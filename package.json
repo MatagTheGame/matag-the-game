@@ -9,9 +9,9 @@
     "lint-fix": "eslint src/main/resources/app/src/*.js src/main/resources/app/src/**/*.js --fix",
     "build-dev": "webpack -d",
     "build-prod": "webpack -p",
-    "watch": "webpack -d --watch"
+    "watch": "webpack -d --watch",
+    "postinstall": "yarn build-prod"
   },
-  "postinstall": "yarn build-prod",
   "author": "Antonio Alonzi",
   "license": "MIT",
   "dependencies": {
