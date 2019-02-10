@@ -22,7 +22,7 @@ The application is written using:
 
 #### Build on Travis
 
-[![Build Status](https://travis-ci.com/antonioalonzi/open-games.svg?branch=master)](https://travis-ci.com/antonioalonzi/open-games)
+[![Build Status](https://travis-ci.com/antonioalonzi/mtg.svg?branch=master)](https://travis-ci.com/antonioalonzi/mtg)
 
 #### Build locally
     
