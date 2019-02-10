@@ -1,5 +1,6 @@
 /.idea
 /mtg.iml
 /node_modules
+/node
 /yarn-error.log
 /src/main/resources/public/js/

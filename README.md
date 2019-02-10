@@ -42,7 +42,7 @@ Run from command line:
 
 ## Deployment
 
-Application is deployed at: https://open-games.herokuapp.com/
+Application is deployed at: https://aa-mtg.herokuapp.com/
 
 The deploy happens automatically after each commit on master if the build passed. 
 
