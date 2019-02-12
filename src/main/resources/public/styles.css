@@ -1,0 +1,94 @@
+body {
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
+  overflow: hidden;
+}
+
+#player-hand {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  z-index: 2;
+}
+
+#player-land-area {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform:translate(-50%,0%);
+}
+
+#player-library {
+  position: absolute;
+  bottom: 30%;
+  left: 5%;
+}
+
+#opponent-hand {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform:translate(-50%,0%) scale(0.5,0.5);
+  z-index: 1;
+}
+
+#opponent-land-area {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform:translate(-50%,0%) rotate(180deg);
+}
+
+#opponent-library {
+  position: absolute;
+  right: 5%;
+  top: 30%;
+  transform: rotate(180deg);
+}
+
+#table {
+  background-color: saddlebrown;
+  border: 1px solid maroon;
+  position: absolute;
+  width: 160%;
+  left: -30%;
+  height: 200%;
+  bottom: -35%;
+  z-index: 0;
+  transform: rotateX(45deg) scale(0.5, 0.5);
+}
+
+.card {
+  position: relative;
+  float: left;
+  width: 180px;
+  height: 250px;
+  margin: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: gray;
+}
+
+.tapped {
+  transform: rotateZ(90deg);
+}
+
+.card-0 {
+  background-image: url("https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg");
+}
+
+.card-1 {
+  background-image: url("https://deckbox.org/system/images/mtg/cards/398617.jpg");
+}
+
+.card-2 {
+  background-image: url("https://deckbox.org/system/images/mtg/cards/398425.jpg");
+}
+
+.card-3 {
+  background-image: url("https://deckbox.org/system/images/mtg/cards/202651.jpg");
+}

@@ -17,12 +17,6 @@ module.exports = {
         test: /\.js$/,
         include: APP_DIR,
         loader: 'babel-loader'
-      },
-      {
-        test: /\.sass$/,
-        use: [
-          { loader: "sass-loader" },
-        ]
       }
     ]
   }
