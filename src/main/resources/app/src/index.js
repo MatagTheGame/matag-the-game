@@ -1,9 +1,33 @@
 import React, {Fragment} from 'react'
 import {render} from 'react-dom'
+import SockJs from 'sockjs-client'
+import {Stomp} from '@stomp/stompjs'
 
 class App extends React.Component {
   constructor(props) {
     super(props)
+  }
+
+  componentDidMount() {
+    let socket = new SockJs('/mtg-ws')
+    let stompClient = Stomp.over(socket)
+    // TODO save stompClient in redux
+
+    stompClient.connect({}, () => {
+      this.sessionId = socket._transport.url.split('/')[5]
+
+      stompClient.subscribe('/topic/events', (event) => {
+        const eventBody = JSON.parse(event.body)
+        console.log(eventBody)
+      })
+
+      stompClient.subscribe('/user/' + this.sessionId + '/events', (event) => {
+        const eventBody = JSON.parse(event.body)
+        console.log(eventBody)
+      })
+
+      stompClient.send('/api/init', {}, '{}')
+    })
   }
 
   render() {
