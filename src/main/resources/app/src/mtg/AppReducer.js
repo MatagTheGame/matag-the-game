@@ -5,6 +5,7 @@ export default (state, action) => {
 
     default:
       return {
+        message: 'ciao',
         player: {
           hand: ['forest', 'mountain', 'alpha_tyrranax'],
           deck: ['card'],

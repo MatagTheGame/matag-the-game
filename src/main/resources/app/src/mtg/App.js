@@ -1,10 +1,11 @@
 import React, {Fragment, PureComponent} from 'react';
+import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import OpponentHand from './OpponentHand'
-import PlayerHand from './PlayerHand'
 import SockJs from 'sockjs-client'
 import {Stomp} from '@stomp/stompjs'
-import {bindActionCreators} from 'redux'
+import OpponentHand from './OpponentHand'
+import PlayerHand from './PlayerHand'
+import Message from './Message'
 
 class App extends PureComponent {
   componentDidMount() {
@@ -28,17 +29,6 @@ class App extends PureComponent {
     })
   }
 
-  displayMessage() {
-    console.log('message: ', this.props.message)
-    if (this.props.message) {
-      return (
-        <div id="message">
-          { this.props.message }
-        </div>
-      )
-    }
-  }
-
   render() {
     return (
       <Fragment>
@@ -58,7 +48,7 @@ class App extends PureComponent {
               <div className="card card-0"/>
             </div>
             <div id="player-land-area">
-              <div className="card card-1"/>
+              <div className="card card-1" onClick={this.test}/>
               <div className="card card-1"/>
               <div className="card card-2"/>
               <div className="card card-2 tapped"/>
@@ -66,7 +56,7 @@ class App extends PureComponent {
             </div>
           </div>
         </div>
-        {this.displayMessage()}
+        <Message/>
       </Fragment>
     )
   }
