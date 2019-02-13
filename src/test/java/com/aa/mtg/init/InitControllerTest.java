@@ -2,7 +2,6 @@ package com.aa.mtg.init;
 
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
-import com.aa.mtg.user.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,25 +23,26 @@ public class InitControllerTest {
   @Autowired
   private EventSender eventSender;
 
-  @Autowired
-  private UserRepository userRepository;
-
   @Before
   public void setup() {
     Mockito.reset(eventSender);
-    userRepository.removeAllUsers();
   }
 
   @Test
   public void shouldRespondToInit() {
-    // Given
-    SimpMessageHeaderAccessor sessionHeader = sessionHeader("sessionId");
-
     // When
-    initController.init(sessionHeader);
+    SimpMessageHeaderAccessor sessionHeaderUserOne = sessionHeader("userOne");
+    initController.init(sessionHeaderUserOne);
 
     // Then
-    Event expectedEvent = Event.builder().type("INIT").value("COMPLETED").build();
-    Mockito.verify(eventSender).sendToUser("sessionId", expectedEvent);
+    Event expectedWaitingOpponentEvent = Event.builder().type("INIT").value("WAITING_OPPONENT").build();
+    Mockito.verify(eventSender).sendToUser("userOne", expectedWaitingOpponentEvent);
+
+    // When
+    SimpMessageHeaderAccessor sessionHeaderUserTwo = sessionHeader("userTwo");
+    initController.init(sessionHeaderUserOne);
+
+    Event expectedCompletedEvent = Event.builder().type("INIT").value("COMPLETED").build();
+    Mockito.verify(eventSender).sendToAll(expectedCompletedEvent);
   }
 }

@@ -2,10 +2,10 @@ import React from 'react'
 import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
-import allReducers from './mtg/reducers/allReducers'
-import App from './mtg/components/App'
+import App from './mtg/App'
+import AppReducer from './mtg/AppReducer'
 
-const store = createStore(allReducers)
+const store = createStore(AppReducer)
 
 render(
   <Provider store={store}>

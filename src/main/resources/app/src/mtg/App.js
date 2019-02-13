@@ -1,36 +1,8 @@
 import React from 'react'
 import {Fragment, PureComponent} from 'react';
 import {connect} from 'react-redux'
-import SockJs from 'sockjs-client'
-import {Stomp} from '@stomp/stompjs'
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props)
-  }
-
-  componentDidMount() {
-    // TODO move this code into stompReducer - initState
-    let socket = new SockJs('/mtg-ws')
-    let stompClient = Stomp.over(socket)
-
-    stompClient.connect({}, () => {
-      this.sessionId = socket._transport.url.split('/')[5]
-
-      stompClient.subscribe('/topic/events', (event) => {
-        const eventBody = JSON.parse(event.body)
-        console.log(eventBody)
-      })
-
-      stompClient.subscribe('/user/' + this.sessionId + '/events', (event) => {
-        const eventBody = JSON.parse(event.body)
-        console.log(eventBody)
-      })
-
-      stompClient.send('/api/init', {}, '{}')
-    })
-  }
-
   render() {
     return (
       <Fragment>
