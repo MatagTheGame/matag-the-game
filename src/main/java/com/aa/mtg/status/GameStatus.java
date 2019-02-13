@@ -1,5 +1,6 @@
 package com.aa.mtg.status;
 
+import com.aa.mtg.player.Player;
 import lombok.Data;
 
 @Data
