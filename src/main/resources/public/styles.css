@@ -60,6 +60,7 @@ body {
   bottom: -35%;
   z-index: 0;
   transform: rotateX(45deg) scale(0.5, 0.5);
+  background-image: url("/img/wood-texture.jpg");
 }
 
 .card {
