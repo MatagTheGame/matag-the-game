@@ -78,17 +78,17 @@ body {
 }
 
 .card-0 {
-  background-image: url("https://upload.wikimedia.org/wikipedia/en/a/aa/Magic_the_gathering-card_back.jpg");
+  background-image: url("/public/img/card-back.jpg");
 }
 
 .card-1 {
-  background-image: url("https://deckbox.org/system/images/mtg/cards/398617.jpg");
+  background-image: url("/img/cards/forest.jpg");
 }
 
 .card-2 {
-  background-image: url("https://deckbox.org/system/images/mtg/cards/398425.jpg");
+  background-image: url("/img/cards/mountain.jpg");
 }
 
 .card-3 {
-  background-image: url("https://deckbox.org/system/images/mtg/cards/202651.jpg");
+  background-image: url("/img/cards/alpha_tyrranax.jpg");
 }
