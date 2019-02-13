@@ -77,3 +77,14 @@ body {
 .tapped {
   transform: rotateZ(90deg);
 }
+
+#message {
+  position: absolute;
+  z-index: 3;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background-color: darkgrey;
+  padding: 2em;
+}

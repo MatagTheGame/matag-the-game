@@ -2,8 +2,43 @@ import React, {Fragment, PureComponent} from 'react';
 import {connect} from 'react-redux'
 import OpponentHand from './OpponentHand'
 import PlayerHand from './PlayerHand'
+import SockJs from 'sockjs-client'
+import {Stomp} from '@stomp/stompjs'
+import {bindActionCreators} from 'redux'
 
 class App extends PureComponent {
+  componentDidMount() {
+    let socket = new SockJs('/mtg-ws')
+    let stompClient = Stomp.over(socket)
+
+    stompClient.connect({}, () => {
+      const sessionId = socket._transport.url.split('/')[5]
+
+      stompClient.subscribe('/topic/events', (event) => {
+        const eventBody = JSON.parse(event.body)
+        this.props.receive(eventBody)
+      })
+
+      stompClient.subscribe('/user/' + sessionId + '/events', (event) => {
+        const eventBody = JSON.parse(event.body)
+        this.props.receive(eventBody)
+      })
+
+      stompClient.send('/api/init', {}, '{}')
+    })
+  }
+
+  displayMessage() {
+    console.log('message: ', this.props.message)
+    if (this.props.message) {
+      return (
+        <div id="message">
+          { this.props.message }
+        </div>
+      )
+    }
+  }
+
   render() {
     return (
       <Fragment>
@@ -31,7 +66,7 @@ class App extends PureComponent {
             </div>
           </div>
         </div>
-        <div id="message" />
+        {this.displayMessage()}
       </Fragment>
     )
   }
@@ -39,11 +74,13 @@ class App extends PureComponent {
 
 const mapStateToProps = state => {
   return {
+    message: state.message
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    receive: bindActionCreators((event) => event, dispatch)
   }
 }
 
