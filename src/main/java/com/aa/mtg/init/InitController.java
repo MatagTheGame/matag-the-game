@@ -4,6 +4,7 @@ import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
 import com.aa.mtg.status.GameStatus;
 import com.aa.mtg.status.GameStatusRepository;
+import com.aa.mtg.status.Player;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
@@ -28,15 +29,15 @@ public class InitController {
 
         GameStatus gameStatus = gameStatusRepository.get();
 
-        if (gameStatus.getPlayer1Session() == null) {
-            gameStatus.setPlayer1Session(sessionId);
+        if (gameStatus.getPlayer1() == null) {
+            gameStatus.setPlayer1(new Player(sessionId));
 
             eventSender.sendToUser(sessionId, Event.builder()
                     .type("INIT")
                     .value("WAITING_OPPONENT")
                     .build());
-        } else if (gameStatus.getPlayer2Session() == null) {
-            gameStatus.setPlayer2Session(sessionId);
+        } else if (gameStatus.getPlayer2() == null) {
+            gameStatus.setPlayer2(new Player (sessionId));
 
             eventSender.sendToAll(Event.builder()
                     .type("INIT")

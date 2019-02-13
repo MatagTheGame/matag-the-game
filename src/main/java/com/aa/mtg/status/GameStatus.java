@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class GameStatus {
 
-    private String player1Session;
-    private String player2Session;
+    private Player player1;
+    private Player player2;
 
 }

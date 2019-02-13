@@ -23,7 +23,17 @@ const initSocketAndClient = () => {
 
   return {
     socket: socket,
-    client: stompClient
+    client: stompClient,
+    player: {
+      hand: ['forest', 'mountain', 'alpha_tyrranax'],
+      deck: ['card'],
+      battlefield: ['forest', 'forest', 'mountain', 'mountain', 'mountain']
+    },
+    opponent: {
+      hand: ['card', 'card', 'card', 'card'],
+      deck: ['card'],
+      battlefield: ['forest', 'forest', 'mountain']
+    }
   }
 }
 

@@ -77,19 +77,3 @@ body {
 .tapped {
   transform: rotateZ(90deg);
 }
-
-.card-0 {
-  background-image: url("/img/card-back.jpg");
-}
-
-.card-1 {
-  background-image: url("/img/cards/forest.jpg");
-}
-
-.card-2 {
-  background-image: url("/img/cards/mountain.jpg");
-}
-
-.card-3 {
-  background-image: url("/img/cards/alpha_tyrranax.jpg");
-}
