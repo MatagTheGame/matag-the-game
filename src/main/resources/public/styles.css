@@ -10,16 +10,18 @@ body {
 #player-hand {
   position: absolute;
   bottom: 20px;
-  left: 50%;
-  transform: translate(-50%, 0%);
   z-index: 2;
+  justify-content: center;
+  display: flex;
+  width: 100%;
 }
 
 #player-land-area {
   position: absolute;
   bottom: 10%;
-  left: 50%;
-  transform:translate(-50%,0%);
+  justify-content: center;
+  display: flex;
+  width: 100%;
 }
 
 #player-library {
@@ -31,16 +33,20 @@ body {
 #opponent-hand {
   position: absolute;
   top: -120px;
-  left: 50%;
-  transform:translate(-50%,0%) scale(0.5,0.5);
+  transform: scale(0.5,0.5);
   z-index: 1;
+  justify-content: center;
+  display: flex;
+  width: 100%;
 }
 
 #opponent-land-area {
   position: absolute;
   top: 10%;
-  left: 50%;
-  transform:translate(-50%,0%) rotate(180deg);
+  transform: rotate(180deg);
+  justify-content: center;
+  display: flex;
+  width: 100%;
 }
 
 #opponent-library {

@@ -45,7 +45,7 @@ public class InitController {
 
             eventSender.sendToUser(gameStatus.getPlayer2().getSessionId(), Event.builder()
                     .type("INIT_PLAYER")
-                    .value(gameStatus.getPlayer1())
+                    .value(gameStatus.getPlayer2())
                     .build());
 
             eventSender.sendToUser(gameStatus.getPlayer1().getSessionId(), Event.builder()

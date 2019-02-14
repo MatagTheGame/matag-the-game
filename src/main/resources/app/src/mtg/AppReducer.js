@@ -20,12 +20,7 @@ const initialState = {
 export default (state, action) => {
   const newState = Object.assign({}, state)
 
-  if (!action.type) {
-    console.log('empty action type')
-    return initialState
-  }
-
-  switch (action.type) {
+    switch (action.type) {
     case 'INIT_WAITING_OPPONENT':
       return Object.assign(newState, {message: 'Waiting for opponent...'})
 
