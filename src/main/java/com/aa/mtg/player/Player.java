@@ -1,7 +1,7 @@
 package com.aa.mtg.player;
 
 import com.aa.mtg.cards.Card;
-import com.aa.mtg.cards.CardIntance;
+import com.aa.mtg.cards.CardInstance;
 import lombok.Data;
 
 import java.util.Random;
@@ -21,7 +21,7 @@ public class Player {
         this.hand = new Hand();
 
         for (int i = 0; i < 60; i++) {
-            this.library.getCards().add(new CardIntance(i, getRandomCard()));
+            this.library.getCards().add(new CardInstance(i, getRandomCard()));
         }
 
         for (int i = 0; i < 7; i++) {

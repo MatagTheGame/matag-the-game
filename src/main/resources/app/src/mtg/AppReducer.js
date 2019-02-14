@@ -11,9 +11,15 @@ const initialState = {
     }
   },
   opponent: {
-    hand: [],
-    deck: [],
-    battlefield: []
+    hand: {
+      cards: []
+    },
+    library: {
+      cards: []
+    },
+    battlefield: {
+      cards: []
+    }
   }
 }
 
@@ -24,14 +30,16 @@ export default (state, action) => {
     case 'INIT_WAITING_OPPONENT':
       return Object.assign(newState, {message: 'Waiting for opponent...'})
 
+    case 'OPPONENT_JOINED':
+      return Object.assign(newState, {message: undefined})
+
     case 'INIT_PLAYER':
       return Object.assign(newState, {player: action.value})
 
-    case 'INIT_COMPLETED':
-      return Object.assign(newState, {message: undefined})
+    case 'INIT_OPPONENT':
+      return Object.assign(newState, {opponent: action.value})
 
     case '@@INIT':
-      console.log('@@INIT action type')
       return initialState
 
     default:

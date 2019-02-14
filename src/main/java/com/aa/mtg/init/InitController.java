@@ -39,21 +39,27 @@ public class InitController {
             gameStatus.setPlayer2(new Player (sessionId));
 
             eventSender.sendToUser(gameStatus.getPlayer1().getSessionId(), Event.builder()
-                    .type("INIT_PLAYER")
-                    .value(gameStatus.getPlayer1())
-                    .build());
-
-            eventSender.sendToUser(gameStatus.getPlayer2().getSessionId(), Event.builder()
-                    .type("INIT_PLAYER")
-                    .value(gameStatus.getPlayer2())
+                    .type("OPPONENT_JOINED")
                     .build());
 
             eventSender.sendToUser(gameStatus.getPlayer1().getSessionId(), Event.builder()
-                    .type("INIT_COMPLETED")
+                    .type("INIT_PLAYER")
+                    .value(InitPlayerEvent.create(gameStatus.getPlayer1()))
                     .build());
 
             eventSender.sendToUser(gameStatus.getPlayer2().getSessionId(), Event.builder()
-                    .type("INIT_COMPLETED")
+                    .type("INIT_PLAYER")
+                    .value(InitPlayerEvent.create(gameStatus.getPlayer2()))
+                    .build());
+
+            eventSender.sendToUser(gameStatus.getPlayer1().getSessionId(), Event.builder()
+                    .type("INIT_OPPONENT")
+                    .value(InitOpponentEvent.create(gameStatus.getPlayer2()))
+                    .build());
+
+            eventSender.sendToUser(gameStatus.getPlayer2().getSessionId(), Event.builder()
+                    .type("INIT_OPPONENT")
+                    .value(InitOpponentEvent.create(gameStatus.getPlayer1()))
                     .build());
 
         } else {
