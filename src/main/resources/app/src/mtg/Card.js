@@ -8,10 +8,11 @@ export default class Card extends PureComponent {
   }
 
   imageUrl () {
-    if (this.props.name === 'card') {
+    const name = Card.normalizeCardName(this.props.name)
+    if (name === 'card') {
       return 'url("/img/card-back.jpg")'
     } else {
-      return `url("/img/cards/${this.props.name}.jpg")`
+      return `url("/img/cards/${name}.jpg")`
     }
   }
 

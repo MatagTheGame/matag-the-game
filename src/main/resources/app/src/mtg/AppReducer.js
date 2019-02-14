@@ -1,8 +1,14 @@
 const initialState = {
   player: {
-    hand: [],
-    deck: [],
-    battlefield: []
+    hand: {
+      cards: []
+    },
+    library: {
+      cards: []
+    },
+    battlefield: {
+      cards: []
+    }
   },
   opponent: {
     hand: [],
@@ -15,6 +21,7 @@ export default (state, action) => {
   const newState = Object.assign({}, state)
 
   if (!action.type) {
+    console.log('empty action type')
     return initialState
   }
 
@@ -28,7 +35,11 @@ export default (state, action) => {
     case 'INIT_COMPLETED':
       return Object.assign(newState, {message: undefined})
 
+    case '@@INIT':
+      console.log('@@INIT action type')
+      return initialState
+
     default:
-      throw 'Unknown action ' + action.type
+      throw 'Unknown action type ' + action.type
   }
 }

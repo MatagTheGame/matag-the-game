@@ -6,7 +6,7 @@ class OpponentHand extends PureComponent {
   render() {
     return (
       <div id="player-hand">
-        {this.props.hand.map((card, i) => <Card key={i} name={card} />)}
+        {this.props.cards.map((cardInstance) => <Card key={cardInstance.id} name={cardInstance.card.name} />)}
       </div>
     )
   }
@@ -14,7 +14,7 @@ class OpponentHand extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    hand: state.player.hand
+    cards: state.player.hand.cards
   }
 }
 

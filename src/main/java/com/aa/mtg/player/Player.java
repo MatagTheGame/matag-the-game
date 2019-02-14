@@ -33,7 +33,7 @@ public class Player {
         switch (new Random().nextInt(3)) {
             case 0: return MOUNTAIN;
             case 1: return FOREST;
-            case 2: return ALPHA_TYRANNAX;
+            case 2: return ALPHA_TYRRANAX;
         }
         throw new RuntimeException("Non Existent Card");
     }
