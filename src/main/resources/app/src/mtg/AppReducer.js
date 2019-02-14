@@ -1,11 +1,11 @@
 export default (state, action) => {
+  const newState = Object.assign({}, state)
   switch (action.type) {
     case 'INIT_WAITING_OPPONENT':
-      return Object.assign(state, {message: 'Waiting for opponent...'})
+      return Object.assign(newState, {message: 'Waiting for opponent...'})
 
     default:
       return {
-        message: 'ciao',
         player: {
           hand: ['forest', 'mountain', 'alpha_tyrranax'],
           deck: ['card'],
