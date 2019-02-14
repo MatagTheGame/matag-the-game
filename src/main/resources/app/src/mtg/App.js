@@ -3,9 +3,11 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import SockJs from 'sockjs-client'
 import {Stomp} from '@stomp/stompjs'
-import OpponentHand from './OpponentHand'
-import PlayerHand from './PlayerHand'
 import Message from './Message'
+import OpponentHand from './Opponent/OpponentHand'
+import PlayerHand from './Player/PlayerHand'
+import OpponentLibrary from './Opponent/OpponentLibrary'
+import PlayerLibrary from './Player/PlayerLibrary'
 
 class App extends PureComponent {
   componentDidMount() {
@@ -36,17 +38,13 @@ class App extends PureComponent {
         <PlayerHand />
         <div id="table">
           <div>
-            <div id="opponent-library">
-              <div className="card card-0"/>
-            </div>
+            <OpponentLibrary/>
             <div id="opponent-land-area">
               <div className="card card-1"/>
               <div className="card card-1 tapped"/>
               <div className="card card-2 tapped"/>
             </div>
-            <div id="player-library">
-              <div className="card card-0"/>
-            </div>
+            <PlayerLibrary/>
             <div id="player-land-area">
               <div className="card card-1" onClick={this.test}/>
               <div className="card card-1"/>
