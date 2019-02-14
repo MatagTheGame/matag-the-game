@@ -30,9 +30,10 @@ public class Player {
     }
 
     private Card getRandomCard() {
-        switch (new Random().nextInt(2)) {
+        switch (new Random().nextInt(3)) {
             case 0: return MOUNTAIN;
             case 1: return FOREST;
+            case 2: return ALPHA_TYRANNAX;
         }
         throw new RuntimeException("Non Existent Card");
     }

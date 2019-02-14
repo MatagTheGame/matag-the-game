@@ -34,7 +34,6 @@ public class InitController {
 
             eventSender.sendToUser(sessionId, Event.builder()
                     .type("INIT_WAITING_OPPONENT")
-                    .value("")
                     .build());
         } else if (gameStatus.getPlayer2() == null) {
             gameStatus.setPlayer2(new Player (sessionId));
@@ -48,6 +47,15 @@ public class InitController {
                     .type("INIT_PLAYER")
                     .value(gameStatus.getPlayer1())
                     .build());
+
+            eventSender.sendToUser(gameStatus.getPlayer1().getSessionId(), Event.builder()
+                    .type("INIT_COMPLETED")
+                    .build());
+
+            eventSender.sendToUser(gameStatus.getPlayer2().getSessionId(), Event.builder()
+                    .type("INIT_COMPLETED")
+                    .build());
+
         } else {
             throw new RuntimeException("Game is full");
         }

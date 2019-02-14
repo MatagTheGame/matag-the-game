@@ -1,5 +1,6 @@
 package com.aa.mtg.cards;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
@@ -10,5 +11,7 @@ public class Cards {
     public static Card SWAMP = new Card("Swamp", singletonList(Color.BLACK), emptyList(), singletonList(Type.LAND), singletonList("Swamp"), "", 0, 0);
     public static Card MOUNTAIN = new Card("Mountain", singletonList(Color.RED), emptyList(), singletonList(Type.LAND), singletonList("Mountain"), "", 0, 0);
     public static Card FOREST = new Card("Forest", singletonList(Color.GREEN), emptyList(), singletonList(Type.LAND), singletonList("Forest"), "", 0, 0);
+
+    public static Card ALPHA_TYRANNAX = new Card("Alpha Tyrannax", singletonList(Color.GREEN), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.GREEN, Cost.GREEN), singletonList(Type.CREATURE), singletonList("Beast"), "", 6, 5);
 
 }
