@@ -1,0 +1,26 @@
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux'
+import Card from '../Card'
+
+class OpponentLandArea extends PureComponent {
+  render() {
+    return (
+      <div id="player-land-area">
+        {this.props.cards.map((cardInstance) => <Card key={cardInstance.id} name={cardInstance.card.name} />)}
+      </div>
+    )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    cards: state.player.battlefield.cards
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(OpponentLandArea)

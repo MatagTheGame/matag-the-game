@@ -8,6 +8,8 @@ import OpponentHand from './Opponent/OpponentHand'
 import PlayerHand from './Player/PlayerHand'
 import OpponentLibrary from './Opponent/OpponentLibrary'
 import PlayerLibrary from './Player/PlayerLibrary'
+import PlayerLandArea from './Player/PlayerLandArea'
+import OpponentLandArea from './Opponent/OpponentLandArea'
 
 class App extends PureComponent {
   componentDidMount() {
@@ -39,19 +41,9 @@ class App extends PureComponent {
         <div id="table">
           <div>
             <OpponentLibrary/>
-            <div id="opponent-land-area">
-              <div className="card card-1"/>
-              <div className="card card-1 tapped"/>
-              <div className="card card-2 tapped"/>
-            </div>
+            <OpponentLandArea/>
             <PlayerLibrary/>
-            <div id="player-land-area">
-              <div className="card card-1" onClick={this.test}/>
-              <div className="card card-1"/>
-              <div className="card card-2"/>
-              <div className="card card-2 tapped"/>
-              <div className="card card-2 tapped"/>
-            </div>
+            <PlayerLandArea/>
           </div>
         </div>
         <Message/>
