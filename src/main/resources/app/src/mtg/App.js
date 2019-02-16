@@ -4,12 +4,12 @@ import {connect} from 'react-redux'
 import SockJs from 'sockjs-client'
 import {Stomp} from '@stomp/stompjs'
 import Message from './Message'
-import OpponentHand from './Opponent/OpponentHand'
-import OpponentLandArea from './Opponent/OpponentLandArea'
-import OpponentLibrary from './Opponent/OpponentLibrary'
-import PlayerHand from './Player/PlayerHand'
-import PlayerLandArea from './Player/PlayerLandArea'
-import PlayerLibrary from './Player/PlayerLibrary'
+import OpponentHand from './Hand/OpponentHand'
+import OpponentLandArea from './LandArea/OpponentLandArea'
+import OpponentLibrary from './Library/OpponentLibrary'
+import PlayerHand from './Hand/PlayerHand'
+import PlayerLandArea from './LandArea/PlayerLandArea'
+import PlayerLibrary from './Library/PlayerLibrary'
 
 
 class App extends PureComponent {
