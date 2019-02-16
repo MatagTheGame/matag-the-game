@@ -1,8 +1,8 @@
 export class LibraryUiUtils {
-  static libraryMarginBottom(cardsNumber) {
-    const marginBottom = cardsNumber * 2
+  static cardHeight(cardsNumber) {
+    const halfCardsNumber = Math.floor(cardsNumber / 2)
     return {
-      marginBottom: `${marginBottom}px`,
+      transform: `translateZ(${halfCardsNumber}px)`,
     }
   }
 
@@ -11,7 +11,7 @@ export class LibraryUiUtils {
     return {
       height: `${cardsNumber}px`,
       bottom: `-${halfCardsNumber}px`,
-      transform: `rotateX(-45deg) translateY(${halfCardsNumber}px)`
+      transform: `rotateX(-90deg)`
     }
   }
 
@@ -20,7 +20,7 @@ export class LibraryUiUtils {
     return {
       width: `${cardsNumber}px`,
       right: `-${halfCardsNumber}px`,
-      transform: `rotateY(110deg) translateX(${halfCardsNumber}px)`
+      transform: `rotateY(-90deg)`
     }
   }
 }

@@ -18,7 +18,7 @@ export default class Card extends PureComponent {
 
   render() {
     return (
-      <div className="card" style={{backgroundImage: this.imageUrl()}} />
+      <div className="card" style={{backgroundImage: this.imageUrl(), ...this.props.style}} />
     )
   }
 }
