@@ -8,7 +8,6 @@ class OpponentLibrary extends PureComponent {
     return (
       <div id="opponent-library">
         {this.props.cards.length > 0 ? <Card name={'card'} /> : null}
-        <Card name={'card'}/>
       </div>
     )
   }

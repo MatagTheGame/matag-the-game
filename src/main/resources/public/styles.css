@@ -7,6 +7,21 @@ body {
   overflow: hidden;
 }
 
+.card {
+  position: relative;
+  float: left;
+  width: 180px;
+  height: 250px;
+  margin: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: gray;
+}
+
+.tapped {
+  transform: rotateZ(90deg);
+}
+
 #player-hand {
   position: absolute;
   bottom: 20px;
@@ -31,27 +46,21 @@ body {
 }
 
 #player-library .card {
-  transform-style:preserve-3d;
+  margin: 0;
 }
 
-#player-library .card:after {
-  content: '';
+#player-library .card-bottom-thickness {
   background-color: #252821;
   position: absolute;
   width: 180px;
-  height: 50px;
-  bottom: -25px;
-  transform: rotateX(-45deg) translateY(25px);
+  transform-style:preserve-3d;
 }
 
-#player-library .card:before {
-  content: '';
+#player-library .card-right-thickness {
   background-color: #252821;
   position: absolute;
-  width: 56px;
   height: 250px;
-  right: -28px;
-  transform: rotateY(110deg) translateX(28px);
+  transform-style:preserve-3d;
 }
 
 #opponent-hand {
@@ -102,21 +111,6 @@ body {
   bottom: -48px;
   z-index: 0;
   transform: rotateX(-45deg) translateZ(-20px);
-}
-
-.card {
-  position: relative;
-  float: left;
-  width: 180px;
-  height: 250px;
-  margin: 5px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: gray;
-}
-
-.tapped {
-  transform: rotateZ(90deg);
 }
 
 #message {
