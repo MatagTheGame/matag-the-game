@@ -39,19 +39,19 @@ body {
   background-color: #252821;
   position: absolute;
   width: 180px;
-  height: 40px;
-  bottom: -20px;
-  transform: rotateX(-45deg) translateY(20px);
+  height: 50px;
+  bottom: -25px;
+  transform: rotateX(-45deg) translateY(25px);
 }
 
 #player-library .card:before {
   content: '';
   background-color: #252821;
   position: absolute;
-  width: 46px;
+  width: 56px;
   height: 250px;
-  right: -23px;
-  transform: rotateY(110deg) translateX(23px);
+  right: -28px;
+  transform: rotateY(110deg) translateX(28px);
 }
 
 #opponent-hand {
