@@ -30,6 +30,30 @@ body {
   left: 5%;
 }
 
+#player-library .card {
+  transform-style:preserve-3d;
+}
+
+#player-library .card:after {
+  content: '';
+  background-color: #252821;
+  position: absolute;
+  width: 180px;
+  height: 40px;
+  bottom: -20px;
+  transform: rotateX(-45deg) translateY(20px);
+}
+
+#player-library .card:before {
+  content: '';
+  background-color: #252821;
+  position: absolute;
+  width: 46px;
+  height: 250px;
+  right: -23px;
+  transform: rotateY(110deg) translateX(23px);
+}
+
 #opponent-hand {
   position: absolute;
   top: -120px;

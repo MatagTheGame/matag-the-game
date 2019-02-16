@@ -7,7 +7,8 @@ class PlayerLibrary extends PureComponent {
   render() {
     return (
       <div id="player-library">
-        {this.props.cards.length > 0 ? <Card name={'card'} /> : null}
+        {this.props.cards.length > 0 ? <Card name='card' /> : null}
+        <Card name={'card'}/>
       </div>
     )
   }
