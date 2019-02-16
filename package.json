@@ -23,6 +23,7 @@
     "eslint": "^5.13.0",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-react": "^7.12.4",
+    "lodash": "^4.17.11",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-redux": "^6.0.0",

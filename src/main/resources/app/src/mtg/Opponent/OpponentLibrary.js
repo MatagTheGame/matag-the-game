@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
 import Card from '../Card'
+import {get} from 'lodash';
 
 class OpponentLibrary extends PureComponent {
   render() {
@@ -14,7 +15,7 @@ class OpponentLibrary extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    cards: state.opponent.library.cards
+    cards: get(state, 'opponent.library.cards', [])
   }
 }
 

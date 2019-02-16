@@ -30,13 +30,13 @@ public class InitController {
         GameStatus gameStatus = gameStatusRepository.get();
 
         if (gameStatus.getPlayer1() == null) {
-            gameStatus.setPlayer1(new Player(sessionId));
+            gameStatus.setPlayer1(new Player(sessionId, "Pippo"));
 
             eventSender.sendToUser(sessionId, Event.builder()
                     .type("INIT_WAITING_OPPONENT")
                     .build());
         } else if (gameStatus.getPlayer2() == null) {
-            gameStatus.setPlayer2(new Player (sessionId));
+            gameStatus.setPlayer2(new Player (sessionId, "Pluto"));
 
             eventSender.sendToUser(gameStatus.getPlayer1().getSessionId(), Event.builder()
                     .type("OPPONENT_JOINED")

@@ -1,28 +1,3 @@
-const initialState = {
-  player: {
-    hand: {
-      cards: []
-    },
-    library: {
-      cards: []
-    },
-    battlefield: {
-      cards: []
-    }
-  },
-  opponent: {
-    hand: {
-      cards: []
-    },
-    library: {
-      cards: []
-    },
-    battlefield: {
-      cards: []
-    }
-  }
-}
-
 export default (state, action) => {
   const newState = Object.assign({}, state)
 
@@ -40,7 +15,7 @@ export default (state, action) => {
       return Object.assign(newState, {opponent: action.value})
 
     case '@@INIT':
-      return initialState
+      return {}
 
     default:
       throw 'Unknown action type ' + action.type

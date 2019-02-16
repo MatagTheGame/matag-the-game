@@ -12,13 +12,17 @@ import static com.aa.mtg.cards.Cards.*;
 public class Player {
 
     private String sessionId;
+    private String name;
+    private int life;
     private Library library;
     private Hand hand;
 
-    public Player(String sessionId) {
+    public Player(String sessionId, String name) {
         this.sessionId = sessionId;
         this.library = new Library();
         this.hand = new Hand();
+        this.name = name;
+        this.life = 20;
 
         for (int i = 0; i < 60; i++) {
             this.library.getCards().add(new CardInstance(i, getRandomCard()));

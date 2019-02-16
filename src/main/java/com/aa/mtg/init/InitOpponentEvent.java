@@ -15,6 +15,8 @@ public class InitOpponentEvent {
     private Library library;
     private Hand hand;
     private Battlefield battlefield;
+    private String name;
+    private int life;
 
     public static InitOpponentEvent create(Player player) {
         Hand hand = new Hand();
@@ -29,6 +31,6 @@ public class InitOpponentEvent {
             library.getCards().add(new CardInstance(cardInstance.getId(), Card.hiddenCard()));
         }
 
-        return new InitOpponentEvent(library, hand, battlefield);
+        return new InitOpponentEvent(library, hand, battlefield, player.getName(), player.getLife());
     }
 }
