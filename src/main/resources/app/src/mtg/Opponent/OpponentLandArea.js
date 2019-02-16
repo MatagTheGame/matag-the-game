@@ -6,8 +6,9 @@ import {get} from 'lodash'
 class OpponentLandArea extends PureComponent {
   render() {
     return (
-      <div id="player-land-area">
+      <div id="opponent-land-area">
         {this.props.cards.map((cardInstance) => <Card key={cardInstance.id} name={cardInstance.card.name} />)}
+        <Card name={'Forest'}/>
       </div>
     )
   }

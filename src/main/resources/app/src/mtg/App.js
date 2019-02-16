@@ -5,11 +5,12 @@ import SockJs from 'sockjs-client'
 import {Stomp} from '@stomp/stompjs'
 import Message from './Message'
 import OpponentHand from './Opponent/OpponentHand'
-import PlayerHand from './Player/PlayerHand'
-import OpponentLibrary from './Opponent/OpponentLibrary'
-import PlayerLibrary from './Player/PlayerLibrary'
-import PlayerLandArea from './Player/PlayerLandArea'
 import OpponentLandArea from './Opponent/OpponentLandArea'
+import OpponentLibrary from './Opponent/OpponentLibrary'
+import PlayerHand from './Player/PlayerHand'
+import PlayerLandArea from './Player/PlayerLandArea'
+import PlayerLibrary from './Player/PlayerLibrary'
+
 
 class App extends PureComponent {
   componentDidMount() {

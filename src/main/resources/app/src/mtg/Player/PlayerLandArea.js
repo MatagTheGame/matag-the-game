@@ -8,6 +8,7 @@ class PlayerLandArea extends PureComponent {
     return (
       <div id="player-land-area">
         {this.props.cards.map((cardInstance) => <Card key={cardInstance.id} name={cardInstance.card.name} />)}
+        <Card name={'Mountain'}/>
       </div>
     )
   }
