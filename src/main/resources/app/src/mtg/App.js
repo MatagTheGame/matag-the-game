@@ -10,6 +10,8 @@ import OpponentLibrary from './Library/OpponentLibrary'
 import PlayerHand from './Hand/PlayerHand'
 import PlayerLandArea from './LandArea/PlayerLandArea'
 import PlayerLibrary from './Library/PlayerLibrary'
+import PlayerInfo from './PlayerInfo/PlayerInfo'
+import OpponentInfo from './PlayerInfo/OpponentInfo'
 
 
 class App extends PureComponent {
@@ -43,7 +45,9 @@ class App extends PureComponent {
           <div>
             <OpponentLibrary/>
             <OpponentLandArea/>
+            <OpponentInfo/>
             <PlayerLibrary/>
+            <PlayerInfo/>
             <PlayerLandArea/>
           </div>
         </div>
