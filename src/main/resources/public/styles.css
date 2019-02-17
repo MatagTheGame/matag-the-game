@@ -112,6 +112,14 @@ body {
   align-items: center;
 }
 
+.player-info.active-player span:first-child {
+  text-decoration: underline;
+}
+
+.player-info.inactive-player {
+  color: grey;
+}
+
 #player-info:after, #opponent-info:after {
   content: '';
   position: absolute;
