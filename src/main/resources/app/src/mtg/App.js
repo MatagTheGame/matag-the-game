@@ -12,6 +12,7 @@ import PlayerLandArea from './LandArea/PlayerLandArea'
 import PlayerLibrary from './Library/PlayerLibrary'
 import PlayerInfo from './PlayerInfo/PlayerInfo'
 import OpponentInfo from './PlayerInfo/OpponentInfo'
+import TurnPhases from './Turn/TurnPhases'
 
 
 class App extends PureComponent {
@@ -46,9 +47,10 @@ class App extends PureComponent {
             <OpponentLibrary/>
             <OpponentLandArea/>
             <OpponentInfo/>
+            <TurnPhases/>
             <PlayerLibrary/>
-            <PlayerInfo/>
             <PlayerLandArea/>
+            <PlayerInfo/>
           </div>
         </div>
         <Message/>

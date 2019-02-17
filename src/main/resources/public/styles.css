@@ -5,6 +5,7 @@ body {
   perspective: 1500px;
   perspective-origin: 50% 50%;
   overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .card {
@@ -75,17 +76,17 @@ body {
 }
 
 #player-library .card-bottom-thickness, #opponent-library .card-bottom-thickness {
-  background-color: #252821;
+  background-color: #1E211A;
   position: absolute;
   width: 180px;
-  transform-style:preserve-3d;
+  transform-style: preserve-3d;
 }
 
 #player-library .card-right-thickness, #opponent-library .card-right-thickness {
   background-color: #252821;
   position: absolute;
   height: 250px;
-  transform-style:preserve-3d;
+  transform-style: preserve-3d;
 }
 
 #player-info {
@@ -93,21 +94,22 @@ body {
 }
 
 #opponent-info {
-  top: 35%;
+  top: 40%;
 }
 
 .player-info {
   position: absolute;
   transform-style: preserve-3d;
   background-color: lightgray;
-  width: 300px;
+  width: 12%;
   height: 40px;
-  right: 50px;
+  right: 1%;
   transform: rotateX(-35deg) translateZ(20px);
   padding: 10px 20px 10px 20px;
   font-size: xx-large;
-  justify-content: space-between;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #player-info:after, #opponent-info:after {
@@ -122,6 +124,72 @@ body {
   transform: rotateX(-60deg) translateY(20px);
 }
 
+#turn-phases {
+  position: absolute;
+  right: 0;
+  bottom: 44%;
+  width: 30%;
+  height: 8%;
+  background-color: #778899;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: xx-large;
+  padding-left: 5px;
+  padding-right: 5px;
+  transform-style: preserve-3d;
+  transform: translateZ(10px);
+}
+
+#turn-phases::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 10px;
+  background-color: #637485;
+  transform: rotateX(-90deg) translateY(5px);
+}
+
+#turn-phases::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  bottom: 0;
+  width: 10px;
+  height: 100%;
+  background-color: #6d7e8f;
+  transform: rotateY(90deg) translateX(5px);
+}
+
+#turn-phases span {
+  padding: 6px;
+  margin: 6px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#turn-phases span.enabled {
+  background-color: darkolivegreen;
+}
+
+#turn-phases span.enabled .active {
+  background-color: lawngreen;
+}
+
+#turn-phases span.disabled {
+  background-color: darkred;
+}
+
+#turn-phases span.disabled .active {
+  background-color: red;
+}
+
+#turn-phases span:hover {
+  background-color: yellow;
+}
+
 #table {
   background-image: url("/img/wood-texture.jpg");
   position: absolute;
@@ -131,7 +199,7 @@ body {
   bottom: -35%;
   z-index: 0;
   transform: rotateX(45deg) scale(0.5, 0.5);
-  transform-style:preserve-3d;
+  transform-style: preserve-3d;
 }
 
 #table:after {
