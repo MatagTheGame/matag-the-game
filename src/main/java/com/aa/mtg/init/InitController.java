@@ -38,6 +38,8 @@ public class InitController {
         } else if (gameStatus.getPlayer2() == null) {
             gameStatus.setPlayer2(new Player (sessionId, "Pluto"));
 
+            gameStatus.getTurn().init(gameStatus.getPlayer1().getName());
+
             String player1SessionId = gameStatus.getPlayer1().getSessionId();
             String player2SessionId = gameStatus.getPlayer2().getSessionId();
 
@@ -46,10 +48,12 @@ public class InitController {
             eventSender.sendToUser(player1SessionId, new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer1())));
             eventSender.sendToUser(player1SessionId, new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer2())));
             eventSender.sendToUser(player1SessionId, new Event("INIT_PHASES_CONFIG", new InitPlayerPhasesConfigEvent(PlayerPhasesConfig.defaultPlayerPhasesConfig().getConfig())));
+            eventSender.sendToUser(player1SessionId, new Event("UPDATE_TURN", gameStatus.getTurn()));
 
             eventSender.sendToUser(player2SessionId, new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer2())));
             eventSender.sendToUser(player2SessionId, new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer1())));
             eventSender.sendToUser(player2SessionId, new Event("INIT_PHASES_CONFIG", new InitPlayerPhasesConfigEvent(PlayerPhasesConfig.defaultPlayerPhasesConfig().getConfig())));
+            eventSender.sendToUser(player2SessionId, new Event("UPDATE_TURN", gameStatus.getTurn()));
 
         } else {
             throw new RuntimeException("Game is full");

@@ -9,12 +9,20 @@ public class GameStatus {
     private Player player2;
     private Turn turn;
 
+    public GameStatus() {
+        this.turn = new Turn();
+    }
+
     public Player getPlayer1() {
         return player1;
     }
 
     public Player getPlayer2() {
         return player2;
+    }
+
+    public Turn getTurn() {
+        return turn;
     }
 
     public void setPlayer1(Player player1) {

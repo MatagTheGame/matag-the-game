@@ -17,6 +17,9 @@ export default (state, action) => {
     case 'INIT_PHASES_CONFIG':
       return Object.assign(newState, {turn: action.value})
 
+    case 'UPDATE_TURN':
+      return Object.assign(newState, {turn: {phasesConfig: state.turn.phasesConfig, status: action.value}})
+
     case '@@INIT':
       return {}
 

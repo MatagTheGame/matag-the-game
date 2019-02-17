@@ -1,10 +1,19 @@
 package com.aa.mtg.turn;
 
+import com.aa.mtg.turn.phases.Phase;
+
 public class Turn {
     private int turnNumber;
     private String currentTurnPlayer;
-    private String currentPhase;
+    private Phase currentPhase;
     private String currentPhaseActivePlayer;
+
+    public void init(String playerName) {
+        this.turnNumber = 1;
+        this.currentPhase = Phase.UP;
+        this.currentTurnPlayer = playerName;
+        this.currentPhaseActivePlayer = playerName;
+    }
 
     public int getTurnNumber() {
         return turnNumber;
@@ -22,11 +31,11 @@ public class Turn {
         this.currentTurnPlayer = currentTurnPlayer;
     }
 
-    public String getCurrentPhase() {
+    public Phase getCurrentPhase() {
         return currentPhase;
     }
 
-    public void setCurrentPhase(String currentPhase) {
+    public void setCurrentPhase(Phase currentPhase) {
         this.currentPhase = currentPhase;
     }
 
