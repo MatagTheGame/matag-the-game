@@ -192,7 +192,23 @@ body {
 }
 
 #turn-phases span:hover {
-  background-color: yellow;
+  background-color: yellow !important;
+}
+
+#turn-phases span.active-for-player:before {
+  content: 'o';
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  margin-left: 10px;
+}
+
+#turn-phases span.active-for-opponent:before {
+  content: 'o';
+  position: absolute;
+  top: 0;
+  text-align: center;
+  margin-left: 10px;
 }
 
 #table {
