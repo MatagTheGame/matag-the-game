@@ -2,9 +2,10 @@ package com.aa.mtg.init;
 
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
+import com.aa.mtg.player.Player;
 import com.aa.mtg.status.GameStatus;
 import com.aa.mtg.status.GameStatusRepository;
-import com.aa.mtg.player.Player;
+import com.aa.mtg.turn.phases.PlayerPhasesConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -41,10 +42,14 @@ public class InitController {
             String player2SessionId = gameStatus.getPlayer2().getSessionId();
 
             eventSender.sendToUser(player1SessionId, new Event("OPPONENT_JOINED"));
+
             eventSender.sendToUser(player1SessionId, new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer1())));
-            eventSender.sendToUser(player2SessionId, new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer2())));
             eventSender.sendToUser(player1SessionId, new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer2())));
+            eventSender.sendToUser(player1SessionId, new Event("INIT_PHASES_CONFIG", new InitPlayerPhasesConfigEvent(PlayerPhasesConfig.defaultPlayerPhasesConfig().getConfig())));
+
+            eventSender.sendToUser(player2SessionId, new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer2())));
             eventSender.sendToUser(player2SessionId, new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer1())));
+            eventSender.sendToUser(player2SessionId, new Event("INIT_PHASES_CONFIG", new InitPlayerPhasesConfigEvent(PlayerPhasesConfig.defaultPlayerPhasesConfig().getConfig())));
 
         } else {
             throw new RuntimeException("Game is full");

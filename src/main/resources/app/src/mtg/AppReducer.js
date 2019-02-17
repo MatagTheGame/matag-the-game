@@ -14,6 +14,9 @@ export default (state, action) => {
     case 'INIT_OPPONENT':
       return Object.assign(newState, {opponent: action.value})
 
+    case 'INIT_PHASES_CONFIG':
+      return Object.assign(newState, {turn: action.value})
+
     case '@@INIT':
       return {}
 

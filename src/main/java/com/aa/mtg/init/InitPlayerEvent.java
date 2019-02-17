@@ -1,6 +1,5 @@
 package com.aa.mtg.init;
 
-import com.aa.mtg.cards.model.Card;
 import com.aa.mtg.cards.model.CardInstance;
 import com.aa.mtg.cards.model.HiddenCard;
 import com.aa.mtg.player.Player;

@@ -1,22 +1,14 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
+import {get} from 'lodash'
 
 class TurnPhases extends PureComponent {
   render() {
+    console.log('phasesConfig: ', this.props.phases)
     return (
       <div id='turn-phases'>
-        <span className={'disabled'}>UP</span>
-        <span className={'disabled'}>DR</span>
-        <span className={'enabled'}>M1</span>
-        <span className={'disabled'}>BC</span>
-        <span className={'enabled'}>DA</span>
-        <span className={'enabled'}>DB</span>
-        <span className={'disabled'}>FS</span>
-        <span className={'disabled'}>CD</span>
-        <span className={'disabled'}>EC</span>
-        <span className={'enabled'}>M2</span>
-        <span className={'disabled'}>ET</span>
-        <span className={'disabled'}>CL</span>
+        {this.props.phases.map((phase) =>
+          <span className={phase.status.toLowerCase()}>{phase.name}</span>)}
       </div>
     )
   }
@@ -24,6 +16,7 @@ class TurnPhases extends PureComponent {
 
 const mapStateToProps = state => {
   return {
+    phases: get(state, 'turn.phasesConfig', []),
   }
 }
 

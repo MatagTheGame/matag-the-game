@@ -1,11 +1,13 @@
 package com.aa.mtg.status;
 
 import com.aa.mtg.player.Player;
+import com.aa.mtg.turn.Turn;
 
 public class GameStatus {
 
     private Player player1;
     private Player player2;
+    private Turn turn;
 
     public Player getPlayer1() {
         return player1;
