@@ -100,7 +100,7 @@ body {
 .player-info {
   position: absolute;
   transform-style: preserve-3d;
-  background-color: lightgray;
+  background-image: url("/img/materials/paper.jpg");
   width: 12%;
   height: 40px;
   right: 1%;
@@ -116,7 +116,8 @@ body {
   content: '';
   position: absolute;
   transform-style: preserve-3d;
-  background-color: darkgrey;
+  background-image: url("/img/materials/paper.jpg");
+  filter: brightness(50%);
   width: 100%;
   height: 40px;
   bottom: 40px;
@@ -126,11 +127,11 @@ body {
 
 #turn-phases {
   position: absolute;
+  background-image: url('/img/materials/silver.jpg');
   right: 0;
   bottom: 44%;
   width: 30%;
   height: 8%;
-  background-color: #778899;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -144,23 +145,27 @@ body {
 #turn-phases::after {
   content: '';
   position: absolute;
+  background-image: url('/img/materials/silver.jpg');
   right: 0;
   bottom: -5px;
   width: 100%;
   height: 10px;
   background-color: #637485;
   transform: rotateX(-90deg) translateY(5px);
+  filter: brightness(70%);
 }
 
 #turn-phases::before {
   content: '';
   position: absolute;
+  background-image: url('/img/materials/silver.jpg');
   left: -5px;
   bottom: 0;
   width: 10px;
   height: 100%;
   background-color: #6d7e8f;
   transform: rotateY(90deg) translateX(5px);
+  filter: brightness(85%);
 }
 
 #turn-phases span {
@@ -179,11 +184,11 @@ body {
 }
 
 #turn-phases span.disabled {
-  background-color: darkred;
+  background-color: indianred;
 }
 
 #turn-phases span.disabled .active {
-  background-color: red;
+  background-color: orangered;
 }
 
 #turn-phases span:hover {
@@ -191,7 +196,7 @@ body {
 }
 
 #table {
-  background-image: url("/img/wood-texture.jpg");
+  background-image: url("/img/materials/wood.jpg");
   position: absolute;
   width: 180%;
   left: -40%;
@@ -204,14 +209,14 @@ body {
 
 #table:after {
   content: '';
-  background-image: url("/img/wood-texture.jpg");
+  background-image: url("/img/materials/wood.jpg");
   position: absolute;
   width: 100%;
   height: 80px;
   bottom: -40px;
   z-index: 0;
   transform: rotateX(-90deg) translateY(40px);
-  opacity: 0.5;
+  filter: brightness(50%);
 }
 
 #message {
