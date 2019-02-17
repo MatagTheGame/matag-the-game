@@ -18,7 +18,7 @@ class PlayerLibrary extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    cards: get(state, 'player.library.cards', [])
+    cards: get(state, 'player.library', [])
   }
 }
 

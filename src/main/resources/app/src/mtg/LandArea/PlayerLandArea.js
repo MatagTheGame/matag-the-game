@@ -15,7 +15,7 @@ class PlayerLandArea extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    cards: get(state, 'opponent.battlefield.cards', [])
+    cards: get(state, 'opponent.battlefield', [])
   }
 }
 

@@ -15,7 +15,7 @@ class OpponentHand extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    cards: get(state, 'player.hand.cards', [])
+    cards: get(state, 'player.hand', [])
   }
 }
 

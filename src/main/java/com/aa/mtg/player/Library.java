@@ -14,7 +14,7 @@ public class Library {
         this.cards = new ArrayList<>();
     }
 
-    public CardInstance draw() {
+    CardInstance draw() {
         return this.cards.remove(0);
     }
 }

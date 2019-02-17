@@ -23,7 +23,7 @@ public class InitController {
     }
 
     @MessageMapping("/init")
-    public void init(SimpMessageHeaderAccessor headerAccessor) {
+    void init(SimpMessageHeaderAccessor headerAccessor) {
         String sessionId = headerAccessor.getSessionId();
         log.info("Init request received for sessionId '{}'", sessionId);
 
@@ -44,22 +44,22 @@ public class InitController {
 
             eventSender.sendToUser(gameStatus.getPlayer1().getSessionId(), Event.builder()
                     .type("INIT_PLAYER")
-                    .value(InitPlayerEvent.create(gameStatus.getPlayer1()))
+                    .value(InitPlayerEvent.createForPlayer(gameStatus.getPlayer1()))
                     .build());
 
             eventSender.sendToUser(gameStatus.getPlayer2().getSessionId(), Event.builder()
                     .type("INIT_PLAYER")
-                    .value(InitPlayerEvent.create(gameStatus.getPlayer2()))
+                    .value(InitPlayerEvent.createForPlayer(gameStatus.getPlayer2()))
                     .build());
 
             eventSender.sendToUser(gameStatus.getPlayer1().getSessionId(), Event.builder()
                     .type("INIT_OPPONENT")
-                    .value(InitOpponentEvent.create(gameStatus.getPlayer2()))
+                    .value(InitPlayerEvent.createForOpponent(gameStatus.getPlayer2()))
                     .build());
 
             eventSender.sendToUser(gameStatus.getPlayer2().getSessionId(), Event.builder()
                     .type("INIT_OPPONENT")
-                    .value(InitOpponentEvent.create(gameStatus.getPlayer1()))
+                    .value(InitPlayerEvent.createForOpponent(gameStatus.getPlayer1()))
                     .build());
 
         } else {
