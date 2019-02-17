@@ -5,7 +5,7 @@ import {get} from 'lodash'
 class PlayerInfo extends PureComponent {
   render() {
     return (
-      <div id="player-info">
+      <div id="player-info" className='player-info'>
         <span>{this.props.name}</span>
         <span>{this.props.life}</span>
       </div>

@@ -7,7 +7,7 @@ import {LibraryUiUtils} from './LibraryUiUtils'
 class PlayerLibrary extends PureComponent {
   render() {
     return (
-      <div id="player-library">
+      <div id="player-library" className='player-library'>
         {this.props.cards.length > 0 ? <Card name='card' style={LibraryUiUtils.libraryHeight(this.props.cards.length, 'player')} /> : null}
         <div className='card-bottom-thickness' style={LibraryUiUtils.libraryBottomThickness(this.props.cards.length)} />
         <div className='card-right-thickness' style={LibraryUiUtils.libraryRightThickness(this.props.cards.length)} />

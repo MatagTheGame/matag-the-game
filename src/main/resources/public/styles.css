@@ -5,7 +5,6 @@ body {
   perspective: 1500px;
   perspective-origin: 50% 50%;
   overflow: hidden;
-  font-size: xx-large;
 }
 
 .card {
@@ -24,35 +23,50 @@ body {
 }
 
 #player-hand {
-  position: absolute;
   bottom: 20px;
   z-index: 2;
 }
 
 #opponent-hand {
-  position: absolute;
   top: -120px;
   transform: scale(0.5,0.5);
   z-index: 1;
 }
 
 .hand {
+  position: absolute;
   justify-content: center;
   display: flex;
   width: 100%;
 }
 
 #player-land-area {
-  position: absolute;
   bottom: 10%;
+}
+
+#opponent-land-area {
+  position: absolute;
+  top: 10%;
+  transform: rotate(180deg);
+}
+
+.land-area {
+  position: absolute;
   justify-content: center;
   display: flex;
   width: 100%;
 }
 
 #player-library {
-  position: absolute;
   bottom: 30%;
+}
+
+#opponent-library {
+  top: 30%;
+}
+
+.player-library {
+  position: absolute;
   left: 10%;
 }
 
@@ -75,59 +89,28 @@ body {
 }
 
 #player-info {
-  position: absolute;
-  transform-style: preserve-3d;
-  background-color: lightgray;
-  width: 300px;
-  height: 40px;
   bottom: 35%;
-  right: 50px;
-  transform: rotateX(-35deg) translateZ(20px);
-  padding: 10px;
-}
-
-#player-info:after {
-  content: '';
-  position: absolute;
-  transform-style: preserve-3d;
-  background-color: darkgrey;
-  width: 100%;
-  height: 40px;
-  bottom: 40px;
-  left: 0;
-  transform: rotateX(-60deg) translateY(20px);
-}
-
-
-
-#opponent-land-area {
-  position: absolute;
-  top: 10%;
-  transform: rotate(180deg);
-  justify-content: center;
-  display: flex;
-  width: 100%;
-}
-
-#opponent-library {
-  position: absolute;
-  top: 30%;
-  left: 10%;
 }
 
 #opponent-info {
+  top: 35%;
+}
+
+.player-info {
   position: absolute;
   transform-style: preserve-3d;
   background-color: lightgray;
   width: 300px;
   height: 40px;
-  top: 35%;
   right: 50px;
   transform: rotateX(-35deg) translateZ(20px);
-  padding: 10px;
+  padding: 10px 20px 10px 20px;
+  font-size: xx-large;
+  justify-content: space-between;
+  display: flex;
 }
 
-#opponent-info:after {
+#player-info:after, #opponent-info:after {
   content: '';
   position: absolute;
   transform-style: preserve-3d;
@@ -173,4 +156,5 @@ body {
   background-color: darkgrey;
   padding: 2em;
   border: 1px solid black;
+  font-size: large;
 }
