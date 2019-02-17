@@ -45,18 +45,18 @@ body {
   left: 5%;
 }
 
-#player-library .card {
+#player-library .card, #opponent-library .card{
   margin: 0;
 }
 
-#player-library .card-bottom-thickness {
+#player-library .card-bottom-thickness, #opponent-library .card-bottom-thickness {
   background-color: #252821;
   position: absolute;
   width: 180px;
   transform-style:preserve-3d;
 }
 
-#player-library .card-right-thickness {
+#player-library .card-right-thickness, #opponent-library .card-right-thickness {
   background-color: #252821;
   position: absolute;
   height: 250px;
@@ -86,7 +86,6 @@ body {
   position: absolute;
   top: 30%;
   left: 5%;
-  transform: rotate(180deg);
 }
 
 #table {
