@@ -1,12 +1,10 @@
 package com.aa.mtg.player;
 
-import com.aa.mtg.cards.CardInstance;
-import lombok.Data;
+import com.aa.mtg.cards.model.CardInstance;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 public class Library {
     private List<CardInstance> cards;
 
@@ -16,5 +14,9 @@ public class Library {
 
     CardInstance draw() {
         return this.cards.remove(0);
+    }
+
+    public List<CardInstance> getCards() {
+        return cards;
     }
 }

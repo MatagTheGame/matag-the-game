@@ -1,15 +1,23 @@
 package com.aa.mtg.event;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
-@Getter
-@Builder
-@ToString
-@EqualsAndHashCode
 public class Event {
-  private String type;
-  private Object value;
+  private final String type;
+  private final Object value;
+
+  public Event(String type, Object value) {
+    this.type = type;
+    this.value = value;
+  }
+
+  public Event(String type) {
+    this(type, null);
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public Object getValue() {
+    return value;
+  }
 }

@@ -37,14 +37,14 @@ public class InitControllerTest {
     initController.init(sessionHeaderUserOne);
 
     // Then
-    Event expectedWaitingOpponentEvent = Event.builder().type("INIT").value("WAITING_OPPONENT").build();
+    Event expectedWaitingOpponentEvent = new Event("INIT", "WAITING_OPPONENT");
     Mockito.verify(eventSender).sendToUser("userOne", expectedWaitingOpponentEvent);
 
     // When
     SimpMessageHeaderAccessor sessionHeaderUserTwo = sessionHeader("userTwo");
     initController.init(sessionHeaderUserTwo);
 
-    Event expectedCompletedEvent = Event.builder().type("INIT").value("COMPLETED").build();
+    Event expectedCompletedEvent = new Event("INIT", "COMPLETED");
     Mockito.verify(eventSender).sendToAll(expectedCompletedEvent);
   }
 }

@@ -1,4 +1,4 @@
-package com.aa.mtg.cards;
+package com.aa.mtg.cards.properties;
 
 public enum Type {
     ARTIFACT,
