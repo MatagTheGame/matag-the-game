@@ -27,7 +27,8 @@ public class InitController {
     @MessageMapping("/game/init")
     void init(SimpMessageHeaderAccessor headerAccessor) {
         String sessionId = headerAccessor.getSessionId();
-        LOGGER.info("Init request received for sessionId '{}'", sessionId);
+        String gameId = headerAccessor.getNativeHeader("gameId").get(0);
+        LOGGER.info("Init request received for sessionId '{}', gameId '{}'", sessionId, gameId);
 
         GameStatus gameStatus = gameStatusRepository.get();
 

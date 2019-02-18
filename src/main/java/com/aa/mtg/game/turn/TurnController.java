@@ -23,7 +23,8 @@ public class TurnController {
     @MessageMapping("/game/turn")
     void turn(SimpMessageHeaderAccessor headerAccessor) {
         String sessionId = headerAccessor.getSessionId();
-        LOGGER.info("Turn request received from sessionId '{}'", sessionId);
+        String gameId = headerAccessor.getNativeHeader("gameId").get(0);
+        LOGGER.info("Turn request received for sessionId '{}', gameId '{}'", sessionId, gameId);
     }
 
 }

@@ -3,9 +3,10 @@ import {Stomp} from '@stomp/stompjs'
 
 const socket = new SockJs('/game-ws')
 const stompClient = Stomp.over(socket)
+const gameId = window.location.pathname.replace('/ui/game/', '')
 
 stompClient.sendEvent = (destination, body) => {
-  stompClient.send('/api/game/' + destination, {}, JSON.stringify(body))
+  stompClient.send('/api/game/' + destination, {gameId: gameId}, JSON.stringify(body))
 }
 
 stompClient.init = (receiveCallback) => {
