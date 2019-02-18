@@ -1,3 +1,13 @@
+import stompClient from './WebSocket'
+
+const isPhaseEnabled = (phasesConfig, phaseName) => {
+  const phaseConfig = phasesConfig.find((phaseConfig) => phaseConfig.name === phaseName)
+  if (phaseConfig) {
+    return phaseConfig.status === 'DISABLED'
+  }
+  return false
+}
+
 export default (state, action) => {
   const newState = Object.assign({}, state)
 
@@ -18,6 +28,10 @@ export default (state, action) => {
       return Object.assign(newState, {turn: action.value})
 
     case 'UPDATE_TURN':
+      if (action.value.currentPhaseActivePlayer === state.player.name && isPhaseEnabled(state.turn.phasesConfig, action.value.currentPhase)) {
+        stompClient.send('/api/turn', {}, JSON.stringify({action: 'PASS_PRIORITY'}))
+      }
+
       return Object.assign(newState, {turn: {phasesConfig: state.turn.phasesConfig, status: action.value}})
 
     case '@@INIT':

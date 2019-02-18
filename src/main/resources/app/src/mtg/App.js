@@ -1,8 +1,7 @@
 import React, {Fragment, PureComponent} from 'react';
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import SockJs from 'sockjs-client'
-import {Stomp} from '@stomp/stompjs'
+import stompClient from './WebSocket'
 import Message from './Message'
 import OpponentHand from './Hand/OpponentHand'
 import OpponentLandArea from './LandArea/OpponentLandArea'
@@ -17,24 +16,7 @@ import TurnPhases from './Turn/TurnPhases'
 
 class App extends PureComponent {
   componentDidMount() {
-    let socket = new SockJs('/mtg-ws')
-    let stompClient = Stomp.over(socket)
-
-    stompClient.connect({}, () => {
-      const sessionId = socket._transport.url.split('/')[5]
-
-      stompClient.subscribe('/topic/events', (event) => {
-        const eventBody = JSON.parse(event.body)
-        this.props.receive(eventBody)
-      })
-
-      stompClient.subscribe('/user/' + sessionId + '/events', (event) => {
-        const eventBody = JSON.parse(event.body)
-        this.props.receive(eventBody)
-      })
-
-      stompClient.send('/api/init', {}, '{}')
-    })
+    stompClient.init(this.props.receive)
   }
 
   render() {
