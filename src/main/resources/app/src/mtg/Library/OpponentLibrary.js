@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
-import Card from '../Card'
+import Card from '../Card/Card'
 import {get} from 'lodash';
 import {LibraryUiUtils} from './LibraryUiUtils'
 

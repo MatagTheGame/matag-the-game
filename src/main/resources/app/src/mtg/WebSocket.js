@@ -4,6 +4,10 @@ import {Stomp} from '@stomp/stompjs'
 const socket = new SockJs('/mtg-ws')
 const stompClient = Stomp.over(socket)
 
+stompClient.sendEvent = (destination, body) => {
+  stompClient.send('/api/' + destination, {}, JSON.stringify(body))
+}
+
 stompClient.init = (receiveCallback) => {
   stompClient.connect({}, () => {
     const sessionId = socket._transport.url.split('/')[5]
@@ -18,7 +22,7 @@ stompClient.init = (receiveCallback) => {
       receiveCallback(eventBody)
     })
 
-    stompClient.send('/api/init', {}, '{}')
+    stompClient.sendEvent('init', {})
   })
 }
 

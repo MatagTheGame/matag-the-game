@@ -1,23 +1,7 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
-
-class Phase extends PureComponent {
-  render() {
-    let classes = this.props.status
-    if (this.props.active) {
-      classes += ' active'
-
-      if (this.props.activeForPlayer) {
-        classes += ' active-for-player'
-      } else {
-        classes += ' active-for-opponent'
-      }
-    }
-
-    return <span key={this.props.name} className={classes}>{this.props.name}</span>
-  }
-}
+import Phase from './Phase'
 
 class TurnPhases extends PureComponent {
   isPhaseActiveForPlayer() {

@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
 import {get} from 'lodash'
-import Card from '../Card'
+import Card from '../Card/Card'
 import {LibraryUiUtils} from './LibraryUiUtils'
 
 class PlayerLibrary extends PureComponent {
