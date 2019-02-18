@@ -1,5 +1,6 @@
 package com.aa.mtg.game.turn;
 
+import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
@@ -25,13 +26,19 @@ public class TurnController {
     }
 
     @MessageMapping("/game/turn")
-    void turn(SimpMessageHeaderAccessor headerAccessor) {
+    public void turn(SimpMessageHeaderAccessor headerAccessor, TurnRequest request) {
         SecurityToken token = extractSecurityToken(headerAccessor);
         LOGGER.info("Turn request received for sessionId '{}', gameId '{}'", token.getSessionId(), token.getGameId());
 
         GameStatus gameStatus = gameStatusRepository.get(token.getGameId(), token);
+        LOGGER.info("Request: {}", request);
 
+        if (request.getAction().equals("PASS_PRIORITY")) {
+            gameStatus.passPriority();
+        }
 
+        eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("UPDATE_TURN", gameStatus.getTurn()));
+        eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("UPDATE_TURN", gameStatus.getTurn()));
     }
 
 }

@@ -2,6 +2,7 @@ package com.aa.mtg.game.status;
 
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.turn.Turn;
+import com.aa.mtg.game.turn.phases.Phase;
 
 public class GameStatus {
 
@@ -46,5 +47,16 @@ public class GameStatus {
             return this.getPlayer2();
         }
         throw new RuntimeException("SessionId " + sessionId + " is not linked to game " + gameId + " .");
+    }
+
+    public void passPriority() {
+        String currentPhaseActivePlayer = turn.getCurrentPhaseActivePlayer();
+
+        if (currentPhaseActivePlayer.equals(player1.getName())) {
+            turn.setCurrentPhaseActivePlayer(player2.getName());
+        } else {
+            turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
+            turn.setCurrentPhaseActivePlayer(player1.getName());
+        }
     }
 }

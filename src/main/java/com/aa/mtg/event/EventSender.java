@@ -1,5 +1,6 @@
 package com.aa.mtg.event;
 
+import com.aa.mtg.game.player.Player;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -31,10 +32,10 @@ public class EventSender {
         webSocketTemplate.convertAndSend("/topic/events", eventString);
     }
 
-    public void sendToUser(String sessionId, Event event) {
+    public void sendToPlayer(Player player, Event event) {
         String eventString = serializeToString(event);
-        LOGGER.info("Sending event to {}: {}", sessionId, eventString);
-        webSocketTemplate.convertAndSendToUser(sessionId, "/events", eventString);
+        LOGGER.info("Sending event to {}: {}", player.getSessionId(), eventString);
+        webSocketTemplate.convertAndSendToUser(player.getSessionId(), "/events", eventString);
     }
 
     private String serializeToString(Object event) {

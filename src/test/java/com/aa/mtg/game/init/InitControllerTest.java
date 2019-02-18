@@ -2,6 +2,7 @@ package com.aa.mtg.game.init;
 
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
+import com.aa.mtg.game.player.Player;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -38,13 +39,6 @@ public class InitControllerTest {
 
     // Then
     Event expectedWaitingOpponentEvent = new Event("INIT", "WAITING_OPPONENT");
-    Mockito.verify(eventSender).sendToUser("userOne", expectedWaitingOpponentEvent);
-
-    // When
-    SimpMessageHeaderAccessor sessionHeaderUserTwo = sessionHeader("userTwo");
-    initController.init(sessionHeaderUserTwo);
-
-    Event expectedCompletedEvent = new Event("INIT", "COMPLETED");
-    Mockito.verify(eventSender).sendToAll(expectedCompletedEvent);
+    Mockito.verify(eventSender).sendToPlayer(new Player("userOne", "userOne"), expectedWaitingOpponentEvent);
   }
 }
