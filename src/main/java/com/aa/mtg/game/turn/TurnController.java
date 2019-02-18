@@ -1,7 +1,7 @@
-package com.aa.mtg.turn;
+package com.aa.mtg.game.turn;
 
 import com.aa.mtg.event.EventSender;
-import com.aa.mtg.status.GameStatusRepository;
+import com.aa.mtg.game.status.GameStatusRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -20,7 +20,7 @@ public class TurnController {
         this.gameStatusRepository = gameStatusRepository;
     }
 
-    @MessageMapping("/turn")
+    @MessageMapping("/game/turn")
     void turn(SimpMessageHeaderAccessor headerAccessor) {
         String sessionId = headerAccessor.getSessionId();
         LOGGER.info("Turn request received from sessionId '{}'", sessionId);

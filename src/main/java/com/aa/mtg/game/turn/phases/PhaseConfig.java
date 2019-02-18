@@ -1,4 +1,4 @@
-package com.aa.mtg.turn.phases;
+package com.aa.mtg.game.turn.phases;
 
 public class PhaseConfig {
     private final Phase name;

@@ -1,14 +1,14 @@
-package com.aa.mtg.player;
+package com.aa.mtg.game.player;
 
 import com.aa.mtg.cards.model.CardInstance;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Battlefield {
+public class Hand {
     private List<CardInstance> cards;
 
-    public Battlefield() {
+    public Hand() {
         this.cards = new ArrayList<>();
     }
 

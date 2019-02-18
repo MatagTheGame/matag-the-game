@@ -1,8 +1,8 @@
-package com.aa.mtg.init;
+package com.aa.mtg.game.init;
 
 import com.aa.mtg.cards.model.CardInstance;
 import com.aa.mtg.cards.model.HiddenCard;
-import com.aa.mtg.player.Player;
+import com.aa.mtg.game.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;

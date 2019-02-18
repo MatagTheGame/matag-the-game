@@ -5,7 +5,7 @@ const socket = new SockJs('/mtg-ws')
 const stompClient = Stomp.over(socket)
 
 stompClient.sendEvent = (destination, body) => {
-  stompClient.send('/api/' + destination, {}, JSON.stringify(body))
+  stompClient.send('/api/game/' + destination, {}, JSON.stringify(body))
 }
 
 stompClient.init = (receiveCallback) => {

@@ -1,4 +1,4 @@
-package com.aa.mtg.status;
+package com.aa.mtg.game.status;
 
 import org.springframework.stereotype.Service;
 

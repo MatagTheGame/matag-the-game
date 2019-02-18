@@ -1,6 +1,6 @@
-package com.aa.mtg.init;
+package com.aa.mtg.game.init;
 
-import com.aa.mtg.turn.phases.PhaseConfig;
+import com.aa.mtg.game.turn.phases.PhaseConfig;
 
 import java.util.List;
 

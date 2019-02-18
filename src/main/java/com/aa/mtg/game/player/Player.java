@@ -1,4 +1,4 @@
-package com.aa.mtg.player;
+package com.aa.mtg.game.player;
 
 import com.aa.mtg.cards.model.Card;
 import com.aa.mtg.cards.model.CardInstance;

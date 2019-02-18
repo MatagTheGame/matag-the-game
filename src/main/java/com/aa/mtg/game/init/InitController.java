@@ -1,11 +1,11 @@
-package com.aa.mtg.init;
+package com.aa.mtg.game.init;
 
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
-import com.aa.mtg.player.Player;
-import com.aa.mtg.status.GameStatus;
-import com.aa.mtg.status.GameStatusRepository;
-import com.aa.mtg.turn.phases.PlayerPhasesConfig;
+import com.aa.mtg.game.player.Player;
+import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.status.GameStatusRepository;
+import com.aa.mtg.game.turn.phases.PlayerPhasesConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -24,7 +24,7 @@ public class InitController {
         this.gameStatusRepository = gameStatusRepository;
     }
 
-    @MessageMapping("/init")
+    @MessageMapping("/game/init")
     void init(SimpMessageHeaderAccessor headerAccessor) {
         String sessionId = headerAccessor.getSessionId();
         LOGGER.info("Init request received for sessionId '{}'", sessionId);

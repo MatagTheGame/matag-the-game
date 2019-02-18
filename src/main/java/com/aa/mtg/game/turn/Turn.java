@@ -1,6 +1,6 @@
-package com.aa.mtg.turn;
+package com.aa.mtg.game.turn;
 
-import com.aa.mtg.turn.phases.Phase;
+import com.aa.mtg.game.turn.phases.Phase;
 
 public class Turn {
     private int turnNumber;

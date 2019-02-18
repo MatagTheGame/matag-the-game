@@ -1,7 +1,7 @@
-package com.aa.mtg.status;
+package com.aa.mtg.game.status;
 
-import com.aa.mtg.player.Player;
-import com.aa.mtg.turn.Turn;
+import com.aa.mtg.game.player.Player;
+import com.aa.mtg.game.turn.Turn;
 
 public class GameStatus {
 

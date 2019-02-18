@@ -1,4 +1,4 @@
-package com.aa.mtg.init;
+package com.aa.mtg.game.init;
 
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
