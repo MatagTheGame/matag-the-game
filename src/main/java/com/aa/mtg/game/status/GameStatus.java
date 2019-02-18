@@ -5,12 +5,18 @@ import com.aa.mtg.game.turn.Turn;
 
 public class GameStatus {
 
+    private String gameId;
     private Player player1;
     private Player player2;
     private Turn turn;
 
-    public GameStatus() {
+    public GameStatus(String gameId) {
+        this.gameId = gameId;
         this.turn = new Turn();
+    }
+
+    public String getGameId() {
+        return gameId;
     }
 
     public Player getPlayer1() {
@@ -31,5 +37,14 @@ public class GameStatus {
 
     public void setPlayer2(Player player2) {
         this.player2 = player2;
+    }
+    
+    public Player getPlayer(String sessionId) {
+        if (this.getPlayer1().getSessionId().equals(sessionId)) {
+            return this.getPlayer1();
+        } else if (this.getPlayer2().getSessionId().equals(sessionId)) {
+            return this.getPlayer2();
+        }
+        throw new RuntimeException("SessionId " + sessionId + " is not linked to game " + gameId + " .");
     }
 }
