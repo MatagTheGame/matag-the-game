@@ -6,10 +6,10 @@ var BUILD_DIR = path.resolve(__dirname, 'src/main/resources/public/js');
 var APP_DIR = path.resolve(__dirname, 'src/main/resources/app/src');
 
 module.exports = {
-  entry: APP_DIR + '/index.js',
+  entry: APP_DIR + '/game.js',
   output: {
     path: BUILD_DIR,
-    filename: 'mtg.js'
+    filename: 'game.js'
   },
   module: {
     rules: [

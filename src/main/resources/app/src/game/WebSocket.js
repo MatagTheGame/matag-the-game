@@ -1,7 +1,7 @@
 import SockJs from 'sockjs-client'
 import {Stomp} from '@stomp/stompjs'
 
-const socket = new SockJs('/mtg-ws')
+const socket = new SockJs('/game-ws')
 const stompClient = Stomp.over(socket)
 
 stompClient.sendEvent = (destination, body) => {

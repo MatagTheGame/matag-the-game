@@ -9,6 +9,6 @@ public class MtgWebConfiguration implements WebMvcConfigurer {
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
     registry.addViewController("/").setViewName("redirect:/ui/");
-    registry.addViewController("/ui/**").setViewName("forward:/index.html");
+    registry.addViewController("/ui/game/**").setViewName("forward:/game.html");
   }
 }

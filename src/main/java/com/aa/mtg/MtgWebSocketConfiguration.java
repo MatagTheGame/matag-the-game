@@ -18,7 +18,7 @@ public class MtgWebSocketConfiguration implements WebSocketMessageBrokerConfigur
 
   @Override
   public void registerStompEndpoints(StompEndpointRegistry registry) {
-    registry.addEndpoint("/mtg-ws").withSockJS();
+    registry.addEndpoint("/game-ws").withSockJS();
   }
 
 }
