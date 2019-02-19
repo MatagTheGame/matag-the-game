@@ -5,7 +5,6 @@ import com.aa.mtg.event.EventSender;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
-import com.aa.mtg.game.turn.phases.PlayerPhasesConfig;
 import com.aa.mtg.security.SecurityToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,12 +48,10 @@ public class InitController {
 
                 eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer1())));
                 eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer2())));
-                eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PHASES_CONFIG", new InitPlayerPhasesConfigEvent(PlayerPhasesConfig.defaultPlayerPhasesConfig().getConfig())));
                 eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("UPDATE_TURN", gameStatus.getTurn()));
 
                 eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer2())));
                 eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer1())));
-                eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_PHASES_CONFIG", new InitPlayerPhasesConfigEvent(PlayerPhasesConfig.defaultPlayerPhasesConfig().getConfig())));
                 eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("UPDATE_TURN", gameStatus.getTurn()));
 
             } else {

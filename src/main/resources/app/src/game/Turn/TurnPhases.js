@@ -5,21 +5,20 @@ import Phase from './Phase'
 
 class TurnPhases extends PureComponent {
   isPhaseActiveForPlayer() {
-    return this.props.turnStatus.currentPhaseActivePlayer === this.props.currentPlayerName
+    return this.props.turn.currentPhaseActivePlayer === this.props.currentPlayerName
   }
 
   isPhaseActive(name) {
-    return this.props.turnStatus.currentPhase === name
+    return this.props.turn.currentPhase === name
   }
 
   render() {
     return (
       <div id='turn-phases'>
-        {this.props.phases.map((phase) =>
-          <Phase key={phase.name}
-                 name={phase.name}
-                 status={phase.status.toLowerCase()}
-                 active={this.isPhaseActive(phase.name)}
+        {Phase.getPhases().map((phase) =>
+          <Phase key={phase}
+                 name={phase}
+                 active={this.isPhaseActive(phase)}
                  activeForPlayer={this.isPhaseActiveForPlayer()}/>
                  )}
       </div>
@@ -29,8 +28,7 @@ class TurnPhases extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    phases: get(state, 'turn.phasesConfig', []),
-    turnStatus: get(state, 'turn.status', {}),
+    turn: get(state, 'turn', {}),
     currentPlayerName: get(state, 'player.name', '')
   }
 }

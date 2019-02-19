@@ -25,7 +25,7 @@ const mapStateToProps = state => {
   return {
     name: get(state, 'player.name', ''),
     life: get(state, 'player.life', ''),
-    currentTurnPlayer: get(state, 'turn.status.currentTurnPlayer')
+    currentTurnPlayer: get(state, 'turn.currentTurnPlayer')
   }
 }
 

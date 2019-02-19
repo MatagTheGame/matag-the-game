@@ -180,27 +180,14 @@ body {
   padding: 6px;
   margin: 6px;
   display: inline-block;
-  cursor: pointer;
 }
 
-#turn-phases span.enabled {
+#turn-phases span {
   background-color: darkolivegreen;
 }
 
-#turn-phases span.enabled.active {
+#turn-phases span.active {
   background-color: lawngreen;
-}
-
-#turn-phases span.disabled {
-  background-color: indianred;
-}
-
-#turn-phases span.disabled.active {
-  background-color: orangered;
-}
-
-#turn-phases span:hover {
-  background-color: yellow !important;
 }
 
 #turn-phases span.active-for-player:before {

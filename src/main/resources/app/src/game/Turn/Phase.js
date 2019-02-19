@@ -2,12 +2,8 @@ import React, {PureComponent} from 'react'
 
 export default class Phase extends PureComponent {
 
-  static isPhaseEnabled(phasesConfig, phaseName) {
-    const phaseConfig = phasesConfig.find((phaseConfig) => phaseConfig.name === phaseName)
-    if (phaseConfig) {
-      return phaseConfig.status === 'DISABLED'
-    }
-    return false
+  static getPhases() {
+    return ['UP', 'DR', 'M1', 'BC', 'DA', 'DB', 'FS', 'CD', 'EC', 'M2', 'ET', 'CL']
   }
 
   render() {
