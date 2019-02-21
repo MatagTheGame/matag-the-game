@@ -1,7 +1,6 @@
 package com.aa.mtg.game.status;
 
 import com.aa.mtg.security.SecurityHelper;
-import com.aa.mtg.security.SecurityToken;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -24,9 +23,9 @@ public class GameStatusRepository {
         return games.get(gameId);
     }
 
-    public GameStatus get(String gameId, SecurityToken token) {
+    public GameStatus get(String gameId, String sessionId) {
         GameStatus gameStatus = games.get(gameId);
-        SecurityHelper.isPlayerAllowedToExecuteAction(gameStatus, token);
+        SecurityHelper.isPlayerAllowedToExecuteAction(gameStatus, sessionId);
         return gameStatus;
     }
 }

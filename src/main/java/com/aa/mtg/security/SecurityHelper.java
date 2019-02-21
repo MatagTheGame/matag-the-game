@@ -14,8 +14,8 @@ public class SecurityHelper {
         return new SecurityToken(sessionId, gameId);
     }
 
-    public static void isPlayerAllowedToExecuteAction(GameStatus gameStatus, SecurityToken token) {
-        Player currentPlayer = gameStatus.getPlayer(token.getSessionId());
+    public static void isPlayerAllowedToExecuteAction(GameStatus gameStatus, String sessionId) {
+        Player currentPlayer = gameStatus.getPlayer(sessionId);
         if (!gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
             throw new SecurityException("Player " + currentPlayer.getName() + " is not allowed to execute an action.");
         }

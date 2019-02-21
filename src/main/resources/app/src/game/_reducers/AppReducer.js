@@ -1,3 +1,6 @@
+import stompClient from '../WebSocket'
+import Phase from '../Turn/Phase'
+
 export default (state, action) => {
   const newState = Object.assign({}, state)
 
@@ -15,9 +18,9 @@ export default (state, action) => {
       return Object.assign(newState, {opponent: action.value})
 
     case 'UPDATE_TURN':
-      //if (action.value.currentPhaseActivePlayer === state.player.name) {
-      //  stompClient.sendEvent('turn', {action: 'PASS_PRIORITY'})
-      //}
+      if (action.value.currentPhaseActivePlayer === state.player.name && !Phase.isMainPhase(action.value.currentPhase)) {
+       stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+      }
 
       return Object.assign(newState, {turn: action.value})
 

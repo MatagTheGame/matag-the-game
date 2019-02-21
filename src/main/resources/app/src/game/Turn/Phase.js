@@ -6,6 +6,14 @@ export default class Phase extends PureComponent {
     return ['UP', 'DR', 'M1', 'BC', 'DA', 'DB', 'FS', 'CD', 'EC', 'M2', 'ET', 'CL']
   }
 
+  static isMainPhase(phase) {
+    if (phase === 'M1' || phase === 'M2') {
+      return true
+    } else {
+      return false
+    }
+  }
+
   render() {
     let classes = this.props.status
     if (this.props.active) {

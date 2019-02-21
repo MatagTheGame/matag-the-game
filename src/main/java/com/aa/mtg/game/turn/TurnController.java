@@ -1,7 +1,5 @@
 package com.aa.mtg.game.turn;
 
-import com.aa.mtg.event.Event;
-import com.aa.mtg.event.EventSender;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
 import com.aa.mtg.security.SecurityToken;
@@ -17,28 +15,24 @@ import static com.aa.mtg.security.SecurityHelper.extractSecurityToken;
 public class TurnController {
     private Logger LOGGER = LoggerFactory.getLogger(TurnController.class);
 
-    private EventSender eventSender;
     private GameStatusRepository gameStatusRepository;
+    private TurnService turnService;
 
-    public TurnController(EventSender eventSender, GameStatusRepository gameStatusRepository) {
-        this.eventSender = eventSender;
+    public TurnController(GameStatusRepository gameStatusRepository, TurnService turnService) {
         this.gameStatusRepository = gameStatusRepository;
+        this.turnService = turnService;
     }
 
     @MessageMapping("/game/turn")
     public void turn(SimpMessageHeaderAccessor headerAccessor, TurnRequest request) {
         SecurityToken token = extractSecurityToken(headerAccessor);
-        LOGGER.info("Turn request received for sessionId '{}', gameId '{}'", token.getSessionId(), token.getGameId());
+        LOGGER.info("Turn request received for sessionId '{}', gameId '{}': {}", token.getSessionId(), token.getGameId(), request);
+        GameStatus gameStatus = gameStatusRepository.get(token.getGameId(), token.getSessionId());
 
-        GameStatus gameStatus = gameStatusRepository.get(token.getGameId(), token);
-        LOGGER.info("Request: {}", request);
-
-        if (request.getAction().equals("PASS_PRIORITY")) {
-            gameStatus.passPriority();
+        if ("CONTINUE_TURN".equals(request.getAction())) {
+            turnService.continueTurn(gameStatus);
         }
 
-        eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("UPDATE_TURN", gameStatus.getTurn()));
-        eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("UPDATE_TURN", gameStatus.getTurn()));
     }
 
 }
