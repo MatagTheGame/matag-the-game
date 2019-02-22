@@ -1,33 +1,16 @@
-import stompClient from '../WebSocket'
-import Phase from '../Turn/Phase'
+import ServerEventsReducer from './ServerEventsReducer'
+import ClientEventsReducer from './ClientEventsReducer'
 
 export default (state, action) => {
   const newState = Object.assign({}, state)
 
-    switch (action.type) {
-    case 'INIT_WAITING_OPPONENT':
-      return Object.assign(newState, {message: 'Waiting for opponent...'})
+  if (ServerEventsReducer.getEvents().find(event => action.type === event)) {
+    return ServerEventsReducer.reduceEvent(state, newState, action)
 
-    case 'OPPONENT_JOINED':
-      return Object.assign(newState, {message: undefined})
+  } else if (ClientEventsReducer.getEvents().find(event => action.type === event)) {
+    return ClientEventsReducer.reduceEvent(state, newState, action)
 
-    case 'INIT_PLAYER':
-      return Object.assign(newState, {player: action.value})
-
-    case 'INIT_OPPONENT':
-      return Object.assign(newState, {opponent: action.value})
-
-    case 'UPDATE_TURN':
-      if (action.value.currentPhaseActivePlayer === state.player.name && !Phase.isMainPhase(action.value.currentPhase)) {
-       stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
-      }
-
-      return Object.assign(newState, {turn: action.value})
-
-    case '@@INIT':
-      return {}
-
-    default:
-      throw 'Unknown action type ' + action.type
+  } else {
+    throw new Error('Unknown action type ' + action.type)
   }
 }

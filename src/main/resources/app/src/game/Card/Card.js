@@ -18,7 +18,10 @@ export default class Card extends PureComponent {
 
   render() {
     return (
-      <div className="card" style={{backgroundImage: this.imageUrl(), ...this.props.style}} />
+      <div id={'player-card-' + this.props.id}
+           className="card"
+           style={{backgroundImage: this.imageUrl(), ...this.props.style}}
+           onClick={this.props.onclick} />
     )
   }
 }

@@ -27,7 +27,7 @@ public class Player {
         this.battlefield = new Battlefield();
 
         for (int i = 0; i < 60; i++) {
-            this.library.getCards().add(new CardInstance(i, getRandomCard()));
+            this.library.getCards().add(new CardInstance(i + 1, getRandomCard()));
         }
 
         for (int i = 0; i < 7; i++) {
