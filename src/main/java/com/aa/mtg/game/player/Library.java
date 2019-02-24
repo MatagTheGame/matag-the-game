@@ -1,6 +1,5 @@
 package com.aa.mtg.game.player;
 
-import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ public class Library {
         this.cards = new ArrayList<>();
     }
 
-    CardInstance draw() {
+    public CardInstance draw() {
         return this.cards.remove(0);
     }
 

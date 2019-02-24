@@ -65,6 +65,13 @@ public class TurnService {
 
         } else {
             if (turn.getCurrentPhaseActivePlayer().equals(activePlayer.getName())) {
+                if (turn.getCurrentPhase().equals(Phase.DR) && turn.getTurnNumber() > 1) {
+                    CardInstance cardInstance = activePlayer.getLibrary().draw();
+                    activePlayer.getHand().getCards().add(cardInstance);
+                    eventSender.sendToPlayer(activePlayer, new Event("UPDATE_ACTIVE_PLAYER_HAND", activePlayer.getHand().getCards()));
+                    eventSender.sendToPlayer(inactivePlayer, new Event("UPDATE_ACTIVE_PLAYER_HAND", activePlayer.getHand().maskedHand()));
+                }
+
                 if (Phase.nonOpponentPhases().contains(turn.getCurrentPhase())) {
                     turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
                 } else {

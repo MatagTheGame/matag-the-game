@@ -24,9 +24,6 @@ public class TurnServiceTest {
     @Mock
     private EventSender eventSender;
 
-    @Mock
-    private Library library;
-
     @InjectMocks
     private TurnService turnService;
 
@@ -36,8 +33,8 @@ public class TurnServiceTest {
     public void testContinueTurnUpkeepPlayer() {
         // Given
         GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library));
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -68,8 +65,8 @@ public class TurnServiceTest {
     public void testContinueTurnUpkeepOpponent() {
         // Given
         GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library));
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -100,8 +97,8 @@ public class TurnServiceTest {
     public void testContinueTurnDrawPlayer() {
         // Given
         GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library));
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -128,11 +125,47 @@ public class TurnServiceTest {
     }
 
     @Test
+    public void testContinueTurnDrawPlayerSecondTurn() {
+        // Given
+        GameStatus gameStatus = new GameStatus("game-id");
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+
+        Turn turn = new Turn();
+        turn.setTurnNumber(2);
+        turn.setCurrentTurnPlayer("player-name");
+        turn.setCurrentPhase(Phase.DR);
+        turn.setCurrentPhaseActivePlayer("player-name");
+        turn.addCardToCardsPlayedWithinTurn(A_CARD);
+
+        ReflectionTestUtils.setField(gameStatus, "turn", turn);
+
+        // When
+        turnService.continueTurn(gameStatus);
+
+        // Then
+        BDDMockito.verify(eventSender).sendToPlayer(gameStatus.getPlayer1(),
+                new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards()));
+        BDDMockito.verify(eventSender).sendToPlayer(gameStatus.getPlayer2(),
+                new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().maskedHand()));
+
+        Turn expectedTurn = new Turn();
+        expectedTurn.setTurnNumber(2);
+        expectedTurn.setCurrentTurnPlayer("player-name");
+        expectedTurn.setCurrentPhase(Phase.M1);
+        expectedTurn.setCurrentPhaseActivePlayer("player-name");
+        expectedTurn.addCardToCardsPlayedWithinTurn(A_CARD);
+        BDDMockito.verify(eventSender).sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_TURN", expectedTurn));
+    }
+
+    @Test
     public void testContinueTurnM1Player() {
         // Given
         GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library));
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -162,8 +195,8 @@ public class TurnServiceTest {
     public void testContinueTurnCLPlayer() {
         // Given
         GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library));
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -186,5 +219,15 @@ public class TurnServiceTest {
         BDDMockito.verify(eventSender).sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                 new Event("UPDATE_TURN", expectedTurn));
+    }
+    
+    private Library library() {
+        Library library = new Library();
+        
+        for (int i = 0; i < 60; i++) {
+            library.getCards().add(new CardInstance(i + 1, Cards.PLAINS));
+        }
+        
+        return library;
     }
 }

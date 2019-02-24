@@ -6,6 +6,7 @@ import com.aa.mtg.cards.properties.Type;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Card {
     private final String name;
@@ -67,5 +68,39 @@ public class Card {
 
     public int getToughness() {
         return toughness;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card = (Card) o;
+        return power == card.power &&
+                toughness == card.toughness &&
+                Objects.equals(name, card.name) &&
+                Objects.equals(colors, card.colors) &&
+                Objects.equals(cost, card.cost) &&
+                Objects.equals(types, card.types) &&
+                Objects.equals(subtypes, card.subtypes) &&
+                Objects.equals(ruleText, card.ruleText);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, colors, cost, types, subtypes, ruleText, power, toughness);
+    }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "name='" + name + '\'' +
+                ", colors=" + colors +
+                ", cost=" + cost +
+                ", types=" + types +
+                ", subtypes=" + subtypes +
+                ", ruleText='" + ruleText + '\'' +
+                ", power=" + power +
+                ", toughness=" + toughness +
+                '}';
     }
 }

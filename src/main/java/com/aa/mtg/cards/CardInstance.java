@@ -2,6 +2,7 @@ package com.aa.mtg.cards;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CardInstance {
 
@@ -31,5 +32,27 @@ public class CardInstance {
             library.add(new CardInstance(cardInstance.getId(), Card.hiddenCard()));
         }
         return library;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CardInstance that = (CardInstance) o;
+        return id == that.id &&
+                Objects.equals(card, that.card);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, card);
+    }
+
+    @Override
+    public String toString() {
+        return "CardInstance{" +
+                "id=" + id +
+                ", card=" + card +
+                '}';
     }
 }
