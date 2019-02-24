@@ -5,10 +5,11 @@ import PlayerUtils from '../PlayerInfo/PlayerUtils'
 export default class ServerEventsReducer {
 
   static getEvents() {
-    return ['INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN', 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD']
+    return ['INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN', 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND']
   }
 
   static reduceEvent(state, newState, action) {
+    let activePlayer
     switch (action.type) {
       case 'INIT_WAITING_OPPONENT':
         return Object.assign(newState, {message: 'Waiting for opponent...'})
@@ -30,12 +31,14 @@ export default class ServerEventsReducer {
         return Object.assign(newState, {turn: action.value})
 
       case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':
-        const activePlayer = PlayerUtils.getActivePlayer(state)
+        activePlayer = PlayerUtils.getActivePlayer(state)
+        activePlayer.battlefield = action.value.cards
+        return PlayerUtils.updateActivePlayer(newState, activePlayer)
 
-        const updatedActivePlayer = Object.assign({}, activePlayer)
-        updatedActivePlayer.battlefield = action.value.cards
-
-        return PlayerUtils.updateActivePlayer(newState, updatedActivePlayer)
+      case 'UPDATE_ACTIVE_PLAYER_HAND':
+        activePlayer = PlayerUtils.getActivePlayer(state)
+        activePlayer.hand = action.value
+        return PlayerUtils.updateActivePlayer(newState, activePlayer)
     }
   }
 
