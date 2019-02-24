@@ -1,5 +1,6 @@
 package com.aa.mtg.game.player;
 
+import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
 
 import java.util.ArrayList;
@@ -18,5 +19,9 @@ public class Library {
 
     public List<CardInstance> getCards() {
         return cards;
+    }
+
+    public List<CardInstance> maskedLibrary() {
+        return CardInstance.mask(this.cards);
     }
 }

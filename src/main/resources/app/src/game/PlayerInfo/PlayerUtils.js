@@ -1,4 +1,4 @@
-export default class Player {
+export default class PlayerUtils {
   static getActivePlayer(state) {
     if (state.turn.currentTurnPlayer === state.player.name) {
       return state.player

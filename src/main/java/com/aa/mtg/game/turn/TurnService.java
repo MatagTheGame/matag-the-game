@@ -49,6 +49,9 @@ public class TurnService {
                     new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield())
             );
 
+            eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards()));
+            eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().maskedHand()));
+
         } else {
             throw new RuntimeException("ERROR LAND ALREADY PLAYED");
         }

@@ -1,5 +1,8 @@
 package com.aa.mtg.cards;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CardInstance {
 
     private final int id;
@@ -20,5 +23,13 @@ public class CardInstance {
 
     public Card getCard() {
         return card;
+    }
+
+    public static List<CardInstance> mask(List<CardInstance> cardInstances) {
+        List<CardInstance> library = new ArrayList<>();
+        for (CardInstance cardInstance : cardInstances) {
+            library.add(new CardInstance(cardInstance.getId(), Card.hiddenCard()));
+        }
+        return library;
     }
 }

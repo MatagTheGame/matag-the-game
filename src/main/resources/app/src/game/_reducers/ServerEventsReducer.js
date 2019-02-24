@@ -1,6 +1,6 @@
 import stompClient from '../WebSocket'
 import Phase from '../Turn/Phase'
-import Player from '../PlayerInfo/Player'
+import PlayerUtils from '../PlayerInfo/PlayerUtils'
 
 export default class ServerEventsReducer {
 
@@ -30,12 +30,12 @@ export default class ServerEventsReducer {
         return Object.assign(newState, {turn: action.value})
 
       case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':
-        const activePlayer = Player.getActivePlayer(state)
+        const activePlayer = PlayerUtils.getActivePlayer(state)
 
         const updatedActivePlayer = Object.assign({}, activePlayer)
         updatedActivePlayer.battlefield = action.value.cards
 
-        return Player.updateActivePlayer(newState, updatedActivePlayer)
+        return PlayerUtils.updateActivePlayer(newState, updatedActivePlayer)
     }
   }
 

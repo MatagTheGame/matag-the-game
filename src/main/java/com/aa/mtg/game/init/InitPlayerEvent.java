@@ -1,6 +1,5 @@
 package com.aa.mtg.game.init;
 
-import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
 
@@ -43,14 +42,9 @@ class InitPlayerEvent {
     }
 
     static InitPlayerEvent createForPlayer(Player player) {
-        List<CardInstance> hand = new ArrayList<>();
-        for (CardInstance cardInstance : player.getHand().getCards()) {
-            hand.add(new CardInstance(cardInstance));
-        }
-
         return new InitPlayerEvent(
-                fillLibrary(player),
-                hand,
+                player.getLibrary().maskedLibrary(),
+                player.getHand().getCards(),
                 new ArrayList<>(),
                 player.getName(),
                 player.getLife()
@@ -58,25 +52,12 @@ class InitPlayerEvent {
     }
 
     static InitPlayerEvent createForOpponent(Player player) {
-        List<CardInstance> hand = new ArrayList<>();
-        for (CardInstance cardInstance : player.getHand().getCards()) {
-            hand.add(new CardInstance(cardInstance.getId(), Card.hiddenCard()));
-        }
-
         return new InitPlayerEvent(
-                fillLibrary(player),
-                hand,
+                player.getLibrary().maskedLibrary(),
+                player.getHand().maskedHand(),
                 new ArrayList<>(),
                 player.getName(),
                 player.getLife()
         );
-    }
-
-    private static List<CardInstance> fillLibrary(Player player) {
-        List<CardInstance> library = new ArrayList<>();
-        for (CardInstance cardInstance : player.getLibrary().getCards()) {
-            library.add(new CardInstance(cardInstance.getId(), Card.hiddenCard()));
-        }
-        return library;
     }
 }

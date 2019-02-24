@@ -1,5 +1,6 @@
 package com.aa.mtg.game.player;
 
+import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
 
 import java.util.ArrayList;
@@ -27,5 +28,9 @@ public class Hand {
         CardInstance cardInstance = findCardById(cardId);
         this.cards.remove(cardInstance);
         return cardInstance;
+    }
+
+    public List<CardInstance> maskedHand() {
+        return CardInstance.mask(this.cards);
     }
 }
