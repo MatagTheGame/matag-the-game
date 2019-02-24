@@ -1,6 +1,6 @@
 package com.aa.mtg.cards.sets;
 
-import com.aa.mtg.cards.model.Card;
+import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.cards.properties.Type;

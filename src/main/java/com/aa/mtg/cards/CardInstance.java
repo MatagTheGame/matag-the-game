@@ -1,4 +1,4 @@
-package com.aa.mtg.cards.model;
+package com.aa.mtg.cards;
 
 public class CardInstance {
 

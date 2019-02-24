@@ -1,6 +1,6 @@
 package com.aa.mtg.game.turn;
 
-import com.aa.mtg.cards.model.CardInstance;
+import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.turn.phases.Phase;
 
 import java.util.ArrayList;

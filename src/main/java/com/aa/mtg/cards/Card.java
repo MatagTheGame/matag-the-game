@@ -1,4 +1,4 @@
-package com.aa.mtg.cards.model;
+package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;

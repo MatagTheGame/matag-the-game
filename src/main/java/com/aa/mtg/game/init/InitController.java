@@ -1,6 +1,5 @@
 package com.aa.mtg.game.init;
 
-import com.aa.mtg.cards.model.CardInstance;
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
 import com.aa.mtg.game.deck.DeckRetrieverService;
@@ -14,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
-
-import java.util.List;
 
 import static com.aa.mtg.security.SecurityHelper.extractSecurityToken;
 

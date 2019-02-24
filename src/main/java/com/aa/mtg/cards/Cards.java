@@ -1,6 +1,5 @@
 package com.aa.mtg.cards;
 
-import com.aa.mtg.cards.model.Card;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 

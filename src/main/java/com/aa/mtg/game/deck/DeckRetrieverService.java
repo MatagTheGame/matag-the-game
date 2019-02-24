@@ -1,7 +1,7 @@
 package com.aa.mtg.game.deck;
 
-import com.aa.mtg.cards.model.Card;
-import com.aa.mtg.cards.model.CardInstance;
+import com.aa.mtg.cards.Card;
+import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.security.SecurityToken;

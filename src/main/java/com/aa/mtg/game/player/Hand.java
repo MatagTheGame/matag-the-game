@@ -1,6 +1,6 @@
 package com.aa.mtg.game.player;
 
-import com.aa.mtg.cards.model.CardInstance;
+import com.aa.mtg.cards.CardInstance;
 
 import java.util.ArrayList;
 import java.util.List;

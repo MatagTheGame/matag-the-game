@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn;
 
-import com.aa.mtg.cards.model.Card;
-import com.aa.mtg.cards.model.CardInstance;
+import com.aa.mtg.cards.Card;
+import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;

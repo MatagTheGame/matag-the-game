@@ -1,14 +1,5 @@
 package com.aa.mtg.game.player;
 
-import com.aa.mtg.cards.model.Card;
-import com.aa.mtg.cards.model.CardInstance;
-
-import java.util.Random;
-
-import static com.aa.mtg.cards.Cards.*;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.AXEBANE_BEAST;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.FERAL_MAAKA;
-
 public class Player {
 
     private final String sessionId;
