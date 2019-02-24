@@ -51,8 +51,8 @@ public class TurnService {
                     new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield())
             );
 
-            eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards()));
-            eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().maskedHand()));
+            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards()));
+            eventSender.sendToPlayer(gameStatus.getInactivePlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().maskedHand()));
 
         } else {
             eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("You already played a land this turn", true)));
