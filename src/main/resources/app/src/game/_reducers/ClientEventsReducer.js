@@ -4,7 +4,7 @@ import CardComponent from '../Card/CardComponent'
 export default class ClientEventsReducer {
 
   static getEvents() {
-    return ['@@INIT', 'PLAYER_CARD_CLICK']
+    return ['@@INIT', 'PLAYER_CARD_CLICK', 'CONTINUE_CLICK']
   }
 
   static reduceEvent(state, newState, action) {
@@ -20,6 +20,10 @@ export default class ClientEventsReducer {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardId: cardId})
           }
         }
+        return newState
+
+      case 'CONTINUE_CLICK':
+        stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
         return newState
     }
   }

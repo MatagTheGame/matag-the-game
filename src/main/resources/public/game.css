@@ -207,6 +207,17 @@ body {
   margin-left: 10px;
 }
 
+#continue-button {
+  position: absolute;
+  right: 24%;
+  bottom: 36%;
+  font-size: xx-large;
+  padding: 5px 20px;
+  border-style: outset;
+  border-width: 10px;
+  cursor: pointer;
+}
+
 #table {
   background-image: url("/img/materials/wood.jpg");
   position: absolute;
