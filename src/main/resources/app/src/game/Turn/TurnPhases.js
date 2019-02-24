@@ -5,6 +5,25 @@ import Phase from './Phase'
 import {bindActionCreators} from 'redux'
 
 class TurnPhases extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.handleContinueKey = this.handleContinueKey.bind(this);
+  }
+
+  handleContinueKey(event) {
+    if (event.key === ' ') {
+      this.props.continueClick()
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleContinueKey);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleContinueKey);
+  }
+
   isPhaseActiveForPlayer() {
     return this.props.turn.currentPhaseActivePlayer === this.props.currentPlayerName
   }
@@ -15,7 +34,7 @@ class TurnPhases extends PureComponent {
 
   renderContinueButton() {
     if (this.isPhaseActiveForPlayer()) {
-      return <button id='continue-button' type='button' onClick={this.props.continueClick}>Continue</button>
+      return <button title="Press SPACE to continue" id='continue-button' type='button' onClick={this.props.continueClick}>Continue</button>
     }
   }
 
@@ -37,10 +56,9 @@ class TurnPhases extends PureComponent {
   }
 }
 
-const createContinueClickAction = (event) => {
+const createContinueClickAction = () => {
   return {
-    type: 'CONTINUE_CLICK',
-    cardId: event.target.id
+    type: 'CONTINUE_CLICK'
   }
 }
 

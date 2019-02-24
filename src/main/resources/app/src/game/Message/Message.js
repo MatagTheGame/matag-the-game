@@ -11,7 +11,7 @@ class Message extends PureComponent {
 
   handleEscape(event) {
     if (event.key === 'Escape' && this.props.message.closable) {
-      this.props.closeMessage(closeMessageEvent())
+      this.props.closeMessage()
     }
   }
 

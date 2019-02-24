@@ -212,7 +212,7 @@ body {
   right: 24%;
   bottom: 36%;
   font-size: xx-large;
-  padding: 5px 20px;
+  padding: 5px 20px 10px 20px;
   border-style: outset;
   border-width: 10px;
   cursor: pointer;
