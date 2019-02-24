@@ -15,4 +15,19 @@ export default class PlayerUtils {
       return Object.assign(state, {opponent: newActivePlayerClone})
     }
   }
+
+  static canActivePlayerPerformAnyAction(state) {
+    if (!state.turn) {
+      return true
+    }
+
+    // FIXME for the time being assuming that current player can always perform an action and opponent never
+
+
+    if (state.turn.currentTurnPlayer === state.player.name) {
+      return true
+    } else {
+      return false
+    }
+  }
 }

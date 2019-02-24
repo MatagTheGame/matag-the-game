@@ -27,8 +27,10 @@ export default class ServerEventsReducer {
         return Object.assign(newState, {opponent: action.value})
 
       case 'UPDATE_TURN':
-        if (action.value.currentPhaseActivePlayer === state.player.name && !Phase.isMainPhase(action.value.currentPhase)) {
-          stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+        if (action.value.currentPhaseActivePlayer === state.player.name) {
+          if (!Phase.isMainPhase(action.value.currentPhase) || !PlayerUtils.canActivePlayerPerformAnyAction(state)) {
+            stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+          }
         }
 
         return Object.assign(newState, {turn: action.value})
