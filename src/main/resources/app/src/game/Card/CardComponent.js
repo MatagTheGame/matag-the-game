@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 
-export default class Card extends PureComponent {
+export default class CardComponent extends PureComponent {
   static normalizeCardName(cardName) {
     return cardName.toLowerCase()
       .replace(' ', '_')
@@ -16,7 +16,7 @@ export default class Card extends PureComponent {
   }
 
   imageUrl () {
-    const name = Card.normalizeCardName(this.props.name)
+    const name = CardComponent.normalizeCardName(this.props.name)
     if (name === 'card') {
       return 'url("/img/card-back.jpg")'
     } else {

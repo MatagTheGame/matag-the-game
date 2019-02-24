@@ -1,5 +1,5 @@
-import Card from '../Card/Card'
 import stompClient from '../WebSocket'
+import CardComponent from '../Card/CardComponent'
 
 export default class ClientEventsReducer {
 
@@ -14,8 +14,8 @@ export default class ClientEventsReducer {
 
       case 'PLAYER_CARD_CLICK':
         if (state.turn.currentPhaseActivePlayer === state.player.name) {
-          const cardId = Card.extractCardId(action.cardId)
-          const cardInstance = Card.findCardInstanceById(state.player.hand, cardId)
+          const cardId = CardComponent.extractCardId(action.cardId)
+          const cardInstance = CardComponent.findCardInstanceById(state.player.hand, cardId)
           if (cardInstance.card.types.find(type => type === 'LAND')) {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardId: cardId})
           }
