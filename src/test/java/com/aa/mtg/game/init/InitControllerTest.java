@@ -2,6 +2,7 @@ package com.aa.mtg.game.init;
 
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
+import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -39,6 +40,6 @@ public class InitControllerTest {
 
     // Then
     Event expectedWaitingOpponentEvent = new Event("INIT", "WAITING_OPPONENT");
-    Mockito.verify(eventSender).sendToPlayer(new Player("userOne", "userOne"), expectedWaitingOpponentEvent);
+    Mockito.verify(eventSender).sendToPlayer(new Player("userOne", "userOne", new Library()), expectedWaitingOpponentEvent);
   }
 }

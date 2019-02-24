@@ -1,7 +1,10 @@
 package com.aa.mtg.game.init;
 
+import com.aa.mtg.cards.model.CardInstance;
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
+import com.aa.mtg.game.deck.DeckRetrieverService;
+import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
@@ -12,18 +15,22 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
+
 import static com.aa.mtg.security.SecurityHelper.extractSecurityToken;
 
 @Controller
 public class InitController {
     private Logger LOGGER = LoggerFactory.getLogger(InitController.class);
 
-    private EventSender eventSender;
-    private GameStatusRepository gameStatusRepository;
+    private final EventSender eventSender;
+    private final GameStatusRepository gameStatusRepository;
+    private final DeckRetrieverService deckRetrieverService;
 
-    public InitController(EventSender eventSender, GameStatusRepository gameStatusRepository) {
+    public InitController(EventSender eventSender, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService) {
         this.eventSender = eventSender;
         this.gameStatusRepository = gameStatusRepository;
+        this.deckRetrieverService = deckRetrieverService;
     }
 
     @MessageMapping("/game/init")
@@ -33,14 +40,16 @@ public class InitController {
 
         if (!gameStatusRepository.contains(token.getGameId())) {
             GameStatus gameStatus = new GameStatus(token.getGameId());
-            gameStatus.setPlayer1(new Player(token.getSessionId(), "Pippo"));
+            Library library = deckRetrieverService.retrieveDeckForUser(token, gameStatus);
+            gameStatus.setPlayer1(new Player(token.getSessionId(), "Pippo", library));
             gameStatusRepository.save(token.getGameId(), gameStatus);
             eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_WAITING_OPPONENT"));
 
         } else {
             GameStatus gameStatus = gameStatusRepository.getUnsecure(token.getGameId());
             if (gameStatus.getPlayer2() == null) {
-                gameStatus.setPlayer2(new Player(token.getSessionId(), "Pluto"));
+                Library library = deckRetrieverService.retrieveDeckForUser(token, gameStatus);
+                gameStatus.setPlayer2(new Player(token.getSessionId(), "Pluto", library));
 
                 gameStatus.getTurn().init(gameStatus.getPlayer1().getName());
 

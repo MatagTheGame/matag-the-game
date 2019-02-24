@@ -7,6 +7,14 @@ export default class Card extends PureComponent {
       .replace(',', '_')
   }
 
+  static findCardById (cards, cardId) {
+    return cards.find(card => card.id === parseInt(cardId))
+  }
+
+  static extractCardId (id) {
+    return id.replace('card-', '')
+  }
+
   imageUrl () {
     const name = Card.normalizeCardName(this.props.name)
     if (name === 'card') {
@@ -18,7 +26,7 @@ export default class Card extends PureComponent {
 
   render() {
     return (
-      <div id={'player-card-' + this.props.id}
+      <div id={'card-' + this.props.id}
            className="card"
            style={{backgroundImage: this.imageUrl(), ...this.props.style}}
            onClick={this.props.onclick} />

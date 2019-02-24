@@ -18,17 +18,13 @@ public class Player {
     private final Hand hand;
     private final Battlefield battlefield;
 
-    public Player(String sessionId, String name) {
+    public Player(String sessionId, String name, Library library) {
         this.sessionId = sessionId;
         this.name = name;
         this.life = 20;
-        this.library = new Library();
+        this.library = library;
         this.hand = new Hand();
         this.battlefield = new Battlefield();
-
-        for (int i = 0; i < 60; i++) {
-            this.library.getCards().add(new CardInstance(i + 1, getRandomCard()));
-        }
 
         for (int i = 0; i < 7; i++) {
             this.hand.getCards().add(this.library.draw());
@@ -57,16 +53,6 @@ public class Player {
 
     public Battlefield getBattlefield() {
         return battlefield;
-    }
-
-    private Card getRandomCard() {
-        switch (new Random().nextInt(4)) {
-            case 0: return MOUNTAIN;
-            case 1: return FOREST;
-            case 2: return FERAL_MAAKA;
-            case 3: return AXEBANE_BEAST;
-        }
-        throw new RuntimeException("Non Existent Card");
     }
 
 }

@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn;
 
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
+import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.phases.Phase;
@@ -19,6 +20,9 @@ public class TurnServiceTest {
     @Mock
     private EventSender eventSender;
 
+    @Mock
+    private Library library;
+
     @InjectMocks
     private TurnService turnService;
 
@@ -26,8 +30,8 @@ public class TurnServiceTest {
     public void testContinueTurnUpkeepPlayer() {
         // Given
         GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name"));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name"));
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library));
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -54,8 +58,8 @@ public class TurnServiceTest {
     public void testContinueTurnUpkeepOpponent() {
         // Given
         GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name"));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name"));
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library));
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -82,8 +86,8 @@ public class TurnServiceTest {
     public void testContinueTurnDrawPlayer() {
         // Given
         GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name"));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name"));
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library));
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);

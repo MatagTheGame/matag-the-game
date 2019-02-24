@@ -3,8 +3,11 @@ package com.aa.mtg.game.status;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.turn.Turn;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class GameStatus {
 
+    private AtomicInteger nextCardId = new AtomicInteger();
     private String gameId;
     private Player player1;
     private Player player2;
@@ -47,4 +50,9 @@ public class GameStatus {
         }
         throw new RuntimeException("SessionId " + sessionId + " is not linked to game " + gameId + " .");
     }
+
+    public int nextCardId() {
+        return nextCardId.incrementAndGet();
+    }
+
 }
