@@ -59,17 +59,22 @@ public class TurnService {
         }
     }
 
-    private void updateToNextTurn(Turn turn, Player player, Player opponent) {
-        if (turn.getCurrentPhaseActivePlayer().equals(player.getName())) {
-            if (Phase.nonOpponentPhases().contains(turn.getCurrentPhase())) {
-                turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
-            } else {
-                turn.setCurrentPhaseActivePlayer(opponent.getName());
-            }
+    private void updateToNextTurn(Turn turn, Player activePlayer, Player inactivePlayer) {
+        if (turn.getCurrentPhase().equals(Phase.CL)) {
+            turn.cleanup(inactivePlayer.getName());
 
         } else {
-            turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
-            turn.setCurrentPhaseActivePlayer(player.getName());
+            if (turn.getCurrentPhaseActivePlayer().equals(activePlayer.getName())) {
+                if (Phase.nonOpponentPhases().contains(turn.getCurrentPhase())) {
+                    turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
+                } else {
+                    turn.setCurrentPhaseActivePlayer(inactivePlayer.getName());
+                }
+
+            } else {
+                turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
+                turn.setCurrentPhaseActivePlayer(activePlayer.getName());
+            }
         }
     }
 }

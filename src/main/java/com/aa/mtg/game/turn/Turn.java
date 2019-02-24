@@ -21,6 +21,14 @@ public class Turn {
         this.currentPhaseActivePlayer = playerName;
     }
 
+    public void cleanup(String nextPlayerName) {
+        this.turnNumber++;
+        this.currentPhase = Phase.UP;
+        this.currentTurnPlayer = nextPlayerName;
+        this.currentPhaseActivePlayer = nextPlayerName;
+        this.cardsPlayedWithinTurn.clear();
+    }
+
     public int getTurnNumber() {
         return turnNumber;
     }
@@ -76,5 +84,16 @@ public class Turn {
     @Override
     public int hashCode() {
         return Objects.hash(turnNumber, currentTurnPlayer, currentPhase, currentPhaseActivePlayer, cardsPlayedWithinTurn);
+    }
+
+    @Override
+    public String toString() {
+        return "Turn{" +
+                "turnNumber=" + turnNumber +
+                ", currentTurnPlayer='" + currentTurnPlayer + '\'' +
+                ", currentPhase=" + currentPhase +
+                ", currentPhaseActivePlayer='" + currentPhaseActivePlayer + '\'' +
+                ", cardsPlayedWithinTurn=" + cardsPlayedWithinTurn +
+                '}';
     }
 }

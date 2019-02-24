@@ -32,7 +32,7 @@ public enum Phase {
     }
 
     public static Set<Phase> nonOpponentPhases() {
-        return new HashSet<>(asList(DR, DA));
+        return new HashSet<>(asList(DR, DA, CL));
     }
 
     public static Set<Phase> nonPlayerPhases() {
