@@ -243,3 +243,11 @@ body {
   border: 1px solid black;
   font-size: large;
 }
+
+#message-close {
+  position: absolute;
+  font-size: x-large;
+  top: 0;
+  right: 2px;
+  cursor: pointer;
+}

@@ -8,6 +8,7 @@ import com.aa.mtg.event.EventSender;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.phases.Phase;
+import com.aa.mtg.message.MessageEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +43,7 @@ public class TurnService {
 
         if (!alreadyPlayedALand) {
             CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
+            turn.addCardToCardsPlayedWithinTurn(cardInstance);
             gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance);
 
             eventSender.sendToPlayers(
@@ -53,7 +55,7 @@ public class TurnService {
             eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().maskedHand()));
 
         } else {
-            throw new RuntimeException("ERROR LAND ALREADY PLAYED");
+            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("You already played a land this turn", true)));
         }
     }
 
