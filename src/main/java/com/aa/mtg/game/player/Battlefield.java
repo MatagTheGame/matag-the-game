@@ -15,4 +15,8 @@ public class Battlefield {
     public List<CardInstance> getCards() {
         return cards;
     }
+
+    public void addCard(CardInstance cardInstance) {
+        this.cards.add(cardInstance);
+    }
 }

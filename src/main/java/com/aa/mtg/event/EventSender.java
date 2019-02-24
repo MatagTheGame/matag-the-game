@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Sends events to the browser.
  */
@@ -26,16 +28,14 @@ public class EventSender {
         this.objectMapper = objectMapper;
     }
 
-    public void sendToAll(Event event) {
-        String eventString = serializeToString(event);
-        LOGGER.info("Sending event to all: {}", eventString);
-        webSocketTemplate.convertAndSend("/topic/events", eventString);
-    }
-
     public void sendToPlayer(Player player, Event event) {
         String eventString = serializeToString(event);
         LOGGER.info("Sending event to {}: {}", player.getSessionId(), eventString);
         webSocketTemplate.convertAndSendToUser(player.getSessionId(), "/events", eventString);
+    }
+
+    public void sendToPlayers(List<Player> players, Event event) {
+        players.forEach(player -> sendToPlayer(player, event));
     }
 
     private String serializeToString(Object event) {

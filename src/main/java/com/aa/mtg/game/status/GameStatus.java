@@ -51,6 +51,22 @@ public class GameStatus {
         throw new RuntimeException("SessionId " + sessionId + " is not linked to game " + gameId + " .");
     }
 
+    public Player getActivePlayer() {
+        if (turn.getCurrentTurnPlayer().equals(this.getPlayer1().getName())) {
+            return this.getPlayer1();
+        } else {
+            return this.getPlayer2();
+        }
+    }
+
+    public Player getInactivePlayer() {
+        if (turn.getCurrentTurnPlayer().equals(this.getPlayer1().getName())) {
+            return this.getPlayer2();
+        } else {
+            return this.getPlayer1();
+        }
+    }
+
     public int nextCardId() {
         return nextCardId.incrementAndGet();
     }

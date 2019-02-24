@@ -1,7 +1,10 @@
 package com.aa.mtg.game.turn;
 
+import com.aa.mtg.cards.model.CardInstance;
 import com.aa.mtg.game.turn.phases.Phase;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Turn {
@@ -9,6 +12,7 @@ public class Turn {
     private String currentTurnPlayer;
     private Phase currentPhase;
     private String currentPhaseActivePlayer;
+    private List<CardInstance> cardsPlayedWithinTurn = new ArrayList<>();
 
     public void init(String playerName) {
         this.turnNumber = 1;
@@ -49,29 +53,28 @@ public class Turn {
         this.currentPhaseActivePlayer = currentPhaseActivePlayer;
     }
 
+    public List<CardInstance> getCardsPlayedWithinTurn() {
+        return cardsPlayedWithinTurn;
+    }
+
+    public void addCardToCardsPlayedWithinTurn(CardInstance cardInstance) {
+        cardsPlayedWithinTurn.add(cardInstance);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Turn turn = (Turn) o;
         return turnNumber == turn.turnNumber &&
-                currentTurnPlayer.equals(turn.currentTurnPlayer) &&
+                Objects.equals(currentTurnPlayer, turn.currentTurnPlayer) &&
                 currentPhase == turn.currentPhase &&
-                currentPhaseActivePlayer.equals(turn.currentPhaseActivePlayer);
+                Objects.equals(currentPhaseActivePlayer, turn.currentPhaseActivePlayer) &&
+                Objects.equals(cardsPlayedWithinTurn, turn.cardsPlayedWithinTurn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(turnNumber, currentTurnPlayer, currentPhase, currentPhaseActivePlayer);
-    }
-
-    @Override
-    public String toString() {
-        return "Turn{" +
-                "turnNumber=" + turnNumber +
-                ", currentTurnPlayer='" + currentTurnPlayer + '\'' +
-                ", currentPhase=" + currentPhase +
-                ", currentPhaseActivePlayer='" + currentPhaseActivePlayer + '\'' +
-                '}';
+        return Objects.hash(turnNumber, currentTurnPlayer, currentPhase, currentPhaseActivePlayer, cardsPlayedWithinTurn);
     }
 }

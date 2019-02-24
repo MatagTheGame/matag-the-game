@@ -5,6 +5,7 @@ public enum Type {
     CREATURE,
     ENCHANTMENT,
     INSTANT,
+    BASIC,
     LAND,
     PLANESWALKER,
     SORCERY,

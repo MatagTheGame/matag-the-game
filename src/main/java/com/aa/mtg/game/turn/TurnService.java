@@ -1,5 +1,8 @@
 package com.aa.mtg.game.turn;
 
+import com.aa.mtg.cards.model.Card;
+import com.aa.mtg.cards.model.CardInstance;
+import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
 import com.aa.mtg.game.player.Player;
@@ -7,6 +10,8 @@ import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.phases.Phase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static java.util.Arrays.asList;
 
 @Service
 public class TurnService {
@@ -20,22 +25,33 @@ public class TurnService {
 
     public void continueTurn(GameStatus gameStatus) {
         Turn turn = gameStatus.getTurn();
+        updateToNextTurn(turn, gameStatus.getActivePlayer(), gameStatus.getInactivePlayer());
+        eventSender.sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_TURN", gameStatus.getTurn())
+        );
+    }
 
-        Player player, opponent;
+    public void playLand(GameStatus gameStatus, int cardId) {
+        Turn turn = gameStatus.getTurn();
 
-        if (turn.getCurrentTurnPlayer().equals(gameStatus.getPlayer1().getName())) {
-            player = gameStatus.getPlayer1();
-            opponent = gameStatus.getPlayer2();
+        boolean alreadyPlayedALand = turn.getCardsPlayedWithinTurn().stream()
+                .map(CardInstance::getCard)
+                .map(Card::getTypes)
+                .anyMatch(types -> types.contains(Type.LAND));
+
+        if (!alreadyPlayedALand) {
+            CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
+            gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance);
+
+            eventSender.sendToPlayers(
+                    asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                    new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield())
+            );
 
         } else {
-            player = gameStatus.getPlayer2();
-            opponent = gameStatus.getPlayer1();
+            throw new RuntimeException("ERROR LAND ALREADY PLAYED");
         }
-
-        updateToNextTurn(turn, player, opponent);
-
-        eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("UPDATE_TURN", gameStatus.getTurn()));
-        eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("UPDATE_TURN", gameStatus.getTurn()));
     }
 
     private void updateToNextTurn(Turn turn, Player player, Player opponent) {

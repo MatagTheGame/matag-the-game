@@ -15,8 +15,10 @@ export default class ClientEventsReducer {
       case 'PLAYER_CARD_CLICK':
         if (state.turn.currentPhaseActivePlayer === state.player.name) {
           const cardId = Card.extractCardId(action.cardId)
-          Card.findCardById(state.player.hand, cardId)
-          stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardId: cardId})
+          const cardInstance = Card.findCardInstanceById(state.player.hand, cardId)
+          if (cardInstance.card.types.find(type => type === 'LAND')) {
+            stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardId: cardId})
+          }
         }
         return newState
     }

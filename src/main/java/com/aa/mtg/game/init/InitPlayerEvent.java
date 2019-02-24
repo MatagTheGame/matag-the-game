@@ -1,7 +1,7 @@
 package com.aa.mtg.game.init;
 
+import com.aa.mtg.cards.model.Card;
 import com.aa.mtg.cards.model.CardInstance;
-import com.aa.mtg.cards.model.HiddenCard;
 import com.aa.mtg.game.player.Player;
 
 import java.util.ArrayList;
@@ -60,7 +60,7 @@ class InitPlayerEvent {
     static InitPlayerEvent createForOpponent(Player player) {
         List<CardInstance> hand = new ArrayList<>();
         for (CardInstance cardInstance : player.getHand().getCards()) {
-            hand.add(new CardInstance(cardInstance.getId(), new HiddenCard()));
+            hand.add(new CardInstance(cardInstance.getId(), Card.hiddenCard()));
         }
 
         return new InitPlayerEvent(
@@ -75,7 +75,7 @@ class InitPlayerEvent {
     private static List<CardInstance> fillLibrary(Player player) {
         List<CardInstance> library = new ArrayList<>();
         for (CardInstance cardInstance : player.getLibrary().getCards()) {
-            library.add(new CardInstance(cardInstance.getId(), new HiddenCard()));
+            library.add(new CardInstance(cardInstance.getId(), Card.hiddenCard()));
         }
         return library;
     }

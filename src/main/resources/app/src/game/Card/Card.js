@@ -7,7 +7,7 @@ export default class Card extends PureComponent {
       .replace(',', '_')
   }
 
-  static findCardById (cards, cardId) {
+  static findCardInstanceById (cards, cardId) {
     return cards.find(card => card.id === parseInt(cardId))
   }
 
