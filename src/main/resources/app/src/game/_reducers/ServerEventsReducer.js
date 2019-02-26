@@ -5,7 +5,7 @@ import StatusMessageComponent from '../UserAction/StatusMessageComponent'
 
 export default class ServerEventsReducer {
   static getEvents() {
-    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN', 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND']
+    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN', 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_ACTIVE_PLAYER_GRAVEYARD']
   }
 
   static reduceEvent(state, newState, action) {
@@ -53,6 +53,11 @@ export default class ServerEventsReducer {
       case 'UPDATE_ACTIVE_PLAYER_HAND':
         activePlayer = PlayerUtils.getActivePlayer(state)
         activePlayer.hand = action.value
+        return PlayerUtils.updateActivePlayer(newState, activePlayer)
+
+      case 'UPDATE_ACTIVE_PLAYER_GRAVEYARD':
+        activePlayer = PlayerUtils.getActivePlayer(state)
+        activePlayer.graveyard = action.value.cards
         return PlayerUtils.updateActivePlayer(newState, activePlayer)
     }
   }

@@ -17,7 +17,7 @@ export default class ClientEventsReducer {
           const cardId = CardComponent.extractCardId(action.cardId)
           const cardInstance = CardComponent.findCardInstanceById(state.player.hand, cardId)
           if (state.turn.triggeredAction === 'DISCARD_A_CARD') {
-            stompClient.sendEvent('turn', {action: 'RESOLVE', type: 'DISCARD_A_CARD', cardId: cardId})
+            stompClient.sendEvent('turn', {action: 'RESOLVE', triggeredAction: 'DISCARD_A_CARD', cardId: cardId})
 
           } else if (cardInstance.card.types.find(type => type === 'LAND')) {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardId: cardId})

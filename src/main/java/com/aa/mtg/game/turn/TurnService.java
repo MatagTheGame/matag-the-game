@@ -33,14 +33,14 @@ public class TurnService {
         if (turn.getCurrentPhase().equals(Phase.CL)) {
             turn.cleanup(inactivePlayer.getName());
 
-        } else if (turn.getCurrentPhase().equals(Phase.ET) && activePlayer.getHand().getCards().size() > 7) {
+        } else if (turn.getCurrentPhase().equals(Phase.ET) && activePlayer.getHand().size() > 7) {
             gameStatus.getTurn().setTriggeredAction("DISCARD_A_CARD");
 
         } else {
             if (turn.getCurrentPhaseActivePlayer().equals(activePlayer.getName())) {
                 if (turn.getCurrentPhase().equals(Phase.DR) && turn.getTurnNumber() > 1) {
                     CardInstance cardInstance = activePlayer.getLibrary().draw();
-                    activePlayer.getHand().getCards().add(cardInstance);
+                    activePlayer.getHand().addCard(cardInstance);
                     eventSender.sendToPlayer(activePlayer, new Event("UPDATE_ACTIVE_PLAYER_HAND", activePlayer.getHand().getCards()));
                     eventSender.sendToPlayer(inactivePlayer, new Event("UPDATE_ACTIVE_PLAYER_HAND", activePlayer.getHand().maskedHand()));
                 }
@@ -90,14 +90,25 @@ public class TurnService {
         }
     }
 
-    public void resolve(GameStatus gameStatus, String action, int cardId) {
-        if (gameStatus.getTurn().getTriggeredAction().equals(action)) {
-            if ("DISCARD_A_CARD".equals(action)) {
-                throw new RuntimeException("HERE " + cardId);
+    public void resolve(GameStatus gameStatus, String triggeredAction, int cardId) {
+        if (gameStatus.getTurn().getTriggeredAction().equals(triggeredAction)) {
+            if ("DISCARD_A_CARD".equals(triggeredAction)) {
+                CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
+                gameStatus.getActivePlayer().getGraveyard().addCard(cardInstance);
+                eventSender.sendToPlayers(
+                        asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                        new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards())
+                );
+                eventSender.sendToPlayers(
+                        asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                        new Event("UPDATE_ACTIVE_PLAYER_GRAVEYARD", gameStatus.getActivePlayer().getGraveyard().getCards())
+                );
+                gameStatus.getTurn().setTriggeredAction(null);
             }
+            continueTurn(gameStatus);
 
         } else {
-            String message = "Cannot resolve action " + action + " as current triggered action is " + gameStatus.getTurn().getTriggeredAction();
+            String message = "Cannot resolve triggeredAction " + triggeredAction + " as current triggeredAction is " + gameStatus.getTurn().getTriggeredAction();
             eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event(message, true));
             throw new RuntimeException(message);
         }

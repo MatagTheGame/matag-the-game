@@ -8,6 +8,7 @@ public class Player {
     private final Library library;
     private final Hand hand;
     private final Battlefield battlefield;
+    private final Graveyard graveyard;
 
     public Player(String sessionId, String name, Library library) {
         this.sessionId = sessionId;
@@ -16,9 +17,10 @@ public class Player {
         this.library = library;
         this.hand = new Hand();
         this.battlefield = new Battlefield();
+        this.graveyard = new Graveyard();
 
         for (int i = 0; i < 7; i++) {
-            this.hand.getCards().add(this.library.draw());
+            this.hand.addCard(this.library.draw());
         }
     }
 
@@ -46,4 +48,7 @@ public class Player {
         return battlefield;
     }
 
+    public Graveyard getGraveyard() {
+        return graveyard;
+    }
 }

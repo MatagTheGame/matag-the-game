@@ -10,13 +10,15 @@ class InitPlayerEvent {
     private final List<CardInstance> library;
     private final List<CardInstance> hand;
     private final List<CardInstance> battlefield;
+    private final List<CardInstance> graveyard;
     private final String name;
     private final int life;
 
-    public InitPlayerEvent(List<CardInstance> library, List<CardInstance> hand, List<CardInstance> battlefield, String name, int life) {
+    public InitPlayerEvent(List<CardInstance> library, List<CardInstance> hand, List<CardInstance> battlefield, List<CardInstance> graveyard, String name, int life) {
         this.library = library;
         this.hand = hand;
         this.battlefield = battlefield;
+        this.graveyard = graveyard;
         this.name = name;
         this.life = life;
     }
@@ -33,6 +35,10 @@ class InitPlayerEvent {
         return battlefield;
     }
 
+    public List<CardInstance> getGraveyard() {
+        return graveyard;
+    }
+
     public String getName() {
         return name;
     }
@@ -46,6 +52,7 @@ class InitPlayerEvent {
                 player.getLibrary().maskedLibrary(),
                 player.getHand().getCards(),
                 new ArrayList<>(),
+                new ArrayList<>(),
                 player.getName(),
                 player.getLife()
         );
@@ -55,6 +62,7 @@ class InitPlayerEvent {
         return new InitPlayerEvent(
                 player.getLibrary().maskedLibrary(),
                 player.getHand().maskedHand(),
+                new ArrayList<>(),
                 new ArrayList<>(),
                 player.getName(),
                 player.getLife()

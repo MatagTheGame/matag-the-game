@@ -17,6 +17,14 @@ public class Hand {
         return cards;
     }
 
+    public void addCard(CardInstance cardInstance) {
+        cards.add(cardInstance);
+    }
+
+    public int size() {
+        return cards.size();
+    }
+
     public CardInstance findCardById(int cardId) {
         return cards.stream()
                 .filter(cardInstance -> cardInstance.getId() == cardId)
