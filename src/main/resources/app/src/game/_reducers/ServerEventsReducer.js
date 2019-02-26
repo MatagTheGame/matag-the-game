@@ -27,13 +27,23 @@ export default class ServerEventsReducer {
         return Object.assign(newState, {opponent: action.value})
 
       case 'UPDATE_TURN':
-        if (action.value.currentPhaseActivePlayer === state.player.name) {
-          if (!Phase.isMainPhase(action.value.currentPhase) || !PlayerUtils.canActivePlayerPerformAnyAction(state)) {
-            stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+        Object.assign(newState, {turn: action.value})
+
+        if (PlayerUtils.isCurrentPlayerActive(newState)) {
+          if (PlayerUtils.isCurrentPlayerTurn(newState)) {
+            if (!Phase.isMainPhase(newState.turn.currentPhase)) {
+              if (!PlayerUtils.canActivePlayerPerformAnyAction(newState)) {
+                stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+              }
+            }
+          } else {
+            if (!PlayerUtils.canActivePlayerPerformAnyAction(newState)) {
+              stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+            }
           }
         }
-        Object.assign(newState, {turn: action.value})
-        return Object.assign(newState, {statusMessage: StatusMessageComponent.getDefaultStandbyMessageForUser(newState)})
+
+        return Object.assign(newState, {statusMessage: StatusMessageComponent.getStatusMessageForUser(newState)})
 
       case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':
         activePlayer = PlayerUtils.getActivePlayer(state)

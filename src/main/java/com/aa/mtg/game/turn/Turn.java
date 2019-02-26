@@ -13,6 +13,7 @@ public class Turn {
     private Phase currentPhase;
     private String currentPhaseActivePlayer;
     private List<CardInstance> cardsPlayedWithinTurn = new ArrayList<>();
+    private String triggeredAction;
 
     public void init(String playerName) {
         this.turnNumber = 1;
@@ -69,6 +70,14 @@ public class Turn {
         cardsPlayedWithinTurn.add(cardInstance);
     }
 
+    public String getTriggeredAction() {
+        return triggeredAction;
+    }
+
+    public void setTriggeredAction(String triggeredAction) {
+        this.triggeredAction = triggeredAction;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,12 +87,13 @@ public class Turn {
                 Objects.equals(currentTurnPlayer, turn.currentTurnPlayer) &&
                 currentPhase == turn.currentPhase &&
                 Objects.equals(currentPhaseActivePlayer, turn.currentPhaseActivePlayer) &&
-                Objects.equals(cardsPlayedWithinTurn, turn.cardsPlayedWithinTurn);
+                Objects.equals(cardsPlayedWithinTurn, turn.cardsPlayedWithinTurn) &&
+                Objects.equals(triggeredAction, turn.triggeredAction);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(turnNumber, currentTurnPlayer, currentPhase, currentPhaseActivePlayer, cardsPlayedWithinTurn);
+        return Objects.hash(turnNumber, currentTurnPlayer, currentPhase, currentPhaseActivePlayer, cardsPlayedWithinTurn, triggeredAction);
     }
 
     @Override
@@ -94,6 +104,7 @@ public class Turn {
                 ", currentPhase=" + currentPhase +
                 ", currentPhaseActivePlayer='" + currentPhaseActivePlayer + '\'' +
                 ", cardsPlayedWithinTurn=" + cardsPlayedWithinTurn +
+                ", triggeredAction='" + triggeredAction + '\'' +
                 '}';
     }
 }

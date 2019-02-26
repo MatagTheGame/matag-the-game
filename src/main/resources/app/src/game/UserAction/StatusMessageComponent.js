@@ -3,9 +3,14 @@ import {connect} from 'react-redux'
 import PlayerUtils from '../PlayerInfo/PlayerUtils'
 
 class StatusMessageComponent extends PureComponent {
-  static getDefaultStandbyMessageForUser (state) {
+  static getStatusMessageForUser (state) {
     if (PlayerUtils.isCurrentPlayerActive(state)) {
-      return 'Play any spell or abilities or continue (SPACE).'
+      switch (state.turn.triggeredAction) {
+        case 'DISCARD_A_CARD':
+          return 'Chose a card to discard.'
+        default:
+          return 'Play any spell or abilities or continue (SPACE).'
+      }
     } else {
       return 'Wait for opponent to perform its action...'
     }

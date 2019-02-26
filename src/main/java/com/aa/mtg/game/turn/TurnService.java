@@ -26,42 +26,15 @@ public class TurnService {
 
     public void continueTurn(GameStatus gameStatus) {
         Turn turn = gameStatus.getTurn();
-        updateToNextTurn(turn, gameStatus.getActivePlayer(), gameStatus.getInactivePlayer());
-        eventSender.sendToPlayers(
-                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                new Event("UPDATE_TURN", gameStatus.getTurn())
-        );
-    }
+        Player activePlayer = gameStatus.getActivePlayer();
+        Player inactivePlayer = gameStatus.getInactivePlayer();
 
-    public void playLand(GameStatus gameStatus, int cardId) {
-        Turn turn = gameStatus.getTurn();
 
-        boolean alreadyPlayedALand = turn.getCardsPlayedWithinTurn().stream()
-                .map(CardInstance::getCard)
-                .map(Card::getTypes)
-                .anyMatch(types -> types.contains(Type.LAND));
-
-        if (!alreadyPlayedALand) {
-            CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
-            turn.addCardToCardsPlayedWithinTurn(cardInstance);
-            gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance);
-
-            eventSender.sendToPlayers(
-                    asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                    new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield())
-            );
-
-            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards()));
-            eventSender.sendToPlayer(gameStatus.getInactivePlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().maskedHand()));
-
-        } else {
-            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("You already played a land this turn", true)));
-        }
-    }
-
-    private void updateToNextTurn(Turn turn, Player activePlayer, Player inactivePlayer) {
         if (turn.getCurrentPhase().equals(Phase.CL)) {
             turn.cleanup(inactivePlayer.getName());
+
+        } else if (turn.getCurrentPhase().equals(Phase.ET) && activePlayer.getHand().getCards().size() > 7) {
+            gameStatus.getTurn().setTriggeredAction("DISCARD_A_CARD");
 
         } else {
             if (turn.getCurrentPhaseActivePlayer().equals(activePlayer.getName())) {
@@ -83,5 +56,38 @@ public class TurnService {
                 turn.setCurrentPhaseActivePlayer(activePlayer.getName());
             }
         }
+
+        eventSender.sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_TURN", gameStatus.getTurn())
+        );
     }
+
+    public void playLand(GameStatus gameStatus, int cardId) {
+        Turn turn = gameStatus.getTurn();
+
+        if (!turn.getCurrentPhase().isMainPhase()) {
+            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("You can only play lands during main phases.", true)));
+
+        } else if (turn.getCardsPlayedWithinTurn().stream()
+                .map(CardInstance::getCard)
+                .map(Card::getTypes)
+                .anyMatch(types -> types.contains(Type.LAND))) {
+            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("You already played a land this turn.", true)));
+
+        } else {
+            CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
+            turn.addCardToCardsPlayedWithinTurn(cardInstance);
+            gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance);
+
+            eventSender.sendToPlayers(
+                    asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                    new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield())
+            );
+
+            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards()));
+            eventSender.sendToPlayer(gameStatus.getInactivePlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().maskedHand()));
+        }
+    }
+
 }

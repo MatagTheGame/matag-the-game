@@ -27,6 +27,10 @@ public enum Phase {
         throw new RuntimeException("Cannot get next phase of " + phase);
     }
 
+    public boolean isMainPhase() {
+        return this == M1 || this == M2;
+    }
+
     public static Set<Phase> nonInstantAllowedPhases() {
         return new HashSet<>(asList(DR, CD, EC, CL));
     }
