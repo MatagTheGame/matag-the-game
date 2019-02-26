@@ -1,9 +1,9 @@
 import stompClient from '../WebSocket'
 import Phase from '../Turn/Phase'
 import PlayerUtils from '../PlayerInfo/PlayerUtils'
+import StatusMessageComponent from '../UserAction/StatusMessageComponent'
 
 export default class ServerEventsReducer {
-
   static getEvents() {
     return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN', 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND']
   }
@@ -32,8 +32,8 @@ export default class ServerEventsReducer {
             stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
           }
         }
-
-        return Object.assign(newState, {turn: action.value}, {statusMessage: 'Play any spell or abilities or continue (SPACE).'})
+        Object.assign(newState, {turn: action.value})
+        return Object.assign(newState, {statusMessage: StatusMessageComponent.getDefaultStandbyMessageForUser(newState)})
 
       case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':
         activePlayer = PlayerUtils.getActivePlayer(state)

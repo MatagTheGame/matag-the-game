@@ -29,9 +29,4 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(OpponentInfo)
+export default connect(mapStateToProps)(OpponentInfo)

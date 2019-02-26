@@ -1,6 +1,10 @@
 export default class PlayerUtils {
+  static isCurrentPlayerActive(state) {
+    return state.turn.currentTurnPlayer === state.player.name
+  }
+
   static getActivePlayer(state) {
-    if (state.turn.currentTurnPlayer === state.player.name) {
+    if (PlayerUtils.isCurrentPlayerActive(state)) {
       return state.player
     } else {
       return state.opponent
@@ -9,7 +13,7 @@ export default class PlayerUtils {
 
   static updateActivePlayer(state, newActivePlayer) {
     const newActivePlayerClone = Object.assign({}, newActivePlayer)
-    if (state.turn.currentTurnPlayer === state.player.name) {
+    if (PlayerUtils.isCurrentPlayerActive(state)) {
       return Object.assign(state, {player: newActivePlayerClone})
     } else {
       return Object.assign(state, {opponent: newActivePlayerClone})
@@ -24,7 +28,7 @@ export default class PlayerUtils {
     // FIXME for the time being assuming that current player can always perform an action and opponent never
 
 
-    if (state.turn.currentTurnPlayer === state.player.name) {
+    if (PlayerUtils.isCurrentPlayerActive(state)) {
       return true
     } else {
       return false
