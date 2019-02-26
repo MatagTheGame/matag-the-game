@@ -17,7 +17,7 @@ class PlayerHand extends PureComponent {
 
 const createPlayerCardClickAction = (event) => {
   return {
-    type: 'PLAYER_CARD_CLICK',
+    type: 'PLAYER_HAND_CARD_CLICK',
     cardId: event.target.id
   }
 }

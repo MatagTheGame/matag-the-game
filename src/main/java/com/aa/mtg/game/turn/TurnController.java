@@ -33,8 +33,9 @@ public class TurnController {
             turnService.continueTurn(gameStatus);
         } else if ("PLAY_LAND".equals(request.getAction())) {
             turnService.playLand(gameStatus, request.getCardId());
+        } else if ("RESOLVE".equals(request.getAction())) {
+            turnService.resolve(gameStatus, request.getAction(), request.getCardId());
         }
-
     }
 
 }

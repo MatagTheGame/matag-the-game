@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn;
 
 public class TurnRequest {
     private String action;
+    private String type;
     private int cardId;
 
     public String getAction() {
@@ -10,6 +11,14 @@ public class TurnRequest {
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public int getCardId() {
@@ -24,7 +33,8 @@ public class TurnRequest {
     public String toString() {
         return "TurnRequest{" +
                 "action='" + action + '\'' +
-                ", cardId='" + cardId + '\'' +
+                ", type='" + type + '\'' +
+                ", cardId=" + cardId +
                 '}';
     }
 }

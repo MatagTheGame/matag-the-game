@@ -11,7 +11,9 @@ class UserActionComponent extends PureComponent {
 
   handleContinueKey(event) {
     if (event.key === ' ') {
-      this.props.continueClick()
+      if (this.isPhaseActiveForPlayer()) {
+        this.props.continueClick()
+      }
     }
   }
 

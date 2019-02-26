@@ -90,4 +90,16 @@ public class TurnService {
         }
     }
 
+    public void resolve(GameStatus gameStatus, String action, int cardId) {
+        if (gameStatus.getTurn().getTriggeredAction().equals(action)) {
+            if ("DISCARD_A_CARD".equals(action)) {
+                throw new RuntimeException("HERE " + cardId);
+            }
+
+        } else {
+            String message = "Cannot resolve action " + action + " as current triggered action is " + gameStatus.getTurn().getTriggeredAction();
+            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event(message, true));
+            throw new RuntimeException(message);
+        }
+    }
 }
