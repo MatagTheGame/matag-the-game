@@ -33,7 +33,7 @@ export default class ServerEventsReducer {
           }
         }
 
-        return Object.assign(newState, {turn: action.value})
+        return Object.assign(newState, {turn: action.value}, {statusMessage: 'Play any spell or abilities or continue (SPACE).'})
 
       case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':
         activePlayer = PlayerUtils.getActivePlayer(state)

@@ -25,7 +25,9 @@ body {
 }
 
 #player-hand {
-  bottom: 20px;
+  bottom: 40px;
+  left: 1%;
+  width: 99%;
   z-index: 2;
 }
 
@@ -40,6 +42,64 @@ body {
   justify-content: center;
   display: flex;
   width: 100%;
+}
+
+#user-actions {
+  position: absolute;
+  width: 50px;
+  height: 200px;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+}
+
+#user-actions button {
+  width: 50px;
+  height: 50px;
+  background-color: skyblue;
+  border-radius: 25px;
+  margin-bottom: 20px;
+  margin-left: -5px;
+  font-size: x-large;
+  cursor: pointer;
+}
+
+#user-actions button:disabled {
+  cursor: default;
+  background-color: cadetblue;
+}
+
+#status-message {
+  position: absolute;
+  bottom: 0;
+  width: 94%;
+  left: 3%;
+  z-index: 3;
+  background-color: darkgrey;
+  padding: 2px 10px 2px 10px;
+  border: 1px solid black;
+  font-size: large;
+}
+
+#message {
+  position: absolute;
+  z-index: 3;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 30%;
+  background-color: darkgrey;
+  padding: 2em;
+  border: 1px solid black;
+  font-size: large;
+}
+
+#message-close {
+  position: absolute;
+  font-size: x-large;
+  top: 0;
+  right: 2px;
+  cursor: pointer;
 }
 
 #player-land-area {
@@ -207,17 +267,6 @@ body {
   margin-left: 10px;
 }
 
-#continue-button {
-  position: absolute;
-  right: 24%;
-  bottom: 36%;
-  font-size: xx-large;
-  padding: 5px 20px 10px 20px;
-  border-style: outset;
-  border-width: 10px;
-  cursor: pointer;
-}
-
 #table {
   background-image: url("/img/materials/wood.jpg");
   position: absolute;
@@ -240,25 +289,4 @@ body {
   z-index: 0;
   transform: rotateX(-90deg) translateY(40px);
   filter: brightness(50%);
-}
-
-#message {
-  position: absolute;
-  z-index: 3;
-  top: 25%;
-  left: 25%;
-  width: 50%;
-  height: 30%;
-  background-color: darkgrey;
-  padding: 2em;
-  border: 1px solid black;
-  font-size: large;
-}
-
-#message-close {
-  position: absolute;
-  font-size: x-large;
-  top: 0;
-  right: 2px;
-  cursor: pointer;
 }

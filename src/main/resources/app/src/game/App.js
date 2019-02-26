@@ -12,6 +12,8 @@ import PlayerLibrary from './Library/PlayerLibrary'
 import PlayerInfo from './PlayerInfo/PlayerInfo'
 import OpponentInfo from './PlayerInfo/OpponentInfo'
 import TurnPhases from './Turn/TurnPhases'
+import UserActionComponent from './UserAction/UserActionComponent'
+import StatusMessageComponent from './UserAction/StatusMessageComponent'
 
 
 class App extends PureComponent {
@@ -22,6 +24,8 @@ class App extends PureComponent {
   render() {
     return (
       <Fragment>
+        <UserActionComponent />
+        <StatusMessageComponent />
         <OpponentHand />
         <PlayerHand />
         <div id="table">
