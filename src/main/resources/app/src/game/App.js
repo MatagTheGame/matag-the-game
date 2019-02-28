@@ -14,6 +14,8 @@ import OpponentInfo from './PlayerInfo/OpponentInfo'
 import TurnPhases from './Turn/TurnPhases'
 import UserActionComponent from './UserAction/UserActionComponent'
 import StatusMessageComponent from './UserAction/StatusMessageComponent'
+import OpponentGraveyard from './Graveyard/OpponentGraveyard'
+import PlayerGraveyard from './Graveyard/PlayerGraveyard'
 
 
 class App extends PureComponent {
@@ -32,10 +34,12 @@ class App extends PureComponent {
           <div>
             <OpponentLibrary/>
             <OpponentLandArea/>
+            <OpponentGraveyard/>
             <OpponentInfo/>
             <TurnPhases/>
             <PlayerLibrary/>
             <PlayerLandArea/>
+            <PlayerGraveyard/>
             <PlayerInfo/>
           </div>
         </div>

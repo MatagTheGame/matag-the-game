@@ -20,6 +20,10 @@ body {
   cursor: pointer;
 }
 
+.card:hover {
+  z-index: 100;
+}
+
 .tapped {
   transform: rotateZ(90deg);
 }
@@ -104,11 +108,13 @@ body {
 
 #player-land-area {
   bottom: 10%;
+  left: 20%;
 }
 
 #opponent-land-area {
   position: absolute;
   top: 10%;
+  right: 20%;
   transform: rotate(180deg);
 }
 
@@ -116,7 +122,32 @@ body {
   position: absolute;
   justify-content: center;
   display: flex;
-  width: 100%;
+  width: 80%;
+}
+
+#player-graveyard {
+  bottom: 5%;
+  left: 3%;
+}
+
+#opponent-graveyard {
+  position: absolute;
+  top: 5%;
+  right: 3%;
+  transform: rotate(180deg);
+}
+
+.graveyard {
+  position: absolute;
+  width: 20%;
+}
+
+.graveyard div {
+  margin-left: -160px;
+}
+
+.graveyard div:first-child {
+  margin-left: 0;
 }
 
 #player-library {

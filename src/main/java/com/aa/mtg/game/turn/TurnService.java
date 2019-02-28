@@ -41,8 +41,7 @@ public class TurnService {
                 if (turn.getCurrentPhase().equals(Phase.DR) && turn.getTurnNumber() > 1) {
                     CardInstance cardInstance = activePlayer.getLibrary().draw();
                     activePlayer.getHand().addCard(cardInstance);
-                    eventSender.sendToPlayer(activePlayer, new Event("UPDATE_ACTIVE_PLAYER_HAND", activePlayer.getHand().getCards()));
-                    eventSender.sendToPlayer(inactivePlayer, new Event("UPDATE_ACTIVE_PLAYER_HAND", activePlayer.getHand().maskedHand()));
+                    updatePlayerHands(activePlayer, inactivePlayer);
                 }
 
                 if (Phase.nonOpponentPhases().contains(turn.getCurrentPhase())) {
@@ -82,11 +81,10 @@ public class TurnService {
 
             eventSender.sendToPlayers(
                     asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                    new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield())
+                    new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield().getCards())
             );
 
-            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards()));
-            eventSender.sendToPlayer(gameStatus.getInactivePlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().maskedHand()));
+            updatePlayerHands(gameStatus.getActivePlayer(), gameStatus.getInactivePlayer());
         }
     }
 
@@ -95,10 +93,8 @@ public class TurnService {
             if ("DISCARD_A_CARD".equals(triggeredAction)) {
                 CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
                 gameStatus.getActivePlayer().getGraveyard().addCard(cardInstance);
-                eventSender.sendToPlayers(
-                        asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                        new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards())
-                );
+                updatePlayerHands(gameStatus.getActivePlayer(), gameStatus.getInactivePlayer());
+
                 eventSender.sendToPlayers(
                         asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                         new Event("UPDATE_ACTIVE_PLAYER_GRAVEYARD", gameStatus.getActivePlayer().getGraveyard().getCards())
@@ -112,5 +108,10 @@ public class TurnService {
             eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event(message, true));
             throw new RuntimeException(message);
         }
+    }
+
+    private void updatePlayerHands(Player activePlayer, Player inactivePlayer) {
+        eventSender.sendToPlayer(activePlayer, new Event("UPDATE_ACTIVE_PLAYER_HAND", activePlayer.getHand().getCards()));
+        eventSender.sendToPlayer(inactivePlayer, new Event("UPDATE_ACTIVE_PLAYER_HAND", activePlayer.getHand().maskedHand()));
     }
 }

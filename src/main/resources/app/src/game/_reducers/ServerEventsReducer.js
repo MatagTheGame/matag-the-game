@@ -47,7 +47,7 @@ export default class ServerEventsReducer {
 
       case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':
         activePlayer = PlayerUtils.getActivePlayer(state)
-        activePlayer.battlefield = action.value.cards
+        activePlayer.battlefield = action.value
         return PlayerUtils.updateActivePlayer(newState, activePlayer)
 
       case 'UPDATE_ACTIVE_PLAYER_HAND':
@@ -57,7 +57,7 @@ export default class ServerEventsReducer {
 
       case 'UPDATE_ACTIVE_PLAYER_GRAVEYARD':
         activePlayer = PlayerUtils.getActivePlayer(state)
-        activePlayer.graveyard = action.value.cards
+        activePlayer.graveyard = action.value
         return PlayerUtils.updateActivePlayer(newState, activePlayer)
     }
   }
