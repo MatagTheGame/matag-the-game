@@ -7,7 +7,8 @@ class OpponentGraveyard extends PureComponent {
   render() {
     return (
       <div id="opponent-graveyard" className='graveyard'>
-        {this.props.cards.map((cardInstance) => <CardComponent key={cardInstance.id} name={cardInstance.card.name} />)}
+        {this.props.cards.map((cardInstance) =>
+          <CardComponent key={cardInstance.id} name={cardInstance.card.name} />)}
       </div>
     )
   }
