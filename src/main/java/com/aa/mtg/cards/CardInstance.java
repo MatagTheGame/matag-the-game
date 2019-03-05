@@ -8,10 +8,12 @@ public class CardInstance {
 
     private final int id;
     private final Card card;
+    private final CardModifiers modifiers;
 
     public CardInstance(int id, Card card) {
         this.id = id;
         this.card = card;
+        this.modifiers = new CardModifiers();
     }
 
     public CardInstance(CardInstance cardInstance) {
@@ -24,6 +26,10 @@ public class CardInstance {
 
     public Card getCard() {
         return card;
+    }
+
+    public CardModifiers getModifiers() {
+        return modifiers;
     }
 
     public static List<CardInstance> mask(List<CardInstance> cardInstances) {
@@ -40,12 +46,13 @@ public class CardInstance {
         if (o == null || getClass() != o.getClass()) return false;
         CardInstance that = (CardInstance) o;
         return id == that.id &&
-                Objects.equals(card, that.card);
+                Objects.equals(card, that.card) &&
+                Objects.equals(modifiers, that.modifiers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, card);
+        return Objects.hash(id, card, modifiers);
     }
 
     @Override
@@ -53,6 +60,7 @@ public class CardInstance {
         return "CardInstance{" +
                 "id=" + id +
                 ", card=" + card +
+                ", modifiers=" + modifiers +
                 '}';
     }
 }

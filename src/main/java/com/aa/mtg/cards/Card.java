@@ -70,6 +70,10 @@ public class Card {
         return toughness;
     }
 
+    public boolean isInstantSpeed() {
+        return types.contains(Type.INSTANT);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -2,15 +2,21 @@ package com.aa.mtg.game.turn;
 
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.CostUtils;
+import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.turn.events.TapEvent;
 import com.aa.mtg.game.turn.phases.Phase;
 import com.aa.mtg.message.MessageEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 
@@ -85,6 +91,41 @@ public class TurnService {
             );
 
             updatePlayerHands(gameStatus.getActivePlayer(), gameStatus.getInactivePlayer());
+        }
+    }
+
+    public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds) {
+        Turn turn = gameStatus.getTurn();
+
+        CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
+        if (!turn.getCurrentPhase().isMainPhase() && !cardInstance.getCard().isInstantSpeed()) {
+            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("You can only play Instants during a NON main phases.", true)));
+
+        } else {
+            CardInstance cardToCast = gameStatus.getActivePlayer().getHand().findCardById(cardId);
+            ArrayList<Color> paidCost = new ArrayList<>();
+            for (int tappingLandId : tappingLandIds) {
+                CardInstance landToTap = gameStatus.getActivePlayer().getBattlefield().findCardById(tappingLandId);
+                if (!landToTap.getCard().getTypes().contains(Type.LAND)) {
+                    eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("The card you are trying to tap for mana is not a land.", true)));
+                } else if (landToTap.getModifiers().isTapped()) {
+                    eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("The land you are trying to tap is already tapped.", true)));
+                }
+                paidCost.add(landToTap.getCard().getColors().get(0));
+            }
+
+            if (!CostUtils.isCastingCostFulfilled(cardToCast.getCard(), paidCost)) {
+                eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("There was an error while paying the cost for " + cardToCast.getCard().getName() + ".", true)));
+            }
+
+            for (int tappingLandId : tappingLandIds) {
+                gameStatus.getActivePlayer().getBattlefield().findCardById(tappingLandId).getModifiers().setTapped(true);
+            }
+
+            eventSender.sendToPlayers(
+                    asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                    new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield().getCards())
+            );
         }
     }
 
