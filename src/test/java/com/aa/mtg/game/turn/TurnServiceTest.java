@@ -16,6 +16,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import static java.util.Arrays.asList;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -222,12 +226,11 @@ public class TurnServiceTest {
     }
     
     private Library library() {
-        Library library = new Library();
-        
-        for (int i = 0; i < 60; i++) {
-            library.getCards().add(new CardInstance(i + 1, Cards.PLAINS));
-        }
-        
-        return library;
+        List<CardInstance> libraryCards = IntStream.rangeClosed(1, 60)
+                .boxed()
+                .map(i -> new CardInstance(i, Cards.PLAINS))
+                .collect(Collectors.toList());
+
+        return new Library(libraryCards);
     }
 }

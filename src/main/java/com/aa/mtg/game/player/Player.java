@@ -1,5 +1,7 @@
 package com.aa.mtg.game.player;
 
+import java.util.stream.IntStream;
+
 public class Player {
 
     private final String sessionId;
@@ -19,9 +21,8 @@ public class Player {
         this.battlefield = new Battlefield();
         this.graveyard = new Graveyard();
 
-        for (int i = 0; i < 7; i++) {
-            this.hand.addCard(this.library.draw());
-        }
+        IntStream.rangeClosed(1, 7)
+                .forEach(i -> this.hand.addCard(this.library.draw()));
     }
 
     public String getSessionId() {

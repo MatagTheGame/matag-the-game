@@ -6,6 +6,12 @@ import com.aa.mtg.cards.CardListComponent;
 import java.util.List;
 
 public class Library extends CardListComponent {
+    public Library() {}
+
+    public Library(List<CardInstance> cards) {
+        super(cards);
+    }
+
     public CardInstance draw() {
         return this.cards.remove(0);
     }

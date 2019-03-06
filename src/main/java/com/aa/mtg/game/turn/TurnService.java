@@ -29,7 +29,7 @@ public class TurnService {
         this.eventSender = eventSender;
     }
 
-    public void continueTurn(GameStatus gameStatus) {
+    void continueTurn(GameStatus gameStatus) {
         Turn turn = gameStatus.getTurn();
         Player activePlayer = gameStatus.getActivePlayer();
         Player inactivePlayer = gameStatus.getInactivePlayer();
@@ -67,7 +67,7 @@ public class TurnService {
         );
     }
 
-    public void playLand(GameStatus gameStatus, int cardId) {
+    void playLand(GameStatus gameStatus, int cardId) {
         Turn turn = gameStatus.getTurn();
 
         if (!turn.getCurrentPhase().isMainPhase()) {
@@ -93,7 +93,7 @@ public class TurnService {
         }
     }
 
-    public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds) {
+    void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds) {
         Turn turn = gameStatus.getTurn();
 
         CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
@@ -103,6 +103,7 @@ public class TurnService {
         } else {
             CardInstance cardToCast = gameStatus.getActivePlayer().getHand().findCardById(cardId);
             ArrayList<Color> paidCost = new ArrayList<>();
+
             for (int tappingLandId : tappingLandIds) {
                 CardInstance landToTap = gameStatus.getActivePlayer().getBattlefield().findCardById(tappingLandId);
                 if (!landToTap.getCard().getTypes().contains(Type.LAND)) {
@@ -117,9 +118,9 @@ public class TurnService {
                 eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("There was an error while paying the cost for " + cardToCast.getCard().getName() + ".", true)));
             }
 
-            for (int tappingLandId : tappingLandIds) {
-                gameStatus.getActivePlayer().getBattlefield().findCardById(tappingLandId).getModifiers().tap();
-            }
+            tappingLandIds.stream()
+                    .map(tappingLandId -> gameStatus.getActivePlayer().getBattlefield().findCardById(tappingLandId))
+                    .forEach(card -> card.getModifiers().tap());
 
             eventSender.sendToPlayers(
                     asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
@@ -128,7 +129,7 @@ public class TurnService {
         }
     }
 
-    public void resolve(GameStatus gameStatus, String triggeredAction, int cardId) {
+    void resolve(GameStatus gameStatus, String triggeredAction, int cardId) {
         if (gameStatus.getTurn().getTriggeredAction().equals(triggeredAction)) {
             if ("DISCARD_A_CARD".equals(triggeredAction)) {
                 CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);

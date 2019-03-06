@@ -7,7 +7,10 @@ import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.security.SecurityToken;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static com.aa.mtg.cards.Cards.FOREST;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
@@ -18,13 +21,13 @@ import static com.aa.mtg.cards.sets.RavnicaAllegiance.FERAL_MAAKA;
 public class DeckRetrieverService {
 
     public Library retrieveDeckForUser(SecurityToken token, GameStatus gameStatus) {
-        Library library = new Library();
+        List<CardInstance> libraryCards = IntStream.rangeClosed(1, 60)
+                .boxed()
+                .map(i -> new CardInstance(gameStatus.nextCardId(), getRandomCard()))
+                .collect(Collectors.toList());
 
-        for (int i = 0; i < 60; i++) {
-            library.getCards().add(new CardInstance(gameStatus.nextCardId(), getRandomCard()));
-        }
 
-        return library;
+        return new Library(libraryCards);
     }
 
     private Card getRandomCard() {

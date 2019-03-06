@@ -10,6 +10,10 @@ public abstract class CardListComponent {
         this.cards = new ArrayList<>();
     }
 
+    public CardListComponent(List<CardInstance> cards) {
+        this.cards = cards;
+    }
+
     public List<CardInstance> getCards() {
         return cards;
     }
