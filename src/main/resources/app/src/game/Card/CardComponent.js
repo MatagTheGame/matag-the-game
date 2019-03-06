@@ -15,6 +15,23 @@ export default class CardComponent extends PureComponent {
     return id.replace('card-', '')
   }
 
+  static toggleFrontendTapped(cardInstance) {
+    if (CardComponent.isFrontendTapped(cardInstance)) {
+      cardInstance.modifiers.tapped = undefined
+    } else {
+      cardInstance.modifiers.tapped = 'FRONTEND_TAPPED'
+    }
+  }
+
+  static isFrontendTapped(cardInstance) {
+    return cardInstance.modifiers.tapped === 'FRONTEND_TAPPED'
+  }
+
+  static untapAllFrontendTappedCards(cards) {
+    cards.filter(card => CardComponent.isFrontendTapped(card))
+      .forEach((card) => CardComponent.toggleFrontendTapped(card))
+  }
+
   imageUrl () {
     const name = CardComponent.normalizeCardName(this.props.name)
     if (name === 'card') {
@@ -26,8 +43,8 @@ export default class CardComponent extends PureComponent {
 
   getClasses() {
     let classes = 'card'
-    if (this.props.tapped === 'FRONTEND_TAPPED') {
-      classes += ' tapped'
+    if (this.props.tapped) {
+      classes += ' ' + this.props.tapped.toLowerCase()
     }
     return classes
   }
