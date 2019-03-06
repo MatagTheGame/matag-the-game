@@ -7,11 +7,7 @@ export default class Phase extends PureComponent {
   }
 
   static isMainPhase(phase) {
-    if (phase === 'M1' || phase === 'M2') {
-      return true
-    } else {
-      return false
-    }
+    return phase === 'M1' || phase === 'M2';
   }
 
   render() {
