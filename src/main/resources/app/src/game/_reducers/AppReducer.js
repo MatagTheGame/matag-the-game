@@ -1,8 +1,15 @@
 import ServerEventsReducer from './ServerEventsReducer'
 import ClientEventsReducer from './ClientEventsReducer'
 
+const clone = (object) => {
+  if (!object) {
+    object = {}
+  }
+  return JSON.parse(JSON.stringify(object))
+}
+
 export default (state, action) => {
-  const newState = Object.assign({}, state)
+  const newState = clone(state)
 
   if (ServerEventsReducer.getEvents().find(event => action.type === event)) {
     return ServerEventsReducer.reduceEvent(state, newState, action)

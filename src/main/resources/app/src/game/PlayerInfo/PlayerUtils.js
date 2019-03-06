@@ -15,15 +15,6 @@ export default class PlayerUtils {
     }
   }
 
-  static updateActivePlayer(state, newActivePlayer) {
-    const newActivePlayerClone = Object.assign({}, newActivePlayer)
-    if (PlayerUtils.isCurrentPlayerTurn(state)) {
-      return Object.assign(state, {player: newActivePlayerClone})
-    } else {
-      return Object.assign(state, {opponent: newActivePlayerClone})
-    }
-  }
-
   static canActivePlayerPerformAnyAction(state) {
     if (!state.turn) {
       return true

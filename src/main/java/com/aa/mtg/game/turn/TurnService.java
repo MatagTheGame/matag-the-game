@@ -9,7 +9,6 @@ import com.aa.mtg.event.Event;
 import com.aa.mtg.event.EventSender;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.events.TapEvent;
 import com.aa.mtg.game.turn.phases.Phase;
 import com.aa.mtg.message.MessageEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,7 +118,7 @@ public class TurnService {
             }
 
             for (int tappingLandId : tappingLandIds) {
-                gameStatus.getActivePlayer().getBattlefield().findCardById(tappingLandId).getModifiers().setTapped(true);
+                gameStatus.getActivePlayer().getBattlefield().findCardById(tappingLandId).getModifiers().tap();
             }
 
             eventSender.sendToPlayers(

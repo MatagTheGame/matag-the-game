@@ -1,16 +1,22 @@
 package com.aa.mtg.cards;
 
+import com.aa.mtg.cards.modifiers.TappedModifiers;
+
 import java.util.Objects;
 
 public class CardModifiers {
-    private boolean tapped;
+    private TappedModifiers tapped;
 
-    public boolean isTapped() {
+    public TappedModifiers getTapped() {
         return tapped;
     }
 
-    public void setTapped(boolean tapped) {
-        this.tapped = tapped;
+    public boolean isTapped() {
+        return tapped != null;
+    }
+
+    public void tap() {
+        this.tapped = TappedModifiers.TAPPED;
     }
 
     @Override

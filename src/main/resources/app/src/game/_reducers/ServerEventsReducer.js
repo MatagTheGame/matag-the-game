@@ -12,22 +12,27 @@ export default class ServerEventsReducer {
     let activePlayer
     switch (action.type) {
       case 'MESSAGE':
-        return Object.assign(newState, {message: action.value})
+        newState.message = action.value
+        break
 
       case 'INIT_WAITING_OPPONENT':
-        return Object.assign(newState, {message: {text: 'Waiting for opponent...', closable: false}})
+        newState.message = {text: 'Waiting for opponent...', closable: false}
+        break
 
       case 'OPPONENT_JOINED':
-        return Object.assign(newState, {message: {text: undefined}})
+        newState.message.text = undefined
+        break
 
       case 'INIT_PLAYER':
-        return Object.assign(newState, {player: action.value})
+        newState.player = action.value
+        break
 
       case 'INIT_OPPONENT':
-        return Object.assign(newState, {opponent: action.value})
+        newState.opponent = action.value
+        break
 
       case 'UPDATE_TURN':
-        Object.assign(newState, {turn: action.value})
+        newState.turn = action.value
 
         if (PlayerUtils.isCurrentPlayerActive(newState)) {
           if (PlayerUtils.isCurrentPlayerTurn(newState)) {
@@ -43,23 +48,26 @@ export default class ServerEventsReducer {
           }
         }
 
-        return Object.assign(newState, {statusMessage: StatusMessageComponent.getStatusMessageForUser(newState)})
+        newState.statusMessage = StatusMessageComponent.getStatusMessageForUser(newState)
+        break
 
       case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':
-        activePlayer = PlayerUtils.getActivePlayer(state)
+        activePlayer = PlayerUtils.getActivePlayer(newState)
         activePlayer.battlefield = action.value
-        return PlayerUtils.updateActivePlayer(newState, activePlayer)
+        break
 
       case 'UPDATE_ACTIVE_PLAYER_HAND':
-        activePlayer = PlayerUtils.getActivePlayer(state)
+        activePlayer = PlayerUtils.getActivePlayer(newState)
         activePlayer.hand = action.value
-        return PlayerUtils.updateActivePlayer(newState, activePlayer)
+        break
 
       case 'UPDATE_ACTIVE_PLAYER_GRAVEYARD':
-        activePlayer = PlayerUtils.getActivePlayer(state)
+        activePlayer = PlayerUtils.getActivePlayer(newState)
         activePlayer.graveyard = action.value
-        return PlayerUtils.updateActivePlayer(newState, activePlayer)
+        break
     }
+
+    return newState
   }
 
 }

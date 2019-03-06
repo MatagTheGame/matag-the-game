@@ -24,10 +24,19 @@ export default class CardComponent extends PureComponent {
     }
   }
 
+  getClasses() {
+    let classes = 'card'
+    if (this.props.tapped === 'FRONTEND_TAPPED') {
+      classes += ' tapped'
+    }
+    return classes
+  }
+
+
   render() {
     return (
       <div id={'card-' + this.props.id}
-           className="card"
+           className={this.getClasses()}
            style={{backgroundImage: this.imageUrl(), ...this.props.style}}
            onClick={this.props.onclick} />
     )

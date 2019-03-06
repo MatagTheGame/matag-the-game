@@ -15,7 +15,7 @@ class PlayerHand extends PureComponent {
   }
 }
 
-const createPlayerCardClickAction = (event) => {
+const createHandPlayerCardClickAction = (event) => {
   return {
     type: 'PLAYER_HAND_CARD_CLICK',
     cardId: event.target.id
@@ -30,7 +30,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    playerCardClick: bindActionCreators(createPlayerCardClickAction, dispatch)
+    playerCardClick: bindActionCreators(createHandPlayerCardClickAction, dispatch)
   }
 }
 
