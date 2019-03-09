@@ -4,16 +4,13 @@ import {connect} from 'react-redux'
 import stompClient from './WebSocket'
 import Message from './UserAction/Message'
 import OpponentHand from './Hand/OpponentHand'
-import OpponentLandArea from './LandArea/OpponentLandArea'
-import OpponentLibrary from './Library/OpponentLibrary'
 import PlayerHand from './Hand/PlayerHand'
-import PlayerLandArea from './LandArea/PlayerLandArea'
+import PlayerLandArea from './Battlefield/PlayerLandArea'
 import PlayerLibrary from './Library/PlayerLibrary'
 import PlayerInfo from './PlayerInfo/PlayerInfo'
 import TurnPhases from './Turn/TurnPhases'
 import UserActionComponent from './UserAction/UserActionComponent'
 import StatusMessageComponent from './UserAction/StatusMessageComponent'
-import OpponentGraveyard from './Graveyard/OpponentGraveyard'
 import PlayerGraveyard from './Graveyard/PlayerGraveyard'
 
 
@@ -31,14 +28,14 @@ class App extends PureComponent {
         <PlayerHand />
         <div id="table">
           <div>
-            <OpponentLibrary/>
-            <OpponentLandArea/>
-            <OpponentGraveyard/>
+            <PlayerLibrary type='opponent'/>
+            <PlayerLandArea type='opponent'/>
+            <PlayerGraveyard type='opponent'/>
             <PlayerInfo type='opponent'/>
             <TurnPhases/>
-            <PlayerLibrary/>
-            <PlayerLandArea/>
-            <PlayerGraveyard/>
+            <PlayerLibrary type='player'/>
+            <PlayerLandArea type='player'/>
+            <PlayerGraveyard type='player'/>
             <PlayerInfo type='player'/>
           </div>
         </div>

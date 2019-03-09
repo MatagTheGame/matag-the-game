@@ -4,10 +4,22 @@ import {get} from 'lodash'
 import CardComponent from '../Card/CardComponent'
 
 class PlayerGraveyard extends PureComponent {
+  getId () {
+    return this.props.type + '-graveyard'
+  }
+
+  getGraveyard () {
+    if (this.props.type === 'player') {
+      return this.props.playerGraveyard
+    } else {
+      return this.props.opponentGraveyard
+    }
+  }
+
   render() {
     return (
-      <div id="player-graveyard" className='graveyard'>
-        {this.props.cards.map((cardInstance) =>
+      <div id={this.getId()} className='graveyard'>
+        {this.getGraveyard().map((cardInstance) =>
           <CardComponent key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name} />)}
       </div>
     )
@@ -16,7 +28,8 @@ class PlayerGraveyard extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    cards: get(state, 'player.graveyard', [])
+    playerGraveyard: get(state, 'player.graveyard', []),
+    opponentGraveyard: get(state, 'opponent.graveyard', [])
   }
 }
 

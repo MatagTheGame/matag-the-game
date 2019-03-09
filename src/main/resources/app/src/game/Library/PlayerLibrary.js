@@ -5,12 +5,24 @@ import {LibraryUiUtils} from './LibraryUiUtils'
 import CardComponent from '../Card/CardComponent'
 
 class PlayerLibrary extends PureComponent {
+  getId () {
+    return this.props.type + '-library'
+  }
+  
+  getLibrary () {
+    if (this.props.type === 'player') {
+      return this.props.playerLibrary
+    } else {
+      return this.props.opponentLibrary
+    }
+  }
+  
   render() {
     return (
-      <div id="player-library" className='player-library'>
-        {this.props.cards.length > 0 ? <CardComponent name='card' style={LibraryUiUtils.libraryHeight(this.props.cards.length, 'player')} /> : null}
-        <div className='card-bottom-thickness' style={LibraryUiUtils.libraryBottomThickness(this.props.cards.length)} />
-        <div className='card-right-thickness' style={LibraryUiUtils.libraryRightThickness(this.props.cards.length)} />
+      <div id={this.getId()} className='player-library'>
+        {this.getLibrary().length > 0 ? <CardComponent name='card' style={LibraryUiUtils.libraryHeight(this.getLibrary().length, this.props.type)} /> : null}
+        <div className='card-bottom-thickness' style={LibraryUiUtils.libraryBottomThickness(this.getLibrary().length)} />
+        <div className='card-right-thickness' style={LibraryUiUtils.libraryRightThickness(this.getLibrary().length)} />
       </div>
     )
   }
@@ -18,7 +30,8 @@ class PlayerLibrary extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    cards: get(state, 'player.library', [])
+    playerLibrary: get(state, 'player.library', []),
+    opponentLibrary: get(state, 'opponent.library', [])
   }
 }
 
