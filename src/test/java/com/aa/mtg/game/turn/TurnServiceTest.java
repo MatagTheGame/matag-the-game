@@ -218,7 +218,7 @@ public class TurnServiceTest {
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(2);
         expectedTurn.setCurrentTurnPlayer("opponent-name");
-        expectedTurn.setCurrentPhase(Phase.UP);
+        expectedTurn.setCurrentPhase(Phase.UT);
         expectedTurn.setCurrentPhaseActivePlayer("opponent-name");
         BDDMockito.verify(eventSender).sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),

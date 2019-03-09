@@ -1,6 +1,7 @@
 package com.aa.mtg.game.turn;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.turn.phases.Phase;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class Turn {
 
     public void cleanup(String nextPlayerName) {
         this.turnNumber++;
-        this.currentPhase = Phase.UP;
+        this.currentPhase = Phase.UT;
         this.currentTurnPlayer = nextPlayerName;
         this.currentPhaseActivePlayer = nextPlayerName;
         this.cardsPlayedWithinTurn.clear();

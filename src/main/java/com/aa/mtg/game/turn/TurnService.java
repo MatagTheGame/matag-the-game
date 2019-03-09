@@ -34,8 +34,15 @@ public class TurnService {
         Player activePlayer = gameStatus.getActivePlayer();
         Player inactivePlayer = gameStatus.getInactivePlayer();
 
+        if (turn.getCurrentPhase().equals(Phase.UT)) {
+            activePlayer.getBattlefield().getCards().stream()
+                    .filter(cardInstance -> cardInstance.getModifiers().isTapped())
+                    .forEach(cardInstance -> cardInstance.getModifiers().untap());
 
-        if (turn.getCurrentPhase().equals(Phase.CL)) {
+            sendUpdatePlayerBattlefield(activePlayer, gameStatus.getInactivePlayer());
+            turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
+
+        } else if (turn.getCurrentPhase().equals(Phase.CL)) {
             turn.cleanup(inactivePlayer.getName());
 
         } else if (turn.getCurrentPhase().equals(Phase.ET) && activePlayer.getHand().size() > 7) {
@@ -46,7 +53,7 @@ public class TurnService {
                 if (turn.getCurrentPhase().equals(Phase.DR) && turn.getTurnNumber() > 1) {
                     CardInstance cardInstance = activePlayer.getLibrary().draw();
                     activePlayer.getHand().addCard(cardInstance);
-                    updatePlayerHands(activePlayer, inactivePlayer);
+                    sendUpdatePlayerHand(activePlayer, inactivePlayer);
                 }
 
                 if (Phase.nonOpponentPhases().contains(turn.getCurrentPhase())) {
@@ -69,27 +76,24 @@ public class TurnService {
 
     void playLand(GameStatus gameStatus, int cardId) {
         Turn turn = gameStatus.getTurn();
+        Player activePlayer = gameStatus.getActivePlayer();
 
         if (!turn.getCurrentPhase().isMainPhase()) {
-            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("You can only play lands during main phases.", true)));
+            eventSender.sendToPlayer(activePlayer, new Event("MESSAGE", new MessageEvent("You can only play lands during main phases.", true)));
 
         } else if (turn.getCardsPlayedWithinTurn().stream()
                 .map(CardInstance::getCard)
                 .map(Card::getTypes)
                 .anyMatch(types -> types.contains(Type.LAND))) {
-            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("You already played a land this turn.", true)));
+            eventSender.sendToPlayer(activePlayer, new Event("MESSAGE", new MessageEvent("You already played a land this turn.", true)));
 
         } else {
-            CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
+            CardInstance cardInstance = activePlayer.getHand().extractCardById(cardId);
             turn.addCardToCardsPlayedWithinTurn(cardInstance);
-            gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance);
+            activePlayer.getBattlefield().addCard(cardInstance);
 
-            eventSender.sendToPlayers(
-                    asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                    new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield().getCards())
-            );
-
-            updatePlayerHands(gameStatus.getActivePlayer(), gameStatus.getInactivePlayer());
+            sendUpdatePlayerBattlefield(activePlayer, gameStatus.getInactivePlayer());
+            sendUpdatePlayerHand(activePlayer, gameStatus.getInactivePlayer());
         }
     }
 
@@ -127,12 +131,8 @@ public class TurnService {
                         .map(tappingLandId -> activePlayer.getBattlefield().findCardById(tappingLandId))
                         .forEach(card -> card.getModifiers().tap());
 
-                eventSender.sendToPlayers(
-                        asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                        new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", activePlayer.getBattlefield().getCards())
-                );
-
-                updatePlayerHands(activePlayer, inactivePlayer);
+                sendUpdatePlayerBattlefield(activePlayer, gameStatus.getInactivePlayer());
+                sendUpdatePlayerHand(activePlayer, inactivePlayer);
             }
         }
     }
@@ -142,7 +142,7 @@ public class TurnService {
             if ("DISCARD_A_CARD".equals(triggeredAction)) {
                 CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
                 gameStatus.getActivePlayer().getGraveyard().addCard(cardInstance);
-                updatePlayerHands(gameStatus.getActivePlayer(), gameStatus.getInactivePlayer());
+                sendUpdatePlayerHand(gameStatus.getActivePlayer(), gameStatus.getInactivePlayer());
 
                 eventSender.sendToPlayers(
                         asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
@@ -159,8 +159,15 @@ public class TurnService {
         }
     }
 
-    private void updatePlayerHands(Player activePlayer, Player inactivePlayer) {
+    private void sendUpdatePlayerHand(Player activePlayer, Player inactivePlayer) {
         eventSender.sendToPlayer(activePlayer, new Event("UPDATE_ACTIVE_PLAYER_HAND", activePlayer.getHand().getCards()));
         eventSender.sendToPlayer(inactivePlayer, new Event("UPDATE_ACTIVE_PLAYER_HAND", activePlayer.getHand().maskedHand()));
+    }
+
+    private void sendUpdatePlayerBattlefield(Player playerWithUpdatedBattlefield, Player otherPlayer) {
+        eventSender.sendToPlayers(
+                asList(playerWithUpdatedBattlefield, otherPlayer),
+                new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", playerWithUpdatedBattlefield.getBattlefield().getCards())
+        );
     }
 }

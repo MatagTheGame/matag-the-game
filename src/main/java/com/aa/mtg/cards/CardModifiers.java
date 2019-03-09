@@ -19,6 +19,10 @@ public class CardModifiers {
         this.tapped = TappedModifiers.TAPPED;
     }
 
+    public void untap() {
+        this.tapped = null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -7,10 +7,11 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 public enum Phase {
-    UP, DR, M1, BC, DA, DB, FS, CD, EC, M2, ET, CL;
+    UT, UP, DR, M1, BC, DA, DB, FS, CD, EC, M2, ET, CL;
 
     public static Phase nextPhase(Phase phase) {
         switch (phase) {
+            case UT: return UP;
             case UP: return DR;
             case DR: return M1;
             case M1: return BC;
@@ -32,11 +33,11 @@ public enum Phase {
     }
 
     public static Set<Phase> nonInstantAllowedPhases() {
-        return new HashSet<>(asList(DR, CD, EC, CL));
+        return new HashSet<>(asList(UT, DR, CD, EC, CL));
     }
 
     public static Set<Phase> nonOpponentPhases() {
-        return new HashSet<>(asList(DR, DA, CL));
+        return new HashSet<>(asList(UT, DR, DA, CL));
     }
 
     public static Set<Phase> nonPlayerPhases() {
