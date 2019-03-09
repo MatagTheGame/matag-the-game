@@ -4,11 +4,11 @@ import {get} from 'lodash'
 import CardComponent from '../Card/CardComponent'
 
 class PlayerGraveyard extends PureComponent {
-  getId () {
+  getId() {
     return this.props.type + '-graveyard'
   }
 
-  getGraveyard () {
+  getGraveyard() {
     if (this.props.type === 'player') {
       return this.props.playerGraveyard
     } else {

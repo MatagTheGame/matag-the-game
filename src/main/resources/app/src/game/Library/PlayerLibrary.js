@@ -5,11 +5,11 @@ import {LibraryUiUtils} from './LibraryUiUtils'
 import CardComponent from '../Card/CardComponent'
 
 class PlayerLibrary extends PureComponent {
-  getId () {
+  getId() {
     return this.props.type + '-library'
   }
   
-  getLibrary () {
+  getLibrary() {
     if (this.props.type === 'player') {
       return this.props.playerLibrary
     } else {

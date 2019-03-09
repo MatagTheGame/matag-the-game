@@ -5,11 +5,11 @@ import CardComponent from '../Card/CardComponent'
 import {bindActionCreators} from 'redux'
 
 class PlayerLandArea extends PureComponent {
-  getId () {
+  getId() {
     return this.props.type + '-land-area'
   }
 
-  getBattlefield () {
+  getBattlefield() {
     if (this.props.type === 'player') {
       return this.props.playerBattlefield
     } else {
@@ -17,7 +17,7 @@ class PlayerLandArea extends PureComponent {
     }
   }
 
-  getPlayerClickAction () {
+  getPlayerClickAction() {
     if (this.props.type === 'player') {
       return this.props.playerCardClick
     } else {

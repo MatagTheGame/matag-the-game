@@ -3,7 +3,6 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import stompClient from './WebSocket'
 import Message from './UserAction/Message'
-import OpponentHand from './Hand/OpponentHand'
 import PlayerHand from './Hand/PlayerHand'
 import PlayerLandArea from './Battlefield/PlayerLandArea'
 import PlayerLibrary from './Library/PlayerLibrary'
@@ -24,8 +23,8 @@ class App extends PureComponent {
       <Fragment>
         <UserActionComponent />
         <StatusMessageComponent />
-        <OpponentHand />
-        <PlayerHand />
+        <PlayerHand type='opponent'/>
+        <PlayerHand type='player'/>
         <div id="table">
           <div>
             <PlayerLibrary type='opponent'/>

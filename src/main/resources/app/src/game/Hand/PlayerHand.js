@@ -5,11 +5,31 @@ import {get} from 'lodash'
 import CardComponent from '../Card/CardComponent'
 
 class PlayerHand extends PureComponent {
+  getId() {
+    return this.props.type + '-hand'
+  }
+
+  getHand() {
+    if (this.props.type === 'player') {
+      return this.props.playerHand
+    } else {
+      return this.props.opponentHand
+    }
+  }
+
+  getPlayerCardClick () {
+    if (this.props.type === 'player') {
+      return this.props.playerCardClick
+    } else {
+      return () => {}
+    }
+  }
+
   render() {
     return (
-      <div id="player-hand" className='hand'>
-        {this.props.cards.map((cardInstance) =>
-          <CardComponent key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name} onclick={this.props.playerCardClick} />)}
+      <div id={this.getId()} className='hand'>
+        {this.getHand().map((cardInstance) =>
+          <CardComponent key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name} onclick={this.getPlayerCardClick()} />)}
       </div>
     )
   }
@@ -24,7 +44,8 @@ const createHandPlayerCardClickAction = (event) => {
 
 const mapStateToProps = state => {
   return {
-    cards: get(state, 'player.hand', [])
+    playerHand: get(state, 'player.hand', []),
+    opponentHand: get(state, 'opponent.hand', [])
   }
 }
 
