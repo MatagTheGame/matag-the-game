@@ -111,23 +111,26 @@ body {
   cursor: pointer;
 }
 
-#player-land-area {
+#player-battlefield {
   bottom: 10%;
   left: 20%;
 }
 
-#opponent-land-area {
+#opponent-battlefield {
   position: absolute;
   top: 10%;
   right: 20%;
   transform: rotate(180deg);
 }
 
-.land-area {
+.battlefield {
   position: absolute;
+  width: 80%;
+}
+
+.battlefield-area {
   justify-content: center;
   display: flex;
-  width: 80%;
 }
 
 #player-graveyard {

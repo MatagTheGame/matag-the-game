@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {get} from 'lodash'
 import CardComponent from '../Card/CardComponent'
 
-class PlayerGraveyard extends PureComponent {
+class Graveyard extends PureComponent {
   getId() {
     return this.props.type + '-graveyard'
   }
@@ -33,4 +33,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(PlayerGraveyard)
+export default connect(mapStateToProps)(Graveyard)

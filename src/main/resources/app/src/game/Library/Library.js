@@ -4,7 +4,7 @@ import {get} from 'lodash'
 import {LibraryUiUtils} from './LibraryUiUtils'
 import CardComponent from '../Card/CardComponent'
 
-class PlayerLibrary extends PureComponent {
+class Library extends PureComponent {
   getId() {
     return this.props.type + '-library'
   }
@@ -35,4 +35,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(PlayerLibrary)
+export default connect(mapStateToProps)(Library)

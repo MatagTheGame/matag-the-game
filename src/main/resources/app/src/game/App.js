@@ -3,14 +3,14 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import stompClient from './WebSocket'
 import Message from './UserAction/Message'
-import PlayerHand from './Hand/PlayerHand'
-import PlayerLandArea from './Battlefield/PlayerLandArea'
-import PlayerLibrary from './Library/PlayerLibrary'
-import PlayerInfo from './PlayerInfo/PlayerInfo'
-import TurnPhases from './Turn/TurnPhases'
-import UserActionComponent from './UserAction/UserActionComponent'
 import StatusMessageComponent from './UserAction/StatusMessageComponent'
-import PlayerGraveyard from './Graveyard/PlayerGraveyard'
+import Hand from './Hand/Hand'
+import Library from './Library/Library'
+import Battlefield from './Battlefield/Battlefield'
+import Graveyard from './Graveyard/Graveyard'
+import TurnPhases from './Turn/TurnPhases'
+import PlayerInfo from './PlayerInfo/PlayerInfo'
+import UserActionComponent from './UserAction/UserActionComponent'
 
 
 class App extends PureComponent {
@@ -23,18 +23,18 @@ class App extends PureComponent {
       <Fragment>
         <UserActionComponent />
         <StatusMessageComponent />
-        <PlayerHand type='opponent'/>
-        <PlayerHand type='player'/>
+        <Hand type='opponent'/>
+        <Hand type='player'/>
         <div id="table">
           <div>
-            <PlayerLibrary type='opponent'/>
-            <PlayerLandArea type='opponent'/>
-            <PlayerGraveyard type='opponent'/>
+            <Library type='opponent'/>
+            <Battlefield type='opponent'/>
+            <Graveyard type='opponent'/>
             <PlayerInfo type='opponent'/>
             <TurnPhases/>
-            <PlayerLibrary type='player'/>
-            <PlayerLandArea type='player'/>
-            <PlayerGraveyard type='player'/>
+            <Library type='player'/>
+            <Battlefield type='player'/>
+            <Graveyard type='player'/>
             <PlayerInfo type='player'/>
           </div>
         </div>

@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux'
 import {get} from 'lodash'
 import CardComponent from '../Card/CardComponent'
 
-class PlayerHand extends PureComponent {
+class Hand extends PureComponent {
   getId() {
     return this.props.type + '-hand'
   }
@@ -55,4 +55,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayerHand)
+export default connect(mapStateToProps, mapDispatchToProps)(Hand)
