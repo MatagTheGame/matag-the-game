@@ -1,6 +1,7 @@
 import stompClient from '../WebSocket'
 import CardComponent from '../Card/CardComponent'
 import Phase from '../Turn/Phase'
+import CostUtils from '../Card/CostUtils'
 
 export default class ClientEventsReducer {
 
@@ -26,8 +27,11 @@ export default class ClientEventsReducer {
               stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardId: cardId})
 
             } else {
-              console.log('card.cost:', cardInstance.card.cost)
-              // TODO exactly same code as CostUtils.java... shall I move to kotlin?
+              const currentMana = CostUtils.currentMana(newState.player.battlefield)
+              const currentManaIds = CostUtils.currentManaCardIds(newState.player.battlefield)
+              if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentMana)) {
+                stompClient.sendEvent('turn', {action: 'CAST', cardId: cardId, tappingLandIds: currentManaIds})
+              }
             }
           }
         }

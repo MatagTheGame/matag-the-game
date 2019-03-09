@@ -95,37 +95,45 @@ public class TurnService {
 
     void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds) {
         Turn turn = gameStatus.getTurn();
+        Player activePlayer = gameStatus.getActivePlayer();
+        Player inactivePlayer = gameStatus.getInactivePlayer();
 
-        CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
+        CardInstance cardInstance = activePlayer.getHand().findCardById(cardId);
         if (!turn.getCurrentPhase().isMainPhase() && !cardInstance.getCard().isInstantSpeed()) {
-            eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("You can only play Instants during a NON main phases.", true)));
+            eventSender.sendToPlayer(activePlayer, new Event("MESSAGE", new MessageEvent("You can only play Instants during a NON main phases.", true)));
 
         } else {
-            CardInstance cardToCast = gameStatus.getActivePlayer().getHand().findCardById(cardId);
-            ArrayList<Color> paidCost = new ArrayList<>();
+            CardInstance cardToCast = activePlayer.getHand().findCardById(cardId);
 
+            ArrayList<Color> paidCost = new ArrayList<>();
             for (int tappingLandId : tappingLandIds) {
-                CardInstance landToTap = gameStatus.getActivePlayer().getBattlefield().findCardById(tappingLandId);
+                CardInstance landToTap = activePlayer.getBattlefield().findCardById(tappingLandId);
                 if (!landToTap.getCard().getTypes().contains(Type.LAND)) {
-                    eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("The card you are trying to tap for mana is not a land.", true)));
+                    eventSender.sendToPlayer(activePlayer, new Event("MESSAGE", new MessageEvent("The card you are trying to tap for mana is not a land.", true)));
                 } else if (landToTap.getModifiers().isTapped()) {
-                    eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("The land you are trying to tap is already tapped.", true)));
+                    eventSender.sendToPlayer(activePlayer, new Event("MESSAGE", new MessageEvent("The land you are trying to tap is already tapped.", true)));
                 }
                 paidCost.add(landToTap.getCard().getColors().get(0));
             }
 
             if (!CostUtils.isCastingCostFulfilled(cardToCast.getCard(), paidCost)) {
-                eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("MESSAGE", new MessageEvent("There was an error while paying the cost for " + cardToCast.getCard().getName() + ".", true)));
+                eventSender.sendToPlayer(activePlayer, new Event("MESSAGE", new MessageEvent("There was an error while paying the cost for " + cardToCast.getCard().getName() + ".", true)));
+
+            } else {
+                cardInstance = activePlayer.getHand().extractCardById(cardId);
+                activePlayer.getBattlefield().addCard(cardInstance);
+
+                tappingLandIds.stream()
+                        .map(tappingLandId -> activePlayer.getBattlefield().findCardById(tappingLandId))
+                        .forEach(card -> card.getModifiers().tap());
+
+                eventSender.sendToPlayers(
+                        asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                        new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", activePlayer.getBattlefield().getCards())
+                );
+
+                updatePlayerHands(activePlayer, inactivePlayer);
             }
-
-            tappingLandIds.stream()
-                    .map(tappingLandId -> gameStatus.getActivePlayer().getBattlefield().findCardById(tappingLandId))
-                    .forEach(card -> card.getModifiers().tap());
-
-            eventSender.sendToPlayers(
-                    asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                    new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield().getCards())
-            );
         }
     }
 
