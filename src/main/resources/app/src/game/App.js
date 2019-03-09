@@ -10,7 +10,6 @@ import PlayerHand from './Hand/PlayerHand'
 import PlayerLandArea from './LandArea/PlayerLandArea'
 import PlayerLibrary from './Library/PlayerLibrary'
 import PlayerInfo from './PlayerInfo/PlayerInfo'
-import OpponentInfo from './PlayerInfo/OpponentInfo'
 import TurnPhases from './Turn/TurnPhases'
 import UserActionComponent from './UserAction/UserActionComponent'
 import StatusMessageComponent from './UserAction/StatusMessageComponent'
@@ -35,12 +34,12 @@ class App extends PureComponent {
             <OpponentLibrary/>
             <OpponentLandArea/>
             <OpponentGraveyard/>
-            <OpponentInfo/>
+            <PlayerInfo type='opponent'/>
             <TurnPhases/>
             <PlayerLibrary/>
             <PlayerLandArea/>
             <PlayerGraveyard/>
-            <PlayerInfo/>
+            <PlayerInfo type='player'/>
           </div>
         </div>
         <Message/>
