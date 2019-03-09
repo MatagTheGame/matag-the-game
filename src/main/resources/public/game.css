@@ -119,7 +119,7 @@ body {
 #opponent-battlefield {
   position: absolute;
   top: 10%;
-  right: 20%;
+  left: 20%;
   transform: rotate(180deg);
 }
 
