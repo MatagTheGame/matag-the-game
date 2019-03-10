@@ -1,15 +1,17 @@
+import CardSearch from './CardSearch'
+
 export default class CostUtils {
   static currentMana(battlefield) {
-    return battlefield
-      .filter(cardInstance => cardInstance.card.types.includes('LAND'))
-      .filter(cardInstance => cardInstance.modifiers.tapped === 'FRONTEND_TAPPED')
+    return CardSearch.cards(battlefield)
+      .ofType('LAND')
+      .frontEndTapped()
       .map(cardInstance => cardInstance.card.colors[0])
   }
 
   static currentManaCardIds(battlefield) {
-    return battlefield
-      .filter(cardInstance => cardInstance.card.types.includes('LAND'))
-      .filter(cardInstance => cardInstance.modifiers.tapped === 'FRONTEND_TAPPED')
+    return CardSearch.cards(battlefield)
+      .ofType('LAND')
+      .frontEndTapped()
       .map(cardInstance => cardInstance.id)
   }
 

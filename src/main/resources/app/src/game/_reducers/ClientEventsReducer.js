@@ -2,6 +2,7 @@ import stompClient from '../WebSocket'
 import Phase from '../Turn/Phase'
 import CostUtils from '../Card/CostUtils'
 import CardUtils from '../Card/CardUtils'
+import CardSearch from '../Card/CardSearch'
 
 export default class ClientEventsReducer {
 
@@ -15,14 +16,13 @@ export default class ClientEventsReducer {
         return {}
 
       case 'MAXIMIZE_MINIMIZE_CARD':
-        console.log('MAXIMIZE_MINIMIZE_CARD: ', action)
         newState.maximizedCard = action.value.cardImage
         break;
 
       case 'PLAYER_HAND_CARD_CLICK':
         if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
-          const cardId = CardUtils.extractCardId(action.cardId)
-          const cardInstance = CardUtils.findCardInstanceById(newState.player.hand, cardId)
+          const cardId = CardUtils.getCardId(action.cardId)
+          const cardInstance = CardSearch.cards(newState.player.hand).withId(cardId)
           if (newState.turn.triggeredAction === 'DISCARD_A_CARD') {
             stompClient.sendEvent('turn', {action: 'RESOLVE', triggeredAction: 'DISCARD_A_CARD', cardId: cardId})
           }
@@ -44,8 +44,8 @@ export default class ClientEventsReducer {
 
       case 'PLAYER_BATTLEFIELD_CARD_CLICK':
         if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
-          const cardId = CardUtils.extractCardId(action.cardId)
-          const cardInstance = CardUtils.findCardInstanceById(newState.player.battlefield, cardId)
+          const cardId = CardUtils.getCardId(action.cardId)
+          const cardInstance = CardSearch.cards(newState.player.battlefield).withId(cardId)
           if (cardInstance.card.types.includes('LAND')) {
             if (CardUtils.isUntapped(cardInstance)) {
               CardUtils.frontendTap(cardInstance)
@@ -57,7 +57,9 @@ export default class ClientEventsReducer {
         break
 
       case 'CONTINUE_CLICK':
-        CardUtils.untapAllFrontendTappedCards(newState.player.battlefield)
+        CardSearch.cards(newState.player.battlefield)
+          .frontEndTapped()
+          .forEach((cardInstance) => CardUtils.untap(cardInstance))
         stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
         break
     }

@@ -1,3 +1,5 @@
+import Phase from '../Turn/Phase'
+
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
     return state.turn.currentTurnPlayer === state.player.name
@@ -15,19 +17,21 @@ export default class PlayerUtils {
     }
   }
 
-  static canActivePlayerPerformAnyAction(state) {
-    if (!state.turn) {
-      return true
-    }
+  static canPlayerPerformAnyAction(state) {
+    if (!PlayerUtils.isCurrentPlayerTurn(state)) {
+      // TODO until instants and abilities are implemented opponent cannot do anything during player phases
+      return false
 
-    if (PlayerUtils.isCurrentPlayerTurn(state)) {
-      if (state.turn.triggeredAction) {
+    } else {
+      if (Phase.isMainPhase(state.turn.currentPhase)) {
+        return true
+      } else if (state.turn.triggeredAction) {
+        return true
+      } else if (state.turn.currentPhase === 'DA') {
         return true
       } else {
         return false
       }
-    } else {
-      return false
     }
   }
 }

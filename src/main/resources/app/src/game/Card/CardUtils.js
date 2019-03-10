@@ -5,11 +5,7 @@ export default class CardUtils {
       .replace(',', '_')
   }
 
-  static findCardInstanceById(cards, cardId) {
-    return cards.find(card => card.id === parseInt(cardId))
-  }
-
-  static extractCardId(id) {
+  static getCardId(id) {
     return id.replace('card-', '')
   }
 
@@ -27,10 +23,5 @@ export default class CardUtils {
 
   static isUntapped(cardInstance) {
     return !cardInstance.modifiers.tapped
-  }
-
-  static untapAllFrontendTappedCards(battlefield) {
-    battlefield.filter(cardInstance => CardUtils.isFrontendTapped(cardInstance))
-      .forEach((cardInstance) => CardUtils.untap(cardInstance))
   }
 }

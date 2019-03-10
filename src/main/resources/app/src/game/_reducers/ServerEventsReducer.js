@@ -34,18 +34,8 @@ export default class ServerEventsReducer {
       case 'UPDATE_TURN':
         newState.turn = action.value
 
-        if (PlayerUtils.isCurrentPlayerActive(newState)) {
-          if (PlayerUtils.isCurrentPlayerTurn(newState)) {
-            if (!Phase.isMainPhase(newState.turn.currentPhase)) {
-              if (!PlayerUtils.canActivePlayerPerformAnyAction(newState)) {
-                stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
-              }
-            }
-          } else {
-            if (!PlayerUtils.canActivePlayerPerformAnyAction(newState)) {
-              stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
-            }
-          }
+        if (PlayerUtils.isCurrentPlayerActive(newState) && !PlayerUtils.canPlayerPerformAnyAction(newState)) {
+          stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
         }
 
         newState.statusMessage = StatusMessageUtils.getStatusMessageForUser(newState)

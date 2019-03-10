@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {get} from 'lodash'
 import Card from '../Card/Card'
 import {bindActionCreators} from 'redux'
+import CardSearch from '../Card/CardSearch'
 
 class Battlefield extends PureComponent {
   getId() {
@@ -17,14 +18,12 @@ class Battlefield extends PureComponent {
     }
   }
 
-  getLands() {
-    return this.getBattlefield()
-      .filter(cardInstance => cardInstance.card.types.includes('LAND'))
+  getFirstLineCards() {
+    return CardSearch.cards(this.getBattlefield()).ofType('LAND')
   }
 
-  getCreatures() {
-    return this.getBattlefield()
-      .filter(cardInstance => cardInstance.card.types.includes('CREATURE'))
+  getSecondLineCards() {
+    return CardSearch.cards(this.getBattlefield()).ofType('CREATURE')
   }
 
   playerCardClick() {
@@ -43,8 +42,8 @@ class Battlefield extends PureComponent {
   render() {
     return (
       <div id={this.getId()} className='battlefield'>
-        <div className='battlefield-area'>{this.cardItems(this.getCreatures())}</div>
-        <div className='battlefield-area'>{this.cardItems(this.getLands())}</div>
+        <div className='battlefield-area'>{this.cardItems(this.getSecondLineCards())}</div>
+        <div className='battlefield-area'>{this.cardItems(this.getFirstLineCards())}</div>
       </div>
     )
   }
