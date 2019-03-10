@@ -16,4 +16,17 @@ export default class CardSearch extends Array {
     const cards = this.filter(cardInstance => cardInstance.modifiers.tapped === 'FRONTEND_TAPPED')
     return new CardSearch(...cards)
   }
+
+  withoutSummoningSickness() {
+    const cards = this.filter(cardInstance => !cardInstance.modifiers.summoningSickness)
+    return new CardSearch(...cards)
+  }
+
+  isEmpty() {
+    return this.length === 0
+  }
+
+  isNotEmpty() {
+    return this.length > 0
+  }
 }

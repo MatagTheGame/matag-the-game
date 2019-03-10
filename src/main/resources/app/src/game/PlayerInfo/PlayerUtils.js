@@ -1,4 +1,5 @@
 import Phase from '../Turn/Phase'
+import CardSearch from '../Card/CardSearch'
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
@@ -17,6 +18,14 @@ export default class PlayerUtils {
     }
   }
 
+  static isPlayerAbleToAttack(state) {
+    const battlefield = PlayerUtils.getActivePlayer(state).battlefield
+    return CardSearch.cards(battlefield)
+      .ofType('CREATURE')
+      .withoutSummoningSickness()
+      .isNotEmpty()
+  }
+
   static canPlayerPerformAnyAction(state) {
     if (!PlayerUtils.isCurrentPlayerTurn(state)) {
       // TODO until instants and abilities are implemented opponent cannot do anything during player phases
@@ -27,7 +36,7 @@ export default class PlayerUtils {
         return true
       } else if (state.turn.triggeredAction) {
         return true
-      } else if (state.turn.currentPhase === 'DA') {
+      } else if (state.turn.currentPhase === 'DA' && PlayerUtils.isPlayerAbleToAttack(state)) {
         return true
       } else {
         return false
