@@ -1,7 +1,7 @@
 import stompClient from '../WebSocket'
 import Phase from '../Turn/Phase'
 import PlayerUtils from '../PlayerInfo/PlayerUtils'
-import StatusMessageComponent from '../UserAction/StatusMessageComponent'
+import StatusMessageUtils from '../UserAction/StatusMessageUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {
@@ -48,7 +48,7 @@ export default class ServerEventsReducer {
           }
         }
 
-        newState.statusMessage = StatusMessageComponent.getStatusMessageForUser(newState)
+        newState.statusMessage = StatusMessageUtils.getStatusMessageForUser(newState)
         break
 
       case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':

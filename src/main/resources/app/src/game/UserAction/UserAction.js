@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {get} from 'lodash'
 import {bindActionCreators} from 'redux'
 
-class UserActionComponent extends PureComponent {
+class UserAction extends PureComponent {
   constructor(props) {
     super(props);
     this.handleContinueKey = this.handleContinueKey.bind(this);
@@ -60,4 +60,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserActionComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(UserAction)

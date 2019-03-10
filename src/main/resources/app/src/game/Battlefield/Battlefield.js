@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
-import CardComponent from '../Card/CardComponent'
+import Card from '../Card/Card'
 import {bindActionCreators} from 'redux'
 
 class Battlefield extends PureComponent {
@@ -37,8 +37,8 @@ class Battlefield extends PureComponent {
 
   cardItems(cards) {
     return cards.map((cardInstance) =>
-      <CardComponent key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name}
-                     tapped={cardInstance.modifiers.tapped} onclick={this.getPlayerClickAction()} />)
+      <Card key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name}
+            tapped={cardInstance.modifiers.tapped} onclick={this.getPlayerClickAction()} />)
   }
 
   render() {

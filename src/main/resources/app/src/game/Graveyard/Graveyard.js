@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
 import {get} from 'lodash'
-import CardComponent from '../Card/CardComponent'
+import Card from '../Card/Card'
 
 class Graveyard extends PureComponent {
   getId() {
@@ -20,7 +20,7 @@ class Graveyard extends PureComponent {
     return (
       <div id={this.getId()} className='graveyard'>
         {this.getGraveyard().map((cardInstance) =>
-          <CardComponent key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name} />)}
+          <Card key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name} />)}
       </div>
     )
   }

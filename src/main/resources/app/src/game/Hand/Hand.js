@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {get} from 'lodash'
-import CardComponent from '../Card/CardComponent'
+import Card from '../Card/Card'
 
 class Hand extends PureComponent {
   getId() {
@@ -29,7 +29,7 @@ class Hand extends PureComponent {
     return (
       <div id={this.getId()} className='hand'>
         {this.getHand().map((cardInstance) =>
-          <CardComponent key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name} onclick={this.getPlayerCardClick()} />)}
+          <Card key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name} onclick={this.getPlayerCardClick()} />)}
       </div>
     )
   }

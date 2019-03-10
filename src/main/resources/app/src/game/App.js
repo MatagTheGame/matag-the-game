@@ -3,14 +3,14 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import stompClient from './WebSocket'
 import Message from './UserAction/Message'
-import StatusMessageComponent from './UserAction/StatusMessageComponent'
+import StatusMessage from './UserAction/StatusMessage'
 import Hand from './Hand/Hand'
 import Library from './Library/Library'
 import Battlefield from './Battlefield/Battlefield'
 import Graveyard from './Graveyard/Graveyard'
 import TurnPhases from './Turn/TurnPhases'
 import PlayerInfo from './PlayerInfo/PlayerInfo'
-import UserActionComponent from './UserAction/UserActionComponent'
+import UserAction from './UserAction/UserAction'
 
 
 class App extends PureComponent {
@@ -21,8 +21,8 @@ class App extends PureComponent {
   render() {
     return (
       <Fragment>
-        <UserActionComponent />
-        <StatusMessageComponent />
+        <UserAction />
+        <StatusMessage />
         <Hand type='opponent'/>
         <Hand type='player'/>
         <div id="table">
