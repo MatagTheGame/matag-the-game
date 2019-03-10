@@ -1,21 +1,21 @@
 package com.aa.mtg.game.init;
 
-import com.aa.mtg.event.Event;
-import com.aa.mtg.event.EventSender;
+import com.aa.mtg.game.event.Event;
+import com.aa.mtg.game.event.EventSender;
 import com.aa.mtg.game.deck.DeckRetrieverService;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
-import com.aa.mtg.message.MessageEvent;
-import com.aa.mtg.security.SecurityToken;
+import com.aa.mtg.game.message.MessageEvent;
+import com.aa.mtg.game.security.SecurityToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
-import static com.aa.mtg.security.SecurityHelper.extractSecurityToken;
+import static com.aa.mtg.game.security.SecurityHelper.extractSecurityToken;
 
 @Controller
 public class InitController {

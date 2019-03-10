@@ -1,4 +1,4 @@
-package com.aa.mtg.message;
+package com.aa.mtg.game.message;
 
 public class MessageEvent {
     private final String text;

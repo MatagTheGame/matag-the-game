@@ -4,7 +4,7 @@ import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.security.SecurityToken;
+import com.aa.mtg.game.security.SecurityToken;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

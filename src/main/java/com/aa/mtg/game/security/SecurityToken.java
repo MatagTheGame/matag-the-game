@@ -1,4 +1,4 @@
-package com.aa.mtg.security;
+package com.aa.mtg.game.security;
 
 public class SecurityToken {
     private final String sessionId;

@@ -1,6 +1,6 @@
 package com.aa.mtg.game.status;
 
-import com.aa.mtg.security.SecurityHelper;
+import com.aa.mtg.game.security.SecurityHelper;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

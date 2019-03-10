@@ -1,6 +1,6 @@
 package com.aa.mtg.utils;
 
-import com.aa.mtg.event.EventSender;
+import com.aa.mtg.game.event.EventSender;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

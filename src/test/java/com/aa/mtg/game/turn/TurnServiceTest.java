@@ -2,18 +2,17 @@ package com.aa.mtg.game.turn;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.Cards;
-import com.aa.mtg.event.Event;
-import com.aa.mtg.event.EventSender;
+import com.aa.mtg.game.event.Event;
+import com.aa.mtg.game.event.EventSender;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.phases.Phase;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.Mockito;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
@@ -22,16 +21,56 @@ import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
 
-@RunWith(MockitoJUnitRunner.class)
 public class TurnServiceTest {
 
-    @Mock
+    private static final CardInstance A_CARD = new CardInstance(1, Cards.FOREST);
+
+    private TurnService turnService;
     private EventSender eventSender;
 
-    @InjectMocks
-    private TurnService turnService;
+    @Before
+    public void setup() {
+        eventSender = Mockito.mock(EventSender.class);
+        GameStatusUpdaterService gameStatusUpdated = new GameStatusUpdaterService(eventSender);
+        turnService = new TurnService(gameStatusUpdated);
+    }
 
-    private final CardInstance A_CARD = new CardInstance(1, Cards.FOREST);
+    @Test
+    public void testContinueTurnUntapPlayer() {
+        // Given
+        GameStatus gameStatus = new GameStatus("game-id");
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+
+        Turn turn = new Turn();
+        turn.setTurnNumber(1);
+        turn.setCurrentTurnPlayer("player-name");
+        turn.setCurrentPhase(Phase.UT);
+        turn.setCurrentPhaseActivePlayer("player-name");
+        turn.addCardToCardsPlayedWithinTurn(A_CARD);
+
+        ReflectionTestUtils.setField(gameStatus, "turn", turn);
+
+        // When
+        turnService.continueTurn(gameStatus);
+
+        // Then
+        Turn expectedTurn = new Turn();
+        expectedTurn.setTurnNumber(1);
+        expectedTurn.setCurrentTurnPlayer("player-name");
+        expectedTurn.setCurrentPhase(Phase.UP);
+        expectedTurn.setCurrentPhaseActivePlayer("player-name");
+        expectedTurn.addCardToCardsPlayedWithinTurn(A_CARD);
+        BDDMockito.verify(eventSender).sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getPlayer1().getBattlefield().getCards())
+        );
+
+        BDDMockito.verify(eventSender).sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_TURN", expectedTurn)
+        );
+    }
 
     @Test
     public void testContinueTurnUpkeepPlayer() {

@@ -1,4 +1,4 @@
-package com.aa.mtg.event;
+package com.aa.mtg.game.event;
 
 import java.util.Objects;
 

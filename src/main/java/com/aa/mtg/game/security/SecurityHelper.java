@@ -1,4 +1,4 @@
-package com.aa.mtg.security;
+package com.aa.mtg.game.security;
 
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;

@@ -1,4 +1,4 @@
-package com.aa.mtg.event;
+package com.aa.mtg.game.event;
 
 public abstract class EventResponse {
   public enum ResponseStatus {

@@ -1,7 +1,7 @@
 package com.aa.mtg.game.init;
 
-import com.aa.mtg.event.Event;
-import com.aa.mtg.event.EventSender;
+import com.aa.mtg.game.event.Event;
+import com.aa.mtg.game.event.EventSender;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
 import org.junit.Before;
