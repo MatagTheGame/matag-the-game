@@ -127,6 +127,7 @@ public class TurnService {
                 cardInstance = activePlayer.getHand().extractCardById(cardId);
                 activePlayer.getBattlefield().addCard(cardInstance);
 
+                // TODO do not tap all lands but only the one necessary to pay the cost above... this gets complicated
                 tappingLandIds.stream()
                         .map(tappingLandId -> activePlayer.getBattlefield().findCardById(tappingLandId))
                         .forEach(card -> card.getModifiers().tap());

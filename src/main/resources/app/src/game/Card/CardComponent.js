@@ -15,21 +15,26 @@ export default class CardComponent extends PureComponent {
     return id.replace('card-', '')
   }
 
-  static toggleFrontendTapped(cardInstance) {
-    if (CardComponent.isFrontendTapped(cardInstance)) {
-      cardInstance.modifiers.tapped = undefined
-    } else {
-      cardInstance.modifiers.tapped = 'FRONTEND_TAPPED'
-    }
+  static frontendTap(cardInstance) {
+    cardInstance.modifiers.tapped = 'FRONTEND_TAPPED'
+  }
+
+  static untap(cardInstance) {
+    cardInstance.modifiers.tapped = undefined
   }
 
   static isFrontendTapped(cardInstance) {
     return cardInstance.modifiers.tapped === 'FRONTEND_TAPPED'
   }
 
-  static untapAllFrontendTappedCards(cards) {
-    cards.filter(card => CardComponent.isFrontendTapped(card))
-      .forEach((card) => CardComponent.toggleFrontendTapped(card))
+  static isUntapped(cardInstance) {
+    return !cardInstance.modifiers.tapped
+  }
+
+  static untapAllFrontendTappedCards(cardInstances) {
+    console.log(cardInstances)
+    cardInstances.filter(cardInstance => CardComponent.isFrontendTapped(cardInstance))
+      .forEach((cardInstance) => CardComponent.untap(cardInstance))
   }
 
   imageUrl () {

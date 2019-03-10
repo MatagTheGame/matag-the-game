@@ -41,15 +41,19 @@ export default class ClientEventsReducer {
         if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
           const cardId = CardComponent.extractCardId(action.cardId)
           const cardInstance = CardComponent.findCardInstanceById(newState.player.battlefield, cardId)
-          if (cardInstance.card.types.find(type => type === 'LAND')) {
-            CardComponent.toggleFrontendTapped(cardInstance)
+          if (cardInstance.card.types.includes('LAND')) {
+            if (CardComponent.isUntapped(cardInstance)) {
+              CardComponent.frontendTap(cardInstance)
+            } else if (CardComponent.isFrontendTapped(cardInstance)) {
+              CardComponent.untap(cardInstance)
+            }
           }
         }
         break
 
       case 'CONTINUE_CLICK':
-        stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
         CardComponent.untapAllFrontendTappedCards(newState.player.battlefield)
+        stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
         break
     }
 
