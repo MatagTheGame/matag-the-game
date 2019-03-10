@@ -51,6 +51,7 @@ public class CastService {
 
             } else {
                 cardInstance = activePlayer.getHand().extractCardById(cardId);
+                cardInstance.getModifiers().setSummoningSickness(true);
                 activePlayer.getBattlefield().addCard(cardInstance);
 
                 // FIXME Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.

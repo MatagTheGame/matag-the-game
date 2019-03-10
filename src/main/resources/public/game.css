@@ -25,6 +25,10 @@ body {
   z-index: 100;
 }
 
+.summoning-sickness {
+  filter: brightness(60%);
+}
+
 #modal-container {
   z-index: 4;
   position: absolute;

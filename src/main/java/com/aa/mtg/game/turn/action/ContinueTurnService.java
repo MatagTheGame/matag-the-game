@@ -29,6 +29,10 @@ public class ContinueTurnService {
                     .filter(cardInstance -> cardInstance.getModifiers().isTapped())
                     .forEach(cardInstance -> cardInstance.getModifiers().untap());
 
+            activePlayer.getBattlefield().getCards().stream()
+                    .filter(cardInstance -> cardInstance.getModifiers().isSummoningSickness())
+                    .forEach(cardInstance -> cardInstance.getModifiers().setSummoningSickness(false));
+
             gameStatusUpdaterService.sendUpdateActivePlayerBattlefield(gameStatus);
             turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
 
