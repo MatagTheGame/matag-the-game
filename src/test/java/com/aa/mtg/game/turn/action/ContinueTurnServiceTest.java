@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn;
+package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.Cards;
@@ -8,6 +8,7 @@ import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
+import com.aa.mtg.game.turn.Turn;
 import com.aa.mtg.game.turn.phases.Phase;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,18 +22,17 @@ import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
 
-public class TurnServiceTest {
-
+public class ContinueTurnServiceTest {
     private static final CardInstance A_CARD = new CardInstance(1, Cards.FOREST);
 
-    private TurnService turnService;
+    private ContinueTurnService continueTurnService;
     private EventSender eventSender;
 
     @Before
     public void setup() {
         eventSender = Mockito.mock(EventSender.class);
         GameStatusUpdaterService gameStatusUpdated = new GameStatusUpdaterService(eventSender);
-        turnService = new TurnService(gameStatusUpdated);
+        continueTurnService = new ContinueTurnService(gameStatusUpdated);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class TurnServiceTest {
         ReflectionTestUtils.setField(gameStatus, "turn", turn);
 
         // When
-        turnService.continueTurn(gameStatus);
+        continueTurnService.continueTurn(gameStatus);
 
         // Then
         Turn expectedTurn = new Turn();
@@ -89,7 +89,7 @@ public class TurnServiceTest {
         ReflectionTestUtils.setField(gameStatus, "turn", turn);
 
         // When
-        turnService.continueTurn(gameStatus);
+        continueTurnService.continueTurn(gameStatus);
 
         // Then
         Turn expectedTurn = new Turn();
@@ -121,7 +121,7 @@ public class TurnServiceTest {
         ReflectionTestUtils.setField(gameStatus, "turn", turn);
 
         // When
-        turnService.continueTurn(gameStatus);
+        continueTurnService.continueTurn(gameStatus);
 
         // Then
         Turn expectedTurn = new Turn();
@@ -153,7 +153,7 @@ public class TurnServiceTest {
         ReflectionTestUtils.setField(gameStatus, "turn", turn);
 
         // When
-        turnService.continueTurn(gameStatus);
+        continueTurnService.continueTurn(gameStatus);
 
         // Then
         Turn expectedTurn = new Turn();
@@ -184,7 +184,7 @@ public class TurnServiceTest {
         ReflectionTestUtils.setField(gameStatus, "turn", turn);
 
         // When
-        turnService.continueTurn(gameStatus);
+        continueTurnService.continueTurn(gameStatus);
 
         // Then
         BDDMockito.verify(eventSender).sendToPlayer(gameStatus.getPlayer1(),
@@ -220,7 +220,7 @@ public class TurnServiceTest {
         ReflectionTestUtils.setField(gameStatus, "turn", turn);
 
         // When
-        turnService.continueTurn(gameStatus);
+        continueTurnService.continueTurn(gameStatus);
 
         // Then
         Turn expectedTurn = new Turn();
@@ -229,6 +229,67 @@ public class TurnServiceTest {
         expectedTurn.setCurrentPhase(Phase.M1);
         expectedTurn.setCurrentPhaseActivePlayer("opponent-name");
         expectedTurn.addCardToCardsPlayedWithinTurn(A_CARD);
+        BDDMockito.verify(eventSender).sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_TURN", expectedTurn));
+    }
+
+    @Test
+    public void testContinueTurnET() {
+        // Given
+        GameStatus gameStatus = new GameStatus("game-id");
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+
+        Turn turn = new Turn();
+        turn.setTurnNumber(1);
+        turn.setCurrentTurnPlayer("player-name");
+        turn.setCurrentPhase(Phase.ET);
+        turn.setCurrentPhaseActivePlayer("player-name");
+
+        ReflectionTestUtils.setField(gameStatus, "turn", turn);
+
+        // When
+        continueTurnService.continueTurn(gameStatus);
+
+        // Then
+        Turn expectedTurn = new Turn();
+        expectedTurn.setTurnNumber(1);
+        expectedTurn.setCurrentTurnPlayer("player-name");
+        expectedTurn.setCurrentPhase(Phase.ET);
+        expectedTurn.setCurrentPhaseActivePlayer("opponent-name");
+        BDDMockito.verify(eventSender).sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_TURN", expectedTurn));
+    }
+
+    @Test
+    public void testContinueTurnETDiscardACard() {
+        // Given
+        GameStatus gameStatus = new GameStatus("game-id");
+        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
+        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+
+        IntStream.rangeClosed(1, 8).forEach(i -> gameStatus.getPlayer1().getHand().addCard(A_CARD));
+
+        Turn turn = new Turn();
+        turn.setTurnNumber(1);
+        turn.setCurrentTurnPlayer("player-name");
+        turn.setCurrentPhase(Phase.ET);
+        turn.setCurrentPhaseActivePlayer("player-name");
+
+        ReflectionTestUtils.setField(gameStatus, "turn", turn);
+
+        // When
+        continueTurnService.continueTurn(gameStatus);
+
+        // Then
+        Turn expectedTurn = new Turn();
+        expectedTurn.setTurnNumber(1);
+        expectedTurn.setCurrentTurnPlayer("player-name");
+        expectedTurn.setCurrentPhase(Phase.ET);
+        expectedTurn.setCurrentPhaseActivePlayer("player-name");
+        expectedTurn.setTriggeredAction("DISCARD_A_CARD");
         BDDMockito.verify(eventSender).sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                 new Event("UPDATE_TURN", expectedTurn));
@@ -251,7 +312,7 @@ public class TurnServiceTest {
         ReflectionTestUtils.setField(gameStatus, "turn", turn);
 
         // When
-        turnService.continueTurn(gameStatus);
+        continueTurnService.continueTurn(gameStatus);
 
         // Then
         Turn expectedTurn = new Turn();
@@ -263,7 +324,7 @@ public class TurnServiceTest {
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                 new Event("UPDATE_TURN", expectedTurn));
     }
-    
+
     private Library library() {
         List<CardInstance> libraryCards = IntStream.rangeClosed(1, 60)
                 .boxed()
