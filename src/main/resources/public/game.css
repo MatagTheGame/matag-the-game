@@ -25,6 +25,17 @@ body {
   z-index: 100;
 }
 
+.card.maximized {
+  z-index: 110;
+  width: 360px;
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  margin-left: -180px;
+  top: 50%;
+  margin-top: -250px;
+}
+
 .tapped {
   transform: rotateZ(90deg);
 }

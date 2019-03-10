@@ -27,7 +27,7 @@ class Battlefield extends PureComponent {
       .filter(cardInstance => cardInstance.card.types.includes('CREATURE'))
   }
 
-  getPlayerClickAction() {
+  playerCardClick() {
     if (this.props.type === 'player') {
       return this.props.playerCardClick
     } else {
@@ -37,8 +37,7 @@ class Battlefield extends PureComponent {
 
   cardItems(cards) {
     return cards.map((cardInstance) =>
-      <Card key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name}
-            tapped={cardInstance.modifiers.tapped} onclick={this.getPlayerClickAction()} />)
+      <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick()} />)
   }
 
   render() {

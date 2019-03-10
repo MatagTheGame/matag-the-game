@@ -20,7 +20,7 @@ class Graveyard extends PureComponent {
     return (
       <div id={this.getId()} className='graveyard'>
         {this.getGraveyard().map((cardInstance) =>
-          <Card key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name} />)}
+          <Card key={cardInstance.id} cardInstance={cardInstance} />)}
       </div>
     )
   }

@@ -17,7 +17,7 @@ class Hand extends PureComponent {
     }
   }
 
-  getPlayerCardClick () {
+  playerCardClick () {
     if (this.props.type === 'player') {
       return this.props.playerCardClick
     } else {
@@ -29,7 +29,7 @@ class Hand extends PureComponent {
     return (
       <div id={this.getId()} className='hand'>
         {this.getHand().map((cardInstance) =>
-          <Card key={cardInstance.id} id={cardInstance.id} name={cardInstance.card.name} onclick={this.getPlayerCardClick()} />)}
+          <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick()} />)}
       </div>
     )
   }
