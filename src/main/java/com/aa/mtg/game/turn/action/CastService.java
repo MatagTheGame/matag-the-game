@@ -1,6 +1,5 @@
 package com.aa.mtg.game.turn.action;
 
-import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CostUtils;
 import com.aa.mtg.cards.properties.Color;
@@ -9,7 +8,6 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
-import com.aa.mtg.game.turn.phases.Phase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +53,7 @@ public class CastService {
                 cardInstance = activePlayer.getHand().extractCardById(cardId);
                 activePlayer.getBattlefield().addCard(cardInstance);
 
-                // TODO do not tap all lands but only the one necessary to pay the cost above... this gets complicated
+                // FIXME Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
                 tappingLandIds.stream()
                         .map(tappingLandId -> activePlayer.getBattlefield().findCardById(tappingLandId))
                         .forEach(card -> card.getModifiers().tap());
