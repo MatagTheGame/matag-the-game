@@ -34,10 +34,13 @@ class Message extends PureComponent {
   render() {
     if (this.props.message.text) {
       return (
-        <div id='message'>
-          { this.renderCloseButton() }
-          { this.props.message.text }
-        </div>
+        <Fragment>
+          <div id='modal-container' />
+          <div id='message'>
+            { this.renderCloseButton() }
+            { this.props.message.text }
+          </div>
+        </Fragment>
       )
     } else {
       return <Fragment />

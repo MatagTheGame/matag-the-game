@@ -25,15 +25,27 @@ body {
   z-index: 100;
 }
 
-.card.maximized {
-  z-index: 110;
-  width: 360px;
-  height: 500px;
+#modal-container {
+  z-index: 4;
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: .6;
+}
+
+#maximized-card {
+  z-index: 5;
+  position: absolute;
+  width: 540px;
+  height: 750px;
   left: 50%;
-  margin-left: -180px;
   top: 50%;
-  margin-top: -250px;
+  margin-left: -270px;
+  margin-top: -375px;
+  background-repeat: no-repeat;
 }
 
 .tapped {
@@ -103,7 +115,7 @@ body {
 
 #message {
   position: absolute;
-  z-index: 3;
+  z-index: 5;
   top: 25%;
   left: 25%;
   width: 50%;
@@ -112,6 +124,7 @@ body {
   padding: 2em;
   border: 1px solid black;
   font-size: large;
+  opacity: 1;
 }
 
 #message-close {

@@ -1,13 +1,12 @@
 import React, {PureComponent} from 'react'
 import {get} from 'lodash'
 import CardUtils from './CardUtils'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
 
-export default class Card extends PureComponent {
+class Card extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      maximized: false
-    }
     this.onWheel= this.onWheel.bind(this);
   }
 
@@ -31,22 +30,14 @@ export default class Card extends PureComponent {
       classes += ' ' + this.props.cardInstance.modifiers.tapped.toLowerCase()
     }
 
-    if (this.state.maximized) {
-      classes += ' maximized'
-    }
-
     return classes
   }
 
   onWheel(e) {
-    if (e.deltaY > 0) {
-      if (this.state.maximized) {
-        this.setState({maximized: false})
-      }
-    }
-    if (e.deltaY < 0) {
-      if (!this.state.maximized) {
-        this.setState({maximized: true})
+    const name = CardUtils.normalizeCardName(this.name())
+    if (name !== 'card') {
+      if (e.deltaY < 0) {
+        this.props.maximizeCard(this.imageUrl())
       }
     }
   }
@@ -63,3 +54,26 @@ export default class Card extends PureComponent {
     }
   }
 }
+
+const maximizeCardEvent = (cardImage) => {
+  return {
+    type: 'MAXIMIZE_MINIMIZE_CARD',
+    value: {
+      cardImage: cardImage
+    }
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    message: get(state, 'message', {})
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    maximizeCard: bindActionCreators(maximizeCardEvent, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card)

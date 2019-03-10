@@ -11,6 +11,7 @@ import Graveyard from './Graveyard/Graveyard'
 import TurnPhases from './Turn/TurnPhases'
 import PlayerInfo from './PlayerInfo/PlayerInfo'
 import UserAction from './UserAction/UserAction'
+import MaximizedCard from './Card/MaximizedCard'
 
 
 class App extends PureComponent {
@@ -21,6 +22,7 @@ class App extends PureComponent {
   render() {
     return (
       <Fragment>
+        <MaximizedCard/>
         <UserAction />
         <StatusMessage />
         <Hand type='opponent'/>

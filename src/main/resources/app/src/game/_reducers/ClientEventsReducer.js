@@ -6,13 +6,18 @@ import CardUtils from '../Card/CardUtils'
 export default class ClientEventsReducer {
 
   static getEvents() {
-    return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'CONTINUE_CLICK']
+    return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'CONTINUE_CLICK', 'MAXIMIZE_MINIMIZE_CARD']
   }
 
-  static reduceEvent(state, newState, action) {
+  static reduceEvent(newState, action) {
     switch (action.type) {
       case '@@INIT':
         return {}
+
+      case 'MAXIMIZE_MINIMIZE_CARD':
+        console.log('MAXIMIZE_MINIMIZE_CARD: ', action)
+        newState.maximizedCard = action.value.cardImage
+        break;
 
       case 'PLAYER_HAND_CARD_CLICK':
         if (newState.turn.currentPhaseActivePlayer === newState.player.name) {

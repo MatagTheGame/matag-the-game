@@ -8,7 +8,7 @@ export default class ServerEventsReducer {
     return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN', 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_ACTIVE_PLAYER_GRAVEYARD']
   }
 
-  static reduceEvent(state, newState, action) {
+  static reduceEvent(newState, action) {
     let activePlayer
     switch (action.type) {
       case 'MESSAGE':
