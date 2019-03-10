@@ -18,7 +18,7 @@ class MaximizedCard extends PureComponent {
     if (this.props.maximizedCard) {
       return (
         <Fragment>
-          <div id='modal-container' />
+          <div id='modal-container' onWheel={this.onWheel} />
           <div id='maximized-card'
                   style={{backgroundImage: this.props.maximizedCard}}
                   onWheel={this.onWheel}/>
