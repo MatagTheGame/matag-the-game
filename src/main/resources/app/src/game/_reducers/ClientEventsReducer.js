@@ -28,7 +28,7 @@ export default class ClientEventsReducer {
           }
 
           if (Phase.isMainPhase(newState.turn.currentPhase)) {
-            if (cardInstance.card.types.find(type => type === 'LAND')) {
+            if (CardUtils.isOfType(cardInstance, 'LAND')) {
               stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardId: cardId})
 
             } else {
@@ -46,12 +46,14 @@ export default class ClientEventsReducer {
         if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
           const cardId = CardUtils.getCardId(action.cardId)
           const cardInstance = CardSearch.cards(newState.player.battlefield).withId(cardId)
-          if (cardInstance.card.types.includes('LAND')) {
-            if (CardUtils.isUntapped(cardInstance)) {
-              CardUtils.frontendTap(cardInstance)
-            } else if (CardUtils.isFrontendTapped(cardInstance)) {
-              CardUtils.untap(cardInstance)
+
+          if (newState.turn.currentPhase === 'DA') {
+            if (CardUtils.isOfType(cardInstance, 'CREATURE')) {
+              CardUtils.toggleFrontendTapped(cardInstance)
             }
+
+          } else if (CardUtils.isOfType(cardInstance, 'LAND')) {
+            CardUtils.toggleFrontendTapped(cardInstance)
           }
         }
         break
