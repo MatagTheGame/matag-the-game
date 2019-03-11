@@ -1,5 +1,8 @@
 package com.aa.mtg.cards;
 
+import com.aa.mtg.cards.properties.Type;
+import com.aa.mtg.game.message.MessageException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +27,10 @@ public class CardInstance {
         return id;
     }
 
+    public String getIdAndName() {
+        return id + " " + card.getName();
+    }
+
     public Card getCard() {
         return card;
     }
@@ -38,6 +45,27 @@ public class CardInstance {
             library.add(new CardInstance(cardInstance.getId(), Card.hiddenCard()));
         }
         return library;
+    }
+
+    public boolean isOfType(Type type) {
+        return card.getTypes().contains(type);
+    }
+
+    public void declareAsAttacker() {
+        if (!isOfType(Type.CREATURE)) {
+            throw new MessageException("Declared attacker " + getIdAndName() + " is not of type Creature");
+        }
+
+        if (modifiers.isTapped()) {
+            throw new MessageException(getIdAndName() + " is already tapped and cannot attack");
+        }
+
+        if (modifiers.isSummoningSickness()) {
+            throw new MessageException(getIdAndName() + " is has summoning sickness tapped and cannot attack");
+        }
+
+        modifiers.tap();
+        modifiers.setAttacking(true);
     }
 
     @Override

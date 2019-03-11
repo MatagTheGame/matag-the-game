@@ -21,17 +21,17 @@ public class ResolveService {
     public void resolve(GameStatus gameStatus, String triggeredAction, int cardId) {
         if (gameStatus.getTurn().getTriggeredAction().equals(triggeredAction)) {
             if ("DISCARD_A_CARD".equals(triggeredAction)) {
-                CardInstance cardInstance = gameStatus.getActivePlayer().getHand().extractCardById(cardId);
-                gameStatus.getActivePlayer().getGraveyard().addCard(cardInstance);
-                gameStatusUpdaterService.sendUpdateActivePlayerHand(gameStatus);
-                gameStatusUpdaterService.sendUpdateActivePlayerGraveyard(gameStatus);
+                CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardId);
+                gameStatus.getCurrentPlayer().getGraveyard().addCard(cardInstance);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
                 gameStatus.getTurn().setTriggeredAction(null);
             }
             continueTurnService.continueTurn(gameStatus);
 
         } else {
             String message = "Cannot resolve triggeredAction " + triggeredAction + " as current triggeredAction is " + gameStatus.getTurn().getTriggeredAction();
-            gameStatusUpdaterService.sendMessageToActivePlayer(gameStatus.getActivePlayer(), message);
+            gameStatusUpdaterService.sendMessageToCurrentPlayer(gameStatus.getCurrentPlayer(), message);
             throw new RuntimeException(message);
         }
     }

@@ -22,24 +22,29 @@ public class PlayLandService {
 
     public void playLand(GameStatus gameStatus, int cardId) {
         Turn turn = gameStatus.getTurn();
-        Player activePlayer = gameStatus.getActivePlayer();
+        Player currentPlayer = gameStatus.getCurrentPlayer();
 
         if (!turn.getCurrentPhase().isMainPhase()) {
-            gameStatusUpdaterService.sendMessageToActivePlayer(activePlayer, "You can only play lands during main phases.");
+            gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "You can only play lands during main phases.");
 
         } else if (turn.getCardsPlayedWithinTurn().stream()
                 .map(CardInstance::getCard)
                 .map(Card::getTypes)
                 .anyMatch(types -> types.contains(Type.LAND))) {
-            gameStatusUpdaterService.sendMessageToActivePlayer(activePlayer, "You already played a land this turn.");
+            gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "You already played a land this turn.");
 
         } else {
-            CardInstance cardInstance = activePlayer.getHand().extractCardById(cardId);
-            turn.addCardToCardsPlayedWithinTurn(cardInstance);
-            activePlayer.getBattlefield().addCard(cardInstance);
+            CardInstance cardInstance = currentPlayer.getHand().findCardById(cardId);
+            if (cardInstance.isOfType(Type.LAND)) {
+                cardInstance = currentPlayer.getHand().extractCardById(cardId);
+                turn.addCardToCardsPlayedWithinTurn(cardInstance);
+                currentPlayer.getBattlefield().addCard(cardInstance);
 
-            gameStatusUpdaterService.sendUpdateActivePlayerBattlefield(gameStatus);
-            gameStatusUpdaterService.sendUpdateActivePlayerHand(gameStatus);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
+            } else {
+                gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "Playing " + cardInstance.getIdAndName() + " as land.");
+            }
         }
     }
 

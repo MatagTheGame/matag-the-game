@@ -188,9 +188,9 @@ public class ContinueTurnServiceTest {
 
         // Then
         BDDMockito.verify(eventSender).sendToPlayer(gameStatus.getPlayer1(),
-                new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards()));
+                new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getCurrentPlayer().getHand().getCards()));
         BDDMockito.verify(eventSender).sendToPlayer(gameStatus.getPlayer2(),
-                new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().maskedHand()));
+                new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getCurrentPlayer().getHand().maskedHand()));
 
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(2);

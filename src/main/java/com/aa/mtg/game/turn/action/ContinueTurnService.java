@@ -21,44 +21,44 @@ public class ContinueTurnService {
 
     public void continueTurn(GameStatus gameStatus) {
         Turn turn = gameStatus.getTurn();
-        Player activePlayer = gameStatus.getActivePlayer();
-        Player inactivePlayer = gameStatus.getInactivePlayer();
+        Player currentPlayer = gameStatus.getCurrentPlayer();
+        Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
 
         if (turn.getCurrentPhase().equals(Phase.UT)) {
-            activePlayer.getBattlefield().getCards().stream()
+            currentPlayer.getBattlefield().getCards().stream()
                     .filter(cardInstance -> cardInstance.getModifiers().isTapped())
                     .forEach(cardInstance -> cardInstance.getModifiers().untap());
 
-            activePlayer.getBattlefield().getCards().stream()
+            currentPlayer.getBattlefield().getCards().stream()
                     .filter(cardInstance -> cardInstance.getModifiers().isSummoningSickness())
                     .forEach(cardInstance -> cardInstance.getModifiers().setSummoningSickness(false));
 
-            gameStatusUpdaterService.sendUpdateActivePlayerBattlefield(gameStatus);
+            gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
             turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
 
         } else if (turn.getCurrentPhase().equals(Phase.CL)) {
-            turn.cleanup(inactivePlayer.getName());
+            turn.cleanup(nonCurrentPlayer.getName());
 
-        } else if (turn.getCurrentPhase().equals(Phase.ET) && activePlayer.getHand().size() > 7) {
+        } else if (turn.getCurrentPhase().equals(Phase.ET) && currentPlayer.getHand().size() > 7) {
             gameStatus.getTurn().setTriggeredAction("DISCARD_A_CARD");
 
         } else {
-            if (turn.getCurrentPhaseActivePlayer().equals(activePlayer.getName())) {
+            if (turn.getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
                 if (turn.getCurrentPhase().equals(Phase.DR) && turn.getTurnNumber() > 1) {
-                    CardInstance cardInstance = activePlayer.getLibrary().draw();
-                    activePlayer.getHand().addCard(cardInstance);
-                    gameStatusUpdaterService.sendUpdateActivePlayerHand(gameStatus);
+                    CardInstance cardInstance = currentPlayer.getLibrary().draw();
+                    currentPlayer.getHand().addCard(cardInstance);
+                    gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
                 }
 
                 if (Phase.nonOpponentPhases().contains(turn.getCurrentPhase())) {
                     turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
                 } else {
-                    turn.setCurrentPhaseActivePlayer(inactivePlayer.getName());
+                    turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
                 }
 
             } else {
                 turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
-                turn.setCurrentPhaseActivePlayer(activePlayer.getName());
+                turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
             }
         }
 

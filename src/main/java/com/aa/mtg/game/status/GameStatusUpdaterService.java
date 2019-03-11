@@ -3,7 +3,6 @@ package com.aa.mtg.game.status;
 import com.aa.mtg.game.event.Event;
 import com.aa.mtg.game.event.EventSender;
 import com.aa.mtg.game.message.MessageEvent;
-import com.aa.mtg.game.player.Graveyard;
 import com.aa.mtg.game.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,26 +26,26 @@ public class GameStatusUpdaterService {
         );
     }
 
-    public void sendUpdateActivePlayerHand(GameStatus gameStatus) {
-        eventSender.sendToPlayer(gameStatus.getActivePlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().getCards()));
-        eventSender.sendToPlayer(gameStatus.getInactivePlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getActivePlayer().getHand().maskedHand()));
+    public void sendUpdateCurrentPlayerHand(GameStatus gameStatus) {
+        eventSender.sendToPlayer(gameStatus.getCurrentPlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getCurrentPlayer().getHand().getCards()));
+        eventSender.sendToPlayer(gameStatus.getNonCurrentPlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getCurrentPlayer().getHand().maskedHand()));
     }
 
-    public void sendUpdateActivePlayerBattlefield(GameStatus gameStatus) {
+    public void sendUpdateCurrentPlayerBattlefield(GameStatus gameStatus) {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getActivePlayer().getBattlefield().getCards())
+                new Event("UPDATE_ACTIVE_PLAYER_BATTLEFIELD", gameStatus.getCurrentPlayer().getBattlefield().getCards())
         );
     }
 
-    public void sendUpdateActivePlayerGraveyard(GameStatus gameStatus) {
+    public void sendUpdateCurrentPlayerGraveyard(GameStatus gameStatus) {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                new Event("UPDATE_ACTIVE_PLAYER_GRAVEYARD", gameStatus.getActivePlayer().getGraveyard().getCards())
+                new Event("UPDATE_ACTIVE_PLAYER_GRAVEYARD", gameStatus.getCurrentPlayer().getGraveyard().getCards())
         );
     }
 
-    public void sendMessageToActivePlayer(Player activePlayer, String message) {
-        eventSender.sendToPlayer(activePlayer, new Event("MESSAGE", new MessageEvent(message, true)));
+    public void sendMessageToCurrentPlayer(Player currentPlayer, String message) {
+        eventSender.sendToPlayer(currentPlayer, new Event("MESSAGE", new MessageEvent(message, true)));
     }
 }

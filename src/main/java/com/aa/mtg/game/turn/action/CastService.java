@@ -26,41 +26,41 @@ public class CastService {
 
     public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds) {
         Turn turn = gameStatus.getTurn();
-        Player activePlayer = gameStatus.getActivePlayer();
+        Player currentPlayer = gameStatus.getCurrentPlayer();
 
-        CardInstance cardInstance = activePlayer.getHand().findCardById(cardId);
+        CardInstance cardInstance = currentPlayer.getHand().findCardById(cardId);
         if (!turn.getCurrentPhase().isMainPhase() && !cardInstance.getCard().isInstantSpeed()) {
-            gameStatusUpdaterService.sendMessageToActivePlayer(activePlayer, "You can only play Instants during a NON main phases.");
+            gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "You can only play Instants during a NON main phases.");
 
         } else {
-            CardInstance cardToCast = activePlayer.getHand().findCardById(cardId);
+            CardInstance cardToCast = currentPlayer.getHand().findCardById(cardId);
 
             ArrayList<Color> paidCost = new ArrayList<>();
             for (int tappingLandId : tappingLandIds) {
-                CardInstance landToTap = activePlayer.getBattlefield().findCardById(tappingLandId);
-                if (!landToTap.getCard().getTypes().contains(Type.LAND)) {
-                    gameStatusUpdaterService.sendMessageToActivePlayer(activePlayer, "The card you are trying to tap for mana is not a land.");
+                CardInstance landToTap = currentPlayer.getBattlefield().findCardById(tappingLandId);
+                if (!landToTap.isOfType(Type.LAND)) {
+                    gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "The card you are trying to tap for mana is not a land.");
                 } else if (landToTap.getModifiers().isTapped()) {
-                    gameStatusUpdaterService.sendMessageToActivePlayer(activePlayer, "The land you are trying to tap is already tapped.");
+                    gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "The land you are trying to tap is already tapped.");
                 }
                 paidCost.add(landToTap.getCard().getColors().get(0));
             }
 
             if (!CostUtils.isCastingCostFulfilled(cardToCast.getCard(), paidCost)) {
-                gameStatusUpdaterService.sendMessageToActivePlayer(activePlayer, "There was an error while paying the cost for " + cardToCast.getCard().getName() + ".");
+                gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
 
             } else {
-                cardInstance = activePlayer.getHand().extractCardById(cardId);
+                cardInstance = currentPlayer.getHand().extractCardById(cardId);
                 cardInstance.getModifiers().setSummoningSickness(true);
-                activePlayer.getBattlefield().addCard(cardInstance);
+                currentPlayer.getBattlefield().addCard(cardInstance);
 
                 // FIXME Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
                 tappingLandIds.stream()
-                        .map(tappingLandId -> activePlayer.getBattlefield().findCardById(tappingLandId))
+                        .map(tappingLandId -> currentPlayer.getBattlefield().findCardById(tappingLandId))
                         .forEach(card -> card.getModifiers().tap());
 
-                gameStatusUpdaterService.sendUpdateActivePlayerBattlefield(gameStatus);
-                gameStatusUpdaterService.sendUpdateActivePlayerHand(gameStatus);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
             }
         }
     }
