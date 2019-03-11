@@ -5,7 +5,7 @@ import java.util.List;
 public class TurnRequest {
     private String action;
     private String triggeredAction;
-    private int cardId;
+    private List<Integer> cardIds;
     private List<Integer> tappingLandIds;
 
     public String getAction() {
@@ -24,12 +24,12 @@ public class TurnRequest {
         this.triggeredAction = triggeredAction;
     }
 
-    public int getCardId() {
-        return cardId;
+    public List<Integer> getCardIds() {
+        return cardIds;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
+    public void setCardIds(List<Integer> cardIds) {
+        this.cardIds = cardIds;
     }
 
     public List<Integer> getTappingLandIds() {
@@ -45,7 +45,7 @@ public class TurnRequest {
         return "TurnRequest{" +
                 "action='" + action + '\'' +
                 ", triggeredAction='" + triggeredAction + '\'' +
-                ", cardId=" + cardId +
+                ", cardIds=" + cardIds +
                 ", tappingLandIds=" + tappingLandIds +
                 '}';
     }

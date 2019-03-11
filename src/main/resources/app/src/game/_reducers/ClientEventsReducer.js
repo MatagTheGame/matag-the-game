@@ -24,18 +24,18 @@ export default class ClientEventsReducer {
           const cardId = CardUtils.getCardId(action.cardId)
           const cardInstance = CardSearch.cards(newState.player.hand).withId(cardId)
           if (newState.turn.triggeredAction === 'DISCARD_A_CARD') {
-            stompClient.sendEvent('turn', {action: 'RESOLVE', triggeredAction: 'DISCARD_A_CARD', cardId: cardId})
+            stompClient.sendEvent('turn', {action: 'RESOLVE', triggeredAction: 'DISCARD_A_CARD', cardIds: [cardId]})
           }
 
           if (Phase.isMainPhase(newState.turn.currentPhase)) {
             if (CardUtils.isOfType(cardInstance, 'LAND')) {
-              stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardId: cardId})
+              stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardIds: [cardId]})
 
             } else {
               const currentMana = CostUtils.currentMana(newState.player.battlefield)
               const currentManaIds = CostUtils.currentManaCardIds(newState.player.battlefield)
               if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentMana)) {
-                stompClient.sendEvent('turn', {action: 'CAST', cardId: cardId, tappingLandIds: currentManaIds})
+                stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], tappingLandIds: currentManaIds})
               }
             }
           }
@@ -59,10 +59,26 @@ export default class ClientEventsReducer {
         break
 
       case 'CONTINUE_CLICK':
-        CardSearch.cards(newState.player.battlefield)
-          .frontEndTapped()
-          .forEach((cardInstance) => CardUtils.untap(cardInstance))
-        stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+        if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
+          if (newState.turn.currentPhase === 'DA') {
+            const attackingCreaturesIds = CardSearch.cards(newState.player.battlefield)
+              .frontEndTapped()
+              .ofType('CREATURE')
+              .map(cardInstance => cardInstance.id)
+
+            if (attackingCreaturesIds.length > 0) {
+              stompClient.sendEvent('turn', {action: 'DECLARE_ATTACKERS', cardIds: attackingCreaturesIds})
+              break
+            }
+          }
+
+          CardSearch.cards(newState.player.battlefield)
+            .frontEndTapped()
+            .forEach((cardInstance) => CardUtils.untap(cardInstance))
+
+          stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+        }
+
         break
     }
 

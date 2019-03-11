@@ -3,6 +3,7 @@ package com.aa.mtg.game.turn;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.CastService;
 import com.aa.mtg.game.turn.action.ContinueTurnService;
+import com.aa.mtg.game.turn.action.DeclareAttackerService;
 import com.aa.mtg.game.turn.action.PlayLandService;
 import com.aa.mtg.game.turn.action.ResolveService;
 import org.springframework.stereotype.Service;
@@ -16,12 +17,14 @@ public class TurnService {
     private final PlayLandService playLandService;
     private final CastService castService;
     private final ResolveService resolveService;
+    private final DeclareAttackerService declareAttackerService;
 
-    public TurnService(ContinueTurnService continueTurnService, PlayLandService playLandService, CastService castService, ResolveService resolveService) {
+    public TurnService(ContinueTurnService continueTurnService, PlayLandService playLandService, CastService castService, ResolveService resolveService, DeclareAttackerService declareAttackerService) {
         this.continueTurnService = continueTurnService;
         this.playLandService = playLandService;
         this.castService = castService;
         this.resolveService = resolveService;
+        this.declareAttackerService = declareAttackerService;
     }
 
     void continueTurn(GameStatus gameStatus) {
@@ -38,5 +41,9 @@ public class TurnService {
 
     void resolve(GameStatus gameStatus, String triggeredAction, int cardId) {
         resolveService.resolve(gameStatus, triggeredAction, cardId);
+    }
+
+    void declareAttackers(GameStatus gameStatus, List<Integer> cardIds) {
+        declareAttackerService.declareAttackers(gameStatus, cardIds);
     }
 }

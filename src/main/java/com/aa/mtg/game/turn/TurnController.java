@@ -32,11 +32,13 @@ public class TurnController {
         if ("CONTINUE_TURN".equals(request.getAction())) {
             turnService.continueTurn(gameStatus);
         } else if ("PLAY_LAND".equals(request.getAction())) {
-            turnService.playLand(gameStatus, request.getCardId());
+            turnService.playLand(gameStatus, request.getCardIds().get(0));
         } else if ("CAST".equals(request.getAction())) {
-            turnService.cast(gameStatus, request.getCardId(), request.getTappingLandIds());
+            turnService.cast(gameStatus, request.getCardIds().get(0), request.getTappingLandIds());
         } else if ("RESOLVE".equals(request.getAction())) {
-            turnService.resolve(gameStatus, request.getTriggeredAction(), request.getCardId());
+            turnService.resolve(gameStatus, request.getTriggeredAction(), request.getCardIds().get(0));
+        } else if ("DECLARE_ATTACKERS".equals(request.getAction())) {
+            turnService.declareAttackers(gameStatus, request.getCardIds());
         }
     }
 
