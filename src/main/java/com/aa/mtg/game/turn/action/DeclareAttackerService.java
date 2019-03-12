@@ -15,10 +15,12 @@ import java.util.List;
 public class DeclareAttackerService {
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
+    private final ContinueTurnService continueTurnService;
 
     @Autowired
-    public DeclareAttackerService(GameStatusUpdaterService gameStatusUpdaterService) {
+    public DeclareAttackerService(GameStatusUpdaterService gameStatusUpdaterService, ContinueTurnService continueTurnService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
+        this.continueTurnService = continueTurnService;
     }
 
     public void declareAttackers(GameStatus gameStatus, List<Integer> cardIds) {
@@ -36,9 +38,6 @@ public class DeclareAttackerService {
         }
 
         gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
-
-        turn.setCurrentPhase(Phase.DB);
-        turn.setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
-        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
+        continueTurnService.continueTurn(gameStatus);
     }
 }

@@ -36,6 +36,30 @@ public class ContinueTurnService {
             gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
             turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
 
+        } else if (turn.getCurrentPhase().equals(Phase.DR)) {
+            if (turn.getTurnNumber() > 1) {
+                CardInstance cardInstance = currentPlayer.getLibrary().draw();
+                currentPlayer.getHand().addCard(cardInstance);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
+            }
+            turn.setCurrentPhase(Phase.M1);
+            turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+
+        } else if (turn.getCurrentPhase().equals(Phase.DA)) {
+            turn.setCurrentPhase(Phase.DB);
+            turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
+
+        } else if (turn.getCurrentPhase().equals(Phase.EC)) {
+            turn.setCurrentPhase(Phase.M2);
+            turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+
+            // TODO deal damage
+
+            currentPlayer.getBattlefield().getCards().stream()
+                    .filter(cardInstance -> cardInstance.getModifiers().isAttacking())
+                    .forEach(cardInstance -> cardInstance.getModifiers().setAttacking(false));
+            gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+
         } else if (turn.getCurrentPhase().equals(Phase.CL)) {
             turn.cleanup(nonCurrentPlayer.getName());
 
@@ -43,13 +67,8 @@ public class ContinueTurnService {
             gameStatus.getTurn().setTriggeredAction("DISCARD_A_CARD");
 
         } else {
+            // TODO possibly this code will be dropped when all phases will be implemented
             if (turn.getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
-                if (turn.getCurrentPhase().equals(Phase.DR) && turn.getTurnNumber() > 1) {
-                    CardInstance cardInstance = currentPlayer.getLibrary().draw();
-                    currentPlayer.getHand().addCard(cardInstance);
-                    gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
-                }
-
                 if (Phase.nonOpponentPhases().contains(turn.getCurrentPhase())) {
                     turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
                 } else {

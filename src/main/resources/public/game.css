@@ -29,6 +29,10 @@ body {
   filter: brightness(60%);
 }
 
+.attacking {
+  margin-bottom: 100px;
+}
+
 #modal-container {
   z-index: 4;
   position: absolute;
@@ -157,8 +161,9 @@ body {
 }
 
 .battlefield-area {
-  justify-content: center;
   display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 #player-graveyard {
