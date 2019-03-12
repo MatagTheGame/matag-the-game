@@ -10,6 +10,14 @@ export default class PlayerUtils {
     return state.turn.currentPhaseActivePlayer === state.player.name
   }
 
+  static getPlayerByName(state, playerName) {
+    if (state.player.name === playerName) {
+      return state.player
+    } else {
+      return state.opponent
+    }
+  }
+
   static getActivePlayer(state) {
     if (PlayerUtils.isCurrentPlayerTurn(state)) {
       return state.player

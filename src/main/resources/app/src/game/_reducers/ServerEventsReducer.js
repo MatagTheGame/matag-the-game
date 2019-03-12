@@ -3,11 +3,12 @@ import PlayerUtils from '../PlayerInfo/PlayerUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {
-    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN', 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_ACTIVE_PLAYER_GRAVEYARD']
+    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN',
+      'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_ACTIVE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE']
   }
 
   static reduceEvent(newState, action) {
-    let activePlayer
+    let activePlayer, player
     switch (action.type) {
       case 'MESSAGE':
         newState.message = action.value
@@ -52,6 +53,10 @@ export default class ServerEventsReducer {
         activePlayer = PlayerUtils.getActivePlayer(newState)
         activePlayer.graveyard = action.value
         break
+
+      case 'UPDATE_PLAYER_LIFE':
+        player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
+        player.life = action.value.life
     }
 
     return newState

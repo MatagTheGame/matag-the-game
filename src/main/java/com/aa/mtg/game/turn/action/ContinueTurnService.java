@@ -5,6 +5,7 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
+import com.aa.mtg.game.turn.combat.CombatService;
 import com.aa.mtg.game.turn.phases.Phase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,12 @@ import org.springframework.stereotype.Service;
 public class ContinueTurnService {
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
+    private final CombatService combatService;
 
     @Autowired
-    public ContinueTurnService(GameStatusUpdaterService gameStatusUpdaterService) {
+    public ContinueTurnService(GameStatusUpdaterService gameStatusUpdaterService, CombatService combatService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
+        this.combatService = combatService;
     }
 
     public void continueTurn(GameStatus gameStatus) {
@@ -25,13 +28,8 @@ public class ContinueTurnService {
         Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
 
         if (turn.getCurrentPhase().equals(Phase.UT)) {
-            currentPlayer.getBattlefield().getCards().stream()
-                    .filter(cardInstance -> cardInstance.getModifiers().isTapped())
-                    .forEach(cardInstance -> cardInstance.getModifiers().untap());
-
-            currentPlayer.getBattlefield().getCards().stream()
-                    .filter(cardInstance -> cardInstance.getModifiers().isSummoningSickness())
-                    .forEach(cardInstance -> cardInstance.getModifiers().setSummoningSickness(false));
+            currentPlayer.getBattlefield().untap();
+            currentPlayer.getBattlefield().removeSummoningSickness();
 
             gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
             turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
@@ -49,15 +47,17 @@ public class ContinueTurnService {
             turn.setCurrentPhase(Phase.DB);
             turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
 
+        } else if (turn.getCurrentPhase().equals(Phase.CD)) {
+            combatService.dealCombatDamage(gameStatus);
+
+            turn.setCurrentPhase(Phase.EC);
+            turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+
         } else if (turn.getCurrentPhase().equals(Phase.EC)) {
             turn.setCurrentPhase(Phase.M2);
             turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
 
-            // TODO deal damage
-
-            currentPlayer.getBattlefield().getCards().stream()
-                    .filter(cardInstance -> cardInstance.getModifiers().isAttacking())
-                    .forEach(cardInstance -> cardInstance.getModifiers().setAttacking(false));
+            currentPlayer.getBattlefield().removeAttacking();
             gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
 
         } else if (turn.getCurrentPhase().equals(Phase.CL)) {

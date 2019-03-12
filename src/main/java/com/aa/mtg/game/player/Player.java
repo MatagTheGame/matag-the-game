@@ -6,7 +6,7 @@ public class Player {
 
     private final String sessionId;
     private final String name;
-    private final int life;
+    private int life;
     private final Library library;
     private final Hand hand;
     private final Battlefield battlefield;
@@ -23,6 +23,14 @@ public class Player {
 
         IntStream.rangeClosed(1, 7)
                 .forEach(i -> this.hand.addCard(this.library.draw()));
+    }
+
+    public void increaseLife(int life) {
+        this.life += life;
+    }
+
+    public void decreaseLife(int life) {
+        this.life -= life;
     }
 
     public String getSessionId() {

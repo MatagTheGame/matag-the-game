@@ -9,6 +9,7 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
+import com.aa.mtg.game.turn.combat.CombatService;
 import com.aa.mtg.game.turn.phases.Phase;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +32,10 @@ public class ContinueTurnServiceTest {
     @Before
     public void setup() {
         eventSender = Mockito.mock(EventSender.class);
-        GameStatusUpdaterService gameStatusUpdated = new GameStatusUpdaterService(eventSender);
-        continueTurnService = new ContinueTurnService(gameStatusUpdated);
+        continueTurnService = new ContinueTurnService(
+                new GameStatusUpdaterService(eventSender),
+                new CombatService(new GameStatusUpdaterService(eventSender))
+        );
     }
 
     @Test
