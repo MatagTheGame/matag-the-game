@@ -38,7 +38,7 @@ public class CombatService {
             nonCurrentPlayer.decreaseLife(totalDamage);
             gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, nonCurrentPlayer);
 
-            if (nonCurrentPlayer.getLife() < 0) {
+            if (nonCurrentPlayer.getLife() <= 0) {
                 gameStatus.getTurn().setWinner(currentPlayer.getName());
             }
         }

@@ -35,6 +35,8 @@ export default class ServerEventsReducer {
 
         if (!newState.turn.winner && PlayerUtils.isCurrentPlayerActive(newState) && !PlayerUtils.canPlayerPerformAnyAction(newState)) {
           stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+        } else if (newState.turn.winner) {
+          newState.message = {text: newState.turn.winner + ' Win!', closable: true}
         }
 
         break

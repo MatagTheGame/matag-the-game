@@ -11,7 +11,7 @@ class UserAction extends PureComponent {
 
   handleContinueKey(event) {
     if (event.key === ' ') {
-      if (!this.props.winner && this.isPhaseActiveForPlayer()) {
+      if (this.isContinueEnabled()) {
         this.props.continueClick()
       }
     }
@@ -29,10 +29,14 @@ class UserAction extends PureComponent {
     return this.props.turn.currentPhaseActivePlayer === this.props.currentPlayerName
   }
 
+  isContinueEnabled() {
+    return !this.props.winner && this.isPhaseActiveForPlayer()
+  }
+
   render() {
     return (
       <div id='user-actions'>
-        <button title="Press SPACE to continue" id='continue-button' type='button' disabled={!this.isPhaseActiveForPlayer()} onClick={this.props.continueClick}>-></button>
+        <button title="Press SPACE to continue" id='continue-button' type='button' disabled={!this.isContinueEnabled()} onClick={this.props.continueClick}>-></button>
         <button title="Press L to see game logs" id='logs-button' type='button'>=</button>
       </div>
 
