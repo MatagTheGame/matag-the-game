@@ -33,7 +33,7 @@ export default class ServerEventsReducer {
       case 'UPDATE_TURN':
         newState.turn = action.value
 
-        if (PlayerUtils.isCurrentPlayerActive(newState) && !PlayerUtils.canPlayerPerformAnyAction(newState)) {
+        if (!newState.turn.winner && PlayerUtils.isCurrentPlayerActive(newState) && !PlayerUtils.canPlayerPerformAnyAction(newState)) {
           stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
         }
 

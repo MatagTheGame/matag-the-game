@@ -28,6 +28,9 @@ public class TurnController {
         SecurityToken token = extractSecurityToken(headerAccessor);
         LOGGER.info("Turn request received for sessionId '{}', gameId '{}': {}", token.getSessionId(), token.getGameId(), request);
         GameStatus gameStatus = gameStatusRepository.get(token.getGameId(), token.getSessionId());
+        if (gameStatus.getTurn().isEnded()) {
+            throw new RuntimeException("Game is ended, no more actions are permitted.");
+        }
 
         if ("CONTINUE_TURN".equals(request.getAction())) {
             turnService.continueTurn(gameStatus);

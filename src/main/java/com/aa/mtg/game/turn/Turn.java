@@ -1,7 +1,6 @@
 package com.aa.mtg.game.turn;
 
 import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.turn.phases.Phase;
 
 import java.util.ArrayList;
@@ -15,6 +14,7 @@ public class Turn {
     private String currentPhaseActivePlayer;
     private List<CardInstance> cardsPlayedWithinTurn = new ArrayList<>();
     private String triggeredAction;
+    private String winner;
 
     public void init(String playerName) {
         this.turnNumber = 1;
@@ -79,6 +79,18 @@ public class Turn {
         this.triggeredAction = triggeredAction;
     }
 
+    public void setWinner(String winner) {
+        this.winner = winner;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public boolean isEnded() {
+        return winner != null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,12 +101,13 @@ public class Turn {
                 currentPhase == turn.currentPhase &&
                 Objects.equals(currentPhaseActivePlayer, turn.currentPhaseActivePlayer) &&
                 Objects.equals(cardsPlayedWithinTurn, turn.cardsPlayedWithinTurn) &&
-                Objects.equals(triggeredAction, turn.triggeredAction);
+                Objects.equals(triggeredAction, turn.triggeredAction) &&
+                Objects.equals(winner, turn.winner);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(turnNumber, currentTurnPlayer, currentPhase, currentPhaseActivePlayer, cardsPlayedWithinTurn, triggeredAction);
+        return Objects.hash(turnNumber, currentTurnPlayer, currentPhase, currentPhaseActivePlayer, cardsPlayedWithinTurn, triggeredAction, winner);
     }
 
     @Override
@@ -106,6 +119,7 @@ public class Turn {
                 ", currentPhaseActivePlayer='" + currentPhaseActivePlayer + '\'' +
                 ", cardsPlayedWithinTurn=" + cardsPlayedWithinTurn +
                 ", triggeredAction='" + triggeredAction + '\'' +
+                ", winner='" + winner + '\'' +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn.combat;
 
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,10 @@ public class CombatService {
     }
 
     public void dealCombatDamage(GameStatus gameStatus) {
-        List<CardInstance> attackingCreatures = gameStatus.getCurrentPlayer().getBattlefield().getAttackingCreatures();
+        Player currentPlayer = gameStatus.getCurrentPlayer();
+        Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
+
+        List<CardInstance> attackingCreatures = currentPlayer.getBattlefield().getAttackingCreatures();
 
         if (!attackingCreatures.isEmpty()) {
             // TODO block creatures
@@ -31,9 +35,12 @@ public class CombatService {
                     .mapToInt(Integer::intValue)
                     .sum();
 
-            gameStatus.getNonCurrentPlayer().decreaseLife(totalDamage);
+            nonCurrentPlayer.decreaseLife(totalDamage);
+            gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, nonCurrentPlayer);
 
-            gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, gameStatus.getNonCurrentPlayer());
+            if (nonCurrentPlayer.getLife() < 0) {
+                gameStatus.getTurn().setWinner(currentPlayer.getName());
+            }
         }
     }
 

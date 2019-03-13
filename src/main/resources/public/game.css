@@ -253,6 +253,10 @@ body {
   color: grey;
 }
 
+.player-info.winner, .player-info.inactive-player.winner {
+  color: green;
+}
+
 #player-info:after, #opponent-info:after {
   content: '';
   position: absolute;
@@ -264,6 +268,10 @@ body {
   bottom: 40px;
   left: 0;
   transform: rotateX(-60deg) translateY(20px);
+}
+
+.non-positive {
+  color: red;
 }
 
 #turn-phases {

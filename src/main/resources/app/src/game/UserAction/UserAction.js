@@ -11,7 +11,7 @@ class UserAction extends PureComponent {
 
   handleContinueKey(event) {
     if (event.key === ' ') {
-      if (this.isPhaseActiveForPlayer()) {
+      if (!this.props.winner && this.isPhaseActiveForPlayer()) {
         this.props.continueClick()
       }
     }
@@ -50,7 +50,8 @@ const createContinueClickAction = () => {
 const mapStateToProps = state => {
   return {
     turn: get(state, 'turn', {}),
-    currentPlayerName: get(state, 'player.name', '')
+    currentPlayerName: get(state, 'player.name', ''),
+    winner: get(state, 'turn.winner')
   }
 }
 
