@@ -41,11 +41,14 @@ public class ContinueTurnService {
                 gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
             }
             turn.setCurrentPhase(Phase.M1);
-            turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
 
         } else if (turn.getCurrentPhase().equals(Phase.DA)) {
-            turn.setCurrentPhase(Phase.DB);
-            turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
+            if (!gameStatus.getCurrentPlayer().getBattlefield().getAttackingCreatures().isEmpty()) {
+                turn.setCurrentPhase(Phase.DB);
+                turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
+            } else {
+                turn.setCurrentPhase(Phase.M2);
+            }
 
         } else if (turn.getCurrentPhase().equals(Phase.CD)) {
             combatService.dealCombatDamage(gameStatus);

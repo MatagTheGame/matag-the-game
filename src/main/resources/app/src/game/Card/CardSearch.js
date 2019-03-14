@@ -17,6 +17,11 @@ export default class CardSearch extends Array {
     return new CardSearch(...cards)
   }
 
+  untapped() {
+    const cards = this.filter(cardInstance => !cardInstance.modifiers.tapped)
+    return new CardSearch(...cards)
+  }
+
   withoutSummoningSickness() {
     const cards = this.filter(cardInstance => !cardInstance.modifiers.summoningSickness)
     return new CardSearch(...cards)

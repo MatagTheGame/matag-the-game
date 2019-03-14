@@ -42,17 +42,17 @@ export default class ServerEventsReducer {
         break
 
       case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':
-        activePlayer = PlayerUtils.getActivePlayer(newState)
+        activePlayer = PlayerUtils.getCurrentPlayer(newState)
         activePlayer.battlefield = action.value
         break
 
       case 'UPDATE_ACTIVE_PLAYER_HAND':
-        activePlayer = PlayerUtils.getActivePlayer(newState)
+        activePlayer = PlayerUtils.getCurrentPlayer(newState)
         activePlayer.hand = action.value
         break
 
       case 'UPDATE_ACTIVE_PLAYER_GRAVEYARD':
-        activePlayer = PlayerUtils.getActivePlayer(newState)
+        activePlayer = PlayerUtils.getCurrentPlayer(newState)
         activePlayer.graveyard = action.value
         break
 

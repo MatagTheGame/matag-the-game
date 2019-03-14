@@ -58,6 +58,8 @@ body {
 
 .tapped {
   transform: rotateZ(90deg);
+  margin-right: 40px;
+  margin-left: 40px;
 }
 
 .frontend_tapped {

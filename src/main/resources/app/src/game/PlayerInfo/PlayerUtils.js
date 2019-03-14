@@ -18,27 +18,40 @@ export default class PlayerUtils {
     }
   }
 
+  static getCurrentPlayer(state) {
+    return PlayerUtils.getPlayerByName(state, state.turn.currentTurnPlayer)
+  }
+
   static getActivePlayer(state) {
-    if (PlayerUtils.isCurrentPlayerTurn(state)) {
-      return state.player
-    } else {
-      return state.opponent
-    }
+    return PlayerUtils.getPlayerByName(state, state.turn.currentPhaseActivePlayer)
   }
 
   static isPlayerAbleToAttack(state) {
-    const battlefield = PlayerUtils.getActivePlayer(state).battlefield
+    const battlefield = PlayerUtils.getCurrentPlayer(state).battlefield
     return CardSearch.cards(battlefield)
       .ofType('CREATURE')
       .withoutSummoningSickness()
+      .untapped()
+      .isNotEmpty()
+  }
+
+  static isPlayerAbleToBlock(state) {
+    const battlefield = PlayerUtils.getActivePlayer(state).battlefield
+    return CardSearch.cards(battlefield)
+      .ofType('CREATURE')
+      .untapped()
       .isNotEmpty()
   }
 
   static canPlayerPerformAnyAction(state) {
     if (!PlayerUtils.isCurrentPlayerTurn(state)) {
-      // TODO until instants and abilities are implemented opponent cannot do anything during player phases
-      state.statusMessage = "Wait for opponent to perform its action..."
-      return false
+      if (state.turn.currentPhase === 'DB' && PlayerUtils.isPlayerAbleToBlock(state)) {
+        state.statusMessage = "Choose creatures you want to block with."
+        return true
+      } else {
+        state.statusMessage = "Wait for opponent to perform its action..."
+        return false
+      }
 
     } else {
       if (Phase.isMainPhase(state.turn.currentPhase)) {
