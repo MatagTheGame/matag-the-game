@@ -19,6 +19,11 @@ export default class CardSearch extends Array {
     return new CardSearch(...cards)
   }
 
+  frontEndBlocking() {
+    const cards = this.filter(cardInstance => CardUtils.isFrontendBlocking(cardInstance))
+    return new CardSearch(...cards)
+  }
+
   untapped() {
     const cards = this.filter(cardInstance => CardUtils.isUntapped(cardInstance))
     return new CardSearch(...cards)

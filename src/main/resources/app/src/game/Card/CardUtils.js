@@ -49,6 +49,10 @@ export default class CardUtils {
     cardInstance.modifiers.blocking =  undefined
   }
 
+  static isBlocking(cardInstance) {
+    return cardInstance.modifiers.blocking === true
+  }
+
   static toggleFrontendBlocking(cardInstance) {
     if (CardUtils.isNotFrontendBlocking(cardInstance)) {
       CardUtils.setFrontendBlocking(cardInstance)

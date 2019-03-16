@@ -31,4 +31,10 @@ public class Battlefield extends CardListComponent {
                 .filter(cardInstance -> cardInstance.getModifiers().isAttacking())
                 .collect(Collectors.toList());
     }
+
+    public List<CardInstance> getBlockingCreatures() {
+        return cards.stream()
+                .filter(cardInstance -> cardInstance.getModifiers().isBlocking())
+                .collect(Collectors.toList());
+    }
 }

@@ -1,13 +1,16 @@
 package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.modifiers.TappedModifiers;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
-import java.util.Objects;
-
+@ToString
+@EqualsAndHashCode
 public class CardModifiers {
     private TappedModifiers tapped;
     private boolean summoningSickness;
     private boolean attacking;
+    private boolean blocking;
 
     public TappedModifiers getTapped() {
         return tapped;
@@ -23,6 +26,10 @@ public class CardModifiers {
 
     public boolean isAttacking() {
         return attacking;
+    }
+
+    public boolean isBlocking() {
+        return blocking;
     }
 
     public void tap() {
@@ -41,27 +48,7 @@ public class CardModifiers {
         this.attacking = attacking;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CardModifiers that = (CardModifiers) o;
-        return summoningSickness == that.summoningSickness &&
-                attacking == that.attacking &&
-                tapped == that.tapped;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(tapped, summoningSickness, attacking);
-    }
-
-    @Override
-    public String toString() {
-        return "CardModifiers{" +
-                "tapped=" + tapped +
-                ", summoningSickness=" + summoningSickness +
-                ", attacking=" + attacking +
-                '}';
+    public void setBlocking(boolean blocking) {
+        this.blocking = blocking;
     }
 }

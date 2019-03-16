@@ -50,6 +50,10 @@ public class ContinueTurnService {
                 turn.setCurrentPhase(Phase.M2);
             }
 
+        } else if (turn.getCurrentPhase().equals(Phase.DB)) {
+            turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+            turn.setCurrentPhase(Phase.FS);
+
         } else if (turn.getCurrentPhase().equals(Phase.CD)) {
             combatService.dealCombatDamage(gameStatus);
 

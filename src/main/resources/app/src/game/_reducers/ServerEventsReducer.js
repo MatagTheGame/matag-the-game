@@ -4,11 +4,12 @@ import PlayerUtils from '../PlayerInfo/PlayerUtils'
 export default class ServerEventsReducer {
   static getEvents() {
     return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN',
-      'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_ACTIVE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE']
+      'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_INACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_ACTIVE_PLAYER_GRAVEYARD',
+      'UPDATE_PLAYER_LIFE']
   }
 
   static reduceEvent(newState, action) {
-    let activePlayer, player
+    let currentPlayer, nonCurrentPlayer, player
     switch (action.type) {
       case 'MESSAGE':
         newState.message = action.value
@@ -42,18 +43,24 @@ export default class ServerEventsReducer {
         break
 
       case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':
-        activePlayer = PlayerUtils.getCurrentPlayer(newState)
-        activePlayer.battlefield = action.value
+        currentPlayer = PlayerUtils.getCurrentPlayer(newState)
+        currentPlayer.battlefield = action.value
+        break
+
+
+      case 'UPDATE_INACTIVE_PLAYER_BATTLEFIELD':
+        nonCurrentPlayer = PlayerUtils.getNonCurrentPlayer(newState)
+        nonCurrentPlayer.battlefield = action.value
         break
 
       case 'UPDATE_ACTIVE_PLAYER_HAND':
-        activePlayer = PlayerUtils.getCurrentPlayer(newState)
-        activePlayer.hand = action.value
+        currentPlayer = PlayerUtils.getCurrentPlayer(newState)
+        currentPlayer.hand = action.value
         break
 
       case 'UPDATE_ACTIVE_PLAYER_GRAVEYARD':
-        activePlayer = PlayerUtils.getCurrentPlayer(newState)
-        activePlayer.graveyard = action.value
+        currentPlayer = PlayerUtils.getCurrentPlayer(newState)
+        currentPlayer.graveyard = action.value
         break
 
       case 'UPDATE_PLAYER_LIFE':

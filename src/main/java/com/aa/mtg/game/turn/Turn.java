@@ -2,11 +2,14 @@ package com.aa.mtg.game.turn;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.turn.phases.Phase;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+@ToString
+@EqualsAndHashCode
 public class Turn {
     private int turnNumber;
     private String currentTurnPlayer;
@@ -89,37 +92,5 @@ public class Turn {
 
     public boolean isEnded() {
         return winner != null;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Turn turn = (Turn) o;
-        return turnNumber == turn.turnNumber &&
-                Objects.equals(currentTurnPlayer, turn.currentTurnPlayer) &&
-                currentPhase == turn.currentPhase &&
-                Objects.equals(currentPhaseActivePlayer, turn.currentPhaseActivePlayer) &&
-                Objects.equals(cardsPlayedWithinTurn, turn.cardsPlayedWithinTurn) &&
-                Objects.equals(triggeredAction, turn.triggeredAction) &&
-                Objects.equals(winner, turn.winner);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(turnNumber, currentTurnPlayer, currentPhase, currentPhaseActivePlayer, cardsPlayedWithinTurn, triggeredAction, winner);
-    }
-
-    @Override
-    public String toString() {
-        return "Turn{" +
-                "turnNumber=" + turnNumber +
-                ", currentTurnPlayer='" + currentTurnPlayer + '\'' +
-                ", currentPhase=" + currentPhase +
-                ", currentPhaseActivePlayer='" + currentPhaseActivePlayer + '\'' +
-                ", cardsPlayedWithinTurn=" + cardsPlayedWithinTurn +
-                ", triggeredAction='" + triggeredAction + '\'' +
-                ", winner='" + winner + '\'' +
-                '}';
     }
 }

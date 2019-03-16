@@ -42,6 +42,8 @@ public class TurnController {
             turnService.resolve(gameStatus, request.getTriggeredAction(), request.getCardIds().get(0));
         } else if ("DECLARE_ATTACKERS".equals(request.getAction())) {
             turnService.declareAttackers(gameStatus, request.getCardIds());
+        } else if ("DECLARE_BLOCKERS".equals(request.getAction())) {
+            turnService.declareBlockers(gameStatus, request.getCardIds());
         }
     }
 

@@ -2,13 +2,15 @@ package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+@ToString
+@EqualsAndHashCode
 public class CardInstance {
-
     private final int id;
     private final Card card;
     private final CardModifiers modifiers;
@@ -68,27 +70,15 @@ public class CardInstance {
         modifiers.setAttacking(true);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CardInstance that = (CardInstance) o;
-        return id == that.id &&
-                Objects.equals(card, that.card) &&
-                Objects.equals(modifiers, that.modifiers);
-    }
+    public void declareAsBlocker() {
+        if (!isOfType(Type.CREATURE)) {
+            throw new MessageException("Declared blocker " + getIdAndName() + " is not of type Creature");
+        }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, card, modifiers);
-    }
+        if (modifiers.isTapped()) {
+            throw new MessageException(getIdAndName() + " is tapped and cannot block");
+        }
 
-    @Override
-    public String toString() {
-        return "CardInstance{" +
-                "id=" + id +
-                ", card=" + card +
-                ", modifiers=" + modifiers +
-                '}';
+        modifiers.setBlocking(true);
     }
 }

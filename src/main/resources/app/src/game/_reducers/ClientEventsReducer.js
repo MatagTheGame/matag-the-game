@@ -77,6 +77,16 @@ export default class ClientEventsReducer {
               stompClient.sendEvent('turn', {action: 'DECLARE_ATTACKERS', cardIds: attackingCreaturesIds})
               break
             }
+
+          } else if (newState.turn.currentPhase === 'DB') {
+            const blockingCreaturesIds = CardSearch.cards(newState.player.battlefield)
+              .frontEndBlocking()
+              .map(cardInstance => cardInstance.id)
+
+            if (blockingCreaturesIds.length > 0) {
+              stompClient.sendEvent('turn', {action: 'DECLARE_BLOCKERS', cardIds: blockingCreaturesIds})
+              break
+            }
           }
 
           CardSearch.cards(newState.player.battlefield)

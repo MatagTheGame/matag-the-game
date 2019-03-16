@@ -39,6 +39,13 @@ public class GameStatusUpdaterService {
         );
     }
 
+    public void sendUpdateNonCurrentPlayerBattlefield(GameStatus gameStatus) {
+        eventSender.sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_INACTIVE_PLAYER_BATTLEFIELD", gameStatus.getNonCurrentPlayer().getBattlefield().getCards())
+        );
+    }
+
     public void sendUpdateCurrentPlayerGraveyard(GameStatus gameStatus) {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),

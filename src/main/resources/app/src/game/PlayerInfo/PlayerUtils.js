@@ -22,6 +22,14 @@ export default class PlayerUtils {
     return PlayerUtils.getPlayerByName(state, state.turn.currentTurnPlayer)
   }
 
+  static getNonCurrentPlayer(state) {
+    if (PlayerUtils.isCurrentPlayerTurn(state)) {
+      return state.opponent
+    } else {
+      return state.player
+    }
+  }
+
   static getActivePlayer(state) {
     return PlayerUtils.getPlayerByName(state, state.turn.currentPhaseActivePlayer)
   }

@@ -4,6 +4,7 @@ import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.CastService;
 import com.aa.mtg.game.turn.action.ContinueTurnService;
 import com.aa.mtg.game.turn.action.DeclareAttackerService;
+import com.aa.mtg.game.turn.action.DeclareBlockerService;
 import com.aa.mtg.game.turn.action.PlayLandService;
 import com.aa.mtg.game.turn.action.ResolveService;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,15 @@ public class TurnService {
     private final CastService castService;
     private final ResolveService resolveService;
     private final DeclareAttackerService declareAttackerService;
+    private final DeclareBlockerService declareBlockerService;
 
-    public TurnService(ContinueTurnService continueTurnService, PlayLandService playLandService, CastService castService, ResolveService resolveService, DeclareAttackerService declareAttackerService) {
+    public TurnService(ContinueTurnService continueTurnService, PlayLandService playLandService, CastService castService, ResolveService resolveService, DeclareAttackerService declareAttackerService, DeclareBlockerService declareBlockerService) {
         this.continueTurnService = continueTurnService;
         this.playLandService = playLandService;
         this.castService = castService;
         this.resolveService = resolveService;
         this.declareAttackerService = declareAttackerService;
+        this.declareBlockerService = declareBlockerService;
     }
 
     void continueTurn(GameStatus gameStatus) {
@@ -45,5 +48,9 @@ public class TurnService {
 
     void declareAttackers(GameStatus gameStatus, List<Integer> cardIds) {
         declareAttackerService.declareAttackers(gameStatus, cardIds);
+    }
+
+    void declareBlockers(GameStatus gameStatus, List<Integer> cardIds) {
+        declareBlockerService.declareBlockers(gameStatus, cardIds);
     }
 }

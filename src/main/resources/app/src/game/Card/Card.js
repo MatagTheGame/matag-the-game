@@ -42,6 +42,8 @@ class Card extends PureComponent {
 
     if (CardUtils.isFrontendBlocking(this.props.cardInstance)) {
       classes += ' frontend-blocking'
+    } else if (CardUtils.isBlocking(this.props.cardInstance)) {
+      classes += ' blocking'
     }
 
     return classes
