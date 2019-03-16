@@ -1,3 +1,5 @@
+import CardUtils from './CardUtils'
+
 export default class CardSearch extends Array {
   static cards(cardInstances) {
     return new CardSearch(...cardInstances)
@@ -8,22 +10,22 @@ export default class CardSearch extends Array {
   }
 
   ofType(type) {
-    const cards = this.filter(cardInstance => cardInstance.card.types.includes(type))
+    const cards = this.filter(cardInstance => CardUtils.isOfType(cardInstance, type))
     return new CardSearch(...cards)
   }
 
   frontEndTapped() {
-    const cards = this.filter(cardInstance => cardInstance.modifiers.tapped === 'FRONTEND_TAPPED')
+    const cards = this.filter(cardInstance => CardUtils.isFrontendTapped(cardInstance))
     return new CardSearch(...cards)
   }
 
   untapped() {
-    const cards = this.filter(cardInstance => !cardInstance.modifiers.tapped)
+    const cards = this.filter(cardInstance => CardUtils.isUntapped(cardInstance))
     return new CardSearch(...cards)
   }
 
   withoutSummoningSickness() {
-    const cards = this.filter(cardInstance => !cardInstance.modifiers.summoningSickness)
+    const cards = this.filter(cardInstance => !CardUtils.hasSummoningSickness(cardInstance))
     return new CardSearch(...cards)
   }
 

@@ -33,6 +33,10 @@ body {
   margin-bottom: 100px;
 }
 
+.frontend-blocking {
+  margin-bottom: 100px;
+}
+
 #modal-container {
   z-index: 4;
   position: absolute;
@@ -62,7 +66,7 @@ body {
   margin-left: 40px;
 }
 
-.frontend_tapped {
+.frontend-tapped {
   transform: rotateZ(75deg);
 }
 

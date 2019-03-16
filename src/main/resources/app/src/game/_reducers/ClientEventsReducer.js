@@ -52,8 +52,15 @@ export default class ClientEventsReducer {
               CardUtils.toggleFrontendTapped(cardInstance)
             }
 
-          } else if (CardUtils.isOfType(cardInstance, 'LAND')) {
-            CardUtils.toggleFrontendTapped(cardInstance)
+          } else if (newState.turn.currentPhase === 'DB') {
+            if (CardUtils.isOfType(cardInstance, 'CREATURE')) {
+              CardUtils.toggleFrontendBlocking(cardInstance)
+            }
+
+          } else {
+            if (CardUtils.isOfType(cardInstance, 'LAND')) {
+              CardUtils.toggleFrontendTapped(cardInstance)
+            }
           }
         }
         break

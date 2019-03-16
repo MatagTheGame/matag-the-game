@@ -26,16 +26,22 @@ class Card extends PureComponent {
   getClasses() {
     let classes = 'card'
 
-    if (get(this.props.cardInstance, 'modifiers.tapped'))  {
-      classes += ' ' + this.props.cardInstance.modifiers.tapped.toLowerCase()
+    if (CardUtils.isTapped(this.props.cardInstance))  {
+      classes += ' tapped'
+    } else if (CardUtils.isFrontendTapped(this.props.cardInstance)) {
+      classes += ' frontend-tapped'
     }
 
-    if (get(this.props.cardInstance, 'modifiers.summoningSickness')) {
+    if (CardUtils.hasSummoningSickness(this.props.cardInstance)) {
       classes += ' summoning-sickness'
     }
 
-    if (get(this.props.cardInstance, 'modifiers.attacking')) {
+    if (CardUtils.isAttacking(this.props.cardInstance)) {
       classes += ' attacking'
+    }
+
+    if (CardUtils.isFrontendBlocking(this.props.cardInstance)) {
+      classes += ' frontend-blocking'
     }
 
     return classes
