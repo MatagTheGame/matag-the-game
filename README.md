@@ -14,7 +14,7 @@ The application is written using:
 
 ### Requisites
 
- * Install JDK 1.11
+ * Install JDK 1.8
  * Install maven
  * Install yarn
 
