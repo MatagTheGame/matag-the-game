@@ -23,11 +23,11 @@ class Battlefield extends PureComponent {
   }
 
   getSecondLineCards() {
-    return CardSearch.cards(this.getBattlefield()).ofType('CREATURE').notAttackingOrBlocking()
+    return CardSearch.cards(this.getBattlefield()).ofType('CREATURE').notAttackingOrBlocking().notFrontendBlocking()
   }
 
   getAttackingBlockingCreatures() {
-    return CardSearch.cards(this.getBattlefield()).attackingOrBlocking()
+    return CardSearch.cards(this.getBattlefield()).attackingOrBlocking().concat(CardSearch.cards(this.getBattlefield()).frontendBlocking())
   }
 
   playerCardClick() {

@@ -26,6 +26,12 @@ public class Battlefield extends CardListComponent {
                 .forEach(cardInstance -> cardInstance.getModifiers().setAttacking(false));
     }
 
+    public void removeBlocking() {
+        cards.stream()
+                .filter(cardInstance -> cardInstance.getModifiers().isBlocking())
+                .forEach(cardInstance -> cardInstance.getModifiers().setBlocking(false));
+    }
+
     public List<CardInstance> getAttackingCreatures() {
         return cards.stream()
                 .filter(cardInstance -> cardInstance.getModifiers().isAttacking())

@@ -67,7 +67,9 @@ public class ContinueTurnService {
             turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
 
             currentPlayer.getBattlefield().removeAttacking();
+            nonCurrentPlayer.getBattlefield().removeBlocking();
             gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+            gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
 
         } else if (turn.getCurrentPhase().equals(Phase.CL)) {
             turn.cleanup(nonCurrentPlayer.getName());

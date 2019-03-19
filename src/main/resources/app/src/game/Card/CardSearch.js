@@ -45,12 +45,22 @@ export default class CardSearch extends Array {
   }
 
   blocking() {
-    const cards = this.filter(cardInstance => CardUtils.isBlocking(cardInstance))
+    const cards = this.filter(cardInstance => CardUtils.isFrontendBlocking(cardInstance))
+    return new CardSearch(...cards)
+  }
+
+  frontendBlocking() {
+    const cards = this.filter(cardInstance => CardUtils.isFrontendBlocking(cardInstance))
     return new CardSearch(...cards)
   }
 
   notBlocking() {
     const cards = this.filter(cardInstance => !CardUtils.isBlocking(cardInstance))
+    return new CardSearch(...cards)
+  }
+
+  notFrontendBlocking() {
+    const cards = this.filter(cardInstance => !CardUtils.isFrontendBlocking(cardInstance))
     return new CardSearch(...cards)
   }
 
