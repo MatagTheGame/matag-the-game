@@ -1,5 +1,6 @@
 package com.aa.mtg.game.turn.action;
 
+import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -25,6 +26,7 @@ public class DeclareBlockerService {
 
     public void declareBlockers(GameStatus gameStatus, List<Integer> cardIds) {
         Turn turn = gameStatus.getTurn();
+        Player currentPlayer = gameStatus.getCurrentPlayer();
         Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
 
         if (!turn.getCurrentPhase().equals(Phase.DB)) {
@@ -32,12 +34,12 @@ public class DeclareBlockerService {
         }
 
         try {
-            cardIds.forEach(cardId -> nonCurrentPlayer.getBattlefield().findCardById(cardId).declareAsBlocker());
+            CardInstance firstAttackingCreature = currentPlayer.getBattlefield().getAttackingCreatures().get(0);
+            // TODO Currently all blocking creatures are blocking the first creature
+            cardIds.forEach(cardId -> nonCurrentPlayer.getBattlefield().findCardById(cardId).declareAsBlocker(firstAttackingCreature.getId()));
         } catch (MessageException e) {
             gameStatusUpdaterService.sendMessageToCurrentPlayer(nonCurrentPlayer, e.getMessage());
         }
-
-
 
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
         continueTurnService.continueTurn(gameStatus);

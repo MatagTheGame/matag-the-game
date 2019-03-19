@@ -70,7 +70,7 @@ public class CardInstance {
         modifiers.setAttacking(true);
     }
 
-    public void declareAsBlocker() {
+    public void declareAsBlocker(int attackingCreatureId) {
         if (!isOfType(Type.CREATURE)) {
             throw new MessageException("Declared blocker " + getIdAndName() + " is not of type Creature");
         }
@@ -79,6 +79,10 @@ public class CardInstance {
             throw new MessageException(getIdAndName() + " is tapped and cannot block");
         }
 
-        modifiers.setBlocking(true);
+        modifiers.addBlocking(attackingCreatureId);
+    }
+
+    public int getPower() {
+        return card.getPower();
     }
 }

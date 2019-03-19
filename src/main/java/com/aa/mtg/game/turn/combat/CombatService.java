@@ -1,6 +1,5 @@
 package com.aa.mtg.game.turn.combat;
 
-import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -26,16 +25,18 @@ public class CombatService {
 
         List<CardInstance> attackingCreatures = currentPlayer.getBattlefield().getAttackingCreatures();
 
-        if (!attackingCreatures.isEmpty()) {
-            // TODO block creatures
+        int damageFromUnblockedCreatures = 0;
+        for (CardInstance attackingCreature : attackingCreatures) {
+            List<CardInstance> blockingCreaturesFor = nonCurrentPlayer.getBattlefield().getBlockingCreaturesFor(attackingCreature.getId());
+            if (blockingCreaturesFor.isEmpty()) {
+                damageFromUnblockedCreatures += attackingCreature.getPower();
+            } else {
+                // TODO make the creatures fight
+            }
+        }
 
-            int totalDamage = attackingCreatures.stream()
-                    .map(CardInstance::getCard)
-                    .map(Card::getPower)
-                    .mapToInt(Integer::intValue)
-                    .sum();
-
-            nonCurrentPlayer.decreaseLife(totalDamage);
+        if (damageFromUnblockedCreatures > 0) {
+            nonCurrentPlayer.decreaseLife(damageFromUnblockedCreatures);
             gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, nonCurrentPlayer);
 
             if (nonCurrentPlayer.getLife() <= 0) {

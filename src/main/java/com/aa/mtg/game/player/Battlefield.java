@@ -6,6 +6,8 @@ import com.aa.mtg.cards.CardListComponent;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.emptyList;
+
 public class Battlefield extends CardListComponent {
 
     public void untap() {
@@ -29,7 +31,7 @@ public class Battlefield extends CardListComponent {
     public void removeBlocking() {
         cards.stream()
                 .filter(cardInstance -> cardInstance.getModifiers().isBlocking())
-                .forEach(cardInstance -> cardInstance.getModifiers().setBlocking(false));
+                .forEach(cardInstance -> cardInstance.getModifiers().setBlocking(emptyList()));
     }
 
     public List<CardInstance> getAttackingCreatures() {
@@ -41,6 +43,12 @@ public class Battlefield extends CardListComponent {
     public List<CardInstance> getBlockingCreatures() {
         return cards.stream()
                 .filter(cardInstance -> cardInstance.getModifiers().isBlocking())
+                .collect(Collectors.toList());
+    }
+
+    public List<CardInstance> getBlockingCreaturesFor(int attackingCardId) {
+        return getBlockingCreatures().stream()
+                .filter(cardInstance -> cardInstance.getModifiers().getBlocking().contains(attackingCardId))
                 .collect(Collectors.toList());
     }
 }
