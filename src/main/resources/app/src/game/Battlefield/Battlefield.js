@@ -23,7 +23,11 @@ class Battlefield extends PureComponent {
   }
 
   getSecondLineCards() {
-    return CardSearch.cards(this.getBattlefield()).ofType('CREATURE')
+    return CardSearch.cards(this.getBattlefield()).ofType('CREATURE').notAttackingOrBlocking()
+  }
+
+  getAttackingBlockingCreatures() {
+    return CardSearch.cards(this.getBattlefield()).attackingOrBlocking()
   }
 
   playerCardClick() {
@@ -42,8 +46,9 @@ class Battlefield extends PureComponent {
   render() {
     return (
       <div id={this.getId()} className='battlefield'>
-        <div className='battlefield-area'>{this.cardItems(this.getSecondLineCards())}</div>
-        <div className='battlefield-area'>{this.cardItems(this.getFirstLineCards())}</div>
+        <div className='battlefield-area combat-line'>{this.cardItems(this.getAttackingBlockingCreatures())}</div>
+        <div className='battlefield-area second-line'>{this.cardItems(this.getSecondLineCards())}</div>
+        <div className='battlefield-area first-line'>{this.cardItems(this.getFirstLineCards())}</div>
       </div>
     )
   }

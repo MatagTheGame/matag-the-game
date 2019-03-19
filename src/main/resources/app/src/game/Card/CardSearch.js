@@ -34,6 +34,36 @@ export default class CardSearch extends Array {
     return new CardSearch(...cards)
   }
 
+  attacking() {
+    const cards = this.filter(cardInstance => CardUtils.isAttacking(cardInstance))
+    return new CardSearch(...cards)
+  }
+
+  notAttacking() {
+    const cards = this.filter(cardInstance => !CardUtils.isAttacking(cardInstance))
+    return new CardSearch(...cards)
+  }
+
+  blocking() {
+    const cards = this.filter(cardInstance => CardUtils.isBlocking(cardInstance))
+    return new CardSearch(...cards)
+  }
+
+  notBlocking() {
+    const cards = this.filter(cardInstance => !CardUtils.isBlocking(cardInstance))
+    return new CardSearch(...cards)
+  }
+
+  attackingOrBlocking() {
+    const cards = this.filter(cardInstance => CardUtils.isAttacking(cardInstance) || CardUtils.isBlocking(cardInstance))
+    return new CardSearch(...cards)
+  }
+
+  notAttackingOrBlocking() {
+    const cards = this.filter(cardInstance => !(CardUtils.isAttacking(cardInstance) || CardUtils.isBlocking(cardInstance)))
+    return new CardSearch(...cards)
+  }
+
   isEmpty() {
     return this.length === 0
   }

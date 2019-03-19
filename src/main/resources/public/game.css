@@ -29,10 +29,6 @@ body {
   filter: brightness(60%);
 }
 
-.attacking {
-  margin-bottom: 100px;
-}
-
 .frontend-blocking {
   margin-bottom: 100px;
 }
@@ -156,7 +152,7 @@ body {
 
 #opponent-battlefield {
   position: absolute;
-  top: 10%;
+  top: 2%;
   left: 20%;
   transform: rotate(180deg);
 }
@@ -170,6 +166,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  min-height: 250px;
+}
+
+.battlefield-area .combat-line {
+  margin-bottom: -50px;
+  z-index: 2;
 }
 
 #player-graveyard {
