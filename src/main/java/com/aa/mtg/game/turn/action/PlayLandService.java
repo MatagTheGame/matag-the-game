@@ -3,6 +3,7 @@ package com.aa.mtg.game.turn.action;
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.properties.Type;
+import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
@@ -25,13 +26,13 @@ public class PlayLandService {
         Player currentPlayer = gameStatus.getCurrentPlayer();
 
         if (!turn.getCurrentPhase().isMainPhase()) {
-            gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "You can only play lands during main phases.");
+            throw new MessageException("You can only play lands during main phases.");  // TODO transform all sendMessage as this
 
         } else if (turn.getCardsPlayedWithinTurn().stream()
                 .map(CardInstance::getCard)
                 .map(Card::getTypes)
                 .anyMatch(types -> types.contains(Type.LAND))) {
-            gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "You already played a land this turn.");
+            throw new MessageException("You already played a land this turn.");
 
         } else {
             CardInstance cardInstance = currentPlayer.getHand().findCardById(cardId);
@@ -43,7 +44,7 @@ public class PlayLandService {
                 gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
                 gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
             } else {
-                gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "Playing " + cardInstance.getIdAndName() + " as land.");
+                throw new MessageException("Playing " + cardInstance.getIdAndName() + " as land.");
             }
         }
     }

@@ -31,11 +31,7 @@ public class DeclareAttackerService {
             throw new RuntimeException("Attackers declared during phase: " + turn.getCurrentPhase());
         }
 
-        try {
-            cardIds.forEach(cardId -> currentPlayer.getBattlefield().findCardById(cardId).declareAsAttacker());
-        } catch (MessageException e) {
-            gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, e.getMessage());
-        }
+        cardIds.forEach(cardId -> currentPlayer.getBattlefield().findCardById(cardId).declareAsAttacker());
 
         gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
         continueTurnService.continueTurn(gameStatus);

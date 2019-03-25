@@ -28,10 +28,14 @@ public class EventSender {
         this.objectMapper = objectMapper;
     }
 
-    public void sendToPlayer(Player player, Event event) {
+    public void sendToUser(String sessionId, Event event) {
         String eventString = serializeToString(event);
-        LOGGER.info("Sending event to {}: {}", player.getSessionId(), eventString);
-        webSocketTemplate.convertAndSendToUser(player.getSessionId(), "/events", eventString);
+        LOGGER.info("Sending event to {}: {}", sessionId, eventString);
+        webSocketTemplate.convertAndSendToUser(sessionId, "/events", eventString);
+    }
+
+    public void sendToPlayer(Player player, Event event) {
+        sendToUser(player.getSessionId(), event);
     }
 
     public void sendToPlayers(List<Player> players, Event event) {

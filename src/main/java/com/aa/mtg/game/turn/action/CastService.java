@@ -4,6 +4,7 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CostUtils;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
+import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
@@ -30,7 +31,7 @@ public class CastService {
 
         CardInstance cardInstance = currentPlayer.getHand().findCardById(cardId);
         if (!turn.getCurrentPhase().isMainPhase() && !cardInstance.getCard().isInstantSpeed()) {
-            gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "You can only play Instants during a NON main phases.");
+            throw new MessageException("You can only play Instants during a NON main phases.");
 
         } else {
             CardInstance cardToCast = currentPlayer.getHand().findCardById(cardId);
@@ -39,15 +40,15 @@ public class CastService {
             for (int tappingLandId : tappingLandIds) {
                 CardInstance landToTap = currentPlayer.getBattlefield().findCardById(tappingLandId);
                 if (!landToTap.isOfType(Type.LAND)) {
-                    gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "The card you are trying to tap for mana is not a land.");
+                    throw new MessageException("The card you are trying to tap for mana is not a land.");
                 } else if (landToTap.getModifiers().isTapped()) {
-                    gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "The land you are trying to tap is already tapped.");
+                    throw new MessageException("The land you are trying to tap is already tapped.");
                 }
                 paidCost.add(landToTap.getCard().getColors().get(0));
             }
 
             if (!CostUtils.isCastingCostFulfilled(cardToCast.getCard(), paidCost)) {
-                gameStatusUpdaterService.sendMessageToCurrentPlayer(currentPlayer, "There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
+                throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
 
             } else {
                 cardInstance = currentPlayer.getHand().extractCardById(cardId);

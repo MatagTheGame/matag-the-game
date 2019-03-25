@@ -60,10 +60,6 @@ public class GameStatusUpdaterService {
         );
     }
 
-    public void sendMessageToCurrentPlayer(Player currentPlayer, String message) {
-        eventSender.sendToPlayer(currentPlayer, new Event("MESSAGE", new MessageEvent(message, true)));
-    }
-
     public void sendUpdatePlayerLife(GameStatus gameStatus, Player nonCurrentPlayer) {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),

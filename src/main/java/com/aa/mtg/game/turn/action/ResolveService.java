@@ -1,6 +1,7 @@
 package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,7 @@ public class ResolveService {
 
         } else {
             String message = "Cannot resolve triggeredAction " + triggeredAction + " as current triggeredAction is " + gameStatus.getTurn().getTriggeredAction();
-            gameStatusUpdaterService.sendMessageToCurrentPlayer(gameStatus.getCurrentPlayer(), message);
-            throw new RuntimeException(message);
+            throw new MessageException(message);
         }
     }
 }

@@ -33,13 +33,8 @@ public class DeclareBlockerService {
             throw new RuntimeException("Blockers declared during phase: " + turn.getCurrentPhase());
         }
 
-        try {
-            CardInstance firstAttackingCreature = currentPlayer.getBattlefield().getAttackingCreatures().get(0);
-            // TODO Currently all blocking creatures are blocking the first creature
-            cardIds.forEach(cardId -> nonCurrentPlayer.getBattlefield().findCardById(cardId).declareAsBlocker(firstAttackingCreature.getId()));
-        } catch (MessageException e) {
-            gameStatusUpdaterService.sendMessageToCurrentPlayer(nonCurrentPlayer, e.getMessage());
-        }
+        CardInstance firstAttackingCreature = currentPlayer.getBattlefield().getAttackingCreatures().get(0);
+        cardIds.forEach(cardId -> nonCurrentPlayer.getBattlefield().findCardById(cardId).declareAsBlocker(firstAttackingCreature.getId()));
 
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
         continueTurnService.continueTurn(gameStatus);
