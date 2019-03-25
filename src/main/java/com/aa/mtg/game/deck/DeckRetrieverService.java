@@ -20,12 +20,11 @@ import static com.aa.mtg.cards.sets.RavnicaAllegiance.FERAL_MAAKA;
 @Component
 public class DeckRetrieverService {
 
-    public Library retrieveDeckForUser(SecurityToken token, GameStatus gameStatus) {
+    public Library retrieveDeckForUser(SecurityToken token, String playerName, GameStatus gameStatus) {
         List<CardInstance> libraryCards = IntStream.rangeClosed(1, 60)
                 .boxed()
-                .map(i -> new CardInstance(gameStatus.nextCardId(), getRandomCard()))
+                .map(i -> new CardInstance(gameStatus.nextCardId(), getRandomCard(), playerName))
                 .collect(Collectors.toList());
-
 
         return new Library(libraryCards);
     }

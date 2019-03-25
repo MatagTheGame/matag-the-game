@@ -26,7 +26,7 @@ public class PlayLandService {
         Player currentPlayer = gameStatus.getCurrentPlayer();
 
         if (!turn.getCurrentPhase().isMainPhase()) {
-            throw new MessageException("You can only play lands during main phases.");  // TODO transform all sendMessage as this
+            throw new MessageException("You can only play lands during main phases.");
 
         } else if (turn.getCardsPlayedWithinTurn().stream()
                 .map(CardInstance::getCard)

@@ -24,7 +24,7 @@ import java.util.stream.IntStream;
 import static java.util.Arrays.asList;
 
 public class ContinueTurnServiceTest {
-    private static final CardInstance A_CARD = new CardInstance(1, Cards.FOREST);
+    private static final CardInstance A_CARD = new CardInstance(1, Cards.FOREST, "owner");
 
     private ContinueTurnService continueTurnService;
     private EventSender eventSender;
@@ -331,7 +331,7 @@ public class ContinueTurnServiceTest {
     private Library library() {
         List<CardInstance> libraryCards = IntStream.rangeClosed(1, 60)
                 .boxed()
-                .map(i -> new CardInstance(i, Cards.PLAINS))
+                .map(i -> new CardInstance(i, Cards.PLAINS, "owner"))
                 .collect(Collectors.toList());
 
         return new Library(libraryCards);

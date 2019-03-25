@@ -13,16 +13,18 @@ import java.util.List;
 public class CardInstance {
     private final int id;
     private final Card card;
+    private final String owner;
     private CardModifiers modifiers;
 
-    public CardInstance(int id, Card card) {
+    public CardInstance(int id, Card card, String owner) {
         this.id = id;
         this.card = card;
+        this.owner = owner;
         this.modifiers = new CardModifiers();
     }
 
     public CardInstance(CardInstance cardInstance) {
-        this(cardInstance.getId(), cardInstance.getCard());
+        this(cardInstance.getId(), cardInstance.getCard(), cardInstance.getOwner());
     }
 
     public int getId() {
@@ -37,6 +39,10 @@ public class CardInstance {
         return card;
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
     public CardModifiers getModifiers() {
         return modifiers;
     }
@@ -44,7 +50,7 @@ public class CardInstance {
     public static List<CardInstance> mask(List<CardInstance> cardInstances) {
         List<CardInstance> library = new ArrayList<>();
         for (CardInstance cardInstance : cardInstances) {
-            library.add(new CardInstance(cardInstance.getId(), Card.hiddenCard()));
+            library.add(new CardInstance(cardInstance.getId(), Card.hiddenCard(), cardInstance.getOwner()));
         }
         return library;
     }

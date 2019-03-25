@@ -38,16 +38,18 @@ public class InitController {
 
         if (!gameStatusRepository.contains(token.getGameId())) {
             GameStatus gameStatus = new GameStatus(token.getGameId());
-            Library library = deckRetrieverService.retrieveDeckForUser(token, gameStatus);
-            gameStatus.setPlayer1(new Player(token.getSessionId(), "Pippo", library));
+            String playerName = "Pippo";
+            Library library = deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus);
+            gameStatus.setPlayer1(new Player(token.getSessionId(), playerName, library));
             gameStatusRepository.save(token.getGameId(), gameStatus);
             eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_WAITING_OPPONENT"));
 
         } else {
             GameStatus gameStatus = gameStatusRepository.getUnsecure(token.getGameId());
             if (gameStatus.getPlayer2() == null) {
-                Library library = deckRetrieverService.retrieveDeckForUser(token, gameStatus);
-                gameStatus.setPlayer2(new Player(token.getSessionId(), "Pluto", library));
+                String playerName = "Pluto";
+                Library library = deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus);
+                gameStatus.setPlayer2(new Player(token.getSessionId(), playerName, library));
 
                 gameStatus.getTurn().init(gameStatus.getPlayer1().getName());
 

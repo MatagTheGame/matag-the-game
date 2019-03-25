@@ -51,7 +51,6 @@ public class CombatService {
     }
 
     private void dealDamageToCreature(Player owner, CardInstance cardInstance, int damage) {
-        // TODO owner
         cardInstance.getModifiers().setDamage(damage);
         if (cardInstance.getModifiers().getDamage() >= cardInstance.getToughness()) {
             cardInstance = owner.getBattlefield().extractCardById(cardInstance.getId());
