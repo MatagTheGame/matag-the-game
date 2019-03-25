@@ -32,10 +32,6 @@ class Card extends PureComponent {
       classes += ' frontend-tapped'
     }
 
-    if (CardUtils.hasSummoningSickness(this.props.cardInstance)) {
-      classes += ' summoning-sickness'
-    }
-
     if (CardUtils.isAttacking(this.props.cardInstance)) {
       classes += ' attacking'
     }
@@ -58,13 +54,23 @@ class Card extends PureComponent {
     }
   }
 
+  modifiers() {
+    if (CardUtils.hasSummoningSickness(this.props.cardInstance)) {
+      return <div className='summoning-sickness'/>
+    }
+  }
+
   render() {
     if (this.props.cardInstance) {
-      return <div id={'card-' + this.props.cardInstance.id}
-                  className={this.getClasses()}
-                  style={{backgroundImage: this.imageUrl(), ...this.props.style}}
-                  onClick={this.props.onclick}
-                  onWheel={this.onWheel}/>
+      return (
+        <div id={'card-' + this.props.cardInstance.id}
+             className={this.getClasses()}
+             style={{backgroundImage: this.imageUrl(), ...this.props.style}}
+             onClick={this.props.onclick}
+             onWheel={this.onWheel}>
+          {this.modifiers()}
+        </div>
+      )
     } else {
       return <div className='card' style={{backgroundImage: this.imageUrl(), ...this.props.style}} />
     }

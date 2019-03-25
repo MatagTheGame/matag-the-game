@@ -26,7 +26,12 @@ body {
 }
 
 .summoning-sickness {
-  filter: brightness(60%);
+  background-image: url("/img/modifiers/summoning-sickness.png");
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 25px;
+  top: 50px;
 }
 
 .frontend-blocking {
