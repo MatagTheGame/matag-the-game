@@ -13,7 +13,7 @@ import java.util.List;
 public class CardInstance {
     private final int id;
     private final Card card;
-    private final CardModifiers modifiers;
+    private CardModifiers modifiers;
 
     public CardInstance(int id, Card card) {
         this.id = id;
@@ -84,5 +84,13 @@ public class CardInstance {
 
     public int getPower() {
         return card.getPower();
+    }
+
+    public int getToughness() {
+        return card.getToughness();
+    }
+
+    public void clearModifiers() {
+        modifiers = new CardModifiers();
     }
 }

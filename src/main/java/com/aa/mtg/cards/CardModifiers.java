@@ -14,6 +14,7 @@ public class CardModifiers {
     private boolean summoningSickness;
     private boolean attacking;
     private List<Integer> blocking = new ArrayList<>();
+    private int damage;
 
     public TappedModifiers getTapped() {
         return tapped;
@@ -60,6 +61,15 @@ public class CardModifiers {
     }
 
     public void addBlocking(int blocking) {
+        // FIXME blocking is an immutable list (Collections.emptyList())
         this.blocking.add(blocking);
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 }

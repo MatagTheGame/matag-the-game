@@ -31,7 +31,12 @@ public class CombatService {
             if (blockingCreaturesFor.isEmpty()) {
                 damageFromUnblockedCreatures += attackingCreature.getPower();
             } else {
-                // TODO make the creatures fight
+                dealDamageToCreature(currentPlayer, attackingCreature, blockingCreaturesFor.get(0).getPower());
+                dealDamageToCreature(nonCurrentPlayer, blockingCreaturesFor.get(0), attackingCreature.getPower());
+                gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+                gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
+                gameStatusUpdaterService.sendUpdateNonCurrentPlayerGraveyard(gameStatus);
             }
         }
 
@@ -42,6 +47,16 @@ public class CombatService {
             if (nonCurrentPlayer.getLife() <= 0) {
                 gameStatus.getTurn().setWinner(currentPlayer.getName());
             }
+        }
+    }
+
+    private void dealDamageToCreature(Player owner, CardInstance cardInstance, int damage) {
+        // TODO owner
+        cardInstance.getModifiers().setDamage(damage);
+        if (cardInstance.getModifiers().getDamage() >= cardInstance.getToughness()) {
+            cardInstance = owner.getBattlefield().extractCardById(cardInstance.getId());
+            cardInstance.clearModifiers();
+            owner.getGraveyard().addCard(cardInstance);
         }
     }
 

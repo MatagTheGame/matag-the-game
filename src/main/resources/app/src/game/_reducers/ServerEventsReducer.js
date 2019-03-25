@@ -5,7 +5,7 @@ export default class ServerEventsReducer {
   static getEvents() {
     return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN',
       'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_INACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_ACTIVE_PLAYER_GRAVEYARD',
-      'UPDATE_PLAYER_LIFE']
+      'UPDATE_INACTIVE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE']
   }
 
   static reduceEvent(newState, action) {
@@ -60,6 +60,11 @@ export default class ServerEventsReducer {
 
       case 'UPDATE_ACTIVE_PLAYER_GRAVEYARD':
         currentPlayer = PlayerUtils.getCurrentPlayer(newState)
+        currentPlayer.graveyard = action.value
+        break
+
+      case 'UPDATE_INACTIVE_PLAYER_GRAVEYARD':
+        currentPlayer = PlayerUtils.getNonCurrentPlayer(newState)
         currentPlayer.graveyard = action.value
         break
 
