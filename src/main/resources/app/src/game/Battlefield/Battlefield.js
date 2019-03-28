@@ -30,9 +30,9 @@ class Battlefield extends PureComponent {
     return CardSearch.cards(this.getBattlefield()).attackingOrBlocking().concat(CardSearch.cards(this.getBattlefield()).frontendBlocking())
   }
 
-  playerCardClick() {
+  playerCardClick(cardId) {
     if (this.props.type === 'player') {
-      return this.props.playerCardClick
+      return () => this.props.playerCardClick(cardId)
     } else {
       return () => {}
     }
@@ -40,7 +40,7 @@ class Battlefield extends PureComponent {
 
   cardItems(cards) {
     return cards.map((cardInstance) =>
-      <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick()} />)
+      <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)} />)
   }
 
   render() {
@@ -54,10 +54,10 @@ class Battlefield extends PureComponent {
   }
 }
 
-const createBattlefieldPlayerCardClickAction = (event) => {
+const createBattlefieldPlayerCardClickAction = (cardId) => {
   return {
     type: 'PLAYER_BATTLEFIELD_CARD_CLICK',
-    cardId: event.target.id
+    cardId: cardId
   }
 }
 

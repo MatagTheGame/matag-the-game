@@ -5,10 +5,6 @@ export default class CardUtils {
       .replace(',', '_')
   }
 
-  static getCardId(id) {
-    return id.replace('card-', '')
-  }
-
   static hasSummoningSickness(cardInstance) {
     return cardInstance.modifiers.summoningSickness
   }

@@ -21,7 +21,7 @@ export default class ClientEventsReducer {
 
       case 'PLAYER_HAND_CARD_CLICK':
         if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
-          const cardId = CardUtils.getCardId(action.cardId)
+          const cardId = action.cardId
           const cardInstance = CardSearch.cards(newState.player.hand).withId(cardId)
           if (newState.turn.triggeredAction === 'DISCARD_A_CARD') {
             stompClient.sendEvent('turn', {action: 'RESOLVE', triggeredAction: 'DISCARD_A_CARD', cardIds: [cardId]})
@@ -44,8 +44,7 @@ export default class ClientEventsReducer {
 
       case 'PLAYER_BATTLEFIELD_CARD_CLICK':
         if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
-          const cardId = CardUtils.getCardId(action.cardId)
-          const cardInstance = CardSearch.cards(newState.player.battlefield).withId(cardId)
+          const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
 
           if (newState.turn.currentPhase === 'DA') {
             if (CardUtils.isOfType(cardInstance, 'CREATURE')) {
