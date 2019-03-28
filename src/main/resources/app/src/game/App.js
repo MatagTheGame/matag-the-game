@@ -28,17 +28,15 @@ class App extends PureComponent {
         <Hand type='opponent'/>
         <Hand type='player'/>
         <div id="table">
-          <div>
-            <Library type='opponent'/>
-            <Battlefield type='opponent'/>
-            <Graveyard type='opponent'/>
-            <PlayerInfo type='opponent'/>
-            <TurnPhases/>
-            <Library type='player'/>
-            <Battlefield type='player'/>
-            <Graveyard type='player'/>
-            <PlayerInfo type='player'/>
-          </div>
+          <Library type='opponent'/>
+          <Battlefield type='opponent'/>
+          <Graveyard type='opponent'/>
+          <PlayerInfo type='opponent'/>
+          <TurnPhases/>
+          <Library type='player'/>
+          <Battlefield type='player'/>
+          <Graveyard type='player'/>
+          <PlayerInfo type='player'/>
         </div>
         <Message/>
       </Fragment>

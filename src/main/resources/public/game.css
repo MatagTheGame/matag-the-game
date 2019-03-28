@@ -152,18 +152,17 @@ body {
 
 #player-battlefield {
   bottom: 10%;
-  left: 20%;
 }
 
 #opponent-battlefield {
   position: absolute;
   top: 2%;
-  left: 20%;
   transform: rotate(180deg);
 }
 
 .battlefield {
   position: absolute;
+  left: 20%;
   width: 80%;
 }
 
@@ -181,19 +180,19 @@ body {
 
 #player-graveyard {
   bottom: 5%;
-  left: 3%;
 }
 
 #opponent-graveyard {
-  position: absolute;
   top: 5%;
-  right: 3%;
   transform: rotate(180deg);
+  justify-content: flex-end;
 }
 
 .graveyard {
   position: absolute;
+  left: 3%;
   width: 20%;
+  display: flex;
 }
 
 .graveyard div {
