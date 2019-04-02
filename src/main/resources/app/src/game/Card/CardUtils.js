@@ -37,12 +37,14 @@ export default class CardUtils {
     return cardInstance.modifiers.blocking === 'FRONTEND'
   }
 
-  static setFrontendBlocking(cardInstance) {
+  static setFrontendBlocking(cardInstance, blockingCardId) {
     cardInstance.modifiers.blocking = 'FRONTEND'
+    cardInstance.modifiers.blockingCardId = blockingCardId
   }
 
   static setFrontendUnblocking(cardInstance) {
-    cardInstance.modifiers.blocking =  undefined
+    cardInstance.modifiers.blocking = undefined
+    cardInstance.modifiers.blockingCardId = undefined
   }
 
   static isBlocking(cardInstance) {
@@ -53,9 +55,9 @@ export default class CardUtils {
     return cardInstance.modifiers.attacking === true
   }
 
-  static toggleFrontendBlocking(cardInstance) {
+  static toggleFrontendBlocking(cardInstance, blockingCardId) {
     if (CardUtils.isNotFrontendBlocking(cardInstance)) {
-      CardUtils.setFrontendBlocking(cardInstance)
+      CardUtils.setFrontendBlocking(cardInstance, blockingCardId)
     } else if (CardUtils.isFrontendBlocking(cardInstance)) {
       CardUtils.setFrontendUnblocking(cardInstance)
     }

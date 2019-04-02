@@ -38,6 +38,10 @@ body {
   margin-bottom: 100px;
 }
 
+.selected-to-be-blocked {
+  border: lightskyblue 6px solid;
+}
+
 #modal-container {
   z-index: 4;
   position: absolute;

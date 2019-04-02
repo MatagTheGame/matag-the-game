@@ -7,7 +7,7 @@ import CardSearch from '../Card/CardSearch'
 export default class ClientEventsReducer {
 
   static getEvents() {
-    return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'CONTINUE_CLICK', 'MAXIMIZE_MINIMIZE_CARD']
+    return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'OPPONENT_BATTLEFIELD_CARD_CLICK', 'CONTINUE_CLICK', 'MAXIMIZE_MINIMIZE_CARD']
   }
 
   static reduceEvent(newState, action) {
@@ -53,12 +53,27 @@ export default class ClientEventsReducer {
 
           } else if (newState.turn.currentPhase === 'DB') {
             if (CardUtils.isOfType(cardInstance, 'CREATURE')) {
-              CardUtils.toggleFrontendBlocking(cardInstance)
+              console.log(CardSearch.cards(newState.opponent.battlefield).attacking())
+              console.log(CardSearch.cards(newState.opponent.battlefield).attacking()[newState.turn.blockingCardPosition])
+              const blockingCard = CardSearch.cards(newState.opponent.battlefield).attacking()[newState.turn.blockingCardPosition]
+              CardUtils.toggleFrontendBlocking(cardInstance, blockingCard.id)
             }
 
           } else {
             if (CardUtils.isOfType(cardInstance, 'LAND')) {
               CardUtils.toggleFrontendTapped(cardInstance)
+            }
+          }
+        }
+        break
+
+      case 'OPPONENT_BATTLEFIELD_CARD_CLICK':
+        if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
+          const cardInstance = CardSearch.cards(newState.opponent.battlefield).withId(action.cardId)
+
+          if (newState.turn.currentPhase === 'DB') {
+            if (CardUtils.isOfType(cardInstance, 'CREATURE')) {
+              newState.turn.blockingCardPosition = CardSearch.cards(newState.opponent.battlefield).attacking().indexOf(cardInstance)
             }
           }
         }

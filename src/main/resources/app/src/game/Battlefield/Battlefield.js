@@ -4,6 +4,8 @@ import {get} from 'lodash'
 import Card from '../Card/Card'
 import {bindActionCreators} from 'redux'
 import CardSearch from '../Card/CardSearch'
+import CardUtils from '../Card/CardUtils'
+import PlayerUtils from '../PlayerInfo/PlayerUtils'
 
 class Battlefield extends PureComponent {
   getId() {
@@ -34,13 +36,19 @@ class Battlefield extends PureComponent {
     if (this.props.type === 'player') {
       return () => this.props.playerCardClick(cardId)
     } else {
-      return () => {}
+      return () => this.props.opponentCardClick(cardId)
     }
   }
 
+  isCardSelectedToBeBlocked(cardInstance, index) {
+    return this.props.turn.currentPhase === 'DB' && PlayerUtils.isCurrentPlayerActive(this.props.state)
+      && this.props.turn.blockingCardPosition === index && CardUtils.isAttacking(cardInstance)
+  }
+
   cardItems(cards) {
-    return cards.map((cardInstance) =>
-      <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)} />)
+    return cards.map((cardInstance, i) =>
+      <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
+            selectedToBeBlocked={this.isCardSelectedToBeBlocked(cardInstance, i)} />)
   }
 
   render() {
@@ -61,16 +69,26 @@ const createBattlefieldPlayerCardClickAction = (cardId) => {
   }
 }
 
+const createBattlefieldOpponentCardClickAction = (cardId) => {
+  return {
+    type: 'OPPONENT_BATTLEFIELD_CARD_CLICK',
+    cardId: cardId
+  }
+}
+
 const mapStateToProps = state => {
   return {
     playerBattlefield: get(state, 'player.battlefield', []),
-    opponentBattlefield: get(state, 'opponent.battlefield', [])
+    opponentBattlefield: get(state, 'opponent.battlefield', []),
+    turn: state.turn,
+    state: state
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    playerCardClick: bindActionCreators(createBattlefieldPlayerCardClickAction, dispatch)
+    playerCardClick: bindActionCreators(createBattlefieldPlayerCardClickAction, dispatch),
+    opponentCardClick: bindActionCreators(createBattlefieldOpponentCardClickAction, dispatch)
   }
 }
 

@@ -42,6 +42,10 @@ class Card extends PureComponent {
       classes += ' blocking'
     }
 
+    if (this.props.selectedToBeBlocked) {
+      classes += ' selected-to-be-blocked'
+    }
+
     return classes
   }
 
