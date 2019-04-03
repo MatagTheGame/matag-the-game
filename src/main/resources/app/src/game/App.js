@@ -23,8 +23,9 @@ class App extends PureComponent {
     return (
       <Fragment>
         <MaximizedCard/>
-        <UserAction />
-        <StatusMessage />
+        <UserAction/>
+        <StatusMessage/>
+        <Message/>
         <Hand type='opponent'/>
         <Hand type='player'/>
         <div id="table">
@@ -38,7 +39,6 @@ class App extends PureComponent {
           <Graveyard type='player'/>
           <PlayerInfo type='player'/>
         </div>
-        <Message/>
       </Fragment>
     )
   }
