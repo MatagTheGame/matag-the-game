@@ -177,9 +177,16 @@ body {
   min-height: 250px;
 }
 
-.battlefield-area .combat-line {
-  margin-bottom: -50px;
-  z-index: 2;
+.opponent-battlefield .combat-line {
+  padding-left: 20%;
+}
+
+.player-battlefield .combat-line {
+  padding-right: 20%;
+}
+
+.combat-line span {
+  position: absolute;
 }
 
 #player-graveyard {

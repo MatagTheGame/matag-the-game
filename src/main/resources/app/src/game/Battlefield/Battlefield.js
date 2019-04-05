@@ -12,7 +12,7 @@ class Battlefield extends PureComponent {
     return this.props.type + '-battlefield'
   }
 
-  getBattlefield() {
+  getPlayerBattlefield() {
     if (this.props.type === 'player') {
       return this.props.playerBattlefield
     } else {
@@ -20,24 +20,24 @@ class Battlefield extends PureComponent {
     }
   }
 
+  getOtherPlayerBattlefield() {
+    if (this.props.type === 'opponent') {
+      return this.props.playerBattlefield
+    } else {
+      return this.props.opponentBattlefield
+    }
+  }
+
   getFirstLineCards() {
-    return CardSearch.cards(this.getBattlefield()).ofType('LAND')
+    return CardSearch.cards(this.getPlayerBattlefield()).ofType('LAND')
   }
 
   getSecondLineCards() {
-    return CardSearch.cards(this.getBattlefield()).ofType('CREATURE').notAttackingOrBlocking().notFrontendBlocking()
+    return CardSearch.cards(this.getPlayerBattlefield()).ofType('CREATURE').notAttackingOrBlocking().notFrontendBlocking()
   }
 
   getAttackingBlockingCreatures() {
-    return CardSearch.cards(this.getBattlefield()).attackingOrBlocking().concat(CardSearch.cards(this.getBattlefield()).frontendBlocking())
-  }
-
-  playerCardClick(cardId) {
-    if (this.props.type === 'player') {
-      return () => this.props.playerCardClick(cardId)
-    } else {
-      return () => this.props.opponentCardClick(cardId)
-    }
+    return CardSearch.cards(this.getPlayerBattlefield()).attackingOrBlocking().concat(CardSearch.cards(this.getPlayerBattlefield()).frontendBlocking())
   }
 
   isCardSelectedToBeBlocked(cardInstance, index) {
@@ -51,10 +51,56 @@ class Battlefield extends PureComponent {
             selectedToBeBlocked={this.isCardSelectedToBeBlocked(cardInstance, i)} />)
   }
 
+  attackingCards(cardInstance) {
+    if (CardUtils.isAttacking(cardInstance)) {
+      return CardSearch.cards(this.getPlayerBattlefield()).attacking()
+    } else {
+      return CardSearch.cards(this.getOtherPlayerBattlefield()).attacking()
+    }
+  }
+
+  static marginFromPosition(n, i) {
+    const HALF_CARD = 130
+    return ((-n + 1) + (2 * i)) * HALF_CARD
+  }
+
+  static getCardPosition(attackingCards, cardInstance) {
+    if (CardUtils.isAttacking(cardInstance)) {
+      return attackingCards.indexOfId(cardInstance.id)
+    } else {
+      return attackingCards.indexOfId(cardInstance.modifiers.blockingCardId)
+    }
+  }
+
+  cardMargin(cardInstance) {
+    const attackingCards = this.attackingCards(cardInstance)
+    const numOfAttackingCreatures = attackingCards.length
+    const cardPosition = Battlefield.getCardPosition(attackingCards, cardInstance)
+    let marginFromPosition = Battlefield.marginFromPosition(numOfAttackingCreatures, cardPosition)
+    return CardUtils.isAttacking(cardInstance) ? marginFromPosition : -marginFromPosition;
+  }
+
+  positionedCardItems(cards) {
+    return cards.map((cardInstance, i) =>
+      <span style={{'marginLeft': this.cardMargin(cardInstance)}}>
+        <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
+              selectedToBeBlocked={this.isCardSelectedToBeBlocked(cardInstance, i)} />
+      </span>
+    )
+  }
+
+  playerCardClick(cardId) {
+    if (this.props.type === 'player') {
+      return () => this.props.playerCardClick(cardId)
+    } else {
+      return () => this.props.opponentCardClick(cardId)
+    }
+  }
+
   render() {
     return (
       <div id={this.getId()} className='battlefield'>
-        <div className='battlefield-area combat-line'>{this.cardItems(this.getAttackingBlockingCreatures())}</div>
+        <div className='battlefield-area combat-line'>{this.positionedCardItems(this.getAttackingBlockingCreatures())}</div>
         <div className='battlefield-area second-line'>{this.cardItems(this.getSecondLineCards())}</div>
         <div className='battlefield-area first-line'>{this.cardItems(this.getFirstLineCards())}</div>
       </div>

@@ -9,6 +9,10 @@ export default class CardSearch extends Array {
     return this.find(cardInstance => cardInstance.id === parseInt(id))
   }
 
+  indexOfId(id) {
+    return this.map(cardInstance => cardInstance.id).indexOf(parseInt(id))
+  }
+
   ofType(type) {
     const cards = this.filter(cardInstance => CardUtils.isOfType(cardInstance, type))
     return new CardSearch(...cards)
