@@ -62,7 +62,7 @@ public class CardInstance {
         return card.getTypes().contains(type);
     }
 
-    public void declareAsAttacker() {
+    public void checkIfCanAttack() {
         if (!isOfType(Type.CREATURE)) {
             throw new MessageException("Declared attacker " + getIdAndName() + " is not of type Creature");
         }
@@ -74,12 +74,14 @@ public class CardInstance {
         if (modifiers.isSummoningSickness()) {
             throw new MessageException(getIdAndName() + " is has summoning sickness tapped and cannot attack");
         }
+    }
 
+    public void declareAsAttacker() {
         modifiers.tap();
         modifiers.setAttacking(true);
     }
 
-    public void declareAsBlocker(int attackingCreatureId) {
+    public void checkIfCanBlock() {
         if (!isOfType(Type.CREATURE)) {
             throw new MessageException("Declared blocker " + getIdAndName() + " is not of type Creature");
         }
@@ -87,7 +89,9 @@ public class CardInstance {
         if (modifiers.isTapped()) {
             throw new MessageException(getIdAndName() + " is tapped and cannot block");
         }
+    }
 
+    public void declareAsBlocker(int attackingCreatureId) {
         modifiers.addBlocking(attackingCreatureId);
     }
 

@@ -47,7 +47,7 @@ export default class ClientEventsReducer {
           const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
 
           if (newState.turn.currentPhase === 'DA') {
-            if (CardUtils.isOfType(cardInstance, 'CREATURE')) {
+            if (CardUtils.isOfType(cardInstance, 'CREATURE') && !CardUtils.hasSummoningSickness(cardInstance)) {
               CardUtils.toggleFrontendTapped(cardInstance)
             }
 

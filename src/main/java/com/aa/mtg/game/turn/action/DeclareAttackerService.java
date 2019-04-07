@@ -1,6 +1,5 @@
 package com.aa.mtg.game.turn.action;
 
-import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
@@ -31,6 +30,7 @@ public class DeclareAttackerService {
             throw new RuntimeException("Attackers declared during phase: " + turn.getCurrentPhase());
         }
 
+        cardIds.forEach(cardId -> currentPlayer.getBattlefield().findCardById(cardId).checkIfCanAttack());
         cardIds.forEach(cardId -> currentPlayer.getBattlefield().findCardById(cardId).declareAsAttacker());
 
         gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
