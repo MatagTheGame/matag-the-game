@@ -4,13 +4,19 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
+import com.aa.mtg.game.turn.TurnController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.aa.mtg.cards.ability.Ability.DEATHTOUCH;
+
 @Service
 public class CombatService {
+    private Logger LOGGER = LoggerFactory.getLogger(TurnController.class);
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
 
@@ -31,8 +37,7 @@ public class CombatService {
             if (blockingCreaturesFor.isEmpty()) {
                 damageFromUnblockedCreatures += attackingCreature.getPower();
             } else {
-                dealDamageToCreature(currentPlayer, attackingCreature, blockingCreaturesFor.get(0).getPower());
-                dealDamageToCreature(nonCurrentPlayer, blockingCreaturesFor.get(0), attackingCreature.getPower());
+                dealCombatDamageForOneAttackingCreature(gameStatus, attackingCreature, blockingCreaturesFor);
                 gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
                 gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
                 gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
@@ -50,13 +55,34 @@ public class CombatService {
         }
     }
 
-    private void dealDamageToCreature(Player owner, CardInstance cardInstance, int damage) {
+    private void dealCombatDamageForOneAttackingCreature(GameStatus gameStatus, CardInstance attackingCreature, List<CardInstance> blockingCreatures) {
+        int remainingDamageForAttackingCreature = attackingCreature.getPower();
+        for (CardInstance blockingCreature : blockingCreatures) {
+            int damageToCurrentBlocker = Math.max(remainingDamageForAttackingCreature, blockingCreature.getToughness());
+
+            dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.getAbilities().contains(DEATHTOUCH));
+            dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.getAbilities().contains(DEATHTOUCH));
+
+            remainingDamageForAttackingCreature -= damageToCurrentBlocker;
+        }
+    }
+
+    private void dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
+        LOGGER.info("{} is getting {} damage", cardInstance.getIdAndName(), damage);
         cardInstance.getModifiers().setDamage(damage);
         if (cardInstance.getModifiers().getDamage() >= cardInstance.getToughness()) {
-            cardInstance = owner.getBattlefield().extractCardById(cardInstance.getId());
-            cardInstance.clearModifiers();
-            owner.getGraveyard().addCard(cardInstance);
+            destroy(gameStatus, cardInstance);
+        } else if (damage > 0 && deathtouch) {
+            destroy(gameStatus, cardInstance);
         }
+    }
+
+    private void destroy(GameStatus gameStatus, CardInstance cardInstance) {
+        LOGGER.info("{} is being destroyed", cardInstance.getIdAndName());
+        Player owner = gameStatus.getPlayerByName(cardInstance.getOwner());
+        cardInstance = owner.getBattlefield().extractCardById(cardInstance.getId());
+        cardInstance.clearModifiers();
+        owner.getGraveyard().addCard(cardInstance);
     }
 
 }

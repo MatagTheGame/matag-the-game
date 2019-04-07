@@ -1,5 +1,6 @@
 package com.aa.mtg.cards;
 
+import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import lombok.EqualsAndHashCode;
@@ -7,6 +8,8 @@ import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @ToString
 @EqualsAndHashCode
@@ -98,5 +101,9 @@ public class CardInstance {
 
     public void clearModifiers() {
         modifiers = new CardModifiers();
+    }
+
+    public List<Ability> getAbilities() {
+        return Stream.concat(card.getAbilities().stream(), modifiers.getAbilities().stream()).collect(Collectors.toList());
     }
 }

@@ -15,7 +15,7 @@ public class SecurityHelper {
     }
 
     public static void isPlayerAllowedToExecuteAction(GameStatus gameStatus, String sessionId) {
-        Player currentPlayer = gameStatus.getPlayer(sessionId);
+        Player currentPlayer = gameStatus.getPlayerBySessionId(sessionId);
         if (!gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
             throw new SecurityException("Player " + currentPlayer.getName() + " is not allowed to execute an action. turn=[" + gameStatus.getTurn() + "]");
         }

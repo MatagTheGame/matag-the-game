@@ -1,5 +1,6 @@
 package com.aa.mtg.cards;
 
+import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.cards.properties.Type;
@@ -8,6 +9,8 @@ import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Collections.emptyList;
 
 @ToString
 @EqualsAndHashCode
@@ -20,8 +23,9 @@ public class Card {
     private final String ruleText;
     private final int power;
     private final int toughness;
+    private final List<Ability> abilities;
 
-    public Card(String name, List<Color> colors, List<Cost> cost, List<Type> types, List<String> subtypes, String ruleText, int power, int toughness) {
+    public Card(String name, List<Color> colors, List<Cost> cost, List<Type> types, List<String> subtypes, String ruleText, int power, int toughness, List<Ability> abilities) {
         this.name = name;
         this.colors = colors;
         this.cost = cost;
@@ -30,15 +34,16 @@ public class Card {
         this.ruleText = ruleText;
         this.power = power;
         this.toughness = toughness;
+        this.abilities = abilities;
     }
 
     public Card(Card card) {
         this(card.getName(), new ArrayList<>(card.getColors()), new ArrayList<>(card.getCost()), new ArrayList<>(card.getTypes()),
-                new ArrayList<>(card.getSubtypes()), card.getRuleText(), card.getPower(), card.getToughness());
+                new ArrayList<>(card.getSubtypes()), card.getRuleText(), card.getPower(), card.getToughness(), card.getAbilities());
     }
 
     public static Card hiddenCard() {
-        return new Card("card", new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), "", 0, 0);
+        return new Card("card", emptyList(), emptyList(), emptyList(), emptyList(), "", 0, 0, emptyList());
     }
 
     public String getName() {
@@ -75,5 +80,9 @@ public class Card {
 
     public boolean isInstantSpeed() {
         return types.contains(Type.INSTANT);
+    }
+
+    public List<Ability> getAbilities() {
+        return abilities;
     }
 }

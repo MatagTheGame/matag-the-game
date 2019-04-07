@@ -30,7 +30,7 @@ public abstract class CardListComponent {
         return cards.stream()
                 .filter(cardInstance -> cardInstance.getId() == cardId)
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Card with id " + cardId + " not found in player hand."));
+                .orElseThrow(() -> new RuntimeException("Card with id " + cardId + " not found in player battlefield."));
     }
 
     public CardInstance extractCardById(int cardId) {

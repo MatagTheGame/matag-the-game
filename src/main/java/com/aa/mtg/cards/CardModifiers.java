@@ -1,5 +1,6 @@
 package com.aa.mtg.cards;
 
+import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.modifiers.TappedModifiers;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -15,6 +16,7 @@ public class CardModifiers {
     private boolean attacking;
     private List<Integer> blocking = new ArrayList<>();
     private int damage;
+    private List<Ability> abilities = new ArrayList<>();
 
     public TappedModifiers getTapped() {
         return tapped;
@@ -71,5 +73,17 @@ public class CardModifiers {
 
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+
+    public void setTapped(TappedModifiers tapped) {
+        this.tapped = tapped;
+    }
+
+    public List<Ability> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<Ability> abilities) {
+        this.abilities = abilities;
     }
 }
