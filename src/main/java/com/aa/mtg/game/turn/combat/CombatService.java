@@ -58,23 +58,33 @@ public class CombatService {
     private void dealCombatDamageForOneAttackingCreature(GameStatus gameStatus, CardInstance attackingCreature, List<CardInstance> blockingCreatures) {
         int remainingDamageForAttackingCreature = attackingCreature.getPower();
         for (CardInstance blockingCreature : blockingCreatures) {
-            int damageToCurrentBlocker = Math.max(remainingDamageForAttackingCreature, blockingCreature.getToughness());
+            int damageToCurrentBlocker = remainingDamageForAttackingCreature;
+            if (damageToCurrentBlocker > blockingCreature.getToughness()) {
+                remainingDamageForAttackingCreature = blockingCreature.getToughness();
+            }
 
-            dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.getAbilities().contains(DEATHTOUCH));
+            boolean attackingCreatureDestroyed = dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.getAbilities().contains(DEATHTOUCH));
             dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.getAbilities().contains(DEATHTOUCH));
+
+            if (attackingCreatureDestroyed) {
+                break;
+            }
 
             remainingDamageForAttackingCreature -= damageToCurrentBlocker;
         }
     }
 
-    private void dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
+    private boolean dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
         LOGGER.info("{} is getting {} damage", cardInstance.getIdAndName(), damage);
         cardInstance.getModifiers().setDamage(damage);
         if (cardInstance.getModifiers().getDamage() >= cardInstance.getToughness()) {
             destroy(gameStatus, cardInstance);
+            return true;
         } else if (damage > 0 && deathtouch) {
             destroy(gameStatus, cardInstance);
+            return true;
         }
+        return false;
     }
 
     private void destroy(GameStatus gameStatus, CardInstance cardInstance) {

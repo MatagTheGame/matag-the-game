@@ -7,7 +7,6 @@ import com.aa.mtg.game.status.GameStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static com.aa.mtg.cards.Cards.FOREST;
@@ -30,35 +29,27 @@ public class DeckRetrieverService {
     private Library pippoDeck(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 60 / 5; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), SWAMP, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), PLAINS, playerName));
-        }
-
-        for (int i = 0; i < 18; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), CATACOMB_CROCODILE, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), NOXIOUS_GROODION, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), PROWLING_CARACAL, playerName));
         }
 
-        Collections.shuffle(cards);
         return new Library(cards);
     }
 
     private Library plutoDeck(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 60 / 4; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), MOUNTAIN, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), FOREST, playerName));
-        }
-
-        for (int i = 0; i < 18; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), FERAL_MAAKA, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), AXEBANE_BEAST, playerName));
         }
 
-        Collections.shuffle(cards);
         return new Library(cards);
     }
 

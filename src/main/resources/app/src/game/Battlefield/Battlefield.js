@@ -59,6 +59,14 @@ class Battlefield extends PureComponent {
     }
   }
 
+  blockingCards(cardInstance) {
+    if (CardUtils.isBlocking(cardInstance)) {
+      return CardSearch.cards(this.getOtherPlayerBattlefield()).blocking()
+    } else {
+      return CardSearch.cards(this.getPlayerBattlefield()).blocking()
+    }
+  }
+
   static marginFromPosition(n, i) {
     const HALF_CARD = 130
     return ((-n + 1) + (2 * i)) * HALF_CARD
@@ -72,17 +80,26 @@ class Battlefield extends PureComponent {
     }
   }
 
-  cardMargin(cardInstance) {
+  cardMarginLeft(cardInstance) {
     const attackingCards = this.attackingCards(cardInstance)
     const numOfAttackingCreatures = attackingCards.length
     const cardPosition = Battlefield.getCardPosition(attackingCards, cardInstance)
-    let marginFromPosition = Battlefield.marginFromPosition(numOfAttackingCreatures, cardPosition)
-    return CardUtils.isAttacking(cardInstance) ? marginFromPosition : -marginFromPosition;
+    const marginFromPosition = Battlefield.marginFromPosition(numOfAttackingCreatures, cardPosition)
+    let margin = CardUtils.isAttacking(cardInstance) ? marginFromPosition : -marginFromPosition
+    margin += this.cardMarginTop(cardInstance) / 2
+    return margin
+  }
+
+  cardMarginTop(cardInstance) {
+    return this.blockingCards(cardInstance)
+      .filter(currentCardInstance => cardInstance.modifiers.blockingCardIds === currentCardInstance.modifiers.blockingCardIds)
+      .map(cardInstance => cardInstance.id)
+      .indexOf(cardInstance.id) * 50
   }
 
   positionedCardItems(cards) {
     return cards.map((cardInstance, i) =>
-      <span style={{'marginLeft': this.cardMargin(cardInstance)}}>
+      <span style={{'marginLeft': this.cardMarginLeft(cardInstance), 'marginTop': this.cardMarginTop(cardInstance)}}>
         <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
               selectedToBeBlocked={this.isCardSelectedToBeBlocked(cardInstance, i)} />
       </span>
