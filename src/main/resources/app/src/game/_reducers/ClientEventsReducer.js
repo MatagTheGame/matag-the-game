@@ -53,8 +53,6 @@ export default class ClientEventsReducer {
 
           } else if (newState.turn.currentPhase === 'DB') {
             if (CardUtils.isOfType(cardInstance, 'CREATURE')) {
-              console.log(CardSearch.cards(newState.opponent.battlefield).attacking())
-              console.log(CardSearch.cards(newState.opponent.battlefield).attacking()[newState.turn.blockingCardPosition])
               const blockingCard = CardSearch.cards(newState.opponent.battlefield).attacking()[newState.turn.blockingCardPosition]
               CardUtils.toggleFrontendBlocking(cardInstance, blockingCard.id)
             }
@@ -93,12 +91,13 @@ export default class ClientEventsReducer {
             }
 
           } else if (newState.turn.currentPhase === 'DB') {
-            const blockingCreaturesIds = CardSearch.cards(newState.player.battlefield)
-              .frontEndBlocking()
-              .map(cardInstance => cardInstance.id)
+            const blockingCreatures = CardSearch.cards(newState.player.battlefield).frontEndBlocking()
 
-            if (blockingCreaturesIds.length > 0) {
-              stompClient.sendEvent('turn', {action: 'DECLARE_BLOCKERS', cardIds: blockingCreaturesIds})
+            if (blockingCreatures.length > 0) {
+              stompClient.sendEvent('turn', {
+                action: 'DECLARE_BLOCKERS',
+                targetsIdsForCardIds: CardUtils.blockingCreaturesToTargetIdsEvent(blockingCreatures)
+              })
               break
             }
           }

@@ -10,6 +10,7 @@ import com.aa.mtg.game.turn.action.ResolveService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TurnService {
@@ -50,7 +51,7 @@ public class TurnService {
         declareAttackerService.declareAttackers(gameStatus, cardIds);
     }
 
-    void declareBlockers(GameStatus gameStatus, List<Integer> cardIds) {
-        declareBlockerService.declareBlockers(gameStatus, cardIds);
+    void declareBlockers(GameStatus gameStatus, Map<Integer, List<Integer>> targetsIdsForCardIds) {
+        declareBlockerService.declareBlockers(gameStatus, targetsIdsForCardIds);
     }
 }

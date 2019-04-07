@@ -50,7 +50,7 @@ public class TurnController {
         } else if ("DECLARE_ATTACKERS".equals(request.getAction())) {
             turnService.declareAttackers(gameStatus, request.getCardIds());
         } else if ("DECLARE_BLOCKERS".equals(request.getAction())) {
-            turnService.declareBlockers(gameStatus, request.getCardIds());
+            turnService.declareBlockers(gameStatus, request.getTargetsIdsForCardIds());
         }
     }
 

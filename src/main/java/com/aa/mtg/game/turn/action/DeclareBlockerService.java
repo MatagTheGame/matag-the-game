@@ -1,7 +1,5 @@
 package com.aa.mtg.game.turn.action;
 
-import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
@@ -11,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DeclareBlockerService {
@@ -24,17 +23,17 @@ public class DeclareBlockerService {
         this.continueTurnService = continueTurnService;
     }
 
-    public void declareBlockers(GameStatus gameStatus, List<Integer> cardIds) {
+    public void declareBlockers(GameStatus gameStatus, Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds) {
         Turn turn = gameStatus.getTurn();
-        Player currentPlayer = gameStatus.getCurrentPlayer();
         Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
 
         if (!turn.getCurrentPhase().equals(Phase.DB)) {
             throw new RuntimeException("Blockers declared during phase: " + turn.getCurrentPhase());
         }
 
-        CardInstance firstAttackingCreature = currentPlayer.getBattlefield().getAttackingCreatures().get(0);
-        cardIds.forEach(cardId -> nonCurrentPlayer.getBattlefield().findCardById(cardId).declareAsBlocker(firstAttackingCreature.getId()));
+        blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) ->
+            nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(blockedCreaturesIds.get(0))
+        );
 
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
         continueTurnService.continueTurn(gameStatus);

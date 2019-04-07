@@ -79,7 +79,13 @@ export default class CardUtils {
     return cardInstance.card.types.includes(type)
   }
 
-  static isAttacking(cardInstance) {
-    return cardInstance.modifiers.attacking
+  static blockingCreaturesToTargetIdsEvent(blockingCreatures) {
+    const map = {}
+
+    blockingCreatures.forEach(blockingCreature => {
+      map[blockingCreature.id] = [blockingCreature.modifiers.blockingCardId]
+    })
+
+    return map
   }
 }

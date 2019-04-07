@@ -1,12 +1,14 @@
 package com.aa.mtg.game.turn;
 
 import java.util.List;
+import java.util.Map;
 
 public class TurnRequest {
     private String action;
     private String triggeredAction;
-    private List<Integer> cardIds;
     private List<Integer> tappingLandIds;
+    private List<Integer> cardIds;
+    private Map<Integer, List<Integer>> targetsIdsForCardIds;
 
     public String getAction() {
         return action;
@@ -40,13 +42,22 @@ public class TurnRequest {
         this.tappingLandIds = tappingLandIds;
     }
 
+    public Map<Integer, List<Integer>> getTargetsIdsForCardIds() {
+        return targetsIdsForCardIds;
+    }
+
+    public void setTargetsIdsForCardIds(Map<Integer, List<Integer>> targetsIdsForCardIds) {
+        this.targetsIdsForCardIds = targetsIdsForCardIds;
+    }
+
     @Override
     public String toString() {
         return "TurnRequest{" +
                 "action='" + action + '\'' +
                 ", triggeredAction='" + triggeredAction + '\'' +
-                ", cardIds=" + cardIds +
                 ", tappingLandIds=" + tappingLandIds +
+                ", cardIds=" + cardIds +
+                ", targetsIdsForCardIds=" + targetsIdsForCardIds +
                 '}';
     }
 }
