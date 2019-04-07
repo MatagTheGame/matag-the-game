@@ -37,7 +37,7 @@ class UserAction extends PureComponent {
     return (
       <div id='user-actions'>
         <button title="Press SPACE to continue" id='continue-button' type='button' disabled={!this.isContinueEnabled()} onClick={this.props.continueClick}>-></button>
-        <button title="Press L to see game logs" id='logs-button' type='button'>=</button>
+        <button title="Press L to see game logs" id='logs-button' type='button' onClick={alert('Game Log coming soon!')}>=</button>
       </div>
 
     )
