@@ -52,6 +52,18 @@ public class CastService {
 
             } else {
                 cardInstance = currentPlayer.getHand().extractCardById(cardId);
+                cardInstance.setController(currentPlayer.getName());
+
+                gameStatus.getStack().addLast(cardInstance);
+                gameStatusUpdaterService.sendUpdateStack(gameStatus);
+
+                gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
+                gameStatusUpdaterService.sendUpdateTurn(gameStatus);
+
+
+
+
+                // TODO should be moved out
                 cardInstance.getModifiers().setSummoningSickness(true);
                 currentPlayer.getBattlefield().addCard(cardInstance);
 

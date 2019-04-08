@@ -17,17 +17,23 @@ public class CardInstance {
     private final int id;
     private final Card card;
     private final String owner;
+    private String controller;
     private CardModifiers modifiers;
 
     public CardInstance(int id, Card card, String owner) {
+        this(id, card, owner, null);
+    }
+
+    public CardInstance(int id, Card card, String owner, String controller) {
         this.id = id;
         this.card = card;
         this.owner = owner;
+        this.controller = controller;
         this.modifiers = new CardModifiers();
     }
 
     public CardInstance(CardInstance cardInstance) {
-        this(cardInstance.getId(), cardInstance.getCard(), cardInstance.getOwner());
+        this(cardInstance.getId(), cardInstance.getCard(), cardInstance.getOwner(), cardInstance.getController());
     }
 
     public int getId() {
@@ -44,6 +50,14 @@ public class CardInstance {
 
     public String getOwner() {
         return owner;
+    }
+
+    public String getController() {
+        return controller;
+    }
+
+    public void setController(String controller) {
+        this.controller = controller;
     }
 
     public CardModifiers getModifiers() {

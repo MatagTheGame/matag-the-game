@@ -1,8 +1,10 @@
 package com.aa.mtg.game.status;
 
+import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.turn.Turn;
 
+import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameStatus {
@@ -12,6 +14,7 @@ public class GameStatus {
     private Player player1;
     private Player player2;
     private Turn turn;
+    private LinkedList<CardInstance> stack = new LinkedList<>();
 
     public GameStatus(String gameId) {
         this.gameId = gameId;
@@ -32,6 +35,10 @@ public class GameStatus {
 
     public Turn getTurn() {
         return turn;
+    }
+
+    public LinkedList<CardInstance> getStack() {
+        return stack;
     }
 
     public void setPlayer1(Player player1) {

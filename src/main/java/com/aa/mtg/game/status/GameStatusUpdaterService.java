@@ -2,7 +2,6 @@ package com.aa.mtg.game.status;
 
 import com.aa.mtg.game.event.Event;
 import com.aa.mtg.game.event.EventSender;
-import com.aa.mtg.game.message.MessageEvent;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.turn.events.LifeEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +63,13 @@ public class GameStatusUpdaterService {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                 new Event("UPDATE_PLAYER_LIFE", new LifeEvent(nonCurrentPlayer.getName(), nonCurrentPlayer.getLife()))
+        );
+    }
+
+    public void sendUpdateStack(GameStatus gameStatus) {
+        eventSender.sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_STACK", gameStatus.getStack())
         );
     }
 }
