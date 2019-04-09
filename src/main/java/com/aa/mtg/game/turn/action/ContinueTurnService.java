@@ -32,10 +32,10 @@ public class ContinueTurnService {
             gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
             cardInstance.getModifiers().setSummoningSickness(true);
-            gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
+            currentPlayer.getBattlefield().addCard(cardInstance);
             gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
 
-            gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+            gameStatus.getTurn().setCurrentPhaseActivePlayer(currentPlayer.getName());
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
         } else if (turn.getCurrentPhase().equals(Phase.UT)) {
@@ -54,7 +54,7 @@ public class ContinueTurnService {
             turn.setCurrentPhase(Phase.M1);
 
         } else if (turn.getCurrentPhase().equals(Phase.DA)) {
-            if (!gameStatus.getCurrentPlayer().getBattlefield().getAttackingCreatures().isEmpty()) {
+            if (!currentPlayer.getBattlefield().getAttackingCreatures().isEmpty()) {
                 turn.setCurrentPhase(Phase.DB);
                 turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
             } else {
@@ -85,8 +85,10 @@ public class ContinueTurnService {
         } else if (turn.getCurrentPhase().equals(Phase.CL)) {
             turn.cleanup(nonCurrentPlayer.getName());
 
-        } else if (turn.getCurrentPhase().equals(Phase.ET) && currentPlayer.getHand().size() > 7) {
-            gameStatus.getTurn().setTriggeredAction("DISCARD_A_CARD");
+        } else if (turn.getCurrentPhase().equals(Phase.ET)) {
+            if (currentPlayer.getHand().size() > 7) {
+                gameStatus.getTurn().setTriggeredAction("DISCARD_A_CARD");
+            }
 
         } else {
             // TODO possibly this code will be dropped when all phases will be implemented
