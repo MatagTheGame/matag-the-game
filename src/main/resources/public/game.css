@@ -371,6 +371,14 @@ body {
   margin-left: 10px;
 }
 
+#stack {
+  position: absolute;
+  left: 0;
+  bottom: 42%;
+  transform-style: preserve-3d;
+  transform: translateZ(30px);
+}
+
 #table {
   background-image: url("/img/materials/wood.jpg");
   position: absolute;
@@ -379,7 +387,7 @@ body {
   height: 200%;
   bottom: -35%;
   z-index: 0;
-  transform: rotateX(45deg) scale(0.5, 0.5);
+  transform: rotateX(45deg) scale(0.5, 0.5) translateZ(-1px);
   transform-style: preserve-3d;
 }
 
@@ -391,6 +399,6 @@ body {
   height: 80px;
   bottom: -40px;
   z-index: 0;
-  transform: rotateX(-90deg) translateY(40px);
+  transform: rotateX(-90deg) translateY(40px) translateZ(-1px);
   filter: brightness(50%);
 }

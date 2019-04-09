@@ -99,8 +99,8 @@ class Battlefield extends PureComponent {
 
   positionedCardItems(cards) {
     return cards.map((cardInstance, i) =>
-      <span style={{'marginLeft': this.cardMarginLeft(cardInstance), 'marginTop': this.cardMarginTop(cardInstance)}}>
-        <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
+      <span key={cardInstance.id} style={{'marginLeft': this.cardMarginLeft(cardInstance), 'marginTop': this.cardMarginTop(cardInstance)}}>
+        <Card cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
               selectedToBeBlocked={this.isCardSelectedToBeBlocked(cardInstance, i)} />
       </span>
     )

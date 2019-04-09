@@ -53,6 +53,7 @@ public class CastService {
             } else {
                 cardInstance = currentPlayer.getHand().extractCardById(cardId);
                 cardInstance.setController(currentPlayer.getName());
+                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
 
                 gameStatus.getStack().addLast(cardInstance);
                 gameStatusUpdaterService.sendUpdateStack(gameStatus);
@@ -60,20 +61,11 @@ public class CastService {
                 gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
                 gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
-
-
-
-                // TODO should be moved out
-                cardInstance.getModifiers().setSummoningSickness(true);
-                currentPlayer.getBattlefield().addCard(cardInstance);
-
                 // FIXME Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
                 tappingLandIds.stream()
                         .map(tappingLandId -> currentPlayer.getBattlefield().findCardById(tappingLandId))
                         .forEach(card -> card.getModifiers().tap());
-
                 gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
-                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
             }
         }
     }

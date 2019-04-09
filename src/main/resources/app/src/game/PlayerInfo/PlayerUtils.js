@@ -1,5 +1,6 @@
 import Phase from '../Turn/Phase'
 import CardSearch from '../Card/CardSearch'
+import StackUtils from '../Stack/StackUtils'
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
@@ -52,13 +53,20 @@ export default class PlayerUtils {
   }
 
   static canPlayerPerformAnyAction(state) {
+    if (!PlayerUtils.isCurrentPlayerActive(state)) {
+      state.statusMessage = "Wait for opponent to perform its action..."
+      return false
+    }
+
     if (!PlayerUtils.isCurrentPlayerTurn(state)) {
       if (state.turn.currentPhase === 'DB' && PlayerUtils.isPlayerAbleToBlock(state)) {
         state.statusMessage = "Choose creatures you want to block with."
         return true
       } else {
-        state.statusMessage = "Wait for opponent to perform its action..."
-        return false
+        if (!StackUtils.isStackEmpty(state)) {
+          state.statusMessage = "Play any instant or abilities or resolve the top spell in the stack (SPACE)."
+          return true
+        }
       }
 
     } else {

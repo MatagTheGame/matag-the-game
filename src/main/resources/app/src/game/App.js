@@ -12,6 +12,7 @@ import TurnPhases from './Turn/TurnPhases'
 import PlayerInfo from './PlayerInfo/PlayerInfo'
 import UserAction from './UserAction/UserAction'
 import MaximizedCard from './Card/MaximizedCard'
+import Stack from './Stack/Stack'
 
 
 class App extends PureComponent {
@@ -34,6 +35,7 @@ class App extends PureComponent {
           <Graveyard type='opponent'/>
           <PlayerInfo type='opponent'/>
           <TurnPhases/>
+          <Stack/>
           <Library type='player'/>
           <Battlefield type='player'/>
           <Graveyard type='player'/>

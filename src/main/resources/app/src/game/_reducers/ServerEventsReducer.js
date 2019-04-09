@@ -35,8 +35,10 @@ export default class ServerEventsReducer {
         newState.turn = action.value
         newState.turn.blockingCardPosition = 0
 
-        if (!newState.turn.winner && PlayerUtils.isCurrentPlayerActive(newState) && !PlayerUtils.canPlayerPerformAnyAction(newState)) {
-          stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+        if (!newState.turn.winner && !PlayerUtils.canPlayerPerformAnyAction(newState)) {
+          if (PlayerUtils.isCurrentPlayerActive(newState)) {
+            stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+          }
         } else if (newState.turn.winner) {
           newState.message = {text: newState.turn.winner + ' Win!', closable: true}
         }

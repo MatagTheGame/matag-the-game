@@ -100,6 +100,7 @@ export default class ClientEventsReducer {
               })
               break
             }
+
           }
 
           CardSearch.cards(newState.player.battlefield)
