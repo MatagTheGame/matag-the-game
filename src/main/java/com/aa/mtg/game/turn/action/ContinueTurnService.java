@@ -43,7 +43,16 @@ public class ContinueTurnService {
             currentPlayer.getBattlefield().removeSummoningSickness();
 
             gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
-            turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
+            turn.setCurrentPhase(Phase.UP);
+
+        } else if (turn.getCurrentPhase().equals(Phase.UP)) {
+            if (turn.getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
+                turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
+
+            } else {
+                turn.setCurrentPhase(Phase.DR);
+                turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+            }
 
         } else if (turn.getCurrentPhase().equals(Phase.DR)) {
             if (turn.getTurnNumber() > 1) {
@@ -52,6 +61,24 @@ public class ContinueTurnService {
                 gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
             }
             turn.setCurrentPhase(Phase.M1);
+
+        } else if (turn.getCurrentPhase().equals(Phase.M1)) {
+            if (turn.getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
+                turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
+
+            } else {
+                turn.setCurrentPhase(Phase.BC);
+                turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+            }
+
+        } else if (turn.getCurrentPhase().equals(Phase.BC)) {
+            if (turn.getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
+                turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
+
+            } else {
+                turn.setCurrentPhase(Phase.DA);
+                turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+            }
 
         } else if (turn.getCurrentPhase().equals(Phase.DA)) {
             if (!currentPlayer.getBattlefield().getAttackingCreatures().isEmpty()) {
@@ -64,6 +91,15 @@ public class ContinueTurnService {
         } else if (turn.getCurrentPhase().equals(Phase.DB)) {
             turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
             turn.setCurrentPhase(Phase.FS);
+
+        } else if (turn.getCurrentPhase().equals(Phase.FS)) {
+            if (turn.getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
+                turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
+
+            } else {
+                turn.setCurrentPhase(Phase.CD);
+                turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+            }
 
         } else if (turn.getCurrentPhase().equals(Phase.CD)) {
             combatService.dealCombatDamage(gameStatus);
@@ -82,27 +118,31 @@ public class ContinueTurnService {
             gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
             gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
 
-        } else if (turn.getCurrentPhase().equals(Phase.CL)) {
-            turn.cleanup(nonCurrentPlayer.getName());
+        } else if (turn.getCurrentPhase().equals(Phase.M2)) {
+            if (turn.getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
+                turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
+
+            } else {
+                turn.setCurrentPhase(Phase.ET);
+                turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+            }
 
         } else if (turn.getCurrentPhase().equals(Phase.ET)) {
             if (currentPlayer.getHand().size() > 7) {
                 gameStatus.getTurn().setTriggeredAction("DISCARD_A_CARD");
-            }
-
-        } else {
-            // TODO possibly this code will be dropped when all phases will be implemented
-            if (turn.getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
-                if (Phase.nonOpponentPhases().contains(turn.getCurrentPhase())) {
-                    turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
-                } else {
-                    turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
-                }
 
             } else {
-                turn.setCurrentPhase(Phase.nextPhase(turn.getCurrentPhase()));
-                turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+                if (turn.getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
+                    turn.setCurrentPhaseActivePlayer(nonCurrentPlayer.getName());
+
+                } else {
+                    turn.setCurrentPhase(Phase.CL);
+                    turn.setCurrentPhaseActivePlayer(currentPlayer.getName());
+                }
             }
+
+        } else if (turn.getCurrentPhase().equals(Phase.CL)) {
+            turn.cleanup(nonCurrentPlayer.getName());
         }
 
         gameStatusUpdaterService.sendUpdateTurn(gameStatus);
