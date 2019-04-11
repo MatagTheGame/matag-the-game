@@ -27,18 +27,7 @@ public class ContinueTurnService {
         Player currentPlayer = gameStatus.getCurrentPlayer();
         Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
 
-        if (!gameStatus.getStack().isEmpty()) {
-            CardInstance cardInstance = gameStatus.getStack().removeLast();
-            gameStatusUpdaterService.sendUpdateStack(gameStatus);
-
-            cardInstance.getModifiers().setSummoningSickness(true);
-            currentPlayer.getBattlefield().addCard(cardInstance);
-            gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
-
-            gameStatus.getTurn().setCurrentPhaseActivePlayer(currentPlayer.getName());
-            gameStatusUpdaterService.sendUpdateTurn(gameStatus);
-
-        } else if (turn.getCurrentPhase().equals(Phase.UT)) {
+        if (turn.getCurrentPhase().equals(Phase.UT)) {
             currentPlayer.getBattlefield().untap();
             currentPlayer.getBattlefield().removeSummoningSickness();
 

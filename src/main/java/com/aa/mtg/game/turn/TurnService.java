@@ -43,8 +43,8 @@ public class TurnService {
         castService.cast(gameStatus, cardId, tappingLandIds);
     }
 
-    void resolve(GameStatus gameStatus, String triggeredAction, int cardId) {
-        resolveService.resolve(gameStatus, triggeredAction, cardId);
+    void resolve(GameStatus gameStatus, String triggeredAction, List<Integer> cardIds) {
+        resolveService.resolve(gameStatus, triggeredAction, cardIds);
     }
 
     void declareAttackers(GameStatus gameStatus, List<Integer> cardIds) {

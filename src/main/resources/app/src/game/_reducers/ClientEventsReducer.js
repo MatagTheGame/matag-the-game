@@ -3,6 +3,7 @@ import Phase from '../Turn/Phase'
 import CostUtils from '../Card/CostUtils'
 import CardUtils from '../Card/CardUtils'
 import CardSearch from '../Card/CardSearch'
+import StackUtils from '../Stack/StackUtils'
 
 export default class ClientEventsReducer {
 
@@ -100,14 +101,18 @@ export default class ClientEventsReducer {
               })
               break
             }
-
           }
 
-          CardSearch.cards(newState.player.battlefield)
-            .frontEndTapped()
-            .forEach((cardInstance) => CardUtils.untap(cardInstance))
+          if (!StackUtils.isStackEmpty(newState)) {
+            stompClient.sendEvent('turn', {action: 'RESOLVE'})
 
-          stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+          } else {
+            CardSearch.cards(newState.player.battlefield)
+              .frontEndTapped()
+              .forEach((cardInstance) => CardUtils.untap(cardInstance))
+
+            stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
+          }
         }
 
         break
