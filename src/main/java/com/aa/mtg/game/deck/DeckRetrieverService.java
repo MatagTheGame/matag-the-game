@@ -13,6 +13,7 @@ import static com.aa.mtg.cards.Cards.FOREST;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.Cards.SWAMP;
+import static com.aa.mtg.cards.sets.Ixalan.NEST_ROBBER;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.*;
 
 @Component
@@ -43,11 +44,12 @@ public class DeckRetrieverService {
     private Library plutoDeck(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 60 / 4; i++) {
+        for (int i = 0; i < 60 / 5; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), MOUNTAIN, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), FOREST, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), FERAL_MAAKA, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), AXEBANE_BEAST, playerName));
+            cards.add(new CardInstance(gameStatus.nextCardId(), NEST_ROBBER, playerName));
         }
 
         return new Library(cards);

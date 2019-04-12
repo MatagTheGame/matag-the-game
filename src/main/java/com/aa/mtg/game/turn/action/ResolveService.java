@@ -1,6 +1,7 @@
 package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.aa.mtg.cards.ability.Ability.HASTE;
 
 @Service
 public class ResolveService {
@@ -26,7 +29,10 @@ public class ResolveService {
             CardInstance cardInstance = gameStatus.getStack().removeLast();
             gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
-            cardInstance.getModifiers().setSummoningSickness(true);
+            if (cardInstance.isOfType(Type.CREATURE) && !cardInstance.getAbilities().contains(HASTE)) {
+                cardInstance.getModifiers().setSummoningSickness(true);
+            }
+
             gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
             gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
 
