@@ -4,7 +4,6 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
-import com.aa.mtg.game.turn.phases.Phase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class DeclareAttackerService {
         Turn turn = gameStatus.getTurn();
         Player currentPlayer = gameStatus.getCurrentPlayer();
 
-        if (!turn.getCurrentPhase().equals(Phase.DA)) {
+        if (!turn.getCurrentPhase().equals("DA")) {
             throw new RuntimeException("Attackers declared during phase: " + turn.getCurrentPhase());
         }
 

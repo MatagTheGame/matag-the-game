@@ -6,10 +6,12 @@ import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.aa.mtg.game.turn.phases.Phase.M1;
+import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @Component
-public class DrawPhase {
+public class DrawPhase implements Phase {
+    public static final String DR = "DR";
+
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
 
@@ -18,6 +20,7 @@ public class DrawPhase {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
     }
 
+    @Override
     public void apply(GameStatus gameStatus) {
         if (gameStatus.getTurn().getTurnNumber() > 1) {
             CardInstance cardInstance = gameStatus.getCurrentPlayer().getLibrary().draw();

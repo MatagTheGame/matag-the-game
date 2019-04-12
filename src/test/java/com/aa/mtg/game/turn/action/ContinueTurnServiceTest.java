@@ -8,7 +8,6 @@ import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.Turn;
-import com.aa.mtg.game.turn.phases.Phase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -25,6 +24,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static com.aa.mtg.game.turn.phases.CleanupPhase.CL;
+import static com.aa.mtg.game.turn.phases.DrawPhase.DR;
+import static com.aa.mtg.game.turn.phases.EndTurnPhase.ET;
+import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
+import static com.aa.mtg.game.turn.phases.UntapPhase.UT;
+import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
 import static java.util.Arrays.asList;
 
 @RunWith(SpringRunner.class)
@@ -48,7 +53,7 @@ public class ContinueTurnServiceTest {
         Turn turn = new Turn();
         turn.setTurnNumber(1);
         turn.setCurrentTurnPlayer("player-name");
-        turn.setCurrentPhase(Phase.UT);
+        turn.setCurrentPhase(UT);
         turn.setCurrentPhaseActivePlayer("player-name");
         turn.addCardToCardsPlayedWithinTurn(A_CARD);
 
@@ -61,7 +66,7 @@ public class ContinueTurnServiceTest {
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(1);
         expectedTurn.setCurrentTurnPlayer("player-name");
-        expectedTurn.setCurrentPhase(Phase.UP);
+        expectedTurn.setCurrentPhase(UP);
         expectedTurn.setCurrentPhaseActivePlayer("player-name");
         expectedTurn.addCardToCardsPlayedWithinTurn(A_CARD);
         BDDMockito.verify(eventSender).sendToPlayers(
@@ -85,7 +90,7 @@ public class ContinueTurnServiceTest {
         Turn turn = new Turn();
         turn.setTurnNumber(1);
         turn.setCurrentTurnPlayer("player-name");
-        turn.setCurrentPhase(Phase.UP);
+        turn.setCurrentPhase(UP);
         turn.setCurrentPhaseActivePlayer("player-name");
         turn.addCardToCardsPlayedWithinTurn(A_CARD);
 
@@ -98,7 +103,7 @@ public class ContinueTurnServiceTest {
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(1);
         expectedTurn.setCurrentTurnPlayer("player-name");
-        expectedTurn.setCurrentPhase(Phase.UP);
+        expectedTurn.setCurrentPhase(UP);
         expectedTurn.setCurrentPhaseActivePlayer("opponent-name");
         expectedTurn.addCardToCardsPlayedWithinTurn(A_CARD);
         BDDMockito.verify(eventSender).sendToPlayers(
@@ -117,7 +122,7 @@ public class ContinueTurnServiceTest {
         Turn turn = new Turn();
         turn.setTurnNumber(1);
         turn.setCurrentTurnPlayer("player-name");
-        turn.setCurrentPhase(Phase.UP);
+        turn.setCurrentPhase(UP);
         turn.setCurrentPhaseActivePlayer("opponent-name");
         turn.addCardToCardsPlayedWithinTurn(A_CARD);
 
@@ -130,7 +135,7 @@ public class ContinueTurnServiceTest {
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(1);
         expectedTurn.setCurrentTurnPlayer("player-name");
-        expectedTurn.setCurrentPhase(Phase.DR);
+        expectedTurn.setCurrentPhase(DR);
         expectedTurn.setCurrentPhaseActivePlayer("player-name");
         expectedTurn.addCardToCardsPlayedWithinTurn(A_CARD);
         BDDMockito.verify(eventSender).sendToPlayers(
@@ -149,7 +154,7 @@ public class ContinueTurnServiceTest {
         Turn turn = new Turn();
         turn.setTurnNumber(1);
         turn.setCurrentTurnPlayer("player-name");
-        turn.setCurrentPhase(Phase.DR);
+        turn.setCurrentPhase(DR);
         turn.setCurrentPhaseActivePlayer("player-name");
         turn.addCardToCardsPlayedWithinTurn(A_CARD);
 
@@ -162,7 +167,7 @@ public class ContinueTurnServiceTest {
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(1);
         expectedTurn.setCurrentTurnPlayer("player-name");
-        expectedTurn.setCurrentPhase(Phase.M1);
+        expectedTurn.setCurrentPhase(M1);
         expectedTurn.setCurrentPhaseActivePlayer("player-name");
         expectedTurn.addCardToCardsPlayedWithinTurn(A_CARD);
         BDDMockito.verify(eventSender).sendToPlayers(
@@ -180,7 +185,7 @@ public class ContinueTurnServiceTest {
         Turn turn = new Turn();
         turn.setTurnNumber(2);
         turn.setCurrentTurnPlayer("player-name");
-        turn.setCurrentPhase(Phase.DR);
+        turn.setCurrentPhase(DR);
         turn.setCurrentPhaseActivePlayer("player-name");
         turn.addCardToCardsPlayedWithinTurn(A_CARD);
 
@@ -198,7 +203,7 @@ public class ContinueTurnServiceTest {
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(2);
         expectedTurn.setCurrentTurnPlayer("player-name");
-        expectedTurn.setCurrentPhase(Phase.M1);
+        expectedTurn.setCurrentPhase(M1);
         expectedTurn.setCurrentPhaseActivePlayer("player-name");
         expectedTurn.addCardToCardsPlayedWithinTurn(A_CARD);
         BDDMockito.verify(eventSender).sendToPlayers(
@@ -216,7 +221,7 @@ public class ContinueTurnServiceTest {
         Turn turn = new Turn();
         turn.setTurnNumber(1);
         turn.setCurrentTurnPlayer("player-name");
-        turn.setCurrentPhase(Phase.M1);
+        turn.setCurrentPhase(M1);
         turn.setCurrentPhaseActivePlayer("player-name");
         turn.addCardToCardsPlayedWithinTurn(A_CARD);
 
@@ -229,7 +234,7 @@ public class ContinueTurnServiceTest {
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(1);
         expectedTurn.setCurrentTurnPlayer("player-name");
-        expectedTurn.setCurrentPhase(Phase.M1);
+        expectedTurn.setCurrentPhase(M1);
         expectedTurn.setCurrentPhaseActivePlayer("opponent-name");
         expectedTurn.addCardToCardsPlayedWithinTurn(A_CARD);
         BDDMockito.verify(eventSender).sendToPlayers(
@@ -247,7 +252,7 @@ public class ContinueTurnServiceTest {
         Turn turn = new Turn();
         turn.setTurnNumber(1);
         turn.setCurrentTurnPlayer("player-name");
-        turn.setCurrentPhase(Phase.ET);
+        turn.setCurrentPhase(ET);
         turn.setCurrentPhaseActivePlayer("player-name");
 
         ReflectionTestUtils.setField(gameStatus, "turn", turn);
@@ -259,7 +264,7 @@ public class ContinueTurnServiceTest {
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(1);
         expectedTurn.setCurrentTurnPlayer("player-name");
-        expectedTurn.setCurrentPhase(Phase.ET);
+        expectedTurn.setCurrentPhase(ET);
         expectedTurn.setCurrentPhaseActivePlayer("opponent-name");
         BDDMockito.verify(eventSender).sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
@@ -278,7 +283,7 @@ public class ContinueTurnServiceTest {
         Turn turn = new Turn();
         turn.setTurnNumber(1);
         turn.setCurrentTurnPlayer("player-name");
-        turn.setCurrentPhase(Phase.ET);
+        turn.setCurrentPhase(ET);
         turn.setCurrentPhaseActivePlayer("player-name");
 
         ReflectionTestUtils.setField(gameStatus, "turn", turn);
@@ -290,7 +295,7 @@ public class ContinueTurnServiceTest {
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(1);
         expectedTurn.setCurrentTurnPlayer("player-name");
-        expectedTurn.setCurrentPhase(Phase.ET);
+        expectedTurn.setCurrentPhase(ET);
         expectedTurn.setCurrentPhaseActivePlayer("player-name");
         expectedTurn.setTriggeredAction("DISCARD_A_CARD");
         BDDMockito.verify(eventSender).sendToPlayers(
@@ -308,7 +313,7 @@ public class ContinueTurnServiceTest {
         Turn turn = new Turn();
         turn.setTurnNumber(1);
         turn.setCurrentTurnPlayer("player-name");
-        turn.setCurrentPhase(Phase.CL);
+        turn.setCurrentPhase(CL);
         turn.setCurrentPhaseActivePlayer("player-name");
         turn.addCardToCardsPlayedWithinTurn(A_CARD);
 
@@ -321,7 +326,7 @@ public class ContinueTurnServiceTest {
         Turn expectedTurn = new Turn();
         expectedTurn.setTurnNumber(2);
         expectedTurn.setCurrentTurnPlayer("opponent-name");
-        expectedTurn.setCurrentPhase(Phase.UT);
+        expectedTurn.setCurrentPhase(UT);
         expectedTurn.setCurrentPhaseActivePlayer("opponent-name");
         BDDMockito.verify(eventSender).sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),

@@ -9,6 +9,7 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
+import com.aa.mtg.game.turn.phases.PhaseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class CastService {
         Player currentPlayer = gameStatus.getCurrentPlayer();
 
         CardInstance cardInstance = currentPlayer.getHand().findCardById(cardId);
-        if (!turn.getCurrentPhase().isMainPhase() && !cardInstance.getCard().isInstantSpeed()) {
+        if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !cardInstance.getCard().isInstantSpeed()) {
             throw new MessageException("You can only play Instants during a NON main phases.");
 
         } else {

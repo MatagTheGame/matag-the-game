@@ -1,7 +1,6 @@
 package com.aa.mtg.game.turn;
 
 import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.game.turn.phases.Phase;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public class Turn {
     private int turnNumber;
     private String currentTurnPlayer;
-    private Phase currentPhase;
+    private String currentPhase;
     private String currentPhaseActivePlayer;
     private List<CardInstance> cardsPlayedWithinTurn = new ArrayList<>();
     private String triggeredAction;
@@ -21,7 +20,7 @@ public class Turn {
 
     public void init(String playerName) {
         this.turnNumber = 1;
-        this.currentPhase = Phase.UP;
+        this.currentPhase = "UP";
         this.currentTurnPlayer = playerName;
         this.currentPhaseActivePlayer = playerName;
     }
@@ -46,11 +45,11 @@ public class Turn {
         this.currentTurnPlayer = currentTurnPlayer;
     }
 
-    public Phase getCurrentPhase() {
+    public String getCurrentPhase() {
         return currentPhase;
     }
 
-    public void setCurrentPhase(Phase currentPhase) {
+    public void setCurrentPhase(String currentPhase) {
         this.currentPhase = currentPhase;
     }
 

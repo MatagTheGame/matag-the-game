@@ -8,6 +8,7 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
+import com.aa.mtg.game.turn.phases.PhaseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class PlayLandService {
         Turn turn = gameStatus.getTurn();
         Player currentPlayer = gameStatus.getCurrentPlayer();
 
-        if (!turn.getCurrentPhase().isMainPhase()) {
+        if (!PhaseUtils.isMainPhase(turn.getCurrentPhase())) {
             throw new MessageException("You can only play lands during main phases.");
 
         } else if (turn.getCardsPlayedWithinTurn().stream()
