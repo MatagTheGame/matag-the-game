@@ -26,20 +26,16 @@ public class Turn {
         this.currentPhaseActivePlayer = playerName;
     }
 
-    public void cleanup(String nextPlayerName) {
-        this.turnNumber++;
-        this.currentPhase = Phase.UT;
-        this.currentTurnPlayer = nextPlayerName;
-        this.currentPhaseActivePlayer = nextPlayerName;
-        this.cardsPlayedWithinTurn.clear();
-    }
-
     public int getTurnNumber() {
         return turnNumber;
     }
 
     public void setTurnNumber(int turnNumber) {
         this.turnNumber = turnNumber;
+    }
+
+    public void increaseTurnNumber() {
+        turnNumber++;
     }
 
     public String getCurrentTurnPlayer() {

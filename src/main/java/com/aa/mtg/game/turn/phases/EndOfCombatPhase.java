@@ -1,0 +1,29 @@
+package com.aa.mtg.game.turn.phases;
+
+import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.status.GameStatusUpdaterService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import static com.aa.mtg.game.turn.phases.Phase.M2;
+
+@Component
+public class EndOfCombatPhase {
+
+    private final GameStatusUpdaterService gameStatusUpdaterService;
+
+    @Autowired
+    public EndOfCombatPhase(GameStatusUpdaterService gameStatusUpdaterService) {
+        this.gameStatusUpdaterService = gameStatusUpdaterService;
+    }
+
+    public void apply(GameStatus gameStatus) {
+        gameStatus.getTurn().setCurrentPhase(M2);
+        gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+
+        gameStatus.getCurrentPlayer().getBattlefield().removeAttacking();
+        gameStatus.getNonCurrentPlayer().getBattlefield().removeBlocking();
+        gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+        gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
+    }
+}

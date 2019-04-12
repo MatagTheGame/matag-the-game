@@ -7,14 +7,18 @@ import com.aa.mtg.game.event.EventSender;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
-import com.aa.mtg.game.turn.combat.CombatService;
 import com.aa.mtg.game.turn.phases.Phase;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
@@ -23,20 +27,16 @@ import java.util.stream.IntStream;
 
 import static java.util.Arrays.asList;
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = ContinueTurnServiceTest.ContinueTurnServiceTestConfiguration.class)
 public class ContinueTurnServiceTest {
     private static final CardInstance A_CARD = new CardInstance(1, Cards.FOREST, "owner");
 
+    @Autowired
     private ContinueTurnService continueTurnService;
-    private EventSender eventSender;
 
-    @Before
-    public void setup() {
-        eventSender = Mockito.mock(EventSender.class);
-        continueTurnService = new ContinueTurnService(
-                new GameStatusUpdaterService(eventSender),
-                new CombatService(new GameStatusUpdaterService(eventSender))
-        );
-    }
+    @Autowired
+    private EventSender eventSender;
 
     @Test
     public void testContinueTurnUntapPlayer() {
@@ -335,5 +335,14 @@ public class ContinueTurnServiceTest {
                 .collect(Collectors.toList());
 
         return new Library(libraryCards);
+    }
+
+    @Configuration
+    @ComponentScan(basePackageClasses = {Turn.class, GameStatus.class})
+    public static class ContinueTurnServiceTestConfiguration {
+        @Bean
+        public EventSender eventSender() {
+            return Mockito.mock(EventSender.class);
+        }
     }
 }
