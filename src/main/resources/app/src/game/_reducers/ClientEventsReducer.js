@@ -106,11 +106,12 @@ export default class ClientEventsReducer {
           if (!StackUtils.isStackEmpty(newState)) {
             stompClient.sendEvent('turn', {action: 'RESOLVE'})
 
-          } else {
+          } else if (CardSearch.cards(newState.player.battlefield).frontEndTapped().isNotEmpty()) {
             CardSearch.cards(newState.player.battlefield)
               .frontEndTapped()
               .forEach((cardInstance) => CardUtils.untap(cardInstance))
 
+          } else {
             stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
           }
         }
