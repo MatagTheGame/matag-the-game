@@ -65,6 +65,11 @@ body {
   background-repeat: no-repeat;
 }
 
+.flying {
+  transform: translateZ(20px);
+  box-shadow: 20px 60px 4px rgba(0, 0, 0, 0.4);
+}
+
 .tapped {
   transform: rotateZ(90deg);
   margin-right: 40px;
@@ -377,6 +382,10 @@ body {
   bottom: 42%;
   transform-style: preserve-3d;
   transform: translateZ(30px);
+}
+
+#stack div:first-child {
+  box-shadow: 50px 100px 4px rgba(0, 0, 0, 0.4);
 }
 
 #table {

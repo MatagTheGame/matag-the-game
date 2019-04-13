@@ -11,10 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.aa.mtg.cards.Cards.*;
-import static com.aa.mtg.cards.sets.Ixalan.ANCIENT_BRONTODON;
-import static com.aa.mtg.cards.sets.Ixalan.HEADWATER_SENTRIES;
-import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
-import static com.aa.mtg.cards.sets.Ixalan.NEST_ROBBER;
+import static com.aa.mtg.cards.sets.Ixalan.*;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.*;
 
 @Component
@@ -75,11 +72,12 @@ public class DeckRetrieverService {
     private Library whiteBlueIxalan(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 60 / 4; i++) {
+        for (int i = 0; i < 60 / 5; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), PLAINS, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), ISLAND, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), HEADWATER_SENTRIES, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), HUATLIS_SNUBHORN, playerName));
+            cards.add(new CardInstance(gameStatus.nextCardId(), AIR_ELEMENTAL, playerName));
         }
 
         return new Library(cards);
@@ -88,11 +86,12 @@ public class DeckRetrieverService {
     private Library redGreenIxalan(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 60 / 4; i++) {
+        for (int i = 0; i < 60 / 5; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), FOREST, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), MOUNTAIN, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), NEST_ROBBER, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), ANCIENT_BRONTODON, playerName));
+            cards.add(new CardInstance(gameStatus.nextCardId(), FRENZIED_RAPTOR, playerName));
         }
 
         return new Library(cards);
