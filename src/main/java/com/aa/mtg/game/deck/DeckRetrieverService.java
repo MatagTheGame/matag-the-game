@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.aa.mtg.cards.Cards.*;
 import static com.aa.mtg.cards.sets.Ixalan.ANCIENT_BRONTODON;
@@ -20,11 +21,27 @@ import static com.aa.mtg.cards.sets.RavnicaAllegiance.*;
 public class DeckRetrieverService {
 
     public Library retrieveDeckForUser(SecurityToken token, String playerName, GameStatus gameStatus) {
-        if (playerName.equals("Pippo")) {
-            return whiteBlueIxalan(playerName, gameStatus);
-        } else {
-            return redGreenIxalan(playerName, gameStatus);
+        return randomDeck(playerName, gameStatus);
+
+//        if (playerName.equals("Pippo")) {
+//            return whiteBlueIxalan(playerName, gameStatus);
+//        } else {
+//            return redGreenIxalan(playerName, gameStatus);
+//        }
+    }
+
+    private Library randomDeck(String playerName, GameStatus gameStatus) {
+        switch (new Random().nextInt(4)) {
+            case 0:
+                return blackWhiteGuild(playerName, gameStatus).shuffle();
+            case 1:
+                return redGreenGuild(playerName, gameStatus).shuffle();
+            case 2:
+                return whiteBlueIxalan(playerName, gameStatus).shuffle();
+            case 3:
+                return redGreenIxalan(playerName, gameStatus).shuffle();
         }
+        throw new RuntimeException("Deck not found!");
     }
 
     private Library blackWhiteGuild(String playerName, GameStatus gameStatus) {
