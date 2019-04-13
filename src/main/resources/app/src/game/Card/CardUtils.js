@@ -3,6 +3,7 @@ export default class CardUtils {
     return cardName.toLowerCase()
       .replace(' ', '_')
       .replace(',', '_')
+      .replace('\'', '')
   }
 
   static hasSummoningSickness(cardInstance) {
