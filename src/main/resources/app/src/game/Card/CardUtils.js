@@ -114,6 +114,10 @@ export default class CardUtils {
     } else if (CardUtils.isFrontendAttacking(cardInstance)) {
       CardUtils.setFrontendUnattacking(cardInstance)
     }
+
+    if (!CardUtils.hasAbility(cardInstance, 'VIGILANCE')) {
+      CardUtils.toggleFrontendTapped(cardInstance)
+    }
   }
 
   static isUntapped(cardInstance) {
@@ -130,6 +134,40 @@ export default class CardUtils {
 
   static isOfType(cardInstance, type) {
     return cardInstance.card.types.includes(type)
+  }
+
+  static canAttack(attackingCard) {
+    if (!CardUtils.isOfType(attackingCard, 'CREATURE')) {
+      return false
+    }
+
+    if (CardUtils.hasSummoningSickness(attackingCard)) {
+      return false
+    }
+
+    if (CardUtils.isTapped(attackingCard)) {
+      return false
+    }
+
+    return true
+  }
+
+  static canBlock(blockingCard, blockedCard) {
+    if (!CardUtils.isOfType(blockingCard, 'CREATURE')) {
+      return false
+    }
+
+    if (CardUtils.isTapped(blockingCard)) {
+      return false
+    }
+
+    if (CardUtils.hasAbility(blockedCard, 'FLYING')) {
+      if (!CardUtils.hasAbility(blocking, 'FLYING')) {
+        return false
+      }
+    }
+
+    return true
   }
 
   static blockingCreaturesToTargetIdsEvent(blockingCreatures) {

@@ -65,19 +65,40 @@ body {
   background-repeat: no-repeat;
 }
 
-.flying {
-  transform: translateZ(20px);
+#player-battlefield .flying {
   box-shadow: 20px 60px 4px rgba(0, 0, 0, 0.4);
+  transform: translateZ(20px);
 }
 
-.tapped {
+#opponent-battlefield .flying {
+  box-shadow: -20px -60px 4px rgba(0, 0, 0, 0.4);
+  transform: translateY(20px);
+}
+
+#player-battlefield .tapped, #opponent-battlefield .tapped {
   transform: rotateZ(90deg);
   margin-right: 40px;
   margin-left: 40px;
 }
 
-.frontend-tapped {
+#player-battlefield .tapped.flying {
+  transform: rotateZ(90deg) translateZ(20px);
+}
+
+#opponent-battlefield .tapped.flying {
+  transform: rotateZ(90deg) translateY(20px);
+}
+
+#player-battlefield .frontend-tapped, #opponent-battlefield .frontend-tapped {
   transform: rotateZ(75deg);
+}
+
+#player-battlefield .frontend-tapped.flying {
+  transform: rotateZ(75deg) translateZ(20px);
+}
+
+#opponent-battlefield .frontend-tapped.flying {
+  transform: rotateZ(75deg) translateY(20px);
 }
 
 #player-hand {

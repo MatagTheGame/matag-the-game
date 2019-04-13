@@ -75,7 +75,6 @@ class Battlefield extends PureComponent {
   cardMarginLeft(cardInstance) {
     const attackingCards = this.attackingCards()
     const numOfAttackingCreatures = attackingCards.length
-    console.log('numOfAttackingCreatures: ', numOfAttackingCreatures)
     const cardPosition = Battlefield.getCardPosition(attackingCards, cardInstance)
     const marginFromPosition = Battlefield.marginFromPosition(numOfAttackingCreatures, cardPosition)
     let margin = CardUtils.isAttackingOrFrontendAttacking(cardInstance) ? marginFromPosition : -marginFromPosition
@@ -84,8 +83,6 @@ class Battlefield extends PureComponent {
   }
 
   cardMarginTop(cardInstance) {
-    const blockingCards = this.blockingCards()
-    console.log('blockingCards: ', blockingCards)
     const position = this.blockingCards()
       .filter(currentCardInstance => cardInstance.modifiers.blockingCardId === currentCardInstance.modifiers.blockingCardId)
       .map(cardInstance => cardInstance.id)

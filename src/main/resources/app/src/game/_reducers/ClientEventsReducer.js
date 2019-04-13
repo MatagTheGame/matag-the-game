@@ -48,17 +48,14 @@ export default class ClientEventsReducer {
           const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
 
           if (newState.turn.currentPhase === 'DA') {
-            if (CardUtils.isOfType(cardInstance, 'CREATURE') && !CardUtils.hasSummoningSickness(cardInstance)) {
-              if (!CardUtils.hasAbility(cardInstance, 'VIGILANCE')) {
-                CardUtils.toggleFrontendTapped(cardInstance)
-              }
+            if (CardUtils.canAttack(cardInstance)) {
               CardUtils.toggleFrontendAttacking(cardInstance)
             }
 
           } else if (newState.turn.currentPhase === 'DB') {
-            if (CardUtils.isOfType(cardInstance, 'CREATURE')) {
-              const blockingCard = CardSearch.cards(newState.opponent.battlefield).attacking()[newState.turn.blockingCardPosition]
-              CardUtils.toggleFrontendBlocking(cardInstance, blockingCard.id)
+            const blockedCard = CardSearch.cards(newState.opponent.battlefield).attacking()[newState.turn.blockingCardPosition]
+            if (CardUtils.canBlock(cardInstance, blockedCard)) {
+              CardUtils.toggleFrontendBlocking(cardInstance, blockedCard.id)
             }
 
           } else {
