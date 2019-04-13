@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.aa.mtg.cards.ability.Ability.VIGILANCE;
+
 @ToString
 @EqualsAndHashCode
 public class CardInstance {
@@ -91,7 +93,9 @@ public class CardInstance {
     }
 
     public void declareAsAttacker() {
-        modifiers.tap();
+        if (!modifiers.getAbilities().contains(VIGILANCE)) {
+            modifiers.tap();
+        }
         modifiers.setAttacking(true);
     }
 

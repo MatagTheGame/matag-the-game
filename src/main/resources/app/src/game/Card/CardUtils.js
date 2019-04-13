@@ -10,8 +10,8 @@ export default class CardUtils {
     return cardInstance.modifiers.summoningSickness
   }
 
-  static hasVigilance(cardInstance) {
-    return cardInstance.abilities.vigilance
+  static hasAbility(cardInstance, ability) {
+    return cardInstance.abilities.includes(ability)
   }
 
   static frontendTap(cardInstance) {

@@ -49,7 +49,7 @@ export default class ClientEventsReducer {
 
           if (newState.turn.currentPhase === 'DA') {
             if (CardUtils.isOfType(cardInstance, 'CREATURE') && !CardUtils.hasSummoningSickness(cardInstance)) {
-              if (!CardUtils.hasVigilance(cardInstance)) {
+              if (!CardUtils.hasAbility(cardInstance, 'VIGILANCE')) {
                 CardUtils.toggleFrontendTapped(cardInstance)
               }
               CardUtils.toggleFrontendAttacking(cardInstance)
@@ -85,7 +85,7 @@ export default class ClientEventsReducer {
         if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
           if (newState.turn.currentPhase === 'DA') {
             const attackingCreaturesIds = CardSearch.cards(newState.player.battlefield)
-              .frontEndTapped()
+              .frontEndAttacking()
               .ofType('CREATURE')
               .map(cardInstance => cardInstance.id)
 
