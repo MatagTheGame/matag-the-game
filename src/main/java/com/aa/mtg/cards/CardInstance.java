@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.aa.mtg.cards.ability.Ability.FLYING;
 import static com.aa.mtg.cards.ability.Ability.VIGILANCE;
 
 @ToString
@@ -43,7 +44,7 @@ public class CardInstance {
     }
 
     public String getIdAndName() {
-        return id + " " + card.getName();
+        return "\"" + id + " - " + card.getName() + "\"";
     }
 
     public Card getCard() {
@@ -80,15 +81,15 @@ public class CardInstance {
 
     public void checkIfCanAttack() {
         if (!isOfType(Type.CREATURE)) {
-            throw new MessageException("Declared attacker " + getIdAndName() + " is not of type Creature");
+            throw new MessageException("Declared attacker " + getIdAndName() + " is not of type Creature.");
         }
 
         if (modifiers.isTapped()) {
-            throw new MessageException(getIdAndName() + " is already tapped and cannot attack");
+            throw new MessageException(getIdAndName() + " is already tapped and cannot attack.");
         }
 
         if (modifiers.isSummoningSickness()) {
-            throw new MessageException(getIdAndName() + " is has summoning sickness tapped and cannot attack");
+            throw new MessageException(getIdAndName() + " is has summoning sickness tapped and cannot attack.");
         }
     }
 
@@ -99,13 +100,19 @@ public class CardInstance {
         modifiers.setAttacking(true);
     }
 
-    public void checkIfCanBlock() {
+    public void checkIfCanBlock(CardInstance blockedCreature) {
         if (!isOfType(Type.CREATURE)) {
-            throw new MessageException("Declared blocker " + getIdAndName() + " is not of type Creature");
+            throw new MessageException("Declared blocker " + getIdAndName() + " is not of type Creature.");
         }
 
         if (modifiers.isTapped()) {
-            throw new MessageException(getIdAndName() + " is tapped and cannot block");
+            throw new MessageException(getIdAndName() + " is tapped and cannot block.");
+        }
+
+        if (blockedCreature.getAbilities().contains(FLYING)) {
+            if (!getAbilities().contains(FLYING)) {
+                throw new MessageException(getIdAndName() + " cannot block " + blockedCreature.getIdAndName() + " as it has flying.");
+            }
         }
     }
 

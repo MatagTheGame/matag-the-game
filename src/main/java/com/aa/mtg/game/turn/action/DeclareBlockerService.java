@@ -1,5 +1,6 @@
 package com.aa.mtg.game.turn.action;
 
+import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
@@ -26,15 +27,17 @@ public class DeclareBlockerService {
 
     public void declareBlockers(GameStatus gameStatus, Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds) {
         Turn turn = gameStatus.getTurn();
+        Player currentPlayer = gameStatus.getCurrentPlayer();
         Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
 
         if (!turn.getCurrentPhase().equals(DB)) {
             throw new RuntimeException("Blockers declared during phase: " + turn.getCurrentPhase());
         }
 
-        blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) ->
-                nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).checkIfCanBlock()
-        );
+        blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
+            CardInstance blockedCreature = currentPlayer.getBattlefield().findCardById(blockedCreaturesIds.get(0));
+            nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).checkIfCanBlock(blockedCreature);
+        });
 
         blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) ->
                 nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(blockedCreaturesIds.get(0))
