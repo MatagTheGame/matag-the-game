@@ -182,12 +182,13 @@ body {
 
 #player-battlefield {
   bottom: 10%;
+  transform: translateZ(1px);
 }
 
 #opponent-battlefield {
   position: absolute;
   top: 2%;
-  transform: rotate(180deg);
+  transform: rotate(180deg) translateZ(1px);
 }
 
 .battlefield {
@@ -429,6 +430,6 @@ body {
   height: 80px;
   bottom: -40px;
   z-index: 0;
-  transform: rotateX(-90deg) translateY(40px) translateZ(-1px);
+  transform: rotateX(-90deg) translateY(40px);
   filter: brightness(50%);
 }
