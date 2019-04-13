@@ -3,10 +3,9 @@ package com.aa.mtg.game.player;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CardListComponent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 public class Battlefield extends CardListComponent {
 
@@ -31,7 +30,7 @@ public class Battlefield extends CardListComponent {
     public void removeBlocking() {
         cards.stream()
                 .filter(cardInstance -> cardInstance.getModifiers().isBlocking())
-                .forEach(cardInstance -> cardInstance.getModifiers().setBlocking(emptyList()));
+                .forEach(cardInstance -> cardInstance.getModifiers().setBlocking(new ArrayList<>()));
     }
 
     public List<CardInstance> getAttackingCreatures() {

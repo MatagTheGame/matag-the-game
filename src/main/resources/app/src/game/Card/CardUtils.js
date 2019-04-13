@@ -10,6 +10,10 @@ export default class CardUtils {
     return cardInstance.modifiers.summoningSickness
   }
 
+  static hasVigilance(cardInstance) {
+    return cardInstance.abilities.vigilance
+  }
+
   static frontendTap(cardInstance) {
     cardInstance.modifiers.tapped = 'FRONTEND_TAPPED'
   }
@@ -48,12 +52,52 @@ export default class CardUtils {
     cardInstance.modifiers.blockingCardId = undefined
   }
 
+  static isNotFrontendAttacking(cardInstance) {
+    return !CardUtils.isFrontendAttacking(cardInstance)
+  }
+
+  static isFrontendAttacking(cardInstance) {
+    return cardInstance.modifiers.attacking === 'FRONTEND'
+  }
+
+  static setFrontendAttacking(cardInstance) {
+    cardInstance.modifiers.attacking = 'FRONTEND'
+  }
+
+  static setFrontendUnattacking(cardInstance) {
+    cardInstance.modifiers.attacking = undefined
+  }
+
   static isBlocking(cardInstance) {
     return cardInstance.modifiers.blocking === true
   }
 
+  static isBlockingOrFrontendBlocking(cardInstance) {
+    return CardUtils.isBlocking(cardInstance) || CardUtils.isFrontendBlocking(cardInstance)
+  }
+
+  static isNotBlockingOrFrontendBlocking(cardInstance) {
+    return CardUtils.isNotBlocking(cardInstance) && CardUtils.isNotFrontendBlocking(cardInstance)
+  }
+
+  static isNotBlocking(cardInstance) {
+    return !CardUtils.isBlocking(cardInstance)
+  }
+
   static isAttacking(cardInstance) {
     return cardInstance.modifiers.attacking === true
+  }
+
+  static isAttackingOrFrontendAttacking(cardInstance) {
+    return CardUtils.isAttacking(cardInstance) || CardUtils.isFrontendAttacking(cardInstance)
+  }
+
+  static isNotAttacking(cardInstance) {
+    return !CardUtils.isAttacking(cardInstance)
+  }
+
+  static isNotAttackingOrFrontendAttacking(cardInstance) {
+    return CardUtils.isNotAttacking(cardInstance) && CardUtils.isNotFrontendAttacking(cardInstance)
   }
 
   static toggleFrontendBlocking(cardInstance, blockingCardId) {
@@ -61,6 +105,14 @@ export default class CardUtils {
       CardUtils.setFrontendBlocking(cardInstance, blockingCardId)
     } else if (CardUtils.isFrontendBlocking(cardInstance)) {
       CardUtils.setFrontendUnblocking(cardInstance)
+    }
+  }
+
+  static toggleFrontendAttacking(cardInstance) {
+    if (CardUtils.isNotFrontendAttacking(cardInstance)) {
+      CardUtils.setFrontendAttacking(cardInstance)
+    } else if (CardUtils.isFrontendAttacking(cardInstance)) {
+      CardUtils.setFrontendUnattacking(cardInstance)
     }
   }
 

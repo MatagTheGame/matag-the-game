@@ -33,11 +33,11 @@ class Battlefield extends PureComponent {
   }
 
   getSecondLineCards() {
-    return CardSearch.cards(this.getPlayerBattlefield()).ofType('CREATURE').notAttackingOrBlocking().notFrontendBlocking()
+    return CardSearch.cards(this.getPlayerBattlefield()).ofType('CREATURE').notAttackingOrBlocking()
   }
 
-  getAttackingBlockingCreatures() {
-    return CardSearch.cards(this.getPlayerBattlefield()).attackingOrBlocking().concat(CardSearch.cards(this.getPlayerBattlefield()).frontendBlocking())
+  getAttackingOrBlockingCreatures() {
+    return CardSearch.cards(this.getPlayerBattlefield()).attackingOrBlocking()
   }
 
   isCardSelectedToBeBlocked(cardInstance, index) {
@@ -51,20 +51,12 @@ class Battlefield extends PureComponent {
             selectedToBeBlocked={this.isCardSelectedToBeBlocked(cardInstance, i)} />)
   }
 
-  attackingCards(cardInstance) {
-    if (CardUtils.isAttacking(cardInstance)) {
-      return CardSearch.cards(this.getPlayerBattlefield()).attacking()
-    } else {
-      return CardSearch.cards(this.getOtherPlayerBattlefield()).attacking()
-    }
+  attackingCards() {
+    return CardSearch.cards(this.getPlayerBattlefield()).attackingOrFrontendAttacking().concat(CardSearch.cards(this.getOtherPlayerBattlefield()).attackingOrFrontendAttacking())
   }
 
-  blockingCards(cardInstance) {
-    if (CardUtils.isBlocking(cardInstance)) {
-      return CardSearch.cards(this.getOtherPlayerBattlefield()).blocking()
-    } else {
-      return CardSearch.cards(this.getPlayerBattlefield()).blocking()
-    }
+  blockingCards() {
+    return CardSearch.cards(this.getOtherPlayerBattlefield()).blockingOrFrontenBlocking().concat(CardSearch.cards(this.getPlayerBattlefield()).blockingOrFrontenBlocking())
   }
 
   static marginFromPosition(n, i) {
@@ -73,7 +65,7 @@ class Battlefield extends PureComponent {
   }
 
   static getCardPosition(attackingCards, cardInstance) {
-    if (CardUtils.isAttacking(cardInstance)) {
+    if (CardUtils.isAttackingOrFrontendAttacking(cardInstance)) {
       return attackingCards.indexOfId(cardInstance.id)
     } else {
       return attackingCards.indexOfId(cardInstance.modifiers.blockingCardId)
@@ -81,20 +73,24 @@ class Battlefield extends PureComponent {
   }
 
   cardMarginLeft(cardInstance) {
-    const attackingCards = this.attackingCards(cardInstance)
+    const attackingCards = this.attackingCards()
     const numOfAttackingCreatures = attackingCards.length
+    console.log('numOfAttackingCreatures: ', numOfAttackingCreatures)
     const cardPosition = Battlefield.getCardPosition(attackingCards, cardInstance)
     const marginFromPosition = Battlefield.marginFromPosition(numOfAttackingCreatures, cardPosition)
-    let margin = CardUtils.isAttacking(cardInstance) ? marginFromPosition : -marginFromPosition
+    let margin = CardUtils.isAttackingOrFrontendAttacking(cardInstance) ? marginFromPosition : -marginFromPosition
     margin += this.cardMarginTop(cardInstance) / 2
     return margin
   }
 
   cardMarginTop(cardInstance) {
-    return this.blockingCards(cardInstance)
-      .filter(currentCardInstance => cardInstance.modifiers.blockingCardIds === currentCardInstance.modifiers.blockingCardIds)
+    const blockingCards = this.blockingCards()
+    console.log('blockingCards: ', blockingCards)
+    const position = this.blockingCards()
+      .filter(currentCardInstance => cardInstance.modifiers.blockingCardId === currentCardInstance.modifiers.blockingCardId)
       .map(cardInstance => cardInstance.id)
-      .indexOf(cardInstance.id) * 50
+      .indexOf(cardInstance.id)
+    return position * 50
   }
 
   positionedCardItems(cards) {
@@ -117,7 +113,7 @@ class Battlefield extends PureComponent {
   render() {
     return (
       <div id={this.getId()} className='battlefield'>
-        <div className='battlefield-area combat-line'>{this.positionedCardItems(this.getAttackingBlockingCreatures())}</div>
+        <div className='battlefield-area combat-line'>{this.positionedCardItems(this.getAttackingOrBlockingCreatures())}</div>
         <div className='battlefield-area second-line'>{this.cardItems(this.getSecondLineCards())}</div>
         <div className='battlefield-area first-line'>{this.cardItems(this.getFirstLineCards())}</div>
       </div>

@@ -39,6 +39,7 @@ public class PlayLandService {
             CardInstance cardInstance = currentPlayer.getHand().findCardById(cardId);
             if (cardInstance.isOfType(Type.LAND)) {
                 cardInstance = currentPlayer.getHand().extractCardById(cardId);
+                cardInstance.setController(currentPlayer.getName());
                 turn.addCardToCardsPlayedWithinTurn(cardInstance);
                 currentPlayer.getBattlefield().addCard(cardInstance);
 

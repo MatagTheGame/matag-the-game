@@ -63,7 +63,6 @@ public class CardModifiers {
     }
 
     public void addBlocking(int blocking) {
-        // FIXME blocking is an immutable list (Collections.emptyList())
         this.blocking.add(blocking);
     }
 

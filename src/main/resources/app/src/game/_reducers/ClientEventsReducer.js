@@ -49,7 +49,10 @@ export default class ClientEventsReducer {
 
           if (newState.turn.currentPhase === 'DA') {
             if (CardUtils.isOfType(cardInstance, 'CREATURE') && !CardUtils.hasSummoningSickness(cardInstance)) {
-              CardUtils.toggleFrontendTapped(cardInstance)
+              if (!CardUtils.hasVigilance(cardInstance)) {
+                CardUtils.toggleFrontendTapped(cardInstance)
+              }
+              CardUtils.toggleFrontendAttacking(cardInstance)
             }
 
           } else if (newState.turn.currentPhase === 'DB') {
