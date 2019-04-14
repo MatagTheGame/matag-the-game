@@ -17,6 +17,7 @@ import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.sets.Ixalan.AIR_ELEMENTAL;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
+import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
 
 @Profile("test")
 @Service
@@ -52,6 +53,7 @@ public class InitTestService {
 
         addCardToCurrentPlayerHand(gameStatus, ISLAND);
         addCardToCurrentPlayerHand(gameStatus, PLAINS);
+        addCardToCurrentPlayerHand(gameStatus, HUATLIS_SNUBHORN);
         addCardToCurrentPlayerHand(gameStatus, AIR_ELEMENTAL);
         addCardToCurrentPlayerHand(gameStatus, AIR_ELEMENTAL);
 

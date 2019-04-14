@@ -19,10 +19,11 @@ body {
   background-color: gray;
   cursor: pointer;
   transition-duration: 0.5s;
+  z-index: 1;
 }
 
 .card:hover {
-  z-index: 100;
+  z-index: 9 !important;
 }
 
 .summoning-sickness {
@@ -43,7 +44,7 @@ body {
 }
 
 #modal-container {
-  z-index: 4;
+  z-index: 10;
   position: absolute;
   top: 0;
   left: 0;
@@ -54,7 +55,7 @@ body {
 }
 
 #maximized-card {
-  z-index: 5;
+  z-index: 11;
   position: absolute;
   width: 540px;
   height: 750px;
@@ -67,12 +68,14 @@ body {
 
 #player-battlefield .flying {
   box-shadow: 20px 60px 4px rgba(0, 0, 0, 0.4);
-  transform: translateZ(20px);
+  transform: translateY(-40px);
+  z-index: 2;
 }
 
 #opponent-battlefield .flying {
   box-shadow: -20px -60px 4px rgba(0, 0, 0, 0.4);
-  transform: translateY(20px);
+  transform: translateY(40px);
+  z-index: 2;
 }
 
 #player-battlefield .tapped, #opponent-battlefield .tapped {
@@ -82,11 +85,13 @@ body {
 }
 
 #player-battlefield .tapped.flying {
-  transform: rotateZ(90deg) translateZ(20px);
+  transform: rotateZ(90deg) translateX(-40px);
+  box-shadow: 60px -20px 4px rgba(0, 0, 0, 0.4);
 }
 
 #opponent-battlefield .tapped.flying {
-  transform: rotateZ(90deg) translateY(20px);
+  transform: rotateZ(90deg) translateX(40px);
+  box-shadow: -60px 20px 4px rgba(0, 0, 0, 0.4);
 }
 
 #player-battlefield .frontend-tapped, #opponent-battlefield .frontend-tapped {
@@ -95,17 +100,14 @@ body {
 
 #player-battlefield .frontend-tapped.flying {
   transform: rotateZ(75deg) translateZ(20px);
-}
-
-#opponent-battlefield .frontend-tapped.flying {
-  transform: rotateZ(75deg) translateY(20px);
+  box-shadow: 55px -15px 4px rgba(0, 0, 0, 0.4);
 }
 
 #player-hand {
   bottom: 40px;
   left: 1%;
   width: 99%;
-  z-index: 2;
+  z-index: 5;
 }
 
 #opponent-hand {
@@ -127,7 +129,7 @@ body {
   height: 200px;
   bottom: 0;
   left: 0;
-  z-index: 3;
+  z-index: 9;
 }
 
 #user-actions button {
@@ -151,7 +153,7 @@ body {
   bottom: 0;
   width: 94%;
   left: 3%;
-  z-index: 3;
+  z-index: 9;
   background-color: darkgrey;
   padding: 2px 10px 2px 10px;
   border: 1px solid black;
@@ -160,7 +162,7 @@ body {
 
 #message {
   position: absolute;
-  z-index: 5;
+  z-index: 12;
   top: 25%;
   left: 25%;
   width: 50%;
