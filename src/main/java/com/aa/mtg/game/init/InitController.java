@@ -9,6 +9,7 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
+import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,15 @@ public class InitController {
     private Logger LOGGER = LoggerFactory.getLogger(InitController.class);
 
     private final EventSender eventSender;
+    private final GameStatusUpdaterService gameStatusUpdaterService;
+    private final InitTestService initTestService;
     private final GameStatusRepository gameStatusRepository;
     private final DeckRetrieverService deckRetrieverService;
-    private final InitTestService initTestService;
 
     @Autowired
-    public InitController(EventSender eventSender, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
+    public InitController(EventSender eventSender, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
         this.eventSender = eventSender;
+        this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.gameStatusRepository = gameStatusRepository;
         this.deckRetrieverService = deckRetrieverService;
         this.initTestService = initTestService;
@@ -61,11 +64,11 @@ public class InitController {
 
                 eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer1())));
                 eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer2())));
-                eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("UPDATE_TURN", gameStatus.getTurn()));
 
                 eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer2())));
                 eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer1())));
-                eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("UPDATE_TURN", gameStatus.getTurn()));
+
+                gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
             } else {
                 eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("MESSAGE", new MessageEvent("Game is full.", true)));

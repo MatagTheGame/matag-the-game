@@ -9,20 +9,21 @@ class Library extends PureComponent {
     return this.props.type + '-library'
   }
   
-  getLibrary() {
+  getLibrarySize() {
     if (this.props.type === 'player') {
-      return this.props.playerLibrary
+      return this.props.playerLibrarySize
     } else {
-      return this.props.opponentLibrary
+      return this.props.opponentLibrarySize
     }
   }
   
   render() {
     return (
       <div id={this.getId()} className='player-library'>
-        {this.getLibrary().length > 0 ? <Card style={LibraryUiUtils.libraryHeight(this.getLibrary().length, this.props.type)} /> : null}
-        <div className='card-bottom-thickness' style={LibraryUiUtils.libraryBottomThickness(this.getLibrary().length)} />
-        <div className='card-right-thickness' style={LibraryUiUtils.libraryRightThickness(this.getLibrary().length)} />
+        {this.getLibrarySize() > 0 ? <Card style={LibraryUiUtils.libraryHeight(this.getLibrarySize(), this.props.type)} /> : null}
+        <div className='card-bottom-thickness' style={LibraryUiUtils.libraryBottomThickness(this.getLibrarySize())} />
+        <div className='card-right-thickness' style={LibraryUiUtils.libraryRightThickness(this.getLibrarySize())} />
+        {this.getLibrarySize() > 0 ? <span className='library-size'>{ this.getLibrarySize() }</span> : null}
       </div>
     )
   }
@@ -30,8 +31,8 @@ class Library extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    playerLibrary: get(state, 'player.library', []),
-    opponentLibrary: get(state, 'opponent.library', [])
+    playerLibrarySize: get(state, 'player.librarySize', 0),
+    opponentLibrarySize: get(state, 'opponent.librarySize', 0)
   }
 }
 

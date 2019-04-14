@@ -26,6 +26,7 @@ public class DrawPhase implements Phase {
             CardInstance cardInstance = gameStatus.getCurrentPlayer().getLibrary().draw();
             gameStatus.getCurrentPlayer().getHand().addCard(cardInstance);
             gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
+            gameStatusUpdaterService.sendUpdateCurrentPlayerLibrarySize(gameStatus);
         }
         gameStatus.getTurn().setCurrentPhase(M1);
     }

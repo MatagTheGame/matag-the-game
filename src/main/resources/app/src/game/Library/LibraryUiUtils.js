@@ -12,8 +12,7 @@ export class LibraryUiUtils {
     return {
       height: `${cardsNumber}px`,
       bottom: `-${halfCardsNumber}px`,
-      transform: `rotateX(-90deg)`,
-      boxShadow: `-0.5px ${halfCardsNumber}px 4px rgba(0, 0, 0, 0.4)`
+      transform: `rotateX(-90deg)`
     }
   }
 
@@ -22,8 +21,7 @@ export class LibraryUiUtils {
     return {
       width: `${cardsNumber}px`,
       right: `-${halfCardsNumber}px`,
-      transform: `rotateY(-90deg)`,
-      boxShadow: `-${halfCardsNumber}px 0 4px rgba(0, 0, 0, 0.4)`
+      transform: `rotateY(-90deg)`
     }
   }
 }

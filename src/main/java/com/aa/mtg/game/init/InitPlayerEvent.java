@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 class InitPlayerEvent {
-    private final List<CardInstance> library;
+    private final int librarySize;
     private final List<CardInstance> hand;
     private final List<CardInstance> battlefield;
     private final List<CardInstance> graveyard;
     private final String name;
     private final int life;
 
-    public InitPlayerEvent(List<CardInstance> library, List<CardInstance> hand, List<CardInstance> battlefield, List<CardInstance> graveyard, String name, int life) {
-        this.library = library;
+    public InitPlayerEvent(int librarySize, List<CardInstance> hand, List<CardInstance> battlefield, List<CardInstance> graveyard, String name, int life) {
+        this.librarySize = librarySize;
         this.hand = hand;
         this.battlefield = battlefield;
         this.graveyard = graveyard;
@@ -23,8 +23,8 @@ class InitPlayerEvent {
         this.life = life;
     }
 
-    public List<CardInstance> getLibrary() {
-        return library;
+    public int getLibrarySize() {
+        return librarySize;
     }
 
     public List<CardInstance> getHand() {
@@ -49,7 +49,7 @@ class InitPlayerEvent {
 
     static InitPlayerEvent createForPlayer(Player player) {
         return new InitPlayerEvent(
-                player.getLibrary().maskedLibrary(),
+                player.getLibrary().size(),
                 player.getHand().getCards(),
                 new ArrayList<>(),
                 new ArrayList<>(),
@@ -60,7 +60,7 @@ class InitPlayerEvent {
 
     static InitPlayerEvent createForOpponent(Player player) {
         return new InitPlayerEvent(
-                player.getLibrary().maskedLibrary(),
+                player.getLibrary().size(),
                 player.getHand().maskedHand(),
                 new ArrayList<>(),
                 new ArrayList<>(),

@@ -5,7 +5,8 @@ export default class ServerEventsReducer {
   static getEvents() {
     return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN',
       'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_INACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_INACTIVE_PLAYER_HAND',
-      'UPDATE_ACTIVE_PLAYER_GRAVEYARD', 'UPDATE_INACTIVE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE', 'UPDATE_STACK']
+      'UPDATE_ACTIVE_PLAYER_GRAVEYARD', 'UPDATE_INACTIVE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE', 'UPDATE_STACK',
+      'UPDATE_ACTIVE_PLAYER_LIBRARY_SIZE', 'UPDATE_INACTIVE_PLAYER_LIBRARY_SIZE']
   }
 
   static reduceEvent(newState, action) {
@@ -71,13 +72,23 @@ export default class ServerEventsReducer {
         break
 
       case 'UPDATE_INACTIVE_PLAYER_GRAVEYARD':
-        currentPlayer = PlayerUtils.getNonCurrentPlayer(newState)
-        currentPlayer.graveyard = action.value
+        nonCurrentPlayer = PlayerUtils.getNonCurrentPlayer(newState)
+        nonCurrentPlayer.graveyard = action.value
         break
 
       case 'UPDATE_PLAYER_LIFE':
         player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
         player.life = action.value.life
+        break
+
+      case 'UPDATE_ACTIVE_PLAYER_LIBRARY_SIZE':
+        currentPlayer = PlayerUtils.getCurrentPlayer(newState)
+        currentPlayer.librarySize = action.value
+        break
+
+      case 'UPDATE_INACTIVE_PLAYER_LIBRARY_SIZE':
+        nonCurrentPlayer = PlayerUtils.getNonCurrentPlayer(newState)
+        nonCurrentPlayer.librarySize = action.value
         break
 
       case 'UPDATE_STACK':

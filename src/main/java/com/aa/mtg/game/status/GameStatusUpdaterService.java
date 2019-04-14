@@ -26,6 +26,20 @@ public class GameStatusUpdaterService {
         );
     }
 
+    public void sendUpdateCurrentPlayerLibrarySize(GameStatus gameStatus) {
+        eventSender.sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_ACTIVE_PLAYER_LIBRARY_SIZE", gameStatus.getCurrentPlayer().getLibrary().size())
+        );
+    }
+
+    public void sendUpdateNonCurrentPlayerLibrarySize(GameStatus gameStatus) {
+        eventSender.sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_INACTIVE_PLAYER_LIBRARY_SIZE", gameStatus.getNonCurrentPlayer().getLibrary().size())
+        );
+    }
+
     public void sendUpdateCurrentPlayerHand(GameStatus gameStatus) {
         eventSender.sendToPlayer(gameStatus.getCurrentPlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getCurrentPlayer().getHand().getCards()));
         eventSender.sendToPlayer(gameStatus.getNonCurrentPlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getCurrentPlayer().getHand().maskedHand()));
