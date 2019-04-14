@@ -279,12 +279,20 @@ body {
   position: absolute;
   font-size: xx-large;
   left: 36px;
-  top: 120px;
   z-index: 9;
   background: #534d67;
   border: 2px solid black;
   padding: 4px;
   color: yellow;
+}
+
+#player-library .library-size {
+  top: 120px;
+}
+
+#opponent-library .library-size {
+  transform: rotateZ(180deg);
+  top: -40px;
 }
 
 #player-info {

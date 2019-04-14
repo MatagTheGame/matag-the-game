@@ -52,12 +52,11 @@ public class DeckRetrieverService {
     private Library redGreenGuild(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 60 / 5; i++) {
+        for (int i = 0; i < 60 / 4; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), FOREST, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), MOUNTAIN, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), FERAL_MAAKA, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), AXEBANE_BEAST, playerName));
-
         }
 
         return new Library(cards);

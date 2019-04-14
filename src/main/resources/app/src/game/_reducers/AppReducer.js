@@ -17,6 +17,9 @@ export default (state, action) => {
   } else if (ClientEventsReducer.getEvents().find(event => action.type === event)) {
     return ClientEventsReducer.reduceEvent(newState, action)
 
+  } else if (!state) {
+    return {}
+
   } else {
     throw new Error('Unknown action type ' + action.type)
   }

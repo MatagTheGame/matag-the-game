@@ -13,9 +13,6 @@ export default class ClientEventsReducer {
 
   static reduceEvent(newState, action) {
     switch (action.type) {
-      case '@@INIT':
-        return {}
-
       case 'MAXIMIZE_MINIMIZE_CARD':
         newState.maximizedCard = action.value.cardImage
         break;
