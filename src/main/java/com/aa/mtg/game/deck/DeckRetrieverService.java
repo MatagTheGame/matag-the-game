@@ -19,12 +19,6 @@ public class DeckRetrieverService {
 
     public Library retrieveDeckForUser(SecurityToken token, String playerName, GameStatus gameStatus) {
         return randomDeck(playerName, gameStatus);
-
-//        if (playerName.equals("Pippo")) {
-//            return whiteBlueIxalan(playerName, gameStatus);
-//        } else {
-//            return redGreenIxalan(playerName, gameStatus);
-//        }
     }
 
     private Library randomDeck(String playerName, GameStatus gameStatus) {
@@ -86,17 +80,15 @@ public class DeckRetrieverService {
     private Library redGreenIxalan(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 60 / 5; i++) {
+        for (int i = 0; i < 60 / 6; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), FOREST, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), MOUNTAIN, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), NEST_ROBBER, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), ANCIENT_BRONTODON, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), FRENZIED_RAPTOR, playerName));
+            cards.add(new CardInstance(gameStatus.nextCardId(), GRAZING_WHIPTAIL, playerName));
         }
 
         return new Library(cards);
     }
-
-
-
 }

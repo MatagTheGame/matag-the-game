@@ -4,8 +4,8 @@ import PlayerUtils from '../PlayerInfo/PlayerUtils'
 export default class ServerEventsReducer {
   static getEvents() {
     return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN',
-      'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_INACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_ACTIVE_PLAYER_GRAVEYARD',
-      'UPDATE_INACTIVE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE', 'UPDATE_STACK']
+      'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_INACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_INACTIVE_PLAYER_HAND',
+      'UPDATE_ACTIVE_PLAYER_GRAVEYARD', 'UPDATE_INACTIVE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE', 'UPDATE_STACK']
   }
 
   static reduceEvent(newState, action) {
@@ -58,6 +58,11 @@ export default class ServerEventsReducer {
       case 'UPDATE_ACTIVE_PLAYER_HAND':
         currentPlayer = PlayerUtils.getCurrentPlayer(newState)
         currentPlayer.hand = action.value
+        break
+
+      case 'UPDATE_INACTIVE_PLAYER_HAND':
+        nonCurrentPlayer = PlayerUtils.getNonCurrentPlayer(newState)
+        nonCurrentPlayer.hand = action.value
         break
 
       case 'UPDATE_ACTIVE_PLAYER_GRAVEYARD':

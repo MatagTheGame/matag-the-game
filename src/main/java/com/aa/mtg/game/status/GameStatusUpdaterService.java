@@ -31,6 +31,11 @@ public class GameStatusUpdaterService {
         eventSender.sendToPlayer(gameStatus.getNonCurrentPlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getCurrentPlayer().getHand().maskedHand()));
     }
 
+    public void sendUpdateNonCurrentPlayerHand(GameStatus gameStatus) {
+        eventSender.sendToPlayer(gameStatus.getNonCurrentPlayer(), new Event("UPDATE_INACTIVE_PLAYER_HAND", gameStatus.getNonCurrentPlayer().getHand().getCards()));
+        eventSender.sendToPlayer(gameStatus.getCurrentPlayer(), new Event("UPDATE_INACTIVE_PLAYER_HAND", gameStatus.getNonCurrentPlayer().getHand().maskedHand()));
+    }
+
     public void sendUpdateCurrentPlayerBattlefield(GameStatus gameStatus) {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),

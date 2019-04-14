@@ -162,7 +162,7 @@ export default class CardUtils {
     }
 
     if (CardUtils.hasAbility(blockedCard, 'FLYING')) {
-      if (!CardUtils.hasAbility(blocking, 'FLYING')) {
+      if (!(CardUtils.hasAbility(blockingCard, 'FLYING') || CardUtils.hasAbility(blockingCard, 'REACH'))) {
         return false
       }
     }

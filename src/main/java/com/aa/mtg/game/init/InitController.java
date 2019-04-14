@@ -1,16 +1,17 @@
 package com.aa.mtg.game.init;
 
+import com.aa.mtg.game.deck.DeckRetrieverService;
 import com.aa.mtg.game.event.Event;
 import com.aa.mtg.game.event.EventSender;
-import com.aa.mtg.game.deck.DeckRetrieverService;
+import com.aa.mtg.game.message.MessageEvent;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
+import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
-import com.aa.mtg.game.message.MessageEvent;
-import com.aa.mtg.game.security.SecurityToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
@@ -24,11 +25,14 @@ public class InitController {
     private final EventSender eventSender;
     private final GameStatusRepository gameStatusRepository;
     private final DeckRetrieverService deckRetrieverService;
+    private final InitTestService initTestService;
 
-    public InitController(EventSender eventSender, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService) {
+    @Autowired
+    public InitController(EventSender eventSender, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
         this.eventSender = eventSender;
         this.gameStatusRepository = gameStatusRepository;
         this.deckRetrieverService = deckRetrieverService;
+        this.initTestService = initTestService;
     }
 
     @MessageMapping("/game/init")
@@ -66,6 +70,10 @@ public class InitController {
             } else {
                 eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("MESSAGE", new MessageEvent("Game is full.", true)));
             }
+        }
+
+        if (initTestService != null) {
+            initTestService.initGameStatusForTest(gameStatusRepository.getUnsecure(token.getGameId()));
         }
     }
 

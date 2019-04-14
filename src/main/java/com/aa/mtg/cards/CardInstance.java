@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.aa.mtg.cards.ability.Ability.FLYING;
+import static com.aa.mtg.cards.ability.Ability.REACH;
 import static com.aa.mtg.cards.ability.Ability.VIGILANCE;
 
 @ToString
@@ -110,7 +111,7 @@ public class CardInstance {
         }
 
         if (blockedCreature.getAbilities().contains(FLYING)) {
-            if (!getAbilities().contains(FLYING)) {
+            if (!(getAbilities().contains(FLYING) || getAbilities().contains(REACH))) {
                 throw new MessageException(getIdAndName() + " cannot block " + blockedCreature.getIdAndName() + " as it has flying.");
             }
         }

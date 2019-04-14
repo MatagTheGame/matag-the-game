@@ -4,5 +4,6 @@ public enum Ability {
     DEATHTOUCH,
     FLYING,
     HASTE,
+    REACH,
     VIGILANCE
 }
