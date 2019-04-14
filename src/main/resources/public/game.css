@@ -320,7 +320,7 @@ body {
   width: 12%;
   height: 40px;
   right: 1%;
-  transform: rotateX(-35deg) translateZ(20px);
+  transform: rotateX(-45deg) translateZ(35px);
   padding: 10px 20px 10px 20px;
   font-size: xx-large;
   display: flex;
