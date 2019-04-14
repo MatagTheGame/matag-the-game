@@ -1,26 +1,25 @@
 export class LibraryUiUtils {
   static libraryHeight(cardsNumber, type) {
     const extraOpponentRotation = type === 'opponent' ? 'rotateZ(180deg) ' : ''
-    const halfCardsNumber = Math.floor(cardsNumber / 2)
     return {
-      transform: `${extraOpponentRotation} translateZ(${halfCardsNumber}px)`,
+      transform: `${extraOpponentRotation} translateZ(${cardsNumber}px)`,
     }
   }
 
   static libraryBottomThickness(cardsNumber) {
-    const halfCardsNumber = Math.floor(cardsNumber / 2)
+    const twiceCardsNumber = cardsNumber * 2
     return {
-      height: `${cardsNumber}px`,
-      bottom: `-${halfCardsNumber}px`,
+      height: `${twiceCardsNumber}px`,
+      bottom: `-${cardsNumber}px`,
       transform: `rotateX(-90deg)`
     }
   }
 
   static libraryRightThickness(cardsNumber) {
-    const halfCardsNumber = Math.floor(cardsNumber / 2)
+    const twiceCardsNumber = cardsNumber * 2
     return {
-      width: `${cardsNumber}px`,
-      right: `-${halfCardsNumber}px`,
+      width: `${twiceCardsNumber}px`,
+      right: `-${cardsNumber}px`,
       transform: `rotateY(-90deg)`
     }
   }
