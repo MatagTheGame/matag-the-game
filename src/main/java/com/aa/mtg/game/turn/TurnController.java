@@ -44,7 +44,7 @@ public class TurnController {
         } else if ("PLAY_LAND".equals(request.getAction())) {
             turnService.playLand(gameStatus, request.getCardIds().get(0));
         } else if ("CAST".equals(request.getAction())) {
-            turnService.cast(gameStatus, request.getCardIds().get(0), request.getTappingLandIds());
+            turnService.cast(gameStatus, request.getCardIds().get(0), request.getTappingLandIds(), request.getTargetsIdsForCardIds());
         } else if ("RESOLVE".equals(request.getAction())) {
             turnService.resolve(gameStatus, request.getTriggeredAction(), request.getCardIds());
         } else if ("DECLARE_ATTACKERS".equals(request.getAction())) {
