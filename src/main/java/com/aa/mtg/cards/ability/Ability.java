@@ -10,7 +10,7 @@ public enum Ability {
     HASTE,
     REACH,
     VIGILANCE,
-    DESTROY_TARGET_CREATURE(new DestroyTargetCreatureAction(asList("greaterOrEquals", "4")));
+    DESTROY_TARGET_CREATURE(new DestroyTargetAction(asList("greaterOrEquals", "4")));
 
     private final AbilityAction abilityAction;
 

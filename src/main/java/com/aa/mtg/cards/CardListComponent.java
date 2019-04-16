@@ -1,5 +1,7 @@
 package com.aa.mtg.cards;
 
+import com.aa.mtg.cards.search.CardSearch;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +29,7 @@ public abstract class CardListComponent {
     }
 
     public CardInstance findCardById(int cardId) {
-        return cards.stream()
-                .filter(cardInstance -> cardInstance.getId() == cardId)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Card with id " + cardId + " not found in player battlefield."));
+        return new CardSearch(cards).withId(cardId);
     }
 
     public CardInstance extractCardById(int cardId) {

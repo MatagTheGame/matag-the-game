@@ -4,8 +4,6 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.event.Event;
 import com.aa.mtg.game.event.EventSender;
-import com.aa.mtg.game.player.Library;
-import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.Turn;
 import org.junit.Test;
@@ -20,8 +18,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static com.aa.mtg.game.turn.phases.CleanupPhase.CL;
@@ -30,6 +26,7 @@ import static com.aa.mtg.game.turn.phases.EndTurnPhase.ET;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 import static com.aa.mtg.game.turn.phases.UntapPhase.UT;
 import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
+import static com.aa.mtg.utils.TestUtils.testGameStatus;
 import static java.util.Arrays.asList;
 
 @RunWith(SpringRunner.class)
@@ -46,9 +43,7 @@ public class ContinueTurnServiceTest {
     @Test
     public void testContinueTurnUntapPlayer() {
         // Given
-        GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+        GameStatus gameStatus = testGameStatus();
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -83,9 +78,7 @@ public class ContinueTurnServiceTest {
     @Test
     public void testContinueTurnUpkeepPlayer() {
         // Given
-        GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+        GameStatus gameStatus = testGameStatus();
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -115,9 +108,7 @@ public class ContinueTurnServiceTest {
     @Test
     public void testContinueTurnUpkeepOpponent() {
         // Given
-        GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+        GameStatus gameStatus = testGameStatus();
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -147,9 +138,7 @@ public class ContinueTurnServiceTest {
     @Test
     public void testContinueTurnDrawPlayer() {
         // Given
-        GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+        GameStatus gameStatus = testGameStatus();
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -178,9 +167,7 @@ public class ContinueTurnServiceTest {
     @Test
     public void testContinueTurnDrawPlayerSecondTurn() {
         // Given
-        GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+        GameStatus gameStatus = testGameStatus();
 
         Turn turn = new Turn();
         turn.setTurnNumber(2);
@@ -214,9 +201,7 @@ public class ContinueTurnServiceTest {
     @Test
     public void testContinueTurnM1Player() {
         // Given
-        GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+        GameStatus gameStatus = testGameStatus();
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -245,9 +230,7 @@ public class ContinueTurnServiceTest {
     @Test
     public void testContinueTurnET() {
         // Given
-        GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+        GameStatus gameStatus = testGameStatus();
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -274,9 +257,7 @@ public class ContinueTurnServiceTest {
     @Test
     public void testContinueTurnETDiscardACard() {
         // Given
-        GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+        GameStatus gameStatus = testGameStatus();
 
         IntStream.rangeClosed(1, 8).forEach(i -> gameStatus.getPlayer1().getHand().addCard(A_CARD));
 
@@ -306,9 +287,7 @@ public class ContinueTurnServiceTest {
     @Test
     public void testContinueTurnCLPlayer() {
         // Given
-        GameStatus gameStatus = new GameStatus("game-id");
-        gameStatus.setPlayer1(new Player("player-session", "player-name", library()));
-        gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", library()));
+        GameStatus gameStatus = testGameStatus();
 
         Turn turn = new Turn();
         turn.setTurnNumber(1);
@@ -331,15 +310,6 @@ public class ContinueTurnServiceTest {
         BDDMockito.verify(eventSender).sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                 new Event("UPDATE_TURN", expectedTurn));
-    }
-
-    private Library library() {
-        List<CardInstance> libraryCards = IntStream.rangeClosed(1, 60)
-                .boxed()
-                .map(i -> new CardInstance(i, Cards.PLAINS, "owner"))
-                .collect(Collectors.toList());
-
-        return new Library(libraryCards);
     }
 
     @Configuration

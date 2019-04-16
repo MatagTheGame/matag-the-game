@@ -80,6 +80,15 @@ public class CardInstance {
         return card.getTypes().contains(type);
     }
 
+    public boolean ofAnyOfTheTypes(List<Type> types) {
+        for (Type type : types) {
+            if (isOfType(type)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void checkIfCanAttack() {
         if (!isOfType(Type.CREATURE)) {
             throw new MessageException("Declared attacker " + getIdAndName() + " is not of type Creature.");

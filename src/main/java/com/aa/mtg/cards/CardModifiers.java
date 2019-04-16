@@ -26,6 +26,10 @@ public class CardModifiers {
         return tapped != null;
     }
 
+    public boolean isUnapped() {
+        return !isTapped();
+    }
+
     public boolean isSummoningSickness() {
         return summoningSickness;
     }

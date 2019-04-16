@@ -5,8 +5,8 @@ import com.aa.mtg.game.status.GameStatus;
 
 import java.util.List;
 
-public class DestroyTargetCreatureAction extends AbilityAction {
-    public DestroyTargetCreatureAction(List<String> parameters) {
+public class DestroyTargetAction extends AbilityAction {
+    public DestroyTargetAction(List<String> parameters) {
         super(parameters);
     }
 

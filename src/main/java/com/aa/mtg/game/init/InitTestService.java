@@ -43,6 +43,8 @@ public class InitTestService {
 
         // Current Player
         addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
+        addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
+        addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
         addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
 
         addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
@@ -61,9 +63,12 @@ public class InitTestService {
 
         gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
         gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+        gameStatusUpdaterService.sendUpdateCurrentPlayerLibrarySize(gameStatus);
 
         // Non Current Player
         addCardToNonCurrentPlayerLibrary(gameStatus, PLAINS);
+        addCardToNonCurrentPlayerLibrary(gameStatus, PLAINS);
+        addCardToNonCurrentPlayerLibrary(gameStatus, ISLAND);
         addCardToNonCurrentPlayerLibrary(gameStatus, ISLAND);
 
         addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
@@ -80,6 +85,7 @@ public class InitTestService {
 
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerHand(gameStatus);
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
+        gameStatusUpdaterService.sendUpdateNonCurrentPlayerLibrarySize(gameStatus);
     }
 
     private void addCardToCurrentPlayerLibrary(GameStatus gameStatus, Card card) {
