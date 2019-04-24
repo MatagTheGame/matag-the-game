@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.aa.mtg.cards.ability.Ability.HASTE;
+import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
 
 @Service
 public class ResolveService {
@@ -29,7 +29,7 @@ public class ResolveService {
             CardInstance cardInstance = gameStatus.getStack().removeLast();
             gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
-            if (cardInstance.isOfType(Type.CREATURE) && !cardInstance.getAbilities().contains(HASTE)) {
+            if (cardInstance.isOfType(Type.CREATURE) && !cardInstance.hasAbility(HASTE)) {
                 cardInstance.getModifiers().setSummoningSickness(true);
             }
 

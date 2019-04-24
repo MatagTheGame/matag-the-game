@@ -1,6 +1,6 @@
 # Mtg
 
-MTG.
+MTG game.
 
 
 
@@ -29,15 +29,19 @@ The application is written using:
 Build js:
 
     yarn install
-    yarn build-dev
+    yarn watch
+    
+Startup the app as spring boot
+
+    # from intellij or with
+    mvn spring-boot:run
+    
+It is possible to run with `test` profile in order to start custom decks rather than random (see `InitTestService`)
 
 Run tests:
     
     yarn test
-
-Run from command line:
-
-    mvn spring-boot:run
+    mvn test
 
 
 ## Deployment

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.aa.mtg.cards.ability.Ability.DEATHTOUCH;
+import static com.aa.mtg.cards.ability.type.AbilityType.DEATHTOUCH;
 
 @Service
 public class CombatService {
@@ -63,8 +63,8 @@ public class CombatService {
                 remainingDamageForAttackingCreature = blockingCreature.getToughness();
             }
 
-            boolean attackingCreatureDestroyed = dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.getAbilities().contains(DEATHTOUCH));
-            dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.getAbilities().contains(DEATHTOUCH));
+            boolean attackingCreatureDestroyed = dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.hasAbility(DEATHTOUCH));
+            dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.hasAbility(DEATHTOUCH));
 
             if (attackingCreatureDestroyed) {
                 break;

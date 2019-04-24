@@ -16,7 +16,7 @@ public class Battlefield extends CardListComponent {
     }
 
     public void removeSummoningSickness() {
-        new CardSearch(cards).withoutSummoningSickness().getCards()
+        new CardSearch(cards).withSummoningSickness().getCards()
                 .forEach(cardInstance -> cardInstance.getModifiers().setSummoningSickness(false));
     }
 

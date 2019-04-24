@@ -11,7 +11,7 @@ export default class CardUtils {
   }
 
   static hasAbility(cardInstance, ability) {
-    return cardInstance.abilities.includes(ability)
+    return cardInstance.abilities.find((currentAbility) => currentAbility.abilityType === ability)
   }
 
   static frontendTap(cardInstance) {

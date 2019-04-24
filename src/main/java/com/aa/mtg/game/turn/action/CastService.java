@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CostUtils;
+import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
@@ -79,10 +80,12 @@ public class CastService {
     private void checkSpellRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Integer>> targetsIdsForCardIds) {
         cardToCast.getAbilities().stream()
                 .filter(ability -> ability.getAbilityAction() != null)
-                .forEach(ability -> {
-                    if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId())) {
+                .map((Ability::getAbilityAction))
+                .forEach(action -> {
+                    if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId()) || targetsIdsForCardIds.get(cardToCast.getId()).isEmpty()) {
                         throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
                     }
+                    action.check(cardToCast, gameStatus, targetsIdsForCardIds.get(cardToCast.getId()).get(0));
                 });
 
     }

@@ -1,37 +1,33 @@
 package com.aa.mtg.cards.ability;
 
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.aa.mtg.cards.ability.action.AbilityAction;
+import com.aa.mtg.cards.ability.target.Target;
+import com.aa.mtg.cards.ability.type.AbilityType;
 
-import static java.util.Arrays.asList;
-
-public enum Ability {
-    DEATHTOUCH,
-    FLYING,
-    HASTE,
-    REACH,
-    VIGILANCE,
-    DESTROY_TARGET_CREATURE(new DestroyTargetAction(asList("greaterOrEquals", "4")));
-
+public class Ability {
+    private final AbilityType abilityType;
     private final AbilityAction abilityAction;
+    private final Target target;
 
-    Ability() {
-        this(null);
+    public Ability(AbilityType abilityType) {
+        this(abilityType, null, null);
     }
 
-    Ability(AbilityAction abilityAction) {
+    public Ability(AbilityType abilityType, AbilityAction abilityAction, Target target) {
+        this.abilityType = abilityType;
         this.abilityAction = abilityAction;
+        this.target = target;
+    }
+
+    public AbilityType getAbilityType() {
+        return abilityType;
     }
 
     public AbilityAction getAbilityAction() {
         return abilityAction;
     }
 
-    @JsonValue
-    public String toValue() {
-        if (abilityAction == null) {
-            return name();
-        } else {
-            return name() + ";" + abilityAction.getParameters();
-        }
+    public Target getTarget() {
+        return target;
     }
 }

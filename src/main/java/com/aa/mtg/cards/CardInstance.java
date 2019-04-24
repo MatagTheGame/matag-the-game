@@ -1,6 +1,7 @@
 package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import lombok.EqualsAndHashCode;
@@ -11,9 +12,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.aa.mtg.cards.ability.Ability.FLYING;
-import static com.aa.mtg.cards.ability.Ability.REACH;
-import static com.aa.mtg.cards.ability.Ability.VIGILANCE;
+import static com.aa.mtg.cards.ability.type.AbilityType.FLYING;
+import static com.aa.mtg.cards.ability.type.AbilityType.REACH;
+import static com.aa.mtg.cards.ability.type.AbilityType.VIGILANCE;
 
 @ToString
 @EqualsAndHashCode
@@ -104,7 +105,7 @@ public class CardInstance {
     }
 
     public void declareAsAttacker() {
-        if (!getAbilities().contains(VIGILANCE)) {
+        if (!hasAbility(VIGILANCE)) {
             modifiers.tap();
         }
         modifiers.setAttacking(true);
@@ -119,8 +120,8 @@ public class CardInstance {
             throw new MessageException(getIdAndName() + " is tapped and cannot block.");
         }
 
-        if (blockedCreature.getAbilities().contains(FLYING)) {
-            if (!(getAbilities().contains(FLYING) || getAbilities().contains(REACH))) {
+        if (blockedCreature.hasAbility(FLYING)) {
+            if (!(hasAbility(FLYING) || hasAbility(REACH))) {
                 throw new MessageException(getIdAndName() + " cannot block " + blockedCreature.getIdAndName() + " as it has flying.");
             }
         }
@@ -144,5 +145,9 @@ public class CardInstance {
 
     public List<Ability> getAbilities() {
         return Stream.concat(card.getAbilities().stream(), modifiers.getAbilities().stream()).collect(Collectors.toList());
+    }
+
+    public boolean hasAbility(AbilityType abilityType) {
+        return getAbilities().stream().anyMatch(ability -> ability.getAbilityType().equals(abilityType));
     }
 }
