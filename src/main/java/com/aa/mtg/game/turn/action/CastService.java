@@ -85,7 +85,7 @@ public class CastService {
                     if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId()) || targetsIdsForCardIds.get(cardToCast.getId()).isEmpty()) {
                         throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
                     }
-                    action.check(cardToCast, gameStatus, targetsIdsForCardIds.get(cardToCast.getId()).get(0));
+                    action.check(cardToCast, gameStatus, targetsIdsForCardIds.get(cardToCast.getId()));
                 });
 
     }

@@ -4,19 +4,21 @@ import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.type.AbilityType;
 
+import java.util.List;
+
 public class Ability {
     private final AbilityType abilityType;
     private final AbilityAction abilityAction;
-    private final Target target;
+    private final List<Target> targets;
 
     public Ability(AbilityType abilityType) {
         this(abilityType, null, null);
     }
 
-    public Ability(AbilityType abilityType, AbilityAction abilityAction, Target target) {
+    public Ability(AbilityType abilityType, AbilityAction abilityAction, List<Target> targets) {
         this.abilityType = abilityType;
         this.abilityAction = abilityAction;
-        this.target = target;
+        this.targets = targets;
     }
 
     public AbilityType getAbilityType() {
@@ -27,7 +29,7 @@ public class Ability {
         return abilityAction;
     }
 
-    public Target getTarget() {
-        return target;
+    public List<Target> getTargets() {
+        return targets;
     }
 }
