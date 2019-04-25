@@ -48,7 +48,7 @@ class Battlefield extends PureComponent {
   cardItems(cards) {
     return cards.map((cardInstance, i) =>
       <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
-            selectedToBeBlocked={this.isCardSelectedToBeBlocked(cardInstance, i)} />)
+            selected={this.isCardSelectedToBeBlocked(cardInstance, i)} />)
   }
 
   attackingCards() {
@@ -94,7 +94,7 @@ class Battlefield extends PureComponent {
     return cards.map((cardInstance, i) =>
       <span key={cardInstance.id} style={{'marginLeft': this.cardMarginLeft(cardInstance), 'marginTop': this.cardMarginTop(cardInstance)}}>
         <Card cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
-              selectedToBeBlocked={this.isCardSelectedToBeBlocked(cardInstance, i)} />
+              selected={this.isCardSelectedToBeBlocked(cardInstance, i)} />
       </span>
     )
   }

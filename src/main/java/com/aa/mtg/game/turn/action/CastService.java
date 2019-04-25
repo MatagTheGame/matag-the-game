@@ -3,6 +3,7 @@ package com.aa.mtg.game.turn.action;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CostUtils;
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.action.AbilityActionFactory;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
@@ -17,15 +18,18 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class CastService {
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
+    private final AbilityActionFactory abilityActionFactory;
 
     @Autowired
-    public CastService(GameStatusUpdaterService gameStatusUpdaterService) {
+    public CastService(GameStatusUpdaterService gameStatusUpdaterService, AbilityActionFactory abilityActionFactory) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
+        this.abilityActionFactory = abilityActionFactory;
     }
 
     public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds, Map<Integer, List<Integer>> targetsIdsForCardIds) {
@@ -79,13 +83,14 @@ public class CastService {
 
     private void checkSpellRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Integer>> targetsIdsForCardIds) {
         cardToCast.getAbilities().stream()
-                .filter(ability -> ability.getAbilityAction() != null)
-                .map((Ability::getAbilityAction))
+                .map(Ability::getAbilityType)
+                .map(abilityActionFactory::getAbilityAction)
+                .filter(Objects::nonNull)
                 .forEach(action -> {
                     if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId()) || targetsIdsForCardIds.get(cardToCast.getId()).isEmpty()) {
                         throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
                     }
-                    action.check(cardToCast, gameStatus, targetsIdsForCardIds.get(cardToCast.getId())); // TODO get the action from a factory
+                    action.check(cardToCast, gameStatus, targetsIdsForCardIds.get(cardToCast.getId()));
                 });
 
     }

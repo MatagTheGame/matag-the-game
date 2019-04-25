@@ -1,16 +1,13 @@
 package com.aa.mtg.cards.ability.action;
 
-import com.aa.mtg.cards.ability.target.Target;
+import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.game.status.GameStatus;
 
 import java.util.List;
 
 public class DestroyTargetAction extends AbilityAction {
-    public DestroyTargetAction(List<Target> targets) {
-        super(targets);
-    }
-
     @Override
-    public void perform() {
+    public void perform(CardInstance cardInstance, GameStatus gameStatus, List<Integer> targetCardIds) {
 
     }
 }

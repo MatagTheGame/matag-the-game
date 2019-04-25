@@ -41,7 +41,7 @@ body {
   margin-bottom: 100px;
 }
 
-.selected-to-be-blocked {
+.selected {
   border: lightskyblue 6px solid;
 }
 

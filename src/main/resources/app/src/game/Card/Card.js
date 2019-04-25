@@ -42,8 +42,8 @@ class Card extends PureComponent {
       classes += ' blocking'
     }
 
-    if (this.props.selectedToBeBlocked) {
-      classes += ' selected-to-be-blocked'
+    if (this.props.selected) {
+      classes += ' selected'
     }
 
     if (CardUtils.hasAbility(this.props.cardInstance, 'FLYING')) {

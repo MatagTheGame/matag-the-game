@@ -66,10 +66,10 @@ public class InitTestService {
         gameStatusUpdaterService.sendUpdateCurrentPlayerLibrarySize(gameStatus);
 
         // Non Current Player
-        addCardToNonCurrentPlayerLibrary(gameStatus, PLAINS);
-        addCardToNonCurrentPlayerLibrary(gameStatus, PLAINS);
-        addCardToNonCurrentPlayerLibrary(gameStatus, ISLAND);
-        addCardToNonCurrentPlayerLibrary(gameStatus, ISLAND);
+        addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
+        addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
+        addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
+        addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
 
         addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
         addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
