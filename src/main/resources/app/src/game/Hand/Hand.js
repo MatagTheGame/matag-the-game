@@ -25,11 +25,16 @@ class Hand extends PureComponent {
     }
   }
 
+  isCardSelectedToBePlayed(cardInstance) {
+    return cardInstance.id === this.props.cardIdSelectedToBePlayed
+  }
+
   render() {
     return (
       <div id={this.getId()} className='hand'>
         {this.getHand().map((cardInstance) =>
-          <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)} />)}
+          <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
+                selected={this.isCardSelectedToBePlayed(cardInstance)}/>)}
       </div>
     )
   }
@@ -45,7 +50,8 @@ const createHandPlayerCardClickAction = (cardId) => {
 const mapStateToProps = state => {
   return {
     playerHand: get(state, 'player.hand', []),
-    opponentHand: get(state, 'opponent.hand', [])
+    opponentHand: get(state, 'opponent.hand', []),
+    cardIdSelectedToBePlayed: get(state, 'turn.cardIdSelectedToBePlayed')
   }
 }
 
