@@ -15,7 +15,7 @@ public abstract class AbilityAction {
     }
 
     public void check(CardInstance cardInstance, GameStatus gameStatus, List<Integer> targetCardIds) {
-
+        // TODO implement
     }
 
     public abstract void perform();

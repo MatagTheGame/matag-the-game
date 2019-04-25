@@ -179,4 +179,8 @@ export default class CardUtils {
 
     return map
   }
+
+  static needsTargets(cardInstance) {
+    return cardInstance.abilities[0].targets.length > 0
+  }
 }

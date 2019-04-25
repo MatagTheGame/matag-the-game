@@ -33,7 +33,11 @@ export default class ClientEventsReducer {
               const currentMana = CostUtils.currentMana(newState.player.battlefield)
               const currentManaIds = CostUtils.currentManaCardIds(newState.player.battlefield)
               if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentMana)) {
-                stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], tappingLandIds: currentManaIds})
+                if (CardUtils.needsTargets(cardInstance)) {
+                  newState.turn.cardIdSelectedToBeCasted = cardId
+                } else {
+                  stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], tappingLandIds: currentManaIds})
+                }
               }
             }
           }
