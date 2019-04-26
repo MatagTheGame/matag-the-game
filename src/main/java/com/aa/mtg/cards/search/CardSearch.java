@@ -5,6 +5,7 @@ import com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint;
 import com.aa.mtg.cards.properties.Type;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -17,11 +18,10 @@ public class CardSearch {
         this.cards = cards;
     }
 
-    public CardInstance withId(int cardId) {
+    public Optional<CardInstance> withId(int cardId) {
         return cards.stream()
                 .filter(cardInstance -> cardInstance.getId() == cardId)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Card with id " + cardId + " not found in player battlefield."));
+                .findFirst();
     }
 
     public CardSearch ofType(Type type) {

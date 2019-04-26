@@ -5,10 +5,6 @@ import com.aa.mtg.game.status.GameStatus;
 
 import java.util.List;
 
-public abstract class AbilityAction {
-    public void check(CardInstance cardInstance, GameStatus gameStatus, List<Integer> targetCardIds) {
-        // TODO implement
-    }
-
-    public abstract void perform(CardInstance cardInstance, GameStatus gameStatus, List<Integer> targetCardIds);
+public interface AbilityAction {
+    void perform(CardInstance cardInstance, GameStatus gameStatus, List<Integer> targetCardIds);
 }

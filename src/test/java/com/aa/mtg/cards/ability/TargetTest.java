@@ -3,6 +3,7 @@ package com.aa.mtg.cards.ability;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint;
+import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 
@@ -17,12 +18,10 @@ import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.utils.TestUtils.testGameStatus;
 import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class TargetTest {
-
-    @Test
-    public void selectionOnTargetPermanentReturnsFalse() {
+    @Test(expected = MessageException.class)
+    public void selectionOnTargetPermanentFails() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -31,14 +30,13 @@ public class TargetTest {
                 .build();
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isFalse();
+        // Then an exception is thrown
     }
 
     @Test
-    public void selectionOnTargetPermanentReturnsTrue() {
+    public void selectionOnTargetPermanentPasses() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -49,14 +47,13 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isTrue();
+        // Then NO exception is thrown
     }
 
-    @Test
-    public void selectionOnTargetCreatureReturnsFalse() {
+    @Test(expected = MessageException.class)
+    public void selectionOnTargetCreatureFails() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -68,14 +65,13 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isFalse();
+        // Then an exception is thrown
     }
 
     @Test
-    public void selectionOnTargetCreatureReturnsTrue() {
+    public void selectionOnTargetCreaturePasses() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -87,14 +83,13 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isTrue();
+        // Then NO exception is thrown
     }
 
-    @Test
-    public void selectionOnEqualToughnessReturnsFalse() {
+    @Test(expected = MessageException.class)
+    public void selectionOnEqualToughnessFails() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -107,14 +102,13 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isFalse();
+        // Then an exception is thrown
     }
 
     @Test
-    public void selectionOnEqualToughnessReturnsTrue() {
+    public void selectionOnEqualToughnessPasses() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -127,14 +121,13 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isTrue();
+        // Then NO exception is thrown
     }
 
-    @Test
-    public void selectionOnGreaterPowerReturnsFalse() {
+    @Test(expected = MessageException.class)
+    public void selectionOnGreaterPowerFails() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -147,14 +140,13 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isFalse();
+        // Then an exception is thrown
     }
 
     @Test
-    public void selectionOnGreaterPowerReturnsTrue() {
+    public void selectionOnGreaterPowerPasses() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -167,14 +159,13 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isTrue();
+        // Then NO exception is thrown
     }
 
-    @Test
-    public void selectionOnLessOrEqualToughnessReturnsFalseOnLess() {
+    @Test(expected = MessageException.class)
+    public void selectionOnLessOrEqualToughnessFailsOnLess() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -187,14 +178,13 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isFalse();
+        // Then an exception is thrown
     }
 
     @Test
-    public void selectionOnLessOrEqualToughnessReturnsTrueOnEqual() {
+    public void selectionOnLessOrEqualToughnessPassesOnEqual() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -207,14 +197,13 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isTrue();
+        // Then no exception is thrown
     }
 
     @Test
-    public void selectionOnLessOrEqualToughnessReturnsTrueOnGreater() {
+    public void selectionOnLessOrEqualToughnessPassesOnGreater() {
         // Given
         GameStatus gameStatus = testGameStatus();
 
@@ -227,9 +216,8 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        boolean valid = target.check(gameStatus);
+        target.check(gameStatus, 1);
 
-        // Then
-        assertThat(valid).isTrue();
+        // Then no exception is thrown
     }
 }

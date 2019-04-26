@@ -29,7 +29,8 @@ public abstract class CardListComponent {
     }
 
     public CardInstance findCardById(int cardId) {
-        return new CardSearch(cards).withId(cardId);
+        return new CardSearch(cards).withId(cardId)
+                .orElseThrow(() -> new RuntimeException("Card with id " + cardId + " not found."));
     }
 
     public CardInstance extractCardById(int cardId) {

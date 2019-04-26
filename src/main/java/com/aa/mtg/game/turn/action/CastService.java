@@ -3,6 +3,7 @@ package com.aa.mtg.game.turn.action;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CostUtils;
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.ability.action.AbilityActionFactory;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 public class CastService {
@@ -82,16 +82,17 @@ public class CastService {
     }
 
     private void checkSpellRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Integer>> targetsIdsForCardIds) {
-        cardToCast.getAbilities().stream()
-                .map(Ability::getAbilityType)
-                .map(abilityActionFactory::getAbilityAction)
-                .filter(Objects::nonNull)
-                .forEach(action -> {
-                    if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId()) || targetsIdsForCardIds.get(cardToCast.getId()).isEmpty()) {
-                        throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
-                    }
-                    action.check(cardToCast, gameStatus, targetsIdsForCardIds.get(cardToCast.getId()));
-                });
+        for (Ability ability : cardToCast.getAbilities()) {
+            AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
+            if (abilityAction != null) {
+                if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId()) || targetsIdsForCardIds.get(cardToCast.getId()).isEmpty()) {
+                    throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
+                }
 
+                for (int i = 0; i < ability.getTargets().size(); i++) {
+                    ability.getTargets().get(i).check(gameStatus, targetsIdsForCardIds.get(cardToCast.getId()).get(i));
+                }
+            }
+        }
     }
 }
