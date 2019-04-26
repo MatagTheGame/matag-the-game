@@ -1,6 +1,10 @@
 import Phase from '../Turn/Phase'
 import CardSearch from '../Card/CardSearch'
 import StackUtils from '../Stack/StackUtils'
+import stompClient from '../WebSocket'
+import CostUtils from '../Card/CostUtils'
+
+const PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE = "Play any spell or abilities or continue (SPACE)."
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
@@ -71,7 +75,7 @@ export default class PlayerUtils {
 
     } else {
       if (Phase.isMainPhase(state.turn.currentPhase)) {
-        state.statusMessage = "Play any spell or abilities or continue (SPACE)."
+        state.statusMessage = PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE
         return true
       } else if (state.turn.triggeredAction) {
         state.statusMessage = "Chose a card to discard."
@@ -84,5 +88,26 @@ export default class PlayerUtils {
         return false
       }
     }
+  }
+
+  static cast(state, cardId, targetsIdsForCardIds) {
+    const currentManaIds = CostUtils.currentManaCardIds(state.player.battlefield)
+    stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], tappingLandIds: currentManaIds, targetsIdsForCardIds: targetsIdsForCardIds})
+  }
+
+  static handleSelectTargets(state, cardInstance) {
+    if (state.turn.cardIdSelectedToBePlayed === cardInstance.id) {
+      state.turn.cardIdSelectedToBePlayed = null
+      state.statusMessage = PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE
+    } else {
+      state.turn.cardIdSelectedToBePlayed = cardInstance.id
+      state.statusMessage = "Select targets for " + cardInstance.card.name + "."
+    }
+  }
+
+  static handleSelectedTarget(state, targetCardInstance) {
+    const targetsIdsForCardIds = {[state.turn.cardIdSelectedToBePlayed]: [targetCardInstance.id]}
+    PlayerUtils.cast(state, state.turn.cardIdSelectedToBePlayed, targetsIdsForCardIds)
+    state.turn.cardIdSelectedToBePlayed = null
   }
 }

@@ -4,6 +4,7 @@ import CostUtils from '../Card/CostUtils'
 import CardUtils from '../Card/CardUtils'
 import CardSearch from '../Card/CardSearch'
 import StackUtils from '../Stack/StackUtils'
+import PlayerUtils from '../PlayerInfo/PlayerUtils'
 
 export default class ClientEventsReducer {
 
@@ -31,16 +32,11 @@ export default class ClientEventsReducer {
 
             } else {
               const currentMana = CostUtils.currentMana(newState.player.battlefield)
-              const currentManaIds = CostUtils.currentManaCardIds(newState.player.battlefield)
               if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentMana)) {
                 if (CardUtils.needsTargets(cardInstance)) {
-                  if (newState.turn.cardIdSelectedToBePlayed === cardId) {
-                    newState.turn.cardIdSelectedToBePlayed = null
-                  } else {
-                    newState.turn.cardIdSelectedToBePlayed = cardId
-                  }
+                  PlayerUtils.handleSelectTargets(newState, cardInstance)
                 } else {
-                  stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], tappingLandIds: currentManaIds})
+                  PlayerUtils.cast(newState, cardId)
                 }
               }
             }
@@ -63,7 +59,11 @@ export default class ClientEventsReducer {
               CardUtils.toggleFrontendBlocking(cardInstance, blockedCard.id)
             }
 
+          } else if (newState.turn.cardIdSelectedToBePlayed) {
+            PlayerUtils.handleSelectedTarget(newState, cardInstance)
+
           } else {
+
             if (CardUtils.isOfType(cardInstance, 'LAND')) {
               CardUtils.toggleFrontendTapped(cardInstance)
             }
