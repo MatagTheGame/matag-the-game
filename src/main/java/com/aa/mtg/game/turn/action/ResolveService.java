@@ -1,7 +1,9 @@
 package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.properties.Type;
+import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.action.AbilityAction;
+import com.aa.mtg.cards.ability.action.AbilityActionFactory;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
@@ -11,30 +13,46 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
+import static com.aa.mtg.cards.properties.Type.CREATURE;
 
 @Service
 public class ResolveService {
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
-    private ContinueTurnService continueTurnService;
+    private final ContinueTurnService continueTurnService;
+    private final AbilityActionFactory abilityActionFactory;
 
     @Autowired
-    public ResolveService(GameStatusUpdaterService gameStatusUpdaterService, ContinueTurnService continueTurnService) {
+    public ResolveService(GameStatusUpdaterService gameStatusUpdaterService, ContinueTurnService continueTurnService, AbilityActionFactory abilityActionFactory) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.continueTurnService = continueTurnService;
+        this.abilityActionFactory = abilityActionFactory;
     }
 
     public void resolve(GameStatus gameStatus, String triggeredAction, List<Integer> cardIds) {
         if (!gameStatus.getStack().isEmpty()) {
-            CardInstance cardInstance = gameStatus.getStack().removeLast();
+            CardInstance cardToResolve = gameStatus.getStack().removeLast();
             gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
-            if (cardInstance.isOfType(Type.CREATURE) && !cardInstance.hasAbility(HASTE)) {
-                cardInstance.getModifiers().setSummoningSickness(true);
+            if (cardToResolve.isPermanent()) {
+                if (cardToResolve.isOfType(CREATURE) && !cardToResolve.hasAbility(HASTE)) {
+                    cardToResolve.getModifiers().setSummoningSickness(true);
+                }
+
+                gameStatus.getCurrentPlayer().getBattlefield().addCard(cardToResolve);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+
+            } else {
+                gameStatus.getCurrentPlayer().getGraveyard().addCard(cardToResolve);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
             }
 
-            gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
-            gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+            for (Ability ability : cardToResolve.getAbilities()) {
+                AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
+                if (abilityAction != null) {
+                    abilityAction.perform(cardToResolve, gameStatus);
+                }
+            }
 
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);

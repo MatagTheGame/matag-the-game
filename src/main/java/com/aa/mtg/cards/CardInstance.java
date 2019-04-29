@@ -15,6 +15,8 @@ import java.util.stream.Stream;
 import static com.aa.mtg.cards.ability.type.AbilityType.FLYING;
 import static com.aa.mtg.cards.ability.type.AbilityType.REACH;
 import static com.aa.mtg.cards.ability.type.AbilityType.VIGILANCE;
+import static com.aa.mtg.cards.properties.Type.INSTANT;
+import static com.aa.mtg.cards.properties.Type.SORCERY;
 
 @ToString
 @EqualsAndHashCode
@@ -149,5 +151,9 @@ public class CardInstance {
 
     public boolean hasAbility(AbilityType abilityType) {
         return getAbilities().stream().anyMatch(ability -> ability.getAbilityType().equals(abilityType));
+    }
+
+    public boolean isPermanent() {
+        return !(isOfType(INSTANT) || isOfType(SORCERY));
     }
 }
