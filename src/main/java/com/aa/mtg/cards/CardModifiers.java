@@ -17,6 +17,7 @@ public class CardModifiers {
     private List<Integer> blocking = new ArrayList<>();
     private int damage;
     private List<Ability> abilities = new ArrayList<>();
+    private List<Integer> targets = new ArrayList<>();
 
     public TappedModifiers getTapped() {
         return tapped;
@@ -88,5 +89,13 @@ public class CardModifiers {
 
     public void setAbilities(List<Ability> abilities) {
         this.abilities = abilities;
+    }
+
+    public void setTargets(List<Integer> targets) {
+        this.targets = targets;
+    }
+
+    public List<Integer> getTargets() {
+        return targets;
     }
 }

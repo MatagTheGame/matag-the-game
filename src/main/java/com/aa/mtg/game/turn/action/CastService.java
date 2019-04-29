@@ -89,9 +89,12 @@ public class CastService {
                     throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
                 }
 
+                List<Integer> targetIds = targetsIdsForCardIds.get(cardToCast.getId());
                 for (int i = 0; i < ability.getTargets().size(); i++) {
-                    ability.getTargets().get(i).check(gameStatus, targetsIdsForCardIds.get(cardToCast.getId()).get(i));
+                    ability.getTargets().get(i).check(gameStatus, targetIds.get(i));
                 }
+
+                cardToCast.getModifiers().setTargets(targetIds);
             }
         }
     }

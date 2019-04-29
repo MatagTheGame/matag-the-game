@@ -313,7 +313,7 @@ public class ContinueTurnServiceTest {
     }
 
     @Configuration
-    @ComponentScan(basePackageClasses = {Turn.class, GameStatus.class})
+    @ComponentScan(basePackageClasses = {Turn.class, GameStatus.class, CardInstance.class})
     public static class ContinueTurnServiceTestConfiguration {
         @Bean
         public EventSender eventSender() {
