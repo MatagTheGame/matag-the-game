@@ -37,20 +37,21 @@ public class ResolveService {
             CardInstance cardToResolve = gameStatus.getStack().removeLast();
             gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
+            performAbilityAction(gameStatus, cardToResolve);
+
             if (cardToResolve.isPermanent()) {
                 if (cardToResolve.isOfType(CREATURE) && !cardToResolve.hasAbility(HASTE)) {
                     cardToResolve.getModifiers().setSummoningSickness(true);
                 }
 
                 gameStatus.getCurrentPlayer().getBattlefield().addCard(cardToResolve);
-                gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
 
             } else {
-                gameStatus.getCurrentPlayer().getGraveyard().addCard(cardToResolve);
-                gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
+                gameStatus.putIntoGraveyard(cardToResolve);
             }
 
-            performAbilityAction(gameStatus, cardToResolve);
+            gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
+            gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
 
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
@@ -59,7 +60,7 @@ public class ResolveService {
             switch (triggeredAction) {
                 case "DISCARD_A_CARD": {
                     CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
-                    gameStatus.getCurrentPlayer().getGraveyard().addCard(cardInstance);
+                    gameStatus.putIntoGraveyard(cardInstance);
                     gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
                     gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
                     gameStatus.getTurn().setTriggeredAction(null);
@@ -78,7 +79,6 @@ public class ResolveService {
         for (Ability ability : cardToResolve.getAbilities()) {
             AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
             if (abilityAction != null) {
-
                 try {
                     for (int i = 0; i < ability.getTargets().size(); i++) {
                         ability.getTargets().get(i).check(gameStatus, cardToResolve.getModifiers().getTargets().get(i));

@@ -64,6 +64,11 @@ public class GameStatusUpdaterService {
         );
     }
 
+    public void sendUpdateBattlefields(GameStatus gameStatus) {
+        sendUpdateCurrentPlayerBattlefield(gameStatus);
+        sendUpdateNonCurrentPlayerBattlefield(gameStatus);
+    }
+
     public void sendUpdateCurrentPlayerGraveyard(GameStatus gameStatus) {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
@@ -76,6 +81,11 @@ public class GameStatusUpdaterService {
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                 new Event("UPDATE_INACTIVE_PLAYER_GRAVEYARD", gameStatus.getNonCurrentPlayer().getGraveyard().getCards())
         );
+    }
+
+    public void sendUpdateGraveyards(GameStatus gameStatus) {
+        sendUpdateCurrentPlayerGraveyard(gameStatus);
+        sendUpdateNonCurrentPlayerGraveyard(gameStatus);
     }
 
     public void sendUpdatePlayerLife(GameStatus gameStatus, Player nonCurrentPlayer) {

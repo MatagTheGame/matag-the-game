@@ -38,12 +38,11 @@ public class CombatService {
                 damageFromUnblockedCreatures += attackingCreature.getPower();
             } else {
                 dealCombatDamageForOneAttackingCreature(gameStatus, attackingCreature, blockingCreaturesFor);
-                gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
-                gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
-                gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
-                gameStatusUpdaterService.sendUpdateNonCurrentPlayerGraveyard(gameStatus);
             }
         }
+
+        gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
+        gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
 
         if (damageFromUnblockedCreatures > 0) {
             nonCurrentPlayer.decreaseLife(damageFromUnblockedCreatures);
@@ -77,22 +76,12 @@ public class CombatService {
     private boolean dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
         LOGGER.info("{} is getting {} damage", cardInstance.getIdAndName(), damage);
         cardInstance.getModifiers().setDamage(damage);
-        if (cardInstance.getModifiers().getDamage() >= cardInstance.getToughness()) {
-            destroy(gameStatus, cardInstance);
-            return true;
-        } else if (damage > 0 && deathtouch) {
-            destroy(gameStatus, cardInstance);
+        if (cardInstance.getModifiers().getDamage() >= cardInstance.getToughness() || damage > 0 && deathtouch) {
+            LOGGER.info("{} is being destroyed", cardInstance.getIdAndName());
+            gameStatus.destroy(cardInstance.getId());
             return true;
         }
         return false;
-    }
-
-    private void destroy(GameStatus gameStatus, CardInstance cardInstance) {
-        LOGGER.info("{} is being destroyed", cardInstance.getIdAndName());
-        Player owner = gameStatus.getPlayerByName(cardInstance.getOwner());
-        cardInstance = owner.getBattlefield().extractCardById(cardInstance.getId());
-        cardInstance.clearModifiers();
-        owner.getGraveyard().addCard(cardInstance);
     }
 
 }

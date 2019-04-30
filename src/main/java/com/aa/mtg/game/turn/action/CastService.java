@@ -36,21 +36,19 @@ public class CastService {
         Turn turn = gameStatus.getTurn();
         Player currentPlayer = gameStatus.getCurrentPlayer();
 
-        CardInstance cardInstance = currentPlayer.getHand().findCardById(cardId);
-        if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !cardInstance.getCard().isInstantSpeed()) {
+        CardInstance cardToCast = currentPlayer.getHand().findCardById(cardId);
+        if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !cardToCast.getCard().isInstantSpeed()) {
             throw new MessageException("You can only play Instants during a NON main phases.");
 
         } else {
-            CardInstance cardToCast = currentPlayer.getHand().findCardById(cardId);
-
             checkSpellCost(tappingLandIds, currentPlayer, cardToCast);
             checkSpellRequisites(cardToCast, gameStatus, targetsIdsForCardIds);
 
-            cardInstance = currentPlayer.getHand().extractCardById(cardId);
-            cardInstance.setController(currentPlayer.getName());
+            currentPlayer.getHand().extractCardById(cardId);
+            cardToCast.setController(currentPlayer.getName());
             gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
 
-            gameStatus.getStack().addLast(cardInstance);
+            gameStatus.getStack().addLast(cardToCast);
             gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());

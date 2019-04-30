@@ -28,6 +28,10 @@ public abstract class CardListComponent {
         this.cards.add(cardInstance);
     }
 
+    public boolean hasCardById(int cardId) {
+        return new CardSearch(cards).withId(cardId).isPresent();
+    }
+
     public CardInstance findCardById(int cardId) {
         return new CardSearch(cards).withId(cardId)
                 .orElseThrow(() -> new RuntimeException("Card with id " + cardId + " not found."));
