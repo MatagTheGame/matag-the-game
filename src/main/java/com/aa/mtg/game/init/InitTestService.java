@@ -19,6 +19,7 @@ import static com.aa.mtg.cards.sets.Ixalan.AIR_ELEMENTAL;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
 import static com.aa.mtg.cards.sets.Ixalan.LEGIONS_JUDGMENT;
+import static com.aa.mtg.cards.sets.RavnicaAllegiance.PRECISION_BOLT;
 
 @Profile("test")
 @Service
@@ -50,15 +51,14 @@ public class InitTestService {
         addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
         addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
         addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+        addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+        addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
         addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
         addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
         addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
 
-        addCardToCurrentPlayerHand(gameStatus, ISLAND);
-        addCardToCurrentPlayerHand(gameStatus, PLAINS);
         addCardToCurrentPlayerHand(gameStatus, HUATLIS_SNUBHORN);
         addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
-        addCardToCurrentPlayerHand(gameStatus, AIR_ELEMENTAL);
         addCardToCurrentPlayerHand(gameStatus, AIR_ELEMENTAL);
 
         gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
@@ -74,14 +74,15 @@ public class InitTestService {
         addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
         addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
         addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
+        addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
+        addCardToNonCurrentPlayerBattlefield(gameStatus, FOREST);
         addCardToNonCurrentPlayerBattlefield(gameStatus, FOREST);
         addCardToNonCurrentPlayerBattlefield(gameStatus, FOREST);
         addCardToNonCurrentPlayerBattlefield(gameStatus, FOREST);
 
-        addCardToNonCurrentPlayerHand(gameStatus, MOUNTAIN);
-        addCardToNonCurrentPlayerHand(gameStatus, FOREST);
         addCardToNonCurrentPlayerHand(gameStatus, GRAZING_WHIPTAIL);
         addCardToNonCurrentPlayerHand(gameStatus, GRAZING_WHIPTAIL);
+        addCardToNonCurrentPlayerHand(gameStatus, PRECISION_BOLT);
 
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerHand(gameStatus);
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
