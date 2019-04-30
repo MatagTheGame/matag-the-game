@@ -16,7 +16,7 @@ import static com.aa.mtg.cards.ability.type.AbilityType.DEATHTOUCH;
 
 @Service
 public class CombatService {
-    private Logger LOGGER = LoggerFactory.getLogger(TurnController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TurnController.class);
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
 

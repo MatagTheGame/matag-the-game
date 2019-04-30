@@ -7,6 +7,8 @@ import com.aa.mtg.cards.ability.action.AbilityActionFactory;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import static com.aa.mtg.cards.properties.Type.CREATURE;
 
 @Service
 public class ResolveService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResolveService.class);
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
     private final ContinueTurnService continueTurnService;
@@ -47,12 +50,7 @@ public class ResolveService {
                 gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
             }
 
-            for (Ability ability : cardToResolve.getAbilities()) {
-                AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
-                if (abilityAction != null) {
-                    abilityAction.perform(cardToResolve, gameStatus);
-                }
-            }
+            performAbilityAction(gameStatus, cardToResolve);
 
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
@@ -73,6 +71,24 @@ public class ResolveService {
         } else {
             String message = "Cannot resolve triggeredAction " + triggeredAction + " as current triggeredAction is " + gameStatus.getTurn().getTriggeredAction();
             throw new MessageException(message);
+        }
+    }
+
+    private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve) {
+        for (Ability ability : cardToResolve.getAbilities()) {
+            AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
+            if (abilityAction != null) {
+
+                try {
+                    for (int i = 0; i < ability.getTargets().size(); i++) {
+                        ability.getTargets().get(i).check(gameStatus, cardToResolve.getModifiers().getTargets().get(i));
+                    }
+
+                    abilityAction.perform(cardToResolve, gameStatus);
+                } catch (MessageException e) {
+                    LOGGER.info(cardToResolve.getIdAndName() + ": Target is now invalid during resolution. Dropping the action. ", e.getMessage());
+                }
+            }
         }
     }
 }

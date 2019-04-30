@@ -21,7 +21,7 @@ import static com.aa.mtg.game.security.SecurityHelper.extractSecurityToken;
 
 @Controller
 public class InitController {
-    private Logger LOGGER = LoggerFactory.getLogger(InitController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(InitController.class);
 
     private final EventSender eventSender;
     private final GameStatusUpdaterService gameStatusUpdaterService;

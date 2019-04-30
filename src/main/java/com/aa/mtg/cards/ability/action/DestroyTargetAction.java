@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DestroyTargetAction implements AbilityAction {
-    private Logger LOGGER = LoggerFactory.getLogger(DestroyTargetAction.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DestroyTargetAction.class);
 
     @Override
     public void perform(CardInstance cardInstance, GameStatus gameStatus) {
