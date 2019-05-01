@@ -79,6 +79,9 @@ export default class ClientEventsReducer {
             if (CardUtils.isOfType(cardInstance, 'CREATURE')) {
               newState.turn.blockingCardPosition = CardSearch.cards(newState.opponent.battlefield).attacking().indexOf(cardInstance)
             }
+
+          } else if (newState.turn.cardIdSelectedToBePlayed) {
+            PlayerUtils.handleSelectedTarget(newState, cardInstance)
           }
         }
         break

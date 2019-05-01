@@ -34,7 +34,7 @@ public class InitTestService {
     }
 
     void initGameStatusForTest(GameStatus gameStatus) {
-        LOGGER.warn("Application is running in test mode: Initializing the gameStatus with test data");
+        LOGGER.warn("Application is running in test mode: Initializing the gameStatus with test data.");
 
         // Clear
         gameStatus.getCurrentPlayer().getLibrary().getCards().clear();

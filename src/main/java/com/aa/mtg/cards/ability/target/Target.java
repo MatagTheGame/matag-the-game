@@ -10,6 +10,7 @@ import lombok.Builder;
 
 import java.util.List;
 
+import static com.aa.mtg.cards.ability.target.TargetType.ANY;
 import static com.aa.mtg.cards.ability.target.TargetType.PERMANENT;
 
 @Builder
@@ -44,6 +45,10 @@ public class Target {
             if (targetPowerToughnessConstraint != null) {
                 cards = cards.ofTargetPowerToughnessConstraint(targetPowerToughnessConstraint);
             }
+
+        } else if (targetType.equals(ANY)) {
+            cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+                    .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
 
         } else {
             throw new RuntimeException("Missing targetType.");

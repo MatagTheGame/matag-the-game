@@ -41,7 +41,7 @@ public class InitController {
     @MessageMapping("/game/init")
     void init(SimpMessageHeaderAccessor headerAccessor) {
         SecurityToken token = extractSecurityToken(headerAccessor);
-        LOGGER.info("Init request received for sessionId '{}', gameId '{}'", token.getSessionId(), token.getGameId());
+        LOGGER.info("Init request received for sessionId '{}', gameId '{}'.", token.getSessionId(), token.getGameId());
 
         if (!gameStatusRepository.contains(token.getGameId())) {
             GameStatus gameStatus = new GameStatus(token.getGameId());

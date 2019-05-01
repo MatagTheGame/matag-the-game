@@ -88,17 +88,6 @@ public class GameStatus {
         owner.getGraveyard().addCard(cardInstance);
     }
 
-    public void destroy(int targetId) {
-        if (getNonCurrentPlayer().getBattlefield().hasCardById(targetId)) {
-            CardInstance destroyedCard = getNonCurrentPlayer().getBattlefield().extractCardById(targetId);
-            putIntoGraveyard(destroyedCard);
-
-        } else {
-            CardInstance destroyedCard = getCurrentPlayer().getBattlefield().extractCardById(targetId);
-            putIntoGraveyard(destroyedCard);
-        }
-    }
-
     public int nextCardId() {
         return nextCardId.incrementAndGet();
     }

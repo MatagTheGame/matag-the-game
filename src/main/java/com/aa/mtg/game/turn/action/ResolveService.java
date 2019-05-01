@@ -84,9 +84,9 @@ public class ResolveService {
                         ability.getTargets().get(i).check(gameStatus, cardToResolve.getModifiers().getTargets().get(i));
                     }
 
-                    abilityAction.perform(cardToResolve, gameStatus);
+                    abilityAction.perform(ability, cardToResolve, gameStatus);
                 } catch (MessageException e) {
-                    LOGGER.info(cardToResolve.getIdAndName() + ": Target is now invalid during resolution. Dropping the action. ", e.getMessage());
+                    LOGGER.info("{}: Target is now invalid during resolution, dropping the action. [{}] ", cardToResolve.getIdAndName(), e.getMessage());
                 }
             }
         }
