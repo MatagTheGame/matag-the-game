@@ -13,7 +13,7 @@ public class DestroyTargetAction implements AbilityAction {
 
     @Override
     public void perform(Ability ability, CardInstance cardInstance, GameStatus gameStatus) {
-        Integer targetId = cardInstance.getModifiers().getTargets().get(0);
+        int targetId = (int)cardInstance.getModifiers().getTargets().get(0);
         LOGGER.info("Executing ability action for {} with target {}.", cardInstance.getIdAndName(), targetId);
         destroy(gameStatus, targetId);
     }

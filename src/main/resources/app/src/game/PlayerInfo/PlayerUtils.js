@@ -105,9 +105,14 @@ export default class PlayerUtils {
     }
   }
 
-  static handleSelectedTarget(state, targetCardInstance) {
-    const targetsIdsForCardIds = {[state.turn.cardIdSelectedToBePlayed]: [targetCardInstance.id]}
-    PlayerUtils.cast(state, state.turn.cardIdSelectedToBePlayed, targetsIdsForCardIds)
+  static handleSelectedTarget(state, target) {
+    const targetsIds = []
+    if (typeof target === 'string') {
+      targetsIds.push(target)
+    } else {
+      targetsIds.push(target.id)
+    }
+    PlayerUtils.cast(state, state.turn.cardIdSelectedToBePlayed, {[state.turn.cardIdSelectedToBePlayed]: targetsIds})
     state.turn.cardIdSelectedToBePlayed = null
   }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 import static com.aa.mtg.cards.ability.target.TargetType.ANY;
 import static com.aa.mtg.cards.ability.target.TargetType.PERMANENT;
+import static com.aa.mtg.cards.ability.target.TargetType.PLAYER;
 
 @Builder
 public class Target {
@@ -31,31 +32,39 @@ public class Target {
         this.targetPowerToughnessConstraint = targetPowerToughnessConstraint;
     }
 
-    public void check(GameStatus gameStatus, int targetCardId) {
+    public void check(GameStatus gameStatus, Object targetId) {
         CardSearch cards;
 
-        if (targetType.equals(PERMANENT)) {
-            cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
-                    .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
-
-            if (ofType != null) {
-                cards = cards.ofAnyOfTheTypes(ofType);
+        if (targetId instanceof String) {
+            if (!(targetType.equals(PLAYER) || targetType.equals(ANY))) {
+                throw new MessageException(targetId + " is not valid for targetType PERMANENT");
             }
-
-            if (targetPowerToughnessConstraint != null) {
-                cards = cards.ofTargetPowerToughnessConstraint(targetPowerToughnessConstraint);
-            }
-
-        } else if (targetType.equals(ANY)) {
-            cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
-                    .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
 
         } else {
-            throw new RuntimeException("Missing targetType.");
-        }
+            int targetCardId = (int) targetId;
+            if (targetType.equals(PERMANENT)) {
+                cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+                        .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
 
-        if (!cards.withId(targetCardId).isPresent()) {
-            throw new MessageException("Selected targets were not valid.");
+                if (ofType != null) {
+                    cards = cards.ofAnyOfTheTypes(ofType);
+                }
+
+                if (targetPowerToughnessConstraint != null) {
+                    cards = cards.ofTargetPowerToughnessConstraint(targetPowerToughnessConstraint);
+                }
+
+            } else if (targetType.equals(ANY)) {
+                cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+                        .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
+
+            } else {
+                throw new RuntimeException("Missing targetType.");
+            }
+
+            if (!cards.withId(targetCardId).isPresent()) {
+                throw new MessageException("Selected targets were not valid.");
+            }
         }
     }
 

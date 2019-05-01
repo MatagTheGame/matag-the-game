@@ -8,7 +8,7 @@ public class TurnRequest {
     private String triggeredAction;
     private List<Integer> tappingLandIds;
     private List<Integer> cardIds;
-    private Map<Integer, List<Integer>> targetsIdsForCardIds;
+    private Map<Integer, List<Object>> targetsIdsForCardIds;
 
     public String getAction() {
         return action;
@@ -42,11 +42,11 @@ public class TurnRequest {
         this.tappingLandIds = tappingLandIds;
     }
 
-    public Map<Integer, List<Integer>> getTargetsIdsForCardIds() {
+    public Map<Integer, List<Object>> getTargetsIdsForCardIds() {
         return targetsIdsForCardIds;
     }
 
-    public void setTargetsIdsForCardIds(Map<Integer, List<Integer>> targetsIdsForCardIds) {
+    public void setTargetsIdsForCardIds(Map<Integer, List<Object>> targetsIdsForCardIds) {
         this.targetsIdsForCardIds = targetsIdsForCardIds;
     }
 

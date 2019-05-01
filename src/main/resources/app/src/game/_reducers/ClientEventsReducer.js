@@ -128,7 +128,9 @@ export default class ClientEventsReducer {
         break
 
       case 'PLAYER_CLICK':
-        console.log(action.playerName)
+        if (newState.turn.cardIdSelectedToBePlayed) {
+          PlayerUtils.handleSelectedTarget(newState, action.playerName)
+        }
         break
     }
 

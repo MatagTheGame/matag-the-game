@@ -15,6 +15,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 import static com.aa.mtg.game.security.SecurityHelper.extractSecurityToken;
+import static com.aa.mtg.utils.Utils.toMapListInteger;
 
 @Controller
 public class TurnController {
@@ -50,7 +51,7 @@ public class TurnController {
         } else if ("DECLARE_ATTACKERS".equals(request.getAction())) {
             turnService.declareAttackers(gameStatus, request.getCardIds());
         } else if ("DECLARE_BLOCKERS".equals(request.getAction())) {
-            turnService.declareBlockers(gameStatus, request.getTargetsIdsForCardIds());
+            turnService.declareBlockers(gameStatus, toMapListInteger(request.getTargetsIdsForCardIds()));
         }
     }
 

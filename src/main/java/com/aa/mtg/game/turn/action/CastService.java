@@ -32,7 +32,7 @@ public class CastService {
         this.abilityActionFactory = abilityActionFactory;
     }
 
-    public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds, Map<Integer, List<Integer>> targetsIdsForCardIds) {
+    public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
         Turn turn = gameStatus.getTurn();
         Player currentPlayer = gameStatus.getCurrentPlayer();
 
@@ -79,7 +79,7 @@ public class CastService {
         }
     }
 
-    private void checkSpellRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Integer>> targetsIdsForCardIds) {
+    private void checkSpellRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds) {
         for (Ability ability : cardToCast.getAbilities()) {
             AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
             if (abilityAction != null) {
@@ -87,7 +87,7 @@ public class CastService {
                     throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
                 }
 
-                List<Integer> targetIds = targetsIdsForCardIds.get(cardToCast.getId());
+                List<Object> targetIds = targetsIdsForCardIds.get(cardToCast.getId());
                 for (int i = 0; i < ability.getTargets().size(); i++) {
                     ability.getTargets().get(i).check(gameStatus, targetIds.get(i));
                 }

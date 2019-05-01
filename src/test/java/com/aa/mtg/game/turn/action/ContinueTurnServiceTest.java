@@ -4,6 +4,7 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.event.Event;
 import com.aa.mtg.game.event.EventSender;
+import com.aa.mtg.game.player.LifeService;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.Turn;
 import org.junit.Test;
@@ -313,7 +314,7 @@ public class ContinueTurnServiceTest {
     }
 
     @Configuration
-    @ComponentScan(basePackageClasses = {Turn.class, GameStatus.class, CardInstance.class})
+    @ComponentScan(basePackageClasses = {Turn.class, GameStatus.class, CardInstance.class, LifeService.class})
     public static class ContinueTurnServiceTestConfiguration {
         @Bean
         public EventSender eventSender() {

@@ -2,12 +2,10 @@ package com.aa.mtg.game.turn.combat;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.action.DealXDamageToTargetAction;
+import com.aa.mtg.game.player.LifeService;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
-import com.aa.mtg.game.turn.TurnController;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +17,13 @@ import static com.aa.mtg.cards.ability.type.AbilityType.DEATHTOUCH;
 public class CombatService {
     private final GameStatusUpdaterService gameStatusUpdaterService;
     private final DealXDamageToTargetAction dealXDamageToTargetAction;
+    private final LifeService lifeService;
 
     @Autowired
-    public CombatService(GameStatusUpdaterService gameStatusUpdaterService, DealXDamageToTargetAction destroyTargetAction) {
+    public CombatService(GameStatusUpdaterService gameStatusUpdaterService, DealXDamageToTargetAction destroyTargetAction, LifeService lifeService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.dealXDamageToTargetAction = destroyTargetAction;
+        this.lifeService = lifeService;
     }
 
     public void dealCombatDamage(GameStatus gameStatus) {
@@ -46,12 +46,7 @@ public class CombatService {
         gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
 
         if (damageFromUnblockedCreatures > 0) {
-            nonCurrentPlayer.decreaseLife(damageFromUnblockedCreatures);
-            gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, nonCurrentPlayer);
-
-            if (nonCurrentPlayer.getLife() <= 0) {
-                gameStatus.getTurn().setWinner(currentPlayer.getName());
-            }
+            lifeService.substract(nonCurrentPlayer, damageFromUnblockedCreatures, gameStatus);
         }
     }
 
