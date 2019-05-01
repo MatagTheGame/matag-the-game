@@ -9,7 +9,8 @@ import PlayerUtils from '../PlayerInfo/PlayerUtils'
 export default class ClientEventsReducer {
 
   static getEvents() {
-    return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'OPPONENT_BATTLEFIELD_CARD_CLICK', 'CONTINUE_CLICK', 'MAXIMIZE_MINIMIZE_CARD']
+    return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'OPPONENT_BATTLEFIELD_CARD_CLICK', 'CONTINUE_CLICK',
+      'PLAYER_CLICK', 'MAXIMIZE_MINIMIZE_CARD']
   }
 
   static reduceEvent(newState, action) {
@@ -124,6 +125,10 @@ export default class ClientEventsReducer {
           }
         }
 
+        break
+
+      case 'PLAYER_CLICK':
+        console.log(action.playerName)
         break
     }
 

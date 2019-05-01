@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import {get} from 'lodash'
 
 class PlayerInfo extends PureComponent {
@@ -45,9 +46,13 @@ class PlayerInfo extends PureComponent {
     return classes
   }
 
+  playerClick(playerName) {
+    this.props.playerClick(playerName)
+  }
+
   render() {
     return (
-      <div id={this.getId()} className={this.getPlayerClasses()}>
+      <div id={this.getId()} className={this.getPlayerClasses()} onClick={() => this.playerClick(this.getName())}>
         <span>{this.getName()}</span>
         <span className={this.getLifeClasses()}>{this.getLife()}</span>
       </div>
@@ -66,4 +71,17 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(PlayerInfo)
+const createPlayerClickAction = (playerName) => {
+  return {
+    type: 'PLAYER_CLICK',
+    playerName: playerName
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    playerClick: bindActionCreators(createPlayerClickAction, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerInfo)
