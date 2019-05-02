@@ -57,6 +57,7 @@ public class DeckRetrieverService {
             cards.add(new CardInstance(gameStatus.nextCardId(), MOUNTAIN, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), FERAL_MAAKA, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), AXEBANE_BEAST, playerName));
+            cards.add(new CardInstance(gameStatus.nextCardId(), PRECISION_BOLT, playerName));
         }
 
         return new Library(cards);
@@ -71,6 +72,7 @@ public class DeckRetrieverService {
             cards.add(new CardInstance(gameStatus.nextCardId(), HEADWATER_SENTRIES, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), HUATLIS_SNUBHORN, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), AIR_ELEMENTAL, playerName));
+            cards.add(new CardInstance(gameStatus.nextCardId(), LEGIONS_JUDGMENT, playerName));
         }
 
         return new Library(cards);
