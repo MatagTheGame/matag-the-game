@@ -23,6 +23,10 @@ class Card extends PureComponent {
     }
   }
 
+  isCurrentCardATarget() {
+    return this.props.targetIdsForLastSpell.includes(this.props.cardInstance.id)
+  }
+
   getClasses() {
     let classes = 'card'
 
@@ -48,6 +52,10 @@ class Card extends PureComponent {
 
     if (CardUtils.hasAbility(this.props.cardInstance, 'FLYING')) {
       classes += ' flying'
+    }
+
+    if (this.isCurrentCardATarget()) {
+      classes += ' targeted'
     }
 
     return classes
@@ -96,7 +104,8 @@ const maximizeCardEvent = (cardImage) => {
 
 const mapStateToProps = state => {
   return {
-    message: get(state, 'message', {})
+    message: get(state, 'message', {}),
+    targetIdsForLastSpell: get(state, 'stack[0].modifiers.targets', [])
   }
 }
 

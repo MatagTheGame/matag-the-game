@@ -80,6 +80,11 @@ body {
   z-index: 2;
 }
 
+.targeted {
+  background-color: rgb(255, 100, 100);
+  background-blend-mode: multiply;
+}
+
 #player-battlefield .tapped, #opponent-battlefield .tapped {
   transform: rotateZ(90deg);
   margin-right: 40px;
