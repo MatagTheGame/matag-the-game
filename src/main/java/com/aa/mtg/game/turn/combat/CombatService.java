@@ -53,17 +53,10 @@ public class CombatService {
     private void dealCombatDamageForOneAttackingCreature(GameStatus gameStatus, CardInstance attackingCreature, List<CardInstance> blockingCreatures) {
         int remainingDamageForAttackingCreature = attackingCreature.getPower();
         for (CardInstance blockingCreature : blockingCreatures) {
-            int damageToCurrentBlocker = remainingDamageForAttackingCreature;
-            if (damageToCurrentBlocker > blockingCreature.getToughness()) {
-                remainingDamageForAttackingCreature = blockingCreature.getToughness();
-            }
+            int damageToCurrentBlocker = Math.min(remainingDamageForAttackingCreature, blockingCreature.getToughness());
 
-            boolean attackingCreatureDestroyed = dealXDamageToTargetAction.dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.hasAbility(DEATHTOUCH));
+            dealXDamageToTargetAction.dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.hasAbility(DEATHTOUCH));
             dealXDamageToTargetAction.dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.hasAbility(DEATHTOUCH));
-
-            if (attackingCreatureDestroyed) {
-                break;
-            }
 
             remainingDamageForAttackingCreature -= damageToCurrentBlocker;
         }

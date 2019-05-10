@@ -75,8 +75,8 @@ public class CardModifiers {
         return damage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public void dealDamage(int damage) {
+        this.damage += damage;
     }
 
     public void setTapped(TappedModifiers tapped) {

@@ -55,14 +55,12 @@ public class DealXDamageToTargetAction implements AbilityAction {
         }
     }
 
-    public boolean dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
+    public void dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
         LOGGER.info("{} is getting {} damage.", cardInstance.getIdAndName(), damage);
-        cardInstance.getModifiers().setDamage(damage);
+        cardInstance.getModifiers().dealDamage(damage);
         if (cardInstance.getModifiers().getDamage() >= cardInstance.getToughness() || damage > 0 && deathtouch) {
             destroyTargetAction.destroy(gameStatus, cardInstance.getId());
             LOGGER.info("{} has been destroyed.", cardInstance.getIdAndName());
-            return true;
         }
-        return false;
     }
 }
