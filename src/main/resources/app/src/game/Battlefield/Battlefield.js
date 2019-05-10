@@ -30,6 +30,7 @@ class Battlefield extends PureComponent {
 
   getFirstLineCards() {
     return CardSearch.cards(this.getPlayerBattlefield()).ofType('LAND')
+      .sort((l, r) => l.card.name.localeCompare(r.card.name))
   }
 
   getSecondLineCards() {
@@ -64,7 +65,7 @@ class Battlefield extends PureComponent {
     return ((-n + 1) + (2 * i)) * HALF_CARD
   }
 
-  static getCardPosition(attackingCards, cardInstance) {
+  static getAttackingCardPosition(attackingCards, cardInstance) {
     if (CardUtils.isAttackingOrFrontendAttacking(cardInstance)) {
       return attackingCards.indexOfId(cardInstance.id)
     } else {
@@ -72,27 +73,34 @@ class Battlefield extends PureComponent {
     }
   }
 
-  cardMarginLeft(cardInstance) {
-    const attackingCards = this.attackingCards()
-    const numOfAttackingCreatures = attackingCards.length
-    const cardPosition = Battlefield.getCardPosition(attackingCards, cardInstance)
-    const marginFromPosition = Battlefield.marginFromPosition(numOfAttackingCreatures, cardPosition)
-    let margin = CardUtils.isAttackingOrFrontendAttacking(cardInstance) ? marginFromPosition : -marginFromPosition
-    margin += this.cardMarginTop(cardInstance) / 2
-    return margin
-  }
-
-  cardMarginTop(cardInstance) {
-    const position = this.blockingCards()
+  getBlockingCardPosition(cardInstance) {
+    return this.blockingCards()
       .filter(currentCardInstance => cardInstance.modifiers.blockingCardId === currentCardInstance.modifiers.blockingCardId)
       .map(cardInstance => cardInstance.id)
       .indexOf(cardInstance.id)
+  }
+
+  cardMarginLeft(cardInstance) {
+    const attackingCards = this.attackingCards()
+    const numOfAttackingCreatures = attackingCards.length
+    const cardPosition = Battlefield.getAttackingCardPosition(attackingCards, cardInstance)
+    const marginFromPosition = Battlefield.marginFromPosition(numOfAttackingCreatures, cardPosition)
+    let margin = CardUtils.isAttackingOrFrontendAttacking(cardInstance) ? marginFromPosition : -marginFromPosition
+    margin += this.attackingCardMarginTop(cardInstance) / 2
+    return margin
+  }
+
+  static cardMarginTop(position) {
     return position * 50
+  }
+
+  attackingCardMarginTop(cardInstance) {
+    return Battlefield.cardMarginTop(this.getBlockingCardPosition(cardInstance))
   }
 
   positionedCardItems(cards) {
     return cards.map((cardInstance, i) =>
-      <span key={cardInstance.id} style={{'marginLeft': this.cardMarginLeft(cardInstance), 'marginTop': this.cardMarginTop(cardInstance)}}>
+      <span key={cardInstance.id} style={{'marginLeft': this.cardMarginLeft(cardInstance), 'marginTop': this.attackingCardMarginTop(cardInstance)}}>
         <Card cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
               selected={this.isCardSelectedToBeBlocked(cardInstance, i)} />
       </span>
