@@ -38,9 +38,13 @@ public class DeckRetrieverService {
     private Library blackWhiteGuild(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 60 / 5; i++) {
+        for (int i = 0; i < 12; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), PLAINS, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), SWAMP, playerName));
+        }
+
+
+        for (int i = 0; i < 36 / 3; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), CATACOMB_CROCODILE, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), NOXIOUS_GROODION, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), PROWLING_CARACAL, playerName));
@@ -52,9 +56,12 @@ public class DeckRetrieverService {
     private Library redGreenGuild(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 60 / 4; i++) {
+        for (int i = 0; i < 12; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), FOREST, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), MOUNTAIN, playerName));
+        }
+
+        for (int i = 0; i < 36 / 3; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), FERAL_MAAKA, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), AXEBANE_BEAST, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), PRECISION_BOLT, playerName));
@@ -66,9 +73,12 @@ public class DeckRetrieverService {
     private Library whiteBlueIxalan(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 60 / 5; i++) {
+        for (int i = 0; i < 12; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), PLAINS, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), ISLAND, playerName));
+        }
+
+        for (int i = 0; i < 36 / 4; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), HEADWATER_SENTRIES, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), HUATLIS_SNUBHORN, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), AIR_ELEMENTAL, playerName));
@@ -81,14 +91,18 @@ public class DeckRetrieverService {
     private Library redGreenIxalan(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
-        for (int i = 0; i < 60 / 6; i++) {
+        for (int i = 0; i < 12; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), FOREST, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), MOUNTAIN, playerName));
+        }
+
+        for (int i = 0; i < 36 / 6; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), NEST_ROBBER, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), ANCIENT_BRONTODON, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), FRENZIED_RAPTOR, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), GRAZING_WHIPTAIL, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), CHARGING_MONSTROSAUR, playerName));
+            cards.add(new CardInstance(gameStatus.nextCardId(), COLOSSAL_DREADMAW, playerName));
         }
 
         return new Library(cards);
