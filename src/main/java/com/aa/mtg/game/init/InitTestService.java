@@ -15,10 +15,7 @@ import static com.aa.mtg.cards.Cards.FOREST;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.Cards.PLAINS;
-import static com.aa.mtg.cards.sets.Ixalan.AIR_ELEMENTAL;
-import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
-import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
-import static com.aa.mtg.cards.sets.Ixalan.LEGIONS_JUDGMENT;
+import static com.aa.mtg.cards.sets.Ixalan.*;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.PRECISION_BOLT;
 
 @Profile("test")
@@ -81,7 +78,7 @@ public class InitTestService {
         addCardToNonCurrentPlayerBattlefield(gameStatus, FOREST);
 
         addCardToNonCurrentPlayerHand(gameStatus, GRAZING_WHIPTAIL);
-        addCardToNonCurrentPlayerHand(gameStatus, GRAZING_WHIPTAIL);
+        addCardToNonCurrentPlayerHand(gameStatus, CHARGING_MONSTROSAUR);
         addCardToNonCurrentPlayerHand(gameStatus, PRECISION_BOLT);
 
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerHand(gameStatus);

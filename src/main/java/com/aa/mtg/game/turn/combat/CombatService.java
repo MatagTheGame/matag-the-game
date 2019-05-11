@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.DEATHTOUCH;
+import static com.aa.mtg.cards.ability.type.AbilityType.TRAMPLE;
 
 @Service
 public class CombatService {
@@ -35,10 +36,10 @@ public class CombatService {
         int damageFromUnblockedCreatures = 0;
         for (CardInstance attackingCreature : attackingCreatures) {
             List<CardInstance> blockingCreaturesFor = nonCurrentPlayer.getBattlefield().getBlockingCreaturesFor(attackingCreature.getId());
-            if (blockingCreaturesFor.isEmpty()) {
-                damageFromUnblockedCreatures += attackingCreature.getPower();
-            } else {
-                dealCombatDamageForOneAttackingCreature(gameStatus, attackingCreature, blockingCreaturesFor);
+            int remainingDamage = dealCombatDamageForOneAttackingCreature(gameStatus, attackingCreature, blockingCreaturesFor);
+
+            if (blockingCreaturesFor.isEmpty() || attackingCreature.hasAbility(TRAMPLE)) {
+                damageFromUnblockedCreatures += remainingDamage;
             }
         }
 
@@ -50,7 +51,7 @@ public class CombatService {
         }
     }
 
-    private void dealCombatDamageForOneAttackingCreature(GameStatus gameStatus, CardInstance attackingCreature, List<CardInstance> blockingCreatures) {
+    private int dealCombatDamageForOneAttackingCreature(GameStatus gameStatus, CardInstance attackingCreature, List<CardInstance> blockingCreatures) {
         int remainingDamageForAttackingCreature = attackingCreature.getPower();
         for (CardInstance blockingCreature : blockingCreatures) {
             int damageToCurrentBlocker = Math.min(remainingDamageForAttackingCreature, blockingCreature.getToughness());
@@ -60,6 +61,7 @@ public class CombatService {
 
             remainingDamageForAttackingCreature -= damageToCurrentBlocker;
         }
+        return remainingDamageForAttackingCreature;
     }
 
 }

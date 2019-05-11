@@ -88,6 +88,7 @@ public class DeckRetrieverService {
             cards.add(new CardInstance(gameStatus.nextCardId(), ANCIENT_BRONTODON, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), FRENZIED_RAPTOR, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), GRAZING_WHIPTAIL, playerName));
+            cards.add(new CardInstance(gameStatus.nextCardId(), CHARGING_MONSTROSAUR, playerName));
         }
 
         return new Library(cards);
