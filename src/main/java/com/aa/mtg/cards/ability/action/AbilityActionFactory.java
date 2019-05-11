@@ -1,27 +1,40 @@
 package com.aa.mtg.cards.ability.action;
 
 import com.aa.mtg.cards.ability.type.AbilityType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AbilityActionFactory {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbilityActionFactory.class);
+
     private final DestroyTargetAction destroyTargetAction;
     private final DealXDamageToTargetAction dealXDamageToTargetAction;
+    private final DrawXCardsAction drawXCardsAction;
 
     @Autowired
-    public AbilityActionFactory(DestroyTargetAction destroyTargetAction, DealXDamageToTargetAction dealXDamageToTargetAction) {
+    public AbilityActionFactory(DestroyTargetAction destroyTargetAction, DealXDamageToTargetAction dealXDamageToTargetAction, DrawXCardsAction drawXCardsAction) {
         this.destroyTargetAction = destroyTargetAction;
         this.dealXDamageToTargetAction = dealXDamageToTargetAction;
+        this.drawXCardsAction = drawXCardsAction;
     }
 
     public AbilityAction getAbilityAction(AbilityType abilityType) {
+        if (abilityType.isStatic()) {
+            return null;
+        }
+
         switch (abilityType) {
-            case DESTROY_TARGET_CREATURE:
+            case DESTROY_TARGET:
                 return destroyTargetAction;
             case DEALS_X_DAMAGE_TO_TARGET:
                 return dealXDamageToTargetAction;
+            case DRAW_X_CARDS:
+                return drawXCardsAction;
             default:
+                LOGGER.error("Ability action {} not found. Not performing anything.", abilityType);
                 return null;
         }
     }

@@ -28,14 +28,22 @@ public class EventSender {
         this.objectMapper = objectMapper;
     }
 
-    public void sendToUser(String sessionId, Event event) {
+    public void sendToUser(String sessionId, String username, Event event) {
         String eventString = serializeToString(event);
-        LOGGER.info("Sending event to {}: {}", sessionId, eventString);
+        if (username != null) {
+            LOGGER.info("Sending event to {} - {}: {}", sessionId, username, eventString);
+        } else {
+            LOGGER.info("Sending event to {}: {}", sessionId, eventString);
+        }
         webSocketTemplate.convertAndSendToUser(sessionId, "/events", eventString);
     }
 
+    public void sendToUser(String sessionId, Event event) {
+        sendToUser(sessionId, null, event);
+    }
+
     public void sendToPlayer(Player player, Event event) {
-        sendToUser(player.getSessionId(), event);
+        sendToUser(player.getSessionId(), player.getName(), event);
     }
 
     public void sendToPlayers(List<Player> players, Event event) {

@@ -75,7 +75,7 @@ public class InitController {
             }
         }
 
-        if (initTestService != null) {
+        if (initTestService != null && gameStatusRepository.getUnsecure(token.getGameId()).getPlayer2() != null) {
             initTestService.initGameStatusForTest(gameStatusRepository.getUnsecure(token.getGameId()));
         }
     }

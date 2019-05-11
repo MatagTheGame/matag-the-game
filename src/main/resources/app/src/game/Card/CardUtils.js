@@ -1,9 +1,9 @@
 export default class CardUtils {
   static normalizeCardName(cardName) {
     return cardName.toLowerCase()
-      .replace(' ', '_')
-      .replace(',', '_')
-      .replace('\'', '')
+      .replace(/ /g, '_')
+      .replace(/,/g, '_')
+      .replace(/'/g, '')
   }
 
   static hasSummoningSickness(cardInstance) {

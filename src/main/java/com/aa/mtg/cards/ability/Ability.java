@@ -13,11 +13,7 @@ public class Ability {
     private final List<String> parameters;
 
     public Ability(AbilityType abilityType) {
-        this(abilityType, emptyList());
-    }
-
-    public Ability(AbilityType abilityType, List<Target> targets) {
-        this(abilityType, targets, emptyList());
+        this(abilityType, emptyList(), emptyList());
     }
 
     public Ability(AbilityType abilityType, List<Target> targets, List<String> parameters) {

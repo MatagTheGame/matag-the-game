@@ -16,6 +16,7 @@ import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.sets.Ixalan.*;
+import static com.aa.mtg.cards.sets.RavnicaAllegiance.CLEAR_THE_MIND;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.PRECISION_BOLT;
 
 @Profile("test")
@@ -57,9 +58,13 @@ public class InitTestService {
         addCardToCurrentPlayerHand(gameStatus, HUATLIS_SNUBHORN);
         addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
         addCardToCurrentPlayerHand(gameStatus, AIR_ELEMENTAL);
+        addCardToCurrentPlayerHand(gameStatus, CLEAR_THE_MIND);
+
+        addCardToCurrentPlayerGraveyard(gameStatus, PLAINS);
 
         gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
         gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+        gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
         gameStatusUpdaterService.sendUpdateCurrentPlayerLibrarySize(gameStatus);
 
         // Non Current Player
@@ -81,8 +86,11 @@ public class InitTestService {
         addCardToNonCurrentPlayerHand(gameStatus, CHARGING_MONSTROSAUR);
         addCardToNonCurrentPlayerHand(gameStatus, PRECISION_BOLT);
 
+        addCardToNonCurrentPlayerGraveyard(gameStatus, MOUNTAIN);
+
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerHand(gameStatus);
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
+        gameStatusUpdaterService.sendUpdateNonCurrentPlayerGraveyard(gameStatus);
         gameStatusUpdaterService.sendUpdateNonCurrentPlayerLibrarySize(gameStatus);
     }
 
@@ -98,6 +106,10 @@ public class InitTestService {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
     }
 
+    private void addCardToCurrentPlayerGraveyard(GameStatus gameStatus, Card card) {
+        gameStatus.getCurrentPlayer().getGraveyard().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
+    }
+
     private void addCardToNonCurrentPlayerLibrary(GameStatus gameStatus, Card card) {
         gameStatus.getNonCurrentPlayer().getLibrary().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
     }
@@ -108,5 +120,9 @@ public class InitTestService {
 
     private void addCardToNonCurrentPlayerBattlefield(GameStatus gameStatus, Card card) {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
+    }
+
+    private void addCardToNonCurrentPlayerGraveyard(GameStatus gameStatus, Card card) {
+        gameStatus.getNonCurrentPlayer().getGraveyard().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
     }
 }

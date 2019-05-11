@@ -1,5 +1,7 @@
 package com.aa.mtg.cards.ability.type;
 
+import static java.util.Arrays.asList;
+
 public enum AbilityType {
     DEATHTOUCH,
     FLYING,
@@ -7,6 +9,12 @@ public enum AbilityType {
     REACH,
     VIGILANCE,
     TRAMPLE,
-    DESTROY_TARGET_CREATURE,
+    DESTROY_TARGET,
     DEALS_X_DAMAGE_TO_TARGET,
+    SHUFFLE_GRAVEYARD_INTO_LIBRARY,
+    DRAW_X_CARDS;
+
+    public boolean isStatic() {
+      return asList(DEATHTOUCH, FLYING, REACH, VIGILANCE, TRAMPLE).contains(this);
+    }
 }

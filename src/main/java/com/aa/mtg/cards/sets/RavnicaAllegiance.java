@@ -8,6 +8,8 @@ import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.cards.properties.Type;
 
+import static com.aa.mtg.cards.ability.Abilities.DRAW_1_CARD;
+import static com.aa.mtg.cards.ability.Abilities.SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER;
 import static com.aa.mtg.cards.ability.type.AbilityType.DEALS_X_DAMAGE_TO_TARGET;
 import static com.aa.mtg.cards.ability.type.AbilityType.DEATHTOUCH;
 import static java.util.Arrays.asList;
@@ -18,6 +20,7 @@ public class RavnicaAllegiance {
 
     public static Card AXEBANE_BEAST = new Card("Axebane Beast", singletonList(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Beast"), "", 3, 4, emptyList());
     public static Card CATACOMB_CROCODILE = new Card("Catacomb Crocodile", singletonList(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Crocodile"), "", 3, 7, emptyList());
+    public static Card CLEAR_THE_MIND = new Card("Clear the Mind", singletonList(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), "Target player shuffles their graveyard into their library. Draw a card.", 0, 0, asList(SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER, DRAW_1_CARD));
     public static Card CORAL_COMMANDO = new Card("Coral Commando", singletonList(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Merfolk", "Warrior"), "", 3, 2, emptyList());
     public static Card FERAL_MAAKA = new Card("Feral Maaka", singletonList(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Cat"), "", 2, 2, emptyList());
     public static Card NOXIOUS_GROODION = new Card("Noxious Groodion", singletonList(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Beast"), "Deathtouch", 2, 2, singletonList(new Ability(DEATHTOUCH)));
