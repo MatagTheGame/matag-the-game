@@ -13,12 +13,14 @@ public class AbilityActionFactory {
     private final DestroyTargetAction destroyTargetAction;
     private final DealXDamageToTargetAction dealXDamageToTargetAction;
     private final DrawXCardsAction drawXCardsAction;
+    private final ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction;
 
     @Autowired
-    public AbilityActionFactory(DestroyTargetAction destroyTargetAction, DealXDamageToTargetAction dealXDamageToTargetAction, DrawXCardsAction drawXCardsAction) {
+    public AbilityActionFactory(DestroyTargetAction destroyTargetAction, DealXDamageToTargetAction dealXDamageToTargetAction, DrawXCardsAction drawXCardsAction, ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction) {
         this.destroyTargetAction = destroyTargetAction;
         this.dealXDamageToTargetAction = dealXDamageToTargetAction;
         this.drawXCardsAction = drawXCardsAction;
+        this.shuffleTargetGraveyardIntoLibraryAction = shuffleTargetGraveyardIntoLibraryAction;
     }
 
     public AbilityAction getAbilityAction(AbilityType abilityType) {
@@ -33,6 +35,8 @@ public class AbilityActionFactory {
                 return dealXDamageToTargetAction;
             case DRAW_X_CARDS:
                 return drawXCardsAction;
+            case SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER:
+                return shuffleTargetGraveyardIntoLibraryAction;
             default:
                 LOGGER.error("Ability action {} not found. Not performing anything.", abilityType);
                 return null;

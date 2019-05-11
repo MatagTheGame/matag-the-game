@@ -31,8 +31,8 @@ public class DrawXCardsAction implements AbilityAction {
             currentPlayer.getHand().addCard(drawnCardInstance);
         }
 
-        gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
-        gameStatusUpdaterService.sendUpdateCurrentPlayerLibrarySize(gameStatus);
+        gameStatusUpdaterService.sendUpdatePlayerHand(gameStatus, currentPlayer);
+        gameStatusUpdaterService.sendUpdatePlayerLibrarySize(gameStatus, currentPlayer);
         LOGGER.info("{} drew {} cards.", currentPlayer.getName(), cardsToDraw);
     }
 }

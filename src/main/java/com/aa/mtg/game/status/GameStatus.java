@@ -74,6 +74,10 @@ public class GameStatus {
         }
     }
 
+    public boolean isPlayerCurrent(Player player) {
+        return getCurrentPlayer().getName().equals(player.getName());
+    }
+
     public Player getNonCurrentPlayer() {
         if (turn.getCurrentTurnPlayer().equals(this.getPlayer1().getName())) {
             return this.getPlayer2();

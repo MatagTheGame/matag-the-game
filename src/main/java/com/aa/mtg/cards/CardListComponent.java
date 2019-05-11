@@ -28,6 +28,10 @@ public abstract class CardListComponent {
         this.cards.add(cardInstance);
     }
 
+    public void addCards(ArrayList<CardInstance> cardInstance) {
+        this.cards.addAll(cardInstance);
+    }
+
     public boolean hasCardById(int cardId) {
         return new CardSearch(cards).withId(cardId).isPresent();
     }
@@ -41,6 +45,14 @@ public abstract class CardListComponent {
         CardInstance cardInstance = findCardById(cardId);
         this.cards.remove(cardInstance);
         return cardInstance;
+    }
+
+    public ArrayList<CardInstance> extractAllCards() {
+        ArrayList<CardInstance> removedCards = new ArrayList<>();
+        while (!cards.isEmpty()) {
+            removedCards.add(cards.remove(0));
+        }
+        return removedCards;
     }
 
 }

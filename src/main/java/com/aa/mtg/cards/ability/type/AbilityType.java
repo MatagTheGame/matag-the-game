@@ -11,7 +11,7 @@ public enum AbilityType {
     TRAMPLE,
     DESTROY_TARGET,
     DEALS_X_DAMAGE_TO_TARGET,
-    SHUFFLE_GRAVEYARD_INTO_LIBRARY,
+    SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER,
     DRAW_X_CARDS;
 
     public boolean isStatic() {

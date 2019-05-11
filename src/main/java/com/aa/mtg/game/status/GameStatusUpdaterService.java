@@ -40,6 +40,14 @@ public class GameStatusUpdaterService {
         );
     }
 
+    public void sendUpdatePlayerLibrarySize(GameStatus gameStatus, Player player) {
+        if (gameStatus.isPlayerCurrent(player)) {
+            sendUpdateCurrentPlayerLibrarySize(gameStatus);
+        } else {
+            sendUpdateNonCurrentPlayerLibrarySize(gameStatus);
+        }
+    }
+
     public void sendUpdateCurrentPlayerHand(GameStatus gameStatus) {
         eventSender.sendToPlayer(gameStatus.getCurrentPlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getCurrentPlayer().getHand().getCards()));
         eventSender.sendToPlayer(gameStatus.getNonCurrentPlayer(), new Event("UPDATE_ACTIVE_PLAYER_HAND", gameStatus.getCurrentPlayer().getHand().maskedHand()));
@@ -48,6 +56,14 @@ public class GameStatusUpdaterService {
     public void sendUpdateNonCurrentPlayerHand(GameStatus gameStatus) {
         eventSender.sendToPlayer(gameStatus.getNonCurrentPlayer(), new Event("UPDATE_INACTIVE_PLAYER_HAND", gameStatus.getNonCurrentPlayer().getHand().getCards()));
         eventSender.sendToPlayer(gameStatus.getCurrentPlayer(), new Event("UPDATE_INACTIVE_PLAYER_HAND", gameStatus.getNonCurrentPlayer().getHand().maskedHand()));
+    }
+
+    public void sendUpdatePlayerHand(GameStatus gameStatus, Player player) {
+        if (gameStatus.isPlayerCurrent(player)) {
+            sendUpdateCurrentPlayerHand(gameStatus);
+        } else {
+            sendUpdateNonCurrentPlayerHand(gameStatus);
+        }
     }
 
     public void sendUpdateCurrentPlayerBattlefield(GameStatus gameStatus) {
@@ -62,6 +78,14 @@ public class GameStatusUpdaterService {
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                 new Event("UPDATE_INACTIVE_PLAYER_BATTLEFIELD", gameStatus.getNonCurrentPlayer().getBattlefield().getCards())
         );
+    }
+
+    public void sendUpdatePlayerBattlefield(GameStatus gameStatus, Player player) {
+        if (gameStatus.isPlayerCurrent(player)) {
+            sendUpdateCurrentPlayerBattlefield(gameStatus);
+        } else {
+            sendUpdateNonCurrentPlayerBattlefield(gameStatus);
+        }
     }
 
     public void sendUpdateBattlefields(GameStatus gameStatus) {
@@ -83,15 +107,23 @@ public class GameStatusUpdaterService {
         );
     }
 
+    public void sendUpdatePlayerGraveyard(GameStatus gameStatus, Player player) {
+        if (gameStatus.isPlayerCurrent(player)) {
+            sendUpdateCurrentPlayerGraveyard(gameStatus);
+        } else {
+            sendUpdateNonCurrentPlayerGraveyard(gameStatus);
+        }
+    }
+
     public void sendUpdateGraveyards(GameStatus gameStatus) {
         sendUpdateCurrentPlayerGraveyard(gameStatus);
         sendUpdateNonCurrentPlayerGraveyard(gameStatus);
     }
 
-    public void sendUpdatePlayerLife(GameStatus gameStatus, Player nonCurrentPlayer) {
+    public void sendUpdatePlayerLife(GameStatus gameStatus, Player player) {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                new Event("UPDATE_PLAYER_LIFE", new LifeEvent(nonCurrentPlayer.getName(), nonCurrentPlayer.getLife()))
+                new Event("UPDATE_PLAYER_LIFE", new LifeEvent(player.getName(), player.getLife()))
         );
     }
 
