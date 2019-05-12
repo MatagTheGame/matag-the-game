@@ -17,6 +17,7 @@ public class CardModifiers {
     private List<Integer> blocking = new ArrayList<>();
     private int damage;
     private List<Ability> abilities = new ArrayList<>();
+    private List<Ability> abilitiesUntilEndOfTurn = new ArrayList<>();
     private List<Object> targets = new ArrayList<>();
 
     public TappedModifiers getTapped() {
@@ -89,6 +90,14 @@ public class CardModifiers {
 
     public void setAbilities(List<Ability> abilities) {
         this.abilities = abilities;
+    }
+
+    public List<Ability> getAbilitiesUntilEndOfTurn() {
+        return abilitiesUntilEndOfTurn;
+    }
+
+    public void setAbilitiesUntilEndOfTurn(List<Ability> abilitiesUntilEndOfTurn) {
+        this.abilitiesUntilEndOfTurn = abilitiesUntilEndOfTurn;
     }
 
     public void setTargets(List<Object> targets) {

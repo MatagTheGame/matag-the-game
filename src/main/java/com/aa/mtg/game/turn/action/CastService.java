@@ -81,7 +81,7 @@ public class CastService {
 
     private void checkSpellRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds) {
         for (Ability ability : cardToCast.getAbilities()) {
-            AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
+            AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getMainAbilityType());
             if (abilityAction != null) {
                 if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId()) || targetsIdsForCardIds.get(cardToCast.getId()).isEmpty()) {
                     throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");

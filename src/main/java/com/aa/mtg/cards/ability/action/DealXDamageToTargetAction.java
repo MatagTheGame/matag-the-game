@@ -37,7 +37,7 @@ public class DealXDamageToTargetAction implements AbilityAction {
             lifeService.substract(player, damageToDeal, gameStatus);
 
         } else {
-            int targetCardId = (int)cardInstance.getModifiers().getTargets().get(0);
+            int targetCardId = (int) targetId;
 
             Optional<CardInstance> targetThatIsGettingDamageOptional = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
                     .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards())

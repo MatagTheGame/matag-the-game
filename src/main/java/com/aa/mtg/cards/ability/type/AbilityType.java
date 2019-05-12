@@ -9,10 +9,12 @@ public enum AbilityType {
     REACH,
     VIGILANCE,
     TRAMPLE,
-    DESTROY_TARGET,
+
     DEALS_X_DAMAGE_TO_TARGET,
+    DESTROY_TARGET,
+    DRAW_X_CARDS,
     SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER,
-    DRAW_X_CARDS;
+    THAT_TARGETS_GET_X;
 
     public boolean isStatic() {
       return asList(DEATHTOUCH, FLYING, REACH, VIGILANCE, TRAMPLE).contains(this);

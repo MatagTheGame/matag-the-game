@@ -77,14 +77,20 @@ public class ResolveService {
 
     private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve) {
         for (Ability ability : cardToResolve.getAbilities()) {
-            AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
-            if (abilityAction != null) {
+            AbilityAction mainAbilityAction = abilityActionFactory.getAbilityAction(ability.getMainAbilityType());
+            if (mainAbilityAction != null) {
                 try {
                     for (int i = 0; i < ability.getTargets().size(); i++) {
                         ability.getTargets().get(i).check(gameStatus, cardToResolve.getModifiers().getTargets().get(i));
                     }
 
-                    abilityAction.perform(ability, cardToResolve, gameStatus);
+                    mainAbilityAction.perform(ability, cardToResolve, gameStatus);
+
+                    for (int i = 1; i < ability.getAbilityTypes().size(); i++) {
+                        AbilityAction furtherAbilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityTypes().get(i));
+                        furtherAbilityAction.perform(ability, cardToResolve, gameStatus);
+                    }
+
                 } catch (MessageException e) {
                     LOGGER.info("{}: Target is now invalid during resolution, dropping the action. [{}] ", cardToResolve.getIdAndName(), e.getMessage());
                 }

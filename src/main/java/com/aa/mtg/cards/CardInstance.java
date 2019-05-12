@@ -9,8 +9,6 @@ import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.FLYING;
 import static com.aa.mtg.cards.ability.type.AbilityType.REACH;
@@ -142,11 +140,15 @@ public class CardInstance {
     }
 
     public List<Ability> getAbilities() {
-        return Stream.concat(card.getAbilities().stream(), modifiers.getAbilities().stream()).collect(Collectors.toList());
+        ArrayList<Ability> abilities = new ArrayList<>();
+        abilities.addAll(card.getAbilities());
+        abilities.addAll(modifiers.getAbilities());
+        abilities.addAll(modifiers.getAbilitiesUntilEndOfTurn());
+        return abilities;
     }
 
     public boolean hasAbility(AbilityType abilityType) {
-        return getAbilities().stream().anyMatch(ability -> ability.getAbilityType().equals(abilityType));
+        return getAbilities().stream().anyMatch(ability -> ability.getAbilityTypes().contains(abilityType));
     }
 
     public boolean isPermanent() {
