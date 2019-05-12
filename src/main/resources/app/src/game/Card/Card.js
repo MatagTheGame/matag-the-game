@@ -3,11 +3,12 @@ import {get} from 'lodash'
 import CardUtils from './CardUtils'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import {Modifiers} from './Modifiers'
 
 class Card extends PureComponent {
   constructor(props) {
     super(props);
-    this.onWheel= this.onWheel.bind(this);
+    this.onWheel = this.onWheel.bind(this);
   }
 
   name() {
@@ -70,12 +71,6 @@ class Card extends PureComponent {
     }
   }
 
-  modifiers() {
-    if (CardUtils.hasSummoningSickness(this.props.cardInstance)) {
-      return <div className='summoning-sickness'/>
-    }
-  }
-
   render() {
     if (this.props.cardInstance) {
       return (
@@ -84,7 +79,7 @@ class Card extends PureComponent {
              style={{backgroundImage: this.imageUrl(), ...this.props.style}}
              onClick={this.props.onclick}
              onWheel={this.onWheel}>
-          {this.modifiers()}
+          { this.props.area === 'battlefield' ? <Modifiers cardInstance={this.props.cardInstance} /> : null }
         </div>
       )
     } else {

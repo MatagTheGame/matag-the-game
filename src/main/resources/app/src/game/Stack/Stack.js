@@ -8,7 +8,7 @@ class Stack extends PureComponent {
   renderCards(cards) {
     return cards.map((cardInstance) =>
       <span key={cardInstance.id}>
-        <Card cardInstance={cardInstance} />
+        <Card cardInstance={cardInstance} area='stack' />
       </span>
     )
   }

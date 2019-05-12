@@ -34,7 +34,7 @@ class Hand extends PureComponent {
       <div id={this.getId()} className='hand'>
         {this.getHand().map((cardInstance) =>
           <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
-                selected={this.isCardSelectedToBePlayed(cardInstance)}/>)}
+                selected={this.isCardSelectedToBePlayed(cardInstance)} area='hand' />)}
       </div>
     )
   }
