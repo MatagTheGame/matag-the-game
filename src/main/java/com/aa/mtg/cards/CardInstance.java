@@ -39,10 +39,6 @@ public class CardInstance {
         this.modifiers = new CardModifiers();
     }
 
-    public CardInstance(CardInstance cardInstance) {
-        this(cardInstance.getId(), cardInstance.getCard(), cardInstance.getOwner(), cardInstance.getController());
-    }
-
     public int getId() {
         return id;
     }

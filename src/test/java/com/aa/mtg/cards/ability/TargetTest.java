@@ -8,6 +8,8 @@ import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 
 import static com.aa.mtg.cards.Cards.PLAINS;
+import static com.aa.mtg.game.player.PlayerType.OPPONENT;
+import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint.PowerOrToughness.POWER;
 import static com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
 import static com.aa.mtg.cards.ability.target.TargetSelectionConstraint.EQUAL;
@@ -219,5 +221,85 @@ public class TargetTest {
         target.check(gameStatus, 1);
 
         // Then no exception is thrown
+    }
+
+    @Test
+    public void selectionPlayerCreatureCorrect() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder()
+                .targetType(PERMANENT)
+                .ofType(singletonList(CREATURE))
+                .targetControllerType(PLAYER)
+                .build();
+        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        target.check(gameStatus, 1);
+
+        // Then no exception is thrown
+    }
+
+    @Test(expected = MessageException.class)
+    public void selectionPlayerCreatureException() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder()
+                .targetType(PERMANENT)
+                .ofType(singletonList(CREATURE))
+                .targetControllerType(PLAYER)
+                .build();
+        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getNonCurrentPlayer().getName());
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        target.check(gameStatus, 1);
+
+        // Then an exception is thrown
+    }
+
+    @Test
+    public void selectionOpponentCreatureCorrect() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder()
+                .targetType(PERMANENT)
+                .ofType(singletonList(CREATURE))
+                .targetControllerType(OPPONENT)
+                .build();
+        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getNonCurrentPlayer().getName());
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        target.check(gameStatus, 1);
+
+        // Then no exception is thrown
+    }
+
+    @Test(expected = MessageException.class)
+    public void selectionOpponentCreatureException() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder()
+                .targetType(PERMANENT)
+                .ofType(singletonList(CREATURE))
+                .targetControllerType(OPPONENT)
+                .build();
+        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        target.check(gameStatus, 1);
+
+        // Then an exception is thrown
     }
 }

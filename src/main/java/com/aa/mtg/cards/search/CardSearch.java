@@ -99,6 +99,13 @@ public class CardSearch {
         return new CardSearch(cards);
     }
 
+    public CardSearch controlledBy(String playerName) {
+        List<CardInstance> cards = this.cards.stream()
+                .filter(cardInstance -> cardInstance.getController().equals(playerName))
+                .collect(toList());
+        return new CardSearch(cards);
+    }
+
     public boolean isEmpty() {
         return cards.isEmpty();
     }

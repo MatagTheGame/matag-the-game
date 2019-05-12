@@ -85,6 +85,7 @@ public class InitTestService {
         addCardToNonCurrentPlayerHand(gameStatus, GRAZING_WHIPTAIL);
         addCardToNonCurrentPlayerHand(gameStatus, CHARGING_MONSTROSAUR);
         addCardToNonCurrentPlayerHand(gameStatus, PRECISION_BOLT);
+        addCardToNonCurrentPlayerHand(gameStatus, RILE);
 
         addCardToNonCurrentPlayerGraveyard(gameStatus, MOUNTAIN);
 

@@ -5,6 +5,7 @@ import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.cards.search.CardSearch;
 import com.aa.mtg.game.message.MessageException;
+import com.aa.mtg.game.player.PlayerType;
 import com.aa.mtg.game.status.GameStatus;
 import lombok.Builder;
 
@@ -12,7 +13,6 @@ import java.util.List;
 
 import static com.aa.mtg.cards.ability.target.TargetType.ANY;
 import static com.aa.mtg.cards.ability.target.TargetType.PERMANENT;
-import static com.aa.mtg.cards.ability.target.TargetType.PLAYER;
 
 @Builder
 public class Target {
@@ -22,50 +22,62 @@ public class Target {
     private final AbilityType withAbilityType;
     private final Color ofColor;
     private final TargetPowerToughnessConstraint targetPowerToughnessConstraint;
+    private final PlayerType targetControllerType;
 
-    public Target(TargetType targetType, List<Type> ofType, String ofSubtypeOf, AbilityType withAbilityType, Color ofColor, TargetPowerToughnessConstraint targetPowerToughnessConstraint) {
+    public Target(TargetType targetType, List<Type> ofType, String ofSubtypeOf, AbilityType withAbilityType, Color ofColor, TargetPowerToughnessConstraint targetPowerToughnessConstraint, PlayerType targetControllerType) {
         this.targetType = targetType;
         this.ofType = ofType;
         this.ofSubtypeOf = ofSubtypeOf;
         this.withAbilityType = withAbilityType;
         this.ofColor = ofColor;
         this.targetPowerToughnessConstraint = targetPowerToughnessConstraint;
+        this.targetControllerType = targetControllerType;
     }
 
     public void check(GameStatus gameStatus, Object targetId) {
-        CardSearch cards;
-
         if (targetId instanceof String) {
-            if (!(targetType.equals(PLAYER) || targetType.equals(ANY))) {
+            if (!(targetType.equals(TargetType.PLAYER) || targetType.equals(ANY))) {
                 throw new MessageException(targetId + " is not valid for targetType PERMANENT");
             }
 
         } else {
+            CardSearch cards = getPossibleTargetCardInstances(gameStatus);
             int targetCardId = (int) targetId;
-            if (targetType.equals(PERMANENT)) {
-                cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
-                        .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
-
-                if (ofType != null) {
-                    cards = cards.ofAnyOfTheTypes(ofType);
-                }
-
-                if (targetPowerToughnessConstraint != null) {
-                    cards = cards.ofTargetPowerToughnessConstraint(targetPowerToughnessConstraint);
-                }
-
-            } else if (targetType.equals(ANY)) {
-                cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
-                        .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
-
-            } else {
-                throw new RuntimeException("Missing targetType.");
-            }
-
             if (!cards.withId(targetCardId).isPresent()) {
                 throw new MessageException("Selected targets were not valid.");
             }
         }
+    }
+
+    private CardSearch getPossibleTargetCardInstances(GameStatus gameStatus) {
+        CardSearch cards;
+        if (targetType.equals(PERMANENT)) {
+            cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+                    .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
+
+            if (ofType != null) {
+                cards = cards.ofAnyOfTheTypes(ofType);
+            }
+
+            if (targetPowerToughnessConstraint != null) {
+                cards = cards.ofTargetPowerToughnessConstraint(targetPowerToughnessConstraint);
+            }
+
+        } else if (targetType.equals(ANY)) {
+            cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+                    .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
+
+        } else {
+            throw new RuntimeException("Missing targetType.");
+        }
+
+        if (targetControllerType == PlayerType.PLAYER) {
+            cards = cards.controlledBy(gameStatus.getCurrentPlayer().getName());
+        } else if (targetControllerType == PlayerType.OPPONENT) {
+            cards = cards.controlledBy(gameStatus.getNonCurrentPlayer().getName());
+        }
+
+        return cards;
     }
 
     public TargetType getTargetType() {
