@@ -80,6 +80,10 @@ public class CardModifiers {
         this.damage += damage;
     }
 
+    public void resetDamage() {
+        this.damage = 0;
+    }
+
     public void setTapped(TappedModifiers tapped) {
         this.tapped = tapped;
     }

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
@@ -96,5 +97,7 @@ public class ResolveService {
                 }
             }
         }
+
+        cardToResolve.getModifiers().setTargets(new ArrayList<>());
     }
 }
