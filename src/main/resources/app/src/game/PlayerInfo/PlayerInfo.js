@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {get} from 'lodash'
+import PropTypes from 'prop-types'
 
 class PlayerInfo extends PureComponent {
   getId () {
@@ -63,9 +64,9 @@ class PlayerInfo extends PureComponent {
 const mapStateToProps = state => {
   return {
     playerName: get(state, 'player.name', ''),
-    playerLife: get(state, 'player.life', ''),
+    playerLife: get(state, 'player.life', 0),
     opponentName: get(state, 'opponent.name', ''),
-    opponentLife: get(state, 'opponent.life', ''),
+    opponentLife: get(state, 'opponent.life', 0),
     currentTurnPlayer: get(state, 'turn.currentTurnPlayer'),
     winner: get(state, 'turn.winner')
   }
@@ -82,6 +83,16 @@ const mapDispatchToProps = dispatch => {
   return {
     playerClick: bindActionCreators(createPlayerClickAction, dispatch)
   }
+}
+
+PlayerInfo.propTypes = {
+  type: PropTypes.string.isRequired,
+  playerName: PropTypes.string.isRequired,
+  playerLife: PropTypes.number.isRequired,
+  opponentName: PropTypes.string.isRequired,
+  opponentLife: PropTypes.number.isRequired,
+  currentTurnPlayer: PropTypes.string,
+  winner: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerInfo)

@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
 class StatusMessage extends PureComponent {
   render() {
@@ -11,11 +12,14 @@ class StatusMessage extends PureComponent {
   }
 }
 
-
 const mapStateToProps = state => {
   return {
     statusMessage: state.statusMessage
   }
+}
+
+StatusMessage.propTypes = {
+  statusMessage: PropTypes.string
 }
 
 export default connect(mapStateToProps)(StatusMessage)

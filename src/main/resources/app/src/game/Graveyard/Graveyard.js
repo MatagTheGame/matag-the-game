@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react';
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import Card from '../Card/Card'
+import PropTypes from 'prop-types'
 
 class Graveyard extends PureComponent {
   getId() {
@@ -31,6 +32,12 @@ const mapStateToProps = state => {
     playerGraveyard: get(state, 'player.graveyard', []),
     opponentGraveyard: get(state, 'opponent.graveyard', [])
   }
+}
+
+Graveyard.propTypes = {
+  type: PropTypes.string.isRequired,
+  playerGraveyard: PropTypes.array.isRequired,
+  opponentGraveyard: PropTypes.array.isRequired
 }
 
 export default connect(mapStateToProps)(Graveyard)

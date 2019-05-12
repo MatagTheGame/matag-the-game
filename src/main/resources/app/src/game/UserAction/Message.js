@@ -2,6 +2,7 @@ import React, {Fragment, PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import {bindActionCreators} from 'redux'
+import PropTypes from 'prop-types'
 
 class Message extends PureComponent {
   constructor(props) {
@@ -65,6 +66,11 @@ const mapDispatchToProps = dispatch => {
   return {
     closeMessage: bindActionCreators(closeMessageEvent, dispatch)
   }
+}
+
+Message.propTypes = {
+  message: PropTypes.object.isRequired,
+  closeMessage: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Message)

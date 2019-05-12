@@ -1,6 +1,7 @@
 import React, {Fragment, PureComponent} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
 class MaximizedCard extends PureComponent {
   constructor(props) {
@@ -49,6 +50,11 @@ const mapDispatchToProps = dispatch => {
   return {
     minimizeCard: bindActionCreators(minimizeCardEvent, dispatch)
   }
+}
+
+MaximizedCard.propTypes = {
+  maximizedCard: PropTypes.string,
+  minimizeCard: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MaximizedCard)

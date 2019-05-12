@@ -4,6 +4,7 @@ import CardUtils from './CardUtils'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {Modifiers} from './Modifiers'
+import PropTypes from 'prop-types'
 
 class Card extends PureComponent {
   constructor(props) {
@@ -99,7 +100,6 @@ const maximizeCardEvent = (cardImage) => {
 
 const mapStateToProps = state => {
   return {
-    message: get(state, 'message', {}),
     targetIdsForLastSpell: get(state, 'stack[0].modifiers.targets', [])
   }
 }
@@ -108,6 +108,16 @@ const mapDispatchToProps = dispatch => {
   return {
     maximizeCard: bindActionCreators(maximizeCardEvent, dispatch)
   }
+}
+
+Card.propTypes = {
+  targetIdsForLastSpell: PropTypes.array.isRequired,
+  maximizeCard: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
+  area: PropTypes.string,
+  style: PropTypes.object,
+  cardInstance: PropTypes.object,
+  selected: PropTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card)

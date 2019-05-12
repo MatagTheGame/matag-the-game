@@ -1,7 +1,8 @@
-import React, {Fragment, PureComponent} from 'react'
+import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import Phase from './Phase'
+import PropTypes from 'prop-types'
 
 class TurnPhases extends PureComponent {
   isPhaseActiveForPlayer() {
@@ -31,6 +32,11 @@ const mapStateToProps = state => {
     turn: get(state, 'turn', {}),
     currentPlayerName: get(state, 'player.name', '')
   }
+}
+
+TurnPhases.propTypes = {
+  turn: PropTypes.object.isRequired,
+  currentPlayerName: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps)(TurnPhases)

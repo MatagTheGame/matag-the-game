@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {get} from 'lodash'
 import Card from '../Card/Card'
+import PropTypes from 'prop-types'
 
 class Hand extends PureComponent {
   getId() {
@@ -59,6 +60,14 @@ const mapDispatchToProps = dispatch => {
   return {
     playerCardClick: bindActionCreators(createHandPlayerCardClickAction, dispatch)
   }
+}
+
+Hand.propTypes = {
+  type: PropTypes.string.isRequired,
+  playerHand: PropTypes.array.isRequired,
+  opponentHand: PropTypes.array.isRequired,
+  cardIdSelectedToBePlayed: PropTypes.number,
+  playerCardClick: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hand)

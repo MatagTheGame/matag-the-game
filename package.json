@@ -24,6 +24,7 @@
     "eslint-loader": "^2.1.2",
     "eslint-plugin-react": "^7.12.4",
     "lodash": "^4.17.11",
+    "prop-types": "^15.7.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "react-redux": "^6.0.0",

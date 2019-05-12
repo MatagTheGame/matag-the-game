@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {get} from 'lodash'
 import {LibraryUiUtils} from './LibraryUiUtils'
 import Card from '../Card/Card'
+import PropTypes from 'prop-types'
 
 class Library extends PureComponent {
   getId() {
@@ -34,6 +35,12 @@ const mapStateToProps = state => {
     playerLibrarySize: get(state, 'player.librarySize', 0),
     opponentLibrarySize: get(state, 'opponent.librarySize', 0)
   }
+}
+
+Library.propTypes = {
+  type: PropTypes.string.isRequired,
+  playerLibrarySize: PropTypes.number.isRequired,
+  opponentLibrarySize: PropTypes.number.isRequired,
 }
 
 export default connect(mapStateToProps)(Library)

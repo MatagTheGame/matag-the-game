@@ -2,6 +2,7 @@ import React, {PureComponent} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import {bindActionCreators} from 'redux'
+import PropTypes from 'prop-types'
 
 class UserAction extends PureComponent {
   constructor(props) {
@@ -63,6 +64,13 @@ const mapDispatchToProps = dispatch => {
   return {
     continueClick: bindActionCreators(createContinueClickAction, dispatch)
   }
+}
+
+UserAction.propTypes = {
+  turn: PropTypes.object.isRequired,
+  currentPlayerName: PropTypes.string.isRequired,
+  winner: PropTypes.string,
+  continueClick: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserAction)

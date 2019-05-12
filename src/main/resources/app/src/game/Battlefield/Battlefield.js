@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux'
 import CardSearch from '../Card/CardSearch'
 import CardUtils from '../Card/CardUtils'
 import PlayerUtils from '../PlayerInfo/PlayerUtils'
+import PropTypes from 'prop-types'
 
 class Battlefield extends PureComponent {
   getId() {
@@ -154,6 +155,16 @@ const mapDispatchToProps = dispatch => {
     playerCardClick: bindActionCreators(createBattlefieldPlayerCardClickAction, dispatch),
     opponentCardClick: bindActionCreators(createBattlefieldOpponentCardClickAction, dispatch)
   }
+}
+
+Battlefield.propTypes = {
+  type: PropTypes.string.isRequired,
+  playerBattlefield: PropTypes.array.isRequired,
+  opponentBattlefield: PropTypes.array.isRequired,
+  turn: PropTypes.object,
+  state: PropTypes.object.isRequired,
+  playerCardClick: PropTypes.func.isRequired,
+  opponentCardClick: PropTypes.func.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Battlefield)
