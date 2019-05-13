@@ -91,7 +91,7 @@ body {
 }
 
 .targeted {
-  background-color: rgb(255, 100, 100);
+  background-color: rgb(255, 255, 100);
   background-blend-mode: multiply;
 }
 
