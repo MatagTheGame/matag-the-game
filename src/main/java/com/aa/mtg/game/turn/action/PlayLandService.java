@@ -16,10 +16,12 @@ import org.springframework.stereotype.Service;
 public class PlayLandService {
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
+    private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
 
     @Autowired
-    public PlayLandService(GameStatusUpdaterService gameStatusUpdaterService) {
+    public PlayLandService(GameStatusUpdaterService gameStatusUpdaterService, EnterCardIntoBattlefieldService enterCardIntoBattlefieldService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
+        this.enterCardIntoBattlefieldService = enterCardIntoBattlefieldService;
     }
 
     public void playLand(GameStatus gameStatus, int cardId) {
@@ -41,7 +43,7 @@ public class PlayLandService {
                 cardInstance = currentPlayer.getHand().extractCardById(cardId);
                 cardInstance.setController(currentPlayer.getName());
                 turn.addCardToCardsPlayedWithinTurn(cardInstance);
-                currentPlayer.getBattlefield().addCard(cardInstance);
+                enterCardIntoBattlefieldService.enter(gameStatus, cardInstance);
 
                 gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
                 gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);

@@ -1,6 +1,7 @@
 package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.cards.modifiers.TappedModifier;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -18,6 +19,7 @@ public class CardModifiers {
     private int damage;
     private List<Ability> abilities = new ArrayList<>();
     private List<Ability> abilitiesUntilEndOfTurn = new ArrayList<>();
+    private PowerToughness extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
     private List<Object> targets = new ArrayList<>();
 
     public TappedModifier getTapped() {
@@ -102,6 +104,14 @@ public class CardModifiers {
 
     public void setAbilitiesUntilEndOfTurn(List<Ability> abilitiesUntilEndOfTurn) {
         this.abilitiesUntilEndOfTurn = abilitiesUntilEndOfTurn;
+    }
+
+    public PowerToughness getExtraPowerToughnessUntilEndOfTurn() {
+        return extraPowerToughnessUntilEndOfTurn;
+    }
+
+    public void setExtraPowerToughnessUntilEndOfTurn(PowerToughness extraPowerToughnessUntilEndOfTurn) {
+        this.extraPowerToughnessUntilEndOfTurn = extraPowerToughnessUntilEndOfTurn;
     }
 
     public void setTargets(List<Object> targets) {

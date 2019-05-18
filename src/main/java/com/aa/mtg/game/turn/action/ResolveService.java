@@ -25,12 +25,15 @@ public class ResolveService {
     private final GameStatusUpdaterService gameStatusUpdaterService;
     private final ContinueTurnService continueTurnService;
     private final AbilityActionFactory abilityActionFactory;
+    private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
 
     @Autowired
-    public ResolveService(GameStatusUpdaterService gameStatusUpdaterService, ContinueTurnService continueTurnService, AbilityActionFactory abilityActionFactory) {
+    public ResolveService(GameStatusUpdaterService gameStatusUpdaterService, ContinueTurnService continueTurnService, AbilityActionFactory abilityActionFactory,
+                          EnterCardIntoBattlefieldService enterCardIntoBattlefieldService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.continueTurnService = continueTurnService;
         this.abilityActionFactory = abilityActionFactory;
+        this.enterCardIntoBattlefieldService = enterCardIntoBattlefieldService;
     }
 
     public void resolve(GameStatus gameStatus, String triggeredAction, List<Integer> cardIds) {
@@ -45,7 +48,7 @@ public class ResolveService {
                     cardToResolve.getModifiers().setSummoningSickness(true);
                 }
 
-                gameStatus.getCurrentPlayer().getBattlefield().addCard(cardToResolve);
+                enterCardIntoBattlefieldService.enter(gameStatus, cardToResolve);
 
             } else {
                 gameStatus.putIntoGraveyard(cardToResolve);

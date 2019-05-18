@@ -58,11 +58,15 @@ public class Ability {
         return parameters;
     }
 
-    public Trigger trigger() {
+    public Trigger getTrigger() {
         return trigger;
     }
 
     public boolean requiresTarget() {
         return !targets.isEmpty();
+    }
+
+    public boolean hasTrigger(Trigger trigger) {
+        return this.trigger == trigger;
     }
 }
