@@ -1,5 +1,5 @@
 package com.aa.mtg.cards.modifiers;
 
-public enum TappedModifiers {
+public enum TappedModifier {
     TAPPED, TAPPED_DOES_NOT_UNTAP_NEXT_TURN
 }

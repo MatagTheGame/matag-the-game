@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.aa.mtg.cards.ability.type.AbilityType.TRAMPLE;
+import static com.aa.mtg.cards.ability.Abilities.TRAMPLE;
 
 @Service
 public class ThatTargetsGetAction implements AbilityAction {
@@ -29,7 +29,7 @@ public class ThatTargetsGetAction implements AbilityAction {
 
             if (targetThatIsGettingThingsOptional.isPresent()) {
                 CardInstance targetThatIsGettingThings = targetThatIsGettingThingsOptional.get();
-                targetThatIsGettingThings.getModifiers().getAbilitiesUntilEndOfTurn().add(new Ability(TRAMPLE)); //FIXME use thing to thingsToGet
+                targetThatIsGettingThings.getModifiers().getAbilitiesUntilEndOfTurn().add(TRAMPLE); //FIXME use thing to thingsToGet
                 LOGGER.info("AbilityActionExecuted: {} gets {}", cardInstance.getIdAndName(), thingsToGet);
 
             } else {

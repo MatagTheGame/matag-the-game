@@ -16,6 +16,7 @@ import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.sets.Ixalan.*;
+import static com.aa.mtg.cards.sets.RavnicaAllegiance.CIVIC_STALWART;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CLEAR_THE_MIND;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.PRECISION_BOLT;
 
@@ -59,6 +60,7 @@ public class InitTestService {
         addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
         addCardToCurrentPlayerHand(gameStatus, AIR_ELEMENTAL);
         addCardToCurrentPlayerHand(gameStatus, CLEAR_THE_MIND);
+        addCardToCurrentPlayerHand(gameStatus, CIVIC_STALWART);
 
         addCardToCurrentPlayerGraveyard(gameStatus, PLAINS);
 

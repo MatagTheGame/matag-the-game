@@ -1,7 +1,7 @@
 package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.modifiers.TappedModifiers;
+import com.aa.mtg.cards.modifiers.TappedModifier;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class CardModifiers {
-    private TappedModifiers tapped;
+    private TappedModifier tapped;
     private boolean summoningSickness;
     private boolean attacking;
     private List<Integer> blocking = new ArrayList<>();
@@ -20,7 +20,7 @@ public class CardModifiers {
     private List<Ability> abilitiesUntilEndOfTurn = new ArrayList<>();
     private List<Object> targets = new ArrayList<>();
 
-    public TappedModifiers getTapped() {
+    public TappedModifier getTapped() {
         return tapped;
     }
 
@@ -49,7 +49,7 @@ public class CardModifiers {
     }
 
     public void tap() {
-        this.tapped = TappedModifiers.TAPPED;
+        this.tapped = TappedModifier.TAPPED;
     }
 
     public void untap() {
@@ -84,7 +84,7 @@ public class CardModifiers {
         this.damage = 0;
     }
 
-    public void setTapped(TappedModifiers tapped) {
+    public void setTapped(TappedModifier tapped) {
         this.tapped = tapped;
     }
 

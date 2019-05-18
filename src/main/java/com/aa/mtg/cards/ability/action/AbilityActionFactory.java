@@ -1,36 +1,31 @@
 package com.aa.mtg.cards.ability.action;
 
 import com.aa.mtg.cards.ability.type.AbilityType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AbilityActionFactory {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbilityActionFactory.class);
-
     private final DestroyTargetAction destroyTargetAction;
     private final DealXDamageToTargetAction dealXDamageToTargetAction;
     private final DrawXCardsAction drawXCardsAction;
     private final ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction;
     private final ThatTargetsGetAction thatTargetsGetAction;
+    private final CreaturesYouControlGetPlusXXUntilEndOfTurn creaturesYouControlGetPlusXXUntilEndOfTurn;
 
     @Autowired
     public AbilityActionFactory(DestroyTargetAction destroyTargetAction, DealXDamageToTargetAction dealXDamageToTargetAction, DrawXCardsAction drawXCardsAction,
-                                ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction, ThatTargetsGetAction thatTargetsGetAction) {
+                                ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction, ThatTargetsGetAction thatTargetsGetAction,
+                                CreaturesYouControlGetPlusXXUntilEndOfTurn creaturesYouControlGetPlusXXUntilEndOfTurn) {
         this.destroyTargetAction = destroyTargetAction;
         this.dealXDamageToTargetAction = dealXDamageToTargetAction;
         this.drawXCardsAction = drawXCardsAction;
         this.shuffleTargetGraveyardIntoLibraryAction = shuffleTargetGraveyardIntoLibraryAction;
         this.thatTargetsGetAction = thatTargetsGetAction;
+        this.creaturesYouControlGetPlusXXUntilEndOfTurn = creaturesYouControlGetPlusXXUntilEndOfTurn;
     }
 
     public AbilityAction getAbilityAction(AbilityType abilityType) {
-        if (abilityType.isStatic()) {
-            return null;
-        }
-
         switch (abilityType) {
             case DESTROY_TARGET:
                 return destroyTargetAction;
@@ -42,8 +37,9 @@ public class AbilityActionFactory {
                 return shuffleTargetGraveyardIntoLibraryAction;
             case THAT_TARGETS_GET_X:
                 return thatTargetsGetAction;
+            case CREATURES_YOU_CONTROL_GET_PLUS_X_X_UNTIL_END_OF_TURN:
+                return creaturesYouControlGetPlusXXUntilEndOfTurn;
             default:
-                LOGGER.error("Ability action {} not found. Not performing anything.", abilityType);
                 return null;
         }
     }
