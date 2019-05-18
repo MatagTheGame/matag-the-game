@@ -191,4 +191,8 @@ export default class CardUtils {
   static getToughness(cardInstance) {
     return cardInstance.toughness
   }
+
+  static getDamage(cardInstance) {
+    return cardInstance.modifiers.damage
+  }
 }

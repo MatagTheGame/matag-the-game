@@ -12,6 +12,13 @@ export class Modifiers extends PureComponent {
     }
   }
 
+  damage() {
+    const damage = CardUtils.getDamage(this.props.cardInstance)
+    if (damage) {
+      return <div className='damage'>{damage}</div>
+    }
+  }
+
   powerToughness() {
     if (CardUtils.isOfType(this.props.cardInstance, 'CREATURE')) {
       return <div className='power-toughness'>
@@ -25,6 +32,7 @@ export class Modifiers extends PureComponent {
   render() {
     return <Fragment>
       {this.summoningSickness()}
+      {this.damage()}
       {this.powerToughness()}
     </Fragment>
   }

@@ -47,6 +47,17 @@ body {
   font-size: xx-large;
 }
 
+.damage {
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+  background-color: yellow;
+  color: darkred;
+  border: 1px solid black;
+  padding: 1px 4px;
+  font-size: xx-large;
+}
+
 .frontend-blocking {
   margin-bottom: 100px;
 }
