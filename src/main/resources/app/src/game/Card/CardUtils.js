@@ -185,10 +185,12 @@ export default class CardUtils {
   }
 
   static getPower(cardInstance) {
+    // already contains the modifier extraPowerAndToughnessUntilEndOfTurn
     return cardInstance.power
   }
 
   static getToughness(cardInstance) {
+    // already contains the modifier extraPowerAndToughnessUntilEndOfTurn
     return cardInstance.toughness
   }
 

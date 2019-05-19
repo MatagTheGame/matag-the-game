@@ -6,6 +6,7 @@ import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.aa.mtg.cards.ability.trigger.Trigger.WHEN_IT_ENTERS_THE_BATTLEFIELD;
@@ -17,6 +18,7 @@ public class EnterCardIntoBattlefieldService {
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
 
+    @Autowired
     public EnterCardIntoBattlefieldService(GameStatusUpdaterService gameStatusUpdaterService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
     }

@@ -7,6 +7,7 @@ import com.aa.mtg.game.turn.action.DeclareAttackerService;
 import com.aa.mtg.game.turn.action.DeclareBlockerService;
 import com.aa.mtg.game.turn.action.PlayLandService;
 import com.aa.mtg.game.turn.action.ResolveService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class TurnService {
     private final DeclareAttackerService declareAttackerService;
     private final DeclareBlockerService declareBlockerService;
 
+    @Autowired
     public TurnService(ContinueTurnService continueTurnService, PlayLandService playLandService, CastService castService, ResolveService resolveService, DeclareAttackerService declareAttackerService, DeclareBlockerService declareBlockerService) {
         this.continueTurnService = continueTurnService;
         this.playLandService = playLandService;

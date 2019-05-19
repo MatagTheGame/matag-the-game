@@ -133,11 +133,11 @@ public class CardInstance {
     }
 
     public int getPower() {
-        return card.getPower();
+        return card.getPower() + modifiers.getExtraPowerToughnessUntilEndOfTurn().getPower();
     }
 
     public int getToughness() {
-        return card.getToughness();
+        return card.getToughness() + modifiers.getExtraPowerToughnessUntilEndOfTurn().getToughness();
     }
 
     public void clearModifiers() {
