@@ -1,4 +1,4 @@
-package com.aa.mtg.cards.utils;
+package integration.cards.utils;
 
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import org.junit.Test;

@@ -34,5 +34,7 @@
     "webpack": "^4.29.3",
     "webpack-cli": "^3.2.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^24.8.0"
+  }
 }

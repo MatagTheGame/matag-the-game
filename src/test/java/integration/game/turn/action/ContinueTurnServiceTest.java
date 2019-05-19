@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn.action;
+package integration.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.Cards;
@@ -7,6 +7,7 @@ import com.aa.mtg.game.event.EventSender;
 import com.aa.mtg.game.player.LifeService;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.Turn;
+import com.aa.mtg.game.turn.action.ContinueTurnService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -27,7 +28,7 @@ import static com.aa.mtg.game.turn.phases.EndTurnPhase.ET;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 import static com.aa.mtg.game.turn.phases.UntapPhase.UT;
 import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
-import static com.aa.mtg.utils.TestUtils.testGameStatus;
+import static integration.utils.TestUtils.testGameStatus;
 import static java.util.Arrays.asList;
 
 @RunWith(SpringRunner.class)

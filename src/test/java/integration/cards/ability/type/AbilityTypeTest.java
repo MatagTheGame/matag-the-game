@@ -1,5 +1,6 @@
-package com.aa.mtg.cards.ability.type;
+package integration.cards.ability.type;
 
+import com.aa.mtg.cards.ability.type.AbilityType;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 

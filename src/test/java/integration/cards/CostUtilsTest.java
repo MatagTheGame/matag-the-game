@@ -1,5 +1,7 @@
-package com.aa.mtg.cards;
+package integration.cards;
 
+import com.aa.mtg.cards.Card;
+import com.aa.mtg.cards.CostUtils;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.sets.RavnicaAllegiance;
 import org.junit.Test;

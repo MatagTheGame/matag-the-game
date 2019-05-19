@@ -1,23 +1,16 @@
-package com.aa.mtg.utils;
+package integration.utils;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TestUtils {
-
-  public static SimpMessageHeaderAccessor sessionHeader(String sessionId) {
-    SimpMessageHeaderAccessor headerAccessor = SimpMessageHeaderAccessor.create();
-    headerAccessor.setSessionId(sessionId);
-    return headerAccessor;
-  }
 
   public static Library testLibrary(String playerName) {
     List<CardInstance> libraryCards = IntStream.rangeClosed(1, 60)

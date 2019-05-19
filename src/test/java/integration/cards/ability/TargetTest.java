@@ -1,4 +1,4 @@
-package com.aa.mtg.cards.ability;
+package integration.cards.ability;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.target.Target;
@@ -18,7 +18,7 @@ import static com.aa.mtg.cards.ability.target.TargetSelectionConstraint.LESS_OR_
 import static com.aa.mtg.cards.ability.target.TargetType.PERMANENT;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
-import static com.aa.mtg.utils.TestUtils.testGameStatus;
+import static integration.utils.TestUtils.testGameStatus;
 import static java.util.Collections.singletonList;
 
 public class TargetTest {

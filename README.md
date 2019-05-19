@@ -11,6 +11,23 @@ The application is written using:
  * Javascript (React + Redux)
 
 
+### Tests info
+
+There are two types of tests **application** and **integration**.
+
+ * **integration** tests are smaller tests that test small bits of Java code
+ * **application** tests are bigger tests that test entire features end to end
+
+#### Run application tests
+
+Application tests span the entire SpringBootApplication and open browser to hit the server.
+
+They run against HtmlUnit on Travis but can be run against ChromeDriver locally.
+
+To run them against ChromeDriver change the default JUnit IntelliJ configuration adding the following in the VM arguments:
+
+    -Dwebdriver.chrome.driver=/your/chromedriver/installation/folder 
+
 
 ### Requisites
 
@@ -42,7 +59,6 @@ Run tests:
     
     yarn test
     mvn test
-
 
 ## Deployment
 
