@@ -6,8 +6,8 @@ import PropTypes from 'prop-types'
 
 class Stack extends PureComponent {
 
-  renderCards() {
-    return this.props.stack.map((cardInstance) =>
+  renderStack() {
+    return this.props.stack.items.map((cardInstance) =>
       <span key={cardInstance.id}>
         <Card cardInstance={cardInstance} area='stack' />
       </span>
@@ -17,7 +17,7 @@ class Stack extends PureComponent {
   render() {
     return (
       <div id='stack'>
-        {this.renderCards()}
+        {this.renderStack()}
       </div>
     )
   }
@@ -25,12 +25,12 @@ class Stack extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    stack: get(state, 'stack', [])
+    stack: get(state, 'stack', {items: []})
   }
 }
 
 Stack.propTypes = {
-  stack: PropTypes.array.isRequired
+  stack: PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps)(Stack)

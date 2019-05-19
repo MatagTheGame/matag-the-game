@@ -77,7 +77,7 @@ export default class PlayerUtils {
       if (Phase.isMainPhase(state.turn.currentPhase)) {
         state.statusMessage = PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE
         return true
-      } else if (state.turn.triggeredAction) {
+      } else if (state.turn.triggeredNonStackAction) {
         state.statusMessage = "Chose a card to discard."
         return true
       } else if (state.turn.currentPhase === 'DA' && PlayerUtils.isPlayerAbleToAttack(state)) {

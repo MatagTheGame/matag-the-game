@@ -279,7 +279,7 @@ public class ContinueTurnServiceTest {
         expectedTurn.setCurrentTurnPlayer("player-name");
         expectedTurn.setCurrentPhase(ET);
         expectedTurn.setCurrentPhaseActivePlayer("player-name");
-        expectedTurn.setTriggeredAction("DISCARD_A_CARD");
+        expectedTurn.setTriggeredNonStackAction("DISCARD_A_CARD");
         BDDMockito.verify(eventSender).sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                 new Event("UPDATE_TURN", expectedTurn));

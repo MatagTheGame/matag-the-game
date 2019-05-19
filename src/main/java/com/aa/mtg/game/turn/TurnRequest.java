@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class TurnRequest {
     private String action;
-    private String triggeredAction;
+    private String triggeredNonStackAction;
     private List<Integer> tappingLandIds;
     private List<Integer> cardIds;
     private Map<Integer, List<Object>> targetsIdsForCardIds;
@@ -18,12 +18,12 @@ public class TurnRequest {
         this.action = action;
     }
 
-    public String getTriggeredAction() {
-        return triggeredAction;
+    public String getTriggeredNonStackAction() {
+        return triggeredNonStackAction;
     }
 
-    public void setTriggeredAction(String triggeredAction) {
-        this.triggeredAction = triggeredAction;
+    public void setTriggeredNonStackAction(String triggeredNonStackAction) {
+        this.triggeredNonStackAction = triggeredNonStackAction;
     }
 
     public List<Integer> getCardIds() {
@@ -54,7 +54,7 @@ public class TurnRequest {
     public String toString() {
         return "TurnRequest{" +
                 "action='" + action + '\'' +
-                ", triggeredAction='" + triggeredAction + '\'' +
+                ", triggeredNonStackAction='" + triggeredNonStackAction + '\'' +
                 ", tappingLandIds=" + tappingLandIds +
                 ", cardIds=" + cardIds +
                 ", targetsIdsForCardIds=" + targetsIdsForCardIds +

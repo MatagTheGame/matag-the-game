@@ -12,7 +12,7 @@ public class EndTurnPhase implements Phase {
     @Override
     public void apply(GameStatus gameStatus) {
         if (gameStatus.getCurrentPlayer().getHand().size() > 7) {
-            gameStatus.getTurn().setTriggeredAction("DISCARD_A_CARD");
+            gameStatus.getTurn().setTriggeredNonStackAction("DISCARD_A_CARD");
 
         } else {
             if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {

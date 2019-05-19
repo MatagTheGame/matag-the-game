@@ -23,8 +23,8 @@ export default class ClientEventsReducer {
         if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
           const cardId = action.cardId
           const cardInstance = CardSearch.cards(newState.player.hand).withId(cardId)
-          if (newState.turn.triggeredAction === 'DISCARD_A_CARD') {
-            stompClient.sendEvent('turn', {action: 'RESOLVE', triggeredAction: 'DISCARD_A_CARD', cardIds: [cardId]})
+          if (newState.turn.triggeredNonStackAction === 'DISCARD_A_CARD') {
+            stompClient.sendEvent('turn', {action: 'RESOLVE', triggeredNonStackAction: 'DISCARD_A_CARD', cardIds: [cardId]})
           }
 
           if (Phase.isMainPhase(newState.turn.currentPhase)) {

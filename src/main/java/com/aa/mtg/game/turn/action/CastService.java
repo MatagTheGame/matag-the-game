@@ -48,7 +48,7 @@ public class CastService {
             cardToCast.setController(currentPlayer.getName());
             gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
 
-            gameStatus.getStack().addLast(cardToCast);
+            gameStatus.getStack().add(cardToCast);
             gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());

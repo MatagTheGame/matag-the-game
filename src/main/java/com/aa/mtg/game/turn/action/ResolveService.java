@@ -36,47 +36,62 @@ public class ResolveService {
         this.enterCardIntoBattlefieldService = enterCardIntoBattlefieldService;
     }
 
-    public void resolve(GameStatus gameStatus, String triggeredAction, List<Integer> cardIds) {
+    public void resolve(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> cardIds) {
         if (!gameStatus.getStack().isEmpty()) {
-            CardInstance cardToResolve = gameStatus.getStack().removeLast();
-            gameStatusUpdaterService.sendUpdateStack(gameStatus);
+            Object stackItemToResolve = gameStatus.getStack().remove();
 
-            performAbilityAction(gameStatus, cardToResolve);
-
-            if (cardToResolve.isPermanent()) {
-                if (cardToResolve.isOfType(CREATURE) && !cardToResolve.hasAbility(HASTE)) {
-                    cardToResolve.getModifiers().setSummoningSickness(true);
-                }
-
-                enterCardIntoBattlefieldService.enter(gameStatus, cardToResolve);
+            if (stackItemToResolve instanceof CardInstance) {
+                CardInstance cardToResolve = (CardInstance) stackItemToResolve;
+                resolveCardInstanceFromStack(gameStatus, cardToResolve);
 
             } else {
-                gameStatus.putIntoGraveyard(cardToResolve);
+
             }
 
-            gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
-            gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
-
-            gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-            gameStatusUpdaterService.sendUpdateTurn(gameStatus);
-
-        } else if (gameStatus.getTurn().getTriggeredAction().equals(triggeredAction)) {
-            switch (triggeredAction) {
-                case "DISCARD_A_CARD": {
-                    CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
-                    gameStatus.putIntoGraveyard(cardInstance);
-                    gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
-                    gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
-                    gameStatus.getTurn().setTriggeredAction(null);
-                    break;
-                }
-            }
-            continueTurnService.continueTurn(gameStatus);
+        } else if (gameStatus.getTurn().getTriggeredNonStackAction().equals(triggeredNonStackAction)) {
+            resolveTriggeredNonStackAction(gameStatus, triggeredNonStackAction, cardIds);
 
         } else {
-            String message = "Cannot resolve triggeredAction " + triggeredAction + " as current triggeredAction is " + gameStatus.getTurn().getTriggeredAction();
+            String message = "Cannot resolve triggeredNonStackAction " + triggeredNonStackAction + " as current triggeredNonStackAction is " + gameStatus.getTurn().getTriggeredNonStackAction();
             throw new MessageException(message);
         }
+    }
+
+    private void resolveTriggeredNonStackAction(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> cardIds) {
+        switch (triggeredNonStackAction) {
+            case "DISCARD_A_CARD": {
+                CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
+                gameStatus.putIntoGraveyard(cardInstance);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
+                gameStatus.getTurn().setTriggeredNonStackAction(null);
+                break;
+            }
+        }
+        continueTurnService.continueTurn(gameStatus);
+    }
+
+    private void resolveCardInstanceFromStack(GameStatus gameStatus, CardInstance cardToResolve) {
+        gameStatusUpdaterService.sendUpdateStack(gameStatus);
+
+        performAbilityAction(gameStatus, cardToResolve);
+
+        if (cardToResolve.isPermanent()) {
+            if (cardToResolve.isOfType(CREATURE) && !cardToResolve.hasAbility(HASTE)) {
+                cardToResolve.getModifiers().setSummoningSickness(true);
+            }
+
+            enterCardIntoBattlefieldService.enter(gameStatus, cardToResolve);
+
+        } else {
+            gameStatus.putIntoGraveyard(cardToResolve);
+        }
+
+        gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
+        gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
+
+        gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }
 
     private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve) {

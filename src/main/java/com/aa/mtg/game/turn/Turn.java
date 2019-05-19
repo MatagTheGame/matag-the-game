@@ -15,7 +15,7 @@ public class Turn {
     private String currentPhase;
     private String currentPhaseActivePlayer;
     private List<CardInstance> cardsPlayedWithinTurn = new ArrayList<>();
-    private String triggeredAction;
+    private String triggeredNonStackAction;
     private String winner;
 
     public void init(String playerName) {
@@ -69,12 +69,12 @@ public class Turn {
         cardsPlayedWithinTurn.add(cardInstance);
     }
 
-    public String getTriggeredAction() {
-        return triggeredAction;
+    public String getTriggeredNonStackAction() {
+        return triggeredNonStackAction;
     }
 
-    public void setTriggeredAction(String triggeredAction) {
-        this.triggeredAction = triggeredAction;
+    public void setTriggeredNonStackAction(String triggeredNonStackAction) {
+        this.triggeredNonStackAction = triggeredNonStackAction;
     }
 
     public void setWinner(String winner) {

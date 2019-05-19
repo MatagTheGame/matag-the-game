@@ -2,9 +2,9 @@ package com.aa.mtg.game.status;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
+import com.aa.mtg.game.stack.SpellStack;
 import com.aa.mtg.game.turn.Turn;
 
-import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameStatus {
@@ -14,11 +14,12 @@ public class GameStatus {
     private Player player1;
     private Player player2;
     private Turn turn;
-    private LinkedList<CardInstance> stack = new LinkedList<>();
+    private SpellStack stack;
 
     public GameStatus(String gameId) {
         this.gameId = gameId;
         this.turn = new Turn();
+        this.stack = new SpellStack();
     }
 
     public String getGameId() {
@@ -37,7 +38,7 @@ public class GameStatus {
         return turn;
     }
 
-    public LinkedList<CardInstance> getStack() {
+    public SpellStack getStack() {
         return stack;
     }
 

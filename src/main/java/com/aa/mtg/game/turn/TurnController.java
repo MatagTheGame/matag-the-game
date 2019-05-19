@@ -47,7 +47,7 @@ public class TurnController {
         } else if ("CAST".equals(request.getAction())) {
             turnService.cast(gameStatus, request.getCardIds().get(0), request.getTappingLandIds(), request.getTargetsIdsForCardIds());
         } else if ("RESOLVE".equals(request.getAction())) {
-            turnService.resolve(gameStatus, request.getTriggeredAction(), request.getCardIds());
+            turnService.resolve(gameStatus, request.getTriggeredNonStackAction(), request.getCardIds());
         } else if ("DECLARE_ATTACKERS".equals(request.getAction())) {
             turnService.declareAttackers(gameStatus, request.getCardIds());
         } else if ("DECLARE_BLOCKERS".equals(request.getAction())) {
