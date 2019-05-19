@@ -48,6 +48,7 @@ public class DeckRetrieverService {
             cards.add(new CardInstance(gameStatus.nextCardId(), CATACOMB_CROCODILE, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), NOXIOUS_GROODION, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), PROWLING_CARACAL, playerName));
+            cards.add(new CardInstance(gameStatus.nextCardId(), CIVIC_STALWART, playerName));
         }
 
         return new Library(cards);
