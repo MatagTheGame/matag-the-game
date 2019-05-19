@@ -3,6 +3,8 @@ package com.aa.mtg.game.init;
 import com.aa.mtg.game.deck.DeckRetrieverService;
 import com.aa.mtg.game.event.Event;
 import com.aa.mtg.game.event.EventSender;
+import com.aa.mtg.game.init.test.InitTestService;
+import com.aa.mtg.game.init.test.ProdInitTestService;
 import com.aa.mtg.game.message.MessageEvent;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
@@ -30,7 +32,7 @@ public class InitController {
     private final DeckRetrieverService deckRetrieverService;
 
     @Autowired
-    public InitController(EventSender eventSender, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
+    public InitController(EventSender eventSender, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) ProdInitTestService initTestService) {
         this.eventSender = eventSender;
         this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.gameStatusRepository = gameStatusRepository;

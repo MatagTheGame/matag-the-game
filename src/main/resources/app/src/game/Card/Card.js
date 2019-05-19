@@ -79,7 +79,8 @@ class Card extends PureComponent {
              className={this.getClasses()}
              style={{backgroundImage: this.imageUrl(), ...this.props.style}}
              onClick={this.props.onclick}
-             onWheel={this.onWheel}>
+             onWheel={this.onWheel}
+             aria-label={this.props.cardInstance.card.name}>
           { this.props.area === 'battlefield' ? <Modifiers cardInstance={this.props.cardInstance} /> : null }
         </div>
       )

@@ -1,5 +1,7 @@
-package application;
+package application.browser;
 
+import com.aa.mtg.cards.Card;
+import com.aa.mtg.game.player.PlayerType;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
@@ -10,6 +12,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class MtgBrowser {
     private final WebDriver webDriver;
@@ -23,15 +27,12 @@ public class MtgBrowser {
         webDriver.close();
     }
 
-    public void displaysMessage(String message) {
-        wait(driver -> {
-            WebElement webElement = webDriver.findElement(By.id("message"));
-            return webElement != null && webElement.getText().equals(message);
-        });
+    public MessageHelper getMessageHelper() {
+        return new MessageHelper(this);
     }
 
-    public void hasNoMessage() {
-        wait(driver -> hasNoElement(By.id("message")));
+    public HandHelper getHandHelper(PlayerType playerType) {
+        return new HandHelper(this, playerType);
     }
 
     private WebDriver getWebDriver() {
@@ -43,16 +44,20 @@ public class MtgBrowser {
         }
     }
 
-    private Boolean hasNoElement(By element) {
+    Boolean hasNoElement(By by) {
         try {
-            webDriver.findElement(element);
+            findElement(by);
             return false;
         } catch (NotFoundException e) {
             return true;
         }
     }
 
-    private void wait(ExpectedCondition<Boolean> condition) {
+    WebElement findElement(By element) {
+        return webDriver.findElement(element);
+    }
+
+    void wait(ExpectedCondition<Boolean> condition) {
         new WebDriverWait(webDriver, 5).until(condition);
     }
 }
