@@ -42,7 +42,7 @@ public class Ability {
         this.trigger = trigger;
     }
 
-    public AbilityType getMainAbilityType() {
+    public AbilityType getFirstAbilityType() {
         return abilityTypes.get(0);
     }
 

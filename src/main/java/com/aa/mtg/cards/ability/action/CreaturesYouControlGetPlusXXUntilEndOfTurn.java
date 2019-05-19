@@ -6,6 +6,7 @@ import com.aa.mtg.cards.search.CardSearch;
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,12 @@ import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 @Service
 public class CreaturesYouControlGetPlusXXUntilEndOfTurn implements AbilityAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(CreaturesYouControlGetPlusXXUntilEndOfTurn.class);
+
+    private final GameStatusUpdaterService gameStatusUpdaterService;
+
+    public CreaturesYouControlGetPlusXXUntilEndOfTurn(GameStatusUpdaterService gameStatusUpdaterService) {
+        this.gameStatusUpdaterService = gameStatusUpdaterService;
+    }
 
     @Override
     public void perform(Ability ability, CardInstance cardInstance, GameStatus gameStatus) {
@@ -33,6 +40,7 @@ public class CreaturesYouControlGetPlusXXUntilEndOfTurn implements AbilityAction
             card.getModifiers().setExtraPowerToughnessUntilEndOfTurn(originalPowerToughness.combine(powerToughness));
         }
 
+        gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
         LOGGER.info("creatures you ({}) control get: {}", controllerString, powerToughness);
     }
 }

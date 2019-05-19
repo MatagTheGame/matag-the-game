@@ -5,8 +5,7 @@ import com.aa.mtg.cards.CardInstance;
 import java.util.LinkedList;
 
 public class SpellStack {
-
-    private LinkedList<Object> items = new LinkedList<>();
+    private LinkedList<CardInstance> items = new LinkedList<>();
 
     public boolean isEmpty() {
         return items.isEmpty();
@@ -16,15 +15,19 @@ public class SpellStack {
         items.addLast(cardInstance);
     }
 
-    public Object remove() {
+    public CardInstance peek() {
+        return items.peekLast();
+    }
+
+    public CardInstance remove() {
         return items.removeLast();
     }
 
-    public LinkedList<Object> getItems() {
+    public LinkedList<CardInstance> getItems() {
         return items;
     }
 
-    public void setItems(LinkedList<Object> items) {
+    public void setItems(LinkedList<CardInstance> items) {
         this.items = items;
     }
 }

@@ -24,6 +24,7 @@ public class CardInstance {
     private final String owner;
     private String controller;
     private CardModifiers modifiers;
+    private List<Ability> triggeredAbilities = new ArrayList<>();
 
     public CardInstance(int id, Card card, String owner) {
         this(id, card, owner, null);
@@ -63,6 +64,10 @@ public class CardInstance {
 
     public CardModifiers getModifiers() {
         return modifiers;
+    }
+
+    public List<Ability> getTriggeredAbilities() {
+        return triggeredAbilities;
     }
 
     public static List<CardInstance> mask(List<CardInstance> cardInstances) {

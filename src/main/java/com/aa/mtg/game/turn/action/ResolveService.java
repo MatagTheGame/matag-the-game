@@ -38,14 +38,23 @@ public class ResolveService {
 
     public void resolve(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> cardIds) {
         if (!gameStatus.getStack().isEmpty()) {
-            Object stackItemToResolve = gameStatus.getStack().remove();
+            CardInstance stackItemToResolve = gameStatus.getStack().peek();
 
-            if (stackItemToResolve instanceof CardInstance) {
-                CardInstance cardToResolve = (CardInstance) stackItemToResolve;
-                resolveCardInstanceFromStack(gameStatus, cardToResolve);
+            if (stackItemToResolve.getTriggeredAbilities().isEmpty()) {
+                removeTopElementFromStack(gameStatus);
+                resolveCardInstanceFromStack(gameStatus, stackItemToResolve);
 
             } else {
+                if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
+                    gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
+                    gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
+                } else {
+                    removeTopElementFromStack(gameStatus);
+                    resolveTriggeredAbility(gameStatus, stackItemToResolve);
+                    gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+                    gameStatusUpdaterService.sendUpdateTurn(gameStatus);
+                }
             }
 
         } else if (gameStatus.getTurn().getTriggeredNonStackAction().equals(triggeredNonStackAction)) {
@@ -55,20 +64,6 @@ public class ResolveService {
             String message = "Cannot resolve triggeredNonStackAction " + triggeredNonStackAction + " as current triggeredNonStackAction is " + gameStatus.getTurn().getTriggeredNonStackAction();
             throw new MessageException(message);
         }
-    }
-
-    private void resolveTriggeredNonStackAction(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> cardIds) {
-        switch (triggeredNonStackAction) {
-            case "DISCARD_A_CARD": {
-                CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
-                gameStatus.putIntoGraveyard(cardInstance);
-                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
-                gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
-                gameStatus.getTurn().setTriggeredNonStackAction(null);
-                break;
-            }
-        }
-        continueTurnService.continueTurn(gameStatus);
     }
 
     private void resolveCardInstanceFromStack(GameStatus gameStatus, CardInstance cardToResolve) {
@@ -94,16 +89,35 @@ public class ResolveService {
         gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }
 
+    private void resolveTriggeredAbility(GameStatus gameStatus, CardInstance stackItemToResolve) {
+        performAbilityAction(gameStatus, stackItemToResolve);
+        stackItemToResolve.getTriggeredAbilities().clear();
+    }
+
+    private void resolveTriggeredNonStackAction(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> cardIds) {
+        switch (triggeredNonStackAction) {
+            case "DISCARD_A_CARD": {
+                CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
+                gameStatus.putIntoGraveyard(cardInstance);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
+                gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
+                gameStatus.getTurn().setTriggeredNonStackAction(null);
+                break;
+            }
+        }
+        continueTurnService.continueTurn(gameStatus);
+    }
+
     private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve) {
-        for (Ability ability : cardToResolve.getAbilities()) {
-            AbilityAction mainAbilityAction = abilityActionFactory.getAbilityAction(ability.getMainAbilityType());
-            if (mainAbilityAction != null) {
+        for (Ability ability : cardToResolve.getTriggeredAbilities()) {
+            AbilityAction firstAbilityAction = abilityActionFactory.getAbilityAction(ability.getFirstAbilityType());
+            if (firstAbilityAction != null) {
                 try {
                     for (int i = 0; i < ability.getTargets().size(); i++) {
                         ability.getTargets().get(i).check(gameStatus, cardToResolve.getModifiers().getTargets().get(i));
                     }
 
-                    mainAbilityAction.perform(ability, cardToResolve, gameStatus);
+                    firstAbilityAction.perform(ability, cardToResolve, gameStatus);
 
                     for (int i = 1; i < ability.getAbilityTypes().size(); i++) {
                         AbilityAction furtherAbilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityTypes().get(i));
@@ -117,5 +131,10 @@ public class ResolveService {
         }
 
         cardToResolve.getModifiers().setTargets(new ArrayList<>());
+    }
+
+    private void removeTopElementFromStack(GameStatus gameStatus) {
+        gameStatus.getStack().remove();
+        gameStatusUpdaterService.sendUpdateStack(gameStatus);
     }
 }

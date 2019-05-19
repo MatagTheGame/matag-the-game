@@ -25,18 +25,14 @@ public class EnterCardIntoBattlefieldService {
         String controller = cardInstance.getController();
         gameStatus.getPlayerByName(controller).getBattlefield().addCard(cardInstance);
 
-
-        boolean updateStack = false;
         for (Ability ability : cardInstance.getAbilities()) {
             if (ability.hasTrigger(WHEN_IT_ENTERS_THE_BATTLEFIELD)) {
+                cardInstance.getTriggeredAbilities().add(ability);
                 LOGGER.info("Event {} triggered with ability {} for {}.", WHEN_IT_ENTERS_THE_BATTLEFIELD, ability.getAbilityTypes(), cardInstance.getModifiers());
-                // FIXME trigger the event on the stack
-                updateStack = true;
+                gameStatus.getStack().add(cardInstance);
+                gameStatusUpdaterService.sendUpdateStack(gameStatus);
+                return;
             }
-        }
-
-        if (updateStack) {
-            gameStatusUpdaterService.sendUpdateStack(gameStatus);
         }
     }
 
