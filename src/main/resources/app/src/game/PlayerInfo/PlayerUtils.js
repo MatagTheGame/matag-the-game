@@ -5,6 +5,7 @@ import stompClient from '../WebSocket'
 import CostUtils from '../Card/CostUtils'
 
 const PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE = "Play any spell or abilities or continue (SPACE)."
+const PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE = "Play any instant or abilities or resolve the top spell in the stack (SPACE)."
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
@@ -68,14 +69,18 @@ export default class PlayerUtils {
         return true
       } else {
         if (!StackUtils.isStackEmpty(state)) {
-          state.statusMessage = "Play any instant or abilities or resolve the top spell in the stack (SPACE)."
+          state.statusMessage = PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE
           return true
         }
       }
 
     } else {
       if (Phase.isMainPhase(state.turn.currentPhase)) {
-        state.statusMessage = PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE
+        if (StackUtils.isStackEmpty(state)) {
+          state.statusMessage = PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE
+        } else {
+          state.statusMessage = PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE
+        }
         return true
       } else if (state.turn.triggeredNonStackAction) {
         state.statusMessage = "Chose a card to discard."

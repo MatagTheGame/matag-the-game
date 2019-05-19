@@ -16,7 +16,7 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
 public class Abilities {
-    public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(CREATURES_YOU_CONTROL_GET_PLUS_X_X_UNTIL_END_OF_TURN, emptyList(), singletonList("+1/+1"), WHEN_IT_ENTERS_THE_BATTLEFIELD);
+    public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(CREATURES_YOU_CONTROL_GET_PLUS_X_UNTIL_END_OF_TURN, emptyList(), singletonList("+1/+1"), WHEN_IT_ENTERS_THE_BATTLEFIELD);
     public static Ability DEAL_1_DAMAGE_TO_CREATURE_YOU_CONTROL_THAT_CREATURE_GAINS_TRAMPLE = new Ability(asList(DEALS_X_DAMAGE_TO_TARGET, THAT_TARGETS_GET_X), singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetControllerType(PLAYER).build()), asList("1", "Trample"));
     public static Ability DEAL_3_DAMAGE_TO_ANY_TARGET = new Ability(DEALS_X_DAMAGE_TO_TARGET, singletonList(Target.builder().targetType(TargetType.ANY).build()), singletonList("3"));
     public static Ability DEATHTOUCH = new Ability(AbilityType.DEATHTOUCH);

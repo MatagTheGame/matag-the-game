@@ -37,7 +37,7 @@ public class AbilityActionFactory {
                 return shuffleTargetGraveyardIntoLibraryAction;
             case THAT_TARGETS_GET_X:
                 return thatTargetsGetAction;
-            case CREATURES_YOU_CONTROL_GET_PLUS_X_X_UNTIL_END_OF_TURN:
+            case CREATURES_YOU_CONTROL_GET_PLUS_X_UNTIL_END_OF_TURN:
                 return creaturesYouControlGetPlusXXUntilEndOfTurn;
             default:
                 return null;

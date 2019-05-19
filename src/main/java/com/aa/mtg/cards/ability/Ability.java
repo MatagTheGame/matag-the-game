@@ -46,6 +46,10 @@ public class Ability {
         return abilityTypes.get(0);
     }
 
+    public String getFirstAbilityTypeText() {
+        return getFirstAbilityType().getText(parameters);
+    }
+
     public List<AbilityType> getAbilityTypes() {
         return abilityTypes;
     }

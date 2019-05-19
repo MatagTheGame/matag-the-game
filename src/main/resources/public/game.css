@@ -66,6 +66,18 @@ body {
   border: lightskyblue 6px solid;
 }
 
+.triggered-ability {
+  width: 360px;
+  height: 250px;
+  margin: 0 0 0 -80px;
+  padding: 5px;
+  font-size: xx-large;
+  background-color: rgba(250, 235, 215, .9);
+  border: 1px solid black;
+  cursor: pointer;
+  z-index: 1;
+}
+
 #modal-container {
   z-index: 10;
   position: absolute;
