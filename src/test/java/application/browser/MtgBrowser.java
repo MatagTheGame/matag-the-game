@@ -1,6 +1,5 @@
 package application.browser;
 
-import com.aa.mtg.cards.Card;
 import com.aa.mtg.game.player.PlayerType;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.apache.commons.lang3.StringUtils;
@@ -12,8 +11,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
 
 public class MtgBrowser {
     private final WebDriver webDriver;
@@ -33,6 +30,18 @@ public class MtgBrowser {
 
     public HandHelper getHandHelper(PlayerType playerType) {
         return new HandHelper(this, playerType);
+    }
+
+    public BattlefieldHelper getBattlefieldHelper(PlayerType playerType) {
+        return new BattlefieldHelper(this, playerType);
+    }
+
+    public GraveyardHelper getGraveyardHelper(PlayerType playerType) {
+        return new GraveyardHelper(this, playerType);
+    }
+
+    public PlayerInfoHelper getPlayerInfoHelper(PlayerType playerType) {
+        return new PlayerInfoHelper(this, playerType);
     }
 
     private WebDriver getWebDriver() {
