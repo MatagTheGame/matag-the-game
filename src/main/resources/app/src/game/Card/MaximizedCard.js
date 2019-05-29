@@ -1,9 +1,9 @@
-import React, {Fragment, PureComponent} from 'react'
+import React, {Fragment, Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-class MaximizedCard extends PureComponent {
+class MaximizedCard extends Component {
   constructor(props) {
     super(props);
     this.onWheel= this.onWheel.bind(this);

@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react'
+import React, {Component} from 'react'
 import {get} from 'lodash'
 import CardUtils from './CardUtils'
 import {bindActionCreators} from 'redux'
@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 import {Modifiers} from './Modifiers'
 import PropTypes from 'prop-types'
 
-class Card extends PureComponent {
+class Card extends Component {
   constructor(props) {
     super(props);
     this.onWheel = this.onWheel.bind(this);

@@ -1,10 +1,10 @@
-import React, {PureComponent} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import Phase from './Phase'
 import PropTypes from 'prop-types'
 
-class TurnPhases extends PureComponent {
+class TurnPhases extends Component {
   isPhaseActiveForPlayer() {
     return this.props.turn.currentPhaseActivePlayer === this.props.currentPlayerName
   }

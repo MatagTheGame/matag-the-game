@@ -1,10 +1,10 @@
-import React, {PureComponent} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 
-class UserAction extends PureComponent {
+class UserAction extends Component {
   constructor(props) {
     super(props);
     this.handleContinueKey = this.handleContinueKey.bind(this);

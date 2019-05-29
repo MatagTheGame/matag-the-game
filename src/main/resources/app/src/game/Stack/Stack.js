@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import Card from '../Card/Card'
@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import StackUtils from './StackUtils'
 import {TriggeredAbility} from './TriggeredAbility'
 
-class Stack extends PureComponent {
+class Stack extends Component {
 
   static renderCastedCard(cardInstance) {
     return (

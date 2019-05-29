@@ -1,10 +1,10 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import Card from '../Card/Card'
 import PropTypes from 'prop-types'
 
-class Graveyard extends PureComponent {
+class Graveyard extends Component {
   getId() {
     return this.props.type + '-graveyard'
   }

@@ -1,11 +1,11 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {get} from 'lodash'
 import Card from '../Card/Card'
 import PropTypes from 'prop-types'
 
-class Hand extends PureComponent {
+class Hand extends Component {
   getId() {
     return this.props.type + '-hand'
   }

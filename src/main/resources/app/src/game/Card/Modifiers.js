@@ -1,7 +1,7 @@
-import React, {Fragment, PureComponent} from 'react'
+import React, {Fragment, Component} from 'react'
 import CardUtils from './CardUtils'
 
-export class Modifiers extends PureComponent {
+export class Modifiers extends Component {
   constructor(props) {
     super(props);
   }

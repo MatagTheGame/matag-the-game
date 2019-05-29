@@ -1,7 +1,7 @@
-import React, {PureComponent, Fragment} from 'react'
+import React, {Component, Fragment} from 'react'
 import PropTypes from 'prop-types'
 
-export class TriggeredAbility extends PureComponent {
+export class TriggeredAbility extends Component {
   constructor(props) {
     super(props);
   }

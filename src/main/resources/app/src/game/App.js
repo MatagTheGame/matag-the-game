@@ -1,4 +1,4 @@
-import React, {Fragment, PureComponent} from 'react'
+import React, {Fragment, Component} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import stompClient from './WebSocket'
@@ -15,7 +15,7 @@ import MaximizedCard from './Card/MaximizedCard'
 import Stack from './Stack/Stack'
 
 
-class App extends PureComponent {
+class App extends Component {
   componentDidMount() {
     stompClient.init(this.props.receive)
   }

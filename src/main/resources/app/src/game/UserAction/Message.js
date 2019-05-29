@@ -1,10 +1,10 @@
-import React, {Fragment, PureComponent} from 'react'
+import React, {Fragment, Component} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 
-class Message extends PureComponent {
+class Message extends Component {
   constructor(props) {
     super(props);
     this.handleEscape = this.handleEscape.bind(this);

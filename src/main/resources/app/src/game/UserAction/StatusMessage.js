@@ -1,8 +1,8 @@
-import React, {PureComponent} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 
-class StatusMessage extends PureComponent {
+class StatusMessage extends Component {
   render() {
     return (
       <div id='status-message'>

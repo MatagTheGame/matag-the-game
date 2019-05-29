@@ -1,11 +1,11 @@
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import {LibraryUiUtils} from './LibraryUiUtils'
 import Card from '../Card/Card'
 import PropTypes from 'prop-types'
 
-class Library extends PureComponent {
+class Library extends Component {
   getId() {
     return this.props.type + '-library'
   }

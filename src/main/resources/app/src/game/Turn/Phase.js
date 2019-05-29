@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react'
+import React, {Component} from 'react'
 
-export default class Phase extends PureComponent {
+export default class Phase extends Component {
 
   static getPhases() {
     return ['UP', 'DR', 'M1', 'BC', 'DA', 'DB', 'FS', 'CD', 'EC', 'M2', 'ET', 'CL']

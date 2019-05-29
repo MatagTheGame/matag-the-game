@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import Card from '../Card/Card'
@@ -8,7 +8,7 @@ import CardUtils from '../Card/CardUtils'
 import PlayerUtils from '../PlayerInfo/PlayerUtils'
 import PropTypes from 'prop-types'
 
-class Battlefield extends PureComponent {
+class Battlefield extends Component {
   getId() {
     return this.props.type + '-battlefield'
   }
