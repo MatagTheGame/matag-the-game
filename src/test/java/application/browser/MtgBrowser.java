@@ -12,6 +12,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class MtgBrowser {
     private final WebDriver webDriver;
 
@@ -64,6 +66,10 @@ public class MtgBrowser {
 
     WebElement findElement(By element) {
         return webDriver.findElement(element);
+    }
+
+    List<WebElement> findElements(By element) {
+        return webDriver.findElements(element);
     }
 
     void wait(ExpectedCondition<Boolean> condition) {

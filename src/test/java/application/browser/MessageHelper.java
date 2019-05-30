@@ -1,6 +1,7 @@
 package application.browser;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,19 +17,20 @@ public class MessageHelper {
 
     public void hasMessage(String message) {
         mtgBrowser.wait(driver -> {
-            WebElement webElement = mtgBrowser.findElement(By.id("message"));
+            try {
+                WebElement webElement = mtgBrowser.findElement(By.id("message"));
 
-            if (webElement == null) {
-                LOGGER.info("Waiting for Message to appear.");
+                if (!webElement.getText().equals(message)) {
+                    LOGGER.info("Waiting for Message to have content: '{}' but is '{}'", message, webElement.getText());
+                    return false;
+                }
+
+                return true;
+
+            } catch (NotFoundException e) {
+                LOGGER.info("Waiting for Message to appear...");
                 return false;
             }
-
-            if (!webElement.getText().equals(message)) {
-                LOGGER.info("Waiting for Message to have content: '{}'", message);
-                return false;
-            }
-
-            return true;
         });
     }
 

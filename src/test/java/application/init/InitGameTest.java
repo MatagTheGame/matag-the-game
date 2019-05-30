@@ -48,10 +48,10 @@ public class InitGameTest {
         player2.getMessageHelper().hasNoMessage();
 
         // Hands are
-        player1.getHandHelper(PLAYER).handContainsExactly(cardNames(ISLAND, LEGIONS_JUDGMENT));
-        player1.getHandHelper(OPPONENT).handContainsExactly(asList("card", "card"));
-        player2.getHandHelper(PLAYER).handContainsExactly(cardNames(FOREST, CHARGING_MONSTROSAUR));
-        player2.getHandHelper(OPPONENT).handContainsExactly(asList("card", "card"));
+        player1.getHandHelper(PLAYER).containsExactly(cardNames(ISLAND, LEGIONS_JUDGMENT));
+        player1.getHandHelper(OPPONENT).containsExactly(asList("card", "card"));
+        player2.getHandHelper(PLAYER).containsExactly(cardNames(FOREST, CHARGING_MONSTROSAUR));
+        player2.getHandHelper(OPPONENT).containsExactly(asList("card", "card"));
 
         // Battlefields are
         player1.getBattlefieldHelper(PLAYER).battlefieldContainsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
@@ -60,10 +60,10 @@ public class InitGameTest {
         player2.getBattlefieldHelper(OPPONENT).battlefieldContainsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
 
         // Graveyards are
-        player1.getGraveyardHelper(PLAYER).graveyardContainsExactly(cardNames(PLAINS));
-        player1.getGraveyardHelper(OPPONENT).graveyardContainsExactly(cardNames(MOUNTAIN));
-        player2.getGraveyardHelper(PLAYER).graveyardContainsExactly(cardNames(MOUNTAIN));
-        player2.getGraveyardHelper(OPPONENT).graveyardContainsExactly(cardNames(PLAINS));
+        player1.getGraveyardHelper(PLAYER).containsExactly(cardNames(PLAINS));
+        player1.getGraveyardHelper(OPPONENT).containsExactly(cardNames(MOUNTAIN));
+        player2.getGraveyardHelper(PLAYER).containsExactly(cardNames(MOUNTAIN));
+        player2.getGraveyardHelper(OPPONENT).containsExactly(cardNames(PLAINS));
 
         // PlayerInfos are
         player1.getPlayerInfoHelper(PLAYER).toHaveName("Pippo");
