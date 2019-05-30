@@ -9,7 +9,7 @@ import java.util.Map;
 @Service
 public class GameStatusRepository {
 
-    private static Map<String, GameStatus> games = new HashMap<>();
+    private Map<String, GameStatus> games = new HashMap<>();
 
     public boolean contains(String gameId) {
         return games.containsKey(gameId);

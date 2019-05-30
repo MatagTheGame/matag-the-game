@@ -4,7 +4,6 @@ import com.aa.mtg.game.player.PlayerType;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -52,15 +51,6 @@ public class MtgBrowser {
             return new HtmlUnitDriver(BrowserVersion.CHROME, true);
         } else {
             return new ChromeDriver();
-        }
-    }
-
-    Boolean hasNoElement(By by) {
-        try {
-            findElement(by);
-            return false;
-        } catch (NotFoundException e) {
-            return true;
         }
     }
 

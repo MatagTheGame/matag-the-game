@@ -1,6 +1,6 @@
 package application.init;
 
-import application.browser.MtgBrowser;
+import application.AbstractApplicatonTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
@@ -8,7 +8,6 @@ import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -30,23 +29,9 @@ import static java.util.Arrays.asList;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({InitGameTest.InitGameTestConfiguration.class})
-public class InitGameTest {
-    @LocalServerPort
-    private int port;
-
+public class InitGameTest extends AbstractApplicatonTest {
     @Test
     public void display() {
-        // When player1 joins the game is waiting for opponent
-        MtgBrowser player1 = new MtgBrowser(port);
-        player1.getMessageHelper().hasMessage("Waiting for opponent...");
-
-        // When player2 joins the game both players see the table with the cards
-        MtgBrowser player2 = new MtgBrowser(port);
-
-        // Message disappears
-        player1.getMessageHelper().hasNoMessage();
-        player2.getMessageHelper().hasNoMessage();
-
         // Hands are
         player1.getHandHelper(PLAYER).containsExactly(cardNames(ISLAND, LEGIONS_JUDGMENT));
         player1.getHandHelper(OPPONENT).containsExactly(asList("card", "card"));
@@ -54,10 +39,10 @@ public class InitGameTest {
         player2.getHandHelper(OPPONENT).containsExactly(asList("card", "card"));
 
         // Battlefields are
-        player1.getBattlefieldHelper(PLAYER).battlefieldContainsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
-        player1.getBattlefieldHelper(OPPONENT).battlefieldContainsExactly(cardNames(MOUNTAIN, GRAZING_WHIPTAIL));
-        player2.getBattlefieldHelper(PLAYER).battlefieldContainsExactly(cardNames(MOUNTAIN, GRAZING_WHIPTAIL));
-        player2.getBattlefieldHelper(OPPONENT).battlefieldContainsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
+        player1.getBattlefieldHelper(PLAYER).containsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
+        player1.getBattlefieldHelper(OPPONENT).containsExactly(cardNames(MOUNTAIN, GRAZING_WHIPTAIL));
+        player2.getBattlefieldHelper(PLAYER).containsExactly(cardNames(MOUNTAIN, GRAZING_WHIPTAIL));
+        player2.getBattlefieldHelper(OPPONENT).containsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
 
         // Graveyards are
         player1.getGraveyardHelper(PLAYER).containsExactly(cardNames(PLAINS));
@@ -78,10 +63,6 @@ public class InitGameTest {
         player2.getPlayerInfoHelper(OPPONENT).toHaveName("Pippo");
         player2.getPlayerInfoHelper(OPPONENT).toHaveLife("20");
         player2.getPlayerInfoHelper(OPPONENT).toBeActive();
-
-        // Close browsers
-        player1.close();
-        player2.close();
     }
 
     @Configuration

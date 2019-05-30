@@ -1,6 +1,6 @@
 package application.cast;
 
-import application.browser.MtgBrowser;
+import application.AbstractApplicatonTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
@@ -8,7 +8,6 @@ import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -21,33 +20,22 @@ import static com.aa.mtg.game.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import({playLandTest.InitGameTestConfiguration.class})
-public class playLandTest {
-    @LocalServerPort
-    private int port;
-
+@Import({PlayLandTest.InitGameTestConfiguration.class})
+public class PlayLandTest extends AbstractApplicatonTest {
     @Test
     public void playLand() {
-        // Given
-        MtgBrowser player1 = new MtgBrowser(port);
-        MtgBrowser player2 = new MtgBrowser(port);
-
         // When play first land
-        player1.getHandHelper(PLAYER).clickCard(ISLAND);
+        player1.getHandHelper(PLAYER).clickFirstCard(ISLAND);
 
         // Then battlefields are
-        player1.getBattlefieldHelper(PLAYER).battlefieldContainsExactly(cardNames(ISLAND));
-        player2.getBattlefieldHelper(OPPONENT).battlefieldContainsExactly(cardNames(ISLAND));
+        player1.getBattlefieldHelper(PLAYER).containsExactly(cardNames(ISLAND));
+        player2.getBattlefieldHelper(OPPONENT).containsExactly(cardNames(ISLAND));
 
         // When play second land
-        player1.getHandHelper(PLAYER).clickCard(ISLAND);
+        player1.getHandHelper(PLAYER).clickFirstCard(ISLAND);
 
         // Then error is displayed
         player1.getMessageHelper().hasMessage("You already played a land this turn.");
-
-        // Close browsers
-        player1.close();
-        player2.close();
     }
 
     @Configuration

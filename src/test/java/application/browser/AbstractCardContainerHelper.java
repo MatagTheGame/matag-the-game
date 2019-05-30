@@ -31,16 +31,41 @@ public abstract class AbstractCardContainerHelper {
         });
     }
 
-    public void clickCard(Card card) {
-        getFirstCardByName(card);
+    public void isEmpty() {
+        toHaveSize(0);
     }
 
-    private void getFirstCardByName(Card card) {
+    public void toHaveSize(int size) {
         mtgBrowser.wait(driver -> {
-            List<String> actualCardNames = cardNames(containerElement());
-            return actualCardNames.contains(card.getName());
+            List<String> cardNames = cardNames(containerElement());
+
+            if (cardNames.size() == size) {
+                return true;
+            } else {
+                LOGGER.info("Expected {} cards but got {} ({})", size, cardNames.size(), cardNames);
+                return false;
+            }
         });
-        mtgBrowser.findElements(By.cssSelector("[aria-label=" + card.getName() + "]")).get(0).click();
+    }
+
+    public void clickFirstCard(Card card) {
+        getFirstCard(card).click();
+    }
+
+    public void clickCard(Card card, int index) {
+        getCard(card, index).click();
+    }
+
+    public CardHelper getFirstCard(Card card) {
+        return getCard(card, 0);
+    }
+
+    public CardHelper getCard(Card card, int index) {
+        mtgBrowser.wait(driver -> cardNames(containerElement()).stream()
+                .filter(cardName -> cardName.equals(card.getName()))
+                .count() > index);
+        WebElement webElement = mtgBrowser.findElements(By.cssSelector("[aria-label=\"" + card.getName() + "\"]")).get(index);
+        return new CardHelper(webElement, mtgBrowser);
     }
 
     private WebElement containerElement() {
