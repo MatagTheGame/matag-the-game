@@ -1,19 +1,31 @@
 package application.browser;
 
 import com.aa.mtg.game.player.PlayerType;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class BattlefieldHelper extends AbstractCardContainerHelper {
+    public static final String FIRST_LINE = "first-line";
+    public static final String SECOND_LINE = "second-line";
+    public static final String COMBAT_LINE = "combat-line";
 
-    BattlefieldHelper(MtgBrowser mtgBrowser, PlayerType playerType) {
+    private final String lineType;
+
+    BattlefieldHelper(MtgBrowser mtgBrowser, PlayerType playerType, String lineType) {
         super(mtgBrowser, playerType);
+        this.lineType = lineType;
     }
 
     @Override
-    protected String getCardContainerId() {
+    protected WebElement containerElement() {
+        return playerTypeContainer().findElement(By.className(lineType));
+    }
+
+    private WebElement playerTypeContainer() {
         if (playerType == PlayerType.PLAYER) {
-            return "player-battlefield";
+            return mtgBrowser.findElement(By.id("player-battlefield"));
         } else {
-            return "opponent-battlefield";
+            return mtgBrowser.findElement(By.id("opponent-battlefield"));
         }
     }
 }

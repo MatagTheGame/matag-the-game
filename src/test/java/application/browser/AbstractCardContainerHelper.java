@@ -68,9 +68,5 @@ public abstract class AbstractCardContainerHelper {
         return new CardHelper(webElement, mtgBrowser);
     }
 
-    private WebElement containerElement() {
-        return mtgBrowser.findElement(By.id(getCardContainerId()));
-    }
-
-    protected abstract String getCardContainerId();
+    protected abstract WebElement containerElement();
 }

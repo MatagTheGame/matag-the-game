@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.sets.Ixalan.AIR_ELEMENTAL;
@@ -29,18 +30,18 @@ public class CastCreatureTest extends AbstractApplicatonTest {
         player1.getHandHelper(PLAYER).clickFirstCard(AIR_ELEMENTAL);
 
         // Then battlefields is still empty
-        player1.getBattlefieldHelper(PLAYER).toHaveSize(5);
-        player2.getBattlefieldHelper(OPPONENT).toHaveSize(5);
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).toHaveSize(5);
+        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).toHaveSize(5);
 
         // When clicking all lands
-        player1.getBattlefieldHelper(PLAYER).clickCard(ISLAND, 0);
-        player1.getBattlefieldHelper(PLAYER).clickCard(ISLAND, 1);
-        player1.getBattlefieldHelper(PLAYER).clickCard(ISLAND, 2);
-        player1.getBattlefieldHelper(PLAYER).clickCard(MOUNTAIN, 0);
-        player1.getBattlefieldHelper(PLAYER).clickCard(MOUNTAIN, 1);
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(ISLAND, 0);
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(ISLAND, 1);
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(ISLAND, 2);
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(MOUNTAIN, 0);
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(MOUNTAIN, 1);
 
         // Then all lands are front-end tapped
-        player1.getBattlefieldHelper(PLAYER).getCard(ISLAND, 0).isFrontendTapped();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isFrontendTapped();
     }
 
     @Configuration

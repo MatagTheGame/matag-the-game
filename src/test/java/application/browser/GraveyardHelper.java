@@ -1,6 +1,8 @@
 package application.browser;
 
 import com.aa.mtg.game.player.PlayerType;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class GraveyardHelper extends AbstractCardContainerHelper {
 
@@ -9,11 +11,11 @@ public class GraveyardHelper extends AbstractCardContainerHelper {
     }
 
     @Override
-    protected String getCardContainerId() {
+    protected WebElement containerElement() {
         if (playerType == PlayerType.PLAYER) {
-            return "player-graveyard";
+            return mtgBrowser.findElement(By.id("player-graveyard"));
         } else {
-            return "opponent-graveyard";
+            return mtgBrowser.findElement(By.id("opponent-graveyard"));
         }
     }
 }

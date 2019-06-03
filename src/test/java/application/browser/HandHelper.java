@@ -1,6 +1,8 @@
 package application.browser;
 
 import com.aa.mtg.game.player.PlayerType;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class HandHelper extends AbstractCardContainerHelper {
 
@@ -9,11 +11,11 @@ public class HandHelper extends AbstractCardContainerHelper {
     }
 
     @Override
-    protected String getCardContainerId() {
+    protected WebElement containerElement() {
         if (playerType == PlayerType.PLAYER) {
-            return "player-hand";
+            return mtgBrowser.findElement(By.id("player-hand"));
         } else {
-            return "opponent-hand";
+            return mtgBrowser.findElement(By.id("opponent-hand"));
         }
     }
 }

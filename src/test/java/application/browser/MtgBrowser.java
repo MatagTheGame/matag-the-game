@@ -33,8 +33,8 @@ public class MtgBrowser {
         return new HandHelper(this, playerType);
     }
 
-    public BattlefieldHelper getBattlefieldHelper(PlayerType playerType) {
-        return new BattlefieldHelper(this, playerType);
+    public BattlefieldHelper getBattlefieldHelper(PlayerType playerType, String lineType) {
+        return new BattlefieldHelper(this, playerType, lineType);
     }
 
     public GraveyardHelper getGraveyardHelper(PlayerType playerType) {

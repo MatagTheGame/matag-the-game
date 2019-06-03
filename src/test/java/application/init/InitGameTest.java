@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.CardHelper.cardNames;
 import static com.aa.mtg.cards.Cards.FOREST;
 import static com.aa.mtg.cards.Cards.ISLAND;
@@ -39,10 +40,10 @@ public class InitGameTest extends AbstractApplicatonTest {
         player2.getHandHelper(OPPONENT).containsExactly(asList("card", "card"));
 
         // Battlefields are
-        player1.getBattlefieldHelper(PLAYER).containsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
-        player1.getBattlefieldHelper(OPPONENT).containsExactly(cardNames(MOUNTAIN, GRAZING_WHIPTAIL));
-        player2.getBattlefieldHelper(PLAYER).containsExactly(cardNames(MOUNTAIN, GRAZING_WHIPTAIL));
-        player2.getBattlefieldHelper(OPPONENT).containsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
+        player1.getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(MOUNTAIN, GRAZING_WHIPTAIL));
+        player2.getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(MOUNTAIN, GRAZING_WHIPTAIL));
+        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
 
         // Graveyards are
         player1.getGraveyardHelper(PLAYER).containsExactly(cardNames(PLAINS));
