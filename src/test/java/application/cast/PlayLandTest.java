@@ -28,9 +28,13 @@ public class PlayLandTest extends AbstractApplicatonTest {
         // When play first land
         player1.getHandHelper(PLAYER).clickFirstCard(ISLAND);
 
-        // Then battlefields are
+        // Then battlefields contain land
         player1.getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(ISLAND));
         player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(ISLAND));
+
+        // Hand is empty
+        player1.getHandHelper(PLAYER).toHaveSize(1);
+        player2.getHandHelper(OPPONENT).toHaveSize(1);
 
         // When play second land
         player1.getHandHelper(PLAYER).clickFirstCard(ISLAND);

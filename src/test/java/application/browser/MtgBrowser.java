@@ -2,7 +2,6 @@ package application.browser;
 
 import com.aa.mtg.game.player.PlayerType;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -27,6 +27,10 @@ public class MtgBrowser {
 
     public MessageHelper getMessageHelper() {
         return new MessageHelper(this);
+    }
+
+    public StatusHelper getStatusHelper() {
+        return new StatusHelper(this);
     }
 
     public HandHelper getHandHelper(PlayerType playerType) {
@@ -47,7 +51,7 @@ public class MtgBrowser {
 
     private WebDriver getWebDriver() {
         String property = System.getProperty("webdriver.chrome.driver");
-        if (StringUtils.isBlank(property)) {
+        if (StringUtils.isEmpty(property)) {
             return new HtmlUnitDriver(BrowserVersion.CHROME, true);
         } else {
             return new ChromeDriver();

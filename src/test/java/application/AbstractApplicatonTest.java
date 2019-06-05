@@ -25,6 +25,10 @@ public class AbstractApplicatonTest {
         // Message disappears
         player1.getMessageHelper().hasNoMessage();
         player2.getMessageHelper().hasNoMessage();
+
+        // Status is
+        player1.getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
+        player2.getStatusHelper().hasMessage("Wait for opponent to perform its action...");
     }
 
     @After
