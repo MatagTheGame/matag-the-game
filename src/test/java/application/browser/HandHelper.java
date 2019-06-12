@@ -5,9 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 public class HandHelper extends AbstractCardContainerHelper {
+    private final PlayerType playerType;
 
     HandHelper(MtgBrowser mtgBrowser, PlayerType playerType) {
-        super(mtgBrowser, playerType);
+        super(mtgBrowser);
+        this.playerType = playerType;
     }
 
     @Override

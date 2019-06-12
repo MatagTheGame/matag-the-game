@@ -6,8 +6,11 @@ import org.openqa.selenium.WebElement;
 
 public class GraveyardHelper extends AbstractCardContainerHelper {
 
+    private final PlayerType playerType;
+
     GraveyardHelper(MtgBrowser mtgBrowser, PlayerType playerType) {
-        super(mtgBrowser, playerType);
+        super(mtgBrowser);
+        this.playerType = playerType;
     }
 
     @Override

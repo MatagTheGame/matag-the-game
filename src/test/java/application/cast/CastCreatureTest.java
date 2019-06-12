@@ -29,9 +29,8 @@ public class CastCreatureTest extends AbstractApplicatonTest {
         // When click on creature without paying the cost
         player1.getHandHelper(PLAYER).clickFirstCard(AIR_ELEMENTAL);
 
-        // Then battlefields is still empty
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).toHaveSize(5);
-        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).toHaveSize(5);
+        // Then stack is still empty
+        player1.getStackHelper().toHaveSize(0);
 
         // When clicking all lands
         player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(ISLAND, 0);
@@ -40,17 +39,40 @@ public class CastCreatureTest extends AbstractApplicatonTest {
         player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(MOUNTAIN, 0);
         player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(MOUNTAIN, 1);
 
-        // Then all lands are front-end tapped and creature is in the battlefield
-//        // TODO FIXME
-//        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isFrontendTapped();
-//        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).contains(AIR_ELEMENTAL);
-//        player2.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isFrontendTapped();
-//
-//        player2.getBattlefieldHelper(PLAYER, FIRST_LINE).contains(AIR_ELEMENTAL);
-//
-//        // Hand is now empty
-//        player1.getHandHelper(PLAYER).isEmpty();
-//        player2.getHandHelper(PLAYER).isEmpty();
+        // Then all lands are front-end tapped
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isFrontendTapped();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).isFrontendTapped();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).isFrontendTapped();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isFrontendTapped();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).isFrontendTapped();
+
+        // When click on creature
+        player1.getHandHelper(PLAYER).clickCard(AIR_ELEMENTAL, 0);
+
+        // Then all lands are tapped for both players
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isTapped();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).isTapped();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).isTapped();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isTapped();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).isTapped();
+
+        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 0).isTapped();
+        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 1).isTapped();
+        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 2).isTapped();
+        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(MOUNTAIN, 0).isTapped();
+        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(MOUNTAIN, 1).isTapped();
+
+        // And creature is on the stack for both players
+        player1.getStackHelper().contains(AIR_ELEMENTAL);
+        player2.getStackHelper().contains(AIR_ELEMENTAL);
+
+        // And priority is to opponent
+        // TODO continue from here
+        //player2.getBattlefieldHelper(PLAYER, FIRST_LINE).contains(AIR_ELEMENTAL);
+
+        // Hand is now empty
+        player1.getHandHelper(PLAYER).isEmpty();
+        player2.getHandHelper(PLAYER).isEmpty();
     }
 
     @Configuration

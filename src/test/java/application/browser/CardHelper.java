@@ -42,4 +42,8 @@ public class CardHelper {
     public void isFrontendTapped() {
         mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", "frontend-tapped"));
     }
+
+    public void isTapped() {
+        mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", "tapped"));
+    }
 }

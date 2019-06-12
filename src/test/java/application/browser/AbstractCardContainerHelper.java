@@ -1,7 +1,6 @@
 package application.browser;
 
 import com.aa.mtg.cards.Card;
-import com.aa.mtg.game.player.PlayerType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
@@ -16,11 +15,9 @@ public abstract class AbstractCardContainerHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractCardContainerHelper.class);
 
     final MtgBrowser mtgBrowser;
-    final PlayerType playerType;
 
-    AbstractCardContainerHelper(MtgBrowser mtgBrowser, PlayerType playerType) {
+    AbstractCardContainerHelper(MtgBrowser mtgBrowser) {
         this.mtgBrowser = mtgBrowser;
-        this.playerType = playerType;
     }
 
     public void containsExactly(List<String> expectedCards) {

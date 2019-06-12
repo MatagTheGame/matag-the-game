@@ -9,10 +9,12 @@ public class BattlefieldHelper extends AbstractCardContainerHelper {
     public static final String SECOND_LINE = "second-line";
     public static final String COMBAT_LINE = "combat-line";
 
+    private final PlayerType playerType;
     private final String lineType;
 
     BattlefieldHelper(MtgBrowser mtgBrowser, PlayerType playerType, String lineType) {
-        super(mtgBrowser, playerType);
+        super(mtgBrowser);
+        this.playerType = playerType;
         this.lineType = lineType;
     }
 

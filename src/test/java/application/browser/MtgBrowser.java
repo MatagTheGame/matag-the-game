@@ -49,6 +49,10 @@ public class MtgBrowser {
         return new PlayerInfoHelper(this, playerType);
     }
 
+    public StackHelper getStackHelper() {
+        return new StackHelper(this);
+    }
+
     private WebDriver getWebDriver() {
         String property = System.getProperty("webdriver.chrome.driver");
         if (StringUtils.isEmpty(property)) {
