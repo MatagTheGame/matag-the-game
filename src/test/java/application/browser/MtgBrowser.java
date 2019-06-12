@@ -33,6 +33,10 @@ public class MtgBrowser {
         return new StatusHelper(this);
     }
 
+    public PhaseHelper getPhaseHelper() {
+        return new PhaseHelper(this);
+    }
+
     public HandHelper getHandHelper(PlayerType playerType) {
         return new HandHelper(this, playerType);
     }

@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
+import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static application.browser.CardHelper.cardNames;
 import static com.aa.mtg.cards.Cards.FOREST;
 import static com.aa.mtg.cards.Cards.ISLAND;
@@ -25,6 +26,7 @@ import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
 import static com.aa.mtg.cards.sets.Ixalan.LEGIONS_JUDGMENT;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 import static java.util.Arrays.asList;
 
 @RunWith(SpringRunner.class)
@@ -40,10 +42,10 @@ public class InitGameTest extends AbstractApplicatonTest {
         player2.getHandHelper(OPPONENT).containsExactly(asList("card", "card"));
 
         // Battlefields are
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
-        player1.getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(MOUNTAIN, GRAZING_WHIPTAIL));
-        player2.getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(MOUNTAIN, GRAZING_WHIPTAIL));
-        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(PLAINS, HUATLIS_SNUBHORN));
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(PLAINS, PLAINS));
+        player1.getBattlefieldHelper(OPPONENT, SECOND_LINE).containsExactly(cardNames(GRAZING_WHIPTAIL));
+        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(PLAINS, PLAINS));
+        player2.getBattlefieldHelper(PLAYER, SECOND_LINE).containsExactly(cardNames(GRAZING_WHIPTAIL));
 
         // Graveyards are
         player1.getGraveyardHelper(PLAYER).containsExactly(cardNames(PLAINS));
@@ -64,6 +66,10 @@ public class InitGameTest extends AbstractApplicatonTest {
         player2.getPlayerInfoHelper(OPPONENT).toHaveName("Pippo");
         player2.getPlayerInfoHelper(OPPONENT).toHaveLife("20");
         player2.getPlayerInfoHelper(OPPONENT).toBeActive();
+
+        // Phase is at
+        player1.getPhaseHelper().is(M1, PLAYER);
+        player2.getPhaseHelper().is(M1, OPPONENT);
     }
 
     @Configuration
@@ -78,6 +84,7 @@ public class InitGameTest extends AbstractApplicatonTest {
                     addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
 
                     addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
                     addCardToCurrentPlayerBattlefield(gameStatus, HUATLIS_SNUBHORN);
 
                     addCardToCurrentPlayerHand(gameStatus, ISLAND);
@@ -89,6 +96,7 @@ public class InitGameTest extends AbstractApplicatonTest {
                     addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
                     addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
 
+                    addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
                     addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
                     addCardToNonCurrentPlayerBattlefield(gameStatus, GRAZING_WHIPTAIL);
 
