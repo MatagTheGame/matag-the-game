@@ -33,6 +33,10 @@ public class MtgBrowser {
         return new StatusHelper(this);
     }
 
+    public ActionHelper getActionHelper() {
+        return new ActionHelper(this);
+    }
+
     public PhaseHelper getPhaseHelper() {
         return new PhaseHelper(this);
     }
@@ -74,7 +78,7 @@ public class MtgBrowser {
         return webDriver.findElements(element);
     }
 
-    void wait(ExpectedCondition<Boolean> condition) {
+    void wait(ExpectedCondition<?> condition) {
         new WebDriverWait(webDriver, 5).until(condition);
     }
 }

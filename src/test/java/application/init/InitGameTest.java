@@ -67,9 +67,13 @@ public class InitGameTest extends AbstractApplicatonTest {
         player2.getPlayerInfoHelper(OPPONENT).toHaveLife("20");
         player2.getPlayerInfoHelper(OPPONENT).toBeActive();
 
-        // Phase is at
+        // Phase and statuses are
         player1.getPhaseHelper().is(M1, PLAYER);
+        player1.getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
+        player1.getActionHelper().canContinue();
         player2.getPhaseHelper().is(M1, OPPONENT);
+        player2.getStatusHelper().hasMessage("Wait for opponent to perform its action...");
+        player2.getActionHelper().cannotContinue();
     }
 
     @Configuration
