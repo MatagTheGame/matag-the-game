@@ -29,75 +29,75 @@ public class CastCreatureTest extends AbstractApplicationTest {
     @Test
     public void castCreature() {
         // When click on creature without paying the cost
-        player1.getHandHelper(PLAYER).getFirstCard(AIR_ELEMENTAL).click();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(AIR_ELEMENTAL).click();
 
         // Then stack is still empty
-        player1.getStackHelper().toHaveSize(0);
+        browser.player1().getStackHelper().toHaveSize(0);
 
         // When clicking all lands
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).click();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).click();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).click();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).click();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).click();
 
         // Then all lands are front-end tapped
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isFrontendTapped();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).isFrontendTapped();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).isFrontendTapped();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isFrontendTapped();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).isFrontendTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isFrontendTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).isFrontendTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).isFrontendTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isFrontendTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).isFrontendTapped();
 
         // When click on creature
-        player1.getHandHelper(PLAYER).getCard(AIR_ELEMENTAL, 0).click();
+        browser.player1().getHandHelper(PLAYER).getCard(AIR_ELEMENTAL, 0).click();
 
         // Then all lands are tapped for both players
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isTapped();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).isTapped();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).isTapped();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isTapped();
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).isTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).isTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).isTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).isTapped();
 
-        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 0).isTapped();
-        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 1).isTapped();
-        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 2).isTapped();
-        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(MOUNTAIN, 0).isTapped();
-        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(MOUNTAIN, 1).isTapped();
+        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 0).isTapped();
+        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 1).isTapped();
+        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 2).isTapped();
+        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(MOUNTAIN, 0).isTapped();
+        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(MOUNTAIN, 1).isTapped();
 
         // And creature is on the stack for both players (hands is empty)
-        player1.getStackHelper().contains(AIR_ELEMENTAL);
-        player1.getHandHelper(PLAYER).isEmpty();
-        player2.getStackHelper().contains(AIR_ELEMENTAL);
-        player1.getHandHelper(OPPONENT).isEmpty();
+        browser.player1().getStackHelper().contains(AIR_ELEMENTAL);
+        browser.player1().getHandHelper(PLAYER).isEmpty();
+        browser.player2().getStackHelper().contains(AIR_ELEMENTAL);
+        browser.player1().getHandHelper(OPPONENT).isEmpty();
 
         // And priority is to opponent with corresponding status
-        player1.getPhaseHelper().is(M1, OPPONENT);
-        player1.getStatusHelper().hasMessage("Wait for opponent to perform its action...");
-        player1.getActionHelper().cannotContinue();
-        player2.getPhaseHelper().is(M1, PLAYER);
-        player2.getStatusHelper().hasMessage("Play any instant or abilities or resolve the top spell in the stack (SPACE).");
-        player2.getActionHelper().canContinue();
+        browser.player1().getPhaseHelper().is(M1, OPPONENT);
+        browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
+        browser.player1().getActionHelper().cannotContinue();
+        browser.player2().getPhaseHelper().is(M1, PLAYER);
+        browser.player2().getStatusHelper().hasMessage("Play any instant or abilities or resolve the top spell in the stack (SPACE).");
+        browser.player2().getActionHelper().canContinue();
 
         // When player2 acknowledge the spell casted
-        player2.getActionHelper().clickContinue();
+        browser.player2().getActionHelper().clickContinue();
 
         // Creature goes on the battlefield (stack is empty)
-        player1.getBattlefieldHelper(PLAYER, SECOND_LINE).contains(AIR_ELEMENTAL);
-        player2.getBattlefieldHelper(OPPONENT, SECOND_LINE).contains(AIR_ELEMENTAL);
-        player1.getStackHelper().isEmpty();
-        player2.getStackHelper().isEmpty();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(AIR_ELEMENTAL);
+        browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).contains(AIR_ELEMENTAL);
+        browser.player1().getStackHelper().isEmpty();
+        browser.player2().getStackHelper().isEmpty();
 
         // And priority is to player again
-        player1.getPhaseHelper().is(M1, PLAYER);
-        player1.getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
-        player1.getActionHelper().canContinue();
-        player2.getPhaseHelper().is(M1, OPPONENT);
-        player2.getStatusHelper().hasMessage("Wait for opponent to perform its action...");
-        player2.getActionHelper().cannotContinue();
+        browser.player1().getPhaseHelper().is(M1, PLAYER);
+        browser.player1().getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
+        browser.player1().getActionHelper().canContinue();
+        browser.player2().getPhaseHelper().is(M1, OPPONENT);
+        browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
+        browser.player2().getActionHelper().cannotContinue();
 
         // Hand is now empty
-        player1.getHandHelper(PLAYER).isEmpty();
-        player2.getHandHelper(PLAYER).isEmpty();
+        browser.player1().getHandHelper(PLAYER).isEmpty();
+        browser.player2().getHandHelper(PLAYER).isEmpty();
     }
 
     @Configuration

@@ -36,44 +36,44 @@ public class InitGameTest extends AbstractApplicationTest {
     @Test
     public void display() {
         // Hands are
-        player1.getHandHelper(PLAYER).containsExactly(cardNames(ISLAND, LEGIONS_JUDGMENT));
-        player1.getHandHelper(OPPONENT).containsExactly(asList("card", "card"));
-        player2.getHandHelper(PLAYER).containsExactly(cardNames(FOREST, CHARGING_MONSTROSAUR));
-        player2.getHandHelper(OPPONENT).containsExactly(asList("card", "card"));
+        browser.player1().getHandHelper(PLAYER).containsExactly(cardNames(ISLAND, LEGIONS_JUDGMENT));
+        browser.player1().getHandHelper(OPPONENT).containsExactly(asList("card", "card"));
+        browser.player2().getHandHelper(PLAYER).containsExactly(cardNames(FOREST, CHARGING_MONSTROSAUR));
+        browser.player2().getHandHelper(OPPONENT).containsExactly(asList("card", "card"));
 
         // Battlefields are
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(PLAINS, PLAINS));
-        player1.getBattlefieldHelper(OPPONENT, SECOND_LINE).containsExactly(cardNames(GRAZING_WHIPTAIL));
-        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(PLAINS, PLAINS));
-        player2.getBattlefieldHelper(PLAYER, SECOND_LINE).containsExactly(cardNames(GRAZING_WHIPTAIL));
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(PLAINS, PLAINS));
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).containsExactly(cardNames(GRAZING_WHIPTAIL));
+        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(PLAINS, PLAINS));
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).containsExactly(cardNames(GRAZING_WHIPTAIL));
 
         // Graveyards are
-        player1.getGraveyardHelper(PLAYER).containsExactly(cardNames(PLAINS));
-        player1.getGraveyardHelper(OPPONENT).containsExactly(cardNames(MOUNTAIN));
-        player2.getGraveyardHelper(PLAYER).containsExactly(cardNames(MOUNTAIN));
-        player2.getGraveyardHelper(OPPONENT).containsExactly(cardNames(PLAINS));
+        browser.player1().getGraveyardHelper(PLAYER).containsExactly(cardNames(PLAINS));
+        browser.player1().getGraveyardHelper(OPPONENT).containsExactly(cardNames(MOUNTAIN));
+        browser.player2().getGraveyardHelper(PLAYER).containsExactly(cardNames(MOUNTAIN));
+        browser.player2().getGraveyardHelper(OPPONENT).containsExactly(cardNames(PLAINS));
 
         // PlayerInfos are
-        player1.getPlayerInfoHelper(PLAYER).toHaveName("Pippo");
-        player1.getPlayerInfoHelper(PLAYER).toHaveLife("20");
-        player1.getPlayerInfoHelper(PLAYER).toBeActive();
-        player1.getPlayerInfoHelper(OPPONENT).toHaveName("Pluto");
-        player1.getPlayerInfoHelper(OPPONENT).toHaveLife("20");
-        player1.getPlayerInfoHelper(OPPONENT).toBeInactive();
-        player2.getPlayerInfoHelper(PLAYER).toHaveName("Pluto");
-        player2.getPlayerInfoHelper(PLAYER).toHaveLife("20");
-        player2.getPlayerInfoHelper(PLAYER).toBeInactive();
-        player2.getPlayerInfoHelper(OPPONENT).toHaveName("Pippo");
-        player2.getPlayerInfoHelper(OPPONENT).toHaveLife("20");
-        player2.getPlayerInfoHelper(OPPONENT).toBeActive();
+        browser.player1().getPlayerInfoHelper(PLAYER).toHaveName("Pippo");
+        browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife("20");
+        browser.player1().getPlayerInfoHelper(PLAYER).toBeActive();
+        browser.player1().getPlayerInfoHelper(OPPONENT).toHaveName("Pluto");
+        browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife("20");
+        browser.player1().getPlayerInfoHelper(OPPONENT).toBeInactive();
+        browser.player2().getPlayerInfoHelper(PLAYER).toHaveName("Pluto");
+        browser.player2().getPlayerInfoHelper(PLAYER).toHaveLife("20");
+        browser.player2().getPlayerInfoHelper(PLAYER).toBeInactive();
+        browser.player2().getPlayerInfoHelper(OPPONENT).toHaveName("Pippo");
+        browser.player2().getPlayerInfoHelper(OPPONENT).toHaveLife("20");
+        browser.player2().getPlayerInfoHelper(OPPONENT).toBeActive();
 
         // Phase and statuses are
-        player1.getPhaseHelper().is(M1, PLAYER);
-        player1.getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
-        player1.getActionHelper().canContinue();
-        player2.getPhaseHelper().is(M1, OPPONENT);
-        player2.getStatusHelper().hasMessage("Wait for opponent to perform its action...");
-        player2.getActionHelper().cannotContinue();
+        browser.player1().getPhaseHelper().is(M1, PLAYER);
+        browser.player1().getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
+        browser.player1().getActionHelper().canContinue();
+        browser.player2().getPhaseHelper().is(M1, OPPONENT);
+        browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
+        browser.player2().getActionHelper().cannotContinue();
     }
 
     @Configuration

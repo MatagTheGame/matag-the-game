@@ -69,7 +69,7 @@ public class ResolveService {
     private void resolveCardInstanceFromStack(GameStatus gameStatus, CardInstance cardToResolve) {
         gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
-        performAbilityAction(gameStatus, cardToResolve);
+        performAbilitiesActions(gameStatus, cardToResolve, cardToResolve.getAbilities());
 
         if (cardToResolve.isPermanent()) {
             if (cardToResolve.isOfType(CREATURE) && !cardToResolve.hasAbility(HASTE)) {
@@ -90,7 +90,7 @@ public class ResolveService {
     }
 
     private void resolveTriggeredAbility(GameStatus gameStatus, CardInstance stackItemToResolve) {
-        performAbilityAction(gameStatus, stackItemToResolve);
+        performAbilitiesActions(gameStatus, stackItemToResolve, stackItemToResolve.getTriggeredAbilities());
         stackItemToResolve.getTriggeredAbilities().clear();
     }
 
@@ -108,29 +108,33 @@ public class ResolveService {
         continueTurnService.continueTurn(gameStatus);
     }
 
-    private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve) {
-        for (Ability ability : cardToResolve.getTriggeredAbilities()) {
-            AbilityAction firstAbilityAction = abilityActionFactory.getAbilityAction(ability.getFirstAbilityType());
-            if (firstAbilityAction != null) {
-                try {
-                    for (int i = 0; i < ability.getTargets().size(); i++) {
-                        ability.getTargets().get(i).check(gameStatus, cardToResolve.getModifiers().getTargets().get(i));
-                    }
-
-                    firstAbilityAction.perform(ability, cardToResolve, gameStatus);
-
-                    for (int i = 1; i < ability.getAbilityTypes().size(); i++) {
-                        AbilityAction furtherAbilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityTypes().get(i));
-                        furtherAbilityAction.perform(ability, cardToResolve, gameStatus);
-                    }
-
-                } catch (MessageException e) {
-                    LOGGER.info("{}: Target is now invalid during resolution, dropping the action. [{}] ", cardToResolve.getIdAndName(), e.getMessage());
-                }
-            }
+    private void performAbilitiesActions(GameStatus gameStatus, CardInstance cardToResolve, List<Ability> abilities) {
+        for (Ability ability : abilities) {
+            performAbilityAction(gameStatus, cardToResolve, ability);
         }
 
         cardToResolve.getModifiers().setTargets(new ArrayList<>());
+    }
+
+    private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve, Ability ability) {
+        AbilityAction firstAbilityAction = abilityActionFactory.getAbilityAction(ability.getFirstAbilityType());
+        if (firstAbilityAction != null) {
+            try {
+                for (int i = 0; i < ability.getTargets().size(); i++) {
+                    ability.getTargets().get(i).check(gameStatus, cardToResolve.getModifiers().getTargets().get(i));
+                }
+
+                firstAbilityAction.perform(ability, cardToResolve, gameStatus);
+
+                for (int i = 1; i < ability.getAbilityTypes().size(); i++) {
+                    AbilityAction furtherAbilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityTypes().get(i));
+                    furtherAbilityAction.perform(ability, cardToResolve, gameStatus);
+                }
+
+            } catch (MessageException e) {
+                LOGGER.info("{}: Target is now invalid during resolution, dropping the action. [{}] ", cardToResolve.getIdAndName(), e.getMessage());
+            }
+        }
     }
 
     private void removeTopElementFromStack(GameStatus gameStatus) {

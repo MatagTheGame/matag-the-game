@@ -26,21 +26,21 @@ public class PlayLandTest extends AbstractApplicationTest {
     @Test
     public void playLand() {
         // When play first land
-        player1.getHandHelper(PLAYER).getFirstCard(ISLAND).click();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(ISLAND).click();
 
         // Then battlefields contain land
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(ISLAND));
-        player2.getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(ISLAND));
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(ISLAND));
+        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(ISLAND));
 
         // Hand is empty
-        player1.getHandHelper(PLAYER).toHaveSize(1);
-        player2.getHandHelper(OPPONENT).toHaveSize(1);
+        browser.player1().getHandHelper(PLAYER).toHaveSize(1);
+        browser.player2().getHandHelper(OPPONENT).toHaveSize(1);
 
         // When play second land
-        player1.getHandHelper(PLAYER).getFirstCard(ISLAND).click();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(ISLAND).click();
 
         // Then error is displayed
-        player1.getMessageHelper().hasMessage("You already played a land this turn.");
+        browser.player1().getMessageHelper().hasMessage("You already played a land this turn.");
     }
 
     @Configuration

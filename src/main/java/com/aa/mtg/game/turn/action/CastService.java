@@ -43,11 +43,6 @@ public class CastService {
         } else {
             checkSpellCost(tappingLandIds, currentPlayer, cardToCast);
 
-            // FIXME the ability to cast must come from the frontend (for the time being let's cast all abilities for instant and sorceries and none for other permanents)
-            if (!cardToCast.isPermanent()) {
-                cardToCast.getTriggeredAbilities().addAll(cardToCast.getAbilities());
-            }
-
             checkSpellRequisites(cardToCast, gameStatus, targetsIdsForCardIds);
 
             currentPlayer.getHand().extractCardById(cardId);
@@ -86,7 +81,7 @@ public class CastService {
     }
 
     private void checkSpellRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds) {
-        for (Ability ability : cardToCast.getTriggeredAbilities()) {
+        for (Ability ability : cardToCast.getAbilities()) {
             AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getFirstAbilityType());
             if (abilityAction != null &&  ability.requiresTarget()) {
                 if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId()) || targetsIdsForCardIds.get(cardToCast.getId()).isEmpty()) {

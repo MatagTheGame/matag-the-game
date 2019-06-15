@@ -3,22 +3,41 @@ package application.browser;
 import com.aa.mtg.game.player.PlayerType;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MtgBrowser {
     private final WebDriver webDriver;
+    private final int port;
 
     public MtgBrowser(int port) {
+        this.port = port;
         webDriver = getWebDriver();
         webDriver.get("http://localhost:" + port);
+    }
+
+    public void openSecondTab() {
+        ((JavascriptExecutor)webDriver).executeScript("window.open('http://localhost:" + port + "')");
+    }
+
+    public MtgBrowser player1() {
+        webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(0));
+        return this;
+    }
+
+    public MtgBrowser player2() {
+        webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1));
+        return this;
     }
 
     public void close() {
@@ -62,8 +81,14 @@ public class MtgBrowser {
     }
 
     private WebDriver getWebDriver() {
-        if (isChrome()) {
-            return new ChromeDriver();
+        String webdriverChromeDriver = System.getProperty("webdriver.chrome.driver");
+        String webdriverUserDataDir = System.getProperty("webdriver.chrome.userDataDir");
+
+        if (StringUtils.hasText(webdriverChromeDriver)) {
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.addArguments("user-data-dir=" + webdriverUserDataDir);
+            return new ChromeDriver(chromeOptions);
+
         } else {
             return new HtmlUnitDriver(BrowserVersion.CHROME, true);
         }
@@ -81,7 +106,4 @@ public class MtgBrowser {
         new WebDriverWait(webDriver, 5).until(condition);
     }
 
-    public static boolean isChrome() {
-        return StringUtils.hasText(System.getProperty("webdriver.chrome.driver"));
-    }
 }

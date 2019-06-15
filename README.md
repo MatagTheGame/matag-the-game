@@ -26,7 +26,14 @@ They run against HtmlUnit on Travis but can be run against ChromeDriver locally.
 
 To run them against ChromeDriver change the default JUnit IntelliJ configuration adding the following in the VM arguments:
 
-    -Dwebdriver.chrome.driver=/your/chromedriver/installation/folder 
+    -Dwebdriver.chrome.driver=/your/chromedriver/installation/folder
+
+If you want to use a chromedriver version with some extensions (e.g. redux tools)
+
+    -D"webdriver.chrome.userDataDir=/tmp/Chrome/Mtg/"
+
+Then put a breakpoint on some test and while is executing open a new tab and install everything you want.
+Next time the test will rerun will use that same profile.
 
 
 ### Requisites
