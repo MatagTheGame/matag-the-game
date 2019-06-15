@@ -3,7 +3,6 @@ package com.aa.mtg.game.init;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 class InitPlayerEvent {
@@ -51,8 +50,8 @@ class InitPlayerEvent {
         return new InitPlayerEvent(
                 player.getLibrary().size(),
                 player.getHand().getCards(),
-                new ArrayList<>(),
-                new ArrayList<>(),
+                player.getBattlefield().getCards(),
+                player.getGraveyard().getCards(),
                 player.getName(),
                 player.getLife()
         );
@@ -62,8 +61,8 @@ class InitPlayerEvent {
         return new InitPlayerEvent(
                 player.getLibrary().size(),
                 player.getHand().maskedHand(),
-                new ArrayList<>(),
-                new ArrayList<>(),
+                player.getBattlefield().getCards(),
+                player.getGraveyard().getCards(),
                 player.getName(),
                 player.getLife()
         );

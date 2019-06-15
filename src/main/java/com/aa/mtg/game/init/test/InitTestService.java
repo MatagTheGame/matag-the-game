@@ -3,18 +3,11 @@ package com.aa.mtg.game.init.test;
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class InitTestService {
     private static final Logger LOGGER = LoggerFactory.getLogger(InitTestService.class);
-
-    protected final GameStatusUpdaterService gameStatusUpdaterService;
-
-    public InitTestService(GameStatusUpdaterService gameStatusUpdaterService) {
-        this.gameStatusUpdaterService = gameStatusUpdaterService;
-    }
 
     public void initGameStatusForTest(GameStatus gameStatus) {
         LOGGER.warn("Application is running in test mode: Initializing the gameStatus with test data.");
@@ -27,17 +20,6 @@ public abstract class InitTestService {
 
         // Call abstract initStatus
         initGameStatus(gameStatus);
-
-        // Update players status
-        gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
-        gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
-        gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
-        gameStatusUpdaterService.sendUpdateCurrentPlayerLibrarySize(gameStatus);
-
-        gameStatusUpdaterService.sendUpdateNonCurrentPlayerHand(gameStatus);
-        gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
-        gameStatusUpdaterService.sendUpdateNonCurrentPlayerGraveyard(gameStatus);
-        gameStatusUpdaterService.sendUpdateNonCurrentPlayerLibrarySize(gameStatus);
     }
 
     protected abstract void initGameStatus(GameStatus gameStatus);

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import Card from '../Card/Card'
@@ -117,6 +117,10 @@ class Battlefield extends Component {
   }
 
   render() {
+    if (!this.props.turn) {
+      return <Fragment />
+    }
+
     return (
       <div id={this.getId()} className='battlefield'>
         <div className='battlefield-area combat-line'>{this.positionedCardItems(this.getAttackingOrBlockingCreatures())}</div>

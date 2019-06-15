@@ -4,7 +4,6 @@ import application.AbstractApplicationTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -108,8 +107,8 @@ public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
     @Configuration
     static class InitGameTestConfiguration {
         @Bean
-        public InitTestService initTestService(GameStatusUpdaterService gameStatusUpdaterService) {
-            return new InitTestService(gameStatusUpdaterService) {
+        public InitTestService initTestService() {
+            return new InitTestService() {
                 @Override
                 protected void initGameStatus(GameStatus gameStatus) {
                     addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);

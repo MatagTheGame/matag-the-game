@@ -20,6 +20,9 @@ public class MtgBrowser {
     private final WebDriver webDriver;
     private final int port;
 
+    private int player1TabIndex = 0;
+    private int player2TabIndex = 1;
+
     public MtgBrowser(int port) {
         this.port = port;
         webDriver = getWebDriver();
@@ -28,19 +31,29 @@ public class MtgBrowser {
 
     public void openSecondTab() {
         ((JavascriptExecutor)webDriver).executeScript("window.open('http://localhost:" + port + "')");
+        // Wait for it to fully load
+        this.getMessageHelper().hasNoMessage();
+    }
+
+    public void swapTabs() {
+        player1TabIndex = 1;
+        player2TabIndex = 0;
     }
 
     public MtgBrowser player1() {
-        webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(0));
+        tabAt(player1TabIndex);
         return this;
     }
 
     public MtgBrowser player2() {
-        webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(1));
+        tabAt(player2TabIndex);
         return this;
     }
 
     public void close() {
+        tabAt(1);
+        webDriver.close();
+        tabAt(0);
         webDriver.close();
     }
 
@@ -78,6 +91,10 @@ public class MtgBrowser {
 
     public StackHelper getStackHelper() {
         return new StackHelper(this);
+    }
+
+    private void tabAt(int player2TabIndex) {
+        webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(player2TabIndex));
     }
 
     private WebDriver getWebDriver() {

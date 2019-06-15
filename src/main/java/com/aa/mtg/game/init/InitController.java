@@ -63,6 +63,10 @@ public class InitController {
 
                 eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("OPPONENT_JOINED"));
 
+                if (initTestService != null && gameStatusRepository.getUnsecure(token.getGameId()).getPlayer2() != null) {
+                    initTestService.initGameStatusForTest(gameStatusRepository.getUnsecure(token.getGameId()));
+                }
+
                 eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer1())));
                 eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer2())));
 
@@ -74,10 +78,6 @@ public class InitController {
             } else {
                 eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("MESSAGE", new MessageEvent("Game is full.", true)));
             }
-        }
-
-        if (initTestService != null && gameStatusRepository.getUnsecure(token.getGameId()).getPlayer2() != null) {
-            initTestService.initGameStatusForTest(gameStatusRepository.getUnsecure(token.getGameId()));
         }
     }
 

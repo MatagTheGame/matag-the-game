@@ -20,20 +20,33 @@ public class PlayerInfoHelper {
         this.playerType = playerType;
     }
 
+    public void toHaveName() {
+        mtgBrowser.wait(driver -> {
+            LOGGER.info("actualPlayerName={}", getPlayerName());
+            return !getPlayerName().equals("");
+        });
+    }
+
     public void toHaveName(String expectedPlayerName) {
         mtgBrowser.wait(driver -> {
-            String actualPlayerName = playerInfoElement().findElements(By.tagName("span")).get(0).getText();
-            LOGGER.info("actualPlayerName={}   expectedPlayerName={}", actualPlayerName, expectedPlayerName);
-            return actualPlayerName.equals(expectedPlayerName);
+            LOGGER.info("actualPlayerName={}   expectedPlayerName={}", getPlayerName(), expectedPlayerName);
+            return getPlayerName().equals(expectedPlayerName);
         });
     }
 
     public void toHaveLife(String expectedPlayerLife) {
         mtgBrowser.wait(driver -> {
-            String actualPlayerLife = playerInfoElement().findElements(By.tagName("span")).get(1).getText();
-            LOGGER.info("actualPlayerName={}   expectedPlayerLife={}", actualPlayerLife, expectedPlayerLife);
-            return actualPlayerLife.equals(expectedPlayerLife);
+            LOGGER.info("actualPlayerName={}   expectedPlayerLife={}", getPlayerLife(), expectedPlayerLife);
+            return getPlayerLife().equals(expectedPlayerLife);
         });
+    }
+
+    public String getPlayerName() {
+        return playerInfoElement().findElements(By.tagName("span")).get(0).getText();
+    }
+
+    public String getPlayerLife() {
+        return playerInfoElement().findElements(By.tagName("span")).get(1).getText();
     }
 
     public void toBeActive() {

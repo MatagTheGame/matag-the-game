@@ -5,6 +5,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.springframework.boot.web.server.LocalServerPort;
 
+import static com.aa.mtg.game.player.PlayerType.PLAYER;
+
 public class AbstractApplicationTest {
 
     @LocalServerPort
@@ -21,6 +23,15 @@ public class AbstractApplicationTest {
         // When player2 joins the game both players see the table with the cards
         browser.openSecondTab();
 
+        // Make sure player1 is Pippo and player2 is Pluto
+        browser.player1().getPlayerInfoHelper(PLAYER).toHaveName();
+        browser.player2().getPlayerInfoHelper(PLAYER).toHaveName();
+        if (browser.player1().getPlayerInfoHelper(PLAYER).getPlayerName().equals("Pluto")) {
+            browser.swapTabs();
+        }
+        browser.player1().getPlayerInfoHelper(PLAYER).toHaveName("Pippo");
+        browser.player2().getPlayerInfoHelper(PLAYER).toHaveName("Pluto");
+
         // Message disappears
         browser.player1().getMessageHelper().hasNoMessage();
         browser.player2().getMessageHelper().hasNoMessage();
@@ -32,7 +43,6 @@ public class AbstractApplicationTest {
 
     @After
     public void cleanup() {
-        browser.player2().close();
-        browser.player1().close();
+        browser.close();
     }
 }

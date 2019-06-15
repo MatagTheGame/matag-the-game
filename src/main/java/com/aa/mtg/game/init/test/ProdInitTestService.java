@@ -1,8 +1,6 @@
 package com.aa.mtg.game.init.test;
 
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +16,6 @@ import static com.aa.mtg.cards.sets.RavnicaAllegiance.PRECISION_BOLT;
 @Profile("test")
 @Service
 public class ProdInitTestService extends InitTestService {
-
-    @Autowired
-    public ProdInitTestService(GameStatusUpdaterService gameStatusUpdaterService) {
-        super(gameStatusUpdaterService);
-    }
 
     @Override
     public void initGameStatus(GameStatus gameStatus) {
