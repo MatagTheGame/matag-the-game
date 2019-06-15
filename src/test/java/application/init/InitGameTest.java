@@ -1,6 +1,6 @@
 package application.init;
 
-import application.AbstractApplicatonTest;
+import application.AbstractApplicationTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
@@ -32,7 +32,7 @@ import static java.util.Arrays.asList;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({InitGameTest.InitGameTestConfiguration.class})
-public class InitGameTest extends AbstractApplicatonTest {
+public class InitGameTest extends AbstractApplicationTest {
     @Test
     public void display() {
         // Hands are

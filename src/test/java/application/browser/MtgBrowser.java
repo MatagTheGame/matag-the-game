@@ -62,11 +62,10 @@ public class MtgBrowser {
     }
 
     private WebDriver getWebDriver() {
-        String property = System.getProperty("webdriver.chrome.driver");
-        if (StringUtils.isEmpty(property)) {
-            return new HtmlUnitDriver(BrowserVersion.CHROME, true);
-        } else {
+        if (isChrome()) {
             return new ChromeDriver();
+        } else {
+            return new HtmlUnitDriver(BrowserVersion.CHROME, true);
         }
     }
 
@@ -80,5 +79,9 @@ public class MtgBrowser {
 
     void wait(ExpectedCondition<?> condition) {
         new WebDriverWait(webDriver, 5).until(condition);
+    }
+
+    public static boolean isChrome() {
+        return StringUtils.hasText(System.getProperty("webdriver.chrome.driver"));
     }
 }

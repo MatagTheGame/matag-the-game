@@ -3,7 +3,7 @@ package application.browser;
 import com.aa.mtg.game.player.PlayerType;
 import org.openqa.selenium.By;
 
-import static application.browser.selenium.MtgExpectedCondition.classToContain;
+import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBe;
 
 public class PhaseHelper {
@@ -15,7 +15,7 @@ public class PhaseHelper {
 
     public void is(String phase, PlayerType priority) {
         mtgBrowser.wait(textToBe(By.cssSelector("#turn-phases .active"), phase));
-        mtgBrowser.wait(classToContain(By.cssSelector("#turn-phases .active"), getClassNameLinkedToPriority(priority)));
+        mtgBrowser.wait(attributeContains(By.cssSelector("#turn-phases .active"), "class", getClassNameLinkedToPriority(priority)));
     }
 
     private String getClassNameLinkedToPriority(PlayerType priority) {

@@ -26,10 +26,12 @@ class Message extends Component {
 
   renderCloseButton() {
     if (this.props.message.closable) {
-      return <i id='message-close' className='fa fa-window-close'
-                onClick={this.props.closeMessage}
-                aria-hidden='true'/>
+      return <i id='message-close' onClick={this.props.closeMessage} aria-hidden='true'>X</i>
     }
+  }
+
+  renderMessageText() {
+    return <p id='message-text'>{ this.props.message.text }</p>
   }
 
   render() {
@@ -39,7 +41,7 @@ class Message extends Component {
           <div id='modal-container' />
           <div id='message'>
             { this.renderCloseButton() }
-            { this.props.message.text }
+            { this.renderMessageText() }
           </div>
         </Fragment>
       )

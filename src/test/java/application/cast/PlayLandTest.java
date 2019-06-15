@@ -1,6 +1,6 @@
 package application.cast;
 
-import application.AbstractApplicatonTest;
+import application.AbstractApplicationTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
@@ -22,11 +22,11 @@ import static com.aa.mtg.game.player.PlayerType.PLAYER;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({PlayLandTest.InitGameTestConfiguration.class})
-public class PlayLandTest extends AbstractApplicatonTest {
+public class PlayLandTest extends AbstractApplicationTest {
     @Test
     public void playLand() {
         // When play first land
-        player1.getHandHelper(PLAYER).clickFirstCard(ISLAND);
+        player1.getHandHelper(PLAYER).getFirstCard(ISLAND).click();
 
         // Then battlefields contain land
         player1.getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(ISLAND));
@@ -37,7 +37,7 @@ public class PlayLandTest extends AbstractApplicatonTest {
         player2.getHandHelper(OPPONENT).toHaveSize(1);
 
         // When play second land
-        player1.getHandHelper(PLAYER).clickFirstCard(ISLAND);
+        player1.getHandHelper(PLAYER).getFirstCard(ISLAND).click();
 
         // Then error is displayed
         player1.getMessageHelper().hasMessage("You already played a land this turn.");

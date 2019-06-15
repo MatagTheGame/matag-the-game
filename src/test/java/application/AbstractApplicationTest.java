@@ -5,7 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.springframework.boot.web.server.LocalServerPort;
 
-public class AbstractApplicatonTest {
+public class AbstractApplicationTest {
 
     @LocalServerPort
     private int port;

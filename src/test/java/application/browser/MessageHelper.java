@@ -13,10 +13,14 @@ public class MessageHelper {
     }
 
     public void hasMessage(String message) {
-        mtgBrowser.wait(textToBe(By.id("message"), message));
+        mtgBrowser.wait(textToBe(By.id("message-text"), message));
     }
 
     public void hasNoMessage() {
         mtgBrowser.wait(invisibilityOfElementLocated(By.id("message")));
+    }
+
+    public void close() {
+        mtgBrowser.findElement(By.id("message-close")).click();
     }
 }

@@ -1,6 +1,6 @@
 package application.cast;
 
-import application.AbstractApplicatonTest;
+import application.AbstractApplicationTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
@@ -25,21 +25,21 @@ import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CastCreatureTest.InitGameTestConfiguration.class})
-public class CastCreatureTest extends AbstractApplicatonTest {
+public class CastCreatureTest extends AbstractApplicationTest {
     @Test
     public void castCreature() {
         // When click on creature without paying the cost
-        player1.getHandHelper(PLAYER).clickFirstCard(AIR_ELEMENTAL);
+        player1.getHandHelper(PLAYER).getFirstCard(AIR_ELEMENTAL).click();
 
         // Then stack is still empty
         player1.getStackHelper().toHaveSize(0);
 
         // When clicking all lands
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(ISLAND, 0);
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(ISLAND, 1);
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(ISLAND, 2);
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(MOUNTAIN, 0);
-        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).clickCard(MOUNTAIN, 1);
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).click();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).click();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).click();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).click();
+        player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).click();
 
         // Then all lands are front-end tapped
         player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isFrontendTapped();
@@ -49,7 +49,7 @@ public class CastCreatureTest extends AbstractApplicatonTest {
         player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).isFrontendTapped();
 
         // When click on creature
-        player1.getHandHelper(PLAYER).clickCard(AIR_ELEMENTAL, 0);
+        player1.getHandHelper(PLAYER).getCard(AIR_ELEMENTAL, 0).click();
 
         // Then all lands are tapped for both players
         player1.getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isTapped();

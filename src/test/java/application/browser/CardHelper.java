@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
+import static org.openqa.selenium.support.ui.ExpectedConditions.not;
 
 public class CardHelper {
     private WebElement webElement;
@@ -31,12 +32,16 @@ public class CardHelper {
                 .collect(toList());
     }
 
-    void click() {
+    public void click() {
         webElement.click();
     }
 
-    String getCardId() {
+    public String getCardId() {
         return webElement.getAttribute("id");
+    }
+
+    public int getCardIdNumeric() {
+        return Integer.parseInt(getCardId().split("-")[1]);
     }
 
     public void isFrontendTapped() {
@@ -45,5 +50,13 @@ public class CardHelper {
 
     public void isTapped() {
         mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", "tapped"));
+    }
+
+    public void hasClass(String classValue) {
+        mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", classValue));
+    }
+
+    public void doesNotHaveClass(String classValue) {
+        mtgBrowser.wait(not(attributeContains(By.id(getCardId()), "class", classValue)));
     }
 }

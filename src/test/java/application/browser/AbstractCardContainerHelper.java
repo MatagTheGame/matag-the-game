@@ -53,14 +53,6 @@ public abstract class AbstractCardContainerHelper {
         });
     }
 
-    public void clickFirstCard(Card card) {
-        getFirstCard(card).click();
-    }
-
-    public void clickCard(Card card, int index) {
-        getCard(card, index).click();
-    }
-
     public CardHelper getFirstCard(Card card) {
         return getCard(card, 0);
     }

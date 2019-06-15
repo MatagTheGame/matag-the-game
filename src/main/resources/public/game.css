@@ -218,8 +218,8 @@ body {
 #message-close {
   position: absolute;
   font-size: x-large;
-  top: 0;
-  right: 2px;
+  top: 2px;
+  right: 8px;
   cursor: pointer;
 }
 
