@@ -45,18 +45,30 @@ public class CardHelper {
     }
 
     public void isFrontendTapped() {
-        mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", "frontend-tapped"));
+        hasClass("frontend-tapped");
     }
 
     public void isTapped() {
-        mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", "tapped"));
+        hasClass("tapped");
     }
 
-    public void hasClass(String classValue) {
+    public void isTargeted() {
+        hasClass("targeted");
+    }
+
+    public void isSelected() {
+        hasClass("selected");
+    }
+
+    public void isNotSelected() {
+        doesNotHaveClass("selected");
+    }
+
+    private void hasClass(String classValue) {
         mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", classValue));
     }
 
-    public void doesNotHaveClass(String classValue) {
+    private void doesNotHaveClass(String classValue) {
         mtgBrowser.wait(not(attributeContains(By.id(getCardId()), "class", classValue)));
     }
 }

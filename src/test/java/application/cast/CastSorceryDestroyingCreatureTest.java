@@ -39,21 +39,21 @@ public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
         browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).click();
 
         // Then card is selected and message ask to choose a target
-        browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).hasClass("selected");
+        browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).isSelected();
         browser.player1().getStatusHelper().hasMessage("Select targets for Legion's Judgment.");
 
         // When un-selecting the card
         browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).click();
 
         // Then card is unselected
-        browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).doesNotHaveClass("selected");
+        browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).isNotSelected();
         browser.player1().getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
 
         // When click on a sorcery that requires target
         browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).click();
 
         // Then again card is selected and message ask to choose a target
-        browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).hasClass("selected");
+        browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).isSelected();
         browser.player1().getStatusHelper().hasMessage("Select targets for Legion's Judgment.");
 
         // When clicking a wrong target
@@ -68,11 +68,13 @@ public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
         browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).click();
         browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(COLOSSAL_DREADMAW).click();
 
-        // TODO Antonio: Then spell goes on the stack
-//        browser.player1().getStackHelper().containsAbilitiesExactly(singletonList("Pippo's Legion's Judgment (" + legionsJudgmentId + "): Destroy target."));
-//        browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
-//        browser.player2().getStackHelper().containsAbilitiesExactly(singletonList("Pippo's Legion's Judgment (" + legionsJudgmentId + "): Destroy target."));
-//        browser.player2().getStatusHelper().hasMessage("Play any instant or abilities or resolve the top spell in the stack (SPACE).");
+        // Then spell goes on the stack
+        browser.player1().getStackHelper().containsExactly(LEGIONS_JUDGMENT);
+        browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(COLOSSAL_DREADMAW).isTargeted();
+        browser.player2().getStackHelper().containsExactly(LEGIONS_JUDGMENT);
+        browser.player2().getStatusHelper().hasMessage("Play any instant or abilities or resolve the top spell in the stack (SPACE).");
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(COLOSSAL_DREADMAW).isTargeted();
 
         // Player 2 resolve the spell
         browser.player2().getActionHelper().clickContinue();

@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
-import static application.browser.CardHelper.cardNames;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
@@ -29,8 +28,8 @@ public class PlayLandTest extends AbstractApplicationTest {
         browser.player1().getHandHelper(PLAYER).getFirstCard(ISLAND).click();
 
         // Then battlefields contain land
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(cardNames(ISLAND));
-        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(cardNames(ISLAND));
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(ISLAND);
+        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(ISLAND);
 
         // Hand is empty
         browser.player1().getHandHelper(PLAYER).toHaveSize(1);

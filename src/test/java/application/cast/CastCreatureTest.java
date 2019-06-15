@@ -65,9 +65,9 @@ public class CastCreatureTest extends AbstractApplicationTest {
         browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(MOUNTAIN, 1).isTapped();
 
         // And creature is on the stack for both players (hands is empty)
-        browser.player1().getStackHelper().contains(AIR_ELEMENTAL);
+        browser.player1().getStackHelper().containsExactly(AIR_ELEMENTAL);
         browser.player1().getHandHelper(PLAYER).isEmpty();
-        browser.player2().getStackHelper().contains(AIR_ELEMENTAL);
+        browser.player2().getStackHelper().containsExactly(AIR_ELEMENTAL);
         browser.player1().getHandHelper(OPPONENT).isEmpty();
 
         // And priority is to opponent with corresponding status

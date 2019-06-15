@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static application.browser.CardHelper.cardNames;
@@ -20,11 +21,16 @@ public abstract class AbstractCardContainerHelper {
         this.mtgBrowser = mtgBrowser;
     }
 
-    public void containsExactly(List<String> expectedCards) {
+    public void containsExactly(Card... expectedCards) {
+        containsExactly(cardNames(expectedCards).toArray(new String[0]));
+    }
+
+    public void containsExactly(String... expectedCardsNames) {
+        List<String> expectedCardsNamesList = Arrays.asList(expectedCardsNames);
         mtgBrowser.wait(driver -> {
             List<String> actualCardNames = cardNames(containerElement());
-            LOGGER.info("actualCardNames={}   expectedCards={}", actualCardNames, expectedCards);
-            return expectedCards.equals(actualCardNames);
+            LOGGER.info("actualCardNames={}   expectedCardsNames={}", actualCardNames, expectedCardsNamesList);
+            return expectedCardsNamesList.equals(actualCardNames);
         });
     }
 
