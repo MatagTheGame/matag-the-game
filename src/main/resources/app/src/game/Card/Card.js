@@ -26,7 +26,7 @@ class Card extends Component {
   }
 
   isCurrentCardATarget() {
-    return this.props.targetIdsForLastSpell.includes(this.props.cardInstance.id)
+    return this.props.targetIdsForLastSpell.indexOf(this.props.cardInstance.id) >= 0
   }
 
   getClasses() {

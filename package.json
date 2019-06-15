@@ -10,6 +10,7 @@
     "build-dev": "webpack -d",
     "build-prod": "webpack -p",
     "watch": "webpack -d --watch",
+    "watch-htmlunit": "webpack -p --watch",
     "postinstall": "yarn build-prod"
   },
   "author": "Antonio Alonzi",

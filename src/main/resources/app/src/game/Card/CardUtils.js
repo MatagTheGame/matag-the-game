@@ -133,7 +133,7 @@ export default class CardUtils {
   }
 
   static isOfType(cardInstance, type) {
-    return cardInstance.card.types.includes(type)
+    return cardInstance.card.types.indexOf(type) >= 0
   }
 
   static canAttack(attackingCard) {
