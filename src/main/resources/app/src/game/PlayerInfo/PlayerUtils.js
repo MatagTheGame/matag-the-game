@@ -4,8 +4,8 @@ import StackUtils from '../Stack/StackUtils'
 import stompClient from '../WebSocket'
 import CostUtils from '../Card/CostUtils'
 
-const PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE = "Play any spell or abilities or continue (SPACE)."
-const PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE = "Play any instant or abilities or resolve the top spell in the stack (SPACE)."
+const PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE = 'Play any spell or abilities or continue (SPACE).'
+const PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE = 'Play any instant or abilities or resolve the top spell in the stack (SPACE).'
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
@@ -59,13 +59,13 @@ export default class PlayerUtils {
 
   static canPlayerPerformAnyAction(state) {
     if (!PlayerUtils.isCurrentPlayerActive(state)) {
-      state.statusMessage = "Wait for opponent to perform its action..."
+      state.statusMessage = 'Wait for opponent to perform its action...'
       return false
     }
 
     if (!PlayerUtils.isCurrentPlayerTurn(state)) {
       if (state.turn.currentPhase === 'DB' && PlayerUtils.isPlayerAbleToBlock(state)) {
-        state.statusMessage = "Choose creatures you want to block with."
+        state.statusMessage = 'Choose creatures you want to block with.'
         return true
       } else {
         if (!StackUtils.isStackEmpty(state)) {
@@ -83,13 +83,13 @@ export default class PlayerUtils {
         }
         return true
       } else if (state.turn.triggeredNonStackAction) {
-        state.statusMessage = "Chose a card to discard."
+        state.statusMessage = 'Chose a card to discard.'
         return true
       } else if (state.turn.currentPhase === 'DA' && PlayerUtils.isPlayerAbleToAttack(state)) {
-        state.statusMessage = "Choose creatures you want to attack with."
+        state.statusMessage = 'Choose creatures you want to attack with.'
         return true
       } else {
-        state.statusMessage = "..."
+        state.statusMessage = '...'
         return false
       }
     }
@@ -106,7 +106,7 @@ export default class PlayerUtils {
       state.statusMessage = PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE
     } else {
       state.turn.cardIdSelectedToBePlayed = cardInstance.id
-      state.statusMessage = "Select targets for " + cardInstance.card.name + "."
+      state.statusMessage = 'Select targets for ' + cardInstance.card.name + '.'
     }
   }
 

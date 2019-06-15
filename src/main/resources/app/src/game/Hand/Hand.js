@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {get} from 'lodash'
@@ -35,7 +35,7 @@ class Hand extends Component {
       <div id={this.getId()} className='hand'>
         {this.getHand().map((cardInstance) =>
           <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
-                selected={this.isCardSelectedToBePlayed(cardInstance)} area='hand' />)}
+            selected={this.isCardSelectedToBePlayed(cardInstance)} area='hand' />)}
       </div>
     )
   }

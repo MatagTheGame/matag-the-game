@@ -6,8 +6,8 @@ import PropTypes from 'prop-types'
 
 class Message extends Component {
   constructor(props) {
-    super(props);
-    this.handleEscape = this.handleEscape.bind(this);
+    super(props)
+    this.handleEscape = this.handleEscape.bind(this)
   }
 
   handleEscape(event) {
@@ -17,11 +17,11 @@ class Message extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this.handleEscape);
+    document.addEventListener('keydown', this.handleEscape)
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleEscape);
+    document.removeEventListener('keydown', this.handleEscape)
   }
 
   renderCloseButton() {

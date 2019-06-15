@@ -11,7 +11,7 @@ export class LibraryUiUtils {
     return {
       height: `${twiceCardsNumber}px`,
       bottom: `-${cardsNumber}px`,
-      transform: `rotateX(-90deg)`
+      transform: 'rotateX(-90deg)'
     }
   }
 
@@ -20,7 +20,7 @@ export class LibraryUiUtils {
     return {
       width: `${twiceCardsNumber}px`,
       right: `-${cardsNumber}px`,
-      transform: `rotateY(-90deg)`
+      transform: 'rotateY(-90deg)'
     }
   }
 }

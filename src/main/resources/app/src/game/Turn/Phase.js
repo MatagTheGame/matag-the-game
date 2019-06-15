@@ -7,7 +7,7 @@ export default class Phase extends Component {
   }
 
   static isMainPhase(phase) {
-    return phase === 'M1' || phase === 'M2';
+    return phase === 'M1' || phase === 'M2'
   }
 
   render() {

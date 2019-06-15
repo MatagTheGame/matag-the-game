@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {get} from 'lodash'
 import Card from '../Card/Card'

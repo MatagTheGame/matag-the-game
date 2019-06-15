@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 
 class MaximizedCard extends Component {
   constructor(props) {
-    super(props);
-    this.onWheel= this.onWheel.bind(this);
+    super(props)
+    this.onWheel= this.onWheel.bind(this)
   }
 
   onWheel(e) {
@@ -21,8 +21,8 @@ class MaximizedCard extends Component {
         <Fragment>
           <div id='modal-container' onWheel={this.onWheel} />
           <div id='maximized-card'
-                  style={{backgroundImage: this.props.maximizedCard}}
-                  onWheel={this.onWheel}/>
+            style={{backgroundImage: this.props.maximizedCard}}
+            onWheel={this.onWheel}/>
         </Fragment>
       )
     } else {

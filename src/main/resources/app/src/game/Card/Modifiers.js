@@ -3,7 +3,7 @@ import CardUtils from './CardUtils'
 
 export class Modifiers extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   summoningSickness() {

@@ -18,10 +18,10 @@ class TurnPhases extends Component {
       <div id='turn-phases'>
         {Phase.getPhases().map((phase) =>
           <Phase key={phase}
-                 name={phase}
-                 active={this.isPhaseActive(phase)}
-                 activeForPlayer={this.isPhaseActiveForPlayer()}/>
-                 )}
+            name={phase}
+            active={this.isPhaseActive(phase)}
+            activeForPlayer={this.isPhaseActiveForPlayer()}/>
+        )}
       </div>
     )
   }

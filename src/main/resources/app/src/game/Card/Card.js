@@ -8,8 +8,8 @@ import PropTypes from 'prop-types'
 
 class Card extends Component {
   constructor(props) {
-    super(props);
-    this.onWheel = this.onWheel.bind(this);
+    super(props)
+    this.onWheel = this.onWheel.bind(this)
   }
 
   name() {
@@ -76,11 +76,11 @@ class Card extends Component {
     if (this.props.cardInstance) {
       return (
         <div id={'card-' + this.props.cardInstance.id}
-             className={this.getClasses()}
-             style={{backgroundImage: this.imageUrl(), ...this.props.style}}
-             onClick={this.props.onclick}
-             onWheel={this.onWheel}
-             aria-label={this.props.cardInstance.card.name}>
+          className={this.getClasses()}
+          style={{backgroundImage: this.imageUrl(), ...this.props.style}}
+          onClick={this.props.onclick}
+          onWheel={this.onWheel}
+          aria-label={this.props.cardInstance.card.name}>
           { this.props.area === 'battlefield' ? <Modifiers cardInstance={this.props.cardInstance} /> : null }
         </div>
       )

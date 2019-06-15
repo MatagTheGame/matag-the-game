@@ -6,8 +6,8 @@ import PropTypes from 'prop-types'
 
 class UserAction extends Component {
   constructor(props) {
-    super(props);
-    this.handleContinueKey = this.handleContinueKey.bind(this);
+    super(props)
+    this.handleContinueKey = this.handleContinueKey.bind(this)
   }
 
   handleContinueKey(event) {
@@ -19,11 +19,11 @@ class UserAction extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this.handleContinueKey);
+    document.addEventListener('keydown', this.handleContinueKey)
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleContinueKey);
+    document.removeEventListener('keydown', this.handleContinueKey)
   }
 
   isPhaseActiveForPlayer() {

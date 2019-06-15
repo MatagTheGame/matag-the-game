@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 export class TriggeredAbility extends Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   getTriggeredAbilityText() {
