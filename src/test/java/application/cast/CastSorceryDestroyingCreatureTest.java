@@ -23,6 +23,7 @@ import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
 import static com.aa.mtg.cards.sets.Ixalan.LEGIONS_JUDGMENT;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -70,14 +71,38 @@ public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
 
         // Then spell goes on the stack
         browser.player1().getStackHelper().containsExactly(LEGIONS_JUDGMENT);
-        browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
         browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(COLOSSAL_DREADMAW).isTargeted();
+        browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
         browser.player2().getStackHelper().containsExactly(LEGIONS_JUDGMENT);
-        browser.player2().getStatusHelper().hasMessage("Play any instant or abilities or resolve the top spell in the stack (SPACE).");
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(COLOSSAL_DREADMAW).isTargeted();
+        browser.player2().getStatusHelper().hasMessage("Play any instant or abilities or resolve the top spell in the stack (SPACE).");
 
-        // Player 2 resolve the spell
+        // And priority is passed to the opponent
+        browser.player1().getActionHelper().cannotContinue();
+        browser.player1().getPhaseHelper().is(M1, OPPONENT);
+        browser.player2().getActionHelper().canContinue();
+        browser.player2().getPhaseHelper().is(M1, PLAYER);
+
+        // When player 2 resolves the spell
         browser.player2().getActionHelper().clickContinue();
+
+        // Then the creature is destroyed
+        browser.player1().getStackHelper().isEmpty();
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).doesNotContain(COLOSSAL_DREADMAW);
+        browser.player1().getGraveyardHelper(OPPONENT).contains(COLOSSAL_DREADMAW);
+        browser.player1().getGraveyardHelper(PLAYER).contains(LEGIONS_JUDGMENT);
+        browser.player2().getStackHelper().isEmpty();
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).doesNotContain(COLOSSAL_DREADMAW);
+        browser.player2().getGraveyardHelper(PLAYER).contains(COLOSSAL_DREADMAW);
+        browser.player2().getGraveyardHelper(OPPONENT).contains(LEGIONS_JUDGMENT);
+
+        // And priority is passed to the player again
+        browser.player1().getActionHelper().canContinue();
+        browser.player1().getPhaseHelper().is(M1, PLAYER);
+        browser.player1().getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
+        browser.player2().getActionHelper().cannotContinue();
+        browser.player2().getPhaseHelper().is(M1, OPPONENT);
+        browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
     }
 
     @Configuration

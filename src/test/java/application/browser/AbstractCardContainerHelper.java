@@ -42,6 +42,14 @@ public abstract class AbstractCardContainerHelper {
         });
     }
 
+    public void doesNotContain(Card expectedCard) {
+        mtgBrowser.wait(driver -> {
+            List<String> actualCardNames = cardNames(containerElement());
+            LOGGER.info("actualCardNames={}   expectedCard={}", actualCardNames, expectedCard);
+            return !actualCardNames.contains(expectedCard.getName());
+        });
+    }
+
     public void isEmpty() {
         toHaveSize(0);
     }
