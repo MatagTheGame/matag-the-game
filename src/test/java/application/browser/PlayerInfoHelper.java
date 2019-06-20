@@ -34,10 +34,10 @@ public class PlayerInfoHelper {
         });
     }
 
-    public void toHaveLife(String expectedPlayerLife) {
+    public void toHaveLife(int expectedPlayerLife) {
         mtgBrowser.wait(driver -> {
             LOGGER.info("actualPlayerName={}   expectedPlayerLife={}", getPlayerLife(), expectedPlayerLife);
-            return getPlayerLife().equals(expectedPlayerLife);
+            return getPlayerLife().equals(String.valueOf(expectedPlayerLife));
         });
     }
 

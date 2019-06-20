@@ -52,16 +52,16 @@ public class InitGameTest extends AbstractApplicationTest {
 
         // PlayerInfos are
         browser.player1().getPlayerInfoHelper(PLAYER).toHaveName("Pippo");
-        browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife("20");
+        browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(20);
         browser.player1().getPlayerInfoHelper(PLAYER).toBeActive();
         browser.player1().getPlayerInfoHelper(OPPONENT).toHaveName("Pluto");
-        browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife("20");
+        browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(20);
         browser.player1().getPlayerInfoHelper(OPPONENT).toBeInactive();
         browser.player2().getPlayerInfoHelper(PLAYER).toHaveName("Pluto");
-        browser.player2().getPlayerInfoHelper(PLAYER).toHaveLife("20");
+        browser.player2().getPlayerInfoHelper(PLAYER).toHaveLife(20);
         browser.player2().getPlayerInfoHelper(PLAYER).toBeInactive();
         browser.player2().getPlayerInfoHelper(OPPONENT).toHaveName("Pippo");
-        browser.player2().getPlayerInfoHelper(OPPONENT).toHaveLife("20");
+        browser.player2().getPlayerInfoHelper(OPPONENT).toHaveLife(20);
         browser.player2().getPlayerInfoHelper(OPPONENT).toBeActive();
 
         // Phase and statuses are

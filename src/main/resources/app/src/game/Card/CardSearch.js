@@ -80,4 +80,9 @@ export default class CardSearch extends Array {
   isNotEmpty() {
     return this.length > 0
   }
+
+  concat(array) {
+    super.concat(array)
+    return this
+  }
 }

@@ -34,11 +34,16 @@ public abstract class AbstractCardContainerHelper {
         });
     }
 
-    public void contains(Card expectedCard) {
+    public void contains(Card... expectedCards) {
+        contains(cardNames(expectedCards).toArray(new String[0]));
+    }
+
+    public void contains(String... expectedCardsNames) {
+        List<String> expectedCardsNamesList = Arrays.asList(expectedCardsNames);
         mtgBrowser.wait(driver -> {
             List<String> actualCardNames = cardNames(containerElement());
-            LOGGER.info("actualCardNames={}   expectedCard={}", actualCardNames, expectedCard);
-            return actualCardNames.contains(expectedCard.getName());
+            LOGGER.info("actualCardNames={}   expectedCard={}", actualCardNames, expectedCardsNamesList);
+            return actualCardNames.containsAll(expectedCardsNamesList);
         });
     }
 
@@ -75,7 +80,7 @@ public abstract class AbstractCardContainerHelper {
         mtgBrowser.wait(driver -> cardNames(containerElement()).stream()
                 .filter(cardName -> cardName.equals(card.getName()))
                 .count() > index);
-        WebElement webElement = mtgBrowser.findElements(By.cssSelector("[aria-label=\"" + card.getName() + "\"]")).get(index);
+        WebElement webElement = containerElement().findElements(By.cssSelector("[aria-label=\"" + card.getName() + "\"]")).get(index);
         return new CardHelper(webElement, mtgBrowser);
     }
 

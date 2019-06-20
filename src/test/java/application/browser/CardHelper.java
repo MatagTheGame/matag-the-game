@@ -2,6 +2,7 @@ package application.browser;
 
 import com.aa.mtg.cards.Card;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
 import static org.openqa.selenium.support.ui.ExpectedConditions.not;
+import static org.openqa.selenium.support.ui.ExpectedConditions.textToBe;
 
 public class CardHelper {
     private WebElement webElement;
@@ -33,7 +35,11 @@ public class CardHelper {
     }
 
     public void click() {
-        webElement.click();
+        try {
+            webElement.click();
+        } catch (ElementClickInterceptedException e) {
+            webElement.findElement(By.tagName("div")).click();
+        }
     }
 
     public String getCardId() {
@@ -50,6 +56,10 @@ public class CardHelper {
 
     public void isTapped() {
         hasClass("tapped");
+    }
+
+    public void isNotTapped() {
+        doesNotHaveClass("tapped");
     }
 
     public void isTargeted() {
@@ -70,5 +80,9 @@ public class CardHelper {
 
     private void doesNotHaveClass(String classValue) {
         mtgBrowser.wait(not(attributeContains(By.id(getCardId()), "class", classValue)));
+    }
+
+    public void hasDamage(int damage) {
+        mtgBrowser.wait(textToBe(By.cssSelector("#" + getCardId() + " .damage"), String.valueOf(damage)));
     }
 }
