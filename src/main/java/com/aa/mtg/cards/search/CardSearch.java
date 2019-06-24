@@ -47,7 +47,7 @@ public class CardSearch {
 
     public CardSearch untapped() {
         List<CardInstance> cards = this.cards.stream()
-                .filter(cardInstance -> cardInstance.getModifiers().isUnapped())
+                .filter(cardInstance -> cardInstance.getModifiers().isUntapped())
                 .collect(toList());
         return new CardSearch(cards);
     }

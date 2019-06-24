@@ -30,7 +30,7 @@ public class CardModifiers {
         return tapped != null;
     }
 
-    public boolean isUnapped() {
+    public boolean isUntapped() {
         return !isTapped();
     }
 
