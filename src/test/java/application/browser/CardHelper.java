@@ -81,12 +81,8 @@ public class CardHelper {
         waitForAbsenceOfElement(cardCssSelector(".summoning-sickness"));
     }
 
-    private void hasClass(String classValue) {
-        mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", classValue));
-    }
-
-    private void doesNotHaveClass(String classValue) {
-        mtgBrowser.wait(not(attributeContains(By.id(getCardId()), "class", classValue)));
+    public void hasFlying() {
+        hasClass("flying");
     }
 
     public void hasDamage(int damage) {
@@ -99,6 +95,14 @@ public class CardHelper {
 
     public void hasPowerAndToughness(String powerAndToughness) {
         mtgBrowser.wait(textToBe(cardCssSelector(".power-toughness"), String.valueOf(powerAndToughness)));
+    }
+
+    private void hasClass(String classValue) {
+        mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", classValue));
+    }
+
+    private void doesNotHaveClass(String classValue) {
+        mtgBrowser.wait(not(attributeContains(By.id(getCardId()), "class", classValue)));
     }
 
     private By cardCssSelector(String cssSelector) {

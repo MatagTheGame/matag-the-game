@@ -82,7 +82,7 @@ export default class CardSearch extends Array {
   }
 
   concat(array) {
-    super.concat(array)
-    return this
+    const cards = super.concat(array)
+    return new CardSearch(...cards)
   }
 }

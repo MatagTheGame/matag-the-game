@@ -11,7 +11,7 @@ export default class CardUtils {
   }
 
   static hasAbility(cardInstance, ability) {
-    return cardInstance.abilities.find((currentAbility) => currentAbility.abilityType === ability)
+    return cardInstance.abilities.find((currentAbility) => currentAbility.abilityTypes.indexOf(ability) > -1)
   }
 
   static frontendTap(cardInstance) {
