@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class CardHelper {
@@ -119,4 +120,8 @@ public class CardHelper {
         }
     }
 
+    public void parentHasStyle(String style) {
+        WebElement parent = webElement.findElement(By.xpath("./.."));
+        assertThat(parent.getAttribute("style")).contains(style);
+    }
 }

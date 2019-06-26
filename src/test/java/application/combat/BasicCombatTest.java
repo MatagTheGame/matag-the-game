@@ -84,13 +84,17 @@ public class BasicCombatTest extends AbstractApplicationTest {
         // Opponent declare blockers
         browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(HEADWATER_SENTRIES).click();
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).click();
+        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(HEADWATER_SENTRIES).parentHasStyle("margin-left: 390px; margin-top: 0px;");
 
         browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(CORAL_COMMANDO).click();
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CORAL_COMMANDO).click();
+        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(CORAL_COMMANDO).parentHasStyle("margin-left: 130px; margin-top: 0px;");
 
         browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(AXEBANE_BEAST).click();
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(NEST_ROBBER).click();
+        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(NEST_ROBBER).parentHasStyle("margin-left: -130px; margin-top: 0px;");
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).click();
+        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getCard(HEADWATER_SENTRIES, 1).parentHasStyle("margin-left: -105px; margin-top: 50px;");
 
         // And continue
         browser.player2().getActionHelper().clickContinue();
