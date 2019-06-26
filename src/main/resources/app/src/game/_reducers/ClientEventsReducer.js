@@ -50,14 +50,20 @@ export default class ClientEventsReducer {
         const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
 
         if (newState.turn.currentPhase === 'DA') {
-          if (CardUtils.canAttack(cardInstance)) {
+          const canAttackResult = CardUtils.canAttack(cardInstance)
+          if (canAttackResult === true) {
             CardUtils.toggleFrontendAttacking(cardInstance)
+          } else {
+            newState.message = {text: canAttackResult, closable: true}
           }
 
         } else if (newState.turn.currentPhase === 'DB') {
           const blockedCard = CardSearch.cards(newState.opponent.battlefield).attacking()[newState.turn.blockingCardPosition]
-          if (CardUtils.canBlock(cardInstance, blockedCard)) {
+          const canBlockResult = CardUtils.canBlock(cardInstance, blockedCard)
+          if (canBlockResult === true) {
             CardUtils.toggleFrontendBlocking(cardInstance, blockedCard.id)
+          } else {
+            newState.message = {text: canBlockResult, closable: true}
           }
 
         } else if (newState.turn.cardIdSelectedToBePlayed) {

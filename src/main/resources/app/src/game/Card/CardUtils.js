@@ -138,15 +138,15 @@ export default class CardUtils {
 
   static canAttack(attackingCard) {
     if (!CardUtils.isOfType(attackingCard, 'CREATURE')) {
-      return false
+      return attackingCard.idAndName + ' is not of type Creature.'
     }
 
     if (CardUtils.hasSummoningSickness(attackingCard)) {
-      return false
+      return attackingCard.idAndName + ' has summoning sickness and cannot attack.'
     }
 
     if (CardUtils.isTapped(attackingCard)) {
-      return false
+      return attackingCard.idAndName + ' is already tapped and cannot attack.'
     }
 
     return true
@@ -154,16 +154,16 @@ export default class CardUtils {
 
   static canBlock(blockingCard, blockedCard) {
     if (!CardUtils.isOfType(blockingCard, 'CREATURE')) {
-      return false
+      return blockingCard.idAndName + ' is not of type Creature.'
     }
 
     if (CardUtils.isTapped(blockingCard)) {
-      return false
+      return blockingCard.idAndName + ' is tapped and cannot block.'
     }
 
     if (CardUtils.hasAbility(blockedCard, 'FLYING')) {
       if (!(CardUtils.hasAbility(blockingCard, 'FLYING') || CardUtils.hasAbility(blockingCard, 'REACH'))) {
-        return false
+        return blockingCard.idAndName +' cannot block ' + blockedCard.idAndName + ' as it has flying.'
       }
     }
 

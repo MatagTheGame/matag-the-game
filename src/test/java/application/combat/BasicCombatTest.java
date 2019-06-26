@@ -50,6 +50,13 @@ public class BasicCombatTest extends AbstractApplicationTest {
         // Then attacker is moved backward
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).isNotTapped();
 
+        // When declare illegal attacker
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(NEST_ROBBER).click();
+
+        // Then a message is displayed
+        browser.getMessageHelper().hasMessage("\"129 - Nest Robber\" is already tapped and cannot attack.");
+        browser.getMessageHelper().close();
+
         // The four attackers are declared as attacker and continue
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).click();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CORAL_COMMANDO).click();
@@ -150,6 +157,10 @@ public class BasicCombatTest extends AbstractApplicationTest {
 
                     // Non blocked damage to player
                     addCardToCurrentPlayerBattlefield(gameStatus, ANCIENT_BRONTODON); // 9/9
+
+                    // Cannot attack as tapped
+                    addCardToCurrentPlayerBattlefield(gameStatus, NEST_ROBBER);
+                    gameStatus.getCurrentPlayer().getBattlefield().getCards().get(4).getModifiers().tap();
                 }
             };
         }
