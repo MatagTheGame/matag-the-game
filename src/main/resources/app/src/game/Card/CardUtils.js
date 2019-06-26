@@ -181,7 +181,9 @@ export default class CardUtils {
   }
 
   static needsTargets(cardInstance) {
-    return cardInstance.abilities[0].targets.length > 0
+    if (cardInstance.abilities.length > 0) {
+      return cardInstance.abilities[0].targets.length > 0
+    }
   }
 
   static getPower(cardInstance) {
