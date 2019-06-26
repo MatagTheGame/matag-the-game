@@ -44,7 +44,7 @@ public class DeckRetrieverService {
         }
 
 
-        for (int i = 0; i < 36 / 3; i++) {
+        for (int i = 0; i < 36 / 4; i++) {
             cards.add(new CardInstance(gameStatus.nextCardId(), CATACOMB_CROCODILE, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), NOXIOUS_GROODION, playerName));
             cards.add(new CardInstance(gameStatus.nextCardId(), PROWLING_CARACAL, playerName));
