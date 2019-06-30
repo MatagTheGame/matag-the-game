@@ -25,7 +25,7 @@ public class DeckRetrieverService {
     }
 
     private Library randomDeck(String playerName, GameStatus gameStatus) {
-        switch (new Random().nextInt(4)) {
+        switch (new Random().nextInt(3)) {
             case 0:
                 return blackWhiteGuild(playerName, gameStatus).shuffle();
             case 1:

@@ -30,12 +30,11 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
     @Test
     public void castAuraDestroyCreature() {
         // When cast an enchantment aura
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 0).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 2).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 3).click();
-        browser.player1().getHandHelper(PLAYER).getFirstCard(CANDLELIGHT_VIGIL).click();
-        browser.player1().getHandHelper(PLAYER).getFirstCard(CANDLELIGHT_VIGIL).isSelected();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 0).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 2).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 3).tap();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(CANDLELIGHT_VIGIL).select();
         browser.player1().getStatusHelper().hasMessage("Select targets for Candlelight Vigil.");
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
 
@@ -50,12 +49,11 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).hasPowerAndToughness("4/5");
 
         // When casting another instance of the same aura
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 4).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 5).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 6).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 7).click();
-        browser.player1().getHandHelper(PLAYER).getFirstCard(CANDLELIGHT_VIGIL).click();
-        browser.player1().getHandHelper(PLAYER).getFirstCard(CANDLELIGHT_VIGIL).isSelected();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 4).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 5).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 6).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 7).tap();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(CANDLELIGHT_VIGIL).select();
         browser.player1().getStatusHelper().hasMessage("Select targets for Candlelight Vigil.");
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
 
@@ -72,18 +70,18 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
         // Verify as well the vigilance effect
         browser.player1().getActionHelper().clickContinue();
         browser.getPhaseHelper().is(DA, PLAYER);
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).declareAsAttacker();
         browser.player1().getActionHelper().clickContinue();
         browser.player1().getPhaseHelper().is(M2, PLAYER);
         browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(13);
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).isNotTapped();
 
         // Destroy the creature
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 8).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 9).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 10).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 11).click();
-        browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 8).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 9).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 10).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 11).tap();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).select();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
         browser.player2().getActionHelper().clickContinue();
 

@@ -31,9 +31,9 @@ public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
     @Test
     public void castSorceryDestroyingCreature() {
         // When clicking all lands
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 0).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 0).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).tap();
 
         // When click on a sorcery that requires target
         browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).click();

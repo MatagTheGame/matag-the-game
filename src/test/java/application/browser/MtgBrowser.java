@@ -122,5 +122,4 @@ public class MtgBrowser {
     void wait(ExpectedCondition<?> condition) {
         new WebDriverWait(webDriver, 5).until(condition);
     }
-
 }

@@ -42,6 +42,22 @@ public class CardHelper {
         }
     }
 
+    public void tap() {
+        click();
+        isFrontendTapped();
+    }
+
+    public void select() {
+        click();
+        isSelected();
+    }
+
+    public void declareAsAttacker() {
+        String cardId = this.getCardId();
+        click();
+        mtgBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + cardId)));
+    }
+
     public String getCardId() {
         return webElement.getAttribute("id");
     }
@@ -78,7 +94,7 @@ public class CardHelper {
         mtgBrowser.wait(presenceOfElementLocated(cardCssSelector(".summoning-sickness")));
     }
 
-    public void doesNotHAveSummoningSickness() {
+    public void doesNotHaveSummoningSickness() {
         waitForAbsenceOfElement(cardCssSelector(".summoning-sickness"));
     }
 
