@@ -43,13 +43,15 @@ public class CardHelper {
     }
 
     public void tap() {
+        String cardId = this.getCardId();
         click();
-        isFrontendTapped();
+        findByCardId(cardId).isFrontendTapped();
     }
 
     public void select() {
+        String cardId = this.getCardId();
         click();
-        isSelected();
+        findByCardId(cardId).isSelected();
     }
 
     public void declareAsAttacker() {
@@ -114,6 +116,11 @@ public class CardHelper {
         mtgBrowser.wait(textToBe(cardCssSelector(".power-toughness"), String.valueOf(powerAndToughness)));
     }
 
+    public void parentHasStyle(String style) {
+        WebElement parent = webElement.findElement(By.xpath("./.."));
+        assertThat(parent.getAttribute("style")).contains(style);
+    }
+
     private void hasClass(String classValue) {
         mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", classValue));
     }
@@ -136,8 +143,7 @@ public class CardHelper {
         }
     }
 
-    public void parentHasStyle(String style) {
-        WebElement parent = webElement.findElement(By.xpath("./.."));
-        assertThat(parent.getAttribute("style")).contains(style);
+    private CardHelper findByCardId(String cardId) {
+        return new CardHelper(mtgBrowser.findElement(By.id(cardId)), mtgBrowser);
     }
 }
