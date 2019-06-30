@@ -29,4 +29,13 @@ public class Abilities {
     public static Ability SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER = new Ability(SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER, singletonList(Target.builder().targetType(TargetType.PLAYER).build()), emptyList());
     public static Ability TRAMPLE = new Ability(AbilityType.TRAMPLE);
     public static Ability VIGILANCE = new Ability(AbilityType.VIGILANCE);
+
+
+    public static Ability get(String ability) {
+        try {
+            return (Ability) Abilities.class.getField(ability).get(null);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Ability " + ability  + " does not exist.");
+        }
+    }
 }

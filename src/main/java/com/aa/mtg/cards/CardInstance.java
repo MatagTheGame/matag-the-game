@@ -1,5 +1,6 @@
 package com.aa.mtg.cards;
 
+import com.aa.mtg.cards.ability.Abilities;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Type;
@@ -11,6 +12,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.ENCHANTED_CREATURE_GETS;
@@ -160,6 +162,7 @@ public class CardInstance {
         abilities.addAll(card.getAbilities());
         abilities.addAll(modifiers.getAbilities());
         abilities.addAll(modifiers.getAbilitiesUntilEndOfTurn());
+        abilities.addAll(getAttachmentsAbilities());
         return abilities;
     }
 
@@ -173,6 +176,12 @@ public class CardInstance {
 
     public boolean isOfSubtype(String subtype) {
         return this.card.getSubtypes().contains(subtype);
+    }
+
+    public List<CardInstance> getAttachedCards() {
+        return new CardSearch(gameStatus.getPlayer1().getBattlefield().getCards())
+                .concat(gameStatus.getPlayer2().getBattlefield().getCards())
+                .attachedToId(this.id).getCards();
     }
 
     private int getAttachmentsPower() {
@@ -201,10 +210,16 @@ public class CardInstance {
         return attachmentsToughness;
     }
 
-    public List<CardInstance> getAttachedCards() {
-        return new CardSearch(gameStatus.getPlayer1().getBattlefield().getCards())
-                .concat(gameStatus.getPlayer2().getBattlefield().getCards())
-                .attachedToId(this.id).getCards();
+    private List<Ability> getAttachmentsAbilities() {
+        List<Ability> abilities = new ArrayList<>();
+        for (Ability ability : getAttachedCardsAbilities()) {
+            for (String parameter : ability.getParameters()) {
+                if (!parameter.contains("/")) {
+                    abilities.add(Abilities.get(parameter));
+                }
+            }
+        }
+        return abilities;
     }
 
     private List<Ability> getAttachedCardsAbilities() {

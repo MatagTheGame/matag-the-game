@@ -11,6 +11,6 @@ import static java.util.Collections.singletonList;
 
 public class GuildsOfRavnica {
 
-    public static Card CANDLELIGHT_VIGIL = new Card("Candlelight Vigil", singletonList(Color.WHITE), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), "Enchant Creature. Enchanted creature gets +3/+2 and has vigilance.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_2_AND_VIGILANCE));
+    public static Card CANDLELIGHT_VIGIL = new Card("Candlelight Vigil", singletonList(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), "Enchant Creature. Enchanted creature gets +3/+2 and has vigilance.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_2_AND_VIGILANCE));
 
 }
