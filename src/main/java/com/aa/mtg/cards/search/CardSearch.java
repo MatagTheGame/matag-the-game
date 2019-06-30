@@ -6,6 +6,7 @@ import com.aa.mtg.cards.properties.Type;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -116,5 +117,12 @@ public class CardSearch {
 
     public List<CardInstance> getCards() {
         return cards;
+    }
+
+    public CardSearch attachedToId(int attachedToId) {
+        List<CardInstance> cards = this.cards.stream()
+                .filter((cardInstance -> cardInstance.getModifiers().getAttachedToId() == attachedToId))
+                .collect(Collectors.toList());
+        return new CardSearch(cards);
     }
 }

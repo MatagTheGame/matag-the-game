@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import static com.aa.mtg.cards.properties.Type.ARTIFACT;
+import static com.aa.mtg.cards.properties.Type.ENCHANTMENT;
+
 @Service
 public class DestroyTargetAction implements AbilityAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(DestroyTargetAction.class);
@@ -19,15 +22,20 @@ public class DestroyTargetAction implements AbilityAction {
     }
 
     public void destroy(GameStatus gameStatus, int targetId) {
-        if (gameStatus.getNonCurrentPlayer().getBattlefield().hasCardById(targetId)) {
-            CardInstance destroyedCard = gameStatus.getNonCurrentPlayer().getBattlefield().extractCardById(targetId);
-            gameStatus.putIntoGraveyard(destroyedCard);
-            LOGGER.info("{} destroyed.", destroyedCard.getIdAndName());
+        CardInstance cardToDestroy = gameStatus.extractCardByIdFromAnyBattlefield(targetId);
+        if (cardToDestroy != null) {
+            for (CardInstance attachedCard : cardToDestroy.getAttachedCards()) {
+                if (attachedCard.isOfType(ENCHANTMENT)) {
+                    gameStatus.extractCardByIdFromAnyBattlefield(attachedCard.getId());
+                    gameStatus.putIntoGraveyard(attachedCard);
 
-        } else if (gameStatus.getCurrentPlayer().getBattlefield().hasCardById(targetId)) {
-            CardInstance destroyedCard = gameStatus.getCurrentPlayer().getBattlefield().extractCardById(targetId);
-            gameStatus.putIntoGraveyard(destroyedCard);
-            LOGGER.info("{} destroyed.", destroyedCard.getIdAndName());
+                } else if (attachedCard.isOfType(ARTIFACT)) {
+                    attachedCard.getModifiers().unsetAttachedId();
+                }
+            }
+
+            gameStatus.putIntoGraveyard(cardToDestroy);
+            LOGGER.info("{} destroyed.", cardToDestroy.getIdAndName());
 
         } else {
             LOGGER.info("target {} is not anymore valid.", targetId);

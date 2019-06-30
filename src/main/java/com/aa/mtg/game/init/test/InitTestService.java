@@ -25,34 +25,34 @@ public abstract class InitTestService {
     protected abstract void initGameStatus(GameStatus gameStatus);
 
     protected void addCardToCurrentPlayerLibrary(GameStatus gameStatus, Card card) {
-        gameStatus.getCurrentPlayer().getLibrary().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
+        gameStatus.getCurrentPlayer().getLibrary().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
     }
 
     protected void addCardToCurrentPlayerHand(GameStatus gameStatus, Card card) {
-        gameStatus.getCurrentPlayer().getHand().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
+        gameStatus.getCurrentPlayer().getHand().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
     }
 
     protected void addCardToCurrentPlayerBattlefield(GameStatus gameStatus, Card card) {
-        gameStatus.getCurrentPlayer().getBattlefield().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
     }
 
     protected void addCardToCurrentPlayerGraveyard(GameStatus gameStatus, Card card) {
-        gameStatus.getCurrentPlayer().getGraveyard().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
+        gameStatus.getCurrentPlayer().getGraveyard().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
     }
 
     protected void addCardToNonCurrentPlayerLibrary(GameStatus gameStatus, Card card) {
-        gameStatus.getNonCurrentPlayer().getLibrary().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
+        gameStatus.getNonCurrentPlayer().getLibrary().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
     }
 
     protected void addCardToNonCurrentPlayerHand(GameStatus gameStatus, Card card) {
-        gameStatus.getNonCurrentPlayer().getHand().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
+        gameStatus.getNonCurrentPlayer().getHand().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
     }
 
     protected void addCardToNonCurrentPlayerBattlefield(GameStatus gameStatus, Card card) {
-        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
     }
 
     protected void addCardToNonCurrentPlayerGraveyard(GameStatus gameStatus, Card card) {
-        gameStatus.getNonCurrentPlayer().getGraveyard().addCard(new CardInstance(gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
+        gameStatus.getNonCurrentPlayer().getGraveyard().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
     }
 }

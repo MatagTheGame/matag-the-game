@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 import static com.aa.mtg.cards.Cards.*;
+import static com.aa.mtg.cards.sets.GuildsOfRavnica.CANDLELIGHT_VIGIL;
 import static com.aa.mtg.cards.sets.Ixalan.*;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.*;
 
@@ -39,16 +40,16 @@ public class DeckRetrieverService {
         List<CardInstance> cards = new ArrayList<>();
 
         for (int i = 0; i < 12; i++) {
-            cards.add(new CardInstance(gameStatus.nextCardId(), PLAINS, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), SWAMP, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), PLAINS, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), SWAMP, playerName));
         }
 
 
         for (int i = 0; i < 36 / 4; i++) {
-            cards.add(new CardInstance(gameStatus.nextCardId(), CATACOMB_CROCODILE, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), NOXIOUS_GROODION, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), PROWLING_CARACAL, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), CIVIC_STALWART, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), CATACOMB_CROCODILE, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), NOXIOUS_GROODION, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), PROWLING_CARACAL, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), CIVIC_STALWART, playerName));
         }
 
         return new Library(cards);
@@ -58,14 +59,14 @@ public class DeckRetrieverService {
         List<CardInstance> cards = new ArrayList<>();
 
         for (int i = 0; i < 12; i++) {
-            cards.add(new CardInstance(gameStatus.nextCardId(), FOREST, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), MOUNTAIN, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), FOREST, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), MOUNTAIN, playerName));
         }
 
         for (int i = 0; i < 36 / 3; i++) {
-            cards.add(new CardInstance(gameStatus.nextCardId(), FERAL_MAAKA, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), AXEBANE_BEAST, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), PRECISION_BOLT, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), FERAL_MAAKA, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), AXEBANE_BEAST, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), PRECISION_BOLT, playerName));
         }
 
         return new Library(cards);
@@ -75,15 +76,16 @@ public class DeckRetrieverService {
         List<CardInstance> cards = new ArrayList<>();
 
         for (int i = 0; i < 12; i++) {
-            cards.add(new CardInstance(gameStatus.nextCardId(), PLAINS, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), ISLAND, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), PLAINS, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), ISLAND, playerName));
         }
 
-        for (int i = 0; i < 36 / 4; i++) {
-            cards.add(new CardInstance(gameStatus.nextCardId(), HEADWATER_SENTRIES, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), HUATLIS_SNUBHORN, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), AIR_ELEMENTAL, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), LEGIONS_JUDGMENT, playerName));
+        for (int i = 0; i < 36 / 5; i++) {
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), HEADWATER_SENTRIES, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), HUATLIS_SNUBHORN, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), AIR_ELEMENTAL, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), LEGIONS_JUDGMENT, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), CANDLELIGHT_VIGIL, playerName));
         }
 
         return new Library(cards);
@@ -93,17 +95,17 @@ public class DeckRetrieverService {
         List<CardInstance> cards = new ArrayList<>();
 
         for (int i = 0; i < 12; i++) {
-            cards.add(new CardInstance(gameStatus.nextCardId(), FOREST, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), MOUNTAIN, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), FOREST, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), MOUNTAIN, playerName));
         }
 
         for (int i = 0; i < 36 / 6; i++) {
-            cards.add(new CardInstance(gameStatus.nextCardId(), NEST_ROBBER, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), ANCIENT_BRONTODON, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), FRENZIED_RAPTOR, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), GRAZING_WHIPTAIL, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), CHARGING_MONSTROSAUR, playerName));
-            cards.add(new CardInstance(gameStatus.nextCardId(), COLOSSAL_DREADMAW, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), NEST_ROBBER, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), ANCIENT_BRONTODON, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), FRENZIED_RAPTOR, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), GRAZING_WHIPTAIL, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), CHARGING_MONSTROSAUR, playerName));
+            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), COLOSSAL_DREADMAW, playerName));
         }
 
         return new Library(cards);

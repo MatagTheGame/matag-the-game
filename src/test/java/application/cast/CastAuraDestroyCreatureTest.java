@@ -18,7 +18,10 @@ import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.sets.GuildsOfRavnica.CANDLELIGHT_VIGIL;
 import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
 import static com.aa.mtg.cards.sets.Ixalan.LEGIONS_JUDGMENT;
+import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
+import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -39,8 +42,55 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
         // Enchantment goes on
         browser.player1().getStackHelper().containsExactly(CANDLELIGHT_VIGIL);
 
-        // When opponent accept enchantment
+        // When opponent accepts enchantment
         browser.player2().getActionHelper().clickContinue();
+
+        // Then the attachment and its effect are on the battlefield
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(CANDLELIGHT_VIGIL);
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).hasPowerAndToughness("5/4");
+
+        // When casting another instance of the same aura
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 4).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 5).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 6).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 7).click();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(CANDLELIGHT_VIGIL).click();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(CANDLELIGHT_VIGIL).isSelected();
+        browser.player1().getStatusHelper().hasMessage("Select targets for Candlelight Vigil.");
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).click();
+
+        // Enchantment goes on
+        browser.player1().getStackHelper().containsExactly(CANDLELIGHT_VIGIL);
+
+        // When opponent accepts enchantment
+        browser.player2().getActionHelper().clickContinue();
+
+        // Then the attachment and its effect are on the battlefield
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(CANDLELIGHT_VIGIL);
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).hasPowerAndToughness("8/6");
+
+        // Verify as well the vigilance effect
+        browser.player1().getActionHelper().clickContinue();
+        browser.getPhaseHelper().is(DA, PLAYER);
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).click();
+        browser.player1().getActionHelper().clickContinue();
+        browser.player1().getPhaseHelper().is(M2, PLAYER);
+        browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(12);
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).isNotTapped();
+
+        // Destroy the creature
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 8).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 9).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 10).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 11).click();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).click();
+        browser.player2().getActionHelper().clickContinue();
+
+        // Creature and its enchantments are in the graveyard
+        browser.player1().getGraveyardHelper(PLAYER).contains(HUATLIS_SNUBHORN, CANDLELIGHT_VIGIL, CANDLELIGHT_VIGIL, LEGIONS_JUDGMENT);
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).isEmpty();
+        System.out.println();
     }
 
     @Configuration
@@ -53,6 +103,11 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
                     addCardToCurrentPlayerBattlefield(gameStatus, HUATLIS_SNUBHORN);
                     addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
                     addCardToCurrentPlayerHand(gameStatus, CANDLELIGHT_VIGIL);
+                    addCardToCurrentPlayerHand(gameStatus, CANDLELIGHT_VIGIL);
+                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
                     addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
                     addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
                     addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);

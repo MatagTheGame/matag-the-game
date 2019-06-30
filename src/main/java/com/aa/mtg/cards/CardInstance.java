@@ -3,22 +3,28 @@ package com.aa.mtg.cards;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Type;
+import com.aa.mtg.cards.search.CardSearch;
 import com.aa.mtg.game.message.MessageException;
+import com.aa.mtg.game.status.GameStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.aa.mtg.cards.ability.type.AbilityType.ENCHANTED_CREATURE_GETS;
 import static com.aa.mtg.cards.ability.type.AbilityType.FLYING;
 import static com.aa.mtg.cards.ability.type.AbilityType.REACH;
 import static com.aa.mtg.cards.ability.type.AbilityType.VIGILANCE;
+import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
 
 @ToString
 @EqualsAndHashCode
 public class CardInstance {
+    @JsonIgnore private final GameStatus gameStatus;
     private final int id;
     private final Card card;
     private final String owner;
@@ -26,16 +32,21 @@ public class CardInstance {
     private CardModifiers modifiers;
     private List<Ability> triggeredAbilities = new ArrayList<>();
 
-    public CardInstance(int id, Card card, String owner) {
-        this(id, card, owner, null);
+    public CardInstance(GameStatus gameStatus, int id, Card card, String owner) {
+        this(gameStatus, id, card, owner, null);
     }
 
-    public CardInstance(int id, Card card, String owner, String controller) {
+    public CardInstance(GameStatus gameStatus, int id, Card card, String owner, String controller) {
+        this.gameStatus = gameStatus;
         this.id = id;
         this.card = card;
         this.owner = owner;
         this.controller = controller;
         this.modifiers = new CardModifiers();
+    }
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
     }
 
     public int getId() {
@@ -73,7 +84,7 @@ public class CardInstance {
     public static List<CardInstance> mask(List<CardInstance> cardInstances) {
         List<CardInstance> library = new ArrayList<>();
         for (CardInstance cardInstance : cardInstances) {
-            library.add(new CardInstance(cardInstance.getId(), Card.hiddenCard(), cardInstance.getOwner()));
+            library.add(new CardInstance(cardInstance.getGameStatus(), cardInstance.getId(), Card.hiddenCard(), cardInstance.getOwner()));
         }
         return library;
     }
@@ -133,11 +144,11 @@ public class CardInstance {
     }
 
     public int getPower() {
-        return card.getPower() + modifiers.getExtraPowerToughnessUntilEndOfTurn().getPower();
+        return card.getPower() + modifiers.getExtraPowerToughnessUntilEndOfTurn().getPower() + getAttachmentsPower();
     }
 
     public int getToughness() {
-        return card.getToughness() + modifiers.getExtraPowerToughnessUntilEndOfTurn().getToughness();
+        return card.getToughness() + modifiers.getExtraPowerToughnessUntilEndOfTurn().getToughness() + getAttachmentsToughness();
     }
 
     public void clearModifiers() {
@@ -162,5 +173,49 @@ public class CardInstance {
 
     public boolean isOfSubtype(String subtype) {
         return this.card.getSubtypes().contains(subtype);
+    }
+
+    private int getAttachmentsPower() {
+        int attachmentsPower = 0;
+        for (Ability ability : getAttachedCardsAbilities()) {
+            for (String parameter : ability.getParameters()) {
+                if (parameter.contains("/")) {
+                    attachmentsPower += powerToughness(parameter).getPower();
+                }
+            }
+        }
+
+        return attachmentsPower;
+    }
+
+    private int getAttachmentsToughness() {
+        int attachmentsToughness = 0;
+        for (Ability ability : getAttachedCardsAbilities()) {
+            for (String parameter : ability.getParameters()) {
+                if (parameter.contains("/")) {
+                    attachmentsToughness += powerToughness(parameter).getToughness();
+                }
+            }
+        }
+
+        return attachmentsToughness;
+    }
+
+    public List<CardInstance> getAttachedCards() {
+        return new CardSearch(gameStatus.getPlayer1().getBattlefield().getCards())
+                .concat(gameStatus.getPlayer2().getBattlefield().getCards())
+                .attachedToId(this.id).getCards();
+    }
+
+    private List<Ability> getAttachedCardsAbilities() {
+        List<Ability> abilities = new ArrayList<>();
+        for (CardInstance attachedCards : getAttachedCards()) {
+            for (Ability ability : attachedCards.getAbilities()) {
+                if (ability.getAbilityTypes().contains(ENCHANTED_CREATURE_GETS)) {
+                    abilities.add(ability);
+                }
+            }
+        }
+        return abilities;
     }
 }

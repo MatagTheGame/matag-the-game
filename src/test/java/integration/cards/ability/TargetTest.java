@@ -45,7 +45,7 @@ public class TargetTest {
         Target target = Target.builder()
                 .targetType(PERMANENT)
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
@@ -63,7 +63,7 @@ public class TargetTest {
                 .targetType(PERMANENT)
                 .ofType(singletonList(CREATURE))
                 .build();
-        CardInstance cardInstance = new CardInstance(1, PLAINS, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, PLAINS, gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
@@ -81,7 +81,7 @@ public class TargetTest {
                 .targetType(PERMANENT)
                 .ofType(singletonList(CREATURE))
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
@@ -100,7 +100,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(POWER, EQUAL, 2))
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
@@ -119,7 +119,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(POWER, EQUAL, 3))
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
@@ -138,7 +138,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(POWER, GREATER, 4))
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
@@ -157,7 +157,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(POWER, GREATER, 2))
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
@@ -176,7 +176,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(TOUGHNESS, LESS_OR_EQUAL, 3))
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
@@ -195,7 +195,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(TOUGHNESS, LESS_OR_EQUAL, 4))
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
@@ -214,7 +214,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(TOUGHNESS, LESS_OR_EQUAL, 5))
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
@@ -233,7 +233,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetControllerType(PLAYER)
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
         cardInstance.setController(gameStatus.getCurrentPlayer().getName());
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -253,7 +253,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetControllerType(PLAYER)
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         cardInstance.setController(gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -273,7 +273,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetControllerType(OPPONENT)
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
         cardInstance.setController(gameStatus.getNonCurrentPlayer().getName());
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -293,7 +293,7 @@ public class TargetTest {
                 .ofType(singletonList(CREATURE))
                 .targetControllerType(OPPONENT)
                 .build();
-        CardInstance cardInstance = new CardInstance(1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
         cardInstance.setController(gameStatus.getCurrentPlayer().getName());
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 

@@ -22,7 +22,7 @@ public class Abilities {
     public static Ability DEATHTOUCH = new Ability(AbilityType.DEATHTOUCH);
     public static Ability DESTROY_TARGET_CREATURE_WITH_POWER_GREATER_OR_EQUAL_4 = new Ability(DESTROY_TARGET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(POWER, TargetSelectionConstraint.GREATER_OR_EQUAL, 4)).build()), emptyList());
     public static Ability DRAW_1_CARD = new Ability(DRAW_X_CARDS, emptyList(), singletonList("1"));
-    public static Ability ENCHANTED_CREATURE_GETS_PLUS_3_2_AND_VIGILANCE = new Ability(ENCHANTED_CREATURE_GETS_AND, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("+3/+2", "VIGILANCE"));
+    public static Ability ENCHANTED_CREATURE_GETS_PLUS_3_2_AND_VIGILANCE = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("+3/+2", "VIGILANCE"));
     public static Ability FLYING = new Ability(AbilityType.FLYING);
     public static Ability HASTE = new Ability(AbilityType.HASTE);
     public static Ability REACH = new Ability(AbilityType.REACH);

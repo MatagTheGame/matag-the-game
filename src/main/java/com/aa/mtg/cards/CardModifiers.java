@@ -130,4 +130,8 @@ public class CardModifiers {
     public int getAttachedToId() {
         return attachedToId;
     }
+
+    public void unsetAttachedId() {
+        attachedToId = 0;
+    }
 }
