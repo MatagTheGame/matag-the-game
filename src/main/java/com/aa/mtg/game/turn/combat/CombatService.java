@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.DEATHTOUCH;
+import static com.aa.mtg.cards.ability.type.AbilityType.LIFELINK;
 import static com.aa.mtg.cards.ability.type.AbilityType.TRAMPLE;
 
 @Service
@@ -34,12 +35,17 @@ public class CombatService {
         List<CardInstance> attackingCreatures = currentPlayer.getBattlefield().getAttackingCreatures();
 
         int damageFromUnblockedCreatures = 0;
+        int lifelink = 0;
         for (CardInstance attackingCreature : attackingCreatures) {
             List<CardInstance> blockingCreaturesFor = nonCurrentPlayer.getBattlefield().getBlockingCreaturesFor(attackingCreature.getId());
             int remainingDamage = dealCombatDamageForOneAttackingCreature(gameStatus, attackingCreature, blockingCreaturesFor);
 
             if (blockingCreaturesFor.isEmpty() || attackingCreature.hasAbility(TRAMPLE)) {
                 damageFromUnblockedCreatures += remainingDamage;
+            }
+
+            if (attackingCreature.hasAbility(LIFELINK)) {
+                lifelink += attackingCreature.getPower();
             }
         }
 
@@ -48,6 +54,10 @@ public class CombatService {
 
         if (damageFromUnblockedCreatures > 0) {
             lifeService.substract(nonCurrentPlayer, damageFromUnblockedCreatures, gameStatus);
+        }
+
+        if (lifelink > 0) {
+            lifeService.add(currentPlayer, lifelink, gameStatus);
         }
     }
 

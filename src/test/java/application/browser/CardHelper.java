@@ -5,6 +5,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -14,6 +16,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class CardHelper {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CardHelper.class);
+
     private WebElement webElement;
     private MtgBrowser mtgBrowser;
 
@@ -43,15 +47,14 @@ public class CardHelper {
     }
 
     public void tap() {
-        String cardId = this.getCardId();
         click();
-        findByCardId(cardId).isFrontendTapped();
+        debug();
+        isFrontendTapped();
     }
 
     public void select() {
-        String cardId = this.getCardId();
         click();
-        findByCardId(cardId).isSelected();
+        isSelected();
     }
 
     public void declareAsAttacker() {
@@ -143,7 +146,7 @@ public class CardHelper {
         }
     }
 
-    private CardHelper findByCardId(String cardId) {
-        return new CardHelper(mtgBrowser.findElement(By.id(cardId)), mtgBrowser);
+    private void debug() {
+        LOGGER.info("toString(" + getCardId() + "): " + webElement.toString());
     }
 }

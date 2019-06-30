@@ -25,6 +25,7 @@ public class Abilities {
     public static Ability ENCHANTED_CREATURE_GETS_PLUS_3_2_AND_VIGILANCE = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("+3/+2", "VIGILANCE"));
     public static Ability FLYING = new Ability(AbilityType.FLYING);
     public static Ability HASTE = new Ability(AbilityType.HASTE);
+    public static Ability LIFELINK = new Ability(AbilityType.LIFELINK);
     public static Ability REACH = new Ability(AbilityType.REACH);
     public static Ability SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER = new Ability(SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER, singletonList(Target.builder().targetType(TargetType.PLAYER).build()), emptyList());
     public static Ability TRAMPLE = new Ability(AbilityType.TRAMPLE);

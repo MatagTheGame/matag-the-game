@@ -55,9 +55,6 @@ public class CombatFlyingReachTest extends AbstractApplicationTest {
         CardHelper ancientBrontodon = browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(ANCIENT_BRONTODON);
         ancientBrontodon.click();
         browser.player2().getMessageHelper().hasMessage("\"" + ancientBrontodon.getCardIdNumeric() + " - Ancient Brontodon\" cannot block \"" + airElemental.getCardIdNumeric() + " - Air Elemental\" as it has flying.");
-
-        // And the opponent sees the same
-        System.out.println("");
     }
 
     @Configuration

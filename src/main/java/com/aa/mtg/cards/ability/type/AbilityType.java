@@ -11,6 +11,7 @@ public enum AbilityType {
     ENCHANTED_CREATURE_GETS("Enchanted creature gets %s."),
     FLYING("Flying."),
     HASTE("Haste."),
+    LIFELINK("Lifelink."),
     REACH("Reach."),
     SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER("Shuffle graveyard into library."),
     THAT_TARGETS_GET_X("That targets get %s."),
