@@ -51,10 +51,11 @@ public class BasicCombatTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).isNotTapped();
 
         // When declare illegal attacker
+        int nestRobberId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(NEST_ROBBER).getCardIdNumeric();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(NEST_ROBBER).click();
 
         // Then a message is displayed
-        browser.getMessageHelper().hasMessage("\"129 - Nest Robber\" is already tapped and cannot attack.");
+        browser.getMessageHelper().hasMessage("\"" + nestRobberId + " - Nest Robber\" is already tapped and cannot attack.");
         browser.getMessageHelper().close();
 
         // The four attackers are declared as attacker and continue
