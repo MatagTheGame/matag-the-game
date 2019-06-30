@@ -21,6 +21,7 @@ public class CardModifiers {
     private List<Ability> abilitiesUntilEndOfTurn = new ArrayList<>();
     private PowerToughness extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
     private List<Object> targets = new ArrayList<>();
+    private int attachedToId;
 
     public TappedModifier getTapped() {
         return tapped;
@@ -120,5 +121,13 @@ public class CardModifiers {
 
     public List<Object> getTargets() {
         return targets;
+    }
+
+    public void setAttachedToId(int attachedToId) {
+        this.attachedToId = attachedToId;
+    }
+
+    public int getAttachedToId() {
+        return attachedToId;
     }
 }

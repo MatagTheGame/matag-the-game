@@ -159,4 +159,8 @@ public class CardInstance {
     public boolean isPermanent() {
         return !(isOfType(INSTANT) || isOfType(SORCERY));
     }
+
+    public boolean isOfSubtype(String subtype) {
+        return this.card.getSubtypes().contains(subtype);
+    }
 }
