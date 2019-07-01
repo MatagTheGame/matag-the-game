@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.aa.mtg.cards.sets.WarOfTheSparks.CHARITY_EXTRACTOR;
+import static com.aa.mtg.cards.sets.WarOfTheSpark.CHARITY_EXTRACTOR;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;

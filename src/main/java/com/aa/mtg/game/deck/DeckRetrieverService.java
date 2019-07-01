@@ -15,7 +15,7 @@ import static com.aa.mtg.cards.Cards.*;
 import static com.aa.mtg.cards.sets.GuildsOfRavnica.CANDLELIGHT_VIGIL;
 import static com.aa.mtg.cards.sets.Ixalan.*;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.*;
-import static com.aa.mtg.cards.sets.WarOfTheSparks.*;
+import static com.aa.mtg.cards.sets.WarOfTheSpark.*;
 
 @Component
 public class DeckRetrieverService {
