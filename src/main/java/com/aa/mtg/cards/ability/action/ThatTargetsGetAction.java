@@ -2,7 +2,7 @@ package com.aa.mtg.cards.ability.action;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.search.CardSearch;
+import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.status.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class ThatTargetsGetAction implements AbilityAction {
 
             String thingsToGet = ability.getParameters().get(1); // FIXME it's wrong to assume that the first parameter is the things that the target will get
 
-            Optional<CardInstance> targetThatIsGettingThingsOptional = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+            Optional<CardInstance> targetThatIsGettingThingsOptional = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
                     .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards())
                     .withId(targetCardId);
 

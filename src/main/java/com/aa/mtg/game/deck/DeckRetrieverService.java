@@ -2,20 +2,21 @@ package com.aa.mtg.game.deck;
 
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.properties.Color;
+import com.aa.mtg.cards.search.CardSearch;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import static com.aa.mtg.cards.Cards.*;
-import static com.aa.mtg.cards.sets.GuildsOfRavnica.CANDLELIGHT_VIGIL;
-import static com.aa.mtg.cards.sets.Ixalan.*;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.*;
-import static com.aa.mtg.cards.sets.WarOfTheSpark.*;
+import static com.aa.mtg.cards.properties.Color.*;
+import static com.aa.mtg.cards.sets.MtgSets.mtgSets;
+import static java.util.Arrays.asList;
 
 @Component
 public class DeckRetrieverService {
@@ -25,71 +26,53 @@ public class DeckRetrieverService {
     }
 
     private Library randomDeck(String playerName, GameStatus gameStatus) {
-        switch (new Random().nextInt(3)) {
-            case 0:
-                return blackWhiteGuild(playerName, gameStatus).shuffle();
-            case 1:
-                return redGreenGuild(playerName, gameStatus).shuffle();
-            case 2:
-                return whiteBlueIxalan(playerName, gameStatus).shuffle();
+        List<CardInstance> cards = new ArrayList<>();
+
+        List<Color> deckColors = randomTwoColors();
+        List<Card> randomCardsOfTheseColors = getRandomCardsForColors(deckColors);
+
+        for (Color color : deckColors) {
+            addNCards(gameStatus, cards, playerName, 12, getBasicLandForColor(color));
         }
-        throw new RuntimeException("Deck not found!");
-    }
 
-    private Library blackWhiteGuild(String playerName, GameStatus gameStatus) {
-        List<CardInstance> cards = new ArrayList<>();
+        for (Card randomCard : randomCardsOfTheseColors) {
+            addNCards(gameStatus, cards, playerName, 4, randomCard);
+        }
 
-        addNCards(gameStatus, cards, playerName, 12, PLAINS);
-        addNCards(gameStatus, cards, playerName, 12, SWAMP);
-
-        addNCards(gameStatus, cards, playerName, 4, PROWLING_CARACAL);
-        addNCards(gameStatus, cards, playerName, 4, CIVIC_STALWART);
-        addNCards(gameStatus, cards, playerName, 4, LAZOTEP_BEHEMOTH);
-        addNCards(gameStatus, cards, playerName, 4, ENFORCER_GRIFFIN);
-        addNCards(gameStatus, cards, playerName, 4, IRONCLAD_KROVOD);
-        addNCards(gameStatus, cards, playerName, 4, CATACOMB_CROCODILE);
-        addNCards(gameStatus, cards, playerName, 4, NOXIOUS_GROODION);
-        addNCards(gameStatus, cards, playerName, 4, CANDLELIGHT_VIGIL);
-        addNCards(gameStatus, cards, playerName, 4, CHARITY_EXTRACTOR);
-
+        Collections.shuffle(cards);
         return new Library(cards);
     }
 
-    private Library redGreenGuild(String playerName, GameStatus gameStatus) {
-        List<CardInstance> cards = new ArrayList<>();
-
-        addNCards(gameStatus, cards, playerName, 12, FOREST);
-        addNCards(gameStatus, cards, playerName, 12, MOUNTAIN);
-
-        addNCards(gameStatus, cards, playerName, 4, FERAL_MAAKA);
-        addNCards(gameStatus, cards, playerName, 4, AXEBANE_BEAST);
-        addNCards(gameStatus, cards, playerName, 4, PRECISION_BOLT);
-        addNCards(gameStatus, cards, playerName, 4, NEST_ROBBER);
-        addNCards(gameStatus, cards, playerName, 4, ANCIENT_BRONTODON);
-        addNCards(gameStatus, cards, playerName, 4, FRENZIED_RAPTOR);
-        addNCards(gameStatus, cards, playerName, 4, GRAZING_WHIPTAIL);
-        addNCards(gameStatus, cards, playerName, 4, COLOSSAL_DREADMAW);
-        addNCards(gameStatus, cards, playerName, 4, GOBLIN_ASSAILANT);
-        addNCards(gameStatus, cards, playerName, 4, KRAUL_STINGER);
-        addNCards(gameStatus, cards, playerName, 4, PRIMORDIAL_WURM);
-
-        return new Library(cards);
+    private Card getBasicLandForColor(Color color) {
+        switch (color) {
+            case WHITE:
+                return PLAINS;
+            case BLUE:
+                return ISLAND;
+            case BLACK:
+                return SWAMP;
+            case RED:
+                return MOUNTAIN;
+            case GREEN:
+                return FOREST;
+            default:
+                throw new RuntimeException("Basic Land for color " + color + " does not exist.");
+        }
     }
 
-    private Library whiteBlueIxalan(String playerName, GameStatus gameStatus) {
-        List<CardInstance> cards = new ArrayList<>();
+    private List<Color> randomTwoColors() {
+        List<Color> colors = asList(WHITE, BLUE, BLACK, RED, GREEN);
+        Collections.shuffle(colors);
+        return colors.subList(0, 2);
+    }
 
-        addNCards(gameStatus, cards, playerName, 12, PLAINS);
-        addNCards(gameStatus, cards, playerName, 12, ISLAND);
+    private List<Card> getRandomCardsForColors(List<Color> deckColors) {
+        List<Card> allCardsOfTheseColors = new CardSearch(mtgSets().getAllCards())
+                .ofAnyOfTheColors(deckColors)
+                .getCards();
+        Collections.shuffle(allCardsOfTheseColors);
 
-        addNCards(gameStatus, cards, playerName, 4, HEADWATER_SENTRIES);
-        addNCards(gameStatus, cards, playerName, 4, HUATLIS_SNUBHORN);
-        addNCards(gameStatus, cards, playerName, 4, AIR_ELEMENTAL);
-        addNCards(gameStatus, cards, playerName, 4, LEGIONS_JUDGMENT);
-        addNCards(gameStatus, cards, playerName, 4, CANDLELIGHT_VIGIL);
-        addNCards(gameStatus, cards, playerName, 4, NAGA_ETERNAL);
-
-        return new Library(cards);
+        return allCardsOfTheseColors.subList(0, 9);
     }
 
     private void addNCards(GameStatus gameStatus, List<CardInstance> cards, String playerName, int n, Card plains) {

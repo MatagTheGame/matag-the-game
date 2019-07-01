@@ -2,7 +2,7 @@ package com.aa.mtg.cards.ability.action;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.search.CardSearch;
+import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -34,7 +34,7 @@ public class CreaturesYouControlGetPlusXXUntilEndOfTurn implements AbilityAction
         String controllerString = cardInstance.getController();
         Player controller = gameStatus.getPlayerByName(controllerString);
 
-        List<CardInstance> cards = new CardSearch(controller.getBattlefield().getCards()).ofType(CREATURE).getCards();
+        List<CardInstance> cards = new CardInstanceSearch(controller.getBattlefield().getCards()).ofType(CREATURE).getCards();
         for (CardInstance card : cards) {
             PowerToughness originalPowerToughness = card.getModifiers().getExtraPowerToughnessUntilEndOfTurn();
             card.getModifiers().setExtraPowerToughnessUntilEndOfTurn(originalPowerToughness.combine(powerToughness));

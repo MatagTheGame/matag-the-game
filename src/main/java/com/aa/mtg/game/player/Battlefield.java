@@ -2,7 +2,7 @@ package com.aa.mtg.game.player;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CardListComponent;
-import com.aa.mtg.cards.search.CardSearch;
+import com.aa.mtg.cards.search.CardInstanceSearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,31 +11,31 @@ import java.util.stream.Collectors;
 public class Battlefield extends CardListComponent {
 
     public void untap() {
-        new CardSearch(cards).tapped().getCards()
+        new CardInstanceSearch(cards).tapped().getCards()
                 .forEach(cardInstance -> cardInstance.getModifiers().untap());
     }
 
     public void removeSummoningSickness() {
-        new CardSearch(cards).withSummoningSickness().getCards()
+        new CardInstanceSearch(cards).withSummoningSickness().getCards()
                 .forEach(cardInstance -> cardInstance.getModifiers().setSummoningSickness(false));
     }
 
     public void removeAttacking() {
-        new CardSearch(cards).attacking().getCards()
+        new CardInstanceSearch(cards).attacking().getCards()
                 .forEach(cardInstance -> cardInstance.getModifiers().setAttacking(false));
     }
 
     public void removeBlocking() {
-        new CardSearch(cards).blocking().getCards()
+        new CardInstanceSearch(cards).blocking().getCards()
                 .forEach(cardInstance -> cardInstance.getModifiers().setBlocking(new ArrayList<>()));
     }
 
     public List<CardInstance> getAttackingCreatures() {
-        return new CardSearch(cards).attacking().getCards();
+        return new CardInstanceSearch(cards).attacking().getCards();
     }
 
     public List<CardInstance> getBlockingCreatures() {
-        return new CardSearch(cards).blocking().getCards();
+        return new CardInstanceSearch(cards).blocking().getCards();
     }
 
     public List<CardInstance> getBlockingCreaturesFor(int attackingCardId) {

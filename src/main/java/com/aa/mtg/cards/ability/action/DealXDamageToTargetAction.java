@@ -2,7 +2,7 @@ package com.aa.mtg.cards.ability.action;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.search.CardSearch;
+import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.player.LifeService;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -39,7 +39,7 @@ public class DealXDamageToTargetAction implements AbilityAction {
         } else {
             int targetCardId = (int) targetId;
 
-            Optional<CardInstance> targetThatIsGettingDamageOptional = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+            Optional<CardInstance> targetThatIsGettingDamageOptional = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
                     .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards())
                     .withId(targetCardId);
 

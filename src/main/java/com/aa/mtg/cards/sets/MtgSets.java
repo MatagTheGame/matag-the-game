@@ -1,5 +1,7 @@
 package com.aa.mtg.cards.sets;
 
+import com.aa.mtg.cards.Card;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +23,18 @@ public class MtgSets {
         MTG_SETS.add(ixalan());
     }
 
-    public static MtgSets getInstance() {
-        return instance;
-    }
-
-    public MtgSets mtgSets() {
+    public static MtgSets mtgSets() {
         if (instance == null) {
             instance = new MtgSets();
         }
-        return mtgSets();
+        return instance;
+    }
+
+    public List<Card> getAllCards() {
+        List<Card> cards = new ArrayList<>();
+        for (MtgSet mtgSet : MTG_SETS) {
+            cards.addAll(mtgSet.getCards());
+        }
+        return cards;
     }
 }

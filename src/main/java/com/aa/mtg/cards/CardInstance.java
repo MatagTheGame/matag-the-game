@@ -4,7 +4,7 @@ import com.aa.mtg.cards.ability.Abilities;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Type;
-import com.aa.mtg.cards.search.CardSearch;
+import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,7 +12,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.ENCHANTED_CREATURE_GETS;
@@ -92,7 +91,7 @@ public class CardInstance {
     }
 
     public boolean isOfType(Type type) {
-        return card.getTypes().contains(type);
+        return card.isOfType(type);
     }
 
     public boolean ofAnyOfTheTypes(List<Type> types) {
@@ -179,7 +178,7 @@ public class CardInstance {
     }
 
     public List<CardInstance> getAttachedCards() {
-        return new CardSearch(gameStatus.getPlayer1().getBattlefield().getCards())
+        return new CardInstanceSearch(gameStatus.getPlayer1().getBattlefield().getCards())
                 .concat(gameStatus.getPlayer2().getBattlefield().getCards())
                 .attachedToId(this.id).getCards();
     }

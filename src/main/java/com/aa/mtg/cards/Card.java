@@ -85,4 +85,21 @@ public class Card {
     public List<Ability> getAbilities() {
         return abilities;
     }
+
+    public boolean isOfType(Type type) {
+        return types.contains(type);
+    }
+
+    public boolean isOfColor(Color color) {
+        return colors.contains(color);
+    }
+
+    public boolean ofAnyOfTheColors(List<Color> colors) {
+        for (Color color : colors) {
+            if (isOfColor(color)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

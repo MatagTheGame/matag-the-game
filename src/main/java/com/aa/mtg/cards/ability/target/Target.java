@@ -3,7 +3,7 @@ package com.aa.mtg.cards.ability.target;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
-import com.aa.mtg.cards.search.CardSearch;
+import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.PlayerType;
 import com.aa.mtg.game.status.GameStatus;
@@ -41,7 +41,7 @@ public class Target {
             }
 
         } else {
-            CardSearch cards = getPossibleTargetCardInstances(gameStatus);
+            CardInstanceSearch cards = getPossibleTargetCardInstances(gameStatus);
             int targetCardId = (int) targetId;
             if (!cards.withId(targetCardId).isPresent()) {
                 throw new MessageException("Selected targets were not valid.");
@@ -49,10 +49,10 @@ public class Target {
         }
     }
 
-    private CardSearch getPossibleTargetCardInstances(GameStatus gameStatus) {
-        CardSearch cards;
+    private CardInstanceSearch getPossibleTargetCardInstances(GameStatus gameStatus) {
+        CardInstanceSearch cards;
         if (targetType.equals(PERMANENT)) {
-            cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+            cards = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
                     .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
 
             if (ofType != null) {
@@ -64,7 +64,7 @@ public class Target {
             }
 
         } else if (targetType.equals(ANY)) {
-            cards = new CardSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+            cards = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
                     .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
 
         } else {
