@@ -243,7 +243,6 @@ body {
 .battlefield-area {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
   min-height: 250px;
 }
 
@@ -257,6 +256,16 @@ body {
 
 .combat-line span {
   position: absolute;
+  min-height: 250px;
+}
+
+.first-line span.group span, .second-line span.group span {
+  position: absolute;
+}
+
+span.group {
+  min-width: 180px;
+  min-height: 250px;
 }
 
 #player-battlefield .combat-line {

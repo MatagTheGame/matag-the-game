@@ -136,6 +136,10 @@ export default class CardUtils {
     return cardInstance.card.types.indexOf(type) >= 0
   }
 
+  static isOfSubtype(cardInstance, subtype) {
+    return cardInstance.card.subtypes.indexOf(subtype) >= 0
+  }
+
   static canAttack(attackingCard) {
     if (!CardUtils.isOfType(attackingCard, 'CREATURE')) {
       return attackingCard.idAndName + ' is not of type Creature.'
@@ -198,5 +202,9 @@ export default class CardUtils {
 
   static getDamage(cardInstance) {
     return cardInstance.modifiers.damage
+  }
+
+  static isAttachedToId(cardInstance, id) {
+    return cardInstance.modifiers.attachedToId === id
   }
 }

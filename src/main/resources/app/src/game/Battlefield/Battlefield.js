@@ -9,6 +9,11 @@ import PlayerUtils from '../PlayerInfo/PlayerUtils'
 import PropTypes from 'prop-types'
 
 class Battlefield extends Component {
+  constructor(props) {
+    super(props)
+    this.cardWithAttachments = this.cardWithAttachments.bind(this)
+  }
+
   getId() {
     return this.props.type + '-battlefield'
   }
@@ -32,15 +37,17 @@ class Battlefield extends Component {
   getFirstLineCards() {
     return CardSearch.cards(this.getPlayerBattlefield()).ofType('LAND')
       .sort((l, r) => l.card.name.localeCompare(r.card.name))
+      .map(this.cardWithAttachments)
   }
 
   getSecondLineCards() {
     return CardSearch.cards(this.getPlayerBattlefield()).ofType('CREATURE').notAttackingOrBlocking()
-      .concat(CardSearch.cards(this.getPlayerBattlefield()).ofType('ENCHANTMENT'))
+      .map(this.cardWithAttachments)
   }
 
   getAttackingOrBlockingCreatures() {
     return CardSearch.cards(this.getPlayerBattlefield()).attackingOrBlocking()
+      .map(this.cardWithAttachments)
   }
 
   isCardSelectedToBeBlocked(cardInstance, index) {
@@ -48,10 +55,45 @@ class Battlefield extends Component {
       && this.props.turn.blockingCardPosition === index && CardUtils.isAttacking(cardInstance)
   }
 
-  cardItems(cards) {
-    return cards.map((cardInstance, i) =>
-      <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
-        selected={this.isCardSelectedToBeBlocked(cardInstance, i)} area='battlefield' />)
+  cardGroups(cardGroups) {
+    return cardGroups.map((cardGroup) => {
+      return <span className='group' key={cardGroup[0].id}>
+        {this.cardGroup(cardGroup)}
+      </span>
+    })
+  }
+
+  cardGroup(cardGroup, position=-1) {
+    if (cardGroup.length === 1) {
+      return this.singleCardInstance(cardGroup[0], position)
+
+    } else {
+      return this.cardGroupInstance(cardGroup, position)
+    }
+  }
+
+  positionedCardGroups(cardGroups) {
+    return cardGroups.map((cardGroup, i) =>
+      <span key={cardGroup[0].id} style={{'marginLeft': this.cardMarginLeft(cardGroup[0]), 'marginTop': this.attackingCardMarginTop(cardGroup[0])}}>
+        {this.cardGroup(cardGroup, i)}
+      </span>
+    )
+  }
+
+  singleCardInstance(cardInstance, i=-1) {
+    return <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
+                 selected={this.isCardSelectedToBeBlocked(cardInstance, i)} area='battlefield'/>
+  }
+
+  cardGroupInstance(cardGroup, position=-1) {
+    return cardGroup.slice().reverse().map((cardInstance, i) => {
+      const marginLeft = -(cardGroup.length-i-1)*50;
+      const marginTop = -(cardGroup.length-i-1)*25;
+      return (
+        <span key={cardInstance.id} style={{'marginLeft': `${marginLeft}px`, 'marginTop': `${marginTop}px`}}>
+          {this.singleCardInstance(cardInstance, position)}
+        </span>)
+    })
   }
 
   attackingCards() {
@@ -59,7 +101,7 @@ class Battlefield extends Component {
   }
 
   blockingCards() {
-    return CardSearch.cards(this.getOtherPlayerBattlefield()).blockingOrFrontenBlocking().concat(CardSearch.cards(this.getPlayerBattlefield()).blockingOrFrontenBlocking())
+    return CardSearch.cards(this.getOtherPlayerBattlefield()).blockingOrFrontendBlocking().concat(CardSearch.cards(this.getPlayerBattlefield()).blockingOrFrontendBlocking())
   }
 
   static marginFromPosition(n, i) {
@@ -100,13 +142,11 @@ class Battlefield extends Component {
     return Battlefield.cardMarginTop(this.getBlockingCardPosition(cardInstance))
   }
 
-  positionedCardItems(cards) {
-    return cards.map((cardInstance, i) =>
-      <span key={cardInstance.id} style={{'marginLeft': this.cardMarginLeft(cardInstance), 'marginTop': this.attackingCardMarginTop(cardInstance)}}>
-        <Card cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
-          selected={this.isCardSelectedToBeBlocked(cardInstance, i)} area='battlefield' />
-      </span>
-    )
+  cardWithAttachments(card) {
+    const attachments = CardSearch.cards(this.getPlayerBattlefield())
+      .concat(this.getOtherPlayerBattlefield())
+      .attachedTo(card.id)
+    return [card, ...attachments]
   }
 
   playerCardClick(cardId) {
@@ -124,9 +164,9 @@ class Battlefield extends Component {
 
     return (
       <div id={this.getId()} className='battlefield'>
-        <div className='battlefield-area combat-line'>{this.positionedCardItems(this.getAttackingOrBlockingCreatures())}</div>
-        <div className='battlefield-area second-line'>{this.cardItems(this.getSecondLineCards())}</div>
-        <div className='battlefield-area first-line'>{this.cardItems(this.getFirstLineCards())}</div>
+        <div className='battlefield-area combat-line'>{this.positionedCardGroups(this.getAttackingOrBlockingCreatures())}</div>
+        <div className='battlefield-area second-line'>{this.cardGroups(this.getSecondLineCards())}</div>
+        <div className='battlefield-area first-line'>{this.cardGroups(this.getFirstLineCards())}</div>
       </div>
     )
   }

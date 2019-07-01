@@ -8,6 +8,7 @@ import static com.aa.mtg.cards.Cards.FOREST;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.Cards.PLAINS;
+import static com.aa.mtg.cards.sets.GuildsOfRavnica.CANDLELIGHT_VIGIL;
 import static com.aa.mtg.cards.sets.Ixalan.*;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CIVIC_STALWART;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CLEAR_THE_MIND;
@@ -39,6 +40,7 @@ public class ProdInitTestService extends InitTestService {
         addCardToCurrentPlayerHand(gameStatus, AIR_ELEMENTAL);
         addCardToCurrentPlayerHand(gameStatus, CLEAR_THE_MIND);
         addCardToCurrentPlayerHand(gameStatus, CIVIC_STALWART);
+        addCardToCurrentPlayerHand(gameStatus, CANDLELIGHT_VIGIL);
 
         addCardToCurrentPlayerGraveyard(gameStatus, PLAINS);
 

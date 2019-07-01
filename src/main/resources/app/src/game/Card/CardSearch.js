@@ -18,6 +18,11 @@ export default class CardSearch extends Array {
     return new CardSearch(...cards)
   }
 
+  ofSubtype(subtype) {
+    const cards = this.filter(cardInstance => CardUtils.isOfSubtype(cardInstance, subtype))
+    return new CardSearch(...cards)
+  }
+
   frontEndTapped() {
     const cards = this.filter(cardInstance => CardUtils.isFrontendTapped(cardInstance))
     return new CardSearch(...cards)
@@ -58,7 +63,7 @@ export default class CardSearch extends Array {
     return new CardSearch(...cards)
   }
 
-  blockingOrFrontenBlocking() {
+  blockingOrFrontendBlocking() {
     const cards = this.filter(cardInstance => CardUtils.isBlockingOrFrontendBlocking(cardInstance))
     return new CardSearch(...cards)
   }
@@ -70,6 +75,11 @@ export default class CardSearch extends Array {
 
   notAttackingOrBlocking() {
     const cards = this.filter(cardInstance => CardUtils.isNotAttackingOrFrontendAttacking(cardInstance) && CardUtils.isNotBlockingOrFrontendBlocking(cardInstance))
+    return new CardSearch(...cards)
+  }
+
+  attachedTo(id) {
+    const cards = this.filter(cardInstance => CardUtils.isAttachedToId(cardInstance, id))
     return new CardSearch(...cards)
   }
 
