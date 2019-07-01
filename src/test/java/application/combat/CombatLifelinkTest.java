@@ -29,11 +29,11 @@ public class CombatLifelinkTest extends AbstractApplicationTest {
         browser.player1().getActionHelper().clickContinue();
         browser.player1().getPhaseHelper().is(DA, PLAYER);
 
-        // When declare attacker
+        // When attacking
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CHARITY_EXTRACTOR).declareAsAttacker();
         browser.player1().getActionHelper().clickContinue();
 
-        // Declare blocker
+        // Then
         browser.player1().getPhaseHelper().is(M2, PLAYER);
         browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(19);
         browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(21);

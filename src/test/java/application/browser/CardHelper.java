@@ -55,10 +55,11 @@ public class CardHelper {
     }
 
     public void declareAsAttacker() {
-        canCurrentUserContinue();
-        String cardId = this.getCardId();
-        click();
-        mtgBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + cardId)));
+        declareAsAttackerOrBlocker();
+    }
+
+    public void declareAsBlocker() {
+        declareAsAttackerOrBlocker();
     }
 
     public String getCardId() {
@@ -146,5 +147,12 @@ public class CardHelper {
 
     private void canCurrentUserContinue() {
         new ActionHelper(mtgBrowser).canContinue();
+    }
+
+    private void declareAsAttackerOrBlocker() {
+        canCurrentUserContinue();
+        String cardId = this.getCardId();
+        click();
+        mtgBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + cardId)));
     }
 }
