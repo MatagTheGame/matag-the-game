@@ -50,6 +50,7 @@ public class DeckRetrieverService {
         addNCards(gameStatus, cards, playerName, 4, CATACOMB_CROCODILE);
         addNCards(gameStatus, cards, playerName, 4, NOXIOUS_GROODION);
         addNCards(gameStatus, cards, playerName, 4, CANDLELIGHT_VIGIL);
+        addNCards(gameStatus, cards, playerName, 4, CHARITY_EXTRACTOR);
 
         return new Library(cards);
     }

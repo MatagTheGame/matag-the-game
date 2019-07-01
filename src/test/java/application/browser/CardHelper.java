@@ -5,8 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -16,8 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class CardHelper {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CardHelper.class);
-
     private WebElement webElement;
     private MtgBrowser mtgBrowser;
 
@@ -47,17 +43,19 @@ public class CardHelper {
     }
 
     public void tap() {
+        canCurrentUserContinue();
         click();
-        debug();
         isFrontendTapped();
     }
 
     public void select() {
+        canCurrentUserContinue();
         click();
         isSelected();
     }
 
     public void declareAsAttacker() {
+        canCurrentUserContinue();
         String cardId = this.getCardId();
         click();
         mtgBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + cardId)));
@@ -146,7 +144,7 @@ public class CardHelper {
         }
     }
 
-    private void debug() {
-        LOGGER.info("toString(" + getCardId() + "): " + webElement.toString());
+    private void canCurrentUserContinue() {
+        new ActionHelper(mtgBrowser).canContinue();
     }
 }
