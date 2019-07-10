@@ -28,13 +28,14 @@ export default class ClientEventsReducer {
         }
 
         if (Phase.isMainPhase(newState.turn.currentPhase)) {
+          // TODO this is very similar to the one for battlefield click
           if (CardUtils.isOfType(cardInstance, 'LAND')) {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardIds: [cardId]})
 
           } else {
             const currentMana = CostUtils.currentMana(newState.player.battlefield)
             if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentMana)) {
-              if (CardUtils.needsTargets(cardInstance)) {
+              if (CardUtils.needsTargets(cardInstance, 'CAST')) {
                 PlayerUtils.handleSelectTargets(newState, cardInstance)
               } else {
                 PlayerUtils.cast(newState, cardId)
@@ -70,9 +71,15 @@ export default class ClientEventsReducer {
           PlayerUtils.handleSelectedTarget(newState, cardInstance)
 
         } else {
-
+          // TODO this is very similar to the one for hand click
           if (CardUtils.isOfType(cardInstance, 'LAND')) {
             CardUtils.toggleFrontendTapped(cardInstance)
+
+          } else {
+            let ability = CardUtils.getAbilityForTriggerType(cardInstance, 'ACTIVATED_ABILITY')
+            if (ability) {
+              console.log(ability)
+            }
           }
         }
       }

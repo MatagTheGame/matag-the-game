@@ -88,7 +88,6 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
         // Creature and its enchantments are in the graveyard
         browser.player1().getGraveyardHelper(PLAYER).contains(CONCORDIA_PEGASUS, CANDLELIGHT_VIGIL, CANDLELIGHT_VIGIL, LEGIONS_JUDGMENT);
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).isEmpty();
-        System.out.println();
     }
 
     @Configuration

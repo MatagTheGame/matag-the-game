@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static com.aa.mtg.cards.ability.trigger.Trigger.WHEN_IT_ENTERS_THE_BATTLEFIELD;
+import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_IT_ENTERS_THE_BATTLEFIELD;
 
 @Service
 public class EnterCardIntoBattlefieldService {
@@ -28,7 +28,7 @@ public class EnterCardIntoBattlefieldService {
         gameStatus.getPlayerByName(controller).getBattlefield().addCard(cardInstance);
 
         for (Ability ability : cardInstance.getAbilities()) {
-            if (ability.hasTrigger(WHEN_IT_ENTERS_THE_BATTLEFIELD)) {
+            if (ability.hasTriggerOfSubtype(WHEN_IT_ENTERS_THE_BATTLEFIELD)) {
                 cardInstance.getTriggeredAbilities().add(ability);
                 LOGGER.info("Event {} triggered with ability {} for {}.", WHEN_IT_ENTERS_THE_BATTLEFIELD, ability.getAbilityTypes(), cardInstance.getModifiers());
                 gameStatus.getStack().add(cardInstance);

@@ -1,3 +1,5 @@
+import {get} from 'lodash'
+
 export default class CardUtils {
   static normalizeCardName(cardName) {
     return cardName.toLowerCase()
@@ -136,6 +138,10 @@ export default class CardUtils {
     return cardInstance.card.types.indexOf(type) >= 0
   }
 
+  static isOfAnyType(cardInstance, types) {
+    return cardInstance.card.types.some(type => types.indexOf(type) >= 0)
+  }
+
   static isOfSubtype(cardInstance, subtype) {
     return cardInstance.card.subtypes.indexOf(subtype) >= 0
   }
@@ -184,10 +190,16 @@ export default class CardUtils {
     return map
   }
 
-  static needsTargets(cardInstance) {
-    if (cardInstance.abilities.length > 0) {
-      return cardInstance.abilities[0].targets.length > 0
+  static needsTargets(cardInstance, triggerType) {
+    const ability = CardUtils.getAbilityForTriggerType(cardInstance, triggerType)
+    console.log('ability: ', ability)
+    if (ability) {
+      return ability.targets.length > 0
     }
+  }
+
+  static getAbilityForTriggerType(cardInstance, triggerType) {
+    return cardInstance.abilities.find(ability => get(ability, 'trigger.type') === triggerType)
   }
 
   static getPower(cardInstance) {

@@ -2,6 +2,7 @@ package com.aa.mtg.cards.ability;
 
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.trigger.Trigger;
+import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.type.AbilityType;
 
 import java.util.List;
@@ -20,19 +21,11 @@ public class Ability {
     }
 
     public Ability(List<AbilityType> abilityTypes) {
-        this(abilityTypes, emptyList(), emptyList());
-    }
-
-    public Ability(AbilityType abilityType, List<Target> targets, List<String> parameters) {
-        this(singletonList(abilityType), targets, parameters);
+        this(abilityTypes, emptyList(), emptyList(), null);
     }
 
     public Ability(AbilityType abilityType, List<Target> targets, List<String> parameters, Trigger trigger) {
         this(singletonList(abilityType), targets, parameters, trigger);
-    }
-
-    public Ability(List<AbilityType> abilityTypes, List<Target> targets, List<String> parameters) {
-        this(abilityTypes, targets, parameters, null);
     }
 
     public Ability(List<AbilityType> abilityTypes, List<Target> targets, List<String> parameters, Trigger trigger) {
@@ -70,7 +63,10 @@ public class Ability {
         return !targets.isEmpty();
     }
 
-    public boolean hasTrigger(Trigger trigger) {
-        return this.trigger == trigger;
+    public boolean hasTriggerOfSubtype(TriggerSubtype triggerSubtype) {
+        if (trigger != null) {
+            return triggerSubtype.equals(trigger.getSubtype());
+        }
+        return false;
     }
 }

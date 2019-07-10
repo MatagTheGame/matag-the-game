@@ -18,6 +18,11 @@ export default class CardSearch extends Array {
     return new CardSearch(...cards)
   }
 
+  ofAnyType(types) {
+    const cards = this.filter(cardInstance => CardUtils.isOfAnyType(cardInstance, types))
+    return new CardSearch(...cards)
+  }
+
   ofSubtype(subtype) {
     const cards = this.filter(cardInstance => CardUtils.isOfSubtype(cardInstance, subtype))
     return new CardSearch(...cards)

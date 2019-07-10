@@ -41,7 +41,7 @@ class Battlefield extends Component {
   }
 
   getSecondLineCards() {
-    return CardSearch.cards(this.getPlayerBattlefield()).ofType('CREATURE').notAttackingOrBlocking()
+    return CardSearch.cards(this.getPlayerBattlefield()).ofAnyType(['CREATURE', 'ARTIFACT']).notAttackingOrBlocking()
       .map(this.cardWithAttachments)
   }
 
