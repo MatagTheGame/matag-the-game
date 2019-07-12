@@ -82,7 +82,7 @@ class Battlefield extends Component {
 
   singleCardInstance(cardInstance, i=-1) {
     return <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
-                 selected={this.isCardSelectedToBeBlocked(cardInstance, i)} area='battlefield'/>
+                 selected={this.isCardSelectedToBeBlocked(cardInstance, i) || this.isCardSelectedToBePlayed(cardInstance)} area='battlefield'/>
   }
 
   cardGroupInstance(cardGroup, position=-1) {
@@ -157,6 +157,10 @@ class Battlefield extends Component {
     }
   }
 
+  isCardSelectedToBePlayed(cardInstance) {
+    return cardInstance.id === this.props.cardIdSelectedToBePlayed
+  }
+
   render() {
     if (!this.props.turn) {
       return <Fragment />
@@ -190,6 +194,7 @@ const mapStateToProps = state => {
   return {
     playerBattlefield: get(state, 'player.battlefield', []),
     opponentBattlefield: get(state, 'opponent.battlefield', []),
+    cardIdSelectedToBePlayed: get(state, 'turn.cardIdSelectedToBePlayed'),
     turn: state.turn,
     state: state
   }

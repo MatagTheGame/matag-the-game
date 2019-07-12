@@ -192,7 +192,6 @@ export default class CardUtils {
 
   static needsTargets(cardInstance, triggerType) {
     const ability = CardUtils.getAbilityForTriggerType(cardInstance, triggerType)
-    console.log('ability: ', ability)
     if (ability) {
       return ability.targets.length > 0
     }

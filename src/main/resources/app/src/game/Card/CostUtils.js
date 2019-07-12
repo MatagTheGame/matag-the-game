@@ -16,20 +16,28 @@ export default class CostUtils {
   }
 
   static isCastingCostFulfilled(card, manaPaid) {
-    for (const cost of card.cost) {
+    return CostUtils.isCostFulfilled(card.cost, manaPaid)
+  }
+
+  static isAbilityCostFulfilled(ability, manaPaid) {
+    return CostUtils.isCostFulfilled(ability.trigger.cost, manaPaid)
+  }
+
+  static isCostFulfilled(costToFulfill, manaPaid) {
+    for (const cost of costToFulfill) {
       let removed = false
 
       if (cost !== 'COLORLESS') {
         const index = manaPaid.indexOf(cost)
         if (index >= 0) {
           removed = true
-          manaPaid = manaPaid.splice(index, 1)
+          manaPaid.splice(index, 1)
         }
 
       } else {
         if (manaPaid.length > 0) {
           removed = true
-          manaPaid = manaPaid.splice(0, 1)
+          manaPaid.splice(0, 1)
         }
       }
 

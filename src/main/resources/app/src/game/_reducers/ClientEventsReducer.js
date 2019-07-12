@@ -78,7 +78,15 @@ export default class ClientEventsReducer {
           } else {
             let ability = CardUtils.getAbilityForTriggerType(cardInstance, 'ACTIVATED_ABILITY')
             if (ability) {
-              console.log(ability)
+              const currentMana = CostUtils.currentMana(newState.player.battlefield)
+              if (CostUtils.isAbilityCostFulfilled(ability, currentMana)) {
+                if (CardUtils.needsTargets(cardInstance, 'ACTIVATED_ABILITY')) {
+                  console.log('yes')
+                  PlayerUtils.handleSelectTargets(newState, cardInstance)
+                } else {
+
+                }
+              }
             }
           }
         }

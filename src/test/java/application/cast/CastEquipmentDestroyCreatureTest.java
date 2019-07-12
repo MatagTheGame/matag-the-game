@@ -42,7 +42,7 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
         // When casting another instance of the same aura
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).tap();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 2).tap();
-//        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(SHORT_SWORD).select();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(SHORT_SWORD).select();
 //        browser.player1().getStatusHelper().hasMessage("Select targets for Short Sword.");
 //        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
 //
