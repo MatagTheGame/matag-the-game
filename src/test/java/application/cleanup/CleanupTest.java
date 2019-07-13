@@ -20,6 +20,7 @@ import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.modifiers.TappedModifier.TAPPED;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
+import static com.aa.mtg.cards.sets.Ixalan.AIR_ELEMENTAL;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
@@ -37,6 +38,9 @@ public class CleanupTest extends AbstractApplicationTest {
 
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(GRAZING_WHIPTAIL).hasSummoningSickness();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(GRAZING_WHIPTAIL).hasPowerAndToughness("4/5");
+
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(AIR_ELEMENTAL).hasDamage(1);
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(AIR_ELEMENTAL).isTapped();
 
         // Phase is
         browser.player1().getPhaseHelper().is(M1, PLAYER);
@@ -59,16 +63,8 @@ public class CleanupTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(GRAZING_WHIPTAIL).hasSummoningSickness();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(GRAZING_WHIPTAIL).hasPowerAndToughness("3/4");
 
-        // When Player2 clicks continue twice
-        browser.player2().getActionHelper().clickContinue();
-        browser.player2().getPhaseHelper().is(M2, PLAYER);
-        browser.player2().getActionHelper().clickContinue();
-
-        // Phase is
-        browser.player1().getPhaseHelper().is(M1, PLAYER);
-
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).isNotTapped();
-//        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(GRAZING_WHIPTAIL).doesNotHAveSummoningSickness();
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(AIR_ELEMENTAL).isNotTapped();
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(AIR_ELEMENTAL).doesNotHaveDamage();
     }
 
     @Configuration
@@ -94,6 +90,11 @@ public class CleanupTest extends AbstractApplicationTest {
 
                     // Non Current Player
                     addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
+
+                    addCardToNonCurrentPlayerBattlefield(gameStatus, AIR_ELEMENTAL);
+                    CardInstance nestRobber = gameStatus.getNonCurrentPlayer().getBattlefield().getCards().get(0);
+                    nestRobber.getModifiers().dealDamage(1);
+                    nestRobber.getModifiers().setTapped(TAPPED);
                 }
             };
         }

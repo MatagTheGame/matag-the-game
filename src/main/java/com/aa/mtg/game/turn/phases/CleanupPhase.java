@@ -1,6 +1,6 @@
 package com.aa.mtg.game.turn.phases;
 
-import com.aa.mtg.cards.modifiers.PowerToughness;
+import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +27,8 @@ public class CleanupPhase implements Phase {
 
     private void cleanup(GameStatus gameStatus) {
         gameStatus.getTurn().getCardsPlayedWithinTurn().clear();
-        gameStatus.getCurrentPlayer().getBattlefield().getCards().forEach(cardInstance -> {
-            cardInstance.getModifiers().resetDamage();
-            cardInstance.getModifiers().getAbilitiesUntilEndOfTurn().clear();
-            cardInstance.getModifiers().setExtraPowerToughnessUntilEndOfTurn(new PowerToughness(0, 0));
-        });
+        gameStatus.getCurrentPlayer().getBattlefield().getCards().forEach(CardInstance::cleanup);
+        gameStatus.getNonCurrentPlayer().getBattlefield().getCards().forEach(CardInstance::cleanup);
         gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
     }
 

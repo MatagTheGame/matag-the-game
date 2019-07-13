@@ -3,6 +3,7 @@ package com.aa.mtg.cards;
 import com.aa.mtg.cards.ability.Abilities;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.type.AbilityType;
+import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.message.MessageException;
@@ -237,5 +238,11 @@ public class CardInstance {
             }
         }
         return abilities;
+    }
+
+    public void cleanup() {
+        modifiers.resetDamage();
+        modifiers.getAbilitiesUntilEndOfTurn().clear();
+        modifiers.setExtraPowerToughnessUntilEndOfTurn(new PowerToughness(0, 0));
     }
 }
