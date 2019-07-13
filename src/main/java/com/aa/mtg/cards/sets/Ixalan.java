@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
+import static com.aa.mtg.cards.properties.Type.ARTIFACT;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
 import static java.util.Arrays.asList;
@@ -23,6 +24,7 @@ public class Ixalan implements MtgSet {
     public static Card ANCIENT_BRONTODON = new Card("Ancient Brontodon", singletonList(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), "", 9, 9, emptyList());
     public static Card CHARGING_MONSTROSAUR = new Card("Charging Monstrosaur", singletonList(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), "Trample, haste", 5, 5, asList(TRAMPLE, HASTE));
     public static Card COLOSSAL_DREADMAW = new Card("Colossal Dreadmaw", singletonList(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), "Trample", 6, 6, singletonList(TRAMPLE));
+    public static Card COBBLED_WINGS = new Card("Cobbled Wings", emptyList(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), "Equipped creature has flying. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_FLYING));
     public static Card FRENZIED_RAPTOR = new Card("Frenzied Raptor", singletonList(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), "", 4, 2, emptyList());
     public static Card GRAZING_WHIPTAIL = new Card("Grazing Whiptail", singletonList(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), "", 3, 4, singletonList(REACH));
     public static Card HEADWATER_SENTRIES = new Card("Headwater Sentries", singletonList(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Merfolk Warrior"), "", 2, 5, emptyList());
@@ -39,6 +41,7 @@ public class Ixalan implements MtgSet {
         cards.add(AIR_ELEMENTAL);
         cards.add(ANCIENT_BRONTODON);
         cards.add(CHARGING_MONSTROSAUR);
+        cards.add(COBBLED_WINGS);
         cards.add(COLOSSAL_DREADMAW);
         cards.add(FRENZIED_RAPTOR);
         cards.add(GRAZING_WHIPTAIL);

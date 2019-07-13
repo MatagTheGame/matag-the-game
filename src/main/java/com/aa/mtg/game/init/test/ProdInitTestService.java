@@ -8,6 +8,7 @@ import static com.aa.mtg.cards.Cards.FOREST;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.Cards.PLAINS;
+import static com.aa.mtg.cards.sets.CoreSet2020.MARAUDERS_AXE;
 import static com.aa.mtg.cards.sets.GuildsOfRavnica.CANDLELIGHT_VIGIL;
 import static com.aa.mtg.cards.sets.Ixalan.*;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CIVIC_STALWART;
@@ -63,6 +64,7 @@ public class ProdInitTestService extends InitTestService {
         addCardToNonCurrentPlayerHand(gameStatus, CHARGING_MONSTROSAUR);
         addCardToNonCurrentPlayerHand(gameStatus, PRECISION_BOLT);
         addCardToNonCurrentPlayerHand(gameStatus, RILE);
+        addCardToNonCurrentPlayerHand(gameStatus, MARAUDERS_AXE);
 
         addCardToNonCurrentPlayerGraveyard(gameStatus, MOUNTAIN);
     }
