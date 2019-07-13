@@ -13,6 +13,8 @@ import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
 import com.aa.mtg.game.turn.phases.PhaseUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
+
 @Service
 public class CastService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CastService.class);
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
     private final AbilityActionFactory abilityActionFactory;
@@ -32,25 +38,42 @@ public class CastService {
         this.abilityActionFactory = abilityActionFactory;
     }
 
-    public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
+    public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
         Turn turn = gameStatus.getTurn();
         Player currentPlayer = gameStatus.getCurrentPlayer();
 
-        CardInstance cardToCast = currentPlayer.getHand().findCardById(cardId);
+        CardInstance cardToCast;
+        String castedFrom;
+        if (currentPlayer.getHand().hasCardById(cardId)) {
+            cardToCast = currentPlayer.getHand().findCardById(cardId);
+            castedFrom = "HAND";
+        } else {
+            cardToCast = currentPlayer.getBattlefield().findCardById(cardId);
+            castedFrom = "BATTLEFIELD";
+        }
+
         if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !cardToCast.getCard().isInstantSpeed()) {
             throw new MessageException("You can only play Instants during a NON main phases.");
 
         } else {
-            checkSpellCost(tappingLandIds, currentPlayer, cardToCast);
+            checkSpellOrAbilityCost(tappingLandIds, currentPlayer, cardToCast, playedAbility);
+            checkSpellOrAbilityTargetRequisites(cardToCast, gameStatus, targetsIdsForCardIds, playedAbility);
 
-            checkSpellRequisites(cardToCast, gameStatus, targetsIdsForCardIds);
+            if (castedFrom.equals("HAND")) {
+                currentPlayer.getHand().extractCardById(cardId);
+                cardToCast.setController(currentPlayer.getName());
+                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
 
-            currentPlayer.getHand().extractCardById(cardId);
-            cardToCast.setController(currentPlayer.getName());
-            gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
+                gameStatus.getStack().add(cardToCast);
+                gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
-            gameStatus.getStack().add(cardToCast);
-            gameStatusUpdaterService.sendUpdateStack(gameStatus);
+            } else {
+                Ability triggeredAbility = cardToCast.getAbilities().get(0);
+                cardToCast.getTriggeredAbilities().add(triggeredAbility);
+                LOGGER.info("Player {} triggered ability {} for {}.", currentPlayer.getName(), triggeredAbility.getAbilityTypes(), cardToCast.getModifiers());
+                gameStatus.getStack().add(cardToCast);
+                gameStatusUpdaterService.sendUpdateStack(gameStatus);
+            }
 
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
@@ -63,7 +86,14 @@ public class CastService {
         }
     }
 
-    private void checkSpellCost(List<Integer> tappingLandIds, Player currentPlayer, CardInstance cardToCast) {
+    private void checkSpellOrAbilityCost(List<Integer> tappingLandIds, Player currentPlayer, CardInstance cardToCast, String ability) {
+        ArrayList<Color> paidCost = getManaPaid(tappingLandIds, currentPlayer);
+        if (!CostUtils.isCastingCostFulfilled(cardToCast.getCard(), paidCost, ability)) {
+            throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
+        }
+    }
+
+    private ArrayList<Color> getManaPaid(List<Integer> tappingLandIds, Player currentPlayer) {
         ArrayList<Color> paidCost = new ArrayList<>();
         for (int tappingLandId : tappingLandIds) {
             CardInstance landToTap = currentPlayer.getBattlefield().findCardById(tappingLandId);
@@ -74,15 +104,12 @@ public class CastService {
             }
             paidCost.add(landToTap.getCard().getColors().get(0));
         }
-
-        if (!CostUtils.isCastingCostFulfilled(cardToCast.getCard(), paidCost)) {
-            throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
-        }
+        return paidCost;
     }
 
-    private void checkSpellRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds) {
+    private void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
         for (Ability ability : cardToCast.getAbilities()) {
-            AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getFirstAbilityType());
+            AbilityAction abilityAction = abilityActionFactory.getAbilityAction(abilityType(playedAbility));
             if (abilityAction != null &&  ability.requiresTarget()) {
                 if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId()) || targetsIdsForCardIds.get(cardToCast.getId()).isEmpty()) {
                     throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");

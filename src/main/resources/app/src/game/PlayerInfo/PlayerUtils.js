@@ -1,3 +1,4 @@
+import {get} from 'lodash'
 import Phase from '../Turn/Phase'
 import CardSearch from '../Card/CardSearch'
 import StackUtils from '../Stack/StackUtils'
@@ -95,29 +96,42 @@ export default class PlayerUtils {
     }
   }
 
-  static cast(state, cardId, targetsIdsForCardIds) {
+  static cast(state, cardId, targetsIdsForCardIds, playedAbility) {
     const currentManaIds = CostUtils.currentManaCardIds(state.player.battlefield)
-    stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], tappingLandIds: currentManaIds, targetsIdsForCardIds: targetsIdsForCardIds})
+    stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], tappingLandIds: currentManaIds, targetsIdsForCardIds: targetsIdsForCardIds, playedAbility: playedAbility})
   }
 
-  static handleSelectTargets(state, cardInstance) {
+  static handleSelectTargets(state, cardInstance, ability) {
     if (state.turn.cardIdSelectedToBePlayed === cardInstance.id) {
       state.turn.cardIdSelectedToBePlayed = null
+      state.turn.abilityToBePlayed = null
       state.statusMessage = PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE
     } else {
       state.turn.cardIdSelectedToBePlayed = cardInstance.id
+      state.turn.abilityToBePlayed = ability
       state.statusMessage = 'Select targets for ' + cardInstance.card.name + '.'
     }
   }
 
   static handleSelectedTarget(state, target) {
+    const targetsIds = PlayerUtils.getTargetsIds(target)
+    const playedAbility = PlayerUtils.getAbilityToBePlayed(state.turn.abilityToBePlayed)
+    PlayerUtils.cast(state, state.turn.cardIdSelectedToBePlayed, {[state.turn.cardIdSelectedToBePlayed]: targetsIds}, playedAbility)
+    state.turn.cardIdSelectedToBePlayed = null
+    state.turn.abilityToBePlayed = null
+  }
+
+  static getTargetsIds(target) {
     const targetsIds = []
     if (typeof target === 'string') {
       targetsIds.push(target)
     } else {
       targetsIds.push(target.id)
     }
-    PlayerUtils.cast(state, state.turn.cardIdSelectedToBePlayed, {[state.turn.cardIdSelectedToBePlayed]: targetsIds})
-    state.turn.cardIdSelectedToBePlayed = null
+    return targetsIds
+  }
+
+  static getAbilityToBePlayed(abilityToBePlayed) {
+    return get(abilityToBePlayed, 'abilityTypes[0]')
   }
 }

@@ -38,7 +38,7 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
         browser.player1().getStatusHelper().hasMessage("Select targets for Candlelight Vigil.");
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
 
-        // Enchantment goes on
+        // Enchantment goes on the stack
         browser.player1().getStackHelper().containsExactly(CANDLELIGHT_VIGIL);
 
         // When opponent accepts enchantment
@@ -57,7 +57,7 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
         browser.player1().getStatusHelper().hasMessage("Select targets for Candlelight Vigil.");
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
 
-        // Enchantment goes on
+        // Enchantment goes on goes on the stack
         browser.player1().getStackHelper().containsExactly(CANDLELIGHT_VIGIL);
 
         // When opponent accepts enchantment

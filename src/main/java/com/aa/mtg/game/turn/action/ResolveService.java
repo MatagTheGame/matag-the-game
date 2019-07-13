@@ -69,7 +69,7 @@ public class ResolveService {
     private void resolveCardInstanceFromStack(GameStatus gameStatus, CardInstance cardToResolve) {
         gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
-        performAbilitiesActions(gameStatus, cardToResolve, cardToResolve.getAbilities());
+        performAbilitiesActions(gameStatus, cardToResolve, cardToResolve.getCastAbilities());
 
         if (cardToResolve.isPermanent()) {
             if (cardToResolve.isOfType(CREATURE) && !cardToResolve.hasAbility(HASTE)) {

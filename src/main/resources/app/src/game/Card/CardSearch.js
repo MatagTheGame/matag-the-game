@@ -88,6 +88,11 @@ export default class CardSearch extends Array {
     return new CardSearch(...cards)
   }
 
+  notAttached() {
+    const cards = this.filter(cardInstance => CardUtils.isNotAttached(cardInstance))
+    return new CardSearch(...cards)
+  }
+
   isEmpty() {
     return this.length === 0
   }

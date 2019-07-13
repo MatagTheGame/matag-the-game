@@ -28,4 +28,12 @@ public enum AbilityType {
     public String getText(List<String> parameters) {
         return String.format(text, parameters.toArray());
     }
+
+    public static AbilityType abilityType(String text) {
+        if (text == null) {
+            return null;
+        }
+
+        return AbilityType.valueOf(text);
+    }
 }

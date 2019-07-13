@@ -28,6 +28,10 @@ public class AbilityActionFactory {
     }
 
     public AbilityAction getAbilityAction(AbilityType abilityType) {
+        if (abilityType == null) {
+            return null;
+        }
+
         switch (abilityType) {
             case DESTROY_TARGET:
                 return destroyTargetAction;
@@ -42,6 +46,7 @@ public class AbilityActionFactory {
             case CREATURES_YOU_CONTROL_GET_PLUS_X_UNTIL_END_OF_TURN:
                 return creaturesYouControlGetPlusXXUntilEndOfTurn;
             case ENCHANTED_CREATURE_GETS:
+            case EQUIPPED_CREATURE_GETS:
                 return attach;
             default:
                 return null;

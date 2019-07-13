@@ -24,7 +24,7 @@ public class CostUtilsTest {
         List<Color> manaPaid = asList(GREEN, RED);
 
         // When
-        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid);
+        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
 
         // Then
         assertThat(fulfilled).isTrue();
@@ -37,7 +37,7 @@ public class CostUtilsTest {
         List<Color> manaPaid = Collections.emptyList();
 
         // When
-        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid);
+        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
 
         // Then
         assertThat(fulfilled).isFalse();
@@ -50,7 +50,7 @@ public class CostUtilsTest {
         List<Color> manaPaid = asList(WHITE, GREEN);
 
         // When
-        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid);
+        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
 
         // Then
         assertThat(fulfilled).isFalse();
@@ -63,7 +63,7 @@ public class CostUtilsTest {
         List<Color> manaPaid = Collections.singletonList(RED);
 
         // When
-        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid);
+        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
 
         // Then
         assertThat(fulfilled).isFalse();
@@ -76,7 +76,7 @@ public class CostUtilsTest {
         List<Color> manaPaid = asList(GREEN, GREEN, RED, RED);
 
         // When
-        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid);
+        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
 
         // Then
         assertThat(fulfilled).isTrue();

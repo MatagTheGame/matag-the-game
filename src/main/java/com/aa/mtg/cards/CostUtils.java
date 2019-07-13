@@ -6,12 +6,14 @@ import com.aa.mtg.cards.properties.Cost;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
+
 public class CostUtils {
 
-    public static boolean isCastingCostFulfilled(Card card, List<Color> manaPaid) {
+    public static boolean isCastingCostFulfilled(Card card, List<Color> manaPaid, String ability) {
         ArrayList<Color> manaPaidCopy = new ArrayList<>(manaPaid);
 
-        for (Cost cost : card.getCost()) {
+        for (Cost cost : getCost(card, ability)) {
             boolean removed = false;
             switch (cost) {
                 case WHITE:
@@ -42,6 +44,24 @@ public class CostUtils {
         }
 
         return true;
+    }
+
+    private static List<Cost> getCost(Card card, String ability) {
+        if (ability == null || getAbilityCost(card, ability) == null) {
+            return card.getCost();
+
+        } else {
+            return getAbilityCost(card, ability);
+        }
+    }
+
+    private static List<Cost> getAbilityCost(Card card, String ability) {
+        return card.getAbilities().stream()
+                .findFirst()
+                .filter(a -> a.getAbilityTypes().contains(abilityType(ability)))
+                .orElseThrow(() -> new RuntimeException("ability " + ability +" not found on card " + card.getName()))
+                .getTrigger()
+                .getCost();
     }
 
 }

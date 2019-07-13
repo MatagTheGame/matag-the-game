@@ -218,4 +218,8 @@ export default class CardUtils {
   static isAttachedToId(cardInstance, id) {
     return cardInstance.modifiers.attachedToId === id
   }
+
+  static isNotAttached(cardInstance) {
+    return !cardInstance.modifiers.attachedToId
+  }
 }

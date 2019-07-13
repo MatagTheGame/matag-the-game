@@ -13,11 +13,10 @@ import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.aa.mtg.cards.ability.type.AbilityType.ENCHANTED_CREATURE_GETS;
-import static com.aa.mtg.cards.ability.type.AbilityType.FLYING;
-import static com.aa.mtg.cards.ability.type.AbilityType.REACH;
-import static com.aa.mtg.cards.ability.type.AbilityType.VIGILANCE;
+import static com.aa.mtg.cards.ability.trigger.TriggerType.CAST;
+import static com.aa.mtg.cards.ability.type.AbilityType.*;
 import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
@@ -165,6 +164,13 @@ public class CardInstance {
         return abilities;
     }
 
+    public List<Ability> getCastAbilities() {
+        return getAbilities().stream()
+                .filter(ability -> ability.getTrigger() != null)
+                .filter(ability -> ability.getTrigger().getType().equals(CAST))
+                .collect(Collectors.toList());
+    }
+
     public boolean hasAbility(AbilityType abilityType) {
         return getAbilities().stream().anyMatch(ability -> ability.getAbilityTypes().contains(abilityType));
     }
@@ -225,7 +231,7 @@ public class CardInstance {
         List<Ability> abilities = new ArrayList<>();
         for (CardInstance attachedCards : getAttachedCards()) {
             for (Ability ability : attachedCards.getAbilities()) {
-                if (ability.getAbilityTypes().contains(ENCHANTED_CREATURE_GETS)) {
+                if (ability.getAbilityTypes().contains(ENCHANTED_CREATURE_GETS) || ability.getAbilityTypes().contains(EQUIPPED_CREATURE_GETS)) {
                     abilities.add(ability);
                 }
             }

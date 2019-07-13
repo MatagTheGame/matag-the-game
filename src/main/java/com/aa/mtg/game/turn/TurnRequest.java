@@ -1,14 +1,18 @@
 package com.aa.mtg.game.turn;
 
+import lombok.ToString;
+
 import java.util.List;
 import java.util.Map;
 
+@ToString
 public class TurnRequest {
     private String action;
     private String triggeredNonStackAction;
     private List<Integer> tappingLandIds;
     private List<Integer> cardIds;
     private Map<Integer, List<Object>> targetsIdsForCardIds;
+    private String playedAbility;
 
     public String getAction() {
         return action;
@@ -50,14 +54,11 @@ public class TurnRequest {
         this.targetsIdsForCardIds = targetsIdsForCardIds;
     }
 
-    @Override
-    public String toString() {
-        return "TurnRequest{" +
-                "action='" + action + '\'' +
-                ", triggeredNonStackAction='" + triggeredNonStackAction + '\'' +
-                ", tappingLandIds=" + tappingLandIds +
-                ", cardIds=" + cardIds +
-                ", targetsIdsForCardIds=" + targetsIdsForCardIds +
-                '}';
+    public String getPlayedAbility() {
+        return playedAbility;
+    }
+
+    public void setPlayedAbility(String playedAbility) {
+        this.playedAbility = playedAbility;
     }
 }

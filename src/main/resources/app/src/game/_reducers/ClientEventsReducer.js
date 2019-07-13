@@ -5,6 +5,7 @@ import CardUtils from '../Card/CardUtils'
 import CardSearch from '../Card/CardSearch'
 import StackUtils from '../Stack/StackUtils'
 import PlayerUtils from '../PlayerInfo/PlayerUtils'
+import {get} from 'lodash'
 
 export default class ClientEventsReducer {
 
@@ -34,11 +35,12 @@ export default class ClientEventsReducer {
 
           } else {
             const currentMana = CostUtils.currentMana(newState.player.battlefield)
+            const ability = get(cardInstance, 'castAbilities[0]')
             if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentMana)) {
               if (CardUtils.needsTargets(cardInstance, 'CAST')) {
-                PlayerUtils.handleSelectTargets(newState, cardInstance)
+                PlayerUtils.handleSelectTargets(newState, cardInstance, ability)
               } else {
-                PlayerUtils.cast(newState, cardId)
+                PlayerUtils.cast(newState, cardId, {}, PlayerUtils.getAbilityToBePlayed(ability))
               }
             }
           }
@@ -49,6 +51,7 @@ export default class ClientEventsReducer {
     case 'PLAYER_BATTLEFIELD_CARD_CLICK':
       if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
         const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
+        const playedAbility = CardUtils.getAbilityForTriggerType(cardInstance, 'ACTIVATED_ABILITY')
 
         if (newState.turn.currentPhase === 'DA') {
           const canAttackResult = CardUtils.canAttack(cardInstance)
@@ -76,15 +79,11 @@ export default class ClientEventsReducer {
             CardUtils.toggleFrontendTapped(cardInstance)
 
           } else {
-            let ability = CardUtils.getAbilityForTriggerType(cardInstance, 'ACTIVATED_ABILITY')
-            if (ability) {
+            if (playedAbility) {
               const currentMana = CostUtils.currentMana(newState.player.battlefield)
-              if (CostUtils.isAbilityCostFulfilled(ability, currentMana)) {
+              if (CostUtils.isAbilityCostFulfilled(playedAbility, currentMana)) {
                 if (CardUtils.needsTargets(cardInstance, 'ACTIVATED_ABILITY')) {
-                  console.log('yes')
-                  PlayerUtils.handleSelectTargets(newState, cardInstance)
-                } else {
-
+                  PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
                 }
               }
             }
