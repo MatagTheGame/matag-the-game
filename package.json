@@ -4,20 +4,20 @@
   "description": "mtg ui",
   "private": true,
   "scripts": {
-    "test": "jest",
-    "lint": "eslint src/main/resources/app/src/ --ext .js --ignore-pattern node_modules/",
-    "lint-fix": "eslint src/main/resources/app/src/ --ext .js --fix",
     "build-dev": "webpack -d",
     "build-prod": "webpack -p",
+    "lint": "eslint src/main/resources/app/src/ --ext .js --ignore-pattern node_modules/",
+    "lint-fix": "eslint src/main/resources/app/src/ --ext .js --fix",
+    "postinstall": "yarn build-prod",
+    "test": "jest",
     "watch": "webpack -d --watch",
-    "watch-htmlunit": "webpack -p --watch",
-    "postinstall": "yarn build-prod"
+    "watch-htmlunit": "webpack -p --watch"
   },
   "author": "Antonio Alonzi",
   "license": "MIT",
   "dependencies": {
     "@stomp/stompjs": "^5.2.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.14",
     "prop-types": "^15.7.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
@@ -37,5 +37,13 @@
     "eslint-plugin-react": "^7.12.4",
     "jest": "^24.8.0",
     "webpack-cli": "^3.2.3"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src/test/resources/app/src"
+    ],
+    "moduleNameMapper": {
+      "^Main/(.*)$": "<rootDir>/src/main/resources/app/src/$1"
+    }
   }
 }

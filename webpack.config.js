@@ -19,5 +19,10 @@ module.exports = {
         loader: 'babel-loader'
       }
     ]
+  },
+  resolve: {
+    alias: {
+      Main: APP_DIR
+    }
   }
 };

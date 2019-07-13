@@ -83,13 +83,13 @@ class Battlefield extends Component {
 
   singleCardInstance(cardInstance, i=-1) {
     return <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
-                 selected={this.isCardSelectedToBeBlocked(cardInstance, i) || this.isCardSelectedToBePlayed(cardInstance)} area='battlefield'/>
+      selected={this.isCardSelectedToBeBlocked(cardInstance, i) || this.isCardSelectedToBePlayed(cardInstance)} area='battlefield'/>
   }
 
   cardGroupInstance(cardGroup, position=-1) {
     return cardGroup.slice().reverse().map((cardInstance, i) => {
-      const marginLeft = -(cardGroup.length-i-1)*50;
-      const marginTop = -(cardGroup.length-i-1)*25;
+      const marginLeft = -(cardGroup.length-i-1)*50
+      const marginTop = -(cardGroup.length-i-1)*25
       return (
         <span key={cardInstance.id} style={{'marginLeft': `${marginLeft}px`, 'marginTop': `${marginTop}px`}}>
           {this.singleCardInstance(cardInstance, position)}
