@@ -39,6 +39,8 @@ public class DeckRetrieverService {
             addNCards(gameStatus, cards, playerName, 4, randomCard);
         }
 
+        addNCards(gameStatus, cards, playerName, 4, getRandomColorlessCard());
+
         Collections.shuffle(cards);
         return new Library(cards);
     }
@@ -72,7 +74,16 @@ public class DeckRetrieverService {
                 .getCards();
         Collections.shuffle(allCardsOfTheseColors);
 
-        return allCardsOfTheseColors.subList(0, 9);
+        return allCardsOfTheseColors.subList(0, 8);
+    }
+
+    private Card getRandomColorlessCard() {
+        List<Card> allColorlessCards = new CardSearch(mtgSets().getAllCards())
+                .colorless()
+                .getCards();
+        Collections.shuffle(allColorlessCards);
+
+        return allColorlessCards.get(0);
     }
 
     private void addNCards(GameStatus gameStatus, List<CardInstance> cards, String playerName, int n, Card plains) {

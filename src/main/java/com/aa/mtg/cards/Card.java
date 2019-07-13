@@ -10,6 +10,7 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 import static java.util.Collections.emptyList;
 
 @ToString
@@ -52,6 +53,10 @@ public class Card {
 
     public List<Color> getColors() {
         return colors;
+    }
+
+    public boolean isColorless() {
+        return getCost().stream().noneMatch(cost -> cost != COLORLESS);
     }
 
     public List<Cost> getCost() {

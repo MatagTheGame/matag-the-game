@@ -31,6 +31,13 @@ public class CardSearch {
         return new CardSearch(cards);
     }
 
+    public CardSearch colorless() {
+        List<Card> cards = this.cards.stream()
+                .filter(Card::isColorless)
+                .collect(toList());
+        return new CardSearch(cards);
+    }
+
     public CardSearch ofAnyOfTheColors(List<Color> colors) {
         List<Card> cards = this.cards.stream()
                 .filter(card -> card.ofAnyOfTheColors(colors))
