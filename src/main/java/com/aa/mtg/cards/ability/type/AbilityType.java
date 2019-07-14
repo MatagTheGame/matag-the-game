@@ -8,6 +8,7 @@ public enum AbilityType {
     DEATHTOUCH("Deathtouch."),
     DESTROY_TARGET("Destroy target."),
     DRAW_X_CARDS("Draw %s cards."),
+    GAIN_X_LIFE("Gain %s life."),
     ENCHANTED_CREATURE_GETS("Enchanted creature gets %s."),
     EQUIPPED_CREATURE_GETS("Equipped creature gets %s."),
     FLYING("Flying."),

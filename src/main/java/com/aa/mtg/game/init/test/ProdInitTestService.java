@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import static com.aa.mtg.cards.Cards.*;
-import static com.aa.mtg.cards.sets.CoreSet2020.ANGELIC_GIFT;
 import static com.aa.mtg.cards.sets.CoreSet2020.MARAUDERS_AXE;
 import static com.aa.mtg.cards.sets.GuildsOfRavnica.CANDLELIGHT_VIGIL;
 import static com.aa.mtg.cards.sets.Ixalan.*;
@@ -13,6 +12,7 @@ import static com.aa.mtg.cards.sets.RavnicaAllegiance.CIVIC_STALWART;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CLEAR_THE_MIND;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.PRECISION_BOLT;
 import static com.aa.mtg.cards.sets.RivalsOfIxalan.DEAD_WEIGHT;
+import static com.aa.mtg.cards.sets.WarOfTheSpark.BULWARK_GIANT;
 
 @Profile("test")
 @Service
@@ -41,7 +41,7 @@ public class ProdInitTestService extends InitTestService {
         addCardToCurrentPlayerHand(gameStatus, CLEAR_THE_MIND);
         addCardToCurrentPlayerHand(gameStatus, CIVIC_STALWART);
         addCardToCurrentPlayerHand(gameStatus, CANDLELIGHT_VIGIL);
-        addCardToCurrentPlayerHand(gameStatus, ANGELIC_GIFT);
+        addCardToCurrentPlayerHand(gameStatus, BULWARK_GIANT);
 
         addCardToCurrentPlayerGraveyard(gameStatus, PLAINS);
 

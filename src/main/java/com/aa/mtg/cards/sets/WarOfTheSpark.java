@@ -8,10 +8,7 @@ import com.aa.mtg.cards.properties.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.aa.mtg.cards.ability.Abilities.DEATHTOUCH;
-import static com.aa.mtg.cards.ability.Abilities.FLYING;
-import static com.aa.mtg.cards.ability.Abilities.HASTE;
-import static com.aa.mtg.cards.ability.Abilities.LIFELINK;
+import static com.aa.mtg.cards.ability.Abilities.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -21,6 +18,7 @@ public class WarOfTheSpark implements MtgSet {
     public static final String WAR = "WAR";
 
     public static Card BANEHOUND = new Card("Banehound", singletonList(Color.BLACK), singletonList(Cost.BLACK), singletonList(Type.CREATURE), asList("Nightmare", "Hound"), "Lifelink, haste", 1, 1, asList(LIFELINK, HASTE));
+    public static Card BULWARK_GIANT = new Card("Bulwark Giant", singletonList(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Giant", "Soldier"), "When Bulwark Giant enters the battlefield, you gain 5 life.", 3, 6, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_5_LIFE));
     public static Card CHARITY_EXTRACTOR = new Card("Charity Extractor", singletonList(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Human", "Knight"), "Lifelink", 1, 5, singletonList(LIFELINK));
     public static Card ENFORCER_GRIFFIN = new Card("Enforcer Griffin", singletonList(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Griffin"), "Flying", 3, 4, singletonList(FLYING));
     public static Card GOBLIN_ASSAILANT = new Card("Goblin Assailant", singletonList(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Goblin", "Warrior"), "", 2, 2, emptyList());
@@ -36,6 +34,7 @@ public class WarOfTheSpark implements MtgSet {
 
     private WarOfTheSpark() {
         cards.add(BANEHOUND);
+        cards.add(BULWARK_GIANT);
         cards.add(CHARITY_EXTRACTOR);
         cards.add(ENFORCER_GRIFFIN);
         cards.add(GOBLIN_ASSAILANT);
