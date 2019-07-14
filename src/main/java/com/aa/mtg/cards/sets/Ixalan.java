@@ -22,6 +22,7 @@ public class Ixalan implements MtgSet {
 
     public static Card AIR_ELEMENTAL = new Card("Air Elemental", singletonList(Color.BLUE), asList(Cost.BLUE, Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Elemental"), "Flying", 4, 4, singletonList(FLYING));
     public static Card ANCIENT_BRONTODON = new Card("Ancient Brontodon", singletonList(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), "", 9, 9, emptyList());
+    public static Card BISHOPS_SOLDIER = new Card("Bishop's Soldier", singletonList(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Vampire", "Soldier"), "", 2, 2, singletonList(LIFELINK));
     public static Card CHARGING_MONSTROSAUR = new Card("Charging Monstrosaur", singletonList(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), "Trample, haste", 5, 5, asList(TRAMPLE, HASTE));
     public static Card COBBLED_WINGS = new Card("Cobbled Wings", emptyList(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), "Equipped creature has flying. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_FLYING));
     public static Card COLOSSAL_DREADMAW = new Card("Colossal Dreadmaw", singletonList(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), "Trample", 6, 6, singletonList(TRAMPLE));
@@ -43,6 +44,7 @@ public class Ixalan implements MtgSet {
     private Ixalan() {
         cards.add(AIR_ELEMENTAL);
         cards.add(ANCIENT_BRONTODON);
+        cards.add(BISHOPS_SOLDIER);
         cards.add(CHARGING_MONSTROSAUR);
         cards.add(COBBLED_WINGS);
         cards.add(COLOSSAL_DREADMAW);

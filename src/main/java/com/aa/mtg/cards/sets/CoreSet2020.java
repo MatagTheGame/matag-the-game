@@ -19,6 +19,10 @@ public class CoreSet2020 implements MtgSet {
     public static final String M20 = "M20";
 
     public static Card ANGELIC_GIFT = new Card("Angelic Gift", singletonList(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), "Enchant creature. When Angelic Gift enters the battlefield, draw a card. Enchanted creature has flying.", 0, 0, asList(ENCHANTED_CREATURE_GETS_FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
+    public static Card BARONY_VAMPIRE = new Card("Barony Vampire", singletonList(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Vampire"), "", 3, 2, emptyList());
+    public static Card BARTIZAN_BATS = new Card("Bartizan_Bats", singletonList(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Bat"), "", 3, 1, singletonList(FLYING));
+    public static Card BASTION_ENFORCER = new Card("Bastion Enforcer", singletonList(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Dwarf", "Soldier"), "", 3, 2, emptyList());
+    public static Card BOGSTOMPER = new Card("Bogstomper", singletonList(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Beast"), "", 6, 5, emptyList());
     public static Card MARAUDERS_AXE = new Card("Marauder's Axe", emptyList(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), "Equipped creature gets +2/+0. Equip 2", 0, 0, singletonList(PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0));
     public static Card OAKENFORM = new Card("Oakenform", singletonList(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), "Enchant creature. Enchanted creature gets +3/+3.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_3));
 
@@ -28,6 +32,9 @@ public class CoreSet2020 implements MtgSet {
 
     private CoreSet2020() {
         cards.add(ANGELIC_GIFT);
+        cards.add(BARONY_VAMPIRE);
+        cards.add(BARTIZAN_BATS);
+        cards.add(BASTION_ENFORCER);
         cards.add(MARAUDERS_AXE);
         cards.add(OAKENFORM);
     }
