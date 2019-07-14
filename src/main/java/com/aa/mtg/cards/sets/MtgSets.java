@@ -5,6 +5,7 @@ import com.aa.mtg.cards.Card;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.aa.mtg.cards.sets.CoreSet2019.m19;
 import static com.aa.mtg.cards.sets.CoreSet2020.m20;
 import static com.aa.mtg.cards.sets.Dominaria.dominaria;
 import static com.aa.mtg.cards.sets.GuildsOfRavnica.guildsOfRavnica;
@@ -24,6 +25,7 @@ public class MtgSets {
         MTG_SETS.add(warOfTheSpark());
         MTG_SETS.add(ravnicaAllegiance());
         MTG_SETS.add(guildsOfRavnica());
+        MTG_SETS.add(m19());
         MTG_SETS.add(dominaria());
         MTG_SETS.add(rivalsOfIxalan());
         MTG_SETS.add(ixalan());

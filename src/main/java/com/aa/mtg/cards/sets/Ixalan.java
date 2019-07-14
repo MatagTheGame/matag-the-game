@@ -30,8 +30,11 @@ public class Ixalan implements MtgSet {
     public static Card HEADWATER_SENTRIES = new Card("Headwater Sentries", singletonList(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Merfolk Warrior"), "", 2, 5, emptyList());
     public static Card HUATLIS_SNUBHORN = new Card("Huatli's Snubhorn", singletonList(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), "Vigilance", 2, 2, singletonList(VIGILANCE));
     public static Card LEGIONS_JUDGMENT = new Card("Legion's Judgment", singletonList(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), "Destroy target creature with power 4 or greater.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_WITH_POWER_GREATER_OR_EQUAL_4));
+    public static Card MARK_OF_THE_VAMPIRE = new Card("Mark of the Vampire", singletonList(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), "Enchant creature. Enchanted creature gets +2/+2 and has lifelink.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_LIFELINK));
     public static Card NEST_ROBBER = new Card("Nest Robber", singletonList(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), "Haste", 2, 1, singletonList(HASTE));
+    public static Card ONE_WITH_THE_WIND = new Card("One With the Wind", singletonList(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), "Enchant creature. Enchanted creature gets +2/+2 and has flying.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_FLYING));
     public static Card RILE = new Card("Rile", singletonList(Color.RED), singletonList(Cost.RED), singletonList(SORCERY), emptyList(), "Rile deals 1 damage to target creature you control. That creature gains trample until end of turn. Draw a card.", 0, 0, asList(DEAL_1_DAMAGE_TO_CREATURE_YOU_CONTROL_THAT_CREATURE_GAINS_TRAMPLE, DRAW_1_CARD));
+    public static Card SWASHBUCKLING = new Card("SwashBuckling", singletonList(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), "Enchant creature. Enchanted creature gets +2/+2 and has haste.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_HASTE));
 
     private static Ixalan instance;
 
@@ -48,8 +51,11 @@ public class Ixalan implements MtgSet {
         cards.add(HEADWATER_SENTRIES);
         cards.add(HUATLIS_SNUBHORN);
         cards.add(LEGIONS_JUDGMENT);
+        cards.add(MARK_OF_THE_VAMPIRE);
         cards.add(NEST_ROBBER);
+        cards.add(ONE_WITH_THE_WIND);
         cards.add(RILE);
+        cards.add(SWASHBUCKLING);
     }
 
     @Override
