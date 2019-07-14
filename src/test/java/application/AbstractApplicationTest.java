@@ -43,6 +43,7 @@ public class AbstractApplicationTest {
 
     @After
     public void cleanup() {
+        browser.dumpContent();
         browser.close();
     }
 }

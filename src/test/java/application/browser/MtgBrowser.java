@@ -122,4 +122,8 @@ public class MtgBrowser {
     void wait(ExpectedCondition<?> condition) {
         new WebDriverWait(webDriver, 5).until(condition);
     }
+
+    public void dumpContent() {
+        System.out.println(webDriver.getPageSource());
+    }
 }

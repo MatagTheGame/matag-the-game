@@ -35,6 +35,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(BARONY_VAMPIRE);
         cards.add(BARTIZAN_BATS);
         cards.add(BASTION_ENFORCER);
+        cards.add(BOGSTOMPER);
         cards.add(MARAUDERS_AXE);
         cards.add(OAKENFORM);
     }
