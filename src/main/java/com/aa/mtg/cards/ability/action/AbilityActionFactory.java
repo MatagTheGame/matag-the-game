@@ -11,19 +11,19 @@ public class AbilityActionFactory {
     private final DrawXCardsAction drawXCardsAction;
     private final ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction;
     private final ThatTargetsGetAction thatTargetsGetAction;
-    private final CreaturesYouControlGetPlusXXUntilEndOfTurn creaturesYouControlGetPlusXXUntilEndOfTurn;
+    private final CreaturesYouControlGetXUntilEndOfTurn creaturesYouControlGetXUntilEndOfTurn;
     private final Attach attach;
 
     @Autowired
     public AbilityActionFactory(DestroyTargetAction destroyTargetAction, DealXDamageToTargetAction dealXDamageToTargetAction, DrawXCardsAction drawXCardsAction,
                                 ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction, ThatTargetsGetAction thatTargetsGetAction,
-                                CreaturesYouControlGetPlusXXUntilEndOfTurn creaturesYouControlGetPlusXXUntilEndOfTurn, Attach attach) {
+                                CreaturesYouControlGetXUntilEndOfTurn creaturesYouControlGetXUntilEndOfTurn, Attach attach) {
         this.destroyTargetAction = destroyTargetAction;
         this.dealXDamageToTargetAction = dealXDamageToTargetAction;
         this.drawXCardsAction = drawXCardsAction;
         this.shuffleTargetGraveyardIntoLibraryAction = shuffleTargetGraveyardIntoLibraryAction;
         this.thatTargetsGetAction = thatTargetsGetAction;
-        this.creaturesYouControlGetPlusXXUntilEndOfTurn = creaturesYouControlGetPlusXXUntilEndOfTurn;
+        this.creaturesYouControlGetXUntilEndOfTurn = creaturesYouControlGetXUntilEndOfTurn;
         this.attach = attach;
     }
 
@@ -43,8 +43,8 @@ public class AbilityActionFactory {
                 return shuffleTargetGraveyardIntoLibraryAction;
             case THAT_TARGETS_GET_X:
                 return thatTargetsGetAction;
-            case CREATURES_YOU_CONTROL_GET_PLUS_X_UNTIL_END_OF_TURN:
-                return creaturesYouControlGetPlusXXUntilEndOfTurn;
+            case CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN:
+                return creaturesYouControlGetXUntilEndOfTurn;
             case ENCHANTED_CREATURE_GETS:
             case EQUIPPED_CREATURE_GETS:
                 return attach;

@@ -97,6 +97,10 @@ public class Card {
         return types.contains(type);
     }
 
+    public boolean isNotOfType(Type type) {
+        return !isOfType(type);
+    }
+
     public boolean isOfColor(Color color) {
         return colors.contains(color);
     }

@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
 public class StackHelper extends AbstractCardContainerHelper {
@@ -19,6 +20,10 @@ public class StackHelper extends AbstractCardContainerHelper {
     @Override
     protected WebElement containerElement() {
         return mtgBrowser.findElement(By.id("stack"));
+    }
+
+    public void containsAbility(String ability) {
+        containsAbilitiesExactly(singletonList(ability));
     }
 
     public void containsAbilitiesExactly(List<String> expectedTriggeredAbilities) {

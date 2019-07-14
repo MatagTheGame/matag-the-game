@@ -69,7 +69,7 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
 
         // Verify as well the vigilance effect
         browser.player1().getActionHelper().clickContinue();
-        browser.getPhaseHelper().is(DA, PLAYER);
+        browser.player1().getPhaseHelper().is(DA, PLAYER);
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).declareAsAttacker();
         browser.player1().getActionHelper().clickContinue();
         browser.player1().getPhaseHelper().is(M2, PLAYER);

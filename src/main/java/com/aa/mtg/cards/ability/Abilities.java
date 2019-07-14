@@ -5,6 +5,10 @@ import com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint;
 import com.aa.mtg.cards.ability.target.TargetType;
 import com.aa.mtg.cards.ability.trigger.Trigger;
 import com.aa.mtg.cards.ability.type.AbilityType;
+import com.aa.mtg.cards.modifiers.PowerToughness;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint.PowerOrToughness.POWER;
 import static com.aa.mtg.cards.ability.target.TargetSelectionConstraint.GREATER_OR_EQUAL;
@@ -13,6 +17,7 @@ import static com.aa.mtg.cards.ability.trigger.TriggerType.ACTIVATED_ABILITY;
 import static com.aa.mtg.cards.ability.trigger.TriggerType.CAST;
 import static com.aa.mtg.cards.ability.trigger.TriggerType.TRIGGERED_ABILITY;
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
+import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
@@ -21,7 +26,8 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
 public class Abilities {
-    public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(CREATURES_YOU_CONTROL_GET_PLUS_X_UNTIL_END_OF_TURN, emptyList(), singletonList("+1/+1"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
+    public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN, emptyList(), singletonList("+1/+1"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
+    public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_AND_VIGILANCE_UNTIL_END_OF_TURN = new Ability(CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN, emptyList(), asList("+1/+1", "VIGILANCE"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD = new Ability(DRAW_X_CARDS, emptyList(), singletonList("1"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability DEAL_1_DAMAGE_TO_CREATURE_YOU_CONTROL_THAT_CREATURE_GAINS_TRAMPLE = new Ability(asList(DEALS_X_DAMAGE_TO_TARGET, THAT_TARGETS_GET_X), singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetControllerType(PLAYER).build()), asList("1", "Trample"), new Trigger(CAST));
     public static Ability DEAL_3_DAMAGE_TO_ANY_TARGET = new Ability(DEALS_X_DAMAGE_TO_TARGET, singletonList(Target.builder().targetType(TargetType.ANY).build()), singletonList("3"), new Trigger(CAST));
@@ -51,11 +57,26 @@ public class Abilities {
     public static Ability VIGILANCE = new Ability(AbilityType.VIGILANCE);
 
 
-    public static Ability get(String ability) {
+    private static Ability get(String ability) {
         try {
             return (Ability) Abilities.class.getField(ability).get(null);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException("Ability " + ability  + " does not exist.");
         }
+    }
+
+    public static PowerToughness powerToughnessFromParameters(List<String> parameters) {
+        return parameters.stream()
+                .filter(parameter -> parameter.contains("/"))
+                .map(PowerToughness::powerToughness)
+                .findFirst()
+                .orElse(powerToughness("0/0"));
+    }
+
+    public static List<Ability> abilitiesFromParameters(List<String> parameters) {
+        return parameters.stream()
+                .filter(parameter -> !parameter.contains("/"))
+                .map(Abilities::get)
+                .collect(Collectors.toList());
     }
 }

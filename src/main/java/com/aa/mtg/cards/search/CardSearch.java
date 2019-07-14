@@ -24,6 +24,13 @@ public class CardSearch {
         return new CardSearch(cards);
     }
 
+    public CardSearch notOfType(Type type) {
+        List<Card> cards = this.cards.stream()
+                .filter(card -> card.isNotOfType(type))
+                .collect(toList());
+        return new CardSearch(cards);
+    }
+
     public CardSearch ofColor(Color color) {
         List<Card> cards = this.cards.stream()
                 .filter(card -> card.isOfColor(color))

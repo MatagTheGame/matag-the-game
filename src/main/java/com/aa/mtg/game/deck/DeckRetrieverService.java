@@ -3,6 +3,7 @@ package com.aa.mtg.game.deck;
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.properties.Color;
+import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.cards.search.CardSearch;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.security.SecurityToken;
@@ -69,12 +70,23 @@ public class DeckRetrieverService {
     }
 
     private List<Card> getRandomCardsForColors(List<Color> deckColors) {
-        List<Card> allCardsOfTheseColors = new CardSearch(mtgSets().getAllCards())
-                .ofAnyOfTheColors(deckColors)
-                .getCards();
-        Collections.shuffle(allCardsOfTheseColors);
+        ArrayList<Card> selectedCards = new ArrayList<>();
 
-        return allCardsOfTheseColors.subList(0, 8);
+        List<Card> creatureCardsOfTheseColors = new CardSearch(mtgSets().getAllCards())
+                .ofAnyOfTheColors(deckColors)
+                .ofType(Type.CREATURE)
+                .getCards();
+        Collections.shuffle(creatureCardsOfTheseColors);
+        selectedCards.addAll(creatureCardsOfTheseColors.subList(0, 5));
+
+        List<Card> nonCreatureCardsOfTheseColors = new CardSearch(mtgSets().getAllCards())
+                .ofAnyOfTheColors(deckColors)
+                .notOfType(Type.CREATURE)
+                .getCards();
+        Collections.shuffle(nonCreatureCardsOfTheseColors);
+        selectedCards.addAll(nonCreatureCardsOfTheseColors.subList(0, 3));
+
+        return selectedCards;
     }
 
     private Card getRandomColorlessCard() {

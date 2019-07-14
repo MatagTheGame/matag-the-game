@@ -3,7 +3,7 @@ package com.aa.mtg.cards.ability.type;
 import java.util.List;
 
 public enum AbilityType {
-    CREATURES_YOU_CONTROL_GET_PLUS_X_UNTIL_END_OF_TURN("Creatures you control get plus %s until end of turn."),
+    CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN("Creatures you control get %s until end of turn."),
     DEALS_X_DAMAGE_TO_TARGET("Deals %s damage to target."),
     DEATHTOUCH("Deathtouch."),
     DESTROY_TARGET("Destroy target."),

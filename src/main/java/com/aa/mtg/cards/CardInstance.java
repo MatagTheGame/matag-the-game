@@ -16,9 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.aa.mtg.cards.ability.Abilities.abilitiesFromParameters;
+import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameters;
 import static com.aa.mtg.cards.ability.trigger.TriggerType.CAST;
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
-import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
 
@@ -194,11 +195,7 @@ public class CardInstance {
     private int getAttachmentsPower() {
         int attachmentsPower = 0;
         for (Ability ability : getAttachedCardsAbilities()) {
-            for (String parameter : ability.getParameters()) {
-                if (parameter.contains("/")) {
-                    attachmentsPower += powerToughness(parameter).getPower();
-                }
-            }
+            attachmentsPower += powerToughnessFromParameters(ability.getParameters()).getPower();
         }
 
         return attachmentsPower;
@@ -207,11 +204,7 @@ public class CardInstance {
     private int getAttachmentsToughness() {
         int attachmentsToughness = 0;
         for (Ability ability : getAttachedCardsAbilities()) {
-            for (String parameter : ability.getParameters()) {
-                if (parameter.contains("/")) {
-                    attachmentsToughness += powerToughness(parameter).getToughness();
-                }
-            }
+            attachmentsToughness += powerToughnessFromParameters(ability.getParameters()).getToughness();
         }
 
         return attachmentsToughness;
@@ -220,11 +213,7 @@ public class CardInstance {
     private List<Ability> getAttachmentsAbilities() {
         List<Ability> abilities = new ArrayList<>();
         for (Ability ability : getAttachedCardsAbilities()) {
-            for (String parameter : ability.getParameters()) {
-                if (!parameter.contains("/")) {
-                    abilities.add(Abilities.get(parameter));
-                }
-            }
+            abilities.addAll(abilitiesFromParameters(ability.getParameters()));
         }
         return abilities;
     }
