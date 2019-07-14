@@ -23,6 +23,8 @@ public class CoreSet2020 implements MtgSet {
     public static Card BARTIZAN_BATS = new Card("Bartizan_Bats", singletonList(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Bat"), "", 3, 1, singletonList(FLYING));
     public static Card BASTION_ENFORCER = new Card("Bastion Enforcer", singletonList(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Dwarf", "Soldier"), "", 3, 2, emptyList());
     public static Card BOGSTOMPER = new Card("Bogstomper", singletonList(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Beast"), "", 6, 5, emptyList());
+    public static Card CANOPY_SPIDER = new Card("Canopy Spider", singletonList(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Spider"), "", 1, 3, singletonList(REACH));
+    public static Card CENTAUR_COURSER = new Card("Centaur Courser", singletonList(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Centaur", "Warrior"), "", 3, 3, emptyList());
     public static Card MARAUDERS_AXE = new Card("Marauder's Axe", emptyList(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), "Equipped creature gets +2/+0. Equip 2", 0, 0, singletonList(PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0));
     public static Card OAKENFORM = new Card("Oakenform", singletonList(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), "Enchant creature. Enchanted creature gets +3/+3.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_3));
 
@@ -36,6 +38,8 @@ public class CoreSet2020 implements MtgSet {
         cards.add(BARTIZAN_BATS);
         cards.add(BASTION_ENFORCER);
         cards.add(BOGSTOMPER);
+        cards.add(CANOPY_SPIDER);
+        cards.add(CENTAUR_COURSER);
         cards.add(MARAUDERS_AXE);
         cards.add(OAKENFORM);
     }

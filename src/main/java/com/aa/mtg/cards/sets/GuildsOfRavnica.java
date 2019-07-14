@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.Abilities.ENCHANTED_CREATURE_GETS_PLUS_3_2_AND_VIGILANCE;
+import static com.aa.mtg.cards.ability.Abilities.WHEN_IT_ENTERS_THE_BATTLEFIELD_EACH_PLAYERS_GAIN_4_LIFE;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
@@ -17,6 +18,7 @@ public class GuildsOfRavnica implements MtgSet {
     public static final String GRN = "GRN";
 
     public static Card CANDLELIGHT_VIGIL = new Card("Candlelight Vigil", singletonList(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), "Enchant Creature. Enchanted creature gets +3/+2 and has vigilance.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_2_AND_VIGILANCE));
+    public static Card CENTAUR_PEACEMAKER = new Card("Centaur Peacemaker", asList(Color.WHITE, Color.GREEN), asList(Cost.WHITE, Cost.GREEN, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Centaur", "Cleric"), "When Centaur Peacemaker enters the battlefield, each player gains 4 life.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_EACH_PLAYERS_GAIN_4_LIFE));
 
     private static GuildsOfRavnica instance;
 

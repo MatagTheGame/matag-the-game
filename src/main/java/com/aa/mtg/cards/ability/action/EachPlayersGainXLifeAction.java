@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GainXLifeAction implements AbilityAction {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GainXLifeAction.class);
+public class EachPlayersGainXLifeAction implements AbilityAction {
+    private static final Logger LOGGER = LoggerFactory.getLogger(EachPlayersGainXLifeAction.class);
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
 
     @Autowired
-    public GainXLifeAction(GameStatusUpdaterService gameStatusUpdaterService) {
+    public EachPlayersGainXLifeAction(GameStatusUpdaterService gameStatusUpdaterService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
     }
 
@@ -29,6 +29,10 @@ public class GainXLifeAction implements AbilityAction {
         currentPlayer.increaseLife(lifeToGain);
         gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, currentPlayer);
 
-        LOGGER.info("{} gained {} life.", currentPlayer.getName(), lifeToGain);
+        Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
+        nonCurrentPlayer.increaseLife(lifeToGain);
+        gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, nonCurrentPlayer);
+
+        LOGGER.info("Each players gain {} life.", lifeToGain);
     }
 }

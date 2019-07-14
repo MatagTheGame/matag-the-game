@@ -10,6 +10,7 @@ public class AbilityActionFactory {
     private final DealXDamageToTargetAction dealXDamageToTargetAction;
     private final DrawXCardsAction drawXCardsAction;
     private final GainXLifeAction gainXLifeAction;
+    private final EachPlayersGainXLifeAction eachPlayersGainXLifeAction;
     private final ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction;
     private final ThatTargetsGetAction thatTargetsGetAction;
     private final CreaturesYouControlGetXUntilEndOfTurn creaturesYouControlGetXUntilEndOfTurn;
@@ -17,12 +18,13 @@ public class AbilityActionFactory {
 
     @Autowired
     public AbilityActionFactory(DestroyTargetAction destroyTargetAction, DealXDamageToTargetAction dealXDamageToTargetAction, DrawXCardsAction drawXCardsAction,
-                                GainXLifeAction gainXLifeAction, ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction, ThatTargetsGetAction thatTargetsGetAction,
+                                GainXLifeAction gainXLifeAction, EachPlayersGainXLifeAction eachPlayersGainXLifeAction, ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction, ThatTargetsGetAction thatTargetsGetAction,
                                 CreaturesYouControlGetXUntilEndOfTurn creaturesYouControlGetXUntilEndOfTurn, Attach attach) {
         this.destroyTargetAction = destroyTargetAction;
         this.dealXDamageToTargetAction = dealXDamageToTargetAction;
         this.drawXCardsAction = drawXCardsAction;
         this.gainXLifeAction = gainXLifeAction;
+        this.eachPlayersGainXLifeAction = eachPlayersGainXLifeAction;
         this.shuffleTargetGraveyardIntoLibraryAction = shuffleTargetGraveyardIntoLibraryAction;
         this.thatTargetsGetAction = thatTargetsGetAction;
         this.creaturesYouControlGetXUntilEndOfTurn = creaturesYouControlGetXUntilEndOfTurn;
@@ -43,6 +45,8 @@ public class AbilityActionFactory {
                 return drawXCardsAction;
             case GAIN_X_LIFE:
                 return gainXLifeAction;
+            case EACH_PLAYERS_GAIN_X_LIFE:
+                return eachPlayersGainXLifeAction;
             case SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER:
                 return shuffleTargetGraveyardIntoLibraryAction;
             case THAT_TARGETS_GET_X:

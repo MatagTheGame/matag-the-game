@@ -9,6 +9,7 @@ public enum AbilityType {
     DESTROY_TARGET("Destroy target."),
     DRAW_X_CARDS("Draw %s cards."),
     GAIN_X_LIFE("Gain %s life."),
+    EACH_PLAYERS_GAIN_X_LIFE("Each player gains %s life."),
     ENCHANTED_CREATURE_GETS("Enchanted creature gets %s."),
     EQUIPPED_CREATURE_GETS("Equipped creature gets %s."),
     FLYING("Flying."),
