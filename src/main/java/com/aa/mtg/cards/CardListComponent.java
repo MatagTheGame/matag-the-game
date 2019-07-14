@@ -20,6 +20,10 @@ public abstract class CardListComponent {
         return cards;
     }
 
+    public List<CardInstance> getCardsCopy() {
+        return new ArrayList<>(cards);
+    }
+
     public int size() {
         return cards.size();
     }

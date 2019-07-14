@@ -5,7 +5,6 @@ import CardUtils from '../Card/CardUtils'
 import CardSearch from '../Card/CardSearch'
 import StackUtils from '../Stack/StackUtils'
 import PlayerUtils from '../PlayerInfo/PlayerUtils'
-import {get} from 'lodash'
 
 export default class ClientEventsReducer {
 
@@ -35,7 +34,7 @@ export default class ClientEventsReducer {
 
           } else {
             const currentMana = CostUtils.currentMana(newState.player.battlefield)
-            const ability = get(cardInstance, 'castAbilities[0]')
+            const ability = CardUtils.getCastAbility(cardInstance)
             if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentMana)) {
               if (CardUtils.needsTargets(cardInstance, 'CAST')) {
                 PlayerUtils.handleSelectTargets(newState, cardInstance, ability)

@@ -2,6 +2,8 @@ package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.action.DestroyTargetAction;
+import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_IT_ENTERS_THE_BATTLEFIELD;
+import static com.aa.mtg.cards.properties.Type.CREATURE;
 
 @Service
 public class EnterCardIntoBattlefieldService {
@@ -17,10 +20,12 @@ public class EnterCardIntoBattlefieldService {
     private static final Logger LOGGER = LoggerFactory.getLogger(EnterCardIntoBattlefieldService.class);
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
+    private final DestroyTargetAction destroyTargetAction;
 
     @Autowired
-    public EnterCardIntoBattlefieldService(GameStatusUpdaterService gameStatusUpdaterService) {
+    public EnterCardIntoBattlefieldService(GameStatusUpdaterService gameStatusUpdaterService, DestroyTargetAction destroyTargetAction) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
+        this.destroyTargetAction = destroyTargetAction;
     }
 
     public void enter(GameStatus gameStatus, CardInstance cardInstance) {
@@ -36,6 +41,16 @@ public class EnterCardIntoBattlefieldService {
                 return;
             }
         }
+
+        destroyCreaturesWith0ToughnessOrLowerForPlayer(gameStatus, gameStatus.getCurrentPlayer());
+        destroyCreaturesWith0ToughnessOrLowerForPlayer(gameStatus, gameStatus.getNonCurrentPlayer());
+    }
+
+    private void destroyCreaturesWith0ToughnessOrLowerForPlayer(GameStatus gameStatus, Player player) {
+        player.getBattlefield().getCardsCopy().stream()
+                .filter(cardInstance -> cardInstance.isOfType(CREATURE))
+                .filter(cardInstance -> cardInstance.getToughness() <= 0)
+                .forEach(cardInstance -> destroyTargetAction.destroy(gameStatus, cardInstance.getId()));
     }
 
 }

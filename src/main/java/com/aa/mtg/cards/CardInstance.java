@@ -165,6 +165,7 @@ public class CardInstance {
         return abilities;
     }
 
+    @JsonIgnore
     public List<Ability> getCastAbilities() {
         return getAbilities().stream()
                 .filter(ability -> ability.getTrigger() != null)

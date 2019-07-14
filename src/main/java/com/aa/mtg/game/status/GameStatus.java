@@ -107,4 +107,15 @@ public class GameStatus {
 
         return null;
     }
+
+    public CardInstance findCardByIdFromAnyBattlefield(int id) {
+        if (getNonCurrentPlayer().getBattlefield().hasCardById(id)) {
+            return getNonCurrentPlayer().getBattlefield().findCardById(id);
+
+        } else if (getCurrentPlayer().getBattlefield().hasCardById(id)) {
+            return getCurrentPlayer().getBattlefield().findCardById(id);
+        }
+
+        return null;
+    }
 }

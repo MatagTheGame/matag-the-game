@@ -23,8 +23,9 @@ public class Attach implements AbilityAction {
     @Override
     public void perform(Ability ability, CardInstance cardInstance, GameStatus gameStatus) {
         String target = cardInstance.getModifiers().getTargets().get(0).toString();
-        cardInstance.getModifiers().setAttachedToId(parseInt(target));
-        gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+        int attachedToId = parseInt(target);
+        cardInstance.getModifiers().setAttachedToId(attachedToId);
         LOGGER.info("attached {} to {}", cardInstance.getIdAndName(), target);
+        gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
     }
 }

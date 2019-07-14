@@ -222,4 +222,8 @@ export default class CardUtils {
   static isNotAttached(cardInstance) {
     return !cardInstance.modifiers.attachedToId
   }
+
+  static getCastAbility(cardInstance) {
+    return cardInstance.abilities.find(ability => get(ability, 'trigger.type') === 'CAST')
+  }
 }
