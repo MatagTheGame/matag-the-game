@@ -20,6 +20,7 @@ import static com.aa.mtg.cards.sets.Ixalan.LEGIONS_JUDGMENT;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CONCORDIA_PEGASUS;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
 import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
 
@@ -69,9 +70,13 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
 
         // Verify as well the vigilance effect
         browser.player1().getActionHelper().clickContinue();
+        browser.player2().getPhaseHelper().is(BC, PLAYER);
+        browser.player2().getActionHelper().clickContinue();
         browser.player1().getPhaseHelper().is(DA, PLAYER);
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).declareAsAttacker();
         browser.player1().getActionHelper().clickContinue();
+        browser.player1().getPhaseHelper().is(DA, OPPONENT);
+        browser.player2().getActionHelper().clickContinue();
         browser.player1().getPhaseHelper().is(M2, PLAYER);
         browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(13);
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).isNotTapped();

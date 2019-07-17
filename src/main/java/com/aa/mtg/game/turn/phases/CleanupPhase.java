@@ -13,16 +13,19 @@ public class CleanupPhase implements Phase {
     public static final String CL = "CL";
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
+    private final UntapPhase untapPhase;
 
     @Autowired
-    public CleanupPhase(GameStatusUpdaterService gameStatusUpdaterService) {
+    public CleanupPhase(GameStatusUpdaterService gameStatusUpdaterService, UntapPhase untapPhase) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
+        this.untapPhase = untapPhase;
     }
 
     @Override
     public void apply(GameStatus gameStatus) {
         cleanup(gameStatus);
         moveToNextPlayer(gameStatus);
+        untapPhase.apply(gameStatus);
     }
 
     private void cleanup(GameStatus gameStatus) {
@@ -38,5 +41,6 @@ public class CleanupPhase implements Phase {
         String nextCurrentPlayer = gameStatus.getNonCurrentPlayer().getName();
         gameStatus.getTurn().setCurrentTurnPlayer(nextCurrentPlayer);
         gameStatus.getTurn().setCurrentPhaseActivePlayer(nextCurrentPlayer);
+        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }
 }

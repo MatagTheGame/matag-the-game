@@ -12,10 +12,12 @@ public class CombatDamagePhase implements Phase {
     public static final String CD = "CD";
 
     private final CombatService combatService;
+    private final EndOfCombatPhase endOfCombatPhase;
 
     @Autowired
-    public CombatDamagePhase(CombatService combatService) {
+    public CombatDamagePhase(CombatService combatService, EndOfCombatPhase endOfCombatPhase) {
         this.combatService = combatService;
+        this.endOfCombatPhase = endOfCombatPhase;
     }
 
     @Override
@@ -25,6 +27,7 @@ public class CombatDamagePhase implements Phase {
         if (!gameStatus.getTurn().isEnded()) {
             gameStatus.getTurn().setCurrentPhase(EC);
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+            endOfCombatPhase.apply(gameStatus);
         }
     }
 }

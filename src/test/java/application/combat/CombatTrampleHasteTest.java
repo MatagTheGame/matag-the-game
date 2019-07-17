@@ -20,6 +20,7 @@ import static com.aa.mtg.cards.sets.Ixalan.CHARGING_MONSTROSAUR;
 import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
 import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
 
@@ -40,6 +41,8 @@ public class CombatTrampleHasteTest extends AbstractApplicationTest {
 
         // When going to combat
         browser.player1().getActionHelper().clickContinue();
+        browser.player2().getPhaseHelper().is(BC, PLAYER);
+        browser.player2().getActionHelper().clickContinue();
         browser.player1().getPhaseHelper().is(DA, PLAYER);
 
         // When declare attacker
@@ -47,6 +50,8 @@ public class CombatTrampleHasteTest extends AbstractApplicationTest {
         browser.player1().getActionHelper().clickContinue();
 
         // Declare blocker
+        browser.player2().getPhaseHelper().is(DA, PLAYER);
+        browser.player2().getActionHelper().clickContinue();
         browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(CHARGING_MONSTROSAUR).select();
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).declareAsBlocker();
         browser.player2().getActionHelper().clickContinue();

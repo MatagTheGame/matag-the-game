@@ -20,6 +20,7 @@ import static com.aa.mtg.cards.sets.Ixalan.ANCIENT_BRONTODON;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
 import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.aa.mtg.game.turn.phases.DeclareBlockersPhase.DB;
 
@@ -31,6 +32,8 @@ public class CombatFlyingReachTest extends AbstractApplicationTest {
     public void combatFlyingReach() {
         // When going to combat
         browser.player1().getActionHelper().clickContinue();
+        browser.player2().getPhaseHelper().is(BC, PLAYER);
+        browser.player2().getActionHelper().clickContinue();
         browser.player1().getPhaseHelper().is(DA, PLAYER);
 
         // creature with flying should have the correct class
@@ -41,6 +44,8 @@ public class CombatFlyingReachTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(AIR_ELEMENTAL).declareAsAttacker();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(AIR_ELEMENTAL).declareAsAttacker();
         browser.player1().getActionHelper().clickContinue();
+        browser.player2().getPhaseHelper().is(DA, PLAYER);
+        browser.player2().getActionHelper().clickContinue();
 
         // Declare blocker
         browser.player2().getPhaseHelper().is(DB, PLAYER);

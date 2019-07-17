@@ -19,6 +19,7 @@ import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.sets.CoreSet2019.ANGEL_OF_THE_DAWN;
 import static com.aa.mtg.cards.sets.WarOfTheSpark.ENFORCER_GRIFFIN;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
 import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
 
 @RunWith(SpringRunner.class)
@@ -47,6 +48,8 @@ public class CreatureEntersTheBattlefieldWithAbilityTest extends AbstractApplica
 
         // And gives them vigilance
         browser.player1().getActionHelper().clickContinue();
+        browser.player2().getPhaseHelper().is(BC, PLAYER);
+        browser.player2().getActionHelper().clickContinue();
         browser.player1().getPhaseHelper().is(DA, PLAYER);
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(ENFORCER_GRIFFIN).declareAsAttacker();
         browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(ENFORCER_GRIFFIN).isNotTapped();

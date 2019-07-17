@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn.phases;
 
 import com.aa.mtg.cards.ability.action.DrawXCardsAction;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,10 +13,12 @@ import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 public class DrawPhase implements Phase {
     public static final String DR = "DR";
 
+    private final GameStatusUpdaterService gameStatusUpdaterService;
     private final DrawXCardsAction drawXCardsAction;
 
     @Autowired
-    public DrawPhase(DrawXCardsAction drawXCardsAction) {
+    public DrawPhase(GameStatusUpdaterService gameStatusUpdaterService, DrawXCardsAction drawXCardsAction) {
+        this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.drawXCardsAction = drawXCardsAction;
     }
 
@@ -25,5 +28,6 @@ public class DrawPhase implements Phase {
             drawXCardsAction.perform(DRAW_1_CARD, null, gameStatus);
         }
         gameStatus.getTurn().setCurrentPhase(M1);
+        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }
 }

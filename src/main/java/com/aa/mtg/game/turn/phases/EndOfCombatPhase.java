@@ -22,6 +22,7 @@ public class EndOfCombatPhase implements Phase {
     public void apply(GameStatus gameStatus) {
         gameStatus.getTurn().setCurrentPhase(M2);
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
         gameStatus.getCurrentPlayer().getBattlefield().removeAttacking();
         gameStatus.getNonCurrentPlayer().getBattlefield().removeBlocking();

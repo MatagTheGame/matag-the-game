@@ -18,13 +18,15 @@ import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.modifiers.TappedModifier.TAPPED;
+import static com.aa.mtg.cards.sets.Ixalan.AIR_ELEMENTAL;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
-import static com.aa.mtg.cards.sets.Ixalan.AIR_ELEMENTAL;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.EndTurnPhase.ET;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
+import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -55,7 +57,10 @@ public class CleanupTest extends AbstractApplicationTest {
         browser.player1().getActionHelper().clickContinue();
 
         // Phase is
-        browser.player1().getPhaseHelper().is(M1, OPPONENT);
+        browser.player1().getPhaseHelper().is(ET, OPPONENT);
+        browser.player2().getPhaseHelper().is(ET, PLAYER);
+        browser.player2().getActionHelper().clickContinue();
+        browser.player1().getPhaseHelper().is(UP, OPPONENT);
 
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).doesNotHaveDamage();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).isTapped();

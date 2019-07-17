@@ -21,6 +21,7 @@ import static com.aa.mtg.cards.sets.RavnicaAllegiance.AXEBANE_BEAST;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CORAL_COMMANDO;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
 import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.aa.mtg.game.turn.phases.DeclareBlockersPhase.DB;
 import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
@@ -33,6 +34,8 @@ public class BasicCombatTest extends AbstractApplicationTest {
     public void basicCombat() {
         // When continuing
         browser.player1().getActionHelper().clickContinue();
+        browser.player2().getPhaseHelper().is(BC, PLAYER);
+        browser.player2().getActionHelper().clickContinue();
 
         // Message and status are about declaring attackers
         browser.player1().getPhaseHelper().is(DA, PLAYER);
@@ -64,6 +67,11 @@ public class BasicCombatTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(AXEBANE_BEAST).click();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(ANCIENT_BRONTODON).click();
         browser.player1().getActionHelper().clickContinue();
+
+        // Priority passes to the opponent
+        browser.player1().getPhaseHelper().is(DA, OPPONENT);
+        browser.player2().getPhaseHelper().is(DA, PLAYER);
+        browser.player2().getActionHelper().clickContinue();
 
         // The phase move to Declare blocker
         browser.player1().getPhaseHelper().is(DB, OPPONENT);

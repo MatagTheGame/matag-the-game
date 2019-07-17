@@ -47,7 +47,7 @@ public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
 
         // Then card is unselected
         browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).isNotSelected();
-        browser.player1().getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
+        browser.player1().getStatusHelper().hasMessage("Play any spell or ability or continue (SPACE).");
 
         // When click on a sorcery that requires target
         browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).click();
@@ -74,7 +74,7 @@ public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
         browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
         browser.player2().getStackHelper().containsExactly(LEGIONS_JUDGMENT);
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(COLOSSAL_DREADMAW).isTargeted();
-        browser.player2().getStatusHelper().hasMessage("Play any instant or abilities or resolve the top spell in the stack (SPACE).");
+        browser.player2().getStatusHelper().hasMessage("Play any instant or ability or resolve the top spell in the stack (SPACE).");
 
         // And priority is passed to the opponent
         browser.player1().getActionHelper().cannotContinue();
@@ -98,7 +98,7 @@ public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
         // And priority is passed to the player again
         browser.player1().getActionHelper().canContinue();
         browser.player1().getPhaseHelper().is(M1, PLAYER);
-        browser.player1().getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
+        browser.player1().getStatusHelper().hasMessage("Play any spell or ability or continue (SPACE).");
         browser.player2().getActionHelper().cannotContinue();
         browser.player2().getPhaseHelper().is(M1, OPPONENT);
         browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");

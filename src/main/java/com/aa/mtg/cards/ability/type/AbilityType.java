@@ -19,6 +19,7 @@ public enum AbilityType {
     SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER("Shuffle graveyard into library."),
     THAT_TARGETS_GET_X("That targets get %s."),
     TRAMPLE("Trample."),
+    TARGET_CREATURE_GETS("Target creature gets %s."),
     VIGILANCE("Vigilance.");
 
     private String text;

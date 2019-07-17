@@ -5,8 +5,13 @@ import StackUtils from '../Stack/StackUtils'
 import stompClient from '../WebSocket'
 import CostUtils from '../Card/CostUtils'
 
-const PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE = 'Play any spell or abilities or continue (SPACE).'
-const PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE = 'Play any instant or abilities or resolve the top spell in the stack (SPACE).'
+const CHOOSE_A_CARD_TO_DISCARD = 'Chose a card to discard.'
+const CHOOSE_CREATURES_YOU_WANT_TO_BLOCK_WITH = 'Choose creatures you want to block with.'
+const CHOOSE_CREATURES_YOU_WANT_TO_ATTACK_WITH = 'Choose creatures you want to attack with.'
+const PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE = 'Play any spell or ability or continue (SPACE).'
+const PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE = 'Play any instant or ability or continue (SPACE).'
+const PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE_STACK_NOT_EMPTY = 'Play any instant or ability or resolve the top spell in the stack (SPACE).'
+const WAIT_FOR_AN_OPPONENT_TO_PERFORM_ITS_ACTION = 'Wait for opponent to perform its action...'
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
@@ -58,40 +63,33 @@ export default class PlayerUtils {
       .isNotEmpty()
   }
 
-  static canPlayerPerformAnyAction(state) {
-    if (!PlayerUtils.isCurrentPlayerActive(state)) {
-      state.statusMessage = 'Wait for opponent to perform its action...'
-      return false
-    }
+  static setStatusMessage(state) {
+    if (state.turn.winner) {
+      state.message = {text: state.turn.winner + ' Win!', closable: true}
 
-    if (!PlayerUtils.isCurrentPlayerTurn(state)) {
-      if (state.turn.currentPhase === 'DB' && PlayerUtils.isPlayerAbleToBlock(state)) {
-        state.statusMessage = 'Choose creatures you want to block with.'
-        return true
-      } else {
-        if (!StackUtils.isStackEmpty(state)) {
-          state.statusMessage = PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE
-          return true
-        }
-      }
+    } else if (!PlayerUtils.isCurrentPlayerActive(state)) {
+      state.statusMessage = WAIT_FOR_AN_OPPONENT_TO_PERFORM_ITS_ACTION
 
     } else {
-      if (Phase.isMainPhase(state.turn.currentPhase)) {
-        if (StackUtils.isStackEmpty(state)) {
+      if (!StackUtils.isStackEmpty(state)) {
+        state.statusMessage = PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE_STACK_NOT_EMPTY
+
+      } else {
+        if (Phase.isMainPhase(state.turn.currentPhase)) {
           state.statusMessage = PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE
+
+        } else if (state.turn.currentPhase === 'DB' && PlayerUtils.isPlayerAbleToBlock(state)) {
+          state.statusMessage = CHOOSE_CREATURES_YOU_WANT_TO_BLOCK_WITH
+
+        } else if (state.turn.currentPhase === 'DA' && PlayerUtils.isPlayerAbleToAttack(state)) {
+          state.statusMessage = CHOOSE_CREATURES_YOU_WANT_TO_ATTACK_WITH
+
+        } else if (state.turn.triggeredNonStackAction) {
+          state.statusMessage = CHOOSE_A_CARD_TO_DISCARD
+
         } else {
           state.statusMessage = PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE
         }
-        return true
-      } else if (state.turn.triggeredNonStackAction) {
-        state.statusMessage = 'Chose a card to discard.'
-        return true
-      } else if (state.turn.currentPhase === 'DA' && PlayerUtils.isPlayerAbleToAttack(state)) {
-        state.statusMessage = 'Choose creatures you want to attack with.'
-        return true
-      } else {
-        state.statusMessage = '...'
-        return false
       }
     }
   }

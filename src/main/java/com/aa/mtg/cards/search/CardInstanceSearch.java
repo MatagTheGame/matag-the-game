@@ -125,4 +125,17 @@ public class CardInstanceSearch {
                 .collect(Collectors.toList());
         return new CardInstanceSearch(cards);
     }
+
+    public boolean canAnyCreatureAttack() {
+        return ofType(Type.CREATURE)
+                .untapped()
+                .withoutSummoningSickness()
+                .isNotEmpty();
+    }
+
+    public boolean canAnyCreatureBlock() {
+        return ofType(Type.CREATURE)
+                .untapped()
+                .isNotEmpty();
+    }
 }

@@ -66,7 +66,7 @@ public class InitGameTest extends AbstractApplicationTest {
 
         // Phase and statuses are
         browser.player1().getPhaseHelper().is(M1, PLAYER);
-        browser.player1().getStatusHelper().hasMessage("Play any spell or abilities or continue (SPACE).");
+        browser.player1().getStatusHelper().hasMessage("Play any spell or ability or continue (SPACE).");
         browser.player1().getActionHelper().canContinue();
         browser.player2().getPhaseHelper().is(M1, OPPONENT);
         browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");

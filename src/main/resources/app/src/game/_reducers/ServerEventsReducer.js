@@ -1,4 +1,3 @@
-import stompClient from '../WebSocket'
 import PlayerUtils from '../PlayerInfo/PlayerUtils'
 
 export default class ServerEventsReducer {
@@ -35,14 +34,7 @@ export default class ServerEventsReducer {
     case 'UPDATE_TURN':
       newState.turn = action.value
       newState.turn.blockingCardPosition = 0
-
-      if (!newState.turn.winner && !PlayerUtils.canPlayerPerformAnyAction(newState)) {
-        if (PlayerUtils.isCurrentPlayerActive(newState)) {
-          stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})
-        }
-      } else if (newState.turn.winner) {
-        newState.message = {text: newState.turn.winner + ' Win!', closable: true}
-      }
+      PlayerUtils.setStatusMessage(newState)
 
       break
 

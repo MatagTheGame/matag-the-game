@@ -47,15 +47,16 @@ public class Abilities {
     public static Ability ENCHANTED_CREATURE_GETS_PLUS_3_3 = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+3/+3"), new Trigger(CAST));
     public static Ability ENCHANTED_CREATURE_GETS_PLUS_7_7_AND_TRAMPLE = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("+7/+7", "TRAMPLE"), new Trigger(CAST));
     public static Ability ENCHANTED_CREATURE_GETS_MINUS_2_2 = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("-2/-2"), new Trigger(CAST));
+    public static Ability FLYING = new Ability(AbilityType.FLYING);
+    public static Ability HASTE = new Ability(AbilityType.HASTE);
+    public static Ability LIFELINK = new Ability(AbilityType.LIFELINK);
     public static Ability PAY_1_EQUIP_CREATURE_GETS_FLYING = new Ability(EQUIPPED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("FLYING"), new Trigger(ACTIVATED_ABILITY, singletonList(COLORLESS)));
     public static Ability PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1 = new Ability(EQUIPPED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+1"), new Trigger(ACTIVATED_ABILITY, singletonList(COLORLESS)));
     public static Ability PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1_AND_HASTE = new Ability(EQUIPPED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("+1/+1", "HASTE"), new Trigger(ACTIVATED_ABILITY, singletonList(COLORLESS)));
     public static Ability PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0 = new Ability(EQUIPPED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+2/+0"), new Trigger(ACTIVATED_ABILITY, asList(COLORLESS, COLORLESS)));
-    public static Ability FLYING = new Ability(AbilityType.FLYING);
-    public static Ability HASTE = new Ability(AbilityType.HASTE);
-    public static Ability LIFELINK = new Ability(AbilityType.LIFELINK);
     public static Ability REACH = new Ability(AbilityType.REACH);
     public static Ability SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER = new Ability(SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER, singletonList(Target.builder().targetType(TargetType.PLAYER).build()), emptyList(), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_PLUS_1_3 = new Ability(TARGET_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+3"), new Trigger(CAST));
     public static Ability TRAMPLE = new Ability(AbilityType.TRAMPLE);
     public static Ability VIGILANCE = new Ability(AbilityType.VIGILANCE);
 
