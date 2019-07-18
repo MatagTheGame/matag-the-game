@@ -1,13 +1,15 @@
 package application.enter;
 
 import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
+import application.init.InitGameTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -26,6 +28,14 @@ import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CreatureEntersTheBattlefieldWithAbilityTest.InitGameTestConfiguration.class})
 public class CreatureEntersTheBattlefieldWithAbilityTest extends AbstractApplicationTest {
+
+    @Autowired
+    private InitTestServiceDecorator initTestServiceDecorator;
+
+    public void setupGame() {
+        initTestServiceDecorator.setInitTestService(new CreatureEntersTheBattlefieldWithAbilityTest.InitTestServiceForTest());
+    }
+
     @Test
     public void creatureEntersTheBattlefieldWithAbility() {
         // When Playing Angel of the Dawn
@@ -56,21 +66,16 @@ public class CreatureEntersTheBattlefieldWithAbilityTest extends AbstractApplica
     }
 
     @Configuration
-    static class InitGameTestConfiguration {
-        @Bean
-        public InitTestService initTestService() {
-            return new InitTestService() {
-                @Override
-                protected void initGameStatus(GameStatus gameStatus) {
-                    addCardToCurrentPlayerHand(gameStatus, ANGEL_OF_THE_DAWN);
-                    addCardToCurrentPlayerBattlefield(gameStatus, ENFORCER_GRIFFIN);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                }
-            };
+    static class InitTestServiceForTest extends InitTestService {
+        @Override
+        public void initGameStatus(GameStatus gameStatus) {
+            addCardToCurrentPlayerHand(gameStatus, ANGEL_OF_THE_DAWN);
+            addCardToCurrentPlayerBattlefield(gameStatus, ENFORCER_GRIFFIN);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
         }
     }
 }

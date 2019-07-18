@@ -1,13 +1,15 @@
 package application.combat;
 
 import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
+import application.init.InitGameTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,6 +26,14 @@ import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CombatLifelinkTest.InitGameTestConfiguration.class})
 public class CombatLifelinkTest extends AbstractApplicationTest {
+
+    @Autowired
+    private InitTestServiceDecorator initTestServiceDecorator;
+
+    public void setupGame() {
+        initTestServiceDecorator.setInitTestService(new CombatLifelinkTest.InitTestServiceForTest());
+    }
+
     @Test
     public void combatLifelink() {
         // When going to combat
@@ -45,15 +55,10 @@ public class CombatLifelinkTest extends AbstractApplicationTest {
     }
 
     @Configuration
-    static class InitGameTestConfiguration {
-        @Bean
-        public InitTestService initTestService() {
-            return new InitTestService() {
-                @Override
-                protected void initGameStatus(GameStatus gameStatus) {
-                    addCardToCurrentPlayerBattlefield(gameStatus, CHARITY_EXTRACTOR);
-                }
-            };
+    static class InitTestServiceForTest extends InitTestService {
+        @Override
+        public void initGameStatus(GameStatus gameStatus) {
+            addCardToCurrentPlayerBattlefield(gameStatus, CHARITY_EXTRACTOR);
         }
     }
 }

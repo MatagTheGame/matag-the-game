@@ -1,14 +1,14 @@
 package application.init;
 
 import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -28,8 +28,16 @@ import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import({InitGameTest.InitGameTestConfiguration.class})
+@Import({AbstractApplicationTest.InitGameTestConfiguration.class})
 public class InitGameTest extends AbstractApplicationTest {
+
+    @Autowired
+    private InitTestServiceDecorator initTestServiceDecorator;
+
+    public void setupGame() {
+        initTestServiceDecorator.setInitTestService(new InitTestServiceForTest());
+    }
+
     @Test
     public void display() {
         // Hands are
@@ -73,40 +81,34 @@ public class InitGameTest extends AbstractApplicationTest {
         browser.player2().getActionHelper().cannotContinue();
     }
 
-    @Configuration
-    static class InitGameTestConfiguration {
-        @Bean
-        public InitTestService initTestService() {
-            return new InitTestService() {
-                @Override
-                protected void initGameStatus(GameStatus gameStatus) {
-                    // Current Player
-                    addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
-                    addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
+    static class InitTestServiceForTest extends InitTestService {
+        @Override
+        public void initGameStatus(GameStatus gameStatus) {
+            // Current Player
+            addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
+            addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
 
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, HUATLIS_SNUBHORN);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, HUATLIS_SNUBHORN);
 
-                    addCardToCurrentPlayerHand(gameStatus, ISLAND);
-                    addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
+            addCardToCurrentPlayerHand(gameStatus, ISLAND);
+            addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
 
-                    addCardToCurrentPlayerGraveyard(gameStatus, PLAINS);
+            addCardToCurrentPlayerGraveyard(gameStatus, PLAINS);
 
-                    // Non Current Player
-                    addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
-                    addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
+            // Non Current Player
+            addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
+            addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
 
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, GRAZING_WHIPTAIL);
+            addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
+            addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
+            addCardToNonCurrentPlayerBattlefield(gameStatus, GRAZING_WHIPTAIL);
 
-                    addCardToNonCurrentPlayerHand(gameStatus, FOREST);
-                    addCardToNonCurrentPlayerHand(gameStatus, CHARGING_MONSTROSAUR);
+            addCardToNonCurrentPlayerHand(gameStatus, FOREST);
+            addCardToNonCurrentPlayerHand(gameStatus, CHARGING_MONSTROSAUR);
 
-                    addCardToNonCurrentPlayerGraveyard(gameStatus, MOUNTAIN);
-                }
-            };
+            addCardToNonCurrentPlayerGraveyard(gameStatus, MOUNTAIN);
         }
     }
 }

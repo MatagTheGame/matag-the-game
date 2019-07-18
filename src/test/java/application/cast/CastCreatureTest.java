@@ -1,13 +1,15 @@
 package application.cast;
 
 import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
+import application.init.InitGameTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,6 +27,14 @@ import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CastCreatureTest.InitGameTestConfiguration.class})
 public class CastCreatureTest extends AbstractApplicationTest {
+
+    @Autowired
+    private InitTestServiceDecorator initTestServiceDecorator;
+
+    public void setupGame() {
+        initTestServiceDecorator.setInitTestService(new CastCreatureTest.InitTestServiceForTest());
+    }
+
     @Test
     public void castCreature() {
         // When click on creature without paying the cost
@@ -100,20 +110,15 @@ public class CastCreatureTest extends AbstractApplicationTest {
     }
 
     @Configuration
-    static class InitGameTestConfiguration {
-        @Bean
-        public InitTestService initTestService() {
-            return new InitTestService() {
-                @Override
-                protected void initGameStatus(GameStatus gameStatus) {
-                    addCardToCurrentPlayerHand(gameStatus, HEADWATER_SENTRIES);
-                    addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
-                    addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
-                    addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
-                    addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
-                    addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
-                }
-            };
+    static class InitTestServiceForTest extends InitTestService {
+        @Override
+        public void initGameStatus(GameStatus gameStatus) {
+            addCardToCurrentPlayerHand(gameStatus, HEADWATER_SENTRIES);
+            addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
+            addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
+            addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
+            addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
+            addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
         }
     }
 }

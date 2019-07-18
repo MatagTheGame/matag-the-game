@@ -22,7 +22,7 @@ public abstract class InitTestService {
         initGameStatus(gameStatus);
     }
 
-    protected abstract void initGameStatus(GameStatus gameStatus);
+    public abstract void initGameStatus(GameStatus gameStatus);
 
     protected void addCardToCurrentPlayerLibrary(GameStatus gameStatus, Card card) {
         gameStatus.getCurrentPlayer().getLibrary().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));

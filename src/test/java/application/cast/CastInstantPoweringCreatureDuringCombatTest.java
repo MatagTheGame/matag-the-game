@@ -1,13 +1,15 @@
 package application.cast;
 
 import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
+import application.init.InitGameTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,6 +27,14 @@ import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CastInstantPoweringCreatureDuringCombatTest.InitGameTestConfiguration.class})
 public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplicationTest {
+
+    @Autowired
+    private InitTestServiceDecorator initTestServiceDecorator;
+
+    public void setupGame() {
+        initTestServiceDecorator.setInitTestService(new CastInstantPoweringCreatureDuringCombatTest.InitTestServiceForTest());
+    }
+
     @Test
     public void castInstantPoweringCreatureDuringCombat() {
         // When player one attack thinking to win the fight
@@ -43,20 +53,15 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
     }
 
     @Configuration
-    static class InitGameTestConfiguration {
-        @Bean
-        public InitTestService initTestService() {
-            return new InitTestService() {
-                @Override
-                protected void initGameStatus(GameStatus gameStatus) {
-                    addCardToCurrentPlayerBattlefield(gameStatus, BASTION_ENFORCER);
+    static class InitTestServiceForTest extends InitTestService {
+        @Override
+        public void initGameStatus(GameStatus gameStatus) {
+            addCardToCurrentPlayerBattlefield(gameStatus, BASTION_ENFORCER);
 
-                    addCardToNonCurrentPlayerHand(gameStatus, DARK_REMEDY);
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, BARTIZAN_BATS);
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, SWAMP);
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, SWAMP);
-                }
-            };
+            addCardToNonCurrentPlayerHand(gameStatus, DARK_REMEDY);
+            addCardToNonCurrentPlayerBattlefield(gameStatus, BARTIZAN_BATS);
+            addCardToNonCurrentPlayerBattlefield(gameStatus, SWAMP);
+            addCardToNonCurrentPlayerBattlefield(gameStatus, SWAMP);
         }
     }
 }

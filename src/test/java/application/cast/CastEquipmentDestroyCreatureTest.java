@@ -1,13 +1,15 @@
 package application.cast;
 
 import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
+import application.init.InitGameTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,6 +26,14 @@ import static com.aa.mtg.game.player.PlayerType.PLAYER;
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CastEquipmentDestroyCreatureTest.InitGameTestConfiguration.class})
 public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
+
+    @Autowired
+    private InitTestServiceDecorator initTestServiceDecorator;
+
+    public void setupGame() {
+        initTestServiceDecorator.setInitTestService(new CastEquipmentDestroyCreatureTest.InitTestServiceForTest());
+    }
+
     @Test
     public void castEquipmentDestroyCreature() {
         // When cast an artifact equipment
@@ -72,23 +82,18 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
     }
 
     @Configuration
-    static class InitGameTestConfiguration {
-        @Bean
-        public InitTestService initTestService() {
-            return new InitTestService() {
-                @Override
-                protected void initGameStatus(GameStatus gameStatus) {
-                    addCardToCurrentPlayerBattlefield(gameStatus, PROWLING_CARACAL);
-                    addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
-                    addCardToCurrentPlayerHand(gameStatus, SHORT_SWORD);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                }
-            };
+    static class InitTestServiceForTest extends InitTestService {
+        @Override
+        public void initGameStatus(GameStatus gameStatus) {
+            addCardToCurrentPlayerBattlefield(gameStatus, PROWLING_CARACAL);
+            addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
+            addCardToCurrentPlayerHand(gameStatus, SHORT_SWORD);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
         }
     }
 }

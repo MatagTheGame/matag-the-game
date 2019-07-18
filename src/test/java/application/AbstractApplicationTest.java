@@ -4,21 +4,27 @@ import application.browser.MtgBrowser;
 import org.junit.After;
 import org.junit.Before;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
 
-public class AbstractApplicationTest {
+public abstract class AbstractApplicationTest {
 
     @LocalServerPort
     private int port;
 
     protected MtgBrowser browser;
 
+    public abstract void setupGame();
+
     @Before
     public void setup() {
+        setupGame();
+
         // When player1 joins the game is waiting for opponent
         browser = new MtgBrowser(port);
         browser.getMessageHelper().hasMessage("Waiting for opponent...");
@@ -68,5 +74,13 @@ public class AbstractApplicationTest {
     public void cleanup() {
         browser.dumpContent();
         browser.close();
+    }
+
+    @Configuration
+    public static class InitGameTestConfiguration {
+        @Bean
+        public InitTestServiceDecorator initTestServiceDecorator() {
+            return new InitTestServiceDecorator();
+        }
     }
 }

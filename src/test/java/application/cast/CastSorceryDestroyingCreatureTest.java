@@ -1,13 +1,15 @@
 package application.cast;
 
 import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
+import application.init.InitGameTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -28,6 +30,14 @@ import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CastSorceryDestroyingCreatureTest.InitGameTestConfiguration.class})
 public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
+
+    @Autowired
+    private InitTestServiceDecorator initTestServiceDecorator;
+
+    public void setupGame() {
+        initTestServiceDecorator.setInitTestService(new CastSorceryDestroyingCreatureTest.InitTestServiceForTest());
+    }
+
     @Test
     public void castSorceryDestroyingCreature() {
         // When clicking all lands
@@ -105,22 +115,17 @@ public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
     }
 
     @Configuration
-    static class InitGameTestConfiguration {
-        @Bean
-        public InitTestService initTestService() {
-            return new InitTestService() {
-                @Override
-                protected void initGameStatus(GameStatus gameStatus) {
-                    addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-                    addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
+    static class InitTestServiceForTest extends InitTestService {
+        @Override
+        public void initGameStatus(GameStatus gameStatus) {
+            addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
 
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, SWAMP);
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, HUATLIS_SNUBHORN);
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, COLOSSAL_DREADMAW);
-                }
-            };
+            addCardToNonCurrentPlayerBattlefield(gameStatus, SWAMP);
+            addCardToNonCurrentPlayerBattlefield(gameStatus, HUATLIS_SNUBHORN);
+            addCardToNonCurrentPlayerBattlefield(gameStatus, COLOSSAL_DREADMAW);
         }
     }
 }

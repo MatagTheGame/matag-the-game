@@ -1,13 +1,15 @@
 package application.combat;
 
 import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
+import application.init.InitGameTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -30,6 +32,14 @@ import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({BasicCombatTest.InitGameTestConfiguration.class})
 public class BasicCombatTest extends AbstractApplicationTest {
+
+    @Autowired
+    private InitTestServiceDecorator initTestServiceDecorator;
+
+    public void setupGame() {
+        initTestServiceDecorator.setInitTestService(new BasicCombatTest.InitTestServiceForTest());
+    }
+
     @Test
     public void basicCombat() {
         // When continuing
@@ -145,33 +155,28 @@ public class BasicCombatTest extends AbstractApplicationTest {
     }
 
     @Configuration
-    static class InitGameTestConfiguration {
-        @Bean
-        public InitTestService initTestService() {
-            return new InitTestService() {
-                @Override
-                protected void initGameStatus(GameStatus gameStatus) {
-                    // Single block both survive
-                    addCardToCurrentPlayerBattlefield(gameStatus, HEADWATER_SENTRIES); // 2/5
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, HEADWATER_SENTRIES); // 2/5
+    static class InitTestServiceForTest extends InitTestService {
+        @Override
+        public void initGameStatus(GameStatus gameStatus) {
+            // Single block both survive
+            addCardToCurrentPlayerBattlefield(gameStatus, HEADWATER_SENTRIES); // 2/5
+            addCardToNonCurrentPlayerBattlefield(gameStatus, HEADWATER_SENTRIES); // 2/5
 
-                    // Single block both die
-                    addCardToCurrentPlayerBattlefield(gameStatus, CORAL_COMMANDO); // 3/2
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, CORAL_COMMANDO); // 3/2
+            // Single block both die
+            addCardToCurrentPlayerBattlefield(gameStatus, CORAL_COMMANDO); // 3/2
+            addCardToNonCurrentPlayerBattlefield(gameStatus, CORAL_COMMANDO); // 3/2
 
-                    // Double block attacker dies one blocker dies
-                    addCardToCurrentPlayerBattlefield(gameStatus, AXEBANE_BEAST); // 3/4
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, NEST_ROBBER); // 2/1
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, HEADWATER_SENTRIES); // 2/5
+            // Double block attacker dies one blocker dies
+            addCardToCurrentPlayerBattlefield(gameStatus, AXEBANE_BEAST); // 3/4
+            addCardToNonCurrentPlayerBattlefield(gameStatus, NEST_ROBBER); // 2/1
+            addCardToNonCurrentPlayerBattlefield(gameStatus, HEADWATER_SENTRIES); // 2/5
 
-                    // Non blocked damage to player
-                    addCardToCurrentPlayerBattlefield(gameStatus, ANCIENT_BRONTODON); // 9/9
+            // Non blocked damage to player
+            addCardToCurrentPlayerBattlefield(gameStatus, ANCIENT_BRONTODON); // 9/9
 
-                    // Cannot attack as tapped
-                    addCardToCurrentPlayerBattlefield(gameStatus, NEST_ROBBER);
-                    gameStatus.getCurrentPlayer().getBattlefield().getCards().get(4).getModifiers().tap();
-                }
-            };
+            // Cannot attack as tapped
+            addCardToCurrentPlayerBattlefield(gameStatus, NEST_ROBBER);
+            gameStatus.getCurrentPlayer().getBattlefield().getCards().get(4).getModifiers().tap();
         }
     }
 }

@@ -1,14 +1,16 @@
 package application.cleanup;
 
 import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
+import application.init.InitGameTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -32,6 +34,14 @@ import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CleanupTest.InitGameTestConfiguration.class})
 public class CleanupTest extends AbstractApplicationTest {
+
+    @Autowired
+    private InitTestServiceDecorator initTestServiceDecorator;
+
+    public void setupGame() {
+        initTestServiceDecorator.setInitTestService(new CleanupTest.InitTestServiceForTest());
+    }
+
     @Test
     public void cleanupWhenPassingTurns() {
         // Battlefields is
@@ -73,35 +83,30 @@ public class CleanupTest extends AbstractApplicationTest {
     }
 
     @Configuration
-    static class InitGameTestConfiguration {
-        @Bean
-        public InitTestService initTestService() {
-            return new InitTestService() {
-                @Override
-                protected void initGameStatus(GameStatus gameStatus) {
-                    // Current Player
-                    addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
+    static class InitTestServiceForTest extends InitTestService {
+        @Override
+        public void initGameStatus(GameStatus gameStatus) {
+            // Current Player
+            addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
 
-                    addCardToCurrentPlayerBattlefield(gameStatus, HUATLIS_SNUBHORN);
-                    addCardToCurrentPlayerBattlefield(gameStatus, GRAZING_WHIPTAIL);
+            addCardToCurrentPlayerBattlefield(gameStatus, HUATLIS_SNUBHORN);
+            addCardToCurrentPlayerBattlefield(gameStatus, GRAZING_WHIPTAIL);
 
-                    CardInstance huatlisShubhorn = gameStatus.getCurrentPlayer().getBattlefield().getCards().get(0);
-                    huatlisShubhorn.getModifiers().setTapped(TAPPED);
-                    huatlisShubhorn.getModifiers().dealDamage(1);
+            CardInstance huatlisShubhorn = gameStatus.getCurrentPlayer().getBattlefield().getCards().get(0);
+            huatlisShubhorn.getModifiers().setTapped(TAPPED);
+            huatlisShubhorn.getModifiers().dealDamage(1);
 
-                    CardInstance grazingWhiptail = gameStatus.getCurrentPlayer().getBattlefield().getCards().get(1);
-                    grazingWhiptail.getModifiers().setSummoningSickness(true);
-                    grazingWhiptail.getModifiers().setExtraPowerToughnessUntilEndOfTurn(powerToughness("1/1"));
+            CardInstance grazingWhiptail = gameStatus.getCurrentPlayer().getBattlefield().getCards().get(1);
+            grazingWhiptail.getModifiers().setSummoningSickness(true);
+            grazingWhiptail.getModifiers().setExtraPowerToughnessUntilEndOfTurn(powerToughness("1/1"));
 
-                    // Non Current Player
-                    addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
+            // Non Current Player
+            addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
 
-                    addCardToNonCurrentPlayerBattlefield(gameStatus, AIR_ELEMENTAL);
-                    CardInstance nestRobber = gameStatus.getNonCurrentPlayer().getBattlefield().getCards().get(0);
-                    nestRobber.getModifiers().dealDamage(1);
-                    nestRobber.getModifiers().setTapped(TAPPED);
-                }
-            };
+            addCardToNonCurrentPlayerBattlefield(gameStatus, AIR_ELEMENTAL);
+            CardInstance nestRobber = gameStatus.getNonCurrentPlayer().getBattlefield().getCards().get(0);
+            nestRobber.getModifiers().dealDamage(1);
+            nestRobber.getModifiers().setTapped(TAPPED);
         }
     }
 }
