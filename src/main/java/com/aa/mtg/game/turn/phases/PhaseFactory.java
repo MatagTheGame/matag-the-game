@@ -3,6 +3,7 @@ package com.aa.mtg.game.turn.phases;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.aa.mtg.game.turn.phases.AfterDeclareBlockersPhase.AB;
 import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
 import static com.aa.mtg.game.turn.phases.CleanupPhase.CL;
 import static com.aa.mtg.game.turn.phases.CombatDamagePhase.CD;
@@ -27,6 +28,7 @@ public class PhaseFactory {
     private final BeginCombatPhase beginCombatPhase;
     private final DeclareAttackersPhase declareAttackersPhase;
     private final DeclareBlockersPhase declareBlockersPhase;
+    private final AfterDeclareBlockersPhase afterDeclareBlockersPhase;
     private final FirstStrikePhase firstStrikePhase;
     private final CombatDamagePhase combatDamagePhase;
     private final EndOfCombatPhase endOfCombatPhase;
@@ -37,7 +39,7 @@ public class PhaseFactory {
     @Autowired
     public PhaseFactory(UntapPhase untapPhase, UpkeepPhase upkeepPhase, DrawPhase drawPhase,
                         Main1Phase main1Phase, BeginCombatPhase beginCombatPhase, DeclareAttackersPhase declareAttackersPhase, DeclareBlockersPhase declareBlockersPhase,
-                        FirstStrikePhase firstStrikePhase, CombatDamagePhase combatDamagePhase, EndOfCombatPhase endOfCombatPhase, Main2Phase main2Phase,
+                        AfterDeclareBlockersPhase afterDeclareBlockersPhase, FirstStrikePhase firstStrikePhase, CombatDamagePhase combatDamagePhase, EndOfCombatPhase endOfCombatPhase, Main2Phase main2Phase,
                         EndTurnPhase endTurnPhase, CleanupPhase cleanupPhase) {
         this.untapPhase = untapPhase;
         this.upkeepPhase = upkeepPhase;
@@ -46,6 +48,7 @@ public class PhaseFactory {
         this.beginCombatPhase = beginCombatPhase;
         this.declareAttackersPhase = declareAttackersPhase;
         this.declareBlockersPhase = declareBlockersPhase;
+        this.afterDeclareBlockersPhase = afterDeclareBlockersPhase;
         this.firstStrikePhase = firstStrikePhase;
         this.combatDamagePhase = combatDamagePhase;
         this.endOfCombatPhase = endOfCombatPhase;
@@ -76,6 +79,9 @@ public class PhaseFactory {
 
             case DB:
                 return declareBlockersPhase;
+
+            case AB:
+                return afterDeclareBlockersPhase;
 
             case FS:
                 return firstStrikePhase;

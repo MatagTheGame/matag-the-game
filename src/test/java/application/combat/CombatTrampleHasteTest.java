@@ -66,6 +66,10 @@ public class CombatTrampleHasteTest extends AbstractApplicationTest {
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HUATLIS_SNUBHORN).declareAsBlocker();
         browser.player2().getActionHelper().clickContinue();
 
+        // No instant played during combat
+        browser.player1().getActionHelper().clickContinue();
+        browser.player2().getActionHelper().clickContinue();
+
         // Then
         browser.player1().getPhaseHelper().is(M2, PLAYER);
         browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(17);

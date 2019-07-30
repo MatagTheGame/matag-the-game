@@ -74,6 +74,10 @@ public class CardHelper {
         hasClass("frontend-tapped");
     }
 
+    public void isNotFrontendTapped() {
+        doesNotHaveClass("frontend-tapped");
+    }
+
     public void isTapped() {
         hasClass("tapped");
     }

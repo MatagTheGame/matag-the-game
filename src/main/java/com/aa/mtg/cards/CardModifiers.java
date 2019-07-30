@@ -15,7 +15,7 @@ public class CardModifiers {
     private TappedModifier tapped;
     private boolean summoningSickness;
     private boolean attacking;
-    private List<Integer> blocking = new ArrayList<>();
+    private Integer blockingCardId;
     private int damage;
     private List<Ability> abilities = new ArrayList<>();
     private List<Ability> abilitiesUntilEndOfTurn = new ArrayList<>();
@@ -43,12 +43,12 @@ public class CardModifiers {
         return attacking;
     }
 
-    public List<Integer> getBlocking() {
-        return blocking;
+    public Integer getBlockingCardId() {
+        return blockingCardId;
     }
 
     public boolean isBlocking() {
-        return !blocking.isEmpty();
+        return blockingCardId != null;
     }
 
     public void tap() {
@@ -67,12 +67,12 @@ public class CardModifiers {
         this.attacking = attacking;
     }
 
-    public void setBlocking(List<Integer> blocking) {
-        this.blocking = blocking;
+    public void setBlockingCardId(Integer blockingCardId) {
+        this.blockingCardId = blockingCardId;
     }
 
-    public void addBlocking(int blocking) {
-        this.blocking.add(blocking);
+    public void unsetBlockingCardId() {
+        this.blockingCardId = null;
     }
 
     public int getDamage() {

@@ -52,7 +52,7 @@ export default class ClientEventsReducer {
         const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
         const playedAbility = CardUtils.getAbilityForTriggerType(cardInstance, 'ACTIVATED_ABILITY')
 
-        if (newState.turn.currentPhase === 'DA') {
+        if (newState.turn.currentPhase === 'DA' && PlayerUtils.isCurrentPlayerTurn(newState)) {
           const canAttackResult = CardUtils.canAttack(cardInstance)
           if (canAttackResult === true) {
             CardUtils.toggleFrontendAttacking(cardInstance)

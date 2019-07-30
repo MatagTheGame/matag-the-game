@@ -1,6 +1,5 @@
 package com.aa.mtg.cards;
 
-import com.aa.mtg.cards.ability.Abilities;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.modifiers.PowerToughness;
@@ -142,7 +141,7 @@ public class CardInstance {
     }
 
     public void declareAsBlocker(int attackingCreatureId) {
-        modifiers.addBlocking(attackingCreatureId);
+        modifiers.setBlockingCardId(attackingCreatureId);
     }
 
     public int getPower() {

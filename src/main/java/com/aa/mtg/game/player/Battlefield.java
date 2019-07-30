@@ -27,7 +27,7 @@ public class Battlefield extends CardListComponent {
 
     public void removeBlocking() {
         new CardInstanceSearch(cards).blocking().getCards()
-                .forEach(cardInstance -> cardInstance.getModifiers().setBlocking(new ArrayList<>()));
+                .forEach(cardInstance -> cardInstance.getModifiers().unsetBlockingCardId());
     }
 
     public List<CardInstance> getAttackingCreatures() {
@@ -40,7 +40,7 @@ public class Battlefield extends CardListComponent {
 
     public List<CardInstance> getBlockingCreaturesFor(int attackingCardId) {
         return getBlockingCreatures().stream()
-                .filter(cardInstance -> cardInstance.getModifiers().getBlocking().contains(attackingCardId))
+                .filter(cardInstance -> cardInstance.getModifiers().getBlockingCardId() == attackingCardId)
                 .collect(Collectors.toList());
     }
 }

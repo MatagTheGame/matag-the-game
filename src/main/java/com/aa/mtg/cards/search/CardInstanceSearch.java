@@ -83,7 +83,7 @@ public class CardInstanceSearch {
 
     public CardInstanceSearch blockingCreatureFor(int attackingCardId) {
         List<CardInstance> cards = blocking().getCards().stream()
-                .filter(cardInstance -> cardInstance.getModifiers().getBlocking().contains(attackingCardId))
+                .filter(cardInstance -> cardInstance.getModifiers().getBlockingCardId() == attackingCardId)
                 .collect(toList());
         return new CardInstanceSearch(cards);
     }

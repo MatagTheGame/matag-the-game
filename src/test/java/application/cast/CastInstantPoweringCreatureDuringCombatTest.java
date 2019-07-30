@@ -2,7 +2,6 @@ package application.cast;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
-import application.init.InitGameTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
@@ -46,10 +45,11 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
         browser.player1().getActionHelper().clickContinue();
 
         // And player 2 plays the game by blocking
+        browser.player2().getActionHelper().clickContinue();
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(BARTIZAN_BATS).declareAsBlocker();
         browser.player2().getActionHelper().clickContinue();
 
-        // Between DA and DB no spell should be allowed... not true, blockers could give flying.
+        System.out.println();
     }
 
     @Configuration
