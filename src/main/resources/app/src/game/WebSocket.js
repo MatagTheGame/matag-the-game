@@ -10,7 +10,7 @@ stompClient.sendEvent = (destination, body) => {
 }
 
 stompClient.init = (receiveCallback) => {
-  stompClient.connect({}, () => {
+  stompClient.connect('', '', () => {
     const sessionId = socket._transport.url.split('/')[5]
 
     stompClient.subscribe('/topic/events', (event) => {
@@ -24,6 +24,12 @@ stompClient.init = (receiveCallback) => {
     })
 
     stompClient.sendEvent('init', {})
+  },
+  () => {
+    throw new Error('errorCallback');
+  },
+  () => {
+    throw new Error('closeEventCallback');
   })
 }
 
