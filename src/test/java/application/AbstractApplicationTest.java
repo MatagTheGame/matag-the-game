@@ -7,12 +7,16 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
 
 public abstract class AbstractApplicationTest {
+
+    private static AtomicInteger GAME_ID = new AtomicInteger(0);
 
     @LocalServerPort
     private int port;
@@ -26,7 +30,7 @@ public abstract class AbstractApplicationTest {
         setupGame();
 
         // When player1 joins the game is waiting for opponent
-        browser = new MtgBrowser(port);
+        browser = new MtgBrowser(port, GAME_ID.incrementAndGet());
         browser.getMessageHelper().hasMessage("Waiting for opponent...");
 
         // When player2 joins the game both players see the table with the cards

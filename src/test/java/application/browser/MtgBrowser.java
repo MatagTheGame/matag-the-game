@@ -20,18 +20,20 @@ import java.util.ArrayList;
 public class MtgBrowser {
     private final WebDriver webDriver;
     private final int port;
+    private final int gameId;
 
     private int player1TabIndex = 0;
     private int player2TabIndex = 1;
 
-    public MtgBrowser(int port) {
+    public MtgBrowser(int port, int gameId) {
         this.port = port;
+        this.gameId = gameId;
         webDriver = getWebDriver();
-        webDriver.get("http://localhost:" + port);
+        webDriver.get(getUrl());
     }
 
     public void openSecondTab() {
-        ((JavascriptExecutor)webDriver).executeScript("window.open('http://localhost:" + port + "')");
+        ((JavascriptExecutor)webDriver).executeScript("window.open('"+ getUrl() + "')");
         // Wait for it to fully load
         this.getMessageHelper().hasNoMessage();
     }
@@ -92,6 +94,10 @@ public class MtgBrowser {
 
     public StackHelper getStackHelper() {
         return new StackHelper(this);
+    }
+
+    private String getUrl() {
+        return "http://localhost:" + port  + "/ui/game/" + gameId;
     }
 
     private void tabAt(int player2TabIndex) {
