@@ -1,20 +1,19 @@
 package application.browser;
 
 import com.aa.mtg.game.player.PlayerType;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MtgBrowser {
     private final WebDriver webDriver;
@@ -100,23 +99,25 @@ public class MtgBrowser {
     private WebDriver getWebDriver() {
         String webdriverChromeDriver = System.getProperty("webdriver.chrome.driver");
         String webdriverUserDataDir = System.getProperty("webdriver.chrome.userDataDir");
+        String webdriverFirefox = System.getProperty("webdriver.gecko.driver");
 
         if (StringUtils.hasText(webdriverChromeDriver)) {
             ChromeOptions chromeOptions = new ChromeOptions();
             chromeOptions.addArguments("user-data-dir=" + webdriverUserDataDir);
             return new ChromeDriver(chromeOptions);
 
+        } else if (StringUtils.hasText(webdriverFirefox)) {
+            FirefoxOptions options = new FirefoxOptions();
+            options.addArguments("--headless");
+            return new FirefoxDriver(options);
+
         } else {
-            return new HtmlUnitDriver(BrowserVersion.CHROME, true);
+            throw new RuntimeException("Specify webdriver.chrome.driver or webdriver.gecko.driver");
         }
     }
 
     WebElement findElement(By element) {
         return webDriver.findElement(element);
-    }
-
-    List<WebElement> findElements(By element) {
-        return webDriver.findElements(element);
     }
 
     void wait(ExpectedCondition<?> condition) {
