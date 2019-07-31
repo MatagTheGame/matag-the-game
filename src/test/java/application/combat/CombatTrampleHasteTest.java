@@ -2,7 +2,6 @@ package application.combat;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
-import application.init.InitGameTest;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
