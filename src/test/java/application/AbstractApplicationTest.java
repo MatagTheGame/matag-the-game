@@ -1,8 +1,11 @@
 package application;
 
 import application.browser.MtgBrowser;
+import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +19,8 @@ import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
 
 public abstract class AbstractApplicationTest {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplicationTest.class);
+
     private static AtomicInteger GAME_ID = new AtomicInteger(0);
 
     @LocalServerPort
@@ -26,7 +31,30 @@ public abstract class AbstractApplicationTest {
     public abstract void setupGame();
 
     @Before
-    public void setup() {
+    public void setupWithRetries() {
+        RuntimeException lastException = null;
+
+        for (int i = 0; i < 5; i++) {
+            try {
+                lastException = null;
+                LOGGER.info("Setup (attempt {})", i);
+                setup();
+                sleep5Secs();
+                LOGGER.info("Setup succeeded");
+                break;
+
+            } catch (RuntimeException e) {
+                lastException = e;
+                LOGGER.info("Setup failed: {}", e.getMessage());
+            }
+        }
+
+        if (lastException != null) {
+            throw lastException;
+        }
+    }
+
+    private void setup() {
         setupGame();
 
         // When player1 joins the game is waiting for opponent
@@ -82,9 +110,15 @@ public abstract class AbstractApplicationTest {
 
     @Configuration
     public static class InitGameTestConfiguration {
+
         @Bean
         public InitTestServiceDecorator initTestServiceDecorator() {
             return new InitTestServiceDecorator();
         }
+    }
+
+    @SneakyThrows
+    private void sleep5Secs() {
+        Thread.sleep(5000);
     }
 }
