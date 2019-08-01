@@ -42,7 +42,7 @@ public class CreaturesYouControlGetXUntilEndOfTurn implements AbilityAction {
             card.getModifiers().getAbilitiesUntilEndOfTurn().addAll(abilities);
         }
 
-        gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+        gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, controller);
         LOGGER.info("creatures you ({}) control get: {}", controllerString, powerToughness);
     }
 }

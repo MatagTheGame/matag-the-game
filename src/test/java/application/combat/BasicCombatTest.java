@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -174,7 +173,6 @@ public class BasicCombatTest extends AbstractApplicationTest {
         browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(11);
     }
 
-    @Configuration
     static class InitTestServiceForTest extends InitTestService {
         @Override
         public void initGameStatus(GameStatus gameStatus) {

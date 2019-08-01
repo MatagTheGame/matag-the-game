@@ -67,6 +67,18 @@ public class GameStatus {
         }
     }
 
+    public Player getOtherPlayer(Player player) {
+        if (player1.getName().equals(player.getName())) {
+            return player2;
+        } else {
+            return player1;
+        }
+    }
+
+    public Player getNonCurrentPlayer() {
+        return getOtherPlayer(getCurrentPlayer());
+    }
+
     public Player getCurrentPlayer() {
         if (turn.getCurrentTurnPlayer().equals(this.getPlayer1().getName())) {
             return this.getPlayer1();
@@ -75,15 +87,11 @@ public class GameStatus {
         }
     }
 
-    public boolean isPlayerCurrent(Player player) {
-        return getCurrentPlayer().getName().equals(player.getName());
-    }
-
-    public Player getNonCurrentPlayer() {
-        if (turn.getCurrentTurnPlayer().equals(this.getPlayer1().getName())) {
-            return this.getPlayer2();
-        } else {
+    public Player getActivePlayer() {
+        if (turn.getCurrentPhaseActivePlayer().equals(this.getPlayer1().getName())) {
             return this.getPlayer1();
+        } else {
+            return this.getPlayer2();
         }
     }
 
@@ -103,17 +111,6 @@ public class GameStatus {
 
         } else if (getCurrentPlayer().getBattlefield().hasCardById(id)) {
             return getCurrentPlayer().getBattlefield().extractCardById(id);
-        }
-
-        return null;
-    }
-
-    public CardInstance findCardByIdFromAnyBattlefield(int id) {
-        if (getNonCurrentPlayer().getBattlefield().hasCardById(id)) {
-            return getNonCurrentPlayer().getBattlefield().findCardById(id);
-
-        } else if (getCurrentPlayer().getBattlefield().hasCardById(id)) {
-            return getCurrentPlayer().getBattlefield().findCardById(id);
         }
 
         return null;

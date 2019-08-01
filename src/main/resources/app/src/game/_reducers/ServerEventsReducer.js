@@ -2,14 +2,12 @@ import PlayerUtils from '../PlayerInfo/PlayerUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {
-    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN',
-      'UPDATE_ACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_INACTIVE_PLAYER_BATTLEFIELD', 'UPDATE_ACTIVE_PLAYER_HAND', 'UPDATE_INACTIVE_PLAYER_HAND',
-      'UPDATE_ACTIVE_PLAYER_GRAVEYARD', 'UPDATE_INACTIVE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE', 'UPDATE_STACK',
-      'UPDATE_ACTIVE_PLAYER_LIBRARY_SIZE', 'UPDATE_INACTIVE_PLAYER_LIBRARY_SIZE']
+    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN', 'UPDATE_STACK',
+      'UPDATE_PLAYER_BATTLEFIELD', 'UPDATE_PLAYER_HAND', 'UPDATE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE', 'UPDATE_PLAYER_LIBRARY_SIZE']
   }
 
   static reduceEvent(newState, action) {
-    let currentPlayer, nonCurrentPlayer, player
+    let player
     switch (action.type) {
     case 'MESSAGE':
       newState.message = action.value
@@ -35,56 +33,36 @@ export default class ServerEventsReducer {
       newState.turn = action.value
       newState.turn.blockingCardPosition = 0
       PlayerUtils.setStatusMessage(newState)
-
-      break
-
-    case 'UPDATE_ACTIVE_PLAYER_BATTLEFIELD':
-      currentPlayer = PlayerUtils.getCurrentPlayer(newState)
-      currentPlayer.battlefield = action.value
-      break
-
-    case 'UPDATE_INACTIVE_PLAYER_BATTLEFIELD':
-      nonCurrentPlayer = PlayerUtils.getNonCurrentPlayer(newState)
-      nonCurrentPlayer.battlefield = action.value
-      break
-
-    case 'UPDATE_ACTIVE_PLAYER_HAND':
-      currentPlayer = PlayerUtils.getCurrentPlayer(newState)
-      currentPlayer.hand = action.value
-      break
-
-    case 'UPDATE_INACTIVE_PLAYER_HAND':
-      nonCurrentPlayer = PlayerUtils.getNonCurrentPlayer(newState)
-      nonCurrentPlayer.hand = action.value
-      break
-
-    case 'UPDATE_ACTIVE_PLAYER_GRAVEYARD':
-      currentPlayer = PlayerUtils.getCurrentPlayer(newState)
-      currentPlayer.graveyard = action.value
-      break
-
-    case 'UPDATE_INACTIVE_PLAYER_GRAVEYARD':
-      nonCurrentPlayer = PlayerUtils.getNonCurrentPlayer(newState)
-      nonCurrentPlayer.graveyard = action.value
-      break
-
-    case 'UPDATE_PLAYER_LIFE':
-      player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
-      player.life = action.value.life
-      break
-
-    case 'UPDATE_ACTIVE_PLAYER_LIBRARY_SIZE':
-      currentPlayer = PlayerUtils.getCurrentPlayer(newState)
-      currentPlayer.librarySize = action.value
-      break
-
-    case 'UPDATE_INACTIVE_PLAYER_LIBRARY_SIZE':
-      nonCurrentPlayer = PlayerUtils.getNonCurrentPlayer(newState)
-      nonCurrentPlayer.librarySize = action.value
       break
 
     case 'UPDATE_STACK':
       newState.stack = action.value
+      break
+
+    case 'UPDATE_PLAYER_BATTLEFIELD':
+      player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
+      console.log('player: ', player)
+      player.battlefield = action.value.value
+      break
+
+    case 'UPDATE_PLAYER_HAND':
+      player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
+      player.hand = action.value.value
+      break
+
+    case 'UPDATE_PLAYER_GRAVEYARD':
+      player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
+      player.graveyard = action.value.value
+      break
+
+    case 'UPDATE_PLAYER_LIFE':
+      player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
+      player.life = action.value.value
+      break
+
+    case 'UPDATE_PLAYER_LIBRARY_SIZE':
+      player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
+      player.librarySize = action.value.value
       break
     }
 

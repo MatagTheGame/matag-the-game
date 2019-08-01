@@ -43,7 +43,7 @@ public class DeclareBlockerService {
                 nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(blockedCreaturesIds.get(0))
         );
 
-        gameStatusUpdaterService.sendUpdateNonCurrentPlayerBattlefield(gameStatus);
+        gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, nonCurrentPlayer);
         continueTurnService.continueTurn(gameStatus);
     }
 }

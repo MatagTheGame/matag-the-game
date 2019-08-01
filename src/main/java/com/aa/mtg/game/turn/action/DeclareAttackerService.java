@@ -32,7 +32,7 @@ public class DeclareAttackerService {
         cardIds.forEach(cardId -> currentPlayer.getBattlefield().findCardById(cardId).checkIfCanAttack());
         cardIds.forEach(cardId -> currentPlayer.getBattlefield().findCardById(cardId).declareAsAttacker());
 
-        gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+        gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, currentPlayer);
         continueTurnService.continueTurn(gameStatus);
     }
 }

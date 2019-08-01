@@ -99,8 +99,8 @@ public class ResolveService {
             case "DISCARD_A_CARD": {
                 CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
                 gameStatus.putIntoGraveyard(cardInstance);
-                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
-                gameStatusUpdaterService.sendUpdateCurrentPlayerGraveyard(gameStatus);
+                gameStatusUpdaterService.sendUpdatePlayerHand(gameStatus, gameStatus.getCurrentPlayer());
+                gameStatusUpdaterService.sendUpdatePlayerGraveyard(gameStatus, gameStatus.getCurrentPlayer());
                 gameStatus.getTurn().setTriggeredNonStackAction(null);
                 break;
             }

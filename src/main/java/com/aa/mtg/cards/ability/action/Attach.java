@@ -26,6 +26,6 @@ public class Attach implements AbilityAction {
         int attachedToId = parseInt(target);
         cardInstance.getModifiers().setAttachedToId(attachedToId);
         LOGGER.info("attached {} to {}", cardInstance.getIdAndName(), target);
-        gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+        gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, gameStatus.getCurrentPlayer());
     }
 }

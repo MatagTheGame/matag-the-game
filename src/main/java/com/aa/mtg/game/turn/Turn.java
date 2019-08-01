@@ -1,6 +1,7 @@
 package com.aa.mtg.game.turn;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.game.status.GameStatus;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -87,5 +88,13 @@ public class Turn {
 
     public boolean isEnded() {
         return winner != null;
+    }
+
+    public void passPriority(GameStatus gameStatus) {
+        if (currentPhaseActivePlayer.equals(gameStatus.getPlayer1().getName())) {
+            currentPhaseActivePlayer = gameStatus.getPlayer2().getName();
+        } else {
+            currentPhaseActivePlayer = gameStatus.getPlayer1().getName();
+        }
     }
 }

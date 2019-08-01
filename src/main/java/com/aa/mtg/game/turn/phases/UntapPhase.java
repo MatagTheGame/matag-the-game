@@ -23,7 +23,7 @@ public class UntapPhase implements Phase {
         gameStatus.getCurrentPlayer().getBattlefield().untap();
         gameStatus.getCurrentPlayer().getBattlefield().removeSummoningSickness();
 
-        gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+        gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, gameStatus.getCurrentPlayer());
         gameStatus.getTurn().setCurrentPhase(UP);
         gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }

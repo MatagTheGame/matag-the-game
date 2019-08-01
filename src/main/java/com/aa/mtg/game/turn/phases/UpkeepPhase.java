@@ -24,7 +24,7 @@ public class UpkeepPhase implements Phase {
     @Override
     public void apply(GameStatus gameStatus) {
         if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
-            gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
+            gameStatus.getTurn().passPriority(gameStatus);
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
         } else {

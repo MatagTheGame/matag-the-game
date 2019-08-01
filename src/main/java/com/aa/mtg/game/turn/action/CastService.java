@@ -40,15 +40,15 @@ public class CastService {
 
     public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
         Turn turn = gameStatus.getTurn();
-        Player currentPlayer = gameStatus.getCurrentPlayer();
+        Player activePlayer = gameStatus.getActivePlayer();
 
         CardInstance cardToCast;
         String castedFrom;
-        if (currentPlayer.getHand().hasCardById(cardId)) {
-            cardToCast = currentPlayer.getHand().findCardById(cardId);
+        if (activePlayer.getHand().hasCardById(cardId)) {
+            cardToCast = activePlayer.getHand().findCardById(cardId);
             castedFrom = "HAND";
         } else {
-            cardToCast = currentPlayer.getBattlefield().findCardById(cardId);
+            cardToCast = activePlayer.getBattlefield().findCardById(cardId);
             castedFrom = "BATTLEFIELD";
         }
 
@@ -56,13 +56,13 @@ public class CastService {
             throw new MessageException("You can only play Instants during a NON main phases.");
 
         } else {
-            checkSpellOrAbilityCost(tappingLandIds, currentPlayer, cardToCast, playedAbility);
+            checkSpellOrAbilityCost(tappingLandIds, activePlayer, cardToCast, playedAbility);
             checkSpellOrAbilityTargetRequisites(cardToCast, gameStatus, targetsIdsForCardIds, playedAbility);
 
             if (castedFrom.equals("HAND")) {
-                currentPlayer.getHand().extractCardById(cardId);
-                cardToCast.setController(currentPlayer.getName());
-                gameStatusUpdaterService.sendUpdateCurrentPlayerHand(gameStatus);
+                activePlayer.getHand().extractCardById(cardId);
+                cardToCast.setController(activePlayer.getName());
+                gameStatusUpdaterService.sendUpdatePlayerHand(gameStatus, activePlayer);
 
                 gameStatus.getStack().add(cardToCast);
                 gameStatusUpdaterService.sendUpdateStack(gameStatus);
@@ -70,7 +70,7 @@ public class CastService {
             } else {
                 Ability triggeredAbility = cardToCast.getAbilities().get(0);
                 cardToCast.getTriggeredAbilities().add(triggeredAbility);
-                LOGGER.info("Player {} triggered ability {} for {}.", currentPlayer.getName(), triggeredAbility.getAbilityTypes(), cardToCast.getModifiers());
+                LOGGER.info("Player {} triggered ability {} for {}.", activePlayer.getName(), triggeredAbility.getAbilityTypes(), cardToCast.getModifiers());
                 gameStatus.getStack().add(cardToCast);
                 gameStatusUpdaterService.sendUpdateStack(gameStatus);
             }
@@ -80,9 +80,9 @@ public class CastService {
 
             // FIXME Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
             tappingLandIds.stream()
-                    .map(tappingLandId -> currentPlayer.getBattlefield().findCardById(tappingLandId))
+                    .map(tappingLandId -> activePlayer.getBattlefield().findCardById(tappingLandId))
                     .forEach(card -> card.getModifiers().tap());
-            gameStatusUpdaterService.sendUpdateCurrentPlayerBattlefield(gameStatus);
+            gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, activePlayer);
         }
     }
 

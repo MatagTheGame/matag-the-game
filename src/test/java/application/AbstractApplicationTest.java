@@ -16,6 +16,7 @@ import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
+import static java.lang.Integer.parseInt;
 
 public abstract class AbstractApplicationTest {
 
@@ -34,16 +35,16 @@ public abstract class AbstractApplicationTest {
     public void setupWithRetries() {
         RuntimeException lastException = null;
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < getNumOfRetries(); i++) {
             try {
                 lastException = null;
                 LOGGER.info("Setup (attempt {})", i);
                 setup();
-                sleep5Secs();
                 LOGGER.info("Setup succeeded");
                 break;
 
             } catch (RuntimeException e) {
+                sleep5Secs();
                 lastException = e;
                 LOGGER.info("Setup failed: {}", e.getMessage());
             }
@@ -110,7 +111,6 @@ public abstract class AbstractApplicationTest {
 
     @Configuration
     public static class InitGameTestConfiguration {
-
         @Bean
         public InitTestServiceDecorator initTestServiceDecorator() {
             return new InitTestServiceDecorator();
@@ -120,5 +120,13 @@ public abstract class AbstractApplicationTest {
     @SneakyThrows
     private void sleep5Secs() {
         Thread.sleep(5000);
+    }
+
+    private int getNumOfRetries() {
+        try {
+            return parseInt(System.getProperty("test.gameSetup.retries"));
+        } catch (Exception e) {
+            return 5;
+        }
     }
 }

@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -77,7 +76,6 @@ public class CombatTrampleHasteTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CHARGING_MONSTROSAUR).hasDamage(2);
     }
 
-    @Configuration
     static class InitTestServiceForTest extends InitTestService {
         @Override
         public void initGameStatus(GameStatus gameStatus) {
