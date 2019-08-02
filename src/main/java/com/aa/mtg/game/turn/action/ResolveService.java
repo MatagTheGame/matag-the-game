@@ -5,6 +5,7 @@ import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.ability.action.AbilityActionFactory;
 import com.aa.mtg.game.message.MessageException;
+import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
@@ -39,16 +40,20 @@ public class ResolveService {
     public void resolve(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> cardIds) {
         if (!gameStatus.getStack().isEmpty()) {
             CardInstance stackItemToResolve = gameStatus.getStack().peek();
+            Player playerWhoCastedTheSpell = gameStatus.getPlayerByName(stackItemToResolve.getController());
 
             if (stackItemToResolve.getTriggeredAbilities().isEmpty()) {
                 removeTopElementFromStack(gameStatus);
                 resolveCardInstanceFromStack(gameStatus, stackItemToResolve);
 
+                gameStatus.getTurn().setCurrentPhaseActivePlayer(playerWhoCastedTheSpell.getName());
+                gameStatusUpdaterService.sendUpdateTurn(gameStatus);
+
             } else {
+                // TODO figure it out later
                 if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
                     gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
                     gameStatusUpdaterService.sendUpdateTurn(gameStatus);
-
                 } else {
                     removeTopElementFromStack(gameStatus);
                     resolveTriggeredAbility(gameStatus, stackItemToResolve);
@@ -67,8 +72,6 @@ public class ResolveService {
     }
 
     private void resolveCardInstanceFromStack(GameStatus gameStatus, CardInstance cardToResolve) {
-        gameStatusUpdaterService.sendUpdateStack(gameStatus);
-
         performAbilitiesActions(gameStatus, cardToResolve, cardToResolve.getCastAbilities());
 
         if (cardToResolve.isPermanent()) {
@@ -84,9 +87,6 @@ public class ResolveService {
 
         gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
         gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
-
-        gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }
 
     private void resolveTriggeredAbility(GameStatus gameStatus, CardInstance stackItemToResolve) {

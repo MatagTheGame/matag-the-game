@@ -21,6 +21,7 @@ import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -32,8 +33,8 @@ public class Abilities {
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_4_LIFE = new Ability(GAIN_X_LIFE, emptyList(), singletonList("4"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_5_LIFE = new Ability(GAIN_X_LIFE, emptyList(), singletonList("5"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_EACH_PLAYERS_GAIN_4_LIFE = new Ability(EACH_PLAYERS_GAIN_X_LIFE, emptyList(), singletonList("4"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
-    public static Ability DEAL_1_DAMAGE_TO_CREATURE_YOU_CONTROL_THAT_CREATURE_GAINS_TRAMPLE = new Ability(asList(DEALS_X_DAMAGE_TO_TARGET, THAT_TARGETS_GET_X), singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetControllerType(PLAYER).build()), asList("1", "Trample"), new Trigger(CAST));
-    public static Ability DEAL_3_DAMAGE_TO_ANY_TARGET = new Ability(DEALS_X_DAMAGE_TO_TARGET, singletonList(Target.builder().targetType(TargetType.ANY).build()), singletonList("3"), new Trigger(CAST));
+    public static Ability DEAL_1_DAMAGE_TO_CREATURE_YOU_CONTROL_THAT_CREATURE_GAINS_TRAMPLE = new Ability(singletonList(THAT_TARGETS_GETS), singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetControllerType(PLAYER).build()), asList("DAMAGE:1", "TRAMPLE"), new Trigger(CAST));
+    public static Ability DEAL_3_DAMAGE_TO_ANY_TARGET = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.ANY).build()), singletonList("DAMAGE:3"), new Trigger(CAST));
     public static Ability DEATHTOUCH = new Ability(AbilityType.DEATHTOUCH);
     public static Ability DESTROY_TARGET_CREATURE_WITH_POWER_GREATER_OR_EQUAL_4 = new Ability(DESTROY_TARGET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(POWER, GREATER_OR_EQUAL, 4)).build()), emptyList(), new Trigger(CAST));
     public static Ability DRAW_1_CARD = new Ability(DRAW_X_CARDS, emptyList(), singletonList("1"), new Trigger(CAST));
@@ -56,7 +57,7 @@ public class Abilities {
     public static Ability PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0 = new Ability(EQUIPPED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+2/+0"), new Trigger(ACTIVATED_ABILITY, asList(COLORLESS, COLORLESS)));
     public static Ability REACH = new Ability(AbilityType.REACH);
     public static Ability SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER = new Ability(SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER, singletonList(Target.builder().targetType(TargetType.PLAYER).build()), emptyList(), new Trigger(CAST));
-    public static Ability TARGET_CREATURE_GETS_PLUS_1_3 = new Ability(TARGET_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+3"), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_PLUS_1_3 = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+3"), new Trigger(CAST));
     public static Ability TRAMPLE = new Ability(AbilityType.TRAMPLE);
     public static Ability VIGILANCE = new Ability(AbilityType.VIGILANCE);
 
@@ -82,5 +83,13 @@ public class Abilities {
                 .filter(parameter -> !parameter.contains("/"))
                 .map(Abilities::get)
                 .collect(Collectors.toList());
+    }
+
+    public static int damageFromParameters(List<String> parameters) {
+        return parameters.stream()
+                .filter(parameter -> parameter.startsWith("DAMAGE:"))
+                .findFirst()
+                .map(parameter -> parseInt(parameter.replace("DAMAGE:", "")))
+                .orElse(0);
     }
 }

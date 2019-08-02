@@ -38,7 +38,7 @@ public class CreaturesYouControlGetXUntilEndOfTurn implements AbilityAction {
         List<CardInstance> cards = new CardInstanceSearch(controller.getBattlefield().getCards()).ofType(CREATURE).getCards();
         for (CardInstance card : cards) {
             PowerToughness originalPowerToughness = card.getModifiers().getExtraPowerToughnessUntilEndOfTurn();
-            card.getModifiers().setExtraPowerToughnessUntilEndOfTurn(originalPowerToughness.combine(powerToughness));
+            card.getModifiers().addExtraPowerToughnessUntilEndOfTurn(originalPowerToughness.combine(powerToughness));
             card.getModifiers().getAbilitiesUntilEndOfTurn().addAll(abilities);
         }
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 public enum AbilityType {
     CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN("Creatures you control get %s until end of turn."),
-    DEALS_X_DAMAGE_TO_TARGET("Deals %s damage to target."),
     DEATHTOUCH("Deathtouch."),
     DESTROY_TARGET("Destroy target."),
     DRAW_X_CARDS("Draw %s cards."),
@@ -17,9 +16,8 @@ public enum AbilityType {
     LIFELINK("Lifelink."),
     REACH("Reach."),
     SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER("Shuffle graveyard into library."),
-    THAT_TARGETS_GET_X("That targets get %s."),
+    THAT_TARGETS_GETS("That targets get %s."),
     TRAMPLE("Trample."),
-    TARGET_CREATURE_GETS("Target creature gets %s."),
     VIGILANCE("Vigilance.");
 
     private String text;

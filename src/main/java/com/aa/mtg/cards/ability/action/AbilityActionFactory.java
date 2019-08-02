@@ -7,26 +7,24 @@ import org.springframework.stereotype.Component;
 @Component
 public class AbilityActionFactory {
     private final DestroyTargetAction destroyTargetAction;
-    private final DealXDamageToTargetAction dealXDamageToTargetAction;
+    private final ThatTargetsGetAction thatTargetsGetAction;
     private final DrawXCardsAction drawXCardsAction;
     private final GainXLifeAction gainXLifeAction;
     private final EachPlayersGainXLifeAction eachPlayersGainXLifeAction;
     private final ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction;
-    private final ThatTargetsGetAction thatTargetsGetAction;
     private final CreaturesYouControlGetXUntilEndOfTurn creaturesYouControlGetXUntilEndOfTurn;
     private final Attach attach;
 
     @Autowired
-    public AbilityActionFactory(DestroyTargetAction destroyTargetAction, DealXDamageToTargetAction dealXDamageToTargetAction, DrawXCardsAction drawXCardsAction,
-                                GainXLifeAction gainXLifeAction, EachPlayersGainXLifeAction eachPlayersGainXLifeAction, ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction, ThatTargetsGetAction thatTargetsGetAction,
+    public AbilityActionFactory(DestroyTargetAction destroyTargetAction, ThatTargetsGetAction thatTargetsGetAction, DrawXCardsAction drawXCardsAction,
+                                GainXLifeAction gainXLifeAction, EachPlayersGainXLifeAction eachPlayersGainXLifeAction, ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction,
                                 CreaturesYouControlGetXUntilEndOfTurn creaturesYouControlGetXUntilEndOfTurn, Attach attach) {
         this.destroyTargetAction = destroyTargetAction;
-        this.dealXDamageToTargetAction = dealXDamageToTargetAction;
+        this.thatTargetsGetAction= thatTargetsGetAction;
         this.drawXCardsAction = drawXCardsAction;
         this.gainXLifeAction = gainXLifeAction;
         this.eachPlayersGainXLifeAction = eachPlayersGainXLifeAction;
         this.shuffleTargetGraveyardIntoLibraryAction = shuffleTargetGraveyardIntoLibraryAction;
-        this.thatTargetsGetAction = thatTargetsGetAction;
         this.creaturesYouControlGetXUntilEndOfTurn = creaturesYouControlGetXUntilEndOfTurn;
         this.attach = attach;
     }
@@ -39,8 +37,6 @@ public class AbilityActionFactory {
         switch (abilityType) {
             case DESTROY_TARGET:
                 return destroyTargetAction;
-            case DEALS_X_DAMAGE_TO_TARGET:
-                return dealXDamageToTargetAction;
             case DRAW_X_CARDS:
                 return drawXCardsAction;
             case GAIN_X_LIFE:
@@ -49,7 +45,7 @@ public class AbilityActionFactory {
                 return eachPlayersGainXLifeAction;
             case SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER:
                 return shuffleTargetGraveyardIntoLibraryAction;
-            case THAT_TARGETS_GET_X:
+            case THAT_TARGETS_GETS:
                 return thatTargetsGetAction;
             case CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN:
                 return creaturesYouControlGetXUntilEndOfTurn;

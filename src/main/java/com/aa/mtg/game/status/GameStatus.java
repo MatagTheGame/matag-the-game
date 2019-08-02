@@ -75,10 +75,6 @@ public class GameStatus {
         }
     }
 
-    public Player getNonCurrentPlayer() {
-        return getOtherPlayer(getCurrentPlayer());
-    }
-
     public Player getCurrentPlayer() {
         if (turn.getCurrentTurnPlayer().equals(this.getPlayer1().getName())) {
             return this.getPlayer1();
@@ -87,12 +83,20 @@ public class GameStatus {
         }
     }
 
+    public Player getNonCurrentPlayer() {
+        return getOtherPlayer(getCurrentPlayer());
+    }
+
     public Player getActivePlayer() {
         if (turn.getCurrentPhaseActivePlayer().equals(this.getPlayer1().getName())) {
             return this.getPlayer1();
         } else {
             return this.getPlayer2();
         }
+    }
+
+    public Player getNonActivePlayer() {
+        return getOtherPlayer(getActivePlayer());
     }
 
     public void putIntoGraveyard(CardInstance cardInstance) {

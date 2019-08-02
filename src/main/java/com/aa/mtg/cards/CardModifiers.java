@@ -111,8 +111,14 @@ public class CardModifiers {
         return extraPowerToughnessUntilEndOfTurn;
     }
 
-    public void setExtraPowerToughnessUntilEndOfTurn(PowerToughness extraPowerToughnessUntilEndOfTurn) {
-        this.extraPowerToughnessUntilEndOfTurn = extraPowerToughnessUntilEndOfTurn;
+    public void addExtraPowerToughnessUntilEndOfTurn(PowerToughness extraPowerToughnessUntilEndOfTurn) {
+        int newPower = this.extraPowerToughnessUntilEndOfTurn.getPower() + extraPowerToughnessUntilEndOfTurn.getPower();
+        int newToughness = this.extraPowerToughnessUntilEndOfTurn.getToughness() + extraPowerToughnessUntilEndOfTurn.getToughness();
+        this.extraPowerToughnessUntilEndOfTurn = new PowerToughness(newPower, newToughness);
+    }
+
+    public void resetExtraPowerToughnessUntilEndOfTurn() {
+        extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
     }
 
     public void setTargets(List<Object> targets) {

@@ -1,7 +1,6 @@
-package com.aa.mtg.game.turn.combat;
+package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.ability.action.DealXDamageToTargetAction;
 import com.aa.mtg.game.player.LifeService;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -18,15 +17,16 @@ import static com.aa.mtg.cards.ability.type.AbilityType.TRAMPLE;
 @Service
 public class CombatService {
     private final GameStatusUpdaterService gameStatusUpdaterService;
-    private final DealXDamageToTargetAction dealXDamageToTargetAction;
     private final LifeService lifeService;
+    private final DealDamageToCreatureService dealDamageToCreatureService;
 
     @Autowired
-    public CombatService(GameStatusUpdaterService gameStatusUpdaterService, DealXDamageToTargetAction destroyTargetAction, LifeService lifeService) {
+    public CombatService(GameStatusUpdaterService gameStatusUpdaterService, LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
-        this.dealXDamageToTargetAction = destroyTargetAction;
         this.lifeService = lifeService;
+        this.dealDamageToCreatureService = dealDamageToCreatureService;
     }
+
 
     public void dealCombatDamage(GameStatus gameStatus) {
         Player currentPlayer = gameStatus.getCurrentPlayer();
@@ -66,8 +66,8 @@ public class CombatService {
         for (CardInstance blockingCreature : blockingCreatures) {
             int damageToCurrentBlocker = Math.min(remainingDamageForAttackingCreature, blockingCreature.getToughness());
 
-            dealXDamageToTargetAction.dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.hasAbility(DEATHTOUCH));
-            dealXDamageToTargetAction.dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.hasAbility(DEATHTOUCH));
+            dealDamageToCreatureService.dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.hasAbility(DEATHTOUCH));
+            dealDamageToCreatureService.dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.hasAbility(DEATHTOUCH));
 
             remainingDamageForAttackingCreature -= damageToCurrentBlocker;
         }

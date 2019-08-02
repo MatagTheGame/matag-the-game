@@ -95,7 +95,7 @@ public class CleanupTest extends AbstractApplicationTest {
 
             CardInstance grazingWhiptail = gameStatus.getCurrentPlayer().getBattlefield().getCards().get(1);
             grazingWhiptail.getModifiers().setSummoningSickness(true);
-            grazingWhiptail.getModifiers().setExtraPowerToughnessUntilEndOfTurn(powerToughness("1/1"));
+            grazingWhiptail.getModifiers().addExtraPowerToughnessUntilEndOfTurn(powerToughness("1/1"));
 
             // Non Current Player
             addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);

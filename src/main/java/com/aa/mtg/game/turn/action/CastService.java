@@ -75,7 +75,7 @@ public class CastService {
                 gameStatusUpdaterService.sendUpdateStack(gameStatus);
             }
 
-            gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
+            gameStatus.getTurn().passPriority(gameStatus);
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
             // FIXME Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.

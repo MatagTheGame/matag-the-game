@@ -27,7 +27,7 @@ export default class ClientEventsReducer {
           stompClient.sendEvent('turn', {action: 'RESOLVE', triggeredNonStackAction: 'DISCARD_A_CARD', cardIds: [cardId]})
         }
 
-        if (Phase.isMainPhase(newState.turn.currentPhase)) {
+        if (Phase.isMainPhase(newState.turn.currentPhase) || cardInstance.card.instantSpeed) {
           // TODO this is very similar to the one for battlefield click
           if (CardUtils.isOfType(cardInstance, 'LAND')) {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardIds: [cardId]})
