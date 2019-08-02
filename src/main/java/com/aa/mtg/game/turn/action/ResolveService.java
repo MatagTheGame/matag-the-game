@@ -40,27 +40,21 @@ public class ResolveService {
     public void resolve(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> cardIds) {
         if (!gameStatus.getStack().isEmpty()) {
             CardInstance stackItemToResolve = gameStatus.getStack().peek();
-            Player playerWhoCastedTheSpell = gameStatus.getPlayerByName(stackItemToResolve.getController());
 
             if (stackItemToResolve.getTriggeredAbilities().isEmpty()) {
                 removeTopElementFromStack(gameStatus);
                 resolveCardInstanceFromStack(gameStatus, stackItemToResolve);
 
-                gameStatus.getTurn().setCurrentPhaseActivePlayer(playerWhoCastedTheSpell.getName());
-                gameStatusUpdaterService.sendUpdateTurn(gameStatus);
-
             } else {
-                // TODO figure it out later
-                if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
-                    gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
-                    gameStatusUpdaterService.sendUpdateTurn(gameStatus);
-                } else {
+                Player playerWhoCastedTheSpell = gameStatus.getPlayerByName(stackItemToResolve.getController());
+                if (!gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(playerWhoCastedTheSpell.getName())) {
                     removeTopElementFromStack(gameStatus);
                     resolveTriggeredAbility(gameStatus, stackItemToResolve);
-                    gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-                    gameStatusUpdaterService.sendUpdateTurn(gameStatus);
                 }
             }
+
+            gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonActivePlayer().getName());
+            gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
         } else if (gameStatus.getTurn().getTriggeredNonStackAction().equals(triggeredNonStackAction)) {
             resolveTriggeredNonStackAction(gameStatus, triggeredNonStackAction, cardIds);
