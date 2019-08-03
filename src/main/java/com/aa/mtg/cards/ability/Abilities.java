@@ -35,6 +35,7 @@ public class Abilities {
     public static Ability DEAL_3_DAMAGE_TO_ANY_TARGET = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.ANY).build()), singletonList("DAMAGE:3"), new Trigger(CAST));
     public static Ability DEAL_3_DAMAGE_TO_TARGET_CREATURE = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DAMAGE:3"), new Trigger(CAST));
     public static Ability DEAL_4_DAMAGE_TO_TARGET_CREATURE = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DAMAGE:4"), new Trigger(CAST));
+    public static Ability DEAL_4_DAMAGE_TO_TARGET_CREATURE_2_DAMAGE_TO_CONTROLLER = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("DAMAGE:4", "CONTROLLER_DAMAGE:2"), new Trigger(CAST));
     public static Ability DEATHTOUCH = new Ability(AbilityType.DEATHTOUCH);
     public static Ability DESTROY_TARGET_ARTIFACT_CREATURE_OR_PLANESWALKER = new Ability(DESTROY_TARGET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(asList(ARTIFACT, CREATURE, PLANESWALKER)).build()), emptyList(), new Trigger(CAST));
     public static Ability DESTROY_TARGET_ATTACKING_CREATURE = new Ability(DESTROY_TARGET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetStatusType(ATTACKING).build()), emptyList(), new Trigger(CAST));
@@ -93,7 +94,7 @@ public class Abilities {
 
     public static List<Ability> abilitiesFromParameters(List<String> parameters) {
         return parameters.stream()
-                .filter(parameter -> !parameter.contains("/"))
+                .filter(parameter -> !parameter.contains("/") && !parameter.contains(":"))
                 .map(Abilities::get)
                 .collect(Collectors.toList());
     }
@@ -103,6 +104,14 @@ public class Abilities {
                 .filter(parameter -> parameter.startsWith("DAMAGE:"))
                 .findFirst()
                 .map(parameter -> parseInt(parameter.replace("DAMAGE:", "")))
+                .orElse(0);
+    }
+
+    public static int controllerDamageFromParameters(List<String> parameters) {
+        return parameters.stream()
+                .filter(parameter -> parameter.startsWith("CONTROLLER_DAMAGE:"))
+                .findFirst()
+                .map(parameter -> parseInt(parameter.replace("CONTROLLER_DAMAGE:", "")))
                 .orElse(0);
     }
 }

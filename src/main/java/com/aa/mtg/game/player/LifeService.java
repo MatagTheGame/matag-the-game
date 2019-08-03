@@ -22,22 +22,24 @@ public class LifeService {
         perform(player, "ADD", amount, gameStatus);
     }
 
-    public void substract(Player player, int amount, GameStatus gameStatus) {
+    public void subtract(Player player, int amount, GameStatus gameStatus) {
         perform(player, "SUBTRACT", amount, gameStatus);
     }
 
     private void perform(Player player, String lifeServiceType, int amount, GameStatus gameStatus) {
-        if (lifeServiceType.equals("ADD")) {
-            player.increaseLife(amount);
-        } else {
-            player.decreaseLife(amount);
-        }
+        if (amount > 0) {
+            if (lifeServiceType.equals("ADD")) {
+                player.increaseLife(amount);
+            } else {
+                player.decreaseLife(amount);
+            }
 
-        LOGGER.info("Player {} {} {} life bringing it to {}", player.getName(), lifeServiceType, amount, player.getLife());
-        gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, player);
+            LOGGER.info("Player {} {} {} life bringing it to {}", player.getName(), lifeServiceType, amount, player.getLife());
+            gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, player);
 
-        if (player.getLife() <= 0) {
-            gameStatus.getTurn().setWinner(player.getName());
+            if (player.getLife() <= 0) {
+                gameStatus.getTurn().setWinner(player.getName());
+            }
         }
     }
 }

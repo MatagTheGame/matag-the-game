@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.aa.mtg.cards.ability.Abilities.abilitiesFromParameters;
+import static com.aa.mtg.cards.ability.Abilities.controllerDamageFromParameters;
 import static com.aa.mtg.cards.ability.Abilities.damageFromParameters;
 import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameters;
 
@@ -41,7 +42,7 @@ public class ThatTargetsGetAction implements AbilityAction {
                 Player player = gameStatus.getPlayerByName(targetPlayerName);
                 int damage = damageFromParameters(ability.getParameters());
                 if (damage > 0) {
-                    lifeService.substract(player, damage, gameStatus);
+                    lifeService.subtract(player, damage, gameStatus);
                     LOGGER.info("AbilityActionExecuted: {} deals {} damage to {}", cardInstance.getIdAndName(), damage, player.getName());
                 }
 
@@ -63,6 +64,9 @@ public class ThatTargetsGetAction implements AbilityAction {
 
                     int damage = damageFromParameters(ability.getParameters());
                     dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false);
+
+                    int controllerDamage = controllerDamageFromParameters(ability.getParameters());
+                    lifeService.subtract(gameStatus.getPlayerByName(cardInstance.getController()), controllerDamage, gameStatus);
 
                     LOGGER.info("AbilityActionExecuted: {} target {} which gets {}", cardInstance.getIdAndName(), targetCardId, ability.getParameters());
 

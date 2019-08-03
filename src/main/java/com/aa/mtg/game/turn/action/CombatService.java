@@ -53,7 +53,7 @@ public class CombatService {
         gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
 
         if (damageFromUnblockedCreatures > 0) {
-            lifeService.substract(nonCurrentPlayer, damageFromUnblockedCreatures, gameStatus);
+            lifeService.subtract(nonCurrentPlayer, damageFromUnblockedCreatures, gameStatus);
         }
 
         if (lifelink > 0) {

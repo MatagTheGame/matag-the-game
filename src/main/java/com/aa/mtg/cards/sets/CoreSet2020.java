@@ -31,6 +31,7 @@ public class CoreSet2020 implements MtgSet {
     public static Card BOGSTOMPER = new Card("Bogstomper", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Beast"), COMMON, "", 6, 5, emptyList());
     public static Card CANOPY_SPIDER = new Card("Canopy Spider", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Spider"), COMMON, "", 1, 3, singletonList(REACH));
     public static Card CENTAUR_COURSER = new Card("Centaur Courser", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Centaur", "Warrior"), COMMON, "", 3, 3, emptyList());
+    public static Card CHANDRAS_OUTRAGE = new Card("Chandra's Outrage", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.", 0, 0, singletonList( DEAL_4_DAMAGE_TO_TARGET_CREATURE_2_DAMAGE_TO_CONTROLLER));
     public static Card CLOUDKIN_SEER = new Card("Cloudkin Seer", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Elemental", "Wizard"), COMMON, "Flying. When Cloudkin Seer enters the battlefield, draw a card.", 2, 1, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
     public static Card CORAL_MERFOLK = new Card("Coral Merfolk", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Merfolk"), COMMON, "", 2, 1, emptyList());
     public static Card DARK_REMEDY = new Card("Dark Remedy", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Target creature gets +1/+3 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_1_3_UNTIL_END_OF_TURN));
@@ -54,6 +55,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(BOGSTOMPER);
         cards.add(CANOPY_SPIDER);
         cards.add(CENTAUR_COURSER);
+        cards.add(CHANDRAS_OUTRAGE);
         cards.add(CLOUDKIN_SEER);
         cards.add(CORAL_MERFOLK);
         cards.add(DARK_REMEDY);
