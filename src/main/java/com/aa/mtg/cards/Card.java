@@ -3,6 +3,7 @@ package com.aa.mtg.cards;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
+import com.aa.mtg.cards.properties.Rarity;
 import com.aa.mtg.cards.properties.Type;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
@@ -25,17 +26,19 @@ public class Card {
     private final List<Cost> cost;
     private final List<Type> types;
     private final List<String> subtypes;
+    private final Rarity rarity;
     private final String ruleText;
     private final int power;
     private final int toughness;
     private final List<Ability> abilities;
 
-    public Card(String name, Set<Color> colors, List<Cost> cost, List<Type> types, List<String> subtypes, String ruleText, int power, int toughness, List<Ability> abilities) {
+    public Card(String name, Set<Color> colors, List<Cost> cost, List<Type> types, List<String> subtypes, Rarity rarity, String ruleText, int power, int toughness, List<Ability> abilities) {
         this.name = name;
         this.colors = colors;
         this.cost = cost;
         this.types = types;
         this.subtypes = subtypes;
+        this.rarity = rarity;
         this.ruleText = ruleText;
         this.power = power;
         this.toughness = toughness;
@@ -44,11 +47,11 @@ public class Card {
 
     public Card(Card card) {
         this(card.getName(), new HashSet<>(card.getColors()), new ArrayList<>(card.getCost()), new ArrayList<>(card.getTypes()),
-                new ArrayList<>(card.getSubtypes()), card.getRuleText(), card.getPower(), card.getToughness(), card.getAbilities());
+                new ArrayList<>(card.getSubtypes()), Rarity.COMMON, card.getRuleText(), card.getPower(), card.getToughness(), card.getAbilities());
     }
 
     public static Card hiddenCard() {
-        return new Card("card", emptySet(), emptyList(), emptyList(), emptyList(), "", 0, 0, emptyList());
+        return new Card("card", emptySet(), emptyList(), emptyList(), emptyList(), Rarity.COMMON, "", 0, 0, emptyList());
     }
 
     public String getName() {
@@ -73,6 +76,10 @@ public class Card {
 
     public List<String> getSubtypes() {
         return subtypes;
+    }
+
+    public Rarity getRarity() {
+        return rarity;
     }
 
     public String getRuleText() {

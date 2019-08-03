@@ -38,4 +38,14 @@ public class MtgSets {
         }
         return cards;
     }
+
+    public MtgSet getSetForCard(Card card) {
+        for (MtgSet mtgSet : MTG_SETS) {
+            if (mtgSet.getCards().contains(card)) {
+                return mtgSet;
+            }
+        }
+
+        throw new RuntimeException("Card " + card.getName() + " not found in any set.");
+    }
 }

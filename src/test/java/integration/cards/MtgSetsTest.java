@@ -31,6 +31,8 @@ public class MtgSetsTest {
         LOGGER.info("Num of Cards: " + mtgSets.getAllCards().size());
         LOGGER.info("Cards by Colors: " + mtgSets.getAllCards().stream().collect(groupingBy(Card::getColors, counting())));
         LOGGER.info("Cards by Types: " + mtgSets.getAllCards().stream().collect(groupingBy(Card::getTypes, counting())));
+        LOGGER.info("Cards by Rarity: " + mtgSets.getAllCards().stream().collect(groupingBy(Card::getRarity, counting())));
+        LOGGER.info("Cards by Set: " + mtgSets.getAllCards().stream().collect(groupingBy(card -> mtgSets.getSetForCard(card).getName(), counting())));
     }
 
     @Configuration
