@@ -1,6 +1,7 @@
 package com.aa.mtg.cards.sets;
 
 import com.aa.mtg.cards.Card;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +15,10 @@ import static com.aa.mtg.cards.sets.RavnicaAllegiance.ravnicaAllegiance;
 import static com.aa.mtg.cards.sets.RivalsOfIxalan.rivalsOfIxalan;
 import static com.aa.mtg.cards.sets.WarOfTheSpark.warOfTheSpark;
 
+@Component
 public class MtgSets {
 
-    private static MtgSets instance;
-
-    private static List<MtgSet> MTG_SETS = new ArrayList<>();
+    private List<MtgSet> MTG_SETS = new ArrayList<>();
 
     private MtgSets() {
         MTG_SETS.add(m20());
@@ -29,13 +29,6 @@ public class MtgSets {
         MTG_SETS.add(dominaria());
         MTG_SETS.add(rivalsOfIxalan());
         MTG_SETS.add(ixalan());
-    }
-
-    public static MtgSets mtgSets() {
-        if (instance == null) {
-            instance = new MtgSets();
-        }
-        return instance;
     }
 
     public List<Card> getAllCards() {

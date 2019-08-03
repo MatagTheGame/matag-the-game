@@ -9,16 +9,19 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 
 @ToString
 @EqualsAndHashCode
 public class Card {
     private final String name;
-    private final List<Color> colors;
+    private final Set<Color> colors;
     private final List<Cost> cost;
     private final List<Type> types;
     private final List<String> subtypes;
@@ -27,7 +30,7 @@ public class Card {
     private final int toughness;
     private final List<Ability> abilities;
 
-    public Card(String name, List<Color> colors, List<Cost> cost, List<Type> types, List<String> subtypes, String ruleText, int power, int toughness, List<Ability> abilities) {
+    public Card(String name, Set<Color> colors, List<Cost> cost, List<Type> types, List<String> subtypes, String ruleText, int power, int toughness, List<Ability> abilities) {
         this.name = name;
         this.colors = colors;
         this.cost = cost;
@@ -40,19 +43,19 @@ public class Card {
     }
 
     public Card(Card card) {
-        this(card.getName(), new ArrayList<>(card.getColors()), new ArrayList<>(card.getCost()), new ArrayList<>(card.getTypes()),
+        this(card.getName(), new HashSet<>(card.getColors()), new ArrayList<>(card.getCost()), new ArrayList<>(card.getTypes()),
                 new ArrayList<>(card.getSubtypes()), card.getRuleText(), card.getPower(), card.getToughness(), card.getAbilities());
     }
 
     public static Card hiddenCard() {
-        return new Card("card", emptyList(), emptyList(), emptyList(), emptyList(), "", 0, 0, emptyList());
+        return new Card("card", emptySet(), emptyList(), emptyList(), emptyList(), "", 0, 0, emptyList());
     }
 
     public String getName() {
         return name;
     }
 
-    public List<Color> getColors() {
+    public Set<Color> getColors() {
         return colors;
     }
 

@@ -102,7 +102,7 @@ public class CastService {
             } else if (landToTap.getModifiers().isTapped()) {
                 throw new MessageException("The land you are trying to tap is already tapped.");
             }
-            paidCost.add(landToTap.getCard().getColors().get(0));
+            paidCost.add(landToTap.getCard().getColors().iterator().next());
         }
         return paidCost;
     }

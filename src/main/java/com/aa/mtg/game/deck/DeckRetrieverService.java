@@ -5,9 +5,11 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.cards.search.CardSearch;
+import com.aa.mtg.cards.sets.MtgSets;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,11 +18,17 @@ import java.util.List;
 
 import static com.aa.mtg.cards.Cards.*;
 import static com.aa.mtg.cards.properties.Color.*;
-import static com.aa.mtg.cards.sets.MtgSets.mtgSets;
 import static java.util.Arrays.asList;
 
 @Component
 public class DeckRetrieverService {
+
+    private final MtgSets mtgSets;
+
+    @Autowired
+    public DeckRetrieverService(MtgSets mtgSets) {
+        this.mtgSets = mtgSets;
+    }
 
     public Library retrieveDeckForUser(SecurityToken token, String playerName, GameStatus gameStatus) {
         return randomDeck(playerName, gameStatus);
@@ -72,14 +80,14 @@ public class DeckRetrieverService {
     private List<Card> getRandomCardsForColors(List<Color> deckColors) {
         ArrayList<Card> selectedCards = new ArrayList<>();
 
-        List<Card> creatureCardsOfTheseColors = new CardSearch(mtgSets().getAllCards())
+        List<Card> creatureCardsOfTheseColors = new CardSearch(mtgSets.getAllCards())
                 .ofAnyOfTheColors(deckColors)
                 .ofType(Type.CREATURE)
                 .getCards();
         Collections.shuffle(creatureCardsOfTheseColors);
         selectedCards.addAll(creatureCardsOfTheseColors.subList(0, 5));
 
-        List<Card> nonCreatureCardsOfTheseColors = new CardSearch(mtgSets().getAllCards())
+        List<Card> nonCreatureCardsOfTheseColors = new CardSearch(mtgSets.getAllCards())
                 .ofAnyOfTheColors(deckColors)
                 .notOfType(Type.CREATURE)
                 .getCards();
@@ -90,7 +98,7 @@ public class DeckRetrieverService {
     }
 
     private Card getRandomColorlessCard() {
-        List<Card> allColorlessCards = new CardSearch(mtgSets().getAllCards())
+        List<Card> allColorlessCards = new CardSearch(mtgSets.getAllCards())
                 .colorless()
                 .getCards();
         Collections.shuffle(allColorlessCards);

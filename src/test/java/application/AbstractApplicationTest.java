@@ -119,7 +119,7 @@ public abstract class AbstractApplicationTest {
 
     @SneakyThrows
     private void sleep5Secs() {
-        Thread.sleep(5000);
+        Thread.sleep(3000);
     }
 
     private int getNumOfRetries() {
