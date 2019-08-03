@@ -5,7 +5,6 @@ import java.util.List;
 public enum AbilityType {
     CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN("Creatures you control get %s until end of turn."),
     DEATHTOUCH("Deathtouch."),
-    DESTROY_TARGET("Destroy target."),
     DRAW_X_CARDS("Draw %s cards."),
     GAIN_X_LIFE("Gain %s life."),
     EACH_PLAYERS_GAIN_X_LIFE("Each player gains %s life."),

@@ -1,7 +1,6 @@
 package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.ability.action.DestroyTargetAction;
 import com.aa.mtg.game.status.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +12,11 @@ public class DealDamageToCreatureService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DealDamageToCreatureService.class);
 
-    private final DestroyTargetAction destroyTargetAction;
+    private final DestroyTargetService destroyTargetService;
 
     @Autowired
-    public DealDamageToCreatureService(DestroyTargetAction destroyTargetAction) {
-        this.destroyTargetAction = destroyTargetAction;
+    public DealDamageToCreatureService(DestroyTargetService destroyTargetService) {
+        this.destroyTargetService = destroyTargetService;
     }
 
     public void dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
@@ -25,7 +24,7 @@ public class DealDamageToCreatureService {
             LOGGER.info("{} is getting {} damage.", cardInstance.getIdAndName(), damage);
             cardInstance.getModifiers().dealDamage(damage);
             if (cardInstance.getModifiers().getDamage() >= cardInstance.getToughness() || deathtouch) {
-                destroyTargetAction.destroy(gameStatus, cardInstance.getId());
+                destroyTargetService.destroy(gameStatus, cardInstance.getId());
                 LOGGER.info("{} has been destroyed.", cardInstance.getIdAndName());
             }
         }

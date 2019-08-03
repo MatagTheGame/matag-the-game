@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AbilityActionFactory {
-    private final DestroyTargetAction destroyTargetAction;
     private final ThatTargetsGetAction thatTargetsGetAction;
     private final DrawXCardsAction drawXCardsAction;
     private final GainXLifeAction gainXLifeAction;
@@ -16,10 +15,9 @@ public class AbilityActionFactory {
     private final Attach attach;
 
     @Autowired
-    public AbilityActionFactory(DestroyTargetAction destroyTargetAction, ThatTargetsGetAction thatTargetsGetAction, DrawXCardsAction drawXCardsAction,
+    public AbilityActionFactory(ThatTargetsGetAction thatTargetsGetAction, DrawXCardsAction drawXCardsAction,
                                 GainXLifeAction gainXLifeAction, EachPlayersGainXLifeAction eachPlayersGainXLifeAction, ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction,
                                 CreaturesYouControlGetXUntilEndOfTurn creaturesYouControlGetXUntilEndOfTurn, Attach attach) {
-        this.destroyTargetAction = destroyTargetAction;
         this.thatTargetsGetAction= thatTargetsGetAction;
         this.drawXCardsAction = drawXCardsAction;
         this.gainXLifeAction = gainXLifeAction;
@@ -35,8 +33,6 @@ public class AbilityActionFactory {
         }
 
         switch (abilityType) {
-            case DESTROY_TARGET:
-                return destroyTargetAction;
             case DRAW_X_CARDS:
                 return drawXCardsAction;
             case GAIN_X_LIFE:

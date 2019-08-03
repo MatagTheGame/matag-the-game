@@ -2,7 +2,6 @@ package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.ability.action.DestroyTargetAction;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
@@ -20,12 +19,12 @@ public class EnterCardIntoBattlefieldService {
     private static final Logger LOGGER = LoggerFactory.getLogger(EnterCardIntoBattlefieldService.class);
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
-    private final DestroyTargetAction destroyTargetAction;
+    private final DestroyTargetService destroyTargetService;
 
     @Autowired
-    public EnterCardIntoBattlefieldService(GameStatusUpdaterService gameStatusUpdaterService, DestroyTargetAction destroyTargetAction) {
+    public EnterCardIntoBattlefieldService(GameStatusUpdaterService gameStatusUpdaterService, DestroyTargetService destroyTargetService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
-        this.destroyTargetAction = destroyTargetAction;
+        this.destroyTargetService = destroyTargetService;
     }
 
     public void enter(GameStatus gameStatus, CardInstance cardInstance) {
@@ -50,7 +49,7 @@ public class EnterCardIntoBattlefieldService {
         player.getBattlefield().getCardsCopy().stream()
                 .filter(cardInstance -> cardInstance.isOfType(CREATURE))
                 .filter(cardInstance -> cardInstance.getToughness() <= 0)
-                .forEach(cardInstance -> destroyTargetAction.destroy(gameStatus, cardInstance.getId()));
+                .forEach(cardInstance -> destroyTargetService.destroy(gameStatus, cardInstance.getId()));
     }
 
 }

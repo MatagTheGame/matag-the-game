@@ -1,7 +1,6 @@
-package com.aa.mtg.cards.ability.action;
+package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.game.status.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,15 +10,8 @@ import static com.aa.mtg.cards.properties.Type.ARTIFACT;
 import static com.aa.mtg.cards.properties.Type.ENCHANTMENT;
 
 @Service
-public class DestroyTargetAction implements AbilityAction {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DestroyTargetAction.class);
-
-    @Override
-    public void perform(Ability ability, CardInstance cardInstance, GameStatus gameStatus) {
-        int targetId = (int)cardInstance.getModifiers().getTargets().get(0);
-        LOGGER.info("Executing ability action for {} with target {}.", cardInstance.getIdAndName(), targetId);
-        destroy(gameStatus, targetId);
-    }
+public class DestroyTargetService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DestroyTargetService.class);
 
     public void destroy(GameStatus gameStatus, int targetId) {
         CardInstance cardToDestroy = gameStatus.extractCardByIdFromAnyBattlefield(targetId);

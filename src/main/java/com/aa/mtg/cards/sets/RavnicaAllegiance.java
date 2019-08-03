@@ -22,12 +22,13 @@ public class RavnicaAllegiance implements MtgSet {
     public static final String RNA = "RNA";
 
     public static Card AXEBANE_BEAST = new Card("Axebane Beast", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Beast"), COMMON, "", 3, 4, emptyList());
-    public static Card BEDEVIL = new Card("Bedevil", asSet(Color.BLACK, Color.RED), asList(Cost.BLACK, Cost.BLACK, Cost.RED), singletonList(Type.INSTANT), emptyList(), RARE, "Destroy target artifact, creature, or planeswalker.", 0, 0, singletonList(DESTROY_TARGET_ARTIFACT_CREATURE_OR_PLANESWALKER));
+    public static Card BEDEVIL = new Card("Bedevil", asSet(Color.BLACK, Color.RED), asList(Cost.BLACK, Cost.BLACK, Cost.RED), singletonList(Type.INSTANT), emptyList(), RARE, "Destroy target artifact, creature, or planeswalker.", 0, 0, singletonList(TARGET_ARTIFACT_CREATURE_OR_PLANESWALKER_GETS_DESTROYED));
     public static Card BURN_BRIGHT = new Card("Burn Bright", asSet(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), RARE, "Creatures you control get +2/+0 until end of turn.", 0, 0, singletonList(CREATURES_YOU_CONTROL_GET_PLUS_2_0_UNTIL_END_OF_TURN));
     public static Card CATACOMB_CROCODILE = new Card("Catacomb Crocodile", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Crocodile"), COMMON, "", 3, 7, emptyList());
     public static Card CIVIC_STALWART = new Card("Civic Stalwart", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Elephant", "Soldier"), COMMON, "When Civic Stalwart enters the battlefield, creatures you control get +1/+1 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN));
     public static Card CLEAR_THE_MIND = new Card("Clear the Mind", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), COMMON, "Target player shuffles their graveyard into their library. Draw a card.", 0, 0, asList(SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER, DRAW_1_CARD));
     public static Card CONCORDIA_PEGASUS = new Card("Concordia Pegasus", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Pegasus"), COMMON, "Flying", 1, 3, singletonList(FLYING));
+    public static Card CONSIGN_TO_THE_PIT = new Card("Consign to the Pit", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), COMMON, "Destroy target creature. Consign to the Pit deals 2 damage to that creature's controller.", 0, 0, singletonList(TARGET_CREATURE_GETS_DESTROYED_2_DAMAGE_TO_CONTROLLER));
     public static Card CORAL_COMMANDO = new Card("Coral Commando", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Merfolk", "Warrior"), COMMON, "", 3, 2, emptyList());
     public static Card FERAL_MAAKA = new Card("Feral Maaka", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Cat"), COMMON, "", 2, 2, emptyList());
     public static Card NOXIOUS_GROODION = new Card("Noxious Groodion", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Beast"), COMMON, "Deathtouch", 2, 2, singletonList(DEATHTOUCH));
@@ -46,6 +47,7 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(CIVIC_STALWART);
         cards.add(CLEAR_THE_MIND);
         cards.add(CONCORDIA_PEGASUS);
+        cards.add(CONSIGN_TO_THE_PIT);
         cards.add(CORAL_COMMANDO);
         cards.add(FERAL_MAAKA);
         cards.add(NOXIOUS_GROODION);

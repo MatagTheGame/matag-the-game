@@ -80,6 +80,7 @@ class Card extends Component {
           style={{backgroundImage: this.imageUrl(), ...this.props.style}}
           onClick={this.props.onclick}
           onWheel={this.onWheel}
+          title={this.props.cardInstance.card.name}
           aria-label={this.props.cardInstance.card.name}>
           { this.props.area === 'battlefield' ? <Modifiers cardInstance={this.props.cardInstance} /> : null }
         </div>
