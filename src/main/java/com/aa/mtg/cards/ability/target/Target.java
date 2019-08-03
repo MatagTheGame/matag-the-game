@@ -25,9 +25,9 @@ public class Target {
     private final Color ofColor;
     private final TargetPowerToughnessConstraint targetPowerToughnessConstraint;
     private final PlayerType targetControllerType;
-    private final TargetStatusType targetStatusType;
+    private final List<TargetStatusType> targetStatusTypes;
 
-    private Target(TargetType targetType, List<Type> ofType, String ofSubtypeOf, AbilityType withAbilityType, Color ofColor, TargetPowerToughnessConstraint targetPowerToughnessConstraint, PlayerType targetControllerType, TargetStatusType targetStatusType) {
+    private Target(TargetType targetType, List<Type> ofType, String ofSubtypeOf, AbilityType withAbilityType, Color ofColor, TargetPowerToughnessConstraint targetPowerToughnessConstraint, PlayerType targetControllerType, List<TargetStatusType> targetStatusTypes) {
         this.targetType = targetType;
         this.ofType = ofType;
         this.ofSubtypeOf = ofSubtypeOf;
@@ -35,7 +35,7 @@ public class Target {
         this.ofColor = ofColor;
         this.targetPowerToughnessConstraint = targetPowerToughnessConstraint;
         this.targetControllerType = targetControllerType;
-        this.targetStatusType = targetStatusType;
+        this.targetStatusTypes = targetStatusTypes;
     }
 
     public void check(GameStatus gameStatus, Object targetId) {
@@ -67,10 +67,12 @@ public class Target {
                 cards = cards.ofTargetPowerToughnessConstraint(targetPowerToughnessConstraint);
             }
 
-            if (targetStatusType != null) {
-                if (targetStatusType == ATTACKING) {
+            if (targetStatusTypes != null) {
+                if (targetStatusTypes.contains(ATTACKING) && targetStatusTypes.contains(BLOCKING)) {
+                    cards = cards.attackingOrBlocking();
+                } else if (targetStatusTypes.contains(ATTACKING)) {
                     cards = cards.attacking();
-                } else if (targetStatusType == BLOCKING) {
+                } else if (targetStatusTypes.contains(BLOCKING)) {
                     cards = cards.blocking();
                 }
             }

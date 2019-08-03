@@ -21,6 +21,7 @@ import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static integration.utils.TestUtils.testGameStatus;
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
 public class TargetTest {
@@ -313,7 +314,7 @@ public class TargetTest {
         Target target = Target.builder()
                 .targetType(PERMANENT)
                 .ofType(singletonList(CREATURE))
-                .targetStatusType(ATTACKING)
+                .targetStatusTypes(singletonList(ATTACKING))
                 .build();
         CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
         cardInstance.setController(gameStatus.getCurrentPlayer().getName());
@@ -334,7 +335,7 @@ public class TargetTest {
         Target target = Target.builder()
                 .targetType(PERMANENT)
                 .ofType(singletonList(CREATURE))
-                .targetStatusType(ATTACKING)
+                .targetStatusTypes(singletonList(ATTACKING))
                 .build();
         CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
         cardInstance.setController(gameStatus.getCurrentPlayer().getName());
@@ -354,7 +355,7 @@ public class TargetTest {
         Target target = Target.builder()
                 .targetType(PERMANENT)
                 .ofType(singletonList(CREATURE))
-                .targetStatusType(BLOCKING)
+                .targetStatusTypes(singletonList(BLOCKING))
                 .build();
         CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
         cardInstance.setController(gameStatus.getCurrentPlayer().getName());
@@ -375,7 +376,7 @@ public class TargetTest {
         Target target = Target.builder()
                 .targetType(PERMANENT)
                 .ofType(singletonList(CREATURE))
-                .targetStatusType(BLOCKING)
+                .targetStatusTypes(singletonList(BLOCKING))
                 .build();
         CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
         cardInstance.setController(gameStatus.getCurrentPlayer().getName());
@@ -385,5 +386,67 @@ public class TargetTest {
         target.check(gameStatus, 1);
 
         // Then an exception is thrown
+    }
+
+    @Test
+    public void selectionAttackingOrBlockingAttackingCreature() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder()
+                .targetType(PERMANENT)
+                .ofType(singletonList(CREATURE))
+                .targetStatusTypes(asList(ATTACKING, BLOCKING))
+                .build();
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getCurrentPlayer().getName());
+        cardInstance.getModifiers().setAttacking(true);
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        target.check(gameStatus, 1);
+
+        // Then no exception is thrown
+    }
+
+    @Test
+    public void selectionAttackingOrBlockingBlockingCreature() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder()
+                .targetType(PERMANENT)
+                .ofType(singletonList(CREATURE))
+                .targetStatusTypes(asList(ATTACKING, BLOCKING))
+                .build();
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getCurrentPlayer().getName());
+        cardInstance.getModifiers().setBlockingCardId(2);
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        target.check(gameStatus, 1);
+
+        // Then no exception is thrown
+    }
+
+    @Test(expected = MessageException.class)
+    public void selectionAttackingOrBlockingException() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder()
+                .targetType(PERMANENT)
+                .ofType(singletonList(CREATURE))
+                .targetStatusTypes(asList(ATTACKING, BLOCKING))
+                .build();
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        target.check(gameStatus, 1);
+
+        // Then no exception is thrown
     }
 }

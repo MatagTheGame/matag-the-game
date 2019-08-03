@@ -32,6 +32,9 @@ public class Ixalan implements MtgSet {
     public static Card CHARGING_MONSTROSAUR = new Card("Charging Monstrosaur", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), UNCOMMON, "Trample, haste", 5, 5, asList(TRAMPLE, HASTE));
     public static Card COBBLED_WINGS = new Card("Cobbled Wings", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipped creature has flying. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_FLYING));
     public static Card COLOSSAL_DREADMAW = new Card("Colossal Dreadmaw", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "Trample", 6, 6, singletonList(TRAMPLE));
+    public static Card CRASH_THE_RAMPARTS = new Card("Crash the Ramparts", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +3/+3 and gains trample until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_3_3_AND_TRAMPLE_UNTIL_END_OF_TURN));
+    public static Card DARK_NOURISHMENT = new Card("Dark Nourishment", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Dark Nourishment deals 3 damage to target creature or player. You gain 3 life.", 0, 0, asList(DEAL_3_DAMAGE_TO_TARGET_CREATURE, GAIN_3_LIFE));
+    public static Card DEMYSTIFY = new Card("Demystify", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(INSTANT), emptyList(), COMMON, "Destroy target enchantment.", 0, 0, singletonList(TARGET_ENCHANTMENT_GETS_DESTROYED));
     public static Card FRENZIED_RAPTOR = new Card("Frenzied Raptor", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 4, 2, emptyList());
     public static Card GRAZING_WHIPTAIL = new Card("Grazing Whiptail", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 3, 4, singletonList(REACH));
     public static Card HEADWATER_SENTRIES = new Card("Headwater Sentries", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Merfolk Warrior"), COMMON, "", 2, 5, emptyList());
@@ -55,6 +58,9 @@ public class Ixalan implements MtgSet {
         cards.add(CHARGING_MONSTROSAUR);
         cards.add(COBBLED_WINGS);
         cards.add(COLOSSAL_DREADMAW);
+        cards.add(CRASH_THE_RAMPARTS);
+        cards.add(DARK_NOURISHMENT);
+        cards.add(DEMYSTIFY);
         cards.add(FRENZIED_RAPTOR);
         cards.add(GRAZING_WHIPTAIL);
         cards.add(HEADWATER_SENTRIES);

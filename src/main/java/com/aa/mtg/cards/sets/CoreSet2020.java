@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
+import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Type.ARTIFACT;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -37,6 +38,8 @@ public class CoreSet2020 implements MtgSet {
     public static Card DARK_REMEDY = new Card("Dark Remedy", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Target creature gets +1/+3 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_1_3_UNTIL_END_OF_TURN));
     public static Card DAWNING_ANGEL = new Card("Dawning Angel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Angel"), COMMON, "Flying. When Dawning Angel enters the battlefield, you gain 4 life.", 3, 2, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_4_LIFE));
     public static Card DAYBREAK_CHAPLAIN = new Card("Daybreak Chaplain", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Human", "Cleric"), COMMON, "Lifelink", 1, 3, singletonList(LIFELINK));
+    public static Card DISENCHANT = new Card("Disenchant", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Destroy target artifact or enchantment.", 0, 0, singletonList(TARGET_ARTIFACT_OR_ENCHANTMENT_GETS_DESTROYED));
+    public static Card DISFIGURE = new Card("Disfigure", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(Type.INSTANT), emptyList(), UNCOMMON, "Target creature gets -2/-2 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_MINUS_2_2_UNTIL_END_OF_TURN));
     public static Card MARAUDERS_AXE = new Card("Marauder's Axe", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipped creature gets +2/+0. Equip 2", 0, 0, singletonList(PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0));
     public static Card OAKENFORM = new Card("Oakenform", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +3/+3.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_3));
 
@@ -61,6 +64,8 @@ public class CoreSet2020 implements MtgSet {
         cards.add(DARK_REMEDY);
         cards.add(DAWNING_ANGEL);
         cards.add(DAYBREAK_CHAPLAIN);
+        cards.add(DISENCHANT);
+        cards.add(DISFIGURE);
         cards.add(MARAUDERS_AXE);
         cards.add(OAKENFORM);
     }

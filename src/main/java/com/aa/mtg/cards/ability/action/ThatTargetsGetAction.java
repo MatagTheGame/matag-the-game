@@ -50,7 +50,7 @@ public class ThatTargetsGetAction implements AbilityAction {
                 int targetCardId = (int) targetId;
 
                 Optional<CardInstance> targetOptional = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
-                        .concat(gameStatus.getNonActivePlayer().getBattlefield().getCards())
+                        .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards())
                         .withId(targetCardId);
 
                 if (targetOptional.isPresent()) {
