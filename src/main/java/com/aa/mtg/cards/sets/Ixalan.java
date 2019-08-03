@@ -13,6 +13,7 @@ import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Type.ARTIFACT;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
+import static com.aa.mtg.cards.properties.Type.INSTANT;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -27,6 +28,7 @@ public class Ixalan implements MtgSet {
     public static Card AIR_ELEMENTAL = new Card("Air Elemental", singleton(Color.BLUE), asList(Cost.BLUE, Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Elemental"), UNCOMMON, "Flying", 4, 4, singletonList(FLYING));
     public static Card ANCIENT_BRONTODON = new Card("Ancient Brontodon", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 9, 9, emptyList());
     public static Card BISHOPS_SOLDIER = new Card("Bishop's Soldier", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Vampire", "Soldier"), COMMON, "", 2, 2, singletonList(LIFELINK));
+    public static Card BRIGHT_REPRISAL = new Card("Bright Reprisal", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Destroy target attacking creature. Draw a card.", 0, 0, asList(DESTROY_TARGET_ATTACKING_CREATURE, DRAW_1_CARD));
     public static Card CHARGING_MONSTROSAUR = new Card("Charging Monstrosaur", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), UNCOMMON, "Trample, haste", 5, 5, asList(TRAMPLE, HASTE));
     public static Card COBBLED_WINGS = new Card("Cobbled Wings", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipped creature has flying. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_FLYING));
     public static Card COLOSSAL_DREADMAW = new Card("Colossal Dreadmaw", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "Trample", 6, 6, singletonList(TRAMPLE));
@@ -49,6 +51,7 @@ public class Ixalan implements MtgSet {
         cards.add(AIR_ELEMENTAL);
         cards.add(ANCIENT_BRONTODON);
         cards.add(BISHOPS_SOLDIER);
+        cards.add(BRIGHT_REPRISAL);
         cards.add(CHARGING_MONSTROSAUR);
         cards.add(COBBLED_WINGS);
         cards.add(COLOSSAL_DREADMAW);

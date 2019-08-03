@@ -11,6 +11,8 @@ import lombok.Builder;
 
 import java.util.List;
 
+import static com.aa.mtg.cards.ability.target.TargetStatusType.ATTACKING;
+import static com.aa.mtg.cards.ability.target.TargetStatusType.BLOCKING;
 import static com.aa.mtg.cards.ability.target.TargetType.ANY;
 import static com.aa.mtg.cards.ability.target.TargetType.PERMANENT;
 
@@ -23,8 +25,9 @@ public class Target {
     private final Color ofColor;
     private final TargetPowerToughnessConstraint targetPowerToughnessConstraint;
     private final PlayerType targetControllerType;
+    private final TargetStatusType targetStatusType;
 
-    public Target(TargetType targetType, List<Type> ofType, String ofSubtypeOf, AbilityType withAbilityType, Color ofColor, TargetPowerToughnessConstraint targetPowerToughnessConstraint, PlayerType targetControllerType) {
+    private Target(TargetType targetType, List<Type> ofType, String ofSubtypeOf, AbilityType withAbilityType, Color ofColor, TargetPowerToughnessConstraint targetPowerToughnessConstraint, PlayerType targetControllerType, TargetStatusType targetStatusType) {
         this.targetType = targetType;
         this.ofType = ofType;
         this.ofSubtypeOf = ofSubtypeOf;
@@ -32,6 +35,7 @@ public class Target {
         this.ofColor = ofColor;
         this.targetPowerToughnessConstraint = targetPowerToughnessConstraint;
         this.targetControllerType = targetControllerType;
+        this.targetStatusType = targetStatusType;
     }
 
     public void check(GameStatus gameStatus, Object targetId) {
@@ -61,6 +65,14 @@ public class Target {
 
             if (targetPowerToughnessConstraint != null) {
                 cards = cards.ofTargetPowerToughnessConstraint(targetPowerToughnessConstraint);
+            }
+
+            if (targetStatusType != null) {
+                if (targetStatusType == ATTACKING) {
+                    cards = cards.attacking();
+                } else if (targetStatusType == BLOCKING) {
+                    cards = cards.blocking();
+                }
             }
 
         } else if (targetType.equals(ANY)) {
