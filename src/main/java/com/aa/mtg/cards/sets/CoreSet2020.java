@@ -20,6 +20,7 @@ public class CoreSet2020 implements MtgSet {
 
     public static final String M20 = "M20";
 
+    public static Card AGONIZING_SYPHON = new Card("Agonizing Syphon", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), "Agonizing Syphon deals 3 damage to any target and you gain 3 life.", 0, 0, asList(DEAL_3_DAMAGE_TO_TARGET_CREATURE, GAIN_3_LIFE)); // FIXME this is bugged, and means that if the target disappears spell cannot be resolved and player doesn't gain the life
     public static Card ANGELIC_GIFT = new Card("Angelic Gift", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), "Enchant creature. When Angelic Gift enters the battlefield, draw a card. Enchanted creature has flying.", 0, 0, asList(ENCHANTED_CREATURE_GETS_FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
     public static Card BARONY_VAMPIRE = new Card("Barony Vampire", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Vampire"), "", 3, 2, emptyList());
     public static Card BARTIZAN_BATS = new Card("Bartizan_Bats", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Bat"), "", 3, 1, singletonList(FLYING));
@@ -40,6 +41,7 @@ public class CoreSet2020 implements MtgSet {
     private List<Card> cards = new ArrayList<>();
 
     private CoreSet2020() {
+        cards.add(AGONIZING_SYPHON);
         cards.add(ANGELIC_GIFT);
         cards.add(BARONY_VAMPIRE);
         cards.add(BARTIZAN_BATS);
