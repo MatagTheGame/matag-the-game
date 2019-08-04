@@ -1,7 +1,9 @@
 # Mtg
 
-MTG game.
+Early access implementation of an MTG game accessible at: https://aa-mtg.herokuapp.com
+(Most probably there will be nobody online, but you can try it out playing against yourself by opening to tabs at the address above). 
 
+For any questions please contact: antonio.aa.mtg@gmail.com
 
 
 ## Development
