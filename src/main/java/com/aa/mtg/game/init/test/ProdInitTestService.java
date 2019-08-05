@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import static com.aa.mtg.cards.Cards.*;
-import static com.aa.mtg.cards.sets.CoreSet2020.MARAUDERS_AXE;
+import static com.aa.mtg.cards.sets.CoreSet2019.MARAUDERS_AXE;
 import static com.aa.mtg.cards.sets.GuildsOfRavnica.CANDLELIGHT_VIGIL;
 import static com.aa.mtg.cards.sets.Ixalan.*;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CIVIC_STALWART;

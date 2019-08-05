@@ -35,6 +35,7 @@ public class RivalsOfIxalan implements MtgSet {
         cards.add(AGGRESSIVE_URGE);
         cards.add(BOMBARD);
         cards.add(CANAL_MONITOR);
+        cards.add(Ixalan.COLOSSAL_DREADMAW);
         cards.add(DEAD_WEIGHT);
         cards.add(STRIDER_HARNESS);
     }
