@@ -30,8 +30,9 @@ public class CoreSet2020 implements MtgSet {
     public static Card CORAL_MERFOLK = new Card("Coral Merfolk", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Merfolk"), COMMON, "", 2, 1, emptyList());
     public static Card DARK_REMEDY = new Card("Dark Remedy", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Target creature gets +1/+3 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_1_3_UNTIL_END_OF_TURN));
     public static Card DAWNING_ANGEL = new Card("Dawning Angel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Angel"), COMMON, "Flying. When Dawning Angel enters the battlefield, you gain 4 life.", 3, 2, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_4_LIFE));
-    public static Card DISENCHANT = new Card("Disenchant", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Destroy target artifact or enchantment.", 0, 0, singletonList(TARGET_ARTIFACT_OR_ENCHANTMENT_GETS_DESTROYED));
+    public static Card DISENCHANT = new Card("Disenchant", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Destroy target artifact or enchantment.", 0, 0, singletonList(DESTROY_TARGET_ARTIFACT_OR_ENCHANTMENT));
     public static Card DISFIGURE = new Card("Disfigure", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(Type.INSTANT), emptyList(), UNCOMMON, "Target creature gets -2/-2 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_MINUS_2_2_UNTIL_END_OF_TURN));
+    public static Card ENGULFING_ERUPTION = new Card("Engulfing Eruption", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), COMMON, "Engulfing Eruption deals 5 damage to target creature.", 0, 0, singletonList(DEAL_5_DAMAGE_TO_TARGET_CREATURE));
 
     private static CoreSet2020 instance;
 
@@ -58,6 +59,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(CoreSet2019.DAYBREAK_CHAPLAIN);
         cards.add(DISENCHANT);
         cards.add(DISFIGURE);
+        cards.add(ENGULFING_ERUPTION);
         cards.add(WarOfTheSpark.GOBLIN_ASSAILANT);
         cards.add(WarOfTheSpark.IRONCLAD_KROVOD);
         cards.add(CoreSet2019.MARAUDERS_AXE);
