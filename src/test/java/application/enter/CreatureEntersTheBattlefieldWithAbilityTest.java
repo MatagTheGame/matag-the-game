@@ -47,7 +47,7 @@ public class CreatureEntersTheBattlefieldWithAbilityTest extends AbstractApplica
         int angelOfTheDawnId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(ANGEL_OF_THE_DAWN).getCardIdNumeric();
 
         // Then the enter the battlefield event gets triggered
-        browser.player1().getStackHelper().containsAbility("Pippo's Angel of the Dawn (" + angelOfTheDawnId + "): Creatures you control get +1/+1 until end of turn.");
+        browser.player1().getStackHelper().containsAbility("Pippo's Angel of the Dawn (" + angelOfTheDawnId + "): Creatures you control get +1/+1, vigilance until end of turn.");
         browser.player1().getActionHelper().clickContinue();
         browser.player2().getActionHelper().clickContinue();
 

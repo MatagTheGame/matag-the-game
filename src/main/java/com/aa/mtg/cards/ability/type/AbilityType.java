@@ -2,6 +2,8 @@ package com.aa.mtg.cards.ability.type;
 
 import java.util.List;
 
+import static com.aa.mtg.cards.ability.Abilities.parametersAsString;
+
 public enum AbilityType {
     CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN("Creatures you control get %s until end of turn."),
     DEATHTOUCH("Deathtouch."),
@@ -16,7 +18,7 @@ public enum AbilityType {
     REACH("Reach."),
     SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER("Shuffle graveyard into library."),
     THAT_TARGET_CONTROLLER_GETS("That target controller get %s."),
-    THAT_TARGETS_GETS("That targets get %s."),
+    THAT_TARGETS_GET("That targets get %s."),
     TRAMPLE("Trample."),
     VIGILANCE("Vigilance.");
 
@@ -27,7 +29,7 @@ public enum AbilityType {
     }
 
     public String getText(List<String> parameters) {
-        return String.format(text, parameters.toArray());
+        return String.format(text, parametersAsString(parameters));
     }
 
     public static AbilityType abilityType(String text) {

@@ -22,7 +22,7 @@ public class FirstStrikePhase implements Phase {
         if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
-            // TODO check if any creature has first strike
+            // TODO Antonio: check if any creature has first strike
             apply(gameStatus);
 
         } else {

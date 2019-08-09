@@ -5,7 +5,14 @@ import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.turn.action.TargetCheckerService;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint.PowerOrToughness.POWER;
@@ -24,7 +31,13 @@ import static integration.utils.TestUtils.testGameStatus;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = TargetTest.TargetTestConfiguration.class)
 public class TargetTest {
+    
+    @Autowired
+    private TargetCheckerService targetCheckerService;
+    
     @Test(expected = MessageException.class)
     public void selectionOnTargetPermanentFails() {
         // Given
@@ -35,7 +48,7 @@ public class TargetTest {
                 .build();
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then an exception is thrown
     }
@@ -52,7 +65,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then NO exception is thrown
     }
@@ -70,7 +83,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then an exception is thrown
     }
@@ -88,7 +101,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then NO exception is thrown
     }
@@ -107,7 +120,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then an exception is thrown
     }
@@ -126,7 +139,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then NO exception is thrown
     }
@@ -145,7 +158,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then an exception is thrown
     }
@@ -164,7 +177,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then NO exception is thrown
     }
@@ -183,7 +196,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then an exception is thrown
     }
@@ -202,7 +215,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then no exception is thrown
     }
@@ -221,7 +234,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then no exception is thrown
     }
@@ -241,7 +254,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then no exception is thrown
     }
@@ -261,7 +274,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then an exception is thrown
     }
@@ -281,7 +294,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then no exception is thrown
     }
@@ -301,7 +314,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then an exception is thrown
     }
@@ -322,7 +335,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then no exception is thrown
     }
@@ -342,7 +355,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then an exception is thrown
     }
@@ -363,7 +376,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then no exception is thrown
     }
@@ -383,7 +396,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then an exception is thrown
     }
@@ -404,7 +417,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then no exception is thrown
     }
@@ -425,7 +438,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then no exception is thrown
     }
@@ -445,8 +458,14 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        target.check(gameStatus, 1);
+        targetCheckerService.check(gameStatus, target, 1);
 
         // Then no exception is thrown
+    }
+    
+    @Configuration
+    @ComponentScan(basePackages = "com.aa.mtg")
+    public static class TargetTestConfiguration {
+        
     }
 }

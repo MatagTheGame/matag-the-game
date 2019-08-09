@@ -28,7 +28,7 @@ export default class ClientEventsReducer {
         }
 
         if (Phase.isMainPhase(newState.turn.currentPhase) || cardInstance.card.instantSpeed) {
-          // TODO this is very similar to the one for battlefield click
+          // TODO Antonio: this is very similar to the one for battlefield click
           if (CardUtils.isOfType(cardInstance, 'LAND')) {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardIds: [cardId]})
 
@@ -73,7 +73,7 @@ export default class ClientEventsReducer {
           PlayerUtils.handleSelectedTarget(newState, cardInstance)
 
         } else {
-          // TODO this is very similar to the one for hand click
+          // TODO Antonio: this is very similar to the one for hand click
           if (CardUtils.isOfType(cardInstance, 'LAND')) {
             CardUtils.toggleFrontendTapped(cardInstance)
 

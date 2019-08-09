@@ -3,8 +3,6 @@ package com.aa.mtg.game.turn.action;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CostUtils;
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.ability.action.AbilityAction;
-import com.aa.mtg.cards.ability.action.AbilityActionFactory;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
@@ -22,20 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
-
 @Service
 public class CastService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CastService.class);
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
-    private final AbilityActionFactory abilityActionFactory;
+    private final TargetCheckerService targetCheckerService;
 
     @Autowired
-    public CastService(GameStatusUpdaterService gameStatusUpdaterService, AbilityActionFactory abilityActionFactory) {
+    public CastService(GameStatusUpdaterService gameStatusUpdaterService, TargetCheckerService targetCheckerService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
-        this.abilityActionFactory = abilityActionFactory;
+        this.targetCheckerService = targetCheckerService;
     }
 
     public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
@@ -57,7 +53,7 @@ public class CastService {
 
         } else {
             checkSpellOrAbilityCost(tappingLandIds, activePlayer, cardToCast, playedAbility);
-            checkSpellOrAbilityTargetRequisites(cardToCast, gameStatus, targetsIdsForCardIds, playedAbility);
+            targetCheckerService.checkSpellOrAbilityTargetRequisites(cardToCast, gameStatus, targetsIdsForCardIds, playedAbility);
 
             if (castedFrom.equals("HAND")) {
                 activePlayer.getHand().extractCardById(cardId);
@@ -78,7 +74,7 @@ public class CastService {
             gameStatus.getTurn().passPriority(gameStatus);
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
-            // FIXME Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
+            // FIXME Antonio: Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
             tappingLandIds.stream()
                     .map(tappingLandId -> activePlayer.getBattlefield().findCardById(tappingLandId))
                     .forEach(card -> card.getModifiers().tap());
@@ -105,23 +101,5 @@ public class CastService {
             paidCost.add(landToTap.getCard().getColors().iterator().next());
         }
         return paidCost;
-    }
-
-    private void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
-        for (Ability ability : cardToCast.getAbilities()) {
-            AbilityAction abilityAction = abilityActionFactory.getAbilityAction(abilityType(playedAbility));
-            if (abilityAction != null &&  ability.requiresTarget()) {
-                if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId()) || targetsIdsForCardIds.get(cardToCast.getId()).isEmpty()) {
-                    throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
-                }
-
-                List<Object> targetIds = targetsIdsForCardIds.get(cardToCast.getId());
-                for (int i = 0; i < ability.getTargets().size(); i++) {
-                    ability.getTargets().get(i).check(gameStatus, targetIds.get(i));
-                }
-
-                cardToCast.getModifiers().setTargets(targetIds);
-            }
-        }
     }
 }

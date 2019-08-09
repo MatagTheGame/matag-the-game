@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
@@ -27,17 +28,19 @@ public class ResolveService {
     private final ContinueTurnService continueTurnService;
     private final AbilityActionFactory abilityActionFactory;
     private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
+    private final TargetCheckerService targetCheckerService;
 
     @Autowired
     public ResolveService(GameStatusUpdaterService gameStatusUpdaterService, ContinueTurnService continueTurnService, AbilityActionFactory abilityActionFactory,
-                          EnterCardIntoBattlefieldService enterCardIntoBattlefieldService) {
+                          EnterCardIntoBattlefieldService enterCardIntoBattlefieldService, TargetCheckerService targetCheckerService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.continueTurnService = continueTurnService;
         this.abilityActionFactory = abilityActionFactory;
         this.enterCardIntoBattlefieldService = enterCardIntoBattlefieldService;
+        this.targetCheckerService = targetCheckerService;
     }
 
-    public void resolve(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> cardIds) {
+    public void resolve(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
         if (!gameStatus.getStack().isEmpty()) {
             CardInstance stackItemToResolve = gameStatus.getStack().peek();
 
@@ -47,7 +50,11 @@ public class ResolveService {
 
             } else {
                 Player playerWhoCastedTheSpell = gameStatus.getPlayerByName(stackItemToResolve.getController());
-                if (!gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(playerWhoCastedTheSpell.getName())) {
+                if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(playerWhoCastedTheSpell.getName())) {
+                    // TODO Antonio: continue this
+                    targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
+
+                } else {
                     removeTopElementFromStack(gameStatus);
                     resolveTriggeredAbility(gameStatus, stackItemToResolve);
                 }
@@ -57,7 +64,7 @@ public class ResolveService {
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
         } else if (gameStatus.getTurn().getTriggeredNonStackAction().equals(triggeredNonStackAction)) {
-            resolveTriggeredNonStackAction(gameStatus, triggeredNonStackAction, cardIds);
+            resolveTriggeredNonStackAction(gameStatus, triggeredNonStackAction, targetCardIds);
 
         } else {
             String message = "Cannot resolve triggeredNonStackAction " + triggeredNonStackAction + " as current triggeredNonStackAction is " + gameStatus.getTurn().getTriggeredNonStackAction();
@@ -115,7 +122,7 @@ public class ResolveService {
         if (firstAbilityAction != null) {
             try {
                 for (int i = 0; i < ability.getTargets().size(); i++) {
-                    ability.getTargets().get(i).check(gameStatus, cardToResolve.getModifiers().getTargets().get(i));
+                    targetCheckerService.check(gameStatus, ability.getTargets().get(i), cardToResolve.getModifiers().getTargets().get(i));
                 }
 
                 firstAbilityAction.perform(ability, cardToResolve, gameStatus);

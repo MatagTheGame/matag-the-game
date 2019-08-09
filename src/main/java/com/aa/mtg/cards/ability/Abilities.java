@@ -23,32 +23,34 @@ import static com.aa.mtg.cards.ability.type.AbilityType.*;
 import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 import static com.aa.mtg.cards.properties.Type.*;
+import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 
 public class Abilities {
     public static Ability CREATURES_YOU_CONTROL_GET_PLUS_2_0_UNTIL_END_OF_TURN = new Ability(CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN, emptyList(), singletonList("+2/+0"), new Trigger(CAST));
     public static Ability CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN, emptyList(), singletonList("+1/+1"), new Trigger(CAST));
     public static Ability CREATURES_YOU_CONTROL_GET_TRAMPLE_UNTIL_END_OF_TURN = new Ability(CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN, emptyList(), singletonList("TRAMPLE"), new Trigger(CAST));
-    public static Ability DEAL_1_DAMAGE_TO_CREATURE_YOU_CONTROL_THAT_CREATURE_GAINS_TRAMPLE = new Ability(singletonList(THAT_TARGETS_GETS), singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetControllerType(PLAYER).build()), asList("DAMAGE:1", "TRAMPLE"), new Trigger(CAST));
-    public static Ability DEAL_3_DAMAGE_TO_ANY_TARGET = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.ANY).build()), singletonList("DAMAGE:3"), new Trigger(CAST));
-    public static Ability DEAL_4_DAMAGE_TO_TARGET_ATTACKING_OR_BLOCKING_CREATURE = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetStatusTypes(asList(ATTACKING, BLOCKING)).build()), singletonList("DAMAGE:4"), new Trigger(CAST));
-    public static Ability DEAL_3_DAMAGE_TO_TARGET_CREATURE = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DAMAGE:3"), new Trigger(CAST));
-    public static Ability DEAL_4_DAMAGE_TO_TARGET_CREATURE = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DAMAGE:4"), new Trigger(CAST));
-    public static Ability DEAL_4_DAMAGE_TO_TARGET_CREATURE_2_DAMAGE_TO_CONTROLLER = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("DAMAGE:4", "CONTROLLER_DAMAGE:2"), new Trigger(CAST));
-    public static Ability DEAL_5_DAMAGE_TO_TARGET_CREATURE = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DAMAGE:5"), new Trigger(CAST));
+    public static Ability DEAL_1_DAMAGE_TO_CREATURE_YOU_CONTROL_THAT_CREATURE_GAINS_TRAMPLE = new Ability(singletonList(THAT_TARGETS_GET), singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetControllerType(PLAYER).build()), asList("DAMAGE:1", "TRAMPLE"), new Trigger(CAST));
+    public static Ability DEAL_3_DAMAGE_TO_ANY_TARGET = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.ANY).build()), singletonList("DAMAGE:3"), new Trigger(CAST));
+    public static Ability DEAL_4_DAMAGE_TO_TARGET_ATTACKING_OR_BLOCKING_CREATURE = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetStatusTypes(asList(ATTACKING, BLOCKING)).build()), singletonList("DAMAGE:4"), new Trigger(CAST));
+    public static Ability DEAL_3_DAMAGE_TO_TARGET_CREATURE = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DAMAGE:3"), new Trigger(CAST));
+    public static Ability DEAL_4_DAMAGE_TO_TARGET_CREATURE = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DAMAGE:4"), new Trigger(CAST));
+    public static Ability DEAL_4_DAMAGE_TO_TARGET_CREATURE_2_DAMAGE_TO_CONTROLLER = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("DAMAGE:4", "CONTROLLER_DAMAGE:2"), new Trigger(CAST));
+    public static Ability DEAL_5_DAMAGE_TO_TARGET_CREATURE = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DAMAGE:5"), new Trigger(CAST));
     public static Ability DEATHTOUCH = new Ability(AbilityType.DEATHTOUCH);
-    public static Ability DESTROY_TARGET_ARTIFACT_CREATURE_OR_PLANESWALKER = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(asList(ARTIFACT, CREATURE, PLANESWALKER)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
-    public static Ability DESTROY_TARGET_ARTIFACT_OR_ENCHANTMENT = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(asList(ARTIFACT, ENCHANTMENT)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
-    public static Ability DESTROY_TARGET_ARTIFACT_OR_LAND = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(asList(ARTIFACT, LAND)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
-    public static Ability DESTROY_TARGET_ATTACKING_CREATURE = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetStatusTypes(singletonList(ATTACKING)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
-    public static Ability DESTROY_TARGET_ATTACKING_OF_BLOCKING_CREATURE = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetStatusTypes(asList(ATTACKING, BLOCKING)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
-    public static Ability DESTROY_TARGET_CREATURE_WITH_POWER_GREATER_OR_EQUAL_4 = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(POWER, GREATER_OR_EQUAL, 4)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
-    public static Ability DESTROY_TARGET_CREATURE_WITH_TOUGHNESS_GREATER_OR_EQUAL_4 = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(TOUGHNESS, GREATER_OR_EQUAL, 4)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
-    public static Ability DESTROY_TARGET_CREATURE_2_DAMAGE_TO_CONTROLLER = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(POWER, GREATER_OR_EQUAL, 4)).build()), asList(":DESTROYED", "CONTROLLER_DAMAGE:2"), new Trigger(CAST));
+    public static Ability DESTROY_TARGET_ARTIFACT_CREATURE_OR_PLANESWALKER = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(asList(ARTIFACT, CREATURE, PLANESWALKER)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
+    public static Ability DESTROY_TARGET_ARTIFACT_OR_ENCHANTMENT = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(asList(ARTIFACT, ENCHANTMENT)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
+    public static Ability DESTROY_TARGET_ARTIFACT_OR_LAND = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(asList(ARTIFACT, LAND)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
+    public static Ability DESTROY_TARGET_ATTACKING_CREATURE = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetStatusTypes(singletonList(ATTACKING)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
+    public static Ability DESTROY_TARGET_ATTACKING_OF_BLOCKING_CREATURE = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetStatusTypes(asList(ATTACKING, BLOCKING)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
+    public static Ability DESTROY_TARGET_CREATURE_WITH_POWER_GREATER_OR_EQUAL_4 = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(POWER, GREATER_OR_EQUAL, 4)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
+    public static Ability DESTROY_TARGET_CREATURE_WITH_TOUGHNESS_GREATER_OR_EQUAL_4 = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(TOUGHNESS, GREATER_OR_EQUAL, 4)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
+    public static Ability DESTROY_TARGET_CREATURE_2_DAMAGE_TO_CONTROLLER = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetPowerToughnessConstraint(new TargetPowerToughnessConstraint(POWER, GREATER_OR_EQUAL, 4)).build()), asList(":DESTROYED", "CONTROLLER_DAMAGE:2"), new Trigger(CAST));
     public static Ability DRAW_1_CARD = new Ability(DRAW_X_CARDS, emptyList(), singletonList("1"), new Trigger(CAST));
     public static Ability DRAW_2_CARD = new Ability(DRAW_X_CARDS, emptyList(), singletonList("2"), new Trigger(CAST));
     public static Ability ENCHANTED_CREATURE_GETS_FLYING = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("FLYING"), new Trigger(CAST));
@@ -71,16 +73,16 @@ public class Abilities {
     public static Ability PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0 = new Ability(EQUIPPED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+2/+0"), new Trigger(ACTIVATED_ABILITY, asList(COLORLESS, COLORLESS)));
     public static Ability REACH = new Ability(AbilityType.REACH);
     public static Ability SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER = new Ability(SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER, singletonList(Target.builder().targetType(TargetType.PLAYER).build()), emptyList(), new Trigger(CAST));
-    public static Ability TARGET_CREATURE_GETS_DEATHTOUCH_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DEATHTOUCH"), new Trigger(CAST));
-    public static Ability TARGET_CREATURE_GETS_MINUS_2_2_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("-2/-2"), new Trigger(CAST));
-    public static Ability TARGET_CREATURE_GETS_PLUS_1_0_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+0"), new Trigger(CAST));
-    public static Ability TARGET_CREATURE_GETS_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+1"), new Trigger(CAST));
-    public static Ability TARGET_CREATURE_GETS_PLUS_1_3_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+3"), new Trigger(CAST));
-    public static Ability TARGET_CREATURE_GETS_PLUS_1_7_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+7"), new Trigger(CAST));
-    public static Ability TARGET_CREATURE_GETS_PLUS_2_2_AND_FLYING_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("+2/+2", "FLYING"), new Trigger(CAST));
-    public static Ability TARGET_CREATURE_GETS_PLUS_3_3_AND_TRAMPLE_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("+3/+3", "TRAMPLE"), new Trigger(CAST));
-    public static Ability TARGET_CREATURE_GETS_MINUS_4_0_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("-4/-0"), new Trigger(CAST));
-    public static Ability TARGET_ENCHANTMENT_GETS_DESTROYED = new Ability(THAT_TARGETS_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(ENCHANTMENT)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_DEATHTOUCH_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DEATHTOUCH"), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_MINUS_2_2_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("-2/-2"), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_PLUS_1_0_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+0"), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+1"), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_PLUS_1_3_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+3"), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_PLUS_1_7_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+1/+7"), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_PLUS_2_2_AND_FLYING_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("+2/+2", "FLYING"), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_PLUS_3_3_AND_TRAMPLE_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("+3/+3", "TRAMPLE"), new Trigger(CAST));
+    public static Ability TARGET_CREATURE_GETS_MINUS_4_0_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("-4/-0"), new Trigger(CAST));
+    public static Ability TARGET_ENCHANTMENT_GETS_DESTROYED = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(ENCHANTMENT)).build()), singletonList(":DESTROYED"), new Trigger(CAST));
     public static Ability TRAMPLE = new Ability(AbilityType.TRAMPLE);
     public static Ability VIGILANCE = new Ability(AbilityType.VIGILANCE);
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN, emptyList(), singletonList("+1/+1"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
@@ -89,7 +91,7 @@ public class Abilities {
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_4_LIFE = new Ability(GAIN_X_LIFE, emptyList(), singletonList("4"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_5_LIFE = new Ability(GAIN_X_LIFE, emptyList(), singletonList("5"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_EACH_PLAYERS_GAIN_4_LIFE = new Ability(EACH_PLAYERS_GAIN_X_LIFE, emptyList(), singletonList("4"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
-
+    public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_CREATURE_GETS_TAPPED_DOES_NOT_UNTAP_NEXT_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetControllerType(OPPONENT).build()), singletonList(":TAPPED_DOES_NOT_UNTAP_NEXT_TURN"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
 
     private static Ability get(String ability) {
         try {
@@ -99,19 +101,19 @@ public class Abilities {
         }
     }
 
+    public static List<Ability> abilitiesFromParameters(List<String> parameters) {
+        return parameters.stream()
+                .filter(parameter -> !parameter.contains("/") && !parameter.contains(":"))
+                .map(Abilities::get)
+                .collect(toList());
+    }
+
     public static PowerToughness powerToughnessFromParameters(List<String> parameters) {
         return parameters.stream()
                 .filter(parameter -> parameter.contains("/"))
                 .map(PowerToughness::powerToughness)
                 .findFirst()
                 .orElse(powerToughness("0/0"));
-    }
-
-    public static List<Ability> abilitiesFromParameters(List<String> parameters) {
-        return parameters.stream()
-                .filter(parameter -> !parameter.contains("/") && !parameter.contains(":"))
-                .map(Abilities::get)
-                .collect(Collectors.toList());
     }
 
     public static int damageFromParameters(List<String> parameters) {
@@ -132,5 +134,33 @@ public class Abilities {
 
     public static boolean destroyedFromParameters(List<String> parameters) {
         return parameters.contains(":DESTROYED");
+    }
+
+    public static boolean tapped(List<String> parameters) {
+        return parameters.contains(":TAPPED");
+    }
+
+    public static boolean tappedDoesNotUntapNextTurn(List<String> parameters) {
+        return parameters.contains(":TAPPED_DOES_NOT_UNTAP_NEXT_TURN");
+    }
+
+    public static boolean untapped(List<String> parameters) {
+        return parameters.contains(":UNTAPPED");
+    }
+
+    public static String parametersAsString(List<String> parameters) {
+        return parameters.stream().map(Abilities::parameterAsString).collect(Collectors.joining(", "));
+    }
+
+    private static String parameterAsString(String parameter) {
+        if (parameter.startsWith("DAMAGE:")) {
+            return parameter.replace("DAMAGE:", "") + " damage";
+        } if (parameter.startsWith("CONTROLLER_DAMAGE:")) {
+            return "to its controller " + parameter.replace("CONTROLLER_DAMAGE:", "") + " damage";
+        } if (parameter.equals(":TAPPED_DOES_NOT_UNTAP_NEXT_TURN")) {
+            return "tapped doesn't untap next turn";
+        } else {
+            return parameter.replace(":", "").toLowerCase();
+        }
     }
 }

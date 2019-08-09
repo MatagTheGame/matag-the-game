@@ -41,7 +41,7 @@ public class AbilityActionFactory {
                 return eachPlayersGainXLifeAction;
             case SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER:
                 return shuffleTargetGraveyardIntoLibraryAction;
-            case THAT_TARGETS_GETS:
+            case THAT_TARGETS_GET:
                 return thatTargetsGetAction;
             case CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN:
                 return creaturesYouControlGetXUntilEndOfTurn;
