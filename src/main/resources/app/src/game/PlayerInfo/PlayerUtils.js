@@ -111,12 +111,21 @@ export default class PlayerUtils {
     }
   }
 
+  static shouldHandleTargets(state) {
+    return state.turn.cardIdSelectedToBePlayed || get(state, 'stack.items[0].triggeredAbilities[0].targets[0]')
+  }
+
   static handleSelectedTarget(state, target) {
     const targetsIds = PlayerUtils.getTargetsIds(target)
-    const playedAbility = PlayerUtils.getAbilityToBePlayed(state.turn.abilityToBePlayed)
-    PlayerUtils.cast(state, state.turn.cardIdSelectedToBePlayed, {[state.turn.cardIdSelectedToBePlayed]: targetsIds}, playedAbility)
-    state.turn.cardIdSelectedToBePlayed = null
-    state.turn.abilityToBePlayed = null
+    if (state.turn.cardIdSelectedToBePlayed) {
+      const playedAbility = PlayerUtils.getAbilityToBePlayed(state.turn.abilityToBePlayed)
+      PlayerUtils.cast(state, state.turn.cardIdSelectedToBePlayed, {[state.turn.cardIdSelectedToBePlayed]: targetsIds}, playedAbility)
+      state.turn.cardIdSelectedToBePlayed = null
+      state.turn.abilityToBePlayed = null
+
+    } else if (get(state, 'stack.items[0].triggeredAbilities[0].targets[0]')) {
+      stompClient.sendEvent('turn', {action: 'RESOLVE', targetsIdsForCardIds: {[get(state, 'stack.items[0].id')]: targetsIds}})
+    }
   }
 
   static getTargetsIds(target) {

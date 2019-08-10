@@ -69,7 +69,7 @@ export default class ClientEventsReducer {
             newState.message = {text: canBlockResult, closable: true}
           }
 
-        } else if (newState.turn.cardIdSelectedToBePlayed) {
+        } else if (PlayerUtils.shouldHandleTargets(newState)) {
           PlayerUtils.handleSelectedTarget(newState, cardInstance)
 
         } else {
@@ -100,7 +100,7 @@ export default class ClientEventsReducer {
             newState.turn.blockingCardPosition = CardSearch.cards(newState.opponent.battlefield).attacking().indexOf(cardInstance)
           }
 
-        } else if (newState.turn.cardIdSelectedToBePlayed) {
+        } else if (PlayerUtils.shouldHandleTargets(newState)) {
           PlayerUtils.handleSelectedTarget(newState, cardInstance)
         }
       }
@@ -147,7 +147,7 @@ export default class ClientEventsReducer {
       break
 
     case 'PLAYER_CLICK':
-      if (newState.turn.cardIdSelectedToBePlayed) {
+      if (PlayerUtils.shouldHandleTargets(newState)) {
         PlayerUtils.handleSelectedTarget(newState, action.playerName)
       }
       break

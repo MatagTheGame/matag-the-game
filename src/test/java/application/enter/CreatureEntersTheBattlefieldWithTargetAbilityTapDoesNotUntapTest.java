@@ -18,6 +18,7 @@ import static com.aa.mtg.cards.Cards.FOREST;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.sets.CoreSet2020.CANOPY_SPIDER;
 import static com.aa.mtg.cards.sets.CoreSet2020.FROST_LYNX;
+import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
@@ -41,10 +42,14 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
         browser.player1().getHandHelper(PLAYER).getFirstCard(FROST_LYNX).click();
         browser.player2().getActionHelper().clickContinue();
 
-        // Player one cannot resolve without choosing a target if there are targets available
+        // Player 1 cannot resolve without choosing a target if there are targets available
         browser.player1().getActionHelper().clickContinue();
         int frostLynxId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(FROST_LYNX).getCardIdNumeric();
         browser.player1().getMessageHelper().hasMessage("\"" + frostLynxId  + " - Frost Lynx\" requires a valid target.");
+        browser.player1().getMessageHelper().close();
+
+        // Player 1 choose a target
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(CANOPY_SPIDER).click();
         System.out.println();
     }
 

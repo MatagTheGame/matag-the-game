@@ -33,7 +33,9 @@ public abstract class InitTestService {
     }
 
     protected void addCardToCurrentPlayerBattlefield(GameStatus gameStatus, Card card) {
-        gameStatus.getCurrentPlayer().getBattlefield().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getCurrentPlayer().getName()));
+        String owner = gameStatus.getCurrentPlayer().getName();
+        String controller = gameStatus.getCurrentPlayer().getName();
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, owner, controller));
     }
 
     protected void addCardToCurrentPlayerGraveyard(GameStatus gameStatus, Card card) {
@@ -49,7 +51,9 @@ public abstract class InitTestService {
     }
 
     protected void addCardToNonCurrentPlayerBattlefield(GameStatus gameStatus, Card card) {
-        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
+        String owner = gameStatus.getNonCurrentPlayer().getName();
+        String controller = gameStatus.getNonCurrentPlayer().getName();
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(new CardInstance(gameStatus, gameStatus.nextCardId(), card, owner, controller));
     }
 
     protected void addCardToNonCurrentPlayerGraveyard(GameStatus gameStatus, Card card) {

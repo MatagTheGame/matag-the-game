@@ -45,7 +45,7 @@ public class ResolveService {
             CardInstance stackItemToResolve = gameStatus.getStack().peek();
 
             if (stackItemToResolve.getTriggeredAbilities().isEmpty()) {
-                removeTopElementFromStack(gameStatus);
+                gameStatus.getStack().remove();
                 resolveCardInstanceFromStack(gameStatus, stackItemToResolve);
 
             } else {
@@ -55,12 +55,13 @@ public class ResolveService {
                     targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
 
                 } else {
-                    removeTopElementFromStack(gameStatus);
+                    gameStatus.getStack().remove();
                     resolveTriggeredAbility(gameStatus, stackItemToResolve);
                 }
             }
 
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonActivePlayer().getName());
+            gameStatusUpdaterService.sendUpdateStack(gameStatus);
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
         } else if (gameStatus.getTurn().getTriggeredNonStackAction().equals(triggeredNonStackAction)) {
@@ -136,10 +137,5 @@ public class ResolveService {
                 LOGGER.info("{}: Target is now invalid during resolution, dropping the action. [{}] ", cardToResolve.getIdAndName(), e.getMessage());
             }
         }
-    }
-
-    private void removeTopElementFromStack(GameStatus gameStatus) {
-        gameStatus.getStack().remove();
-        gameStatusUpdaterService.sendUpdateStack(gameStatus);
     }
 }
