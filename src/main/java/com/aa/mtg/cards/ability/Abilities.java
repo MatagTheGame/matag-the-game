@@ -62,6 +62,7 @@ public class Abilities {
     public static Ability ENCHANTED_CREATURE_GETS_PLUS_3_3 = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("+3/+3"), new Trigger(CAST));
     public static Ability ENCHANTED_CREATURE_GETS_PLUS_7_7_AND_TRAMPLE = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), asList("+7/+7", "TRAMPLE"), new Trigger(CAST));
     public static Ability ENCHANTED_CREATURE_GETS_MINUS_2_2 = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("-2/-2"), new Trigger(CAST));
+    public static Ability ENTERS_THE_BATTLEFIELD_TAPPED = new Ability(AbilityType.ENTERS_THE_BATTLEFIELD_TAPPED);
     public static Ability FLYING = new Ability(AbilityType.FLYING);
     public static Ability GAIN_2_LIFE = new Ability(GAIN_X_LIFE, emptyList(), singletonList("2"), new Trigger(CAST));
     public static Ability GAIN_3_LIFE = new Ability(GAIN_X_LIFE, emptyList(), singletonList("3"), new Trigger(CAST));

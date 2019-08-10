@@ -11,6 +11,7 @@ public enum AbilityType {
     GAIN_X_LIFE("Gain %s life."),
     EACH_PLAYERS_GAIN_X_LIFE("Each player gains %s life."),
     ENCHANTED_CREATURE_GETS("Enchanted creature gets %s."),
+    ENTERS_THE_BATTLEFIELD_TAPPED("Enters the battlefield tapped."),
     EQUIPPED_CREATURE_GETS("Equipped creature gets %s."),
     FLYING("Flying."),
     HASTE("Haste."),

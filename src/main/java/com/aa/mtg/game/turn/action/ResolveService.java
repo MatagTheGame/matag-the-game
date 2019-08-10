@@ -83,10 +83,6 @@ public class ResolveService {
         performAbilitiesActions(gameStatus, cardToResolve, cardToResolve.getCastAbilities());
 
         if (cardToResolve.isPermanent()) {
-            if (cardToResolve.isOfType(CREATURE) && !cardToResolve.hasAbility(HASTE)) {
-                cardToResolve.getModifiers().setSummoningSickness(true);
-            }
-
             enterCardIntoBattlefieldService.enter(gameStatus, cardToResolve);
 
         } else {

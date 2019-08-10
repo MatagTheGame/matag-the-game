@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_IT_ENTERS_THE_BATTLEFIELD;
+import static com.aa.mtg.cards.ability.type.AbilityType.ENTERS_THE_BATTLEFIELD_TAPPED;
+import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 
 @Service
@@ -30,6 +32,14 @@ public class EnterCardIntoBattlefieldService {
     public void enter(GameStatus gameStatus, CardInstance cardInstance) {
         String controller = cardInstance.getController();
         gameStatus.getPlayerByName(controller).getBattlefield().addCard(cardInstance);
+
+        if (cardInstance.isOfType(CREATURE) && !cardInstance.hasAbility(HASTE)) {
+            cardInstance.getModifiers().setSummoningSickness(true);
+        }
+
+        if (cardInstance.hasAbility(ENTERS_THE_BATTLEFIELD_TAPPED)) {
+            cardInstance.getModifiers().tap();
+        }
 
         for (Ability ability : cardInstance.getAbilities()) {
             if (ability.hasTriggerOfSubtype(WHEN_IT_ENTERS_THE_BATTLEFIELD)) {

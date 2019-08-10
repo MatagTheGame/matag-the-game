@@ -33,6 +33,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card CRASH_THROUGH = new Card("Crash Through", singleton(Color.RED), singletonList(Cost.RED), singletonList(SORCERY), emptyList(), COMMON, "Creatures you control gain trample until end of turn. Draw a card.", 0, 0, asList(CREATURES_YOU_CONTROL_GET_TRAMPLE_UNTIL_END_OF_TURN, DRAW_1_CARD));
     public static Card DAGGERBACK_BASILISK = new Card("Daggerback Basilisk", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Basilisk"), COMMON, "Deathtouch", 0, 0, singletonList(DEATHTOUCH));
     public static Card DAYBREAK_CHAPLAIN = new Card("Daybreak Chaplain", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Human", "Cleric"), COMMON, "Lifelink", 1, 3, singletonList(LIFELINK));
+    public static Card DIREGRAF_GHOUL = new Card("Diregraf Ghoul", singleton(Color.BLACK), asList(Cost.BLACK), singletonList(Type.CREATURE), singletonList("Zombie"), UNCOMMON, "Diregraf Ghoul enters the battlefield tapped.", 2, 2, singletonList(ENTERS_THE_BATTLEFIELD_TAPPED));
     public static Card ELECTRIFY = new Card("Electrify", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Electrify deals 4 damage to target creature.", 0, 0, singletonList(DEAL_4_DAMAGE_TO_TARGET_CREATURE));
     public static Card KNIGHTS_PLEDGE = new Card("Knight's Pledge", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(ENCHANTMENT), emptyList(), COMMON, "Draw two cards.", 0, 0, singletonList(DRAW_2_CARD));
     public static Card MARAUDERS_AXE = new Card("Marauder's Axe", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipped creature gets +2/+0. Equip 2", 0, 0, singletonList(PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0));
@@ -55,6 +56,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(CRASH_THROUGH);
         cards.add(DAGGERBACK_BASILISK);
         cards.add(DAYBREAK_CHAPLAIN);
+        cards.add(DIREGRAF_GHOUL);
         cards.add(Dominaria.DIVINATION);
         cards.add(ELECTRIFY);
         cards.add(KNIGHTS_PLEDGE);
