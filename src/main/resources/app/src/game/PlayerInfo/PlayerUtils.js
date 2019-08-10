@@ -5,7 +5,7 @@ import StackUtils from '../Stack/StackUtils'
 import stompClient from '../WebSocket'
 import CostUtils from '../Card/CostUtils'
 
-const CHOOSE_A_CARD_TO_DISCARD = 'Chose a card to discard.'
+const CHOOSE_A_CARD_TO_DISCARD = 'Choose a card to discard.'
 const CHOOSE_CREATURES_YOU_WANT_TO_BLOCK_WITH = 'Choose creatures you want to block with.'
 const CHOOSE_CREATURES_YOU_WANT_TO_ATTACK_WITH = 'Choose creatures you want to attack with.'
 const PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE = 'Play any spell or ability or continue (SPACE).'
