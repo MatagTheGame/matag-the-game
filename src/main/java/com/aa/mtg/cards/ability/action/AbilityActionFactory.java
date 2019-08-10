@@ -11,20 +11,20 @@ public class AbilityActionFactory {
     private final GainXLifeAction gainXLifeAction;
     private final EachPlayersGainXLifeAction eachPlayersGainXLifeAction;
     private final ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction;
-    private final CreaturesYouControlGetXUntilEndOfTurn creaturesYouControlGetXUntilEndOfTurn;
-    private final Attach attach;
+    private final CreaturesYouControlGetXUntilEndOfTurnAction creaturesYouControlGetXUntilEndOfTurnAction;
+    private final AttachAction attachAction;
 
     @Autowired
     public AbilityActionFactory(ThatTargetsGetAction thatTargetsGetAction, DrawXCardsAction drawXCardsAction,
                                 GainXLifeAction gainXLifeAction, EachPlayersGainXLifeAction eachPlayersGainXLifeAction, ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction,
-                                CreaturesYouControlGetXUntilEndOfTurn creaturesYouControlGetXUntilEndOfTurn, Attach attach) {
+                                CreaturesYouControlGetXUntilEndOfTurnAction creaturesYouControlGetXUntilEndOfTurnAction, AttachAction attachAction) {
         this.thatTargetsGetAction= thatTargetsGetAction;
         this.drawXCardsAction = drawXCardsAction;
         this.gainXLifeAction = gainXLifeAction;
         this.eachPlayersGainXLifeAction = eachPlayersGainXLifeAction;
         this.shuffleTargetGraveyardIntoLibraryAction = shuffleTargetGraveyardIntoLibraryAction;
-        this.creaturesYouControlGetXUntilEndOfTurn = creaturesYouControlGetXUntilEndOfTurn;
-        this.attach = attach;
+        this.creaturesYouControlGetXUntilEndOfTurnAction = creaturesYouControlGetXUntilEndOfTurnAction;
+        this.attachAction = attachAction;
     }
 
     public AbilityAction getAbilityAction(AbilityType abilityType) {
@@ -35,19 +35,19 @@ public class AbilityActionFactory {
         switch (abilityType) {
             case DRAW_X_CARDS:
                 return drawXCardsAction;
-            case GAIN_X_LIFE:
+            case ADD_X_LIFE:
                 return gainXLifeAction;
-            case EACH_PLAYERS_GAIN_X_LIFE:
+            case EACH_PLAYERS_ADD_X_LIFE:
                 return eachPlayersGainXLifeAction;
             case SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER:
                 return shuffleTargetGraveyardIntoLibraryAction;
             case THAT_TARGETS_GET:
                 return thatTargetsGetAction;
             case CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN:
-                return creaturesYouControlGetXUntilEndOfTurn;
+                return creaturesYouControlGetXUntilEndOfTurnAction;
             case ENCHANTED_CREATURE_GETS:
             case EQUIPPED_CREATURE_GETS:
-                return attach;
+                return attachAction;
             default:
                 return null;
         }

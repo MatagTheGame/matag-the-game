@@ -1,7 +1,6 @@
 package com.aa.mtg.cards.ability.action;
 
 import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
@@ -22,8 +21,8 @@ public class GainXLifeAction implements AbilityAction {
     }
 
     @Override
-    public void perform(Ability ability, CardInstance cardInstance, GameStatus gameStatus) {
-        int lifeToGain = Integer.valueOf(ability.getParameters().get(0));
+    public void perform(CardInstance cardInstance, GameStatus gameStatus, String parameter) {
+        int lifeToGain = Integer.valueOf(parameter);
 
         Player currentPlayer = gameStatus.getCurrentPlayer();
         currentPlayer.increaseLife(lifeToGain);

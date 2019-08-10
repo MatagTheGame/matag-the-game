@@ -14,4 +14,8 @@ public class Utils {
     private static List<Integer> toListInteger(List<Object> listObject) {
         return listObject.stream().map((item) -> (int) item).collect(Collectors.toList());
     }
+
+    public static String replaceLast(String text, String regex, String replacement) {
+        return text.replaceFirst("(?s)"+regex+"(?!.*?"+regex+")", replacement);
+    }
 }

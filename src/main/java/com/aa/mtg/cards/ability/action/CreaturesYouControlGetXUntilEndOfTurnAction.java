@@ -12,34 +12,34 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-import static com.aa.mtg.cards.ability.Abilities.abilitiesFromParameters;
-import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameters;
+import static com.aa.mtg.cards.ability.Abilities.abilityFromParameter;
+import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameter;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 
 @Service
-public class CreaturesYouControlGetXUntilEndOfTurn implements AbilityAction {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreaturesYouControlGetXUntilEndOfTurn.class);
+public class CreaturesYouControlGetXUntilEndOfTurnAction implements AbilityAction {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreaturesYouControlGetXUntilEndOfTurnAction.class);
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
 
-    public CreaturesYouControlGetXUntilEndOfTurn(GameStatusUpdaterService gameStatusUpdaterService) {
+    public CreaturesYouControlGetXUntilEndOfTurnAction(GameStatusUpdaterService gameStatusUpdaterService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
     }
 
     @Override
-    public void perform(Ability ability, CardInstance cardInstance, GameStatus gameStatus) {
-        PowerToughness powerToughness = powerToughnessFromParameters(ability.getParameters());
-        List<Ability> abilities = abilitiesFromParameters(ability.getParameters());
+    public void perform(CardInstance cardInstance, GameStatus gameStatus, String parameter) {
+        PowerToughness powerToughness = powerToughnessFromParameter(parameter);
+        Optional<Ability> ability = abilityFromParameter(parameter);
 
         String controllerString = cardInstance.getController();
         Player controller = gameStatus.getPlayerByName(controllerString);
 
         List<CardInstance> cards = new CardInstanceSearch(controller.getBattlefield().getCards()).ofType(CREATURE).getCards();
         for (CardInstance card : cards) {
-            PowerToughness originalPowerToughness = card.getModifiers().getExtraPowerToughnessUntilEndOfTurn();
-            card.getModifiers().addExtraPowerToughnessUntilEndOfTurn(originalPowerToughness.combine(powerToughness));
-            card.getModifiers().getAbilitiesUntilEndOfTurn().addAll(abilities);
+            card.getModifiers().addExtraPowerToughnessUntilEndOfTurn(powerToughness);
+            ability.ifPresent(value -> card.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
         }
 
         gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, controller);

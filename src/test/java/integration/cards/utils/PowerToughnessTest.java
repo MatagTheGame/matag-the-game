@@ -42,17 +42,4 @@ public class PowerToughnessTest {
         // Then
         assertThat(powerToughness).isEqualTo(new PowerToughness(2, -3));
     }
-
-    @Test
-    public void combine() {
-        // Given
-        PowerToughness first = powerToughness("+1/-2");
-        PowerToughness second = powerToughness("-3/+4");
-
-        // When
-        PowerToughness combined = first.combine(second);
-
-        // Then
-        assertThat(combined).isEqualTo(new PowerToughness(-2, 2));
-    }
 }

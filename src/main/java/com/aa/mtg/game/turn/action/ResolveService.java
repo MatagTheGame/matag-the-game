@@ -17,9 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
-import static com.aa.mtg.cards.properties.Type.CREATURE;
-
 @Service
 public class ResolveService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ResolveService.class);
@@ -128,11 +125,11 @@ public class ResolveService {
                     targetCheckerService.check(gameStatus, ability.getTargets().get(i), cardToResolve.getModifiers().getTargets().get(i));
                 }
 
-                firstAbilityAction.perform(ability, cardToResolve, gameStatus);
+                firstAbilityAction.perform(cardToResolve, gameStatus, ability.getParameter(0));
 
                 for (int i = 1; i < ability.getAbilityTypes().size(); i++) {
                     AbilityAction furtherAbilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityTypes().get(i));
-                    furtherAbilityAction.perform(ability, cardToResolve, gameStatus);
+                    furtherAbilityAction.perform(cardToResolve, gameStatus, ability.getParameter(i));
                 }
 
             } catch (MessageException e) {

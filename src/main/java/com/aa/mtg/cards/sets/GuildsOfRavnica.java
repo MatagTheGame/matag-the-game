@@ -25,6 +25,7 @@ public class GuildsOfRavnica implements MtgSet {
     public static Card CENTAUR_PEACEMAKER = new Card("Centaur Peacemaker", asSet(Color.WHITE, Color.GREEN), asList(Cost.WHITE, Cost.GREEN, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Centaur", "Cleric"), COMMON, "When Centaur Peacemaker enters the battlefield, each player gains 4 life.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_EACH_PLAYERS_GAIN_4_LIFE));
     public static Card COLLAR_THE_CULPRIT = new Card("Collar the Culprit", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Destroy target creature with toughness 4 or greater.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_WITH_TOUGHNESS_GREATER_OR_EQUAL_4));
     public static Card COMMAND_THE_STORM = new Card("Command the Storm", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Command the Storm deals 5 damage to target creature.", 0, 0, singletonList(DEAL_5_DAMAGE_TO_TARGET_CREATURE));
+    public static Card DOUSER_OF_LIGHTS = new Card("Douser of Lights", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Horror"), COMMON, "", 4, 5, emptyList());
 
     private static GuildsOfRavnica instance;
 
@@ -37,6 +38,7 @@ public class GuildsOfRavnica implements MtgSet {
         cards.add(CoreSet2019.CHILD_OF_NIGHT);
         cards.add(COLLAR_THE_CULPRIT);
         cards.add(COMMAND_THE_STORM);
+        cards.add(DOUSER_OF_LIGHTS);
     }
 
     @Override

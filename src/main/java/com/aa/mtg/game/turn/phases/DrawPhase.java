@@ -6,7 +6,6 @@ import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.aa.mtg.cards.ability.Abilities.DRAW_1_CARD;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @Component
@@ -25,7 +24,7 @@ public class DrawPhase implements Phase {
     @Override
     public void apply(GameStatus gameStatus) {
         if (gameStatus.getTurn().getTurnNumber() > 1) {
-            drawXCardsAction.perform(DRAW_1_CARD, null, gameStatus);
+            drawXCardsAction.perform(null, gameStatus, "1");
         }
         gameStatus.getTurn().setCurrentPhase(M1);
         gameStatusUpdaterService.sendUpdateTurn(gameStatus);

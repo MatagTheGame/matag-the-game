@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
@@ -38,12 +37,12 @@ public class ThatTargetsGetAction implements AbilityAction {
     }
 
     @Override
-    public void perform(Ability ability, CardInstance cardInstance, GameStatus gameStatus) {
+    public void perform(CardInstance cardInstance, GameStatus gameStatus, String parameter) {
         for (Object targetId : cardInstance.getModifiers().getTargets()) {
             if (targetId instanceof String) {
                 String targetPlayerName = (String) targetId;
                 Player player = gameStatus.getPlayerByName(targetPlayerName);
-                int damage = damageFromParameters(ability.getParameters());
+                int damage = damageFromParameter(parameter);
                 if (damage > 0) {
                     lifeService.subtract(player, damage, gameStatus);
                     LOGGER.info("AbilityActionExecuted: {} deals {} damage to {}", cardInstance.getIdAndName(), damage, player.getName());
@@ -59,27 +58,27 @@ public class ThatTargetsGetAction implements AbilityAction {
                 if (targetOptional.isPresent()) {
                     CardInstance target = targetOptional.get();
 
-                    PowerToughness powerToughness = powerToughnessFromParameters(ability.getParameters());
+                    PowerToughness powerToughness = powerToughnessFromParameter(parameter);
                     target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(powerToughness);
 
-                    List<Ability> abilities = abilitiesFromParameters(ability.getParameters());
-                    target.getModifiers().getAbilitiesUntilEndOfTurn().addAll(abilities);
+                    Optional<Ability> ability = abilityFromParameter(parameter);
+                    ability.ifPresent(value -> target.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
 
-                    int damage = damageFromParameters(ability.getParameters());
+                    int damage = damageFromParameter(parameter);
                     dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false);
 
-                    int controllerDamage = controllerDamageFromParameters(ability.getParameters());
+                    int controllerDamage = controllerDamageFromParameter(parameter);
                     lifeService.subtract(gameStatus.getPlayerByName(cardInstance.getController()), controllerDamage, gameStatus);
 
-                    if (destroyedFromParameters(ability.getParameters())) {
+                    if (destroyedFromParameter(parameter)) {
                         destroyTargetService.destroy(gameStatus, targetCardId);
                     }
 
-                    if (tappedDoesNotUntapNextTurn(ability.getParameters())) {
+                    if (tappedDoesNotUntapNextTurn(parameter)) {
                         tapTargetService.tapDoesNotUntapNextTurn(gameStatus, targetCardId);
                     }
 
-                    LOGGER.info("AbilityActionExecuted: {} target {} which gets {}", cardInstance.getIdAndName(), targetCardId, ability.getParameters());
+                    LOGGER.info("AbilityActionExecuted: {} target {} which gets {}", cardInstance.getIdAndName(), targetCardId, parameter);
 
                 } else {
                     LOGGER.info("target {} is not anymore valid.", targetCardId);

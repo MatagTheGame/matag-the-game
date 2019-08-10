@@ -14,12 +14,6 @@ public class PowerToughness {
         this.toughness = toughness;
     }
 
-    public PowerToughness combine(PowerToughness powerToughness) {
-        int power = this.power + powerToughness.getPower();
-        int toughness = this.toughness + powerToughness.getToughness();
-        return new PowerToughness(power, toughness);
-    }
-
     public int getPower() {
         return power;
     }
