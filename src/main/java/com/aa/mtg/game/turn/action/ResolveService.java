@@ -51,7 +51,13 @@ public class ResolveService {
             } else {
                 Player playerWhoCastedTheSpell = gameStatus.getPlayerByName(stackItemToResolve.getController());
                 if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(playerWhoCastedTheSpell.getName())) {
-                    targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
+                    if (targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus)) {
+                        targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
+                    } else {
+                        gameStatus.getStack().remove();
+                        gameStatusUpdaterService.sendUpdateStack(gameStatus);
+                        return;
+                    }
 
                 } else {
                     gameStatus.getStack().remove();

@@ -50,6 +50,28 @@ public class TargetCheckerService {
         }
     }
 
+    public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
+        for (Ability ability : cardToCast.getAbilities()) {
+            AbilityAction abilityAction = abilityActionFactory.getAbilityAction(abilityType("THAT_TARGETS_GET"));
+            if (abilityAction == null) {
+                return true;
+
+            } else if (!ability.requiresTarget()) {
+                return true;
+
+            } else {
+                for (Target target : ability.getTargets()) {
+                    CardInstanceSearch cards = getPossibleTargetCardInstances(gameStatus, target);
+                    if (cards.isNotEmpty()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void check(GameStatus gameStatus, Target target, Object targetId) {
         if (targetId instanceof String) {
             if (!(target.getTargetType().equals(TargetType.PLAYER) || target.getTargetType().equals(ANY))) {
