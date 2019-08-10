@@ -20,6 +20,7 @@ import static com.aa.mtg.cards.sets.CoreSet2020.CANOPY_SPIDER;
 import static com.aa.mtg.cards.sets.CoreSet2020.FROST_LYNX;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -48,9 +49,41 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
         browser.player1().getMessageHelper().hasMessage("\"" + frostLynxId  + " - Frost Lynx\" requires a valid target.");
         browser.player1().getMessageHelper().close();
 
-        // Player 1 choose a target
+        // Player 1 chooses a target
         browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(CANOPY_SPIDER).click();
-        System.out.println();
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(CANOPY_SPIDER).isTargeted();
+        browser.player1().getPhaseHelper().is(M1, OPPONENT);
+
+        // Player 2 just continues
+        browser.player2().getPhaseHelper().is(M1, PLAYER);
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CANOPY_SPIDER).isTargeted();
+        browser.player2().getActionHelper().clickContinue();
+
+        // Player 1 has priority again and target is tapped
+        browser.player1().getPhaseHelper().is(M1, PLAYER);
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(CANOPY_SPIDER).isTappedDoesNotUntapNextTurn();
+
+        // Next turn target is still tapped
+        browser.player1().getActionHelper().clickContinue();
+        browser.player1().getActionHelper().clickContinue();
+        browser.player2().getActionHelper().clickContinue();
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CANOPY_SPIDER).isTapped();
+
+        // Next next turn target is untapped
+        browser.player2().getActionHelper().clickContinue();
+        browser.player1().getActionHelper().clickContinue();
+        browser.player2().getActionHelper().clickContinue();
+        browser.player2().getActionHelper().clickContinue();
+        browser.player1().getActionHelper().clickContinue();
+        browser.player1().getActionHelper().clickContinue();
+        browser.player2().getActionHelper().clickContinue();
+        browser.player1().getActionHelper().clickContinue();
+        browser.player2().getActionHelper().clickContinue();
+        browser.player1().getActionHelper().clickContinue();
+        browser.player2().getActionHelper().clickContinue();
+        browser.player1().getActionHelper().clickContinue();
+        browser.player2().getActionHelper().clickContinue();
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CANOPY_SPIDER).isNotTapped();
     }
 
     static class InitTestServiceForTest extends InitTestService {

@@ -9,6 +9,7 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.DealDamageToCreatureService;
 import com.aa.mtg.game.turn.action.DestroyTargetService;
+import com.aa.mtg.game.turn.action.TapTargetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,14 @@ public class ThatTargetsGetAction implements AbilityAction {
     private final LifeService lifeService;
     private final DealDamageToCreatureService dealDamageToCreatureService;
     private final DestroyTargetService destroyTargetService;
+    private final TapTargetService tapTargetService;
 
     @Autowired
-    public ThatTargetsGetAction(LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService, DestroyTargetService destroyTargetService) {
+    public ThatTargetsGetAction(LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService, DestroyTargetService destroyTargetService, TapTargetService tapTargetService) {
         this.lifeService = lifeService;
         this.dealDamageToCreatureService = dealDamageToCreatureService;
         this.destroyTargetService = destroyTargetService;
+        this.tapTargetService = tapTargetService;
     }
 
     @Override
@@ -70,6 +73,10 @@ public class ThatTargetsGetAction implements AbilityAction {
 
                     if (destroyedFromParameters(ability.getParameters())) {
                         destroyTargetService.destroy(gameStatus, targetCardId);
+                    }
+
+                    if (tappedDoesNotUntapNextTurn(ability.getParameters())) {
+                        tapTargetService.tapDoesNotUntapNextTurn(gameStatus, targetCardId);
                     }
 
                     LOGGER.info("AbilityActionExecuted: {} target {} which gets {}", cardInstance.getIdAndName(), targetCardId, ability.getParameters());

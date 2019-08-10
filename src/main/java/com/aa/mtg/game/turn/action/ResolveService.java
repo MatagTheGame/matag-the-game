@@ -51,7 +51,6 @@ public class ResolveService {
             } else {
                 Player playerWhoCastedTheSpell = gameStatus.getPlayerByName(stackItemToResolve.getController());
                 if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(playerWhoCastedTheSpell.getName())) {
-                    // TODO Antonio: continue this
                     targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
 
                 } else {
@@ -62,6 +61,7 @@ public class ResolveService {
 
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonActivePlayer().getName());
             gameStatusUpdaterService.sendUpdateStack(gameStatus);
+            gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
         } else if (gameStatus.getTurn().getTriggeredNonStackAction().equals(triggeredNonStackAction)) {

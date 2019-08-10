@@ -4,15 +4,19 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CardListComponent;
 import com.aa.mtg.cards.search.CardInstanceSearch;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Battlefield extends CardListComponent {
 
     public void untap() {
-        new CardInstanceSearch(cards).tapped().getCards()
-                .forEach(cardInstance -> cardInstance.getModifiers().untap());
+        for (CardInstance cardInstance : new CardInstanceSearch(cards).tapped().getCards()) {
+            if (cardInstance.getModifiers().isDoesNotUntapNextTurn()) {
+                cardInstance.getModifiers().doesNotUntapNextTurn(false);
+            } else {
+                cardInstance.getModifiers().untap();
+            }
+        }
     }
 
     public void removeSummoningSickness() {

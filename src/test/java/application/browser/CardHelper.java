@@ -82,6 +82,10 @@ public class CardHelper {
         hasClass("tapped");
     }
 
+    public void isTappedDoesNotUntapNextTurn() {
+        hasClass("tapped-does-not-untap-next-turn");
+    }
+
     public void isNotTapped() {
         doesNotHaveClass("tapped");
     }

@@ -3,6 +3,7 @@ package com.aa.mtg.cards;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.cards.modifiers.TappedModifier;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class CardModifiers {
     private TappedModifier tapped;
+    private boolean doesNotUntapNextTurn;
     private boolean summoningSickness;
     private boolean attacking;
     private Integer blockingCardId;
@@ -31,6 +33,11 @@ public class CardModifiers {
         return tapped != null;
     }
 
+    public boolean isDoesNotUntapNextTurn() {
+        return doesNotUntapNextTurn;
+    }
+
+    @JsonIgnore
     public boolean isUntapped() {
         return !isTapped();
     }
@@ -57,6 +64,14 @@ public class CardModifiers {
 
     public void untap() {
         this.tapped = null;
+    }
+
+    public void doesNotUntapNextTurn() {
+        this.doesNotUntapNextTurn = true;
+    }
+
+    public void doesNotUntapNextTurn(boolean doesNotUntapNextTurn) {
+        this.doesNotUntapNextTurn = doesNotUntapNextTurn;
     }
 
     public void setSummoningSickness(boolean summoningSickness) {

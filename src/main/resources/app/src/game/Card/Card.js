@@ -33,7 +33,12 @@ class Card extends Component {
     let classes = 'card'
 
     if (CardUtils.isTapped(this.props.cardInstance))  {
-      classes += ' tapped'
+      if (CardUtils.doesNotUntapNextTurn(this.props.cardInstance)) {
+        classes += ' tapped-does-not-untap-next-turn'
+      } else {
+        classes += ' tapped'
+      }
+
     } else if (CardUtils.isFrontendTapped(this.props.cardInstance)) {
       classes += ' frontend-tapped'
     }

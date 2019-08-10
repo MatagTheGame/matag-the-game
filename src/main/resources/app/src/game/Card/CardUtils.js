@@ -134,6 +134,10 @@ export default class CardUtils {
     return CardUtils.isTapped(cardInstance) || CardUtils.isFrontendTapped(cardInstance)
   }
 
+  static doesNotUntapNextTurn(cardInstance) {
+    return cardInstance.modifiers.doesNotUntapNextTurn
+  }
+
   static isOfType(cardInstance, type) {
     return cardInstance.card.types.indexOf(type) >= 0
   }

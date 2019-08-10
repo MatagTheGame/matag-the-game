@@ -134,6 +134,22 @@ body {
   box-shadow: -60px 20px 4px rgba(0, 0, 0, 0.4);
 }
 
+#player-battlefield .tapped-does-not-untap-next-turn, #opponent-battlefield .tapped-does-not-untap-next-turn {
+  transform: rotateZ(110deg);
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+#player-battlefield .tapped-does-not-untap-next-turn.flying {
+  transform: rotateZ(110deg) translateX(-40px);
+  box-shadow: 60px -20px 4px rgba(0, 0, 0, 0.4);
+}
+
+#opponent-battlefield .tapped-does-not-untap-next-turn.flying {
+  transform: rotateZ(110deg) translateX(40px);
+  box-shadow: -60px 20px 4px rgba(0, 0, 0, 0.4);
+}
+
 #player-battlefield .frontend-tapped, #opponent-battlefield .frontend-tapped {
   transform: rotateZ(75deg);
 }
