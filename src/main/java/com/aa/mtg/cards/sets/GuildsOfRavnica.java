@@ -26,6 +26,11 @@ public class GuildsOfRavnica implements MtgSet {
     public static Card COLLAR_THE_CULPRIT = new Card("Collar the Culprit", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Destroy target creature with toughness 4 or greater.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_WITH_TOUGHNESS_GREATER_OR_EQUAL_4));
     public static Card COMMAND_THE_STORM = new Card("Command the Storm", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Command the Storm deals 5 damage to target creature.", 0, 0, singletonList(DEAL_5_DAMAGE_TO_TARGET_CREATURE));
     public static Card DOUSER_OF_LIGHTS = new Card("Douser of Lights", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Horror"), COMMON, "", 4, 5, emptyList());
+    public static Card FEARLESS_HALBERDIER = new Card("Fearless Halberdier", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Human", "Warrior"), COMMON, "", 3, 2, emptyList());
+    public static Card GENEROUS_STRAY = new Card("Generous Stray", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Cat"), COMMON, "When Generous Stray enters the battlefield, draw a card.", 1, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
+    public static Card HEALERS_HAWK = new Card("Healer's Hawk", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(Type.CREATURE), singletonList("Bird"), COMMON, "Flying, lifelink", 1, 1, asList(FLYING, LIFELINK));
+    public static Card HIRED_POISONER = new Card("Hired Poisoner", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(Type.CREATURE), asList("Human", "Assassin"), COMMON, "Deathtouch.", 1, 1, singletonList(DEATHTOUCH));
+    public static Card HITCHCLAW_RECLUSE = new Card("Hitchclaw Recluse", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Spider"), COMMON, "Reach.", 1, 4, singletonList(REACH));
 
     private static GuildsOfRavnica instance;
 
@@ -39,6 +44,11 @@ public class GuildsOfRavnica implements MtgSet {
         cards.add(COLLAR_THE_CULPRIT);
         cards.add(COMMAND_THE_STORM);
         cards.add(DOUSER_OF_LIGHTS);
+        cards.add(FEARLESS_HALBERDIER);
+        cards.add(GENEROUS_STRAY);
+        cards.add(HEALERS_HAWK);
+        cards.add(HIRED_POISONER);
+        cards.add(HITCHCLAW_RECLUSE);
     }
 
     @Override

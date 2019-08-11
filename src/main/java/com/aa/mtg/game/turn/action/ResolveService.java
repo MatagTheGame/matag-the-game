@@ -122,7 +122,7 @@ public class ResolveService {
         if (firstAbilityAction != null) {
             try {
                 for (int i = 0; i < ability.getTargets().size(); i++) {
-                    targetCheckerService.check(gameStatus, ability.getTargets().get(i), cardToResolve.getModifiers().getTargets().get(i));
+                    targetCheckerService.check(gameStatus, cardToResolve, ability.getTargets().get(i), cardToResolve.getModifiers().getTargets().get(i));
                 }
 
                 firstAbilityAction.perform(cardToResolve, gameStatus, ability.getParameter(0));

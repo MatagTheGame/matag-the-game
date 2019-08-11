@@ -42,7 +42,7 @@ public class TargetCheckerService {
 
                 List<Object> targetIds = targetsIdsForCardIds.get(cardToCast.getId());
                 for (int i = 0; i < ability.getTargets().size(); i++) {
-                    check(gameStatus, ability.getTargets().get(i), targetIds.get(i));
+                    check(gameStatus, cardToCast, ability.getTargets().get(i), targetIds.get(i));
                 }
 
                 cardToCast.getModifiers().setTargets(targetIds);
@@ -72,15 +72,19 @@ public class TargetCheckerService {
         return false;
     }
 
-    public void check(GameStatus gameStatus, Target target, Object targetId) {
+    public void check(GameStatus gameStatus, CardInstance cardInstance, Target target, Object targetId) {
         if (targetId instanceof String) {
             if (!(target.getTargetType().equals(TargetType.PLAYER) || target.getTargetType().equals(ANY))) {
                 throw new MessageException(targetId + " is not valid for targetType PERMANENT");
             }
 
         } else {
-            CardInstanceSearch cards = getPossibleTargetCardInstances(gameStatus, target);
             int targetCardId = (int) targetId;
+            if (cardInstance.getId() == targetCardId && target.isAnother()) {
+                throw new MessageException("Selected targets were not valid.");
+            }
+
+            CardInstanceSearch cards = getPossibleTargetCardInstances(gameStatus, target);
             if (!cards.withId(targetCardId).isPresent()) {
                 throw new MessageException("Selected targets were not valid.");
             }

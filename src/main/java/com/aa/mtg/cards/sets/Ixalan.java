@@ -37,9 +37,11 @@ public class Ixalan implements MtgSet {
     public static Card DEMOLISH = new Card("Demolish", singleton(Color.RED), singletonList(Cost.RED), singletonList(Type.SORCERY), emptyList(), COMMON, "Destroy target artifact or land.", 0, 0, singletonList(DESTROY_TARGET_ARTIFACT_OR_LAND));
     public static Card DEMYSTIFY = new Card("Demystify", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(INSTANT), emptyList(), COMMON, "Destroy target enchantment.", 0, 0, singletonList(TARGET_ENCHANTMENT_GETS_DESTROYED));
     public static Card FRENZIED_RAPTOR = new Card("Frenzied Raptor", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 4, 2, emptyList());
+    public static Card GILDED_SENTINEL = new Card("Gilded Sentinel", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Golem"), COMMON, "", 3, 3, emptyList());
     public static Card GRAZING_WHIPTAIL = new Card("Grazing Whiptail", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 3, 4, singletonList(REACH));
     public static Card HEADWATER_SENTRIES = new Card("Headwater Sentries", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Merfolk Warrior"), COMMON, "", 2, 5, emptyList());
     public static Card HUATLIS_SNUBHORN = new Card("Huatli's Snubhorn", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "Vigilance", 2, 2, singletonList(VIGILANCE));
+    public static Card IMPERIAL_AEROSAUR = new Card("Imperial Aerosaur", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), UNCOMMON, "Flying. When Imperial Aerosaur enters the battlefield, another target creature you control gets +1/+1 and gains flying until end of turn.", 3, 3, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_ANOTHER_TARGET_CREATURE_YOU_CONTROL_GET_PLUS_1_1_AND_FLYING));
     public static Card LEGIONS_JUDGMENT = new Card("Legion's Judgment", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), COMMON, "Destroy target creature with power 4 or greater.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_WITH_POWER_GREATER_OR_EQUAL_4));
     public static Card MARK_OF_THE_VAMPIRE = new Card("Mark of the Vampire", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has lifelink.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_LIFELINK));
     public static Card NEST_ROBBER = new Card("Nest Robber", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "Haste", 2, 1, singletonList(HASTE));
@@ -64,9 +66,11 @@ public class Ixalan implements MtgSet {
         cards.add(DEMYSTIFY);
         cards.add(DEMOLISH);
         cards.add(FRENZIED_RAPTOR);
+        cards.add(GILDED_SENTINEL);
         cards.add(GRAZING_WHIPTAIL);
         cards.add(HEADWATER_SENTRIES);
         cards.add(HUATLIS_SNUBHORN);
+        cards.add(IMPERIAL_AEROSAUR);
         cards.add(LEGIONS_JUDGMENT);
         cards.add(MARK_OF_THE_VAMPIRE);
         cards.add(NEST_ROBBER);

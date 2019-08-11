@@ -24,6 +24,7 @@ import static com.aa.mtg.cards.ability.target.TargetStatusType.ATTACKING;
 import static com.aa.mtg.cards.ability.target.TargetStatusType.BLOCKING;
 import static com.aa.mtg.cards.ability.target.TargetType.PERMANENT;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
+import static com.aa.mtg.cards.sets.Ixalan.FRENZIED_RAPTOR;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
@@ -47,8 +48,10 @@ public class TargetTest {
                 .targetType(PERMANENT)
                 .build();
 
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getNonCurrentPlayer().getName());
+
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 2);
 
         // Then an exception is thrown
     }
@@ -65,7 +68,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then NO exception is thrown
     }
@@ -83,7 +86,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then an exception is thrown
     }
@@ -101,7 +104,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then NO exception is thrown
     }
@@ -120,7 +123,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then an exception is thrown
     }
@@ -139,7 +142,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then NO exception is thrown
     }
@@ -158,7 +161,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then an exception is thrown
     }
@@ -177,7 +180,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then NO exception is thrown
     }
@@ -196,7 +199,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then an exception is thrown
     }
@@ -215,7 +218,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then no exception is thrown
     }
@@ -234,7 +237,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then no exception is thrown
     }
@@ -254,7 +257,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then no exception is thrown
     }
@@ -274,7 +277,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then an exception is thrown
     }
@@ -294,7 +297,7 @@ public class TargetTest {
         gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then no exception is thrown
     }
@@ -314,7 +317,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then an exception is thrown
     }
@@ -335,7 +338,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then no exception is thrown
     }
@@ -355,7 +358,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then an exception is thrown
     }
@@ -376,7 +379,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then no exception is thrown
     }
@@ -396,7 +399,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then an exception is thrown
     }
@@ -417,7 +420,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then no exception is thrown
     }
@@ -438,7 +441,7 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then no exception is thrown
     }
@@ -458,9 +461,44 @@ public class TargetTest {
         gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
+
+        // Then an exception is thrown
+    }
+
+    @Test
+    public void selectionAnother() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder().another(true).targetType(PERMANENT).ofType(singletonList(CREATURE)).build();
+        CardInstance cardInstance1 = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        CardInstance cardInstance2 = new CardInstance(gameStatus, 2, FRENZIED_RAPTOR, gameStatus.getCurrentPlayer().getName());
+        cardInstance1.setController(gameStatus.getCurrentPlayer().getName());
+        cardInstance2.setController(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance1);
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance2);
+
+        // When
+        targetCheckerService.check(gameStatus, cardInstance1, target, 2);
 
         // Then no exception is thrown
+    }
+
+    @Test(expected = MessageException.class)
+    public void selectionAnotherException() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder().another(true).targetType(PERMANENT).ofType(singletonList(CREATURE)).build();
+        CardInstance cardInstance1 = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        cardInstance1.setController(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance1);
+
+        // When
+        targetCheckerService.check(gameStatus, cardInstance1, target, 1);
+
+        // Then an exception is thrown
     }
     
     @Configuration

@@ -18,8 +18,9 @@ public class Target {
     private final TargetPowerToughnessConstraint targetPowerToughnessConstraint;
     private final PlayerType targetControllerType;
     private final List<TargetStatusType> targetStatusTypes;
+    private final boolean another;
 
-    private Target(TargetType targetType, List<Type> ofType, String ofSubtypeOf, AbilityType withAbilityType, Color ofColor, TargetPowerToughnessConstraint targetPowerToughnessConstraint, PlayerType targetControllerType, List<TargetStatusType> targetStatusTypes) {
+    private Target(TargetType targetType, List<Type> ofType, String ofSubtypeOf, AbilityType withAbilityType, Color ofColor, TargetPowerToughnessConstraint targetPowerToughnessConstraint, PlayerType targetControllerType, List<TargetStatusType> targetStatusTypes, boolean another) {
         this.targetType = targetType;
         this.ofType = ofType;
         this.ofSubtypeOf = ofSubtypeOf;
@@ -28,6 +29,7 @@ public class Target {
         this.targetPowerToughnessConstraint = targetPowerToughnessConstraint;
         this.targetControllerType = targetControllerType;
         this.targetStatusTypes = targetStatusTypes;
+        this.another = another;
     }
 
     public TargetType getTargetType() {
@@ -60,5 +62,9 @@ public class Target {
 
     public List<TargetStatusType> getTargetStatusTypes() {
         return targetStatusTypes;
+    }
+
+    public boolean isAnother() {
+        return another;
     }
 }

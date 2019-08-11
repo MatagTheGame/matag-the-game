@@ -33,7 +33,10 @@ public class CoreSet2020 implements MtgSet {
     public static Card DISENCHANT = new Card("Disenchant", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Destroy target artifact or enchantment.", 0, 0, singletonList(DESTROY_TARGET_ARTIFACT_OR_ENCHANTMENT));
     public static Card DISFIGURE = new Card("Disfigure", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(Type.INSTANT), emptyList(), UNCOMMON, "Target creature gets -2/-2 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_MINUS_2_2_UNTIL_END_OF_TURN));
     public static Card ENGULFING_ERUPTION = new Card("Engulfing Eruption", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), COMMON, "Engulfing Eruption deals 5 damage to target creature.", 0, 0, singletonList(DEAL_5_DAMAGE_TO_TARGET_CREATURE));
+    public static Card FORTRESS_CRAB = new Card("Fortress Crab", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Crab"), COMMON, "", 1, 6, emptyList());
     public static Card FROST_LYNX = new Card("Frost Lynx", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Elemental", "Cat"), COMMON, "When Frost Lynx enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_CREATURE_GETS_TAPPED_DOES_NOT_UNTAP_NEXT_TURN));
+    public static Card GRIFFIN_SENTINEL = new Card("Griffin Sentinel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Griffin"), COMMON, "Flying. Vigilance.", 1, 3, asList(FLYING, VIGILANCE));
+    public static Card HEALER_OF_THE_GLADE = new Card("Healer of the Glade", singleton(Color.GREEN), asList(Cost.GREEN), singletonList(Type.CREATURE), singletonList("Elemental"), COMMON, "When Healer of the Glade enters the battlefield, you gain 3 life.", 1, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_3_LIFE));
 
     private static CoreSet2020 instance;
 
@@ -61,8 +64,17 @@ public class CoreSet2020 implements MtgSet {
         cards.add(DISENCHANT);
         cards.add(DISFIGURE);
         cards.add(ENGULFING_ERUPTION);
+        cards.add(GuildsOfRavnica.FEARLESS_HALBERDIER);
+        cards.add(Dominaria.FERAL_ABOMINATION);
+        cards.add(Dominaria.FIRE_ELEMENTAL);
+        cards.add(FORTRESS_CRAB);
         cards.add(FROST_LYNX);
+        cards.add(CoreSet2019.GREENWOOD_SENTINEL);
+        cards.add(GRIFFIN_SENTINEL);
         cards.add(WarOfTheSpark.GOBLIN_ASSAILANT);
+        cards.add(RavnicaAllegiance.HAAZDA_OFFICER);
+        cards.add(HEALER_OF_THE_GLADE);
+        cards.add(CoreSet2019.HOSTILE_MINOTAUR);
         cards.add(WarOfTheSpark.IRONCLAD_KROVOD);
         cards.add(CoreSet2019.MARAUDERS_AXE);
         cards.add(CoreSet2019.OAKENFORM);
