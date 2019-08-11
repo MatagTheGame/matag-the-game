@@ -52,6 +52,11 @@ public class CoreSet2019 implements MtgSet {
     public static Card ONAKKE_OGRE = new Card("Onakke Ogre", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Ogre", "Warrior"), COMMON, "", 4, 2, emptyList());
     public static Card ORESKOS_SWIFTCLAW = new Card("Oreskos Swiftclaw", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Cat", "Warrior"), COMMON, "", 3, 1, emptyList());
     public static Card PRODIGIOUS_GROWTH = new Card("Prodigious Growth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), RARE, "Enchant creature. Enchanted creature gets +7/+7 and has trample.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_7_7_AND_TRAMPLE));
+    public static Card RHOX_ORACLE = new Card("Rhox Oracle", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Rhino", "Monk"), COMMON, "When Rhox Oracle enters the battlefield, draw a card.", 4, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
+    //public static Card RIDDLEMASTER_SPHINX = new Card("Riddlemaster Sphinx", singleton(Color.BLUE), asList(Cost.BLUE, Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Sphinx"), RARE, "Flying. When Riddlemaster Sphinx enters the battlefield, you may return target creature an opponent controls to its owner's hand.", 5, 5, asList(FLYING, )); // TODO Antonio: you may!
+    public static Card RUSTWING_FALCON = new Card("Rustwing Falcon", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(CREATURE), singletonList("Bird"), COMMON, "Flying.", 1, 2, singletonList(FLYING));
+    public static Card SKELETON_ARCHER = new Card("Skeleton Archer", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Skeleton", "Archer"), COMMON, "When Skeleton Archer enters the battlefield, it deals 1 damage to any target.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_ANY_TARGET_GET_1_DAMAGE));
+    // TODO Antonio: Skymarch Bloodletter
 
     private static CoreSet2019 instance;
 
@@ -89,6 +94,9 @@ public class CoreSet2019 implements MtgSet {
         cards.add(OAKENFORM);
         cards.add(ORESKOS_SWIFTCLAW);
         cards.add(PRODIGIOUS_GROWTH);
+        cards.add(RHOX_ORACLE);
+        cards.add(RUSTWING_FALCON);
+        cards.add(SKELETON_ARCHER);
     }
 
     @Override

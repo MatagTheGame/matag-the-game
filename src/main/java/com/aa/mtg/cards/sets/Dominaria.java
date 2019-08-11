@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
+import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Type.ARTIFACT;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
@@ -37,6 +38,7 @@ public class Dominaria implements MtgSet {
     public static Card PARDIC_WANDERER = new Card("Pardic Wanderer", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Golem"), COMMON, "Trample", 5, 5, singletonList(TRAMPLE));
     public static Card PRIMORDIAL_WURM = new Card("Primordial Wurm", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Wurm"), COMMON, "", 7, 6, emptyList());
     public static Card PYROMANTIC_PILGRIM = new Card("Pyromantic Pilgrim", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Wizard"), COMMON, "Haste", 3, 1, singletonList(HASTE));
+    public static Card SERRA_ANGEL = new Card("Serra Angel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Angel"), UNCOMMON, "Flying, vigilance", 4, 4, asList(FLYING, VIGILANCE));
     public static Card SHORT_SWORD = new Card("Short Sword", emptySet(), singletonList(Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipment Creatures get +1/+1. Equip 2", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1));
 
     private static Dominaria instance;
@@ -58,6 +60,7 @@ public class Dominaria implements MtgSet {
         cards.add(PRIMORDIAL_WURM);
         cards.add(PARDIC_WANDERER);
         cards.add(PYROMANTIC_PILGRIM);
+        cards.add(SERRA_ANGEL);
         cards.add(SHORT_SWORD);
     }
 

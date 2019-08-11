@@ -43,6 +43,9 @@ public class CoreSet2020 implements MtgSet {
     public static Card INSPIRING_CAPTAIN = new Card("Inspiring Captain", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Knight"), COMMON, "When Inspiring Captain enters the battlefield, creatures you control get +1/+1 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN));
     public static Card LIGHTNING_STORMKIN = new Card("Lightning Stormkin", asSet(Color.BLUE, Color.RED), asList(Cost.BLUE, Cost.RED), singletonList(CREATURE), asList("Elemental", "Wizard"), UNCOMMON, "Flying. Haste.", 2, 2, asList(FLYING, HASTE));
     public static Card NIMBLE_BIRDSTICKER = new Card("Nimble Birdsticker", asSet(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Goblin"), COMMON, "Reach.", 2, 3, singletonList(REACH));
+    public static Card SAVANNAH_SAGE = new Card("Savannah Sage", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Cat", "Cleric"), COMMON, "When Savannah Sage enters the battlefield, you gain 2 life.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE));
+    public static Card SEDGE_SCORPION = new Card("Sedge Scorpion", asSet(Color.GREEN), singletonList(Cost.GREEN), singletonList(CREATURE), singletonList("Scorption"), COMMON, "Deathtouch.", 1, 1, singletonList(DEATHTOUCH));
+    public static Card SIEGE_MASTODON = new Card("Siege Mastodon", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Elephant"), COMMON, "", 3, 5, emptyList());
 
     private static CoreSet2020 instance;
 
@@ -91,6 +94,10 @@ public class CoreSet2020 implements MtgSet {
         cards.add(NIMBLE_BIRDSTICKER);
         cards.add(CoreSet2019.OAKENFORM);
         cards.add(RavnicaAllegiance.PROWLING_CARACAL);
+        cards.add(SAVANNAH_SAGE);
+        cards.add(SEDGE_SCORPION);
+        cards.add(SIEGE_MASTODON);
+        cards.add(CoreSet2019.SKELETON_ARCHER);
     }
 
     @Override
