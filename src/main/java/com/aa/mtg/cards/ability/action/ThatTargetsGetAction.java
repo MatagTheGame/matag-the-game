@@ -9,6 +9,7 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.DealDamageToCreatureService;
 import com.aa.mtg.game.turn.action.DestroyTargetService;
+import com.aa.mtg.game.turn.action.ReturnTargetToHandService;
 import com.aa.mtg.game.turn.action.TapTargetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,13 +28,15 @@ public class ThatTargetsGetAction implements AbilityAction {
     private final DealDamageToCreatureService dealDamageToCreatureService;
     private final DestroyTargetService destroyTargetService;
     private final TapTargetService tapTargetService;
+    private final ReturnTargetToHandService returnTargetToHandService;
 
     @Autowired
-    public ThatTargetsGetAction(LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService, DestroyTargetService destroyTargetService, TapTargetService tapTargetService) {
+    public ThatTargetsGetAction(LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService, DestroyTargetService destroyTargetService, TapTargetService tapTargetService, ReturnTargetToHandService returnTargetToHandService) {
         this.lifeService = lifeService;
         this.dealDamageToCreatureService = dealDamageToCreatureService;
         this.destroyTargetService = destroyTargetService;
         this.tapTargetService = tapTargetService;
+        this.returnTargetToHandService = returnTargetToHandService;
     }
 
     @Override
@@ -76,6 +79,10 @@ public class ThatTargetsGetAction implements AbilityAction {
 
                     if (tappedDoesNotUntapNextTurn(parameter)) {
                         tapTargetService.tapDoesNotUntapNextTurn(gameStatus, targetCardId);
+                    }
+
+                    if (returnToOwnerHand(parameter)) {
+                        returnTargetToHandService.returnTargetToHand(gameStatus, targetCardId);
                     }
 
                     LOGGER.info("AbilityActionExecuted: {} target {} which gets {}", cardInstance.getIdAndName(), targetCardId, parameter);

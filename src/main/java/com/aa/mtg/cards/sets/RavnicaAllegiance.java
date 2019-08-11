@@ -31,6 +31,7 @@ public class RavnicaAllegiance implements MtgSet {
     public static Card CONCORDIA_PEGASUS = new Card("Concordia Pegasus", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Pegasus"), COMMON, "Flying", 1, 3, singletonList(FLYING));
     public static Card CONSIGN_TO_THE_PIT = new Card("Consign to the Pit", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), COMMON, "Destroy target creature. Consign to the Pit deals 2 damage to that creature's controller.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_2_DAMAGE_TO_CONTROLLER));
     public static Card CORAL_COMMANDO = new Card("Coral Commando", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Merfolk", "Warrior"), COMMON, "", 3, 2, emptyList());
+    public static Card END_RAZE_FORERUNNER = new Card("End-Raze Forerunner", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Boar"), RARE, "Vigilance, trample, haste. When End-Raze Forerunners enters the battlefield, other creatures you control get +2/+2 and gain vigilance and trample until end of turn.", 7, 7, asList(VIGILANCE, TRAMPLE, HASTE, WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_2_2_VIGILANCE_AND_TRAMPLE_UNTIL_END_OF_TURN));
     public static Card FERAL_MAAKA = new Card("Feral Maaka", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Cat"), COMMON, "", 2, 2, emptyList());
     public static Card NOXIOUS_GROODION = new Card("Noxious Groodion", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Beast"), COMMON, "Deathtouch", 2, 2, singletonList(DEATHTOUCH));
     public static Card PRECISION_BOLT = new Card("Precision Bolt", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), COMMON, "Precision Bolt deals 3 damage to any target.", 0, 0, singletonList(DEAL_3_DAMAGE_TO_ANY_TARGET));
@@ -51,6 +52,7 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(CONCORDIA_PEGASUS);
         cards.add(CONSIGN_TO_THE_PIT);
         cards.add(CORAL_COMMANDO);
+        cards.add(END_RAZE_FORERUNNER);
         cards.add(FERAL_MAAKA);
         cards.add(NOXIOUS_GROODION);
         cards.add(PRECISION_BOLT);

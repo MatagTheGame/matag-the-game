@@ -90,12 +90,15 @@ public class Abilities {
     public static Ability VIGILANCE = new Ability(AbilityType.VIGILANCE);
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN, emptyList(), singletonList("+1/+1"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_AND_VIGILANCE_UNTIL_END_OF_TURN = new Ability(asList(CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN, CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN), emptyList(), asList("+1/+1", "VIGILANCE"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
+    public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_2_2_VIGILANCE_AND_TRAMPLE_UNTIL_END_OF_TURN = new Ability(asList(CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN, CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN, CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN), emptyList(), asList("+2/+2", "VIGILANCE", "TRAMPLE"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD = new Ability(DRAW_X_CARDS, emptyList(), singletonList("1"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD_AND_LOSE_1_LIFE = new Ability(asList(DRAW_X_CARDS, ADD_X_LIFE), emptyList(), asList("1", "-1"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
+    public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD_AND_GAIN_3_LIFE = new Ability(asList(DRAW_X_CARDS, ADD_X_LIFE), emptyList(), asList("1", "3"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_4_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("4"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_5_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("5"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_EACH_PLAYERS_GAIN_4_LIFE = new Ability(EACH_PLAYERS_ADD_X_LIFE, emptyList(), singletonList("4"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_CREATURE_GETS_TAPPED_DOES_NOT_UNTAP_NEXT_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetControllerType(OPPONENT).build()), singletonList(":TAPPED_DOES_NOT_UNTAP_NEXT_TURN"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
+    public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_RETURN_TARGET_OPPONENT_CREATURE_TO_ITS_OWNERS_HAND = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).targetControllerType(OPPONENT).build()), singletonList(":RETURN_TO_OWNER_HAND"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
 
     private static Ability get(String ability) {
         try {
@@ -159,6 +162,10 @@ public class Abilities {
         return parameter.equals(":TAPPED_DOES_NOT_UNTAP_NEXT_TURN");
     }
 
+    public static boolean returnToOwnerHand(String parameter) {
+        return parameter.equals(":RETURN_TO_OWNER_HAND");
+    }
+
     public static boolean untapped(String parameter) {
         return parameter.equals(":UNTAPPED");
     }
@@ -177,6 +184,8 @@ public class Abilities {
             return "to its controller " + parameter.replace("CONTROLLER_DAMAGE:", "") + " damage";
         } if (parameter.equals(":TAPPED_DOES_NOT_UNTAP_NEXT_TURN")) {
             return "tapped doesn't untap next turn";
+        } if (parameter.equals(":RETURN_TO_OWNER_HAND")) {
+            return "returned to its owner's hand";
         } else {
             return parameter.replace(":", "").toLowerCase();
         }
