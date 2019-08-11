@@ -30,6 +30,10 @@ public class CreaturesYouControlGetXUntilEndOfTurnAction implements AbilityActio
 
     @Override
     public void perform(CardInstance cardInstance, GameStatus gameStatus, String parameter) {
+        creaturesGet(cardInstance, gameStatus, parameter, true);
+    }
+
+    void creaturesGet(CardInstance cardInstance, GameStatus gameStatus, String parameter, boolean includeThisCreature) {
         PowerToughness powerToughness = powerToughnessFromParameter(parameter);
         Optional<Ability> ability = abilityFromParameter(parameter);
 
@@ -38,6 +42,9 @@ public class CreaturesYouControlGetXUntilEndOfTurnAction implements AbilityActio
 
         List<CardInstance> cards = new CardInstanceSearch(controller.getBattlefield().getCards()).ofType(CREATURE).getCards();
         for (CardInstance card : cards) {
+            if (!includeThisCreature && card.getId() == cardInstance.getId()) {
+                continue;
+            }
             card.getModifiers().addExtraPowerToughnessUntilEndOfTurn(powerToughness);
             ability.ifPresent(value -> card.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
         }

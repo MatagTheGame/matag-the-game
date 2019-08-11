@@ -24,6 +24,7 @@ import static com.aa.mtg.cards.ability.target.TargetStatusType.ATTACKING;
 import static com.aa.mtg.cards.ability.target.TargetStatusType.BLOCKING;
 import static com.aa.mtg.cards.ability.target.TargetType.PERMANENT;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
+import static com.aa.mtg.cards.properties.Type.LAND;
 import static com.aa.mtg.cards.sets.Ixalan.FRENZIED_RAPTOR;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
@@ -491,12 +492,44 @@ public class TargetTest {
         GameStatus gameStatus = testGameStatus();
 
         Target target = Target.builder().another(true).targetType(PERMANENT).ofType(singletonList(CREATURE)).build();
-        CardInstance cardInstance1 = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
-        cardInstance1.setController(gameStatus.getCurrentPlayer().getName());
-        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance1);
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
         // When
-        targetCheckerService.check(gameStatus, cardInstance1, target, 1);
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
+
+        // Then an exception is thrown
+    }
+
+    @Test
+    public void selectionNonLand() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder().targetType(PERMANENT).notOfType(singletonList(LAND)).build();
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, GRAZING_WHIPTAIL, gameStatus.getCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
+
+        // Then no exception is thrown
+    }
+
+    @Test(expected = MessageException.class)
+    public void selectionNonLandException() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder().targetType(PERMANENT).notOfType(singletonList(LAND)).build();
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, PLAINS, gameStatus.getCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        targetCheckerService.check(gameStatus, cardInstance, target, 1);
 
         // Then an exception is thrown
     }

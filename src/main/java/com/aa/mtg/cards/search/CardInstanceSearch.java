@@ -39,6 +39,13 @@ public class CardInstanceSearch {
         return new CardInstanceSearch(cards);
     }
 
+    public CardInstanceSearch notOfTypes(List<Type> types) {
+        List<CardInstance> cards = this.cards.stream()
+                .filter(cardInstance -> !cardInstance.ofAnyOfTheTypes(types))
+                .collect(toList());
+        return new CardInstanceSearch(cards);
+    }
+
     public CardInstanceSearch tapped() {
         List<CardInstance> cards = this.cards.stream()
                 .filter(cardInstance -> cardInstance.getModifiers().isTapped())

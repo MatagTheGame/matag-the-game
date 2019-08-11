@@ -43,8 +43,11 @@ public class CoreSet2019 implements MtgSet {
     public static Card GREENWOOD_SENTINEL = new Card("Greenwood Sentinel", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), asList("Elf", "Scout"), COMMON, "Vigilance.", 2, 2, singletonList(VIGILANCE));
     public static Card HAVOC_DEVILS = new Card("Havoc Devils", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Devil"), COMMON, "Trample.", 4, 3, singletonList(TRAMPLE));
     public static Card HOSTILE_MINOTAUR = new Card("Hostile Minotaur", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Minotaur"), COMMON, "Haste.", 3, 3, singletonList(HASTE));
+    public static Card KNIGHT_OF_THE_TUSK = new Card("Knight of the Tusk", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Knight"), COMMON, "Vigilance.", 3, 7, emptyList());
     public static Card KNIGHTS_PLEDGE = new Card("Knight's Pledge", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(ENCHANTMENT), emptyList(), COMMON, "Draw two cards.", 0, 0, singletonList(DRAW_2_CARD));
+    public static Card LOXODON_LINE_BREAKER = new Card("Loxodon Line Breaker", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Elephant", "Soldier"), COMMON, "", 3, 2, emptyList());
     public static Card MARAUDERS_AXE = new Card("Marauder's Axe", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipped creature gets +2/+0. Equip 2", 0, 0, singletonList(PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0));
+    public static Card METEOR_GOLEM = new Card("Meteor Golem", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Golem"), UNCOMMON, "When Meteor Golem enters the battlefield, destroy target nonland permanent an opponent controls.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_NONLAND_OPPONENT_PERMANENT_GET_DESTROYED));
     public static Card OAKENFORM = new Card("Oakenform", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +3/+3.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_3));
     public static Card PRODIGIOUS_GROWTH = new Card("Prodigious Growth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), RARE, "Enchant creature. Enchanted creature gets +7/+7 and has trample.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_7_7_AND_TRAMPLE));
 
@@ -75,8 +78,11 @@ public class CoreSet2019 implements MtgSet {
         cards.add(GREENWOOD_SENTINEL);
         cards.add(HAVOC_DEVILS);
         cards.add(HOSTILE_MINOTAUR);
+        cards.add(KNIGHT_OF_THE_TUSK);
         cards.add(KNIGHTS_PLEDGE);
+        cards.add(LOXODON_LINE_BREAKER);
         cards.add(MARAUDERS_AXE);
+        cards.add(METEOR_GOLEM);
         cards.add(OAKENFORM);
         cards.add(PRODIGIOUS_GROWTH);
     }

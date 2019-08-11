@@ -15,6 +15,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
+import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
 
 public class CoreSet2020 implements MtgSet {
 
@@ -36,7 +37,10 @@ public class CoreSet2020 implements MtgSet {
     public static Card FORTRESS_CRAB = new Card("Fortress Crab", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Crab"), COMMON, "", 1, 6, emptyList());
     public static Card FROST_LYNX = new Card("Frost Lynx", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Elemental", "Cat"), COMMON, "When Frost Lynx enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_CREATURE_GETS_TAPPED_DOES_NOT_UNTAP_NEXT_TURN));
     public static Card GRIFFIN_SENTINEL = new Card("Griffin Sentinel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Griffin"), COMMON, "Flying. Vigilance.", 1, 3, asList(FLYING, VIGILANCE));
-    public static Card HEALER_OF_THE_GLADE = new Card("Healer of the Glade", singleton(Color.GREEN), asList(Cost.GREEN), singletonList(Type.CREATURE), singletonList("Elemental"), COMMON, "When Healer of the Glade enters the battlefield, you gain 3 life.", 1, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_3_LIFE));
+    public static Card HEALER_OF_THE_GLADE = new Card("Healer of the Glade", singleton(Color.GREEN), singletonList(Cost.GREEN), singletonList(Type.CREATURE), singletonList("Elemental"), COMMON, "When Healer of the Glade enters the battlefield, you gain 3 life.", 1, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_3_LIFE));
+    public static Card IMPERIAL_OUTRIDER = new Card("Imperial Outrider", singleton(Color.WHITE), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Human", "Knight"), COMMON, "", 1, 5, emptyList());
+    public static Card INSPIRING_CAPTAIN = new Card("Inspiring Captain", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Human", "Knight"), COMMON, "When Inspiring Captain enters the battlefield, creatures you control get +1/+1 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN));
+    public static Card LIGHTNING_STORMKIN = new Card("Lightning Stormkin", asSet(Color.BLUE, Color.RED), asList(Cost.BLUE, Cost.RED), singletonList(Type.CREATURE), asList("Elemental", "Wizard"), UNCOMMON, "Flying. Haste.", 2, 2, asList(FLYING, HASTE));
 
     private static CoreSet2020 instance;
 
@@ -75,8 +79,13 @@ public class CoreSet2020 implements MtgSet {
         cards.add(RavnicaAllegiance.HAAZDA_OFFICER);
         cards.add(HEALER_OF_THE_GLADE);
         cards.add(CoreSet2019.HOSTILE_MINOTAUR);
+        cards.add(IMPERIAL_OUTRIDER);
+        cards.add(INSPIRING_CAPTAIN);
         cards.add(WarOfTheSpark.IRONCLAD_KROVOD);
+        cards.add(LIGHTNING_STORMKIN);
+        cards.add(Dominaria.MAMMOTH_SPIDER);
         cards.add(CoreSet2019.MARAUDERS_AXE);
+        cards.add(CoreSet2019.METEOR_GOLEM);
         cards.add(CoreSet2019.OAKENFORM);
         cards.add(RavnicaAllegiance.PROWLING_CARACAL);
     }

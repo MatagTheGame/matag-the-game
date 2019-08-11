@@ -28,6 +28,7 @@ public class RivalsOfIxalan implements MtgSet {
     public static Card DIVINE_VERDICT = new Card("Divine Verdict", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Destroy target attacking or blocking creature.", 0, 0, singletonList(DESTROY_TARGET_ATTACKING_OF_BLOCKING_CREATURE));
     public static Card DUSK_LEGION_ZEALOT = new Card("Dusk Legion Zealot", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Vampire", "Soldier"), COMMON, "When Dusk Legion Zealot enters the battlefield, you draw a card and you lose 1 life.", 1, 1, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD_AND_LOSE_1_LIFE));
     public static Card EXULTANT_SKYMARCHER = new Card("Exultant Skymarcher", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Vampire", "Soldier"), COMMON, "Flying.", 2, 3, singletonList(FLYING));
+    public static Card JADECRAFT_ARTISAN = new Card("Jadecraft Artisan", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Merfolk", "Shaman"), COMMON, "When Jadecraft Artisan enters the battlefield, target creature gets +2/+2 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GET_PLUS_2_2));
     public static Card STRIDER_HARNESS = new Card("Strider Harness", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipped creature gets +1/+1 and has haste. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1_AND_HASTE));
 
     private static RivalsOfIxalan instance;
@@ -43,6 +44,7 @@ public class RivalsOfIxalan implements MtgSet {
         cards.add(DIVINE_VERDICT);
         cards.add(DUSK_LEGION_ZEALOT);
         cards.add(EXULTANT_SKYMARCHER);
+        cards.add(JADECRAFT_ARTISAN);
         cards.add(STRIDER_HARNESS);
     }
 

@@ -99,6 +99,9 @@ public class TargetCheckerService {
 
             if (target.getOfType() != null) {
                 cards = cards.ofAnyOfTheTypes(target.getOfType());
+
+            } else if(target.getNotOfType() != null) {
+                cards = cards.notOfTypes(target.getNotOfType());
             }
 
             if (target.getTargetPowerToughnessConstraint() != null) {

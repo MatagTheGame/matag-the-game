@@ -31,6 +31,9 @@ public class Dominaria implements MtgSet {
     public static Card DIVINATION = new Card("Divination", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Draw 2 cards.", 0, 0, singletonList(DRAW_2_CARD));
     public static Card FERAL_ABOMINATION = new Card("Feral Abomination", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Thrull"), COMMON, "Deathtouch", 5, 5, singletonList(DEATHTOUCH));
     public static Card FIRE_ELEMENTAL = new Card("Fire Elemental", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Elemental"), COMMON, "", 5, 4, emptyList());
+    public static Card KNIGHT_OF_NEW_BENALIA = new Card("Knight of New Benalia", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Knight"), COMMON, "", 3, 1, emptyList());
+    public static Card MAMMOTH_SPIDER = new Card("Mammoth Spider", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Spider"), COMMON, "Reach", 3, 5, singletonList(REACH));
+    public static Card MESA_UNICORN = new Card("Mesa Unicorn", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), singletonList("Unicorn"), COMMON, "Lifelink", 2, 2, singletonList(LIFELINK));
     public static Card PRIMORDIAL_WURM = new Card("Primordial Wurm", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Wurm"), COMMON, "", 7, 6, emptyList());
     public static Card SHORT_SWORD = new Card("Short Sword", emptySet(), singletonList(Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipment Creatures get +1/+1. Equip 2", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1));
 
@@ -47,6 +50,9 @@ public class Dominaria implements MtgSet {
         cards.add(DIVINATION);
         cards.add(FERAL_ABOMINATION);
         cards.add(FIRE_ELEMENTAL);
+        cards.add(KNIGHT_OF_NEW_BENALIA);
+        cards.add(MAMMOTH_SPIDER);
+        cards.add(MESA_UNICORN);
         cards.add(PRIMORDIAL_WURM);
         cards.add(SHORT_SWORD);
     }

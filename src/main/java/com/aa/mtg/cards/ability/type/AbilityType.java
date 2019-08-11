@@ -12,6 +12,7 @@ public enum AbilityType {
     FLYING("Flying."),
     HASTE("Haste."),
     LIFELINK("Lifelink."),
+    OTHER_CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN("Other creatures you control get %s until end of turn."),
     REACH("Reach."),
     SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER("Shuffle graveyard into library."),
     THAT_TARGET_CONTROLLER_GETS("That target controller gets %s."),

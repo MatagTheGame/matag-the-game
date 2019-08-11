@@ -56,6 +56,7 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(END_RAZE_FORERUNNER);
         cards.add(FERAL_MAAKA);
         cards.add(HAAZDA_OFFICER);
+        cards.add(Dominaria.MAMMOTH_SPIDER);
         cards.add(NOXIOUS_GROODION);
         cards.add(PRECISION_BOLT);
         cards.add(PROWLING_CARACAL);
