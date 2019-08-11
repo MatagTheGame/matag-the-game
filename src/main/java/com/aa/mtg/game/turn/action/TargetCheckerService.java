@@ -94,8 +94,7 @@ public class TargetCheckerService {
     private CardInstanceSearch getPossibleTargetCardInstances(GameStatus gameStatus, Target target) {
         CardInstanceSearch cards;
         if (target.getTargetType().equals(PERMANENT)) {
-            cards = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
-                    .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
+            cards = gameStatus.getAllBattlefieldCards();
 
             if (target.getOfType() != null) {
                 cards = cards.ofAnyOfTheTypes(target.getOfType());
@@ -119,8 +118,7 @@ public class TargetCheckerService {
             }
 
         } else if (target.getTargetType().equals(ANY)) {
-            cards = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
-                    .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards());
+            cards = gameStatus.getAllBattlefieldCards();
 
         } else {
             throw new RuntimeException("Missing targetType.");

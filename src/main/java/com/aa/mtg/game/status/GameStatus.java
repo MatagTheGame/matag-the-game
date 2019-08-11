@@ -1,6 +1,7 @@
 package com.aa.mtg.game.status;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.stack.SpellStack;
 import com.aa.mtg.game.turn.Turn;
@@ -129,5 +130,10 @@ public class GameStatus {
         }
 
         return null;
+    }
+
+    public CardInstanceSearch getAllBattlefieldCards() {
+        return new CardInstanceSearch(player1.getBattlefield().getCards())
+                .concat(player2.getBattlefield().getCards());
     }
 }

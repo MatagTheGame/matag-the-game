@@ -48,7 +48,9 @@ public class CoreSet2019 implements MtgSet {
     public static Card LOXODON_LINE_BREAKER = new Card("Loxodon Line Breaker", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Elephant", "Soldier"), COMMON, "", 3, 2, emptyList());
     public static Card MARAUDERS_AXE = new Card("Marauder's Axe", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipped creature gets +2/+0. Equip 2", 0, 0, singletonList(PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0));
     public static Card METEOR_GOLEM = new Card("Meteor Golem", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Golem"), UNCOMMON, "When Meteor Golem enters the battlefield, destroy target nonland permanent an opponent controls.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_NONLAND_OPPONENT_PERMANENT_GET_DESTROYED));
-    public static Card OAKENFORM = new Card("Oakenform", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +3/+3.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_3));
+    public static Card OAKENFORM = new Card("Oakenform", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +3/+3.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_3));
+    public static Card ONAKKE_OGRE = new Card("Onakke Ogre", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Ogre", "Warrior"), COMMON, "", 4, 2, emptyList());
+    public static Card ORESKOS_SWIFTCLAW = new Card("Oreskos Swiftclaw", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Cat", "Warrior"), COMMON, "", 3, 1, emptyList());
     public static Card PRODIGIOUS_GROWTH = new Card("Prodigious Growth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), RARE, "Enchant creature. Enchanted creature gets +7/+7 and has trample.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_7_7_AND_TRAMPLE));
 
     private static CoreSet2019 instance;
@@ -83,7 +85,9 @@ public class CoreSet2019 implements MtgSet {
         cards.add(LOXODON_LINE_BREAKER);
         cards.add(MARAUDERS_AXE);
         cards.add(METEOR_GOLEM);
+        cards.add(ONAKKE_OGRE);
         cards.add(OAKENFORM);
+        cards.add(ORESKOS_SWIFTCLAW);
         cards.add(PRODIGIOUS_GROWTH);
     }
 

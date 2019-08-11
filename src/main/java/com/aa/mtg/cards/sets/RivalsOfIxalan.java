@@ -11,6 +11,7 @@ import java.util.List;
 import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Type.ARTIFACT;
+import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
@@ -23,12 +24,14 @@ public class RivalsOfIxalan implements MtgSet {
 
     public static Card AGGRESSIVE_URGE = new Card("Aggressive Urge", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Target creature gets +1/+1 until end of turn. Draw a card.", 0, 0, asList(TARGET_CREATURE_GETS_PLUS_1_1_UNTIL_END_OF_TURN, DRAW_1_CARD));
     public static Card BOMBARD = new Card("Bombard", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Bombard deals 4 damage to target creature.", 0, 0, singletonList(DEAL_4_DAMAGE_TO_TARGET_CREATURE));
-    public static Card CANAL_MONITOR = new Card("Canal Monitor", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), singletonList("Lizard"), COMMON, "", 5, 3, emptyList());
+    public static Card CANAL_MONITOR = new Card("Canal Monitor", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Lizard"), COMMON, "", 5, 3, emptyList());
     public static Card DEAD_WEIGHT = new Card("Dead Weight", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(Type.ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets -2/-2.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_MINUS_2_2));
     public static Card DIVINE_VERDICT = new Card("Divine Verdict", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Destroy target attacking or blocking creature.", 0, 0, singletonList(DESTROY_TARGET_ATTACKING_OF_BLOCKING_CREATURE));
-    public static Card DUSK_LEGION_ZEALOT = new Card("Dusk Legion Zealot", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Vampire", "Soldier"), COMMON, "When Dusk Legion Zealot enters the battlefield, you draw a card and you lose 1 life.", 1, 1, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD_AND_LOSE_1_LIFE));
-    public static Card EXULTANT_SKYMARCHER = new Card("Exultant Skymarcher", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Vampire", "Soldier"), COMMON, "Flying.", 2, 3, singletonList(FLYING));
-    public static Card JADECRAFT_ARTISAN = new Card("Jadecraft Artisan", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.CREATURE), asList("Merfolk", "Shaman"), COMMON, "When Jadecraft Artisan enters the battlefield, target creature gets +2/+2 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GET_PLUS_2_2));
+    public static Card DUSK_LEGION_ZEALOT = new Card("Dusk Legion Zealot", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList("Vampire", "Soldier"), COMMON, "When Dusk Legion Zealot enters the battlefield, you draw a card and you lose 1 life.", 1, 1, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD_AND_LOSE_1_LIFE));
+    public static Card EXULTANT_SKYMARCHER = new Card("Exultant Skymarcher", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Vampire", "Soldier"), COMMON, "Flying.", 2, 3, singletonList(FLYING));
+    public static Card JADECRAFT_ARTISAN = new Card("Jadecraft Artisan", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Merfolk", "Shaman"), COMMON, "When Jadecraft Artisan enters the battlefield, target creature gets +2/+2 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GET_PLUS_2_2));
+    public static Card ORAZCA_FRILLBACK = new Card("Orazca Frillback", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 4, 3, emptyList());
+    public static Card ORAZCA_RAPTOR = new Card("Orazca Raptor", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 3, 4, emptyList());
     public static Card STRIDER_HARNESS = new Card("Strider Harness", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipped creature gets +1/+1 and has haste. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1_AND_HASTE));
 
     private static RivalsOfIxalan instance;
@@ -45,6 +48,8 @@ public class RivalsOfIxalan implements MtgSet {
         cards.add(DUSK_LEGION_ZEALOT);
         cards.add(EXULTANT_SKYMARCHER);
         cards.add(JADECRAFT_ARTISAN);
+        cards.add(ORAZCA_FRILLBACK);
+        cards.add(ORAZCA_RAPTOR);
         cards.add(STRIDER_HARNESS);
     }
 

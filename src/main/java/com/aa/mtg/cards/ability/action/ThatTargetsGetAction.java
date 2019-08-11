@@ -3,7 +3,6 @@ package com.aa.mtg.cards.ability.action;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.modifiers.PowerToughness;
-import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.player.LifeService;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -54,43 +53,45 @@ public class ThatTargetsGetAction implements AbilityAction {
             } else {
                 int targetCardId = (int) targetId;
 
-                Optional<CardInstance> targetOptional = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
-                        .concat(gameStatus.getNonCurrentPlayer().getBattlefield().getCards())
-                        .withId(targetCardId);
+                Optional<CardInstance> targetOptional = gameStatus.getAllBattlefieldCards().withId(targetCardId);
 
                 if (targetOptional.isPresent()) {
                     CardInstance target = targetOptional.get();
 
-                    PowerToughness powerToughness = powerToughnessFromParameter(parameter);
-                    target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(powerToughness);
-
-                    Optional<Ability> ability = abilityFromParameter(parameter);
-                    ability.ifPresent(value -> target.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
-
-                    int damage = damageFromParameter(parameter);
-                    dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false);
-
-                    int controllerDamage = controllerDamageFromParameter(parameter);
-                    lifeService.subtract(gameStatus.getPlayerByName(cardInstance.getController()), controllerDamage, gameStatus);
-
-                    if (destroyedFromParameter(parameter)) {
-                        destroyTargetService.destroy(gameStatus, targetCardId);
-                    }
-
-                    if (tappedDoesNotUntapNextTurn(parameter)) {
-                        tapTargetService.tapDoesNotUntapNextTurn(gameStatus, targetCardId);
-                    }
-
-                    if (returnToOwnerHand(parameter)) {
-                        returnTargetToHandService.returnTargetToHand(gameStatus, targetCardId);
-                    }
-
-                    LOGGER.info("AbilityActionExecuted: {} target {} which gets {}", cardInstance.getIdAndName(), targetCardId, parameter);
+                    thatTargetGet(cardInstance, gameStatus, parameter, target);
 
                 } else {
                     LOGGER.info("target {} is not anymore valid.", targetCardId);
                 }
             }
         }
+    }
+
+    void thatTargetGet(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
+        PowerToughness powerToughness = powerToughnessFromParameter(parameter);
+        target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(powerToughness);
+
+        Optional<Ability> ability = abilityFromParameter(parameter);
+        ability.ifPresent(value -> target.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
+
+        int damage = damageFromParameter(parameter);
+        dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false);
+
+        int controllerDamage = controllerDamageFromParameter(parameter);
+        lifeService.subtract(gameStatus.getPlayerByName(cardInstance.getController()), controllerDamage, gameStatus);
+
+        if (destroyedFromParameter(parameter)) {
+            destroyTargetService.destroy(gameStatus, target.getId());
+        }
+
+        if (tappedDoesNotUntapNextTurn(parameter)) {
+            tapTargetService.tapDoesNotUntapNextTurn(gameStatus, target.getId());
+        }
+
+        if (returnToOwnerHand(parameter)) {
+            returnTargetToHandService.returnTargetToHand(gameStatus, target.getId());
+        }
+
+        LOGGER.info("AbilityActionExecuted: {} target {} which gets {}", cardInstance.getIdAndName(), target.getId(), parameter);
     }
 }

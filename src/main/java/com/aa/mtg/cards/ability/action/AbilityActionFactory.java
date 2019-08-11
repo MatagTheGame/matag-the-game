@@ -12,19 +12,21 @@ public class AbilityActionFactory {
     private final EachPlayersGainXLifeAction eachPlayersGainXLifeAction;
     private final ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction;
     private final CreaturesYouControlGetXUntilEndOfTurnAction creaturesYouControlGetXUntilEndOfTurnAction;
+    private final OtherCreaturesGetXUntilEndOfTurnAction otherCreaturesGetXUntilEndOfTurnAction;
     private final OtherCreaturesYouControlGetXUntilEndOfTurnAction otherCreaturesYouControlGetXUntilEndOfTurnAction;
     private final AttachAction attachAction;
 
     @Autowired
     public AbilityActionFactory(ThatTargetsGetAction thatTargetsGetAction, DrawXCardsAction drawXCardsAction,
                                 GainXLifeAction gainXLifeAction, EachPlayersGainXLifeAction eachPlayersGainXLifeAction, ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction,
-                                CreaturesYouControlGetXUntilEndOfTurnAction creaturesYouControlGetXUntilEndOfTurnAction, OtherCreaturesYouControlGetXUntilEndOfTurnAction otherCreaturesYouControlGetXUntilEndOfTurnAction, AttachAction attachAction) {
+                                CreaturesYouControlGetXUntilEndOfTurnAction creaturesYouControlGetXUntilEndOfTurnAction, OtherCreaturesGetXUntilEndOfTurnAction otherCreaturesGetXUntilEndOfTurnAction, OtherCreaturesYouControlGetXUntilEndOfTurnAction otherCreaturesYouControlGetXUntilEndOfTurnAction, AttachAction attachAction) {
         this.thatTargetsGetAction= thatTargetsGetAction;
         this.drawXCardsAction = drawXCardsAction;
         this.gainXLifeAction = gainXLifeAction;
         this.eachPlayersGainXLifeAction = eachPlayersGainXLifeAction;
         this.shuffleTargetGraveyardIntoLibraryAction = shuffleTargetGraveyardIntoLibraryAction;
         this.creaturesYouControlGetXUntilEndOfTurnAction = creaturesYouControlGetXUntilEndOfTurnAction;
+        this.otherCreaturesGetXUntilEndOfTurnAction = otherCreaturesGetXUntilEndOfTurnAction;
         this.otherCreaturesYouControlGetXUntilEndOfTurnAction = otherCreaturesYouControlGetXUntilEndOfTurnAction;
         this.attachAction = attachAction;
     }
@@ -47,6 +49,8 @@ public class AbilityActionFactory {
                 return thatTargetsGetAction;
             case CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN:
                 return creaturesYouControlGetXUntilEndOfTurnAction;
+            case OTHER_CREATURES_GET_X_UNTIL_END_OF_TURN:
+                return otherCreaturesGetXUntilEndOfTurnAction;
             case OTHER_CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN:
                 return otherCreaturesYouControlGetXUntilEndOfTurnAction;
             case ENCHANTED_CREATURE_GETS:

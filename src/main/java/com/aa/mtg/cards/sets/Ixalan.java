@@ -11,15 +11,13 @@ import java.util.List;
 import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
-import static com.aa.mtg.cards.properties.Type.ARTIFACT;
-import static com.aa.mtg.cards.properties.Type.CREATURE;
-import static com.aa.mtg.cards.properties.Type.INSTANT;
-import static com.aa.mtg.cards.properties.Type.SORCERY;
+import static com.aa.mtg.cards.properties.Type.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
+import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
 
 public class Ixalan implements MtgSet {
 
@@ -45,11 +43,13 @@ public class Ixalan implements MtgSet {
     public static Card INSPIRING_CLERIC = new Card("Inspiring Cleric", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Vampire", "Cleric"), UNCOMMON, "When Inspiring Cleric enters the battlefield, you gain 4 life.", 3, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_4_LIFE));
     public static Card LEGIONS_JUDGMENT = new Card("Legion's Judgment", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), COMMON, "Destroy target creature with power 4 or greater.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_WITH_POWER_GREATER_OR_EQUAL_4));
     public static Card LOOMING_ALTISAUR = new Card("Looming Altisaur", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 1, 7, emptyList());
-    public static Card MARK_OF_THE_VAMPIRE = new Card("Mark of the Vampire", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has lifelink.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_LIFELINK));
+    public static Card MARK_OF_THE_VAMPIRE = new Card("Mark of the Vampire", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has lifelink.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_LIFELINK));
     public static Card NEST_ROBBER = new Card("Nest Robber", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "Haste", 2, 1, singletonList(HASTE));
-    public static Card ONE_WITH_THE_WIND = new Card("One With the Wind", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has flying.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_FLYING));
+    public static Card ONE_WITH_THE_WIND = new Card("One With the Wind", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has flying.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_FLYING));
+    public static Card QUEENS_BAY_SOLDIER = new Card("Queen's Bay Soldier", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList("Vampire", "Soldier"), COMMON, "", 2, 2, emptyList());
+    public static Card RAGING_SWORDTOOTH = new Card("Raging Swordtooth", asSet(Color.RED, Color.GREEN), asList(Cost.RED, Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), UNCOMMON, "Trample. When Raging Swordtooth enters the battlefield, it deals 1 damage to each other creature.", 5, 5, asList(TRAMPLE, WHEN_IT_ENTERS_THE_BATTLEFIELD_OTHER_CREATURES_GET_ONE_DAMAGE));
     public static Card RILE = new Card("Rile", singleton(Color.RED), singletonList(Cost.RED), singletonList(SORCERY), emptyList(), COMMON, "Rile deals 1 damage to target creature you control. That creature gains trample until end of turn. Draw a card.", 0, 0, asList(DEAL_1_DAMAGE_TO_CREATURE_YOU_CONTROL_THAT_CREATURE_GAINS_TRAMPLE, DRAW_1_CARD));
-    public static Card SWASHBUCKLING = new Card("SwashBuckling", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(Type.ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has haste.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_HASTE));
+    public static Card SWASHBUCKLING = new Card("SwashBuckling", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has haste.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_HASTE));
 
     private static Ixalan instance;
 
@@ -79,6 +79,8 @@ public class Ixalan implements MtgSet {
         cards.add(MARK_OF_THE_VAMPIRE);
         cards.add(NEST_ROBBER);
         cards.add(ONE_WITH_THE_WIND);
+        cards.add(QUEENS_BAY_SOLDIER);
+        cards.add(RAGING_SWORDTOOTH);
         cards.add(RILE);
         cards.add(SWASHBUCKLING);
     }

@@ -1,55 +1,36 @@
 package com.aa.mtg.cards.ability.action;
 
 import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
-import static com.aa.mtg.cards.ability.Abilities.abilityFromParameter;
-import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameter;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 
 @Service
 public class CreaturesYouControlGetXUntilEndOfTurnAction implements AbilityAction {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CreaturesYouControlGetXUntilEndOfTurnAction.class);
-
     private final GameStatusUpdaterService gameStatusUpdaterService;
+    private final ThatTargetsGetAction thatTargetsGetAction;
 
-    public CreaturesYouControlGetXUntilEndOfTurnAction(GameStatusUpdaterService gameStatusUpdaterService) {
+    public CreaturesYouControlGetXUntilEndOfTurnAction(GameStatusUpdaterService gameStatusUpdaterService, ThatTargetsGetAction thatTargetsGetAction) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
+        this.thatTargetsGetAction = thatTargetsGetAction;
     }
 
     @Override
     public void perform(CardInstance cardInstance, GameStatus gameStatus, String parameter) {
-        creaturesGet(cardInstance, gameStatus, parameter, true);
-    }
-
-    void creaturesGet(CardInstance cardInstance, GameStatus gameStatus, String parameter, boolean includeThisCreature) {
-        PowerToughness powerToughness = powerToughnessFromParameter(parameter);
-        Optional<Ability> ability = abilityFromParameter(parameter);
-
-        String controllerString = cardInstance.getController();
-        Player controller = gameStatus.getPlayerByName(controllerString);
+        Player controller = gameStatus.getPlayerByName(cardInstance.getController());
 
         List<CardInstance> cards = new CardInstanceSearch(controller.getBattlefield().getCards()).ofType(CREATURE).getCards();
         for (CardInstance card : cards) {
-            if (!includeThisCreature && card.getId() == cardInstance.getId()) {
-                continue;
-            }
-            card.getModifiers().addExtraPowerToughnessUntilEndOfTurn(powerToughness);
-            ability.ifPresent(value -> card.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
+            thatTargetsGetAction.thatTargetGet(cardInstance, gameStatus, parameter, card);
         }
 
         gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, controller);
-        LOGGER.info("creatures you ({}) control get: {}", controllerString, powerToughness);
     }
+
 }

@@ -185,9 +185,7 @@ public class CardInstance {
     }
 
     public List<CardInstance> getAttachedCards() {
-        return new CardInstanceSearch(gameStatus.getPlayer1().getBattlefield().getCards())
-                .concat(gameStatus.getPlayer2().getBattlefield().getCards())
-                .attachedToId(this.id).getCards();
+        return gameStatus.getAllBattlefieldCards().attachedToId(this.id).getCards();
     }
 
     private int getAttachmentsPower() {

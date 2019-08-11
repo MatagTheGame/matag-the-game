@@ -24,18 +24,18 @@ import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import({CreatureEntersTheBattlefieldWithAbilityTest.InitGameTestConfiguration.class})
-public class CreatureEntersTheBattlefieldWithAbilityTest extends AbstractApplicationTest {
+@Import({CreatureEntersTheBattlefieldWithAbilityAllCreaturesYouControlTest.InitGameTestConfiguration.class})
+public class CreatureEntersTheBattlefieldWithAbilityAllCreaturesYouControlTest extends AbstractApplicationTest {
 
     @Autowired
     private InitTestServiceDecorator initTestServiceDecorator;
 
     public void setupGame() {
-        initTestServiceDecorator.setInitTestService(new CreatureEntersTheBattlefieldWithAbilityTest.InitTestServiceForTest());
+        initTestServiceDecorator.setInitTestService(new CreatureEntersTheBattlefieldWithAbilityAllCreaturesYouControlTest.InitTestServiceForTest());
     }
 
     @Test
-    public void creatureEntersTheBattlefieldWithAbility() {
+    public void creatureEntersTheBattlefieldWithAbilityAllCreaturesYouControl() {
         // When Playing Angel of the Dawn
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 0).tap();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).tap();
