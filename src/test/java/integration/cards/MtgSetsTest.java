@@ -13,8 +13,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = MtgSetsTest.MtgSetsTestConfiguration.class)
@@ -33,6 +40,28 @@ public class MtgSetsTest {
         LOGGER.info("Cards by Types: " + mtgSets.getAllCards().stream().collect(groupingBy(Card::getTypes, counting())));
         LOGGER.info("Cards by Rarity: " + mtgSets.getAllCards().stream().collect(groupingBy(Card::getRarity, counting())));
         LOGGER.info("Cards by Set: " + mtgSets.getAllCards().stream().collect(groupingBy(card -> mtgSets.getSetForCard(card).getName(), counting())));
+    }
+
+    @Test
+    public void allCardsHaveTheirImage() {
+        Set<String> nonExistingImages = new TreeSet<>();
+
+        for (Card card : mtgSets.getAllCards()) {
+            String normalizeCardName = normalizeCardName(card.getName());
+            if (!new File("src/main/resources/public/img/cards/" + normalizeCardName + ".jpg").exists()) {
+                nonExistingImages.add(card.getName() + " - " + normalizeCardName);
+            }
+        }
+
+        assertThat(nonExistingImages).isEmpty();
+    }
+
+    private static String normalizeCardName(String cardName) {
+        return cardName.toLowerCase()
+                .replaceAll(" ", "_")
+                .replaceAll("-", "_")
+                .replaceAll(",", "_")
+                .replaceAll("'", "");
     }
 
     @Configuration

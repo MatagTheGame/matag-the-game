@@ -4,6 +4,7 @@ export default class CardUtils {
   static normalizeCardName(cardName) {
     return cardName.toLowerCase()
       .replace(/ /g, '_')
+      .replace(/-/g, '_')
       .replace(/,/g, '_')
       .replace(/'/g, '')
   }
