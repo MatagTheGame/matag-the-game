@@ -11,9 +11,11 @@ import java.util.List;
 import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
+import static com.aa.mtg.cards.properties.Type.ARTIFACT;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
@@ -46,6 +48,7 @@ public class CoreSet2020 implements MtgSet {
     public static Card SAVANNAH_SAGE = new Card("Savannah Sage", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Cat", "Cleric"), COMMON, "When Savannah Sage enters the battlefield, you gain 2 life.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE));
     public static Card SEDGE_SCORPION = new Card("Sedge Scorpion", asSet(Color.GREEN), singletonList(Cost.GREEN), singletonList(CREATURE), singletonList("Scorption"), COMMON, "Deathtouch.", 1, 1, singletonList(DEATHTOUCH));
     public static Card SIEGE_MASTODON = new Card("Siege Mastodon", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Elephant"), COMMON, "", 3, 5, emptyList());
+    public static Card STONE_GOLEM = new Card("Stone Golem", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Golem"), COMMON, "", 4, 4, emptyList());
 
     private static CoreSet2020 instance;
 
@@ -98,6 +101,8 @@ public class CoreSet2020 implements MtgSet {
         cards.add(SEDGE_SCORPION);
         cards.add(SIEGE_MASTODON);
         cards.add(CoreSet2019.SKELETON_ARCHER);
+        cards.add(CoreSet2019.SNAPPING_DRAKE);
+        cards.add(STONE_GOLEM);
     }
 
     @Override

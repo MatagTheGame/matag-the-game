@@ -3,6 +3,7 @@ package integration.cards.ability;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint;
+import com.aa.mtg.cards.ability.target.TargetType;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.TargetCheckerService;
@@ -530,6 +531,64 @@ public class TargetTest {
 
         // When
         targetCheckerService.check(gameStatus, cardInstance, target, 1);
+
+        // Then an exception is thrown
+    }
+
+    @Test
+    public void targetPlayer() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder().targetType(TargetType.PLAYER).build();
+
+        // When
+        targetCheckerService.check(gameStatus, null, target, "player-name");
+
+        // Then no exception is thrown
+    }
+
+    @Test(expected = MessageException.class)
+    public void targetPlayerException() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder().targetType(TargetType.PLAYER).build();
+
+        // When
+        targetCheckerService.check(gameStatus, null, target, 1);
+
+        // Then an exception is thrown
+    }
+
+    @Test
+    public void targetOpponent() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder().targetType(TargetType.PLAYER).targetControllerType(OPPONENT).build();
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, PLAINS, gameStatus.getCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        targetCheckerService.check(gameStatus, cardInstance, target, "opponent-name");
+
+        // Then no exception is thrown
+    }
+
+    @Test(expected = MessageException.class)
+    public void targetOpponentException() {
+        // Given
+        GameStatus gameStatus = testGameStatus();
+
+        Target target = Target.builder().targetType(TargetType.PLAYER).targetControllerType(OPPONENT).build();
+        CardInstance cardInstance = new CardInstance(gameStatus, 1, PLAINS, gameStatus.getCurrentPlayer().getName());
+        cardInstance.setController(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
+
+        // When
+        targetCheckerService.check(gameStatus, cardInstance, target, "player-name");
 
         // Then an exception is thrown
     }

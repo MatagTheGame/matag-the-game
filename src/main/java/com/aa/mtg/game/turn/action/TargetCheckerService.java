@@ -21,6 +21,7 @@ import static com.aa.mtg.cards.ability.target.TargetStatusType.BLOCKING;
 import static com.aa.mtg.cards.ability.target.TargetType.ANY;
 import static com.aa.mtg.cards.ability.target.TargetType.PERMANENT;
 import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
+import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 
 @Service
 public class TargetCheckerService {
@@ -75,13 +76,21 @@ public class TargetCheckerService {
     public void check(GameStatus gameStatus, CardInstance cardInstance, Target target, Object targetId) {
         if (targetId instanceof String) {
             if (!(target.getTargetType().equals(TargetType.PLAYER) || target.getTargetType().equals(ANY))) {
-                throw new MessageException(targetId + " is not valid for targetType PERMANENT");
+                throw new MessageException(targetId + " is not valid for targetType " + target.getTargetType());
+            }
+
+            if (OPPONENT.equals(target.getTargetControllerType()) && cardInstance.getController().equals(targetId)) {
+                throw new MessageException(targetId + " is not valid for targetType " + target.getTargetType() + " (needs to be an opponent)");
             }
 
         } else {
+            if (target.getTargetType().equals(TargetType.PLAYER)) {
+                throw new MessageException(targetId + " is not valid for targetType " + target.getTargetType());
+            }
+
             int targetCardId = (int) targetId;
             if (cardInstance.getId() == targetCardId && target.isAnother()) {
-                throw new MessageException("Selected targets were not valid.");
+                throw new MessageException("Selected targets were not valid (cannot target itself).");
             }
 
             CardInstanceSearch cards = getPossibleTargetCardInstances(gameStatus, target);
@@ -126,7 +135,7 @@ public class TargetCheckerService {
 
         if (target.getTargetControllerType() == PlayerType.PLAYER) {
             cards = cards.controlledBy(gameStatus.getCurrentPlayer().getName());
-        } else if (target.getTargetControllerType() == PlayerType.OPPONENT) {
+        } else if (target.getTargetControllerType() == OPPONENT) {
             cards = cards.controlledBy(gameStatus.getNonCurrentPlayer().getName());
         }
 

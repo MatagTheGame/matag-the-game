@@ -97,6 +97,7 @@ public class Abilities {
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD = new Ability(DRAW_X_CARDS, emptyList(), singletonList("1"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD_AND_LOSE_1_LIFE = new Ability(asList(DRAW_X_CARDS, ADD_X_LIFE), emptyList(), asList("1", "-1"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD_AND_GAIN_3_LIFE = new Ability(asList(DRAW_X_CARDS, ADD_X_LIFE), emptyList(), asList("1", "3"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
+    public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_1_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("2"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("2"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_3_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("3"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_4_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("4"), new Trigger(TRIGGERED_ABILITY, WHEN_IT_ENTERS_THE_BATTLEFIELD));
