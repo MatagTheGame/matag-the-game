@@ -44,7 +44,7 @@ public class CastMultipleInstantsTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 3).click();
         browser.player1().getHandHelper(PLAYER).getFirstCard(ENGULFING_ERUPTION).click();
         browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(DOUSER_OF_LIGHTS).click();
-        // TODO one spell on the stack
+        browser.player1().getStackHelper().contains(ENGULFING_ERUPTION);
 
         // Then player 2 can cast a spell to reinforce its creature and don't let it die
         browser.player2().getPhaseHelper().is(M1, PLAYER);
@@ -52,21 +52,21 @@ public class CastMultipleInstantsTest extends AbstractApplicationTest {
         browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(SWAMP, 1).click();
         browser.player2().getHandHelper(PLAYER).getFirstCard(DARK_REMEDY).click();
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(DOUSER_OF_LIGHTS).click();
-        // TODO two spells on the stack
+        browser.player2().getStackHelper().contains(ENGULFING_ERUPTION, DARK_REMEDY);
 
         // Player 1 continues
         browser.player1().getPhaseHelper().is(M1, PLAYER);
         browser.player1().getActionHelper().clickContinue();
         browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(DOUSER_OF_LIGHTS).hasPowerAndToughness("5/8");
-        // TODO one spell on the stack
+        browser.player1().getStackHelper().contains(ENGULFING_ERUPTION);
+        browser.player1().getGraveyardHelper(OPPONENT).contains(DARK_REMEDY);
 
         // Players 2 continues
         browser.player2().getPhaseHelper().is(M1, PLAYER);
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(DOUSER_OF_LIGHTS).hasPowerAndToughness("5/8");
         browser.player2().getActionHelper().clickContinue();
-        // TODO zero spell on the stack
-
-        System.out.println();
+        browser.player2().getStackHelper().isEmpty();
+        browser.player2().getGraveyardHelper(OPPONENT).contains(ENGULFING_ERUPTION);
     }
 
     static class InitTestServiceForTest extends InitTestService {

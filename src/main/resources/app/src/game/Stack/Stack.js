@@ -8,32 +8,27 @@ import {TriggeredAbility} from './TriggeredAbility'
 
 class Stack extends Component {
 
-  static renderCastedCard(cardInstance) {
-    return (
-      <span key={cardInstance.id}>
-        <Card cardInstance={cardInstance} area='stack'/>
-      </span>
-    )
-  }
-
-  static renderTriggeredStackAbility(cardInstance) {
-    return (
-      <span key={cardInstance.id}>
-        <TriggeredAbility cardInstance={cardInstance} />
-      </span>
-    )
-  }
-
-  renderStackItem(cardInstance) {
+  static renderStackItem(cardInstance, i) {
+    const style = {transform: 'translateY(-150px) translateX(' + (i * 50) + 'px) translateZ(' + (i * 150) + 'px)'}
+    console.log(style)
     if (StackUtils.isACastedCard(cardInstance)) {
-      return Stack.renderCastedCard(cardInstance)
+      return (
+        <span key={cardInstance.id} style={style}>
+          <Card cardInstance={cardInstance} area='stack'/>
+        </span>
+      )
+
     } else {
-      return Stack.renderTriggeredStackAbility(cardInstance)
+      return (
+        <span key={cardInstance.id} style={style}>
+          <TriggeredAbility cardInstance={cardInstance} />
+        </span>
+      )
     }
   }
 
   renderStack() {
-    return this.props.stack.items.map((cardInstance) => this.renderStackItem(cardInstance))
+    return this.props.stack.items.map((cardInstance, index) => Stack.renderStackItem(cardInstance, index))
   }
 
   render() {

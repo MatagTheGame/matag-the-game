@@ -507,6 +507,10 @@ span.group {
   box-shadow: 50px 100px 4px rgba(0, 0, 0, 0.4);
 }
 
+#stack span {
+  position: absolute;
+}
+
 #table {
   background-image: url("/img/materials/wood.jpg");
   position: absolute;
