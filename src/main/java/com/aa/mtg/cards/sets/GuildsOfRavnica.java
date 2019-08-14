@@ -35,6 +35,7 @@ public class GuildsOfRavnica implements MtgSet {
     public static Card MUSE_DRAKE = new Card("Muse Drake", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Drake"), COMMON, "Flying. When Muse Drake enters the battlefield, draw a card.", 1, 3, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
     public static Card RUBBLEBELT_BOAR = new Card("Rubblebelt Boar", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Boar"), COMMON, "When Rubblebelt Boar enters the battlefield, target creature gets +2/+0 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_2_0));
     public static Card SKYKNIGHT_LEGIONNAIRE = new Card("Skyknight Legionnaire", asSet(Color.RED, Color.WHITE), asList(Cost.RED, Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Knight"), COMMON, "Flying, haste.", 2, 2, asList(FLYING, HASTE));
+    public static Card TENTH_DISTRICT_GUARD = new Card("Tenth District Guard", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Soldier"), COMMON, "When Tenth District Guard enters the battlefield, target creature gets +0/+1 until end of turn.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_0_1));
 
     private static GuildsOfRavnica instance;
 
@@ -56,6 +57,7 @@ public class GuildsOfRavnica implements MtgSet {
         cards.add(MUSE_DRAKE);
         cards.add(RUBBLEBELT_BOAR);
         cards.add(SKYKNIGHT_LEGIONNAIRE);
+        cards.add(TENTH_DISTRICT_GUARD);
     }
 
     @Override

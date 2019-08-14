@@ -58,6 +58,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card SKELETON_ARCHER = new Card("Skeleton Archer", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Skeleton", "Archer"), COMMON, "When Skeleton Archer enters the battlefield, it deals 1 damage to any target.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_ANY_TARGET_GET_1_DAMAGE));
     public static Card SKYSCANNER = new Card("Skyscanner", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Thopter"), COMMON, "Flying. When Skyscanner enters the battlefield, draw a card.", 1, 1, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
     public static Card SNAPPING_DRAKE = new Card("Snapping Drake", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Drake"), COMMON, "Flying.", 3, 2, singletonList(FLYING));
+    public static Card THORNHIDE_WOLVES = new Card("Thornhide Wolves", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Wolf"), COMMON, "", 4, 5, emptyList());
 
     private static CoreSet2019 instance;
 
@@ -99,6 +100,8 @@ public class CoreSet2019 implements MtgSet {
         cards.add(RUSTWING_FALCON);
         cards.add(SKELETON_ARCHER);
         cards.add(SKYSCANNER);
+        cards.add(RivalsOfIxalan.SUN_SENTINEL);
+        cards.add(THORNHIDE_WOLVES);
     }
 
     @Override

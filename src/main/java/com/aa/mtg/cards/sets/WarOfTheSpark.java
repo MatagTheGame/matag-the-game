@@ -36,6 +36,8 @@ public class WarOfTheSpark implements MtgSet {
     public static Card LAZOTEP_BEHEMOTH = new Card("Lazotep Behemoth", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Zombie", "Hippo"), COMMON, "", 5, 4, emptyList());
     public static Card LOXODON_SERGEANT = new Card("Loxodon Sergeant", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Elephant", "Soldier"), COMMON, "Vigilance. When Loxodon Sergeant enters the battlefield, other creatures you control gain vigilance until end of turn.", 3, 3, asList(VIGILANCE, WHEN_IT_ENTERS_THE_BATTLEFIELD_OTHER_CREATURES_YOU_CONTROL_GET_VIGILANCE_UNTIL_END_OF_TURN));
     public static Card NAGA_ETERNAL = new Card("Naga Eternal", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Zombie", "Naga"), COMMON, "", 3, 2, emptyList());
+    public static Card THUNDERING_CERATOK = new Card("Thundering Ceratok", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Rhino"), COMMON, "Trample. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.", 4, 5, asList(TRAMPLE, WHEN_IT_ENTERS_THE_BATTLEFIELD_OTHER_CREATURES_YOU_CONTROL_GET_TRAMPLE_UNTIL_END_OF_TURN));
+    public static Card TITHEBEARER_GIANT = new Card("Tithebearer Giant", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Giant", "Warrior"), COMMON, "When Tithebearer Giant enters the battlefield, you draw a card and you lose 1 life. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.", 4, 5, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD_AND_LOSE_1_LIFE));
 
 
     private static WarOfTheSpark instance;
@@ -59,6 +61,8 @@ public class WarOfTheSpark implements MtgSet {
         cards.add(LOXODON_SERGEANT);
         cards.add(NAGA_ETERNAL);
         cards.add(Dominaria.PRIMORDIAL_WURM);
+        cards.add(THUNDERING_CERATOK);
+        cards.add(TITHEBEARER_GIANT);
     }
 
     @Override
