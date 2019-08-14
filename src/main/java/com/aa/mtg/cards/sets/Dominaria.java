@@ -13,6 +13,7 @@ import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Type.ARTIFACT;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
+import static com.aa.mtg.cards.properties.Type.LEGENDARY;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -40,6 +41,8 @@ public class Dominaria implements MtgSet {
     public static Card PYROMANTIC_PILGRIM = new Card("Pyromantic Pilgrim", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Wizard"), COMMON, "Haste", 3, 1, singletonList(HASTE));
     public static Card SERRA_ANGEL = new Card("Serra Angel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Angel"), UNCOMMON, "Flying, vigilance", 4, 4, asList(FLYING, VIGILANCE));
     public static Card SHORT_SWORD = new Card("Short Sword", emptySet(), singletonList(Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipment Creatures get +1/+1. Equip 2", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1));
+    public static Card TOLARIAN_SCOLAR = new Card("Tolarian Scolar", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Wizard"), COMMON, "", 2, 3, emptyList());
+    public static Card YARGLE_GLUTTON_OF_URBORG = new Card("Yargle, Glutton of Urborg", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(LEGENDARY, CREATURE), asList("Frog", "Spirit"), UNCOMMON, "", 9, 3, emptyList());
 
     private static Dominaria instance;
 
@@ -62,6 +65,8 @@ public class Dominaria implements MtgSet {
         cards.add(PYROMANTIC_PILGRIM);
         cards.add(SERRA_ANGEL);
         cards.add(SHORT_SWORD);
+        cards.add(TOLARIAN_SCOLAR);
+        cards.add(YARGLE_GLUTTON_OF_URBORG);
     }
 
     @Override

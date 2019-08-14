@@ -38,6 +38,8 @@ public class RivalsOfIxalan implements MtgSet {
     public static Card STRIDER_HARNESS = new Card("Strider Harness", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipped creature gets +1/+1 and has haste. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1_AND_HASTE));
     public static Card SWAB_GOBLIN = new Card("Swab Goblin", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), asList("Goblin", "Pirate"), COMMON, "", 2, 2, emptyList());
     public static Card SWORN_GUARDIAN = new Card("Sworn Guardian", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), asList("Merfolk", "Warrior"), COMMON, "", 1, 3, emptyList());
+    public static Card VAMPIRE_CHAMPION = new Card("Vampire Champion", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Vampire", "Soldier"), COMMON, "Deathtouch.", 3, 3, singletonList(DEATHTOUCH));
+    public static Card VAMPIRE_REVENANT = new Card("Vampire Revenant", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Vampire", "Spirit"), COMMON, "Flying.", 3, 1, singletonList(FLYING));
 
     private static RivalsOfIxalan instance;
 
@@ -61,6 +63,8 @@ public class RivalsOfIxalan implements MtgSet {
         cards.add(STRIDER_HARNESS);
         cards.add(SWAB_GOBLIN);
         cards.add(SWORN_GUARDIAN);
+        cards.add(VAMPIRE_CHAMPION);
+        cards.add(VAMPIRE_REVENANT);
     }
 
     @Override

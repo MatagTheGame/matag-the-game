@@ -17,5 +17,6 @@ public enum Type {
     CONSPIRACY,
     TOKEN,
     EMBLEM,
-    HERO
+    HERO,
+    LEGENDARY
 }

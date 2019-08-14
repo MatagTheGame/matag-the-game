@@ -49,6 +49,10 @@ public class CoreSet2020 implements MtgSet {
     public static Card SEDGE_SCORPION = new Card("Sedge Scorpion", asSet(Color.GREEN), singletonList(Cost.GREEN), singletonList(CREATURE), singletonList("Scorption"), COMMON, "Deathtouch.", 1, 1, singletonList(DEATHTOUCH));
     public static Card SIEGE_MASTODON = new Card("Siege Mastodon", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Elephant"), COMMON, "", 3, 5, emptyList());
     public static Card STONE_GOLEM = new Card("Stone Golem", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Golem"), COMMON, "", 4, 4, emptyList());
+    public static Card VAMPIRE_OF_THE_DIRE_MOON = new Card("Vampire of the Dire Moon", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(CREATURE), singletonList("Vampire"), UNCOMMON, "Deathtouch. Lifelink", 1, 1, asList(DEATHTOUCH, LIFELINK));
+    public static Card VORSTCLAW = new Card("Vorstclaw", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Elemental", "Horror"), UNCOMMON, "", 7, 7, emptyList());
+    public static Card YAROKS_WEAVECRASHER = new Card("Yaroks Wavecrasher", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Elemental"), UNCOMMON, "When Yarok's Wavecrasher enters the battlefield, return another creature you control to its owner's hand.", 4, 4, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_RETURN_ANOTHER_TARGET_CREATURE_YOU_CONTROL_TO_ITS_OWNER_HAND));
+    public static Card YOKED_OX = new Card("Yoked Ox", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(CREATURE), singletonList("Ox"), COMMON, "", 0, 4, emptyList());
 
     private static CoreSet2020 instance;
 
@@ -103,6 +107,11 @@ public class CoreSet2020 implements MtgSet {
         cards.add(CoreSet2019.SKELETON_ARCHER);
         cards.add(CoreSet2019.SNAPPING_DRAKE);
         cards.add(STONE_GOLEM);
+        cards.add(VAMPIRE_OF_THE_DIRE_MOON);
+        cards.add(VORSTCLAW);
+        cards.add(CoreSet2019.WALKING_CORPSE);
+        cards.add(YAROKS_WEAVECRASHER);
+        cards.add(YOKED_OX);
     }
 
     @Override

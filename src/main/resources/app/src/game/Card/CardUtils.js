@@ -5,7 +5,7 @@ export default class CardUtils {
     return cardName.toLowerCase()
       .replace(/ /g, '_')
       .replace(/-/g, '_')
-      .replace(/,/g, '_')
+      .replace(/,/g, '')
       .replace(/'/g, '')
   }
 

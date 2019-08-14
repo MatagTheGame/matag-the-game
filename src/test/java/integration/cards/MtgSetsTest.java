@@ -60,7 +60,7 @@ public class MtgSetsTest {
         return cardName.toLowerCase()
                 .replaceAll(" ", "_")
                 .replaceAll("-", "_")
-                .replaceAll(",", "_")
+                .replaceAll(",", "")
                 .replaceAll("'", "");
     }
 

@@ -36,6 +36,9 @@ public class GuildsOfRavnica implements MtgSet {
     public static Card RUBBLEBELT_BOAR = new Card("Rubblebelt Boar", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Boar"), COMMON, "When Rubblebelt Boar enters the battlefield, target creature gets +2/+0 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_2_0));
     public static Card SKYKNIGHT_LEGIONNAIRE = new Card("Skyknight Legionnaire", asSet(Color.RED, Color.WHITE), asList(Cost.RED, Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Knight"), COMMON, "Flying, haste.", 2, 2, asList(FLYING, HASTE));
     public static Card TENTH_DISTRICT_GUARD = new Card("Tenth District Guard", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Soldier"), COMMON, "When Tenth District Guard enters the battlefield, target creature gets +0/+1 until end of turn.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_0_1));
+    public static Card WARY_OKAPY = new Card("Wary Okapi", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Antelope"), COMMON, "Vigilance", 3, 2, singletonList(VIGILANCE));
+    public static Card WILD_CERATOK = new Card("Wild Ceratok", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Rhino"), COMMON, "", 4, 3, emptyList());
+    public static Card WISHCOIN_CRAB = new Card("Wishcoin Crab", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Crab"), COMMON, "", 2, 5, emptyList());
 
     private static GuildsOfRavnica instance;
 
@@ -58,6 +61,9 @@ public class GuildsOfRavnica implements MtgSet {
         cards.add(RUBBLEBELT_BOAR);
         cards.add(SKYKNIGHT_LEGIONNAIRE);
         cards.add(TENTH_DISTRICT_GUARD);
+        cards.add(WARY_OKAPY);
+        cards.add(WILD_CERATOK);
+        cards.add(WISHCOIN_CRAB);
     }
 
     @Override

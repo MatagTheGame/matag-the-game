@@ -53,6 +53,7 @@ public class Ixalan implements MtgSet {
     public static Card SHINING_AEROSAUR = new Card("Shining Aerosaur", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "Flying.", 3, 4, singletonList(FLYING));
     public static Card SKYBLADE_OF_THE_LEGION = new Card("Skyblade of the Legion", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Vampire", "Solder"), COMMON, "Flying.", 1, 3, singletonList(FLYING));
     public static Card SWASHBUCKLING = new Card("SwashBuckling", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has haste.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_HASTE));
+    public static Card WATERTRAP_WEAVER = new Card("Watertrap Weaver", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Merfolk", "Wizard"), COMMON, "When Watertrap Weaver enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_CREATURE_GETS_TAPPED_DOES_NOT_UNTAP_NEXT_TURN));
 
     private static Ixalan instance;
 
@@ -89,6 +90,7 @@ public class Ixalan implements MtgSet {
         cards.add(SHINING_AEROSAUR);
         cards.add(SKYBLADE_OF_THE_LEGION);
         cards.add(SWASHBUCKLING);
+        cards.add(WATERTRAP_WEAVER);
     }
 
     @Override
