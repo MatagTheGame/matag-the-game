@@ -95,8 +95,8 @@ export default class PlayerUtils {
   }
 
   static cast(state, cardId, targetsIdsForCardIds, playedAbility) {
-    const currentManaIds = CostUtils.currentManaCardIds(state.player.battlefield)
-    stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], tappingLandIds: currentManaIds, targetsIdsForCardIds: targetsIdsForCardIds, playedAbility: playedAbility})
+    const mana = CostUtils.currentTappedMana(state.player.battlefield)
+    stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], mana: mana, targetsIdsForCardIds: targetsIdsForCardIds, playedAbility: playedAbility})
   }
 
   static handleSelectTargets(state, cardInstance, ability) {

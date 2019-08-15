@@ -41,8 +41,8 @@ public class TurnService {
         playLandService.playLand(gameStatus, cardId);
     }
 
-    void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
-        castService.cast(gameStatus, cardId, tappingLandIds, targetsIdsForCardIds, playedAbility);
+    void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
+        castService.cast(gameStatus, cardId, mana, targetsIdsForCardIds, playedAbility);
     }
 
     void resolve(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {

@@ -34,7 +34,7 @@ public class CastService {
         this.targetCheckerService = targetCheckerService;
     }
 
-    public void cast(GameStatus gameStatus, int cardId, List<Integer> tappingLandIds, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
+    public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
         Turn turn = gameStatus.getTurn();
         Player activePlayer = gameStatus.getActivePlayer();
 
@@ -52,7 +52,7 @@ public class CastService {
             throw new MessageException("You can only play Instants during a NON main phases.");
 
         } else {
-            checkSpellOrAbilityCost(tappingLandIds, activePlayer, cardToCast, playedAbility);
+            checkSpellOrAbilityCost(mana, activePlayer, cardToCast, playedAbility);
             targetCheckerService.checkSpellOrAbilityTargetRequisites(cardToCast, gameStatus, targetsIdsForCardIds, playedAbility);
 
             if (castedFrom.equals("HAND")) {
@@ -75,29 +75,30 @@ public class CastService {
             gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
             // FIXME Antonio: Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
-            tappingLandIds.stream()
-                    .map(tappingLandId -> activePlayer.getBattlefield().findCardById(tappingLandId))
+            mana.keySet().stream()
+                    .map(cardInstanceId -> activePlayer.getBattlefield().findCardById(cardInstanceId))
                     .forEach(card -> card.getModifiers().tap());
             gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, activePlayer);
         }
     }
 
-    private void checkSpellOrAbilityCost(List<Integer> tappingLandIds, Player currentPlayer, CardInstance cardToCast, String ability) {
-        ArrayList<Color> paidCost = getManaPaid(tappingLandIds, currentPlayer);
+    private void checkSpellOrAbilityCost(Map<Integer, List<String>> mana, Player currentPlayer, CardInstance cardToCast, String ability) {
+        ArrayList<Color> paidCost = getManaPaid(mana, currentPlayer);
         if (!CostUtils.isCastingCostFulfilled(cardToCast.getCard(), paidCost, ability)) {
             throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
         }
     }
 
-    private ArrayList<Color> getManaPaid(List<Integer> tappingLandIds, Player currentPlayer) {
+    private ArrayList<Color> getManaPaid(Map<Integer, List<String>> mana, Player currentPlayer) {
         ArrayList<Color> paidCost = new ArrayList<>();
-        for (int tappingLandId : tappingLandIds) {
-            CardInstance landToTap = currentPlayer.getBattlefield().findCardById(tappingLandId);
+        for (int cardInstanceId : mana.keySet()) {
+            CardInstance landToTap = currentPlayer.getBattlefield().findCardById(cardInstanceId);
             if (!landToTap.isOfType(Type.LAND)) {
                 throw new MessageException("The card you are trying to tap for mana is not a land.");
             } else if (landToTap.getModifiers().isTapped()) {
                 throw new MessageException("The land you are trying to tap is already tapped.");
             }
+            // FIXME choose the color passed into mana
             paidCost.add(landToTap.getCard().getColors().iterator().next());
         }
         return paidCost;

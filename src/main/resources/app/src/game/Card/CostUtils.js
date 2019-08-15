@@ -8,11 +8,17 @@ export default class CostUtils {
       .map(cardInstance => cardInstance.card.colors[0])
   }
 
-  static currentManaCardIds(battlefield) {
-    return CardSearch.cards(battlefield)
+  static currentTappedMana(battlefield) {
+    const map = {}
+
+    CardSearch.cards(battlefield)
       .ofType('LAND')
       .frontEndTapped()
-      .map(cardInstance => cardInstance.id)
+      .forEach(cardInstance => {
+        map[cardInstance.id] = [cardInstance.card.colors[0]]
+      })
+
+    return map
   }
 
   static isCastingCostFulfilled(card, manaPaid) {

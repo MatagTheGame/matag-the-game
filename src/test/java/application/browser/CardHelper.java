@@ -80,6 +80,7 @@ public class CardHelper {
 
     public void isTapped() {
         hasClass("tapped");
+        doesNotHaveClass("frontend-tapped");
     }
 
     public void isTappedDoesNotUntapNextTurn() {
