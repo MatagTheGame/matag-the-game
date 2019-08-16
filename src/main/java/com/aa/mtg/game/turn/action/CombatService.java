@@ -6,7 +6,7 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import static com.aa.mtg.cards.ability.type.AbilityType.DEATHTOUCH;
 import static com.aa.mtg.cards.ability.type.AbilityType.LIFELINK;
 import static com.aa.mtg.cards.ability.type.AbilityType.TRAMPLE;
 
-@Service
+@Component
 public class CombatService {
     private final GameStatusUpdaterService gameStatusUpdaterService;
     private final LifeService lifeService;

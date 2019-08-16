@@ -4,12 +4,12 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.status.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import static com.aa.mtg.cards.properties.Type.ARTIFACT;
 import static com.aa.mtg.cards.properties.Type.ENCHANTMENT;
 
-@Service
+@Component
 public class DestroyTargetService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DestroyTargetService.class);
 

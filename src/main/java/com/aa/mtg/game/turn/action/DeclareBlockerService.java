@@ -6,14 +6,14 @@ import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 
 import static com.aa.mtg.game.turn.phases.DeclareBlockersPhase.DB;
 
-@Service
+@Component
 public class DeclareBlockerService {
 
     private final GameStatusUpdaterService gameStatusUpdaterService;

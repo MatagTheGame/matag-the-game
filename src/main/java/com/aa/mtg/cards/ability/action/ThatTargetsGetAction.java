@@ -13,13 +13,13 @@ import com.aa.mtg.game.turn.action.TapTargetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
 
-@Service
+@Component
 public class ThatTargetsGetAction implements AbilityAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(ThatTargetsGetAction.class);
 

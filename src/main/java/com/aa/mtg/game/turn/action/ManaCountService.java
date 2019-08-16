@@ -6,7 +6,7 @@ import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Map;
 
 import static com.aa.mtg.cards.properties.Cost.fromColor;
 
-@Service
+@Component
 public class ManaCountService {
 
     ArrayList<Cost> verifyManaPaid(Map<Integer, List<String>> mana, Player currentPlayer) {

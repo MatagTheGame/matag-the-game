@@ -11,7 +11,7 @@ import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.PlayerType;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +23,7 @@ import static com.aa.mtg.cards.ability.target.TargetType.PERMANENT;
 import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 
-@Service
+@Component
 public class TargetCheckerService {
 
     private final AbilityActionFactory abilityActionFactory;

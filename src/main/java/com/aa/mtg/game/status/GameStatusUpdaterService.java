@@ -4,11 +4,11 @@ import com.aa.mtg.game.event.Event;
 import com.aa.mtg.game.event.EventSender;
 import com.aa.mtg.game.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import static java.util.Arrays.asList;
 
-@Service
+@Component
 public class GameStatusUpdaterService {
 
     private final EventSender eventSender;

@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.phases;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import static com.aa.mtg.game.turn.phases.AfterDeclareBlockersPhase.AB;
 import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
@@ -18,7 +18,7 @@ import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
 import static com.aa.mtg.game.turn.phases.UntapPhase.UT;
 import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
 
-@Service
+@Component
 public class PhaseFactory {
 
     private final UntapPhase untapPhase;

@@ -5,11 +5,11 @@ import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import static java.lang.Integer.parseInt;
 
-@Service
+@Component
 public class AttachAction implements AbilityAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(AttachAction.class);
 

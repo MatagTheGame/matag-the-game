@@ -8,12 +8,12 @@ import com.aa.mtg.game.turn.action.DeclareBlockerService;
 import com.aa.mtg.game.turn.action.PlayLandService;
 import com.aa.mtg.game.turn.action.ResolveService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Component
 public class TurnService {
 
     private final ContinueTurnService continueTurnService;

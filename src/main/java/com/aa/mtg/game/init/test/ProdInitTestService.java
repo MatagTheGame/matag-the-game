@@ -2,7 +2,7 @@ package com.aa.mtg.game.init.test;
 
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import static com.aa.mtg.cards.Cards.*;
 import static com.aa.mtg.cards.sets.CoreSet2019.MARAUDERS_AXE;
@@ -15,7 +15,7 @@ import static com.aa.mtg.cards.sets.RivalsOfIxalan.DEAD_WEIGHT;
 import static com.aa.mtg.cards.sets.WarOfTheSpark.BULWARK_GIANT;
 
 @Profile("test")
-@Service
+@Component
 public class ProdInitTestService extends InitTestService {
 
     @Override

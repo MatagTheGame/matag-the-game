@@ -1,12 +1,12 @@
 package com.aa.mtg.game.status;
 
 import com.aa.mtg.game.security.SecurityHelper;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+@Component
 public class GameStatusRepository {
 
     private Map<String, GameStatus> games = new HashMap<>();

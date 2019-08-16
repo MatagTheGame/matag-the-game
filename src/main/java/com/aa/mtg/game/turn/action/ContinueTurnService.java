@@ -4,9 +4,9 @@ import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.phases.Phase;
 import com.aa.mtg.game.turn.phases.PhaseFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class ContinueTurnService {
 
     private final PhaseFactory phaseFactory;

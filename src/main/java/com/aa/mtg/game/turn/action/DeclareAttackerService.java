@@ -5,11 +5,11 @@ import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Service
+@Component
 public class DeclareAttackerService {
 
     private final GameStatusUpdaterService gameStatusUpdaterService;

@@ -8,14 +8,14 @@ import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_IT_ENTERS_THE_BATTLEFIELD;
 import static com.aa.mtg.cards.ability.type.AbilityType.ENTERS_THE_BATTLEFIELD_TAPPED;
 import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 
-@Service
+@Component
 public class EnterCardIntoBattlefieldService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EnterCardIntoBattlefieldService.class);
