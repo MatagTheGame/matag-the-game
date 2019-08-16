@@ -1,42 +1,30 @@
 package com.aa.mtg.cards;
 
-import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
+import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 
 public class CostUtils {
 
-    public static boolean isCastingCostFulfilled(Card card, List<Color> manaPaid, String ability) {
-        ArrayList<Color> manaPaidCopy = new ArrayList<>(manaPaid);
+    public static boolean isCastingCostFulfilled(Card card, List<Cost> manaPaid, String ability) {
+        ArrayList<Cost> manaPaidCopy = new ArrayList<>(manaPaid);
 
         for (Cost cost : getCost(card, ability)) {
             boolean removed = false;
-            switch (cost) {
-                case WHITE:
-                    removed = manaPaidCopy.remove(Color.WHITE);
-                    break;
-                case BLUE:
-                    removed = manaPaidCopy.remove(Color.BLUE);
-                    break;
-                case BLACK:
-                    removed = manaPaidCopy.remove(Color.BLACK);
-                    break;
-                case RED:
-                    removed = manaPaidCopy.remove(Color.RED);
-                    break;
-                case GREEN:
-                    removed = manaPaidCopy.remove(Color.GREEN);
-                    break;
-                case COLORLESS:
-                    if (manaPaidCopy.size() > 0) {
-                        manaPaidCopy.remove(0);
-                        removed = true;
-                    }
+
+            if (cost == COLORLESS) {
+                if (manaPaidCopy.size() > 0) {
+                    manaPaidCopy.remove(0);
+                    removed = true;
+                }
+            } else {
+                removed = manaPaidCopy.remove(cost);
             }
+
 
             if (!removed) {
                 return false;

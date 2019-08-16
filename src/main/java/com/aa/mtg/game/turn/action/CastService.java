@@ -4,7 +4,7 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CostUtils;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.properties.Color;
-import com.aa.mtg.cards.properties.Type;
+import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -27,11 +27,13 @@ public class CastService {
 
     private final GameStatusUpdaterService gameStatusUpdaterService;
     private final TargetCheckerService targetCheckerService;
+    private final ManaCountService manaCountService;
 
     @Autowired
-    public CastService(GameStatusUpdaterService gameStatusUpdaterService, TargetCheckerService targetCheckerService) {
+    public CastService(GameStatusUpdaterService gameStatusUpdaterService, TargetCheckerService targetCheckerService, ManaCountService manaCountService) {
         this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.targetCheckerService = targetCheckerService;
+        this.manaCountService = manaCountService;
     }
 
     public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
@@ -83,24 +85,11 @@ public class CastService {
     }
 
     private void checkSpellOrAbilityCost(Map<Integer, List<String>> mana, Player currentPlayer, CardInstance cardToCast, String ability) {
-        ArrayList<Color> paidCost = getManaPaid(mana, currentPlayer);
+        List<Cost> paidCost = manaCountService.verifyManaPaid(mana, currentPlayer);
         if (!CostUtils.isCastingCostFulfilled(cardToCast.getCard(), paidCost, ability)) {
             throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
         }
     }
 
-    private ArrayList<Color> getManaPaid(Map<Integer, List<String>> mana, Player currentPlayer) {
-        ArrayList<Color> paidCost = new ArrayList<>();
-        for (int cardInstanceId : mana.keySet()) {
-            CardInstance landToTap = currentPlayer.getBattlefield().findCardById(cardInstanceId);
-            if (!landToTap.isOfType(Type.LAND)) {
-                throw new MessageException("The card you are trying to tap for mana is not a land.");
-            } else if (landToTap.getModifiers().isTapped()) {
-                throw new MessageException("The land you are trying to tap is already tapped.");
-            }
-            // FIXME choose the color passed into mana
-            paidCost.add(landToTap.getCard().getColors().iterator().next());
-        }
-        return paidCost;
-    }
+
 }

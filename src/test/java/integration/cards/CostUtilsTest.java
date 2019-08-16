@@ -2,26 +2,26 @@ package integration.cards;
 
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CostUtils;
-import com.aa.mtg.cards.properties.Color;
+import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.cards.sets.RavnicaAllegiance;
 import org.junit.Test;
 
 import java.util.Collections;
 import java.util.List;
 
-import static com.aa.mtg.cards.properties.Color.GREEN;
-import static com.aa.mtg.cards.properties.Color.RED;
-import static com.aa.mtg.cards.properties.Color.WHITE;
+import static com.aa.mtg.cards.properties.Cost.GREEN;
+import static com.aa.mtg.cards.properties.Cost.RED;
+import static com.aa.mtg.cards.properties.Cost.WHITE;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CostUtilsTest {
 
     @Test
-    public void isCastingCostFulfilledFeralMaakaCorrectColors() {
+    public void isCastingCostFulfilledFeralMaakaCorrectCosts() {
         // Given
         Card card = RavnicaAllegiance.FERAL_MAAKA;
-        List<Color> manaPaid = asList(GREEN, RED);
+        List<Cost> manaPaid = asList(GREEN, RED);
 
         // When
         boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
@@ -34,7 +34,7 @@ public class CostUtilsTest {
     public void isCastingCostFulfilledFeralMaakaNoMana() {
         // Given
         Card card = RavnicaAllegiance.FERAL_MAAKA;
-        List<Color> manaPaid = Collections.emptyList();
+        List<Cost> manaPaid = Collections.emptyList();
 
         // When
         boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
@@ -44,10 +44,10 @@ public class CostUtilsTest {
     }
 
     @Test
-    public void isCastingCostFulfilledFeralMaakaWrongColor() {
+    public void isCastingCostFulfilledFeralMaakaWrongCost() {
         // Given
         Card card = RavnicaAllegiance.FERAL_MAAKA;
-        List<Color> manaPaid = asList(WHITE, GREEN);
+        List<Cost> manaPaid = asList(WHITE, GREEN);
 
         // When
         boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
@@ -60,7 +60,7 @@ public class CostUtilsTest {
     public void isCastingCostFulfilledFeralMaakaOneLessMana() {
         // Given
         Card card = RavnicaAllegiance.FERAL_MAAKA;
-        List<Color> manaPaid = Collections.singletonList(RED);
+        List<Cost> manaPaid = Collections.singletonList(RED);
 
         // When
         boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
@@ -70,10 +70,10 @@ public class CostUtilsTest {
     }
 
     @Test
-    public void isCastingCostFulfilledAxebaneBeastCorrectColors() {
+    public void isCastingCostFulfilledAxebaneBeastCorrectCosts() {
         // Given
         Card card = RavnicaAllegiance.AXEBANE_BEAST;
-        List<Color> manaPaid = asList(GREEN, GREEN, RED, RED);
+        List<Cost> manaPaid = asList(GREEN, GREEN, RED, RED);
 
         // When
         boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
