@@ -12,8 +12,10 @@ import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.RARE;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
+import static com.aa.mtg.cards.properties.Type.LAND;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
@@ -23,6 +25,7 @@ public class RavnicaAllegiance implements MtgSet {
     public static final String RNA = "RNA";
 
     public static Card AXEBANE_BEAST = new Card("Axebane Beast", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Beast"), COMMON, "", 3, 4, emptyList());
+    public static Card AZORIUS_GUILDGATE = new Card("Azorius Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList("Gate"), COMMON, "Azorius Guildgate enters the battlefield tapped. TAP: Add WHITE or BLUE to your mana pool.", 0, 0, singletonList(TAP_ADD_WHITE_MANA));
     public static Card BEDEVIL = new Card("Bedevil", asSet(Color.BLACK, Color.RED), asList(Cost.BLACK, Cost.BLACK, Cost.RED), singletonList(Type.INSTANT), emptyList(), RARE, "Destroy target artifact, creature, or planeswalker.", 0, 0, singletonList(DESTROY_TARGET_ARTIFACT_CREATURE_OR_PLANESWALKER));
     public static Card BLADEBRAND = new Card("Bladebrand", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Target creature gains deathtouch until end of turn. Draw a card.", 0, 0, asList(TARGET_CREATURE_GETS_DEATHTOUCH_UNTIL_END_OF_TURN, DRAW_1_CARD));
     public static Card BURN_BRIGHT = new Card("Burn Bright", asSet(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), RARE, "Creatures you control get +2/+0 until end of turn.", 0, 0, singletonList(CREATURES_YOU_CONTROL_GET_PLUS_2_0_UNTIL_END_OF_TURN));

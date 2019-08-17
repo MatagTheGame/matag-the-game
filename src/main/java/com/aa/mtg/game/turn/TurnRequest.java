@@ -9,7 +9,7 @@ import java.util.Map;
 public class TurnRequest {
     private String action;
     private String triggeredNonStackAction;
-    private Map<Integer, List<String>> mana;
+    private Map<Integer, String> mana;
     private List<Integer> cardIds;
     private Map<Integer, List<Object>> targetsIdsForCardIds;
     private String playedAbility;
@@ -38,11 +38,11 @@ public class TurnRequest {
         this.cardIds = cardIds;
     }
 
-    public Map<Integer, List<String>> getMana() {
+    public Map<Integer, String> getMana() {
         return mana;
     }
 
-    public void setMana(Map<Integer, List<String>> mana) {
+    public void setMana(Map<Integer, String> mana) {
         this.mana = mana;
     }
 

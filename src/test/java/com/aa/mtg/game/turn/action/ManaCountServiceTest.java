@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import static com.aa.mtg.cards.Cards.ISLAND;
@@ -32,10 +31,10 @@ public class ManaCountServiceTest {
     @Test
     public void countManaPaidForSimpleLands() {
         // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("WHITE"),
-                2, ImmutableList.of("WHITE"),
-                3, ImmutableList.of("BLUE")
+        Map<Integer, String> mana = ImmutableMap.of(
+                1, "WHITE",
+                2, "WHITE",
+                3, "BLUE"
         );
         GameStatus gameStatus = TestUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
@@ -54,15 +53,15 @@ public class ManaCountServiceTest {
     @Test
     public void countManaPaidTappingInstant() {
         // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("WHITE")
+        Map<Integer, String> mana = ImmutableMap.of(
+                1, "WHITE"
         );
         GameStatus gameStatus = TestUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
 
         player.getBattlefield().addCard(new CardInstance(gameStatus, 1, DARK_REMEDY, player.getName(), player.getName()));
 
-        thrown.expectMessage("The card you are trying to tap for mana is not a land.");
+        thrown.expectMessage("\"1 - Dark Remedy\" cannot be tapped for mana.");
 
         // When
         manaCountService.verifyManaPaid(mana, player);
@@ -71,8 +70,8 @@ public class ManaCountServiceTest {
     @Test
     public void countManaPaidTappingAlreadyTappedLand() {
         // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("WHITE")
+        Map<Integer, String> mana = ImmutableMap.of(
+                1, "WHITE"
         );
         GameStatus gameStatus = TestUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
@@ -81,7 +80,7 @@ public class ManaCountServiceTest {
         plains.getModifiers().tap();
         player.getBattlefield().addCard(plains);
 
-        thrown.expectMessage("The land you are trying to tap is already tapped.");
+        thrown.expectMessage("\"1 - Plains\" is already tapped.");
 
         // When
         manaCountService.verifyManaPaid(mana, player);
@@ -90,8 +89,8 @@ public class ManaCountServiceTest {
     @Test
     public void countManaPaidTappingLandForWrongColor() {
         // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("BLUE")
+        Map<Integer, String> mana = ImmutableMap.of(
+                1, "BLUE"
         );
         GameStatus gameStatus = TestUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();

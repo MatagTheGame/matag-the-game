@@ -36,7 +36,7 @@ public class CastService {
         this.manaCountService = manaCountService;
     }
 
-    public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
+    public void cast(GameStatus gameStatus, int cardId, Map<Integer, String> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
         Turn turn = gameStatus.getTurn();
         Player activePlayer = gameStatus.getActivePlayer();
 
@@ -84,7 +84,7 @@ public class CastService {
         }
     }
 
-    private void checkSpellOrAbilityCost(Map<Integer, List<String>> mana, Player currentPlayer, CardInstance cardToCast, String ability) {
+    private void checkSpellOrAbilityCost(Map<Integer, String> mana, Player currentPlayer, CardInstance cardToCast, String ability) {
         List<Cost> paidCost = manaCountService.verifyManaPaid(mana, currentPlayer);
         if (!CostUtils.isCastingCostFulfilled(cardToCast.getCard(), paidCost, ability)) {
             throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");

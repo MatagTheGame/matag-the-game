@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static com.aa.mtg.cards.ability.trigger.TriggerType.CAST;
+
 @Component
 public class ResolveService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ResolveService.class);
@@ -77,7 +79,7 @@ public class ResolveService {
     }
 
     private void resolveCardInstanceFromStack(GameStatus gameStatus, CardInstance cardToResolve) {
-        performAbilitiesActions(gameStatus, cardToResolve, cardToResolve.getCastAbilities());
+        performAbilitiesActions(gameStatus, cardToResolve, cardToResolve.getAbilitiesByTriggerType(CAST));
 
         if (cardToResolve.isPermanent()) {
             enterCardIntoBattlefieldService.enter(gameStatus, cardToResolve);

@@ -14,7 +14,11 @@ export default class CardUtils {
   }
 
   static hasAbility(cardInstance, ability) {
-    return cardInstance.abilities.find((currentAbility) => currentAbility.abilityTypes.indexOf(ability) > -1)
+    return this.getAbilities(cardInstance, ability).length > 0
+  }
+
+  static getAbilities(cardInstance, ability) {
+    return cardInstance.abilities.filter((currentAbility) => currentAbility.abilityTypes.indexOf(ability) > -1)
   }
 
   static frontendTap(cardInstance) {

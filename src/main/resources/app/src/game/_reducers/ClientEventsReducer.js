@@ -33,9 +33,9 @@ export default class ClientEventsReducer {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardIds: [cardId]})
 
           } else {
-            const currentMana = CostUtils.currentMana(newState.player.battlefield)
+            const currentTappedMana = CostUtils.currentTappedMana(newState.player.battlefield)
             const ability = CardUtils.getCastAbility(cardInstance)
-            if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentMana)) {
+            if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentTappedMana)) {
               if (CardUtils.needsTargets(cardInstance, 'CAST')) {
                 PlayerUtils.handleSelectTargets(newState, cardInstance, ability)
               } else {
@@ -79,8 +79,8 @@ export default class ClientEventsReducer {
 
           } else {
             if (playedAbility) {
-              const currentMana = CostUtils.currentMana(newState.player.battlefield)
-              if (CostUtils.isAbilityCostFulfilled(playedAbility, currentMana)) {
+              const currentTappedMana = CostUtils.currentTappedMana(newState.player.battlefield)
+              if (CostUtils.isAbilityCostFulfilled(playedAbility, currentTappedMana)) {
                 if (CardUtils.needsTargets(cardInstance, 'ACTIVATED_ABILITY')) {
                   PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
                 }

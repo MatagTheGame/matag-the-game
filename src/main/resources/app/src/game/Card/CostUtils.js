@@ -1,35 +1,31 @@
+import _ from 'lodash'
 import CardSearch from './CardSearch'
+import CardUtils from 'Main/game/Card/CardUtils'
 
 export default class CostUtils {
-  static currentMana(battlefield) {
-    return CardSearch.cards(battlefield)
-      .ofType('LAND')
-      .frontEndTapped()
-      .map(cardInstance => cardInstance.card.colors[0])
-  }
-
   static currentTappedMana(battlefield) {
     const map = {}
 
     CardSearch.cards(battlefield)
-      .ofType('LAND')
+      .withAbility('TAP_ADD_MANA')
       .frontEndTapped()
       .forEach(cardInstance => {
-        map[cardInstance.id] = [cardInstance.card.colors[0]]
+        map[cardInstance.id] = CardUtils.getAbilities(cardInstance, 'TAP_ADD_MANA')[0].parameters[0]
       })
 
     return map
   }
 
-  static isCastingCostFulfilled(card, manaPaid) {
-    return CostUtils.isCostFulfilled(card.cost, manaPaid)
+  static isCastingCostFulfilled(card, currentTappedMana) {
+    return CostUtils.isCostFulfilled(card.cost, currentTappedMana)
   }
 
-  static isAbilityCostFulfilled(ability, manaPaid) {
-    return CostUtils.isCostFulfilled(ability.trigger.cost, manaPaid)
+  static isAbilityCostFulfilled(ability, currentTappedMana) {
+    return CostUtils.isCostFulfilled(ability.trigger.cost, currentTappedMana)
   }
 
-  static isCostFulfilled(costToFulfill, manaPaid) {
+  static isCostFulfilled(costToFulfill, currentTappedMana) {
+    const manaPaid = _.values(currentTappedMana)
     for (const cost of costToFulfill) {
       let removed = false
 

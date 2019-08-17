@@ -1,9 +1,10 @@
 package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.cards.ability.type.AbilityType;
+import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
-import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 
 import static com.aa.mtg.cards.ability.Abilities.abilitiesFromParameters;
 import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameters;
-import static com.aa.mtg.cards.ability.trigger.TriggerType.CAST;
+import static com.aa.mtg.cards.ability.trigger.TriggerType.MANA_ABILITY;
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
@@ -81,14 +82,6 @@ public class CardInstance {
         return triggeredAbilities;
     }
 
-    public static List<CardInstance> mask(List<CardInstance> cardInstances) {
-        List<CardInstance> library = new ArrayList<>();
-        for (CardInstance cardInstance : cardInstances) {
-            library.add(new CardInstance(cardInstance.getGameStatus(), cardInstance.getId(), Card.hiddenCard(), cardInstance.getOwner()));
-        }
-        return library;
-    }
-
     public boolean isOfType(Type type) {
         return card.isOfType(type);
     }
@@ -100,6 +93,15 @@ public class CardInstance {
             }
         }
         return false;
+    }
+
+    public boolean ofAllOfTheTypes(List<Type> types) {
+        for (Type type : types) {
+            if (!isOfType(type)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void checkIfCanAttack() {
@@ -164,11 +166,18 @@ public class CardInstance {
         return abilities;
     }
 
+    public boolean canProduceMana(Color color) {
+        return getAbilitiesByTriggerType(MANA_ABILITY).stream()
+                .map(Ability::getParameters)
+                .map(parameters -> parameters.get(0))
+                .anyMatch(parameter -> parameter.equals(color.toString()));
+    }
+
     @JsonIgnore
-    public List<Ability> getCastAbilities() {
+    public List<Ability> getAbilitiesByTriggerType(TriggerType triggerType) {
         return getAbilities().stream()
                 .filter(ability -> ability.getTrigger() != null)
-                .filter(ability -> ability.getTrigger().getType().equals(CAST))
+                .filter(ability -> ability.getTrigger().getType().equals(triggerType))
                 .collect(Collectors.toList());
     }
 
@@ -230,5 +239,13 @@ public class CardInstance {
         modifiers.resetDamage();
         modifiers.getAbilitiesUntilEndOfTurn().clear();
         modifiers.resetExtraPowerToughnessUntilEndOfTurn();
+    }
+
+    public static List<CardInstance> mask(List<CardInstance> cardInstances) {
+        List<CardInstance> library = new ArrayList<>();
+        for (CardInstance cardInstance : cardInstances) {
+            library.add(new CardInstance(cardInstance.getGameStatus(), cardInstance.getId(), Card.hiddenCard(), cardInstance.getOwner()));
+        }
+        return library;
     }
 }

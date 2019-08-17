@@ -6,10 +6,10 @@ describe('isCostFulfilled', () => {
   test('isCostFulfilled simple mana color', () => {
     // Given
     const cost = ['WHITE']
-    const manaPaid = ['WHITE']
+    const currentTappedMana = {1: 'WHITE'}
 
     // When
-    const fulfilled = CostUtils.isCostFulfilled(cost, manaPaid)
+    const fulfilled = CostUtils.isCostFulfilled(cost, currentTappedMana)
 
     // Then
     expect(fulfilled).toBe(true)
@@ -18,10 +18,10 @@ describe('isCostFulfilled', () => {
   test('isCostFulfilled two colors and colorless fulfilled', () => {
     // Given
     const cost = ['WHITE', 'RED', 'COLORLESS']
-    const manaPaid = ['WHITE', 'WHITE', 'RED']
+    const currentTappedMana = {1: 'WHITE', 2: 'WHITE', 3: 'RED'}
 
     // When
-    const fulfilled = CostUtils.isCostFulfilled(cost, manaPaid)
+    const fulfilled = CostUtils.isCostFulfilled(cost, currentTappedMana)
 
     // Then
     expect(fulfilled).toBe(true)
@@ -30,10 +30,10 @@ describe('isCostFulfilled', () => {
   test('isCostFulfilled two colors and colorless not fulfilled', () => {
     // Given
     const cost = ['WHITE', 'COLORLESS', 'COLORLESS']
-    const manaPaid = ['WHITE']
+    const currentTappedMana = {1: 'WHITE'}
 
     // When
-    const fulfilled = CostUtils.isCostFulfilled(cost, manaPaid)
+    const fulfilled = CostUtils.isCostFulfilled(cost, currentTappedMana)
 
     // Then
     expect(fulfilled).toBe(false)

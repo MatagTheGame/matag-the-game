@@ -93,6 +93,11 @@ export default class CardSearch extends Array {
     return new CardSearch(...cards)
   }
 
+  withAbility(abilityType) {
+    const cards = this.filter(cardInstance => CardUtils.hasAbility(cardInstance, abilityType))
+    return new CardSearch(...cards)
+  }
+
   isEmpty() {
     return this.length === 0
   }
