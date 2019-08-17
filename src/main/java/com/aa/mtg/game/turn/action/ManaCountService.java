@@ -12,23 +12,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.aa.mtg.cards.properties.Cost.fromColor;
-
 @Component
 public class ManaCountService {
 
     ArrayList<Cost> verifyManaPaid(Map<Integer, List<String>> mana, Player currentPlayer) {
         ArrayList<Cost> paidCost = new ArrayList<>();
         for (int cardInstanceId : mana.keySet()) {
+            String requestedMana = mana.get(cardInstanceId).get(0);
+
             CardInstance landToTap = currentPlayer.getBattlefield().findCardById(cardInstanceId);
             if (!landToTap.isOfType(Type.LAND)) {
                 throw new MessageException("The card you are trying to tap for mana is not a land.");
+
             } else if (landToTap.getModifiers().isTapped()) {
                 throw new MessageException("The land you are trying to tap is already tapped.");
+
+            } else if (!landToTap.getCard().getColors().contains(Color.valueOf(requestedMana))) {
+                throw new MessageException(landToTap.getIdAndName() + " cannot produce " + requestedMana);
+
+            } else {
+                paidCost.add(Cost.valueOf(requestedMana));
             }
-            // FIXME choose the color passed into mana
-            Color firstColor = landToTap.getCard().getColors().iterator().next();
-            paidCost.add(fromColor(firstColor));
         }
         return paidCost;
     }
