@@ -33,7 +33,7 @@ export default class ServerEventsReducer {
     case 'UPDATE_TURN':
       newState.turn = action.value
       newState.turn.blockingCardPosition = 0
-      PlayerUtils.setStatusMessage(newState)
+      UserInterfaceUtils.computeStatusMessage(newState)
       break
 
     case 'UPDATE_STACK':

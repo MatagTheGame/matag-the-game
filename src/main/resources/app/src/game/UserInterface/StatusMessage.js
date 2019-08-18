@@ -1,3 +1,4 @@
+import {get} from 'lodash'
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
@@ -14,7 +15,7 @@ class StatusMessage extends Component {
 
 const mapStateToProps = state => {
   return {
-    statusMessage: state.statusMessage
+    statusMessage: get(state, 'userInterface.statusMessage', '')
   }
 }
 

@@ -1,18 +1,9 @@
 import {get} from 'lodash'
 import stompClient from 'Main/game/WebSocket'
-import Phase from 'Main/game/Turn/Phase'
 import CardSearch from 'Main/game/Card/CardSearch'
-import StackUtils from 'Main/game/Stack/StackUtils'
 import CostUtils from 'Main/game/Card/CostUtils'
 import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
 
-const CHOOSE_A_CARD_TO_DISCARD = 'Choose a card to discard.'
-const CHOOSE_CREATURES_YOU_WANT_TO_BLOCK_WITH = 'Choose creatures you want to block with.'
-const CHOOSE_CREATURES_YOU_WANT_TO_ATTACK_WITH = 'Choose creatures you want to attack with.'
-const PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE = 'Play any spell or ability or continue (SPACE).'
-const PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE = 'Play any instant or ability or continue (SPACE).'
-const PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE_STACK_NOT_EMPTY = 'Play any instant or ability or resolve the top spell in the stack (SPACE).'
-const WAIT_FOR_AN_OPPONENT_TO_PERFORM_ITS_ACTION = 'Wait for opponent to perform its action...'
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
@@ -64,37 +55,6 @@ export default class PlayerUtils {
       .isNotEmpty()
   }
 
-  static setStatusMessage(state) {
-    if (state.turn.winner) {
-      UserInterfaceUtils.setMessage(state, state.turn.winner + ' Win!')
-
-    } else if (!PlayerUtils.isCurrentPlayerActive(state)) {
-      state.statusMessage = WAIT_FOR_AN_OPPONENT_TO_PERFORM_ITS_ACTION
-
-    } else {
-      if (!StackUtils.isStackEmpty(state)) {
-        state.statusMessage = PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE_STACK_NOT_EMPTY
-
-      } else {
-        if (Phase.isMainPhase(state.turn.currentPhase)) {
-          state.statusMessage = PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE
-
-        } else if (state.turn.currentPhase === 'DB' && PlayerUtils.isPlayerAbleToBlock(state)) {
-          state.statusMessage = CHOOSE_CREATURES_YOU_WANT_TO_BLOCK_WITH
-
-        } else if (state.turn.currentPhase === 'DA' && PlayerUtils.isPlayerAbleToAttack(state)) {
-          state.statusMessage = CHOOSE_CREATURES_YOU_WANT_TO_ATTACK_WITH
-
-        } else if (state.turn.triggeredNonStackAction) {
-          state.statusMessage = CHOOSE_A_CARD_TO_DISCARD
-
-        } else {
-          state.statusMessage = PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE
-        }
-      }
-    }
-  }
-
   static cast(state, cardId, targetsIdsForCardIds, playedAbility) {
     const mana = CostUtils.currentTappedMana(state.player.battlefield)
     stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], mana: mana, targetsIdsForCardIds: targetsIdsForCardIds, playedAbility: playedAbility})
@@ -104,11 +64,11 @@ export default class PlayerUtils {
     if (state.turn.cardIdSelectedToBePlayed === cardInstance.id) {
       state.turn.cardIdSelectedToBePlayed = null
       state.turn.abilityToBePlayed = null
-      state.statusMessage = PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE
+      UserInterfaceUtils.setStatusMessage(state, UserInterfaceUtils.PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE)
     } else {
       state.turn.cardIdSelectedToBePlayed = cardInstance.id
       state.turn.abilityToBePlayed = ability
-      state.statusMessage = 'Select targets for ' + cardInstance.card.name + '.'
+      UserInterfaceUtils.setStatusMessage(state, 'Select targets for ' + cardInstance.card.name + '.')
     }
   }
 
