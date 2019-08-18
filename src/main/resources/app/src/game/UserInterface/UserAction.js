@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
 import {get} from 'lodash'
+import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 
@@ -50,7 +50,6 @@ const createContinueClickAction = () => {
     type: 'CONTINUE_CLICK'
   }
 }
-
 
 const mapStateToProps = state => {
   return {

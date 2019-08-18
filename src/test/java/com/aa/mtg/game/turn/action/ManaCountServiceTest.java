@@ -19,6 +19,7 @@ import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.properties.Cost.BLUE;
 import static com.aa.mtg.cards.properties.Cost.WHITE;
 import static com.aa.mtg.cards.sets.CoreSet2020.DARK_REMEDY;
+import static com.aa.mtg.cards.sets.RavnicaAllegiance.AZORIUS_GUILDGATE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ManaCountServiceTest {
@@ -98,6 +99,41 @@ public class ManaCountServiceTest {
         player.getBattlefield().addCard(new CardInstance(gameStatus, 1, PLAINS, player.getName(), player.getName()));
 
         thrown.expectMessage("\"1 - Plains\" cannot produce BLUE");
+
+        // When
+        manaCountService.verifyManaPaid(mana, player);
+    }
+
+    @Test
+    public void countManaPaidTappingLandForDualLand() {
+        // Given
+        Map<Integer, String> mana = ImmutableMap.of(
+                1, "BLUE"
+        );
+        GameStatus gameStatus = TestUtils.testGameStatus();
+        Player player = gameStatus.getPlayer1();
+
+        player.getBattlefield().addCard(new CardInstance(gameStatus, 1, AZORIUS_GUILDGATE, player.getName(), player.getName()));
+
+        // When
+        ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
+
+        // Then
+        assertThat(colors).isEqualTo(ImmutableList.of(BLUE));
+    }
+
+    @Test
+    public void countManaPaidTappingLandForDualLandError() {
+        // Given
+        Map<Integer, String> mana = ImmutableMap.of(
+                1, "BLACK"
+        );
+        GameStatus gameStatus = TestUtils.testGameStatus();
+        Player player = gameStatus.getPlayer1();
+
+        player.getBattlefield().addCard(new CardInstance(gameStatus, 1, AZORIUS_GUILDGATE, player.getName(), player.getName()));
+
+        thrown.expectMessage("\"1 - Azorius Guildgate\" cannot produce BLACK");
 
         // When
         manaCountService.verifyManaPaid(mana, player);

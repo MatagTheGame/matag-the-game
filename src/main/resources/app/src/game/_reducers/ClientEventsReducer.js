@@ -1,10 +1,11 @@
 import stompClient from '../WebSocket'
-import Phase from '../Turn/Phase'
-import CostUtils from '../Card/CostUtils'
-import CardUtils from '../Card/CardUtils'
-import CardSearch from '../Card/CardSearch'
-import StackUtils from '../Stack/StackUtils'
-import PlayerUtils from '../PlayerInfo/PlayerUtils'
+import Phase from 'Main/game/Turn/Phase'
+import CostUtils from 'Main/game/Card/CostUtils'
+import CardUtils from 'Main/game/Card/CardUtils'
+import CardSearch from 'Main/game/Card/CardSearch'
+import StackUtils from 'Main/game/Stack/StackUtils'
+import PlayerUtils from 'Main/game/PlayerInfo/PlayerUtils'
+import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
 
 export default class ClientEventsReducer {
 
@@ -57,7 +58,7 @@ export default class ClientEventsReducer {
           if (canAttackResult === true) {
             CardUtils.toggleFrontendAttacking(cardInstance)
           } else {
-            newState.message = {text: canAttackResult, closable: true}
+            UserInterfaceUtils.setMessage(newState, canAttackResult)
           }
 
         } else if (newState.turn.currentPhase === 'DB') {
@@ -66,7 +67,7 @@ export default class ClientEventsReducer {
           if (canBlockResult === true) {
             CardUtils.toggleFrontendBlocking(cardInstance, blockedCard.id)
           } else {
-            newState.message = {text: canBlockResult, closable: true}
+            UserInterfaceUtils.setMessage(newState, canBlockResult)
           }
 
         } else if (PlayerUtils.shouldHandleTargets(newState)) {

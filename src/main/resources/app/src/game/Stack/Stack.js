@@ -10,7 +10,6 @@ class Stack extends Component {
 
   static renderStackItem(cardInstance, i) {
     const style = {transform: 'translateY(-150px) translateX(' + (i * 50) + 'px) translateZ(' + (i * 150) + 'px)'}
-    console.log(style)
     if (StackUtils.isACastedCard(cardInstance)) {
       return (
         <span key={cardInstance.id} style={style}>

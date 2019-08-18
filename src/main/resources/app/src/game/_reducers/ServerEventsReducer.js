@@ -1,4 +1,5 @@
-import PlayerUtils from '../PlayerInfo/PlayerUtils'
+import PlayerUtils from 'Main/game/PlayerInfo/PlayerUtils'
+import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {
@@ -10,15 +11,15 @@ export default class ServerEventsReducer {
     let player
     switch (action.type) {
     case 'MESSAGE':
-      newState.message = action.value
+      UserInterfaceUtils.setMessage(newState, action.value.text, action.value.closable)
       break
 
     case 'INIT_WAITING_OPPONENT':
-      newState.message = {text: 'Waiting for opponent...', closable: false}
+      UserInterfaceUtils.setMessage(newState, 'Waiting for opponent...', false)
       break
 
     case 'OPPONENT_JOINED':
-      newState.message.text = undefined
+      UserInterfaceUtils.unsetMessage(newState)
       break
 
     case 'INIT_PLAYER':
@@ -41,7 +42,6 @@ export default class ServerEventsReducer {
 
     case 'UPDATE_PLAYER_BATTLEFIELD':
       player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
-      console.log('player: ', player)
       player.battlefield = action.value.value
       break
 

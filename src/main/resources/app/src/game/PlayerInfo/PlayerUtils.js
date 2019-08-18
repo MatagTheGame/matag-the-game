@@ -1,9 +1,10 @@
 import {get} from 'lodash'
-import Phase from '../Turn/Phase'
-import CardSearch from '../Card/CardSearch'
-import StackUtils from '../Stack/StackUtils'
-import stompClient from '../WebSocket'
-import CostUtils from '../Card/CostUtils'
+import stompClient from 'Main/game/WebSocket'
+import Phase from 'Main/game/Turn/Phase'
+import CardSearch from 'Main/game/Card/CardSearch'
+import StackUtils from 'Main/game/Stack/StackUtils'
+import CostUtils from 'Main/game/Card/CostUtils'
+import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
 
 const CHOOSE_A_CARD_TO_DISCARD = 'Choose a card to discard.'
 const CHOOSE_CREATURES_YOU_WANT_TO_BLOCK_WITH = 'Choose creatures you want to block with.'
@@ -65,7 +66,7 @@ export default class PlayerUtils {
 
   static setStatusMessage(state) {
     if (state.turn.winner) {
-      state.message = {text: state.turn.winner + ' Win!', closable: true}
+      UserInterfaceUtils.setMessage(state, state.turn.winner + ' Win!')
 
     } else if (!PlayerUtils.isCurrentPlayerActive(state)) {
       state.statusMessage = WAIT_FOR_AN_OPPONENT_TO_PERFORM_ITS_ACTION

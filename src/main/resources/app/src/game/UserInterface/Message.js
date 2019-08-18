@@ -60,7 +60,7 @@ const closeMessageEvent = () => {
 
 const mapStateToProps = state => {
   return {
-    message: get(state, 'message', {})
+    message: get(state, 'userInterface.message', {})
   }
 }
 

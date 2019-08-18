@@ -1,18 +1,16 @@
-import React, {Fragment, Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import stompClient from './WebSocket'
-import Message from './UserAction/Message'
-import StatusMessage from './UserAction/StatusMessage'
 import Hand from './Hand/Hand'
 import Library from './Library/Library'
 import Battlefield from './Battlefield/Battlefield'
 import Graveyard from './Graveyard/Graveyard'
 import TurnPhases from './Turn/TurnPhases'
 import PlayerInfo from './PlayerInfo/PlayerInfo'
-import UserAction from './UserAction/UserAction'
 import MaximizedCard from './Card/MaximizedCard'
 import Stack from './Stack/Stack'
+import {UserInterface} from './UserInterface/UserInterface'
 
 
 class App extends Component {
@@ -24,9 +22,7 @@ class App extends Component {
     return (
       <Fragment>
         <MaximizedCard/>
-        <UserAction/>
-        <StatusMessage/>
-        <Message/>
+        <UserInterface/>
         <Hand type='opponent'/>
         <Hand type='player'/>
         <div id="table">
@@ -46,10 +42,8 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    message: state.message
-  }
+const mapStateToProps = () => {
+  return {}
 }
 
 const mapDispatchToProps = dispatch => {
