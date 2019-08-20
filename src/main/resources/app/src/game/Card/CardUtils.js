@@ -200,14 +200,18 @@ export default class CardUtils {
   }
 
   static needsTargets(cardInstance, triggerType) {
-    const ability = CardUtils.getAbilityForTriggerType(cardInstance, triggerType)
+    const ability = CardUtils.getAbilitiesForTriggerType(cardInstance, triggerType)[0]
     if (ability) {
       return ability.targets.length > 0
     }
   }
 
-  static getAbilityForTriggerType(cardInstance, triggerType) {
-    return cardInstance.abilities.find(ability => get(ability, 'trigger.type') === triggerType)
+  static getAbilitiesForTriggerType(cardInstance, triggerType) {
+    return cardInstance.abilities.filter(ability => get(ability, 'trigger.type') === triggerType)
+  }
+
+  static getAbilitiesForTriggerTypes(cardInstance, triggerTypes) {
+    return cardInstance.abilities.filter(ability => triggerTypes.indexOf(get(ability, 'trigger.type')) > -1)
   }
 
   static getPower(cardInstance) {
@@ -230,9 +234,5 @@ export default class CardUtils {
 
   static isNotAttached(cardInstance) {
     return !cardInstance.modifiers.attachedToId
-  }
-
-  static getCastAbility(cardInstance) {
-    return cardInstance.abilities.find(ability => get(ability, 'trigger.type') === 'CAST')
   }
 }

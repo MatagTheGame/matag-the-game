@@ -17,7 +17,6 @@ import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.sets.Ixalan.HEADWATER_SENTRIES;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.AZORIUS_GUILDGATE;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
@@ -43,30 +42,34 @@ public class CastCreatureTest extends AbstractApplicationTest {
         browser.player1().getStackHelper().toHaveSize(0);
 
         // When clicking all lands
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(AZORIUS_GUILDGATE, 0).click();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).click();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).click();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).click();
 
         // Then all lands are front-end tapped
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(AZORIUS_GUILDGATE, 0).isFrontendTapped();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isFrontendTapped();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).isFrontendTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).isFrontendTapped();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isFrontendTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).isFrontendTapped();
 
         // When click on creature
         browser.player1().getHandHelper(PLAYER).getCard(HEADWATER_SENTRIES, 0).click();
 
         // Then all lands are tapped for both players
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(AZORIUS_GUILDGATE, 0).isTapped();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 0).isTapped();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 1).isTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).isTapped();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).isTapped();
 
-        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(AZORIUS_GUILDGATE, 0).isTapped();
         browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 0).isTapped();
         browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 1).isTapped();
+        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(ISLAND, 2).isTapped();
         browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(MOUNTAIN, 0).isTapped();
+        browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).getCard(MOUNTAIN, 1).isTapped();
 
         // And creature is on the stack for both players (hands is empty)
         browser.player1().getStackHelper().containsExactly(HEADWATER_SENTRIES);
@@ -108,9 +111,10 @@ public class CastCreatureTest extends AbstractApplicationTest {
         @Override
         public void initGameStatus(GameStatus gameStatus) {
             addCardToCurrentPlayerHand(gameStatus, HEADWATER_SENTRIES);
-            addCardToCurrentPlayerBattlefield(gameStatus, AZORIUS_GUILDGATE);
             addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
             addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
+            addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
+            addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
             addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
         }
     }

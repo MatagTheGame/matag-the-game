@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 }
 
 StatusMessage.propTypes = {
-  statusMessage: PropTypes.string
+  statusMessage: PropTypes.string.isRequired
 }
 
 export default connect(mapStateToProps)(StatusMessage)

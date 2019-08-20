@@ -46,6 +46,14 @@ export default class UserInterfaceUtils {
   static setStatusMessage(state, statusMessage) {
     set(state, 'userInterface.statusMessage', statusMessage)
   }
+
+  static setPlayableAbilities(state, cardId, possibleAbilities, position) {
+    set(state, 'userInterface.playableAbilities', {cardId: cardId, possibleAbilities: possibleAbilities, position: position})
+  }
+
+  static unsetPlayableAbilities(state) {
+    set(state, 'userInterface.playableAbilities', {})
+  }
 }
 
 UserInterfaceUtils.CHOOSE_A_CARD_TO_DISCARD = 'Choose a card to discard.'

@@ -11,13 +11,17 @@ export default class ClientEventsReducer {
 
   static getEvents() {
     return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'OPPONENT_BATTLEFIELD_CARD_CLICK', 'CONTINUE_CLICK',
-      'PLAYER_CLICK', 'MAXIMIZE_MINIMIZE_CARD']
+      'PLAYER_CLICK', 'MAXIMIZE_MINIMIZE_CARD', 'CLOSE_PLAYABLE_ABILITIES_CLICK']
   }
 
   static reduceEvent(newState, action) {
     switch (action.type) {
     case 'MAXIMIZE_MINIMIZE_CARD':
       newState.maximizedCard = action.value.cardImage
+      break
+
+    case 'CLOSE_PLAYABLE_ABILITIES_CLICK':
+      UserInterfaceUtils.unsetPlayableAbilities(newState)
       break
 
     case 'PLAYER_HAND_CARD_CLICK':
@@ -29,13 +33,13 @@ export default class ClientEventsReducer {
         }
 
         if (Phase.isMainPhase(newState.turn.currentPhase) || cardInstance.card.instantSpeed) {
-          // TODO Antonio: this is very similar to the one for battlefield click
           if (CardUtils.isOfType(cardInstance, 'LAND')) {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardIds: [cardId]})
 
           } else {
+            // TODO Antonio: this is very similar to the one for battlefield click
             const currentTappedMana = CostUtils.currentTappedMana(newState.player.battlefield)
-            const ability = CardUtils.getCastAbility(cardInstance)
+            const ability = CardUtils.getAbilitiesForTriggerType(cardInstance, 'CAST')[0]
             if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentTappedMana)) {
               if (CardUtils.needsTargets(cardInstance, 'CAST')) {
                 PlayerUtils.handleSelectTargets(newState, cardInstance, ability)
@@ -51,7 +55,6 @@ export default class ClientEventsReducer {
     case 'PLAYER_BATTLEFIELD_CARD_CLICK':
       if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
         const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
-        const playedAbility = CardUtils.getAbilityForTriggerType(cardInstance, 'ACTIVATED_ABILITY')
 
         if (newState.turn.currentPhase === 'DA' && PlayerUtils.isCurrentPlayerTurn(newState)) {
           const canAttackResult = CardUtils.canAttack(cardInstance)
@@ -74,16 +77,23 @@ export default class ClientEventsReducer {
           PlayerUtils.handleSelectedTarget(newState, cardInstance)
 
         } else {
-          // TODO Antonio: this is very similar to the one for hand click
-          if (CardUtils.isOfType(cardInstance, 'LAND')) {
-            CardUtils.toggleFrontendTapped(cardInstance)
+          const possibleAbilities = CardUtils.getAbilitiesForTriggerTypes(cardInstance, ['MANA_ABILITY', 'ACTIVATED_ABILITY'])
+
+          if (possibleAbilities.length > 1) {
+            UserInterfaceUtils.setPlayableAbilities(newState, action.cardId, possibleAbilities, action.position)
 
           } else {
-            if (playedAbility) {
-              const currentTappedMana = CostUtils.currentTappedMana(newState.player.battlefield)
-              if (CostUtils.isAbilityCostFulfilled(playedAbility, currentTappedMana)) {
-                if (CardUtils.needsTargets(cardInstance, 'ACTIVATED_ABILITY')) {
-                  PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
+            if (CardUtils.getAbilitiesForTriggerType(cardInstance, 'MANA_ABILITY').length > 0) {
+              CardUtils.toggleFrontendTapped(cardInstance)
+
+            } else {
+              const playedAbility = CardUtils.getAbilitiesForTriggerType(cardInstance, 'ACTIVATED_ABILITY')[0]
+              if (playedAbility) {
+                const currentTappedMana = CostUtils.currentTappedMana(newState.player.battlefield)
+                if (CostUtils.isAbilityCostFulfilled(playedAbility, currentTappedMana)) {
+                  if (CardUtils.needsTargets(cardInstance, 'ACTIVATED_ABILITY')) {
+                    PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
+                  }
                 }
               }
             }

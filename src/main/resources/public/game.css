@@ -239,6 +239,37 @@ body {
   cursor: pointer;
 }
 
+#playable-abilities-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 14;
+}
+
+#playable-abilities {
+  position: absolute;
+  background-color: navajowhite;
+  z-index: 15;
+}
+
+#playable-abilities ul {
+  margin: 0;
+  padding: 0;
+}
+
+#playable-abilities li {
+  display: block;
+  padding: 2px;
+  border: solid chocolate 1px;
+  cursor: pointer;
+}
+
+#playable-abilities li:hover {
+  background-color: orange;
+}
+
 #player-battlefield {
   bottom: 10%;
   transform: translateZ(1px);

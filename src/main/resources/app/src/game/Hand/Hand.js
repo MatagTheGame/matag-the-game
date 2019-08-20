@@ -20,7 +20,7 @@ class Hand extends Component {
 
   playerCardClick(cardId) {
     if (this.props.type === 'player') {
-      return () => this.props.playerCardClick(cardId)
+      return (e) => this.props.playerCardClick(cardId, {x: e.screenX, y: e.screenY})
     } else {
       return () => {}
     }
@@ -41,10 +41,11 @@ class Hand extends Component {
   }
 }
 
-const createHandPlayerCardClickAction = (cardId) => {
+const createHandPlayerCardClickAction = (cardId, event) => {
   return {
     type: 'PLAYER_HAND_CARD_CLICK',
-    cardId: cardId
+    cardId: cardId,
+    event: event
   }
 }
 

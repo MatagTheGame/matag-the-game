@@ -152,9 +152,9 @@ class Battlefield extends Component {
 
   playerCardClick(cardId) {
     if (this.props.type === 'player') {
-      return () => this.props.playerCardClick(cardId)
+      return (e) => this.props.playerCardClick(cardId, {x: e.screenX, y: e.screenY})
     } else {
-      return () => this.props.opponentCardClick(cardId)
+      return (e) => this.props.opponentCardClick(cardId, {x: e.screenX, y: e.screenY})
     }
   }
 
@@ -177,17 +177,19 @@ class Battlefield extends Component {
   }
 }
 
-const createBattlefieldPlayerCardClickAction = (cardId) => {
+const createBattlefieldPlayerCardClickAction = (cardId, position) => {
   return {
     type: 'PLAYER_BATTLEFIELD_CARD_CLICK',
-    cardId: cardId
+    cardId: cardId,
+    position: position
   }
 }
 
-const createBattlefieldOpponentCardClickAction = (cardId) => {
+const createBattlefieldOpponentCardClickAction = (cardId, position) => {
   return {
     type: 'OPPONENT_BATTLEFIELD_CARD_CLICK',
-    cardId: cardId
+    cardId: cardId,
+    position: position
   }
 }
 
