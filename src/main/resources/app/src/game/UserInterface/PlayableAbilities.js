@@ -4,10 +4,32 @@ import {bindActionCreators} from 'redux'
 import {get} from 'lodash'
 import PropTypes from 'prop-types'
 
+class PossibleAbility extends Component {
+  render() {
+    switch (this.props.possibleAbility.firstAbilityType) {
+      case 'TAP_ADD_MANA':
+        const color = this.props.possibleAbility.parameters[0]
+        return <li onClick={this.props.onClick}><img src='/img/symbols/TAP.png' alt='TAP' title='TAP' />: add <img src={`/img/symbols/${color}.png`} alt={color} title={color} /></li>
+      default:
+        return <li/>
+    }
+  }
+}
+
+PossibleAbility.propTypes = {
+  possibleAbility: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired
+}
+
 class PlayableAbilities extends Component {
   constructor(props) {
     super(props)
     this.closePlayableAbilitiesOverlay = this.closePlayableAbilitiesOverlay.bind(this)
+    this.playAbility = this.playAbility.bind(this)
+  }
+
+  playAbility(index) {
+    this.props.playAbilitiesAction(this.props.cardId, index)
   }
 
   closePlayableAbilitiesOverlay() {
@@ -18,10 +40,10 @@ class PlayableAbilities extends Component {
     if (this.props.possibleAbilities.length > 1) {
       return (
         <div id='playable-abilities-overlay' onClick={this.closePlayableAbilitiesOverlay}>
-          <div id='playable-abilities' style={{left: this.props.position.x + 'px', top: this.props.position.y + 'px'}}>
+          <div id='playable-abilities' style={{left: this.props.position.x + 'px', top: (this.props.position.y - 150) + 'px'}}>
             <ul>
-              <li>TAP: add 1 WHITE mana</li>
-              <li>TAP: add 1 BLUE mana</li>
+              { this.props.possibleAbilities.map((possibleAbility, index) =>
+                <PossibleAbility key={index} possibleAbility={possibleAbility} onClick={() => this.playAbility(index)} />) }
             </ul>
           </div>
         </div>
@@ -38,6 +60,14 @@ const closePlayableAbilitiesAction = () => {
   }
 }
 
+const playAbilitiesAction = (cardId, index) => {
+  return {
+    type: 'PLAY_ABILITIES_CLICK',
+    cardId: cardId,
+    index: index
+  }
+}
+
 const mapStateToProps = state => {
   return {
     cardId: get(state, 'userInterface.playableAbilities.cardId', -1),
@@ -48,7 +78,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    closePlayableAbilitiesOverlay: bindActionCreators(closePlayableAbilitiesAction, dispatch)
+    closePlayableAbilitiesOverlay: bindActionCreators(closePlayableAbilitiesAction, dispatch),
+    playAbilitiesAction: bindActionCreators(playAbilitiesAction, dispatch)
   }
 }
 

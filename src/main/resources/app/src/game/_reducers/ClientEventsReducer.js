@@ -11,7 +11,7 @@ export default class ClientEventsReducer {
 
   static getEvents() {
     return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'OPPONENT_BATTLEFIELD_CARD_CLICK', 'CONTINUE_CLICK',
-      'PLAYER_CLICK', 'MAXIMIZE_MINIMIZE_CARD', 'CLOSE_PLAYABLE_ABILITIES_CLICK']
+      'PLAYER_CLICK', 'MAXIMIZE_MINIMIZE_CARD', 'CLOSE_PLAYABLE_ABILITIES_CLICK', 'PLAY_ABILITIES_CLICK']
   }
 
   static reduceEvent(newState, action) {
@@ -22,6 +22,11 @@ export default class ClientEventsReducer {
 
     case 'CLOSE_PLAYABLE_ABILITIES_CLICK':
       UserInterfaceUtils.unsetPlayableAbilities(newState)
+      break
+
+    case 'PLAY_ABILITIES_CLICK':
+      const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
+      CardUtils.activateManaAbility(newState, cardInstance, action.index)
       break
 
     case 'PLAYER_HAND_CARD_CLICK':
@@ -79,7 +84,7 @@ export default class ClientEventsReducer {
         } else {
           const possibleAbilities = CardUtils.getAbilitiesForTriggerTypes(cardInstance, ['MANA_ABILITY', 'ACTIVATED_ABILITY'])
 
-          if (possibleAbilities.length > 1) {
+          if (!CardUtils.isFrontendTapped(cardInstance) && possibleAbilities.length > 1) {
             UserInterfaceUtils.setPlayableAbilities(newState, action.cardId, possibleAbilities, action.position)
 
           } else {
@@ -148,7 +153,7 @@ export default class ClientEventsReducer {
         } else if (CardSearch.cards(newState.player.battlefield).frontEndTapped().isNotEmpty()) {
           CardSearch.cards(newState.player.battlefield)
             .frontEndTapped()
-            .forEach((cardInstance) => CardUtils.untap(cardInstance))
+            .forEach(CardUtils.untap)
 
         } else {
           stompClient.sendEvent('turn', {action: 'CONTINUE_TURN'})

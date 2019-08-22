@@ -80,7 +80,7 @@ class Card extends Component {
   render() {
     if (this.props.cardInstance) {
       return (
-        <div id={'card-' + this.props.cardInstance.id}
+        <div id={`card-${this.props.cardInstance.id}`}
           className={this.getClasses()}
           style={{backgroundImage: this.imageUrl(), ...this.props.style}}
           onClick={this.props.onclick}

@@ -21,8 +21,7 @@ public class PlayerActiveManaHelper {
 
     public void toHaveMana(List<Color> colors) {
         mtgBrowser.wait(driver -> {
-            WebElement manaContainer = mtgBrowser.findElement(By.id("player-active-mana"));
-            List<WebElement> imgs = manaContainer.findElements(By.tagName("img"));
+            List<WebElement> imgs = getElementContainer().findElements(By.tagName("img"));
             List<String> alts = imgs.stream().map((webElement -> webElement.getAttribute("alt"))).sorted().collect(Collectors.toList());
             List<String> expectedColors = colors.stream().map(Enum::name).sorted().collect(Collectors.toList());
             LOGGER.info("alts={}   expectedColors={}", alts, expectedColors);
@@ -30,4 +29,7 @@ public class PlayerActiveManaHelper {
         });
     }
 
+    private WebElement getElementContainer() {
+        return mtgBrowser.findElement(By.id("player-active-mana"));
+    }
 }

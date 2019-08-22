@@ -21,6 +21,6 @@ export default (state, action) => {
     return {}
 
   } else {
-    throw new Error('Unknown action type ' + action.type)
+    throw new Error(`Unknown action type ${action.type}`)
   }
 }

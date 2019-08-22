@@ -174,16 +174,16 @@ export default class CardUtils {
 
   static canBlock(blockingCard, blockedCard) {
     if (!CardUtils.isOfType(blockingCard, 'CREATURE')) {
-      return blockingCard.idAndName + ' is not of type Creature.'
+      return `${blockingCard.idAndName} is not of type Creature.`
     }
 
     if (CardUtils.isTapped(blockingCard)) {
-      return blockingCard.idAndName + ' is tapped and cannot block.'
+      return `${blockingCard.idAndName} is tapped and cannot block.`
     }
 
     if (CardUtils.hasAbility(blockedCard, 'FLYING')) {
       if (!(CardUtils.hasAbility(blockingCard, 'FLYING') || CardUtils.hasAbility(blockingCard, 'REACH'))) {
-        return blockingCard.idAndName +' cannot block ' + blockedCard.idAndName + ' as it has flying.'
+        return `${blockingCard.idAndName} cannot block ${blockedCard.idAndName} as it has flying.`
       }
     }
 
@@ -237,11 +237,11 @@ export default class CardUtils {
     return !cardInstance.modifiers.attachedToId
   }
 
-  static activateManaAbility(state, cardInstance) {
+  static activateManaAbility(state, cardInstance, index = 0) {
     if (CardUtils.isFrontendTapped(cardInstance)) {
       CostUtils.removeMana(state, cardInstance.id)
     } else {
-      CostUtils.addMana(state, cardInstance.id, CardUtils.getAbilities(cardInstance, 'TAP_ADD_MANA')[0].parameters[0])
+      CostUtils.addMana(state, cardInstance.id, CardUtils.getAbilities(cardInstance, 'TAP_ADD_MANA')[index].parameters[0])
     }
     CardUtils.toggleFrontendTapped(cardInstance)
   }

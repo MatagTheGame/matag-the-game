@@ -6,7 +6,7 @@ const stompClient = Stomp.over(socket)
 const gameId = window.location.pathname.replace('/ui/game/', '')
 
 stompClient.sendEvent = (destination, body) => {
-  stompClient.send('/api/game/' + destination, {gameId: gameId}, JSON.stringify(body))
+  stompClient.send(`/api/game/${destination}`, {gameId: gameId}, JSON.stringify(body))
 }
 
 stompClient.init = (receiveCallback) => {
@@ -18,7 +18,7 @@ stompClient.init = (receiveCallback) => {
       receiveCallback(eventBody)
     })
 
-    stompClient.subscribe('/user/' + sessionId + '/events', (event) => {
+    stompClient.subscribe(`/user/${sessionId}/events`, (event) => {
       const eventBody = JSON.parse(event.body)
       receiveCallback(eventBody)
     })

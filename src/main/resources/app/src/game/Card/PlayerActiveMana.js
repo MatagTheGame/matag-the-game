@@ -8,7 +8,7 @@ class PlayerActiveMana extends Component {
     return (
       <div id='player-active-mana'>
         <ul>
-          { Object.values(this.props.mana).map((mana, index) => <li key={index}><img alt={mana} title={mana} src={'/img/symbols/' + mana + '.png'} /></li>) }
+          { Object.values(this.props.mana).map((mana, index) => <li key={index}><img alt={mana} title={mana} src={`/img/symbols/${mana}.png`} /></li>) }
         </ul>
       </div>
     )

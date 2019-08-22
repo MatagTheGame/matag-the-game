@@ -68,7 +68,7 @@ export default class PlayerUtils {
     } else {
       state.turn.cardIdSelectedToBePlayed = cardInstance.id
       state.turn.abilityToBePlayed = ability
-      UserInterfaceUtils.setStatusMessage(state, 'Select targets for ' + cardInstance.card.name + '.')
+      UserInterfaceUtils.setStatusMessage(state, `Select targets for ${cardInstance.card.name}.`)
     }
   }
 
