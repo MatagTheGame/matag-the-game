@@ -92,6 +92,10 @@ public class MtgBrowser {
         return new PlayerInfoHelper(this, playerType);
     }
 
+    public PlayerActiveManaHelper getPlayerActiveManaHelper() {
+        return new PlayerActiveManaHelper(this);
+    }
+
     public StackHelper getStackHelper() {
         return new StackHelper(this);
     }

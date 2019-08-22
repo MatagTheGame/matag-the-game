@@ -11,6 +11,7 @@ import PlayerInfo from './PlayerInfo/PlayerInfo'
 import MaximizedCard from './Card/MaximizedCard'
 import Stack from './Stack/Stack'
 import {UserInterface} from './UserInterface/UserInterface'
+import PlayerActiveMana from 'Main/game/Card/PlayerActiveMana'
 
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
           <Battlefield type='player'/>
           <Graveyard type='player'/>
           <PlayerInfo type='player'/>
+          <PlayerActiveMana type='player'/>
         </div>
       </Fragment>
     )

@@ -1,21 +1,9 @@
 import _ from 'lodash'
-import CardSearch from './CardSearch'
+import get from 'lodash/get'
+import CardSearch from 'Main/game/Card/CardSearch'
 import CardUtils from 'Main/game/Card/CardUtils'
 
 export default class CostUtils {
-  static currentTappedMana(battlefield) {
-    const map = {}
-
-    CardSearch.cards(battlefield)
-      .withAbility('TAP_ADD_MANA')
-      .frontEndTapped()
-      .forEach(cardInstance => {
-        map[cardInstance.id] = CardUtils.getAbilities(cardInstance, 'TAP_ADD_MANA')[0].parameters[0]
-      })
-
-    return map
-  }
-
   static isCastingCostFulfilled(card, currentTappedMana) {
     return CostUtils.isCostFulfilled(card.cost, currentTappedMana)
   }
@@ -49,5 +37,29 @@ export default class CostUtils {
     }
 
     return true
+  }
+
+  static getMana(state) {
+    return get(state, 'player.mana', {})
+  }
+
+  static addMana(state, cardId, manaType) {
+    const mana = CostUtils.getMana(state)
+    mana[cardId] = manaType
+    state.player.mana = mana
+  }
+
+  static removeMana(state, cardId) {
+    const mana = CostUtils.getMana(state)
+    delete mana[cardId]
+  }
+
+  static clearMana(state) {
+    for (let cardId in this.getMana(state)) {
+      const cardInstance = CardSearch.cards(state.player.battlefield).withId(cardId)
+      if (!CardUtils.isFrontendTapped(cardInstance)) {
+        CostUtils.removeMana(state, cardId)
+      }
+    }
   }
 }

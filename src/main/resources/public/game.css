@@ -449,6 +449,24 @@ span.group {
   transform: rotateX(-60deg) translateY(20px);
 }
 
+#player-active-mana {
+  position: absolute;
+  bottom: 30%;
+  width: 13%;
+  right: 1%;
+  font-size: x-large;
+}
+
+#player-active-mana ul {
+  margin: 0;
+  padding: 0;
+}
+
+#player-active-mana li {
+  display: inline-block;
+  margin-right: 5px;
+}
+
 .non-positive {
   color: red;
 }

@@ -1,5 +1,6 @@
 import PlayerUtils from 'Main/game/PlayerInfo/PlayerUtils'
 import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
+import CostUtils from 'Main/game/Card/CostUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {
@@ -43,6 +44,7 @@ export default class ServerEventsReducer {
     case 'UPDATE_PLAYER_BATTLEFIELD':
       player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
       player.battlefield = action.value.value
+      CostUtils.clearMana(newState)
       break
 
     case 'UPDATE_PLAYER_HAND':

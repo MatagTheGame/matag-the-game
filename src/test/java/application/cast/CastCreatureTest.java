@@ -16,10 +16,13 @@ import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
+import static com.aa.mtg.cards.properties.Color.BLUE;
+import static com.aa.mtg.cards.properties.Color.RED;
 import static com.aa.mtg.cards.sets.Ixalan.HEADWATER_SENTRIES;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
+import static java.util.Arrays.asList;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -54,6 +57,15 @@ public class CastCreatureTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 2).isFrontendTapped();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isFrontendTapped();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).isFrontendTapped();
+        browser.player1().getPlayerActiveManaHelper().toHaveMana(asList(BLUE, BLUE, BLUE, RED, RED));
+
+        // When clicking on a land again then gets untapped and when clicking on it again then gets tapped again
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isNotFrontendTapped();
+        browser.player1().getPlayerActiveManaHelper().toHaveMana(asList(BLUE, BLUE, BLUE, RED));
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).isFrontendTapped();
+        browser.player1().getPlayerActiveManaHelper().toHaveMana(asList(BLUE, BLUE, BLUE, RED, RED));
 
         // When click on creature
         browser.player1().getHandHelper(PLAYER).getCard(HEADWATER_SENTRIES, 0).click();

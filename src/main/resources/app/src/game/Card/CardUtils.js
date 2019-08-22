@@ -1,4 +1,5 @@
 import {get} from 'lodash'
+import CostUtils from 'Main/game/Card/CostUtils'
 
 export default class CardUtils {
   static normalizeCardName(cardName) {
@@ -234,5 +235,14 @@ export default class CardUtils {
 
   static isNotAttached(cardInstance) {
     return !cardInstance.modifiers.attachedToId
+  }
+
+  static activateManaAbility(state, cardInstance) {
+    if (CardUtils.isFrontendTapped(cardInstance)) {
+      CostUtils.removeMana(state, cardInstance.id)
+    } else {
+      CostUtils.addMana(state, cardInstance.id, CardUtils.getAbilities(cardInstance, 'TAP_ADD_MANA')[0].parameters[0])
+    }
+    CardUtils.toggleFrontendTapped(cardInstance)
   }
 }
