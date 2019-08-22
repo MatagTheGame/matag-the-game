@@ -467,6 +467,11 @@ span.group {
   margin-right: 5px;
 }
 
+#player-active-mana li img {
+  width: 36px;
+  height: 36px;
+}
+
 .non-positive {
   color: red;
 }
