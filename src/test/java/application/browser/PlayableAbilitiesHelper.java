@@ -20,7 +20,7 @@ public class PlayableAbilitiesHelper {
 
     public void toHaveAbilities(List<String> expectedAbilities) {
         mtgBrowser.wait(driver -> {
-            List<String> abilities = abilities().stream().map(ability -> ability.getText() + "->" + imagesAsString(ability)).collect(Collectors.toList());
+            List<String> abilities = abilities().stream().map(ability -> ability.getAttribute("title")).collect(Collectors.toList());
             LOGGER.info("abilities={}   expectedAbilities={}", abilities, expectedAbilities);
             return expectedAbilities.equals(abilities);
         });
@@ -36,11 +36,5 @@ public class PlayableAbilitiesHelper {
 
     private WebElement getElementContainer() {
         return mtgBrowser.findElement(By.id("playable-abilities"));
-    }
-
-    private String imagesAsString(WebElement ability) {
-        return ability.findElements(By.tagName("img")).stream()
-                .map(img -> img.getAttribute("alt"))
-                .collect(Collectors.joining(","));
     }
 }
