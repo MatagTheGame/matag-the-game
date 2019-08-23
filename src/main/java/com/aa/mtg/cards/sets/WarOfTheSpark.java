@@ -12,6 +12,7 @@ import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
+import static com.aa.mtg.cards.sets.RavnicaAllegiance.AZORIUS_GUILDGATE;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
@@ -45,6 +46,7 @@ public class WarOfTheSpark implements MtgSet {
     private List<Card> cards = new ArrayList<>();
 
     private WarOfTheSpark() {
+        cards.add(AZORIUS_GUILDGATE);
         cards.add(BANEHOUND);
         cards.add(BULWARK_GIANT);
         cards.add(CHARITY_EXTRACTOR);
@@ -60,7 +62,9 @@ public class WarOfTheSpark implements MtgSet {
         cards.add(LAZOTEP_BEHEMOTH);
         cards.add(LOXODON_SERGEANT);
         cards.add(NAGA_ETERNAL);
+        cards.add(RavnicaAllegiance.ORZHOV_GUILDGATE);
         cards.add(Dominaria.PRIMORDIAL_WURM);
+        cards.add(RavnicaAllegiance.SIMIC_GUILDGATE);
         cards.add(THUNDERING_CERATOK);
         cards.add(TITHEBEARER_GIANT);
     }

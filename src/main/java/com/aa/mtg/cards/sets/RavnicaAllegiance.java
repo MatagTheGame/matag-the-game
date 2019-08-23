@@ -37,10 +37,14 @@ public class RavnicaAllegiance implements MtgSet {
     public static Card CORAL_COMMANDO = new Card("Coral Commando", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Merfolk", "Warrior"), COMMON, "", 3, 2, emptyList());
     public static Card END_RAZE_FORERUNNERS = new Card("End-Raze Forerunners", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Boar"), RARE, "Vigilance, trample, haste. When End-Raze Forerunners enters the battlefield, other creatures you control get +2/+2 and gain vigilance and trample until end of turn.", 7, 7, asList(VIGILANCE, TRAMPLE, HASTE, WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_2_2_VIGILANCE_AND_TRAMPLE_UNTIL_END_OF_TURN));
     public static Card FERAL_MAAKA = new Card("Feral Maaka", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), singletonList("Cat"), COMMON, "", 2, 2, emptyList());
+    public static Card GRUUL_GUILDGATE = new Card("Gruul Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList("Gate"), COMMON, "Gruul Guildgate enters the battlefield tapped. TAP: Add RED or GREEN to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_RED_MANA, TAP_ADD_GREEN_MANA));
     public static Card HAAZDA_OFFICER = new Card("Haazda Officer", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Solder"), COMMON, "When Haazda Officer enters the battlefield, target creature you control gets +1/+1 until end of turn.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_YOU_CONTROL_GETS_PLUS_1_1));
     public static Card NOXIOUS_GROODION = new Card("Noxious Groodion", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Beast"), COMMON, "Deathtouch", 2, 2, singletonList(DEATHTOUCH));
+    public static Card ORZHOV_GUILDGATE = new Card("Orzhov Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList("Gate"), COMMON, "Orzhov Guildgate enters the battlefield tapped. TAP: Add WHITE or BLACK to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_WHITE_MANA, TAP_ADD_BLACK_MANA));
     public static Card PRECISION_BOLT = new Card("Precision Bolt", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), COMMON, "Precision Bolt deals 3 damage to any target.", 0, 0, singletonList(DEAL_3_DAMAGE_TO_ANY_TARGET));
     public static Card PROWLING_CARACAL = new Card("Prowling Caracal", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), singletonList("Cat"), COMMON, "", 3, 1, emptyList());
+    public static Card RAKDOS_GUILDGATE = new Card("Rakdos Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList("Gate"), COMMON, "Rakdos Guildgate enters the battlefield tapped. TAP: Add BLACK or RED to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_BLACK_MANA, TAP_ADD_RED_MANA));
+    public static Card SIMIC_GUILDGATE = new Card("Simic Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList("Gate"), COMMON, "Simic Guildgate enters the battlefield tapped. TAP: Add GREEN or BLUE to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_GREEN_MANA, TAP_ADD_BLUE_MANA));
     public static Card SYLVAN_BRUSHSTRIDER = new Card("Sylvan Brushstrider", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Beast"), COMMON, "When Sylvan Brushstrider enters the battlefield, you gain 2 life.", 3, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE));
 
     private static RavnicaAllegiance instance;
@@ -49,6 +53,7 @@ public class RavnicaAllegiance implements MtgSet {
 
     private RavnicaAllegiance() {
         cards.add(AXEBANE_BEAST);
+        cards.add(AZORIUS_GUILDGATE);
         cards.add(BEDEVIL);
         cards.add(BLADEBRAND);
         cards.add(BURN_BRIGHT);
@@ -60,11 +65,15 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(CORAL_COMMANDO);
         cards.add(END_RAZE_FORERUNNERS);
         cards.add(FERAL_MAAKA);
+        cards.add(GRUUL_GUILDGATE);
         cards.add(HAAZDA_OFFICER);
         cards.add(Dominaria.MAMMOTH_SPIDER);
         cards.add(NOXIOUS_GROODION);
+        cards.add(ORZHOV_GUILDGATE);
         cards.add(PRECISION_BOLT);
         cards.add(PROWLING_CARACAL);
+        cards.add(RAKDOS_GUILDGATE);
+        cards.add(SIMIC_GUILDGATE);
         cards.add(SYLVAN_BRUSHSTRIDER);
     }
 
