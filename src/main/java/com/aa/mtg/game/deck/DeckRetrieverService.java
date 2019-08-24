@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.aa.mtg.cards.Cards.*;
 import static com.aa.mtg.cards.properties.Color.*;
@@ -38,14 +39,17 @@ public class DeckRetrieverService {
         List<CardInstance> cards = new ArrayList<>();
 
         List<Color> deckColors = randomTwoColors();
-        List<Card> randomCardsOfTheseColors = getRandomCardsForColors(deckColors);
 
         for (Color color : deckColors) {
-            addNCards(gameStatus, cards, playerName, 12, getBasicLandForColor(color));
+            addNCards(gameStatus, cards, playerName, 11, getBasicLandForColor(color));
         }
 
-        for (Card randomCard : randomCardsOfTheseColors) {
+        for (Card randomCard : getRandomSpellsForColors(deckColors)) {
             addNCards(gameStatus, cards, playerName, 4, randomCard);
+        }
+
+        for (Card randomCard : getRandomNonBasicLandsOfTheseColors(deckColors)) {
+            addNCards(gameStatus, cards, playerName, 2, randomCard);
         }
 
         addNCards(gameStatus, cards, playerName, 4, getRandomColorlessCard());
@@ -77,7 +81,7 @@ public class DeckRetrieverService {
         return colors.subList(0, 2);
     }
 
-    private List<Card> getRandomCardsForColors(List<Color> deckColors) {
+    private List<Card> getRandomSpellsForColors(List<Color> deckColors) {
         ArrayList<Card> selectedCards = new ArrayList<>();
 
         List<Card> creatureCardsOfTheseColors = new CardSearch(mtgSets.getAllCards())
@@ -93,6 +97,22 @@ public class DeckRetrieverService {
                 .getCards();
         Collections.shuffle(nonCreatureCardsOfTheseColors);
         selectedCards.addAll(nonCreatureCardsOfTheseColors.subList(0, 3));
+
+        return selectedCards;
+    }
+
+    private List<Card> getRandomNonBasicLandsOfTheseColors(List<Color> deckColors) {
+        ArrayList<Card> selectedCards = new ArrayList<>();
+
+        List<Card> nonBasicLands = new CardSearch(mtgSets.getAllCards())
+                .ofType(Type.LAND)
+                .notOfType(Type.BASIC)
+                .getCards()
+                .stream()
+                .filter(card -> card.colorsOfManaThatCanGenerate().size() == 0 || deckColors.contains(card.colorsOfManaThatCanGenerate().get(0)))
+                .collect(Collectors.toList());
+        Collections.shuffle(nonBasicLands);
+        selectedCards.addAll(nonBasicLands.subList(0, 2));
 
         return selectedCards;
     }

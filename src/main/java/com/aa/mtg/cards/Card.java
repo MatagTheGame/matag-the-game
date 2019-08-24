@@ -1,6 +1,7 @@
 package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.cards.properties.Rarity;
@@ -13,7 +14,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static com.aa.mtg.cards.ability.type.AbilityType.TAP_ADD_MANA;
 import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
@@ -101,6 +106,22 @@ public class Card {
     @JsonIgnore
     public List<Ability> getAbilities() {
         return abilities;
+    }
+
+    @JsonIgnore
+    public List<Color> colorsOfManaThatCanGenerate() {
+        List<Color> colors = new ArrayList<>();
+
+        for (Ability ability : abilities) {
+            List<AbilityType> abilityTypes = ability.getAbilityTypes().stream().filter(abilityType -> abilityType.equals(TAP_ADD_MANA)).collect(Collectors.toList());
+            List<String> parameters = ability.getParameters();
+
+            if (abilityTypes.size() == 1) {
+                colors.add(Color.valueOf(parameters.get(0)));
+            }
+        }
+
+        return colors;
     }
 
     public boolean isOfType(Type type) {
