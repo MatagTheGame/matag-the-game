@@ -38,7 +38,8 @@ public class LifeService {
             gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, player);
 
             if (player.getLife() <= 0) {
-                gameStatus.getTurn().setWinner(player.getName());
+                gameStatus.getTurn().setWinner(gameStatus.getOtherPlayer(player).getName());
+                gameStatusUpdaterService.sendUpdateTurn(gameStatus);
             }
         }
     }

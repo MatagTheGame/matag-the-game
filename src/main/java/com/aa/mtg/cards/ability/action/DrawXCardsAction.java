@@ -24,14 +24,14 @@ public class DrawXCardsAction implements AbilityAction {
     public void perform(CardInstance cardInstance, GameStatus gameStatus, String parameter) {
         int cardsToDraw = Integer.valueOf(parameter);
 
-        Player currentPlayer = gameStatus.getCurrentPlayer();
+        Player controller = gameStatus.getPlayerByName(cardInstance.getController());
         for (int i = 0; i < cardsToDraw; i++) {
-            CardInstance drawnCardInstance = currentPlayer.getLibrary().draw();
-            currentPlayer.getHand().addCard(drawnCardInstance);
+            CardInstance drawnCardInstance = controller.getLibrary().draw();
+            controller.getHand().addCard(drawnCardInstance);
         }
 
-        gameStatusUpdaterService.sendUpdatePlayerHand(gameStatus, currentPlayer);
-        gameStatusUpdaterService.sendUpdatePlayerLibrarySize(gameStatus, currentPlayer);
-        LOGGER.info("{} drew {} cards.", currentPlayer.getName(), cardsToDraw);
+        gameStatusUpdaterService.sendUpdatePlayerHand(gameStatus, controller);
+        gameStatusUpdaterService.sendUpdatePlayerLibrarySize(gameStatus, controller);
+        LOGGER.info("{} drew {} cards.", controller.getName(), cardsToDraw);
     }
 }
