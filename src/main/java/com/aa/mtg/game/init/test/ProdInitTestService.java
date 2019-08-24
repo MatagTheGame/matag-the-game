@@ -62,7 +62,7 @@ public class ProdInitTestService extends InitTestService {
         addCardToNonCurrentPlayerBattlefield(gameStatus, FOREST);
         addCardToNonCurrentPlayerBattlefield(gameStatus, FOREST);
 
-        addCardToNonCurrentPlayerHand(gameStatus, GRAZING_WHIPTAIL);
+        addCardToNonCurrentPlayerHand(gameStatus, GILDED_SENTINEL);
         addCardToNonCurrentPlayerHand(gameStatus, CHARGING_MONSTROSAUR);
         addCardToNonCurrentPlayerHand(gameStatus, PRECISION_BOLT);
         addCardToNonCurrentPlayerHand(gameStatus, RILE);
