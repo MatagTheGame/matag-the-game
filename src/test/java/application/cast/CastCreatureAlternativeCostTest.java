@@ -11,12 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
+import sun.awt.image.BufferedImageGraphicsConfig;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
-import static com.aa.mtg.cards.Cards.MOUNTAIN;
+import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.aa.mtg.cards.properties.Color.BLUE;
+import static com.aa.mtg.cards.properties.Color.GREEN;
 import static com.aa.mtg.cards.properties.Color.RED;
 import static com.aa.mtg.cards.properties.Color.WHITE;
+import static com.aa.mtg.cards.sets.CoreSet2019.DRUID_OF_THE_COWL;
 import static com.aa.mtg.cards.sets.Ixalan.HEADWATER_SENTRIES;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.AZORIUS_GUILDGATE;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
@@ -57,9 +60,9 @@ public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
         browser.player1().getPlayerActiveManaHelper().toHaveMana(singletonList(WHITE));
 
         // When clicking on other lands and try to play the creature
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 0).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 1).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(MOUNTAIN, 2).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(DRUID_OF_THE_COWL, 0).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(DRUID_OF_THE_COWL, 1).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(DRUID_OF_THE_COWL, 2).click();
         browser.player1().getHandHelper(PLAYER).getFirstCard(HEADWATER_SENTRIES).click();
 
         // Then the creature is not played
@@ -70,7 +73,7 @@ public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
 
         // The dual land gets untapped
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getFirstCard(AZORIUS_GUILDGATE).isNotFrontendTapped();
-        browser.player1().getPlayerActiveManaHelper().toHaveMana(asList(RED, RED, RED));
+        browser.player1().getPlayerActiveManaHelper().toHaveMana(asList(GREEN, GREEN, GREEN));
 
         // When clicking the dual land for BLUE
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getFirstCard(AZORIUS_GUILDGATE).click();
@@ -78,7 +81,7 @@ public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
 
         // Then BLUE mana is generated
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getFirstCard(AZORIUS_GUILDGATE).isFrontendTapped();
-        browser.player1().getPlayerActiveManaHelper().toHaveMana(asList(BLUE, RED, RED, RED));
+        browser.player1().getPlayerActiveManaHelper().toHaveMana(asList(BLUE, GREEN, GREEN, GREEN));
 
         // When clicking on the creature
         browser.player1().getHandHelper(PLAYER).getFirstCard(HEADWATER_SENTRIES).click();
@@ -92,9 +95,9 @@ public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
         public void initGameStatus(GameStatus gameStatus) {
             addCardToCurrentPlayerHand(gameStatus, HEADWATER_SENTRIES);
             addCardToCurrentPlayerBattlefield(gameStatus, AZORIUS_GUILDGATE);
-            addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
-            addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
-            addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
+            addCardToCurrentPlayerBattlefield(gameStatus, DRUID_OF_THE_COWL);
+            addCardToCurrentPlayerBattlefield(gameStatus, DRUID_OF_THE_COWL);
+            addCardToCurrentPlayerBattlefield(gameStatus, DRUID_OF_THE_COWL);
         }
     }
 }

@@ -35,6 +35,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card DAGGERBACK_BASILISK = new Card("Daggerback Basilisk", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Basilisk"), COMMON, "Deathtouch", 0, 0, singletonList(DEATHTOUCH));
     public static Card DAYBREAK_CHAPLAIN = new Card("Daybreak Chaplain", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Cleric"), COMMON, "Lifelink", 1, 3, singletonList(LIFELINK));
     public static Card DIREGRAF_GHOUL = new Card("Diregraf Ghoul", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(CREATURE), singletonList("Zombie"), UNCOMMON, "Diregraf Ghoul enters the battlefield tapped.", 2, 2, singletonList(ENTERS_THE_BATTLEFIELD_TAPPED));
+    public static Card DRUID_OF_THE_COWL = new Card("Druid of the Cowl", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), asList("Elf", "Druid"), COMMON, "TAP: add GREEN.", 1, 3, singletonList(TAP_ADD_GREEN_MANA));
     public static Card ELECTRIFY = new Card("Electrify", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Electrify deals 4 damage to target creature.", 0, 0, singletonList(DEAL_4_DAMAGE_TO_TARGET_CREATURE));
     public static Card EXCLUSION_MAGE = new Card("Exclusion Mage", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Wizard"), UNCOMMON, "\tWhen Exclusion Mage enters the battlefield, return target creature an opponent controls to its owner's hand.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_RETURN_TARGET_OPPONENT_CREATURE_TO_ITS_OWNERS_HAND));
     public static Card FIELD_CREEPER = new Card("Field Creeper", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Scarecrow"), COMMON, "", 2, 1, emptyList());
@@ -81,6 +82,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(DAYBREAK_CHAPLAIN);
         cards.add(DIREGRAF_GHOUL);
         cards.add(Dominaria.DIVINATION);
+        cards.add(DRUID_OF_THE_COWL);
         cards.add(ELECTRIFY);
         cards.add(EXCLUSION_MAGE);
         cards.add(FIELD_CREEPER);
