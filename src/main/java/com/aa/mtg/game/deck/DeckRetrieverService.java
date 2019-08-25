@@ -48,9 +48,7 @@ public class DeckRetrieverService {
             addNCards(gameStatus, cards, playerName, 4, randomCard);
         }
 
-        for (Card randomCard : getRandomNonBasicLandsOfTheseColors(deckColors)) {
-            addNCards(gameStatus, cards, playerName, 2, randomCard);
-        }
+        addNCards(gameStatus, cards, playerName, 2, getRandomNonBasicLandOfTheseColors(deckColors));
 
         addNCards(gameStatus, cards, playerName, 4, getRandomColorlessCard());
 
@@ -101,9 +99,7 @@ public class DeckRetrieverService {
         return selectedCards;
     }
 
-    private List<Card> getRandomNonBasicLandsOfTheseColors(List<Color> deckColors) {
-        ArrayList<Card> selectedCards = new ArrayList<>();
-
+    private Card getRandomNonBasicLandOfTheseColors(List<Color> deckColors) {
         List<Card> nonBasicLands = new CardSearch(mtgSets.getAllCards())
                 .ofType(Type.LAND)
                 .notOfType(Type.BASIC)
@@ -112,9 +108,7 @@ public class DeckRetrieverService {
                 .filter(card -> card.colorsOfManaThatCanGenerate().size() == 0 || deckColors.contains(card.colorsOfManaThatCanGenerate().get(0)))
                 .collect(Collectors.toList());
         Collections.shuffle(nonBasicLands);
-        selectedCards.addAll(nonBasicLands.subList(0, 1));
-
-        return selectedCards;
+        return nonBasicLands.get(0);
     }
 
     private Card getRandomColorlessCard() {
