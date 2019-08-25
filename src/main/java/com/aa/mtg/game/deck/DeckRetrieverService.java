@@ -112,7 +112,7 @@ public class DeckRetrieverService {
                 .filter(card -> card.colorsOfManaThatCanGenerate().size() == 0 || deckColors.contains(card.colorsOfManaThatCanGenerate().get(0)))
                 .collect(Collectors.toList());
         Collections.shuffle(nonBasicLands);
-        selectedCards.addAll(nonBasicLands.subList(0, 2));
+        selectedCards.addAll(nonBasicLands.subList(0, 1));
 
         return selectedCards;
     }
