@@ -67,16 +67,22 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
         browser.player1().getActionHelper().clickContinue();
         browser.player1().getActionHelper().clickContinue();
         browser.player2().getActionHelper().clickContinue();
+        browser.player2().getActionHelper().clickContinue();
+        browser.player1().getActionHelper().clickContinue();
+        browser.player2().getPhaseHelper().is(M1, PLAYER);
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CANOPY_SPIDER).isTapped();
+        browser.player2().getHandHelper(PLAYER).contains(FOREST);
 
-        // Next next turn target is untapped
-        browser.player2().getActionHelper().clickContinue();
-        browser.player1().getActionHelper().clickContinue();
+        // Next next turn target is still tapped
         browser.player2().getActionHelper().clickContinue();
         browser.player2().getActionHelper().clickContinue();
         browser.player1().getActionHelper().clickContinue();
         browser.player1().getActionHelper().clickContinue();
         browser.player2().getActionHelper().clickContinue();
+        browser.player1().getPhaseHelper().is(M1, PLAYER);
+        browser.player1().getHandHelper(PLAYER).contains(ISLAND);
+
+        // Next next next turn target is untapped
         browser.player1().getActionHelper().clickContinue();
         browser.player2().getActionHelper().clickContinue();
         browser.player1().getActionHelper().clickContinue();
@@ -94,10 +100,8 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
             addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
             addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
             addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
-            addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
 
             addCardToNonCurrentPlayerBattlefield(gameStatus, CANOPY_SPIDER);
-            addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
             addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
         }
     }
