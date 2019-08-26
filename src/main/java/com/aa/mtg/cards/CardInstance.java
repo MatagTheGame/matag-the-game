@@ -168,8 +168,7 @@ public class CardInstance {
 
     public boolean canProduceMana(Color color) {
         return getAbilitiesByTriggerType(MANA_ABILITY).stream()
-                .map(Ability::getParameters)
-                .map(parameters -> parameters.get(0))
+                .flatMap(ability -> ability.getParameters().stream())
                 .anyMatch(parameter -> parameter.equals(color.toString()));
     }
 

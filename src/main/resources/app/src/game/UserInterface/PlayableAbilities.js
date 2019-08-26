@@ -1,15 +1,19 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {get} from 'lodash'
+import get from 'lodash/get'
 import PropTypes from 'prop-types'
 
 class PossibleAbility extends Component {
+  static renderColors(colors) {
+    return colors.map((color, index) => <img key={index} src={`/img/symbols/${color}.png`} alt={color} />)
+  }
+
   render() {
     switch (this.props.possibleAbility.firstAbilityType) {
       case 'TAP_ADD_MANA':
-        const color = this.props.possibleAbility.parameters[0]
-        return <li onClick={this.props.onClick} title={`TAP: add ${color}`}><img src='/img/symbols/TAP.png' alt='TAP' />: add <img src={`/img/symbols/${color}.png`} alt={color} /></li>
+        const colors = this.props.possibleAbility.parameters
+        return <li onClick={this.props.onClick} title={`TAP: add ${colors}`}><img src='/img/symbols/TAP.png' alt='TAP' />: add {PossibleAbility.renderColors(colors)}</li>
       default:
         return <li/>
     }

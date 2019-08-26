@@ -1,6 +1,6 @@
 import React, {Fragment, Component} from 'react'
 import {connect} from 'react-redux'
-import {get} from 'lodash'
+import get from 'lodash/get'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 

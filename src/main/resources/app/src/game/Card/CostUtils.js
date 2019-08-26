@@ -13,7 +13,7 @@ export default class CostUtils {
   }
 
   static isCostFulfilled(costToFulfill, currentTappedMana) {
-    const manaPaid = _.values(currentTappedMana)
+    const manaPaid = _.flatten(_.values(currentTappedMana))
     for (const cost of costToFulfill) {
       let removed = false
 
@@ -43,9 +43,9 @@ export default class CostUtils {
     return get(state, 'player.mana', {})
   }
 
-  static addMana(state, cardId, manaType) {
+  static addMana(state, cardId, manaTypes) {
     const mana = CostUtils.getMana(state)
-    mana[cardId] = manaType
+    mana[cardId] = manaTypes
     state.player.mana = mana
   }
 

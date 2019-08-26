@@ -11,6 +11,7 @@ import java.util.List;
 import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.RARE;
+import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.properties.Type.LAND;
 import static java.util.Arrays.asList;
@@ -38,6 +39,7 @@ public class RavnicaAllegiance implements MtgSet {
     public static Card END_RAZE_FORERUNNERS = new Card("End-Raze Forerunners", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Boar"), RARE, "Vigilance, trample, haste. When End-Raze Forerunners enters the battlefield, other creatures you control get +2/+2 and gain vigilance and trample until end of turn.", 7, 7, asList(VIGILANCE, TRAMPLE, HASTE, WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_2_2_VIGILANCE_AND_TRAMPLE_UNTIL_END_OF_TURN));
     public static Card FERAL_MAAKA = new Card("Feral Maaka", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), singletonList("Cat"), COMMON, "", 2, 2, emptyList());
     public static Card GRUUL_GUILDGATE = new Card("Gruul Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList("Gate"), COMMON, "Gruul Guildgate enters the battlefield tapped. TAP: Add RED or GREEN to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_RED_MANA, TAP_ADD_GREEN_MANA));
+    public static Card GYRE_ENGINEER = new Card("Gyre Engineer", asSet(Color.GREEN, Color.BLUE), asList(Cost.GREEN, Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), asList("Vedalken", "Wizard"), UNCOMMON, "TAP: Add GREEN or BLUE.", 1, 1, singletonList(TAP_ADD_1_GREEN_1_BLUE_MANA));
     public static Card HAAZDA_OFFICER = new Card("Haazda Officer", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Solder"), COMMON, "When Haazda Officer enters the battlefield, target creature you control gets +1/+1 until end of turn.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_YOU_CONTROL_GETS_PLUS_1_1));
     public static Card NOXIOUS_GROODION = new Card("Noxious Groodion", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Beast"), COMMON, "Deathtouch", 2, 2, singletonList(DEATHTOUCH));
     public static Card ORZHOV_GUILDGATE = new Card("Orzhov Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList("Gate"), COMMON, "Orzhov Guildgate enters the battlefield tapped. TAP: Add WHITE or BLACK to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_WHITE_MANA, TAP_ADD_BLACK_MANA));
@@ -66,6 +68,7 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(END_RAZE_FORERUNNERS);
         cards.add(FERAL_MAAKA);
         cards.add(GRUUL_GUILDGATE);
+        cards.add(GYRE_ENGINEER);
         cards.add(HAAZDA_OFFICER);
         cards.add(Dominaria.MAMMOTH_SPIDER);
         cards.add(NOXIOUS_GROODION);

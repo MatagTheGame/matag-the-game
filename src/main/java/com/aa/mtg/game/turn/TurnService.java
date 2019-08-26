@@ -41,7 +41,7 @@ public class TurnService {
         playLandService.playLand(gameStatus, cardId);
     }
 
-    void cast(GameStatus gameStatus, int cardId, Map<Integer, String> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
+    void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
         castService.cast(gameStatus, cardId, mana, targetsIdsForCardIds, playedAbility);
     }
 

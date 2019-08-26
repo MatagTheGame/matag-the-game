@@ -1,4 +1,4 @@
-import {get} from 'lodash'
+import get from 'lodash/get'
 import stompClient from 'Main/game/WebSocket'
 import CardSearch from 'Main/game/Card/CardSearch'
 import CostUtils from 'Main/game/Card/CostUtils'

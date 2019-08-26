@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
-import {get} from 'lodash'
+import get from 'lodash/get'
 import Card from '../Card/Card'
 import {bindActionCreators} from 'redux'
 import CardSearch from '../Card/CardSearch'

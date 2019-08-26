@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {get} from 'lodash'
+import get from 'lodash/get'
 import Phase from './Phase'
 import PropTypes from 'prop-types'
 

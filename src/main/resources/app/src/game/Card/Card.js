@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {get} from 'lodash'
+import get from 'lodash/get'
 import CardUtils from './CardUtils'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'

@@ -80,6 +80,7 @@ public class Abilities {
     public static Ability TAP_ADD_BLACK_MANA = new Ability(TAP_ADD_MANA, emptyList(), singletonList("BLACK"), new Trigger(MANA_ABILITY));
     public static Ability TAP_ADD_BLUE_MANA = new Ability(TAP_ADD_MANA, emptyList(), singletonList("BLUE"), new Trigger(MANA_ABILITY));
     public static Ability TAP_ADD_GREEN_MANA = new Ability(TAP_ADD_MANA, emptyList(), singletonList("GREEN"), new Trigger(MANA_ABILITY));
+    public static Ability TAP_ADD_1_GREEN_1_BLUE_MANA = new Ability(TAP_ADD_MANA, emptyList(), asList("GREEN", "BLUE"), new Trigger(MANA_ABILITY));
     public static Ability TAP_ADD_RED_MANA = new Ability(TAP_ADD_MANA, emptyList(), singletonList("RED"), new Trigger(MANA_ABILITY));
     public static Ability TAP_ADD_WHITE_MANA = new Ability(TAP_ADD_MANA, emptyList(), singletonList("WHITE"), new Trigger(MANA_ABILITY));
     public static Ability TARGET_CREATURE_GETS_DEATHTOUCH_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().targetType(TargetType.PERMANENT).ofType(singletonList(CREATURE)).build()), singletonList("DEATHTOUCH"), new Trigger(CAST));

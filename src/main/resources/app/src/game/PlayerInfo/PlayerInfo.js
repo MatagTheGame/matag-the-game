@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {get} from 'lodash'
+import get from 'lodash/get'
 import PropTypes from 'prop-types'
 
 class PlayerInfo extends Component {

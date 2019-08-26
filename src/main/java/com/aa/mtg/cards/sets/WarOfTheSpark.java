@@ -35,6 +35,7 @@ public class WarOfTheSpark implements MtgSet {
     public static Card IRONCLAD_KROVOD = new Card("Ironclad Krovod", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Beast"), COMMON, "", 2, 5, emptyList());
     public static Card KRAUL_STINGER = new Card("Kraul Stinger", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Insect", "Assassin"), COMMON, "Deathtouch", 2, 2, singletonList(DEATHTOUCH));
     public static Card LAZOTEP_BEHEMOTH = new Card("Lazotep Behemoth", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Zombie", "Hippo"), COMMON, "", 5, 4, emptyList());
+    public static Card LEYLINE_PROWLER = new Card("Leyline Prowler", asSet(Color.BLACK, Color.GREEN), asList(Cost.BLACK, Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), asList("Nightmare", "Beast"), UNCOMMON, "Deathtouch, lifelink. TAP: Add one mana of any color.", 2, 3, asList(DEATHTOUCH, LIFELINK, TAP_ADD_WHITE_MANA, TAP_ADD_BLUE_MANA, TAP_ADD_BLACK_MANA, TAP_ADD_RED_MANA, TAP_ADD_GREEN_MANA));
     public static Card LOXODON_SERGEANT = new Card("Loxodon Sergeant", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Elephant", "Soldier"), COMMON, "Vigilance. When Loxodon Sergeant enters the battlefield, other creatures you control gain vigilance until end of turn.", 3, 3, asList(VIGILANCE, WHEN_IT_ENTERS_THE_BATTLEFIELD_OTHER_CREATURES_YOU_CONTROL_GET_VIGILANCE_UNTIL_END_OF_TURN));
     public static Card NAGA_ETERNAL = new Card("Naga Eternal", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Zombie", "Naga"), COMMON, "", 3, 2, emptyList());
     public static Card THUNDERING_CERATOK = new Card("Thundering Ceratok", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Rhino"), COMMON, "Trample. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.", 4, 5, asList(TRAMPLE, WHEN_IT_ENTERS_THE_BATTLEFIELD_OTHER_CREATURES_YOU_CONTROL_GET_TRAMPLE_UNTIL_END_OF_TURN));
@@ -60,6 +61,7 @@ public class WarOfTheSpark implements MtgSet {
         cards.add(IRONCLAD_KROVOD);
         cards.add(KRAUL_STINGER);
         cards.add(LAZOTEP_BEHEMOTH);
+        cards.add(LEYLINE_PROWLER);
         cards.add(LOXODON_SERGEANT);
         cards.add(NAGA_ETERNAL);
         cards.add(RavnicaAllegiance.ORZHOV_GUILDGATE);

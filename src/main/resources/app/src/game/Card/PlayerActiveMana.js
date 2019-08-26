@@ -1,14 +1,15 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {get} from 'lodash'
+import get from 'lodash/get'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 
 class PlayerActiveMana extends Component {
   render() {
     return (
       <div id='player-active-mana'>
         <ul>
-          { Object.keys(this.props.mana).map(key => this.props.mana[key]).map((mana, index) => <li key={index}><img alt={mana} title={mana} src={`/img/symbols/${mana}.png`} /></li>) }
+          { _.flatten(_.values(this.props.mana)).sort().map((mana, index) => <li key={index}><img alt={mana} title={mana} src={`/img/symbols/${mana}.png`} /></li>) }
         </ul>
       </div>
     )
@@ -17,7 +18,6 @@ class PlayerActiveMana extends Component {
 
 const mapStateToProps = state => {
   return {
-    playerName: get(state, 'player.name', ''),
     mana: get(state, 'player.mana', {})
   }
 }
