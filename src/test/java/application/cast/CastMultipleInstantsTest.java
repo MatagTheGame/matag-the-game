@@ -72,7 +72,6 @@ public class CastMultipleInstantsTest extends AbstractApplicationTest {
     static class InitTestServiceForTest extends InitTestService {
         @Override
         public void initGameStatus(GameStatus gameStatus) {
-            // TODO Antonio: add the image
             addCardToCurrentPlayerHand(gameStatus, ENGULFING_ERUPTION);
             addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
             addCardToCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
