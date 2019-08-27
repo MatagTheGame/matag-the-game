@@ -94,6 +94,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(HOSTILE_MINOTAUR);
         cards.add(KNIGHT_OF_THE_TUSK);
         cards.add(KNIGHTS_PLEDGE);
+        cards.add(Dominaria.LLANOWAR_ELVES);
         cards.add(LOXODON_LINE_BREAKER);
         cards.add(MARAUDERS_AXE);
         cards.add(METEOR_GOLEM);

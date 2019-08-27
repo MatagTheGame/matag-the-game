@@ -34,6 +34,7 @@ public class Dominaria implements MtgSet {
     public static Card FERAL_ABOMINATION = new Card("Feral Abomination", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Thrull"), COMMON, "Deathtouch", 5, 5, singletonList(DEATHTOUCH));
     public static Card FIRE_ELEMENTAL = new Card("Fire Elemental", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Elemental"), COMMON, "", 5, 4, emptyList());
     public static Card KNIGHT_OF_NEW_BENALIA = new Card("Knight of New Benalia", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Knight"), COMMON, "", 3, 1, emptyList());
+    public static Card LLANOWAR_ELVES = new Card("Llanowar Elves", singleton(Color.GREEN), singletonList(Cost.GREEN), singletonList(CREATURE), asList("Elf", "Druid"), COMMON, "Tap: Add GREEN to your mana pool.", 1, 1, singletonList(TAP_ADD_GREEN_MANA));
     public static Card MAMMOTH_SPIDER = new Card("Mammoth Spider", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Spider"), COMMON, "Reach", 3, 5, singletonList(REACH));
     public static Card MESA_UNICORN = new Card("Mesa Unicorn", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), singletonList("Unicorn"), COMMON, "Lifelink", 2, 2, singletonList(LIFELINK));
     public static Card PARDIC_WANDERER = new Card("Pardic Wanderer", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Golem"), COMMON, "Trample", 5, 5, singletonList(TRAMPLE));
@@ -58,6 +59,7 @@ public class Dominaria implements MtgSet {
         cards.add(FERAL_ABOMINATION);
         cards.add(FIRE_ELEMENTAL);
         cards.add(KNIGHT_OF_NEW_BENALIA);
+        cards.add(LLANOWAR_ELVES);
         cards.add(MAMMOTH_SPIDER);
         cards.add(MESA_UNICORN);
         cards.add(PRIMORDIAL_WURM);
