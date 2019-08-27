@@ -3,7 +3,6 @@ package com.aa.mtg.game.turn.action;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CostUtils;
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
@@ -16,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
