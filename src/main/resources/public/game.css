@@ -554,7 +554,7 @@ span.group {
   left: 0;
   bottom: 42%;
   transform-style: preserve-3d;
-  transform: translateZ(30px);
+  transform: translateZ(60px);
 }
 
 #stack div:first-child {

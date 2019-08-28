@@ -235,9 +235,7 @@ public class CardInstance {
     }
 
     public void cleanup() {
-        modifiers.resetDamage();
-        modifiers.getAbilitiesUntilEndOfTurn().clear();
-        modifiers.resetExtraPowerToughnessUntilEndOfTurn();
+        modifiers = new CardModifiers();
     }
 
     public static List<CardInstance> mask(List<CardInstance> cardInstances) {
