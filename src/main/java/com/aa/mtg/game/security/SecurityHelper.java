@@ -3,11 +3,11 @@ package com.aa.mtg.game.security;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
-@Service
+@Component
 public class SecurityHelper {
 
     public SecurityToken extractSecurityToken(SimpMessageHeaderAccessor headerAccessor) {
