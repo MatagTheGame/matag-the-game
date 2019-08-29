@@ -3,7 +3,6 @@ package com.aa.mtg.game.turn.action.service;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,12 +15,10 @@ import static com.aa.mtg.game.turn.phases.DeclareBlockersPhase.DB;
 @Component
 public class DeclareBlockerService {
 
-    private final GameStatusUpdaterService gameStatusUpdaterService;
     private final ContinueTurnService continueTurnService;
 
     @Autowired
-    public DeclareBlockerService(GameStatusUpdaterService gameStatusUpdaterService, ContinueTurnService continueTurnService) {
-        this.gameStatusUpdaterService = gameStatusUpdaterService;
+    public DeclareBlockerService(ContinueTurnService continueTurnService) {
         this.continueTurnService = continueTurnService;
     }
 
@@ -43,7 +40,6 @@ public class DeclareBlockerService {
                 nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(blockedCreaturesIds.get(0))
         );
 
-        gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, nonCurrentPlayer);
         continueTurnService.continueTurn(gameStatus);
     }
 }

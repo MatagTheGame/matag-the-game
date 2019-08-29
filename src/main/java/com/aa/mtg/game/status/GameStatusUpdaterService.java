@@ -39,13 +39,6 @@ public class GameStatusUpdaterService {
         eventSender.sendToPlayer(otherPlayer, new Event("UPDATE_PLAYER_HAND", player, player.getHand().maskedHand()));
     }
 
-    public void sendUpdatePlayerBattlefield(GameStatus gameStatus, Player player) {
-        eventSender.sendToPlayers(
-                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                new Event("UPDATE_PLAYER_BATTLEFIELD", player, player.getBattlefield().getCards())
-        );
-    }
-
     public void sendUpdateBattlefields(GameStatus gameStatus) {
         sendUpdatePlayerBattlefield(gameStatus, gameStatus.getPlayer1());
         sendUpdatePlayerBattlefield(gameStatus, gameStatus.getPlayer2());
@@ -79,5 +72,12 @@ public class GameStatusUpdaterService {
 
     public void sendMessage(String sessionId, MessageEvent messageEvent) {
         eventSender.sendToUser(sessionId, new Event("MESSAGE", messageEvent));
+    }
+
+    private void sendUpdatePlayerBattlefield(GameStatus gameStatus, Player player) {
+        eventSender.sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_PLAYER_BATTLEFIELD", player, player.getBattlefield().getCards())
+        );
     }
 }

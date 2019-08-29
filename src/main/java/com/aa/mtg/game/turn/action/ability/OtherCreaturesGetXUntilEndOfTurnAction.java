@@ -3,7 +3,6 @@ package com.aa.mtg.game.turn.action.ability;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,12 +13,10 @@ import static com.aa.mtg.cards.properties.Type.CREATURE;
 @Component
 public class OtherCreaturesGetXUntilEndOfTurnAction implements AbilityAction {
 
-    private final GameStatusUpdaterService gameStatusUpdaterService;
     private final ThatTargetsGetAction thatTargetsGetAction;
 
     @Autowired
-    public OtherCreaturesGetXUntilEndOfTurnAction(GameStatusUpdaterService gameStatusUpdaterService, ThatTargetsGetAction thatTargetsGetAction) {
-        this.gameStatusUpdaterService = gameStatusUpdaterService;
+    public OtherCreaturesGetXUntilEndOfTurnAction(ThatTargetsGetAction thatTargetsGetAction) {
         this.thatTargetsGetAction = thatTargetsGetAction;
     }
 
@@ -31,7 +28,5 @@ public class OtherCreaturesGetXUntilEndOfTurnAction implements AbilityAction {
                 thatTargetsGetAction.thatTargetGet(cardInstance, gameStatus, parameter, card);
             }
         }
-
-        gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
     }
 }

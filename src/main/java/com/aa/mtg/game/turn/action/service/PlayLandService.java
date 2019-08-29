@@ -45,7 +45,6 @@ public class PlayLandService {
                 turn.addCardToCardsPlayedWithinTurn(cardInstance);
                 enterCardIntoBattlefieldService.enter(gameStatus, cardInstance);
 
-                gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, activePlayer);
                 gameStatusUpdaterService.sendUpdatePlayerHand(gameStatus, activePlayer);
             } else {
                 throw new MessageException("Playing " + cardInstance.getIdAndName() + " as land.");

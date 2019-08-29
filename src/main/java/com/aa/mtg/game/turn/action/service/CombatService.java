@@ -3,7 +3,6 @@ package com.aa.mtg.game.turn.action.service;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,13 +14,11 @@ import static com.aa.mtg.cards.ability.type.AbilityType.TRAMPLE;
 
 @Component
 public class CombatService {
-    private final GameStatusUpdaterService gameStatusUpdaterService;
     private final LifeService lifeService;
     private final DealDamageToCreatureService dealDamageToCreatureService;
 
     @Autowired
-    public CombatService(GameStatusUpdaterService gameStatusUpdaterService, LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService) {
-        this.gameStatusUpdaterService = gameStatusUpdaterService;
+    public CombatService(LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService) {
         this.lifeService = lifeService;
         this.dealDamageToCreatureService = dealDamageToCreatureService;
     }
@@ -47,9 +44,6 @@ public class CombatService {
                 lifelink += attackingCreature.getPower();
             }
         }
-
-        gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
-        gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
 
         if (damageFromUnblockedCreatures > 0) {
             lifeService.subtract(nonCurrentPlayer, damageFromUnblockedCreatures, gameStatus);

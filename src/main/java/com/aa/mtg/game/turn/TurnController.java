@@ -55,6 +55,9 @@ public class TurnController {
             turnService.declareBlockers(gameStatus, toMapListInteger(request.getTargetsIdsForCardIds()));
         }
 
+        gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
+        gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
+        gameStatusUpdaterService.sendUpdateStack(gameStatus);
         gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }
 

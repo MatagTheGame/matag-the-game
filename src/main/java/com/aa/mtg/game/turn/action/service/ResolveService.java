@@ -3,11 +3,11 @@ package com.aa.mtg.game.turn.action.service;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
-import com.aa.mtg.game.turn.action.ability.AbilityActionFactory;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
+import com.aa.mtg.game.turn.action.ability.AbilityActionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +54,6 @@ public class ResolveService {
                         targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
                     } else {
                         gameStatus.getStack().remove();
-                        gameStatusUpdaterService.sendUpdateStack(gameStatus);
                         return;
                     }
 
@@ -65,8 +64,6 @@ public class ResolveService {
             }
 
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonActivePlayer().getName());
-            gameStatusUpdaterService.sendUpdateStack(gameStatus);
-            gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
 
         } else if (gameStatus.getTurn().getTriggeredNonStackAction().equals(triggeredNonStackAction)) {
             resolveTriggeredNonStackAction(gameStatus, triggeredNonStackAction, targetCardIds);
@@ -86,9 +83,6 @@ public class ResolveService {
         } else {
             gameStatus.putIntoGraveyard(cardToResolve);
         }
-
-        gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
-        gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
     }
 
     private void resolveTriggeredAbility(GameStatus gameStatus, CardInstance stackItemToResolve) {

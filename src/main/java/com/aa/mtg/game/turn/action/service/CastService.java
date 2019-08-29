@@ -61,14 +61,12 @@ public class CastService {
                 gameStatusUpdaterService.sendUpdatePlayerHand(gameStatus, activePlayer);
 
                 gameStatus.getStack().add(cardToCast);
-                gameStatusUpdaterService.sendUpdateStack(gameStatus);
 
             } else {
                 Ability triggeredAbility = cardToCast.getAbilities().get(0);
                 cardToCast.getTriggeredAbilities().add(triggeredAbility);
                 LOGGER.info("Player {} triggered ability {} for {}.", activePlayer.getName(), triggeredAbility.getAbilityTypes(), cardToCast.getModifiers());
                 gameStatus.getStack().add(cardToCast);
-                gameStatusUpdaterService.sendUpdateStack(gameStatus);
             }
 
             gameStatus.getTurn().passPriority(gameStatus);
@@ -77,7 +75,6 @@ public class CastService {
             mana.keySet().stream()
                     .map(cardInstanceId -> activePlayer.getBattlefield().findCardById(cardInstanceId))
                     .forEach(card -> card.getModifiers().tap());
-            gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, activePlayer);
         }
     }
 

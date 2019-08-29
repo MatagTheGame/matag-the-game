@@ -2,7 +2,6 @@ package com.aa.mtg.game.turn.phases;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,12 +11,10 @@ import static com.aa.mtg.game.turn.phases.UntapPhase.UT;
 public class CleanupPhase implements Phase {
     public static final String CL = "CL";
 
-    private final GameStatusUpdaterService gameStatusUpdaterService;
     private final UntapPhase untapPhase;
 
     @Autowired
-    public CleanupPhase(GameStatusUpdaterService gameStatusUpdaterService, UntapPhase untapPhase) {
-        this.gameStatusUpdaterService = gameStatusUpdaterService;
+    public CleanupPhase(UntapPhase untapPhase) {
         this.untapPhase = untapPhase;
     }
 
@@ -32,7 +29,6 @@ public class CleanupPhase implements Phase {
         gameStatus.getTurn().getCardsPlayedWithinTurn().clear();
         gameStatus.getCurrentPlayer().getBattlefield().getCards().forEach(CardInstance::cleanup);
         gameStatus.getNonCurrentPlayer().getBattlefield().getCards().forEach(CardInstance::cleanup);
-        gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
     }
 
     private void moveToNextPlayer(GameStatus gameStatus) {
