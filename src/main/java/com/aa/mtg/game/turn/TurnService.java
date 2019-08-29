@@ -1,12 +1,12 @@
 package com.aa.mtg.game.turn;
 
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.action.CastService;
-import com.aa.mtg.game.turn.action.ContinueTurnService;
-import com.aa.mtg.game.turn.action.DeclareAttackerService;
-import com.aa.mtg.game.turn.action.DeclareBlockerService;
-import com.aa.mtg.game.turn.action.PlayLandService;
-import com.aa.mtg.game.turn.action.ResolveService;
+import com.aa.mtg.game.turn.action.service.CastService;
+import com.aa.mtg.game.turn.action.service.ContinueTurnService;
+import com.aa.mtg.game.turn.action.service.DeclareAttackerService;
+import com.aa.mtg.game.turn.action.service.DeclareBlockerService;
+import com.aa.mtg.game.turn.action.service.PlayLandService;
+import com.aa.mtg.game.turn.action.service.ResolveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

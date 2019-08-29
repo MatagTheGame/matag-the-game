@@ -98,10 +98,6 @@ public class CardModifiers {
         this.damage += damage;
     }
 
-    public void resetDamage() {
-        this.damage = 0;
-    }
-
     public void setTapped(TappedModifier tapped) {
         this.tapped = tapped;
     }
@@ -132,10 +128,6 @@ public class CardModifiers {
         this.extraPowerToughnessUntilEndOfTurn = new PowerToughness(newPower, newToughness);
     }
 
-    public void resetExtraPowerToughnessUntilEndOfTurn() {
-        extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
-    }
-
     public void setTargets(List<Object> targets) {
         this.targets = targets;
     }
@@ -154,5 +146,18 @@ public class CardModifiers {
 
     public void unsetAttachedId() {
         attachedToId = 0;
+    }
+
+    public void cleanupUntilEndOfTurnModifiers() {
+        resetDamage();
+        resetExtraPowerToughnessUntilEndOfTurn();
+    }
+
+    public void resetDamage() {
+        this.damage = 0;
+    }
+
+    private void resetExtraPowerToughnessUntilEndOfTurn() {
+        extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
     }
 }

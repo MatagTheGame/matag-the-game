@@ -1,6 +1,7 @@
-package com.aa.mtg.cards.ability.action;
+package com.aa.mtg.game.turn.action.ability;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;

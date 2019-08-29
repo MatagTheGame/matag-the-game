@@ -1,9 +1,9 @@
-package com.aa.mtg.game.turn.action;
+package com.aa.mtg.game.turn.action.service;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
-import com.aa.mtg.cards.ability.action.AbilityActionFactory;
+import com.aa.mtg.game.turn.action.ability.AbilityActionFactory;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;

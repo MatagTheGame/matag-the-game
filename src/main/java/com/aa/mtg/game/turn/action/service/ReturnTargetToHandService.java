@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn.action;
+package com.aa.mtg.game.turn.action.service;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
@@ -24,7 +24,7 @@ public class ReturnTargetToHandService {
         CardInstance cardToReturn = gameStatus.findCardByIdFromAnyBattlefield(targetId);
         if (cardToReturn != null) {
             Player owner = gameStatus.getPlayerByName(cardToReturn.getOwner());
-            cardToReturn.cleanup();
+            cardToReturn.resetAllModifiers();
             gameStatus.extractCardByIdFromAnyBattlefield(cardToReturn.getId());
             owner.getHand().addCard(cardToReturn);
 

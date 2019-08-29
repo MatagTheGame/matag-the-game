@@ -6,7 +6,7 @@ import com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint;
 import com.aa.mtg.cards.ability.target.TargetType;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.action.TargetCheckerService;
+import com.aa.mtg.game.turn.action.service.TargetCheckerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

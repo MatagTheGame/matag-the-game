@@ -1,15 +1,16 @@
-package com.aa.mtg.cards.ability.action;
+package com.aa.mtg.game.turn.action.ability;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.game.player.LifeService;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.action.DealDamageToCreatureService;
-import com.aa.mtg.game.turn.action.DestroyTargetService;
-import com.aa.mtg.game.turn.action.ReturnTargetToHandService;
-import com.aa.mtg.game.turn.action.TapTargetService;
+import com.aa.mtg.game.turn.action.service.DealDamageToCreatureService;
+import com.aa.mtg.game.turn.action.service.DestroyTargetService;
+import com.aa.mtg.game.turn.action.service.ReturnTargetToHandService;
+import com.aa.mtg.game.turn.action.service.TapTargetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

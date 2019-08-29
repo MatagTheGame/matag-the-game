@@ -154,7 +154,7 @@ public class CardInstance {
     }
 
     public void clearModifiers() {
-        modifiers = new CardModifiers();
+        modifiers.cleanupUntilEndOfTurnModifiers();
     }
 
     public List<Ability> getAbilities() {
@@ -235,6 +235,10 @@ public class CardInstance {
     }
 
     public void cleanup() {
+        modifiers.cleanupUntilEndOfTurnModifiers();
+    }
+
+    public void resetAllModifiers() {
         modifiers = new CardModifiers();
     }
 

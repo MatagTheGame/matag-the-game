@@ -1,5 +1,6 @@
-package com.aa.mtg.cards.ability.action;
+package com.aa.mtg.game.turn.action.ability;
 
+import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

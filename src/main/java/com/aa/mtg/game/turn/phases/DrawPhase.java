@@ -1,6 +1,6 @@
 package com.aa.mtg.game.turn.phases;
 
-import com.aa.mtg.cards.ability.action.DrawXCardsAction;
+import com.aa.mtg.game.turn.action.ability.DrawXCardsAction;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.springframework.beans.factory.annotation.Autowired;
