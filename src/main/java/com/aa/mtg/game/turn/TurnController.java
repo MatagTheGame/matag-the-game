@@ -4,6 +4,7 @@ import com.aa.mtg.game.event.Event;
 import com.aa.mtg.game.event.EventSender;
 import com.aa.mtg.game.message.MessageEvent;
 import com.aa.mtg.game.message.MessageException;
+import com.aa.mtg.game.security.SecurityHelper;
 import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
@@ -14,18 +15,19 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
-import static com.aa.mtg.game.security.SecurityHelper.extractSecurityToken;
 import static com.aa.mtg.utils.Utils.toMapListInteger;
 
 @Controller
 public class TurnController {
     private Logger LOGGER = LoggerFactory.getLogger(TurnController.class);
 
-    private EventSender eventSender;
-    private GameStatusRepository gameStatusRepository;
-    private TurnService turnService;
+    private final SecurityHelper securityHelper;
+    private final EventSender eventSender;
+    private final GameStatusRepository gameStatusRepository;
+    private final TurnService turnService;
 
-    public TurnController(EventSender eventSender, GameStatusRepository gameStatusRepository, TurnService turnService) {
+    public TurnController(SecurityHelper securityHelper, EventSender eventSender, GameStatusRepository gameStatusRepository, TurnService turnService) {
+        this.securityHelper = securityHelper;
         this.eventSender = eventSender;
         this.gameStatusRepository = gameStatusRepository;
         this.turnService = turnService;
@@ -33,7 +35,7 @@ public class TurnController {
 
     @MessageMapping("/game/turn")
     public void turn(SimpMessageHeaderAccessor headerAccessor, TurnRequest request) {
-        SecurityToken token = extractSecurityToken(headerAccessor);
+        SecurityToken token = securityHelper.extractSecurityToken(headerAccessor);
         LOGGER.info("Turn request received for sessionId '{}', gameId '{}': {}", token.getSessionId(), token.getGameId(), request);
         GameStatus gameStatus = gameStatusRepository.get(token.getGameId(), token.getSessionId());
         if (gameStatus.getTurn().isEnded()) {

@@ -1,6 +1,7 @@
 package com.aa.mtg.game.status;
 
 import com.aa.mtg.game.security.SecurityHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -8,6 +9,13 @@ import java.util.Map;
 
 @Component
 public class GameStatusRepository {
+
+    private final SecurityHelper securityHelper;
+
+    @Autowired
+    public GameStatusRepository(SecurityHelper securityHelper) {
+        this.securityHelper = securityHelper;
+    }
 
     private Map<String, GameStatus> games = new HashMap<>();
 
@@ -25,7 +33,7 @@ public class GameStatusRepository {
 
     public GameStatus get(String gameId, String sessionId) {
         GameStatus gameStatus = games.get(gameId);
-        SecurityHelper.isPlayerAllowedToExecuteAction(gameStatus, sessionId);
+        securityHelper.isPlayerAllowedToExecuteAction(gameStatus, sessionId);
         return gameStatus;
     }
 }

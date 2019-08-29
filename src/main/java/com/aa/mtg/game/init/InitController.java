@@ -7,6 +7,7 @@ import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.message.MessageEvent;
 import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.player.Player;
+import com.aa.mtg.game.security.SecurityHelper;
 import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
@@ -18,12 +19,11 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
-import static com.aa.mtg.game.security.SecurityHelper.extractSecurityToken;
-
 @Controller
 public class InitController {
     private static final Logger LOGGER = LoggerFactory.getLogger(InitController.class);
 
+    private final SecurityHelper securityHelper;
     private final EventSender eventSender;
     private final GameStatusUpdaterService gameStatusUpdaterService;
     private final InitTestService initTestService;
@@ -31,7 +31,8 @@ public class InitController {
     private final DeckRetrieverService deckRetrieverService;
 
     @Autowired
-    public InitController(EventSender eventSender, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
+    public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
+        this.securityHelper = securityHelper;
         this.eventSender = eventSender;
         this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.gameStatusRepository = gameStatusRepository;
@@ -41,7 +42,7 @@ public class InitController {
 
     @MessageMapping("/game/init")
     void init(SimpMessageHeaderAccessor headerAccessor) {
-        SecurityToken token = extractSecurityToken(headerAccessor);
+        SecurityToken token = securityHelper.extractSecurityToken(headerAccessor);
         LOGGER.info("Init request received for sessionId '{}', gameId '{}'.", token.getSessionId(), token.getGameId());
 
         if (!gameStatusRepository.contains(token.getGameId())) {
