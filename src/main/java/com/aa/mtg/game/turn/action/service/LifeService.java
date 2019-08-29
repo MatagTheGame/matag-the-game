@@ -1,5 +1,6 @@
-package com.aa.mtg.game.player;
+package com.aa.mtg.game.turn.action.service;
 
+import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;

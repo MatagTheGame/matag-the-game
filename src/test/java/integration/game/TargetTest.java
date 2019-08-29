@@ -1,4 +1,4 @@
-package integration.cards.ability;
+package integration.game;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.target.Target;
@@ -30,7 +30,7 @@ import static com.aa.mtg.cards.sets.Ixalan.FRENZIED_RAPTOR;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
-import static integration.utils.TestUtils.testGameStatus;
+import static integration.TestUtils.testGameStatus;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 

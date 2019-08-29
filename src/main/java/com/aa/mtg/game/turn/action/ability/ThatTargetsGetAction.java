@@ -4,7 +4,7 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.modifiers.PowerToughness;
-import com.aa.mtg.game.player.LifeService;
+import com.aa.mtg.game.turn.action.service.LifeService;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.service.DealDamageToCreatureService;

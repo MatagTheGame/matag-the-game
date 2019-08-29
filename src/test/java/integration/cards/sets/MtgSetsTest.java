@@ -1,4 +1,4 @@
-package integration.cards;
+package integration.cards.sets;
 
 import application.AbstractApplicationTest;
 import com.aa.mtg.cards.Card;
@@ -14,8 +14,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 

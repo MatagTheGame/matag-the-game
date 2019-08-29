@@ -1,4 +1,4 @@
-package integration.utils;
+package integration;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.Cards;

@@ -1,4 +1,4 @@
-package integration.cards;
+package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CostUtils;
