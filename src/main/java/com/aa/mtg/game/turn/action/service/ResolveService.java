@@ -6,7 +6,6 @@ import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.action.ability.AbilityActionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,16 +22,14 @@ import static com.aa.mtg.cards.ability.trigger.TriggerType.CAST;
 public class ResolveService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ResolveService.class);
 
-    private final GameStatusUpdaterService gameStatusUpdaterService;
     private final ContinueTurnService continueTurnService;
     private final AbilityActionFactory abilityActionFactory;
     private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
     private final TargetCheckerService targetCheckerService;
 
     @Autowired
-    public ResolveService(GameStatusUpdaterService gameStatusUpdaterService, ContinueTurnService continueTurnService, AbilityActionFactory abilityActionFactory,
+    public ResolveService(ContinueTurnService continueTurnService, AbilityActionFactory abilityActionFactory,
                           EnterCardIntoBattlefieldService enterCardIntoBattlefieldService, TargetCheckerService targetCheckerService) {
-        this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.continueTurnService = continueTurnService;
         this.abilityActionFactory = abilityActionFactory;
         this.enterCardIntoBattlefieldService = enterCardIntoBattlefieldService;
@@ -95,8 +92,6 @@ public class ResolveService {
             case "DISCARD_A_CARD": {
                 CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
                 gameStatus.putIntoGraveyard(cardInstance);
-                gameStatusUpdaterService.sendUpdatePlayerHand(gameStatus, gameStatus.getCurrentPlayer());
-                gameStatusUpdaterService.sendUpdatePlayerGraveyard(gameStatus, gameStatus.getCurrentPlayer());
                 gameStatus.getTurn().setTriggeredNonStackAction(null);
                 break;
             }

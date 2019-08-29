@@ -24,6 +24,7 @@ import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.AfterDeclareBlockersPhase.AB;
 import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
 import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
+import static com.aa.mtg.game.turn.phases.DeclareBlockersPhase.DB;
 import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
 import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
 
@@ -51,6 +52,7 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
 
         // And player 2 plays the game by blocking
         browser.player2().getActionHelper().clickContinue();
+        browser.player2().getPhaseHelper().is(DB, PLAYER);
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(BARTIZAN_BATS).declareAsBlocker();
         browser.player2().getActionHelper().clickContinue();
 

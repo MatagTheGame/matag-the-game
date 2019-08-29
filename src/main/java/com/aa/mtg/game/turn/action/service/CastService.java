@@ -7,7 +7,6 @@ import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
 import com.aa.mtg.game.turn.phases.PhaseUtils;
 import org.slf4j.Logger;
@@ -23,13 +22,11 @@ public class CastService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CastService.class);
 
-    private final GameStatusUpdaterService gameStatusUpdaterService;
     private final TargetCheckerService targetCheckerService;
     private final ManaCountService manaCountService;
 
     @Autowired
-    public CastService(GameStatusUpdaterService gameStatusUpdaterService, TargetCheckerService targetCheckerService, ManaCountService manaCountService) {
-        this.gameStatusUpdaterService = gameStatusUpdaterService;
+    public CastService(TargetCheckerService targetCheckerService, ManaCountService manaCountService) {
         this.targetCheckerService = targetCheckerService;
         this.manaCountService = manaCountService;
     }
@@ -58,8 +55,6 @@ public class CastService {
             if (castedFrom.equals("HAND")) {
                 activePlayer.getHand().extractCardById(cardId);
                 cardToCast.setController(activePlayer.getName());
-                gameStatusUpdaterService.sendUpdatePlayerHand(gameStatus, activePlayer);
-
                 gameStatus.getStack().add(cardToCast);
 
             } else {

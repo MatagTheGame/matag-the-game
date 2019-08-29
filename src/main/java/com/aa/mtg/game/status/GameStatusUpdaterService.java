@@ -26,17 +26,14 @@ public class GameStatusUpdaterService {
         );
     }
 
-    public void sendUpdatePlayerLibrarySize(GameStatus gameStatus, Player player) {
-        eventSender.sendToPlayers(
-                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                new Event("UPDATE_PLAYER_LIBRARY_SIZE", player, player.getLibrary().size())
-        );
+    public void sendUpdateLibrariesSize(GameStatus gameStatus) {
+        sendUpdatePlayerLibrarySize(gameStatus, gameStatus.getPlayer1());
+        sendUpdatePlayerLibrarySize(gameStatus, gameStatus.getPlayer2());
     }
 
-    public void sendUpdatePlayerHand(GameStatus gameStatus, Player player) {
-        Player otherPlayer = gameStatus.getOtherPlayer(player);
-        eventSender.sendToPlayer(player, new Event("UPDATE_PLAYER_HAND", player, player.getHand().getCards()));
-        eventSender.sendToPlayer(otherPlayer, new Event("UPDATE_PLAYER_HAND", player, player.getHand().maskedHand()));
+    public void sendUpdateHands(GameStatus gameStatus) {
+        sendUpdatePlayerHand(gameStatus, gameStatus.getPlayer1());
+        sendUpdatePlayerHand(gameStatus, gameStatus.getPlayer2());
     }
 
     public void sendUpdateBattlefields(GameStatus gameStatus) {
@@ -44,23 +41,14 @@ public class GameStatusUpdaterService {
         sendUpdatePlayerBattlefield(gameStatus, gameStatus.getPlayer2());
     }
 
-    public void sendUpdatePlayerGraveyard(GameStatus gameStatus, Player player) {
-        eventSender.sendToPlayers(
-                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                new Event("UPDATE_PLAYER_GRAVEYARD", player, player.getGraveyard().getCards())
-        );
-    }
-
     public void sendUpdateGraveyards(GameStatus gameStatus) {
         sendUpdatePlayerGraveyard(gameStatus, gameStatus.getPlayer1());
         sendUpdatePlayerGraveyard(gameStatus, gameStatus.getPlayer2());
     }
 
-    public void sendUpdatePlayerLife(GameStatus gameStatus, Player player) {
-        eventSender.sendToPlayers(
-                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                new Event("UPDATE_PLAYER_LIFE", player, player.getLife())
-        );
+    public void sendUpdatePlayersLife(GameStatus gameStatus) {
+        sendUpdatePlayerLife(gameStatus, gameStatus.getPlayer1());
+        sendUpdatePlayerLife(gameStatus, gameStatus.getPlayer2());
     }
 
     public void sendUpdateStack(GameStatus gameStatus) {
@@ -74,10 +62,37 @@ public class GameStatusUpdaterService {
         eventSender.sendToUser(sessionId, new Event("MESSAGE", messageEvent));
     }
 
+    private void sendUpdatePlayerLibrarySize(GameStatus gameStatus, Player player) {
+        eventSender.sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_PLAYER_LIBRARY_SIZE", player, player.getLibrary().size())
+        );
+    }
+
+    private void sendUpdatePlayerHand(GameStatus gameStatus, Player player) {
+        Player otherPlayer = gameStatus.getOtherPlayer(player);
+        eventSender.sendToPlayer(player, new Event("UPDATE_PLAYER_HAND", player, player.getHand().getCards()));
+        eventSender.sendToPlayer(otherPlayer, new Event("UPDATE_PLAYER_HAND", player, player.getHand().maskedHand()));
+    }
+
     private void sendUpdatePlayerBattlefield(GameStatus gameStatus, Player player) {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                 new Event("UPDATE_PLAYER_BATTLEFIELD", player, player.getBattlefield().getCards())
+        );
+    }
+
+    private void sendUpdatePlayerGraveyard(GameStatus gameStatus, Player player) {
+        eventSender.sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_PLAYER_GRAVEYARD", player, player.getGraveyard().getCards())
+        );
+    }
+
+    private void sendUpdatePlayerLife(GameStatus gameStatus, Player player) {
+        eventSender.sendToPlayers(
+                asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
+                new Event("UPDATE_PLAYER_LIFE", player, player.getLife())
         );
     }
 }

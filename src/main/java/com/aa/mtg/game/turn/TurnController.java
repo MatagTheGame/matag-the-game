@@ -58,6 +58,9 @@ public class TurnController {
         gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
         gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
         gameStatusUpdaterService.sendUpdateStack(gameStatus);
+        gameStatusUpdaterService.sendUpdateLibrariesSize(gameStatus);
+        gameStatusUpdaterService.sendUpdatePlayersLife(gameStatus);
+        gameStatusUpdaterService.sendUpdateHands(gameStatus);
         gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }
 

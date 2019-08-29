@@ -2,22 +2,13 @@ package com.aa.mtg.game.turn.action.service;
 
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LifeService {
     private static final Logger LOGGER = LoggerFactory.getLogger(LifeService.class);
-
-    private final GameStatusUpdaterService gameStatusUpdaterService;
-
-    @Autowired
-    public LifeService(GameStatusUpdaterService gameStatusUpdaterService) {
-        this.gameStatusUpdaterService = gameStatusUpdaterService;
-    }
 
     public void add(Player player, int amount, GameStatus gameStatus) {
         perform(player, "ADD", amount, gameStatus);
@@ -36,7 +27,6 @@ public class LifeService {
             }
 
             LOGGER.info("Player {} {} {} life bringing it to {}", player.getName(), lifeServiceType, amount, player.getLife());
-            gameStatusUpdaterService.sendUpdatePlayerLife(gameStatus, player);
 
             if (player.getLife() <= 0) {
                 gameStatus.getTurn().setWinner(gameStatus.getOtherPlayer(player).getName());

@@ -6,7 +6,6 @@ import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusUpdaterService;
 import com.aa.mtg.game.turn.Turn;
 import com.aa.mtg.game.turn.phases.PhaseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +14,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlayLandService {
 
-    private final GameStatusUpdaterService gameStatusUpdaterService;
     private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
 
     @Autowired
-    public PlayLandService(GameStatusUpdaterService gameStatusUpdaterService, EnterCardIntoBattlefieldService enterCardIntoBattlefieldService) {
-        this.gameStatusUpdaterService = gameStatusUpdaterService;
+    public PlayLandService(EnterCardIntoBattlefieldService enterCardIntoBattlefieldService) {
         this.enterCardIntoBattlefieldService = enterCardIntoBattlefieldService;
     }
 
@@ -45,7 +42,6 @@ public class PlayLandService {
                 turn.addCardToCardsPlayedWithinTurn(cardInstance);
                 enterCardIntoBattlefieldService.enter(gameStatus, cardInstance);
 
-                gameStatusUpdaterService.sendUpdatePlayerHand(gameStatus, activePlayer);
             } else {
                 throw new MessageException("Playing " + cardInstance.getIdAndName() + " as land.");
             }
