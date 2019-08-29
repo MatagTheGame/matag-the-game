@@ -67,7 +67,6 @@ public class ResolveService {
             gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonActivePlayer().getName());
             gameStatusUpdaterService.sendUpdateStack(gameStatus);
             gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
-            gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
         } else if (gameStatus.getTurn().getTriggeredNonStackAction().equals(triggeredNonStackAction)) {
             resolveTriggeredNonStackAction(gameStatus, triggeredNonStackAction, targetCardIds);

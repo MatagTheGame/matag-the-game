@@ -25,6 +25,5 @@ public class UntapPhase implements Phase {
 
         gameStatusUpdaterService.sendUpdatePlayerBattlefield(gameStatus, gameStatus.getCurrentPlayer());
         gameStatus.getTurn().setCurrentPhase(UP);
-        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }
 }

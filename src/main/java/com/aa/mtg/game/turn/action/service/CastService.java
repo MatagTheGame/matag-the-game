@@ -72,7 +72,6 @@ public class CastService {
             }
 
             gameStatus.getTurn().passPriority(gameStatus);
-            gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
             // FIXME Antonio: Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
             mana.keySet().stream()

@@ -2,6 +2,7 @@ package com.aa.mtg.game.status;
 
 import com.aa.mtg.game.event.Event;
 import com.aa.mtg.game.event.EventSender;
+import com.aa.mtg.game.message.MessageEvent;
 import com.aa.mtg.game.player.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -74,5 +75,9 @@ public class GameStatusUpdaterService {
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
                 new Event("UPDATE_STACK", gameStatus.getStack())
         );
+    }
+
+    public void sendMessage(String sessionId, MessageEvent messageEvent) {
+        eventSender.sendToUser(sessionId, new Event("MESSAGE", messageEvent));
     }
 }

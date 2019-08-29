@@ -41,6 +41,5 @@ public class CleanupPhase implements Phase {
         String nextCurrentPlayer = gameStatus.getNonCurrentPlayer().getName();
         gameStatus.getTurn().setCurrentTurnPlayer(nextCurrentPlayer);
         gameStatus.getTurn().setCurrentPhaseActivePlayer(nextCurrentPlayer);
-        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }
 }

@@ -11,12 +11,10 @@ import static com.aa.mtg.game.turn.phases.DrawPhase.DR;
 public class UpkeepPhase implements Phase {
     public static final String UP = "UP";
 
-    private final GameStatusUpdaterService gameStatusUpdaterService;
     private final DrawPhase drawPhase;
 
     @Autowired
-    public UpkeepPhase(GameStatusUpdaterService gameStatusUpdaterService, DrawPhase drawPhase) {
-        this.gameStatusUpdaterService = gameStatusUpdaterService;
+    public UpkeepPhase(DrawPhase drawPhase) {
         this.drawPhase = drawPhase;
     }
 
@@ -25,7 +23,6 @@ public class UpkeepPhase implements Phase {
     public void apply(GameStatus gameStatus) {
         if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
             gameStatus.getTurn().passPriority(gameStatus);
-            gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
         } else {
             gameStatus.getTurn().setCurrentPhase(DR);

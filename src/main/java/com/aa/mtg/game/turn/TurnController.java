@@ -1,13 +1,12 @@
 package com.aa.mtg.game.turn;
 
-import com.aa.mtg.game.event.Event;
-import com.aa.mtg.game.event.EventSender;
 import com.aa.mtg.game.message.MessageEvent;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.security.SecurityHelper;
 import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
+import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
@@ -22,14 +21,14 @@ public class TurnController {
     private Logger LOGGER = LoggerFactory.getLogger(TurnController.class);
 
     private final SecurityHelper securityHelper;
-    private final EventSender eventSender;
     private final GameStatusRepository gameStatusRepository;
+    private final GameStatusUpdaterService gameStatusUpdaterService;
     private final TurnService turnService;
 
-    public TurnController(SecurityHelper securityHelper, EventSender eventSender, GameStatusRepository gameStatusRepository, TurnService turnService) {
+    public TurnController(SecurityHelper securityHelper, GameStatusRepository gameStatusRepository, GameStatusUpdaterService gameStatusUpdaterService, TurnService turnService) {
         this.securityHelper = securityHelper;
-        this.eventSender = eventSender;
         this.gameStatusRepository = gameStatusRepository;
+        this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.turnService = turnService;
     }
 
@@ -55,10 +54,12 @@ public class TurnController {
         } else if ("DECLARE_BLOCKERS".equals(request.getAction())) {
             turnService.declareBlockers(gameStatus, toMapListInteger(request.getTargetsIdsForCardIds()));
         }
+
+        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
     }
 
     @MessageExceptionHandler
     public void handleException(SimpMessageHeaderAccessor headerAccessor, MessageException e) {
-        eventSender.sendToUser(headerAccessor.getSessionId(), new Event("MESSAGE", new MessageEvent(e.getMessage(), true)));
+        gameStatusUpdaterService.sendMessage(headerAccessor.getSessionId(), new MessageEvent(e.getMessage(), true));
     }
 }
