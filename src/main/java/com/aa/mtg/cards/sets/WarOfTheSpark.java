@@ -12,6 +12,7 @@ import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
+import static com.aa.mtg.cards.properties.Type.INSTANT;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.AZORIUS_GUILDGATE;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -30,6 +31,7 @@ public class WarOfTheSpark implements MtgSet {
     public static Card DESPERATE_LUNGE = new Card("Desperate Lunge", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Target creature gets +2/+2 and gains flying until end of turn. You gain 2 life.", 0, 0, asList(TARGET_CREATURE_GETS_PLUS_2_2_AND_FLYING_UNTIL_END_OF_TURN, GAIN_2_LIFE));
     public static Card DIVINE_ARROW = new Card("Divine Arrow", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Divine Arrow deals 4 damage to target attacking or blocking creature.", 0, 0, singletonList(DEAL_4_DAMAGE_TO_TARGET_ATTACKING_OR_BLOCKING_CREATURE));
     public static Card ELITE_GUARDMAGE = new Card("Elite Guardmage", asSet(Color.WHITE, Color.BLUE), asList(Cost.WHITE, Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Wizard"), UNCOMMON, "Flying. When Elite Guardmage enters the battlefield, you gain 3 life and draw a card.", 2, 3, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD_AND_GAIN_3_LIFE));
+    public static Card GIANT_GROWTH = new Card("Giant Growth", singleton(Color.GREEN), singletonList(Cost.GREEN), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +3/+3 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_3_3_UNTIL_END_OF_TURN));
     public static Card ENFORCER_GRIFFIN = new Card("Enforcer Griffin", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Griffin"), COMMON, "Flying", 3, 4, singletonList(FLYING));
     public static Card GOBLIN_ASSAILANT = new Card("Goblin Assailant", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), asList("Goblin", "Warrior"), COMMON, "", 2, 2, emptyList());
     public static Card IRONCLAD_KROVOD = new Card("Ironclad Krovod", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Beast"), COMMON, "", 2, 5, emptyList());
@@ -57,6 +59,7 @@ public class WarOfTheSpark implements MtgSet {
         cards.add(DIVINE_ARROW);
         cards.add(ELITE_GUARDMAGE);
         cards.add(ENFORCER_GRIFFIN);
+        cards.add(GIANT_GROWTH);
         cards.add(GOBLIN_ASSAILANT);
         cards.add(IRONCLAD_KROVOD);
         cards.add(KRAUL_STINGER);
