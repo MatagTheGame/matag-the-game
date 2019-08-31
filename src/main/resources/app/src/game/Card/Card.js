@@ -107,7 +107,7 @@ const maximizeCardEvent = (cardImage) => {
 
 const mapStateToProps = state => {
   return {
-    targetIdsForLastSpell: get(state, 'stack.items[0].modifiers.targets', [])
+    targetIdsForLastSpell: get(state, 'stack[0].modifiers.targets', [])
   }
 }
 

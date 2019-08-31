@@ -6,7 +6,6 @@ import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.cards.properties.Rarity;
 import com.aa.mtg.cards.properties.Type;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -103,12 +102,10 @@ public class Card {
         return types.contains(Type.INSTANT);
     }
 
-    @JsonIgnore
     public List<Ability> getAbilities() {
         return abilities;
     }
 
-    @JsonIgnore
     public List<Color> colorsOfManaThatCanGenerate() {
         List<Color> colors = new ArrayList<>();
 

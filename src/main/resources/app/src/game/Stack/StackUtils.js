@@ -1,6 +1,6 @@
 export default class StackUtils {
   static isStackEmpty(state) {
-    return !state.stack || state.stack.items.length === 0
+    return !state.stack || state.stack.length === 0
   }
 
   static isACastedCard(cardInstance) {

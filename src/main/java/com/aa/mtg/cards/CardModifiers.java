@@ -3,7 +3,6 @@ package com.aa.mtg.cards;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.cards.modifiers.TappedModifier;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -37,7 +36,6 @@ public class CardModifiers {
         return doesNotUntapNextTurn;
     }
 
-    @JsonIgnore
     public boolean isUntapped() {
         return !isTapped();
     }

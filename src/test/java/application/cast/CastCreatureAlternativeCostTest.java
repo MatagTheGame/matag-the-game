@@ -45,7 +45,7 @@ public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
         // Then stack is still empty
         browser.player1().getStackHelper().toHaveSize(0);
 
-        // When clicking the dual landÎ
+        // When clicking the dual land
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getFirstCard(AZORIUS_GUILDGATE).click();
 
         // Then it's possible to chose which mana generate

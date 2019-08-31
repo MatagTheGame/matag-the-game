@@ -73,7 +73,7 @@ export default class PlayerUtils {
   }
 
   static shouldHandleTargets(state) {
-    return state.turn.cardIdSelectedToBePlayed || get(state, 'stack.items[0].triggeredAbilities[0].targets[0]')
+    return state.turn.cardIdSelectedToBePlayed || get(state, 'stack[0].triggeredAbilities[0].targets[0]')
   }
 
   static handleSelectedTarget(state, target) {
@@ -84,8 +84,8 @@ export default class PlayerUtils {
       state.turn.cardIdSelectedToBePlayed = null
       state.turn.abilityToBePlayed = null
 
-    } else if (get(state, 'stack.items[0].triggeredAbilities[0].targets[0]')) {
-      stompClient.sendEvent('turn', {action: 'RESOLVE', targetsIdsForCardIds: {[get(state, 'stack.items[0].id')]: targetsIds}})
+    } else if (get(state, 'stack[0].triggeredAbilities[0].targets[0]')) {
+      stompClient.sendEvent('turn', {action: 'RESOLVE', targetsIdsForCardIds: {[get(state, 'stack[0].id')]: targetsIds}})
     }
   }
 

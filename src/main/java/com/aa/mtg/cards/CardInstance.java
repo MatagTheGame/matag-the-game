@@ -7,7 +7,8 @@ import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -24,14 +25,21 @@ import static com.aa.mtg.cards.properties.Type.SORCERY;
 
 @ToString
 @EqualsAndHashCode
+@JsonAutoDetect(
+        fieldVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE,
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+        creatorVisibility = JsonAutoDetect.Visibility.NONE
+)
 public class CardInstance {
-    @JsonIgnore private final GameStatus gameStatus;
-    private final int id;
-    private final Card card;
-    private final String owner;
-    private String controller;
-    private CardModifiers modifiers;
-    private List<Ability> triggeredAbilities = new ArrayList<>();
+    private final GameStatus gameStatus;
+    @JsonProperty private final int id;
+    @JsonProperty private final Card card;
+    @JsonProperty private final String owner;
+    @JsonProperty private String controller;
+    @JsonProperty private CardModifiers modifiers;
+    @JsonProperty private List<Ability> triggeredAbilities = new ArrayList<>();
 
     public CardInstance(GameStatus gameStatus, int id, Card card, String owner) {
         this(gameStatus, id, card, owner, null);
@@ -145,18 +153,17 @@ public class CardInstance {
         modifiers.setBlockingCardId(attackingCreatureId);
     }
 
+    @JsonProperty
     public int getPower() {
         return card.getPower() + modifiers.getExtraPowerToughnessUntilEndOfTurn().getPower() + getAttachmentsPower();
     }
 
+    @JsonProperty
     public int getToughness() {
         return card.getToughness() + modifiers.getExtraPowerToughnessUntilEndOfTurn().getToughness() + getAttachmentsToughness();
     }
 
-    public void clearModifiers() {
-        modifiers.cleanupUntilEndOfTurnModifiers();
-    }
-
+    @JsonProperty
     public List<Ability> getAbilities() {
         ArrayList<Ability> abilities = new ArrayList<>();
         abilities.addAll(card.getAbilities());
@@ -172,7 +179,6 @@ public class CardInstance {
                 .anyMatch(parameter -> parameter.equals(color.toString()));
     }
 
-    @JsonIgnore
     public List<Ability> getAbilitiesByTriggerType(TriggerType triggerType) {
         return getAbilities().stream()
                 .filter(ability -> ability.getTrigger() != null)

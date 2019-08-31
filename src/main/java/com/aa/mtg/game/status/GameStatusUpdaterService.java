@@ -19,6 +19,16 @@ public class GameStatusUpdaterService {
         this.eventSender = eventSender;
     }
 
+    public void sendUpdateGameStatus(GameStatus gameStatus) {
+        sendUpdateBattlefields(gameStatus);
+        sendUpdateGraveyards(gameStatus);
+        sendUpdateStack(gameStatus);
+        sendUpdateLibrariesSize(gameStatus);
+        sendUpdatePlayersLife(gameStatus);
+        sendUpdateHands(gameStatus);
+        sendUpdateTurn(gameStatus);
+    }
+
     public void sendUpdateTurn(GameStatus gameStatus) {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
@@ -26,35 +36,35 @@ public class GameStatusUpdaterService {
         );
     }
 
-    public void sendUpdateLibrariesSize(GameStatus gameStatus) {
+    private void sendUpdateLibrariesSize(GameStatus gameStatus) {
         sendUpdatePlayerLibrarySize(gameStatus, gameStatus.getPlayer1());
         sendUpdatePlayerLibrarySize(gameStatus, gameStatus.getPlayer2());
     }
 
-    public void sendUpdateHands(GameStatus gameStatus) {
+    private void sendUpdateHands(GameStatus gameStatus) {
         sendUpdatePlayerHand(gameStatus, gameStatus.getPlayer1());
         sendUpdatePlayerHand(gameStatus, gameStatus.getPlayer2());
     }
 
-    public void sendUpdateBattlefields(GameStatus gameStatus) {
+    private void sendUpdateBattlefields(GameStatus gameStatus) {
         sendUpdatePlayerBattlefield(gameStatus, gameStatus.getPlayer1());
         sendUpdatePlayerBattlefield(gameStatus, gameStatus.getPlayer2());
     }
 
-    public void sendUpdateGraveyards(GameStatus gameStatus) {
+    private void sendUpdateGraveyards(GameStatus gameStatus) {
         sendUpdatePlayerGraveyard(gameStatus, gameStatus.getPlayer1());
         sendUpdatePlayerGraveyard(gameStatus, gameStatus.getPlayer2());
     }
 
-    public void sendUpdatePlayersLife(GameStatus gameStatus) {
+    private void sendUpdatePlayersLife(GameStatus gameStatus) {
         sendUpdatePlayerLife(gameStatus, gameStatus.getPlayer1());
         sendUpdatePlayerLife(gameStatus, gameStatus.getPlayer2());
     }
 
-    public void sendUpdateStack(GameStatus gameStatus) {
+    private void sendUpdateStack(GameStatus gameStatus) {
         eventSender.sendToPlayers(
                 asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-                new Event("UPDATE_STACK", gameStatus.getStack())
+                new Event("UPDATE_STACK", gameStatus.getStack().getItems())
         );
     }
 

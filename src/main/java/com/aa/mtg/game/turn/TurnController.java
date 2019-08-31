@@ -55,14 +55,7 @@ public class TurnController {
             turnService.declareBlockers(gameStatus, toMapListInteger(request.getTargetsIdsForCardIds()));
         }
 
-        // TODO Anotnio: this can now become one method which send one only event to the server GameStatus
-        gameStatusUpdaterService.sendUpdateBattlefields(gameStatus);
-        gameStatusUpdaterService.sendUpdateGraveyards(gameStatus);
-        gameStatusUpdaterService.sendUpdateStack(gameStatus);
-        gameStatusUpdaterService.sendUpdateLibrariesSize(gameStatus);
-        gameStatusUpdaterService.sendUpdatePlayersLife(gameStatus);
-        gameStatusUpdaterService.sendUpdateHands(gameStatus);
-        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
+        gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);
     }
 
     @MessageExceptionHandler

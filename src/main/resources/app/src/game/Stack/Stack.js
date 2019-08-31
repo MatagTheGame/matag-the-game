@@ -27,7 +27,7 @@ class Stack extends Component {
   }
 
   renderStack() {
-    return this.props.stack.items.map((cardInstance, index) => Stack.renderStackItem(cardInstance, index))
+    return this.props.stack.map((cardInstance, index) => Stack.renderStackItem(cardInstance, index))
   }
 
   render() {
@@ -41,12 +41,12 @@ class Stack extends Component {
 
 const mapStateToProps = state => {
   return {
-    stack: get(state, 'stack', {items: []})
+    stack: get(state, 'stack', [])
   }
 }
 
 Stack.propTypes = {
-  stack: PropTypes.object.isRequired
+  stack: PropTypes.array.isRequired
 }
 
 export default connect(mapStateToProps)(Stack)

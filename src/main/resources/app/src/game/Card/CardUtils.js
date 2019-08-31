@@ -10,6 +10,10 @@ export default class CardUtils {
       .replace(/'/g, '')
   }
 
+  static getIdAndName(cardInstance) {
+    return `"${cardInstance.id} - ${cardInstance.card.name}"`
+  }
+
   static hasSummoningSickness(cardInstance) {
     return cardInstance.modifiers.summoningSickness
   }
@@ -157,33 +161,36 @@ export default class CardUtils {
   }
 
   static canAttack(attackingCard) {
+    let attackingCardName = CardUtils.getIdAndName(attackingCard)
     if (!CardUtils.isOfType(attackingCard, 'CREATURE')) {
-      return attackingCard.idAndName + ' is not of type Creature.'
+      return `${attackingCardName} is not of type Creature.`
     }
 
     if (CardUtils.hasSummoningSickness(attackingCard)) {
-      return attackingCard.idAndName + ' has summoning sickness and cannot attack.'
+      return `${attackingCardName} has summoning sickness and cannot attack.`
     }
 
     if (CardUtils.isTapped(attackingCard)) {
-      return attackingCard.idAndName + ' is already tapped and cannot attack.'
+      return `${attackingCardName} is already tapped and cannot attack.`
     }
 
     return true
   }
 
   static canBlock(blockingCard, blockedCard) {
+    let blockingCardName = CardUtils.getIdAndName(blockingCard)
+    let blockedCardName = CardUtils.getIdAndName(blockedCard)
     if (!CardUtils.isOfType(blockingCard, 'CREATURE')) {
-      return `${blockingCard.idAndName} is not of type Creature.`
+      return `${blockedCardName} is not of type Creature.`
     }
 
     if (CardUtils.isTapped(blockingCard)) {
-      return `${blockingCard.idAndName} is tapped and cannot block.`
+      return `${blockedCardName} is tapped and cannot block.`
     }
 
     if (CardUtils.hasAbility(blockedCard, 'FLYING')) {
       if (!(CardUtils.hasAbility(blockingCard, 'FLYING') || CardUtils.hasAbility(blockingCard, 'REACH'))) {
-        return `${blockingCard.idAndName} cannot block ${blockedCard.idAndName} as it has flying.`
+        return `${blockingCardName} cannot block ${blockedCardName} as it has flying.`
       }
     }
 

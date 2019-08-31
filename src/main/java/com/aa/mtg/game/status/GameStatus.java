@@ -102,7 +102,7 @@ public class GameStatus {
 
     public void putIntoGraveyard(CardInstance cardInstance) {
         Player owner = getPlayerByName(cardInstance.getOwner());
-        cardInstance.clearModifiers();
+        cardInstance.resetAllModifiers();
         owner.getGraveyard().addCard(cardInstance);
     }
 

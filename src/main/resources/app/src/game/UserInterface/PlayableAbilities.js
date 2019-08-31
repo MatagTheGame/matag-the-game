@@ -10,7 +10,7 @@ class PossibleAbility extends Component {
   }
 
   render() {
-    switch (this.props.possibleAbility.firstAbilityType) {
+    switch (this.props.possibleAbility.abilityTypes[0]) {
       case 'TAP_ADD_MANA':
         const colors = this.props.possibleAbility.parameters
         return <li onClick={this.props.onClick} title={`TAP: add ${colors}`}><img src='/img/symbols/TAP.png' alt='TAP' />: add {PossibleAbility.renderColors(colors)}</li>

@@ -49,8 +49,10 @@ public class InitGameTest extends AbstractApplicationTest {
         // Battlefields are
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).containsExactly(PLAINS, PLAINS);
         browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).containsExactly(GRAZING_WHIPTAIL);
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(GRAZING_WHIPTAIL).hasPowerAndToughness("3/4");
         browser.player2().getBattlefieldHelper(OPPONENT, FIRST_LINE).containsExactly(PLAINS, PLAINS);
         browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).containsExactly(GRAZING_WHIPTAIL);
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(GRAZING_WHIPTAIL).hasPowerAndToughness("3/4");
 
         // Graveyards are
         browser.player1().getGraveyardHelper(PLAYER).containsExactly(PLAINS);
