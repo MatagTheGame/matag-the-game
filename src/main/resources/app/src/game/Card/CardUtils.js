@@ -81,7 +81,7 @@ export default class CardUtils {
   }
 
   static isBlocking(cardInstance) {
-    return cardInstance.modifiers.blocking === true
+    return cardInstance.modifiers.blockingCardId
   }
 
   static isBlockingOrFrontendBlocking(cardInstance) {

@@ -3,6 +3,8 @@ package com.aa.mtg.cards;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.cards.modifiers.TappedModifier;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -11,18 +13,25 @@ import java.util.List;
 
 @ToString
 @EqualsAndHashCode
+@JsonAutoDetect(
+        fieldVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE,
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+        creatorVisibility = JsonAutoDetect.Visibility.NONE
+)
 public class CardModifiers {
-    private TappedModifier tapped;
-    private boolean doesNotUntapNextTurn;
-    private boolean summoningSickness;
-    private boolean attacking;
-    private Integer blockingCardId;
-    private int damage;
-    private List<Ability> abilities = new ArrayList<>();
-    private List<Ability> abilitiesUntilEndOfTurn = new ArrayList<>();
-    private PowerToughness extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
-    private List<Object> targets = new ArrayList<>();
-    private int attachedToId;
+    @JsonProperty private TappedModifier tapped;
+    @JsonProperty private boolean doesNotUntapNextTurn;
+    @JsonProperty private boolean summoningSickness;
+    @JsonProperty private boolean attacking;
+    @JsonProperty private Integer blockingCardId;
+    @JsonProperty private int damage;
+    @JsonProperty private List<Ability> abilities = new ArrayList<>();
+    @JsonProperty private List<Ability> abilitiesUntilEndOfTurn = new ArrayList<>();
+    @JsonProperty private PowerToughness extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
+    @JsonProperty private List<Object> targets = new ArrayList<>();
+    @JsonProperty private int attachedToId;
 
     public TappedModifier getTapped() {
         return tapped;

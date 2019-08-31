@@ -64,7 +64,7 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
         browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(SWAMP, 0).tap();
         browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(SWAMP, 1).tap();
         browser.player2().getPhaseHelper().is(AB, PLAYER);
-        browser.player2().getHandHelper(PLAYER).getFirstCard(DARK_REMEDY).click();
+        browser.player2().getHandHelper(PLAYER).getFirstCard(DARK_REMEDY).select();
         browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(BARTIZAN_BATS).click();
 
         // And spell goes on the stack

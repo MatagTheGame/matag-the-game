@@ -4,6 +4,10 @@ import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.trigger.Trigger;
 import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.type.AbilityType;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -14,11 +18,20 @@ import static com.aa.mtg.cards.ability.Abilities.parametersAsString;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
+@ToString
+@EqualsAndHashCode
+@JsonAutoDetect(
+        fieldVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE,
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+        creatorVisibility = JsonAutoDetect.Visibility.NONE
+)
 public class Ability {
-    private final List<AbilityType> abilityTypes;
-    private final List<Target> targets;
-    private final List<String> parameters;
-    private final Trigger trigger;
+    @JsonProperty private final List<AbilityType> abilityTypes;
+    @JsonProperty private final List<Target> targets;
+    @JsonProperty private final List<String> parameters;
+    @JsonProperty private final Trigger trigger;
 
     public Ability(AbilityType abilityType) {
         this(singletonList(abilityType));
@@ -43,7 +56,8 @@ public class Ability {
         return abilityTypes.get(0);
     }
 
-    public String getAbilityTypesText() {
+    @JsonProperty
+    String getAbilityTypesText() {
         StringBuilder stringBuilder = new StringBuilder();
 
         Map<AbilityType, List<String>> abilitiesParametersMap = toAbilitiesParametersMap(abilityTypes);
