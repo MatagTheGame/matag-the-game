@@ -52,6 +52,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card MARAUDERS_AXE = new Card("Marauder's Axe", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList("Equipment"), COMMON, "Equipped creature gets +2/+0. Equip 2", 0, 0, singletonList(PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0));
     public static Card METEOR_GOLEM = new Card("Meteor Golem", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Golem"), UNCOMMON, "When Meteor Golem enters the battlefield, destroy target nonland permanent an opponent controls.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_NONLAND_OPPONENT_PERMANENT_GET_DESTROYED));
     public static Card MIGHTY_LEAP = new Card("Mighty Leap", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +2/+2 and gains flying until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_2_2_AND_FLYING_UNTIL_END_OF_TURN));
+    public static Card MURDER = new Card("Murder", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Destroy target creature.", 0, 0, singletonList(DESTROY_TARGET_CREATURE));
     public static Card OAKENFORM = new Card("Oakenform", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +3/+3.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_3));
     public static Card ONAKKE_OGRE = new Card("Onakke Ogre", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Ogre", "Warrior"), COMMON, "", 4, 2, emptyList());
     public static Card ORESKOS_SWIFTCLAW = new Card("Oreskos Swiftclaw", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Cat", "Warrior"), COMMON, "", 3, 1, emptyList());
@@ -108,6 +109,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(MARAUDERS_AXE);
         cards.add(METEOR_GOLEM);
         cards.add(MIGHTY_LEAP);
+        cards.add(MURDER);
         cards.add(ONAKKE_OGRE);
         cards.add(OAKENFORM);
         cards.add(ORESKOS_SWIFTCLAW);

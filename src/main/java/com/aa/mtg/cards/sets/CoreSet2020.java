@@ -104,6 +104,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(CoreSet2019.MARAUDERS_AXE);
         cards.add(CoreSet2019.METEOR_GOLEM);
         cards.add(MOMENT_OF_HEROISM);
+        cards.add(CoreSet2019.MURDER);
         cards.add(NIMBLE_BIRDSTICKER);
         cards.add(CoreSet2019.OAKENFORM);
         cards.add(RavnicaAllegiance.PROWLING_CARACAL);
