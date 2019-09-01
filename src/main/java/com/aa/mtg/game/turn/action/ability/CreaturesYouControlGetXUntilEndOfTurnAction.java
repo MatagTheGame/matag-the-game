@@ -25,7 +25,7 @@ public class CreaturesYouControlGetXUntilEndOfTurnAction implements AbilityActio
 
         List<CardInstance> cards = new CardInstanceSearch(controller.getBattlefield().getCards()).ofType(CREATURE).getCards();
         for (CardInstance card : cards) {
-            thatTargetsGetAction.thatTargetGet(cardInstance, gameStatus, parameter, card);
+            thatTargetsGetAction.thatTargetPermanentGet(cardInstance, gameStatus, parameter, card);
         }
     }
 

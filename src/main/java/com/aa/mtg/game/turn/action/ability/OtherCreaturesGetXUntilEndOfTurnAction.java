@@ -25,7 +25,7 @@ public class OtherCreaturesGetXUntilEndOfTurnAction implements AbilityAction {
         List<CardInstance> cards = gameStatus.getAllBattlefieldCards().ofType(CREATURE).getCards();
         for (CardInstance card : cards) {
             if (card.getId() != cardInstance.getId()) {
-                thatTargetsGetAction.thatTargetGet(cardInstance, gameStatus, parameter, card);
+                thatTargetsGetAction.thatTargetPermanentGet(cardInstance, gameStatus, parameter, card);
             }
         }
     }

@@ -165,7 +165,7 @@ public class AbilitiesTest {
         String parameter = ":TAPPED";
 
         // When
-        boolean tapped = tapped(parameter);
+        boolean tapped = tappedFromParameter(parameter);
 
         // Then
         assertThat(tapped).isTrue();
@@ -174,7 +174,7 @@ public class AbilitiesTest {
     @Test
     public void testTappedFromParameterAbsent() {
         // When
-        boolean tapped = tapped("TRAMPLE");
+        boolean tapped = tappedFromParameter("TRAMPLE");
 
         // Then
         assertThat(tapped).isFalse();
@@ -186,7 +186,7 @@ public class AbilitiesTest {
         String parameter = ":TAPPED_DOES_NOT_UNTAP_NEXT_TURN";
 
         // When
-        boolean tappedDoesNotUntapNextTurn = tappedDoesNotUntapNextTurn(parameter);
+        boolean tappedDoesNotUntapNextTurn = tappedDoesNotUntapNextTurnFromParameter(parameter);
 
         // Then
         assertThat(tappedDoesNotUntapNextTurn).isTrue();
@@ -195,7 +195,7 @@ public class AbilitiesTest {
     @Test
     public void testTappedDoesNotUntapNextTurnFromParameterAbsent() {
         // When
-        boolean tappedDoesNotUntapNextTurn = tappedDoesNotUntapNextTurn("TRAMPLE");
+        boolean tappedDoesNotUntapNextTurn = tappedDoesNotUntapNextTurnFromParameter("TRAMPLE");
 
         // Then
         assertThat(tappedDoesNotUntapNextTurn).isFalse();
@@ -207,7 +207,7 @@ public class AbilitiesTest {
         String parameter = ":UNTAPPED";
 
         // When
-        boolean untapped = untapped(parameter);
+        boolean untapped = untappedFromParameter(parameter);
 
         // Then
         assertThat(untapped).isTrue();
@@ -216,10 +216,31 @@ public class AbilitiesTest {
     @Test
     public void testUntappedFromParameterAbsent() {
         // When
-        boolean untapped = untapped("TRAMPLE");
+        boolean untapped = untappedFromParameter("TRAMPLE");
 
         // Then
         assertThat(untapped).isFalse();
+    }
+
+    @Test
+    public void testDrawFromParameter() {
+        // Given
+        String parameter = "DRAW:2";
+
+        // When
+        boolean untapped = untappedFromParameter(parameter);
+
+        // Then
+        assertThat(untapped).isTrue();
+    }
+
+    @Test
+    public void testDrawFromParameterAbsent() {
+        // When
+        int draw = drawFromParameter("TRAMPLE");
+
+        // Then
+        assertThat(draw).isEqualTo(0);
     }
 
     @Test

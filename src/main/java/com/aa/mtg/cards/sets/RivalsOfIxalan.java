@@ -35,6 +35,7 @@ public class RivalsOfIxalan implements MtgSet {
     public static Card IMPALE = new Card("Impale", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Destroy target creature.", 0, 0, singletonList(DESTROY_TARGET_CREATURE));
     public static Card JADECRAFT_ARTISAN = new Card("Jadecraft Artisan", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Merfolk", "Shaman"), COMMON, "When Jadecraft Artisan enters the battlefield, target creature gets +2/+2 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_2_2));
     public static Card MOMENT_OF_CRAVING = new Card("Moment of Craving", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets -2/-2 until end of turn. You gain 2 life.", 0, 0, asList(TARGET_CREATURE_GETS_MINUS_2_2_UNTIL_END_OF_TURN, GAIN_2_LIFE));
+    public static Card NATURALIZE = new Card("Naturalize", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Destroy target artifact or enchantment.", 0, 0, singletonList(DESTROY_TARGET_ARTIFACT_OR_ENCHANTMENT));
     public static Card ORAZCA_FRILLBACK = new Card("Orazca Frillback", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 4, 3, emptyList());
     public static Card ORAZCA_RAPTOR = new Card("Orazca Raptor", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 3, 4, emptyList());
     public static Card RAVENOUS_CHUPACABRA = new Card("Ravenous Chupacabra", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Beast", "Horror"), UNCOMMON, "When Ravenous Chupacabra enters the battlefield, destroy target creature an opponent controls.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_CREATURE_GETS_DESTROYED));
@@ -61,6 +62,7 @@ public class RivalsOfIxalan implements MtgSet {
         cards.add(IMPALE);
         cards.add(JADECRAFT_ARTISAN);
         cards.add(MOMENT_OF_CRAVING);
+        cards.add(NATURALIZE);
         cards.add(ORAZCA_FRILLBACK);
         cards.add(ORAZCA_RAPTOR);
         cards.add(Ixalan.RAPTOR_COMPANION);

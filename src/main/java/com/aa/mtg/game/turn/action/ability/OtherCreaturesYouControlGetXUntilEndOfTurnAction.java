@@ -29,7 +29,7 @@ public class OtherCreaturesYouControlGetXUntilEndOfTurnAction implements Ability
         List<CardInstance> cards = new CardInstanceSearch(controller.getBattlefield().getCards()).ofType(CREATURE).getCards();
         for (CardInstance card : cards) {
             if (card.getId() != cardInstance.getId()) {
-                thatTargetsGetAction.thatTargetGet(cardInstance, gameStatus, parameter, card);
+                thatTargetsGetAction.thatTargetPermanentGet(cardInstance, gameStatus, parameter, card);
             }
         }
     }

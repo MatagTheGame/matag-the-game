@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
+import static com.aa.mtg.cards.properties.Rarity.MYTHIC;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Type.*;
 import static java.util.Arrays.asList;
@@ -47,6 +48,7 @@ public class Ixalan implements MtgSet {
     public static Card MARK_OF_THE_VAMPIRE = new Card("Mark of the Vampire", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has lifelink.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_LIFELINK));
     public static Card NEST_ROBBER = new Card("Nest Robber", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "Haste", 2, 1, singletonList(HASTE));
     public static Card ONE_WITH_THE_WIND = new Card("One With the Wind", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has flying.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_FLYING));
+    public static Card OVERFLOWING_INSIGHT = new Card("Overflowing Insight", singleton(Color.BLUE), asList(Cost.BLUE, Cost.BLUE, Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), MYTHIC, "Target player draws seven cards.", 0, 0, singletonList(TARGET_PLAYER_DRAWS_7_CARDS));
     public static Card QUEENS_BAY_SOLDIER = new Card("Queen's Bay Soldier", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList("Vampire", "Soldier"), COMMON, "", 2, 2, emptyList());
     public static Card RAGING_SWORDTOOTH = new Card("Raging Swordtooth", asSet(Color.RED, Color.GREEN), asList(Cost.RED, Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), UNCOMMON, "Trample. When Raging Swordtooth enters the battlefield, it deals 1 damage to each other creature.", 5, 5, asList(TRAMPLE, WHEN_IT_ENTERS_THE_BATTLEFIELD_OTHER_CREATURES_GET_1_DAMAGE));
     public static Card RAPTOR_COMPANION = new Card("Raptor Companion", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), singletonList("Dinosaur"), COMMON, "", 3, 1, emptyList());
@@ -85,6 +87,7 @@ public class Ixalan implements MtgSet {
         cards.add(MARK_OF_THE_VAMPIRE);
         cards.add(NEST_ROBBER);
         cards.add(ONE_WITH_THE_WIND);
+        cards.add(OVERFLOWING_INSIGHT);
         cards.add(QUEENS_BAY_SOLDIER);
         cards.add(RAGING_SWORDTOOTH);
         cards.add(RAPTOR_COMPANION);

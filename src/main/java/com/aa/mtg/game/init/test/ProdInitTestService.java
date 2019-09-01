@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 
 import static com.aa.mtg.cards.Cards.*;
 import static com.aa.mtg.cards.sets.CoreSet2019.MARAUDERS_AXE;
+import static com.aa.mtg.cards.sets.CoreSet2020.OVERCOME;
 import static com.aa.mtg.cards.sets.GuildsOfRavnica.CANDLELIGHT_VIGIL;
 import static com.aa.mtg.cards.sets.Ixalan.*;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CIVIC_STALWART;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CLEAR_THE_MIND;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.PRECISION_BOLT;
 import static com.aa.mtg.cards.sets.RivalsOfIxalan.DEAD_WEIGHT;
-import static com.aa.mtg.cards.sets.WarOfTheSpark.BULWARK_GIANT;
 
 @Profile("test")
 @Component
@@ -23,6 +23,11 @@ public class ProdInitTestService extends InitTestService {
         // Current Player
         addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
         addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
+        addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
+        addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
+        addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
+        addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
+        addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
         addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
         addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
 
@@ -41,15 +46,18 @@ public class ProdInitTestService extends InitTestService {
         addCardToCurrentPlayerHand(gameStatus, CLEAR_THE_MIND);
         addCardToCurrentPlayerHand(gameStatus, CIVIC_STALWART);
         addCardToCurrentPlayerHand(gameStatus, CANDLELIGHT_VIGIL);
-        addCardToCurrentPlayerHand(gameStatus, BULWARK_GIANT);
+        addCardToCurrentPlayerHand(gameStatus, OVERFLOWING_INSIGHT);
 
         addCardToCurrentPlayerGraveyard(gameStatus, PLAINS);
 
         // Non Current Player
         addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
         addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
+        addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
         addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
         addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
+        addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
+        addCardToNonCurrentPlayerLibrary(gameStatus, SWAMP);
         addCardToNonCurrentPlayerLibrary(gameStatus, SWAMP);
         addCardToNonCurrentPlayerLibrary(gameStatus, SWAMP);
 
@@ -65,7 +73,7 @@ public class ProdInitTestService extends InitTestService {
         addCardToNonCurrentPlayerHand(gameStatus, GILDED_SENTINEL);
         addCardToNonCurrentPlayerHand(gameStatus, CHARGING_MONSTROSAUR);
         addCardToNonCurrentPlayerHand(gameStatus, PRECISION_BOLT);
-        addCardToNonCurrentPlayerHand(gameStatus, RILE);
+        addCardToNonCurrentPlayerHand(gameStatus, OVERCOME);
         addCardToNonCurrentPlayerHand(gameStatus, MARAUDERS_AXE);
         addCardToNonCurrentPlayerHand(gameStatus, DEAD_WEIGHT);
 

@@ -45,7 +45,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card HOSTILE_MINOTAUR = new Card("Hostile Minotaur", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Minotaur"), COMMON, "Haste.", 3, 3, singletonList(HASTE));
     public static Card INSPIRED_CHARGE = new Card("Inspired Charge", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Creatures you control get +2/+1 until end of turn.", 0, 0, singletonList(CREATURES_YOU_CONTROL_GET_PLUS_2_1_UNTIL_END_OF_TURN));
     public static Card KNIGHT_OF_THE_TUSK = new Card("Knight of the Tusk", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Knight"), COMMON, "Vigilance.", 3, 7, emptyList());
-    public static Card KNIGHTS_PLEDGE = new Card("Knight's Pledge", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(ENCHANTMENT), emptyList(), COMMON, "Draw two cards.", 0, 0, singletonList(DRAW_2_CARD));
+    public static Card KNIGHTS_PLEDGE = new Card("Knight's Pledge", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(ENCHANTMENT), emptyList(), COMMON, "Draw two cards.", 0, 0, singletonList(DRAW_2_CARDS));
     public static Card LAVA_AXE = new Card("Lava Axe", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Lava Axe deals 5 damage to target player.", 0, 0, singletonList(DEAL_5_DAMAGE_TO_TARGET_PLAYER_OR_PLANESWALKER));
     public static Card LICHS_CARESS = new Card("Lich's Caress", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Destroy target creature. You gain 3 life.", 0, 0, asList(DESTROY_TARGET_CREATURE, GAIN_3_LIFE));
     public static Card LOXODON_LINE_BREAKER = new Card("Loxodon Line Breaker", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Elephant", "Soldier"), COMMON, "", 3, 2, emptyList());
@@ -110,6 +110,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(METEOR_GOLEM);
         cards.add(MIGHTY_LEAP);
         cards.add(MURDER);
+        cards.add(RivalsOfIxalan.NATURALIZE);
         cards.add(ONAKKE_OGRE);
         cards.add(OAKENFORM);
         cards.add(ORESKOS_SWIFTCLAW);
