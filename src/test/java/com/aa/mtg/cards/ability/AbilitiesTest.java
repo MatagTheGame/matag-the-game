@@ -228,10 +228,10 @@ public class AbilitiesTest {
         String parameter = "DRAW:2";
 
         // When
-        boolean untapped = untappedFromParameter(parameter);
+        int draw = drawFromParameter(parameter);
 
         // Then
-        assertThat(untapped).isTrue();
+        assertThat(draw).isEqualTo(2);
     }
 
     @Test

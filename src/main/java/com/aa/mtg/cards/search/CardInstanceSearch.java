@@ -1,7 +1,7 @@
 package com.aa.mtg.cards.search;
 
 import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.ability.target.TargetPowerToughnessConstraint;
+import com.aa.mtg.cards.selector.PowerToughnessConstraint;
 import com.aa.mtg.cards.properties.Type;
 
 import java.util.List;
@@ -102,9 +102,9 @@ public class CardInstanceSearch {
         return new CardInstanceSearch(cards);
     }
 
-    public CardInstanceSearch ofTargetPowerToughnessConstraint(TargetPowerToughnessConstraint targetPowerToughnessConstraint) {
+    public CardInstanceSearch ofPowerToughnessConstraint(PowerToughnessConstraint powerToughnessConstraint) {
         List<CardInstance> cards = this.cards.stream()
-                .filter(targetPowerToughnessConstraint::check)
+                .filter(powerToughnessConstraint::check)
                 .collect(toList());
         return new CardInstanceSearch(cards);
     }

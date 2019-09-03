@@ -1,0 +1,76 @@
+package com.aa.mtg.cards.selector;
+
+import com.aa.mtg.cards.ability.type.AbilityType;
+import com.aa.mtg.cards.properties.Color;
+import com.aa.mtg.cards.properties.Type;
+import com.aa.mtg.game.player.PlayerType;
+import lombok.Builder;
+
+import java.util.List;
+
+@Builder
+public class CardInstanceSelector {
+    private final SelectorType selectorType;
+    private final List<Type> ofType;
+    private final List<Type> notOfType;
+    private final String ofSubtypeOf;
+    private final AbilityType withAbilityType;
+    private final Color ofColor;
+    private final PowerToughnessConstraint powerToughnessConstraint;
+    private final PlayerType controllerType;
+    private final List<StatusType> statusTypes;
+    private final boolean another;
+
+    private CardInstanceSelector(SelectorType selectorType, List<Type> ofType, List<Type> notOfType, String ofSubtypeOf, AbilityType withAbilityType, Color ofColor, PowerToughnessConstraint powerToughnessConstraint, PlayerType controllerType, List<StatusType> statusTypes, boolean another) {
+        this.selectorType = selectorType;
+        this.ofType = ofType;
+        this.notOfType = notOfType;
+        this.ofSubtypeOf = ofSubtypeOf;
+        this.withAbilityType = withAbilityType;
+        this.ofColor = ofColor;
+        this.powerToughnessConstraint = powerToughnessConstraint;
+        this.controllerType = controllerType;
+        this.statusTypes = statusTypes;
+        this.another = another;
+    }
+
+    public SelectorType getSelectorType() {
+        return selectorType;
+    }
+
+    public List<Type> getOfType() {
+        return ofType;
+    }
+
+    public List<Type> getNotOfType() {
+        return notOfType;
+    }
+
+    public String getOfSubtypeOf() {
+        return ofSubtypeOf;
+    }
+
+    public AbilityType getWithAbilityType() {
+        return withAbilityType;
+    }
+
+    public Color getOfColor() {
+        return ofColor;
+    }
+
+    public PowerToughnessConstraint getPowerToughnessConstraint() {
+        return powerToughnessConstraint;
+    }
+
+    public PlayerType getControllerType() {
+        return controllerType;
+    }
+
+    public List<StatusType> getStatusTypes() {
+        return statusTypes;
+    }
+
+    public boolean isAnother() {
+        return another;
+    }
+}

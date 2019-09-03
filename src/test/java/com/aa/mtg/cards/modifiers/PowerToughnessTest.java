@@ -1,6 +1,5 @@
 package com.aa.mtg.cards.modifiers;
 
-import com.aa.mtg.cards.modifiers.PowerToughness;
 import org.junit.Test;
 
 import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;

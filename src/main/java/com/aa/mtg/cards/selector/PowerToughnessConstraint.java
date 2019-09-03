@@ -1,27 +1,27 @@
-package com.aa.mtg.cards.ability.target;
+package com.aa.mtg.cards.selector;
 
 import com.aa.mtg.cards.CardInstance;
 
-public class TargetPowerToughnessConstraint {
+public class PowerToughnessConstraint {
 
     public enum PowerOrToughness {
         POWER, TOUGHNESS
     }
 
     private final PowerOrToughness powerOrToughness;
-    private final TargetSelectionConstraint targetSelectionConstraint;
+    private final PowerToughnessConstraintType powerToughnessConstraintType;
     private final int value;
 
-    public TargetPowerToughnessConstraint(PowerOrToughness powerOrToughness, TargetSelectionConstraint targetSelectionConstraint, int value) {
+    public PowerToughnessConstraint(PowerOrToughness powerOrToughness, PowerToughnessConstraintType powerToughnessConstraintType, int value) {
         this.powerOrToughness = powerOrToughness;
-        this.targetSelectionConstraint = targetSelectionConstraint;
+        this.powerToughnessConstraintType = powerToughnessConstraintType;
         this.value = value;
     }
 
     public boolean check(CardInstance cardInstance) {
         int value = getValue(cardInstance);
 
-        switch (targetSelectionConstraint) {
+        switch (powerToughnessConstraintType) {
             case EQUAL:
                 return value == this.value;
 
@@ -38,7 +38,7 @@ public class TargetPowerToughnessConstraint {
                 return value >= this.value;
 
             default:
-                throw new RuntimeException("targetSelectionConstraint is null");
+                throw new RuntimeException("powerToughnessConstraintType is null");
         }
     }
 
@@ -46,8 +46,8 @@ public class TargetPowerToughnessConstraint {
         return powerOrToughness;
     }
 
-    public TargetSelectionConstraint getTargetSelectionConstraint() {
-        return targetSelectionConstraint;
+    public PowerToughnessConstraintType getPowerToughnessConstraintType() {
+        return powerToughnessConstraintType;
     }
 
     public int getValue() {
