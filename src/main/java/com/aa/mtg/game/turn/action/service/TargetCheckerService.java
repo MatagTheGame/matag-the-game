@@ -61,7 +61,7 @@ public class TargetCheckerService {
 
             } else {
                 for (Target target : ability.getTargets()) {
-                    CardInstanceSearch cards = cardInstanceSelectorService.select(gameStatus, target.getCardInstanceSelector());
+                    CardInstanceSearch cards = cardInstanceSelectorService.select(gameStatus, cardToCast, target.getCardInstanceSelector());
                     if (cards.isNotEmpty()) {
                         return true;
                     }
@@ -89,11 +89,7 @@ public class TargetCheckerService {
             }
 
             int targetCardId = (int) targetId;
-            if (cardInstance.getId() == targetCardId && cardInstanceSelector.isAnother()) {
-                throw new MessageException("Selected targets were not valid (cannot target itself).");
-            }
-
-            CardInstanceSearch cards = cardInstanceSelectorService.select(gameStatus, cardInstanceSelector);
+            CardInstanceSearch cards = cardInstanceSelectorService.select(gameStatus, cardInstance, cardInstanceSelector);
             if (!cards.withId(targetCardId).isPresent()) {
                 throw new MessageException("Selected targets were not valid.");
             }

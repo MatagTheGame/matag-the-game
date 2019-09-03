@@ -25,6 +25,14 @@ public class CardInstanceSearch {
                 .findFirst();
     }
 
+    public CardInstanceSearch notWithId(int cardId) {
+        List<CardInstance> cards = this.cards.stream()
+                .filter(cardInstance -> cardInstance.getId() != cardId)
+                .collect(toList());
+
+        return new CardInstanceSearch(cards);
+    }
+
     public CardInstanceSearch ofType(Type type) {
         List<CardInstance> cards = this.cards.stream()
                 .filter(cardInstance -> cardInstance.isOfType(type))
