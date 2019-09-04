@@ -8,19 +8,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class DestroyPermanentService {
     private final LeaveBattlefieldService leaveBattlefieldService;
-    private final PutInGraveyardService putInGraveyardService;
+    private final PutIntoGraveyardService putIntoGraveyardService;
 
     @Autowired
-    public DestroyPermanentService(LeaveBattlefieldService leaveBattlefieldService, PutInGraveyardService putInGraveyardService) {
+    public DestroyPermanentService(LeaveBattlefieldService leaveBattlefieldService, PutIntoGraveyardService putIntoGraveyardService) {
         this.leaveBattlefieldService = leaveBattlefieldService;
-        this.putInGraveyardService = putInGraveyardService;
+        this.putIntoGraveyardService = putIntoGraveyardService;
     }
 
     public void destroy(GameStatus gameStatus, int permanentId) {
         CardInstance cardInstance = leaveBattlefieldService.leaveTheBattlefield(gameStatus, permanentId);
 
         if (cardInstance != null) {
-            putInGraveyardService.putInGraveyard(gameStatus, cardInstance);
+            putIntoGraveyardService.putIntoGraveyard(gameStatus, cardInstance);
         }
     }
 }

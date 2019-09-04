@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReturnPermanentToHandService {
     private final LeaveBattlefieldService leaveBattlefieldService;
-    private final ReturnToHandService returnToHand;
+    private final PutIntoHandService returnToHand;
 
     @Autowired
-    public ReturnPermanentToHandService(LeaveBattlefieldService leaveBattlefieldService, ReturnToHandService returnToHand) {
+    public ReturnPermanentToHandService(LeaveBattlefieldService leaveBattlefieldService, PutIntoHandService returnToHand) {
         this.leaveBattlefieldService = leaveBattlefieldService;
         this.returnToHand = returnToHand;
     }

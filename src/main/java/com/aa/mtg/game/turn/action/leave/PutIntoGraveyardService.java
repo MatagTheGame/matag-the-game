@@ -6,8 +6,8 @@ import com.aa.mtg.game.status.GameStatus;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PutInGraveyardService {
-    public void putInGraveyard(GameStatus gameStatus, CardInstance cardInstance) {
+public class PutIntoGraveyardService {
+    public void putIntoGraveyard(GameStatus gameStatus, CardInstance cardInstance) {
         Player owner = gameStatus.getPlayerByName(cardInstance.getOwner());
         cardInstance.resetAllModifiers();
         owner.getGraveyard().addCard(cardInstance);
