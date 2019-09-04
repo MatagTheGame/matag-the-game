@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TapTargetService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TapTargetService.class);
+public class TapPermanentService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TapPermanentService.class);
 
     public void tap(GameStatus gameStatus, int targetId) {
         CardInstance cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);

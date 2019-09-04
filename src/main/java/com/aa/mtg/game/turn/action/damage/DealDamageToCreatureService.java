@@ -2,7 +2,7 @@ package com.aa.mtg.game.turn.action.damage;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.action.destroy.DestroyTargetService;
+import com.aa.mtg.game.turn.action.leave.DestroyPermanentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +13,11 @@ public class DealDamageToCreatureService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DealDamageToCreatureService.class);
 
-    private final DestroyTargetService destroyTargetService;
+    private final DestroyPermanentService destroyPermanentService;
 
     @Autowired
-    public DealDamageToCreatureService(DestroyTargetService destroyTargetService) {
-        this.destroyTargetService = destroyTargetService;
+    public DealDamageToCreatureService(DestroyPermanentService destroyPermanentService) {
+        this.destroyPermanentService = destroyPermanentService;
     }
 
     public void dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
@@ -25,7 +25,7 @@ public class DealDamageToCreatureService {
             LOGGER.info("{} is getting {} damage.", cardInstance.getIdAndName(), damage);
             cardInstance.getModifiers().dealDamage(damage);
             if (cardInstance.getModifiers().getDamage() >= cardInstance.getToughness() || deathtouch) {
-                destroyTargetService.destroy(gameStatus, cardInstance.getId());
+                destroyPermanentService.destroy(gameStatus, cardInstance.getId());
                 LOGGER.info("{} has been destroyed.", cardInstance.getIdAndName());
             }
         }

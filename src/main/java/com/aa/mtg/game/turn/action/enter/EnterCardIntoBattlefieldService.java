@@ -4,7 +4,7 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.action.destroy.DestroyTargetService;
+import com.aa.mtg.game.turn.action.leave.DestroyPermanentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +20,11 @@ public class EnterCardIntoBattlefieldService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EnterCardIntoBattlefieldService.class);
 
-    private final DestroyTargetService destroyTargetService;
+    private final DestroyPermanentService destroyPermanentService;
 
     @Autowired
-    public EnterCardIntoBattlefieldService(DestroyTargetService destroyTargetService) {
-        this.destroyTargetService = destroyTargetService;
+    public EnterCardIntoBattlefieldService(DestroyPermanentService destroyPermanentService) {
+        this.destroyPermanentService = destroyPermanentService;
     }
 
     public void enter(GameStatus gameStatus, CardInstance cardInstance) {
@@ -56,7 +56,7 @@ public class EnterCardIntoBattlefieldService {
         player.getBattlefield().getCardsCopy().stream()
                 .filter(cardInstance -> cardInstance.isOfType(CREATURE))
                 .filter(cardInstance -> cardInstance.getToughness() <= 0)
-                .forEach(cardInstance -> destroyTargetService.destroy(gameStatus, cardInstance.getId()));
+                .forEach(cardInstance -> destroyPermanentService.destroy(gameStatus, cardInstance.getId()));
     }
 
 }

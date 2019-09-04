@@ -8,6 +8,7 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.AbilityActionFactory;
 import com.aa.mtg.game.turn.action.enter.EnterCardIntoBattlefieldService;
+import com.aa.mtg.game.turn.action.leave.PutInGraveyardService;
 import com.aa.mtg.game.turn.action.target.TargetCheckerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,14 +28,16 @@ public class ResolveService {
     private final ContinueTurnService continueTurnService;
     private final AbilityActionFactory abilityActionFactory;
     private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
+    private final PutInGraveyardService putInGraveyardService;
     private final TargetCheckerService targetCheckerService;
 
     @Autowired
     public ResolveService(ContinueTurnService continueTurnService, AbilityActionFactory abilityActionFactory,
-                          EnterCardIntoBattlefieldService enterCardIntoBattlefieldService, TargetCheckerService targetCheckerService) {
+                          EnterCardIntoBattlefieldService enterCardIntoBattlefieldService, PutInGraveyardService putInGraveyardService, TargetCheckerService targetCheckerService) {
         this.continueTurnService = continueTurnService;
         this.abilityActionFactory = abilityActionFactory;
         this.enterCardIntoBattlefieldService = enterCardIntoBattlefieldService;
+        this.putInGraveyardService = putInGraveyardService;
         this.targetCheckerService = targetCheckerService;
     }
 
@@ -80,7 +83,8 @@ public class ResolveService {
             enterCardIntoBattlefieldService.enter(gameStatus, cardToResolve);
 
         } else {
-            gameStatus.putIntoGraveyard(cardToResolve);
+            cardToResolve.resetAllModifiers();
+            putInGraveyardService.putInGraveyard(gameStatus, cardToResolve);
         }
     }
 
@@ -93,7 +97,7 @@ public class ResolveService {
         switch (triggeredNonStackAction) {
             case "DISCARD_A_CARD": {
                 CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
-                gameStatus.putIntoGraveyard(cardInstance);
+                putInGraveyardService.putInGraveyard(gameStatus, cardInstance);
                 gameStatus.getTurn().setTriggeredNonStackAction(null);
                 break;
             }

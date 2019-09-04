@@ -100,12 +100,6 @@ public class GameStatus {
         return getOtherPlayer(getActivePlayer());
     }
 
-    public void putIntoGraveyard(CardInstance cardInstance) {
-        Player owner = getPlayerByName(cardInstance.getOwner());
-        cardInstance.resetAllModifiers();
-        owner.getGraveyard().addCard(cardInstance);
-    }
-
     public int nextCardId() {
         return nextCardId.incrementAndGet();
     }
