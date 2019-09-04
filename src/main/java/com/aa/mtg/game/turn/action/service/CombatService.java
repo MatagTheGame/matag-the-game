@@ -3,6 +3,7 @@ package com.aa.mtg.game.turn.action.service;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.turn.action.life.LifeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

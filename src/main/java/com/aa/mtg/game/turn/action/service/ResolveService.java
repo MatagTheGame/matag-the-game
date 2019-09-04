@@ -6,7 +6,7 @@ import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.action.ability.AbilityActionFactory;
+import com.aa.mtg.game.turn.action.AbilityActionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

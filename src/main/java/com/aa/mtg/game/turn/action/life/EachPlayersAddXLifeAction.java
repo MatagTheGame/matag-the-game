@@ -1,9 +1,8 @@
-package com.aa.mtg.game.turn.action.ability;
+package com.aa.mtg.game.turn.action.life;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.action.service.LifeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn.action.service;
+package com.aa.mtg.game.turn.action.draw;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.player.Player;

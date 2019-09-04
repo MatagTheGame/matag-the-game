@@ -9,7 +9,7 @@ import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.action.ability.AbilityActionFactory;
+import com.aa.mtg.game.turn.action.AbilityActionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

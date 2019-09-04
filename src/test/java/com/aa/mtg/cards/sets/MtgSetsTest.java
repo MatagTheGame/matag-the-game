@@ -1,8 +1,7 @@
-package integration.cards.sets;
+package com.aa.mtg.cards.sets;
 
 import application.AbstractApplicationTest;
 import com.aa.mtg.cards.Card;
-import com.aa.mtg.cards.sets.MtgSets;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

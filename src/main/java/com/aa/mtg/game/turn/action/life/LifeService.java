@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn.action.service;
+package com.aa.mtg.game.turn.action.life;
 
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
