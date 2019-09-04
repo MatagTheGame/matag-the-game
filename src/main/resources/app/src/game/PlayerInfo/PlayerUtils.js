@@ -100,6 +100,8 @@ export default class PlayerUtils {
   }
 
   static getAbilityToBePlayed(abilityToBePlayed) {
-    return get(abilityToBePlayed, 'abilityTypes[0]')
+    if (abilityToBePlayed) {
+      return abilityToBePlayed.abilityType
+    }
   }
 }

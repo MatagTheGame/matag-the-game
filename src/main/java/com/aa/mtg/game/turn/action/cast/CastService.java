@@ -61,7 +61,7 @@ public class CastService {
             } else {
                 Ability triggeredAbility = cardToCast.getAbilities().get(0);
                 cardToCast.getTriggeredAbilities().add(triggeredAbility);
-                LOGGER.info("Player {} triggered ability {} for {}.", activePlayer.getName(), triggeredAbility.getAbilityTypes(), cardToCast.getModifiers());
+                LOGGER.info("Player {} triggered ability {} for {}.", activePlayer.getName(), triggeredAbility.getAbilityType(), cardToCast.getModifiers());
                 gameStatus.getStack().add(cardToCast);
             }
 

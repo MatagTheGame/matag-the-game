@@ -42,7 +42,7 @@ public class EnterCardIntoBattlefieldService {
         for (Ability ability : cardInstance.getAbilities()) {
             if (ability.hasTriggerOfSubtype(WHEN_IT_ENTERS_THE_BATTLEFIELD)) {
                 cardInstance.getTriggeredAbilities().add(ability);
-                LOGGER.info("Event {} triggered with ability {} for {}.", WHEN_IT_ENTERS_THE_BATTLEFIELD, ability.getAbilityTypes(), cardInstance.getModifiers());
+                LOGGER.info("Event {} triggered with ability {} for {}.", WHEN_IT_ENTERS_THE_BATTLEFIELD, ability.getAbilityType(), cardInstance.getModifiers());
                 gameStatus.getStack().add(cardInstance);
                 return;
             }

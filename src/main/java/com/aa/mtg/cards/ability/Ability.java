@@ -10,14 +10,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import static com.aa.mtg.cards.ability.Abilities.parametersAsString;
 import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
 
 @ToString
 @EqualsAndHashCode
@@ -29,89 +25,51 @@ import static java.util.Collections.singletonList;
         creatorVisibility = JsonAutoDetect.Visibility.NONE
 )
 public class Ability {
-    @JsonProperty private final List<AbilityType> abilityTypes;
+    @JsonProperty private final AbilityType abilityType;
     @JsonProperty private final List<Target> targets;
     @JsonProperty private final CardInstanceSelector cardInstanceSelector;
     @JsonProperty private final List<String> parameters;
     @JsonProperty private final Trigger trigger;
 
     public Ability(AbilityType abilityType) {
-        this(singletonList(abilityType));
-    }
-
-    public Ability(List<AbilityType> abilityTypes) {
-        this(abilityTypes, emptyList(), null, emptyList(), null);
+        this(abilityType, emptyList(), null, emptyList(), null);
     }
 
     public Ability(AbilityType abilityType, List<Target> targets, List<String> parameters, Trigger trigger) {
-        this(singletonList(abilityType), targets, parameters, trigger);
-    }
-
-    public Ability(List<AbilityType> abilityTypes, List<Target> targets, List<String> parameters, Trigger trigger) {
-        this(abilityTypes, targets, null, parameters, trigger);
+        this(abilityType, targets, null, parameters, trigger);
     }
 
     public Ability(AbilityType abilityType, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger) {
-        this(singletonList(abilityType), cardInstanceSelector, parameters, trigger);
+        this(abilityType, emptyList(), cardInstanceSelector, parameters, trigger);
     }
 
-    public Ability(List<AbilityType> abilityTypes, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger) {
-        this(abilityTypes, emptyList(), cardInstanceSelector, parameters, trigger);
-    }
-
-    public Ability(List<AbilityType> abilityTypes, List<Target> targets, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger) {
-        this.abilityTypes = abilityTypes;
+    public Ability(AbilityType abilityType, List<Target> targets, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger) {
+        this.abilityType = abilityType;
         this.targets = targets;
         this.cardInstanceSelector = cardInstanceSelector;
         this.parameters = parameters;
         this.trigger = trigger;
     }
 
-    public AbilityType getFirstAbilityType() {
-        return abilityTypes.get(0);
-    }
-
     @JsonProperty
-    String getAbilityTypesText() {
-        StringBuilder stringBuilder = new StringBuilder();
+    String getAbilityTypeText() {
+        String parametersString = parametersAsString(parameters);
 
-        Map<AbilityType, List<String>> abilitiesParametersMap = toAbilitiesParametersMap(abilityTypes);
-        for (AbilityType abilityType : abilitiesParametersMap.keySet()) {
-            String parametersString = parametersAsString(abilitiesParametersMap.get(abilityType));
-
-            boolean negative = parametersString.startsWith("-");
-            switch (abilityType) {
-                case ADD_X_LIFE:
-                    stringBuilder.append(String.format(abilityType.getText(), negative ? "Lose" : "Gain", parametersString.replace("-", "")));
-                    break;
-                case EACH_PLAYERS_ADD_X_LIFE:
-                    stringBuilder.append(String.format(abilityType.getText(), negative ? "loses" : "gains", parametersString.replace("-", "")));
-                    break;
-                default:
-                    stringBuilder.append(String.format(abilityType.getText(), parametersString));
-                    break;
-            }
-
-            stringBuilder.append(" ");
+        boolean negative = parametersString.startsWith("-");
+        switch (abilityType) {
+            case ADD_X_LIFE:
+                return String.format(abilityType.getText(), negative ? "Lose" : "Gain", parametersString.replace("-", ""));
+            case EACH_PLAYERS_ADD_X_LIFE:
+                return String.format(abilityType.getText(), negative ? "loses" : "gains", parametersString.replace("-", ""));
+            case SELECTED_PERMANENTS_GET:
+                return String.format(abilityType.getText(), cardInstanceSelector.getText(), parametersString);
+            default:
+                return String.format(abilityType.getText(), parametersString);
         }
-
-        return stringBuilder.toString().trim();
     }
 
-    private Map<AbilityType, List<String>> toAbilitiesParametersMap(List<AbilityType> abilityTypes) {
-        Map<AbilityType, List<String>> abilitiesParameters = new LinkedHashMap<>();
-        for (int i = 0; i < abilityTypes.size(); i++) {
-            AbilityType abilityType = this.abilityTypes.get(i);
-            if (!abilitiesParameters.containsKey(abilityType)) {
-                abilitiesParameters.put(abilityType, new ArrayList<>());
-            }
-            abilitiesParameters.get(abilityType).add(getParameter(i));
-        }
-        return abilitiesParameters;
-    }
-
-    public List<AbilityType> getAbilityTypes() {
-        return abilityTypes;
+    public AbilityType getAbilityType() {
+        return abilityType;
     }
 
     public CardInstanceSelector getCardInstanceSelector() {

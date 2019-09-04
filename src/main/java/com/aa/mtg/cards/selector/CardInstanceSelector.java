@@ -7,6 +7,8 @@ import com.aa.mtg.game.player.PlayerType;
 import lombok.Builder;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Builder
 public class CardInstanceSelector {
@@ -72,5 +74,30 @@ public class CardInstanceSelector {
 
     public boolean isOthers() {
         return others;
+    }
+
+    public String getText() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if (others) {
+            stringBuilder.append("other ");
+        }
+
+        if (ofType != null) {
+            stringBuilder.append(ofType.stream().map(Objects::toString).collect(Collectors.joining(", "))).append("s ");
+        }
+
+        if (controllerType != null) {
+            if (controllerType == PlayerType.PLAYER) {
+                stringBuilder.append("you control ");
+            } else {
+                stringBuilder.append("opponent controls" );
+            }
+        }
+
+        String str = stringBuilder.toString();
+        str = str.toLowerCase();
+        str = str.substring(0, 1).toUpperCase() + str.substring(1);
+        return str.trim();
     }
 }

@@ -11,7 +11,7 @@ export class TriggeredAbility extends Component {
     return (
       <Fragment>
         <strong>{this.props.cardInstance.controller}'s {this.props.cardInstance.card.name} ({this.props.cardInstance.id}):</strong><br/>
-        {triggeredAbility.abilityTypesText}
+        {triggeredAbility.abilityTypeText}
       </Fragment>
     )
   }

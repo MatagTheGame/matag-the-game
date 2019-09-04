@@ -187,7 +187,7 @@ public class CardInstance {
     }
 
     public boolean hasAbility(AbilityType abilityType) {
-        return getAbilities().stream().anyMatch(ability -> ability.getAbilityTypes().contains(abilityType));
+        return getAbilities().stream().map(Ability::getAbilityType).anyMatch(currentAbilityType -> currentAbilityType.equals(abilityType));
     }
 
     public boolean isPermanent() {
@@ -232,7 +232,7 @@ public class CardInstance {
         List<Ability> abilities = new ArrayList<>();
         for (CardInstance attachedCards : getAttachedCards()) {
             for (Ability ability : attachedCards.getAbilities()) {
-                if (ability.getAbilityTypes().contains(ENCHANTED_CREATURE_GETS) || ability.getAbilityTypes().contains(EQUIPPED_CREATURE_GETS)) {
+                if (ability.getAbilityType().equals(ENCHANTED_CREATURE_GETS) || ability.getAbilityType().equals(EQUIPPED_CREATURE_GETS)) {
                     abilities.add(ability);
                 }
             }

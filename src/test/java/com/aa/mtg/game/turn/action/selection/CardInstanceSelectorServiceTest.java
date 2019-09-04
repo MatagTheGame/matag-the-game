@@ -12,6 +12,9 @@ import static com.aa.TestUtils.testGameStatus;
 import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.properties.Type.LAND;
+import static com.aa.mtg.cards.selector.CardInstanceSelectors.CREATURES_YOU_CONTROL;
+import static com.aa.mtg.cards.selector.CardInstanceSelectors.OTHER_CREATURES;
+import static com.aa.mtg.cards.selector.CardInstanceSelectors.OTHER_CREATURES_YOU_CONTROL;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughness.POWER;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.EQUAL;
@@ -550,5 +553,20 @@ public class CardInstanceSelectorServiceTest {
 
         // Then
         assertThat(selection).isEmpty();
+    }
+
+    @Test
+    public void creaturesYouControlText() {
+        assertThat(CREATURES_YOU_CONTROL.getText()).isEqualTo("Creatures you control");
+    }
+
+    @Test
+    public void otherCreaturesYouControlText() {
+        assertThat(OTHER_CREATURES_YOU_CONTROL.getText()).isEqualTo("Other creatures you control");
+    }
+
+    @Test
+    public void allOtherCreaturesText() {
+        assertThat(OTHER_CREATURES.getText()).isEqualTo("Other creatures");
     }
 }

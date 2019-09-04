@@ -18,12 +18,12 @@ export default class CardUtils {
     return cardInstance.modifiers.summoningSickness
   }
 
-  static hasAbility(cardInstance, ability) {
-    return this.getAbilities(cardInstance, ability).length > 0
+  static hasAbility(cardInstance, abilityType) {
+    return this.getAbilities(cardInstance, abilityType).length > 0
   }
 
-  static getAbilities(cardInstance, ability) {
-    return cardInstance.abilities.filter((currentAbility) => currentAbility.abilityTypes.indexOf(ability) > -1)
+  static getAbilities(cardInstance, abilityType) {
+    return cardInstance.abilities.filter((currentAbility) => currentAbility.abilityType === abilityType)
   }
 
   static frontendTap(cardInstance) {

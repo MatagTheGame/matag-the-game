@@ -46,7 +46,7 @@ public class CostUtils {
     private static List<Cost> getAbilityCost(Card card, String ability) {
         return card.getAbilities().stream()
                 .findFirst()
-                .filter(a -> a.getAbilityTypes().contains(abilityType(ability)))
+                .filter(c -> c.getAbilityType().equals(abilityType(ability)))
                 .orElseThrow(() -> new RuntimeException("ability " + ability +" not found on card " + card.getName()))
                 .getTrigger()
                 .getCost();

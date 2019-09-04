@@ -3,6 +3,7 @@ package com.aa.mtg.cards.ability;
 import org.junit.Test;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
+import static com.aa.mtg.cards.selector.CardInstanceSelectors.CREATURES_YOU_CONTROL;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -16,7 +17,7 @@ public class AbilityTest {
         Ability ability = new Ability(FLYING);
 
         // When
-        String text = ability.getAbilityTypesText();
+        String text = ability.getAbilityTypeText();
 
         // Then
         assertThat(text).isEqualTo("Flying.");
@@ -28,7 +29,7 @@ public class AbilityTest {
         Ability ability = new Ability(DRAW_X_CARDS, emptyList(), singletonList("2"), null);
 
         // When
-        String text = ability.getAbilityTypesText();
+        String text = ability.getAbilityTypeText();
 
         // Then
         assertThat(text).isEqualTo("Draw 2 cards.");
@@ -40,7 +41,7 @@ public class AbilityTest {
         Ability ability = new Ability(ADD_X_LIFE, emptyList(), singletonList("2"), null);
 
         // When
-        String text = ability.getAbilityTypesText();
+        String text = ability.getAbilityTypeText();
 
         // Then
         assertThat(text).isEqualTo("Gain 2 life.");
@@ -52,7 +53,7 @@ public class AbilityTest {
         Ability ability = new Ability(ADD_X_LIFE, emptyList(), singletonList("-2"), null);
 
         // When
-        String text = ability.getAbilityTypesText();
+        String text = ability.getAbilityTypeText();
 
         // Then
         assertThat(text).isEqualTo("Lose 2 life.");
@@ -64,7 +65,7 @@ public class AbilityTest {
         Ability ability = new Ability(EACH_PLAYERS_ADD_X_LIFE, emptyList(), singletonList("2"), null);
 
         // When
-        String text = ability.getAbilityTypesText();
+        String text = ability.getAbilityTypeText();
 
         // Then
         assertThat(text).isEqualTo("Each player gains 2 life.");
@@ -76,7 +77,7 @@ public class AbilityTest {
         Ability ability = new Ability(EACH_PLAYERS_ADD_X_LIFE, emptyList(), singletonList("-2"), null);
 
         // When
-        String text = ability.getAbilityTypesText();
+        String text = ability.getAbilityTypeText();
 
         // Then
         assertThat(text).isEqualTo("Each player loses 2 life.");
@@ -88,7 +89,7 @@ public class AbilityTest {
         Ability ability = new Ability(ENCHANTED_CREATURE_GETS, emptyList(), singletonList("+2/+2"), null);
 
         // When
-        String text = ability.getAbilityTypesText();
+        String text = ability.getAbilityTypeText();
 
         // Then
         assertThat(text).isEqualTo("Enchanted creature gets +2/+2.");
@@ -97,24 +98,24 @@ public class AbilityTest {
     @Test
     public void enchantedCreatureGetMultipleAbilitiesText() {
         // Given
-        Ability ability = new Ability(asList(ENCHANTED_CREATURE_GETS, ENCHANTED_CREATURE_GETS, ENCHANTED_CREATURE_GETS), emptyList(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+        Ability ability = new Ability(ENCHANTED_CREATURE_GETS, emptyList(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
 
         // When
-        String text = ability.getAbilityTypesText();
+        String text = ability.getAbilityTypeText();
 
         // Then
         assertThat(text).isEqualTo("Enchanted creature gets +2/+2, trample and haste.");
     }
 
     @Test
-    public void draw1CardLose2LifeText() {
+    public void selectedPermanentsGetMultipleAbilitiesText() {
         // Given
-        Ability ability = new Ability(asList(DRAW_X_CARDS, ADD_X_LIFE), emptyList(), asList("1", "-2"), null);
+        Ability ability = new Ability(SELECTED_PERMANENTS_GET, CREATURES_YOU_CONTROL, asList("+2/+2", "TRAMPLE", "HASTE"), null);
 
         // When
-        String text = ability.getAbilityTypesText();
+        String text = ability.getAbilityTypeText();
 
         // Then
-        assertThat(text).isEqualTo("Draw 1 cards. Lose 2 life.");
+        assertThat(text).isEqualTo("Creatures you control get +2/+2, trample and haste.");
     }
 }
