@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn.action.ability;
+package com.aa.mtg.game.turn.action.target;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
@@ -6,12 +6,12 @@ import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.action.service.DealDamageToCreatureService;
-import com.aa.mtg.game.turn.action.service.DestroyTargetService;
-import com.aa.mtg.game.turn.action.life.LifeService;
+import com.aa.mtg.game.turn.action._return.ReturnTargetToHandService;
+import com.aa.mtg.game.turn.action.damage.DealDamageToCreatureService;
+import com.aa.mtg.game.turn.action.destroy.DestroyTargetService;
 import com.aa.mtg.game.turn.action.draw.PlayerDrawXCardsService;
-import com.aa.mtg.game.turn.action.service.ReturnTargetToHandService;
-import com.aa.mtg.game.turn.action.service.TapTargetService;
+import com.aa.mtg.game.turn.action.life.LifeService;
+import com.aa.mtg.game.turn.action.tap.TapTargetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +80,7 @@ public class ThatTargetsGetAction implements AbilityAction {
         }
     }
 
-    void thatTargetPermanentGet(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
+    public void thatTargetPermanentGet(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
         PowerToughness powerToughness = powerToughnessFromParameter(parameter);
         target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(powerToughness);
 

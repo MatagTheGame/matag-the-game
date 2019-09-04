@@ -2,15 +2,15 @@ package com.aa.mtg.game.turn.action;
 
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.ability.type.AbilityType;
-import com.aa.mtg.game.turn.action.ability.AttachAction;
-import com.aa.mtg.game.turn.action.ability.CreaturesYouControlGetXUntilEndOfTurnAction;
+import com.aa.mtg.game.turn.action.attach.AttachAction;
 import com.aa.mtg.game.turn.action.draw.DrawXCardsAction;
-import com.aa.mtg.game.turn.action.ability.OtherCreaturesGetXUntilEndOfTurnAction;
-import com.aa.mtg.game.turn.action.ability.OtherCreaturesYouControlGetXUntilEndOfTurnAction;
-import com.aa.mtg.game.turn.action.ability.ShuffleTargetGraveyardIntoLibraryAction;
-import com.aa.mtg.game.turn.action.ability.ThatTargetsGetAction;
 import com.aa.mtg.game.turn.action.life.AddXLifeAction;
 import com.aa.mtg.game.turn.action.life.EachPlayersAddXLifeAction;
+import com.aa.mtg.game.turn.action.selection.CreaturesYouControlGetXUntilEndOfTurnAction;
+import com.aa.mtg.game.turn.action.selection.OtherCreaturesGetXUntilEndOfTurnAction;
+import com.aa.mtg.game.turn.action.selection.OtherCreaturesYouControlGetXUntilEndOfTurnAction;
+import com.aa.mtg.game.turn.action.shuffle.ShuffleTargetGraveyardIntoLibraryAction;
+import com.aa.mtg.game.turn.action.target.ThatTargetsGetAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

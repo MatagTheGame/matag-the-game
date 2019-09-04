@@ -1,7 +1,8 @@
-package com.aa.mtg.game.turn.action.service;
+package com.aa.mtg.game.turn.action.damage;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.turn.action.destroy.DestroyTargetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

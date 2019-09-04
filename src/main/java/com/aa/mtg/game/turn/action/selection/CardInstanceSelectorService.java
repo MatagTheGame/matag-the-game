@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn.action.service;
+package com.aa.mtg.game.turn.action.selection;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.search.CardInstanceSearch;
@@ -15,7 +15,7 @@ import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 
 @Component
 public class CardInstanceSelectorService {
-    CardInstanceSearch select(GameStatus gameStatus, CardInstance cardInstance, CardInstanceSelector cardInstanceSelector) {
+    public CardInstanceSearch select(GameStatus gameStatus, CardInstance cardInstance, CardInstanceSelector cardInstanceSelector) {
         CardInstanceSearch cards;
         if (cardInstanceSelector.getSelectorType().equals(PERMANENT)) {
             cards = gameStatus.getAllBattlefieldCards();

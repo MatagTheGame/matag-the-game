@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn.action.service;
+package com.aa.mtg.game.turn.action.cast;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.CostUtils;
@@ -8,6 +8,7 @@ import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.Turn;
+import com.aa.mtg.game.turn.action.target.TargetCheckerService;
 import com.aa.mtg.game.turn.phases.PhaseUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

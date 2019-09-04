@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn.action.service;
+package com.aa.mtg.game.turn.action.cast;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.properties.Color;

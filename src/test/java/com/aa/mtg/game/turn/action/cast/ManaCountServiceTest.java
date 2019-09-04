@@ -1,12 +1,12 @@
-package com.aa.mtg.game.turn.action.service;
+package com.aa.mtg.game.turn.action.cast;
 
+import com.aa.TestUtils;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.aa.TestUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

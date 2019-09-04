@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn.action.ability;
+package com.aa.mtg.game.turn.action.shuffle;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.action.AbilityAction;

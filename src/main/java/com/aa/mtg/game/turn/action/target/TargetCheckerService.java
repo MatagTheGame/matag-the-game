@@ -1,23 +1,24 @@
-package com.aa.mtg.game.turn.action.service;
+package com.aa.mtg.game.turn.action.target;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
-import com.aa.mtg.cards.selector.SelectorType;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
+import com.aa.mtg.cards.selector.SelectorType;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.AbilityActionFactory;
+import com.aa.mtg.game.turn.action.selection.CardInstanceSelectorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.aa.mtg.cards.selector.SelectorType.ANY;
 import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
+import static com.aa.mtg.cards.selector.SelectorType.ANY;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 
 @Component
@@ -32,7 +33,7 @@ public class TargetCheckerService {
         this.cardInstanceSelectorService = cardInstanceSelectorService;
     }
 
-    void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
+    public void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
         for (Ability ability : cardToCast.getAbilities()) {
             AbilityAction abilityAction = abilityActionFactory.getAbilityAction(abilityType(playedAbility));
             if (abilityAction != null && ability.requiresTarget()) {
@@ -50,7 +51,7 @@ public class TargetCheckerService {
         }
     }
 
-    boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
+    public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
         for (Ability ability : cardToCast.getAbilities()) {
             AbilityAction abilityAction = abilityActionFactory.getAbilityAction(abilityType("THAT_TARGETS_GET"));
             if (abilityAction == null) {

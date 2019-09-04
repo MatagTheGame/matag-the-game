@@ -1,4 +1,4 @@
-package com.aa.mtg.game.turn.action.service;
+package com.aa.mtg.game.turn.action._continue;
 
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.phases.Phase;
