@@ -19,7 +19,7 @@ public class LifeService {
     }
 
     private void perform(Player player, String lifeServiceType, int amount, GameStatus gameStatus) {
-        if (amount > 0) {
+        if (amount != 0) {
             if (lifeServiceType.equals("ADD")) {
                 player.increaseLife(amount);
             } else {
