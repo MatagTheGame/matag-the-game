@@ -6,9 +6,7 @@ import com.aa.mtg.game.turn.action.attach.AttachAction;
 import com.aa.mtg.game.turn.action.draw.DrawXCardsAction;
 import com.aa.mtg.game.turn.action.life.AddXLifeAction;
 import com.aa.mtg.game.turn.action.life.EachPlayersAddXLifeAction;
-import com.aa.mtg.game.turn.action.selection.CreaturesYouControlGetXUntilEndOfTurnAction;
-import com.aa.mtg.game.turn.action.selection.OtherCreaturesGetXUntilEndOfTurnAction;
-import com.aa.mtg.game.turn.action.selection.OtherCreaturesYouControlGetXUntilEndOfTurnAction;
+import com.aa.mtg.game.turn.action.selection.SelectedPermanentsGetXUntilEndOfTurnAction;
 import com.aa.mtg.game.turn.action.shuffle.ShuffleTargetGraveyardIntoLibraryAction;
 import com.aa.mtg.game.turn.action.target.ThatTargetsGetAction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +19,19 @@ public class AbilityActionFactory {
     private final AddXLifeAction addXLifeAction;
     private final EachPlayersAddXLifeAction eachPlayersAddXLifeAction;
     private final ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction;
-    private final CreaturesYouControlGetXUntilEndOfTurnAction creaturesYouControlGetXUntilEndOfTurnAction;
-    private final OtherCreaturesGetXUntilEndOfTurnAction otherCreaturesGetXUntilEndOfTurnAction;
-    private final OtherCreaturesYouControlGetXUntilEndOfTurnAction otherCreaturesYouControlGetXUntilEndOfTurnAction;
+    private final SelectedPermanentsGetXUntilEndOfTurnAction selectedPermanentsGetXUntilEndOfTurnAction;
     private final AttachAction attachAction;
 
     @Autowired
     public AbilityActionFactory(ThatTargetsGetAction thatTargetsGetAction, DrawXCardsAction drawXCardsAction,
                                 AddXLifeAction addXLifeAction, EachPlayersAddXLifeAction eachPlayersAddXLifeAction, ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction,
-                                CreaturesYouControlGetXUntilEndOfTurnAction creaturesYouControlGetXUntilEndOfTurnAction, OtherCreaturesGetXUntilEndOfTurnAction otherCreaturesGetXUntilEndOfTurnAction, OtherCreaturesYouControlGetXUntilEndOfTurnAction otherCreaturesYouControlGetXUntilEndOfTurnAction, AttachAction attachAction) {
+                                SelectedPermanentsGetXUntilEndOfTurnAction selectedPermanentsGetXUntilEndOfTurnAction, AttachAction attachAction) {
         this.thatTargetsGetAction= thatTargetsGetAction;
         this.drawXCardsAction = drawXCardsAction;
         this.addXLifeAction = addXLifeAction;
         this.eachPlayersAddXLifeAction = eachPlayersAddXLifeAction;
         this.shuffleTargetGraveyardIntoLibraryAction = shuffleTargetGraveyardIntoLibraryAction;
-        this.creaturesYouControlGetXUntilEndOfTurnAction = creaturesYouControlGetXUntilEndOfTurnAction;
-        this.otherCreaturesGetXUntilEndOfTurnAction = otherCreaturesGetXUntilEndOfTurnAction;
-        this.otherCreaturesYouControlGetXUntilEndOfTurnAction = otherCreaturesYouControlGetXUntilEndOfTurnAction;
+        this.selectedPermanentsGetXUntilEndOfTurnAction = selectedPermanentsGetXUntilEndOfTurnAction;
         this.attachAction = attachAction;
     }
 
@@ -57,12 +51,8 @@ public class AbilityActionFactory {
                 return shuffleTargetGraveyardIntoLibraryAction;
             case THAT_TARGETS_GET:
                 return thatTargetsGetAction;
-            case CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN:
-                return creaturesYouControlGetXUntilEndOfTurnAction;
-            case OTHER_CREATURES_GET_X_UNTIL_END_OF_TURN:
-                return otherCreaturesGetXUntilEndOfTurnAction;
-            case OTHER_CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN:
-                return otherCreaturesYouControlGetXUntilEndOfTurnAction;
+            case SELECTED_PERMANENTS_GET:
+                return selectedPermanentsGetXUntilEndOfTurnAction;
             case ENCHANTED_CREATURE_GETS:
             case EQUIPPED_CREATURE_GETS:
                 return attachAction;

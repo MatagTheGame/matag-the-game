@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PlayerDrawXCardsService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PlayerDrawXCardsService.class);
+public class DrawXCardsService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DrawXCardsService.class);
 
     public void drawXCards(Player player, int cardsToDraw) {
         for (int i = 0; i < cardsToDraw; i++) {

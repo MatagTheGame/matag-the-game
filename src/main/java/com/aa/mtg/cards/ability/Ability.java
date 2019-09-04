@@ -4,6 +4,7 @@ import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.trigger.Trigger;
 import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.type.AbilityType;
+import com.aa.mtg.cards.selector.CardInstanceSelector;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
@@ -30,6 +31,7 @@ import static java.util.Collections.singletonList;
 public class Ability {
     @JsonProperty private final List<AbilityType> abilityTypes;
     @JsonProperty private final List<Target> targets;
+    @JsonProperty private final CardInstanceSelector cardInstanceSelector;
     @JsonProperty private final List<String> parameters;
     @JsonProperty private final Trigger trigger;
 
@@ -38,7 +40,7 @@ public class Ability {
     }
 
     public Ability(List<AbilityType> abilityTypes) {
-        this(abilityTypes, emptyList(), emptyList(), null);
+        this(abilityTypes, emptyList(), null, emptyList(), null);
     }
 
     public Ability(AbilityType abilityType, List<Target> targets, List<String> parameters, Trigger trigger) {
@@ -46,8 +48,21 @@ public class Ability {
     }
 
     public Ability(List<AbilityType> abilityTypes, List<Target> targets, List<String> parameters, Trigger trigger) {
+        this(abilityTypes, targets, null, parameters, trigger);
+    }
+
+    public Ability(AbilityType abilityType, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger) {
+        this(singletonList(abilityType), cardInstanceSelector, parameters, trigger);
+    }
+
+    public Ability(List<AbilityType> abilityTypes, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger) {
+        this(abilityTypes, emptyList(), cardInstanceSelector, parameters, trigger);
+    }
+
+    public Ability(List<AbilityType> abilityTypes, List<Target> targets, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger) {
         this.abilityTypes = abilityTypes;
         this.targets = targets;
+        this.cardInstanceSelector = cardInstanceSelector;
         this.parameters = parameters;
         this.trigger = trigger;
     }
@@ -97,6 +112,10 @@ public class Ability {
 
     public List<AbilityType> getAbilityTypes() {
         return abilityTypes;
+    }
+
+    public CardInstanceSelector getCardInstanceSelector() {
+        return cardInstanceSelector;
     }
 
     public List<Target> getTargets() {

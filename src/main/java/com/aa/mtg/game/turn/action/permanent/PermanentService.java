@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
@@ -39,7 +40,13 @@ public class PermanentService {
         this.returnPermanentToHandService = returnPermanentToHandService;
     }
 
-    public void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
+    public void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, List<String> parameters, CardInstance target) {
+        for (String parameter : parameters) {
+            thatPermanentGets(cardInstance, gameStatus, parameter, target);
+        }
+    }
+
+    private void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
         PowerToughness powerToughness = powerToughnessFromParameter(parameter);
         target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(powerToughness);
 

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static com.aa.mtg.cards.ability.Abilities.DRAW_1_CARD;
+import static com.aa.mtg.cards.ability.Abilities.DRAW_2_CARDS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -24,24 +26,22 @@ public class DrawXCardsActionTest {
         // Given
         GameStatus gameStatus = TestUtils.testGameStatus();
         CardInstance cardInstance = new CardInstance(gameStatus, 12, CoreSet2020.DARK_REMEDY, "opponent-name");
-        String parameter = "3";
 
         // When
-        drawXCardsAction.perform(cardInstance, gameStatus, parameter);
+        drawXCardsAction.perform(cardInstance, gameStatus, DRAW_2_CARDS);
 
         // Then
-        assertThat(gameStatus.getPlayerByName("opponent-name").getHand().size()).isEqualTo(10);
-        assertThat(gameStatus.getPlayerByName("opponent-name").getLibrary().size()).isEqualTo(50);
+        assertThat(gameStatus.getPlayerByName("opponent-name").getHand().size()).isEqualTo(9);
+        assertThat(gameStatus.getPlayerByName("opponent-name").getLibrary().size()).isEqualTo(51);
     }
 
     @Test
     public void currentPlayerDraw1Cardd() {
         // Given
         GameStatus gameStatus = TestUtils.testGameStatus();
-        String parameter = "1";
 
         // When
-        drawXCardsAction.perform(null, gameStatus, parameter);
+        drawXCardsAction.perform(null, gameStatus, DRAW_1_CARD);
 
         // Then
         assertThat(gameStatus.getPlayerByName("player-name").getHand().size()).isEqualTo(8);

@@ -1,7 +1,6 @@
 package com.aa.mtg.cards.ability.type;
 
 public enum AbilityType {
-    CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN("Creatures you control get %s until end of turn."),
     DEATHTOUCH("Deathtouch."),
     DRAW_X_CARDS("Draw %s cards."),
     ADD_X_LIFE("%s %s life."),
@@ -12,9 +11,8 @@ public enum AbilityType {
     FLYING("Flying."),
     HASTE("Haste."),
     LIFELINK("Lifelink."),
-    OTHER_CREATURES_YOU_CONTROL_GET_X_UNTIL_END_OF_TURN("Other creatures you control get %s until end of turn."),
-    OTHER_CREATURES_GET_X_UNTIL_END_OF_TURN("Other creatures get %s until end of turn."),
     REACH("Reach."),
+    SELECTED_PERMANENTS_GET("Selected permanents get %s until end of turn."),
     SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER("Shuffle graveyard into library."),
     TAP_ADD_MANA("Tap add %s mana."),
     THAT_TARGET_CONTROLLER_GETS("That target controller gets %s."),

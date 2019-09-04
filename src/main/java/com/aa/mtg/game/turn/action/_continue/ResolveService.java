@@ -121,12 +121,7 @@ public class ResolveService {
                     targetCheckerService.check(gameStatus, cardToResolve, ability.getTargets().get(i), cardToResolve.getModifiers().getTargets().get(i));
                 }
 
-                firstAbilityAction.perform(cardToResolve, gameStatus, ability.getParameter(0));
-
-                for (int i = 1; i < ability.getAbilityTypes().size(); i++) {
-                    AbilityAction furtherAbilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityTypes().get(i));
-                    furtherAbilityAction.perform(cardToResolve, gameStatus, ability.getParameter(i));
-                }
+                firstAbilityAction.perform(cardToResolve, gameStatus, ability);
 
             } catch (MessageException e) {
                 LOGGER.info("{}: Target is now invalid during resolution, dropping the action. [{}] ", cardToResolve.getIdAndName(), e.getMessage());

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static com.aa.mtg.cards.ability.Abilities.LOSE_4_LIFE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -24,10 +25,9 @@ public class EachPlayersAddXLifeActionTest {
         // Given
         GameStatus gameStatus = TestUtils.testGameStatus();
         CardInstance cardInstance = new CardInstance(gameStatus, 1, CoreSet2020.DARK_REMEDY, "player-name");
-        String parameter = "-4";
 
         // When
-        eachPlayersAddXLifeAction.perform(cardInstance, gameStatus, parameter);
+        eachPlayersAddXLifeAction.perform(cardInstance, gameStatus, LOSE_4_LIFE);
 
         // Then
         assertThat(gameStatus.getPlayerByName("player-name").getLife()).isEqualTo(16);

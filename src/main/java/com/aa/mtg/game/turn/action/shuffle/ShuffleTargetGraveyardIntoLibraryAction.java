@@ -1,6 +1,7 @@
 package com.aa.mtg.game.turn.action.shuffle;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -15,7 +16,7 @@ public class ShuffleTargetGraveyardIntoLibraryAction implements AbilityAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(ShuffleTargetGraveyardIntoLibraryAction.class);
 
     @Override
-    public void perform(CardInstance cardInstance, GameStatus gameStatus, String parameter) {
+    public void perform(CardInstance cardInstance, GameStatus gameStatus, Ability ability) {
         String targetPlayerName = (String)cardInstance.getModifiers().getTargets().get(0);
         Player targetPlayer = gameStatus.getPlayerByName(targetPlayerName);
 

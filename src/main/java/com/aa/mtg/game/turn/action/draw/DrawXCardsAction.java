@@ -1,6 +1,7 @@
 package com.aa.mtg.game.turn.action.draw;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -9,16 +10,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DrawXCardsAction implements AbilityAction {
-    private final PlayerDrawXCardsService playerDrawXCardsService;
+    private final DrawXCardsService drawXCardsService;
 
     @Autowired
-    public DrawXCardsAction(PlayerDrawXCardsService playerDrawXCardsService) {
-        this.playerDrawXCardsService = playerDrawXCardsService;
+    public DrawXCardsAction(DrawXCardsService drawXCardsService) {
+        this.drawXCardsService = drawXCardsService;
     }
 
     @Override
-    public void perform(CardInstance cardInstance, GameStatus gameStatus, String parameter) {
-        int cardsToDraw = Integer.valueOf(parameter);
+    public void perform(CardInstance cardInstance, GameStatus gameStatus, Ability ability) {
+        int cardsToDraw = Integer.valueOf(ability.getParameter(0));
 
         Player player;
         if (cardInstance == null) {
@@ -27,6 +28,6 @@ public class DrawXCardsAction implements AbilityAction {
             player = gameStatus.getPlayerByName(cardInstance.getController());
         }
 
-        playerDrawXCardsService.drawXCards(player, cardsToDraw);
+        drawXCardsService.drawXCards(player, cardsToDraw);
     }
 }

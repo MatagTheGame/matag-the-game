@@ -1,6 +1,7 @@
 package com.aa.mtg.game.turn.action.life;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -17,8 +18,8 @@ public class AddXLifeAction implements AbilityAction {
     }
 
     @Override
-    public void perform(CardInstance cardInstance, GameStatus gameStatus, String parameter) {
-        int lifeToAdd = Integer.valueOf(parameter);
+    public void perform(CardInstance cardInstance, GameStatus gameStatus, Ability ability) {
+        int lifeToAdd = Integer.valueOf(ability.getParameter(0));
         Player controller = gameStatus.getPlayerByName(cardInstance.getController());
         lifeService.add(controller, lifeToAdd, gameStatus);
     }

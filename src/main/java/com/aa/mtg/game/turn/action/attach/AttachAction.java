@@ -1,6 +1,7 @@
 package com.aa.mtg.game.turn.action.attach;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class AttachAction implements AbilityAction {
     }
 
     @Override
-    public void perform(CardInstance cardInstance, GameStatus gameStatus, String parameter) {
+    public void perform(CardInstance cardInstance, GameStatus gameStatus, Ability ability) {
         String target = cardInstance.getModifiers().getTargets().get(0).toString();
         int attachedToId = parseInt(target);
         attachService.attach(gameStatus, cardInstance, attachedToId);
