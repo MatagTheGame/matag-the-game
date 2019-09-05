@@ -12,7 +12,7 @@ public enum AbilityType {
     HASTE("Haste."),
     LIFELINK("Lifelink."),
     REACH("Reach."),
-    SELECTED_PERMANENTS_GET("%s get %s."),
+    SELECTED_PERMANENTS_GET("%s get %s"),
     SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER("Shuffle graveyard into library."),
     TAP_ADD_MANA("Tap add %s mana."),
     THAT_TARGET_CONTROLLER_GETS("That target controller gets %s."),

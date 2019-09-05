@@ -6,12 +6,17 @@ export class TriggeredAbility extends Component {
     super(props)
   }
 
+  getText() {
+    return this.props.cardInstance.triggeredAbilities
+      .map(triggeredAbility => triggeredAbility.abilityTypeText)
+      .join(' ')
+  }
+
   getTriggeredAbilityText() {
-    const triggeredAbility = this.props.cardInstance.triggeredAbilities[0]
     return (
       <Fragment>
         <strong>{this.props.cardInstance.controller}'s {this.props.cardInstance.card.name} ({this.props.cardInstance.id}):</strong><br/>
-        {triggeredAbility.abilityTypeText}
+        {this.getText()}
       </Fragment>
     )
   }

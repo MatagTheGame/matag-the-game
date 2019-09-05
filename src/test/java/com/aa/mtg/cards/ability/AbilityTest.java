@@ -116,6 +116,6 @@ public class AbilityTest {
         String text = ability.getAbilityTypeText();
 
         // Then
-        assertThat(text).isEqualTo("Creatures you control get +2/+2, trample and haste.");
+        assertThat(text).isEqualTo("Creatures you control get +2/+2, trample and haste until end of turn.");
     }
 }

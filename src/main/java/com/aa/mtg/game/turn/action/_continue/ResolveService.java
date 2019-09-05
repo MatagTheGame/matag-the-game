@@ -3,6 +3,7 @@ package com.aa.mtg.game.turn.action._continue;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
+import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -117,12 +118,20 @@ public class ResolveService {
         AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
         if (abilityAction != null) {
             try {
-                targetCheckerService.check(gameStatus, cardToResolve, ability.getTargets().get(0), cardToResolve.getModifiers().getTargets().get(0));
+                checkTargets(gameStatus, cardToResolve, ability);
                 abilityAction.perform(cardToResolve, gameStatus, ability);
 
             } catch (MessageException e) {
                 LOGGER.info("{}: Target is now invalid during resolution, dropping the action. [{}] ", cardToResolve.getIdAndName(), e.getMessage());
             }
+        }
+    }
+
+    private void checkTargets(GameStatus gameStatus, CardInstance cardToResolve, Ability ability) {
+        for (int i = 0; i < ability.getTargets().size(); i++) {
+            Target target = ability.getTargets().get(i);
+            Object targetId = cardToResolve.getModifiers().getTargets().get(i);
+            targetCheckerService.check(gameStatus, cardToResolve, target, targetId);
         }
     }
 }

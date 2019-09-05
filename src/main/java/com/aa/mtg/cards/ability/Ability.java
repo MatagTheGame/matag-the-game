@@ -62,7 +62,7 @@ public class Ability {
             case EACH_PLAYERS_ADD_X_LIFE:
                 return String.format(abilityType.getText(), negative ? "loses" : "gains", parametersString.replace("-", ""));
             case SELECTED_PERMANENTS_GET:
-                return String.format(abilityType.getText(), cardInstanceSelector.getText(), parametersString);
+                return String.format(abilityType.getText(), cardInstanceSelector.getText(), parametersString) + " until end of turn.";
             default:
                 return String.format(abilityType.getText(), parametersString);
         }
