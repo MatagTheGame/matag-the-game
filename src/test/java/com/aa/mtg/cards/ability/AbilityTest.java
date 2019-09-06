@@ -1,9 +1,12 @@
 package com.aa.mtg.cards.ability;
 
+import com.aa.mtg.cards.selector.CardInstanceSelector;
+import com.aa.mtg.cards.selector.SelectorType;
 import org.junit.Test;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
-import static com.aa.mtg.cards.selector.CardInstanceSelectors.CREATURES_YOU_CONTROL;
+import static com.aa.mtg.cards.properties.Type.CREATURE;
+import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -110,7 +113,7 @@ public class AbilityTest {
     @Test
     public void selectedPermanentsGetMultipleAbilitiesText() {
         // Given
-        Ability ability = new Ability(SELECTED_PERMANENTS_GET, CREATURES_YOU_CONTROL, asList("+2/+2", "TRAMPLE", "HASTE"), null);
+        Ability ability = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(SelectorType.PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
 
         // When
         String text = ability.getAbilityTypeText();
