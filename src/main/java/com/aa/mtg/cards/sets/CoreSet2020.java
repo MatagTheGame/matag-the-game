@@ -49,10 +49,10 @@ public class CoreSet2020 implements MtgSet {
     public static Card MOMENT_OF_HEROISM = new Card("Moment of Heroism", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +2/+2 and gains lifelink until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_2_2_AND_LIFELINK_UNTIL_END_OF_TURN));
     public static Card NATURAL_END = new Card("Natural End", asSet(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Destroy target artifact or enchantment. You gain 3 life.", 0, 0, asList(DESTROY_TARGET_ARTIFACT_OR_ENCHANTMENT, GAIN_3_LIFE));
     public static Card NIMBLE_BIRDSTICKER = new Card("Nimble Birdsticker", asSet(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Goblin"), COMMON, "Reach.", 2, 3, singletonList(REACH));
-    public static Card NOXIOUS_GRASP = new Card("Noxious Grasp", asSet(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Destroy target creature or planeswalker that's green or white. You gain 1 life.", 0, 0, asList(DESTROY_TARGET_ARTIFACT_CREATURE_OR_PLANESWALKER, GAIN_1_LIFE));
+    //public static Card NOXIOUS_GRASP = new Card("Noxious Grasp", asSet(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Destroy target creature or planeswalker that's green or white. You gain 1 life.", 0, 0, asList(, GAIN_1_LIFE));
     public static Card OVERCOME = new Card("Overcome", asSet(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Creatures you control get +2/+2 and gain trample until end of turn.", 0, 0, singletonList(CREATURES_YOU_CONTROL_GET_PLUS_2_2_AND_TRAMPLE_UNTIL_END_OF_TURN));
     public static Card SAVANNAH_SAGE = new Card("Savannah Sage", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList("Cat", "Cleric"), COMMON, "When Savannah Sage enters the battlefield, you gain 2 life.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE));
-    public static Card SEDGE_SCORPION = new Card("Sedge Scorpion", asSet(Color.GREEN), singletonList(Cost.GREEN), singletonList(CREATURE), singletonList("Scorption"), COMMON, "Deathtouch.", 1, 1, singletonList(DEATHTOUCH));
+    public static Card SEDGE_SCORPION = new Card("Sedge Scorpion", asSet(Color.GREEN), singletonList(Cost.GREEN), singletonList(CREATURE), singletonList("Scorpion"), COMMON, "Deathtouch.", 1, 1, singletonList(DEATHTOUCH));
     public static Card SIEGE_MASTODON = new Card("Siege Mastodon", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Elephant"), COMMON, "", 3, 5, emptyList());
     public static Card STONE_GOLEM = new Card("Stone Golem", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList("Golem"), COMMON, "", 4, 4, emptyList());
     public static Card VAMPIRE_OF_THE_DIRE_MOON = new Card("Vampire of the Dire Moon", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(CREATURE), singletonList("Vampire"), UNCOMMON, "Deathtouch. Lifelink", 1, 1, asList(DEATHTOUCH, LIFELINK));
@@ -110,7 +110,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(CoreSet2019.MURDER);
         cards.add(NATURAL_END);
         cards.add(NIMBLE_BIRDSTICKER);
-        cards.add(NOXIOUS_GRASP);
+        //cards.add(NOXIOUS_GRASP);
         cards.add(OVERCOME);
         cards.add(CoreSet2019.OAKENFORM);
         cards.add(RavnicaAllegiance.PROWLING_CARACAL);
