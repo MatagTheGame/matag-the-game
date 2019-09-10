@@ -7,6 +7,7 @@ import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.turn.action.selection.CardInstanceSelectorService;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
@@ -14,9 +15,11 @@ import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.aa.mtg.cards.ability.Abilities.abilitiesFromParameters;
+import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameter;
 import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameters;
 import static com.aa.mtg.cards.ability.trigger.TriggerType.MANA_ABILITY;
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
@@ -155,12 +158,18 @@ public class CardInstance {
 
     @JsonProperty
     public int getPower() {
-        return card.getPower() + modifiers.getExtraPowerToughnessUntilEndOfTurn().getPower() + getAttachmentsPower();
+        return card.getPower() +
+                modifiers.getExtraPowerToughnessUntilEndOfTurn().getPower() +
+                getAttachmentsPower() +
+                getPowerFromOtherPermanents();
     }
 
     @JsonProperty
     public int getToughness() {
-        return card.getToughness() + modifiers.getExtraPowerToughnessUntilEndOfTurn().getToughness() + getAttachmentsToughness();
+        return card.getToughness() +
+                modifiers.getExtraPowerToughnessUntilEndOfTurn().getToughness() +
+                getAttachmentsToughness() +
+                getToughnessFromOtherPermanents();
     }
 
     @JsonProperty
@@ -170,6 +179,7 @@ public class CardInstance {
         abilities.addAll(modifiers.getAbilities());
         abilities.addAll(modifiers.getAbilitiesUntilEndOfTurn());
         abilities.addAll(getAttachmentsAbilities());
+        abilities.addAll(getAbilitiesFormOtherPermanents());
         return abilities;
     }
 
@@ -238,6 +248,48 @@ public class CardInstance {
             }
         }
         return abilities;
+    }
+
+    private int getPowerFromOtherPermanents() {
+        int attachmentsPower = 0;
+
+        for (String parameter : getParametersFromOtherPermanents()) {
+            attachmentsPower += powerToughnessFromParameter(parameter).getPower();
+        }
+
+        return attachmentsPower;
+    }
+
+    private int getToughnessFromOtherPermanents() {
+        int attachmentsToughness = 0;
+
+        for (String parameter : getParametersFromOtherPermanents()) {
+            attachmentsToughness += powerToughnessFromParameter(parameter).getToughness();
+        }
+
+        return attachmentsToughness;
+    }
+
+    private List<Ability> getAbilitiesFormOtherPermanents() {
+        return abilitiesFromParameters(getParametersFromOtherPermanents());
+    }
+
+    private List<String> getParametersFromOtherPermanents() {
+        List<String> parameters = new ArrayList<>();
+        List<CardInstance> cards = gameStatus.getAllBattlefieldCards().withAbility(SELECTED_PERMANENTS_GET).getCards();
+
+        for (CardInstance card : cards) {
+            for (Ability ability : card.getAbilities()) {
+                if (ability.getAbilityType() == SELECTED_PERMANENTS_GET) {
+                    Optional<CardInstance> cardInstance = new CardInstanceSelectorService().select(gameStatus, card, ability.getCardInstanceSelector()).withId(id);
+                    if (cardInstance.isPresent()) {
+                        parameters.addAll(ability.getParameters());
+                    }
+                }
+            }
+        }
+
+        return parameters;
     }
 
     public void cleanup() {

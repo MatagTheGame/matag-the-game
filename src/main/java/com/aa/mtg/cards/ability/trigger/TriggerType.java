@@ -5,5 +5,5 @@ public enum TriggerType {
     ACTIVATED_ABILITY,
     MANA_ABILITY,
     TRIGGERED_ABILITY,
-    ALWAYS
+    STATIC
 }

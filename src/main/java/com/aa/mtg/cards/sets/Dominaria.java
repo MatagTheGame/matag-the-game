@@ -10,6 +10,7 @@ import java.util.List;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
+import static com.aa.mtg.cards.properties.Rarity.RARE;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Type.*;
 import static java.util.Arrays.asList;
@@ -25,6 +26,7 @@ public class Dominaria implements MtgSet {
     public static Card ARCANE_FLIGHT = new Card("Arcane Flight", singleton(Color.BLUE), singletonList(Cost.BLUE), singletonList(Type.ENCHANTMENT), singletonList("Aura"), COMMON, "Enchant creature. Enchanted creature gets +1/+1 and has flying.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_1_1_AND_FLYING));
     public static Card AVEN_SENTRY = new Card("Aven Sentry", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList("Bird", "Soldier"), COMMON, "Flying.", 3, 2, singletonList(FLYING));
     public static Card BEFUDDLE = new Card("Befuddle", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Target creature gets -4/-0 until end of turn. Draw a card.", 0, 0, asList(TARGET_CREATURE_GETS_MINUS_4_0_UNTIL_END_OF_TURN, DRAW_1_CARD));
+    public static Card BENALISH_MARSHAL = new Card("Benalish Marshal", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.WHITE), singletonList(CREATURE), asList("Human", "Knight"), RARE, "Other creatures you control get +1/+1.", 3, 3, singletonList(OTHER_CREATURES_YOU_CONTROL_GET_PLUS_1_1));
     public static Card CABAL_EVANGEL = new Card("Cabal Evangel", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList("Human", "Cleric"), COMMON, ".", 2, 2, emptyList());
     public static Card CHARGE = new Card("Charge", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(Type.INSTANT), emptyList(), COMMON, "Creatures you control get +1/+1 until end of turn.", 0, 0, singletonList(CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN));
     public static Card DIVINATION = new Card("Divination", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Draw 2 cards.", 0, 0, singletonList(DRAW_2_CARDS));
@@ -53,6 +55,7 @@ public class Dominaria implements MtgSet {
         cards.add(ARCANE_FLIGHT);
         cards.add(AVEN_SENTRY);
         cards.add(BEFUDDLE);
+        cards.add(BENALISH_MARSHAL);
         cards.add(CABAL_EVANGEL);
         cards.add(CHARGE);
         cards.add(DIVINATION);

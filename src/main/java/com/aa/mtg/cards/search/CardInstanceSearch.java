@@ -1,8 +1,9 @@
 package com.aa.mtg.cards.search;
 
 import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.selector.PowerToughnessConstraint;
+import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Type;
+import com.aa.mtg.cards.selector.PowerToughnessConstraint;
 
 import java.util.List;
 import java.util.Optional;
@@ -126,6 +127,14 @@ public class CardInstanceSearch {
         List<CardInstance> cards = this.cards.stream()
                 .filter(cardInstance -> cardInstance.getController().equals(playerName))
                 .collect(toList());
+        return new CardInstanceSearch(cards);
+    }
+
+    public CardInstanceSearch withAbility(AbilityType abilityType) {
+        List<CardInstance> cards = this.cards.stream()
+                .filter(cardInstance -> cardInstance.hasAbility(abilityType))
+                .collect(toList());
+
         return new CardInstanceSearch(cards);
     }
 

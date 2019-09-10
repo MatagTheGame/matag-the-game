@@ -4,10 +4,7 @@ import com.aa.mtg.cards.properties.Cost;
 
 import java.util.List;
 
-import static com.aa.mtg.cards.ability.trigger.TriggerType.ACTIVATED_ABILITY;
-import static com.aa.mtg.cards.ability.trigger.TriggerType.CAST;
-import static com.aa.mtg.cards.ability.trigger.TriggerType.MANA_ABILITY;
-import static com.aa.mtg.cards.ability.trigger.TriggerType.TRIGGERED_ABILITY;
+import static com.aa.mtg.cards.ability.trigger.TriggerType.*;
 
 public class Trigger {
     private final TriggerType type;
@@ -46,5 +43,9 @@ public class Trigger {
 
     public static Trigger activatedAbility(List<Cost> cost) {
         return new Trigger(ACTIVATED_ABILITY, null, cost);
+    }
+
+    public static Trigger staticAbility() {
+        return new Trigger(STATIC, null, null);
     }
 }
