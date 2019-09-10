@@ -276,10 +276,10 @@ public class CardInstance {
 
     private List<String> getParametersFromOtherPermanents() {
         List<String> parameters = new ArrayList<>();
-        List<CardInstance> cards = gameStatus.getAllBattlefieldCards().withAbility(SELECTED_PERMANENTS_GET).getCards();
+        List<CardInstance> cards = gameStatus.getAllBattlefieldCards().withAbilityOnCard(SELECTED_PERMANENTS_GET).getCards();
 
         for (CardInstance card : cards) {
-            for (Ability ability : card.getAbilities()) {
+            for (Ability ability : card.getCard().getAbilities()) {
                 if (ability.getAbilityType() == SELECTED_PERMANENTS_GET) {
                     Optional<CardInstance> cardInstance = new CardInstanceSelectorService().select(gameStatus, card, ability.getCardInstanceSelector()).withId(id);
                     if (cardInstance.isPresent()) {

@@ -1,6 +1,7 @@
 package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.cards.properties.Rarity;
@@ -101,6 +102,10 @@ public class Card {
 
     public List<Ability> getAbilities() {
         return abilities;
+    }
+
+    public boolean hasAbility(AbilityType abilityType) {
+        return abilities.stream().map(Ability::getAbilityType).anyMatch(currentAbilityType -> currentAbilityType == abilityType);
     }
 
     public List<Color> colorsOfManaThatCanGenerate() {

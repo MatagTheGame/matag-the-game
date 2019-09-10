@@ -130,6 +130,14 @@ public class CardInstanceSearch {
         return new CardInstanceSearch(cards);
     }
 
+    public CardInstanceSearch withAbilityOnCard(AbilityType abilityType) {
+        List<CardInstance> cards = this.cards.stream()
+                .filter(cardInstance -> cardInstance.getCard().hasAbility(abilityType))
+                .collect(toList());
+
+        return new CardInstanceSearch(cards);
+    }
+
     public CardInstanceSearch withAbility(AbilityType abilityType) {
         List<CardInstance> cards = this.cards.stream()
                 .filter(cardInstance -> cardInstance.hasAbility(abilityType))
