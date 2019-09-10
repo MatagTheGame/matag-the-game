@@ -5,23 +5,21 @@ import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.stack.SpellStack;
 import com.aa.mtg.game.turn.Turn;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Component
+@Scope("prototype")
 public class GameStatus {
 
     private AtomicInteger nextCardId = new AtomicInteger();
     private String gameId;
     private Player player1;
     private Player player2;
-    private Turn turn;
-    private SpellStack stack;
-
-    public GameStatus(String gameId) {
-        this.gameId = gameId;
-        this.turn = new Turn();
-        this.stack = new SpellStack();
-    }
+    private Turn turn = new Turn();
+    private SpellStack stack = new SpellStack();
 
     public String getGameId() {
         return gameId;
@@ -41,6 +39,10 @@ public class GameStatus {
 
     public SpellStack getStack() {
         return stack;
+    }
+
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
     }
 
     public void setPlayer1(Player player1) {

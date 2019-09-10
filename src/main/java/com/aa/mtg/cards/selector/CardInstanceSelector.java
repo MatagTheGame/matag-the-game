@@ -79,25 +79,30 @@ public class CardInstanceSelector {
     public String getText() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        if (others) {
-            stringBuilder.append("other ");
-        }
+        if (selectorType == SelectorType.PERMANENT) {
 
-        if (ofType != null) {
-            stringBuilder.append(ofType.stream().map(Objects::toString).collect(Collectors.joining(", "))).append("s ");
-        }
-
-        if (controllerType != null) {
-            if (controllerType == PlayerType.PLAYER) {
-                stringBuilder.append("you control ");
-            } else {
-                stringBuilder.append("opponent controls" );
+            if (others) {
+                stringBuilder.append("other ");
             }
+
+            if (ofType != null) {
+                stringBuilder.append(ofType.stream().map(Objects::toString).collect(Collectors.joining(", "))).append("s ");
+            }
+
+            if (controllerType != null) {
+                if (controllerType == PlayerType.PLAYER) {
+                    stringBuilder.append("you control ");
+                } else {
+                    stringBuilder.append("opponent controls");
+                }
+            }
+
         }
 
         String str = stringBuilder.toString();
         str = str.toLowerCase();
-        str = str.substring(0, 1).toUpperCase() + str.substring(1);
+        str = str.isEmpty() ? str : str.substring(0, 1).toUpperCase() + str.substring(1);
+
         return str.trim();
     }
 }

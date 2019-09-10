@@ -13,7 +13,8 @@ import java.util.stream.IntStream;
 public class TestUtils {
 
   public static GameStatus testGameStatus() {
-    GameStatus gameStatus = new GameStatus("game-id");
+    GameStatus gameStatus = new GameStatus();
+    gameStatus.setGameId("game-id");
     gameStatus.setPlayer1(new Player("player-session", "player-name", testLibrary(gameStatus, "player-name")));
     gameStatus.setPlayer2(new Player("opponent-session", "opponent-name", testLibrary(gameStatus, "opponent-name")));
     gameStatus.getTurn().setCurrentTurnPlayer("player-name");

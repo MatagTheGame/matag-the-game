@@ -10,6 +10,7 @@ import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.security.SecurityHelper;
 import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.status.GameStatusFactory;
 import com.aa.mtg.game.status.GameStatusRepository;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
 import org.slf4j.Logger;
@@ -25,15 +26,17 @@ public class InitController {
 
     private final SecurityHelper securityHelper;
     private final EventSender eventSender;
+    private final GameStatusFactory gameStatusFactory;
     private final GameStatusUpdaterService gameStatusUpdaterService;
     private final InitTestService initTestService;
     private final GameStatusRepository gameStatusRepository;
     private final DeckRetrieverService deckRetrieverService;
 
     @Autowired
-    public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
+    public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
         this.securityHelper = securityHelper;
         this.eventSender = eventSender;
+        this.gameStatusFactory = gameStatusFactory;
         this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.gameStatusRepository = gameStatusRepository;
         this.deckRetrieverService = deckRetrieverService;
@@ -46,7 +49,7 @@ public class InitController {
         LOGGER.info("Init request received for sessionId '{}', gameId '{}'.", token.getSessionId(), token.getGameId());
 
         if (!gameStatusRepository.contains(token.getGameId())) {
-            GameStatus gameStatus = new GameStatus(token.getGameId());
+            GameStatus gameStatus = gameStatusFactory.create(token.getGameId());
             String playerName = "Pippo";
             Library library = deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus);
             gameStatus.setPlayer1(new Player(token.getSessionId(), playerName, library));
