@@ -6,18 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class CardListComponent {
-    protected List<CardInstance> cards;
-
-    public CardListComponent() {
-        this.cards = new ArrayList<>();
-    }
-
-    public CardListComponent(List<CardInstance> cards) {
-        this.cards = cards;
-    }
+    protected List<CardInstance> cards = new ArrayList<>();
 
     public List<CardInstance> getCards() {
         return cards;
+    }
+
+    public void setCards(List<CardInstance> cards) {
+        this.cards = cards;
     }
 
     public List<CardInstance> getCardsCopy() {
@@ -32,7 +28,7 @@ public abstract class CardListComponent {
         this.cards.add(cardInstance);
     }
 
-    public void addCards(ArrayList<CardInstance> cardInstance) {
+    public void addCards(List<CardInstance> cardInstance) {
         this.cards.addAll(cardInstance);
     }
 

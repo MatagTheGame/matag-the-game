@@ -5,8 +5,7 @@ import com.aa.mtg.game.event.Event;
 import com.aa.mtg.game.event.EventSender;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.message.MessageEvent;
-import com.aa.mtg.game.player.Library;
-import com.aa.mtg.game.player.Player;
+import com.aa.mtg.game.player.PlayerFactory;
 import com.aa.mtg.game.security.SecurityHelper;
 import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
@@ -27,16 +26,18 @@ public class InitController {
     private final SecurityHelper securityHelper;
     private final EventSender eventSender;
     private final GameStatusFactory gameStatusFactory;
+    private final PlayerFactory playerFactory;
     private final GameStatusUpdaterService gameStatusUpdaterService;
     private final InitTestService initTestService;
     private final GameStatusRepository gameStatusRepository;
     private final DeckRetrieverService deckRetrieverService;
 
     @Autowired
-    public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
+    public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerFactory playerFactory, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
         this.securityHelper = securityHelper;
         this.eventSender = eventSender;
         this.gameStatusFactory = gameStatusFactory;
+        this.playerFactory = playerFactory;
         this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.gameStatusRepository = gameStatusRepository;
         this.deckRetrieverService = deckRetrieverService;
@@ -51,8 +52,9 @@ public class InitController {
         if (!gameStatusRepository.contains(token.getGameId())) {
             GameStatus gameStatus = gameStatusFactory.create(token.getGameId());
             String playerName = "Pippo";
-            Library library = deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus);
-            gameStatus.setPlayer1(new Player(token.getSessionId(), playerName, library));
+            gameStatus.setPlayer1(playerFactory.create(token.getSessionId(), playerName));
+            gameStatus.getPlayer1().getLibrary().addCards(deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus));
+            gameStatus.getPlayer1().drawHand();
             gameStatusRepository.save(token.getGameId(), gameStatus);
             eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_WAITING_OPPONENT"));
 
@@ -60,8 +62,9 @@ public class InitController {
             GameStatus gameStatus = gameStatusRepository.getUnsecure(token.getGameId());
             if (gameStatus.getPlayer2() == null) {
                 String playerName = "Pluto";
-                Library library = deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus);
-                gameStatus.setPlayer2(new Player(token.getSessionId(), playerName, library));
+                gameStatus.setPlayer2(playerFactory.create(token.getSessionId(), playerName));
+                gameStatus.getPlayer2().getLibrary().addCards(deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus));
+                gameStatus.getPlayer2().drawHand();
 
                 gameStatus.getTurn().init(gameStatus.getPlayer1().getName());
 

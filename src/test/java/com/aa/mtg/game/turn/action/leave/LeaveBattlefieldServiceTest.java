@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn.action.leave;
 
 import com.aa.TestUtils;
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.CardInstanceFactory;
 import com.aa.mtg.cards.sets.CoreSet2019;
 import com.aa.mtg.cards.sets.CoreSet2020;
 import com.aa.mtg.game.status.GameStatus;
@@ -24,11 +25,17 @@ public class LeaveBattlefieldServiceTest {
     @Autowired
     private AttachService attachService;
 
+    @Autowired
+    private CardInstanceFactory cardInstanceFactory;
+
+    @Autowired
+    private TestUtils testUtils;
+
     @Test
     public void testLeaveBattlefield() {
         // Given
-        GameStatus gameStatus = TestUtils.testGameStatus();
-        CardInstance cardInstance = new CardInstance(gameStatus, 61, CoreSet2020.CANOPY_SPIDER, "player-name", "player-name");
+        GameStatus gameStatus = testUtils.testGameStatus();
+        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, CoreSet2020.CANOPY_SPIDER, "player-name", "player-name");
         cardInstance.getModifiers().tap();
         gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
@@ -44,19 +51,19 @@ public class LeaveBattlefieldServiceTest {
     @Test
     public void testLeaveBattlefieldWithAttachments() {
         // Given
-        GameStatus gameStatus = TestUtils.testGameStatus();
-        CardInstance creature = new CardInstance(gameStatus, 61, CoreSet2020.CANOPY_SPIDER, "player-name", "player-name");
+        GameStatus gameStatus = testUtils.testGameStatus();
+        CardInstance creature = cardInstanceFactory.create(gameStatus, 61, CoreSet2020.CANOPY_SPIDER, "player-name", "player-name");
         gameStatus.getPlayer1().getBattlefield().addCard(creature);
 
-        CardInstance enchantment1 = new CardInstance(gameStatus, 62, CoreSet2019.KNIGHTS_PLEDGE, "player-name", "player-name");
+        CardInstance enchantment1 = cardInstanceFactory.create(gameStatus, 62, CoreSet2019.KNIGHTS_PLEDGE, "player-name", "player-name");
         gameStatus.getPlayer1().getBattlefield().addCard(enchantment1);
         attachService.attach(gameStatus, enchantment1, creature.getId());
 
-        CardInstance enchantment2 = new CardInstance(gameStatus, 63, CoreSet2019.KNIGHTS_PLEDGE, "opponent-name", "opponent-name");
+        CardInstance enchantment2 = cardInstanceFactory.create(gameStatus, 63, CoreSet2019.KNIGHTS_PLEDGE, "opponent-name", "opponent-name");
         gameStatus.getPlayer2().getBattlefield().addCard(enchantment2);
         attachService.attach(gameStatus, enchantment2, creature.getId());
 
-        CardInstance equipment = new CardInstance(gameStatus, 64, CoreSet2019.MARAUDERS_AXE, "player-name", "player-name");
+        CardInstance equipment = cardInstanceFactory.create(gameStatus, 64, CoreSet2019.MARAUDERS_AXE, "player-name", "player-name");
         gameStatus.getPlayer1().getBattlefield().addCard(equipment);
         attachService.attach(gameStatus, equipment, creature.getId());
 
@@ -74,7 +81,7 @@ public class LeaveBattlefieldServiceTest {
     @Test
     public void testLeaveBattlefieldCardNotFound() {
         // Given
-        GameStatus gameStatus = TestUtils.testGameStatus();
+        GameStatus gameStatus = testUtils.testGameStatus();
 
         // When
         CardInstance cardLeft = leaveBattlefieldService.leaveTheBattlefield(gameStatus, 61);

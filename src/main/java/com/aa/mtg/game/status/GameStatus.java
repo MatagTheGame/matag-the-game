@@ -5,6 +5,7 @@ import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.stack.SpellStack;
 import com.aa.mtg.game.turn.Turn;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -18,8 +19,16 @@ public class GameStatus {
     private String gameId;
     private Player player1;
     private Player player2;
-    private Turn turn = new Turn();
-    private SpellStack stack = new SpellStack();
+    private Turn turn;
+    private SpellStack stack;
+
+    @Autowired
+    public GameStatus(Player player1, Player player2, Turn turn, SpellStack stack) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.turn = turn;
+        this.stack = stack;
+    }
 
     public String getGameId() {
         return gameId;

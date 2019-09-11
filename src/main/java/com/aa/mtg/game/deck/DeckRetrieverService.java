@@ -2,11 +2,11 @@ package com.aa.mtg.game.deck;
 
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.CardInstanceFactory;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.cards.search.CardSearch;
 import com.aa.mtg.cards.sets.MtgSets;
-import com.aa.mtg.game.player.Library;
 import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +25,19 @@ import static java.util.Arrays.asList;
 public class DeckRetrieverService {
 
     private final MtgSets mtgSets;
+    private final CardInstanceFactory cardInstanceFactory;
 
     @Autowired
-    public DeckRetrieverService(MtgSets mtgSets) {
+    public DeckRetrieverService(MtgSets mtgSets, CardInstanceFactory cardInstanceFactory) {
         this.mtgSets = mtgSets;
+        this.cardInstanceFactory = cardInstanceFactory;
     }
 
-    public Library retrieveDeckForUser(SecurityToken token, String playerName, GameStatus gameStatus) {
+    public List<CardInstance> retrieveDeckForUser(SecurityToken token, String playerName, GameStatus gameStatus) {
         return randomDeck(playerName, gameStatus);
     }
 
-    private Library randomDeck(String playerName, GameStatus gameStatus) {
+    private List<CardInstance> randomDeck(String playerName, GameStatus gameStatus) {
         List<CardInstance> cards = new ArrayList<>();
 
         List<Color> deckColors = randomTwoColors();
@@ -53,7 +55,7 @@ public class DeckRetrieverService {
         addNCards(gameStatus, cards, playerName, 4, getRandomColorlessCard());
 
         Collections.shuffle(cards);
-        return new Library(cards);
+        return cards;
     }
 
     private Card getBasicLandForColor(Color color) {
@@ -122,7 +124,7 @@ public class DeckRetrieverService {
 
     private void addNCards(GameStatus gameStatus, List<CardInstance> cards, String playerName, int n, Card plains) {
         for (int i = 0; i < n; i++) {
-            cards.add(new CardInstance(gameStatus, gameStatus.nextCardId(), plains, playerName));
+            cards.add(cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), plains, playerName));
         }
     }
 }

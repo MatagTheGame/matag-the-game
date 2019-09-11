@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,27 +37,17 @@ import static com.aa.mtg.cards.properties.Type.SORCERY;
         isGetterVisibility = JsonAutoDetect.Visibility.NONE,
         creatorVisibility = JsonAutoDetect.Visibility.NONE
 )
+@Component
+@Scope("prototype")
 public class CardInstance {
-    private final GameStatus gameStatus;
-    @JsonProperty private final int id;
-    @JsonProperty private final Card card;
-    @JsonProperty private final String owner;
+    private GameStatus gameStatus;
+
+    @JsonProperty private int id;
+    @JsonProperty private Card card;
+    @JsonProperty private String owner;
     @JsonProperty private String controller;
-    @JsonProperty private CardModifiers modifiers;
+    @JsonProperty private CardModifiers modifiers = new CardModifiers();
     @JsonProperty private List<Ability> triggeredAbilities = new ArrayList<>();
-
-    public CardInstance(GameStatus gameStatus, int id, Card card, String owner) {
-        this(gameStatus, id, card, owner, null);
-    }
-
-    public CardInstance(GameStatus gameStatus, int id, Card card, String owner, String controller) {
-        this.gameStatus = gameStatus;
-        this.id = id;
-        this.card = card;
-        this.owner = owner;
-        this.controller = controller;
-        this.modifiers = new CardModifiers();
-    }
 
     public GameStatus getGameStatus() {
         return gameStatus;
@@ -79,6 +71,22 @@ public class CardInstance {
 
     public String getController() {
         return controller;
+    }
+
+    public void setGameStatus(GameStatus gameStatus) {
+        this.gameStatus = gameStatus;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public void setController(String controller) {
@@ -298,13 +306,5 @@ public class CardInstance {
 
     public void resetAllModifiers() {
         modifiers = new CardModifiers();
-    }
-
-    public static List<CardInstance> mask(List<CardInstance> cardInstances) {
-        List<CardInstance> library = new ArrayList<>();
-        for (CardInstance cardInstance : cardInstances) {
-            library.add(new CardInstance(cardInstance.getGameStatus(), cardInstance.getId(), Card.hiddenCard(), cardInstance.getOwner()));
-        }
-        return library;
     }
 }

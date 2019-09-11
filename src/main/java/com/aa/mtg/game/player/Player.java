@@ -1,26 +1,33 @@
 package com.aa.mtg.game.player;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.stream.IntStream;
 
+@Component
+@Scope("prototype")
 public class Player {
 
-    private final String sessionId;
-    private final String name;
+    private String sessionId;
+    private String name;
     private int life;
     private final Library library;
     private final Hand hand;
     private final Battlefield battlefield;
     private final Graveyard graveyard;
 
-    public Player(String sessionId, String name, Library library) {
-        this.sessionId = sessionId;
-        this.name = name;
+    @Autowired
+    public Player(Library library, Hand hand, Battlefield battlefield, Graveyard graveyard) {
         this.life = 20;
         this.library = library;
-        this.hand = new Hand();
-        this.battlefield = new Battlefield();
-        this.graveyard = new Graveyard();
+        this.hand = hand;
+        this.battlefield = battlefield;
+        this.graveyard = graveyard;
+    }
 
+    public void drawHand() {
         IntStream.rangeClosed(1, 7)
                 .forEach(i -> this.hand.addCard(this.library.draw()));
     }
@@ -59,5 +66,13 @@ public class Player {
 
     public Graveyard getGraveyard() {
         return graveyard;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

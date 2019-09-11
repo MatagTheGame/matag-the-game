@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn.action.life;
 
 import com.aa.TestUtils;
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.CardInstanceFactory;
 import com.aa.mtg.cards.sets.CoreSet2020;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
@@ -20,11 +21,17 @@ public class EachPlayersAddXLifeActionTest {
     @Autowired
     private EachPlayersAddXLifeAction eachPlayersAddXLifeAction;
 
+    @Autowired
+    private CardInstanceFactory cardInstanceFactory;
+
+    @Autowired
+    private TestUtils testUtils;
+
     @Test
     public void subtractXLifeToEachPlayer() {
         // Given
-        GameStatus gameStatus = TestUtils.testGameStatus();
-        CardInstance cardInstance = new CardInstance(gameStatus, 1, CoreSet2020.DARK_REMEDY, "player-name");
+        GameStatus gameStatus = testUtils.testGameStatus();
+        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, CoreSet2020.DARK_REMEDY, "player-name");
 
         // When
         eachPlayersAddXLifeAction.perform(cardInstance, gameStatus, LOSE_4_LIFE);

@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn.action.draw;
 
 import com.aa.TestUtils;
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.CardInstanceFactory;
 import com.aa.mtg.cards.sets.CoreSet2020;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
@@ -20,12 +21,18 @@ public class DrawXCardsActionTest {
 
     @Autowired
     private DrawXCardsAction drawXCardsAction;
+    
+    @Autowired
+    private CardInstanceFactory cardInstanceFactory;
+
+    @Autowired
+    private TestUtils testUtils;
 
     @Test
     public void controllerDraw3Cards() {
         // Given
-        GameStatus gameStatus = TestUtils.testGameStatus();
-        CardInstance cardInstance = new CardInstance(gameStatus, 12, CoreSet2020.DARK_REMEDY, "opponent-name");
+        GameStatus gameStatus = testUtils.testGameStatus();
+        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 12, CoreSet2020.DARK_REMEDY, "opponent-name");
 
         // When
         drawXCardsAction.perform(cardInstance, gameStatus, DRAW_2_CARDS);
@@ -38,7 +45,7 @@ public class DrawXCardsActionTest {
     @Test
     public void currentPlayerDraw1Cardd() {
         // Given
-        GameStatus gameStatus = TestUtils.testGameStatus();
+        GameStatus gameStatus = testUtils.testGameStatus();
 
         // When
         drawXCardsAction.perform(null, gameStatus, DRAW_1_CARD);

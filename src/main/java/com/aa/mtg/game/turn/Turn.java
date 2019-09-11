@@ -4,12 +4,16 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.status.GameStatus;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @ToString
 @EqualsAndHashCode
+@Component
+@Scope("prototype")
 public class Turn {
     private int turnNumber;
     private String currentTurnPlayer;

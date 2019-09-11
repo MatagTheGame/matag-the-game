@@ -1,9 +1,13 @@
 package com.aa.mtg.game.stack;
 
 import com.aa.mtg.cards.CardInstance;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 
+@Component
+@Scope("prototype")
 public class SpellStack {
     private LinkedList<CardInstance> items = new LinkedList<>();
 

@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn.action.leave;
 
 import com.aa.TestUtils;
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.CardInstanceFactory;
 import com.aa.mtg.cards.sets.CoreSet2020;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
@@ -18,12 +19,18 @@ public class DestroyPermanentServiceTest {
 
     @Autowired
     private DestroyPermanentService destroyPermanentService;
+    
+    @Autowired
+    private CardInstanceFactory cardInstanceFactory;
+
+    @Autowired
+    private TestUtils testUtils;
 
     @Test
     public void testDestroy() {
         // Given
-        GameStatus gameStatus = TestUtils.testGameStatus();
-        CardInstance cardInstance = new CardInstance(gameStatus, 61, CoreSet2020.CANOPY_SPIDER, "player-name", "player-name");
+        GameStatus gameStatus = testUtils.testGameStatus();
+        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, CoreSet2020.CANOPY_SPIDER, "player-name", "player-name");
         gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
         // When
