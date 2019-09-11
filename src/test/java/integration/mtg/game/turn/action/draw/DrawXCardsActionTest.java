@@ -44,7 +44,7 @@ public class DrawXCardsActionTest {
     }
 
     @Test
-    public void currentPlayerDraw1Cardd() {
+    public void currentPlayerDraw1Card() {
         // Given
         GameStatus gameStatus = testUtils.testGameStatus();
 

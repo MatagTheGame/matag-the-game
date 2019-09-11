@@ -3,6 +3,7 @@ package com.aa.mtg.game.turn.action.leave;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.attach.AttachService;
+import com.aa.mtg.game.turn.action.attach.AttachmentsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,14 @@ public class LeaveBattlefieldService {
     private static final Logger LOGGER = LoggerFactory.getLogger(LeaveBattlefieldService.class);
 
     private final AttachService attachService;
+    private final AttachmentsService attachmentsService;
     private final DestroyPermanentService destroyPermanentService;
 
     @Lazy
     @Autowired
-    public LeaveBattlefieldService(AttachService attachService, DestroyPermanentService destroyPermanentService) {
+    public LeaveBattlefieldService(AttachService attachService, AttachmentsService attachmentsService, DestroyPermanentService destroyPermanentService) {
         this.attachService = attachService;
+        this.attachmentsService = attachmentsService;
         this.destroyPermanentService = destroyPermanentService;
     }
 
@@ -32,7 +35,7 @@ public class LeaveBattlefieldService {
         if (cardInstance != null) {
             cardInstance.resetAllModifiers();
 
-            for (CardInstance attachedCard : cardInstance.getAttachedCards()) {
+            for (CardInstance attachedCard : attachmentsService.getAttachedCards(gameStatus, cardInstance)) {
                 if (attachedCard.isOfType(ENCHANTMENT)) {
                     destroyPermanentService.destroy(gameStatus, attachedCard.getId());
 

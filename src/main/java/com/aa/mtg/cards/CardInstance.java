@@ -7,11 +7,13 @@ import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.turn.action.attach.AttachmentsService;
 import com.aa.mtg.game.turn.action.selection.CardInstanceSelectorService;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -22,11 +24,14 @@ import java.util.stream.Collectors;
 
 import static com.aa.mtg.cards.ability.Abilities.abilitiesFromParameters;
 import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameter;
-import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameters;
 import static com.aa.mtg.cards.ability.trigger.TriggerType.MANA_ABILITY;
-import static com.aa.mtg.cards.ability.type.AbilityType.*;
+import static com.aa.mtg.cards.ability.type.AbilityType.FLYING;
+import static com.aa.mtg.cards.ability.type.AbilityType.REACH;
+import static com.aa.mtg.cards.ability.type.AbilityType.SELECTED_PERMANENTS_GET;
+import static com.aa.mtg.cards.ability.type.AbilityType.VIGILANCE;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
+import static java.util.Collections.emptyList;
 
 @ToString
 @EqualsAndHashCode
@@ -40,7 +45,6 @@ import static com.aa.mtg.cards.properties.Type.SORCERY;
 @Component
 @Scope("prototype")
 public class CardInstance {
-    private GameStatus gameStatus;
 
     @JsonProperty private int id;
     @JsonProperty private Card card;
@@ -48,6 +52,14 @@ public class CardInstance {
     @JsonProperty private String controller;
     @JsonProperty private CardModifiers modifiers = new CardModifiers();
     @JsonProperty private List<Ability> triggeredAbilities = new ArrayList<>();
+
+    private GameStatus gameStatus;
+    private final AttachmentsService attachmentsService;
+
+    @Autowired
+    public CardInstance(@Autowired(required = false) AttachmentsService attachmentsService) {
+        this.attachmentsService = attachmentsService;
+    }
 
     public GameStatus getGameStatus() {
         return gameStatus;
@@ -216,46 +228,16 @@ public class CardInstance {
         return this.card.getSubtypes().contains(subtype);
     }
 
-    public List<CardInstance> getAttachedCards() {
-        return gameStatus.getAllBattlefieldCards().attachedToId(this.id).getCards();
-    }
-
     private int getAttachmentsPower() {
-        int attachmentsPower = 0;
-        for (Ability ability : getAttachedCardsAbilities()) {
-            attachmentsPower += powerToughnessFromParameters(ability.getParameters()).getPower();
-        }
-
-        return attachmentsPower;
+        return attachmentsService != null ? attachmentsService.getAttachmentsPower(gameStatus, this) : 0;
     }
 
     private int getAttachmentsToughness() {
-        int attachmentsToughness = 0;
-        for (Ability ability : getAttachedCardsAbilities()) {
-            attachmentsToughness += powerToughnessFromParameters(ability.getParameters()).getToughness();
-        }
-
-        return attachmentsToughness;
+        return attachmentsService != null ? attachmentsService.getAttachmentsToughness(gameStatus, this) : 0;
     }
 
     private List<Ability> getAttachmentsAbilities() {
-        List<Ability> abilities = new ArrayList<>();
-        for (Ability ability : getAttachedCardsAbilities()) {
-            abilities.addAll(abilitiesFromParameters(ability.getParameters()));
-        }
-        return abilities;
-    }
-
-    private List<Ability> getAttachedCardsAbilities() {
-        List<Ability> abilities = new ArrayList<>();
-        for (CardInstance attachedCards : getAttachedCards()) {
-            for (Ability ability : attachedCards.getAbilities()) {
-                if (ability.getAbilityType().equals(ENCHANTED_CREATURE_GETS) || ability.getAbilityType().equals(EQUIPPED_CREATURE_GETS)) {
-                    abilities.add(ability);
-                }
-            }
-        }
-        return abilities;
+        return attachmentsService != null ? attachmentsService.getAttachmentsAbilities(gameStatus, this) : emptyList();
     }
 
     private int getPowerFromOtherPermanents() {

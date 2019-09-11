@@ -59,15 +59,6 @@ public class GameStatus {
     public void setPlayer2(Player player2) {
         this.player2 = player2;
     }
-    
-    public Player getPlayerBySessionId(String sessionId) {
-        if (this.getPlayer1().getSessionId().equals(sessionId)) {
-            return this.getPlayer1();
-        } else if (this.getPlayer2().getSessionId().equals(sessionId)) {
-            return this.getPlayer2();
-        }
-        throw new RuntimeException("SessionId " + sessionId + " is not linked to game " + gameId + " .");
-    }
 
     public Player getPlayerByName(String name) {
         if (this.getPlayer1().getName().equals(name)) {
