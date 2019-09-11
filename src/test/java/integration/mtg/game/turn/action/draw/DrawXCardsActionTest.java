@@ -40,7 +40,7 @@ public class DrawXCardsActionTest {
 
         // Then
         assertThat(gameStatus.getPlayerByName("opponent-name").getHand().size()).isEqualTo(9);
-        assertThat(gameStatus.getPlayerByName("opponent-name").getLibrary().size()).isEqualTo(51);
+        assertThat(gameStatus.getPlayerByName("opponent-name").getLibrary().size()).isEqualTo(31);
     }
 
     @Test
@@ -53,6 +53,6 @@ public class DrawXCardsActionTest {
 
         // Then
         assertThat(gameStatus.getPlayerByName("player-name").getHand().size()).isEqualTo(8);
-        assertThat(gameStatus.getPlayerByName("player-name").getLibrary().size()).isEqualTo(52);
+        assertThat(gameStatus.getPlayerByName("player-name").getLibrary().size()).isEqualTo(32);
     }
 }

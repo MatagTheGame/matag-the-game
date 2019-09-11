@@ -30,11 +30,11 @@ public class CardInstanceFactoryTest {
         GameStatus gameStatus = testUtils.testGameStatus();
 
         // When
-        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, Dominaria.SHORT_SWORD, "owner");
+        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, Dominaria.SHORT_SWORD, "player-name");
 
         // Then
         assertThat(cardInstance.getId()).isEqualTo(1);
-        assertThat(cardInstance.getOwner()).isEqualTo("owner");
+        assertThat(cardInstance.getOwner()).isEqualTo("player-name");
     }
 
     @Test
@@ -43,8 +43,8 @@ public class CardInstanceFactoryTest {
         GameStatus gameStatus = testUtils.testGameStatus();
 
         // When
-        CardInstance cardInstance1 = cardInstanceFactory.create(gameStatus, 1, Dominaria.SHORT_SWORD, "owner-1");
-        CardInstance cardInstance2 = cardInstanceFactory.create(gameStatus, 2, Dominaria.BEFUDDLE, "owner-2");
+        CardInstance cardInstance1 = cardInstanceFactory.create(gameStatus, 1, Dominaria.SHORT_SWORD, "player-name");
+        CardInstance cardInstance2 = cardInstanceFactory.create(gameStatus, 2, Dominaria.BEFUDDLE, "opponent-name");
 
         // Then
         assertThat(cardInstance1).isNotSameAs(cardInstance2);

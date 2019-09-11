@@ -27,18 +27,24 @@ public class TestUtils {
 
   public GameStatus testGameStatus() {
     GameStatus gameStatus = gameStatusFactory.create("game-id");
+
     gameStatus.setPlayer1(playerFactory.create("player-session", "player-name"));
     gameStatus.getPlayer1().getLibrary().addCards(testLibrary(gameStatus, "player-name"));
     gameStatus.getPlayer1().drawHand();
+
     gameStatus.setPlayer2(playerFactory.create("opponent-session", "opponent-name"));
     gameStatus.getPlayer2().getLibrary().addCards(testLibrary(gameStatus, "opponent-name"));
     gameStatus.getPlayer2().drawHand();
+
     gameStatus.getTurn().setCurrentTurnPlayer("player-name");
+    gameStatus.getTurn().setCurrentPhaseActivePlayer("player-name");
+    gameStatus.getTurn().setCurrentPhase("M1");
+
     return gameStatus;
   }
 
   private List<CardInstance> testLibrary(GameStatus gameStatus, String playerName) {
-    return IntStream.rangeClosed(1, 60)
+    return IntStream.rangeClosed(1, 40)
             .boxed()
             .map(i -> cardInstanceFactory.create(gameStatus, i, Cards.PLAINS, playerName))
             .collect(Collectors.toList());
