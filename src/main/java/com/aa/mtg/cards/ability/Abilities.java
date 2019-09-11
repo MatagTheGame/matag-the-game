@@ -16,6 +16,7 @@ import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_IT_ENTERS_THE
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
 import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.properties.Cost.COLORLESS;
+import static com.aa.mtg.cards.properties.Subtype.ZOMBIE;
 import static com.aa.mtg.cards.properties.Type.*;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughness.POWER;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
@@ -80,6 +81,8 @@ public class Abilities {
     public static final Ability LOSE_4_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("-4"), castTrigger());
     public static final Ability OTHER_CREATURES_YOU_CONTROL_GET_PLUS_1_1 = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).others(true).build(), singletonList("+1/+1"), staticAbility());
     public static final Ability OTHER_CREATURES_YOU_CONTROL_GET_TRAMPLE = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).others(true).build(), singletonList("TRAMPLE"), staticAbility());
+    public static final Ability OTHER_ZOMBIES_YOU_CONTROL_GET_DEATHTOUCH = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtypeOf(singletonList(ZOMBIE)).controllerType(PLAYER).others(true).build(), singletonList("DEATHTOUCH"), staticAbility());
+    public static final Ability OTHER_ZOMBIES_YOU_CONTROL_GET_PLUS_1_1 = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtypeOf(singletonList(ZOMBIE)).controllerType(PLAYER).others(true).build(), singletonList("+1/+1"), staticAbility());
     public static final Ability PAY_1_EQUIP_CREATURE_GETS_FLYING = new Ability(EQUIPPED_CREATURE_GETS, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), singletonList("FLYING"), activatedAbility(singletonList(COLORLESS)));
     public static final Ability PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1 = new Ability(EQUIPPED_CREATURE_GETS, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), singletonList("+1/+1"), activatedAbility(singletonList(COLORLESS)));
     public static final Ability PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1_AND_HASTE = new Ability(EQUIPPED_CREATURE_GETS, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), asList("+1/+1", "HASTE"), activatedAbility(singletonList(COLORLESS)));
@@ -87,6 +90,8 @@ public class Abilities {
     public static final Ability REACH = new Ability(AbilityType.REACH);
     public static final Ability RETURN_TARGET_NONLAND_TO_ITS_OWNER_HAND = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).notOfType(singletonList(LAND)).build())), singletonList(":RETURN_TO_OWNER_HAND"), castTrigger());
     public static final Ability SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER = new Ability(SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER, singletonList(new Target(CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).build())), emptyList(), castTrigger());
+    public static final Ability SKELETON_YOU_CONTROL_GET_DEATHTOUCH = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtypeOf(singletonList(ZOMBIE)).controllerType(PLAYER).build(), singletonList("DEATHTOUCH"), staticAbility());
+    public static final Ability SKELETON_YOU_CONTROL_GET_PLUS_1_1 = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtypeOf(singletonList(ZOMBIE)).controllerType(PLAYER).build(), singletonList("+1/+1"), staticAbility());
     public static final Ability TAP_ADD_BLACK_MANA = new Ability(TAP_ADD_MANA, emptyList(), singletonList("BLACK"), manaAbilityTrigger());
     public static final Ability TAP_ADD_BLUE_MANA = new Ability(TAP_ADD_MANA, emptyList(), singletonList("BLUE"), manaAbilityTrigger());
     public static final Ability TAP_ADD_GREEN_MANA = new Ability(TAP_ADD_MANA, emptyList(), singletonList("GREEN"), manaAbilityTrigger());

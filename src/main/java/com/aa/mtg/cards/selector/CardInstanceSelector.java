@@ -2,6 +2,7 @@ package com.aa.mtg.cards.selector;
 
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
+import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.player.PlayerType;
 import lombok.Builder;
@@ -15,7 +16,7 @@ public class CardInstanceSelector {
     private final SelectorType selectorType;
     private final List<Type> ofType;
     private final List<Type> notOfType;
-    private final String ofSubtypeOf;
+    private final List<Subtype> ofSubtypeOf;
     private final AbilityType withAbilityType;
     private final Color ofColor;
     private final PowerToughnessConstraint powerToughnessConstraint;
@@ -23,7 +24,7 @@ public class CardInstanceSelector {
     private final List<StatusType> statusTypes;
     private final boolean others;
 
-    private CardInstanceSelector(SelectorType selectorType, List<Type> ofType, List<Type> notOfType, String ofSubtypeOf, AbilityType withAbilityType, Color ofColor, PowerToughnessConstraint powerToughnessConstraint, PlayerType controllerType, List<StatusType> statusTypes, boolean others) {
+    private CardInstanceSelector(SelectorType selectorType, List<Type> ofType, List<Type> notOfType, List<Subtype> ofSubtypeOf, AbilityType withAbilityType, Color ofColor, PowerToughnessConstraint powerToughnessConstraint, PlayerType controllerType, List<StatusType> statusTypes, boolean others) {
         this.selectorType = selectorType;
         this.ofType = ofType;
         this.notOfType = notOfType;
@@ -48,7 +49,7 @@ public class CardInstanceSelector {
         return notOfType;
     }
 
-    public String getOfSubtypeOf() {
+    public List<Subtype> getOfSubtypeOf() {
         return ofSubtypeOf;
     }
 

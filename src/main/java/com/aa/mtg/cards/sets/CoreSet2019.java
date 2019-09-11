@@ -33,6 +33,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card CRASH_THROUGH = new Card("Crash Through", singleton(Color.RED), singletonList(Cost.RED), singletonList(SORCERY), emptyList(), COMMON, "Creatures you control gain trample until end of turn. Draw a card.", 0, 0, asList(CREATURES_YOU_CONTROL_GET_TRAMPLE_UNTIL_END_OF_TURN, DRAW_1_CARD));
     public static Card DAGGERBACK_BASILISK = new Card("Daggerback Basilisk", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BASILISK), COMMON, "Deathtouch", 0, 0, singletonList(DEATHTOUCH));
     public static Card DAYBREAK_CHAPLAIN = new Card("Daybreak Chaplain", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, CLERIC), COMMON, "Lifelink", 1, 3, singletonList(LIFELINK));
+    public static Card DEATH_BARON = new Card("Death Baron", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList(ZOMBIE, WIZARD), RARE, "Skeleton creatures you control and other Zombie creatures you control get +1/+1 and have deathtouch.", 2, 2, asList(SKELETON_YOU_CONTROL_GET_PLUS_1_1, SKELETON_YOU_CONTROL_GET_DEATHTOUCH, OTHER_ZOMBIES_YOU_CONTROL_GET_PLUS_1_1, OTHER_ZOMBIES_YOU_CONTROL_GET_DEATHTOUCH));
     public static Card DISPERSE = new Card("Disperse", singleton(Color.BLUE), singletonList(Cost.BLUE), singletonList(INSTANT), emptyList(), COMMON, "Return target nonland permanent to its owner's hand.", 0, 0, singletonList(RETURN_TARGET_NONLAND_TO_ITS_OWNER_HAND));
     public static Card DIREGRAF_GHOUL = new Card("Diregraf Ghoul", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(CREATURE), singletonList(ZOMBIE), UNCOMMON, "Diregraf Ghoul enters the battlefield tapped.", 2, 2, singletonList(ENTERS_THE_BATTLEFIELD_TAPPED));
     public static Card DRUID_OF_THE_COWL = new Card("Druid of the Cowl", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), asList(ELF, DRUID), COMMON, "TAP: add GREEN.", 1, 3, singletonList(TAP_ADD_GREEN_MANA));
@@ -87,6 +88,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(CRASH_THROUGH);
         cards.add(DAGGERBACK_BASILISK);
         cards.add(DAYBREAK_CHAPLAIN);
+        cards.add(DEATH_BARON);
         cards.add(DISPERSE);
         cards.add(DIREGRAF_GHOUL);
         cards.add(Dominaria.DIVINATION);

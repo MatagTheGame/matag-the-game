@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static com.aa.mtg.cards.Cards.PLAINS;
+import static com.aa.mtg.cards.ability.Abilities.OTHER_ZOMBIES_YOU_CONTROL_GET_DEATHTOUCH;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.properties.Type.LAND;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughness.POWER;
@@ -26,6 +27,9 @@ import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.LESS_OR_EQU
 import static com.aa.mtg.cards.selector.SelectorType.PERMANENT;
 import static com.aa.mtg.cards.selector.StatusType.ATTACKING;
 import static com.aa.mtg.cards.selector.StatusType.BLOCKING;
+import static com.aa.mtg.cards.sets.CoreSet2019.DAYBREAK_CHAPLAIN;
+import static com.aa.mtg.cards.sets.CoreSet2019.DEATH_BARON;
+import static com.aa.mtg.cards.sets.CoreSet2019.DIREGRAF_GHOUL;
 import static com.aa.mtg.cards.sets.Ixalan.FRENZIED_RAPTOR;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
@@ -565,6 +569,35 @@ public class CardInstanceSelectorServiceTest {
 
         // Then
         assertThat(selection).isEmpty();
+    }
+
+    @Test
+    public void selectionZombiesYouControl() {
+        // Given
+        GameStatus gameStatus = testUtils.testGameStatus();
+
+        CardInstanceSelector cardInstanceSelector = OTHER_ZOMBIES_YOU_CONTROL_GET_DEATHTOUCH.getCardInstanceSelector();
+        CardInstance otherZombiesCreature = cardInstanceFactory.create(gameStatus, 1, DEATH_BARON, "player-name");
+        otherZombiesCreature.setController("player-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(otherZombiesCreature);
+
+        CardInstance aZombie = cardInstanceFactory.create(gameStatus, 2, DIREGRAF_GHOUL, "player-name");
+        aZombie.setController("player-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(aZombie);
+
+        CardInstance aNonZombie = cardInstanceFactory.create(gameStatus, 3, DAYBREAK_CHAPLAIN, "player-name");
+        aNonZombie.setController("player-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(aNonZombie);
+
+        CardInstance anOpponentZombie = cardInstanceFactory.create(gameStatus, 4, DAYBREAK_CHAPLAIN, "player-name");
+        anOpponentZombie.setController("opponent-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(anOpponentZombie);
+
+        // When
+        List<CardInstance> selection = selectorService.select(gameStatus, otherZombiesCreature, cardInstanceSelector).getCards();
+
+        // Then
+        assertThat(selection).containsExactly(aZombie);
     }
 
     @Test

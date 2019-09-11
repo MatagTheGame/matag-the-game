@@ -4,6 +4,7 @@ import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
+import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
@@ -127,13 +128,13 @@ public class CardInstance {
         return false;
     }
 
-    public boolean ofAllOfTheTypes(List<Type> types) {
-        for (Type type : types) {
-            if (!isOfType(type)) {
-                return false;
+    public boolean ofAnyOfTheSubtypes(List<Subtype> subtypes) {
+        for (Subtype subtype : subtypes) {
+            if (isOfSubtype(subtype)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public void checkIfCanAttack() {
@@ -225,7 +226,7 @@ public class CardInstance {
         return !(isOfType(INSTANT) || isOfType(SORCERY));
     }
 
-    public boolean isOfSubtype(String subtype) {
+    public boolean isOfSubtype(Subtype subtype) {
         return this.card.getSubtypes().contains(subtype);
     }
 
