@@ -66,6 +66,7 @@ public class CoreSet2020 implements MtgSet {
     private List<Card> cards = new ArrayList<>();
 
     private CoreSet2020() {
+        cards.add(CoreSet2019.AGGRESSIVE_MAMMOTH);
         cards.add(AGONIZING_SYPHON);
         cards.add(Ixalan.AIR_ELEMENTAL);
         cards.add(ANGELIC_GIFT);
