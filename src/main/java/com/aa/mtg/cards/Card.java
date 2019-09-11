@@ -5,6 +5,7 @@ import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.cards.properties.Rarity;
+import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -27,14 +28,14 @@ public class Card {
     private final Set<Color> colors;
     private final List<Cost> cost;
     private final List<Type> types;
-    private final List<String> subtypes;
+    private final List<Subtype> subtypes;
     private final Rarity rarity;
     private final String ruleText;
     private final int power;
     private final int toughness;
     private final List<Ability> abilities;
 
-    public Card(String name, Set<Color> colors, List<Cost> cost, List<Type> types, List<String> subtypes, Rarity rarity, String ruleText, int power, int toughness, List<Ability> abilities) {
+    public Card(String name, Set<Color> colors, List<Cost> cost, List<Type> types, List<Subtype> subtypes, Rarity rarity, String ruleText, int power, int toughness, List<Ability> abilities) {
         this.name = name;
         this.colors = colors;
         this.cost = cost;
@@ -76,7 +77,7 @@ public class Card {
         return types;
     }
 
-    public List<String> getSubtypes() {
+    public List<Subtype> getSubtypes() {
         return subtypes;
     }
 
