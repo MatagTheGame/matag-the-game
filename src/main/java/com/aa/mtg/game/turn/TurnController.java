@@ -7,6 +7,7 @@ import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.status.GameStatusRepository;
 import com.aa.mtg.game.status.GameStatusUpdaterService;
+import com.aa.mtg.game.turn.action._continue.ConsolidateStatusService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
@@ -24,12 +25,14 @@ public class TurnController {
     private final GameStatusRepository gameStatusRepository;
     private final GameStatusUpdaterService gameStatusUpdaterService;
     private final TurnService turnService;
+    private final ConsolidateStatusService consolidateStatusService;
 
-    public TurnController(SecurityHelper securityHelper, GameStatusRepository gameStatusRepository, GameStatusUpdaterService gameStatusUpdaterService, TurnService turnService) {
+    public TurnController(SecurityHelper securityHelper, GameStatusRepository gameStatusRepository, GameStatusUpdaterService gameStatusUpdaterService, TurnService turnService, ConsolidateStatusService consolidateStatusService) {
         this.securityHelper = securityHelper;
         this.gameStatusRepository = gameStatusRepository;
         this.gameStatusUpdaterService = gameStatusUpdaterService;
         this.turnService = turnService;
+        this.consolidateStatusService = consolidateStatusService;
     }
 
     @MessageMapping("/game/turn")
@@ -55,6 +58,7 @@ public class TurnController {
             turnService.declareBlockers(gameStatus, toMapListInteger(request.getTargetsIdsForCardIds()));
         }
 
+        consolidateStatusService.consolidate(gameStatus);
         gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);
     }
 

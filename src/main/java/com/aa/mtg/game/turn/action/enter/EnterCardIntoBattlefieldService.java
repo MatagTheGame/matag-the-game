@@ -3,12 +3,9 @@ package com.aa.mtg.game.turn.action.enter;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.type.AbilityType;
-import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.turn.action.leave.DestroyPermanentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,13 +20,6 @@ import static java.util.stream.Collectors.toList;
 public class EnterCardIntoBattlefieldService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EnterCardIntoBattlefieldService.class);
-
-    private final DestroyPermanentService destroyPermanentService;
-
-    @Autowired
-    public EnterCardIntoBattlefieldService(DestroyPermanentService destroyPermanentService) {
-        this.destroyPermanentService = destroyPermanentService;
-    }
 
     public void enter(GameStatus gameStatus, CardInstance cardInstance) {
         String controller = cardInstance.getController();
@@ -53,17 +43,6 @@ public class EnterCardIntoBattlefieldService {
             LOGGER.info("Event {} triggered with abilities {} for {}.", WHEN_IT_ENTERS_THE_BATTLEFIELD, abilityTypes, cardInstance.getModifiers());
             gameStatus.getStack().add(cardInstance);
         }
-
-        // TODO antonio: Not really the right place to be this destroy
-        destroyCreaturesWith0ToughnessOrLowerForPlayer(gameStatus, gameStatus.getCurrentPlayer());
-        destroyCreaturesWith0ToughnessOrLowerForPlayer(gameStatus, gameStatus.getNonCurrentPlayer());
-    }
-
-    private void destroyCreaturesWith0ToughnessOrLowerForPlayer(GameStatus gameStatus, Player player) {
-        player.getBattlefield().getCardsCopy().stream()
-                .filter(cardInstance -> cardInstance.isOfType(CREATURE))
-                .filter(cardInstance -> cardInstance.getToughness() <= 0)
-                .forEach(cardInstance -> destroyPermanentService.destroy(gameStatus, cardInstance.getId()));
     }
 
 }
