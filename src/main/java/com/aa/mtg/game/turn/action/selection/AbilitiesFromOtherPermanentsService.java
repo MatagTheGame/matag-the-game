@@ -1,7 +1,9 @@
 package com.aa.mtg.game.turn.action.selection;
 
 import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cards.ability.Abilities;
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.Abilities.abilitiesFromParameters;
-import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameter;
 import static com.aa.mtg.cards.ability.type.AbilityType.SELECTED_PERMANENTS_GET;
 
 @Component
@@ -24,23 +25,19 @@ public class AbilitiesFromOtherPermanentsService {
     }
 
     public int getPowerFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
-        int attachmentsPower = 0;
-
-        for (String parameter : getParametersFromOtherPermanents(gameStatus, cardInstance)) {
-            attachmentsPower += powerToughnessFromParameter(parameter).getPower();
-        }
-
-        return attachmentsPower;
+        return getParametersFromOtherPermanents(gameStatus, cardInstance).stream()
+                .map(Abilities::powerToughnessFromParameter)
+                .map(PowerToughness::getPower)
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
     public int getToughnessFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
-        int attachmentsToughness = 0;
-
-        for (String parameter : getParametersFromOtherPermanents(gameStatus, cardInstance)) {
-            attachmentsToughness += powerToughnessFromParameter(parameter).getToughness();
-        }
-
-        return attachmentsToughness;
+        return getParametersFromOtherPermanents(gameStatus, cardInstance).stream()
+                .map(Abilities::powerToughnessFromParameter)
+                .map(PowerToughness::getToughness)
+                .reduce(Integer::sum)
+                .orElse(0);
     }
 
     public List<Ability> getAbilitiesFormOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
@@ -52,7 +49,7 @@ public class AbilitiesFromOtherPermanentsService {
         List<CardInstance> cards = gameStatus.getAllBattlefieldCards().withStaticAbility(SELECTED_PERMANENTS_GET).getCards();
 
         for (CardInstance card : cards) {
-            for (Ability ability : card.getStaticAbilities()) {
+            for (Ability ability : card.getNonStaticAbilities()) {
                 if (ability.getAbilityType() == SELECTED_PERMANENTS_GET) {
                     if (cardInstanceSelectorService.select(gameStatus, card, ability.getCardInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
                         parameters.addAll(ability.getParameters());
