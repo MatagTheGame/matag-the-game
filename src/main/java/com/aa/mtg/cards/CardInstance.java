@@ -8,7 +8,7 @@ import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.attach.AttachmentsService;
-import com.aa.mtg.game.turn.action.selection.CardInstanceSelectorService;
+import com.aa.mtg.game.turn.action.selection.AbilitiesFromOtherPermanentsService;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
@@ -19,15 +19,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.aa.mtg.cards.ability.Abilities.abilitiesFromParameters;
-import static com.aa.mtg.cards.ability.Abilities.powerToughnessFromParameter;
 import static com.aa.mtg.cards.ability.trigger.TriggerType.MANA_ABILITY;
 import static com.aa.mtg.cards.ability.type.AbilityType.FLYING;
 import static com.aa.mtg.cards.ability.type.AbilityType.REACH;
-import static com.aa.mtg.cards.ability.type.AbilityType.SELECTED_PERMANENTS_GET;
 import static com.aa.mtg.cards.ability.type.AbilityType.VIGILANCE;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
@@ -55,10 +51,15 @@ public class CardInstance {
 
     private GameStatus gameStatus;
     private final AttachmentsService attachmentsService;
+    private final AbilitiesFromOtherPermanentsService abilitiesFromOtherPermanentsService;
 
     @Autowired
-    public CardInstance(@Autowired(required = false) AttachmentsService attachmentsService) {
+    public CardInstance(
+            @Autowired(required = false) AttachmentsService attachmentsService,
+            @Autowired(required = false) AbilitiesFromOtherPermanentsService abilitiesFromOtherPermanentsService
+    ) {
         this.attachmentsService = attachmentsService;
+        this.abilitiesFromOtherPermanentsService = abilitiesFromOtherPermanentsService;
     }
 
     public GameStatus getGameStatus() {
@@ -241,45 +242,15 @@ public class CardInstance {
     }
 
     private int getPowerFromOtherPermanents() {
-        int attachmentsPower = 0;
-
-        for (String parameter : getParametersFromOtherPermanents()) {
-            attachmentsPower += powerToughnessFromParameter(parameter).getPower();
-        }
-
-        return attachmentsPower;
+        return abilitiesFromOtherPermanentsService != null ? abilitiesFromOtherPermanentsService.getPowerFromOtherPermanents(gameStatus, this) : 0;
     }
 
     private int getToughnessFromOtherPermanents() {
-        int attachmentsToughness = 0;
-
-        for (String parameter : getParametersFromOtherPermanents()) {
-            attachmentsToughness += powerToughnessFromParameter(parameter).getToughness();
-        }
-
-        return attachmentsToughness;
+        return abilitiesFromOtherPermanentsService != null ? abilitiesFromOtherPermanentsService.getToughnessFromOtherPermanents(gameStatus, this) : 0;
     }
 
     private List<Ability> getAbilitiesFormOtherPermanents() {
-        return abilitiesFromParameters(getParametersFromOtherPermanents());
-    }
-
-    private List<String> getParametersFromOtherPermanents() {
-        List<String> parameters = new ArrayList<>();
-        List<CardInstance> cards = gameStatus.getAllBattlefieldCards().withAbilityOnCard(SELECTED_PERMANENTS_GET).getCards();
-
-        for (CardInstance card : cards) {
-            for (Ability ability : card.getCard().getAbilities()) {
-                if (ability.getAbilityType() == SELECTED_PERMANENTS_GET) {
-                    Optional<CardInstance> cardInstance = new CardInstanceSelectorService().select(gameStatus, card, ability.getCardInstanceSelector()).withId(id);
-                    if (cardInstance.isPresent()) {
-                        parameters.addAll(ability.getParameters());
-                    }
-                }
-            }
-        }
-
-        return parameters;
+        return abilitiesFromOtherPermanentsService != null ? abilitiesFromOtherPermanentsService.getAbilitiesFormOtherPermanents(gameStatus, this) : emptyList();
     }
 
     public void cleanup() {
