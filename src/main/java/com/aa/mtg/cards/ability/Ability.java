@@ -52,7 +52,7 @@ public class Ability {
     }
 
     @JsonProperty
-    String getAbilityTypeText() {
+    public String getAbilityTypeText() {
         String parametersString = parametersAsString(parameters);
 
         boolean negative = parametersString.startsWith("-");

@@ -26,7 +26,7 @@ public class LeaveBattlefieldService {
         this.destroyPermanentService = destroyPermanentService;
     }
 
-    CardInstance leaveTheBattlefield(GameStatus gameStatus, int permanentId) {
+    public CardInstance leaveTheBattlefield(GameStatus gameStatus, int permanentId) {
         CardInstance cardInstance = gameStatus.extractCardByIdFromAnyBattlefield(permanentId);
 
         if (cardInstance != null) {

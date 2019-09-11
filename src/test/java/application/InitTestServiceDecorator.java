@@ -12,6 +12,7 @@ public class InitTestServiceDecorator extends InitTestService {
     }
 
     public void setInitTestService(InitTestService initTestService) {
+        initTestService.setCardInstanceFactory(this.getCardInstanceFactory());
         this.initTestService = initTestService;
     }
 }

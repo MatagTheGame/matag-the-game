@@ -16,7 +16,7 @@ import static com.aa.mtg.cards.ability.type.AbilityType.TAP_ADD_MANA;
 @Component
 public class ManaCountService {
 
-    ArrayList<Cost> verifyManaPaid(Map<Integer, List<String>> mana, Player currentPlayer) {
+    public ArrayList<Cost> verifyManaPaid(Map<Integer, List<String>> mana, Player currentPlayer) {
         ArrayList<Cost> paidCost = new ArrayList<>();
         for (int cardInstanceId : mana.keySet()) {
             List<String> requestedManas = mana.get(cardInstanceId);

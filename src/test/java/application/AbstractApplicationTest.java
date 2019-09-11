@@ -1,6 +1,7 @@
 package application;
 
 import application.browser.MtgBrowser;
+import com.aa.mtg.cards.CardInstanceFactory;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
@@ -112,8 +113,10 @@ public abstract class AbstractApplicationTest {
     @Configuration
     public static class InitGameTestConfiguration {
         @Bean
-        public InitTestServiceDecorator initTestServiceDecorator() {
-            return new InitTestServiceDecorator();
+        public InitTestServiceDecorator initTestServiceDecorator(CardInstanceFactory cardInstanceFactory) {
+            InitTestServiceDecorator initTestServiceDecorator = new InitTestServiceDecorator();
+            initTestServiceDecorator.setCardInstanceFactory(cardInstanceFactory);
+            return initTestServiceDecorator;
         }
     }
 

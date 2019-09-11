@@ -5,13 +5,11 @@ import com.aa.mtg.cards.CardInstanceFactory;
 import com.aa.mtg.game.status.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class InitTestService {
     private static final Logger LOGGER = LoggerFactory.getLogger(InitTestService.class);
-    
-    @Autowired
-    private CardInstanceFactory cardInstanceFactory;
+
+    protected CardInstanceFactory cardInstanceFactory;
 
     public void initGameStatusForTest(GameStatus gameStatus) {
         LOGGER.warn("Application is running in test mode: Initializing the gameStatus with test data.");
@@ -62,5 +60,13 @@ public abstract class InitTestService {
 
     protected void addCardToNonCurrentPlayerGraveyard(GameStatus gameStatus, Card card) {
         gameStatus.getNonCurrentPlayer().getGraveyard().addCard(cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, gameStatus.getNonCurrentPlayer().getName()));
+    }
+
+    public void setCardInstanceFactory(CardInstanceFactory cardInstanceFactory) {
+        this.cardInstanceFactory = cardInstanceFactory;
+    }
+
+    public CardInstanceFactory getCardInstanceFactory() {
+        return cardInstanceFactory;
     }
 }

@@ -1,5 +1,6 @@
 package com.aa.mtg.game.init.test;
 
+import com.aa.mtg.cards.CardInstanceFactory;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,10 @@ import static com.aa.mtg.cards.sets.RivalsOfIxalan.DEAD_WEIGHT;
 @Profile("test")
 @Component
 public class ProdInitTestService extends InitTestService {
+
+    public ProdInitTestService(CardInstanceFactory cardInstanceFactory) {
+        this.cardInstanceFactory = cardInstanceFactory;
+    }
 
     @Override
     public void initGameStatus(GameStatus gameStatus) {

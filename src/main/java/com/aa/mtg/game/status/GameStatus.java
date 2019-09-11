@@ -23,9 +23,7 @@ public class GameStatus {
     private SpellStack stack;
 
     @Autowired
-    public GameStatus(Player player1, Player player2, Turn turn, SpellStack stack) {
-        this.player1 = player1;
-        this.player2 = player2;
+    public GameStatus(Turn turn, SpellStack stack) {
         this.turn = turn;
         this.stack = stack;
     }
