@@ -196,12 +196,17 @@ public class CardInstance {
 
     @JsonProperty
     public List<Ability> getAbilities() {
-        ArrayList<Ability> abilities = new ArrayList<>();
+        List<Ability> abilities = getStaticAbilities();
+        abilities.addAll(getAbilitiesFormOtherPermanents());
+        return abilities;
+    }
+
+    public List<Ability> getStaticAbilities() {
+        List<Ability> abilities = new ArrayList<>();
         abilities.addAll(card.getAbilities());
         abilities.addAll(modifiers.getAbilities());
         abilities.addAll(modifiers.getAbilitiesUntilEndOfTurn());
         abilities.addAll(getAttachmentsAbilities());
-        abilities.addAll(getAbilitiesFormOtherPermanents());
         return abilities;
     }
 
@@ -220,6 +225,10 @@ public class CardInstance {
 
     public boolean hasAbility(AbilityType abilityType) {
         return getAbilities().stream().map(Ability::getAbilityType).anyMatch(currentAbilityType -> currentAbilityType.equals(abilityType));
+    }
+
+    public boolean hasStaticAbility(AbilityType abilityType) {
+        return getStaticAbilities().stream().map(Ability::getAbilityType).anyMatch(currentAbilityType -> currentAbilityType.equals(abilityType));
     }
 
     public boolean isPermanent() {

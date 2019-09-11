@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static com.aa.mtg.cards.Cards.PLAINS;
+import static com.aa.mtg.cards.ability.Abilities.OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_1_1;
 import static com.aa.mtg.cards.ability.Abilities.OTHER_ZOMBIES_YOU_CONTROL_GET_DEATHTOUCH;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.properties.Type.LAND;
@@ -30,6 +31,8 @@ import static com.aa.mtg.cards.selector.StatusType.BLOCKING;
 import static com.aa.mtg.cards.sets.CoreSet2019.DAYBREAK_CHAPLAIN;
 import static com.aa.mtg.cards.sets.CoreSet2019.DEATH_BARON;
 import static com.aa.mtg.cards.sets.CoreSet2019.DIREGRAF_GHOUL;
+import static com.aa.mtg.cards.sets.CoreSet2020.DAWNING_ANGEL;
+import static com.aa.mtg.cards.sets.CoreSet2020.EMPYREAN_EAGLE;
 import static com.aa.mtg.cards.sets.Ixalan.FRENZIED_RAPTOR;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
@@ -598,6 +601,35 @@ public class CardInstanceSelectorServiceTest {
 
         // Then
         assertThat(selection).containsExactly(aZombie);
+    }
+
+    @Test
+    public void selectionFliersYouControl() {
+        // Given
+        GameStatus gameStatus = testUtils.testGameStatus();
+
+        CardInstanceSelector cardInstanceSelector = OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_1_1.getCardInstanceSelector();
+        CardInstance otherFliersCreature = cardInstanceFactory.create(gameStatus, 1, EMPYREAN_EAGLE, "player-name");
+        otherFliersCreature.setController("player-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(otherFliersCreature);
+
+        CardInstance aFlier = cardInstanceFactory.create(gameStatus, 2, DAWNING_ANGEL, "player-name");
+        aFlier.setController("player-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(aFlier);
+
+        CardInstance aNonFlier = cardInstanceFactory.create(gameStatus, 3, DAYBREAK_CHAPLAIN, "player-name");
+        aNonFlier.setController("player-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(aNonFlier);
+
+        CardInstance anOpponentFlier = cardInstanceFactory.create(gameStatus, 4, DAWNING_ANGEL, "player-name");
+        anOpponentFlier.setController("opponent-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(anOpponentFlier);
+
+        // When
+        List<CardInstance> selection = selectorService.select(gameStatus, otherFliersCreature, cardInstanceSelector).getCards();
+
+        // Then
+        assertThat(selection).containsExactly(aFlier);
     }
 
     @Test

@@ -49,10 +49,10 @@ public class AbilitiesFromOtherPermanentsService {
 
     private List<String> getParametersFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
         List<String> parameters = new ArrayList<>();
-        List<CardInstance> cards = gameStatus.getAllBattlefieldCards().withAbilityOnCard(SELECTED_PERMANENTS_GET).getCards();
+        List<CardInstance> cards = gameStatus.getAllBattlefieldCards().withStaticAbility(SELECTED_PERMANENTS_GET).getCards();
 
         for (CardInstance card : cards) {
-            for (Ability ability : card.getCard().getAbilities()) {
+            for (Ability ability : card.getStaticAbilities()) {
                 if (ability.getAbilityType() == SELECTED_PERMANENTS_GET) {
                     if (cardInstanceSelectorService.select(gameStatus, card, ability.getCardInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
                         parameters.addAll(ability.getParameters());

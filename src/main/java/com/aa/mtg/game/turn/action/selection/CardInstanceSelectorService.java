@@ -44,6 +44,10 @@ public class CardInstanceSelectorService {
             cards = cards.controlledBy(gameStatus.getNonCurrentPlayer().getName());
         }
 
+        if (cardInstanceSelector.getWithAbilityType() != null) {
+            cards = cards.withStaticAbility(cardInstanceSelector.getWithAbilityType());
+        }
+
         if (cardInstanceSelector.getPowerToughnessConstraint() != null) {
             cards = cards.ofPowerToughnessConstraint(cardInstanceSelector.getPowerToughnessConstraint());
         }

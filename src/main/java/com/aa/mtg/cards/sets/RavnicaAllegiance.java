@@ -51,7 +51,9 @@ public class RavnicaAllegiance implements MtgSet {
     public static Card PROWLING_CARACAL = new Card("Prowling Caracal", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), singletonList(CAT), COMMON, "", 3, 1, emptyList());
     public static Card RAKDOS_GUILDGATE = new Card("Rakdos Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Rakdos Guildgate enters the battlefield tapped. TAP: Add BLACK or RED to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_BLACK_MANA, TAP_ADD_RED_MANA));
     public static Card SIMIC_GUILDGATE = new Card("Simic Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Simic Guildgate enters the battlefield tapped. TAP: Add GREEN or BLUE to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_GREEN_MANA, TAP_ADD_BLUE_MANA));
+    public static Card SPIRIT_OF_THE_SPIRES = new Card("Spirit of the Spires", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(SPIRIT), UNCOMMON, "Flying. Other creatures you control with flying get +0/+1.", 2, 4, asList(FLYING, OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_0_1));
     public static Card SYLVAN_BRUSHSTRIDER = new Card("Sylvan Brushstrider", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), COMMON, "When Sylvan Brushstrider enters the battlefield, you gain 2 life.", 3, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE));
+    public static Card WINDSTORM_DRAKE = new Card("Windstorm Drake", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DRAKE), UNCOMMON, "Flying. Other creatures you control with flying get +1/+0.", 3, 3, asList(FLYING, OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_1_0));
 
     private static RavnicaAllegiance instance;
 
@@ -83,7 +85,9 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(PROWLING_CARACAL);
         cards.add(RAKDOS_GUILDGATE);
         cards.add(SIMIC_GUILDGATE);
+        cards.add(SPIRIT_OF_THE_SPIRES);
         cards.add(SYLVAN_BRUSHSTRIDER);
+        cards.add(WINDSTORM_DRAKE);
     }
 
     @Override

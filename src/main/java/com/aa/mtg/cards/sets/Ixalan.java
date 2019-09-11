@@ -35,6 +35,7 @@ public class Ixalan implements MtgSet {
     public static Card DARK_NOURISHMENT = new Card("Dark Nourishment", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Dark Nourishment deals 3 damage to target creature or player. You gain 3 life.", 0, 0, asList(DEAL_3_DAMAGE_TO_TARGET_CREATURE, GAIN_3_LIFE));
     public static Card DEMOLISH = new Card("Demolish", singleton(Color.RED), singletonList(Cost.RED), singletonList(SORCERY), emptyList(), COMMON, "Destroy target artifact or land.", 0, 0, singletonList(DESTROY_TARGET_ARTIFACT_OR_LAND));
     public static Card DEMYSTIFY = new Card("Demystify", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(INSTANT), emptyList(), COMMON, "Destroy target enchantment.", 0, 0, singletonList(TARGET_ENCHANTMENT_GETS_DESTROYED));
+    public static Card FAVORABLE_WINDS = new Card("Favorable Winds", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(ENCHANTMENT), emptyList(), UNCOMMON, "Creatures you control with flying get +1/+1.", 0, 0, singletonList(CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_1_1));
     public static Card FRENZIED_RAPTOR = new Card("Frenzied Raptor", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "", 4, 2, emptyList());
     public static Card GILDED_SENTINEL = new Card("Gilded Sentinel", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList(GOLEM), COMMON, "", 3, 3, emptyList());
     public static Card GRAZING_WHIPTAIL = new Card("Grazing Whiptail", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "", 3, 4, singletonList(REACH));
@@ -73,6 +74,7 @@ public class Ixalan implements MtgSet {
         cards.add(CRASH_THE_RAMPARTS);
         cards.add(DARK_NOURISHMENT);
         cards.add(DEMYSTIFY);
+        cards.add(FAVORABLE_WINDS);
         cards.add(DEMOLISH);
         cards.add(FRENZIED_RAPTOR);
         cards.add(GILDED_SENTINEL);
