@@ -8,6 +8,7 @@ import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.Turn;
+import com.aa.mtg.game.turn.action.tap.TapPermanentService;
 import com.aa.mtg.game.turn.action.target.TargetCheckerService;
 import com.aa.mtg.game.turn.phases.PhaseUtils;
 import org.slf4j.Logger;
@@ -25,11 +26,13 @@ public class CastService {
 
     private final TargetCheckerService targetCheckerService;
     private final ManaCountService manaCountService;
+    private final TapPermanentService tapPermanentService;
 
     @Autowired
-    public CastService(TargetCheckerService targetCheckerService, ManaCountService manaCountService) {
+    public CastService(TargetCheckerService targetCheckerService, ManaCountService manaCountService, TapPermanentService tapPermanentService) {
         this.targetCheckerService = targetCheckerService;
         this.manaCountService = manaCountService;
+        this.tapPermanentService = tapPermanentService;
     }
 
     public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
@@ -70,7 +73,7 @@ public class CastService {
             // FIXME Antonio: Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
             mana.keySet().stream()
                     .map(cardInstanceId -> activePlayer.getBattlefield().findCardById(cardInstanceId))
-                    .forEach(card -> card.getModifiers().tap());
+                    .forEach(card -> tapPermanentService.tap(gameStatus, card.getId()));
         }
     }
 

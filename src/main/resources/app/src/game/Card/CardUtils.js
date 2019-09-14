@@ -15,7 +15,7 @@ export default class CardUtils {
   }
 
   static hasSummoningSickness(cardInstance) {
-    return cardInstance.modifiers.summoningSickness
+    return cardInstance.summoningSickness
   }
 
   static hasAbility(cardInstance, abilityType) {

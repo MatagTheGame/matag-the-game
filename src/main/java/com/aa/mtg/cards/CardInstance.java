@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 
 import static com.aa.mtg.cards.ability.trigger.TriggerType.MANA_ABILITY;
 import static com.aa.mtg.cards.ability.type.AbilityType.FLYING;
+import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
 import static com.aa.mtg.cards.ability.type.AbilityType.REACH;
 import static com.aa.mtg.cards.ability.type.AbilityType.VIGILANCE;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
@@ -43,10 +44,10 @@ import static java.util.Collections.emptyList;
 @Scope("prototype")
 public class CardInstance {
 
-    @JsonProperty private int id;
+    private int id;
     @JsonProperty private Card card;
     @JsonProperty private String owner;
-    @JsonProperty private String controller;
+    private String controller;
     @JsonProperty private CardModifiers modifiers = new CardModifiers();
     @JsonProperty private List<Ability> triggeredAbilities = new ArrayList<>();
 
@@ -67,6 +68,7 @@ public class CardInstance {
         return gameStatus;
     }
 
+    @JsonProperty
     public int getId() {
         return modifiers.getPermanentId() > 0 ? modifiers.getPermanentId() : id;
     }
@@ -83,7 +85,16 @@ public class CardInstance {
         return owner;
     }
 
+    @JsonProperty
     public String getController() {
+        if (modifiers.getControllerUntilEndOfTurn() != null) {
+            return modifiers.getControllerUntilEndOfTurn();
+        }
+
+        if (modifiers.getController() != null) {
+            return modifiers.getController();
+        }
+
         return controller;
     }
 
@@ -146,9 +157,14 @@ public class CardInstance {
             throw new MessageException(getIdAndName() + " is already tapped and cannot attack.");
         }
 
-        if (modifiers.isSummoningSickness()) {
+        if (isSummoningSickness()) {
             throw new MessageException(getIdAndName() + " has summoning sickness and cannot attack.");
         }
+    }
+
+    @JsonProperty
+    public boolean isSummoningSickness() {
+        return modifiers.isSummoningSickness() && !hasAbility(HASTE);
     }
 
     public void declareAsAttacker() {

@@ -3,7 +3,6 @@ package com.aa.mtg.cards.sets;
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
-import com.aa.mtg.cards.properties.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,8 @@ public class CoreSet2019 implements MtgSet {
 
     public static final String M19 = "M19";
 
-    public static Card AEGIS_OF_THE_HEAVENS = new Card("Aegis of the Heavens", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), UNCOMMON, "Target creature gets +1/+7 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_1_7_UNTIL_END_OF_TURN));
+    public static Card ACT_OF_TREASON = new Card("Act of Treason", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.", 0, 0, asList(GAIN_CONTROL_TARGET_CREATURE_UNTIL_END_OF_TURN, UNTAP_TARGET_CREATURE, TARGET_CREATURE_GETS_HASTE_UNTIL_END_OF_TURN));
+    public static Card AEGIS_OF_THE_HEAVENS = new Card("Aegis of the Heavens", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Target creature gets +1/+7 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_1_7_UNTIL_END_OF_TURN));
     public static Card AGGRESSIVE_MAMMOTH = new Card("Aggressive Mammoth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ELEPHANT), RARE, "Trample. Other creatures you control have trample.", 8, 8, asList(TRAMPLE, OTHER_CREATURES_YOU_CONTROL_GET_TRAMPLE));
     public static Card ANGEL_OF_THE_DAWN = new Card("Angel of the Dawn", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ANGEL), COMMON, "Flying. When Angel of the Dawn enters the battlefield, creatures you control get +1/+1 and gain vigilance until end of turn.", 3, 3, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_AND_VIGILANCE_UNTIL_END_OF_TURN));
     public static Card BOGSTOMPER = new Card("Bogstomper", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), COMMON, "", 6, 5, emptyList());
@@ -37,7 +37,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card DISPERSE = new Card("Disperse", singleton(Color.BLUE), singletonList(Cost.BLUE), singletonList(INSTANT), emptyList(), COMMON, "Return target nonland permanent to its owner's hand.", 0, 0, singletonList(RETURN_TARGET_NONLAND_TO_ITS_OWNER_HAND));
     public static Card DIREGRAF_GHOUL = new Card("Diregraf Ghoul", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(CREATURE), singletonList(ZOMBIE), UNCOMMON, "Diregraf Ghoul enters the battlefield tapped.", 2, 2, singletonList(ENTERS_THE_BATTLEFIELD_TAPPED));
     public static Card DRUID_OF_THE_COWL = new Card("Druid of the Cowl", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), asList(ELF, DRUID), COMMON, "TAP: add GREEN.", 1, 3, singletonList(TAP_ADD_GREEN_MANA));
-    public static Card ELECTRIFY = new Card("Electrify", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Electrify deals 4 damage to target creature.", 0, 0, singletonList(DEAL_4_DAMAGE_TO_TARGET_CREATURE));
+    public static Card ELECTRIFY = new Card("Electrify", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Electrify deals 4 damage to target creature.", 0, 0, singletonList(DEAL_4_DAMAGE_TO_TARGET_CREATURE));
     public static Card EXCLUSION_MAGE = new Card("Exclusion Mage", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, WIZARD), UNCOMMON, "\tWhen Exclusion Mage enters the battlefield, return target creature an opponent controls to its owner's hand.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_RETURN_TARGET_OPPONENT_CREATURE_TO_ITS_OWNERS_HAND));
     public static Card FIELD_CREEPER = new Card("Field Creeper", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList(SCARECROW), COMMON, "", 2, 1, emptyList());
     public static Card FIERY_FINISH = new Card("Fiery Finish", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), UNCOMMON, "Fiery Finish deals 7 damage to target creature.", 0, 0, singletonList(DEAL_7_DAMAGE_TO_TARGET_CREATURE));
@@ -76,6 +76,7 @@ public class CoreSet2019 implements MtgSet {
     private List<Card> cards = new ArrayList<>();
 
     private CoreSet2019() {
+        cards.add(ACT_OF_TREASON);
         cards.add(AEGIS_OF_THE_HEAVENS);
         cards.add(AGGRESSIVE_MAMMOTH);
         cards.add(Ixalan.AIR_ELEMENTAL);

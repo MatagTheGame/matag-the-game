@@ -60,6 +60,7 @@ public class RavnicaAllegiance implements MtgSet {
     private List<Card> cards = new ArrayList<>();
 
     private RavnicaAllegiance() {
+        cards.add(CoreSet2019.ACT_OF_TREASON);
         cards.add(AXEBANE_BEAST);
         cards.add(AZORIUS_GUILDGATE);
         cards.add(BEDEVIL);

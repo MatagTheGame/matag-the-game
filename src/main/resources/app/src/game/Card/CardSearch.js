@@ -103,6 +103,11 @@ export default class CardSearch extends Array {
     return new CardSearch(...cards)
   }
 
+  controlledBy(playerName) {
+    const cards = this.filter(cardInstance => cardInstance.controller === playerName)
+    return new CardSearch(...cards)
+  }
+
   isEmpty() {
     return this.length === 0
   }

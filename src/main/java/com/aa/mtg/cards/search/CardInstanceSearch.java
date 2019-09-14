@@ -79,14 +79,14 @@ public class CardInstanceSearch {
 
     public CardInstanceSearch withSummoningSickness() {
         List<CardInstance> cards = this.cards.stream()
-                .filter(cardInstance -> cardInstance.getModifiers().isSummoningSickness())
+                .filter(CardInstance::isSummoningSickness)
                 .collect(toList());
         return new CardInstanceSearch(cards);
     }
 
     public CardInstanceSearch withoutSummoningSickness() {
         List<CardInstance> cards = this.cards.stream()
-                .filter(cardInstance -> !cardInstance.getModifiers().isSummoningSickness())
+                .filter(cardInstance -> !cardInstance.isSummoningSickness())
                 .collect(toList());
         return new CardInstanceSearch(cards);
     }

@@ -13,21 +13,6 @@ import java.util.stream.Collectors;
 @Scope("prototype")
 public class Battlefield extends CardListComponent {
 
-    public void untap() {
-        for (CardInstance cardInstance : new CardInstanceSearch(cards).tapped().getCards()) {
-            if (cardInstance.getModifiers().isDoesNotUntapNextTurn()) {
-                cardInstance.getModifiers().doesNotUntapNextTurn(false);
-            } else {
-                cardInstance.getModifiers().untap();
-            }
-        }
-    }
-
-    public void removeSummoningSickness() {
-        new CardInstanceSearch(cards).withSummoningSickness().getCards()
-                .forEach(cardInstance -> cardInstance.getModifiers().setSummoningSickness(false));
-    }
-
     public void removeAttacking() {
         new CardInstanceSearch(cards).attacking().getCards()
                 .forEach(cardInstance -> cardInstance.getModifiers().setAttacking(false));

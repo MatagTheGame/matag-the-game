@@ -24,7 +24,7 @@ public class CardModifiers {
     @JsonProperty private int permanentId;
     @JsonProperty private TappedModifier tapped;
     @JsonProperty private boolean doesNotUntapNextTurn;
-    @JsonProperty private boolean summoningSickness;
+    private boolean summoningSickness;
     @JsonProperty private boolean attacking;
     @JsonProperty private Integer blockingCardId;
     @JsonProperty private int damage;
@@ -33,6 +33,8 @@ public class CardModifiers {
     @JsonProperty private PowerToughness extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
     @JsonProperty private List<Object> targets = new ArrayList<>();
     @JsonProperty private int attachedToId;
+    private String controller;
+    private String controllerUntilEndOfTurn;
 
     public TappedModifier getTapped() {
         return tapped;
@@ -167,6 +169,7 @@ public class CardModifiers {
     public void cleanupUntilEndOfTurnModifiers() {
         resetDamage();
         resetExtraPowerToughnessUntilEndOfTurn();
+        resetControllerUntilEndOfTurn();
     }
 
     public void resetDamage() {
@@ -175,5 +178,25 @@ public class CardModifiers {
 
     private void resetExtraPowerToughnessUntilEndOfTurn() {
         extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
+    }
+
+    public void setController(String controller) {
+        this.controller = controller;
+    }
+
+    public String getController() {
+        return controller;
+    }
+
+    public void setControllerUntilEndOfTurn(String controllerUntilEndOfTurn) {
+        this.controllerUntilEndOfTurn = controllerUntilEndOfTurn;
+    }
+
+    public String getControllerUntilEndOfTurn() {
+        return controllerUntilEndOfTurn;
+    }
+
+    public void resetControllerUntilEndOfTurn() {
+        controllerUntilEndOfTurn = null;
     }
 }

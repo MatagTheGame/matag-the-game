@@ -32,4 +32,15 @@ public class TapPermanentService {
             LOGGER.info("target {} is not anymore valid.", targetId);
         }
     }
+
+    public void untap(GameStatus gameStatus, int targetId) {
+        CardInstance cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);
+        if (cardToTap != null) {
+            cardToTap.getModifiers().untap();
+            LOGGER.info("{} tapped.", cardToTap.getIdAndName());
+
+        } else {
+            LOGGER.info("target {} is not anymore valid.", targetId);
+        }
+    }
 }

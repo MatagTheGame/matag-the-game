@@ -12,7 +12,6 @@ import java.util.List;
 
 import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_IT_ENTERS_THE_BATTLEFIELD;
 import static com.aa.mtg.cards.ability.type.AbilityType.ENTERS_THE_BATTLEFIELD_TAPPED;
-import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static java.util.stream.Collectors.toList;
 
@@ -27,7 +26,7 @@ public class EnterCardIntoBattlefieldService {
 
         cardInstance.getModifiers().setPermanentId(gameStatus.nextCardId());
 
-        if (cardInstance.isOfType(CREATURE) && !cardInstance.hasAbility(HASTE)) {
+        if (cardInstance.isOfType(CREATURE)) {
             cardInstance.getModifiers().setSummoningSickness(true);
         }
 

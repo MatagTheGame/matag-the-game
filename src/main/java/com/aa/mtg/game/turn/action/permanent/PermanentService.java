@@ -29,15 +29,17 @@ public class PermanentService {
     private final DestroyPermanentService destroyPermanentService;
     private final TapPermanentService tapPermanentService;
     private final ReturnPermanentToHandService returnPermanentToHandService;
+    private final GainControlPermanentService gainControlPermanentService;
 
     @Autowired
     public PermanentService(LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService, DestroyPermanentService destroyPermanentService,
-                            TapPermanentService tapPermanentService, ReturnPermanentToHandService returnPermanentToHandService) {
+                            TapPermanentService tapPermanentService, ReturnPermanentToHandService returnPermanentToHandService, GainControlPermanentService gainControlPermanentService) {
         this.lifeService = lifeService;
         this.dealDamageToCreatureService = dealDamageToCreatureService;
         this.destroyPermanentService = destroyPermanentService;
         this.tapPermanentService = tapPermanentService;
         this.returnPermanentToHandService = returnPermanentToHandService;
+        this.gainControlPermanentService = gainControlPermanentService;
     }
 
     public void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, List<String> parameters, CardInstance target) {
@@ -67,8 +69,16 @@ public class PermanentService {
             tapPermanentService.tapDoesNotUntapNextTurn(gameStatus, target.getId());
         }
 
+        if (untappedFromParameter(parameter)) {
+            tapPermanentService.untap(gameStatus, target.getId());
+        }
+
         if (returnToOwnerHandFromParameter(parameter)) {
             returnPermanentToHandService.returnPermanentToHand(gameStatus, target.getId());
+        }
+
+        if (controlledFromParameter(parameter)) {
+            gainControlPermanentService.gainControlUntilEndOfTurn(gameStatus, target, cardInstance.getController());
         }
 
         LOGGER.info("PermanentService: {} target {} which gets {}", cardInstance.getIdAndName(), target.getIdAndName(), parameter);

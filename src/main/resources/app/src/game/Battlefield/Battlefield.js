@@ -18,36 +18,36 @@ class Battlefield extends Component {
     return this.props.type + '-battlefield'
   }
 
-  getPlayerBattlefield() {
+  getAllPermanents() {
+    return this.props.playerBattlefield.concat(this.props.opponentBattlefield)
+  }
+
+  getTypePlayerName() {
     if (this.props.type === 'player') {
-      return this.props.playerBattlefield
+      return this.props.playerName
     } else {
-      return this.props.opponentBattlefield
+      return this.props.opponentName
     }
   }
 
-  getOtherPlayerBattlefield() {
-    if (this.props.type === 'opponent') {
-      return this.props.playerBattlefield
-    } else {
-      return this.props.opponentBattlefield
-    }
+  getPlayerPermanents() {
+    return CardSearch.cards(this.getAllPermanents()).controlledBy(this.getTypePlayerName())
   }
 
   getFirstLineCards() {
-    return CardSearch.cards(this.getPlayerBattlefield()).ofType('LAND')
+    return CardSearch.cards(this.getPlayerPermanents()).ofType('LAND')
       .sort((l, r) => l.card.name.localeCompare(r.card.name))
       .map(this.cardWithAttachments)
   }
 
   getSecondLineCards() {
-    return CardSearch.cards(this.getPlayerBattlefield()).ofType('CREATURE').notAttackingOrBlocking()
-      .concat(CardSearch.cards(this.getPlayerBattlefield()).notOfType('CREATURE').ofAnyType(['ARTIFACT', 'ENCHANTMENT']).notAttached())
+    return CardSearch.cards(this.getPlayerPermanents()).ofType('CREATURE').notAttackingOrBlocking()
+      .concat(CardSearch.cards(this.getPlayerPermanents()).notOfType('CREATURE').ofAnyType(['ARTIFACT', 'ENCHANTMENT']).notAttached())
       .map(this.cardWithAttachments)
   }
 
   getAttackingOrBlockingCreatures() {
-    return CardSearch.cards(this.getPlayerBattlefield()).attackingOrBlocking()
+    return CardSearch.cards(this.getPlayerPermanents()).attackingOrBlocking()
       .map(this.cardWithAttachments)
   }
 
@@ -98,11 +98,11 @@ class Battlefield extends Component {
   }
 
   attackingCards() {
-    return CardSearch.cards(this.getPlayerBattlefield()).attackingOrFrontendAttacking().concat(CardSearch.cards(this.getOtherPlayerBattlefield()).attackingOrFrontendAttacking())
+    return CardSearch.cards(this.getAllPermanents()).attackingOrFrontendAttacking()
   }
 
   blockingCards() {
-    return CardSearch.cards(this.getOtherPlayerBattlefield()).blockingOrFrontendBlocking().concat(CardSearch.cards(this.getPlayerBattlefield()).blockingOrFrontendBlocking())
+    return CardSearch.cards(this.getAllPermanents()).blockingOrFrontendBlocking()
   }
 
   static marginFromPosition(n, i) {
@@ -144,8 +144,8 @@ class Battlefield extends Component {
   }
 
   cardWithAttachments(card) {
-    const attachments = CardSearch.cards(this.getPlayerBattlefield())
-      .concat(this.getOtherPlayerBattlefield())
+    const attachments = CardSearch.cards(this.getPlayerPermanents())
+      .concat(this.getAllPermanents())
       .attachedTo(card.id)
     return [card, ...attachments]
   }
@@ -198,6 +198,8 @@ const mapStateToProps = state => {
     playerBattlefield: get(state, 'player.battlefield', []),
     opponentBattlefield: get(state, 'opponent.battlefield', []),
     cardIdSelectedToBePlayed: get(state, 'turn.cardIdSelectedToBePlayed'),
+    playerName: get(state, 'player.name', ''),
+    opponentName: get(state, 'opponent.name', ''),
     turn: state.turn,
     state: state
   }
@@ -214,10 +216,13 @@ Battlefield.propTypes = {
   type: PropTypes.string.isRequired,
   playerBattlefield: PropTypes.array.isRequired,
   opponentBattlefield: PropTypes.array.isRequired,
+  cardIdSelectedToBePlayed: PropTypes.number,
+  playerName: PropTypes.string.isRequired,
+  opponentName: PropTypes.string.isRequired,
   turn: PropTypes.object,
   state: PropTypes.object.isRequired,
   playerCardClick: PropTypes.func.isRequired,
-  opponentCardClick: PropTypes.func.isRequired,
+  opponentCardClick: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Battlefield)

@@ -1,6 +1,7 @@
 package integration.mtg.game.turn.action.cast;
 
 import com.aa.mtg.game.turn.action.enter.EnterCardIntoBattlefieldService;
+import com.aa.mtg.game.turn.action.tap.TapPermanentService;
 import com.aa.mtg.game.turn.action.target.TargetCheckerService;
 import integration.TestUtilsConfiguration;
 import org.mockito.Mockito;
@@ -25,5 +26,11 @@ public class CastTestConfiguration {
     @Primary
     public EnterCardIntoBattlefieldService enterCardIntoBattlefieldService() {
         return Mockito.mock(EnterCardIntoBattlefieldService.class);
+    }
+
+    @Bean
+    @Primary
+    public TapPermanentService tapPermanentService() {
+        return Mockito.mock(TapPermanentService.class);
     }
 }
