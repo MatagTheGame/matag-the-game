@@ -68,11 +68,11 @@ public class CardInstance {
     }
 
     public int getId() {
-        return id;
+        return modifiers.getPermanentId() > 0 ? modifiers.getPermanentId() : id;
     }
 
     public String getIdAndName() {
-        return "\"" + id + " - " + card.getName() + "\"";
+        return "\"" + getId() + " - " + card.getName() + "\"";
     }
 
     public Card getCard() {

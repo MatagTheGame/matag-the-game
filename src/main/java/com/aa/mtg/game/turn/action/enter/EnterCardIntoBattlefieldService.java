@@ -25,6 +25,8 @@ public class EnterCardIntoBattlefieldService {
         String controller = cardInstance.getController();
         gameStatus.getPlayerByName(controller).getBattlefield().addCard(cardInstance);
 
+        cardInstance.getModifiers().setPermanentId(gameStatus.nextCardId());
+
         if (cardInstance.isOfType(CREATURE) && !cardInstance.hasAbility(HASTE)) {
             cardInstance.getModifiers().setSummoningSickness(true);
         }

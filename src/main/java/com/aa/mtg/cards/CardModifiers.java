@@ -21,6 +21,7 @@ import java.util.List;
         creatorVisibility = JsonAutoDetect.Visibility.NONE
 )
 public class CardModifiers {
+    @JsonProperty private int permanentId;
     @JsonProperty private TappedModifier tapped;
     @JsonProperty private boolean doesNotUntapNextTurn;
     @JsonProperty private boolean summoningSickness;
@@ -63,6 +64,14 @@ public class CardModifiers {
 
     public boolean isBlocking() {
         return blockingCardId != null;
+    }
+
+    public void setPermanentId(int permanentId) {
+        this.permanentId = permanentId;
+    }
+
+    public int getPermanentId() {
+        return permanentId;
     }
 
     public void tap() {
