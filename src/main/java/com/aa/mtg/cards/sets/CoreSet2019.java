@@ -27,6 +27,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card AEGIS_OF_THE_HEAVENS = new Card("Aegis of the Heavens", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Target creature gets +1/+7 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_1_7_UNTIL_END_OF_TURN));
     public static Card AGGRESSIVE_MAMMOTH = new Card("Aggressive Mammoth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ELEPHANT), RARE, "Trample. Other creatures you control have trample.", 8, 8, asList(TRAMPLE, OTHER_CREATURES_YOU_CONTROL_GET_TRAMPLE));
     public static Card ANGEL_OF_THE_DAWN = new Card("Angel of the Dawn", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ANGEL), COMMON, "Flying. When Angel of the Dawn enters the battlefield, creatures you control get +1/+1 and gain vigilance until end of turn.", 3, 3, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_AND_VIGILANCE_UNTIL_END_OF_TURN));
+    public static Card BLOOD_BURGLAR = new Card("Blood Burglar", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, ROGUE), COMMON, "As long as it's your turn, Blood Burglar has lifelink.", 2, 2, asList(AS_LONG_AS_IS_YOUR_TURN_IT_HAS_LIFELINK));
     public static Card BOGSTOMPER = new Card("Bogstomper", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), COMMON, "", 6, 5, emptyList());
     public static Card CENTAUR_COURSER = new Card("Centaur Courser", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(CENTAUR, WARRIOR), COMMON, "", 3, 3, emptyList());
     public static Card CHILD_OF_NIGHT = new Card("Child of Night", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), singletonList(VAMPIRE), COMMON, "Lifelink", 2, 1, singletonList(LIFELINK));
@@ -82,6 +83,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(Ixalan.AIR_ELEMENTAL);
         cards.add(ANGEL_OF_THE_DAWN);
         cards.add(Dominaria.BEFUDDLE);
+        cards.add(BLOOD_BURGLAR);
         cards.add(BOGSTOMPER);
         cards.add(CENTAUR_COURSER);
         cards.add(CHILD_OF_NIGHT);

@@ -29,6 +29,7 @@ import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.LESS_OR_EQU
 import static com.aa.mtg.cards.selector.SelectorType.PERMANENT;
 import static com.aa.mtg.cards.selector.StatusType.ATTACKING;
 import static com.aa.mtg.cards.selector.StatusType.BLOCKING;
+import static com.aa.mtg.cards.selector.TurnStatusType.YOUR_TURN;
 import static com.aa.mtg.cards.sets.CoreSet2019.DAYBREAK_CHAPLAIN;
 import static com.aa.mtg.cards.sets.CoreSet2019.DEATH_BARON;
 import static com.aa.mtg.cards.sets.CoreSet2019.DIREGRAF_GHOUL;
@@ -652,6 +653,59 @@ public class CardInstanceSelectorServiceTest {
 
         // Then
         assertThat(selection).containsExactly(whiteCreature);
+    }
+
+    @Test
+    public void selectionItself() {
+        // Given
+        GameStatus gameStatus = testUtils.testGameStatus();
+
+        CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build();
+
+        CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, EMPYREAN_EAGLE, "player-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(aPermanent);
+
+        // When
+        List<CardInstance> selection = selectorService.select(gameStatus, aPermanent, cardInstanceSelector).getCards();
+
+        // Then
+        assertThat(selection).containsExactly(aPermanent);
+    }
+
+    @Test
+    public void selectionItselfAsLongItsYourTurnYes() {
+        // Given
+        GameStatus gameStatus = testUtils.testGameStatus();
+
+        CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build();
+
+        CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, EMPYREAN_EAGLE, "player-name");
+        aPermanent.setController("player-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(aPermanent);
+
+        // When
+        List<CardInstance> selection = selectorService.select(gameStatus, aPermanent, cardInstanceSelector).getCards();
+
+        // Then
+        assertThat(selection).containsExactly(aPermanent);
+    }
+
+    @Test
+    public void selectionItselfAsLongItsYourTurnNo() {
+        // Given
+        GameStatus gameStatus = testUtils.testGameStatus();
+
+        CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build();
+
+        CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, EMPYREAN_EAGLE, "opponent-name");
+        aPermanent.setController("opponent-name");
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(aPermanent);
+
+        // When
+        List<CardInstance> selection = selectorService.select(gameStatus, aPermanent, cardInstanceSelector).getCards();
+
+        // Then
+        assertThat(selection).isEmpty();
     }
 
     @Test

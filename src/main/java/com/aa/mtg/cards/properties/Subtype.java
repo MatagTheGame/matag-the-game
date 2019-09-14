@@ -48,6 +48,7 @@ public enum Subtype {
     PEGASUS,
     PIRATE,
     RHINO,
+    ROGUE,
     SCARECROW,
     SCORPION,
     SCOUT,

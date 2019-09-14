@@ -25,6 +25,7 @@ import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.GREATER_OR_
 import static com.aa.mtg.cards.selector.SelectorType.PERMANENT;
 import static com.aa.mtg.cards.selector.StatusType.ATTACKING;
 import static com.aa.mtg.cards.selector.StatusType.BLOCKING;
+import static com.aa.mtg.cards.selector.TurnStatusType.YOUR_TURN;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.utils.Utils.replaceLast;
@@ -35,6 +36,7 @@ import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
 public class Abilities {
+    public static final Ability AS_LONG_AS_IS_YOUR_TURN_IT_HAS_LIFELINK = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build(), singletonList("LIFELINK"), castTrigger());
     public static final Ability CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), singletonList("+1/+1"), castTrigger());
     public static final Ability CREATURES_YOU_CONTROL_GET_PLUS_2_0_UNTIL_END_OF_TURN = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), singletonList("+2/+0"), castTrigger());
     public static final Ability CREATURES_YOU_CONTROL_GET_PLUS_2_1_UNTIL_END_OF_TURN = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), singletonList("+2/+1"), castTrigger());

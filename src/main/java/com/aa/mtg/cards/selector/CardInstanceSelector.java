@@ -23,8 +23,10 @@ public class CardInstanceSelector {
     private final PlayerType controllerType;
     private final List<StatusType> statusTypes;
     private final boolean others;
+    private final boolean itself;
+    private final TurnStatusType turnStatusType;
 
-    private CardInstanceSelector(SelectorType selectorType, List<Type> ofType, List<Type> notOfType, List<Subtype> ofSubtypeOf, AbilityType withAbilityType, List<Color> ofColors, PowerToughnessConstraint powerToughnessConstraint, PlayerType controllerType, List<StatusType> statusTypes, boolean others) {
+    private CardInstanceSelector(SelectorType selectorType, List<Type> ofType, List<Type> notOfType, List<Subtype> ofSubtypeOf, AbilityType withAbilityType, List<Color> ofColors, PowerToughnessConstraint powerToughnessConstraint, PlayerType controllerType, List<StatusType> statusTypes, boolean others, boolean itself, TurnStatusType turnStatusType) {
         this.selectorType = selectorType;
         this.ofType = ofType;
         this.notOfType = notOfType;
@@ -35,6 +37,8 @@ public class CardInstanceSelector {
         this.controllerType = controllerType;
         this.statusTypes = statusTypes;
         this.others = others;
+        this.itself = itself;
+        this.turnStatusType = turnStatusType;
     }
 
     public SelectorType getSelectorType() {
@@ -75,6 +79,14 @@ public class CardInstanceSelector {
 
     public boolean isOthers() {
         return others;
+    }
+
+    public boolean isItself() {
+        return itself;
+    }
+
+    public TurnStatusType getTurnStatusType() {
+        return turnStatusType;
     }
 
     public String getText() {

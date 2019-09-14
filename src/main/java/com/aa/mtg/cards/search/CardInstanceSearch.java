@@ -6,6 +6,8 @@ import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.cards.selector.PowerToughnessConstraint;
+import com.aa.mtg.cards.selector.TurnStatusType;
+import com.aa.mtg.game.status.GameStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -152,6 +154,15 @@ public class CardInstanceSearch {
                 .collect(toList());
 
         return new CardInstanceSearch(cards);
+    }
+
+    public CardInstanceSearch onTurnStatusType(TurnStatusType turnStatusType, GameStatus gameStatus) {
+        if (turnStatusType == TurnStatusType.YOUR_TURN) {
+            return controlledBy(gameStatus.getCurrentPlayer().getName());
+        } else if (turnStatusType == TurnStatusType.YOUR_OPPONENT_TURN) {
+            return controlledBy(gameStatus.getNonCurrentPlayer().getName());
+        }
+        return this;
     }
 
     public boolean isEmpty() {

@@ -7,11 +7,14 @@ import com.aa.mtg.game.player.PlayerType;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+
 import static com.aa.mtg.cards.selector.SelectorType.ANY;
 import static com.aa.mtg.cards.selector.SelectorType.PERMANENT;
 import static com.aa.mtg.cards.selector.StatusType.ATTACKING;
 import static com.aa.mtg.cards.selector.StatusType.BLOCKING;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
+import static java.util.Collections.emptyList;
 
 @Component
 public class CardInstanceSelectorService {
@@ -69,6 +72,15 @@ public class CardInstanceSelectorService {
         if (cardInstanceSelector.isOthers()) {
             cards = cards.notWithId(cardInstance.getId());
         }
+
+        if (cardInstanceSelector.isItself()) {
+            cards = cards.withId(cardInstance.getId()).map(Collections::singletonList).map(CardInstanceSearch::new).orElse(new CardInstanceSearch(emptyList()));
+        }
+
+        if (cardInstanceSelector.getTurnStatusType() != null) {
+            cards = cards.onTurnStatusType(cardInstanceSelector.getTurnStatusType(), gameStatus);
+        }
+
         return cards;
     }
 }
