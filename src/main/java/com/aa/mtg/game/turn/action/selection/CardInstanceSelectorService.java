@@ -62,6 +62,10 @@ public class CardInstanceSelectorService {
             }
         }
 
+        if (cardInstanceSelector.getOfColors() != null) {
+            cards = cards.ofAnyOfTheColors(cardInstanceSelector.getOfColors());
+        }
+
         if (cardInstanceSelector.isOthers()) {
             cards = cards.notWithId(cardInstance.getId());
         }

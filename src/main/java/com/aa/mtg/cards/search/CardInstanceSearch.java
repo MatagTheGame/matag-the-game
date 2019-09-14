@@ -2,6 +2,7 @@ package com.aa.mtg.cards.search;
 
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.type.AbilityType;
+import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.cards.selector.PowerToughnessConstraint;
@@ -59,6 +60,13 @@ public class CardInstanceSearch {
     public CardInstanceSearch ofAnyOfTheSubtypes(List<Subtype> subtypes) {
         List<CardInstance> cards = this.cards.stream()
                 .filter(cardInstance -> cardInstance.ofAnyOfTheSubtypes(subtypes))
+                .collect(toList());
+        return new CardInstanceSearch(cards);
+    }
+
+    public CardInstanceSearch ofAnyOfTheColors(List<Color> colors) {
+        List<CardInstance> cards = this.cards.stream()
+                .filter(cardInstance -> cardInstance.ofAnyOfTheColors(colors))
                 .collect(toList());
         return new CardInstanceSearch(cards);
     }

@@ -18,19 +18,19 @@ public class CardInstanceSelector {
     private final List<Type> notOfType;
     private final List<Subtype> ofSubtypeOf;
     private final AbilityType withAbilityType;
-    private final Color ofColor;
+    private final List<Color> ofColors;
     private final PowerToughnessConstraint powerToughnessConstraint;
     private final PlayerType controllerType;
     private final List<StatusType> statusTypes;
     private final boolean others;
 
-    private CardInstanceSelector(SelectorType selectorType, List<Type> ofType, List<Type> notOfType, List<Subtype> ofSubtypeOf, AbilityType withAbilityType, Color ofColor, PowerToughnessConstraint powerToughnessConstraint, PlayerType controllerType, List<StatusType> statusTypes, boolean others) {
+    private CardInstanceSelector(SelectorType selectorType, List<Type> ofType, List<Type> notOfType, List<Subtype> ofSubtypeOf, AbilityType withAbilityType, List<Color> ofColors, PowerToughnessConstraint powerToughnessConstraint, PlayerType controllerType, List<StatusType> statusTypes, boolean others) {
         this.selectorType = selectorType;
         this.ofType = ofType;
         this.notOfType = notOfType;
         this.ofSubtypeOf = ofSubtypeOf;
         this.withAbilityType = withAbilityType;
-        this.ofColor = ofColor;
+        this.ofColors = ofColors;
         this.powerToughnessConstraint = powerToughnessConstraint;
         this.controllerType = controllerType;
         this.statusTypes = statusTypes;
@@ -57,8 +57,8 @@ public class CardInstanceSelector {
         return withAbilityType;
     }
 
-    public Color getOfColor() {
-        return ofColor;
+    public List<Color> getOfColors() {
+        return ofColors;
     }
 
     public PowerToughnessConstraint getPowerToughnessConstraint() {

@@ -3,6 +3,7 @@ package com.aa.mtg.cards.ability;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.modifiers.PowerToughness;
+import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
 import com.aa.mtg.cards.selector.PowerToughnessConstraint;
 import com.aa.mtg.cards.selector.SelectorType;
@@ -57,6 +58,7 @@ public class Abilities {
     public static final Ability DESTROY_TARGET_ATTACKING_OF_BLOCKING_CREATURE = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).statusTypes(asList(ATTACKING, BLOCKING)).build())), singletonList(":DESTROYED"), castTrigger());
     public static final Ability DESTROY_TARGET_CREATURE = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), singletonList(":DESTROYED"), castTrigger());
     public static final Ability DESTROY_TARGET_CREATURE_OR_ENCHANTMENT = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(asList(CREATURE, ENCHANTMENT)).build())), singletonList(":DESTROYED"), castTrigger());
+    public static final Ability DESTROY_TARGET_CREATURE_OR_PLANESWALKER_THAT_S_GREEN_OR_WHITE = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(asList(CREATURE, PLANESWALKER)).ofColors(asList(Color.GREEN, Color.WHITE)).build())), singletonList(":DESTROYED"), castTrigger());
     public static final Ability DESTROY_TARGET_CREATURE_WITH_POWER_GREATER_OR_EQUAL_4 = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).powerToughnessConstraint(new PowerToughnessConstraint(POWER, GREATER_OR_EQUAL, 4)).build())), singletonList(":DESTROYED"), castTrigger());
     public static final Ability DESTROY_TARGET_CREATURE_WITH_TOUGHNESS_GREATER_OR_EQUAL_4 = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).powerToughnessConstraint(new PowerToughnessConstraint(TOUGHNESS, GREATER_OR_EQUAL, 4)).build())), singletonList(":DESTROYED"), castTrigger());
     public static final Ability DESTROY_TARGET_CREATURE_2_DAMAGE_TO_CONTROLLER = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), asList(":DESTROYED", "CONTROLLER_DAMAGE:2"), castTrigger());

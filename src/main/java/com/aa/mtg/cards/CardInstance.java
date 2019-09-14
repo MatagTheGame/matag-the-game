@@ -148,6 +148,19 @@ public class CardInstance {
         return false;
     }
 
+    public boolean isOfColor(Color color) {
+        return card.isOfColor(color);
+    }
+
+    public boolean ofAnyOfTheColors(List<Color> colors) {
+        for (Color color : colors) {
+            if (isOfColor(color)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void checkIfCanAttack() {
         if (!isOfType(Type.CREATURE)) {
             throw new MessageException(getIdAndName() + " is not of type Creature.");

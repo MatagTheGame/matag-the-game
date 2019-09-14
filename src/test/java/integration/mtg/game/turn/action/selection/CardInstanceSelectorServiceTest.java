@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static com.aa.mtg.cards.Cards.PLAINS;
+import static com.aa.mtg.cards.ability.Abilities.DESTROY_TARGET_CREATURE_OR_PLANESWALKER_THAT_S_GREEN_OR_WHITE;
 import static com.aa.mtg.cards.ability.Abilities.OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_1_1;
 import static com.aa.mtg.cards.ability.Abilities.OTHER_ZOMBIES_YOU_CONTROL_GET_DEATHTOUCH;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
@@ -31,6 +32,7 @@ import static com.aa.mtg.cards.selector.StatusType.BLOCKING;
 import static com.aa.mtg.cards.sets.CoreSet2019.DAYBREAK_CHAPLAIN;
 import static com.aa.mtg.cards.sets.CoreSet2019.DEATH_BARON;
 import static com.aa.mtg.cards.sets.CoreSet2019.DIREGRAF_GHOUL;
+import static com.aa.mtg.cards.sets.CoreSet2020.BARONY_VAMPIRE;
 import static com.aa.mtg.cards.sets.CoreSet2020.DAWNING_ANGEL;
 import static com.aa.mtg.cards.sets.CoreSet2020.EMPYREAN_EAGLE;
 import static com.aa.mtg.cards.sets.Ixalan.FRENZIED_RAPTOR;
@@ -630,6 +632,26 @@ public class CardInstanceSelectorServiceTest {
 
         // Then
         assertThat(selection).containsExactly(aFlier);
+    }
+
+    @Test
+    public void selectionCreatureOrPlaneswalkerGreenOrWhite() {
+        // Given
+        GameStatus gameStatus = testUtils.testGameStatus();
+
+        CardInstanceSelector cardInstanceSelector = DESTROY_TARGET_CREATURE_OR_PLANESWALKER_THAT_S_GREEN_OR_WHITE.getTargets().get(0).getCardInstanceSelector();
+
+        CardInstance whiteCreature = cardInstanceFactory.create(gameStatus, 1, EMPYREAN_EAGLE, "player-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(whiteCreature);
+
+        CardInstance blackCreature = cardInstanceFactory.create(gameStatus, 2, BARONY_VAMPIRE, "player-name");
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(blackCreature);
+
+        // When
+        List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+
+        // Then
+        assertThat(selection).containsExactly(whiteCreature);
     }
 
     @Test
