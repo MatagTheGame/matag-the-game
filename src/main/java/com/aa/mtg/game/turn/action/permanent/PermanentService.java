@@ -5,9 +5,9 @@ import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.damage.DealDamageToCreatureService;
+import com.aa.mtg.game.turn.action.damage.DealDamageToPlayerService;
 import com.aa.mtg.game.turn.action.leave.DestroyPermanentService;
 import com.aa.mtg.game.turn.action.leave.ReturnPermanentToHandService;
-import com.aa.mtg.game.turn.action.life.LifeService;
 import com.aa.mtg.game.turn.action.tap.TapPermanentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,18 +24,18 @@ public class PermanentService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PermanentService.class);
 
-    private final LifeService lifeService;
     private final DealDamageToCreatureService dealDamageToCreatureService;
+    private final DealDamageToPlayerService dealDamageToPlayerService;
     private final DestroyPermanentService destroyPermanentService;
     private final TapPermanentService tapPermanentService;
     private final ReturnPermanentToHandService returnPermanentToHandService;
     private final GainControlPermanentService gainControlPermanentService;
 
     @Autowired
-    public PermanentService(LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService, DestroyPermanentService destroyPermanentService,
+    public PermanentService(DealDamageToCreatureService dealDamageToCreatureService, DealDamageToPlayerService dealDamageToPlayerService, DestroyPermanentService destroyPermanentService,
                             TapPermanentService tapPermanentService, ReturnPermanentToHandService returnPermanentToHandService, GainControlPermanentService gainControlPermanentService) {
-        this.lifeService = lifeService;
         this.dealDamageToCreatureService = dealDamageToCreatureService;
+        this.dealDamageToPlayerService = dealDamageToPlayerService;
         this.destroyPermanentService = destroyPermanentService;
         this.tapPermanentService = tapPermanentService;
         this.returnPermanentToHandService = returnPermanentToHandService;
@@ -59,7 +59,7 @@ public class PermanentService {
         dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false);
 
         int controllerDamage = controllerDamageFromParameter(parameter);
-        lifeService.subtract(gameStatus.getPlayerByName(cardInstance.getController()), controllerDamage, gameStatus);
+        dealDamageToPlayerService.dealDamageToPlayer(gameStatus, controllerDamage, gameStatus.getPlayerByName(cardInstance.getController()));
 
         if (destroyedFromParameter(parameter)) {
             destroyPermanentService.destroy(gameStatus, target.getId());

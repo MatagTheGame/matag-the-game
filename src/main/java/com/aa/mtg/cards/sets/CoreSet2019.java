@@ -67,7 +67,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card SKYSCANNER = new Card("Skyscanner", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList(THOPTER), COMMON, "Flying. When Skyscanner enters the battlefield, draw a card.", 1, 1, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
     public static Card SNAPPING_DRAKE = new Card("Snapping Drake", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DRAKE), COMMON, "Flying.", 3, 2, singletonList(FLYING));
     public static Card THORNHIDE_WOLVES = new Card("Thornhide Wolves", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(WOLF), COMMON, "", 4, 5, emptyList());
-    //public static Card VAMPIRE_SOVEREIGN = new Card("Vampire Sovereign", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(VAMPIRE), UNCOMMON, "Flying. When Vampire Sovereign enters the battlefield, target opponent loses 3 life and you gain 3 life.", 3, 4, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_LOSES_3_LIFE_YOU_GAIN_3_LIFE));
+    public static Card VAMPIRE_SOVEREIGN = new Card("Vampire Sovereign", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(VAMPIRE), UNCOMMON, "Flying. When Vampire Sovereign enters the battlefield, target opponent loses 3 life and you gain 3 life.", 3, 4, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_LOSES_3_LIFE, WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_3_LIFE));
     public static Card VIGILANT_BALOTH = new Card("Vigilant Baloth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), UNCOMMON, "Vigilance", 5, 5, asList(VIGILANCE));
     public static Card WALKING_CORPSE = new Card("Walking Corpse", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), singletonList(ZOMBIE), COMMON, "", 2, 2, emptyList());
 
@@ -128,6 +128,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(RivalsOfIxalan.SUN_SENTINEL);
         cards.add(THORNHIDE_WOLVES);
         cards.add(Dominaria.TOLARIAN_SCOLAR);
+        cards.add(VAMPIRE_SOVEREIGN);
         cards.add(VIGILANT_BALOTH);
         cards.add(WALKING_CORPSE);
     }

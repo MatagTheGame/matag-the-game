@@ -116,7 +116,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(CoreSet2019.MURDER);
         cards.add(NATURAL_END);
         cards.add(NIMBLE_BIRDSTICKER);
-        //cards.add(NOXIOUS_GRASP);
+        cards.add(NOXIOUS_GRASP);
         cards.add(OVERCOME);
         cards.add(CoreSet2019.OAKENFORM);
         cards.add(RavnicaAllegiance.PROWLING_CARACAL);

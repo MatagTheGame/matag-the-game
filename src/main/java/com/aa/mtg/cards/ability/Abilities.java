@@ -145,6 +145,7 @@ public class Abilities {
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_2_0 = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), singletonList("+2/+0"), triggeredAbility(WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_2_2 = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), singletonList("+2/+2"), triggeredAbility(WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_YOU_CONTROL_GETS_PLUS_1_1 = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build())), singletonList("+1/+1"), triggeredAbility(WHEN_IT_ENTERS_THE_BATTLEFIELD));
+    public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_LOSES_3_LIFE = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build())), singletonList("LIFE:-3"), triggeredAbility(WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_NONLAND_OPPONENT_PERMANENT_GET_DESTROYED = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).notOfType(singletonList(LAND)).controllerType(OPPONENT).build())), singletonList(":DESTROYED"), triggeredAbility(WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_RETURN_ANOTHER_TARGET_CREATURE_YOU_CONTROL_TO_ITS_OWNER_HAND = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().others(true).selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build())), singletonList(":RETURN_TO_OWNER_HAND"), triggeredAbility(WHEN_IT_ENTERS_THE_BATTLEFIELD));
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_RETURN_TARGET_OPPONENT_CREATURE_TO_ITS_OWNERS_HAND = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(OPPONENT).build())), singletonList(":RETURN_TO_OWNER_HAND"), triggeredAbility(WHEN_IT_ENTERS_THE_BATTLEFIELD));
@@ -188,6 +189,13 @@ public class Abilities {
     public static int damageFromParameter(String parameter) {
         if (parameter.startsWith("DAMAGE:")) {
             return parseInt(parameter.replace("DAMAGE:", ""));
+        }
+        return 0;
+    }
+
+    public static int lifeFromParameter(String parameter) {
+        if (parameter.startsWith("LIFE:")) {
+            return parseInt(parameter.replace("LIFE:", ""));
         }
         return 0;
     }

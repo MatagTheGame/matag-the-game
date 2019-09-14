@@ -5,6 +5,7 @@ import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.turn.action.damage.DealDamageToPlayerService;
 import com.aa.mtg.game.turn.action.draw.DrawXCardsService;
 import com.aa.mtg.game.turn.action.life.LifeService;
 import com.aa.mtg.game.turn.action.permanent.PermanentService;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 import static com.aa.mtg.cards.ability.Abilities.damageFromParameter;
 import static com.aa.mtg.cards.ability.Abilities.drawFromParameter;
+import static com.aa.mtg.cards.ability.Abilities.lifeFromParameter;
 
 @Component
 public class ThatTargetsGetAction implements AbilityAction {
@@ -26,12 +28,14 @@ public class ThatTargetsGetAction implements AbilityAction {
     private final LifeService lifeService;
     private final DrawXCardsService drawXCardsService;
     private final PermanentService permanentService;
+    private final DealDamageToPlayerService dealDamageToPlayerService;
 
     @Autowired
-    public ThatTargetsGetAction(LifeService lifeService, DrawXCardsService drawXCardsService, PermanentService permanentService) {
+    public ThatTargetsGetAction(LifeService lifeService, DrawXCardsService drawXCardsService, PermanentService permanentService, DealDamageToPlayerService dealDamageToPlayerService) {
         this.lifeService = lifeService;
         this.drawXCardsService = drawXCardsService;
         this.permanentService = permanentService;
+        this.dealDamageToPlayerService = dealDamageToPlayerService;
     }
 
     @Override
@@ -66,9 +70,12 @@ public class ThatTargetsGetAction implements AbilityAction {
     private void thatTargetPlayerGet(CardInstance cardInstance, GameStatus gameStatus, String parameter, String targetPlayerName) {
         Player player = gameStatus.getPlayerByName(targetPlayerName);
         int damage = damageFromParameter(parameter);
-        if (damage > 0) {
-            lifeService.subtract(player, damage, gameStatus);
-            LOGGER.info("AbilityActionExecuted: {} deals {} damage to {}", cardInstance.getIdAndName(), damage, player.getName());
+        dealDamageToPlayerService.dealDamageToPlayer(gameStatus, damage, player);
+
+        int life = lifeFromParameter(parameter);
+        if (life != 0) {
+            lifeService.add(player, damage, gameStatus);
+            LOGGER.info("AbilityActionExecuted: {} add {} life to {}", cardInstance.getIdAndName(), damage, player.getName());
         }
 
         int cardsToDraw = drawFromParameter(parameter);
