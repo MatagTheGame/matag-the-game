@@ -164,4 +164,8 @@ public class CardHelper {
         click();
         mtgBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + cardId)));
     }
+
+    public void hasPlus1Counters(int counters) {
+        mtgBrowser.wait(textToBe(cardCssSelector(".plus-1-counters"), String.valueOf(counters)));
+    }
 }

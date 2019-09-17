@@ -10,9 +10,11 @@ import java.util.List;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
+import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Subtype.*;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.properties.Type.LAND;
+import static com.aa.mtg.cards.properties.Type.SORCERY;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
@@ -34,6 +36,7 @@ public class GuildsOfRavnica implements MtgSet {
     public static Card DOUSER_OF_LIGHTS = new Card("Douser of Lights", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(HORROR), COMMON, "", 4, 5, emptyList());
     public static Card FEARLESS_HALBERDIER = new Card("Fearless Halberdier", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, WARRIOR), COMMON, "", 3, 2, emptyList());
     public static Card GENEROUS_STRAY = new Card("Generous Stray", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(CAT), COMMON, "When Generous Stray enters the battlefield, draw a card.", 1, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
+    public static Card GIRD_FOR_BATTLE = new Card("Gird for Battle", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(SORCERY), emptyList(), UNCOMMON, "Put a +1/+1 counter on each of up to two target creatures.", 0, 0, singletonList(PUT_A_PLUS_1_COUNTER_ON_TARGET_CREATURE));
     public static Card GOLGARI_GUILDGATE = new Card("Golgari Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Golgari Guildgate enters the battlefield tapped. TAP: Add BLACK or GREEN to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_BLACK_MANA, TAP_ADD_GREEN_MANA));
     public static Card HEALERS_HAWK = new Card("Healer's Hawk", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(CREATURE), singletonList(BIRD), COMMON, "Flying, lifelink", 1, 1, asList(FLYING, LIFELINK));
     public static Card HIRED_POISONER = new Card("Hired Poisoner", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(CREATURE), asList(HUMAN, ASSASSIN), COMMON, "Deathtouch.", 1, 1, singletonList(DEATHTOUCH));

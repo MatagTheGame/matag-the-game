@@ -21,20 +21,33 @@ import java.util.List;
         creatorVisibility = JsonAutoDetect.Visibility.NONE
 )
 public class CardModifiers {
-    @JsonProperty private int permanentId;
-    @JsonProperty private TappedModifier tapped;
-    @JsonProperty private boolean doesNotUntapNextTurn;
+    @JsonProperty
+    private int permanentId;
+    @JsonProperty
+    private TappedModifier tapped;
+    @JsonProperty
+    private boolean doesNotUntapNextTurn;
     private boolean summoningSickness;
-    @JsonProperty private boolean attacking;
-    @JsonProperty private Integer blockingCardId;
-    @JsonProperty private int damage;
-    @JsonProperty private List<Ability> abilities = new ArrayList<>();
-    @JsonProperty private List<Ability> abilitiesUntilEndOfTurn = new ArrayList<>();
-    @JsonProperty private PowerToughness extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
-    @JsonProperty private List<Object> targets = new ArrayList<>();
-    @JsonProperty private int attachedToId;
+    @JsonProperty
+    private boolean attacking;
+    @JsonProperty
+    private Integer blockingCardId;
+    @JsonProperty
+    private int damage;
+    @JsonProperty
+    private List<Ability> abilities = new ArrayList<>();
+    @JsonProperty
+    private List<Ability> abilitiesUntilEndOfTurn = new ArrayList<>();
+    @JsonProperty
+    private PowerToughness extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
+    @JsonProperty
+    private List<Object> targets = new ArrayList<>();
+    @JsonProperty
+    private int attachedToId;
     private String controller;
     private String controllerUntilEndOfTurn;
+    @JsonProperty
+    private Counters counters = new Counters();
 
     public TappedModifier getTapped() {
         return tapped;
@@ -199,4 +212,13 @@ public class CardModifiers {
     public void resetControllerUntilEndOfTurn() {
         controllerUntilEndOfTurn = null;
     }
+
+    public Counters getCounters() {
+        return counters;
+    }
+
+    public PowerToughness getExtraPowerToughnessFromCounters() {
+        return new PowerToughness(counters.getPlus1Counters(), counters.getPlus1Counters());
+    }
 }
+

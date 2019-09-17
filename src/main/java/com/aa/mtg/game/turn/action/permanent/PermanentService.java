@@ -4,6 +4,7 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.game.status.GameStatus;
+import com.aa.mtg.game.turn.action.counters.CountersService;
 import com.aa.mtg.game.turn.action.damage.DealDamageToCreatureService;
 import com.aa.mtg.game.turn.action.damage.DealDamageToPlayerService;
 import com.aa.mtg.game.turn.action.leave.DestroyPermanentService;
@@ -30,16 +31,18 @@ public class PermanentService {
     private final TapPermanentService tapPermanentService;
     private final ReturnPermanentToHandService returnPermanentToHandService;
     private final GainControlPermanentService gainControlPermanentService;
+    private final CountersService countersService;
 
     @Autowired
     public PermanentService(DealDamageToCreatureService dealDamageToCreatureService, DealDamageToPlayerService dealDamageToPlayerService, DestroyPermanentService destroyPermanentService,
-                            TapPermanentService tapPermanentService, ReturnPermanentToHandService returnPermanentToHandService, GainControlPermanentService gainControlPermanentService) {
+                            TapPermanentService tapPermanentService, ReturnPermanentToHandService returnPermanentToHandService, GainControlPermanentService gainControlPermanentService, CountersService countersService) {
         this.dealDamageToCreatureService = dealDamageToCreatureService;
         this.dealDamageToPlayerService = dealDamageToPlayerService;
         this.destroyPermanentService = destroyPermanentService;
         this.tapPermanentService = tapPermanentService;
         this.returnPermanentToHandService = returnPermanentToHandService;
         this.gainControlPermanentService = gainControlPermanentService;
+        this.countersService = countersService;
     }
 
     public void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, List<String> parameters, CardInstance target) {
@@ -80,6 +83,9 @@ public class PermanentService {
         if (controlledFromParameter(parameter)) {
             gainControlPermanentService.gainControlUntilEndOfTurn(gameStatus, target, cardInstance.getController());
         }
+
+        int counters = plus1CountersFromParameter(parameter);
+        countersService.addPlus1Counters(gameStatus, target, counters);
 
         LOGGER.info("PermanentService: {} target {} which gets {}", cardInstance.getIdAndName(), target.getIdAndName(), parameter);
     }

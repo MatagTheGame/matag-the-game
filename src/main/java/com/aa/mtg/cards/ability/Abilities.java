@@ -96,6 +96,7 @@ public class Abilities {
     public static final Ability PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1 = new Ability(EQUIPPED_CREATURE_GETS, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), singletonList("+1/+1"), activatedAbility(singletonList(COLORLESS)));
     public static final Ability PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1_AND_HASTE = new Ability(EQUIPPED_CREATURE_GETS, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), asList("+1/+1", "HASTE"), activatedAbility(singletonList(COLORLESS)));
     public static final Ability PAY_2_EQUIP_CREATURE_GETS_PLUS_2_0 = new Ability(EQUIPPED_CREATURE_GETS, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), singletonList("+2/+0"), activatedAbility(asList(COLORLESS, COLORLESS)));
+    public static final Ability PUT_A_PLUS_1_COUNTER_ON_TARGET_CREATURE = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build())), singletonList("PLUS_1_COUNTERS:1"), castTrigger());
     public static final Ability REACH = new Ability(AbilityType.REACH);
     public static final Ability RETURN_TARGET_NONLAND_TO_ITS_OWNER_HAND = new Ability(THAT_TARGETS_GET, singletonList(new Target(CardInstanceSelector.builder().selectorType(PERMANENT).notOfType(singletonList(LAND)).build())), singletonList(":RETURN_TO_OWNER_HAND"), castTrigger());
     public static final Ability SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER = new Ability(SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER, singletonList(new Target(CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).build())), emptyList(), castTrigger());
@@ -240,6 +241,13 @@ public class Abilities {
         return parameter.equals(":CONTROLLED");
     }
 
+    public static int plus1CountersFromParameter(String parameter) {
+        if (parameter.startsWith("PLUS_1_COUNTERS:")) {
+            return parseInt(parameter.replace("PLUS_1_COUNTERS:", ""));
+        }
+        return 0;
+    }
+
     public static String parametersAsString(List<String> parameters) {
         String text = parameters.stream().map(Abilities::parameterAsString).collect(Collectors.joining(", "));
         return replaceLast(text, ",", " and");
@@ -256,6 +264,8 @@ public class Abilities {
             return "tapped doesn't untap next turn";
         } if (parameter.equals(":RETURN_TO_OWNER_HAND")) {
             return "returned to its owner's hand";
+        } if (parameter.startsWith("PLUS_1_COUNTERS:")) {
+            return parameter.replace("PLUS_1_COUNTERS:", "") + " +1/+1 counters";
         } else {
             return parameter.replace(":", "").toLowerCase();
         }

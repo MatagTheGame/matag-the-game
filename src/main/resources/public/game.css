@@ -58,6 +58,35 @@ body {
   font-size: xx-large;
 }
 
+.plus-1-counters {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  background-color: green;
+  color: white;
+  font-size: xx-large;
+  width: 30px;
+  text-align: center;
+  vertical-align: middle;
+  transform-style: preserve-3d;
+}
+
+.plus-1-counters:after {
+  content: '';
+  background-color: #005000;
+  position: absolute;
+  width: 30px;
+  height: 40px;
+}
+
+#player-battlefield .plus-1-counters:after {
+  transform: translateX(-24px) translateY(25px) rotateX(65deg);
+}
+
+#opponent-battlefield .plus-1-counters:after {
+  transform: translateX(-23px) translateY(-28px) rotateX(65deg);
+}
+
 .frontend-blocking {
   margin-bottom: 100px;
 }

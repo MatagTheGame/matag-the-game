@@ -211,6 +211,7 @@ public class CardInstance {
     public int getPower() {
         return card.getPower() +
                 modifiers.getExtraPowerToughnessUntilEndOfTurn().getPower() +
+                modifiers.getExtraPowerToughnessFromCounters().getPower() +
                 getAttachmentsPower() +
                 getPowerFromOtherPermanents();
     }
@@ -219,6 +220,7 @@ public class CardInstance {
     public int getToughness() {
         return card.getToughness() +
                 modifiers.getExtraPowerToughnessUntilEndOfTurn().getToughness() +
+                modifiers.getExtraPowerToughnessFromCounters().getToughness() +
                 getAttachmentsToughness() +
                 getToughnessFromOtherPermanents();
     }

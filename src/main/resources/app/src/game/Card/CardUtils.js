@@ -252,4 +252,8 @@ export default class CardUtils {
     }
     CardUtils.toggleFrontendTapped(cardInstance)
   }
+
+  static getPlus1Counters(cardInstance) {
+    return cardInstance.modifiers.counters.plus1Counters;
+  }
 }

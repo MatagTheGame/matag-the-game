@@ -1,4 +1,4 @@
-import React, {Fragment, Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import CardUtils from './CardUtils'
 
 export class Modifiers extends Component {
@@ -29,9 +29,17 @@ export class Modifiers extends Component {
     }
   }
 
+  plus1Counters() {
+    let plus1Counters = CardUtils.getPlus1Counters(this.props.cardInstance)
+    if (plus1Counters > 0) {
+      return <div className={'plus-1-counters'}>{plus1Counters}</div>
+    }
+  }
+
   render() {
     return <Fragment>
       {this.summoningSickness()}
+      {this.plus1Counters()}
       {this.damage()}
       {this.powerToughness()}
     </Fragment>
