@@ -37,18 +37,26 @@ public class TargetCheckerService {
         for (Ability ability : cardToCast.getAbilities()) {
             AbilityAction abilityAction = abilityActionFactory.getAbilityAction(abilityType(playedAbility));
             if (abilityAction != null && ability.requiresTarget()) {
-                if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId()) || targetsIdsForCardIds.get(cardToCast.getId()).isEmpty()) {
+                if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId())) {
                     throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
                 }
 
                 List<Object> targetIds = targetsIdsForCardIds.get(cardToCast.getId());
                 for (int i = 0; i < ability.getTargets().size(); i++) {
-                    check(gameStatus, cardToCast, ability.getTargets().get(i), targetIds.get(i));
+                    Object targetId = getTargetIdAtIndex(targetIds, i);
+                    check(gameStatus, cardToCast, ability.getTargets().get(i), targetId);
                 }
 
                 cardToCast.getModifiers().setTargets(targetIds);
             }
         }
+    }
+
+    private Object getTargetIdAtIndex(List<Object> targetIds, int i) {
+        if (i < targetIds.size()) {
+            return targetIds.get(i);
+        }
+        return null;
     }
 
     public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
@@ -75,7 +83,12 @@ public class TargetCheckerService {
 
     public void check(GameStatus gameStatus, CardInstance cardInstance, Target target, Object targetId) {
         CardInstanceSelector cardInstanceSelector = target.getCardInstanceSelector();
-        if (targetId instanceof String) {
+        if (targetId == null) {
+            if (!cardInstanceSelector.isOptional()) {
+                throw new MessageException("A target is required.");
+            }
+
+        } else if (targetId instanceof String) {
             if (!(cardInstanceSelector.getSelectorType().equals(SelectorType.PLAYER) || cardInstanceSelector.getSelectorType().equals(ANY))) {
                 throw new MessageException(targetId + " is not valid for type " + cardInstanceSelector.getSelectorType());
             }

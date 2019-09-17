@@ -130,8 +130,15 @@ public class ResolveService {
     private void checkTargets(GameStatus gameStatus, CardInstance cardToResolve, Ability ability) {
         for (int i = 0; i < ability.getTargets().size(); i++) {
             Target target = ability.getTargets().get(i);
-            Object targetId = cardToResolve.getModifiers().getTargets().get(i);
+            Object targetId = getTargetIdAtIndex(cardToResolve, i);
             targetCheckerService.check(gameStatus, cardToResolve, target, targetId);
         }
+    }
+
+    private Object getTargetIdAtIndex(CardInstance cardToResolve, int i) {
+        if (i < cardToResolve.getModifiers().getTargets().size()) {
+            return cardToResolve.getModifiers().getTargets().get(i);
+        }
+        return null;
     }
 }
