@@ -3,7 +3,7 @@ import stompClient from 'Main/game/WebSocket'
 import CardSearch from 'Main/game/Card/CardSearch'
 import CostUtils from 'Main/game/Card/CostUtils'
 import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
-
+import {TurnUtils} from "Main/game/Turn/TurnUtils";
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
@@ -61,47 +61,28 @@ export default class PlayerUtils {
   }
 
   static handleSelectTargets(state, cardInstance, ability) {
-    if (state.turn.cardIdSelectedToBePlayed === cardInstance.id) {
-      state.turn.cardIdSelectedToBePlayed = null
-      state.turn.abilityToBePlayed = null
+    if (TurnUtils.getCardIdSelectedToBePlayed(state) === cardInstance.id) {
+      TurnUtils.resetTarget(state)
       UserInterfaceUtils.setStatusMessage(state, UserInterfaceUtils.PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE)
     } else {
-      state.turn.cardIdSelectedToBePlayed = cardInstance.id
-      state.turn.abilityToBePlayed = ability
+      TurnUtils.selectCardToBePlayed(state, cardInstance, ability)
       UserInterfaceUtils.setStatusMessage(state, `Select targets for ${cardInstance.card.name}.`)
     }
   }
 
   static shouldHandleTargets(state) {
-    return state.turn.cardIdSelectedToBePlayed || get(state, 'stack[0].triggeredAbilities[0].targets[0]')
+    return TurnUtils.getCardIdSelectedToBePlayed(state) || get(state, 'stack[0].triggeredAbilities[0].targets[0]')
   }
 
   static handleSelectedTarget(state, target) {
-    const targetsIds = PlayerUtils.getTargetsIds(target)
-    if (state.turn.cardIdSelectedToBePlayed) {
-      const playedAbility = PlayerUtils.getAbilityToBePlayed(state.turn.abilityToBePlayed)
-      PlayerUtils.cast(state, state.turn.cardIdSelectedToBePlayed, {[state.turn.cardIdSelectedToBePlayed]: targetsIds}, playedAbility)
-      state.turn.cardIdSelectedToBePlayed = null
-      state.turn.abilityToBePlayed = null
+    TurnUtils.selectTarget(state, target)
+    if (TurnUtils.getCardIdSelectedToBePlayed(state)) {
+      const playedAbility = TurnUtils.getAbilityToBePlayed(state)
+      PlayerUtils.cast(state, TurnUtils.getCardIdSelectedToBePlayed(state), {[TurnUtils.getCardIdSelectedToBePlayed(state)]: TurnUtils.getTargetsIds(state)}, playedAbility)
+      TurnUtils.resetTarget(state)
 
     } else if (get(state, 'stack[0].triggeredAbilities[0].targets[0]')) {
-      stompClient.sendEvent('turn', {action: 'RESOLVE', targetsIdsForCardIds: {[get(state, 'stack[0].id')]: targetsIds}})
-    }
-  }
-
-  static getTargetsIds(target) {
-    const targetsIds = []
-    if (typeof target === 'string') {
-      targetsIds.push(target)
-    } else {
-      targetsIds.push(target.id)
-    }
-    return targetsIds
-  }
-
-  static getAbilityToBePlayed(abilityToBePlayed) {
-    if (abilityToBePlayed) {
-      return abilityToBePlayed.abilityType
+      stompClient.sendEvent('turn', {action: 'RESOLVE', targetsIdsForCardIds: {[get(state, 'stack[0].id')]: TurnUtils.getTargetsIds(state)}})
     }
   }
 }

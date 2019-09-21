@@ -1,5 +1,9 @@
 package com.aa.mtg.game.turn.action.target;
 
+import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
+import static com.aa.mtg.cards.selector.SelectorType.ANY;
+import static com.aa.mtg.game.player.PlayerType.OPPONENT;
+
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
@@ -11,15 +15,10 @@ import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.AbilityActionFactory;
 import com.aa.mtg.game.turn.action.selection.CardInstanceSelectorService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 import java.util.Map;
-
-import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
-import static com.aa.mtg.cards.selector.SelectorType.ANY;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class TargetCheckerService {
@@ -41,20 +40,20 @@ public class TargetCheckerService {
                     throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
                 }
 
-                List<Object> targetIds = targetsIdsForCardIds.get(cardToCast.getId());
+                List<Object> targetsIds = targetsIdsForCardIds.get(cardToCast.getId());
                 for (int i = 0; i < ability.getTargets().size(); i++) {
-                    Object targetId = getTargetIdAtIndex(targetIds, i);
+                    Object targetId = getTargetIdAtIndex(targetsIds, i);
                     check(gameStatus, cardToCast, ability.getTargets().get(i), targetId);
                 }
 
-                cardToCast.getModifiers().setTargets(targetIds);
+                cardToCast.getModifiers().setTargets(targetsIds);
             }
         }
     }
 
-    private Object getTargetIdAtIndex(List<Object> targetIds, int i) {
-        if (i < targetIds.size()) {
-            return targetIds.get(i);
+    private Object getTargetIdAtIndex(List<Object> targetsIds, int i) {
+        if (i < targetsIds.size()) {
+            return targetsIds.get(i);
         }
         return null;
     }
