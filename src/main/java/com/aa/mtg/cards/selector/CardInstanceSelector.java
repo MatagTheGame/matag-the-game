@@ -5,11 +5,10 @@ import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.player.PlayerType;
-import lombok.Builder;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lombok.Builder;
 
 @Builder
 public class CardInstanceSelector {
@@ -25,9 +24,8 @@ public class CardInstanceSelector {
     private final boolean others;
     private final boolean itself;
     private final TurnStatusType turnStatusType;
-    private final boolean optional;
 
-    private CardInstanceSelector(SelectorType selectorType, List<Type> ofType, List<Type> notOfType, List<Subtype> ofSubtypeOf, AbilityType withAbilityType, List<Color> ofColors, PowerToughnessConstraint powerToughnessConstraint, PlayerType controllerType, List<StatusType> statusTypes, boolean others, boolean itself, TurnStatusType turnStatusType, boolean optional) {
+    private CardInstanceSelector(SelectorType selectorType, List<Type> ofType, List<Type> notOfType, List<Subtype> ofSubtypeOf, AbilityType withAbilityType, List<Color> ofColors, PowerToughnessConstraint powerToughnessConstraint, PlayerType controllerType, List<StatusType> statusTypes, boolean others, boolean itself, TurnStatusType turnStatusType) {
         this.selectorType = selectorType;
         this.ofType = ofType;
         this.notOfType = notOfType;
@@ -40,7 +38,6 @@ public class CardInstanceSelector {
         this.others = others;
         this.itself = itself;
         this.turnStatusType = turnStatusType;
-        this.optional = optional;
     }
 
     public SelectorType getSelectorType() {
@@ -89,10 +86,6 @@ public class CardInstanceSelector {
 
     public TurnStatusType getTurnStatusType() {
         return turnStatusType;
-    }
-
-    public boolean isOptional() {
-        return optional;
     }
 
     public String getText() {

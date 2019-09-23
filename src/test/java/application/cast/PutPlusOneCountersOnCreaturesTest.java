@@ -1,5 +1,12 @@
 package application.cast;
 
+import static application.browser.BattlefieldHelper.FIRST_LINE;
+import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.aa.mtg.cards.Cards.PLAINS;
+import static com.aa.mtg.cards.sets.GuildsOfRavnica.GIRD_FOR_BATTLE;
+import static com.aa.mtg.cards.sets.RavnicaAllegiance.CONCORDIA_PEGASUS;
+import static com.aa.mtg.game.player.PlayerType.PLAYER;
+
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import com.aa.mtg.MtgApplication;
@@ -11,13 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static application.browser.BattlefieldHelper.FIRST_LINE;
-import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.aa.mtg.cards.Cards.PLAINS;
-import static com.aa.mtg.cards.sets.GuildsOfRavnica.GIRD_FOR_BATTLE;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.CONCORDIA_PEGASUS;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -33,11 +33,12 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
 
     @Test
     public void putPlusOneCountersOnCreaturesTest() {
-        // When cast the sorcery
+        // When cast the sorcery targeting two creatures player control
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 0).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(GIRD_FOR_BATTLE).select();
         browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 1).click();
 
         // Sorcery goes on the stack
         browser.player1().getStackHelper().containsExactly(GIRD_FOR_BATTLE);
@@ -45,9 +46,23 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
         // When opponent accepts
         browser.player2().getActionHelper().clickContinue();
 
-        // Then the counter is added.
+        // Then the counters are added on both creatures
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).hasPlus1Counters(1);
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).hasPowerAndToughness("2/4");
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 1).hasPlus1Counters(1);
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 1).hasPowerAndToughness("2/4");
+
+
+
+        // When cast the sorcery targeting twice the same creature
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).tap();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(GIRD_FOR_BATTLE).select();
+        browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).click();
+
+        // An error is displayed
+        browser.getMessageHelper().hasMessage("Targets must be different");
     }
 
     static class InitTestServiceForTest extends InitTestService {
@@ -57,9 +72,10 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
             addCardToCurrentPlayerHand(gameStatus, GIRD_FOR_BATTLE);
             addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
             addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, CONCORDIA_PEGASUS);
+            addCardToCurrentPlayerBattlefield(gameStatus, CONCORDIA_PEGASUS);
 
-            addCardToCurrentPlayerBattlefield(gameStatus, CONCORDIA_PEGASUS);
-            addCardToCurrentPlayerBattlefield(gameStatus, CONCORDIA_PEGASUS);
+            addCardToNonCurrentPlayerBattlefield(gameStatus, CONCORDIA_PEGASUS);
         }
     }
 }

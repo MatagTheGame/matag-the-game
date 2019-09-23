@@ -3,7 +3,8 @@ import stompClient from 'Main/game/WebSocket'
 import CardSearch from 'Main/game/Card/CardSearch'
 import CostUtils from 'Main/game/Card/CostUtils'
 import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
-import {TurnUtils} from "Main/game/Turn/TurnUtils";
+import {TurnUtils} from 'Main/game/Turn/TurnUtils'
+import CardUtils from 'Main/game/Card/CardUtils'
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
@@ -71,18 +72,26 @@ export default class PlayerUtils {
   }
 
   static shouldHandleTargets(state) {
-    return TurnUtils.getCardIdSelectedToBePlayed(state) || get(state, 'stack[0].triggeredAbilities[0].targets[0]')
+    if (TurnUtils.getCardIdSelectedToBePlayed(state)) {
+      const cardInstance = CardSearch.cards(state.player.hand).withId(TurnUtils.getCardIdSelectedToBePlayed(state))
+      return CardUtils.needsTargets(state, cardInstance, 'CAST')
+
+    } else if (state.stack.length > 0) {
+      return CardUtils.needsTargets(state, state.stack[0], 'TRIGGERED_ABILITY')
+    }
   }
 
   static handleSelectedTarget(state, target) {
     TurnUtils.selectTarget(state, target)
-    if (TurnUtils.getCardIdSelectedToBePlayed(state)) {
-      const playedAbility = TurnUtils.getAbilityToBePlayed(state)
-      PlayerUtils.cast(state, TurnUtils.getCardIdSelectedToBePlayed(state), {[TurnUtils.getCardIdSelectedToBePlayed(state)]: TurnUtils.getTargetsIds(state)}, playedAbility)
-      TurnUtils.resetTarget(state)
+    if (!PlayerUtils.shouldHandleTargets(state)) {
+      if (TurnUtils.getCardIdSelectedToBePlayed(state)) {
+        const playedAbility = TurnUtils.getAbilityToBePlayed(state)
+        PlayerUtils.cast(state, TurnUtils.getCardIdSelectedToBePlayed(state), {[TurnUtils.getCardIdSelectedToBePlayed(state)]: TurnUtils.getTargetsIds(state)}, playedAbility)
+        TurnUtils.resetTarget(state)
 
-    } else if (get(state, 'stack[0].triggeredAbilities[0].targets[0]')) {
-      stompClient.sendEvent('turn', {action: 'RESOLVE', targetsIdsForCardIds: {[get(state, 'stack[0].id')]: TurnUtils.getTargetsIds(state)}})
+      } else if (get(state, 'stack[0].triggeredAbilities[0].targets[0]')) {
+        stompClient.sendEvent('turn', {action: 'RESOLVE', targetsIdsForCardIds: {[get(state, 'stack[0].id')]: TurnUtils.getTargetsIds(state)}})
+      }
     }
   }
 }

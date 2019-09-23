@@ -41,6 +41,7 @@ public class TargetCheckerService {
                 }
 
                 List<Object> targetsIds = targetsIdsForCardIds.get(cardToCast.getId());
+                checkThatTargetsAreDifferent(ability.getTargets(), targetsIds);
                 for (int i = 0; i < ability.getTargets().size(); i++) {
                     Object targetId = getTargetIdAtIndex(targetsIds, i);
                     check(gameStatus, cardToCast, ability.getTargets().get(i), targetId);
@@ -56,6 +57,21 @@ public class TargetCheckerService {
             return targetsIds.get(i);
         }
         return null;
+    }
+
+    private void checkThatTargetsAreDifferent(List<Target> targets, List<Object> targetsIds) {
+        for (int i = 0; i < targets.size(); i++) {
+            Target target = targets.get(i);
+            if (target.isOther()) {
+                if (countTargetsWithId(targetsIds, targetsIds.get(i)) > 1) {
+                    throw new MessageException("Targets must be different.");
+                }
+            }
+        }
+    }
+
+    private long countTargetsWithId(List<Object> targetsIds, Object targetId) {
+        return targetsIds.stream().filter(t -> t.equals(targetId)).count();
     }
 
     public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
@@ -83,7 +99,7 @@ public class TargetCheckerService {
     public void check(GameStatus gameStatus, CardInstance cardInstance, Target target, Object targetId) {
         CardInstanceSelector cardInstanceSelector = target.getCardInstanceSelector();
         if (targetId == null) {
-            if (!cardInstanceSelector.isOptional()) {
+            if (!target.isOptional()) {
                 throw new MessageException("A target is required.");
             }
 

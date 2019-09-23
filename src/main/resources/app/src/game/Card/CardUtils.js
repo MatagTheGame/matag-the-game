@@ -1,5 +1,6 @@
 import get from 'lodash/get'
 import CostUtils from 'Main/game/Card/CostUtils'
+import {TurnUtils} from 'Main/game/Turn/TurnUtils'
 
 export default class CardUtils {
   static normalizeCardName(cardName) {
@@ -207,10 +208,15 @@ export default class CardUtils {
     return map
   }
 
-  static needsTargets(cardInstance, triggerType) {
-    const ability = CardUtils.getAbilitiesForTriggerType(cardInstance, triggerType)[0]
+  static needsTargets(state, cardInstance, triggerType) {
+    let ability
+    if (triggerType === 'TRIGGERED_ABILITY') {
+      ability = get(cardInstance, 'triggeredAbilities[0]')
+    } else {
+      ability = CardUtils.getAbilitiesForTriggerType(cardInstance, triggerType)[0]
+    }
     if (ability) {
-      return ability.targets.length > 0
+      return ability.targets.length > TurnUtils.getTargetsIds(state).length
     }
   }
 

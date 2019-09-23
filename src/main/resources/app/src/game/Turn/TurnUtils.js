@@ -27,7 +27,7 @@ export class TurnUtils  {
   }
 
   static getTargetsIds(state) {
-    return state.turn.targetsIds
+    return get(state, 'turn.targetsIds', [])
   }
 
   static resetTarget(state) {
