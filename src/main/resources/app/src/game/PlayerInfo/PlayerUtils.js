@@ -61,6 +61,12 @@ export default class PlayerUtils {
     stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], mana: mana, targetsIdsForCardIds: targetsIdsForCardIds, playedAbility: playedAbility})
   }
 
+  static castSelectedCard(state) {
+    const playedAbility = TurnUtils.getAbilityToBePlayed(state)
+    PlayerUtils.cast(state, TurnUtils.getCardIdSelectedToBePlayed(state), {[TurnUtils.getCardIdSelectedToBePlayed(state)]: TurnUtils.getTargetsIds(state)}, playedAbility)
+    TurnUtils.resetTarget(state)
+  }
+
   static handleSelectTargets(state, cardInstance, ability) {
     if (TurnUtils.getCardIdSelectedToBePlayed(state) === cardInstance.id) {
       TurnUtils.resetTarget(state)
@@ -85,9 +91,7 @@ export default class PlayerUtils {
     TurnUtils.selectTarget(state, target)
     if (!PlayerUtils.shouldHandleTargets(state)) {
       if (TurnUtils.getCardIdSelectedToBePlayed(state)) {
-        const playedAbility = TurnUtils.getAbilityToBePlayed(state)
-        PlayerUtils.cast(state, TurnUtils.getCardIdSelectedToBePlayed(state), {[TurnUtils.getCardIdSelectedToBePlayed(state)]: TurnUtils.getTargetsIds(state)}, playedAbility)
-        TurnUtils.resetTarget(state)
+        PlayerUtils.castSelectedCard(state)
 
       } else if (get(state, 'stack[0].triggeredAbilities[0].targets[0]')) {
         stompClient.sendEvent('turn', {action: 'RESOLVE', targetsIdsForCardIds: {[get(state, 'stack[0].id')]: TurnUtils.getTargetsIds(state)}})

@@ -62,7 +62,26 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).click();
 
         // An error is displayed
-        browser.getMessageHelper().hasMessage("Targets must be different");
+        browser.getMessageHelper().hasMessage("Targets must be different.");
+        browser.getMessageHelper().close();
+
+
+
+        // When cast the sorcery targeting only one creature
+        browser.player1().getHandHelper(PLAYER).getFirstCard(GIRD_FOR_BATTLE).select();
+        browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).click();
+        browser.player1().getActionHelper().clickContinue();
+
+        // Sorcery goes on the stack
+        browser.player1().getStackHelper().containsExactly(GIRD_FOR_BATTLE);
+
+        // When opponent accepts
+        browser.player2().getActionHelper().clickContinue();
+
+        // Then the counter is added on the creature
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).hasPlus1Counters(2);
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).hasPowerAndToughness("3/5");
     }
 
     static class InitTestServiceForTest extends InitTestService {
@@ -74,8 +93,6 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
             addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
             addCardToCurrentPlayerBattlefield(gameStatus, CONCORDIA_PEGASUS);
             addCardToCurrentPlayerBattlefield(gameStatus, CONCORDIA_PEGASUS);
-
-            addCardToNonCurrentPlayerBattlefield(gameStatus, CONCORDIA_PEGASUS);
         }
     }
 }

@@ -60,7 +60,7 @@ public class TargetCheckerService {
     }
 
     private void checkThatTargetsAreDifferent(List<Target> targets, List<Object> targetsIds) {
-        for (int i = 0; i < targets.size(); i++) {
+        for (int i = 0; i < Math.min(targets.size(), targetsIds.size()); i++) {
             Target target = targets.get(i);
             if (target.isOther()) {
                 if (countTargetsWithId(targetsIds, targetsIds.get(i)) > 1) {

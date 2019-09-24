@@ -6,6 +6,7 @@ import CardSearch from 'Main/game/Card/CardSearch'
 import StackUtils from 'Main/game/Stack/StackUtils'
 import PlayerUtils from 'Main/game/PlayerInfo/PlayerUtils'
 import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
+import {TurnUtils} from 'Main/game/Turn/TurnUtils'
 
 export default class ClientEventsReducer {
 
@@ -149,6 +150,10 @@ export default class ClientEventsReducer {
 
         if (!StackUtils.isStackEmpty(newState)) {
           stompClient.sendEvent('turn', {action: 'RESOLVE'})
+
+        } else if (TurnUtils.getCardIdSelectedToBePlayed(newState)) {
+          console.log('CAAAAAAAAAAST')
+          PlayerUtils.castSelectedCard(newState)
 
         } else if (CardSearch.cards(newState.player.battlefield).frontEndTapped().isNotEmpty()) {
           CardSearch.cards(newState.player.battlefield)
