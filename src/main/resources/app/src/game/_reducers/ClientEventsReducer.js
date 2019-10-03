@@ -85,6 +85,7 @@ export default class ClientEventsReducer {
         } else {
           const possibleAbilities = CardUtils.getAbilitiesForTriggerTypes(cardInstance, ['MANA_ABILITY', 'ACTIVATED_ABILITY'])
 
+          // FIXME this is wrong. It should be still possible to play an ability of a tapped card. And if a card is tapped in the dropdown list should not appear all the abilities that require tapping
           if (!CardUtils.isFrontendTapped(cardInstance) && possibleAbilities.length > 1) {
             UserInterfaceUtils.setPlayableAbilities(newState, action.cardId, possibleAbilities, action.position)
 
