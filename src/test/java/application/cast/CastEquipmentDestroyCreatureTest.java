@@ -1,5 +1,13 @@
 package application.cast;
 
+import static application.browser.BattlefieldHelper.FIRST_LINE;
+import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.aa.mtg.cards.Cards.PLAINS;
+import static com.aa.mtg.cards.sets.Dominaria.SHORT_SWORD;
+import static com.aa.mtg.cards.sets.Ixalan.LEGIONS_JUDGMENT;
+import static com.aa.mtg.cards.sets.RavnicaAllegiance.PROWLING_CARACAL;
+import static com.aa.mtg.game.player.PlayerType.PLAYER;
+
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import com.aa.mtg.MtgApplication;
@@ -11,14 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static application.browser.BattlefieldHelper.FIRST_LINE;
-import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.aa.mtg.cards.Cards.PLAINS;
-import static com.aa.mtg.cards.sets.Dominaria.SHORT_SWORD;
-import static com.aa.mtg.cards.sets.Ixalan.LEGIONS_JUDGMENT;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.PROWLING_CARACAL;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -50,7 +50,6 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
 
         // When equipping
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).tap();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 2).tap();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(SHORT_SWORD).select();
         browser.player1().getStatusHelper().hasMessage("Select targets for Short Sword.");
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(PROWLING_CARACAL).click();
@@ -65,9 +64,9 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(PROWLING_CARACAL).hasPowerAndToughness("4/2");
 
         // Destroy the creature
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 2).tap();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 3).tap();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 4).tap();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 5).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).select();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(PROWLING_CARACAL).click();
         browser.player2().getActionHelper().clickContinue();
@@ -85,7 +84,6 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
             addCardToCurrentPlayerBattlefield(gameStatus, PROWLING_CARACAL);
             addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
             addCardToCurrentPlayerHand(gameStatus, SHORT_SWORD);
-            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
             addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
             addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
             addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);

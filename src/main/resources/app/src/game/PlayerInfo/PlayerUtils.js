@@ -79,8 +79,14 @@ export default class PlayerUtils {
 
   static shouldHandleTargets(state) {
     if (TurnUtils.getCardIdSelectedToBePlayed(state)) {
-      const cardInstance = CardSearch.cards(state.player.hand).withId(TurnUtils.getCardIdSelectedToBePlayed(state))
-      return CardUtils.needsTargets(state, cardInstance, 'CAST')
+      let cardInstance = CardSearch.cards(state.player.hand).withId(TurnUtils.getCardIdSelectedToBePlayed(state))
+      if (cardInstance) {
+        return CardUtils.needsTargets(state, cardInstance, 'CAST')
+
+      } else {
+        cardInstance = CardSearch.cards(state.player.battlefield).withId(TurnUtils.getCardIdSelectedToBePlayed(state))
+        return CardUtils.needsTargets(state, cardInstance, 'ACTIVATED_ABILITY')
+      }
 
     } else if (state.stack.length > 0) {
       return CardUtils.needsTargets(state, state.stack[0], 'TRIGGERED_ABILITY')

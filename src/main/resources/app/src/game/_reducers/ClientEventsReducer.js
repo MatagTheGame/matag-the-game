@@ -50,7 +50,7 @@ export default class ClientEventsReducer {
               if (CardUtils.needsTargets(newState, cardInstance, 'CAST')) {
                 PlayerUtils.handleSelectTargets(newState, cardInstance, ability)
               } else {
-                PlayerUtils.cast(newState, cardId, {}, PlayerUtils.getAbilityToBePlayed(ability))
+                PlayerUtils.cast(newState, cardId, {}, TurnUtils.getAbilityToBePlayed(ability))
               }
             }
           }
@@ -153,7 +153,6 @@ export default class ClientEventsReducer {
           stompClient.sendEvent('turn', {action: 'RESOLVE'})
 
         } else if (TurnUtils.getCardIdSelectedToBePlayed(newState)) {
-          console.log('CAAAAAAAAAAST')
           PlayerUtils.castSelectedCard(newState)
 
         } else if (CardSearch.cards(newState.player.battlefield).frontEndTapped().isNotEmpty()) {
