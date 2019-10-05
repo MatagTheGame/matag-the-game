@@ -25,6 +25,7 @@ public enum Subtype {
     ELEPHANT,
     ELF,
     EQUIPMENT,
+    FAERIE,
     FROG,
     GATE,
     GIANT,
