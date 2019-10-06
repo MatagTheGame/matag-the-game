@@ -4,9 +4,12 @@ import static com.aa.mtg.cards.ability.Abilities.DESTROY_TARGET_CREATURE_WITH_PO
 import static com.aa.mtg.cards.ability.Abilities.FLYING;
 import static com.aa.mtg.cards.ability.Abilities.OTHER_KNIGHTS_YOU_CONTROL_GET_PLUS_1_1;
 import static com.aa.mtg.cards.ability.Abilities.PAY_1_EQUIP_CREATURE_GETS_PLUS_1_0_AND_HASTE;
+import static com.aa.mtg.cards.ability.Abilities.REACH;
 import static com.aa.mtg.cards.ability.Abilities.TAP_ADD_BLUE_MANA;
 import static com.aa.mtg.cards.ability.Abilities.TAP_ADD_GREEN_MANA;
+import static com.aa.mtg.cards.ability.Abilities.TARGET_BLOCKING_CREATURE_GETS_PLUS_7_7_END_OF_TURN;
 import static com.aa.mtg.cards.ability.Abilities.TARGET_CREATURE_GETS_PLUS_2_1_AND_DEATHTOUCH_UNTIL_END_OF_TURN;
+import static com.aa.mtg.cards.ability.Abilities.WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Subtype.EQUIPMENT;
@@ -14,6 +17,7 @@ import static com.aa.mtg.cards.properties.Subtype.FAERIE;
 import static com.aa.mtg.cards.properties.Subtype.GRIFFIN;
 import static com.aa.mtg.cards.properties.Subtype.HUMAN;
 import static com.aa.mtg.cards.properties.Subtype.KNIGHT;
+import static com.aa.mtg.cards.properties.Subtype.SPIDER;
 import static com.aa.mtg.cards.properties.Type.ARTIFACT;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
@@ -42,6 +46,9 @@ public class ThroneOfEldraine implements MtgSet {
     public static Card OKOS_ACCOMPLICES = new Card("Oko's Accomplices", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(FAERIE), COMMON, "Flying", 2, 3, singletonList(FLYING));
     public static Card PRIZED_GRIFFIN = new Card("Prized Griffin", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(GRIFFIN), COMMON, "Flying", 3, 4, singletonList(FLYING));
     public static Card REAVE_SOUL = new Card("Reave Soul", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Destroy target creature with power 3 or less.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_WITH_POWER_LESS_OR_EQUAL_3));
+    public static Card RIGHTEOUSNESS = new Card("Righteousness", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(INSTANT), emptyList(), COMMON, "Target blocking creature gets +7/+7 until end of turn.", 0, 0, singletonList(TARGET_BLOCKING_CREATURE_GETS_PLUS_7_7_END_OF_TURN));
+    public static Card SPORECAP_SPIDER = new Card("Sporecap Spider", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(SPIDER), COMMON, "Reach", 1, 5, singletonList(REACH));
+    public static Card TOME_RAIDER = new Card("Tome raider", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), singletonList(FAERIE), COMMON, "Flying. When Tome Raider enters the battlefield, draw a card.", 1, 1, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
 
     private static ThroneOfEldraine instance;
 
@@ -56,6 +63,9 @@ public class ThroneOfEldraine implements MtgSet {
         cards.add(OKOS_ACCOMPLICES);
         cards.add(PRIZED_GRIFFIN);
         cards.add(REAVE_SOUL);
+        cards.add(RIGHTEOUSNESS);
+        cards.add(SPORECAP_SPIDER);
+        cards.add(TOME_RAIDER);
     }
 
     @Override

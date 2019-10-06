@@ -87,6 +87,13 @@ Startup the app as spring boot
 It is possible to run with `test` profile in order to start custom decks rather than random (see `InitTestService`)
 
 
+## Backlog
+
+The backlog is managed using milestones:
+
+ - https://github.com/antonioalonzi/mtg/milestone/1
+
+
 ## Continuous Integration on Travis
 
 [![Build Status](https://travis-ci.com/antonioalonzi/mtg.svg?branch=master)](https://travis-ci.com/antonioalonzi/mtg)
