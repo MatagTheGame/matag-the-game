@@ -213,7 +213,7 @@ body {
   position: absolute;
   width: 50px;
   height: 200px;
-  bottom: 0;
+  bottom: 30px;
   left: 0;
   z-index: 9;
 }
@@ -246,13 +246,12 @@ body {
   font-size: large;
 }
 
-#message {
+#popup {
   position: absolute;
   z-index: 12;
-  top: 25%;
+  top: 20%;
   left: 25%;
   width: 50%;
-  height: 30%;
   background-color: darkgrey;
   padding: 2em;
   border: 1px solid black;
@@ -260,7 +259,7 @@ body {
   opacity: 1;
 }
 
-#message-close {
+#popup-close {
   position: absolute;
   font-size: x-large;
   top: 2px;

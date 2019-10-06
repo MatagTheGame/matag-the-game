@@ -1,4 +1,4 @@
-import React, {Fragment, Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
 import {bindActionCreators} from 'redux'
@@ -26,7 +26,7 @@ class Message extends Component {
 
   renderCloseButton() {
     if (this.props.message.closable) {
-      return <i id='message-close' onClick={this.props.closeMessage} aria-hidden='true'>X</i>
+      return <i id='popup-close' onClick={this.props.closeMessage} aria-hidden='true'>X</i>
     }
   }
 
@@ -39,7 +39,7 @@ class Message extends Component {
       return (
         <Fragment>
           <div id='modal-container' />
-          <div id='message'>
+          <div id='popup'>
             { this.renderCloseButton() }
             { this.renderMessageText() }
           </div>

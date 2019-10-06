@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import get from 'lodash/get'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
-import HelpPopout from './HelpPopout';
 
 class UserAction extends Component {
   constructor(props) {
@@ -16,6 +15,8 @@ class UserAction extends Component {
       if (this.isContinueEnabled()) {
         this.props.continueClick()
       }
+    } else if (event.key === 'H') {
+      this.props.openHelpPage(true)
     }
   }
 
@@ -40,7 +41,7 @@ class UserAction extends Component {
       <div id='user-actions'>
         <button title="Press SPACE to continue" id='continue-button' type='button' disabled={!this.isContinueEnabled()} onClick={this.props.continueClick}>-></button>
         <button title="Press L to see game logs" id='logs-button' type='button' onClick={() => alert('Game Log coming soon!')}>=</button>
-        <HelpPopout />
+        <button title="Press H to see the help page" id='help-button' type='button' onClick={this.props.openHelpPage}>?</button>
       </div>
 
     )
@@ -50,6 +51,12 @@ class UserAction extends Component {
 const createContinueClickAction = () => {
   return {
     type: 'CONTINUE_CLICK'
+  }
+}
+
+const openHelpPageAction = () => {
+  return {
+    type: 'OPEN_HELP_PAGE'
   }
 }
 
@@ -63,7 +70,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    continueClick: bindActionCreators(createContinueClickAction, dispatch)
+    continueClick: bindActionCreators(createContinueClickAction, dispatch),
+    openHelpPage: bindActionCreators(openHelpPageAction, dispatch)
   }
 }
 
@@ -72,6 +80,7 @@ UserAction.propTypes = {
   currentPlayerName: PropTypes.string.isRequired,
   winner: PropTypes.string,
   continueClick: PropTypes.func.isRequired,
+  openHelpPage: PropTypes.func.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserAction)
