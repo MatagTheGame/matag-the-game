@@ -1,8 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import get from 'lodash/get'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
+import HelpPopout from './HelpPopout';
 
 class UserAction extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class UserAction extends Component {
       <div id='user-actions'>
         <button title="Press SPACE to continue" id='continue-button' type='button' disabled={!this.isContinueEnabled()} onClick={this.props.continueClick}>-></button>
         <button title="Press L to see game logs" id='logs-button' type='button' onClick={() => alert('Game Log coming soon!')}>=</button>
+        <HelpPopout />
       </div>
 
     )
