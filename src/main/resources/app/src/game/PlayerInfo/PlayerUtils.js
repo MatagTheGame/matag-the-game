@@ -88,7 +88,7 @@ export default class PlayerUtils {
         return CardUtils.needsTargets(state, cardInstance, 'ACTIVATED_ABILITY')
       }
 
-    } else if (state.stack.length > 0) {
+    } else if (get(state, 'stack.length', 0) > 0) {
       return CardUtils.needsTargets(state, state.stack[0], 'TRIGGERED_ABILITY')
     }
   }
