@@ -1,7 +1,14 @@
 package application;
 
+import static com.aa.mtg.game.player.PlayerType.OPPONENT;
+import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
+import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
+import static java.lang.Integer.parseInt;
+
 import application.browser.MtgBrowser;
 import com.aa.mtg.cards.CardInstanceFactory;
+import java.util.concurrent.atomic.AtomicInteger;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
@@ -10,14 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
-import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
-import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
-import static java.lang.Integer.parseInt;
 
 public abstract class AbstractApplicationTest {
 
@@ -106,7 +105,7 @@ public abstract class AbstractApplicationTest {
 
     @After
     public void cleanup() {
-        browser.dumpContent();
+        //browser.dumpContent();
         browser.close();
     }
 
