@@ -1,29 +1,25 @@
 package com.aa.mtg.cards.ability;
 
-import static com.aa.mtg.cards.ability.trigger.Trigger.activatedAbility;
-import static com.aa.mtg.cards.ability.trigger.Trigger.castTrigger;
-import static com.aa.mtg.cards.ability.trigger.Trigger.manaAbilityTrigger;
-import static com.aa.mtg.cards.ability.trigger.Trigger.staticAbility;
-import static com.aa.mtg.cards.ability.trigger.Trigger.triggeredAbility;
+import com.aa.mtg.cards.ability.target.Target;
+import com.aa.mtg.cards.ability.type.AbilityType;
+import com.aa.mtg.cards.modifiers.PowerToughness;
+import com.aa.mtg.cards.properties.Color;
+import com.aa.mtg.cards.selector.CardInstanceSelector;
+import com.aa.mtg.cards.selector.PowerToughnessConstraint;
+import com.aa.mtg.cards.selector.SelectorType;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static com.aa.mtg.cards.ability.trigger.Trigger.*;
 import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_IT_ENTERS_THE_BATTLEFIELD;
-import static com.aa.mtg.cards.ability.type.AbilityType.ADD_X_LIFE;
-import static com.aa.mtg.cards.ability.type.AbilityType.DRAW_X_CARDS;
-import static com.aa.mtg.cards.ability.type.AbilityType.EACH_PLAYERS_ADD_X_LIFE;
-import static com.aa.mtg.cards.ability.type.AbilityType.ENCHANTED_CREATURE_GETS;
-import static com.aa.mtg.cards.ability.type.AbilityType.EQUIPPED_CREATURE_GETS;
-import static com.aa.mtg.cards.ability.type.AbilityType.SELECTED_PERMANENTS_GET;
-import static com.aa.mtg.cards.ability.type.AbilityType.SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER;
-import static com.aa.mtg.cards.ability.type.AbilityType.TAP_ADD_MANA;
-import static com.aa.mtg.cards.ability.type.AbilityType.THAT_TARGETS_GET;
+import static com.aa.mtg.cards.ability.type.AbilityType.*;
 import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 import static com.aa.mtg.cards.properties.Subtype.KNIGHT;
 import static com.aa.mtg.cards.properties.Subtype.ZOMBIE;
-import static com.aa.mtg.cards.properties.Type.ARTIFACT;
-import static com.aa.mtg.cards.properties.Type.CREATURE;
-import static com.aa.mtg.cards.properties.Type.ENCHANTMENT;
-import static com.aa.mtg.cards.properties.Type.LAND;
-import static com.aa.mtg.cards.properties.Type.PLANESWALKER;
+import static com.aa.mtg.cards.properties.Type.*;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughness.POWER;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.GREATER_OR_EQUAL;
@@ -41,18 +37,8 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
-import com.aa.mtg.cards.ability.target.Target;
-import com.aa.mtg.cards.ability.type.AbilityType;
-import com.aa.mtg.cards.modifiers.PowerToughness;
-import com.aa.mtg.cards.properties.Color;
-import com.aa.mtg.cards.selector.CardInstanceSelector;
-import com.aa.mtg.cards.selector.PowerToughnessConstraint;
-import com.aa.mtg.cards.selector.SelectorType;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 public class Abilities {
+    public static final Ability ADAMANT_WHITE_ENTER_PLUS_1_COUNTER = new Ability(AbilityType.ADAMANT, singletonList("WHITE"), new Ability(AbilityType.ENTERS_THE_BATTLEFIELD_WITH, singletonList("PLUS_1_COUNTERS:1")));
     public static final Ability AS_LONG_AS_IS_YOUR_TURN_IT_HAS_LIFELINK = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build(), singletonList("LIFELINK"), castTrigger());
     public static final Ability CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), singletonList("+1/+1"), castTrigger());
     public static final Ability CREATURES_YOU_CONTROL_GET_PLUS_2_0_UNTIL_END_OF_TURN = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), singletonList("+2/+0"), castTrigger());
@@ -93,7 +79,7 @@ public class Abilities {
     public static final Ability ENCHANTED_CREATURE_GETS_PLUS_3_3 = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build()).build()), singletonList("+3/+3"), castTrigger());
     public static final Ability ENCHANTED_CREATURE_GETS_PLUS_7_7_AND_TRAMPLE = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build()).build()), asList("+7/+7", "TRAMPLE"), castTrigger());
     public static final Ability ENCHANTED_CREATURE_GETS_MINUS_2_2 = new Ability(ENCHANTED_CREATURE_GETS, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build()).build()), singletonList("-2/-2"), castTrigger());
-    public static final Ability ENTERS_THE_BATTLEFIELD_TAPPED = new Ability(AbilityType.ENTERS_THE_BATTLEFIELD_TAPPED);
+    public static final Ability ENTERS_THE_BATTLEFIELD_TAPPED = new Ability(AbilityType.ENTERS_THE_BATTLEFIELD_WITH, singletonList(":TAPPED"));
     public static final Ability FLYING = new Ability(AbilityType.FLYING);
     public static final Ability GAIN_CONTROL_TARGET_CREATURE_UNTIL_END_OF_TURN = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(PERMANENT).notOfType(singletonList(LAND)).build()).build()), singletonList(":CONTROLLED"), castTrigger());
     public static final Ability GAIN_1_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("1"), castTrigger());

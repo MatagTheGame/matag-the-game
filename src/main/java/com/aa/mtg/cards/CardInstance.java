@@ -20,13 +20,11 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.aa.mtg.cards.ability.trigger.TriggerType.MANA_ABILITY;
-import static com.aa.mtg.cards.ability.type.AbilityType.FLYING;
-import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
-import static com.aa.mtg.cards.ability.type.AbilityType.REACH;
-import static com.aa.mtg.cards.ability.type.AbilityType.VIGILANCE;
+import static com.aa.mtg.cards.ability.type.AbilityType.*;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
 import static java.util.Collections.emptyList;
@@ -177,11 +175,11 @@ public class CardInstance {
 
     @JsonProperty
     public boolean isSummoningSickness() {
-        return modifiers.isSummoningSickness() && !hasAbility(HASTE);
+        return modifiers.isSummoningSickness() && !hasAbilityType(HASTE);
     }
 
     public void declareAsAttacker() {
-        if (!hasAbility(VIGILANCE)) {
+        if (!hasAbilityType(VIGILANCE)) {
             modifiers.tap();
         }
         modifiers.setAttacking(true);
@@ -196,8 +194,8 @@ public class CardInstance {
             throw new MessageException(getIdAndName() + " is tapped and cannot block.");
         }
 
-        if (blockedCreature.hasAbility(FLYING)) {
-            if (!(hasAbility(FLYING) || hasAbility(REACH))) {
+        if (blockedCreature.hasAbilityType(FLYING)) {
+            if (!(hasAbilityType(FLYING) || hasAbilityType(REACH))) {
                 throw new MessageException(getIdAndName() + " cannot block " + blockedCreature.getIdAndName() + " as it has flying.");
             }
         }
@@ -254,8 +252,14 @@ public class CardInstance {
                 .collect(Collectors.toList());
     }
 
-    public boolean hasAbility(AbilityType abilityType) {
-        return getAbilities().stream().map(Ability::getAbilityType).anyMatch(currentAbilityType -> currentAbilityType.equals(abilityType));
+    public Optional<Ability> getAbilityByType(AbilityType abilityType) {
+        return getAbilities().stream()
+            .filter(currentAbility -> currentAbility.getAbilityType().equals(abilityType))
+            .findFirst();
+    }
+
+    public boolean hasAbilityType(AbilityType abilityType) {
+        return getAbilityByType(abilityType).isPresent();
     }
 
     public boolean hasStaticAbility(AbilityType abilityType) {

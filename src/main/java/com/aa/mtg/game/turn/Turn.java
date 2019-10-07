@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @ToString
 @EqualsAndHashCode
@@ -20,6 +22,7 @@ public class Turn {
     private String currentPhase;
     private String currentPhaseActivePlayer;
     private List<CardInstance> cardsPlayedWithinTurn = new ArrayList<>();
+    private Map<Integer, List<String>> lastManaPaid = new HashMap<>();
     private String triggeredNonStackAction;
     private String winner;
 
@@ -72,6 +75,18 @@ public class Turn {
 
     public void addCardToCardsPlayedWithinTurn(CardInstance cardInstance) {
         cardsPlayedWithinTurn.add(cardInstance);
+    }
+
+    public void setCardsPlayedWithinTurn(List<CardInstance> cardsPlayedWithinTurn) {
+        this.cardsPlayedWithinTurn = cardsPlayedWithinTurn;
+    }
+
+    public Map<Integer, List<String>> getLastManaPaid() {
+        return lastManaPaid;
+    }
+
+    public void setLastManaPaid(Map<Integer, List<String>> mana) {
+        this.lastManaPaid = mana;
     }
 
     public String getTriggeredNonStackAction() {

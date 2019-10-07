@@ -1,12 +1,13 @@
 package com.aa.mtg.cards.ability.type;
 
 public enum AbilityType {
+    ADAMANT("Adamant"),
     DEATHTOUCH("Deathtouch."),
     DRAW_X_CARDS("Draw %s cards."),
     ADD_X_LIFE("%s %s life."),
     EACH_PLAYERS_ADD_X_LIFE("Each player %s %s life."),
     ENCHANTED_CREATURE_GETS("Enchanted creature gets %s."),
-    ENTERS_THE_BATTLEFIELD_TAPPED("Enters the battlefield tapped."),
+    ENTERS_THE_BATTLEFIELD_WITH("Enters the battlefield %s."),
     EQUIPPED_CREATURE_GETS("Equipped creature gets %s."),
     FLYING("Flying."),
     HASTE("Haste."),

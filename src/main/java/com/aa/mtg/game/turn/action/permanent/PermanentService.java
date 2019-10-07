@@ -68,6 +68,10 @@ public class PermanentService {
             destroyPermanentService.destroy(gameStatus, target.getId());
         }
 
+        if (tappedFromParameter(parameter)) {
+            tapPermanentService.tap(gameStatus, target.getId());
+        }
+
         if (tappedDoesNotUntapNextTurnFromParameter(parameter)) {
             tapPermanentService.tapDoesNotUntapNextTurn(gameStatus, target.getId());
         }

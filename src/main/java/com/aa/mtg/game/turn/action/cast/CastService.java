@@ -72,8 +72,9 @@ public class CastService {
 
             // FIXME Antonio: Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
             mana.keySet().stream()
-                    .map(cardInstanceId -> activePlayer.getBattlefield().findCardById(cardInstanceId))
-                    .forEach(card -> tapPermanentService.tap(gameStatus, card.getId()));
+                .map(cardInstanceId -> activePlayer.getBattlefield().findCardById(cardInstanceId))
+                .forEach(card -> tapPermanentService.tap(gameStatus, card.getId()));
+            gameStatus.getTurn().setLastManaPaid(mana);
         }
     }
 

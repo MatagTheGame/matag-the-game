@@ -8,6 +8,7 @@ import com.aa.mtg.game.player.Player;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class ManaCountService {
 
             for (String requestedMana : requestedManas) {
                 CardInstance cardInstanceToTap = currentPlayer.getBattlefield().findCardById(cardInstanceId);
-                if (!cardInstanceToTap.hasAbility(TAP_ADD_MANA)) {
+                if (!cardInstanceToTap.hasAbilityType(TAP_ADD_MANA)) {
                     throw new MessageException(cardInstanceToTap.getIdAndName() + " cannot be tapped for mana.");
 
                 } else if (cardInstanceToTap.getModifiers().isTapped()) {
@@ -40,4 +41,18 @@ public class ManaCountService {
         return paidCost;
     }
 
+    public Map<String, Integer> countManaPaid(Map<Integer, List<String>> mana) {
+        Map<String, Integer> map = new HashMap<>();
+
+        for (List<String> values : mana.values()) {
+            for (String value : values) {
+                if (!map.containsKey(value)) {
+                    map.put(value, 0);
+                }
+                map.put(value, map.get(value) + 1);
+            }
+        }
+
+        return map;
+    }
 }

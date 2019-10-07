@@ -11,9 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static com.aa.mtg.cards.ability.type.AbilityType.DEATHTOUCH;
-import static com.aa.mtg.cards.ability.type.AbilityType.LIFELINK;
-import static com.aa.mtg.cards.ability.type.AbilityType.TRAMPLE;
+import static com.aa.mtg.cards.ability.type.AbilityType.*;
 
 @Component
 public class CombatService {
@@ -41,11 +39,11 @@ public class CombatService {
             List<CardInstance> blockingCreaturesFor = nonCurrentPlayer.getBattlefield().getBlockingCreaturesFor(attackingCreature.getId());
             int remainingDamage = dealCombatDamageForOneAttackingCreature(gameStatus, attackingCreature, blockingCreaturesFor);
 
-            if (blockingCreaturesFor.isEmpty() || attackingCreature.hasAbility(TRAMPLE)) {
+            if (blockingCreaturesFor.isEmpty() || attackingCreature.hasAbilityType(TRAMPLE)) {
                 damageFromUnblockedCreatures += remainingDamage;
             }
 
-            if (attackingCreature.hasAbility(LIFELINK)) {
+            if (attackingCreature.hasAbilityType(LIFELINK)) {
                 lifelink += attackingCreature.getPower();
             }
         }
@@ -64,8 +62,8 @@ public class CombatService {
         for (CardInstance blockingCreature : blockingCreatures) {
             int damageToCurrentBlocker = Math.min(remainingDamageForAttackingCreature, blockingCreature.getToughness());
 
-            dealDamageToCreatureService.dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.hasAbility(DEATHTOUCH));
-            dealDamageToCreatureService.dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.hasAbility(DEATHTOUCH));
+            dealDamageToCreatureService.dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.hasAbilityType(DEATHTOUCH));
+            dealDamageToCreatureService.dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.hasAbilityType(DEATHTOUCH));
 
             remainingDamageForAttackingCreature -= damageToCurrentBlocker;
         }

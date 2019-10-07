@@ -30,25 +30,35 @@ public class Ability {
     @JsonProperty private final CardInstanceSelector cardInstanceSelector;
     @JsonProperty private final List<String> parameters;
     @JsonProperty private final Trigger trigger;
+    @JsonProperty private final Ability ability;
 
     public Ability(AbilityType abilityType) {
-        this(abilityType, emptyList(), null, emptyList(), null);
+        this(abilityType, emptyList(), null, emptyList(), null, null);
+    }
+
+    public Ability(AbilityType abilityType, List<String> parameters) {
+        this(abilityType, emptyList(), null, parameters, null, null);
+    }
+
+    public Ability(AbilityType abilityType, List<String> parameters, Ability ability) {
+        this(abilityType, emptyList(), null, parameters, null, ability);
     }
 
     public Ability(AbilityType abilityType, List<Target> targets, List<String> parameters, Trigger trigger) {
-        this(abilityType, targets, null, parameters, trigger);
+        this(abilityType, targets, null, parameters, trigger, null);
     }
 
     public Ability(AbilityType abilityType, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger) {
-        this(abilityType, emptyList(), cardInstanceSelector, parameters, trigger);
+        this(abilityType, emptyList(), cardInstanceSelector, parameters, trigger, null);
     }
 
-    public Ability(AbilityType abilityType, List<Target> targets, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger) {
+    public Ability(AbilityType abilityType, List<Target> targets, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger, Ability ability) {
         this.abilityType = abilityType;
         this.targets = targets;
         this.cardInstanceSelector = cardInstanceSelector;
         this.parameters = parameters;
         this.trigger = trigger;
+        this.ability = ability;
     }
 
     @JsonProperty
@@ -93,6 +103,10 @@ public class Ability {
 
     public Trigger getTrigger() {
         return trigger;
+    }
+
+    public Ability getAbility() {
+        return ability;
     }
 
     public boolean requiresTarget() {
