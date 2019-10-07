@@ -1,9 +1,9 @@
 package application.browser;
 
-import org.openqa.selenium.By;
-
 import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBe;
+
+import org.openqa.selenium.By;
 
 public class MessageHelper {
     private MtgBrowser mtgBrowser;
@@ -21,6 +21,6 @@ public class MessageHelper {
     }
 
     public void close() {
-        mtgBrowser.findElement(By.id("message-close")).click();
+        mtgBrowser.findElement(By.id("popup-close")).click();
     }
 }
