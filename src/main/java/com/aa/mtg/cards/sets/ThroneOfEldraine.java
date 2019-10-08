@@ -21,7 +21,10 @@ public class ThroneOfEldraine implements MtgSet {
     public static final String ELD = "ELD";
 
     public static Card ARDENVALE_PALADIN = new Card("Ardenvale Paladin", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "Adamant — If at least three white mana was spent to cast this spell, Ardenvale Paladin enters the battlefield with a +1/+1 counter on it.", 2, 5, singletonList(ADAMANT_WHITE_ENTER_PLUS_1_COUNTER));
+    public static Card CLOCKWORK_SERVANT = new Card("Clockwork Servant", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList(GNOME), UNCOMMON, "Adamant — When Clockwork Servant enters the battlefield, if at least three mana of the same color was spent to cast it, draw a card.", 2, 3, singletonList(ADAMANT_SAME_ENTER_DRAW_A_CARD));
     public static Card CRYSTAL_SLIPPER = new Card("Crystal Slipper", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(ARTIFACT), singletonList(EQUIPMENT), COMMON, "Equipped creature gets +1/+0 and has haste. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_0_AND_HASTE));
+    public static Card EMBERETH_PALADIN = new Card("Embereth Paladin", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "Haste. Adamant — If at least three red mana was spent to cast this spell, Embereth Paladin enters the battlefield with a +1/+1 counter on it.", 4, 1, asList(HASTE, ADAMANT_RED_ENTER_PLUS_1_COUNTER));
+    public static Card HENGE_WALKER = new Card("Henge Walker", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList(GOLEM), COMMON, "Adamant — If at least three mana of the same color was spent to cast this spell, Henge Walker enters the battlefield with a +1/+1 counter on it.", 2, 2, singletonList(ADAMANT_SAME_ENTER_PLUS_1_COUNTER));
     public static Card INSPIRING_VETERAN = new Card("Inspiring Veteran", asSet(Color.RED, Color.WHITE), asList(Cost.RED, Cost.WHITE), singletonList(CREATURE), asList(HUMAN, KNIGHT), UNCOMMON, "Other Knights you control get +1/+1.", 2, 2, singletonList(OTHER_KNIGHTS_YOU_CONTROL_GET_PLUS_1_1));
     public static Card KNIGHT_OF_THE_KEEP = new Card("Knight of the Keep", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "", 3, 2, emptyList());
     public static Card LASH_OF_THORNS = new Card("Lash of Thorns", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +2/+1 and gains deathtouch until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_2_1_AND_DEATHTOUCH_UNTIL_END_OF_TURN));
@@ -32,6 +35,7 @@ public class ThroneOfEldraine implements MtgSet {
     public static Card RIGHTEOUSNESS = new Card("Righteousness", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(INSTANT), emptyList(), COMMON, "Target blocking creature gets +7/+7 until end of turn.", 0, 0, singletonList(TARGET_BLOCKING_CREATURE_GETS_PLUS_7_7_END_OF_TURN));
     public static Card SPORECAP_SPIDER = new Card("Sporecap Spider", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(SPIDER), COMMON, "Reach", 1, 5, singletonList(REACH));
     public static Card TOME_RAIDER = new Card("Tome raider", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), singletonList(FAERIE), COMMON, "Flying. When Tome Raider enters the battlefield, draw a card.", 1, 1, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
+    public static Card VANTRESS_PALADIN = new Card("Vantress Paladin", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "Flying. Adamant — If at least three blue mana was spent to cast this spell, Vantress Paladin enters the battlefield with an additional +1/+1 counter on it.", 2, 2, singletonList(ADAMANT_BLUE_ENTER_PLUS_1_COUNTER));
 
     private static ThroneOfEldraine instance;
 
@@ -39,7 +43,10 @@ public class ThroneOfEldraine implements MtgSet {
 
     private ThroneOfEldraine() {
         cards.add(ARDENVALE_PALADIN);
+        cards.add(CLOCKWORK_SERVANT);
         cards.add(CRYSTAL_SLIPPER);
+        cards.add(EMBERETH_PALADIN);
+        cards.add(HENGE_WALKER);
         cards.add(INSPIRING_VETERAN);
         cards.add(KNIGHT_OF_THE_KEEP);
         cards.add(LASH_OF_THORNS);
@@ -50,6 +57,7 @@ public class ThroneOfEldraine implements MtgSet {
         cards.add(RIGHTEOUSNESS);
         cards.add(SPORECAP_SPIDER);
         cards.add(TOME_RAIDER);
+        cards.add(VANTRESS_PALADIN);
     }
 
     @Override

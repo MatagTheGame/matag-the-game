@@ -29,6 +29,7 @@ public enum Subtype {
     FROG,
     GATE,
     GIANT,
+    GNOME,
     GOBLIN,
     GOLEM,
     GRIFFIN,

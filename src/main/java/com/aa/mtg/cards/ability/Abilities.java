@@ -38,7 +38,11 @@ import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
 public class Abilities {
+    public static final Ability ADAMANT_BLUE_ENTER_PLUS_1_COUNTER = new Ability(AbilityType.ADAMANT, singletonList("BLUE"), new Ability(AbilityType.ENTERS_THE_BATTLEFIELD_WITH, singletonList("PLUS_1_COUNTERS:1")));
+    public static final Ability ADAMANT_RED_ENTER_PLUS_1_COUNTER = new Ability(AbilityType.ADAMANT, singletonList("RED"), new Ability(AbilityType.ENTERS_THE_BATTLEFIELD_WITH, singletonList("PLUS_1_COUNTERS:1")));
     public static final Ability ADAMANT_WHITE_ENTER_PLUS_1_COUNTER = new Ability(AbilityType.ADAMANT, singletonList("WHITE"), new Ability(AbilityType.ENTERS_THE_BATTLEFIELD_WITH, singletonList("PLUS_1_COUNTERS:1")));
+    public static final Ability ADAMANT_SAME_ENTER_DRAW_A_CARD = new Ability(AbilityType.ADAMANT, singletonList("SAME"), new Ability(AbilityType.ENTERS_THE_BATTLEFIELD_WITH, singletonList("DRAW:1")));
+    public static final Ability ADAMANT_SAME_ENTER_PLUS_1_COUNTER = new Ability(AbilityType.ADAMANT, singletonList("SAME"), new Ability(AbilityType.ENTERS_THE_BATTLEFIELD_WITH, singletonList("PLUS_1_COUNTERS:1")));
     public static final Ability AS_LONG_AS_IS_YOUR_TURN_IT_HAS_LIFELINK = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build(), singletonList("LIFELINK"), castTrigger());
     public static final Ability CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), singletonList("+1/+1"), castTrigger());
     public static final Ability CREATURES_YOU_CONTROL_GET_PLUS_2_0_UNTIL_END_OF_TURN = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), singletonList("+2/+0"), castTrigger());
