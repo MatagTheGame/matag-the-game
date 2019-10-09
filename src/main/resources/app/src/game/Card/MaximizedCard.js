@@ -1,12 +1,13 @@
-import React, {Fragment, Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import throttle from 'lodash/throttle'
 
 class MaximizedCard extends Component {
   constructor(props) {
     super(props)
-    this.onWheel= this.onWheel.bind(this)
+    this.onWheel= throttle(this.onWheel.bind(this), 500)
   }
 
   onWheel(e) {

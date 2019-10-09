@@ -47,6 +47,7 @@ class HelpPage extends Component {
         <h5>The following are available navigation shortcuts:</h5>
         <ul>
           <li>SPACE - continue</li>
+          <li>SCROLL - on a card to maximize/minimize it</li>
         </ul>
       </span>
     );

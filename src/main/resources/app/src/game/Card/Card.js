@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import get from 'lodash/get'
+import throttle from 'lodash/throttle'
 import CardUtils from './CardUtils'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
@@ -9,7 +10,7 @@ import PropTypes from 'prop-types'
 class Card extends Component {
   constructor(props) {
     super(props)
-    this.onWheel = this.onWheel.bind(this)
+    this.onWheel = throttle(this.onWheel.bind(this))
   }
 
   name() {
