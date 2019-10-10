@@ -148,9 +148,9 @@ public class CardInstanceSearch {
         return new CardInstanceSearch(cards);
     }
 
-    public CardInstanceSearch withStaticAbility(AbilityType abilityType) {
+    public CardInstanceSearch withFixedAbility(AbilityType abilityType) {
         List<CardInstance> cards = this.cards.stream()
-                .filter(cardInstance -> cardInstance.hasStaticAbility(abilityType))
+                .filter(cardInstance -> cardInstance.hasFixedAbility(abilityType))
                 .collect(toList());
 
         return new CardInstanceSearch(cards);

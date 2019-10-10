@@ -48,7 +48,7 @@ public class CardInstanceSelectorService {
         }
 
         if (cardInstanceSelector.getWithAbilityType() != null) {
-            cards = cards.withStaticAbility(cardInstanceSelector.getWithAbilityType());
+            cards = cards.withFixedAbility(cardInstanceSelector.getWithAbilityType());
         }
 
         if (cardInstanceSelector.getPowerToughnessConstraint() != null) {
