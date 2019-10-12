@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.ability.type.AbilityType.ADAMANT;
 import static com.aa.mtg.cards.ability.type.AbilityType.ENTERS_THE_BATTLEFIELD_WITH;
+import static java.util.stream.Collectors.toList;
 
 @Component
 public class EntersTheBattlefieldWithService {
@@ -32,30 +33,32 @@ public class EntersTheBattlefieldWithService {
     }
 
     void entersTheBattlefieldWith(GameStatus gameStatus, CardInstance cardInstance) {
-        List<String> parameters = new ArrayList<>();
-        addEntersTheBattlefieldWithParameters(cardInstance, parameters);
-        addAdamantEntersTheBattlefieldWithParameters(gameStatus, cardInstance, parameters);
+        List<String> parameters = addEntersTheBattlefieldWithParameters(cardInstance);
+        parameters.addAll(addAdamantEntersTheBattlefieldWithParameters(gameStatus, cardInstance));
         executeParameters(gameStatus, cardInstance, parameters);
     }
 
-    private void addEntersTheBattlefieldWithParameters(CardInstance cardInstance, List<String> parameters) {
-        Optional<Ability> entersTheBattlefieldWith = cardInstance.getAbilityByType(ENTERS_THE_BATTLEFIELD_WITH);
-        entersTheBattlefieldWith.map(Ability::getParameters).ifPresent(parameters::addAll);
+    private List<String> addEntersTheBattlefieldWithParameters(CardInstance cardInstance) {
+        List<Ability> entersTheBattlefieldWith = cardInstance.getAbilitiesByType(ENTERS_THE_BATTLEFIELD_WITH);
+        return entersTheBattlefieldWith.stream().map(Ability::getParameters).flatMap(Collection::stream).collect(toList());
     }
 
-    private void addAdamantEntersTheBattlefieldWithParameters(GameStatus gameStatus, CardInstance cardInstance, List<String> parameters) {
-        Optional<Ability> adamant = cardInstance.getAbilityByType(ADAMANT);
+    private List<String> addAdamantEntersTheBattlefieldWithParameters(GameStatus gameStatus, CardInstance cardInstance) {
+        List<String> parameters = new ArrayList<>();
+        List<Ability> adamantAbilities = cardInstance.getAbilitiesByType(ADAMANT);
 
-        if (adamant.isPresent()) {
+        for (Ability adamant : adamantAbilities) {
             Map<Integer, List<String>> manaPaid = gameStatus.getTurn().getLastManaPaid();
             Map<String, Integer> manaPaidByColor = manaCountService.countManaPaid(manaPaid);
-            String adamantColor = adamant.get().getParameter(0);
+            String adamantColor = adamant.getParameter(0);
             boolean adamantFulfilled = isAdamantFulfilled(manaPaidByColor, adamantColor);
 
             if (adamantFulfilled) {
-                adamant.map(Ability::getAbility).map(Ability::getParameters).ifPresent(parameters::addAll);
+                parameters.addAll(adamant.getAbility().getParameters());
             }
         }
+
+        return parameters;
     }
 
     private boolean isAdamantFulfilled(Map<String, Integer> manaPaidByColor, String adamantColor) {

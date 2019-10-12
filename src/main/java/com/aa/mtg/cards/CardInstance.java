@@ -1,6 +1,7 @@
 package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
@@ -20,14 +21,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static com.aa.mtg.cards.ability.trigger.TriggerType.MANA_ABILITY;
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
 import static com.aa.mtg.cards.properties.Type.SORCERY;
 import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toList;
 
 @ToString
 @EqualsAndHashCode
@@ -249,21 +249,38 @@ public class CardInstance {
         return getAbilities().stream()
                 .filter(ability -> ability.getTrigger() != null)
                 .filter(ability -> ability.getTrigger().getType().equals(triggerType))
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
-    public Optional<Ability> getAbilityByType(AbilityType abilityType) {
+    public List<Ability> getAbilitiesByTriggerSubType(TriggerSubtype triggerSubType) {
+        return getAbilities().stream()
+                .filter(ability -> ability.getTrigger() != null)
+                .filter(ability -> triggerSubType.equals(ability.getTrigger().getSubtype()))
+                .collect(toList());
+    }
+
+    public List<Ability> getAbilitiesByType(AbilityType abilityType) {
         return getAbilities().stream()
             .filter(currentAbility -> currentAbility.getAbilityType().equals(abilityType))
-            .findFirst();
+            .collect(toList());
     }
 
     public boolean hasAbilityType(AbilityType abilityType) {
-        return getAbilityByType(abilityType).isPresent();
+        return getAbilitiesByType(abilityType).size() > 0;
+    }
+
+    public List<Ability> getFixedAbilitiesByType(AbilityType abilityType) {
+        return getFixedAbilities().stream()
+                .filter(currentAbility -> currentAbility.getAbilityType().equals(abilityType))
+                .collect(toList());
     }
 
     public boolean hasFixedAbility(AbilityType abilityType) {
-        return getFixedAbilities().stream().map(Ability::getAbilityType).anyMatch(currentAbilityType -> currentAbilityType.equals(abilityType));
+        return getFixedAbilitiesByType(abilityType).size() > 0;
+    }
+
+    public boolean hasFixedAbilityWithTriggerSubType(TriggerSubtype triggerSubtype) {
+        return getAbilitiesByTriggerSubType(triggerSubtype).size() > 0;
     }
 
     public boolean isPermanent() {

@@ -3,6 +3,7 @@ package com.aa.mtg.game.turn.action.selection;
 import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Abilities;
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.cards.modifiers.PowerToughness;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,8 @@ public class AbilitiesFromOtherPermanentsService {
         List<CardInstance> cards = gameStatus.getAllBattlefieldCards().withFixedAbility(SELECTED_PERMANENTS_GET).getCards();
 
         for (CardInstance card : cards) {
-            for (Ability ability : card.getFixedAbilities()) {
-                if (ability.getAbilityType() == SELECTED_PERMANENTS_GET) {
+            for (Ability ability : card.getFixedAbilitiesByType(SELECTED_PERMANENTS_GET)) {
+                if (ability.getTrigger().getType() == TriggerType.STATIC) {
                     if (cardInstanceSelectorService.select(gameStatus, card, ability.getCardInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
                         parameters.addAll(ability.getParameters());
                     }

@@ -19,7 +19,6 @@ import static com.aa.mtg.cards.sets.CoreSet2019.BOGSTOMPER;
 import static com.aa.mtg.cards.sets.CoreSet2019.EXCLUSION_MAGE;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
-import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -42,20 +41,39 @@ public class CreatureEntersTheBattlefieldReturnTargetToHandTest extends Abstract
         browser.player1().getHandHelper(PLAYER).getFirstCard(EXCLUSION_MAGE).click();
         browser.player2().getActionHelper().clickContinue();
 
-        // And player 1 select opponent creature to return
-        browser.player1().getPhaseHelper().is(M1, PLAYER);
+        // Then Exclusion Mage is on the battlefield and its trigger on the stack
+        int exclusionMageId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(EXCLUSION_MAGE).getCardIdNumeric();
+        browser.player1().getStackHelper().containsAbility("Pippo's Exclusion Mage (" + exclusionMageId + "): That targets get returned to its owner's hand.");
+
+        // When player 1 selects opponent creature to return
         browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(BOGSTOMPER).click();
         browser.player2().getActionHelper().clickContinue();
 
-        // Then
+        // Then it's returned to its owner hand
         browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).isEmpty();
         browser.player1().getHandHelper(OPPONENT).toHaveSize(1);
+
+        // When playing another Exclusion Mage
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 3).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 4).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(ISLAND, 5).tap();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(EXCLUSION_MAGE).click();
+        browser.player2().getActionHelper().clickContinue();
+
+        // Player 1 continue without targets as nothing can be targeted
+        browser.player1().getActionHelper().clickContinue();
+        browser.player1().getStackHelper().isEmpty();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(EXCLUSION_MAGE, EXCLUSION_MAGE);
     }
 
     static class InitTestServiceForTest extends InitTestService {
         @Override
         public void initGameStatus(GameStatus gameStatus) {
             addCardToCurrentPlayerHand(gameStatus, EXCLUSION_MAGE);
+            addCardToCurrentPlayerHand(gameStatus, EXCLUSION_MAGE);
+            addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
+            addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
+            addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
             addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
             addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
             addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);

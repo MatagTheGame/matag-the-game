@@ -44,7 +44,7 @@ public class CreatureEntersTheBattlefieldDoubleAbilityTest extends AbstractAppli
 
         // Then both abilities happen
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(DUSK_LEGION_ZEALOT);
-        browser.player1().getHandHelper(PLAYER).contains(SWAMP);
+        browser.player1().getHandHelper(PLAYER).containsExactly(SWAMP);
         browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(19);
     }
 
@@ -54,6 +54,7 @@ public class CreatureEntersTheBattlefieldDoubleAbilityTest extends AbstractAppli
             addCardToCurrentPlayerHand(gameStatus, DUSK_LEGION_ZEALOT);
             addCardToCurrentPlayerBattlefield(gameStatus, SWAMP);
             addCardToCurrentPlayerBattlefield(gameStatus, SWAMP);
+            addCardToCurrentPlayerLibrary(gameStatus, SWAMP);
             addCardToCurrentPlayerLibrary(gameStatus, SWAMP);
         }
     }

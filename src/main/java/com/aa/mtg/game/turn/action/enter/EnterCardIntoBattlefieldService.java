@@ -15,14 +15,14 @@ public class EnterCardIntoBattlefieldService {
     private static final Logger LOGGER = LoggerFactory.getLogger(EnterCardIntoBattlefieldService.class);
 
     private final EntersTheBattlefieldWithService entersTheBattlefieldWithService;
-    private final WhenItEntersTheBattlefieldService whenItEntersTheBattlefieldService;
+    private final WhenEnterTheBattlefieldService whenEnterTheBattlefieldService;
 
     @Autowired
     public EnterCardIntoBattlefieldService(
-        EntersTheBattlefieldWithService entersTheBattlefieldWithService,
-        WhenItEntersTheBattlefieldService whenItEntersTheBattlefieldService) {
+            EntersTheBattlefieldWithService entersTheBattlefieldWithService,
+            WhenEnterTheBattlefieldService whenEnterTheBattlefieldService) {
         this.entersTheBattlefieldWithService = entersTheBattlefieldWithService;
-        this.whenItEntersTheBattlefieldService = whenItEntersTheBattlefieldService;
+        this.whenEnterTheBattlefieldService = whenEnterTheBattlefieldService;
     }
 
     public void enter(GameStatus gameStatus, CardInstance cardInstance) {
@@ -38,7 +38,7 @@ public class EnterCardIntoBattlefieldService {
         LOGGER.info(cardInstance.getIdAndName() + " entered the battlefield.");
 
         entersTheBattlefieldWithService.entersTheBattlefieldWith(gameStatus, cardInstance);
-        whenItEntersTheBattlefieldService.whenItEntersTheBattlefield(gameStatus, cardInstance);
+        whenEnterTheBattlefieldService.whenEnterTheBattlefield(gameStatus, cardInstance);
     }
 
 }

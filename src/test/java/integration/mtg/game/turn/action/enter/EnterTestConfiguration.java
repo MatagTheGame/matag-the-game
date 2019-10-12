@@ -2,6 +2,7 @@ package integration.mtg.game.turn.action.enter;
 
 import com.aa.mtg.game.turn.action.cast.ManaCountService;
 import com.aa.mtg.game.turn.action.draw.DrawXCardsService;
+import com.aa.mtg.game.turn.action.selection.CardInstanceSelectorService;
 import integration.TestUtilsConfiguration;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -22,5 +23,10 @@ public class EnterTestConfiguration {
     @Bean
     public DrawXCardsService drawXCardsService() {
         return Mockito.mock(DrawXCardsService.class);
+    }
+
+    @Bean
+    public CardInstanceSelectorService cardInstanceSelectorService() {
+        return new CardInstanceSelectorService();
     }
 }
