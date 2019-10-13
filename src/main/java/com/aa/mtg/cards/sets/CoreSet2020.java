@@ -12,15 +12,9 @@ import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Subtype.*;
-import static com.aa.mtg.cards.properties.Type.ARTIFACT;
-import static com.aa.mtg.cards.properties.Type.CREATURE;
-import static com.aa.mtg.cards.properties.Type.INSTANT;
-import static com.aa.mtg.cards.properties.Type.SORCERY;
+import static com.aa.mtg.cards.properties.Type.*;
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptySet;
-import static java.util.Collections.singleton;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
 import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
 
 public class CoreSet2020 implements MtgSet {
@@ -43,6 +37,7 @@ public class CoreSet2020 implements MtgSet {
     public static Card EMPYREAN_EAGLE = new Card("Empyrean Eagle", asSet(Color.WHITE, Color.BLUE), asList(Cost.WHITE, Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), asList(BIRD, SPIRIT), UNCOMMON, "Flying. Other creatures you control with flying get +1/+1.", 2, 3, asList(FLYING, OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_1_1));
     public static Card FORTRESS_CRAB = new Card("Fortress Crab", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(CRAB), COMMON, "", 1, 6, emptyList());
     public static Card FROST_LYNX = new Card("Frost Lynx", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(ELEMENTAL, CAT), COMMON, "When Frost Lynx enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TAP_TARGET_OPPONENT_CREATURE_DOES_NOT_UNTAP_NEXT_TURN));
+    public static Card GRIFFIN_PROTECTOR = new Card("Griffin Protector", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(GRIFFIN), COMMON, "Flying. Whenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.", 2, 3, asList(FLYING, WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_IT_GETS_PLUS_1_1_UNTIL_END_OF_TURN));
     public static Card GRIFFIN_SENTINEL = new Card("Griffin Sentinel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(GRIFFIN), COMMON, "Flying. Vigilance.", 1, 3, asList(FLYING, VIGILANCE));
     public static Card HEALER_OF_THE_GLADE = new Card("Healer of the Glade", singleton(Color.GREEN), singletonList(Cost.GREEN), singletonList(CREATURE), singletonList(ELEMENTAL), COMMON, "When Healer of the Glade enters the battlefield, you gain 3 life.", 1, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_3_LIFE));
     public static Card IMPERIAL_OUTRIDER = new Card("Imperial Outrider", singleton(Color.WHITE), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "", 1, 5, emptyList());
@@ -99,10 +94,12 @@ public class CoreSet2020 implements MtgSet {
         cards.add(FROST_LYNX);
         cards.add(CoreSet2019.GREENWOOD_SENTINEL);
         cards.add(GRIFFIN_SENTINEL);
+        cards.add(GRIFFIN_PROTECTOR);
         cards.add(WarOfTheSpark.GOBLIN_ASSAILANT);
         cards.add(RavnicaAllegiance.HAAZDA_OFFICER);
         cards.add(HEALER_OF_THE_GLADE);
         cards.add(CoreSet2019.HOSTILE_MINOTAUR);
+        cards.add(RavnicaAllegiance.IMPASSIONED_ORATOR);
         cards.add(IMPERIAL_OUTRIDER);
         cards.add(INFURIATE);
         cards.add(CoreSet2019.INSPIRED_CHARGE);

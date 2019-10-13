@@ -1,66 +1,20 @@
 package com.aa.mtg.cards.sets;
 
-import static com.aa.mtg.cards.ability.Abilities.CREATURES_YOU_CONTROL_GET_PLUS_2_0_UNTIL_END_OF_TURN;
-import static com.aa.mtg.cards.ability.Abilities.DEAL_3_DAMAGE_TO_ANY_TARGET;
-import static com.aa.mtg.cards.ability.Abilities.DEATHTOUCH;
-import static com.aa.mtg.cards.ability.Abilities.DESTROY_TARGET_ARTIFACT_OR_CREATURE_OR_PLANESWALKER;
-import static com.aa.mtg.cards.ability.Abilities.DESTROY_TARGET_CREATURE_2_DAMAGE_TO_CONTROLLER;
-import static com.aa.mtg.cards.ability.Abilities.DESTROY_TARGET_CREATURE_OR_ENCHANTMENT;
-import static com.aa.mtg.cards.ability.Abilities.DRAW_1_CARD;
-import static com.aa.mtg.cards.ability.Abilities.ENTERS_THE_BATTLEFIELD_TAPPED;
-import static com.aa.mtg.cards.ability.Abilities.FLYING;
-import static com.aa.mtg.cards.ability.Abilities.HASTE;
-import static com.aa.mtg.cards.ability.Abilities.OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_0_1;
-import static com.aa.mtg.cards.ability.Abilities.OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_1_0;
-import static com.aa.mtg.cards.ability.Abilities.SHUFFLE_GRAVEYARD_INTO_LIBRARY_OF_TARGET_PLAYER;
-import static com.aa.mtg.cards.ability.Abilities.TAP_ADD_1_GREEN_1_BLUE_MANA;
-import static com.aa.mtg.cards.ability.Abilities.TAP_ADD_BLACK_MANA;
-import static com.aa.mtg.cards.ability.Abilities.TAP_ADD_BLUE_MANA;
-import static com.aa.mtg.cards.ability.Abilities.TAP_ADD_GREEN_MANA;
-import static com.aa.mtg.cards.ability.Abilities.TAP_ADD_RED_MANA;
-import static com.aa.mtg.cards.ability.Abilities.TAP_ADD_WHITE_MANA;
-import static com.aa.mtg.cards.ability.Abilities.TARGET_CREATURE_GETS_DEATHTOUCH_UNTIL_END_OF_TURN;
-import static com.aa.mtg.cards.ability.Abilities.TARGET_CREATURE_GETS_PLUS_3_3_AND_REACH_UNTIL_END_OF_TURN;
-import static com.aa.mtg.cards.ability.Abilities.TRAMPLE;
-import static com.aa.mtg.cards.ability.Abilities.VIGILANCE;
-import static com.aa.mtg.cards.ability.Abilities.WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN;
-import static com.aa.mtg.cards.ability.Abilities.WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_2_2_VIGILANCE_AND_TRAMPLE_UNTIL_END_OF_TURN;
-import static com.aa.mtg.cards.ability.Abilities.WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE;
-import static com.aa.mtg.cards.ability.Abilities.WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_YOU_CONTROL_GETS_PLUS_1_1;
-import static com.aa.mtg.cards.properties.Rarity.COMMON;
-import static com.aa.mtg.cards.properties.Rarity.RARE;
-import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
-import static com.aa.mtg.cards.properties.Subtype.BEAST;
-import static com.aa.mtg.cards.properties.Subtype.BOAR;
-import static com.aa.mtg.cards.properties.Subtype.CAT;
-import static com.aa.mtg.cards.properties.Subtype.CROCODILE;
-import static com.aa.mtg.cards.properties.Subtype.DRAKE;
-import static com.aa.mtg.cards.properties.Subtype.ELEPHANT;
-import static com.aa.mtg.cards.properties.Subtype.GATE;
-import static com.aa.mtg.cards.properties.Subtype.HUMAN;
-import static com.aa.mtg.cards.properties.Subtype.MERFOLK;
-import static com.aa.mtg.cards.properties.Subtype.PEGASUS;
-import static com.aa.mtg.cards.properties.Subtype.SOLDIER;
-import static com.aa.mtg.cards.properties.Subtype.SPIRIT;
-import static com.aa.mtg.cards.properties.Subtype.VEDALKEN;
-import static com.aa.mtg.cards.properties.Subtype.WARRIOR;
-import static com.aa.mtg.cards.properties.Subtype.WIZARD;
-import static com.aa.mtg.cards.properties.Type.CREATURE;
-import static com.aa.mtg.cards.properties.Type.INSTANT;
-import static com.aa.mtg.cards.properties.Type.LAND;
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptySet;
-import static java.util.Collections.singleton;
-import static java.util.Collections.singletonList;
-import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
-
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.cards.properties.Type;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.aa.mtg.cards.ability.Abilities.*;
+import static com.aa.mtg.cards.properties.Rarity.*;
+import static com.aa.mtg.cards.properties.Subtype.*;
+import static com.aa.mtg.cards.properties.Type.*;
+import static java.util.Arrays.asList;
+import static java.util.Collections.*;
+import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
 
 public class RavnicaAllegiance implements MtgSet {
 
@@ -83,6 +37,7 @@ public class RavnicaAllegiance implements MtgSet {
     public static Card GRUUL_GUILDGATE = new Card("Gruul Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Gruul Guildgate enters the battlefield tapped. TAP: Add RED or GREEN to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_RED_MANA, TAP_ADD_GREEN_MANA));
     public static Card GYRE_ENGINEER = new Card("Gyre Engineer", asSet(Color.GREEN, Color.BLUE), asList(Cost.GREEN, Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), asList(VEDALKEN, WIZARD), UNCOMMON, "TAP: Add GREEN and BLUE.", 1, 1, singletonList(TAP_ADD_1_GREEN_1_BLUE_MANA));
     public static Card HAAZDA_OFFICER = new Card("Haazda Officer", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, SOLDIER), COMMON, "When Haazda Officer enters the battlefield, target creature you control gets +1/+1 until end of turn.", 3, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_YOU_CONTROL_GETS_PLUS_1_1));
+    public static Card IMPASSIONED_ORATOR = new Card("Impassionate Orator", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, CLERIC), COMMON, "Whenever another creature enters the battlefield under your control, you gain 1 life.", 2, 2, singletonList(WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_YOU_GAIN_ONE_LIFE));
     public static Card MORTIFY = new Card("Mortify", asSet(Color.WHITE, Color.BLACK), asList(Cost.WHITE, Cost.BLACK, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Destroy target creature or enchantment.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_OR_ENCHANTMENT));
     public static Card NOXIOUS_GROODION = new Card("Noxious Groodion", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), COMMON, "Deathtouch", 2, 2, singletonList(DEATHTOUCH));
     public static Card ORZHOV_GUILDGATE = new Card("Orzhov Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Orzhov Guildgate enters the battlefield tapped. TAP: Add WHITE or BLACK to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_WHITE_MANA, TAP_ADD_BLACK_MANA));
@@ -117,6 +72,7 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(GRUUL_GUILDGATE);
         cards.add(GYRE_ENGINEER);
         cards.add(HAAZDA_OFFICER);
+        cards.add(IMPASSIONED_ORATOR);
         cards.add(Dominaria.MAMMOTH_SPIDER);
         cards.add(MORTIFY);
         cards.add(NOXIOUS_GROODION);
