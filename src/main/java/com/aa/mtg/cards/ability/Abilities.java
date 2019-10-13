@@ -7,6 +7,7 @@ import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
 import com.aa.mtg.cards.selector.PowerToughnessConstraint;
 import com.aa.mtg.cards.selector.SelectorType;
+import com.aa.mtg.game.player.PlayerType;
 
 import java.util.List;
 import java.util.Optional;
@@ -164,6 +165,7 @@ public class Abilities {
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_NONLAND_OPPONENT_PERMANENT_GET_DESTROYED = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(PERMANENT).notOfType(singletonList(LAND)).controllerType(OPPONENT).build()).build()), singletonList(":DESTROYED"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build()));
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_RETURN_ANOTHER_TARGET_CREATURE_YOU_CONTROL_TO_ITS_OWNER_HAND = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().others(true).selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build()).build()), singletonList(":RETURN_TO_OWNER_HAND"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build()));
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_RETURN_TARGET_OPPONENT_CREATURE_TO_ITS_OWNERS_HAND = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(OPPONENT).build()).build()), singletonList(":RETURN_TO_OWNER_HAND"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build()));
+    public static final Ability WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_YOU_GAIN_ONE_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("1"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PlayerType.PLAYER).build()));
 
     private static Ability get(String ability) {
         try {

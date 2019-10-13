@@ -8,17 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
-import static com.aa.mtg.cards.properties.Rarity.COMMON;
-import static com.aa.mtg.cards.properties.Rarity.RARE;
-import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
+import static com.aa.mtg.cards.properties.Rarity.*;
 import static com.aa.mtg.cards.properties.Subtype.*;
 import static com.aa.mtg.cards.properties.Type.*;
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptySet;
-import static java.util.Collections.singleton;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
 
+@SuppressWarnings("WeakerAccess")
 public class CoreSet2019 implements MtgSet {
 
     public static final String M19 = "M19";
@@ -26,8 +22,9 @@ public class CoreSet2019 implements MtgSet {
     public static Card ACT_OF_TREASON = new Card("Act of Treason", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.", 0, 0, asList(GAIN_CONTROL_TARGET_CREATURE_UNTIL_END_OF_TURN, UNTAP_TARGET_CREATURE, TARGET_CREATURE_GETS_HASTE_UNTIL_END_OF_TURN));
     public static Card AEGIS_OF_THE_HEAVENS = new Card("Aegis of the Heavens", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Target creature gets +1/+7 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_1_7_UNTIL_END_OF_TURN));
     public static Card AGGRESSIVE_MAMMOTH = new Card("Aggressive Mammoth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ELEPHANT), RARE, "Trample. Other creatures you control have trample.", 8, 8, asList(TRAMPLE, OTHER_CREATURES_YOU_CONTROL_GET_TRAMPLE));
+    public static Card AJANIS_WELCOME = new Card("Ajanis Welcome", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(ENCHANTMENT), emptyList(), RARE, "Whenever a creature enters the battlefield under your control, you gain 1 life.", 0, 0, singletonList(WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_YOU_GAIN_ONE_LIFE));
     public static Card ANGEL_OF_THE_DAWN = new Card("Angel of the Dawn", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ANGEL), COMMON, "Flying. When Angel of the Dawn enters the battlefield, creatures you control get +1/+1 and gain vigilance until end of turn.", 3, 3, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_AND_VIGILANCE_UNTIL_END_OF_TURN));
-    public static Card BLOOD_BURGLAR = new Card("Blood Burglar", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, ROGUE), COMMON, "As long as it's your turn, Blood Burglar has lifelink.", 2, 2, asList(AS_LONG_AS_IS_YOUR_TURN_IT_HAS_LIFELINK));
+    public static Card BLOOD_BURGLAR = new Card("Blood Burglar", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, ROGUE), COMMON, "As long as it's your turn, Blood Burglar has lifelink.", 2, 2, singletonList(AS_LONG_AS_IS_YOUR_TURN_IT_HAS_LIFELINK));
     public static Card BOGSTOMPER = new Card("Bogstomper", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), COMMON, "", 6, 5, emptyList());
     public static Card CENTAUR_COURSER = new Card("Centaur Courser", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(CENTAUR, WARRIOR), COMMON, "", 3, 3, emptyList());
     public static Card CHILD_OF_NIGHT = new Card("Child of Night", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), singletonList(VAMPIRE), COMMON, "Lifelink", 2, 1, singletonList(LIFELINK));
@@ -69,7 +66,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card SNAPPING_DRAKE = new Card("Snapping Drake", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DRAKE), COMMON, "Flying.", 3, 2, singletonList(FLYING));
     public static Card THORNHIDE_WOLVES = new Card("Thornhide Wolves", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(WOLF), COMMON, "", 4, 5, emptyList());
     public static Card VAMPIRE_SOVEREIGN = new Card("Vampire Sovereign", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(VAMPIRE), UNCOMMON, "Flying. When Vampire Sovereign enters the battlefield, target opponent loses 3 life and you gain 3 life.", 3, 4, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_LOSES_3_LIFE, WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_3_LIFE));
-    public static Card VIGILANT_BALOTH = new Card("Vigilant Baloth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), UNCOMMON, "Vigilance", 5, 5, asList(VIGILANCE));
+    public static Card VIGILANT_BALOTH = new Card("Vigilant Baloth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), UNCOMMON, "Vigilance", 5, 5, singletonList(VIGILANCE));
     public static Card WALKING_CORPSE = new Card("Walking Corpse", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), singletonList(ZOMBIE), COMMON, "", 2, 2, emptyList());
 
     private static CoreSet2019 instance;
@@ -80,6 +77,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(ACT_OF_TREASON);
         cards.add(AEGIS_OF_THE_HEAVENS);
         cards.add(AGGRESSIVE_MAMMOTH);
+        cards.add(AJANIS_WELCOME);
         cards.add(Ixalan.AIR_ELEMENTAL);
         cards.add(ANGEL_OF_THE_DAWN);
         cards.add(Dominaria.BEFUDDLE);
