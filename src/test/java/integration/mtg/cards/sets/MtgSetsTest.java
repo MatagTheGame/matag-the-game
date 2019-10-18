@@ -1,6 +1,5 @@
 package integration.mtg.cards.sets;
 
-import application.AbstractApplicationTest;
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.sets.MtgSets;
 import org.junit.Test;
@@ -26,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Configuration
 public class MtgSetsTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplicationTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MtgSetsTest.class);
 
     @Autowired
     private MtgSets mtgSets;
