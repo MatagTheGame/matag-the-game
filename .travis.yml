@@ -1,2 +1,2 @@
 language: java
-test: mvn test -DexcludedGroups="application.testcategory.Regression"
+script: mvn test -DexcludedGroups="application.testcategory.Regression"
