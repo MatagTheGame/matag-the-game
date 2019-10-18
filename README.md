@@ -78,6 +78,10 @@ When running in IntelliJ is good to add as well:
 
     -Dtest.gameSetup.retries=1 
 
+Some tests have been moved to regression to speed up the process.
+Travis runs only non regression tests with the command
+
+    mvn test -Pbasic
 
 ## Run the application locally
 

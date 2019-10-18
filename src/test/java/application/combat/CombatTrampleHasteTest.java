@@ -2,10 +2,12 @@ package application.combat;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
+import application.testcategory.Regression;
 import com.aa.mtg.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +29,7 @@ import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CombatTrampleHasteTest.InitGameTestConfiguration.class})
+@Category(Regression.class)
 public class CombatTrampleHasteTest extends AbstractApplicationTest {
 
     @Autowired
