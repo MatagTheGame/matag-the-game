@@ -68,7 +68,8 @@ export default class ClientEventsReducer {
 
     case 'PLAYER_BATTLEFIELD_CARD_CLICK':
       if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
-        const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
+        const cardId = action.cardId
+        const cardInstance = CardSearch.cards(newState.player.battlefield).withId(cardId)
 
         if (newState.turn.currentPhase === 'DA' && PlayerUtils.isCurrentPlayerTurn(newState)) {
           const canAttackResult = CardUtils.canAttack(cardInstance)
@@ -95,7 +96,7 @@ export default class ClientEventsReducer {
 
           // FIXME this is wrong. It should be still possible to play an ability of a tapped card. And if a card is tapped in the dropdown list should not appear all the abilities that require tapping
           if (!CardUtils.isFrontendTapped(cardInstance) && possibleAbilities.length > 1) {
-            UserInterfaceUtils.setPlayableAbilities(newState, action.cardId, possibleAbilities, action.position)
+            UserInterfaceUtils.setPlayableAbilities(newState, cardId, possibleAbilities, action.position)
 
           } else {
             if (CardUtils.getAbilitiesForTriggerType(cardInstance, 'MANA_ABILITY').length > 0) {
@@ -108,6 +109,8 @@ export default class ClientEventsReducer {
                 if (CostUtils.isAbilityCostFulfilled(playedAbility, currentTappedMana)) {
                   if (CardUtils.needsTargets(newState, cardInstance, 'ACTIVATED_ABILITY')) {
                     PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
+                  } else {
+                    PlayerUtils.cast(newState, cardId, {}, TurnUtils.getAbilityToBePlayed(playedAbility))
                   }
                 }
               }

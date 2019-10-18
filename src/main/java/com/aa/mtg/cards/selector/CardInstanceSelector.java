@@ -93,22 +93,28 @@ public class CardInstanceSelector {
 
         if (selectorType == SelectorType.PERMANENT) {
 
-            if (others) {
-                stringBuilder.append("other ");
-            }
+            if (itself) {
+                stringBuilder.append("gets");
 
-            if (ofType != null) {
-                stringBuilder.append(ofType.stream().map(Objects::toString).collect(Collectors.joining(", "))).append("s ");
-            }
-
-            if (controllerType != null) {
-                if (controllerType == PlayerType.PLAYER) {
-                    stringBuilder.append("you control ");
-                } else {
-                    stringBuilder.append("opponent controls");
+            } else {
+                if (others) {
+                    stringBuilder.append("other ");
                 }
-            }
 
+                if (ofType != null) {
+                    stringBuilder.append(ofType.stream().map(Objects::toString).collect(Collectors.joining(", "))).append("s ");
+                }
+
+                if (controllerType != null) {
+                    if (controllerType == PlayerType.PLAYER) {
+                        stringBuilder.append("you control ");
+                    } else {
+                        stringBuilder.append("opponent controls ");
+                    }
+                }
+
+                stringBuilder.append("get");
+            }
         }
 
         String str = stringBuilder.toString();

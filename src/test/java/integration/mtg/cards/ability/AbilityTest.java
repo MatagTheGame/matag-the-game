@@ -122,4 +122,16 @@ public class AbilityTest {
         // Then
         assertThat(text).isEqualTo("Creatures you control get +2/+2, trample and haste until end of turn.");
     }
+
+    @Test
+    public void itGetMultipleAbilitiesText() {
+        // Given
+        Ability ability = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(SelectorType.PERMANENT).itself(true).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+
+        // When
+        String text = ability.getAbilityTypeText();
+
+        // Then
+        assertThat(text).isEqualTo("Gets +2/+2, trample and haste until end of turn.");
+    }
 }

@@ -26,6 +26,7 @@ public class ThroneOfEldraine implements MtgSet {
     public static Card EMBERETH_PALADIN = new Card("Embereth Paladin", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "Haste. Adamant — If at least three red mana was spent to cast this spell, Embereth Paladin enters the battlefield with a +1/+1 counter on it.", 4, 1, asList(HASTE, ADAMANT_RED_ENTER_PLUS_1_COUNTER));
     public static Card HENGE_WALKER = new Card("Henge Walker", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList(GOLEM), COMMON, "Adamant — If at least three mana of the same color was spent to cast this spell, Henge Walker enters the battlefield with a +1/+1 counter on it.", 2, 2, singletonList(ADAMANT_SAME_ENTER_PLUS_1_COUNTER));
     public static Card INSPIRING_VETERAN = new Card("Inspiring Veteran", asSet(Color.RED, Color.WHITE), asList(Cost.RED, Cost.WHITE), singletonList(CREATURE), asList(HUMAN, KNIGHT), UNCOMMON, "Other Knights you control get +1/+1.", 2, 2, singletonList(OTHER_KNIGHTS_YOU_CONTROL_GET_PLUS_1_1));
+    public static Card JOUSTING_DUMMY = new Card("Jousting Dummy", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), asList(SCARECROW, KNIGHT), COMMON, "PAY 3: Jousting Dummy gets +1/+0 until end of turn.", 2, 1, singletonList(PAY_3_IT_GETS_PLUS_1_PLUS_0_UNTIL_END_OF_TURN));
     public static Card KNIGHT_OF_THE_KEEP = new Card("Knight of the Keep", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "", 3, 2, emptyList());
     public static Card LASH_OF_THORNS = new Card("Lash of Thorns", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +2/+1 and gains deathtouch until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_2_1_AND_DEATHTOUCH_UNTIL_END_OF_TURN));
     public static Card MARALEAF_PIXIE = new Card("Maraleaf Pixie", asSet(Color.GREEN, Color.BLUE), asList(Cost.GREEN, Cost.BLUE), singletonList(CREATURE), singletonList(FAERIE), UNCOMMON, "Flying. TAP: Add GREEN or BLUE.", 2, 2, asList(FLYING, TAP_ADD_GREEN_MANA, TAP_ADD_BLUE_MANA));
@@ -47,6 +48,7 @@ public class ThroneOfEldraine implements MtgSet {
         cards.add(CRYSTAL_SLIPPER);
         cards.add(EMBERETH_PALADIN);
         cards.add(HENGE_WALKER);
+        cards.add(JOUSTING_DUMMY);
         cards.add(INSPIRING_VETERAN);
         cards.add(KNIGHT_OF_THE_KEEP);
         cards.add(LASH_OF_THORNS);

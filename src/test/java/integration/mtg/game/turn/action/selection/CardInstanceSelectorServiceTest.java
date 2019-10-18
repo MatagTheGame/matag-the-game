@@ -709,17 +709,22 @@ public class CardInstanceSelectorServiceTest {
     }
 
     @Test
-    public void creaturesYouControlText() {
-        assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build().getText()).isEqualTo("Creatures you control");
+    public void creaturesYouControlGetText() {
+        assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build().getText()).isEqualTo("Creatures you control get");
     }
 
     @Test
-    public void otherCreaturesYouControlText() {
-        assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).others(true).build().getText()).isEqualTo("Other creatures you control");
+    public void otherCreaturesYouControlGetText() {
+        assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).others(true).build().getText()).isEqualTo("Other creatures you control get");
     }
 
     @Test
-    public void allOtherCreaturesText() {
-        assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).others(true).build().getText()).isEqualTo("Other creatures");
+    public void allOtherCreaturesGetText() {
+        assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).others(true).build().getText()).isEqualTo("Other creatures get");
+    }
+
+    @Test
+    public void itGetsText() {
+        assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build().getText()).isEqualTo("Gets");
     }
 }
