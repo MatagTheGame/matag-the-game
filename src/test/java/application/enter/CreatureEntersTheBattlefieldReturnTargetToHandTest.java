@@ -19,6 +19,7 @@ import static com.aa.mtg.cards.sets.CoreSet2019.BOGSTOMPER;
 import static com.aa.mtg.cards.sets.CoreSet2019.EXCLUSION_MAGE;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
