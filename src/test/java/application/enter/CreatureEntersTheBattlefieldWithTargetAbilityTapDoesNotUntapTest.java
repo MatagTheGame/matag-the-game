@@ -27,7 +27,6 @@ import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest.InitGameTestConfiguration.class})
-@Category(Regression.class)
 public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest extends AbstractApplicationTest {
 
     @Autowired
