@@ -66,8 +66,6 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
         browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).click();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).click();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).isTargeted();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 1).isTargeted();
 
         // An error is displayed
         browser.getMessageHelper().hasMessage("Targets must be different.");
