@@ -1,6 +1,7 @@
 package application.browser;
 
 import com.aa.mtg.cards.Card;
+import com.aa.mtg.game.player.PlayerType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
@@ -43,15 +44,21 @@ public class CardHelper {
     }
 
     public void tap() {
-        canCurrentUserContinue();
+        playerHasPriority();
         click();
         isFrontendTapped();
     }
 
     public void select() {
-        canCurrentUserContinue();
+        playerHasPriority();
         click();
         isSelected();
+    }
+
+    public void target() {
+        playerHasPriority();
+        click();
+        isTargeted();
     }
 
     public void declareAsAttacker() {
@@ -154,12 +161,12 @@ public class CardHelper {
         }
     }
 
-    private void canCurrentUserContinue() {
-        new ActionHelper(mtgBrowser).canContinue();
+    private void playerHasPriority() {
+        new PhaseHelper(mtgBrowser).isPriority(PlayerType.PLAYER);
     }
 
     private void declareAsAttackerOrBlocker() {
-        canCurrentUserContinue();
+        playerHasPriority();
         String cardId = this.getCardId();
         click();
         mtgBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + cardId)));

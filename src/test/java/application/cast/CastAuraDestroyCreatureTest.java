@@ -45,7 +45,7 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 3).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(CANDLELIGHT_VIGIL).select();
         browser.player1().getStatusHelper().hasMessage("Select targets for Candlelight Vigil.");
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).target();
 
         // Enchantment goes on the stack
         browser.player1().getStackHelper().containsExactly(CANDLELIGHT_VIGIL);
@@ -64,7 +64,7 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 7).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(CANDLELIGHT_VIGIL).select();
         browser.player1().getStatusHelper().hasMessage("Select targets for Candlelight Vigil.");
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).target();
 
         // Enchantment goes on goes on the stack
         browser.player1().getStackHelper().containsExactly(CANDLELIGHT_VIGIL);
@@ -95,7 +95,7 @@ public class CastAuraDestroyCreatureTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 10).tap();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 11).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).select();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CONCORDIA_PEGASUS).target();
         browser.player2().getActionHelper().clickContinue();
 
         // Creature and its enchantments are in the graveyard

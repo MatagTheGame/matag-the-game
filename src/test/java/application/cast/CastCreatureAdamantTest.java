@@ -36,10 +36,10 @@ public class CastCreatureAdamantTest extends AbstractApplicationTest {
     @Test
     public void castCreatureAlternativeCost() {
         // When casting Ardenvale Paladin with 4 white
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 0).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 2).click();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 3).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 0).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 2).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 3).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(ARDENVALE_PALADIN).click();
 
         // Then the creature enters with a counter

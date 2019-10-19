@@ -42,7 +42,7 @@ public class CastNegativeAuraOnOpponentCreatureTest extends AbstractApplicationT
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(SWAMP, 0).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(DEAD_WEIGHT).select();
         browser.player1().getStatusHelper().hasMessage("Select targets for Dead Weight.");
-        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(GRAZING_WHIPTAIL).click();
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(GRAZING_WHIPTAIL).target();
 
         // Enchantment goes on the stack
         browser.player1().getStackHelper().containsExactly(DEAD_WEIGHT);
@@ -58,7 +58,7 @@ public class CastNegativeAuraOnOpponentCreatureTest extends AbstractApplicationT
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(SWAMP, 1).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(DEAD_WEIGHT).select();
         browser.player1().getStatusHelper().hasMessage("Select targets for Dead Weight.");
-        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(NEST_ROBBER).click();
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(NEST_ROBBER).target();
 
         // Enchantment goes on the stack
         browser.player1().getStackHelper().containsExactly(DEAD_WEIGHT);

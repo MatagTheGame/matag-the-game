@@ -40,8 +40,11 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 0).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(GIRD_FOR_BATTLE).select();
         browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");
+        // TODO Antonio: should be able to mark selected targets individually
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).click();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 1).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).isTargeted();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 1).isTargeted();
 
         // Sorcery goes on the stack
         browser.player1().getStackHelper().containsExactly(GIRD_FOR_BATTLE);
@@ -63,6 +66,8 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
         browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).click();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 0).isTargeted();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(CONCORDIA_PEGASUS, 1).isTargeted();
 
         // An error is displayed
         browser.getMessageHelper().hasMessage("Targets must be different.");

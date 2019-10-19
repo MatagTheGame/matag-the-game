@@ -19,7 +19,6 @@ import static com.aa.mtg.cards.sets.CoreSet2019.BOGSTOMPER;
 import static com.aa.mtg.cards.sets.CoreSet2019.EXCLUSION_MAGE;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
-import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -47,7 +46,7 @@ public class CreatureEntersTheBattlefieldReturnTargetToHandTest extends Abstract
         browser.player1().getStackHelper().containsAbility("Pippo's Exclusion Mage (" + exclusionMageId + "): That targets get returned to its owner's hand.");
 
         // When player 1 selects opponent creature to return
-        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(BOGSTOMPER).click();
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(BOGSTOMPER).target();
         browser.player2().getActionHelper().clickContinue();
 
         // Then it's returned to its owner hand

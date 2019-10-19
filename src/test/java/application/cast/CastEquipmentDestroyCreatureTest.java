@@ -55,7 +55,7 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).tap();
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(SHORT_SWORD).select();
         browser.player1().getStatusHelper().hasMessage("Select targets for Short Sword.");
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(PROWLING_CARACAL).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(PROWLING_CARACAL).target();
 
         // Equip ability goes on the stack
         browser.player1().getStackHelper().containsAbility("Pippo's Short Sword (" + shortSwordId + "): Equipped creature gets +1/+1.");
@@ -71,7 +71,7 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 3).tap();
         browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 4).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(LEGIONS_JUDGMENT).select();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(PROWLING_CARACAL).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(PROWLING_CARACAL).target();
         browser.player2().getActionHelper().clickContinue();
 
         // Creature is in the graveyard

@@ -62,9 +62,9 @@ public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
         browser.player1().getPlayerActiveManaHelper().toHaveMana(singletonList(WHITE));
 
         // When clicking on other lands and try to play the creature
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(DRUID_OF_THE_COWL, 0).click();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(DRUID_OF_THE_COWL, 1).click();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(DRUID_OF_THE_COWL, 2).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(DRUID_OF_THE_COWL, 0).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(DRUID_OF_THE_COWL, 1).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(DRUID_OF_THE_COWL, 2).tap();
         browser.player1().getHandHelper(PLAYER).getFirstCard(HEADWATER_SENTRIES).click();
 
         // Then the creature is not played
