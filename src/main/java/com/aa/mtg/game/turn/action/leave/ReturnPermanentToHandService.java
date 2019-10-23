@@ -17,9 +17,10 @@ public class ReturnPermanentToHandService {
     }
 
     public void returnPermanentToHand(GameStatus gameStatus, int targetId) {
-        CardInstance cardInstance = leaveBattlefieldService.leaveTheBattlefield(gameStatus, targetId);
+        CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(targetId);
 
         if (cardInstance != null) {
+            leaveBattlefieldService.leaveTheBattlefield(gameStatus, targetId);
             returnToHand.returnToHand(gameStatus, cardInstance);
         }
     }

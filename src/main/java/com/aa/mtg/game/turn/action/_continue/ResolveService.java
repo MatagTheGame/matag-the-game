@@ -4,8 +4,9 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.ability.target.Target;
+import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
+import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.game.message.MessageException;
-import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.AbilityActionFactory;
 import com.aa.mtg.game.turn.action.enter.EnterCardIntoBattlefieldService;
@@ -21,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.aa.mtg.cards.ability.trigger.TriggerType.CAST;
+import static java.util.Arrays.asList;
 
 @Component
 public class ResolveService {
@@ -51,16 +53,26 @@ public class ResolveService {
                 resolveCardInstanceFromStack(gameStatus, stackItemToResolve);
 
             } else {
-                Player playerWhoCastedTheSpell = gameStatus.getPlayerByName(stackItemToResolve.getController());
-                if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(playerWhoCastedTheSpell.getName())) {
+                String controllerName = stackItemToResolve.getController();
+                String otherPlayerName = gameStatus.getOtherPlayer(gameStatus.getPlayerByName(controllerName)).getName();
+
+                for (Ability triggeredAbility : stackItemToResolve.getTriggeredAbilities()) {
+                    if (!triggeredAbility.getTrigger().getType().equals(TriggerType.TRIGGERED_ABILITY)) {
+                        stackItemToResolve.acknowledgeBy(controllerName);
+                    }
+                }
+
+                if (gameStatus.getActivePlayer().getName().equals(controllerName) && !stackItemToResolve.getAcknowledgedBy().contains(controllerName)) {
                     if (targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus)) {
                         targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
-                    } else {
-                        gameStatus.getStack().remove();
-                        return;
                     }
+                    stackItemToResolve.acknowledgeBy(controllerName);
 
-                } else {
+                } else if (!stackItemToResolve.getAcknowledgedBy().contains(otherPlayerName)) {
+                    stackItemToResolve.acknowledgeBy(otherPlayerName);
+                }
+
+                if (stackItemToResolve.getAcknowledgedBy().containsAll(asList(controllerName, otherPlayerName))) {
                     gameStatus.getStack().remove();
                     resolveTriggeredAbility(gameStatus, stackItemToResolve);
                 }

@@ -14,6 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.aa.mtg.cards.ability.trigger.Trigger.*;
+import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_DIE;
 import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_ENTER_THE_BATTLEFIELD;
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
 import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
@@ -141,6 +142,7 @@ public class Abilities {
     public static final Ability TRAMPLE = new Ability(AbilityType.TRAMPLE);
     public static final Ability UNTAP_TARGET_CREATURE = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build()).build()), singletonList(":UNTAPPED"), castTrigger());
     public static final Ability VIGILANCE = new Ability(AbilityType.VIGILANCE);
+    public static final Ability WHEN_IT_DIES_PUT_A_PLUS_1_COUNTER_ON_TARGET_CREATURE_YOU_CONTROL = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).build()).build()), singletonList("PLUS_1_COUNTERS:1"), triggeredAbility(WHEN_DIE, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build()));
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_ANOTHER_TARGET_CREATURE_YOU_CONTROL_GETS_PLUS_1_1_AND_FLYING = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().others(true).selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build()).build()), asList("+1/+1", "Flying"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build()));
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_ANY_TARGET_GET_1_DAMAGE = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(SelectorType.ANY).build()).build()), singletonList("DAMAGE:1"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build()));
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), singletonList("+1/+1"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build()));

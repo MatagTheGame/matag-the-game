@@ -41,12 +41,11 @@ public class LeaveBattlefieldServiceTest {
         gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
         // When
-        CardInstance cardLeft = leaveBattlefieldService.leaveTheBattlefield(gameStatus, 61);
+        leaveBattlefieldService.leaveTheBattlefield(gameStatus, 61);
 
         // Then
         assertThat(gameStatus.getPlayer1().getBattlefield().size()).isEqualTo(0);
-        assertThat(cardLeft).isSameAs(cardInstance);
-        assertThat(cardLeft.getModifiers().isTapped()).isFalse();
+        assertThat(cardInstance.getModifiers().isTapped()).isFalse();
     }
 
     @Test
@@ -69,25 +68,12 @@ public class LeaveBattlefieldServiceTest {
         attachService.attach(gameStatus, equipment, creature.getId());
 
         // When
-        CardInstance cardLeft = leaveBattlefieldService.leaveTheBattlefield(gameStatus, 61);
+        leaveBattlefieldService.leaveTheBattlefield(gameStatus, 61);
 
         // Then
         assertThat(gameStatus.getPlayer1().getBattlefield().size()).isEqualTo(1);
         assertThat(gameStatus.getPlayer1().getBattlefield().getCards()).contains(equipment);
         assertThat(gameStatus.getPlayer1().getGraveyard().getCards()).contains(enchantment1);
         assertThat(gameStatus.getPlayer2().getGraveyard().getCards()).contains(enchantment2);
-        assertThat(cardLeft).isSameAs(creature);
-    }
-
-    @Test
-    public void testLeaveBattlefieldCardNotFound() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
-
-        // When
-        CardInstance cardLeft = leaveBattlefieldService.leaveTheBattlefield(gameStatus, 61);
-
-        // Then
-        assertThat(cardLeft).isNull();
     }
 }

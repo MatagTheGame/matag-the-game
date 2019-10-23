@@ -29,27 +29,19 @@ public class LeaveBattlefieldService {
         this.destroyPermanentService = destroyPermanentService;
     }
 
-    public CardInstance leaveTheBattlefield(GameStatus gameStatus, int permanentId) {
+    public void leaveTheBattlefield(GameStatus gameStatus, int permanentId) {
         CardInstance cardInstance = gameStatus.extractCardByIdFromAnyBattlefield(permanentId);
+        cardInstance.resetAllModifiers();
 
-        if (cardInstance != null) {
-            cardInstance.resetAllModifiers();
+        for (CardInstance attachedCard : attachmentsService.getAttachedCards(gameStatus, cardInstance)) {
+            if (attachedCard.isOfType(ENCHANTMENT)) {
+                destroyPermanentService.destroy(gameStatus, attachedCard.getId());
 
-            for (CardInstance attachedCard : attachmentsService.getAttachedCards(gameStatus, cardInstance)) {
-                if (attachedCard.isOfType(ENCHANTMENT)) {
-                    destroyPermanentService.destroy(gameStatus, attachedCard.getId());
-
-                } else if (attachedCard.isOfType(ARTIFACT)) {
-                    attachService.detach(cardInstance, attachedCard);
-                }
+            } else if (attachedCard.isOfType(ARTIFACT)) {
+                attachService.detach(cardInstance, attachedCard);
             }
-
-            LOGGER.info("{} left the battlefield.", cardInstance.getIdAndName());
-
-        } else {
-            LOGGER.info("target {} is not anymore valid.", permanentId);
         }
 
-        return cardInstance;
+        LOGGER.info("{} left the battlefield.", cardInstance.getIdAndName());
     }
 }

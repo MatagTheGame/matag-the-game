@@ -33,6 +33,7 @@ public class WarOfTheSpark implements MtgSet {
     public static Card DIVINE_ARROW = new Card("Divine Arrow", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Divine Arrow deals 4 damage to target attacking or blocking creature.", 0, 0, singletonList(DEAL_4_DAMAGE_TO_TARGET_ATTACKING_OR_BLOCKING_CREATURE));
     public static Card ELITE_GUARDMAGE = new Card("Elite Guardmage", asSet(Color.WHITE, Color.BLUE), asList(Cost.WHITE, Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, WIZARD), UNCOMMON, "Flying. When Elite Guardmage enters the battlefield, you gain 3 life and draw a card.", 2, 3, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD, WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_3_LIFE));
     public static Card GIANT_GROWTH = new Card("Giant Growth", singleton(Color.GREEN), singletonList(Cost.GREEN), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +3/+3 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_3_3_UNTIL_END_OF_TURN));
+    public static Card GOBLIN_ASSAULT_TEAM = new Card("Goblin Assault Team", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(GOBLIN, WARRIOR), COMMON, "Haste. When Goblin Assault Team dies, put a +1/+1 counter on target creature you control.", 4, 1, asList(HASTE, WHEN_IT_DIES_PUT_A_PLUS_1_COUNTER_ON_TARGET_CREATURE_YOU_CONTROL));
     public static Card ENFORCER_GRIFFIN = new Card("Enforcer Griffin", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(GRIFFIN), COMMON, "Flying", 3, 4, singletonList(FLYING));
     public static Card GOBLIN_ASSAILANT = new Card("Goblin Assailant", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), asList(GOBLIN, WARRIOR), COMMON, "", 2, 2, emptyList());
     public static Card IRONCLAD_KROVOD = new Card("Ironclad Krovod", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), COMMON, "", 2, 5, emptyList());
@@ -62,6 +63,7 @@ public class WarOfTheSpark implements MtgSet {
         cards.add(ENFORCER_GRIFFIN);
         cards.add(GIANT_GROWTH);
         cards.add(GOBLIN_ASSAILANT);
+        cards.add(GOBLIN_ASSAULT_TEAM);
         cards.add(IRONCLAD_KROVOD);
         cards.add(KRAUL_STINGER);
         cards.add(LAZOTEP_BEHEMOTH);

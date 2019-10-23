@@ -20,7 +20,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.aa.mtg.cards.ability.trigger.TriggerType.MANA_ABILITY;
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
@@ -48,11 +50,11 @@ public class CardInstance {
     private String controller;
     @JsonProperty private CardModifiers modifiers = new CardModifiers();
     @JsonProperty private List<Ability> triggeredAbilities = new ArrayList<>();
+    private Set<String> acknowledgeBy = new HashSet<>();
 
     private GameStatus gameStatus;
     private final AttachmentsService attachmentsService;
     private final AbilitiesFromOtherPermanentsService abilitiesFromOtherPermanentsService;
-
     @Autowired
     public CardInstance(
             @Autowired(required = false) AttachmentsService attachmentsService,
@@ -317,9 +319,18 @@ public class CardInstance {
 
     public void cleanup() {
         modifiers.cleanupUntilEndOfTurnModifiers();
+        acknowledgeBy.clear();
     }
 
     public void resetAllModifiers() {
         modifiers = new CardModifiers();
+    }
+
+    public Set<String> getAcknowledgedBy() {
+        return acknowledgeBy;
+    }
+
+    public void acknowledgeBy(String playerName) {
+        acknowledgeBy.add(playerName);
     }
 }
