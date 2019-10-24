@@ -4,7 +4,6 @@ import com.aa.mtg.cards.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.ability.target.Target;
-import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
@@ -56,11 +55,9 @@ public class ResolveService {
                 String controllerName = stackItemToResolve.getController();
                 String otherPlayerName = gameStatus.getOtherPlayer(gameStatus.getPlayerByName(controllerName)).getName();
 
-                for (Ability triggeredAbility : stackItemToResolve.getTriggeredAbilities()) {
-                    if (!triggeredAbility.getTrigger().getType().equals(TriggerType.TRIGGERED_ABILITY)) {
-                        stackItemToResolve.acknowledgeBy(controllerName);
-                    }
-                }
+                stackItemToResolve.getTriggeredAbilities().stream()
+                        .filter(triggeredAbility -> !triggeredAbility.getTrigger().getType().equals(TriggerType.TRIGGERED_ABILITY))
+                        .forEach(t -> stackItemToResolve.acknowledgeBy(controllerName));
 
                 if (gameStatus.getActivePlayer().getName().equals(controllerName) && !stackItemToResolve.getAcknowledgedBy().contains(controllerName)) {
                     if (targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus)) {
@@ -69,7 +66,14 @@ public class ResolveService {
                     stackItemToResolve.acknowledgeBy(controllerName);
 
                 } else if (!stackItemToResolve.getAcknowledgedBy().contains(otherPlayerName)) {
-                    stackItemToResolve.acknowledgeBy(otherPlayerName);
+                    boolean needsTargets = stackItemToResolve.getTriggeredAbilities().stream()
+                            .map(Ability::getTargets)
+                            .flatMap(List::stream)
+                            .count() > 0;
+                    boolean hasSelectedTargets = !stackItemToResolve.getModifiers().getTargets().isEmpty();
+                    if (!needsTargets || hasSelectedTargets) {
+                        stackItemToResolve.acknowledgeBy(otherPlayerName);
+                    }
                 }
 
                 if (stackItemToResolve.getAcknowledgedBy().containsAll(asList(controllerName, otherPlayerName))) {

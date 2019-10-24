@@ -52,7 +52,7 @@ public class CreatureDiesAbilityTest extends AbstractApplicationTest {
 
         // When clicking on the other goblin
         browser.player2().getActionHelper().clickContinue();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(GOBLIN_ASSAULT_TEAM).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(GOBLIN_ASSAULT_TEAM).target();
         browser.player2().getActionHelper().clickContinue();
 
         // Then that goblin gets a counter
