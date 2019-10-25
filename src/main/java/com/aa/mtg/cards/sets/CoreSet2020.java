@@ -45,11 +45,13 @@ public class CoreSet2020 implements MtgSet {
     public static Card INFURIATE = new Card("Infuriate", singleton(Color.RED), singletonList(Cost.RED), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +3/+2 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_3_2_UNTIL_END_OF_TURN));
     public static Card INSPIRING_CAPTAIN = new Card("Inspiring Captain", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "When Inspiring Captain enters the battlefield, creatures you control get +1/+1 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN));
     public static Card LIGHTNING_STORMKIN = new Card("Lightning Stormkin", asSet(Color.BLUE, Color.RED), asList(Cost.BLUE, Cost.RED), singletonList(CREATURE), asList(ELEMENTAL, WIZARD), UNCOMMON, "Flying. Haste.", 2, 2, asList(FLYING, HASTE));
+    public static Card METROPOLIS_SPRITE = new Card("Metropolis Sprite", asSet(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), asList(FAERIE, ROGUE), COMMON, "Flying. Pay BLUE: Metropolis Sprite gets +1/-1 until end of turn.", 1, 2, asList(FLYING, PAY_BLUE_IT_GETS_PLUS_1_MINUS_1_UNTIL_END_OF_TURN));
     public static Card MOMENT_OF_HEROISM = new Card("Moment of Heroism", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +2/+2 and gains lifelink until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_2_2_AND_LIFELINK_UNTIL_END_OF_TURN));
     public static Card NATURAL_END = new Card("Natural End", asSet(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Destroy target artifact or enchantment. You gain 3 life.", 0, 0, asList(DESTROY_TARGET_ARTIFACT_OR_ENCHANTMENT, GAIN_3_LIFE));
     public static Card NIMBLE_BIRDSTICKER = new Card("Nimble Birdsticker", asSet(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(GOBLIN), COMMON, "Reach.", 2, 3, singletonList(REACH));
     public static Card NOXIOUS_GRASP = new Card("Noxious Grasp", asSet(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Destroy target creature or planeswalker that's green or white. You gain 1 life.", 0, 0, asList(DESTROY_TARGET_CREATURE_OR_PLANESWALKER_THAT_S_GREEN_OR_WHITE, GAIN_1_LIFE));
     public static Card OVERCOME = new Card("Overcome", asSet(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Creatures you control get +2/+2 and gain trample until end of turn.", 0, 0, singletonList(CREATURES_YOU_CONTROL_GET_PLUS_2_2_AND_TRAMPLE_UNTIL_END_OF_TURN));
+    public static Card PYROCLASTIC_ELEMENTAL = new Card("Pyroclastic Elemental", asSet(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ELEMENTAL), UNCOMMON, "PAY 1 2 RED: Pyroclastic Elemental deals 1 damage to target player.", 5, 4, singletonList(PAY_1_2_RED_DEAL_1_DAMAGE_TO_TARGET_PLAYER));
     public static Card SAVANNAH_SAGE = new Card("Savannah Sage", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(CAT, CLERIC), COMMON, "When Savannah Sage enters the battlefield, you gain 2 life.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE));
     public static Card SEDGE_SCORPION = new Card("Sedge Scorpion", asSet(Color.GREEN), singletonList(Cost.GREEN), singletonList(CREATURE), singletonList(SCORPION), COMMON, "Deathtouch.", 1, 1, singletonList(DEATHTOUCH));
     public static Card SIEGE_MASTODON = new Card("Siege Mastodon", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ELEPHANT), COMMON, "", 3, 5, emptyList());
@@ -111,6 +113,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(Dominaria.MAMMOTH_SPIDER);
         cards.add(CoreSet2019.MARAUDERS_AXE);
         cards.add(CoreSet2019.METEOR_GOLEM);
+        cards.add(METROPOLIS_SPRITE);
         cards.add(MOMENT_OF_HEROISM);
         cards.add(CoreSet2019.MURDER);
         cards.add(NATURAL_END);
@@ -118,6 +121,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(NOXIOUS_GRASP);
         cards.add(OVERCOME);
         cards.add(CoreSet2019.OAKENFORM);
+        cards.add(PYROCLASTIC_ELEMENTAL);
         cards.add(RavnicaAllegiance.PROWLING_CARACAL);
         cards.add(SAVANNAH_SAGE);
         cards.add(SEDGE_SCORPION);

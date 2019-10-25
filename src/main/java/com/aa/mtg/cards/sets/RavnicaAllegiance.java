@@ -45,6 +45,7 @@ public class RavnicaAllegiance implements MtgSet {
     public static Card PRECISION_BOLT = new Card("Precision Bolt", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.SORCERY), emptyList(), COMMON, "Precision Bolt deals 3 damage to any target.", 0, 0, singletonList(DEAL_3_DAMAGE_TO_ANY_TARGET));
     public static Card PROWLING_CARACAL = new Card("Prowling Caracal", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), singletonList(CAT), COMMON, "", 3, 1, emptyList());
     public static Card RAKDOS_GUILDGATE = new Card("Rakdos Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Rakdos Guildgate enters the battlefield tapped. TAP: Add BLACK or RED to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_BLACK_MANA, TAP_ADD_RED_MANA));
+    public static Card SENATE_COURIER = new Card("Senate Courier", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BIRD), COMMON, "Flying. PAY 1 1 WHITE: Senate Courier gains vigilance until end of turn.", 1, 4, asList(FLYING, PAY_1_1_WHITE_IT_GETS_VIGILANCE_UNTIL_END_OF_TURN));
     public static Card SIMIC_GUILDGATE = new Card("Simic Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Simic Guildgate enters the battlefield tapped. TAP: Add GREEN or BLUE to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_GREEN_MANA, TAP_ADD_BLUE_MANA));
     public static Card SPIRIT_OF_THE_SPIRES = new Card("Spirit of the Spires", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(SPIRIT), UNCOMMON, "Flying. Other creatures you control with flying get +0/+1.", 2, 4, asList(FLYING, OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_0_1));
     public static Card SYLVAN_BRUSHSTRIDER = new Card("Sylvan Brushstrider", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), COMMON, "When Sylvan Brushstrider enters the battlefield, you gain 2 life.", 3, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE));
@@ -82,6 +83,7 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(PRECISION_BOLT);
         cards.add(PROWLING_CARACAL);
         cards.add(RAKDOS_GUILDGATE);
+        cards.add(SENATE_COURIER);
         cards.add(SIMIC_GUILDGATE);
         cards.add(SPIRIT_OF_THE_SPIRES);
         cards.add(SYLVAN_BRUSHSTRIDER);
