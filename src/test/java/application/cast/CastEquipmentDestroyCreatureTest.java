@@ -64,6 +64,7 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
         browser.player2().getActionHelper().clickContinue();
 
         // Then the target creature is equipped
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).containsExactly(PROWLING_CARACAL, SHORT_SWORD);
         browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(PROWLING_CARACAL).hasPowerAndToughness("4/2");
 
         // Destroy the creature

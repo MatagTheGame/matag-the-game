@@ -144,8 +144,7 @@ class Battlefield extends Component {
   }
 
   cardWithAttachments(card) {
-    const attachments = CardSearch.cards(this.getPlayerPermanents())
-      .concat(this.getAllPermanents())
+    const attachments = CardSearch.cards(this.getAllPermanents())
       .attachedTo(card.id)
     return [card, ...attachments]
   }
