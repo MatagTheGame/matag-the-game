@@ -35,6 +35,7 @@ public class Ixalan implements MtgSet {
     public static Card DARK_NOURISHMENT = new Card("Dark Nourishment", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Dark Nourishment deals 3 damage to target creature or player. You gain 3 life.", 0, 0, asList(DEAL_3_DAMAGE_TO_TARGET_CREATURE, GAIN_3_LIFE));
     public static Card DEMOLISH = new Card("Demolish", singleton(Color.RED), singletonList(Cost.RED), singletonList(SORCERY), emptyList(), COMMON, "Destroy target artifact or land.", 0, 0, singletonList(DESTROY_TARGET_ARTIFACT_OR_LAND));
     public static Card DEMYSTIFY = new Card("Demystify", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(INSTANT), emptyList(), COMMON, "Destroy target enchantment.", 0, 0, singletonList(TARGET_ENCHANTMENT_GETS_DESTROYED));
+    public static Card FATHOM_FLEET_FIREBRAND = new Card("Fathom Fleet Firebrand", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, PIRATE), COMMON, "Pay 1 1 RED: Fathom Fleet Firebrand gets +1/+0 until end of turn.", 2, 2, singletonList(PAY_1_1_RED_IT_GETS_PLUS_1_PLUS_0_UNTIL_END_OF_TURN));
     public static Card FAVORABLE_WINDS = new Card("Favorable Winds", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(ENCHANTMENT), emptyList(), UNCOMMON, "Creatures you control with flying get +1/+1.", 0, 0, singletonList(CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_1_1));
     public static Card FRENZIED_RAPTOR = new Card("Frenzied Raptor", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "", 4, 2, emptyList());
     public static Card GILDED_SENTINEL = new Card("Gilded Sentinel", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList(GOLEM), COMMON, "", 3, 3, emptyList());
@@ -43,6 +44,7 @@ public class Ixalan implements MtgSet {
     public static Card HUATLIS_SNUBHORN = new Card("Huatli's Snubhorn", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "Vigilance", 2, 2, singletonList(VIGILANCE));
     public static Card IMPERIAL_AEROSAUR = new Card("Imperial Aerosaur", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), UNCOMMON, "Flying. When Imperial Aerosaur enters the battlefield, another target creature you control gets +1/+1 and gains flying until end of turn.", 3, 3, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_ANOTHER_TARGET_CREATURE_YOU_CONTROL_GETS_PLUS_1_1_AND_FLYING));
     public static Card INSPIRING_CLERIC = new Card("Inspiring Cleric", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, CLERIC), UNCOMMON, "When Inspiring Cleric enters the battlefield, you gain 4 life.", 3, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_4_LIFE));
+    public static Card JUNGLE_DELVER = new Card("Jungle Delver", singleton(Color.GREEN), asList(Cost.GREEN), singletonList(CREATURE), asList(MERFOLK, WARRIOR), COMMON, "Pay 3 1 GREEN: Put a +1/+1 counter on Jungle Delver.", 1, 1, singletonList(PAY_3_1_GREEN_PUT_A_PLUS_1_COUNTER_ON_IT));
     public static Card LEGIONS_JUDGMENT = new Card("Legion's Judgment", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Destroy target creature with power 4 or greater.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_WITH_POWER_GREATER_OR_EQUAL_4));
     public static Card LIGHTNING_STRIKE = new Card("Lightning Strike", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Lightning Strike deals 3 damage to target creature or player.", 0, 0, singletonList(DEAL_3_DAMAGE_TO_ANY_TARGET));
     public static Card LOOMING_ALTISAUR = new Card("Looming Altisaur", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "", 1, 7, emptyList());
@@ -74,6 +76,7 @@ public class Ixalan implements MtgSet {
         cards.add(CRASH_THE_RAMPARTS);
         cards.add(DARK_NOURISHMENT);
         cards.add(DEMYSTIFY);
+        cards.add(FATHOM_FLEET_FIREBRAND);
         cards.add(FAVORABLE_WINDS);
         cards.add(DEMOLISH);
         cards.add(FRENZIED_RAPTOR);
@@ -83,6 +86,7 @@ public class Ixalan implements MtgSet {
         cards.add(HUATLIS_SNUBHORN);
         cards.add(IMPERIAL_AEROSAUR);
         cards.add(INSPIRING_CLERIC);
+        cards.add(JUNGLE_DELVER);
         cards.add(LEGIONS_JUDGMENT);
         cards.add(LIGHTNING_STRIKE);
         cards.add(LOOMING_ALTISAUR);

@@ -34,6 +34,7 @@ public class RavnicaAllegiance implements MtgSet {
     public static Card END_RAZE_FORERUNNERS = new Card("End-Raze Forerunners", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BOAR), RARE, "Vigilance, trample, haste. When End-Raze Forerunners enters the battlefield, other creatures you control get +2/+2 and gain vigilance and trample until end of turn.", 7, 7, asList(VIGILANCE, TRAMPLE, HASTE, WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_2_2_VIGILANCE_AND_TRAMPLE_UNTIL_END_OF_TURN));
     public static Card FERAL_MAAKA = new Card("Feral Maaka", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), singletonList(CAT), COMMON, "", 2, 2, emptyList());
     public static Card GIFT_OF_STRENGTH = new Card("Gift of Strength", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +3/+3 and gains reach until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_3_3_AND_REACH_UNTIL_END_OF_TURN));
+    public static Card GRAVEL_HIDE_GOBLIN = new Card("Gravel-Hide Goblin", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), asList(GOBLIN, SHAMAN), COMMON, "Pay 3 1 GREEN: Gravel-Hide Goblin gets +2/+2 until end of turn.", 2, 1, singletonList(PAY_3_1_GREEN_IT_GETS_PLUS_1_PLUS_0_UNTIL_END_OF_TURN));
     public static Card GRUUL_GUILDGATE = new Card("Gruul Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Gruul Guildgate enters the battlefield tapped. TAP: Add RED or GREEN to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_RED_MANA, TAP_ADD_GREEN_MANA));
     public static Card GYRE_ENGINEER = new Card("Gyre Engineer", asSet(Color.GREEN, Color.BLUE), asList(Cost.GREEN, Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), asList(VEDALKEN, WIZARD), UNCOMMON, "TAP: Add GREEN and BLUE.", 1, 1, singletonList(TAP_ADD_1_GREEN_1_BLUE_MANA));
     public static Card HAAZDA_OFFICER = new Card("Haazda Officer", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, SOLDIER), COMMON, "When Haazda Officer enters the battlefield, target creature you control gets +1/+1 until end of turn.", 3, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_YOU_CONTROL_GETS_PLUS_1_1));
@@ -69,6 +70,7 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(END_RAZE_FORERUNNERS);
         cards.add(FERAL_MAAKA);
         cards.add(GIFT_OF_STRENGTH);
+        cards.add(GRAVEL_HIDE_GOBLIN);
         cards.add(GRUUL_GUILDGATE);
         cards.add(GYRE_ENGINEER);
         cards.add(HAAZDA_OFFICER);

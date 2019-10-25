@@ -31,6 +31,7 @@ public class Dominaria implements MtgSet {
     public static Card CABAL_EVANGEL = new Card("Cabal Evangel", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, CLERIC), COMMON, ".", 2, 2, emptyList());
     public static Card CHARGE = new Card("Charge", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(Type.INSTANT), emptyList(), COMMON, "Creatures you control get +1/+1 until end of turn.", 0, 0, singletonList(CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN));
     public static Card DIVINATION = new Card("Divination", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Draw 2 cards.", 0, 0, singletonList(DRAW_2_CARDS));
+    public static Card DREAD_SHADE = new Card("Dread Shade", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.BLACK), singletonList(CREATURE), singletonList(SHADE), RARE, "Pay BLACK: Dread Shade gets +1/+1 until end of turn.", 3, 3, singletonList(PAY_BLACK_IT_GETS_PLUS_1_PLUS_1_UNTIL_END_OF_TURN));
     public static Card EVISCERATE = new Card("Eviscerate", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Destroy target creature.", 0, 0, singletonList(DESTROY_TARGET_CREATURE));
     public static Card FERAL_ABOMINATION = new Card("Feral Abomination", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(THRULL), COMMON, "Deathtouch", 5, 5, singletonList(DEATHTOUCH));
     public static Card FIRE_ELEMENTAL = new Card("Fire Elemental", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ELEMENTAL), COMMON, "", 5, 4, emptyList());
@@ -60,6 +61,7 @@ public class Dominaria implements MtgSet {
         cards.add(CABAL_EVANGEL);
         cards.add(CHARGE);
         cards.add(DIVINATION);
+        cards.add(DREAD_SHADE);
         cards.add(EVISCERATE);
         cards.add(FERAL_ABOMINATION);
         cards.add(FIRE_ELEMENTAL);

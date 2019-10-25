@@ -12,9 +12,7 @@ import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Subtype.*;
-import static com.aa.mtg.cards.properties.Type.CREATURE;
-import static com.aa.mtg.cards.properties.Type.LAND;
-import static com.aa.mtg.cards.properties.Type.SORCERY;
+import static com.aa.mtg.cards.properties.Type.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptySet;
@@ -32,6 +30,7 @@ public class GuildsOfRavnica implements MtgSet {
     public static Card CENTAUR_PEACEMAKER = new Card("Centaur Peacemaker", asSet(Color.WHITE, Color.GREEN), asList(Cost.WHITE, Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), asList(CENTAUR, CLERIC), COMMON, "When Centaur Peacemaker enters the battlefield, each player gains 4 life.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_EACH_PLAYERS_GAIN_4_LIFE));
     public static Card COLLAR_THE_CULPRIT = new Card("Collar the Culprit", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Destroy target creature with toughness 4 or greater.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_WITH_TOUGHNESS_GREATER_OR_EQUAL_4));
     public static Card COMMAND_THE_STORM = new Card("Command the Storm", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Command the Storm deals 5 damage to target creature.", 0, 0, singletonList(DEAL_5_DAMAGE_TO_TARGET_CREATURE));
+    public static Card DEVKARIN_DISSIDENT = new Card("Devkarin Dissident", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), asList(ELF, WARRIOR), COMMON, "PAY 4, 1 GREEN: Devkarin Dissident gets +2/+2 until end of turn.", 2, 2, singletonList(PAY_4_1_RED_IT_GETS_PLUS_2_PLUS_2_UNTIL_END_OF_TURN));
     public static Card DIMIR_GUILDGATE = new Card("Dimir Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Dimir Guildgate enters the battlefield tapped. TAP: Add BLUE or BLACK to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_BLUE_MANA, TAP_ADD_BLACK_MANA));
     public static Card DOUSER_OF_LIGHTS = new Card("Douser of Lights", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(HORROR), COMMON, "", 4, 5, emptyList());
     public static Card FEARLESS_HALBERDIER = new Card("Fearless Halberdier", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, WARRIOR), COMMON, "", 3, 2, emptyList());
@@ -63,6 +62,7 @@ public class GuildsOfRavnica implements MtgSet {
         cards.add(CoreSet2019.CHILD_OF_NIGHT);
         cards.add(COLLAR_THE_CULPRIT);
         cards.add(COMMAND_THE_STORM);
+        cards.add(DEVKARIN_DISSIDENT);
         cards.add(DIMIR_GUILDGATE);
         cards.add(DOUSER_OF_LIGHTS);
         cards.add(FEARLESS_HALBERDIER);

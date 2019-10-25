@@ -40,6 +40,7 @@ public class CoreSet2020 implements MtgSet {
     public static Card GRIFFIN_PROTECTOR = new Card("Griffin Protector", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(GRIFFIN), COMMON, "Flying. Whenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.", 2, 3, asList(FLYING, WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_IT_GETS_PLUS_1_1_UNTIL_END_OF_TURN));
     public static Card GRIFFIN_SENTINEL = new Card("Griffin Sentinel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(GRIFFIN), COMMON, "Flying. Vigilance.", 1, 3, asList(FLYING, VIGILANCE));
     public static Card HEALER_OF_THE_GLADE = new Card("Healer of the Glade", singleton(Color.GREEN), singletonList(Cost.GREEN), singletonList(CREATURE), singletonList(ELEMENTAL), COMMON, "When Healer of the Glade enters the battlefield, you gain 3 life.", 1, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_3_LIFE));
+    public static Card HERALD_OF_THE_SUN = new Card("Herald of the Sun", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ANGEL), UNCOMMON, "Flying. Pay 3 1 WHITE: Put a +1/+1 counter on another target creature with flying.", 4, 4, asList(FLYING, PAY_3_1_WHITE_PUT_A_PLUS_1_COUNTER_ON_TARGET_CREATURE_YOU_CONTROL));
     public static Card IMPERIAL_OUTRIDER = new Card("Imperial Outrider", singleton(Color.WHITE), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "", 1, 5, emptyList());
     public static Card INFURIATE = new Card("Infuriate", singleton(Color.RED), singletonList(Cost.RED), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets +3/+2 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_3_2_UNTIL_END_OF_TURN));
     public static Card INSPIRING_CAPTAIN = new Card("Inspiring Captain", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "When Inspiring Captain enters the battlefield, creatures you control get +1/+1 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_UNTIL_END_OF_TURN));
@@ -98,6 +99,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(WarOfTheSpark.GOBLIN_ASSAILANT);
         cards.add(RavnicaAllegiance.HAAZDA_OFFICER);
         cards.add(HEALER_OF_THE_GLADE);
+        cards.add(HERALD_OF_THE_SUN);
         cards.add(CoreSet2019.HOSTILE_MINOTAUR);
         cards.add(RavnicaAllegiance.IMPASSIONED_ORATOR);
         cards.add(IMPERIAL_OUTRIDER);
