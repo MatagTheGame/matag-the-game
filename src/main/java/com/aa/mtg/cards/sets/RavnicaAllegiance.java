@@ -48,7 +48,10 @@ public class RavnicaAllegiance implements MtgSet {
     public static Card SENATE_COURIER = new Card("Senate Courier", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BIRD), COMMON, "Flying. PAY 1 1 WHITE: Senate Courier gains vigilance until end of turn.", 1, 4, asList(FLYING, PAY_1_1_WHITE_IT_GETS_VIGILANCE_UNTIL_END_OF_TURN));
     public static Card SIMIC_GUILDGATE = new Card("Simic Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Simic Guildgate enters the battlefield tapped. TAP: Add GREEN or BLUE to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_GREEN_MANA, TAP_ADD_BLUE_MANA));
     public static Card SPIRIT_OF_THE_SPIRES = new Card("Spirit of the Spires", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(SPIRIT), UNCOMMON, "Flying. Other creatures you control with flying get +0/+1.", 2, 4, asList(FLYING, OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_0_1));
+    public static Card STEEPLE_CREEPER = new Card("Steeple Creeper", singleton(Color.GREEN), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(FROG, SNAKE), COMMON, "PAY 3 1 BLUE: Steeple Creeper gains flying until end of turn.", 4, 2, singletonList(PAY_3_1_BLUE_IT_GETS_FLYING_UNTIL_END_OF_TURN));
     public static Card SYLVAN_BRUSHSTRIDER = new Card("Sylvan Brushstrider", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), COMMON, "When Sylvan Brushstrider enters the battlefield, you gain 2 life.", 3, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE));
+    public static Card THIRSTING_SHADE = new Card("Thirsting Shade", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(CREATURE), singletonList(SHADE), COMMON, "Lifelink. PAY 2 1 BLACK: Thirsting Shade gets +1/+1 until end of turn.", 1, 1, asList(LIFELINK, PAY_2_1_BLACK_IT_GETS_PLUS_1_PLUS_1_UNTIL_END_OF_TURN));
+    public static Card TWILIGHT_PANTHER = new Card("Twilight Panther", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(CREATURE), asList(CAT, SPIRIT), COMMON, "PAY BLACK: Twilight Panther gains deathtouch until end of turn.", 1, 2, singletonList(PAY_BLACK_IT_GETS_DEATHTOUCH_UNTIL_END_OF_TURN));
     public static Card WINDSTORM_DRAKE = new Card("Windstorm Drake", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DRAKE), UNCOMMON, "Flying. Other creatures you control with flying get +1/+0.", 3, 3, asList(FLYING, OTHER_CREATURES_YOU_CONTROL_WITH_FLYING_GET_PLUS_1_0));
 
     private static RavnicaAllegiance instance;
@@ -86,7 +89,10 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(SENATE_COURIER);
         cards.add(SIMIC_GUILDGATE);
         cards.add(SPIRIT_OF_THE_SPIRES);
+        cards.add(STEEPLE_CREEPER);
         cards.add(SYLVAN_BRUSHSTRIDER);
+        cards.add(THIRSTING_SHADE);
+        cards.add(TWILIGHT_PANTHER);
         cards.add(WINDSTORM_DRAKE);
     }
 

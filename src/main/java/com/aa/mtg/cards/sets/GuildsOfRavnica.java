@@ -46,6 +46,7 @@ public class GuildsOfRavnica implements MtgSet {
     public static Card SELESNYA_GUILDGATE = new Card("Selesnya Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Selesnya Guildgate enters the battlefield tapped. TAP: Add GREEN or WHITE to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_GREEN_MANA, TAP_ADD_WHITE_MANA));
     public static Card SKYKNIGHT_LEGIONNAIRE = new Card("Skyknight Legionnaire", asSet(Color.RED, Color.WHITE), asList(Cost.RED, Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "Flying, haste.", 2, 2, asList(FLYING, HASTE));
     public static Card TENTH_DISTRICT_GUARD = new Card("Tenth District Guard", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, SOLDIER), COMMON, "When Tenth District Guard enters the battlefield, target creature gets +0/+1 until end of turn.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_0_1));
+    public static Card VEILED_SHADE = new Card("Veiled Shade", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(SHADE), COMMON, "PAY 1 1 BLACK: Veiled Shade gets +1/+1 until end of turn.", 2, 2, singletonList(PAY_1_1_BLACK_IT_GETS_PLUS_1_PLUS_1_UNTIL_END_OF_TURN));
     public static Card WARY_OKAPY = new Card("Wary Okapi", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ANTELOPE), COMMON, "Vigilance", 3, 2, singletonList(VIGILANCE));
     public static Card WILD_CERATOK = new Card("Wild Ceratok", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(RHINO), COMMON, "", 4, 3, emptyList());
     public static Card WISHCOIN_CRAB = new Card("Wishcoin Crab", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(CRAB), COMMON, "", 2, 5, emptyList());
@@ -77,6 +78,7 @@ public class GuildsOfRavnica implements MtgSet {
         cards.add(GuildsOfRavnica.SELESNYA_GUILDGATE);
         cards.add(SKYKNIGHT_LEGIONNAIRE);
         cards.add(TENTH_DISTRICT_GUARD);
+        cards.add(VEILED_SHADE);
         cards.add(WARY_OKAPY);
         cards.add(WILD_CERATOK);
         cards.add(WISHCOIN_CRAB);

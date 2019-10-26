@@ -42,7 +42,9 @@ public class WarOfTheSpark implements MtgSet {
     public static Card LEYLINE_PROWLER = new Card("Leyline Prowler", asSet(Color.BLACK, Color.GREEN), asList(Cost.BLACK, Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), asList(NIGHTMARE, BEAST), UNCOMMON, "Deathtouch, lifelink. TAP: Add one mana of any color.", 2, 3, asList(DEATHTOUCH, LIFELINK, TAP_ADD_WHITE_MANA, TAP_ADD_BLUE_MANA, TAP_ADD_BLACK_MANA, TAP_ADD_RED_MANA, TAP_ADD_GREEN_MANA));
     public static Card LOXODON_SERGEANT = new Card("Loxodon Sergeant", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(ELEPHANT, SOLDIER), COMMON, "Vigilance. When Loxodon Sergeant enters the battlefield, other creatures you control gain vigilance until end of turn.", 3, 3, asList(VIGILANCE, WHEN_IT_ENTERS_THE_BATTLEFIELD_OTHER_CREATURES_YOU_CONTROL_GET_VIGILANCE_UNTIL_END_OF_TURN));
     public static Card NAGA_ETERNAL = new Card("Naga Eternal", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(ZOMBIE, NAGA), COMMON, "", 3, 2, emptyList());
+    public static Card SHRIEKDIVER = new Card("Shriekdiver", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(ZOMBIE, BIRD, WARRIOR), COMMON, "Flying. PAY 1: Shriekdiver gains haste until end of turn.", 2, 1, asList(FLYING, PAY_1_IT_GETS_PLUS_HASTE_UNTIL_END_OF_TURN));
     public static Card THUNDERING_CERATOK = new Card("Thundering Ceratok", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(RHINO), COMMON, "Trample. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.", 4, 5, asList(TRAMPLE, WHEN_IT_ENTERS_THE_BATTLEFIELD_OTHER_CREATURES_YOU_CONTROL_GET_TRAMPLE_UNTIL_END_OF_TURN));
+    public static Card TIBALTS_RAGER = new Card("Tibalt's Rager", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), singletonList(DEVIL), UNCOMMON, "When Tibalt's Rager dies, it deals 1 damage to any target. PAY 1 1 RED: Tibalt's Rager gets +2/+0 until end of turn.", 1, 2, asList(WHEN_IT_DIES_IT_DEALS_1_DAMAGE_TO_ANY_TARGET, PAY_1_RED_IT_GETS_PLUS_2_PLUS_0_UNTIL_END_OF_TURN));
     public static Card TITHEBEARER_GIANT = new Card("Tithebearer Giant", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(GIANT, WARRIOR), COMMON, "When Tithebearer Giant enters the battlefield, you draw a card and you lose 1 life. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.", 4, 5, asList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD, WHEN_IT_ENTERS_THE_BATTLEFIELD_LOSE_1_LIFE));
 
 
@@ -70,10 +72,12 @@ public class WarOfTheSpark implements MtgSet {
         cards.add(LEYLINE_PROWLER);
         cards.add(LOXODON_SERGEANT);
         cards.add(NAGA_ETERNAL);
+        cards.add(SHRIEKDIVER);
         cards.add(RavnicaAllegiance.ORZHOV_GUILDGATE);
         cards.add(Dominaria.PRIMORDIAL_WURM);
         cards.add(RavnicaAllegiance.SIMIC_GUILDGATE);
         cards.add(THUNDERING_CERATOK);
+        cards.add(TIBALTS_RAGER);
         cards.add(TITHEBEARER_GIANT);
     }
 

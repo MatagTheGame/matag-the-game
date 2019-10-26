@@ -8,16 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.aa.mtg.cards.ability.Abilities.*;
-import static com.aa.mtg.cards.properties.Rarity.COMMON;
-import static com.aa.mtg.cards.properties.Rarity.MYTHIC;
-import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
+import static com.aa.mtg.cards.properties.Rarity.*;
 import static com.aa.mtg.cards.properties.Subtype.*;
 import static com.aa.mtg.cards.properties.Type.*;
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptySet;
-import static java.util.Collections.singleton;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
 import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
 
 public class Ixalan implements MtgSet {
@@ -57,6 +52,7 @@ public class Ixalan implements MtgSet {
     public static Card RAPTOR_COMPANION = new Card("Raptor Companion", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "", 3, 1, emptyList());
     public static Card RILE = new Card("Rile", singleton(Color.RED), singletonList(Cost.RED), singletonList(SORCERY), emptyList(), COMMON, "Rile deals 1 damage to target creature you control. That creature gains trample until end of turn. Draw a card.", 0, 0, asList(DEAL_1_DAMAGE_TO_CREATURE_YOU_CONTROL_THAT_CREATURE_GAINS_TRAMPLE, DRAW_1_CARD));
     public static Card SHINING_AEROSAUR = new Card("Shining Aerosaur", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "Flying.", 3, 4, singletonList(FLYING));
+    public static Card SKITTERING_HEARTSTOPPER = new Card("Skittering Heartstopper", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(CREATURE), singletonList(INSECT), COMMON, "PAY BLACK: Skittering Heartstopper gains deathtouch until end of turn.", 1, 2, singletonList(PAY_BLACK_IT_GETS_DEATHTOUCH_UNTIL_END_OF_TURN));
     public static Card SKYBLADE_OF_THE_LEGION = new Card("Skyblade of the Legion", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, SOLDIER), COMMON, "Flying.", 1, 3, singletonList(FLYING));
     public static Card SWASHBUCKLING = new Card("SwashBuckling", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList(AURA), COMMON, "Enchant creature. Enchanted creature gets +2/+2 and has haste.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_2_2_AND_HASTE));
     public static Card WATERTRAP_WEAVER = new Card("Watertrap Weaver", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(MERFOLK, WIZARD), COMMON, "When Watertrap Weaver enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TAP_TARGET_OPPONENT_CREATURE_DOES_NOT_UNTAP_NEXT_TURN));
@@ -99,6 +95,7 @@ public class Ixalan implements MtgSet {
         cards.add(RAPTOR_COMPANION);
         cards.add(RILE);
         cards.add(SHINING_AEROSAUR);
+        cards.add(SKITTERING_HEARTSTOPPER);
         cards.add(SKYBLADE_OF_THE_LEGION);
         cards.add(SWASHBUCKLING);
         cards.add(WATERTRAP_WEAVER);

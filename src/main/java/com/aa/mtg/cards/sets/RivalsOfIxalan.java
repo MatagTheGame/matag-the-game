@@ -42,6 +42,7 @@ public class RivalsOfIxalan implements MtgSet {
     public static Card RAVENOUS_CHUPACABRA = new Card("Ravenous Chupacabra", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(BEAST, HORROR), UNCOMMON, "When Ravenous Chupacabra enters the battlefield, destroy target creature an opponent controls.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DESTROY_TARGET_OPPONENT_CREATURE));
     public static Card SUN_SENTINEL = new Card("Sun Sentinel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, SOLDIER), COMMON, "Vigilance.", 2, 2, singletonList(VIGILANCE));
     public static Card STRIDER_HARNESS = new Card("Strider Harness", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList(EQUIPMENT), COMMON, "Equipped creature gets +1/+1 and has haste. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1_AND_HASTE));
+    public static Card SUN_COLLARED_RAPTOR = new Card("Sun-Collared Raptor", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "Trample. PAY 2 1 RED: Sun-Collared Raptor gets +3/+0 until end of turn.", 1, 2, asList(TRAMPLE, PAY_2_1_RED_IT_GETS_PLUS_3_PLUS_0_UNTIL_END_OF_TURN));
     public static Card SWAB_GOBLIN = new Card("Swab Goblin", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), asList(GOBLIN, PIRATE), COMMON, "", 2, 2, emptyList());
     public static Card SWORN_GUARDIAN = new Card("Sworn Guardian", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), asList(MERFOLK, WARRIOR), COMMON, "", 1, 3, emptyList());
     public static Card VAMPIRE_CHAMPION = new Card("Vampire Champion", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, SOLDIER), COMMON, "Deathtouch.", 3, 3, singletonList(DEATHTOUCH));
@@ -70,6 +71,7 @@ public class RivalsOfIxalan implements MtgSet {
         cards.add(RAVENOUS_CHUPACABRA);
         cards.add(SUN_SENTINEL);
         cards.add(STRIDER_HARNESS);
+        cards.add(SUN_COLLARED_RAPTOR);
         cards.add(SWAB_GOBLIN);
         cards.add(SWORN_GUARDIAN);
         cards.add(VAMPIRE_CHAMPION);

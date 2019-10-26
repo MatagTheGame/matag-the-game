@@ -127,6 +127,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(SEDGE_SCORPION);
         cards.add(SIEGE_MASTODON);
         cards.add(CoreSet2019.SKELETON_ARCHER);
+        cards.add(CoreSet2019.SHIVAN_DRAGON);
         cards.add(CoreSet2019.SNAPPING_DRAKE);
         cards.add(STONE_GOLEM);
         cards.add(VAMPIRE_OF_THE_DIRE_MOON);
