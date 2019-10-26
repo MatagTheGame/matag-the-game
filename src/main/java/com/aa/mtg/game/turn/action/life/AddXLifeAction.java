@@ -19,7 +19,7 @@ public class AddXLifeAction implements AbilityAction {
 
     @Override
     public void perform(CardInstance cardInstance, GameStatus gameStatus, Ability ability) {
-        int lifeToAdd = Integer.valueOf(ability.getParameter(0));
+        int lifeToAdd = Integer.parseInt(ability.getParameter(0));
         Player controller = gameStatus.getPlayerByName(cardInstance.getController());
         lifeService.add(controller, lifeToAdd, gameStatus);
     }

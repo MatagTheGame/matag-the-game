@@ -46,6 +46,7 @@ public class Dominaria implements MtgSet {
     public static Card PYROMANTIC_PILGRIM = new Card("Pyromantic Pilgrim", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, WIZARD), COMMON, "Haste", 3, 1, singletonList(HASTE));
     public static Card SERRA_ANGEL = new Card("Serra Angel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ANGEL), UNCOMMON, "Flying, vigilance", 4, 4, asList(FLYING, VIGILANCE));
     public static Card SHORT_SWORD = new Card("Short Sword", emptySet(), singletonList(Cost.COLORLESS), singletonList(ARTIFACT), singletonList(EQUIPMENT), COMMON, "Equipment Creatures get +1/+1. Equip 2", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1));
+    public static Card SPARRING_CONSTRUCT = new Card("Sparring Construct", emptySet(), singletonList(Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList(CONSTRUCT), COMMON, "When Sparring Construct dies, put a +1/+1 counter on target creature you control.", 1, 1, singletonList(WHEN_IT_DIES_PUT_A_PLUS_1_COUNTER_ON_TARGET_CREATURE_YOU_CONTROL));
     public static Card TOLARIAN_SCOLAR = new Card("Tolarian Scolar", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, WIZARD), COMMON, "", 2, 3, emptyList());
     public static Card YARGLE_GLUTTON_OF_URBORG = new Card("Yargle, Glutton of Urborg", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(LEGENDARY, CREATURE), asList(FROG, SPIRIT), UNCOMMON, "", 9, 3, emptyList());
 
@@ -76,6 +77,7 @@ public class Dominaria implements MtgSet {
         cards.add(PYROMANTIC_PILGRIM);
         cards.add(SERRA_ANGEL);
         cards.add(SHORT_SWORD);
+        cards.add(SPARRING_CONSTRUCT);
         cards.add(TOLARIAN_SCOLAR);
         cards.add(YARGLE_GLUTTON_OF_URBORG);
     }

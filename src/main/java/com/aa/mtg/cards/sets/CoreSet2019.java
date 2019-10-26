@@ -13,6 +13,7 @@ import static com.aa.mtg.cards.properties.Subtype.*;
 import static com.aa.mtg.cards.properties.Type.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.*;
+import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreSet2019 implements MtgSet {
@@ -22,7 +23,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card ACT_OF_TREASON = new Card("Act of Treason", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.", 0, 0, asList(GAIN_CONTROL_TARGET_CREATURE_UNTIL_END_OF_TURN, UNTAP_TARGET_CREATURE, TARGET_CREATURE_GETS_HASTE_UNTIL_END_OF_TURN));
     public static Card AEGIS_OF_THE_HEAVENS = new Card("Aegis of the Heavens", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Target creature gets +1/+7 until end of turn.", 0, 0, singletonList(TARGET_CREATURE_GETS_PLUS_1_7_UNTIL_END_OF_TURN));
     public static Card AGGRESSIVE_MAMMOTH = new Card("Aggressive Mammoth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ELEPHANT), RARE, "Trample. Other creatures you control have trample.", 8, 8, asList(TRAMPLE, OTHER_CREATURES_YOU_CONTROL_GET_TRAMPLE));
-    public static Card AJANIS_WELCOME = new Card("Ajanis Welcome", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(ENCHANTMENT), emptyList(), UNCOMMON, "Whenever a creature enters the battlefield under your control, you gain 1 life.", 0, 0, singletonList(WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_YOU_GAIN_ONE_LIFE));
+    public static Card AJANIS_WELCOME = new Card("Ajanis Welcome", singleton(Color.WHITE), singletonList(Cost.WHITE), singletonList(ENCHANTMENT), emptyList(), UNCOMMON, "Whenever a creature enters the battlefield under your control, you gain 1 life.", 0, 0, singletonList(WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_YOU_GAIN_1_LIFE));
     public static Card ANGEL_OF_THE_DAWN = new Card("Angel of the Dawn", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ANGEL), COMMON, "Flying. When Angel of the Dawn enters the battlefield, creatures you control get +1/+1 and gain vigilance until end of turn.", 3, 3, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_CREATURES_YOU_CONTROL_GET_PLUS_1_1_AND_VIGILANCE_UNTIL_END_OF_TURN));
     public static Card BLOOD_BURGLAR = new Card("Blood Burglar", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, ROGUE), COMMON, "As long as it's your turn, Blood Burglar has lifelink.", 2, 2, singletonList(AS_LONG_AS_IS_YOUR_TURN_IT_HAS_LIFELINK));
     public static Card BOGSTOMPER = new Card("Bogstomper", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), COMMON, "", 6, 5, emptyList());
@@ -43,7 +44,9 @@ public class CoreSet2019 implements MtgSet {
     public static Card GIGANTOSAURUS = new Card("Gigantosaurus", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.GREEN, Cost.GREEN, Cost.GREEN), singletonList(CREATURE), singletonList(DINOSAUR), RARE, "", 10, 10, emptyList());
     public static Card GREENWOOD_SENTINEL = new Card("Greenwood Sentinel", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), asList(ELF, SCOUT), COMMON, "Vigilance.", 2, 2, singletonList(VIGILANCE));
     public static Card HAVOC_DEVILS = new Card("Havoc Devils", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DEVIL), COMMON, "Trample.", 4, 3, singletonList(TRAMPLE));
+    public static Card HIGHLAND_GAME = new Card("Highland Game", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(CREATURE), singletonList(ELK), COMMON, "When Highland Game dies, you gain 2 life.", 2, 1, singletonList(WHEN_IT_DIES_GAIN_2_LIFE));
     public static Card HOSTILE_MINOTAUR = new Card("Hostile Minotaur", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(MINOTAUR), COMMON, "Haste.", 3, 3, singletonList(HASTE));
+    public static Card IMMORTAL_PHOENIX = new Card("Immortal Phoenix", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(PHOENIX), RARE, "Flying. When Immortal Phoenix dies, return it to its owner's hand.", 5, 3, singletonList(WHEN_IT_DIES_RETURN_IT_TO_ITS_OWNER_HAND));
     public static Card INSPIRED_CHARGE = new Card("Inspired Charge", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Creatures you control get +2/+1 until end of turn.", 0, 0, singletonList(CREATURES_YOU_CONTROL_GET_PLUS_2_1_UNTIL_END_OF_TURN));
     public static Card KNIGHT_OF_THE_TUSK = new Card("Knight of the Tusk", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, KNIGHT), COMMON, "Vigilance.", 3, 7, emptyList());
     public static Card KNIGHTS_PLEDGE = new Card("Knight's Pledge", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(ENCHANTMENT), emptyList(), COMMON, "Draw two cards.", 0, 0, singletonList(DRAW_2_CARDS));
@@ -58,6 +61,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card OAKENFORM = new Card("Oakenform", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList(AURA), COMMON, "Enchant creature. Enchanted creature gets +3/+3.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_3_3));
     public static Card ONAKKE_OGRE = new Card("Onakke Ogre", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(OGRE, WARRIOR), COMMON, "", 4, 2, emptyList());
     public static Card ORESKOS_SWIFTCLAW = new Card("Oreskos Swiftclaw", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(CAT, WARRIOR), COMMON, "", 3, 1, emptyList());
+    public static Card POISON_TIP_ARCHER = new Card("Poison-Tip Archer", asSet(Color.BLACK, Color.GREEN), asList(Cost.BLACK, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(ELF, ARCHER), UNCOMMON, "Reach. Deathtouch. Whenever another creature dies, each opponent loses 1 life.", 2, 3, asList(REACH, DEATHTOUCH, WHENEVER_ANOTHER_CREATURE_DIES_EACH_OPPONENT_LOSES_1_LIFE));
     public static Card PRODIGIOUS_GROWTH = new Card("Prodigious Growth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ENCHANTMENT), singletonList(AURA), RARE, "Enchant creature. Enchanted creature gets +7/+7 and has trample.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_PLUS_7_7_AND_TRAMPLE));
     public static Card RHOX_ORACLE = new Card("Rhox Oracle", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(RHINO, MONK), COMMON, "When Rhox Oracle enters the battlefield, draw a card.", 4, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
     //public static Card RIDDLEMASTER_SPHINX = new Card("Riddlemaster Sphinx", singleton(Color.BLUE), asList(Cost.BLUE, Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList("Sphinx"), RARE, "Flying. When Riddlemaster Sphinx enters the battlefield, you may return target creature an opponent controls to its owner's hand.", 5, 5, asList(FLYING, )); // TODO Antonio: you may!
@@ -66,6 +70,7 @@ public class CoreSet2019 implements MtgSet {
     public static Card SKYSCANNER = new Card("Skyscanner", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList(THOPTER), COMMON, "Flying. When Skyscanner enters the battlefield, draw a card.", 1, 1, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD));
     public static Card SHIVAN_DRAGON = new Card("Shivan Dragon", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DRAGON), RARE, "Flying. PAY RED: Shivan Dragon gets +1/+0 until end of turn.", 1, 1, asList(FLYING, PAY_1_RED_IT_GETS_PLUS_1_PLUS_0_UNTIL_END_OF_TURN));
     public static Card SNAPPING_DRAKE = new Card("Snapping Drake", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DRAKE), COMMON, "Flying.", 3, 2, singletonList(FLYING));
+    public static Card TATTERED_MUMMY = new Card("Tattered Mummy", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList(ZOMBIE, JACKAL), COMMON, "When Tattered Mummy dies, each opponent loses 2 life.", 1, 2, singletonList(WHEN_IT_DIES_EACH_OPPONENTS_LOSES_2_LIFE));
     public static Card THORNHIDE_WOLVES = new Card("Thornhide Wolves", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(WOLF), COMMON, "", 4, 5, emptyList());
     public static Card VAMPIRE_SOVEREIGN = new Card("Vampire Sovereign", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(VAMPIRE), UNCOMMON, "Flying. When Vampire Sovereign enters the battlefield, target opponent loses 3 life and you gain 3 life.", 3, 4, asList(FLYING, WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_OPPONENT_LOSES_3_LIFE, WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_3_LIFE));
     public static Card VIGILANT_BALOTH = new Card("Vigilant Baloth", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), UNCOMMON, "Vigilance", 5, 5, singletonList(VIGILANCE));
@@ -105,7 +110,9 @@ public class CoreSet2019 implements MtgSet {
         cards.add(GIGANTOSAURUS);
         cards.add(GREENWOOD_SENTINEL);
         cards.add(HAVOC_DEVILS);
+        cards.add(HIGHLAND_GAME);
         cards.add(HOSTILE_MINOTAUR);
+        cards.add(IMMORTAL_PHOENIX);
         cards.add(INSPIRED_CHARGE);
         cards.add(Dominaria.INVOKE_THE_DIVINE);
         cards.add(KNIGHT_OF_THE_TUSK);
@@ -123,6 +130,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(ONAKKE_OGRE);
         cards.add(OAKENFORM);
         cards.add(ORESKOS_SWIFTCLAW);
+        cards.add(POISON_TIP_ARCHER);
         cards.add(PRODIGIOUS_GROWTH);
         cards.add(RHOX_ORACLE);
         cards.add(RUSTWING_FALCON);
@@ -130,6 +138,7 @@ public class CoreSet2019 implements MtgSet {
         cards.add(SKYSCANNER);
         cards.add(SHIVAN_DRAGON);
         cards.add(RivalsOfIxalan.SUN_SENTINEL);
+        cards.add(TATTERED_MUMMY);
         cards.add(THORNHIDE_WOLVES);
         cards.add(Dominaria.TOLARIAN_SCOLAR);
         cards.add(VAMPIRE_SOVEREIGN);

@@ -55,6 +55,8 @@ public class CoreSet2020 implements MtgSet {
     public static Card SAVANNAH_SAGE = new Card("Savannah Sage", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(CAT, CLERIC), COMMON, "When Savannah Sage enters the battlefield, you gain 2 life.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_GAIN_2_LIFE));
     public static Card SEDGE_SCORPION = new Card("Sedge Scorpion", asSet(Color.GREEN), singletonList(Cost.GREEN), singletonList(CREATURE), singletonList(SCORPION), COMMON, "Deathtouch.", 1, 1, singletonList(DEATHTOUCH));
     public static Card SIEGE_MASTODON = new Card("Siege Mastodon", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(ELEPHANT), COMMON, "", 3, 5, emptyList());
+    public static Card SILVERBACK_SHAMAN = new Card("Silverback Shaman", asSet(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(APE, SHAMAN), COMMON, "Trample. When Silverback Shaman dies, draw a card.", 5, 4, asList(TRAMPLE, WHEN_IT_DIES_DRAW_1_CARD));
+    public static Card STEADFAST_SENTRY = new Card("Steadfast Sentry", asSet(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, SOLDIER), COMMON, "Vigilance. When Steadfast Sentry dies, put a +1/+1 counter on target creature you control.", 3, 2, asList(VIGILANCE, WHEN_IT_DIES_PUT_A_PLUS_1_COUNTER_ON_TARGET_CREATURE_YOU_CONTROL));
     public static Card STONE_GOLEM = new Card("Stone Golem", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), asList(ARTIFACT, CREATURE), singletonList(GOLEM), COMMON, "", 4, 4, emptyList());
     public static Card VAMPIRE_OF_THE_DIRE_MOON = new Card("Vampire of the Dire Moon", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(CREATURE), singletonList(VAMPIRE), UNCOMMON, "Deathtouch. Lifelink", 1, 1, asList(DEATHTOUCH, LIFELINK));
     public static Card VORSTCLAW = new Card("Vorstclaw", singleton(Color.GREEN), asList(Cost.GREEN, Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(ELEMENTAL, HORROR), UNCOMMON, "", 7, 7, emptyList());
@@ -104,6 +106,7 @@ public class CoreSet2020 implements MtgSet {
         cards.add(HERALD_OF_THE_SUN);
         cards.add(CoreSet2019.HOSTILE_MINOTAUR);
         cards.add(RavnicaAllegiance.IMPASSIONED_ORATOR);
+        cards.add(CoreSet2019.IMMORTAL_PHOENIX);
         cards.add(IMPERIAL_OUTRIDER);
         cards.add(INFURIATE);
         cards.add(CoreSet2019.INSPIRED_CHARGE);
@@ -126,9 +129,11 @@ public class CoreSet2020 implements MtgSet {
         cards.add(SAVANNAH_SAGE);
         cards.add(SEDGE_SCORPION);
         cards.add(SIEGE_MASTODON);
+        cards.add(SILVERBACK_SHAMAN);
         cards.add(CoreSet2019.SKELETON_ARCHER);
         cards.add(CoreSet2019.SHIVAN_DRAGON);
         cards.add(CoreSet2019.SNAPPING_DRAKE);
+        cards.add(STEADFAST_SENTRY);
         cards.add(STONE_GOLEM);
         cards.add(VAMPIRE_OF_THE_DIRE_MOON);
         cards.add(VORSTCLAW);

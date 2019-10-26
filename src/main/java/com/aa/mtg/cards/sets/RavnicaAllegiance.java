@@ -38,7 +38,8 @@ public class RavnicaAllegiance implements MtgSet {
     public static Card GRUUL_GUILDGATE = new Card("Gruul Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Gruul Guildgate enters the battlefield tapped. TAP: Add RED or GREEN to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_RED_MANA, TAP_ADD_GREEN_MANA));
     public static Card GYRE_ENGINEER = new Card("Gyre Engineer", asSet(Color.GREEN, Color.BLUE), asList(Cost.GREEN, Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), asList(VEDALKEN, WIZARD), UNCOMMON, "TAP: Add GREEN and BLUE.", 1, 1, singletonList(TAP_ADD_1_GREEN_1_BLUE_MANA));
     public static Card HAAZDA_OFFICER = new Card("Haazda Officer", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, SOLDIER), COMMON, "When Haazda Officer enters the battlefield, target creature you control gets +1/+1 until end of turn.", 3, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_YOU_CONTROL_GETS_PLUS_1_1));
-    public static Card IMPASSIONED_ORATOR = new Card("Impassionate Orator", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, CLERIC), COMMON, "Whenever another creature enters the battlefield under your control, you gain 1 life.", 2, 2, singletonList(WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_YOU_GAIN_ONE_LIFE));
+    public static Card IMPASSIONED_ORATOR = new Card("Impassionate Orator", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, CLERIC), COMMON, "Whenever another creature enters the battlefield under your control, you gain 1 life.", 2, 2, singletonList(WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_YOU_GAIN_1_LIFE));
+    public static Card JUDITH_THE_SCOURGE_DIVA = new Card("Judith, the Scourge Diva", asSet(Color.BLACK, Color.RED), asList(Cost.BLACK, Cost.RED, Cost.COLORLESS), asList(LEGENDARY, CREATURE), asList(HUMAN, SHAMAN), RARE, "Other creatures you control get +1/+0. Whenever a nontoken creature you control dies, Judith, the Scourge Diva deals 1 damage to any target.", 2, 2, asList(OTHER_CREATURES_YOU_CONTROL_GET_PLUS_1_0, WHENEVER_A_NON_TOKEN_CREATURE_YOU_CONTROL_DIES_IT_DEALS_1_DAMAGE_TO_ANY_TARGET));
     public static Card MORTIFY = new Card("Mortify", asSet(Color.WHITE, Color.BLACK), asList(Cost.WHITE, Cost.BLACK, Cost.COLORLESS), singletonList(INSTANT), emptyList(), UNCOMMON, "Destroy target creature or enchantment.", 0, 0, singletonList(DESTROY_TARGET_CREATURE_OR_ENCHANTMENT));
     public static Card NOXIOUS_GROODION = new Card("Noxious Groodion", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(BEAST), COMMON, "Deathtouch", 2, 2, singletonList(DEATHTOUCH));
     public static Card ORZHOV_GUILDGATE = new Card("Orzhov Guildgate", emptySet(), emptyList(), singletonList(LAND), singletonList(GATE), COMMON, "Orzhov Guildgate enters the battlefield tapped. TAP: Add WHITE or BLACK to your mana pool.", 0, 0, asList(ENTERS_THE_BATTLEFIELD_TAPPED, TAP_ADD_WHITE_MANA, TAP_ADD_BLACK_MANA));
@@ -79,6 +80,7 @@ public class RavnicaAllegiance implements MtgSet {
         cards.add(GYRE_ENGINEER);
         cards.add(HAAZDA_OFFICER);
         cards.add(IMPASSIONED_ORATOR);
+        cards.add(JUDITH_THE_SCOURGE_DIVA);
         cards.add(Dominaria.MAMMOTH_SPIDER);
         cards.add(MORTIFY);
         cards.add(NOXIOUS_GROODION);
