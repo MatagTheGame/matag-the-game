@@ -1,8 +1,6 @@
-package com.aa.mtg.cards;
+package com.aa.mtg.cards.modifiers;
 
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.modifiers.PowerToughness;
-import com.aa.mtg.cards.modifiers.TappedModifier;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;

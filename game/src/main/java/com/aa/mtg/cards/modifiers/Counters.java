@@ -1,4 +1,4 @@
-package com.aa.mtg.cards;
+package com.aa.mtg.cards.modifiers;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
