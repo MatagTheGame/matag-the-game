@@ -2,6 +2,8 @@
 /mtg.iml
 .DS_Store
 
+/cards/cards.iml
+
 /game/game.iml
 /game/node_modules
 /game/node
