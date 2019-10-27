@@ -1,8 +1,9 @@
 /.idea
 /mtg.iml
-/node_modules
-/node
-/yarn-error.log
-/src/main/resources/public/js/
 .DS_Store
-/target
+
+/game/node_modules
+/game/node
+/game/yarn-error.log
+/game/src/main/resources/public/js/
+/game/target
