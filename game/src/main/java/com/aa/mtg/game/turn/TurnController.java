@@ -15,7 +15,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
-import static com.aa.mtg.game.utils.Utils.toMapListInteger;
+import static com.aa.mtg.utils.Utils.toMapListInteger;
 
 @Controller
 public class TurnController {

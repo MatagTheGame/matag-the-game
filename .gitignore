@@ -2,7 +2,13 @@
 /mtg.iml
 .DS_Store
 
+/admin/admin.iml
+/admin/node
+/admin/node_modules
+/admin/target
+
 /cards/cards.iml
+/cards/target
 
 /game/game.iml
 /game/node_modules
@@ -11,7 +17,5 @@
 /game/src/main/resources/public/js/
 /game/target
 
-/admin/admin.iml
-/admin/node
-/admin/node_modules
-/admin/target
+/utils/utils.iml
+/utils/target
