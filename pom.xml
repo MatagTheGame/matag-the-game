@@ -16,5 +16,6 @@
 
   <modules>
     <module>game</module>
-  </modules> 
+    <module>admin</module>
+  </modules>
 </project>

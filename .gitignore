@@ -7,3 +7,7 @@
 /game/yarn-error.log
 /game/src/main/resources/public/js/
 /game/target
+/game/game.iml
+
+/admin/admin.iml
+/admin/target
