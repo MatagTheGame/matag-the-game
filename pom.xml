@@ -15,7 +15,8 @@
   </properties>
 
   <modules>
-    <module>game</module>
     <module>admin</module>
+    <module>cards</module>
+    <module>game</module>
   </modules>
 </project>

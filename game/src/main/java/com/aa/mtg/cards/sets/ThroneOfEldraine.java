@@ -55,6 +55,7 @@ public class ThroneOfEldraine implements MtgSet {
         cards.add(INSPIRING_VETERAN);
         cards.add(KNIGHT_OF_THE_KEEP);
         cards.add(LASH_OF_THORNS);
+        cards.add(LOCTHWAIN_GARGOYLE);
         cards.add(MARALEAF_PIXIE);
         cards.add(OKOS_ACCOMPLICES);
         cards.add(PRIZED_GRIFFIN);
@@ -63,6 +64,7 @@ public class ThroneOfEldraine implements MtgSet {
         cards.add(SPORECAP_SPIDER);
         cards.add(TOME_RAIDER);
         cards.add(VANTRESS_PALADIN);
+        cards.add(VENERABLE_KNIGHT);
         cards.add(WEASELBACK_REDCAP);
     }
 
