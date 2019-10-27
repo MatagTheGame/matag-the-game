@@ -4,7 +4,7 @@ import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import application.browser.CardHelper;
 import application.testcategory.Regression;
-import com.aa.mtg.MtgApplication;
+import com.aa.mtg.game.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;

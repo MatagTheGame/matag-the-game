@@ -1,4 +1,4 @@
-package com.aa.mtg;
+package com.aa.mtg.game;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

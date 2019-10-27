@@ -2,12 +2,14 @@
 /mtg.iml
 .DS_Store
 
+/game/game.iml
 /game/node_modules
 /game/node
 /game/yarn-error.log
 /game/src/main/resources/public/js/
 /game/target
-/game/game.iml
 
 /admin/admin.iml
+/admin/node
+/admin/node_modules
 /admin/target

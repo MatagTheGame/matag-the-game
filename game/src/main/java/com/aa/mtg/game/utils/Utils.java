@@ -1,4 +1,4 @@
-package com.aa.mtg.utils;
+package com.aa.mtg.game.utils;
 
 import java.util.List;
 import java.util.Map;

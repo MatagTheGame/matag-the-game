@@ -1,4 +1,4 @@
-package com.aa.mtg;
+package com.aa.mtg.game;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

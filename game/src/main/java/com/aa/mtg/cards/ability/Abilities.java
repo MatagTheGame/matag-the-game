@@ -33,7 +33,7 @@ import static com.aa.mtg.cards.selector.StatusType.BLOCKING;
 import static com.aa.mtg.cards.selector.TurnStatusType.YOUR_TURN;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
-import static com.aa.mtg.utils.Utils.replaceLast;
+import static com.aa.mtg.game.utils.Utils.replaceLast;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;

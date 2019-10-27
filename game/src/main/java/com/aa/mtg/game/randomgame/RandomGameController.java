@@ -1,4 +1,4 @@
-package com.aa.mtg.randomgame;
+package com.aa.mtg.game.randomgame;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
