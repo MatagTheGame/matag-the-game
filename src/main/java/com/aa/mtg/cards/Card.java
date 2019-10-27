@@ -10,10 +10,7 @@ import com.aa.mtg.cards.properties.Type;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.TAP_ADD_MANA;
@@ -27,15 +24,15 @@ public class Card {
     private final String name;
     private final Set<Color> colors;
     private final List<Cost> cost;
-    private final List<Type> types;
-    private final List<Subtype> subtypes;
+    private final Set<Type> types;
+    private final Set<Subtype> subtypes;
     private final Rarity rarity;
     private final String ruleText;
     private final int power;
     private final int toughness;
     private final List<Ability> abilities;
 
-    public Card(String name, Set<Color> colors, List<Cost> cost, List<Type> types, List<Subtype> subtypes, Rarity rarity, String ruleText, int power, int toughness, List<Ability> abilities) {
+    public Card(String name, Set<Color> colors, List<Cost> cost, Set<Type> types, Set<Subtype> subtypes, Rarity rarity, String ruleText, int power, int toughness, List<Ability> abilities) {
         this.name = name;
         this.colors = colors;
         this.cost = cost;
@@ -49,12 +46,12 @@ public class Card {
     }
 
     public Card(Card card) {
-        this(card.getName(), new HashSet<>(card.getColors()), new ArrayList<>(card.getCost()), new ArrayList<>(card.getTypes()),
-                new ArrayList<>(card.getSubtypes()), Rarity.COMMON, card.getRuleText(), card.getPower(), card.getToughness(), card.getAbilities());
+        this(card.getName(), new HashSet<>(card.getColors()), new ArrayList<>(card.getCost()), new LinkedHashSet<>(card.getTypes()),
+                new LinkedHashSet<>(card.getSubtypes()), Rarity.COMMON, card.getRuleText(), card.getPower(), card.getToughness(), card.getAbilities());
     }
 
     public static Card hiddenCard() {
-        return new Card("card", emptySet(), emptyList(), emptyList(), emptyList(), Rarity.COMMON, "", 0, 0, emptyList());
+        return new Card("card", emptySet(), emptyList(), emptySet(), emptySet(), Rarity.COMMON, "", 0, 0, emptyList());
     }
 
     public String getName() {
@@ -73,11 +70,11 @@ public class Card {
         return cost;
     }
 
-    public List<Type> getTypes() {
+    public Set<Type> getTypes() {
         return types;
     }
 
-    public List<Subtype> getSubtypes() {
+    public Set<Subtype> getSubtypes() {
         return subtypes;
     }
 

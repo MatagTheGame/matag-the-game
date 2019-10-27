@@ -3,7 +3,6 @@ package com.aa.mtg.cards.sets;
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
-import com.aa.mtg.cards.properties.Type;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,41 +11,36 @@ import static com.aa.mtg.cards.ability.Abilities.*;
 import static com.aa.mtg.cards.properties.Rarity.COMMON;
 import static com.aa.mtg.cards.properties.Rarity.UNCOMMON;
 import static com.aa.mtg.cards.properties.Subtype.*;
-import static com.aa.mtg.cards.properties.Type.ARTIFACT;
-import static com.aa.mtg.cards.properties.Type.CREATURE;
-import static com.aa.mtg.cards.properties.Type.INSTANT;
-import static com.aa.mtg.cards.properties.Type.SORCERY;
+import static com.aa.mtg.cards.properties.Type.*;
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptySet;
-import static java.util.Collections.singleton;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
+import static org.hibernate.validator.internal.util.CollectionHelper.asSet;
 
 public class RivalsOfIxalan implements MtgSet {
 
     public static final String RIX = "RIX";
 
-    public static Card AGGRESSIVE_URGE = new Card("Aggressive Urge", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Target creature gets +1/+1 until end of turn. Draw a card.", 0, 0, asList(TARGET_CREATURE_GETS_PLUS_1_1_UNTIL_END_OF_TURN, DRAW_1_CARD));
-    public static Card BOMBARD = new Card("Bombard", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Bombard deals 4 damage to target creature.", 0, 0, singletonList(DEAL_4_DAMAGE_TO_TARGET_CREATURE));
-    public static Card CANAL_MONITOR = new Card("Canal Monitor", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(LIZARD), COMMON, "", 5, 3, emptyList());
-    public static Card DEAD_WEIGHT = new Card("Dead Weight", singleton(Color.BLACK), singletonList(Cost.BLACK), singletonList(Type.ENCHANTMENT), singletonList(AURA), COMMON, "Enchant creature. Enchanted creature gets -2/-2.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_MINUS_2_2));
-    public static Card DIVINE_VERDICT = new Card("Divine Verdict", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(Type.INSTANT), emptyList(), COMMON, "Destroy target attacking or blocking creature.", 0, 0, singletonList(DESTROY_TARGET_ATTACKING_OF_BLOCKING_CREATURE));
-    public static Card DUSK_LEGION_ZEALOT = new Card("Dusk Legion Zealot", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, SOLDIER), COMMON, "When Dusk Legion Zealot enters the battlefield, you draw a card and you lose 1 life.", 1, 1, asList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD, WHEN_IT_ENTERS_THE_BATTLEFIELD_LOSE_1_LIFE));
-    public static Card EXULTANT_SKYMARCHER = new Card("Exultant Skymarcher", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, SOLDIER), COMMON, "Flying.", 2, 3, singletonList(FLYING));
-    public static Card IMPALE = new Card("Impale", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(SORCERY), emptyList(), COMMON, "Destroy target creature.", 0, 0, singletonList(DESTROY_TARGET_CREATURE));
-    public static Card JADECRAFT_ARTISAN = new Card("Jadecraft Artisan", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(MERFOLK, SHAMAN), COMMON, "When Jadecraft Artisan enters the battlefield, target creature gets +2/+2 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_2_2));
-    public static Card MOMENT_OF_CRAVING = new Card("Moment of Craving", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Target creature gets -2/-2 until end of turn. You gain 2 life.", 0, 0, asList(TARGET_CREATURE_GETS_MINUS_2_2_UNTIL_END_OF_TURN, GAIN_2_LIFE));
-    public static Card NATURALIZE = new Card("Naturalize", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singletonList(INSTANT), emptyList(), COMMON, "Destroy target artifact or enchantment.", 0, 0, singletonList(DESTROY_TARGET_ARTIFACT_OR_ENCHANTMENT));
-    public static Card ORAZCA_FRILLBACK = new Card("Orazca Frillback", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "", 4, 3, emptyList());
-    public static Card ORAZCA_RAPTOR = new Card("Orazca Raptor", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "", 3, 4, emptyList());
-    public static Card RAVENOUS_CHUPACABRA = new Card("Ravenous Chupacabra", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(BEAST, HORROR), UNCOMMON, "When Ravenous Chupacabra enters the battlefield, destroy target creature an opponent controls.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DESTROY_TARGET_OPPONENT_CREATURE));
-    public static Card SUN_SENTINEL = new Card("Sun Sentinel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singletonList(CREATURE), asList(HUMAN, SOLDIER), COMMON, "Vigilance.", 2, 2, singletonList(VIGILANCE));
-    public static Card STRIDER_HARNESS = new Card("Strider Harness", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(ARTIFACT), singletonList(EQUIPMENT), COMMON, "Equipped creature gets +1/+1 and has haste. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1_AND_HASTE));
-    public static Card SUN_COLLARED_RAPTOR = new Card("Sun-Collared Raptor", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), singletonList(DINOSAUR), COMMON, "Trample. PAY 2 1 RED: Sun-Collared Raptor gets +3/+0 until end of turn.", 1, 2, asList(TRAMPLE, PAY_2_1_RED_IT_GETS_PLUS_3_PLUS_0_UNTIL_END_OF_TURN));
-    public static Card SWAB_GOBLIN = new Card("Swab Goblin", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singletonList(CREATURE), asList(GOBLIN, PIRATE), COMMON, "", 2, 2, emptyList());
-    public static Card SWORN_GUARDIAN = new Card("Sworn Guardian", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singletonList(CREATURE), asList(MERFOLK, WARRIOR), COMMON, "", 1, 3, emptyList());
-    public static Card VAMPIRE_CHAMPION = new Card("Vampire Champion", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, SOLDIER), COMMON, "Deathtouch.", 3, 3, singletonList(DEATHTOUCH));
-    public static Card VAMPIRE_REVENANT = new Card("Vampire Revenant", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singletonList(CREATURE), asList(VAMPIRE, SPIRIT), COMMON, "Flying.", 3, 1, singletonList(FLYING));
+    public static Card AGGRESSIVE_URGE = new Card("Aggressive Urge", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singleton(INSTANT), emptySet(), COMMON, "Target creature gets +1/+1 until end of turn. Draw a card.", 0, 0, asList(TARGET_CREATURE_GETS_PLUS_1_1_UNTIL_END_OF_TURN, DRAW_1_CARD));
+    public static Card BOMBARD = new Card("Bombard", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singleton(INSTANT), emptySet(), COMMON, "Bombard deals 4 damage to target creature.", 0, 0, singletonList(DEAL_4_DAMAGE_TO_TARGET_CREATURE));
+    public static Card CANAL_MONITOR = new Card("Canal Monitor", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singleton(CREATURE), singleton(LIZARD), COMMON, "", 5, 3, emptyList());
+    public static Card DEAD_WEIGHT = new Card("Dead Weight", singleton(Color.BLACK), singletonList(Cost.BLACK), singleton(ENCHANTMENT), singleton(AURA), COMMON, "Enchant creature. Enchanted creature gets -2/-2.", 0, 0, singletonList(ENCHANTED_CREATURE_GETS_MINUS_2_2));
+    public static Card DIVINE_VERDICT = new Card("Divine Verdict", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singleton(INSTANT), emptySet(), COMMON, "Destroy target attacking or blocking creature.", 0, 0, singletonList(DESTROY_TARGET_ATTACKING_OF_BLOCKING_CREATURE));
+    public static Card DUSK_LEGION_ZEALOT = new Card("Dusk Legion Zealot", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singleton(CREATURE), asSet(VAMPIRE, SOLDIER), COMMON, "When Dusk Legion Zealot enters the battlefield, you draw a card and you lose 1 life.", 1, 1, asList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DRAW_A_CARD, WHEN_IT_ENTERS_THE_BATTLEFIELD_LOSE_1_LIFE));
+    public static Card EXULTANT_SKYMARCHER = new Card("Exultant Skymarcher", singleton(Color.WHITE), asList(Cost.WHITE, Cost.WHITE, Cost.COLORLESS), singleton(CREATURE), asSet(VAMPIRE, SOLDIER), COMMON, "Flying.", 2, 3, singletonList(FLYING));
+    public static Card IMPALE = new Card("Impale", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singleton(SORCERY), emptySet(), COMMON, "Destroy target creature.", 0, 0, singletonList(DESTROY_TARGET_CREATURE));
+    public static Card JADECRAFT_ARTISAN = new Card("Jadecraft Artisan", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singleton(CREATURE), asSet(MERFOLK, SHAMAN), COMMON, "When Jadecraft Artisan enters the battlefield, target creature gets +2/+2 until end of turn.", 3, 3, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_2_2));
+    public static Card MOMENT_OF_CRAVING = new Card("Moment of Craving", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS), singleton(INSTANT), emptySet(), COMMON, "Target creature gets -2/-2 until end of turn. You gain 2 life.", 0, 0, asList(TARGET_CREATURE_GETS_MINUS_2_2_UNTIL_END_OF_TURN, GAIN_2_LIFE));
+    public static Card NATURALIZE = new Card("Naturalize", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS), singleton(INSTANT), emptySet(), COMMON, "Destroy target artifact or enchantment.", 0, 0, singletonList(DESTROY_TARGET_ARTIFACT_OR_ENCHANTMENT));
+    public static Card ORAZCA_FRILLBACK = new Card("Orazca Frillback", singleton(Color.GREEN), asList(Cost.GREEN, Cost.COLORLESS, Cost.COLORLESS), singleton(CREATURE), singleton(DINOSAUR), COMMON, "", 4, 3, emptyList());
+    public static Card ORAZCA_RAPTOR = new Card("Orazca Raptor", singleton(Color.RED), asList(Cost.RED, Cost.RED, Cost.COLORLESS, Cost.COLORLESS), singleton(CREATURE), singleton(DINOSAUR), COMMON, "", 3, 4, emptyList());
+    public static Card RAVENOUS_CHUPACABRA = new Card("Ravenous Chupacabra", singleton(Color.BLACK), asList(Cost.BLACK, Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS), singleton(CREATURE), asSet(BEAST, HORROR), UNCOMMON, "When Ravenous Chupacabra enters the battlefield, destroy target creature an opponent controls.", 2, 2, singletonList(WHEN_IT_ENTERS_THE_BATTLEFIELD_DESTROY_TARGET_OPPONENT_CREATURE));
+    public static Card SUN_SENTINEL = new Card("Sun Sentinel", singleton(Color.WHITE), asList(Cost.WHITE, Cost.COLORLESS), singleton(CREATURE), asSet(HUMAN, SOLDIER), COMMON, "Vigilance.", 2, 2, singletonList(VIGILANCE));
+    public static Card STRIDER_HARNESS = new Card("Strider Harness", emptySet(), asList(Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singleton(ARTIFACT), singleton(EQUIPMENT), COMMON, "Equipped creature gets +1/+1 and has haste. Equip 1", 0, 0, singletonList(PAY_1_EQUIP_CREATURE_GETS_PLUS_1_1_AND_HASTE));
+    public static Card SUN_COLLARED_RAPTOR = new Card("Sun-Collared Raptor", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singleton(CREATURE), singleton(DINOSAUR), COMMON, "Trample. PAY 2 1 RED: Sun-Collared Raptor gets +3/+0 until end of turn.", 1, 2, asList(TRAMPLE, PAY_2_1_RED_IT_GETS_PLUS_3_PLUS_0_UNTIL_END_OF_TURN));
+    public static Card SWAB_GOBLIN = new Card("Swab Goblin", singleton(Color.RED), asList(Cost.RED, Cost.COLORLESS), singleton(CREATURE), asSet(GOBLIN, PIRATE), COMMON, "", 2, 2, emptyList());
+    public static Card SWORN_GUARDIAN = new Card("Sworn Guardian", singleton(Color.BLUE), asList(Cost.BLUE, Cost.COLORLESS), singleton(CREATURE), asSet(MERFOLK, WARRIOR), COMMON, "", 1, 3, emptyList());
+    public static Card VAMPIRE_CHAMPION = new Card("Vampire Champion", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singleton(CREATURE), asSet(VAMPIRE, SOLDIER), COMMON, "Deathtouch.", 3, 3, singletonList(DEATHTOUCH));
+    public static Card VAMPIRE_REVENANT = new Card("Vampire Revenant", singleton(Color.BLACK), asList(Cost.BLACK, Cost.COLORLESS, Cost.COLORLESS, Cost.COLORLESS), singleton(CREATURE), asSet(VAMPIRE, SPIRIT), COMMON, "Flying.", 3, 1, singletonList(FLYING));
 
     private static RivalsOfIxalan instance;
 
