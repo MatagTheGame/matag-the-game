@@ -1,0 +1,25 @@
+{
+  "name": "Huatli's Snubhorn",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DINOSAUR"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Vigilance",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "VIGILANCE"
+    }
+  ]
+}

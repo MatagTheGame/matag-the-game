@@ -1,0 +1,27 @@
+{
+  "name": "Hostile Minotaur",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "MINOTAUR"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Haste.",
+  "power": 3,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "HASTE"
+    }
+  ]
+}

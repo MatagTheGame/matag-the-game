@@ -1,0 +1,37 @@
+{
+  "name": "Gruul Guildgate",
+  "types": [
+    "LAND"
+  ],
+  "subtypes": [
+    "GATE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Gruul Guildgate enters the battlefield tapped. TAP: Add RED or GREEN to your mana pool.",
+  "abilities": [
+    {
+      "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
+      "parameters": [
+        ":TAPPED"
+      ]
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "RED"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "GREEN"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    }
+  ]
+}

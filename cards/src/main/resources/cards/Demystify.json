@@ -1,0 +1,36 @@
+{
+  "name": "Demystify",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Destroy target enchantment.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "ENCHANTMENT"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":DESTROYED"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

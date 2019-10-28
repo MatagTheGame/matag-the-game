@@ -1,0 +1,27 @@
+{
+  "name": "Kraul Stinger",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "INSECT",
+    "ASSASSIN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Deathtouch",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "DEATHTOUCH"
+    }
+  ]
+}

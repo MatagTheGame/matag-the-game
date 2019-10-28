@@ -1,0 +1,45 @@
+{
+  "name": "Rising Populace",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Whenever another creature or planeswalker you control dies, put a +1/+1 counter on Rising Populace.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "PLUS_1_COUNTERS:1"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_DIE",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "ofType": [
+            "CREATURE",
+            "PLANESWALKER"
+          ],
+          "others": true
+        }
+      }
+    }
+  ]
+}

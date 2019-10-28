@@ -1,0 +1,34 @@
+{
+  "name": "Crash Through",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Creatures you control gain trample until end of turn. Draw a card.",
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "parameters": [
+        "TRAMPLE"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    },
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "1"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

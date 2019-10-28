@@ -1,0 +1,38 @@
+{
+  "name": "Skyscanner",
+  "cost": [
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT",
+    "CREATURE"
+  ],
+  "subtypes": [
+    "THOPTER"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying. When Skyscanner enters the battlefield, draw a card.",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "1"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

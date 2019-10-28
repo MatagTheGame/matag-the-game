@@ -1,0 +1,22 @@
+{
+  "name": "Catacomb Crocodile",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "CROCODILE"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 7
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Sworn Guardian",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "MERFOLK",
+    "WARRIOR"
+  ],
+  "rarity": "COMMON",
+  "power": 1,
+  "toughness": 3
+}

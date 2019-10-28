@@ -1,0 +1,60 @@
+{
+  "name": "End-Raze Forerunners",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "GREEN",
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BOAR"
+  ],
+  "rarity": "RARE",
+  "ruleText": "Vigilance, trample, haste. When End-Raze Forerunners enters the battlefield, other creatures you control get +2/+2 and gain vigilance and trample until end of turn.",
+  "power": 7,
+  "toughness": 7,
+  "abilities": [
+    {
+      "abilityType": "VIGILANCE"
+    },
+    {
+      "abilityType": "TRAMPLE"
+    },
+    {
+      "abilityType": "HASTE"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "controllerType": "PLAYER"
+      },
+      "parameters": [
+        "+2/+2",
+        "VIGILANCE",
+        "TRAMPLE"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

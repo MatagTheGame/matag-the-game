@@ -1,0 +1,21 @@
+{
+  "name": "Axebane Beast",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BEAST"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 4
+}

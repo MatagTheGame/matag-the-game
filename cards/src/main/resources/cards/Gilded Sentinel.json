@@ -1,0 +1,19 @@
+{
+  "name": "Gilded Sentinel",
+  "cost": [
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT",
+    "CREATURE"
+  ],
+  "subtypes": [
+    "GOLEM"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 3
+}

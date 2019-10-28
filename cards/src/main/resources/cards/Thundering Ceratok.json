@@ -1,0 +1,50 @@
+{
+  "name": "Thundering Ceratok",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "RHINO"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Trample. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.",
+  "power": 4,
+  "toughness": 5,
+  "abilities": [
+    {
+      "abilityType": "TRAMPLE"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "controllerType": "PLAYER",
+        "others": true
+      },
+      "parameters": [
+        "TRAMPLE"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

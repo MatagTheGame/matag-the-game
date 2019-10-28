@@ -1,0 +1,47 @@
+{
+  "name": "Desperate Lunge",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Target creature gets +2/+2 and gains flying until end of turn. You gain 2 life.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+2/+2",
+        "FLYING"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    },
+    {
+      "abilityType": "ADD_X_LIFE",
+      "parameters": [
+        "2"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

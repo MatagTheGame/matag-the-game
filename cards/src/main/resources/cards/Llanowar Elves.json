@@ -1,0 +1,31 @@
+{
+  "name": "Llanowar Elves",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELF",
+    "DRUID"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Tap: Add GREEN to your mana pool.",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "GREEN"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    }
+  ]
+}

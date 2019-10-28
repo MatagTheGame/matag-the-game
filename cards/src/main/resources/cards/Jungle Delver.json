@@ -1,0 +1,40 @@
+{
+  "name": "Jungle Delver",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "MERFOLK",
+    "WARRIOR"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Pay 3 1 GREEN: Put a +1/+1 counter on Jungle Delver.",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "PLUS_1_COUNTERS:1"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "COLORLESS",
+          "COLORLESS",
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

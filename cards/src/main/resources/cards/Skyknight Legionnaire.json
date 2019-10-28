@@ -1,0 +1,31 @@
+{
+  "name": "Skyknight Legionnaire",
+  "colors": [
+    "RED",
+    "WHITE"
+  ],
+  "cost": [
+    "RED",
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "KNIGHT",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying, haste.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "HASTE"
+    }
+  ]
+}

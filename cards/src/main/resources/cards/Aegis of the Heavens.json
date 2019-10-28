@@ -1,0 +1,37 @@
+{
+  "name": "Aegis of the Heavens",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Target creature gets +1/+7 until end of turn.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+1/+7"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Knight of New Benalia",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "KNIGHT",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 1
+}

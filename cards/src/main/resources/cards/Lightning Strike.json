@@ -1,0 +1,34 @@
+{
+  "name": "Lightning Strike",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Lightning Strike deals 3 damage to target creature or player.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "ANY"
+          }
+        }
+      ],
+      "parameters": [
+        "DAMAGE:3"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

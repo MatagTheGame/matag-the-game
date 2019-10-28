@@ -1,0 +1,28 @@
+{
+  "name": "Shining Aerosaur",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DINOSAUR"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying.",
+  "power": 3,
+  "toughness": 4,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    }
+  ]
+}

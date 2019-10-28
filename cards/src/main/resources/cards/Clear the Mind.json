@@ -1,0 +1,40 @@
+{
+  "name": "Clear the Mind",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Target player shuffles their graveyard into their library. Draw a card.",
+  "abilities": [
+    {
+      "abilityType": "SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PLAYER"
+          }
+        }
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    },
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "1"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

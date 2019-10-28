@@ -1,0 +1,30 @@
+{
+  "name": "Lightning Stormkin",
+  "colors": [
+    "RED",
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "RED"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELEMENTAL",
+    "WIZARD"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Flying. Haste.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "HASTE"
+    }
+  ]
+}

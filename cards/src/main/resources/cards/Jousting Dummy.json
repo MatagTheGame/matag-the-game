@@ -1,0 +1,39 @@
+{
+  "name": "Jousting Dummy",
+  "cost": [
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT",
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SCARECROW",
+    "KNIGHT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "PAY 3: Jousting Dummy gets +1/+0 until end of turn.",
+  "power": 2,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "+1/+0"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "COLORLESS",
+          "COLORLESS",
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

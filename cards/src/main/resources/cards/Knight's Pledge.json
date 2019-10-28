@@ -1,0 +1,26 @@
+{
+  "name": "Knight's Pledge",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "ENCHANTMENT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Draw two cards.",
+  "abilities": [
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "2"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

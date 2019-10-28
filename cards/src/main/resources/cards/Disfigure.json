@@ -1,0 +1,36 @@
+{
+  "name": "Disfigure",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Target creature gets -2/-2 until end of turn.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "-2/-2"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

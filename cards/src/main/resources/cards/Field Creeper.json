@@ -1,0 +1,17 @@
+{
+  "name": "Field Creeper",
+  "cost": [
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT",
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SCARECROW"
+  ],
+  "rarity": "COMMON",
+  "power": 2,
+  "toughness": 1
+}

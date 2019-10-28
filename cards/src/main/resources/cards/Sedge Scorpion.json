@@ -1,0 +1,24 @@
+{
+  "name": "Sedge Scorpion",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SCORPION"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Deathtouch.",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "DEATHTOUCH"
+    }
+  ]
+}

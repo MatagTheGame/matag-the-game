@@ -1,0 +1,27 @@
+{
+  "name": "Exultant Skymarcher",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "VAMPIRE",
+    "SOLDIER"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying.",
+  "power": 2,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    }
+  ]
+}

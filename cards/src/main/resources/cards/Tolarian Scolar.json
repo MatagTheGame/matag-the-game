@@ -1,0 +1,21 @@
+{
+  "name": "Tolarian Scolar",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "HUMAN",
+    "WIZARD"
+  ],
+  "rarity": "COMMON",
+  "power": 2,
+  "toughness": 3
+}

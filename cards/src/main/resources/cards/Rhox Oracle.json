@@ -1,0 +1,40 @@
+{
+  "name": "Rhox Oracle",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "MONK",
+    "RHINO"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "When Rhox Oracle enters the battlefield, draw a card.",
+  "power": 4,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "1"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

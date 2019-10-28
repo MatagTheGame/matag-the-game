@@ -1,0 +1,45 @@
+{
+  "name": "Defiant Strike",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Target creature gets +1/+0 until end of turn. Draw a card.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+1/+0"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    },
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "1"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

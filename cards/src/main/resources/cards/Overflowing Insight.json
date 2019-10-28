@@ -1,0 +1,39 @@
+{
+  "name": "Overflowing Insight",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "BLUE",
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "MYTHIC",
+  "ruleText": "Target player draws seven cards.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PLAYER"
+          }
+        }
+      ],
+      "parameters": [
+        "DRAW:7"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

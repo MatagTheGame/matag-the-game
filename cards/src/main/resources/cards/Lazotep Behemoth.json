@@ -1,0 +1,23 @@
+{
+  "name": "Lazotep Behemoth",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ZOMBIE",
+    "HIPPO"
+  ],
+  "rarity": "COMMON",
+  "power": 5,
+  "toughness": 4
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Aven Sentry",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BIRD",
+    "SOLDIER"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying.",
+  "power": 3,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "Gyre Engineer",
+  "colors": [
+    "GREEN",
+    "BLUE"
+  ],
+  "cost": [
+    "GREEN",
+    "BLUE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "VEDALKEN",
+    "WIZARD"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "TAP: Add GREEN and BLUE.",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "GREEN",
+        "BLUE"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    }
+  ]
+}

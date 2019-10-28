@@ -1,0 +1,21 @@
+{
+  "name": "Loxodon Line Breaker",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELEPHANT",
+    "SOLDIER"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 2
+}

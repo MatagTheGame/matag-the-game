@@ -1,0 +1,38 @@
+{
+  "name": "Engulfing Eruption",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "RED",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Engulfing Eruption deals 5 damage to target creature.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "DAMAGE:5"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

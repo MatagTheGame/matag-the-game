@@ -1,0 +1,19 @@
+{
+  "name": "Coral Merfolk",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "MERFOLK"
+  ],
+  "rarity": "COMMON",
+  "power": 2,
+  "toughness": 1
+}

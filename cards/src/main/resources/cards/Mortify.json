@@ -1,0 +1,40 @@
+{
+  "name": "Mortify",
+  "colors": [
+    "BLACK",
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "BLACK",
+    "COLORLESS"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Destroy target creature or enchantment.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE",
+              "ENCHANTMENT"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":DESTROYED"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

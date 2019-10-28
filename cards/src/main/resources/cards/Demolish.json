@@ -1,0 +1,36 @@
+{
+  "name": "Demolish",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Destroy target artifact or land.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "ARTIFACT",
+              "LAND"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":DESTROYED"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

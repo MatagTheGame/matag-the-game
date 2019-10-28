@@ -1,0 +1,45 @@
+{
+  "name": "Spirit of the Spires",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SPIRIT"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Flying. Other creatures you control with flying get +0/+1.",
+  "power": 2,
+  "toughness": 4,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "withAbilityType": "FLYING",
+        "controllerType": "PLAYER",
+        "others": true
+      },
+      "parameters": [
+        "+0/+1"
+      ],
+      "trigger": {
+        "type": "STATIC"
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Divine Verdict",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Destroy target attacking or blocking creature.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ],
+            "statusTypes": [
+              "ATTACKING",
+              "BLOCKING"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":DESTROYED"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

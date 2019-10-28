@@ -1,0 +1,47 @@
+{
+  "name": "Tenth District Guard",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SOLDIER",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "When Tenth District Guard enters the battlefield, target creature gets +0/+1 until end of turn.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+0/+1"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

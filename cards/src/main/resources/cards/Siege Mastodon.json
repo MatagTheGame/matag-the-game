@@ -1,0 +1,22 @@
+{
+  "name": "Siege Mastodon",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELEPHANT"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 5
+}

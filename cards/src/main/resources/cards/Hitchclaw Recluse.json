@@ -1,0 +1,26 @@
+{
+  "name": "Hitchclaw Recluse",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SPIDER"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Reach.",
+  "power": 1,
+  "toughness": 4,
+  "abilities": [
+    {
+      "abilityType": "REACH"
+    }
+  ]
+}

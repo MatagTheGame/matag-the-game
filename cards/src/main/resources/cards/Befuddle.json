@@ -1,0 +1,47 @@
+{
+  "name": "Befuddle",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Target creature gets -4/-0 until end of turn. Draw a card.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "-4/-0"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    },
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "1"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

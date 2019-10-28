@@ -1,0 +1,38 @@
+{
+  "name": "Eviscerate",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Destroy target creature.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":DESTROYED"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

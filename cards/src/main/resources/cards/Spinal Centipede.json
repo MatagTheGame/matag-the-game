@@ -1,0 +1,47 @@
+{
+  "name": "Spinal Centipede",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "INSECT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "When Spinal Centipede dies, put a +1/+1 counter on target creature you control.",
+  "power": 3,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "PLUS_1_COUNTERS:1"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_DIE",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

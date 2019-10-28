@@ -1,0 +1,26 @@
+{
+  "name": "Oko's Accomplices",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "FAERIE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying",
+  "power": 2,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Ironclad Krovod",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BEAST"
+  ],
+  "rarity": "COMMON",
+  "power": 2,
+  "toughness": 5
+}

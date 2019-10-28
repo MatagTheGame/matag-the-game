@@ -1,0 +1,26 @@
+{
+  "name": "Greenwood Sentinel",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELF",
+    "SCOUT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Vigilance.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "VIGILANCE"
+    }
+  ]
+}

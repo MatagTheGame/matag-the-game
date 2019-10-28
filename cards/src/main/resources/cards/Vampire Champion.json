@@ -1,0 +1,28 @@
+{
+  "name": "Vampire Champion",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "VAMPIRE",
+    "SOLDIER"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Deathtouch.",
+  "power": 3,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "DEATHTOUCH"
+    }
+  ]
+}

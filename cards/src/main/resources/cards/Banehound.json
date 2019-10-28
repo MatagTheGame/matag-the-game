@@ -1,0 +1,28 @@
+{
+  "name": "Banehound",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "NIGHTMARE",
+    "HOUND"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Lifelink, haste",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "LIFELINK"
+    },
+    {
+      "abilityType": "HASTE"
+    }
+  ]
+}

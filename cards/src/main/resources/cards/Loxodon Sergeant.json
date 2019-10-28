@@ -1,0 +1,50 @@
+{
+  "name": "Loxodon Sergeant",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELEPHANT",
+    "SOLDIER"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Vigilance. When Loxodon Sergeant enters the battlefield, other creatures you control gain vigilance until end of turn.",
+  "power": 3,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "VIGILANCE"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "controllerType": "PLAYER",
+        "others": true
+      },
+      "parameters": [
+        "VIGILANCE"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

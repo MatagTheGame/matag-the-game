@@ -1,0 +1,37 @@
+{
+  "name": "Dimir Guildgate",
+  "types": [
+    "LAND"
+  ],
+  "subtypes": [
+    "GATE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Dimir Guildgate enters the battlefield tapped. TAP: Add BLUE or BLACK to your mana pool.",
+  "abilities": [
+    {
+      "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
+      "parameters": [
+        ":TAPPED"
+      ]
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "BLUE"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "BLACK"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    }
+  ]
+}

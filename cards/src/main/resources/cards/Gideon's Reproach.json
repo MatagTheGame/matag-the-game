@@ -1,0 +1,41 @@
+{
+  "name": "Gideon's Reproach",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Gideon's Reproach deals 4 damage to target attacking or blocking creature.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ],
+            "statusTypes": [
+              "ATTACKING",
+              "BLOCKING"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "DAMAGE:4"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

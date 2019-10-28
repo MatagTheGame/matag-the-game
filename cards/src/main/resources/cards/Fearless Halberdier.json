@@ -1,0 +1,21 @@
+{
+  "name": "Fearless Halberdier",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "HUMAN",
+    "WARRIOR"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 2
+}

@@ -1,0 +1,57 @@
+{
+  "name": "Elite Guardmage",
+  "colors": [
+    "WHITE",
+    "BLUE"
+  ],
+  "cost": [
+    "WHITE",
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "HUMAN",
+    "WIZARD"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Flying. When Elite Guardmage enters the battlefield, you gain 3 life and draw a card.",
+  "power": 2,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "1"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    },
+    {
+      "abilityType": "ADD_X_LIFE",
+      "parameters": [
+        "3"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

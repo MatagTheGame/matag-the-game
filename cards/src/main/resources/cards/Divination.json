@@ -1,0 +1,27 @@
+{
+  "name": "Divination",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Draw 2 cards.",
+  "abilities": [
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "2"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

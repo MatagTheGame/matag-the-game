@@ -1,0 +1,21 @@
+{
+  "name": "Centaur Courser",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "CENTAUR",
+    "WARRIOR"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 3
+}

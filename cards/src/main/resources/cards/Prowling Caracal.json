@@ -1,0 +1,19 @@
+{
+  "name": "Prowling Caracal",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "CAT"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 1
+}

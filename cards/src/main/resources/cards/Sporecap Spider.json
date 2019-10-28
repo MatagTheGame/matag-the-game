@@ -1,0 +1,26 @@
+{
+  "name": "Sporecap Spider",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SPIDER"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Reach",
+  "power": 1,
+  "toughness": 5,
+  "abilities": [
+    {
+      "abilityType": "REACH"
+    }
+  ]
+}

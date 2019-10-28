@@ -1,0 +1,39 @@
+{
+  "name": "Cobbled Wings",
+  "cost": [
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT"
+  ],
+  "subtypes": [
+    "EQUIPMENT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Equipped creature has flying. Equip 1",
+  "abilities": [
+    {
+      "abilityType": "EQUIPPED_CREATURE_GETS",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "FLYING"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

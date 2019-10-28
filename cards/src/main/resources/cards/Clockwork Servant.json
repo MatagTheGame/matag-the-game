@@ -1,0 +1,33 @@
+{
+  "name": "Clockwork Servant",
+  "cost": [
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT",
+    "CREATURE"
+  ],
+  "subtypes": [
+    "GNOME"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Adamant — When Clockwork Servant enters the battlefield, if at least three mana of the same color was spent to cast it, draw a card.",
+  "power": 2,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "ADAMANT",
+      "parameters": [
+        "SAME"
+      ],
+      "ability": {
+        "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
+        "parameters": [
+          "DRAW:1"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Fire Elemental",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "RED",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELEMENTAL"
+  ],
+  "rarity": "COMMON",
+  "power": 5,
+  "toughness": 4
+}

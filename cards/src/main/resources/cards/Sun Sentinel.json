@@ -1,0 +1,26 @@
+{
+  "name": "Sun Sentinel",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SOLDIER",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Vigilance.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "VIGILANCE"
+    }
+  ]
+}

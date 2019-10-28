@@ -1,0 +1,42 @@
+{
+  "name": "Dawning Angel",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ANGEL"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying. When Dawning Angel enters the battlefield, you gain 4 life.",
+  "power": 3,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "ADD_X_LIFE",
+      "parameters": [
+        "4"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

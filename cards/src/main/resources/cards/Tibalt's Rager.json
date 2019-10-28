@@ -1,0 +1,59 @@
+{
+  "name": "Tibalt's Rager",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DEVIL"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "When Tibalt's Rager dies, it deals 1 damage to any target. PAY 1 1 RED: Tibalt's Rager gets +2/+0 until end of turn.",
+  "power": 1,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "ANY"
+          }
+        }
+      ],
+      "parameters": [
+        "DAMAGE:1"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_DIE",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "+2/+0"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "RED"
+        ]
+      }
+    }
+  ]
+}

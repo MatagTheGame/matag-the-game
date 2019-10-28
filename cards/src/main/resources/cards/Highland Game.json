@@ -1,0 +1,36 @@
+{
+  "name": "Highland Game",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELK"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "When Highland Game dies, you gain 2 life.",
+  "power": 2,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "ADD_X_LIFE",
+      "parameters": [
+        "2"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_DIE",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

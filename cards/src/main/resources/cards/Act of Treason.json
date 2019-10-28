@@ -1,0 +1,75 @@
+{
+  "name": "Act of Treason",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "notOfType": [
+              "LAND"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":CONTROLLED"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    },
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":UNTAPPED"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    },
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "HASTE"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

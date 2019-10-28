@@ -1,0 +1,39 @@
+{
+  "name": "Weaselback Redcap",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "GOBLIN",
+    "KNIGHT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "PAY 1 1 RED: Weaselback Redcap gets +2/+0 until end of turn.",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "+2/+0"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "RED",
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

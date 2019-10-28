@@ -1,0 +1,37 @@
+{
+  "name": "Boros Guildgate",
+  "types": [
+    "LAND"
+  ],
+  "subtypes": [
+    "GATE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Boros Guildgate enters the battlefield tapped. TAP: Add RED or WHITE to your mana pool.",
+  "abilities": [
+    {
+      "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
+      "parameters": [
+        ":TAPPED"
+      ]
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "RED"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "WHITE"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    }
+  ]
+}

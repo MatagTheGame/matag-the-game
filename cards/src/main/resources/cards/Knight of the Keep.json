@@ -1,0 +1,21 @@
+{
+  "name": "Knight of the Keep",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "KNIGHT",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 2
+}

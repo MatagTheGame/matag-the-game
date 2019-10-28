@@ -1,0 +1,41 @@
+{
+  "name": "Bedevil",
+  "colors": [
+    "BLACK",
+    "RED"
+  ],
+  "cost": [
+    "BLACK",
+    "BLACK",
+    "RED"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "RARE",
+  "ruleText": "Destroy target artifact, creature, or planeswalker.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "ARTIFACT",
+              "CREATURE",
+              "PLANESWALKER"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":DESTROYED"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

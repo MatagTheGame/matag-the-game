@@ -1,0 +1,34 @@
+{
+  "name": "Precision Bolt",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Precision Bolt deals 3 damage to any target.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "ANY"
+          }
+        }
+      ],
+      "parameters": [
+        "DAMAGE:3"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

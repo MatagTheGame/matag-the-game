@@ -1,0 +1,37 @@
+{
+  "name": "Lash of Thorns",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Target creature gets +2/+1 and gains deathtouch until end of turn.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+2/+1",
+        "DEATHTOUCH"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

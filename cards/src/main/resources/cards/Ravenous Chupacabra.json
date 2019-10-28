@@ -1,0 +1,50 @@
+{
+  "name": "Ravenous Chupacabra",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BEAST",
+    "HORROR"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "When Ravenous Chupacabra enters the battlefield, destroy target creature an opponent controls.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ],
+            "controllerType": "OPPONENT"
+          }
+        }
+      ],
+      "parameters": [
+        ":DESTROYED"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

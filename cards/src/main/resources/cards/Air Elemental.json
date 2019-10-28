@@ -1,0 +1,28 @@
+{
+  "name": "Air Elemental",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELEMENTAL"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Flying",
+  "power": 4,
+  "toughness": 4,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    }
+  ]
+}

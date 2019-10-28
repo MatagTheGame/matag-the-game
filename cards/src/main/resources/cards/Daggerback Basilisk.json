@@ -1,0 +1,24 @@
+{
+  "name": "Daggerback Basilisk",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BASILISK"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Deathtouch",
+  "abilities": [
+    {
+      "abilityType": "DEATHTOUCH"
+    }
+  ]
+}

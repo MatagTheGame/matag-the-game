@@ -1,0 +1,38 @@
+{
+  "name": "Overcome",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Creatures you control get +2/+2 and gain trample until end of turn.",
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "controllerType": "PLAYER"
+      },
+      "parameters": [
+        "+2/+2",
+        "TRAMPLE"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

@@ -1,0 +1,39 @@
+{
+  "name": "Mystic Archaeologist",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "HUMAN",
+    "WIZARD"
+  ],
+  "rarity": "RARE",
+  "ruleText": "PAY 3 2 BLUE: Draw two cards.",
+  "power": 2,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "2"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "BLUE",
+          "BLUE",
+          "COLORLESS",
+          "COLORLESS",
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

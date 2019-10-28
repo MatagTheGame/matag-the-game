@@ -1,0 +1,25 @@
+{
+  "name": "Concordia Pegasus",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "PEGASUS"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying",
+  "power": 1,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    }
+  ]
+}

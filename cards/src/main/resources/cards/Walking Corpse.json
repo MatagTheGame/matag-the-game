@@ -1,0 +1,19 @@
+{
+  "name": "Walking Corpse",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ZOMBIE"
+  ],
+  "rarity": "COMMON",
+  "power": 2,
+  "toughness": 2
+}

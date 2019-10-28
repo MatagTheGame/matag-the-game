@@ -1,0 +1,23 @@
+{
+  "name": "Primordial Wurm",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "WURM"
+  ],
+  "rarity": "COMMON",
+  "power": 7,
+  "toughness": 6
+}

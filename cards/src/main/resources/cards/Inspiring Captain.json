@@ -1,0 +1,46 @@
+{
+  "name": "Inspiring Captain",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "KNIGHT",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "When Inspiring Captain enters the battlefield, creatures you control get +1/+1 until end of turn.",
+  "power": 3,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "controllerType": "PLAYER"
+      },
+      "parameters": [
+        "+1/+1"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

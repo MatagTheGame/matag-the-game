@@ -1,0 +1,27 @@
+{
+  "name": "Pyromantic Pilgrim",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "HUMAN",
+    "WIZARD"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Haste",
+  "power": 3,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "HASTE"
+    }
+  ]
+}

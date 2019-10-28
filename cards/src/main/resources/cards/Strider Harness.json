@@ -1,0 +1,41 @@
+{
+  "name": "Strider Harness",
+  "cost": [
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT"
+  ],
+  "subtypes": [
+    "EQUIPMENT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Equipped creature gets +1/+1 and has haste. Equip 1",
+  "abilities": [
+    {
+      "abilityType": "EQUIPPED_CREATURE_GETS",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+1/+1",
+        "HASTE"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

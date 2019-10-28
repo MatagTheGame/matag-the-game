@@ -1,0 +1,40 @@
+{
+  "name": "Fiery Finish",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "RED",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Fiery Finish deals 7 damage to target creature.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "DAMAGE:7"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "name": "Shivan Dragon",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "RED",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DRAGON"
+  ],
+  "rarity": "RARE",
+  "ruleText": "Flying. PAY RED: Shivan Dragon gets +1/+0 until end of turn.",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "+1/+0"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "RED"
+        ]
+      }
+    }
+  ]
+}

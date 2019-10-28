@@ -1,0 +1,20 @@
+{
+  "name": "Orazca Frillback",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DINOSAUR"
+  ],
+  "rarity": "COMMON",
+  "power": 4,
+  "toughness": 3
+}

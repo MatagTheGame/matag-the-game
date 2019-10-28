@@ -1,0 +1,17 @@
+{
+  "name": "Yoked Ox",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "OX"
+  ],
+  "rarity": "COMMON",
+  "toughness": 4
+}

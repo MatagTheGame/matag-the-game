@@ -1,0 +1,21 @@
+{
+  "name": "Onakke Ogre",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "OGRE",
+    "WARRIOR"
+  ],
+  "rarity": "COMMON",
+  "power": 4,
+  "toughness": 2
+}

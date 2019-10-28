@@ -1,0 +1,25 @@
+{
+  "name": "Nest Robber",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DINOSAUR"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Haste",
+  "power": 2,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "HASTE"
+    }
+  ]
+}

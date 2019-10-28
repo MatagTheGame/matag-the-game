@@ -1,0 +1,40 @@
+{
+  "name": "Marauder's Axe",
+  "cost": [
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT"
+  ],
+  "subtypes": [
+    "EQUIPMENT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Equipped creature gets +2/+0. Equip 2",
+  "abilities": [
+    {
+      "abilityType": "EQUIPPED_CREATURE_GETS",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+2/+0"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "COLORLESS",
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

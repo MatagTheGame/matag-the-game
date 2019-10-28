@@ -1,0 +1,21 @@
+{
+  "name": "Bastion Enforcer",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DWARF",
+    "SOLDIER"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 2
+}

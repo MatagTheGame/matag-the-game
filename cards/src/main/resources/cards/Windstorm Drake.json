@@ -1,0 +1,46 @@
+{
+  "name": "Windstorm Drake",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DRAKE"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Flying. Other creatures you control with flying get +1/+0.",
+  "power": 3,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "withAbilityType": "FLYING",
+        "controllerType": "PLAYER",
+        "others": true
+      },
+      "parameters": [
+        "+1/+0"
+      ],
+      "trigger": {
+        "type": "STATIC"
+      }
+    }
+  ]
+}

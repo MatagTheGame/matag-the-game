@@ -1,0 +1,24 @@
+{
+  "name": "Vorstclaw",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELEMENTAL",
+    "HORROR"
+  ],
+  "rarity": "UNCOMMON",
+  "power": 7,
+  "toughness": 7
+}

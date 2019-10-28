@@ -1,0 +1,22 @@
+{
+  "name": "Thornhide Wolves",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "WOLF"
+  ],
+  "rarity": "COMMON",
+  "power": 4,
+  "toughness": 5
+}

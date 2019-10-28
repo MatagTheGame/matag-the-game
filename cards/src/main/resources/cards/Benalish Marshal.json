@@ -1,0 +1,41 @@
+{
+  "name": "Benalish Marshal",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "WHITE",
+    "WHITE"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "KNIGHT",
+    "HUMAN"
+  ],
+  "rarity": "RARE",
+  "ruleText": "Other creatures you control get +1/+1.",
+  "power": 3,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "controllerType": "PLAYER",
+        "others": true
+      },
+      "parameters": [
+        "+1/+1"
+      ],
+      "trigger": {
+        "type": "STATIC"
+      }
+    }
+  ]
+}

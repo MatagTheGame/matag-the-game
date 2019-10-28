@@ -1,0 +1,22 @@
+{
+  "name": "Imperial Outrider",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "KNIGHT",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "power": 1,
+  "toughness": 5
+}

@@ -1,0 +1,38 @@
+{
+  "name": "Short Sword",
+  "cost": [
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT"
+  ],
+  "subtypes": [
+    "EQUIPMENT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Equipment Creatures get +1/+1. Equip 2",
+  "abilities": [
+    {
+      "abilityType": "EQUIPPED_CREATURE_GETS",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+1/+1"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "Disperse",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Return target nonland permanent to its owner's hand.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "notOfType": [
+              "LAND"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":RETURN_TO_OWNER_HAND"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

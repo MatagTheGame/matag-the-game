@@ -1,0 +1,36 @@
+{
+  "name": "Lava Axe",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Lava Axe deals 5 damage to target player.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PLAYER"
+          }
+        }
+      ],
+      "parameters": [
+        "DAMAGE:5"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

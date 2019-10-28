@@ -1,0 +1,20 @@
+{
+  "name": "Stone Golem",
+  "cost": [
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT",
+    "CREATURE"
+  ],
+  "subtypes": [
+    "GOLEM"
+  ],
+  "rarity": "COMMON",
+  "power": 4,
+  "toughness": 4
+}

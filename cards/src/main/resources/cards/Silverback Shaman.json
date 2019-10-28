@@ -1,0 +1,43 @@
+{
+  "name": "Silverback Shaman",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "APE",
+    "SHAMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Trample. When Silverback Shaman dies, draw a card.",
+  "power": 5,
+  "toughness": 4,
+  "abilities": [
+    {
+      "abilityType": "TRAMPLE"
+    },
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "1"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_DIE",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

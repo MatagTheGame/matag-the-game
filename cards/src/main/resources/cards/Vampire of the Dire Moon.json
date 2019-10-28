@@ -1,0 +1,27 @@
+{
+  "name": "Vampire of the Dire Moon",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "VAMPIRE"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Deathtouch. Lifelink",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "DEATHTOUCH"
+    },
+    {
+      "abilityType": "LIFELINK"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "Embereth Paladin",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "KNIGHT",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Haste. Adamant — If at least three red mana was spent to cast this spell, Embereth Paladin enters the battlefield with a +1/+1 counter on it.",
+  "power": 4,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "HASTE"
+    },
+    {
+      "abilityType": "ADAMANT",
+      "parameters": [
+        "RED"
+      ],
+      "ability": {
+        "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
+        "parameters": [
+          "PLUS_1_COUNTERS:1"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "Oakenform",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ENCHANTMENT"
+  ],
+  "subtypes": [
+    "AURA"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Enchant creature. Enchanted creature gets +3/+3.",
+  "abilities": [
+    {
+      "abilityType": "ENCHANTED_CREATURE_GETS",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+3/+3"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

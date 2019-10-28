@@ -1,0 +1,38 @@
+{
+  "name": "Twilight Panther",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SPIRIT",
+    "CAT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "PAY BLACK: Twilight Panther gains deathtouch until end of turn.",
+  "power": 1,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "DEATHTOUCH"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "BLACK"
+        ]
+      }
+    }
+  ]
+}

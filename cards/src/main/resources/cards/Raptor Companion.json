@@ -1,0 +1,19 @@
+{
+  "name": "Raptor Companion",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DINOSAUR"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 1
+}

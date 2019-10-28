@@ -1,0 +1,24 @@
+{
+  "name": "Rustwing Falcon",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BIRD"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying.",
+  "power": 1,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    }
+  ]
+}

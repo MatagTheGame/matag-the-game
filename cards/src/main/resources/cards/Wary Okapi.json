@@ -1,0 +1,26 @@
+{
+  "name": "Wary Okapi",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ANTELOPE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Vigilance",
+  "power": 3,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "VIGILANCE"
+    }
+  ]
+}

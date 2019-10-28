@@ -1,0 +1,25 @@
+{
+  "name": "Mesa Unicorn",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "UNICORN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Lifelink",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "LIFELINK"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "Thirsting Shade",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SHADE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Lifelink. PAY 2 1 BLACK: Thirsting Shade gets +1/+1 until end of turn.",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "LIFELINK"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "+1/+1"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "BLACK",
+          "COLORLESS",
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

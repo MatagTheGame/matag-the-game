@@ -1,0 +1,27 @@
+{
+  "name": "Diregraf Ghoul",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ZOMBIE"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Diregraf Ghoul enters the battlefield tapped.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
+      "parameters": [
+        ":TAPPED"
+      ]
+    }
+  ]
+}

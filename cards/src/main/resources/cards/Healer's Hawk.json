@@ -1,0 +1,27 @@
+{
+  "name": "Healer's Hawk",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BIRD"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying, lifelink",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "LIFELINK"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Pardic Wanderer",
+  "cost": [
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ARTIFACT",
+    "CREATURE"
+  ],
+  "subtypes": [
+    "GOLEM"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Trample",
+  "power": 5,
+  "toughness": 5,
+  "abilities": [
+    {
+      "abilityType": "TRAMPLE"
+    }
+  ]
+}

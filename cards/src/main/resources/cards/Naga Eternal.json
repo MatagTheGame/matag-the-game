@@ -1,0 +1,21 @@
+{
+  "name": "Naga Eternal",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ZOMBIE",
+    "NAGA"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 2
+}

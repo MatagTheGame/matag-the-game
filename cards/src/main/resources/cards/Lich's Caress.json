@@ -1,0 +1,48 @@
+{
+  "name": "Lich's Caress",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Destroy target creature. You gain 3 life.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":DESTROYED"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    },
+    {
+      "abilityType": "ADD_X_LIFE",
+      "parameters": [
+        "3"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Feral Maaka",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "CAT"
+  ],
+  "rarity": "COMMON",
+  "power": 2,
+  "toughness": 2
+}

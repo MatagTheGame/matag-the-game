@@ -1,0 +1,21 @@
+{
+  "name": "Orazca Raptor",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "RED",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DINOSAUR"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 4
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Noxious Groodion",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BEAST"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Deathtouch",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "DEATHTOUCH"
+    }
+  ]
+}

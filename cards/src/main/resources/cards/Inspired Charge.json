@@ -1,0 +1,36 @@
+{
+  "name": "Inspired Charge",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "INSTANT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Creatures you control get +2/+1 until end of turn.",
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "controllerType": "PLAYER"
+      },
+      "parameters": [
+        "+2/+1"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ],
+  "instantSpeed": true
+}

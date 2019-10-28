@@ -1,0 +1,46 @@
+{
+  "name": "Aggressive Mammoth",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "GREEN",
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ELEPHANT"
+  ],
+  "rarity": "RARE",
+  "ruleText": "Trample. Other creatures you control have trample.",
+  "power": 8,
+  "toughness": 8,
+  "abilities": [
+    {
+      "abilityType": "TRAMPLE"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "controllerType": "PLAYER",
+        "others": true
+      },
+      "parameters": [
+        "TRAMPLE"
+      ],
+      "trigger": {
+        "type": "STATIC"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Grazing Whiptail",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DINOSAUR"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 4,
+  "abilities": [
+    {
+      "abilityType": "REACH"
+    }
+  ]
+}

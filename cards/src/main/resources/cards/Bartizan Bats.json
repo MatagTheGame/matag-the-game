@@ -1,0 +1,26 @@
+{
+  "name": "Bartizan Bats",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BAT"
+  ],
+  "rarity": "COMMON",
+  "power": 3,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    }
+  ]
+}

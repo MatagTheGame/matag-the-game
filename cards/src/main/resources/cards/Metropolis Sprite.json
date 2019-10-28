@@ -1,0 +1,42 @@
+{
+  "name": "Metropolis Sprite",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ROGUE",
+    "FAERIE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying. Pay BLUE: Metropolis Sprite gets +1/-1 until end of turn.",
+  "power": 1,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "+1/-1"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "BLUE"
+        ]
+      }
+    }
+  ]
+}

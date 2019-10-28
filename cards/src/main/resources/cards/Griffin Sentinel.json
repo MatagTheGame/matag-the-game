@@ -1,0 +1,29 @@
+{
+  "name": "Griffin Sentinel",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "GRIFFIN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying. Vigilance.",
+  "power": 1,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "VIGILANCE"
+    }
+  ]
+}

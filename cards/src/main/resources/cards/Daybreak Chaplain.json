@@ -1,0 +1,26 @@
+{
+  "name": "Daybreak Chaplain",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "CLERIC",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Lifelink",
+  "power": 1,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "LIFELINK"
+    }
+  ]
+}

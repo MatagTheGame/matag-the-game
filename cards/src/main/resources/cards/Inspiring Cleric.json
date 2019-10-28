@@ -1,0 +1,38 @@
+{
+  "name": "Inspiring Cleric",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "VAMPIRE",
+    "CLERIC"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "When Inspiring Cleric enters the battlefield, you gain 4 life.",
+  "power": 3,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "ADD_X_LIFE",
+      "parameters": [
+        "4"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

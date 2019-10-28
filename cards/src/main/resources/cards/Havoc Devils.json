@@ -1,0 +1,27 @@
+{
+  "name": "Havoc Devils",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "RED",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DEVIL"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Trample.",
+  "power": 4,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "TRAMPLE"
+    }
+  ]
+}

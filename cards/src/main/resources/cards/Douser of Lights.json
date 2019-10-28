@@ -1,0 +1,22 @@
+{
+  "name": "Douser of Lights",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "HORROR"
+  ],
+  "rarity": "COMMON",
+  "power": 4,
+  "toughness": 5
+}

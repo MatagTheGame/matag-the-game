@@ -1,0 +1,44 @@
+{
+  "name": "Shriekdiver",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BIRD",
+    "ZOMBIE",
+    "WARRIOR"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying. PAY 1: Shriekdiver gains haste until end of turn.",
+  "power": 2,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "HASTE"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

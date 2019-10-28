@@ -1,0 +1,31 @@
+{
+  "name": "Charging Monstrosaur",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DINOSAUR"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Trample, haste",
+  "power": 5,
+  "toughness": 5,
+  "abilities": [
+    {
+      "abilityType": "TRAMPLE"
+    },
+    {
+      "abilityType": "HASTE"
+    }
+  ]
+}

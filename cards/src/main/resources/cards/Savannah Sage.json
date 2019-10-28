@@ -1,0 +1,37 @@
+{
+  "name": "Savannah Sage",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "CLERIC",
+    "CAT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "When Savannah Sage enters the battlefield, you gain 2 life.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "ADD_X_LIFE",
+      "parameters": [
+        "2"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

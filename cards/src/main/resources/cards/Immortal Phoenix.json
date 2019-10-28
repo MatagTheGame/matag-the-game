@@ -1,0 +1,47 @@
+{
+  "name": "Immortal Phoenix",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "RED",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "PHOENIX"
+  ],
+  "rarity": "RARE",
+  "ruleText": "Flying. When Immortal Phoenix dies, return it to its owner's hand.",
+  "power": 5,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "ANY"
+          }
+        }
+      ],
+      "parameters": [
+        ":RETURN_TO_OWNER_HAND"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_DIE",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "name": "Rile",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Rile deals 1 damage to target creature you control. That creature gains trample until end of turn. Draw a card.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ],
+            "controllerType": "PLAYER"
+          }
+        }
+      ],
+      "parameters": [
+        "DAMAGE:1",
+        "TRAMPLE"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    },
+    {
+      "abilityType": "DRAW_X_CARDS",
+      "parameters": [
+        "1"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

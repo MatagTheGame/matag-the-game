@@ -1,0 +1,31 @@
+{
+  "name": "Serra Angel",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ANGEL"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Flying, vigilance",
+  "power": 4,
+  "toughness": 4,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    },
+    {
+      "abilityType": "VIGILANCE"
+    }
+  ]
+}

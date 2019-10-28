@@ -1,0 +1,24 @@
+{
+  "name": "Yargle, Glutton of Urborg",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "LEGENDARY",
+    "CREATURE"
+  ],
+  "subtypes": [
+    "FROG",
+    "SPIRIT"
+  ],
+  "rarity": "UNCOMMON",
+  "power": 9,
+  "toughness": 3
+}

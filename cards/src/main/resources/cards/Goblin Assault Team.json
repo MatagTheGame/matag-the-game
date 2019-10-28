@@ -1,0 +1,52 @@
+{
+  "name": "Goblin Assault Team",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "GOBLIN",
+    "WARRIOR"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Haste. When Goblin Assault Team dies, put a +1/+1 counter on target creature you control.",
+  "power": 4,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "HASTE"
+    },
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "PLUS_1_COUNTERS:1"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_DIE",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "name": "Gravel-Hide Goblin",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SHAMAN",
+    "GOBLIN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Pay 3 1 GREEN: Gravel-Hide Goblin gets +2/+2 until end of turn.",
+  "power": 2,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "+1/+0"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "COLORLESS",
+          "COLORLESS",
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "Sylvan Brushstrider",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BEAST"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "When Sylvan Brushstrider enters the battlefield, you gain 2 life.",
+  "power": 3,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "ADD_X_LIFE",
+      "parameters": [
+        "2"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

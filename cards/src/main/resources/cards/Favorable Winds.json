@@ -1,0 +1,34 @@
+{
+  "name": "Favorable Winds",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS"
+  ],
+  "types": [
+    "ENCHANTMENT"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Creatures you control with flying get +1/+1.",
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "withAbilityType": "FLYING",
+        "controllerType": "PLAYER"
+      },
+      "parameters": [
+        "+1/+1"
+      ],
+      "trigger": {
+        "type": "STATIC"
+      }
+    }
+  ]
+}

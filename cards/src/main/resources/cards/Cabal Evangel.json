@@ -1,0 +1,21 @@
+{
+  "name": "Cabal Evangel",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "CLERIC",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": ".",
+  "power": 2,
+  "toughness": 2
+}

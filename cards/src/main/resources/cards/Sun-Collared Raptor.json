@@ -1,0 +1,43 @@
+{
+  "name": "Sun-Collared Raptor",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DINOSAUR"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Trample. PAY 2 1 RED: Sun-Collared Raptor gets +3/+0 until end of turn.",
+  "power": 1,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "TRAMPLE"
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true
+      },
+      "parameters": [
+        "+3/+0"
+      ],
+      "trigger": {
+        "type": "ACTIVATED_ABILITY",
+        "cost": [
+          "RED",
+          "COLORLESS",
+          "COLORLESS"
+        ]
+      }
+    }
+  ]
+}

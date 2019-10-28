@@ -1,0 +1,27 @@
+{
+  "name": "Giant Spider",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SPIDER"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Reach.",
+  "power": 2,
+  "toughness": 4,
+  "abilities": [
+    {
+      "abilityType": "REACH"
+    }
+  ]
+}

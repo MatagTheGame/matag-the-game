@@ -1,0 +1,28 @@
+{
+  "name": "Vampire Revenant",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "VAMPIRE",
+    "SPIRIT"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying.",
+  "power": 3,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    }
+  ]
+}

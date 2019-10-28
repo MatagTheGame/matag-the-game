@@ -1,0 +1,24 @@
+{
+  "name": "Canopy Spider",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "SPIDER"
+  ],
+  "rarity": "COMMON",
+  "power": 1,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "REACH"
+    }
+  ]
+}

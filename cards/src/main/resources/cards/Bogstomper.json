@@ -1,0 +1,23 @@
+{
+  "name": "Bogstomper",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "BEAST"
+  ],
+  "rarity": "COMMON",
+  "power": 6,
+  "toughness": 5
+}

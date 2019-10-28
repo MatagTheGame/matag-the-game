@@ -1,0 +1,25 @@
+{
+  "name": "Knight of the Tusk",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "KNIGHT",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Vigilance.",
+  "power": 3,
+  "toughness": 7
+}

@@ -1,0 +1,37 @@
+{
+  "name": "Blood Burglar",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "VAMPIRE",
+    "ROGUE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "As long as it's your turn, Blood Burglar has lifelink.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "itself": true,
+        "turnStatusType": "YOUR_TURN"
+      },
+      "parameters": [
+        "LIFELINK"
+      ],
+      "trigger": {
+        "type": "STATIC"
+      }
+    }
+  ]
+}

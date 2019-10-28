@@ -1,0 +1,29 @@
+{
+  "name": "Feral Abomination",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "THRULL"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Deathtouch",
+  "power": 5,
+  "toughness": 5,
+  "abilities": [
+    {
+      "abilityType": "DEATHTOUCH"
+    }
+  ]
+}

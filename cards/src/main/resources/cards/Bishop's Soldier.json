@@ -1,0 +1,25 @@
+{
+  "name": "Bishop's Soldier",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "VAMPIRE",
+    "SOLDIER"
+  ],
+  "rarity": "COMMON",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "LIFELINK"
+    }
+  ]
+}

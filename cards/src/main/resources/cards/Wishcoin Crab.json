@@ -1,0 +1,21 @@
+{
+  "name": "Wishcoin Crab",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "CRAB"
+  ],
+  "rarity": "COMMON",
+  "power": 2,
+  "toughness": 5
+}

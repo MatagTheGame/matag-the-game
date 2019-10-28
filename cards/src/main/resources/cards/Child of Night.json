@@ -1,0 +1,25 @@
+{
+  "name": "Child of Night",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "VAMPIRE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Lifelink",
+  "power": 2,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "LIFELINK"
+    }
+  ]
+}

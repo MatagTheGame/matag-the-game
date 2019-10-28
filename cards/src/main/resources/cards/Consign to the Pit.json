@@ -1,0 +1,41 @@
+{
+  "name": "Consign to the Pit",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Destroy target creature. Consign to the Pit deals 2 damage to that creature's controller.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        ":DESTROYED",
+        "CONTROLLER_DAMAGE:2"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

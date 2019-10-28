@@ -1,0 +1,76 @@
+{
+  "name": "Leyline Prowler",
+  "colors": [
+    "GREEN",
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "GREEN",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "NIGHTMARE",
+    "BEAST"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Deathtouch, lifelink. TAP: Add one mana of any color.",
+  "power": 2,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "DEATHTOUCH"
+    },
+    {
+      "abilityType": "LIFELINK"
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "WHITE"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "BLUE"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "BLACK"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "RED"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "GREEN"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    }
+  ]
+}

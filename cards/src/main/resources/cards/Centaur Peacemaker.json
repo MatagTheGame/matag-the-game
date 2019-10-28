@@ -1,0 +1,39 @@
+{
+  "name": "Centaur Peacemaker",
+  "colors": [
+    "GREEN",
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "GREEN",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "CLERIC",
+    "CENTAUR"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "When Centaur Peacemaker enters the battlefield, each player gains 4 life.",
+  "power": 3,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "EACH_PLAYERS_ADD_X_LIFE",
+      "parameters": [
+        "4"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

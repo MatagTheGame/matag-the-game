@@ -1,0 +1,25 @@
+{
+  "name": "Hired Poisoner",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ASSASSIN",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Deathtouch.",
+  "power": 1,
+  "toughness": 1,
+  "abilities": [
+    {
+      "abilityType": "DEATHTOUCH"
+    }
+  ]
+}

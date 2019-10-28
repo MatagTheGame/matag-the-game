@@ -1,0 +1,42 @@
+{
+  "name": "Candlelight Vigil",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ENCHANTMENT"
+  ],
+  "subtypes": [
+    "AURA"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Enchant Creature. Enchanted creature gets +3/+2 and has vigilance.",
+  "abilities": [
+    {
+      "abilityType": "ENCHANTED_CREATURE_GETS",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+3/+2",
+        "VIGILANCE"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

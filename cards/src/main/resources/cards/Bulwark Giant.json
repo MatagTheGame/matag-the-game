@@ -1,0 +1,41 @@
+{
+  "name": "Bulwark Giant",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "GIANT",
+    "SOLDIER"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "When Bulwark Giant enters the battlefield, you gain 5 life.",
+  "power": 3,
+  "toughness": 6,
+  "abilities": [
+    {
+      "abilityType": "ADD_X_LIFE",
+      "parameters": [
+        "5"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

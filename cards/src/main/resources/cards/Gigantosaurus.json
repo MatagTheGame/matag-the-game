@@ -1,0 +1,22 @@
+{
+  "name": "Gigantosaurus",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "GREEN",
+    "GREEN",
+    "GREEN",
+    "GREEN"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DINOSAUR"
+  ],
+  "rarity": "RARE",
+  "power": 10,
+  "toughness": 10
+}

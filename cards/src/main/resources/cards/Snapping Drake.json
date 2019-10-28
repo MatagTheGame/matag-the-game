@@ -1,0 +1,27 @@
+{
+  "name": "Snapping Drake",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "DRAKE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Flying.",
+  "power": 3,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "FLYING"
+    }
+  ]
+}

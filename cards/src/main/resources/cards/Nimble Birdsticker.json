@@ -1,0 +1,26 @@
+{
+  "name": "Nimble Birdsticker",
+  "colors": [
+    "RED"
+  ],
+  "cost": [
+    "RED",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "GOBLIN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Reach.",
+  "power": 2,
+  "toughness": 3,
+  "abilities": [
+    {
+      "abilityType": "REACH"
+    }
+  ]
+}

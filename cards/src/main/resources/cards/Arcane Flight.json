@@ -1,0 +1,39 @@
+{
+  "name": "Arcane Flight",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE"
+  ],
+  "types": [
+    "ENCHANTMENT"
+  ],
+  "subtypes": [
+    "AURA"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Enchant creature. Enchanted creature gets +1/+1 and has flying.",
+  "abilities": [
+    {
+      "abilityType": "ENCHANTED_CREATURE_GETS",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+1/+1",
+        "FLYING"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

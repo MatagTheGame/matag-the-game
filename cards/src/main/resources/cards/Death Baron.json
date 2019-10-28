@@ -1,0 +1,102 @@
+{
+  "name": "Death Baron",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "BLACK",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "ZOMBIE",
+    "WIZARD"
+  ],
+  "rarity": "RARE",
+  "ruleText": "Skeleton creatures you control and other Zombie creatures you control get +1/+1 and have deathtouch.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "ofSubtypeOf": [
+          "ZOMBIE"
+        ],
+        "controllerType": "PLAYER"
+      },
+      "parameters": [
+        "+1/+1"
+      ],
+      "trigger": {
+        "type": "STATIC"
+      }
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "ofSubtypeOf": [
+          "ZOMBIE"
+        ],
+        "controllerType": "PLAYER"
+      },
+      "parameters": [
+        "DEATHTOUCH"
+      ],
+      "trigger": {
+        "type": "STATIC"
+      }
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "ofSubtypeOf": [
+          "ZOMBIE"
+        ],
+        "controllerType": "PLAYER",
+        "others": true
+      },
+      "parameters": [
+        "+1/+1"
+      ],
+      "trigger": {
+        "type": "STATIC"
+      }
+    },
+    {
+      "abilityType": "SELECTED_PERMANENTS_GET",
+      "cardInstanceSelector": {
+        "selectorType": "PERMANENT",
+        "ofType": [
+          "CREATURE"
+        ],
+        "ofSubtypeOf": [
+          "ZOMBIE"
+        ],
+        "controllerType": "PLAYER",
+        "others": true
+      },
+      "parameters": [
+        "DEATHTOUCH"
+      ],
+      "trigger": {
+        "type": "STATIC"
+      }
+    }
+  ]
+}

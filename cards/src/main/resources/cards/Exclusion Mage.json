@@ -1,0 +1,49 @@
+{
+  "name": "Exclusion Mage",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "HUMAN",
+    "WIZARD"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "\tWhen Exclusion Mage enters the battlefield, return target creature an opponent controls to its owner's hand.",
+  "power": 2,
+  "toughness": 2,
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ],
+            "controllerType": "OPPONENT"
+          }
+        }
+      ],
+      "parameters": [
+        ":RETURN_TO_OWNER_HAND"
+      ],
+      "trigger": {
+        "type": "TRIGGERED_ABILITY",
+        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
+        "cardInstanceSelector": {
+          "selectorType": "PERMANENT",
+          "itself": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Canal Monitor",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "LIZARD"
+  ],
+  "rarity": "COMMON",
+  "power": 5,
+  "toughness": 3
+}

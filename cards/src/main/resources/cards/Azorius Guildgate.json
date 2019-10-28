@@ -1,0 +1,37 @@
+{
+  "name": "Azorius Guildgate",
+  "types": [
+    "LAND"
+  ],
+  "subtypes": [
+    "GATE"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Azorius Guildgate enters the battlefield tapped. TAP: Add WHITE or BLUE to your mana pool.",
+  "abilities": [
+    {
+      "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
+      "parameters": [
+        ":TAPPED"
+      ]
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "WHITE"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    },
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "BLUE"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    }
+  ]
+}

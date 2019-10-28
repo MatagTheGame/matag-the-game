@@ -1,0 +1,21 @@
+{
+  "name": "Wild Ceratok",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "RHINO"
+  ],
+  "rarity": "COMMON",
+  "power": 4,
+  "toughness": 3
+}

@@ -1,0 +1,33 @@
+{
+  "name": "Guild of Ravnica",
+  "code": "GRN",
+  "cards": [
+    "Bartizan Bats",
+    "Boros Guildgate",
+    "Candlelight Vigil",
+    "Centaur Peacemaker",
+    "Child of Night",
+    "Collar the Culprit",
+    "Command the Storm",
+    "Devkarin Dissident",
+    "Dimir Guildgate",
+    "Douser of Lights",
+    "Fearless Halberdier",
+    "Generous Stray",
+    "Golgari Guildgate",
+    "Healer's Hawk",
+    "Hired Poisoner",
+    "Hitchclaw Recluse",
+    "Izzet Guildgate",
+    "Muse Drake",
+    "Rubblebelt Boar",
+    "Selesnya Guildgate",
+    "Skyknight Legionnaire",
+    "Spinal Centipede",
+    "Tenth District Guard",
+    "Veiled Shade",
+    "Wary Okapi",
+    "Wild Ceratok",
+    "Wishcoin Crab"
+  ]
+}

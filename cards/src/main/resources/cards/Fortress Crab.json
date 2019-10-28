@@ -1,0 +1,21 @@
+{
+  "name": "Fortress Crab",
+  "colors": [
+    "BLUE"
+  ],
+  "cost": [
+    "BLUE",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "CRAB"
+  ],
+  "rarity": "COMMON",
+  "power": 1,
+  "toughness": 6
+}

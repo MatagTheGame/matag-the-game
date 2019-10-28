@@ -1,0 +1,44 @@
+{
+  "name": "Prodigious Growth",
+  "colors": [
+    "GREEN"
+  ],
+  "cost": [
+    "GREEN",
+    "GREEN",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "ENCHANTMENT"
+  ],
+  "subtypes": [
+    "AURA"
+  ],
+  "rarity": "RARE",
+  "ruleText": "Enchant creature. Enchanted creature gets +7/+7 and has trample.",
+  "abilities": [
+    {
+      "abilityType": "ENCHANTED_CREATURE_GETS",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        }
+      ],
+      "parameters": [
+        "+7/+7",
+        "TRAMPLE"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

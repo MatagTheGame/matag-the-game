@@ -1,0 +1,28 @@
+{
+  "name": "Charity Extractor",
+  "colors": [
+    "BLACK"
+  ],
+  "cost": [
+    "BLACK",
+    "COLORLESS",
+    "COLORLESS",
+    "COLORLESS"
+  ],
+  "types": [
+    "CREATURE"
+  ],
+  "subtypes": [
+    "KNIGHT",
+    "HUMAN"
+  ],
+  "rarity": "COMMON",
+  "ruleText": "Lifelink",
+  "power": 1,
+  "toughness": 5,
+  "abilities": [
+    {
+      "abilityType": "LIFELINK"
+    }
+  ]
+}

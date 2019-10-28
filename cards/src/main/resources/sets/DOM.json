@@ -1,0 +1,31 @@
+{
+  "name": "Ixalan",
+  "code": "DOM",
+  "cards": [
+    "Arcane Flight",
+    "Aven Sentry",
+    "Befuddle",
+    "Benalish Marshal",
+    "Cabal Evangel",
+    "Charge",
+    "Divination",
+    "Dread Shade",
+    "Eviscerate",
+    "Feral Abomination",
+    "Fire Elemental",
+    "Gideon's Reproach",
+    "Invoke the Divine",
+    "Knight of New Benalia",
+    "Llanowar Elves",
+    "Mammoth Spider",
+    "Mesa Unicorn",
+    "Primordial Wurm",
+    "Pardic Wanderer",
+    "Pyromantic Pilgrim",
+    "Serra Angel",
+    "Short Sword",
+    "Sparring Construct",
+    "Tolarian Scolar",
+    "Yargle, Glutton of Urborg"
+  ]
+}
