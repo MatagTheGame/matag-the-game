@@ -19,6 +19,10 @@ public class MtgSetsTest {
     @Test
     public void shouldLoadAllSets() {
         assertThat(mtgSets.getSets()).isNotEmpty();
-        assertThat(mtgSets.getSet("M20").getName()).isEqualTo("Core Set 2020");
+
+        MtgSet m20 = mtgSets.getSet("M20");
+        assertThat(m20.getCode()).isEqualTo("M20");
+        assertThat(m20.getName()).isEqualTo("Core Set 2020");
+        assertThat(m20.getCards()).contains("Bladebrand");
     }
 }
