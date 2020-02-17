@@ -1,7 +1,7 @@
 package integration.mtg.game.turn.action.selection;
 
-import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.CardInstanceFactory;
+import com.aa.mtg.cardinstance.CardInstance;
+import com.aa.mtg.cardinstance.CardInstanceFactory;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
 import com.aa.mtg.cards.selector.PowerToughnessConstraint;
 import com.aa.mtg.game.status.GameStatus;

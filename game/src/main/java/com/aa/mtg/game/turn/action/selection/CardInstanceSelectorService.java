@@ -1,6 +1,6 @@
 package com.aa.mtg.game.turn.action.selection;
 
-import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
 import com.aa.mtg.game.player.PlayerType;

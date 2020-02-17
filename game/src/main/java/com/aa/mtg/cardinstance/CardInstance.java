@@ -1,5 +1,6 @@
-package com.aa.mtg.cards;
+package com.aa.mtg.cardinstance;
 
+import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.trigger.TriggerType;

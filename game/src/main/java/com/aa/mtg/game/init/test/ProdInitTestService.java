@@ -1,6 +1,6 @@
 package com.aa.mtg.game.init.test;
 
-import com.aa.mtg.cards.CardInstanceFactory;
+import com.aa.mtg.cardinstance.CardInstanceFactory;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;

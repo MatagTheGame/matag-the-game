@@ -1,6 +1,6 @@
 package com.aa.mtg.game.turn.action.cast;
 
-import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.game.message.MessageException;

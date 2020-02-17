@@ -1,6 +1,6 @@
 package com.aa.mtg.game.status;
 
-import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.search.CardInstanceSearch;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.stack.SpellStack;

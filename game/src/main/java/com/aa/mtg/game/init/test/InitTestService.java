@@ -1,7 +1,7 @@
 package com.aa.mtg.game.init.test;
 
 import com.aa.mtg.cards.Card;
-import com.aa.mtg.cards.CardInstanceFactory;
+import com.aa.mtg.cardinstance.CardInstanceFactory;
 import com.aa.mtg.game.status.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

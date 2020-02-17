@@ -1,7 +1,7 @@
 package integration.mtg.game.turn.action.life;
 
-import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.CardInstanceFactory;
+import com.aa.mtg.cardinstance.CardInstance;
+import com.aa.mtg.cardinstance.CardInstanceFactory;
 import com.aa.mtg.cards.sets.CoreSet2020;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.life.EachPlayersAddXLifeAction;

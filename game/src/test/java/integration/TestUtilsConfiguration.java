@@ -1,6 +1,6 @@
 package integration;
 
-import com.aa.mtg.cards.CardInstanceFactory;
+import com.aa.mtg.cardinstance.CardInstanceFactory;
 import com.aa.mtg.game.player.PlayerFactory;
 import com.aa.mtg.game.stack.SpellStack;
 import com.aa.mtg.game.status.GameStatusFactory;

@@ -1,7 +1,7 @@
 package integration.mtg.cards;
 
-import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.CardInstanceFactory;
+import com.aa.mtg.cardinstance.CardInstance;
+import com.aa.mtg.cardinstance.CardInstanceFactory;
 import com.aa.mtg.cards.sets.Dominaria;
 import com.aa.mtg.game.status.GameStatus;
 import integration.TestUtils;

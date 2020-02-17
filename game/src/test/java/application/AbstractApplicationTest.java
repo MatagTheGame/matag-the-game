@@ -7,7 +7,7 @@ import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
 import static java.lang.Integer.parseInt;
 
 import application.browser.MtgBrowser;
-import com.aa.mtg.cards.CardInstanceFactory;
+import com.aa.mtg.cardinstance.CardInstanceFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 import lombok.SneakyThrows;
 import org.junit.After;

@@ -1,26 +1,33 @@
-package integration.mtg.cards;
+package com.aa.mtg.cards.cost;
 
 import com.aa.mtg.cards.Card;
-import com.aa.mtg.cards.CostUtils;
+import com.aa.mtg.cards.Cards;
+import com.aa.mtg.cards.CardsConfiguration;
 import com.aa.mtg.cards.properties.Cost;
-import com.aa.mtg.cards.sets.RavnicaAllegiance;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Collections;
 import java.util.List;
 
-import static com.aa.mtg.cards.properties.Cost.GREEN;
-import static com.aa.mtg.cards.properties.Cost.RED;
-import static com.aa.mtg.cards.properties.Cost.WHITE;
+import static com.aa.mtg.cards.properties.Cost.*;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(SpringRunner.class)
+@Import(CardsConfiguration.class)
 public class CostUtilsTest {
+
+    @Autowired
+    private Cards cards;
 
     @Test
     public void isCastingCostFulfilledFeralMaakaCorrectCosts() {
         // Given
-        Card card = RavnicaAllegiance.FERAL_MAAKA;
+        Card card = cards.getCard("Feral Maaka");
         List<Cost> manaPaid = asList(GREEN, RED);
 
         // When
@@ -33,7 +40,7 @@ public class CostUtilsTest {
     @Test
     public void isCastingCostFulfilledFeralMaakaNoMana() {
         // Given
-        Card card = RavnicaAllegiance.FERAL_MAAKA;
+        Card card = cards.getCard("Feral Maaka");
         List<Cost> manaPaid = Collections.emptyList();
 
         // When
@@ -46,7 +53,7 @@ public class CostUtilsTest {
     @Test
     public void isCastingCostFulfilledFeralMaakaWrongCost() {
         // Given
-        Card card = RavnicaAllegiance.FERAL_MAAKA;
+        Card card = cards.getCard("Feral Maaka");
         List<Cost> manaPaid = asList(WHITE, GREEN);
 
         // When
@@ -59,7 +66,7 @@ public class CostUtilsTest {
     @Test
     public void isCastingCostFulfilledFeralMaakaOneLessMana() {
         // Given
-        Card card = RavnicaAllegiance.FERAL_MAAKA;
+        Card card = cards.getCard("Feral Maaka");
         List<Cost> manaPaid = Collections.singletonList(RED);
 
         // When
@@ -72,7 +79,7 @@ public class CostUtilsTest {
     @Test
     public void isCastingCostFulfilledAxebaneBeastCorrectCosts() {
         // Given
-        Card card = RavnicaAllegiance.AXEBANE_BEAST;
+        Card card = cards.getCard("Axebane Beast");
         List<Cost> manaPaid = asList(GREEN, GREEN, RED, RED);
 
         // When

@@ -1,7 +1,7 @@
 package com.aa.mtg.game.player;
 
-import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.CardListComponent;
+import com.aa.mtg.cardinstance.CardInstance;
+import com.aa.mtg.cardinstance.CardListComponent;
 import com.aa.mtg.cards.search.CardInstanceSearch;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

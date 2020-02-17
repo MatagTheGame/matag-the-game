@@ -1,6 +1,6 @@
 package com.aa.mtg.game.turn.action.damage;
 
-import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.leave.DestroyPermanentService;
 import org.slf4j.Logger;

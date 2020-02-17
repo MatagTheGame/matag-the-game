@@ -1,6 +1,6 @@
 package com.aa.mtg.cards.selector;
 
-import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cardinstance.CardInstance;
 
 public class PowerToughnessConstraint {
 

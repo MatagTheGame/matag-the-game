@@ -1,5 +1,7 @@
-package com.aa.mtg.cards;
+package com.aa.mtg.cardinstance;
 
+import com.aa.mtg.cardinstance.CardInstance;
+import com.aa.mtg.cards.Card;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

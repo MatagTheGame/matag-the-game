@@ -1,8 +1,8 @@
 package com.aa.mtg.game.player;
 
-import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.CardInstanceFactory;
-import com.aa.mtg.cards.CardListComponent;
+import com.aa.mtg.cardinstance.CardInstance;
+import com.aa.mtg.cardinstance.CardInstanceFactory;
+import com.aa.mtg.cardinstance.CardListComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

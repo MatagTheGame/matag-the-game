@@ -1,7 +1,7 @@
 package integration;
 
-import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.CardInstanceFactory;
+import com.aa.mtg.cardinstance.CardInstance;
+import com.aa.mtg.cardinstance.CardInstanceFactory;
 import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.player.PlayerFactory;
 import com.aa.mtg.game.status.GameStatus;

@@ -1,8 +1,8 @@
 package com.aa.mtg.game.deck;
 
 import com.aa.mtg.cards.Card;
-import com.aa.mtg.cards.CardInstance;
-import com.aa.mtg.cards.CardInstanceFactory;
+import com.aa.mtg.cardinstance.CardInstance;
+import com.aa.mtg.cardinstance.CardInstanceFactory;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.cards.search.CardSearch;

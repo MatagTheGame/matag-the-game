@@ -1,6 +1,6 @@
 package com.aa.mtg.game.stack;
 
-import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cardinstance.CardInstance;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

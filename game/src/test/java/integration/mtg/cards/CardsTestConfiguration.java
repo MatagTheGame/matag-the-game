@@ -1,10 +1,11 @@
 package integration.mtg.cards;
 
-import org.springframework.context.annotation.ComponentScan;
+import com.aa.mtg.cards.CardsConfiguration;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 @Configuration
-@ComponentScan("com.aa.mtg.cards")
+@Import(CardsConfiguration.class)
 public class CardsTestConfiguration {
 
 }

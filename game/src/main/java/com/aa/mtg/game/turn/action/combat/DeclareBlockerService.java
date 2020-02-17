@@ -1,6 +1,6 @@
 package com.aa.mtg.game.turn.action.combat;
 
-import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.Turn;

@@ -1,5 +1,6 @@
-package com.aa.mtg.cards;
+package com.aa.mtg.cards.cost;
 
+import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.properties.Cost;
 
 import java.util.ArrayList;

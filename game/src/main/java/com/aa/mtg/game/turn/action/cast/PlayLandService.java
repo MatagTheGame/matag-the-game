@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.action.cast;
 
 import com.aa.mtg.cards.Card;
-import com.aa.mtg.cards.CardInstance;
+import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
