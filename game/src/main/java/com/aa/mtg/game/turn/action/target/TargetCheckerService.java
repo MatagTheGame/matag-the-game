@@ -8,7 +8,7 @@ import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.ability.target.Target;
-import com.aa.mtg.cards.search.CardInstanceSearch;
+import com.aa.mtg.cardinstance.CardInstanceSearch;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
 import com.aa.mtg.cards.selector.SelectorType;
 import com.aa.mtg.game.message.MessageException;

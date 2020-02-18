@@ -1,19 +1,16 @@
 package com.aa.mtg.cards;
 
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.properties.Color;
-import com.aa.mtg.cards.properties.Cost;
-import com.aa.mtg.cards.properties.Rarity;
-import com.aa.mtg.cards.properties.Subtype;
-import com.aa.mtg.cards.properties.Type;
+import com.aa.mtg.cards.properties.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
-import java.util.Set;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @EqualsAndHashCode

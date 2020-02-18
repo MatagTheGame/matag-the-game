@@ -62,10 +62,6 @@ public class Card {
         return colors;
     }
 
-    public boolean isColorless() {
-        return getCost().stream().noneMatch(cost -> cost != COLORLESS);
-    }
-
     public List<Cost> getCost() {
         return cost;
     }
@@ -133,5 +129,9 @@ public class Card {
             }
         }
         return false;
+    }
+
+    public boolean isColorless() {
+        return getCost().stream().noneMatch(cost -> cost != COLORLESS);
     }
 }

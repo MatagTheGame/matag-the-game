@@ -1,8 +1,5 @@
 package com.aa.mtg.cardinstance;
 
-import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.search.CardInstanceSearch;
-
 import java.util.ArrayList;
 import java.util.List;
 

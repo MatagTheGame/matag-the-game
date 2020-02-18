@@ -1,6 +1,6 @@
 package com.aa.mtg.game.turn.phases;
 
-import com.aa.mtg.cards.search.CardInstanceSearch;
+import com.aa.mtg.cardinstance.CardInstanceSearch;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

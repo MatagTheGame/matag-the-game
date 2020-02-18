@@ -1,6 +1,7 @@
 package com.aa.mtg.cards.search;
 
 import com.aa.mtg.cards.Card;
+import com.aa.mtg.cards.CardUtils;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 
@@ -19,35 +20,35 @@ public class CardSearch {
 
     public CardSearch ofType(Type type) {
         List<Card> cards = this.cards.stream()
-                .filter(card -> card.isOfType(type))
+                .filter(card -> CardUtils.isOfType(card, type))
                 .collect(toList());
         return new CardSearch(cards);
     }
 
     public CardSearch notOfType(Type type) {
         List<Card> cards = this.cards.stream()
-                .filter(card -> card.isNotOfType(type))
+                .filter(card -> CardUtils.isNotOfType(card, type))
                 .collect(toList());
         return new CardSearch(cards);
     }
 
     public CardSearch ofColor(Color color) {
         List<Card> cards = this.cards.stream()
-                .filter(card -> card.isOfColor(color))
+                .filter(card -> CardUtils.isOfColor(card, color))
                 .collect(toList());
         return new CardSearch(cards);
     }
 
     public CardSearch colorless() {
         List<Card> cards = this.cards.stream()
-                .filter(Card::isColorless)
+                .filter(CardUtils::isColorless)
                 .collect(toList());
         return new CardSearch(cards);
     }
 
     public CardSearch ofAnyOfTheColors(List<Color> colors) {
         List<Card> cards = this.cards.stream()
-                .filter(card -> card.ofAnyOfTheColors(colors))
+                .filter(card -> CardUtils.ofAnyOfTheColors(card, colors))
                 .collect(toList());
         return new CardSearch(cards);
     }
