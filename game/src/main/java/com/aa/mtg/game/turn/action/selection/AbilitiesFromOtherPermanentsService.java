@@ -3,8 +3,9 @@ package com.aa.mtg.game.turn.action.selection;
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.ability.Abilities;
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.AbilityUtils;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
-import com.aa.mtg.cardinstance.modifiers.PowerToughness;
+import com.aa.mtg.cards.properties.PowerToughness;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,7 @@ public class AbilitiesFromOtherPermanentsService {
 
     public int getPowerFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
         return getParametersFromOtherPermanents(gameStatus, cardInstance).stream()
-                .map(Abilities::powerToughnessFromParameter)
+                .map(AbilityUtils::powerToughnessFromParameter)
                 .map(PowerToughness::getPower)
                 .reduce(Integer::sum)
                 .orElse(0);
@@ -35,7 +36,7 @@ public class AbilitiesFromOtherPermanentsService {
 
     public int getToughnessFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
         return getParametersFromOtherPermanents(gameStatus, cardInstance).stream()
-                .map(Abilities::powerToughnessFromParameter)
+                .map(AbilityUtils::powerToughnessFromParameter)
                 .map(PowerToughness::getToughness)
                 .reduce(Integer::sum)
                 .orElse(0);

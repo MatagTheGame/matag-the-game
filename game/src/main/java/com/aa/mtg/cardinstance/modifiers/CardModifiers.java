@@ -1,6 +1,7 @@
 package com.aa.mtg.cardinstance.modifiers;
 
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.properties.PowerToughness;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;

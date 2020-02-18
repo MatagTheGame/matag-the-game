@@ -12,7 +12,7 @@ import lombok.ToString;
 
 import java.util.List;
 
-import static com.aa.mtg.cards.ability.Abilities.parametersAsString;
+import static com.aa.mtg.cards.ability.AbilityUtils.parametersAsString;
 import static java.util.Collections.emptyList;
 
 @ToString

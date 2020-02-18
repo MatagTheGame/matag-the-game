@@ -2,8 +2,8 @@ package application.cleanup;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
-import com.aa.mtg.game.MtgApplication;
 import com.aa.mtg.cardinstance.CardInstance;
+import com.aa.mtg.game.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
@@ -14,13 +14,11 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.aa.mtg.cardinstance.modifiers.TappedModifier.TAPPED;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
-import static com.aa.mtg.cardinstance.modifiers.PowerToughness.powerToughness;
-import static com.aa.mtg.cardinstance.modifiers.TappedModifier.TAPPED;
-import static com.aa.mtg.cards.sets.Ixalan.AIR_ELEMENTAL;
-import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
-import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
+import static com.aa.mtg.cards.properties.PowerToughness.powerToughness;
+import static com.aa.mtg.cards.sets.Ixalan.*;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.EndTurnPhase.ET;

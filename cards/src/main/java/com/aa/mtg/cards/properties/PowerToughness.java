@@ -1,10 +1,8 @@
-package com.aa.mtg.cardinstance.modifiers;
+package com.aa.mtg.cards.properties;
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Data;
 
-@ToString
-@EqualsAndHashCode
+@Data
 public class PowerToughness {
     private final int power;
     private final int toughness;
@@ -12,14 +10,6 @@ public class PowerToughness {
     public PowerToughness(int power, int toughness) {
         this.power = power;
         this.toughness = toughness;
-    }
-
-    public int getPower() {
-        return power;
-    }
-
-    public int getToughness() {
-        return toughness;
     }
 
     public static PowerToughness powerToughness(String powerToughnessString) {

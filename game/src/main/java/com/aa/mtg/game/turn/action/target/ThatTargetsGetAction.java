@@ -17,9 +17,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
-import static com.aa.mtg.cards.ability.Abilities.damageFromParameter;
-import static com.aa.mtg.cards.ability.Abilities.drawFromParameter;
-import static com.aa.mtg.cards.ability.Abilities.lifeFromParameter;
+import static com.aa.mtg.cards.ability.AbilityUtils.*;
 
 @Component
 public class ThatTargetsGetAction implements AbilityAction {

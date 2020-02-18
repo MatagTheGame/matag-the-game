@@ -2,7 +2,7 @@ package com.aa.mtg.game.turn.action.permanent;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cardinstance.modifiers.PowerToughness;
+import com.aa.mtg.cards.properties.PowerToughness;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.counters.CountersService;
 import com.aa.mtg.game.turn.action.damage.DealDamageToCreatureService;
@@ -18,7 +18,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
-import static com.aa.mtg.cards.ability.Abilities.*;
+import static com.aa.mtg.cards.ability.Abilities.abilityFromParameter;
+import static com.aa.mtg.cards.ability.AbilityUtils.*;
 
 @Component
 public class PermanentService {
@@ -52,8 +53,8 @@ public class PermanentService {
     }
 
     private void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
-        PowerToughness powerToughness = powerToughnessFromParameter(parameter);
-        target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(powerToughness);
+        PowerToughness PowerToughness = powerToughnessFromParameter(parameter);
+        target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(PowerToughness);
 
         Optional<Ability> ability = abilityFromParameter(parameter);
         ability.ifPresent(value -> target.getModifiers().getAbilitiesUntilEndOfTurn().add(value));

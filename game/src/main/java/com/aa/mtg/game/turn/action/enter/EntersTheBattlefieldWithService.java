@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static com.aa.mtg.cards.ability.Abilities.*;
+import static com.aa.mtg.cards.ability.AbilityUtils.*;
 import static com.aa.mtg.cards.ability.type.AbilityType.ADAMANT;
 import static com.aa.mtg.cards.ability.type.AbilityType.ENTERS_THE_BATTLEFIELD_WITH;
 import static java.util.stream.Collectors.toList;
