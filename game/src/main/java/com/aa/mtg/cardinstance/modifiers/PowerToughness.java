@@ -1,4 +1,4 @@
-package com.aa.mtg.cards.modifiers;
+package com.aa.mtg.cardinstance.modifiers;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

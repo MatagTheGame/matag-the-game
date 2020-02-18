@@ -1,9 +1,9 @@
-package integration.mtg.cards.modifiers;
+package integration.mtg.cardinstance.modifiers;
 
-import com.aa.mtg.cards.modifiers.PowerToughness;
+import com.aa.mtg.cardinstance.modifiers.PowerToughness;
 import org.junit.Test;
 
-import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
+import static com.aa.mtg.cardinstance.modifiers.PowerToughness.powerToughness;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PowerToughnessTest {

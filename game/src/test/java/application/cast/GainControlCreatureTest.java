@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
-import static com.aa.mtg.cards.modifiers.TappedModifier.TAPPED;
+import static com.aa.mtg.cardinstance.modifiers.TappedModifier.TAPPED;
 import static com.aa.mtg.cards.sets.CoreSet2019.ACT_OF_TREASON;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CONCORDIA_PEGASUS;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;

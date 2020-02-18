@@ -2,7 +2,7 @@ package com.aa.mtg.cards.ability;
 
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.type.AbilityType;
-import com.aa.mtg.cards.modifiers.PowerToughness;
+import com.aa.mtg.cardinstance.modifiers.PowerToughness;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
 import com.aa.mtg.cards.selector.PowerToughnessConstraint;
@@ -17,7 +17,7 @@ import static com.aa.mtg.cards.ability.trigger.Trigger.*;
 import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_DIE;
 import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_ENTER_THE_BATTLEFIELD;
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
-import static com.aa.mtg.cards.modifiers.PowerToughness.powerToughness;
+import static com.aa.mtg.cardinstance.modifiers.PowerToughness.powerToughness;
 import static com.aa.mtg.cards.properties.Cost.*;
 import static com.aa.mtg.cards.properties.Subtype.KNIGHT;
 import static com.aa.mtg.cards.properties.Subtype.ZOMBIE;

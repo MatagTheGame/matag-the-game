@@ -5,7 +5,7 @@ import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.cards.ability.type.AbilityType;
-import com.aa.mtg.cards.modifiers.CardModifiers;
+import com.aa.mtg.cardinstance.modifiers.CardModifiers;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
