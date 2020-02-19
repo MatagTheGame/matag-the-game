@@ -1,16 +1,16 @@
 package com.aa.mtg.cards;
 
-import static com.aa.mtg.cards.CardsConfiguration.RESOURCES_PATH;
-
-import com.aa.mtg.cards.sets.MtgSet;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
-import org.springframework.stereotype.Service;
 
-@Service
+import static com.aa.mtg.cards.CardsConfiguration.RESOURCES_PATH;
+
+@Component
 public class Cards {
   private static final String CARDS_PATH = RESOURCES_PATH + "/cards";
 

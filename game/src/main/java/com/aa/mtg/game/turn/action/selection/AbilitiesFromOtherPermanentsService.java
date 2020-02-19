@@ -1,9 +1,8 @@
 package com.aa.mtg.game.turn.action.selection;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.ability.Abilities;
 import com.aa.mtg.cards.ability.Ability;
-import com.aa.mtg.cards.ability.AbilityUtils;
+import com.aa.mtg.cards.ability.AbilityService;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.cards.properties.PowerToughness;
 import com.aa.mtg.game.status.GameStatus;
@@ -20,15 +19,17 @@ import static com.aa.mtg.cards.ability.type.AbilityType.SELECTED_PERMANENTS_GET;
 public class AbilitiesFromOtherPermanentsService {
 
     private final CardInstanceSelectorService cardInstanceSelectorService;
+    private final AbilityService abilityService;
 
     @Autowired
-    public AbilitiesFromOtherPermanentsService(CardInstanceSelectorService cardInstanceSelectorService) {
+    public AbilitiesFromOtherPermanentsService(CardInstanceSelectorService cardInstanceSelectorService, AbilityService abilityService) {
         this.cardInstanceSelectorService = cardInstanceSelectorService;
+        this.abilityService = abilityService;
     }
 
     public int getPowerFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
         return getParametersFromOtherPermanents(gameStatus, cardInstance).stream()
-                .map(AbilityUtils::powerToughnessFromParameter)
+                .map(abilityService::powerToughnessFromParameter)
                 .map(PowerToughness::getPower)
                 .reduce(Integer::sum)
                 .orElse(0);
@@ -36,7 +37,7 @@ public class AbilitiesFromOtherPermanentsService {
 
     public int getToughnessFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
         return getParametersFromOtherPermanents(gameStatus, cardInstance).stream()
-                .map(AbilityUtils::powerToughnessFromParameter)
+                .map(abilityService::powerToughnessFromParameter)
                 .map(PowerToughness::getToughness)
                 .reduce(Integer::sum)
                 .orElse(0);

@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn.action.enter;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.AbilityService;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.cast.ManaCountService;
 import com.aa.mtg.game.turn.action.draw.DrawXCardsService;
@@ -13,7 +14,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static com.aa.mtg.cards.ability.AbilityUtils.*;
 import static com.aa.mtg.cards.ability.type.AbilityType.ADAMANT;
 import static com.aa.mtg.cards.ability.type.AbilityType.ENTERS_THE_BATTLEFIELD_WITH;
 import static java.util.stream.Collectors.toList;
@@ -25,11 +25,13 @@ public class EntersTheBattlefieldWithService {
 
     private final ManaCountService manaCountService;
     private final DrawXCardsService drawXCardsService;
+    private final AbilityService abilityService;
 
     @Autowired
-    public EntersTheBattlefieldWithService(ManaCountService manaCountService, DrawXCardsService drawXCardsService) {
+    public EntersTheBattlefieldWithService(ManaCountService manaCountService, DrawXCardsService drawXCardsService, AbilityService abilityService) {
         this.manaCountService = manaCountService;
         this.drawXCardsService = drawXCardsService;
+        this.abilityService = abilityService;
     }
 
     void entersTheBattlefieldWith(GameStatus gameStatus, CardInstance cardInstance) {
@@ -75,14 +77,14 @@ public class EntersTheBattlefieldWithService {
 
     private void executeParameters(GameStatus gameStatus, CardInstance cardInstance, List<String> parameters) {
         for (String parameter : parameters) {
-            if (tappedFromParameter(parameter)) {
+            if (abilityService.tappedFromParameter(parameter)) {
                 cardInstance.getModifiers().tap();
             }
 
-            int plus1Counters = plus1CountersFromParameter(parameter);
+            int plus1Counters = abilityService.plus1CountersFromParameter(parameter);
             cardInstance.getModifiers().getCounters().addPlus1Counters(plus1Counters);
 
-            int cardsToDraw = drawFromParameter(parameter);
+            int cardsToDraw = abilityService.drawFromParameter(parameter);
             drawXCardsService.drawXCards(gameStatus.getPlayerByName(cardInstance.getController()), cardsToDraw);
         }
     }

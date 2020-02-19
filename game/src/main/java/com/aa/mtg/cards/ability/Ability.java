@@ -12,7 +12,6 @@ import lombok.ToString;
 
 import java.util.List;
 
-import static com.aa.mtg.cards.ability.AbilityUtils.parametersAsString;
 import static java.util.Collections.emptyList;
 
 @ToString
@@ -63,7 +62,7 @@ public class Ability {
 
     @JsonProperty
     public String getAbilityTypeText() {
-        String parametersString = parametersAsString(parameters);
+        String parametersString = AbilityService.parametersAsString(parameters);
 
         boolean negative = parametersString.startsWith("-");
         switch (abilityType) {

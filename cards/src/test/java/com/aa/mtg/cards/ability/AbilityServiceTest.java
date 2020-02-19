@@ -5,18 +5,19 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.aa.mtg.cards.ability.AbilityUtils.*;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AbilityUtilsTest {
+public class AbilityServiceTest {
+    private AbilityService abilityService = new AbilityService();
+
     @Test
     public void testPowerAndToughnessFromParameter() {
         // Given
         String parameter = "+2/+2";
 
         // When
-        PowerToughness PowerToughness = powerToughnessFromParameter(parameter);
+        PowerToughness PowerToughness = abilityService.powerToughnessFromParameter(parameter);
 
         // Then
         assertThat(PowerToughness).isEqualTo(new PowerToughness(2, 2));
@@ -28,7 +29,7 @@ public class AbilityUtilsTest {
         String parameter = "TRAMPLE";
 
         // When
-        PowerToughness PowerToughness = powerToughnessFromParameter(parameter);
+        PowerToughness PowerToughness = abilityService.powerToughnessFromParameter(parameter);
 
         // Then
         assertThat(PowerToughness).isEqualTo(new PowerToughness(0, 0));
@@ -40,7 +41,7 @@ public class AbilityUtilsTest {
         List<String> parameters = asList("TRAMPLE", "+2/+2", "HASTE");
 
         // When
-        PowerToughness PowerToughness = powerToughnessFromParameters(parameters);
+        PowerToughness PowerToughness = abilityService.powerToughnessFromParameters(parameters);
 
         // Then
         assertThat(PowerToughness).isEqualTo(new PowerToughness(2, 2));
@@ -52,7 +53,7 @@ public class AbilityUtilsTest {
         String parameter = "TRAMPLE";
 
         // When
-        PowerToughness PowerToughness = powerToughnessFromParameter(parameter);
+        PowerToughness PowerToughness = abilityService.powerToughnessFromParameter(parameter);
 
         // Then
         assertThat(PowerToughness).isEqualTo(new PowerToughness(0, 0));
@@ -64,7 +65,7 @@ public class AbilityUtilsTest {
         String parameter = "DAMAGE:4";
 
         // When
-        int damage = damageFromParameter(parameter);
+        int damage = abilityService.damageFromParameter(parameter);
 
         // Then
         assertThat(damage).isEqualTo(4);
@@ -73,7 +74,7 @@ public class AbilityUtilsTest {
     @Test
     public void testDamageFromParameterAbsent() {
         // When
-        int damage = damageFromParameter("TRAMPLE");
+        int damage = abilityService.damageFromParameter("TRAMPLE");
 
         // Then
         assertThat(damage).isEqualTo(0);
@@ -85,7 +86,7 @@ public class AbilityUtilsTest {
         String parameter = "CONTROLLER_DAMAGE:5";
 
         // When
-        int damage = controllerDamageFromParameter(parameter);
+        int damage = abilityService.controllerDamageFromParameter(parameter);
 
         // Then
         assertThat(damage).isEqualTo(5);
@@ -94,7 +95,7 @@ public class AbilityUtilsTest {
     @Test
     public void testControllerDamageFromParameterAbsent() {
         // When
-        int damage = controllerDamageFromParameter("TRAMPLE");
+        int damage = abilityService.controllerDamageFromParameter("TRAMPLE");
 
         // Then
         assertThat(damage).isEqualTo(0);
@@ -106,7 +107,7 @@ public class AbilityUtilsTest {
         String parameter = ":DESTROYED";
 
         // When
-        boolean destroyed = destroyedFromParameter(parameter);
+        boolean destroyed = abilityService.destroyedFromParameter(parameter);
 
         // Then
         assertThat(destroyed).isTrue();
@@ -115,7 +116,7 @@ public class AbilityUtilsTest {
     @Test
     public void testDestroyedFromParameterAbsent() {
         // When
-        boolean destroyed = destroyedFromParameter("TRAMPLE");
+        boolean destroyed = abilityService.destroyedFromParameter("TRAMPLE");
 
         // Then
         assertThat(destroyed).isFalse();
@@ -127,7 +128,7 @@ public class AbilityUtilsTest {
         String parameter = ":TAPPED";
 
         // When
-        boolean tapped = tappedFromParameter(parameter);
+        boolean tapped = abilityService.tappedFromParameter(parameter);
 
         // Then
         assertThat(tapped).isTrue();
@@ -136,7 +137,7 @@ public class AbilityUtilsTest {
     @Test
     public void testTappedFromParameterAbsent() {
         // When
-        boolean tapped = tappedFromParameter("TRAMPLE");
+        boolean tapped = abilityService.tappedFromParameter("TRAMPLE");
 
         // Then
         assertThat(tapped).isFalse();
@@ -148,7 +149,7 @@ public class AbilityUtilsTest {
         String parameter = ":TAPPED_DOES_NOT_UNTAP_NEXT_TURN";
 
         // When
-        boolean tappedDoesNotUntapNextTurn = tappedDoesNotUntapNextTurnFromParameter(parameter);
+        boolean tappedDoesNotUntapNextTurn = abilityService.tappedDoesNotUntapNextTurnFromParameter(parameter);
 
         // Then
         assertThat(tappedDoesNotUntapNextTurn).isTrue();
@@ -157,7 +158,7 @@ public class AbilityUtilsTest {
     @Test
     public void testTappedDoesNotUntapNextTurnFromParameterAbsent() {
         // When
-        boolean tappedDoesNotUntapNextTurn = tappedDoesNotUntapNextTurnFromParameter("TRAMPLE");
+        boolean tappedDoesNotUntapNextTurn = abilityService.tappedDoesNotUntapNextTurnFromParameter("TRAMPLE");
 
         // Then
         assertThat(tappedDoesNotUntapNextTurn).isFalse();
@@ -169,7 +170,7 @@ public class AbilityUtilsTest {
         String parameter = ":UNTAPPED";
 
         // When
-        boolean untapped = untappedFromParameter(parameter);
+        boolean untapped = abilityService.untappedFromParameter(parameter);
 
         // Then
         assertThat(untapped).isTrue();
@@ -178,7 +179,7 @@ public class AbilityUtilsTest {
     @Test
     public void testUntappedFromParameterAbsent() {
         // When
-        boolean untapped = untappedFromParameter("TRAMPLE");
+        boolean untapped = abilityService.untappedFromParameter("TRAMPLE");
 
         // Then
         assertThat(untapped).isFalse();
@@ -190,7 +191,7 @@ public class AbilityUtilsTest {
         String parameter = "DRAW:2";
 
         // When
-        int draw = drawFromParameter(parameter);
+        int draw = abilityService.drawFromParameter(parameter);
 
         // Then
         assertThat(draw).isEqualTo(2);
@@ -199,7 +200,7 @@ public class AbilityUtilsTest {
     @Test
     public void testDrawFromParameterAbsent() {
         // When
-        int draw = drawFromParameter("TRAMPLE");
+        int draw = abilityService.drawFromParameter("TRAMPLE");
 
         // Then
         assertThat(draw).isEqualTo(0);
@@ -211,7 +212,7 @@ public class AbilityUtilsTest {
         String parameter = "PLUS_1_COUNTERS:2";
 
         // When
-        int draw = plus1CountersFromParameter(parameter);
+        int draw = abilityService.plus1CountersFromParameter(parameter);
 
         // Then
         assertThat(draw).isEqualTo(2);
@@ -220,7 +221,7 @@ public class AbilityUtilsTest {
     @Test
     public void testPlus1CountersFromParameterAbsent() {
         // When
-        int draw = plus1CountersFromParameter("TRAMPLE");
+        int draw = abilityService.plus1CountersFromParameter("TRAMPLE");
 
         // Then
         assertThat(draw).isEqualTo(0);
@@ -232,7 +233,7 @@ public class AbilityUtilsTest {
         List<String> parameters = asList("+2/+2", "TRAMPLE", "DAMAGE:2", "HASTE", "CONTROLLER_DAMAGE:3", ":TAPPED_DOES_NOT_UNTAP_NEXT_TURN", ":DESTROYED", ":RETURN_TO_OWNER_HAND", "PLUS_1_COUNTERS:2");
 
         // When
-        String parametersAsString = parametersAsString(parameters);
+        String parametersAsString = AbilityService.parametersAsString(parameters);
 
         // Then
         assertThat(parametersAsString).isEqualTo("+2/+2, trample, 2 damage, haste, to its controller 3 damage, tapped doesn't untap next turn, destroyed, returned to its owner's hand and 2 +1/+1 counters");
