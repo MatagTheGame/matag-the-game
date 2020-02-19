@@ -5,7 +5,7 @@ import static com.aa.mtg.cards.ability.selector.SelectorType.ANY;
 import static com.aa.mtg.player.PlayerType.OPPONENT;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.ability.selector.CardInstanceSelector;
 import com.aa.mtg.cards.ability.selector.SelectorType;
@@ -33,7 +33,7 @@ public class TargetCheckerService {
     }
 
     public void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
-        for (Ability ability : cardToCast.getAbilities()) {
+        for (CardInstanceAbility ability : cardToCast.getAbilities()) {
             AbilityAction abilityAction = abilityActionFactory.getAbilityAction(abilityType(playedAbility));
             if (abilityAction != null && ability.requiresTarget()) {
                 if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId())) {
@@ -75,7 +75,7 @@ public class TargetCheckerService {
     }
 
     public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
-        for (Ability ability : cardToCast.getAbilities()) {
+        for (CardInstanceAbility ability : cardToCast.getAbilities()) {
             AbilityAction abilityAction = abilityActionFactory.getAbilityAction(abilityType("THAT_TARGETS_GET"));
             if (abilityAction == null) {
                 return true;

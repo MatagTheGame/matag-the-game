@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.action.attach;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.ability.AbilityService;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.PowerToughness;
@@ -46,13 +46,13 @@ public class AttachmentsService {
                 .orElse(0);
     }
 
-    public List<Ability> getAttachmentsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
+    public List<CardInstanceAbility> getAttachmentsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
         return getAttachedCardsAbilities(gameStatus, cardInstance).stream()
                 .flatMap(ability -> abilitiesFromParameters(ability.getParameters()).stream())
                 .collect(Collectors.toList());
     }
 
-    private List<Ability> getAttachedCardsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
+    private List<CardInstanceAbility> getAttachedCardsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
         return getAttachedCards(gameStatus, cardInstance).stream()
                 .flatMap(attachedCard -> attachedCard.getCard().getAbilities().stream())
                 .filter(ability -> ATTACHED_ABILITY_TYPES.contains(ability.getAbilityType()))

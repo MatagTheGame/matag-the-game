@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.action.enter;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.ability.AbilityService;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.cast.ManaCountService;
@@ -41,15 +41,15 @@ public class EntersTheBattlefieldWithService {
     }
 
     private List<String> addEntersTheBattlefieldWithParameters(CardInstance cardInstance) {
-        List<Ability> entersTheBattlefieldWith = cardInstance.getAbilitiesByType(ENTERS_THE_BATTLEFIELD_WITH);
-        return entersTheBattlefieldWith.stream().map(Ability::getParameters).flatMap(Collection::stream).collect(toList());
+        List<CardInstanceAbility> entersTheBattlefieldWith = cardInstance.getAbilitiesByType(ENTERS_THE_BATTLEFIELD_WITH);
+        return entersTheBattlefieldWith.stream().map(CardInstanceAbility::getParameters).flatMap(Collection::stream).collect(toList());
     }
 
     private List<String> addAdamantEntersTheBattlefieldWithParameters(GameStatus gameStatus, CardInstance cardInstance) {
         List<String> parameters = new ArrayList<>();
-        List<Ability> adamantAbilities = cardInstance.getAbilitiesByType(ADAMANT);
+        List<CardInstanceAbility> adamantAbilities = cardInstance.getAbilitiesByType(ADAMANT);
 
-        for (Ability adamant : adamantAbilities) {
+        for (CardInstanceAbility adamant : adamantAbilities) {
             Map<Integer, List<String>> manaPaid = gameStatus.getTurn().getLastManaPaid();
             Map<String, Integer> manaPaidByColor = manaCountService.countManaPaid(manaPaid);
             String adamantColor = adamant.getParameter(0);

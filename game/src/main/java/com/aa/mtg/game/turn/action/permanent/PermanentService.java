@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.action.permanent;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.ability.AbilityService;
 import com.aa.mtg.cards.properties.PowerToughness;
 import com.aa.mtg.game.status.GameStatus;
@@ -58,7 +58,7 @@ public class PermanentService {
         PowerToughness PowerToughness = abilityService.powerToughnessFromParameter(parameter);
         target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(PowerToughness);
 
-        Optional<Ability> ability = abilityFromParameter(parameter);
+        Optional<CardInstanceAbility> ability = abilityFromParameter(parameter);
         ability.ifPresent(value -> target.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
 
         int damage = abilityService.damageFromParameter(parameter);

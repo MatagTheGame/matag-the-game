@@ -1,6 +1,6 @@
 package com.aa.mtg.cardinstance.modifiers;
 
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.properties.PowerToughness;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,9 +34,9 @@ public class CardModifiers {
     @JsonProperty
     private int damage;
     @JsonProperty
-    private List<Ability> abilities = new ArrayList<>();
+    private List<CardInstanceAbility> abilities = new ArrayList<>();
     @JsonProperty
-    private List<Ability> abilitiesUntilEndOfTurn = new ArrayList<>();
+    private List<CardInstanceAbility> abilitiesUntilEndOfTurn = new ArrayList<>();
     @JsonProperty
     private PowerToughness extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
     @JsonProperty
@@ -132,19 +132,19 @@ public class CardModifiers {
         this.tapped = tapped;
     }
 
-    public List<Ability> getAbilities() {
+    public List<CardInstanceAbility> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(List<Ability> abilities) {
+    public void setAbilities(List<CardInstanceAbility> abilities) {
         this.abilities = abilities;
     }
 
-    public List<Ability> getAbilitiesUntilEndOfTurn() {
+    public List<CardInstanceAbility> getAbilitiesUntilEndOfTurn() {
         return abilitiesUntilEndOfTurn;
     }
 
-    public void setAbilitiesUntilEndOfTurn(List<Ability> abilitiesUntilEndOfTurn) {
+    public void setAbilitiesUntilEndOfTurn(List<CardInstanceAbility> abilitiesUntilEndOfTurn) {
         this.abilitiesUntilEndOfTurn = abilitiesUntilEndOfTurn;
     }
 

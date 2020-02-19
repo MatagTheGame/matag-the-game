@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.action.selection;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.ability.AbilityService;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.cards.properties.PowerToughness;
@@ -43,7 +43,7 @@ public class AbilitiesFromOtherPermanentsService {
                 .orElse(0);
     }
 
-    public List<Ability> getAbilitiesFormOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
+    public List<CardInstanceAbility> getAbilitiesFormOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
         return abilitiesFromParameters(getParametersFromOtherPermanents(gameStatus, cardInstance));
     }
 
@@ -52,7 +52,7 @@ public class AbilitiesFromOtherPermanentsService {
         List<CardInstance> cards = gameStatus.getAllBattlefieldCards().withFixedAbility(SELECTED_PERMANENTS_GET).getCards();
 
         for (CardInstance card : cards) {
-            for (Ability ability : card.getFixedAbilitiesByType(SELECTED_PERMANENTS_GET)) {
+            for (CardInstanceAbility ability : card.getFixedAbilitiesByType(SELECTED_PERMANENTS_GET)) {
                 if (ability.getTrigger().getType() == TriggerType.STATIC) {
                     if (cardInstanceSelectorService.select(gameStatus, card, ability.getCardInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
                         parameters.addAll(ability.getParameters());

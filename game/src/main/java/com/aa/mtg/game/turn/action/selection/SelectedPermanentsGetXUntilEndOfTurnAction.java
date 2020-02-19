@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.action.selection;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.permanent.PermanentService;
@@ -21,7 +21,7 @@ public class SelectedPermanentsGetXUntilEndOfTurnAction implements AbilityAction
     }
 
     @Override
-    public void perform(CardInstance cardInstance, GameStatus gameStatus, Ability ability) {
+    public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
         List<CardInstance> cards = cardInstanceSelectorService.select(gameStatus, cardInstance, ability.getCardInstanceSelector()).getCards();
         for (CardInstance card : cards) {
             permanentService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), card);

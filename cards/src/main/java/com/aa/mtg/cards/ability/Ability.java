@@ -16,12 +16,12 @@ import lombok.ToString;
 @ToString
 @Builder
 public class Ability {
-    private final AbilityType abilityType;
-    private final List<Target> targets;
-    private final CardInstanceSelector cardInstanceSelector;
-    private final List<String> parameters;
-    private final Trigger trigger;
-    private final Ability ability;
+    protected final AbilityType abilityType;
+    protected final List<Target> targets;
+    protected final CardInstanceSelector cardInstanceSelector;
+    protected final List<String> parameters;
+    protected final Trigger trigger;
+    protected final Ability ability;
 
     public Ability(@JsonProperty("abilityType") AbilityType abilityType, @JsonProperty("targets") List<Target> targets,
         @JsonProperty("cardInstanceSelector") CardInstanceSelector cardInstanceSelector, @JsonProperty("parameters") List<String> parameters,

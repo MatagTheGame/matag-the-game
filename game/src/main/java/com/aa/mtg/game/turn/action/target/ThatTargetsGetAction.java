@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.action.target;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.ability.AbilityService;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.game.player.Player;
@@ -38,7 +38,7 @@ public class ThatTargetsGetAction implements AbilityAction {
     }
 
     @Override
-    public void perform(CardInstance cardInstance, GameStatus gameStatus, Ability ability) {
+    public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
         for (Object targetId : cardInstance.getModifiers().getTargets()) {
             if (targetId instanceof String) {
                 String targetPlayerName = (String) targetId;

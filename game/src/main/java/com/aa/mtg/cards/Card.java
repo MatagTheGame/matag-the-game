@@ -1,6 +1,6 @@
 package com.aa.mtg.cards;
 
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Cost;
@@ -30,9 +30,9 @@ public class Card {
     private final String ruleText;
     private final int power;
     private final int toughness;
-    private final List<Ability> abilities;
+    private final List<CardInstanceAbility> abilities;
 
-    public Card(String name, Set<Color> colors, List<Cost> cost, Set<Type> types, Set<Subtype> subtypes, Rarity rarity, String ruleText, int power, int toughness, List<Ability> abilities) {
+    public Card(String name, Set<Color> colors, List<Cost> cost, Set<Type> types, Set<Subtype> subtypes, Rarity rarity, String ruleText, int power, int toughness, List<CardInstanceAbility> abilities) {
         this.name = name;
         this.colors = colors;
         this.cost = cost;
@@ -94,12 +94,12 @@ public class Card {
         return types.contains(Type.INSTANT);
     }
 
-    public List<Ability> getAbilities() {
+    public List<CardInstanceAbility> getAbilities() {
         return abilities;
     }
 
     public boolean hasAbility(AbilityType abilityType) {
-        return abilities.stream().map(Ability::getAbilityType).anyMatch(currentAbilityType -> currentAbilityType == abilityType);
+        return abilities.stream().map(CardInstanceAbility::getAbilityType).anyMatch(currentAbilityType -> currentAbilityType == abilityType);
     }
 
     public List<Color> colorsOfManaThatCanGenerate() {

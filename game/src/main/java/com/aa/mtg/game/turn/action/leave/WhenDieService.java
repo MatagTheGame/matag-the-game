@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.action.leave;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cardinstance.CardInstanceSearch;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.selection.CardInstanceSelectorService;
@@ -30,7 +30,7 @@ public class WhenDieService {
         List<CardInstance> cardsWithDieAbility = gameStatus.getAllBattlefieldCards().withTriggerSubtype(WHEN_DIE).getCards();
 
         for (CardInstance cardWithDieAbility : cardsWithDieAbility) {
-            for (Ability ability : cardWithDieAbility.getAbilitiesByTriggerSubType(WHEN_DIE)) {
+            for (CardInstanceAbility ability : cardWithDieAbility.getAbilitiesByTriggerSubType(WHEN_DIE)) {
                 CardInstanceSearch selectionForCardWithEnterAbility = cardInstanceSelectorService.select(gameStatus, cardWithDieAbility, ability.getTrigger().getCardInstanceSelector());
                 if (selectionForCardWithEnterAbility.withId(cardInstance.getId()).isPresent()) {
                     cardWithDieAbility.getTriggeredAbilities().add(ability);

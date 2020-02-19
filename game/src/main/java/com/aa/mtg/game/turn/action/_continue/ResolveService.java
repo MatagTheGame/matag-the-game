@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.action._continue;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.ability.action.AbilityAction;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
@@ -67,7 +67,7 @@ public class ResolveService {
 
                 } else if (!stackItemToResolve.getAcknowledgedBy().contains(otherPlayerName)) {
                     boolean needsTargets = stackItemToResolve.getTriggeredAbilities().stream()
-                            .map(Ability::getTargets)
+                            .map(CardInstanceAbility::getTargets)
                             .flatMap(List::stream)
                             .count() > 0;
                     boolean hasSelectedTargets = !stackItemToResolve.getModifiers().getTargets().isEmpty();
@@ -122,15 +122,15 @@ public class ResolveService {
         continueTurnService.continueTurn(gameStatus);
     }
 
-    private void performAbilitiesActions(GameStatus gameStatus, CardInstance cardToResolve, List<Ability> abilities) {
-        for (Ability ability : abilities) {
+    private void performAbilitiesActions(GameStatus gameStatus, CardInstance cardToResolve, List<CardInstanceAbility> abilities) {
+        for (CardInstanceAbility ability : abilities) {
             performAbilityAction(gameStatus, cardToResolve, ability);
         }
 
         cardToResolve.getModifiers().setTargets(new ArrayList<>());
     }
 
-    private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve, Ability ability) {
+    private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve, CardInstanceAbility ability) {
         AbilityAction abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
         if (abilityAction != null) {
             try {
@@ -143,7 +143,7 @@ public class ResolveService {
         }
     }
 
-    private void checkTargets(GameStatus gameStatus, CardInstance cardToResolve, Ability ability) {
+    private void checkTargets(GameStatus gameStatus, CardInstance cardToResolve, CardInstanceAbility ability) {
         for (int i = 0; i < ability.getTargets().size(); i++) {
             Target target = ability.getTargets().get(i);
             Object targetId = getTargetIdAtIndex(cardToResolve, i);

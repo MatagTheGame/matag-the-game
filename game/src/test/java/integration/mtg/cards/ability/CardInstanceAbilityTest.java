@@ -1,6 +1,6 @@
 package integration.mtg.cards.ability;
 
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.ability.selector.CardInstanceSelector;
 import com.aa.mtg.cards.ability.selector.SelectorType;
 import org.junit.Test;
@@ -13,12 +13,12 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AbilityTest {
+public class CardInstanceAbilityTest {
 
     @Test
     public void simpleAbilityText() {
         // Given
-        Ability ability = new Ability(FLYING);
+        CardInstanceAbility ability = new CardInstanceAbility(FLYING);
 
         // When
         String text = ability.getAbilityTypeText();
@@ -30,7 +30,7 @@ public class AbilityTest {
     @Test
     public void drawXCardsText() {
         // Given
-        Ability ability = new Ability(DRAW_X_CARDS, emptyList(), singletonList("2"), null);
+        CardInstanceAbility ability = new CardInstanceAbility(DRAW_X_CARDS, emptyList(), singletonList("2"), null);
 
         // When
         String text = ability.getAbilityTypeText();
@@ -42,7 +42,7 @@ public class AbilityTest {
     @Test
     public void gainXLifeText() {
         // Given
-        Ability ability = new Ability(ADD_X_LIFE, emptyList(), singletonList("2"), null);
+        CardInstanceAbility ability = new CardInstanceAbility(ADD_X_LIFE, emptyList(), singletonList("2"), null);
 
         // When
         String text = ability.getAbilityTypeText();
@@ -54,7 +54,7 @@ public class AbilityTest {
     @Test
     public void loseXLifeText() {
         // Given
-        Ability ability = new Ability(ADD_X_LIFE, emptyList(), singletonList("-2"), null);
+        CardInstanceAbility ability = new CardInstanceAbility(ADD_X_LIFE, emptyList(), singletonList("-2"), null);
 
         // When
         String text = ability.getAbilityTypeText();
@@ -66,7 +66,7 @@ public class AbilityTest {
     @Test
     public void eachPlayerGainsXLifeText() {
         // Given
-        Ability ability = new Ability(EACH_PLAYERS_ADD_X_LIFE, emptyList(), singletonList("2"), null);
+        CardInstanceAbility ability = new CardInstanceAbility(EACH_PLAYERS_ADD_X_LIFE, emptyList(), singletonList("2"), null);
 
         // When
         String text = ability.getAbilityTypeText();
@@ -78,7 +78,7 @@ public class AbilityTest {
     @Test
     public void eachPlayerLosesXLifeText() {
         // Given
-        Ability ability = new Ability(EACH_PLAYERS_ADD_X_LIFE, emptyList(), singletonList("-2"), null);
+        CardInstanceAbility ability = new CardInstanceAbility(EACH_PLAYERS_ADD_X_LIFE, emptyList(), singletonList("-2"), null);
 
         // When
         String text = ability.getAbilityTypeText();
@@ -90,7 +90,7 @@ public class AbilityTest {
     @Test
     public void enchantedCreatureGetOneAbilityText() {
         // Given
-        Ability ability = new Ability(ENCHANTED_CREATURE_GETS, emptyList(), singletonList("+2/+2"), null);
+        CardInstanceAbility ability = new CardInstanceAbility(ENCHANTED_CREATURE_GETS, emptyList(), singletonList("+2/+2"), null);
 
         // When
         String text = ability.getAbilityTypeText();
@@ -102,7 +102,7 @@ public class AbilityTest {
     @Test
     public void enchantedCreatureGetMultipleAbilitiesText() {
         // Given
-        Ability ability = new Ability(ENCHANTED_CREATURE_GETS, emptyList(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+        CardInstanceAbility ability = new CardInstanceAbility(ENCHANTED_CREATURE_GETS, emptyList(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
 
         // When
         String text = ability.getAbilityTypeText();
@@ -114,7 +114,7 @@ public class AbilityTest {
     @Test
     public void selectedPermanentsGetMultipleAbilitiesText() {
         // Given
-        Ability ability = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(SelectorType.PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+        CardInstanceAbility ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(SelectorType.PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
 
         // When
         String text = ability.getAbilityTypeText();
@@ -126,7 +126,7 @@ public class AbilityTest {
     @Test
     public void itGetMultipleAbilitiesText() {
         // Given
-        Ability ability = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(SelectorType.PERMANENT).itself(true).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+        CardInstanceAbility ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(SelectorType.PERMANENT).itself(true).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
 
         // When
         String text = ability.getAbilityTypeText();

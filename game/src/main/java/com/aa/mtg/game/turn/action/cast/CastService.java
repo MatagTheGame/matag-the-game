@@ -2,7 +2,7 @@ package com.aa.mtg.game.turn.action.cast;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.cost.CostService;
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;
@@ -64,7 +64,7 @@ public class CastService {
                 gameStatus.getStack().add(cardToCast);
 
             } else {
-                Ability triggeredAbility = cardToCast.getAbilities().get(0);
+                CardInstanceAbility triggeredAbility = cardToCast.getAbilities().get(0);
                 cardToCast.getTriggeredAbilities().add(triggeredAbility);
                 LOGGER.info("Player {} triggered ability {} for {}.", activePlayer.getName(), triggeredAbility.getAbilityType(), cardToCast.getModifiers());
                 gameStatus.getStack().add(cardToCast);

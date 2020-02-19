@@ -1,6 +1,6 @@
 package integration.mtg.cards.ability;
 
-import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
 import org.junit.Test;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public class AbilitiesTest {
         List<String> parameters = asList("+2/+2", "TRAMPLE", "DAMAGE:2", "HASTE");
 
         // When
-        List<Ability> abilities = abilitiesFromParameters(parameters);
+        List<CardInstanceAbility> abilities = abilitiesFromParameters(parameters);
 
         // Then
         assertThat(abilities).isEqualTo(asList(TRAMPLE, HASTE));
@@ -30,7 +30,7 @@ public class AbilitiesTest {
         String parameter = "+2/+2";
 
         // When
-        Optional<Ability> ability = abilityFromParameter(parameter);
+        Optional<CardInstanceAbility> ability = abilityFromParameter(parameter);
 
         // Then
         assertThat(ability).isEmpty();
@@ -42,7 +42,7 @@ public class AbilitiesTest {
         String parameter = "TRAMPLE";
 
         // When
-        Optional<Ability> ability = abilityFromParameter(parameter);
+        Optional<CardInstanceAbility> ability = abilityFromParameter(parameter);
 
         // Then
         assertThat(ability).isEqualTo(Optional.of(TRAMPLE));
