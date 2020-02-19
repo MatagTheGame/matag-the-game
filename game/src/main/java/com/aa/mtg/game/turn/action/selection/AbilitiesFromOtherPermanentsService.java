@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn.action.selection;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbilityFactory;
 import com.aa.mtg.cards.ability.AbilityService;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.cards.properties.PowerToughness;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.aa.mtg.cards.ability.Abilities.abilitiesFromParameters;
 import static com.aa.mtg.cards.ability.type.AbilityType.SELECTED_PERMANENTS_GET;
 
 @Component
@@ -20,11 +20,13 @@ public class AbilitiesFromOtherPermanentsService {
 
     private final CardInstanceSelectorService cardInstanceSelectorService;
     private final AbilityService abilityService;
+    private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
 
     @Autowired
-    public AbilitiesFromOtherPermanentsService(CardInstanceSelectorService cardInstanceSelectorService, AbilityService abilityService) {
+    public AbilitiesFromOtherPermanentsService(CardInstanceSelectorService cardInstanceSelectorService, AbilityService abilityService, CardInstanceAbilityFactory cardInstanceAbilityFactory) {
         this.cardInstanceSelectorService = cardInstanceSelectorService;
         this.abilityService = abilityService;
+        this.cardInstanceAbilityFactory = cardInstanceAbilityFactory;
     }
 
     public int getPowerFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
@@ -44,7 +46,7 @@ public class AbilitiesFromOtherPermanentsService {
     }
 
     public List<CardInstanceAbility> getAbilitiesFormOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
-        return abilitiesFromParameters(getParametersFromOtherPermanents(gameStatus, cardInstance));
+        return cardInstanceAbilityFactory.abilitiesFromParameters(getParametersFromOtherPermanents(gameStatus, cardInstance));
     }
 
     private List<String> getParametersFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {

@@ -2,6 +2,7 @@ package com.aa.mtg.game.turn.action.permanent;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbilityFactory;
 import com.aa.mtg.cards.ability.AbilityService;
 import com.aa.mtg.cards.properties.PowerToughness;
 import com.aa.mtg.game.status.GameStatus;
@@ -19,8 +20,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Optional;
 
-import static com.aa.mtg.cards.ability.Abilities.abilityFromParameter;
-
 @Component
 public class PermanentService {
 
@@ -34,10 +33,11 @@ public class PermanentService {
     private final GainControlPermanentService gainControlPermanentService;
     private final CountersService countersService;
     private final AbilityService abilityService;
+    private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
 
     @Autowired
     public PermanentService(DealDamageToCreatureService dealDamageToCreatureService, DealDamageToPlayerService dealDamageToPlayerService, DestroyPermanentService destroyPermanentService,
-                            TapPermanentService tapPermanentService, ReturnPermanentToHandService returnPermanentToHandService, GainControlPermanentService gainControlPermanentService, CountersService countersService, AbilityService abilityService) {
+                            TapPermanentService tapPermanentService, ReturnPermanentToHandService returnPermanentToHandService, GainControlPermanentService gainControlPermanentService, CountersService countersService, AbilityService abilityService, CardInstanceAbilityFactory cardInstanceAbilityFactory) {
         this.dealDamageToCreatureService = dealDamageToCreatureService;
         this.dealDamageToPlayerService = dealDamageToPlayerService;
         this.destroyPermanentService = destroyPermanentService;
@@ -46,6 +46,7 @@ public class PermanentService {
         this.gainControlPermanentService = gainControlPermanentService;
         this.countersService = countersService;
         this.abilityService = abilityService;
+        this.cardInstanceAbilityFactory = cardInstanceAbilityFactory;
     }
 
     public void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, List<String> parameters, CardInstance target) {
@@ -58,7 +59,7 @@ public class PermanentService {
         PowerToughness PowerToughness = abilityService.powerToughnessFromParameter(parameter);
         target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(PowerToughness);
 
-        Optional<CardInstanceAbility> ability = abilityFromParameter(parameter);
+        Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
         ability.ifPresent(value -> target.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
 
         int damage = abilityService.damageFromParameter(parameter);

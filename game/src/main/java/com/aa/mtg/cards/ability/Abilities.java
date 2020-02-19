@@ -8,9 +8,6 @@ import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
 
-import java.util.List;
-import java.util.Optional;
-
 import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraint.PowerOrToughness.POWER;
 import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
 import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraintType.GREATER_OR_EQUAL;
@@ -33,7 +30,6 @@ import static com.aa.mtg.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static java.util.stream.Collectors.toList;
 
 public class Abilities {
     public static final CardInstanceAbility ADAMANT_BLUE_ENTER_PLUS_1_COUNTER = new CardInstanceAbility(AbilityType.ADAMANT, singletonList("BLUE"), new CardInstanceAbility(AbilityType.ENTERS_THE_BATTLEFIELD_WITH, singletonList("PLUS_1_COUNTERS:1")));
@@ -196,28 +192,4 @@ public class Abilities {
     public static final CardInstanceAbility WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_YOU_GAIN_1_LIFE = new CardInstanceAbility(ADD_X_LIFE, emptyList(), singletonList("1"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build()));
     public static final CardInstanceAbility WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_IT_GETS_PLUS_1_1_UNTIL_END_OF_TURN = new CardInstanceAbility(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build(), singletonList("+1/+1"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build()));
     public static final CardInstanceAbility WHENEVER_A_NON_TOKEN_CREATURE_YOU_CONTROL_DIES_IT_DEALS_1_DAMAGE_TO_ANY_TARGET = new CardInstanceAbility(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(SelectorType.ANY).build()).build()), singletonList("DAMAGE:1"), triggeredAbility(WHEN_DIE, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).nonToken(true).build()));
-
-    private static CardInstanceAbility get(String ability) {
-        try {
-            return (CardInstanceAbility) Abilities.class.getField(ability).get(null);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException("Ability " + ability  + " does not exist.");
-        }
-    }
-
-    public static List<CardInstanceAbility> abilitiesFromParameters(List<String> parameters) {
-        return parameters.stream()
-                .filter(parameter -> !parameter.contains("/") && !parameter.contains(":"))
-                .map(Abilities::get)
-                .collect(toList());
-    }
-
-    public static Optional<CardInstanceAbility> abilityFromParameter(String parameter) {
-        List<CardInstanceAbility> abilities = abilitiesFromParameters(singletonList(parameter));
-        if (abilities.isEmpty()) {
-            return Optional.empty();
-        } else {
-            return Optional.of(abilities.get(0));
-        }
-    }
 }
