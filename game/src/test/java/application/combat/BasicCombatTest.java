@@ -19,13 +19,13 @@ import static com.aa.mtg.cards.sets.Ixalan.HEADWATER_SENTRIES;
 import static com.aa.mtg.cards.sets.Ixalan.NEST_ROBBER;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.AXEBANE_BEAST;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CORAL_COMMANDO;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.AfterDeclareBlockersPhase.AB;
 import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
 import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.aa.mtg.game.turn.phases.DeclareBlockersPhase.DB;
 import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

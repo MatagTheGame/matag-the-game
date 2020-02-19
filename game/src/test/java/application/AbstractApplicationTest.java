@@ -1,7 +1,7 @@
 package application;
 
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
 import static java.lang.Integer.parseInt;

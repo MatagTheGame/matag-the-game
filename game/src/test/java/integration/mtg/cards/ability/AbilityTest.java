@@ -1,13 +1,13 @@
 package integration.mtg.cards.ability;
 
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.selector.CardInstanceSelector;
 import com.aa.mtg.cards.ability.selector.SelectorType;
-import com.aa.mtg.cards.selector.CardInstanceSelector;
 import org.junit.Test;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;

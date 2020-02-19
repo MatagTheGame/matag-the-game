@@ -16,8 +16,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static com.aa.mtg.cards.Cards.ISLAND;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

@@ -17,8 +17,8 @@ import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.sets.Dominaria.BENALISH_MARSHAL;
 import static com.aa.mtg.cards.sets.WarOfTheSpark.ENFORCER_GRIFFIN;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

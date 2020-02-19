@@ -5,7 +5,7 @@ import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.sets.GuildsOfRavnica.GIRD_FOR_BATTLE;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CONCORDIA_PEGASUS;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;

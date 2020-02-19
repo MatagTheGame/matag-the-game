@@ -20,8 +20,8 @@ import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cardinstance.modifiers.TappedModifier.TAPPED;
 import static com.aa.mtg.cards.sets.CoreSet2019.ACT_OF_TREASON;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.CONCORDIA_PEGASUS;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

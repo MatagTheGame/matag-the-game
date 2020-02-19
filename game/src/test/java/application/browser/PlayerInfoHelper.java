@@ -1,6 +1,6 @@
 package application.browser;
 
-import com.aa.mtg.game.player.PlayerType;
+import com.aa.mtg.player.PlayerType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;

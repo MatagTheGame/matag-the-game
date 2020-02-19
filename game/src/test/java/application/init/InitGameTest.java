@@ -24,8 +24,8 @@ import static com.aa.mtg.cards.sets.Ixalan.CHARGING_MONSTROSAUR;
 import static com.aa.mtg.cards.sets.Ixalan.GRAZING_WHIPTAIL;
 import static com.aa.mtg.cards.sets.Ixalan.HUATLIS_SNUBHORN;
 import static com.aa.mtg.cards.sets.Ixalan.LEGIONS_JUDGMENT;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @RunWith(SpringRunner.class)

@@ -1,6 +1,6 @@
 package com.aa.mtg.cards.ability.target;
 
-import com.aa.mtg.cards.selector.CardInstanceSelector;
+import com.aa.mtg.cards.ability.selector.CardInstanceSelector;
 import lombok.Builder;
 
 @Builder

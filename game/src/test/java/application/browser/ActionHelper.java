@@ -3,7 +3,7 @@ package application.browser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 public class ActionHelper {

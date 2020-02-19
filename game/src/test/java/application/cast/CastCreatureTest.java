@@ -21,8 +21,8 @@ import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.properties.Color.BLUE;
 import static com.aa.mtg.cards.properties.Color.RED;
 import static com.aa.mtg.cards.sets.Ixalan.HEADWATER_SENTRIES;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 import static java.util.Arrays.asList;
 

@@ -23,7 +23,7 @@ import static com.aa.mtg.cards.sets.CoreSet2019.DRUID_OF_THE_COWL;
 import static com.aa.mtg.cards.sets.Ixalan.HEADWATER_SENTRIES;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.AZORIUS_GUILDGATE;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.GYRE_ENGINEER;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 

@@ -17,8 +17,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.Cards.MOUNTAIN;
 import static com.aa.mtg.cards.Cards.PLAINS;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.EndTurnPhase.ET;
 
 @RunWith(SpringRunner.class)

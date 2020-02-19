@@ -19,7 +19,7 @@ import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.sets.CoreSet2019.AJANIS_WELCOME;
 import static com.aa.mtg.cards.sets.CoreSet2019.DAYBREAK_CHAPLAIN;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 
 @RunWith(SpringRunner.class)

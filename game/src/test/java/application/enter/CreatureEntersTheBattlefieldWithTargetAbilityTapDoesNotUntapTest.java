@@ -20,8 +20,8 @@ import static com.aa.mtg.cards.Cards.FOREST;
 import static com.aa.mtg.cards.Cards.ISLAND;
 import static com.aa.mtg.cards.sets.CoreSet2020.CANOPY_SPIDER;
 import static com.aa.mtg.cards.sets.CoreSet2020.FROST_LYNX;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @RunWith(SpringRunner.class)

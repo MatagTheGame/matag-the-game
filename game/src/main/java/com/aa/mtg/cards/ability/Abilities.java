@@ -1,24 +1,15 @@
 package com.aa.mtg.cards.ability;
 
+import com.aa.mtg.cards.ability.selector.CardInstanceSelector;
 import com.aa.mtg.cards.ability.selector.PowerToughnessConstraint;
 import com.aa.mtg.cards.ability.selector.SelectorType;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
-import com.aa.mtg.cards.selector.CardInstanceSelector;
-import com.aa.mtg.game.player.PlayerType;
 
 import java.util.List;
 import java.util.Optional;
 
-import static com.aa.mtg.cards.ability.trigger.Trigger.*;
-import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_DIE;
-import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_ENTER_THE_BATTLEFIELD;
-import static com.aa.mtg.cards.ability.type.AbilityType.*;
-import static com.aa.mtg.cards.properties.Cost.*;
-import static com.aa.mtg.cards.properties.Subtype.KNIGHT;
-import static com.aa.mtg.cards.properties.Subtype.ZOMBIE;
-import static com.aa.mtg.cards.properties.Type.*;
 import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraint.PowerOrToughness.POWER;
 import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
 import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraintType.GREATER_OR_EQUAL;
@@ -28,8 +19,16 @@ import static com.aa.mtg.cards.ability.selector.SelectorType.PERMANENT;
 import static com.aa.mtg.cards.ability.selector.StatusType.ATTACKING;
 import static com.aa.mtg.cards.ability.selector.StatusType.BLOCKING;
 import static com.aa.mtg.cards.ability.selector.TurnStatusType.YOUR_TURN;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.cards.ability.trigger.Trigger.*;
+import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_DIE;
+import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_ENTER_THE_BATTLEFIELD;
+import static com.aa.mtg.cards.ability.type.AbilityType.*;
+import static com.aa.mtg.cards.properties.Cost.*;
+import static com.aa.mtg.cards.properties.Subtype.KNIGHT;
+import static com.aa.mtg.cards.properties.Subtype.ZOMBIE;
+import static com.aa.mtg.cards.properties.Type.*;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -193,8 +192,8 @@ public class Abilities {
     public static final Ability WHEN_IT_ENTERS_THE_BATTLEFIELD_RETURN_TARGET_OPPONENT_CREATURE_TO_ITS_OWNERS_HAND = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(OPPONENT).build()).build()), singletonList(":RETURN_TO_OWNER_HAND"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build()));
     public static final Ability WHENEVER_ANOTHER_CREATURE_DIES_EACH_OPPONENT_LOSES_1_LIFE = new Ability(EACH_PLAYERS_ADD_X_LIFE, emptyList(), singletonList("-1"), triggeredAbility(WHEN_DIE, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).others(true).build()));
     public static final Ability WHENEVER_ANOTHER_CREATURE_OR_PLANESWALKER_DIES_PUT_1_PLUS_1_COUNTER_ON_IT = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build(), singletonList("PLUS_1_COUNTERS:1"), triggeredAbility(WHEN_DIE, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(asList(CREATURE, PLANESWALKER)).others(true).build()));
-    public static final Ability WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_YOU_GAIN_1_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("1"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PlayerType.PLAYER).build()));
-    public static final Ability WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_IT_GETS_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build(), singletonList("+1/+1"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PlayerType.PLAYER).build()));
+    public static final Ability WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_YOU_GAIN_1_LIFE = new Ability(ADD_X_LIFE, emptyList(), singletonList("1"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build()));
+    public static final Ability WHENEVER_A_CREATURE_ENTERS_THE_BATTLEFIELD_UNDER_YOUR_CONTROL_IT_GETS_PLUS_1_1_UNTIL_END_OF_TURN = new Ability(SELECTED_PERMANENTS_GET, CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build(), singletonList("+1/+1"), triggeredAbility(WHEN_ENTER_THE_BATTLEFIELD, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build()));
     public static final Ability WHENEVER_A_NON_TOKEN_CREATURE_YOU_CONTROL_DIES_IT_DEALS_1_DAMAGE_TO_ANY_TARGET = new Ability(THAT_TARGETS_GET, singletonList(Target.builder().cardInstanceSelector(CardInstanceSelector.builder().selectorType(SelectorType.ANY).build()).build()), singletonList("DAMAGE:1"), triggeredAbility(WHEN_DIE, CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).nonToken(true).build()));
 
     private static Ability get(String ability) {

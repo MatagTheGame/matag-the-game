@@ -2,8 +2,7 @@ package com.aa.mtg.game.turn.action.selection;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.CardInstanceSearch;
-import com.aa.mtg.cards.selector.CardInstanceSelector;
-import com.aa.mtg.game.player.PlayerType;
+import com.aa.mtg.cards.ability.selector.CardInstanceSelector;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +12,8 @@ import static com.aa.mtg.cards.ability.selector.SelectorType.ANY;
 import static com.aa.mtg.cards.ability.selector.SelectorType.PERMANENT;
 import static com.aa.mtg.cards.ability.selector.StatusType.ATTACKING;
 import static com.aa.mtg.cards.ability.selector.StatusType.BLOCKING;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static java.util.Collections.emptyList;
 
 @Component
@@ -41,7 +41,7 @@ public class CardInstanceSelectorService {
             cards = cards.ofAnyOfTheSubtypes(cardInstanceSelector.getOfSubtypeOf());
         }
 
-        if (cardInstanceSelector.getControllerType() == PlayerType.PLAYER) {
+        if (cardInstanceSelector.getControllerType() == PLAYER) {
             cards = cards.controlledBy(gameStatus.getCurrentPlayer().getName());
         } else if (cardInstanceSelector.getControllerType() == OPPONENT) {
             cards = cards.controlledBy(gameStatus.getNonCurrentPlayer().getName());

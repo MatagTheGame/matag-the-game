@@ -21,8 +21,8 @@ import static com.aa.mtg.cards.Cards.SWAMP;
 import static com.aa.mtg.cards.sets.CoreSet2020.DARK_REMEDY;
 import static com.aa.mtg.cards.sets.CoreSet2020.ENGULFING_ERUPTION;
 import static com.aa.mtg.cards.sets.GuildsOfRavnica.DOUSER_OF_LIGHTS;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @RunWith(SpringRunner.class)

@@ -1,10 +1,10 @@
 package com.aa.mtg.cards.ability;
 
+import com.aa.mtg.cards.ability.selector.CardInstanceSelector;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.trigger.Trigger;
 import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.type.AbilityType;
-import com.aa.mtg.cards.selector.CardInstanceSelector;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;

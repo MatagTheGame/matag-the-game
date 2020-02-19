@@ -1,9 +1,9 @@
 package application.browser;
 
-import com.aa.mtg.game.player.PlayerType;
+import com.aa.mtg.player.PlayerType;
 import org.openqa.selenium.By;
 
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBe;
 

@@ -1,7 +1,7 @@
 package com.aa.mtg.cards.ability.trigger;
 
+import com.aa.mtg.cards.ability.selector.CardInstanceSelector;
 import com.aa.mtg.cards.properties.Cost;
-import com.aa.mtg.cards.selector.CardInstanceSelector;
 
 import java.util.List;
 

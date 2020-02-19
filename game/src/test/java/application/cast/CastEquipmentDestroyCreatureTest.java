@@ -6,7 +6,7 @@ import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.sets.Dominaria.SHORT_SWORD;
 import static com.aa.mtg.cards.sets.Ixalan.LEGIONS_JUDGMENT;
 import static com.aa.mtg.cards.sets.RavnicaAllegiance.PROWLING_CARACAL;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;

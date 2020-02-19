@@ -17,8 +17,8 @@ import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.aa.mtg.cards.Cards.SWAMP;
 import static com.aa.mtg.cards.sets.CoreSet2019.MURDER;
 import static com.aa.mtg.cards.sets.WarOfTheSpark.GOBLIN_ASSAULT_TEAM;
-import static com.aa.mtg.game.player.PlayerType.OPPONENT;
-import static com.aa.mtg.game.player.PlayerType.PLAYER;
+import static com.aa.mtg.player.PlayerType.OPPONENT;
+import static com.aa.mtg.player.PlayerType.PLAYER;
 import static java.util.Collections.singletonList;
 
 @RunWith(SpringRunner.class)
