@@ -1,7 +1,7 @@
 package com.aa.mtg.cardinstance.ability.selector;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.selector.PowerToughnessConstraint;
+import com.aa.mtg.cards.ability.selector.PowerToughnessConstraint;
 
 public class PowerToughnessConstraintUtils {
     public static boolean check(PowerToughnessConstraint powerToughnessConstraint, CardInstance cardInstance) {

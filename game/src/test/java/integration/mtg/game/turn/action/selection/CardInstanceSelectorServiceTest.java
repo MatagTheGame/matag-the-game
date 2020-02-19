@@ -2,8 +2,8 @@ package integration.mtg.game.turn.action.selection;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.CardInstanceFactory;
+import com.aa.mtg.cards.ability.selector.PowerToughnessConstraint;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
-import com.aa.mtg.cards.selector.PowerToughnessConstraint;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.selection.CardInstanceSelectorService;
 import integration.TestUtils;
@@ -21,11 +21,11 @@ import static com.aa.mtg.cards.ability.Abilities.OTHER_CREATURES_YOU_CONTROL_WIT
 import static com.aa.mtg.cards.ability.Abilities.OTHER_ZOMBIES_YOU_CONTROL_GET_DEATHTOUCH;
 import static com.aa.mtg.cards.properties.Type.CREATURE;
 import static com.aa.mtg.cards.properties.Type.LAND;
-import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughness.POWER;
-import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
-import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.EQUAL;
-import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.GREATER;
-import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.LESS_OR_EQUAL;
+import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraint.PowerOrToughness.POWER;
+import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
+import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraintType.EQUAL;
+import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraintType.GREATER;
+import static com.aa.mtg.cards.ability.selector.PowerToughnessConstraintType.LESS_OR_EQUAL;
 import static com.aa.mtg.cards.ability.selector.SelectorType.PERMANENT;
 import static com.aa.mtg.cards.ability.selector.StatusType.ATTACKING;
 import static com.aa.mtg.cards.ability.selector.StatusType.BLOCKING;

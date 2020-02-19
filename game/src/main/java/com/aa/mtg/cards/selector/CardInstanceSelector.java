@@ -1,5 +1,6 @@
 package com.aa.mtg.cards.selector;
 
+import com.aa.mtg.cards.ability.selector.PowerToughnessConstraint;
 import com.aa.mtg.cards.ability.selector.SelectorType;
 import com.aa.mtg.cards.ability.selector.StatusType;
 import com.aa.mtg.cards.ability.selector.TurnStatusType;

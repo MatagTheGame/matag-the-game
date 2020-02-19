@@ -1,12 +1,13 @@
 package com.aa.mtg.cardinstance;
 
+import com.aa.mtg.cardinstance.ability.selector.PowerToughnessConstraintUtils;
+import com.aa.mtg.cards.ability.selector.PowerToughnessConstraint;
 import com.aa.mtg.cards.ability.selector.TurnStatusType;
 import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
-import com.aa.mtg.cards.selector.PowerToughnessConstraint;
 import com.aa.mtg.game.status.GameStatus;
 
 import java.util.List;
@@ -131,7 +132,7 @@ public class CardInstanceSearch {
 
     public CardInstanceSearch ofPowerToughnessConstraint(PowerToughnessConstraint powerToughnessConstraint) {
         List<CardInstance> cards = this.cards.stream()
-                .filter(powerToughnessConstraint::check)
+                .filter(card -> PowerToughnessConstraintUtils.check(powerToughnessConstraint, card))
                 .collect(toList());
         return new CardInstanceSearch(cards);
     }
