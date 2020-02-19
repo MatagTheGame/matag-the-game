@@ -1,7 +1,7 @@
 package com.aa.mtg.game.turn.action.cast;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.cost.CostUtils;
+import com.aa.mtg.cards.cost.CostService;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.game.message.MessageException;
@@ -27,12 +27,14 @@ public class CastService {
     private final TargetCheckerService targetCheckerService;
     private final ManaCountService manaCountService;
     private final TapPermanentService tapPermanentService;
+    private final CostService costService;
 
     @Autowired
-    public CastService(TargetCheckerService targetCheckerService, ManaCountService manaCountService, TapPermanentService tapPermanentService) {
+    public CastService(TargetCheckerService targetCheckerService, ManaCountService manaCountService, TapPermanentService tapPermanentService, CostService costService) {
         this.targetCheckerService = targetCheckerService;
         this.manaCountService = manaCountService;
         this.tapPermanentService = tapPermanentService;
+        this.costService = costService;
     }
 
     public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
@@ -80,7 +82,7 @@ public class CastService {
 
     private void checkSpellOrAbilityCost(Map<Integer, List<String>> mana, Player currentPlayer, CardInstance cardToCast, String ability) {
         List<Cost> paidCost = manaCountService.verifyManaPaid(mana, currentPlayer);
-        if (!CostUtils.isCastingCostFulfilled(cardToCast.getCard(), paidCost, ability)) {
+        if (!costService.isCastingCostFulfilled(cardToCast.getCard(), paidCost, ability)) {
             throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
         }
     }

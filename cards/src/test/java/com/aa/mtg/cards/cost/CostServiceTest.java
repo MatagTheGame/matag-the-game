@@ -19,10 +19,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @Import(CardsConfiguration.class)
-public class CostUtilsTest {
-
+public class CostServiceTest {
     @Autowired
     private Cards cards;
+
+    @Autowired
+    private CostService costService;
 
     @Test
     public void isCastingCostFulfilledFeralMaakaCorrectCosts() {
@@ -31,7 +33,7 @@ public class CostUtilsTest {
         List<Cost> manaPaid = asList(GREEN, RED);
 
         // When
-        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
+        boolean fulfilled = costService.isCastingCostFulfilled(card, manaPaid, null);
 
         // Then
         assertThat(fulfilled).isTrue();
@@ -44,7 +46,7 @@ public class CostUtilsTest {
         List<Cost> manaPaid = Collections.emptyList();
 
         // When
-        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
+        boolean fulfilled = costService.isCastingCostFulfilled(card, manaPaid, null);
 
         // Then
         assertThat(fulfilled).isFalse();
@@ -57,7 +59,7 @@ public class CostUtilsTest {
         List<Cost> manaPaid = asList(WHITE, GREEN);
 
         // When
-        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
+        boolean fulfilled = costService.isCastingCostFulfilled(card, manaPaid, null);
 
         // Then
         assertThat(fulfilled).isFalse();
@@ -70,7 +72,7 @@ public class CostUtilsTest {
         List<Cost> manaPaid = Collections.singletonList(RED);
 
         // When
-        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
+        boolean fulfilled = costService.isCastingCostFulfilled(card, manaPaid, null);
 
         // Then
         assertThat(fulfilled).isFalse();
@@ -83,7 +85,7 @@ public class CostUtilsTest {
         List<Cost> manaPaid = asList(GREEN, GREEN, RED, RED);
 
         // When
-        boolean fulfilled = CostUtils.isCastingCostFulfilled(card, manaPaid, null);
+        boolean fulfilled = costService.isCastingCostFulfilled(card, manaPaid, null);
 
         // Then
         assertThat(fulfilled).isTrue();

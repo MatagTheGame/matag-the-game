@@ -2,6 +2,7 @@ package com.aa.mtg.cards.cost;
 
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.properties.Cost;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +10,10 @@ import java.util.List;
 import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
 import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 
-public class CostUtils {
+@Service
+public class CostService {
 
-    public static boolean isCastingCostFulfilled(Card card, List<Cost> manaPaid, String ability) {
+    public boolean isCastingCostFulfilled(Card card, List<Cost> manaPaid, String ability) {
         ArrayList<Cost> manaPaidCopy = new ArrayList<>(manaPaid);
 
         for (Cost cost : getCost(card, ability)) {
