@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 
-import static com.aa.mtg.cards.selector.SelectorType.ANY;
-import static com.aa.mtg.cards.selector.SelectorType.PERMANENT;
-import static com.aa.mtg.cards.selector.StatusType.ATTACKING;
-import static com.aa.mtg.cards.selector.StatusType.BLOCKING;
+import static com.aa.mtg.cards.ability.selector.SelectorType.ANY;
+import static com.aa.mtg.cards.ability.selector.SelectorType.PERMANENT;
+import static com.aa.mtg.cards.ability.selector.StatusType.ATTACKING;
+import static com.aa.mtg.cards.ability.selector.StatusType.BLOCKING;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static java.util.Collections.emptyList;
 

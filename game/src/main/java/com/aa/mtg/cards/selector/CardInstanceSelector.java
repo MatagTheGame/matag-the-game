@@ -1,5 +1,8 @@
 package com.aa.mtg.cards.selector;
 
+import com.aa.mtg.cards.ability.selector.SelectorType;
+import com.aa.mtg.cards.ability.selector.StatusType;
+import com.aa.mtg.cards.ability.selector.TurnStatusType;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Subtype;

@@ -1,11 +1,11 @@
 package com.aa.mtg.cards.ability;
 
+import com.aa.mtg.cards.ability.selector.SelectorType;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
 import com.aa.mtg.cards.selector.PowerToughnessConstraint;
-import com.aa.mtg.cards.selector.SelectorType;
 import com.aa.mtg.game.player.PlayerType;
 
 import java.util.List;
@@ -23,11 +23,11 @@ import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughnes
 import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.GREATER_OR_EQUAL;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.LESS_OR_EQUAL;
-import static com.aa.mtg.cards.selector.SelectorType.ANY;
-import static com.aa.mtg.cards.selector.SelectorType.PERMANENT;
-import static com.aa.mtg.cards.selector.StatusType.ATTACKING;
-import static com.aa.mtg.cards.selector.StatusType.BLOCKING;
-import static com.aa.mtg.cards.selector.TurnStatusType.YOUR_TURN;
+import static com.aa.mtg.cards.ability.selector.SelectorType.ANY;
+import static com.aa.mtg.cards.ability.selector.SelectorType.PERMANENT;
+import static com.aa.mtg.cards.ability.selector.StatusType.ATTACKING;
+import static com.aa.mtg.cards.ability.selector.StatusType.BLOCKING;
+import static com.aa.mtg.cards.ability.selector.TurnStatusType.YOUR_TURN;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 import static com.aa.mtg.game.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;

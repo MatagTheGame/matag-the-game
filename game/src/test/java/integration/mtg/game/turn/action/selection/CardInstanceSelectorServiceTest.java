@@ -26,10 +26,10 @@ import static com.aa.mtg.cards.selector.PowerToughnessConstraint.PowerOrToughnes
 import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.EQUAL;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.GREATER;
 import static com.aa.mtg.cards.selector.PowerToughnessConstraintType.LESS_OR_EQUAL;
-import static com.aa.mtg.cards.selector.SelectorType.PERMANENT;
-import static com.aa.mtg.cards.selector.StatusType.ATTACKING;
-import static com.aa.mtg.cards.selector.StatusType.BLOCKING;
-import static com.aa.mtg.cards.selector.TurnStatusType.YOUR_TURN;
+import static com.aa.mtg.cards.ability.selector.SelectorType.PERMANENT;
+import static com.aa.mtg.cards.ability.selector.StatusType.ATTACKING;
+import static com.aa.mtg.cards.ability.selector.StatusType.BLOCKING;
+import static com.aa.mtg.cards.ability.selector.TurnStatusType.YOUR_TURN;
 import static com.aa.mtg.cards.sets.CoreSet2019.DAYBREAK_CHAPLAIN;
 import static com.aa.mtg.cards.sets.CoreSet2019.DEATH_BARON;
 import static com.aa.mtg.cards.sets.CoreSet2019.DIREGRAF_GHOUL;

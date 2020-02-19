@@ -1,16 +1,16 @@
 package com.aa.mtg.game.turn.action.target;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
-import static com.aa.mtg.cards.selector.SelectorType.ANY;
+import static com.aa.mtg.cards.ability.selector.SelectorType.ANY;
 import static com.aa.mtg.game.player.PlayerType.OPPONENT;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.action.AbilityAction;
+import com.aa.mtg.cards.ability.selector.SelectorType;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cardinstance.CardInstanceSearch;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
-import com.aa.mtg.cards.selector.SelectorType;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.AbilityActionFactory;

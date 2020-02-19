@@ -1,12 +1,12 @@
 package com.aa.mtg.cardinstance;
 
+import com.aa.mtg.cards.ability.selector.TurnStatusType;
 import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.cards.selector.PowerToughnessConstraint;
-import com.aa.mtg.cards.selector.TurnStatusType;
 import com.aa.mtg.game.status.GameStatus;
 
 import java.util.List;

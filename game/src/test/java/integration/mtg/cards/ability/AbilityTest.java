@@ -1,8 +1,8 @@
 package integration.mtg.cards.ability;
 
 import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.selector.SelectorType;
 import com.aa.mtg.cards.selector.CardInstanceSelector;
-import com.aa.mtg.cards.selector.SelectorType;
 import org.junit.Test;
 
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
