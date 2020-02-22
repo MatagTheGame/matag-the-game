@@ -18,39 +18,39 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(classes = TestUtilsConfiguration.class)
 public class CardInstanceFactoryTest {
 
-    @Autowired
-    private CardInstanceFactory cardInstanceFactory;
+  @Autowired
+  private CardInstanceFactory cardInstanceFactory;
 
-    @Autowired
-    private Cards cards;
+  @Autowired
+  private Cards cards;
 
-    @Autowired
-    private TestUtils testUtils;
+  @Autowired
+  private TestUtils testUtils;
 
-    @Test
-    public void shouldCreateACardInstance() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
+  @Test
+  public void shouldCreateACardInstance() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
 
-        // When
-        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
+    // When
+    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
 
-        // Then
-        assertThat(cardInstance.getId()).isEqualTo(1);
-        assertThat(cardInstance.getOwner()).isEqualTo("player-name");
-    }
+    // Then
+    assertThat(cardInstance.getId()).isEqualTo(1);
+    assertThat(cardInstance.getOwner()).isEqualTo("player-name");
+  }
 
-    @Test
-    public void shouldCreateTwoDifferentCardInstances() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
+  @Test
+  public void shouldCreateTwoDifferentCardInstances() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
 
-        // When
-        CardInstance cardInstance1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
-        CardInstance cardInstance2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Befuddle"), "opponent-name");
+    // When
+    CardInstance cardInstance1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
+    CardInstance cardInstance2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Befuddle"), "opponent-name");
 
-        // Then
-        assertThat(cardInstance1).isNotSameAs(cardInstance2);
-    }
+    // Then
+    assertThat(cardInstance1).isNotSameAs(cardInstance2);
+  }
 
 }

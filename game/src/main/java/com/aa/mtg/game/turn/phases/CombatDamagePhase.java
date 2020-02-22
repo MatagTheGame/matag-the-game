@@ -9,25 +9,25 @@ import static com.aa.mtg.game.turn.phases.EndOfCombatPhase.EC;
 
 @Component
 public class CombatDamagePhase implements Phase {
-    public static final String CD = "CD";
+  public static final String CD = "CD";
 
-    private final CombatService combatService;
-    private final EndOfCombatPhase endOfCombatPhase;
+  private final CombatService combatService;
+  private final EndOfCombatPhase endOfCombatPhase;
 
-    @Autowired
-    public CombatDamagePhase(CombatService combatService, EndOfCombatPhase endOfCombatPhase) {
-        this.combatService = combatService;
-        this.endOfCombatPhase = endOfCombatPhase;
+  @Autowired
+  public CombatDamagePhase(CombatService combatService, EndOfCombatPhase endOfCombatPhase) {
+    this.combatService = combatService;
+    this.endOfCombatPhase = endOfCombatPhase;
+  }
+
+  @Override
+  public void apply(GameStatus gameStatus) {
+    combatService.dealCombatDamage(gameStatus);
+
+    if (!gameStatus.getTurn().isEnded()) {
+      gameStatus.getTurn().setCurrentPhase(EC);
+      gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+      endOfCombatPhase.apply(gameStatus);
     }
-
-    @Override
-    public void apply(GameStatus gameStatus) {
-        combatService.dealCombatDamage(gameStatus);
-
-        if (!gameStatus.getTurn().isEnded()) {
-            gameStatus.getTurn().setCurrentPhase(EC);
-            gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-            endOfCombatPhase.apply(gameStatus);
-        }
-    }
+  }
 }

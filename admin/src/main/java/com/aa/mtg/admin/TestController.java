@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController("test")
 public class TestController {
 
-    @GetMapping
-    public String test() {
-        return "Admin is running.";
-    }
+  @GetMapping
+  public String test() {
+    return "Admin is running.";
+  }
 }

@@ -10,14 +10,14 @@ import java.io.File;
 @Configuration
 @ComponentScan(basePackageClasses = {CardsConfiguration.class})
 public class CardsConfiguration {
-    public static String getResourcesPath() {
-        String cd = new File("").getAbsolutePath();
-        int endPathIndex = cd.lastIndexOf("mtg");
-        return cd.substring(0, endPathIndex + 3).concat("/cards/src/main/resources");
-    }
+  public static String getResourcesPath() {
+    String cd = new File("").getAbsolutePath();
+    int endPathIndex = cd.lastIndexOf("mtg");
+    return cd.substring(0, endPathIndex + 3).concat("/cards/src/main/resources");
+  }
 
-    @Bean
-    public ObjectMapper cardsObjectMapper() {
-        return new ObjectMapper();
-    }
+  @Bean
+  public ObjectMapper cardsObjectMapper() {
+    return new ObjectMapper();
+  }
 }

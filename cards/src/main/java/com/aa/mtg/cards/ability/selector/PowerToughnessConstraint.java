@@ -12,19 +12,19 @@ import lombok.ToString;
 @ToString
 @Builder
 public class PowerToughnessConstraint {
-    public enum PowerOrToughness {
-        POWER, TOUGHNESS
-    }
+  public enum PowerOrToughness {
+    POWER, TOUGHNESS
+  }
 
-    private final PowerOrToughness powerOrToughness;
-    private final PowerToughnessConstraintType powerToughnessConstraintType;
-    private final int value;
+  private final PowerOrToughness powerOrToughness;
+  private final PowerToughnessConstraintType powerToughnessConstraintType;
+  private final int value;
 
-    @JsonCreator
-    public PowerToughnessConstraint(@JsonProperty("powerOrToughness") PowerOrToughness powerOrToughness,
-        @JsonProperty("powerToughnessConstraintType") PowerToughnessConstraintType powerToughnessConstraintType, @JsonProperty("value") int value) {
-        this.powerOrToughness = powerOrToughness;
-        this.powerToughnessConstraintType = powerToughnessConstraintType;
-        this.value = value;
-    }
+  @JsonCreator
+  public PowerToughnessConstraint(@JsonProperty("powerOrToughness") PowerOrToughness powerOrToughness,
+                                  @JsonProperty("powerToughnessConstraintType") PowerToughnessConstraintType powerToughnessConstraintType, @JsonProperty("value") int value) {
+    this.powerOrToughness = powerOrToughness;
+    this.powerToughnessConstraintType = powerToughnessConstraintType;
+    this.value = value;
+  }
 }

@@ -30,66 +30,66 @@ import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
 @Category(Regression.class)
 public class CombatTrampleHasteTest extends AbstractApplicationTest {
 
-    @Autowired
-    private InitTestServiceDecorator initTestServiceDecorator;
+  @Autowired
+  private InitTestServiceDecorator initTestServiceDecorator;
 
-    @Autowired
-    private Cards cards;
+  @Autowired
+  private Cards cards;
 
-    public void setupGame() {
-        initTestServiceDecorator.setInitTestService(new CombatTrampleHasteTest.InitTestServiceForTest());
+  public void setupGame() {
+    initTestServiceDecorator.setInitTestService(new CombatTrampleHasteTest.InitTestServiceForTest());
+  }
+
+  @Test
+  public void combatTrampleHaste() {
+    // Playing card with trample haste
+    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 0).tap();
+    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 1).tap();
+    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 2).tap();
+    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 3).tap();
+    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 4).tap();
+    browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Charging Monstrosaur")).click();
+    browser.player2().getActionHelper().clickContinue();
+
+    // When going to combat
+    browser.player1().getActionHelper().clickContinue();
+    browser.player2().getPhaseHelper().is(BC, PLAYER);
+    browser.player2().getActionHelper().clickContinue();
+    browser.player1().getPhaseHelper().is(DA, PLAYER);
+
+    // When declare attacker
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Charging Monstrosaur")).declareAsAttacker();
+    browser.player1().getActionHelper().clickContinue();
+
+    // Declare blocker
+    browser.player2().getPhaseHelper().is(DA, PLAYER);
+    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Charging Monstrosaur")).select();
+    browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Huatli's Snubhorn")).declareAsBlocker();
+    browser.player2().getActionHelper().clickContinue();
+
+    // No instant played during combat
+    browser.player1().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinue();
+
+    // Then
+    browser.player1().getPhaseHelper().is(M2, PLAYER);
+    browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(17);
+
+    browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Huatli's Snubhorn"));
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Charging Monstrosaur")).hasDamage(2);
+  }
+
+  static class InitTestServiceForTest extends InitTestService {
+    @Override
+    public void initGameStatus(GameStatus gameStatus) {
+      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
+      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
+      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
+      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
+      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
+      addCardToCurrentPlayerHand(gameStatus, cards.get("Charging Monstrosaur"));
+      addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Huatli's Snubhorn"));
     }
-
-    @Test
-    public void combatTrampleHaste() {
-        // Playing card with trample haste
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 0).tap();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 1).tap();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 2).tap();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 3).tap();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 4).tap();
-        browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Charging Monstrosaur")).click();
-        browser.player2().getActionHelper().clickContinue();
-
-        // When going to combat
-        browser.player1().getActionHelper().clickContinue();
-        browser.player2().getPhaseHelper().is(BC, PLAYER);
-        browser.player2().getActionHelper().clickContinue();
-        browser.player1().getPhaseHelper().is(DA, PLAYER);
-
-        // When declare attacker
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Charging Monstrosaur")).declareAsAttacker();
-        browser.player1().getActionHelper().clickContinue();
-
-        // Declare blocker
-        browser.player2().getPhaseHelper().is(DA, PLAYER);
-        browser.player2().getActionHelper().clickContinue();
-        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Charging Monstrosaur")).select();
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Huatli's Snubhorn")).declareAsBlocker();
-        browser.player2().getActionHelper().clickContinue();
-
-        // No instant played during combat
-        browser.player1().getActionHelper().clickContinue();
-        browser.player2().getActionHelper().clickContinue();
-
-        // Then
-        browser.player1().getPhaseHelper().is(M2, PLAYER);
-        browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(17);
-
-        browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Huatli's Snubhorn"));
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Charging Monstrosaur")).hasDamage(2);
-    }
-
-    static class InitTestServiceForTest extends InitTestService {
-        @Override
-        public void initGameStatus(GameStatus gameStatus) {
-            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
-            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
-            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
-            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
-            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
-            addCardToCurrentPlayerHand(gameStatus, cards.get("Charging Monstrosaur"));
-            addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Huatli's Snubhorn"));
-        }
-    }
+  }
 }

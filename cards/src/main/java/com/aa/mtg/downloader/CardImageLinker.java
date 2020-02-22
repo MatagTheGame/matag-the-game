@@ -28,6 +28,6 @@ public class CardImageLinker {
   @SneakyThrows
   private String readHttpResource(String url) {
     return new BufferedReader(new InputStreamReader(new URL(url).openStream()))
-        .lines().collect(Collectors.joining("\n"));
+      .lines().collect(Collectors.joining("\n"));
   }
 }

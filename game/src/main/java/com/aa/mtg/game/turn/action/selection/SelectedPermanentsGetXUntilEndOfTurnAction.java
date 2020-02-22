@@ -12,20 +12,20 @@ import java.util.List;
 @Component
 public class SelectedPermanentsGetXUntilEndOfTurnAction implements AbilityAction {
 
-    private final CardInstanceSelectorService cardInstanceSelectorService;
-    private final PermanentService permanentService;
+  private final CardInstanceSelectorService cardInstanceSelectorService;
+  private final PermanentService permanentService;
 
-    public SelectedPermanentsGetXUntilEndOfTurnAction(CardInstanceSelectorService cardInstanceSelectorService, PermanentService permanentService) {
-        this.cardInstanceSelectorService = cardInstanceSelectorService;
-        this.permanentService = permanentService;
-    }
+  public SelectedPermanentsGetXUntilEndOfTurnAction(CardInstanceSelectorService cardInstanceSelectorService, PermanentService permanentService) {
+    this.cardInstanceSelectorService = cardInstanceSelectorService;
+    this.permanentService = permanentService;
+  }
 
-    @Override
-    public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
-        List<CardInstance> cards = cardInstanceSelectorService.select(gameStatus, cardInstance, ability.getCardInstanceSelector()).getCards();
-        for (CardInstance card : cards) {
-            permanentService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), card);
-        }
+  @Override
+  public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
+    List<CardInstance> cards = cardInstanceSelectorService.select(gameStatus, cardInstance, ability.getCardInstanceSelector()).getCards();
+    for (CardInstance card : cards) {
+      permanentService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), card);
     }
+  }
 
 }

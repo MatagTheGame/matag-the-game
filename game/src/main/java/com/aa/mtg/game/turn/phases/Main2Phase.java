@@ -8,19 +8,19 @@ import static com.aa.mtg.game.turn.phases.EndTurnPhase.ET;
 
 @Component
 public class Main2Phase implements Phase {
-    public static final String M2 = "M2";
+  public static final String M2 = "M2";
 
-    private final EndTurnPhase endTurnPhase;
+  private final EndTurnPhase endTurnPhase;
 
-    @Autowired
-    public Main2Phase(EndTurnPhase endTurnPhase) {
-        this.endTurnPhase = endTurnPhase;
-    }
+  @Autowired
+  public Main2Phase(EndTurnPhase endTurnPhase) {
+    this.endTurnPhase = endTurnPhase;
+  }
 
-    @Override
-    public void apply(GameStatus gameStatus) {
-        gameStatus.getTurn().setCurrentPhase(ET);
-        gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-        endTurnPhase.apply(gameStatus);
-    }
+  @Override
+  public void apply(GameStatus gameStatus) {
+    gameStatus.getTurn().setCurrentPhase(ET);
+    gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+    endTurnPhase.apply(gameStatus);
+  }
 }

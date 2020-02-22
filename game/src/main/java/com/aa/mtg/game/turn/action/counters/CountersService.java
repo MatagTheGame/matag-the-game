@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class CountersService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CountersService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(CountersService.class);
 
-    public void addPlus1Counters(GameStatus gameStatus, CardInstance target, int counters) {
-        if (counters > 0) {
-            target.getModifiers().getCounters().addPlus1Counters(1);
-            LOGGER.info(target.getIdAndName() + " got " + counters + " +1/+1 counters");
-        }
+  public void addPlus1Counters(GameStatus gameStatus, CardInstance target, int counters) {
+    if (counters > 0) {
+      target.getModifiers().getCounters().addPlus1Counters(1);
+      LOGGER.info(target.getIdAndName() + " got " + counters + " +1/+1 counters");
     }
+  }
 }

@@ -10,24 +10,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DrawXCardsAction implements AbilityAction {
-    private final DrawXCardsService drawXCardsService;
+  private final DrawXCardsService drawXCardsService;
 
-    @Autowired
-    public DrawXCardsAction(DrawXCardsService drawXCardsService) {
-        this.drawXCardsService = drawXCardsService;
+  @Autowired
+  public DrawXCardsAction(DrawXCardsService drawXCardsService) {
+    this.drawXCardsService = drawXCardsService;
+  }
+
+  @Override
+  public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
+    int cardsToDraw = Integer.valueOf(ability.getParameter(0));
+
+    Player player;
+    if (cardInstance == null) {
+      player = gameStatus.getCurrentPlayer();
+    } else {
+      player = gameStatus.getPlayerByName(cardInstance.getController());
     }
 
-    @Override
-    public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
-        int cardsToDraw = Integer.valueOf(ability.getParameter(0));
-
-        Player player;
-        if (cardInstance == null) {
-            player = gameStatus.getCurrentPlayer();
-        } else {
-            player = gameStatus.getPlayerByName(cardInstance.getController());
-        }
-
-        drawXCardsService.drawXCards(player, cardsToDraw);
-    }
+    drawXCardsService.drawXCards(player, cardsToDraw);
+  }
 }

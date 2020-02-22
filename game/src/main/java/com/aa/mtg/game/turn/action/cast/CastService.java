@@ -22,70 +22,70 @@ import java.util.Map;
 @Component
 public class CastService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(CastService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(CastService.class);
 
-    private final TargetCheckerService targetCheckerService;
-    private final ManaCountService manaCountService;
-    private final TapPermanentService tapPermanentService;
-    private final CostService costService;
+  private final TargetCheckerService targetCheckerService;
+  private final ManaCountService manaCountService;
+  private final TapPermanentService tapPermanentService;
+  private final CostService costService;
 
-    @Autowired
-    public CastService(TargetCheckerService targetCheckerService, ManaCountService manaCountService, TapPermanentService tapPermanentService, CostService costService) {
-        this.targetCheckerService = targetCheckerService;
-        this.manaCountService = manaCountService;
-        this.tapPermanentService = tapPermanentService;
-        this.costService = costService;
+  @Autowired
+  public CastService(TargetCheckerService targetCheckerService, ManaCountService manaCountService, TapPermanentService tapPermanentService, CostService costService) {
+    this.targetCheckerService = targetCheckerService;
+    this.manaCountService = manaCountService;
+    this.tapPermanentService = tapPermanentService;
+    this.costService = costService;
+  }
+
+  public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
+    Turn turn = gameStatus.getTurn();
+    Player activePlayer = gameStatus.getActivePlayer();
+
+    CardInstance cardToCast;
+    String castedFrom;
+    if (activePlayer.getHand().hasCardById(cardId)) {
+      cardToCast = activePlayer.getHand().findCardById(cardId);
+      castedFrom = "HAND";
+    } else {
+      cardToCast = activePlayer.getBattlefield().findCardById(cardId);
+      castedFrom = "BATTLEFIELD";
     }
 
-    public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
-        Turn turn = gameStatus.getTurn();
-        Player activePlayer = gameStatus.getActivePlayer();
+    if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !cardToCast.getCard().isInstantSpeed()) {
+      throw new MessageException("You can only play Instants during a NON main phases.");
 
-        CardInstance cardToCast;
-        String castedFrom;
-        if (activePlayer.getHand().hasCardById(cardId)) {
-            cardToCast = activePlayer.getHand().findCardById(cardId);
-            castedFrom = "HAND";
-        } else {
-            cardToCast = activePlayer.getBattlefield().findCardById(cardId);
-            castedFrom = "BATTLEFIELD";
-        }
+    } else {
+      checkSpellOrAbilityCost(mana, activePlayer, cardToCast, playedAbility);
+      targetCheckerService.checkSpellOrAbilityTargetRequisites(cardToCast, gameStatus, targetsIdsForCardIds, playedAbility);
 
-        if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !cardToCast.getCard().isInstantSpeed()) {
-            throw new MessageException("You can only play Instants during a NON main phases.");
+      if (castedFrom.equals("HAND")) {
+        activePlayer.getHand().extractCardById(cardId);
+        cardToCast.setController(activePlayer.getName());
+        gameStatus.getStack().add(cardToCast);
 
-        } else {
-            checkSpellOrAbilityCost(mana, activePlayer, cardToCast, playedAbility);
-            targetCheckerService.checkSpellOrAbilityTargetRequisites(cardToCast, gameStatus, targetsIdsForCardIds, playedAbility);
+      } else {
+        CardInstanceAbility triggeredAbility = cardToCast.getAbilities().get(0);
+        cardToCast.getTriggeredAbilities().add(triggeredAbility);
+        LOGGER.info("Player {} triggered ability {} for {}.", activePlayer.getName(), triggeredAbility.getAbilityType(), cardToCast.getModifiers());
+        gameStatus.getStack().add(cardToCast);
+      }
 
-            if (castedFrom.equals("HAND")) {
-                activePlayer.getHand().extractCardById(cardId);
-                cardToCast.setController(activePlayer.getName());
-                gameStatus.getStack().add(cardToCast);
+      gameStatus.getTurn().passPriority(gameStatus);
 
-            } else {
-                CardInstanceAbility triggeredAbility = cardToCast.getAbilities().get(0);
-                cardToCast.getTriggeredAbilities().add(triggeredAbility);
-                LOGGER.info("Player {} triggered ability {} for {}.", activePlayer.getName(), triggeredAbility.getAbilityType(), cardToCast.getModifiers());
-                gameStatus.getStack().add(cardToCast);
-            }
-
-            gameStatus.getTurn().passPriority(gameStatus);
-
-            // FIXME Antonio: Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
-            mana.keySet().stream()
-                .map(cardInstanceId -> activePlayer.getBattlefield().findCardById(cardInstanceId))
-                .forEach(card -> tapPermanentService.tap(gameStatus, card.getId()));
-            gameStatus.getTurn().setLastManaPaid(mana);
-        }
+      // FIXME Antonio: Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
+      mana.keySet().stream()
+        .map(cardInstanceId -> activePlayer.getBattlefield().findCardById(cardInstanceId))
+        .forEach(card -> tapPermanentService.tap(gameStatus, card.getId()));
+      gameStatus.getTurn().setLastManaPaid(mana);
     }
+  }
 
-    private void checkSpellOrAbilityCost(Map<Integer, List<String>> mana, Player currentPlayer, CardInstance cardToCast, String ability) {
-        List<Cost> paidCost = manaCountService.verifyManaPaid(mana, currentPlayer);
-        if (!costService.isCastingCostFulfilled(cardToCast.getCard(), paidCost, ability)) {
-            throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
-        }
+  private void checkSpellOrAbilityCost(Map<Integer, List<String>> mana, Player currentPlayer, CardInstance cardToCast, String ability) {
+    List<Cost> paidCost = manaCountService.verifyManaPaid(mana, currentPlayer);
+    if (!costService.isCastingCostFulfilled(cardToCast.getCard(), paidCost, ability)) {
+      throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
     }
+  }
 
 
 }

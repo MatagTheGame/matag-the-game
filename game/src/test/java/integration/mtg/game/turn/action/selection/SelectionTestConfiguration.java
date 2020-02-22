@@ -14,9 +14,9 @@ import org.springframework.context.annotation.Primary;
 @Import(TestUtilsConfiguration.class)
 public class SelectionTestConfiguration {
 
-    @Bean
-    @Primary
-    public PermanentService permanentService() {
-        return Mockito.mock(PermanentService.class);
-    }
+  @Bean
+  @Primary
+  public PermanentService permanentService() {
+    return Mockito.mock(PermanentService.class);
+  }
 }

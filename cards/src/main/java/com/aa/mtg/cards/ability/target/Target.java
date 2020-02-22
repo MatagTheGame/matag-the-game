@@ -13,15 +13,15 @@ import lombok.ToString;
 @ToString
 @Builder
 public class Target {
-    private final CardInstanceSelector cardInstanceSelector;
-    private final boolean optional;
-    private final boolean other;
+  private final CardInstanceSelector cardInstanceSelector;
+  private final boolean optional;
+  private final boolean other;
 
-    @JsonCreator
-    public Target(@JsonProperty("cardInstanceSelector") CardInstanceSelector cardInstanceSelector, @JsonProperty("optional") boolean optional,
-        @JsonProperty("other") boolean other) {
-        this.cardInstanceSelector = cardInstanceSelector;
-        this.optional = optional;
-        this.other = other;
-    }
+  @JsonCreator
+  public Target(@JsonProperty("cardInstanceSelector") CardInstanceSelector cardInstanceSelector, @JsonProperty("optional") boolean optional,
+                @JsonProperty("other") boolean other) {
+    this.cardInstanceSelector = cardInstanceSelector;
+    this.optional = optional;
+    this.other = other;
+  }
 }

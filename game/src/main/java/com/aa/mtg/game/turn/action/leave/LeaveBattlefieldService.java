@@ -15,33 +15,33 @@ import static com.aa.mtg.cards.properties.Type.ENCHANTMENT;
 
 @Component
 public class LeaveBattlefieldService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(LeaveBattlefieldService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(LeaveBattlefieldService.class);
 
-    private final AttachService attachService;
-    private final AttachmentsService attachmentsService;
-    private final DestroyPermanentService destroyPermanentService;
+  private final AttachService attachService;
+  private final AttachmentsService attachmentsService;
+  private final DestroyPermanentService destroyPermanentService;
 
-    @Lazy
-    @Autowired
-    public LeaveBattlefieldService(AttachService attachService, AttachmentsService attachmentsService, DestroyPermanentService destroyPermanentService) {
-        this.attachService = attachService;
-        this.attachmentsService = attachmentsService;
-        this.destroyPermanentService = destroyPermanentService;
+  @Lazy
+  @Autowired
+  public LeaveBattlefieldService(AttachService attachService, AttachmentsService attachmentsService, DestroyPermanentService destroyPermanentService) {
+    this.attachService = attachService;
+    this.attachmentsService = attachmentsService;
+    this.destroyPermanentService = destroyPermanentService;
+  }
+
+  public void leaveTheBattlefield(GameStatus gameStatus, int permanentId) {
+    CardInstance cardInstance = gameStatus.extractCardByIdFromAnyBattlefield(permanentId);
+    cardInstance.resetAllModifiers();
+
+    for (CardInstance attachedCard : attachmentsService.getAttachedCards(gameStatus, cardInstance)) {
+      if (attachedCard.isOfType(ENCHANTMENT)) {
+        destroyPermanentService.destroy(gameStatus, attachedCard.getId());
+
+      } else if (attachedCard.isOfType(ARTIFACT)) {
+        attachService.detach(cardInstance, attachedCard);
+      }
     }
 
-    public void leaveTheBattlefield(GameStatus gameStatus, int permanentId) {
-        CardInstance cardInstance = gameStatus.extractCardByIdFromAnyBattlefield(permanentId);
-        cardInstance.resetAllModifiers();
-
-        for (CardInstance attachedCard : attachmentsService.getAttachedCards(gameStatus, cardInstance)) {
-            if (attachedCard.isOfType(ENCHANTMENT)) {
-                destroyPermanentService.destroy(gameStatus, attachedCard.getId());
-
-            } else if (attachedCard.isOfType(ARTIFACT)) {
-                attachService.detach(cardInstance, attachedCard);
-            }
-        }
-
-        LOGGER.info("{} left the battlefield.", cardInstance.getIdAndName());
-    }
+    LOGGER.info("{} left the battlefield.", cardInstance.getIdAndName());
+  }
 }

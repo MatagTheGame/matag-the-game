@@ -23,78 +23,78 @@ import java.util.Optional;
 @Component
 public class PermanentService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PermanentService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(PermanentService.class);
 
-    private final DealDamageToCreatureService dealDamageToCreatureService;
-    private final DealDamageToPlayerService dealDamageToPlayerService;
-    private final DestroyPermanentService destroyPermanentService;
-    private final TapPermanentService tapPermanentService;
-    private final ReturnPermanentToHandService returnPermanentToHandService;
-    private final GainControlPermanentService gainControlPermanentService;
-    private final CountersService countersService;
-    private final AbilityService abilityService;
-    private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
+  private final DealDamageToCreatureService dealDamageToCreatureService;
+  private final DealDamageToPlayerService dealDamageToPlayerService;
+  private final DestroyPermanentService destroyPermanentService;
+  private final TapPermanentService tapPermanentService;
+  private final ReturnPermanentToHandService returnPermanentToHandService;
+  private final GainControlPermanentService gainControlPermanentService;
+  private final CountersService countersService;
+  private final AbilityService abilityService;
+  private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
 
-    @Autowired
-    public PermanentService(DealDamageToCreatureService dealDamageToCreatureService, DealDamageToPlayerService dealDamageToPlayerService, DestroyPermanentService destroyPermanentService,
-                            TapPermanentService tapPermanentService, ReturnPermanentToHandService returnPermanentToHandService, GainControlPermanentService gainControlPermanentService, CountersService countersService, AbilityService abilityService, CardInstanceAbilityFactory cardInstanceAbilityFactory) {
-        this.dealDamageToCreatureService = dealDamageToCreatureService;
-        this.dealDamageToPlayerService = dealDamageToPlayerService;
-        this.destroyPermanentService = destroyPermanentService;
-        this.tapPermanentService = tapPermanentService;
-        this.returnPermanentToHandService = returnPermanentToHandService;
-        this.gainControlPermanentService = gainControlPermanentService;
-        this.countersService = countersService;
-        this.abilityService = abilityService;
-        this.cardInstanceAbilityFactory = cardInstanceAbilityFactory;
+  @Autowired
+  public PermanentService(DealDamageToCreatureService dealDamageToCreatureService, DealDamageToPlayerService dealDamageToPlayerService, DestroyPermanentService destroyPermanentService,
+                          TapPermanentService tapPermanentService, ReturnPermanentToHandService returnPermanentToHandService, GainControlPermanentService gainControlPermanentService, CountersService countersService, AbilityService abilityService, CardInstanceAbilityFactory cardInstanceAbilityFactory) {
+    this.dealDamageToCreatureService = dealDamageToCreatureService;
+    this.dealDamageToPlayerService = dealDamageToPlayerService;
+    this.destroyPermanentService = destroyPermanentService;
+    this.tapPermanentService = tapPermanentService;
+    this.returnPermanentToHandService = returnPermanentToHandService;
+    this.gainControlPermanentService = gainControlPermanentService;
+    this.countersService = countersService;
+    this.abilityService = abilityService;
+    this.cardInstanceAbilityFactory = cardInstanceAbilityFactory;
+  }
+
+  public void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, List<String> parameters, CardInstance target) {
+    for (String parameter : parameters) {
+      thatPermanentGets(cardInstance, gameStatus, parameter, target);
+    }
+  }
+
+  private void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
+    PowerToughness PowerToughness = abilityService.powerToughnessFromParameter(parameter);
+    target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(PowerToughness);
+
+    Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
+    ability.ifPresent(value -> target.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
+
+    int damage = abilityService.damageFromParameter(parameter);
+    dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false);
+
+    int controllerDamage = abilityService.controllerDamageFromParameter(parameter);
+    dealDamageToPlayerService.dealDamageToPlayer(gameStatus, controllerDamage, gameStatus.getPlayerByName(cardInstance.getController()));
+
+    if (abilityService.destroyedFromParameter(parameter)) {
+      destroyPermanentService.destroy(gameStatus, target.getId());
     }
 
-    public void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, List<String> parameters, CardInstance target) {
-        for (String parameter : parameters) {
-            thatPermanentGets(cardInstance, gameStatus, parameter, target);
-        }
+    if (abilityService.tappedFromParameter(parameter)) {
+      tapPermanentService.tap(gameStatus, target.getId());
     }
 
-    private void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
-        PowerToughness PowerToughness = abilityService.powerToughnessFromParameter(parameter);
-        target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(PowerToughness);
-
-        Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
-        ability.ifPresent(value -> target.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
-
-        int damage = abilityService.damageFromParameter(parameter);
-        dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false);
-
-        int controllerDamage = abilityService.controllerDamageFromParameter(parameter);
-        dealDamageToPlayerService.dealDamageToPlayer(gameStatus, controllerDamage, gameStatus.getPlayerByName(cardInstance.getController()));
-
-        if (abilityService.destroyedFromParameter(parameter)) {
-            destroyPermanentService.destroy(gameStatus, target.getId());
-        }
-
-        if (abilityService.tappedFromParameter(parameter)) {
-            tapPermanentService.tap(gameStatus, target.getId());
-        }
-
-        if (abilityService.tappedDoesNotUntapNextTurnFromParameter(parameter)) {
-            tapPermanentService.tapDoesNotUntapNextTurn(gameStatus, target.getId());
-        }
-
-        if (abilityService.untappedFromParameter(parameter)) {
-            tapPermanentService.untap(gameStatus, target.getId());
-        }
-
-        if (abilityService.returnToOwnerHandFromParameter(parameter)) {
-            returnPermanentToHandService.returnPermanentToHand(gameStatus, target.getId());
-        }
-
-        if (abilityService.controlledFromParameter(parameter)) {
-            gainControlPermanentService.gainControlUntilEndOfTurn(gameStatus, target, cardInstance.getController());
-        }
-
-        int counters = abilityService.plus1CountersFromParameter(parameter);
-        countersService.addPlus1Counters(gameStatus, target, counters);
-
-        LOGGER.info("PermanentService: {} target {} which gets {}", cardInstance.getIdAndName(), target.getIdAndName(), parameter);
+    if (abilityService.tappedDoesNotUntapNextTurnFromParameter(parameter)) {
+      tapPermanentService.tapDoesNotUntapNextTurn(gameStatus, target.getId());
     }
+
+    if (abilityService.untappedFromParameter(parameter)) {
+      tapPermanentService.untap(gameStatus, target.getId());
+    }
+
+    if (abilityService.returnToOwnerHandFromParameter(parameter)) {
+      returnPermanentToHandService.returnPermanentToHand(gameStatus, target.getId());
+    }
+
+    if (abilityService.controlledFromParameter(parameter)) {
+      gainControlPermanentService.gainControlUntilEndOfTurn(gameStatus, target, cardInstance.getController());
+    }
+
+    int counters = abilityService.plus1CountersFromParameter(parameter);
+    countersService.addPlus1Counters(gameStatus, target, counters);
+
+    LOGGER.info("PermanentService: {} target {} which gets {}", cardInstance.getIdAndName(), target.getIdAndName(), parameter);
+  }
 }

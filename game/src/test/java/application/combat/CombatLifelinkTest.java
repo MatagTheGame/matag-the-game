@@ -28,40 +28,40 @@ import static com.aa.mtg.player.PlayerType.PLAYER;
 @Category(Regression.class)
 public class CombatLifelinkTest extends AbstractApplicationTest {
 
-    @Autowired
-    private InitTestServiceDecorator initTestServiceDecorator;
+  @Autowired
+  private InitTestServiceDecorator initTestServiceDecorator;
 
-    @Autowired
-    private Cards cards;
+  @Autowired
+  private Cards cards;
 
-    public void setupGame() {
-        initTestServiceDecorator.setInitTestService(new CombatLifelinkTest.InitTestServiceForTest());
+  public void setupGame() {
+    initTestServiceDecorator.setInitTestService(new CombatLifelinkTest.InitTestServiceForTest());
+  }
+
+  @Test
+  public void combatLifelink() {
+    // When going to combat
+    browser.player1().getActionHelper().clickContinue();
+    browser.player2().getPhaseHelper().is(BC, PLAYER);
+    browser.player2().getActionHelper().clickContinue();
+    browser.player1().getPhaseHelper().is(DA, PLAYER);
+
+    // When attacking
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Charity Extractor")).declareAsAttacker();
+    browser.player1().getActionHelper().clickContinue();
+    browser.player2().getPhaseHelper().is(DA, PLAYER);
+    browser.player2().getActionHelper().clickContinue();
+
+    // Then
+    browser.player1().getPhaseHelper().is(M2, PLAYER);
+    browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(19);
+    browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(21);
+  }
+
+  static class InitTestServiceForTest extends InitTestService {
+    @Override
+    public void initGameStatus(GameStatus gameStatus) {
+      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Charity Extractor"));
     }
-
-    @Test
-    public void combatLifelink() {
-        // When going to combat
-        browser.player1().getActionHelper().clickContinue();
-        browser.player2().getPhaseHelper().is(BC, PLAYER);
-        browser.player2().getActionHelper().clickContinue();
-        browser.player1().getPhaseHelper().is(DA, PLAYER);
-
-        // When attacking
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Charity Extractor")).declareAsAttacker();
-        browser.player1().getActionHelper().clickContinue();
-        browser.player2().getPhaseHelper().is(DA, PLAYER);
-        browser.player2().getActionHelper().clickContinue();
-
-        // Then
-        browser.player1().getPhaseHelper().is(M2, PLAYER);
-        browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(19);
-        browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(21);
-    }
-
-    static class InitTestServiceForTest extends InitTestService {
-        @Override
-        public void initGameStatus(GameStatus gameStatus) {
-            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Charity Extractor"));
-        }
-    }
+  }
 }

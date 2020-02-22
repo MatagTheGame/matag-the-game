@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class GainControlPermanentService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GainControlPermanentService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(GainControlPermanentService.class);
 
-    public void gainControlUntilEndOfTurn(GameStatus gameStatus, CardInstance target, String newControllerName) {
-        target.getModifiers().setControllerUntilEndOfTurn(newControllerName);
-        LOGGER.info("Changed controller until end of turn of " + target.getIdAndName() + " to " + newControllerName);
-    }
+  public void gainControlUntilEndOfTurn(GameStatus gameStatus, CardInstance target, String newControllerName) {
+    target.getModifiers().setControllerUntilEndOfTurn(newControllerName);
+    LOGGER.info("Changed controller until end of turn of " + target.getIdAndName() + " to " + newControllerName);
+  }
 }

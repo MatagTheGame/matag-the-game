@@ -12,33 +12,33 @@ import static com.aa.mtg.cards.properties.Type.CREATURE;
 @Component
 public class EnterCardIntoBattlefieldService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EnterCardIntoBattlefieldService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(EnterCardIntoBattlefieldService.class);
 
-    private final EntersTheBattlefieldWithService entersTheBattlefieldWithService;
-    private final WhenEnterTheBattlefieldService whenEnterTheBattlefieldService;
+  private final EntersTheBattlefieldWithService entersTheBattlefieldWithService;
+  private final WhenEnterTheBattlefieldService whenEnterTheBattlefieldService;
 
-    @Autowired
-    public EnterCardIntoBattlefieldService(
-            EntersTheBattlefieldWithService entersTheBattlefieldWithService,
-            WhenEnterTheBattlefieldService whenEnterTheBattlefieldService) {
-        this.entersTheBattlefieldWithService = entersTheBattlefieldWithService;
-        this.whenEnterTheBattlefieldService = whenEnterTheBattlefieldService;
+  @Autowired
+  public EnterCardIntoBattlefieldService(
+    EntersTheBattlefieldWithService entersTheBattlefieldWithService,
+    WhenEnterTheBattlefieldService whenEnterTheBattlefieldService) {
+    this.entersTheBattlefieldWithService = entersTheBattlefieldWithService;
+    this.whenEnterTheBattlefieldService = whenEnterTheBattlefieldService;
+  }
+
+  public void enter(GameStatus gameStatus, CardInstance cardInstance) {
+    String controller = cardInstance.getController();
+    gameStatus.getPlayerByName(controller).getBattlefield().addCard(cardInstance);
+
+    cardInstance.getModifiers().setPermanentId(gameStatus.nextCardId());
+
+    if (cardInstance.isOfType(CREATURE)) {
+      cardInstance.getModifiers().setSummoningSickness(true);
     }
 
-    public void enter(GameStatus gameStatus, CardInstance cardInstance) {
-        String controller = cardInstance.getController();
-        gameStatus.getPlayerByName(controller).getBattlefield().addCard(cardInstance);
+    LOGGER.info(cardInstance.getIdAndName() + " entered the battlefield.");
 
-        cardInstance.getModifiers().setPermanentId(gameStatus.nextCardId());
-
-        if (cardInstance.isOfType(CREATURE)) {
-            cardInstance.getModifiers().setSummoningSickness(true);
-        }
-
-        LOGGER.info(cardInstance.getIdAndName() + " entered the battlefield.");
-
-        entersTheBattlefieldWithService.entersTheBattlefieldWith(gameStatus, cardInstance);
-        whenEnterTheBattlefieldService.whenEnterTheBattlefield(gameStatus, cardInstance);
-    }
+    entersTheBattlefieldWithService.entersTheBattlefieldWith(gameStatus, cardInstance);
+    whenEnterTheBattlefieldService.whenEnterTheBattlefield(gameStatus, cardInstance);
+  }
 
 }

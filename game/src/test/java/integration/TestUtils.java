@@ -46,8 +46,8 @@ public class TestUtils {
 
   private List<CardInstance> testLibrary(GameStatus gameStatus, String playerName) {
     return IntStream.rangeClosed(1, 40)
-            .boxed()
-            .map(i -> cardInstanceFactory.create(gameStatus, i, cards.get("Plains"), playerName))
-            .collect(Collectors.toList());
+      .boxed()
+      .map(i -> cardInstanceFactory.create(gameStatus, i, cards.get("Plains"), playerName))
+      .collect(Collectors.toList());
   }
 }

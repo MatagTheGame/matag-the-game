@@ -15,10 +15,10 @@ import static java.util.Collections.emptyList;
 public class CardUtils {
   public static String normalizeCardName(String cardName) {
     return cardName.toLowerCase()
-            .replaceAll(" ", "_")
-            .replaceAll("-", "_")
-            .replaceAll(",", "")
-            .replaceAll("'", "");
+      .replaceAll(" ", "_")
+      .replaceAll("-", "_")
+      .replaceAll(",", "")
+      .replaceAll("'", "");
   }
 
   public static Card hiddenCard() {
@@ -27,10 +27,10 @@ public class CardUtils {
 
   public static List<Color> colorsOfManaThatCanGenerate(Card card) {
     return card.getAbilities().stream()
-            .filter(ability -> ability.getAbilityType().equals(TAP_ADD_MANA))
-            .flatMap(ability -> ability.getParameters().stream())
-            .map(Color::valueOf)
-            .collect(Collectors.toList());
+      .filter(ability -> ability.getAbilityType().equals(TAP_ADD_MANA))
+      .flatMap(ability -> ability.getParameters().stream())
+      .map(Color::valueOf)
+      .collect(Collectors.toList());
   }
 
   public static boolean isColorless(Card card) {

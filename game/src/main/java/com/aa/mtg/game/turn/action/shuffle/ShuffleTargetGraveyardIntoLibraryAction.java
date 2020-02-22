@@ -13,17 +13,17 @@ import java.util.ArrayList;
 
 @Component
 public class ShuffleTargetGraveyardIntoLibraryAction implements AbilityAction {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ShuffleTargetGraveyardIntoLibraryAction.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ShuffleTargetGraveyardIntoLibraryAction.class);
 
-    @Override
-    public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
-        String targetPlayerName = (String)cardInstance.getModifiers().getTargets().get(0);
-        Player targetPlayer = gameStatus.getPlayerByName(targetPlayerName);
+  @Override
+  public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
+    String targetPlayerName = (String) cardInstance.getModifiers().getTargets().get(0);
+    Player targetPlayer = gameStatus.getPlayerByName(targetPlayerName);
 
-        ArrayList<CardInstance> graveyardCards = targetPlayer.getGraveyard().extractAllCards();
-        targetPlayer.getLibrary().addCards(graveyardCards);
-        targetPlayer.getLibrary().shuffle();
+    ArrayList<CardInstance> graveyardCards = targetPlayer.getGraveyard().extractAllCards();
+    targetPlayer.getLibrary().addCards(graveyardCards);
+    targetPlayer.getLibrary().shuffle();
 
-        LOGGER.info("{} drew shuffled graveyard into library.", targetPlayer.getName());
-    }
+    LOGGER.info("{} drew shuffled graveyard into library.", targetPlayer.getName());
+  }
 }

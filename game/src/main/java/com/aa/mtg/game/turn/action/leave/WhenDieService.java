@@ -17,30 +17,30 @@ import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_DIE;
 @Component
 public class WhenDieService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WhenDieService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(WhenDieService.class);
 
-    private final CardInstanceSelectorService cardInstanceSelectorService;
+  private final CardInstanceSelectorService cardInstanceSelectorService;
 
-    @Autowired
-    public WhenDieService(CardInstanceSelectorService cardInstanceSelectorService) {
-        this.cardInstanceSelectorService = cardInstanceSelectorService;
-    }
+  @Autowired
+  public WhenDieService(CardInstanceSelectorService cardInstanceSelectorService) {
+    this.cardInstanceSelectorService = cardInstanceSelectorService;
+  }
 
-    void whenDie(GameStatus gameStatus, CardInstance cardInstance) {
-        List<CardInstance> cardsWithDieAbility = gameStatus.getAllBattlefieldCards().withTriggerSubtype(WHEN_DIE).getCards();
+  void whenDie(GameStatus gameStatus, CardInstance cardInstance) {
+    List<CardInstance> cardsWithDieAbility = gameStatus.getAllBattlefieldCards().withTriggerSubtype(WHEN_DIE).getCards();
 
-        for (CardInstance cardWithDieAbility : cardsWithDieAbility) {
-            for (CardInstanceAbility ability : cardWithDieAbility.getAbilitiesByTriggerSubType(WHEN_DIE)) {
-                CardInstanceSearch selectionForCardWithEnterAbility = cardInstanceSelectorService.select(gameStatus, cardWithDieAbility, ability.getTrigger().getCardInstanceSelector());
-                if (selectionForCardWithEnterAbility.withId(cardInstance.getId()).isPresent()) {
-                    cardWithDieAbility.getTriggeredAbilities().add(ability);
-                }
-            }
-
-            if (!cardWithDieAbility.getTriggeredAbilities().isEmpty()) {
-                LOGGER.info("{} triggered {} because of {} dying.", cardInstance.getIdAndName(), WHEN_DIE, cardInstance.getIdAndName());
-                gameStatus.getStack().add(cardWithDieAbility);
-            }
+    for (CardInstance cardWithDieAbility : cardsWithDieAbility) {
+      for (CardInstanceAbility ability : cardWithDieAbility.getAbilitiesByTriggerSubType(WHEN_DIE)) {
+        CardInstanceSearch selectionForCardWithEnterAbility = cardInstanceSelectorService.select(gameStatus, cardWithDieAbility, ability.getTrigger().getCardInstanceSelector());
+        if (selectionForCardWithEnterAbility.withId(cardInstance.getId()).isPresent()) {
+          cardWithDieAbility.getTriggeredAbilities().add(ability);
         }
+      }
+
+      if (!cardWithDieAbility.getTriggeredAbilities().isEmpty()) {
+        LOGGER.info("{} triggered {} because of {} dying.", cardInstance.getIdAndName(), WHEN_DIE, cardInstance.getIdAndName());
+        gameStatus.getStack().add(cardWithDieAbility);
+      }
     }
+  }
 }

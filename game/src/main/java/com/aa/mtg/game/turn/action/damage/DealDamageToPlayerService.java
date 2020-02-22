@@ -11,19 +11,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class DealDamageToPlayerService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DealDamageToPlayerService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DealDamageToPlayerService.class);
 
-    private final LifeService lifeService;
+  private final LifeService lifeService;
 
-    @Autowired
-    public DealDamageToPlayerService(LifeService lifeService) {
-        this.lifeService = lifeService;
+  @Autowired
+  public DealDamageToPlayerService(LifeService lifeService) {
+    this.lifeService = lifeService;
+  }
+
+  public void dealDamageToPlayer(GameStatus gameStatus, int damage, Player player) {
+    if (damage > 0) {
+      lifeService.subtract(player, damage, gameStatus);
+      LOGGER.info("AbilityActionExecuted: deals {} damage to {}", damage, player.getName());
     }
-
-    public void dealDamageToPlayer(GameStatus gameStatus, int damage, Player player) {
-        if (damage > 0) {
-            lifeService.subtract(player, damage, gameStatus);
-            LOGGER.info("AbilityActionExecuted: deals {} damage to {}", damage, player.getName());
-        }
-    }
+  }
 }

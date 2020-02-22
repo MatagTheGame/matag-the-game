@@ -9,20 +9,20 @@ import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
 
 @Component
 public class DrawPhase implements Phase {
-    public static final String DR = "DR";
+  public static final String DR = "DR";
 
-    private final DrawXCardsService drawXCardsService;
+  private final DrawXCardsService drawXCardsService;
 
-    @Autowired
-    public DrawPhase(DrawXCardsService drawXCardsService) {
-        this.drawXCardsService = drawXCardsService;
+  @Autowired
+  public DrawPhase(DrawXCardsService drawXCardsService) {
+    this.drawXCardsService = drawXCardsService;
+  }
+
+  @Override
+  public void apply(GameStatus gameStatus) {
+    if (gameStatus.getTurn().getTurnNumber() > 1) {
+      drawXCardsService.drawXCards(gameStatus.getCurrentPlayer(), 1);
     }
-
-    @Override
-    public void apply(GameStatus gameStatus) {
-        if (gameStatus.getTurn().getTurnNumber() > 1) {
-            drawXCardsService.drawXCards(gameStatus.getCurrentPlayer(), 1);
-        }
-        gameStatus.getTurn().setCurrentPhase(M1);
-    }
+    gameStatus.getTurn().setCurrentPhase(M1);
+  }
 }

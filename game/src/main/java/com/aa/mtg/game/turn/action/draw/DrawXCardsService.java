@@ -8,14 +8,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DrawXCardsService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DrawXCardsService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DrawXCardsService.class);
 
-    public void drawXCards(Player player, int cardsToDraw) {
-        for (int i = 0; i < cardsToDraw; i++) {
-            CardInstance drawnCardInstance = player.getLibrary().draw();
-            player.getHand().addCard(drawnCardInstance);
-        }
-
-        LOGGER.info("{} drew {} cards.", player.getName(), cardsToDraw);
+  public void drawXCards(Player player, int cardsToDraw) {
+    for (int i = 0; i < cardsToDraw; i++) {
+      CardInstance drawnCardInstance = player.getLibrary().draw();
+      player.getHand().addCard(drawnCardInstance);
     }
+
+    LOGGER.info("{} drew {} cards.", player.getName(), cardsToDraw);
+  }
 }

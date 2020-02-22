@@ -9,15 +9,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContinueTurnService {
 
-    private final PhaseFactory phaseFactory;
+  private final PhaseFactory phaseFactory;
 
-    @Autowired
-    public ContinueTurnService(PhaseFactory phaseFactory) {
-        this.phaseFactory = phaseFactory;
-    }
+  @Autowired
+  public ContinueTurnService(PhaseFactory phaseFactory) {
+    this.phaseFactory = phaseFactory;
+  }
 
-    public void continueTurn(GameStatus gameStatus) {
-        Phase phase = phaseFactory.get(gameStatus.getTurn().getCurrentPhase());
-        phase.apply(gameStatus);
-    }
+  public void continueTurn(GameStatus gameStatus) {
+    Phase phase = phaseFactory.get(gameStatus.getTurn().getCurrentPhase());
+    phase.apply(gameStatus);
+  }
 }

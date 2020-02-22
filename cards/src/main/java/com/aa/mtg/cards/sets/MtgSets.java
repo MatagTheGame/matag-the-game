@@ -12,24 +12,24 @@ import static com.aa.mtg.cards.CardsConfiguration.getResourcesPath;
 
 @Component
 public class MtgSets {
-    private static final String SETS_PATH = getResourcesPath() + "/sets";
+  private static final String SETS_PATH = getResourcesPath() + "/sets";
 
-    private Map<String, MtgSet> SETS = new LinkedHashMap<>();
+  private Map<String, MtgSet> SETS = new LinkedHashMap<>();
 
-    public MtgSets(ObjectMapper objectMapper) throws Exception {
-        String[] sets = new File(SETS_PATH).list();
-        Objects.requireNonNull(sets);
-        for (String set : sets) {
-            MtgSet mtgSet = objectMapper.readValue(new File(SETS_PATH + "/" + set), MtgSet.class);
-            SETS.put(mtgSet.getCode(), mtgSet);
-        }
+  public MtgSets(ObjectMapper objectMapper) throws Exception {
+    String[] sets = new File(SETS_PATH).list();
+    Objects.requireNonNull(sets);
+    for (String set : sets) {
+      MtgSet mtgSet = objectMapper.readValue(new File(SETS_PATH + "/" + set), MtgSet.class);
+      SETS.put(mtgSet.getCode(), mtgSet);
     }
+  }
 
-    public Map<String, MtgSet> getSets() {
-        return SETS;
-    }
+  public Map<String, MtgSet> getSets() {
+    return SETS;
+  }
 
-    public MtgSet getSet(String code) {
-        return SETS.get(code);
-    }
+  public MtgSet getSet(String code) {
+    return SETS.get(code);
+  }
 }

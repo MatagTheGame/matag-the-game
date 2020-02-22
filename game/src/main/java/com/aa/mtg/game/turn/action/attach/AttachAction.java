@@ -12,17 +12,17 @@ import static java.lang.Integer.parseInt;
 @Component
 public class AttachAction implements AbilityAction {
 
-    private final AttachService attachService;
+  private final AttachService attachService;
 
-    @Autowired
-    public AttachAction(AttachService attachService) {
-        this.attachService = attachService;
-    }
+  @Autowired
+  public AttachAction(AttachService attachService) {
+    this.attachService = attachService;
+  }
 
-    @Override
-    public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
-        String target = cardInstance.getModifiers().getTargets().get(0).toString();
-        int attachedToId = parseInt(target);
-        attachService.attach(gameStatus, cardInstance, attachedToId);
-    }
+  @Override
+  public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
+    String target = cardInstance.getModifiers().getTargets().get(0).toString();
+    int attachedToId = parseInt(target);
+    attachService.attach(gameStatus, cardInstance, attachedToId);
+  }
 }

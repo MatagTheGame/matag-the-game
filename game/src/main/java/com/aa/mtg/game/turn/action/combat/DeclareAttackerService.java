@@ -12,24 +12,24 @@ import java.util.List;
 @Component
 public class DeclareAttackerService {
 
-    private final ContinueTurnService continueTurnService;
+  private final ContinueTurnService continueTurnService;
 
-    @Autowired
-    public DeclareAttackerService(ContinueTurnService continueTurnService) {
-        this.continueTurnService = continueTurnService;
+  @Autowired
+  public DeclareAttackerService(ContinueTurnService continueTurnService) {
+    this.continueTurnService = continueTurnService;
+  }
+
+  public void declareAttackers(GameStatus gameStatus, List<Integer> cardIds) {
+    Turn turn = gameStatus.getTurn();
+    Player currentPlayer = gameStatus.getCurrentPlayer();
+
+    if (!turn.getCurrentPhase().equals("DA")) {
+      throw new RuntimeException("Attackers declared during phase: " + turn.getCurrentPhase());
     }
 
-    public void declareAttackers(GameStatus gameStatus, List<Integer> cardIds) {
-        Turn turn = gameStatus.getTurn();
-        Player currentPlayer = gameStatus.getCurrentPlayer();
+    cardIds.forEach(cardId -> currentPlayer.getBattlefield().findCardById(cardId).checkIfCanAttack());
+    cardIds.forEach(cardId -> currentPlayer.getBattlefield().findCardById(cardId).declareAsAttacker());
 
-        if (!turn.getCurrentPhase().equals("DA")) {
-            throw new RuntimeException("Attackers declared during phase: " + turn.getCurrentPhase());
-        }
-
-        cardIds.forEach(cardId -> currentPlayer.getBattlefield().findCardById(cardId).checkIfCanAttack());
-        cardIds.forEach(cardId -> currentPlayer.getBattlefield().findCardById(cardId).declareAsAttacker());
-
-        continueTurnService.continueTurn(gameStatus);
-    }
+    continueTurnService.continueTurn(gameStatus);
+  }
 }

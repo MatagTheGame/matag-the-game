@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PutIntoGraveyardService {
-    public void putIntoGraveyard(GameStatus gameStatus, CardInstance cardInstance) {
-        Player owner = gameStatus.getPlayerByName(cardInstance.getOwner());
-        cardInstance.resetAllModifiers();
-        owner.getGraveyard().addCard(cardInstance);
-    }
+  public void putIntoGraveyard(GameStatus gameStatus, CardInstance cardInstance) {
+    Player owner = gameStatus.getPlayerByName(cardInstance.getOwner());
+    cardInstance.resetAllModifiers();
+    owner.getGraveyard().addCard(cardInstance);
+  }
 }

@@ -13,14 +13,14 @@ import java.util.List;
 @Scope("prototype")
 public class Hand extends CardListComponent {
 
-    private final CardInstanceFactory cardInstanceFactory;
+  private final CardInstanceFactory cardInstanceFactory;
 
-    @Autowired
-    public Hand(CardInstanceFactory cardInstanceFactory) {
-        this.cardInstanceFactory = cardInstanceFactory;
-    }
+  @Autowired
+  public Hand(CardInstanceFactory cardInstanceFactory) {
+    this.cardInstanceFactory = cardInstanceFactory;
+  }
 
-    public List<CardInstance> maskedHand() {
-        return cardInstanceFactory.mask(this.cards);
-    }
+  public List<CardInstance> maskedHand() {
+    return cardInstanceFactory.mask(this.cards);
+  }
 }

@@ -17,30 +17,30 @@ import static com.aa.mtg.cards.ability.trigger.TriggerSubtype.WHEN_ENTER_THE_BAT
 @Component
 public class WhenEnterTheBattlefieldService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WhenEnterTheBattlefieldService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(WhenEnterTheBattlefieldService.class);
 
-    private final CardInstanceSelectorService cardInstanceSelectorService;
+  private final CardInstanceSelectorService cardInstanceSelectorService;
 
-    @Autowired
-    public WhenEnterTheBattlefieldService(CardInstanceSelectorService cardInstanceSelectorService) {
-        this.cardInstanceSelectorService = cardInstanceSelectorService;
-    }
+  @Autowired
+  public WhenEnterTheBattlefieldService(CardInstanceSelectorService cardInstanceSelectorService) {
+    this.cardInstanceSelectorService = cardInstanceSelectorService;
+  }
 
-    void whenEnterTheBattlefield(GameStatus gameStatus, CardInstance cardInstance) {
-        List<CardInstance> cardsWithEnterAbility = gameStatus.getAllBattlefieldCards().withTriggerSubtype(WHEN_ENTER_THE_BATTLEFIELD).getCards();
+  void whenEnterTheBattlefield(GameStatus gameStatus, CardInstance cardInstance) {
+    List<CardInstance> cardsWithEnterAbility = gameStatus.getAllBattlefieldCards().withTriggerSubtype(WHEN_ENTER_THE_BATTLEFIELD).getCards();
 
-        for (CardInstance cardWithEnterAbility : cardsWithEnterAbility) {
-            for (CardInstanceAbility ability : cardWithEnterAbility.getAbilitiesByTriggerSubType(WHEN_ENTER_THE_BATTLEFIELD)) {
-                CardInstanceSearch selectionForCardWithEnterAbility = cardInstanceSelectorService.select(gameStatus, cardWithEnterAbility, ability.getTrigger().getCardInstanceSelector());
-                if (selectionForCardWithEnterAbility.withId(cardInstance.getId()).isPresent()) {
-                    cardWithEnterAbility.getTriggeredAbilities().add(ability);
-                }
-            }
-
-            if (!cardWithEnterAbility.getTriggeredAbilities().isEmpty()) {
-                LOGGER.info("{} triggered {} because of {} entering the battlefield.", cardInstance.getIdAndName(), WHEN_ENTER_THE_BATTLEFIELD, cardInstance.getIdAndName());
-                gameStatus.getStack().add(cardWithEnterAbility);
-            }
+    for (CardInstance cardWithEnterAbility : cardsWithEnterAbility) {
+      for (CardInstanceAbility ability : cardWithEnterAbility.getAbilitiesByTriggerSubType(WHEN_ENTER_THE_BATTLEFIELD)) {
+        CardInstanceSearch selectionForCardWithEnterAbility = cardInstanceSelectorService.select(gameStatus, cardWithEnterAbility, ability.getTrigger().getCardInstanceSelector());
+        if (selectionForCardWithEnterAbility.withId(cardInstance.getId()).isPresent()) {
+          cardWithEnterAbility.getTriggeredAbilities().add(ability);
         }
+      }
+
+      if (!cardWithEnterAbility.getTriggeredAbilities().isEmpty()) {
+        LOGGER.info("{} triggered {} because of {} entering the battlefield.", cardInstance.getIdAndName(), WHEN_ENTER_THE_BATTLEFIELD, cardInstance.getIdAndName());
+        gameStatus.getStack().add(cardWithEnterAbility);
+      }
     }
+  }
 }

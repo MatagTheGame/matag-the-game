@@ -9,21 +9,21 @@ import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
 
 @Component
 public class BeginCombatPhase implements Phase {
-    public static final String BC = "BC";
+  public static final String BC = "BC";
 
-    @Override
-    public void apply(GameStatus gameStatus) {
-        if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
-            if (new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards()).canAnyCreatureAttack()) {
-                gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
+  @Override
+  public void apply(GameStatus gameStatus) {
+    if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
+      if (new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards()).canAnyCreatureAttack()) {
+        gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
-            } else {
-                gameStatus.getTurn().setCurrentPhase(M2);
-            }
+      } else {
+        gameStatus.getTurn().setCurrentPhase(M2);
+      }
 
-        } else {
-            gameStatus.getTurn().setCurrentPhase(DA);
-            gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-        }
+    } else {
+      gameStatus.getTurn().setCurrentPhase(DA);
+      gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
     }
+  }
 }

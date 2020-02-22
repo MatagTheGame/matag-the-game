@@ -17,44 +17,44 @@ import java.util.List;
 @Component
 public class EventSender {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(EventSender.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(EventSender.class);
 
-    private final SimpMessagingTemplate webSocketTemplate;
-    private final ObjectMapper objectMapper;
+  private final SimpMessagingTemplate webSocketTemplate;
+  private final ObjectMapper objectMapper;
 
-    @Autowired
-    public EventSender(SimpMessagingTemplate simpleMessagingTemplate, ObjectMapper objectMapper) {
-        this.webSocketTemplate = simpleMessagingTemplate;
-        this.objectMapper = objectMapper;
+  @Autowired
+  public EventSender(SimpMessagingTemplate simpleMessagingTemplate, ObjectMapper objectMapper) {
+    this.webSocketTemplate = simpleMessagingTemplate;
+    this.objectMapper = objectMapper;
+  }
+
+  public void sendToUser(String sessionId, String username, Event event) {
+    String eventString = serializeToString(event);
+    if (username != null) {
+      LOGGER.info("Sending event to {} - {}: {}", sessionId, username, eventString);
+    } else {
+      LOGGER.info("Sending event to {}: {}", sessionId, eventString);
     }
+    webSocketTemplate.convertAndSendToUser(sessionId, "/events", eventString);
+  }
 
-    public void sendToUser(String sessionId, String username, Event event) {
-        String eventString = serializeToString(event);
-        if (username != null) {
-            LOGGER.info("Sending event to {} - {}: {}", sessionId, username, eventString);
-        } else {
-            LOGGER.info("Sending event to {}: {}", sessionId, eventString);
-        }
-        webSocketTemplate.convertAndSendToUser(sessionId, "/events", eventString);
-    }
+  public void sendToUser(String sessionId, Event event) {
+    sendToUser(sessionId, null, event);
+  }
 
-    public void sendToUser(String sessionId, Event event) {
-        sendToUser(sessionId, null, event);
-    }
+  public void sendToPlayer(Player player, Event event) {
+    sendToUser(player.getSessionId(), player.getName(), event);
+  }
 
-    public void sendToPlayer(Player player, Event event) {
-        sendToUser(player.getSessionId(), player.getName(), event);
-    }
+  public void sendToPlayers(List<Player> players, Event event) {
+    players.forEach(player -> sendToPlayer(player, event));
+  }
 
-    public void sendToPlayers(List<Player> players, Event event) {
-        players.forEach(player -> sendToPlayer(player, event));
+  private String serializeToString(Object event) {
+    try {
+      return objectMapper.writeValueAsString(event);
+    } catch (JsonProcessingException e) {
+      throw new RuntimeException(e);
     }
-
-    private String serializeToString(Object event) {
-        try {
-            return objectMapper.writeValueAsString(event);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
+  }
 }

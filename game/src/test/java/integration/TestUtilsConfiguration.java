@@ -17,9 +17,9 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import({CardsTestConfiguration.class, GameStatusTestConfiguration.class, PlayerTestConfiguration.class, Turn.class, SpellStack.class})
 public class TestUtilsConfiguration {
-    @Bean
-    public TestUtils testUtils(GameStatusFactory gameStatusFactory, PlayerFactory playerFactory, CardInstanceFactory cardInstanceFactory, Cards cards) {
-        return new TestUtils(gameStatusFactory, playerFactory, cardInstanceFactory, cards);
-    }
+  @Bean
+  public TestUtils testUtils(GameStatusFactory gameStatusFactory, PlayerFactory playerFactory, CardInstanceFactory cardInstanceFactory, Cards cards) {
+    return new TestUtils(gameStatusFactory, playerFactory, cardInstanceFactory, cards);
+  }
 
 }

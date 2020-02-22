@@ -16,31 +16,31 @@ import static com.aa.mtg.game.turn.phases.DeclareBlockersPhase.DB;
 @Component
 public class DeclareBlockerService {
 
-    private final ContinueTurnService continueTurnService;
+  private final ContinueTurnService continueTurnService;
 
-    @Autowired
-    public DeclareBlockerService(ContinueTurnService continueTurnService) {
-        this.continueTurnService = continueTurnService;
+  @Autowired
+  public DeclareBlockerService(ContinueTurnService continueTurnService) {
+    this.continueTurnService = continueTurnService;
+  }
+
+  public void declareBlockers(GameStatus gameStatus, Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds) {
+    Turn turn = gameStatus.getTurn();
+    Player currentPlayer = gameStatus.getCurrentPlayer();
+    Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
+
+    if (!turn.getCurrentPhase().equals(DB)) {
+      throw new RuntimeException("Blockers declared during phase: " + turn.getCurrentPhase());
     }
 
-    public void declareBlockers(GameStatus gameStatus, Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds) {
-        Turn turn = gameStatus.getTurn();
-        Player currentPlayer = gameStatus.getCurrentPlayer();
-        Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
+    blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
+      CardInstance blockedCreature = currentPlayer.getBattlefield().findCardById(blockedCreaturesIds.get(0));
+      nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).checkIfCanBlock(blockedCreature);
+    });
 
-        if (!turn.getCurrentPhase().equals(DB)) {
-            throw new RuntimeException("Blockers declared during phase: " + turn.getCurrentPhase());
-        }
+    blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) ->
+      nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(blockedCreaturesIds.get(0))
+    );
 
-        blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
-            CardInstance blockedCreature = currentPlayer.getBattlefield().findCardById(blockedCreaturesIds.get(0));
-            nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).checkIfCanBlock(blockedCreature);
-        });
-
-        blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) ->
-                nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(blockedCreaturesIds.get(0))
-        );
-
-        continueTurnService.continueTurn(gameStatus);
-    }
+    continueTurnService.continueTurn(gameStatus);
+  }
 }

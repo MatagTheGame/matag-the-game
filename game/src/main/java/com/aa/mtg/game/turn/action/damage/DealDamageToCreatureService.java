@@ -11,23 +11,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class DealDamageToCreatureService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DealDamageToCreatureService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DealDamageToCreatureService.class);
 
-    private final DestroyPermanentService destroyPermanentService;
+  private final DestroyPermanentService destroyPermanentService;
 
-    @Autowired
-    public DealDamageToCreatureService(DestroyPermanentService destroyPermanentService) {
-        this.destroyPermanentService = destroyPermanentService;
+  @Autowired
+  public DealDamageToCreatureService(DestroyPermanentService destroyPermanentService) {
+    this.destroyPermanentService = destroyPermanentService;
+  }
+
+  public void dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
+    if (damage > 0) {
+      LOGGER.info("{} is getting {} damage.", cardInstance.getIdAndName(), damage);
+      cardInstance.getModifiers().dealDamage(damage);
+      if (cardInstance.getToughness() - cardInstance.getModifiers().getDamage() <= 0 || deathtouch) {
+        destroyPermanentService.destroy(gameStatus, cardInstance.getId());
+        LOGGER.info("{} has been destroyed.", cardInstance.getIdAndName());
+      }
     }
-
-    public void dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
-        if (damage > 0) {
-            LOGGER.info("{} is getting {} damage.", cardInstance.getIdAndName(), damage);
-            cardInstance.getModifiers().dealDamage(damage);
-            if (cardInstance.getToughness() - cardInstance.getModifiers().getDamage() <= 0 || deathtouch) {
-                destroyPermanentService.destroy(gameStatus, cardInstance.getId());
-                LOGGER.info("{} has been destroyed.", cardInstance.getIdAndName());
-            }
-        }
-    }
+  }
 }

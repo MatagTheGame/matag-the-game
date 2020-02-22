@@ -13,27 +13,27 @@ import java.util.stream.Collectors;
 @Scope("prototype")
 public class Battlefield extends CardListComponent {
 
-    public void removeAttacking() {
-        new CardInstanceSearch(cards).attacking().getCards()
-                .forEach(cardInstance -> cardInstance.getModifiers().setAttacking(false));
-    }
+  public void removeAttacking() {
+    new CardInstanceSearch(cards).attacking().getCards()
+      .forEach(cardInstance -> cardInstance.getModifiers().setAttacking(false));
+  }
 
-    public void removeBlocking() {
-        new CardInstanceSearch(cards).blocking().getCards()
-                .forEach(cardInstance -> cardInstance.getModifiers().unsetBlockingCardId());
-    }
+  public void removeBlocking() {
+    new CardInstanceSearch(cards).blocking().getCards()
+      .forEach(cardInstance -> cardInstance.getModifiers().unsetBlockingCardId());
+  }
 
-    public List<CardInstance> getAttackingCreatures() {
-        return new CardInstanceSearch(cards).attacking().getCards();
-    }
+  public List<CardInstance> getAttackingCreatures() {
+    return new CardInstanceSearch(cards).attacking().getCards();
+  }
 
-    public List<CardInstance> getBlockingCreatures() {
-        return new CardInstanceSearch(cards).blocking().getCards();
-    }
+  public List<CardInstance> getBlockingCreatures() {
+    return new CardInstanceSearch(cards).blocking().getCards();
+  }
 
-    public List<CardInstance> getBlockingCreaturesFor(int attackingCardId) {
-        return getBlockingCreatures().stream()
-                .filter(cardInstance -> cardInstance.getModifiers().getBlockingCardId() == attackingCardId)
-                .collect(Collectors.toList());
-    }
+  public List<CardInstance> getBlockingCreaturesFor(int attackingCardId) {
+    return getBlockingCreatures().stream()
+      .filter(cardInstance -> cardInstance.getModifiers().getBlockingCardId() == attackingCardId)
+      .collect(Collectors.toList());
+  }
 }

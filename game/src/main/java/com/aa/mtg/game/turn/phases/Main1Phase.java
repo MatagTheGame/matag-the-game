@@ -8,19 +8,19 @@ import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
 
 @Component
 public class Main1Phase implements Phase {
-    public static final String M1 = "M1";
+  public static final String M1 = "M1";
 
-    private final BeginCombatPhase beginCombatPhase;
+  private final BeginCombatPhase beginCombatPhase;
 
-    @Autowired
-    public Main1Phase(BeginCombatPhase beginCombatPhase) {
-        this.beginCombatPhase = beginCombatPhase;
-    }
+  @Autowired
+  public Main1Phase(BeginCombatPhase beginCombatPhase) {
+    this.beginCombatPhase = beginCombatPhase;
+  }
 
-    @Override
-    public void apply(GameStatus gameStatus) {
-        gameStatus.getTurn().setCurrentPhase(BC);
-        gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-        beginCombatPhase.apply(gameStatus);
-    }
+  @Override
+  public void apply(GameStatus gameStatus) {
+    gameStatus.getTurn().setCurrentPhase(BC);
+    gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+    beginCombatPhase.apply(gameStatus);
+  }
 }
