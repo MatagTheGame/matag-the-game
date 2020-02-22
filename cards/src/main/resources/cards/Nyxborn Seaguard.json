@@ -1,0 +1,11 @@
+{
+  "name" : "Nyxborn Seaguard",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/a/9ad0c7d7-0e44-496f-a2fc-fafc604cb1f1.png?1581479427",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "BLUE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE", "ENCHANTMENT" ],
+  "subtypes" : [ "MERFOLK", "SOLDIER" ],
+  "rarity" : "COMMON",
+  "power" : 4,
+  "toughness" : 3
+}
