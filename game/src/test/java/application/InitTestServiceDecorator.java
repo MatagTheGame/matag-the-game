@@ -4,16 +4,16 @@ import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 
 public class InitTestServiceDecorator extends InitTestService {
-    private InitTestService initTestService;
+  private InitTestService initTestService;
 
-    @Override
-    public void initGameStatus(GameStatus gameStatus) {
-        initTestService.initGameStatus(gameStatus);
-    }
+  @Override
+  public void initGameStatus(GameStatus gameStatus) {
+    initTestService.initGameStatus(gameStatus);
+  }
 
-    public void setInitTestService(InitTestService initTestService) {
-        initTestService.setCardInstanceFactory(this.getCardInstanceFactory());
-        initTestService.setCards(this.getCards());
-        this.initTestService = initTestService;
-    }
+  public void setInitTestService(InitTestService initTestService) {
+    initTestService.setCardInstanceFactory(this.getCardInstanceFactory());
+    initTestService.setCards(this.getCards());
+    this.initTestService = initTestService;
+  }
 }
