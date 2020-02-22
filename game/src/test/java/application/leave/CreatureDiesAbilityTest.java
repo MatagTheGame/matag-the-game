@@ -37,7 +37,7 @@ public class CreatureDiesAbilityTest extends AbstractApplicationTest {
   @Test
   public void creatureDiesAbility() {
     int firstGoblinId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Goblin Assault Team"), 0).getCardIdNumeric();
-    int secondGoblinId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Goblin Assault Team"), 1).getCardIdNumeric();
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Goblin Assault Team"), 1).getCardIdNumeric();
 
     // When opponent kills 1 goblin
     browser.player1().getActionHelper().clickContinue();

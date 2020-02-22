@@ -5,23 +5,30 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static com.aa.mtg.cards.CardsConfiguration.getResourcesPath;
 
 @Component
 public class Cards {
   private static final String CARDS_PATH = getResourcesPath() + "/cards";
+  private static final Logger LOGGER = Logger.getLogger(Cards.class.getName());
 
   private Map<String, Card> CARDS = new LinkedHashMap<>();
 
-  public Cards(ObjectMapper objectMapper) throws Exception {
+  public Cards(ObjectMapper objectMapper) {
+    LOGGER.log(Level.INFO, "Current Directory: " + new File("").getAbsolutePath());
+    LOGGER.log(Level.INFO, "Cards Path: " + CARDS_PATH);
     String[] cardsFile = new File(CARDS_PATH).list();
     Objects.requireNonNull(cardsFile);
     for (String cardFile : cardsFile) {
       try {
         Card card = objectMapper.readValue(new File(CARDS_PATH + "/" + cardFile), Card.class);
         CARDS.put(card.getName(), card);
+
       } catch (Exception e) {
+        LOGGER.log(Level.SEVERE, "", e);
         throw new RuntimeException("Failed to load card: " + cardFile, e);
       }
     }
