@@ -18,7 +18,6 @@ body {
   margin: 5px;
   background-repeat: no-repeat;
   background-size: cover;
-  background-color: gray;
   cursor: pointer;
   transition-duration: 0.5s;
   z-index: 1;

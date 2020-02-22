@@ -1,0 +1,11 @@
+{
+  "name" : "Nyxborn Brute",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/5/05bc4236-566f-401b-b9d7-f58126fa228b.png?1581480309",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE", "ENCHANTMENT" ],
+  "subtypes" : [ "CYCLOPS" ],
+  "rarity" : "COMMON",
+  "power" : 7,
+  "toughness" : 3
+}

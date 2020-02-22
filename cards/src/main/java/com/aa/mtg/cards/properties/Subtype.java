@@ -18,6 +18,7 @@ public enum Subtype {
   CONSTRUCT,
   CRAB,
   CROCODILE,
+  CYCLOPS,
   DEVIL,
   DINOSAUR,
   DRAGON,
