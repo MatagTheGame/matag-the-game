@@ -23,8 +23,8 @@ The application is divided in modules:
 
 # Backlog
 
-The backlog is managed at:
- - https://github.com/antonioalonzi/mtg/milestone/1
+The backlog is managed in Kanban style at:
+ - https://github.com/antonioalonzi/mtg/projects/1
 
 
 # CI/CD
