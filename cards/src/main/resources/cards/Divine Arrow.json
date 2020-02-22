@@ -6,7 +6,6 @@
   "types" : [ "INSTANT" ],
   "rarity" : "COMMON",
   "ruleText" : "Divine Arrow deals 4 damage to target attacking or blocking creature.",
-  "instantSpeed": true,
   "abilities" : [ {
     "abilityType" : "THAT_TARGETS_GET",
     "targets" : [ {
@@ -20,5 +19,6 @@
     "trigger" : {
       "type" : "CAST"
     }
-  } ]
+  } ],
+  "instantSpeed" : true
 }

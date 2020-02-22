@@ -6,7 +6,6 @@
   "types" : [ "INSTANT" ],
   "rarity" : "COMMON",
   "ruleText" : "Destroy target creature with toughness 4 or greater.",
-  "instantSpeed": true,
   "abilities" : [ {
     "abilityType" : "THAT_TARGETS_GET",
     "targets" : [ {
@@ -24,5 +23,6 @@
     "trigger" : {
       "type" : "CAST"
     }
-  } ]
+  } ],
+  "instantSpeed" : true
 }

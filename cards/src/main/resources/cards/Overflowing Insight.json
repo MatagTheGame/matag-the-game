@@ -6,7 +6,6 @@
   "types" : [ "INSTANT" ],
   "rarity" : "MYTHIC",
   "ruleText" : "Target player draws seven cards.",
-  "instantSpeed": true,
   "abilities" : [ {
     "abilityType" : "THAT_TARGETS_GET",
     "targets" : [ {
@@ -18,5 +17,6 @@
     "trigger" : {
       "type" : "CAST"
     }
-  } ]
+  } ],
+  "instantSpeed" : true
 }

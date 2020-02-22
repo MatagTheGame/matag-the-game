@@ -6,7 +6,6 @@
   "types" : [ "INSTANT" ],
   "rarity" : "COMMON",
   "ruleText" : "Creatures you control get +2/+0 until end of turn.",
-  "instantSpeed": true,
   "abilities" : [ {
     "abilityType" : "SELECTED_PERMANENTS_GET",
     "cardInstanceSelector" : {
@@ -18,5 +17,6 @@
     "trigger" : {
       "type" : "CAST"
     }
-  } ]
+  } ],
+  "instantSpeed" : true
 }

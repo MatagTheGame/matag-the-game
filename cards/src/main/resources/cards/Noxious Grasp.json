@@ -6,7 +6,6 @@
   "types" : [ "INSTANT" ],
   "rarity" : "UNCOMMON",
   "ruleText" : "Destroy target creature or planeswalker that's green or white. You gain 1 life.",
-  "instantSpeed": true,
   "abilities" : [ {
     "abilityType" : "THAT_TARGETS_GET",
     "targets" : [ {
@@ -26,5 +25,6 @@
     "trigger" : {
       "type" : "CAST"
     }
-  } ]
+  } ],
+  "instantSpeed" : true
 }

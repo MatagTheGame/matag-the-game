@@ -6,7 +6,6 @@
   "types" : [ "INSTANT" ],
   "rarity" : "COMMON",
   "ruleText" : "Target creature gets -2/-2 until end of turn. You gain 2 life.",
-  "instantSpeed": true,
   "abilities" : [ {
     "abilityType" : "THAT_TARGETS_GET",
     "targets" : [ {
@@ -25,5 +24,6 @@
     "trigger" : {
       "type" : "CAST"
     }
-  } ]
+  } ],
+  "instantSpeed" : true
 }

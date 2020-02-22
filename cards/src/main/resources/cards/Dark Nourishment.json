@@ -6,7 +6,6 @@
   "types" : [ "INSTANT" ],
   "rarity" : "UNCOMMON",
   "ruleText" : "Dark Nourishment deals 3 damage to target creature or player. You gain 3 life.",
-  "instantSpeed": true,
   "abilities" : [ {
     "abilityType" : "THAT_TARGETS_GET",
     "targets" : [ {
@@ -25,5 +24,6 @@
     "trigger" : {
       "type" : "CAST"
     }
-  } ]
+  } ],
+  "instantSpeed" : true
 }

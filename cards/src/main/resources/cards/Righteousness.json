@@ -6,7 +6,6 @@
   "types" : [ "INSTANT" ],
   "rarity" : "COMMON",
   "ruleText" : "Target blocking creature gets +7/+7 until end of turn.",
-  "instantSpeed": true,
   "abilities" : [ {
     "abilityType" : "THAT_TARGETS_GET",
     "targets" : [ {
@@ -20,5 +19,6 @@
     "trigger" : {
       "type" : "CAST"
     }
-  } ]
+  } ],
+  "instantSpeed" : true
 }
