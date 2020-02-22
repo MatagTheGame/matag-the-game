@@ -1,0 +1,27 @@
+{
+  "name" : "Nylea's Forerunner",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/c/2cf2b6be-80a8-4464-a909-8cc658196a14.png?1581480774",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE", "ENCHANTMENT" ],
+  "subtypes" : [ "BEAST" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Trample. Other creatures you control have trample.",
+  "power" : 5,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "TRAMPLE"
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "controllerType" : "PLAYER",
+      "others" : true
+    },
+    "parameters" : [ "TRAMPLE" ],
+    "trigger" : {
+      "type" : "STATIC"
+    }
+  } ]
+}

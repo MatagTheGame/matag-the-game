@@ -1,0 +1,30 @@
+{
+  "name" : "Careless Celebrant",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/a/bac6bdd4-b25b-41f6-835d-7d1570cdb951.png?1581480091",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "SATYR", "SHAMAN" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "When Careless Celebrant dies, it deals 2 damage to target creature or planeswalker an opponent controls.",
+  "power" : 2,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE", "PLANESWALKER" ]
+      }
+    } ],
+    "parameters" : [ "DAMAGE:1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_DIE",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
+      }
+    }
+  } ]
+}

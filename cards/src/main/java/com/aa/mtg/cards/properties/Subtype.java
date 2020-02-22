@@ -58,6 +58,7 @@ public enum Subtype {
   PIRATE,
   RHINO,
   ROGUE,
+  SATYR,
   SCARECROW,
   SCORPION,
   SCOUT,

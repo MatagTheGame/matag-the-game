@@ -1,0 +1,15 @@
+{
+  "name" : "Moss Viper",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/4/a4d35ec4-0e0d-4611-8ad9-39d2c8a2ad6e.png?1581480700",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "SNAKE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Deathtouch",
+  "power" : 1,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "DEATHTOUCH"
+  } ]
+}
