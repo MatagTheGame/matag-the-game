@@ -1,21 +1,11 @@
 {
-  "name": "Tolarian Scolar",
-  "colors": [
-    "BLUE"
-  ],
-  "cost": [
-    "BLUE",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "HUMAN",
-    "WIZARD"
-  ],
-  "rarity": "COMMON",
-  "power": 2,
-  "toughness": 3
+  "name" : "Tolarian Scolar",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/e/2eda67da-02b5-4ecb-9038-10e026d454ec.png?1562301207",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "WIZARD" ],
+  "rarity" : "COMMON",
+  "power" : 2,
+  "toughness" : 3
 }

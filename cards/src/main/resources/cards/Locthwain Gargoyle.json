@@ -1,38 +1,22 @@
 {
-  "name": "Locthwain Gargoyle",
-  "cost": [
-    "COLORLESS"
-  ],
-  "types": [
-    "ARTIFACT",
-    "CREATURE"
-  ],
-  "subtypes": [
-    "GARGOYLE"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Pay 4: Locthwain Gargoyle gets +2/+0 and gains flying until end of turn.",
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "itself": true
-      },
-      "parameters": [
-        "+2/+0",
-        "FLYING"
-      ],
-      "trigger": {
-        "type": "ACTIVATED_ABILITY",
-        "cost": [
-          "COLORLESS",
-          "COLORLESS",
-          "COLORLESS",
-          "COLORLESS"
-        ]
-      }
+  "name" : "Locthwain Gargoyle",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/2/02551bee-335c-4bf7-b38e-67dd71d1d567.png?1572491029",
+  "cost" : [ "COLORLESS" ],
+  "types" : [ "ARTIFACT", "CREATURE" ],
+  "subtypes" : [ "GARGOYLE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Pay 4: Locthwain Gargoyle gets +2/+0 and gains flying until end of turn.",
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "itself" : true
+    },
+    "parameters" : [ "+2/+0", "FLYING" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ]
     }
-  ]
+  } ]
 }

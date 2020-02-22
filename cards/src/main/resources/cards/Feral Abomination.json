@@ -1,29 +1,15 @@
 {
-  "name": "Feral Abomination",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "THRULL"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Deathtouch",
-  "power": 5,
-  "toughness": 5,
-  "abilities": [
-    {
-      "abilityType": "DEATHTOUCH"
-    }
-  ]
+  "name" : "Feral Abomination",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/2/b2890cb5-7899-42f4-9686-a8b5ac796c23.png?1563898923",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "THRULL" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Deathtouch",
+  "power" : 5,
+  "toughness" : 5,
+  "abilities" : [ {
+    "abilityType" : "DEATHTOUCH"
+  } ]
 }

@@ -1,47 +1,30 @@
 {
-  "name": "Tenth District Guard",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "SOLDIER",
-    "HUMAN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "When Tenth District Guard enters the battlefield, target creature gets +0/+1 until end of turn.",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+0/+1"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+  "name" : "Tenth District Guard",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/2/829f959e-91cd-42ea-8644-ce828a304d01.png?1572892668",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "SOLDIER" ],
+  "rarity" : "COMMON",
+  "ruleText" : "When Tenth District Guard enters the battlefield, target creature gets +0/+1 until end of turn.",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
+      }
+    } ],
+    "parameters" : [ "+0/+1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

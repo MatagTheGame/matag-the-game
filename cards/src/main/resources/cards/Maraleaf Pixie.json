@@ -1,44 +1,27 @@
 {
-  "name": "Maraleaf Pixie",
-  "colors": [
-    "GREEN",
-    "BLUE"
-  ],
-  "cost": [
-    "GREEN",
-    "BLUE"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "FAERIE"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Flying. TAP: Add GREEN or BLUE.",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    },
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "GREEN"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
-    },
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "BLUE"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
+  "name" : "Maraleaf Pixie",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/6/e6d7f9c9-dd83-4684-a949-1c22f316138a.png?1572490787",
+  "colors" : [ "BLUE", "GREEN" ],
+  "cost" : [ "GREEN", "BLUE" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "FAERIE" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Flying. TAP: Add GREEN or BLUE.",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "GREEN" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
     }
-  ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "BLUE" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
+    }
+  } ]
 }

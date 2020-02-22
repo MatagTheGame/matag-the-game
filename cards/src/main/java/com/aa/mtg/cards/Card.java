@@ -16,9 +16,10 @@ import java.util.TreeSet;
 @Getter
 @EqualsAndHashCode
 @ToString
-@Builder
+@Builder(toBuilder = true)
 public class Card {
   private final String name;
+  private final String imageUrl;
   private final TreeSet<Color> colors;
   private final List<Cost> cost;
   private final TreeSet<Type> types;
@@ -28,15 +29,17 @@ public class Card {
   private final int power;
   private final int toughness;
   private final List<Ability> abilities;
+  private final boolean instantSpeed;
 
   @JsonCreator
-  public Card(@JsonProperty("name") String name,
+  public Card(@JsonProperty("name") String name, @JsonProperty("imageUrl") String imageUrl,
       @JsonProperty("colors") TreeSet<Color> colors, @JsonProperty("cost") List<Cost> cost,
       @JsonProperty("types") TreeSet<Type> types, @JsonProperty("subtypes") TreeSet<Subtype> subtypes,
       @JsonProperty("rarity") Rarity rarity, @JsonProperty("ruleText") String ruleText,
       @JsonProperty("power") int power, @JsonProperty("toughness") int toughness,
-      @JsonProperty("abilities") List<Ability> abilities) {
+      @JsonProperty("abilities") List<Ability> abilities, @JsonProperty("instantSpeed") boolean instantSpeed) {
     this.name = name;
+    this.imageUrl = imageUrl;
     this.colors = colors != null ? colors : new TreeSet<>();
     this.cost = cost != null ? cost : new ArrayList<>();
     this.types = types != null ? types : new TreeSet<>();
@@ -46,9 +49,6 @@ public class Card {
     this.power = power;
     this.toughness = toughness;
     this.abilities = abilities != null ? abilities : new ArrayList<>();
-  }
-
-  public boolean isInstantSpeed() {
-    return types.contains(Type.INSTANT);
+    this.instantSpeed = instantSpeed;
   }
 }

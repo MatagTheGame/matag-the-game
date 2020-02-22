@@ -1,48 +1,31 @@
 {
-  "name": "Griffin Protector",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "GRIFFIN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Flying. Whenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.",
-  "power": 2,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
+  "name" : "Griffin Protector",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/c/5c32c4f2-4fa5-4874-8413-eac822121a0b.png?1563898317",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "GRIFFIN" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flying. Whenever another creature enters the battlefield under your control, Griffin Protector gets +1/+1 until end of turn.",
+  "power" : 2,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "itself" : true
     },
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "itself": true
-      },
-      "parameters": [
-        "+1/+1"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "ofType": [
-            "CREATURE"
-          ],
-          "controllerType": "PLAYER"
-        }
+    "parameters" : [ "+1/+1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ],
+        "controllerType" : "PLAYER"
       }
     }
-  ]
+  } ]
 }

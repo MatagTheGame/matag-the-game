@@ -1,50 +1,29 @@
 {
-  "name": "Noxious Grasp",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Destroy target creature or planeswalker that's green or white. You gain 1 life.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE",
-              "PLANESWALKER"
-            ],
-            "ofColors": [
-              "GREEN",
-              "WHITE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        ":DESTROYED"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Noxious Grasp",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/e/8e5758cc-1f84-455d-a983-8ec471727eaf.png?1563898977",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Destroy target creature or planeswalker that's green or white. You gain 1 life.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE", "PLANESWALKER" ],
+        "ofColors" : [ "GREEN", "WHITE" ]
       }
-    },
-    {
-      "abilityType": "ADD_X_LIFE",
-      "parameters": [
-        "1"
-      ],
-      "trigger": {
-        "type": "CAST"
-      }
+    } ],
+    "parameters" : [ ":DESTROYED" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  }, {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
 }

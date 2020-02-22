@@ -1,25 +1,15 @@
 {
-  "name": "Huatli's Snubhorn",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Vigilance",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "VIGILANCE"
-    }
-  ]
+  "name" : "Huatli's Snubhorn",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/2/e2d88e6c-4aa8-4175-9f5d-a4c0182cdf74.png?1562565551",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Vigilance",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "VIGILANCE"
+  } ]
 }

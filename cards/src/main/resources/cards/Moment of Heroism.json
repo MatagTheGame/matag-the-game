@@ -1,37 +1,22 @@
 {
-  "name": "Moment of Heroism",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Target creature gets +2/+2 and gains lifelink until end of turn.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+2/+2",
-        "LIFELINK"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Moment of Heroism",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/b/7bbc462b-3736-4441-96ee-8dc5615b4529.png?1563898396",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Target creature gets +2/+2 and gains lifelink until end of turn.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "+2/+2", "LIFELINK" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

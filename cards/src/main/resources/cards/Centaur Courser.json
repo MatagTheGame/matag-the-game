@@ -1,21 +1,11 @@
 {
-  "name": "Centaur Courser",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "CENTAUR",
-    "WARRIOR"
-  ],
-  "rarity": "COMMON",
-  "power": 3,
-  "toughness": 3
+  "name" : "Centaur Courser",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/8/e8b67ee8-3189-4426-8b1a-b540267768fd.png?1563899375",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "CENTAUR", "WARRIOR" ],
+  "rarity" : "COMMON",
+  "power" : 3,
+  "toughness" : 3
 }

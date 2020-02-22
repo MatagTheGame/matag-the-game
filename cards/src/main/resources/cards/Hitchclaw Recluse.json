@@ -1,26 +1,15 @@
 {
-  "name": "Hitchclaw Recluse",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "SPIDER"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Reach.",
-  "power": 1,
-  "toughness": 4,
-  "abilities": [
-    {
-      "abilityType": "REACH"
-    }
-  ]
+  "name" : "Hitchclaw Recluse",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/e/fe349432-8726-49cf-ad07-6f8add8f78c8.png?1572893371",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "SPIDER" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Reach.",
+  "power" : 1,
+  "toughness" : 4,
+  "abilities" : [ {
+    "abilityType" : "REACH"
+  } ]
 }

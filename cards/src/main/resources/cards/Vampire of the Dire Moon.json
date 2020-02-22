@@ -1,27 +1,17 @@
 {
-  "name": "Vampire of the Dire Moon",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "VAMPIRE"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Deathtouch. Lifelink",
-  "power": 1,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "DEATHTOUCH"
-    },
-    {
-      "abilityType": "LIFELINK"
-    }
-  ]
+  "name" : "Vampire of the Dire Moon",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/3/b3c185b9-5d97-4a5a-af0b-8b9c44dcd235.png?1563899051",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "VAMPIRE" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Deathtouch. Lifelink",
+  "power" : 1,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "DEATHTOUCH"
+  }, {
+    "abilityType" : "LIFELINK"
+  } ]
 }

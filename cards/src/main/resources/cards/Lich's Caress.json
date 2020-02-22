@@ -1,48 +1,28 @@
 {
-  "name": "Lich's Caress",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "SORCERY"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Destroy target creature. You gain 3 life.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        ":DESTROYED"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Lich's Caress",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/2/32bd3acd-aa62-4708-9336-e3430fd0e541.png?1562301277",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "SORCERY" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Destroy target creature. You gain 3 life.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
-    },
-    {
-      "abilityType": "ADD_X_LIFE",
-      "parameters": [
-        "3"
-      ],
-      "trigger": {
-        "type": "CAST"
-      }
+    } ],
+    "parameters" : [ ":DESTROYED" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  }, {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "3" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
 }

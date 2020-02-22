@@ -1,40 +1,23 @@
 {
-  "name": "One With the Wind",
-  "colors": [
-    "BLUE"
-  ],
-  "cost": [
-    "BLUE",
-    "COLORLESS"
-  ],
-  "types": [
-    "ENCHANTMENT"
-  ],
-  "subtypes": [
-    "AURA"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Enchant creature. Enchanted creature gets +2/+2 and has flying.",
-  "abilities": [
-    {
-      "abilityType": "ENCHANTED_CREATURE_GETS",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+2/+2",
-        "FLYING"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "One With the Wind",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/c/2c00f8bf-0088-44ad-b40b-26a2951a2428.png?1562552635",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "COLORLESS" ],
+  "types" : [ "ENCHANTMENT" ],
+  "subtypes" : [ "AURA" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Enchant creature. Enchanted creature gets +2/+2 and has flying.",
+  "abilities" : [ {
+    "abilityType" : "ENCHANTED_CREATURE_GETS",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "+2/+2", "FLYING" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

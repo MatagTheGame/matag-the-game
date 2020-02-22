@@ -1,31 +1,19 @@
 {
-  "name": "Llanowar Elves",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "ELF",
-    "DRUID"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Tap: Add GREEN to your mana pool.",
-  "power": 1,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "GREEN"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
+  "name" : "Llanowar Elves",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/3/73542493-cd0b-4bb7-a5b8-8f889c76e4d6.png?1562302708",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DRUID", "ELF" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Tap: Add GREEN to your mana pool.",
+  "power" : 1,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "GREEN" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
     }
-  ]
+  } ]
 }

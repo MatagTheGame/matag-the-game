@@ -1,27 +1,16 @@
 {
-  "name": "Diregraf Ghoul",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "ZOMBIE"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Diregraf Ghoul enters the battlefield tapped.",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
-      "parameters": [
-        ":TAPPED"
-      ]
-    }
-  ]
+  "name" : "Diregraf Ghoul",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/c/5cf2d355-404e-4c21-9bc2-973d09a845a5.png?1562302248",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "ZOMBIE" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Diregraf Ghoul enters the battlefield tapped.",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "ENTERS_THE_BATTLEFIELD_WITH",
+    "parameters" : [ ":TAPPED" ]
+  } ]
 }

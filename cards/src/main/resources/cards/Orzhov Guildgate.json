@@ -1,37 +1,24 @@
 {
-  "name": "Orzhov Guildgate",
-  "types": [
-    "LAND"
-  ],
-  "subtypes": [
-    "GATE"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Orzhov Guildgate enters the battlefield tapped. TAP: Add WHITE or BLACK to your mana pool.",
-  "abilities": [
-    {
-      "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
-      "parameters": [
-        ":TAPPED"
-      ]
-    },
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "WHITE"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
-    },
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "BLACK"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
+  "name" : "Orzhov Guildgate",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/b/cbadf8cf-02bf-45f6-b3c1-a684d9bc5228.png?1558667700",
+  "types" : [ "LAND" ],
+  "subtypes" : [ "GATE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Orzhov Guildgate enters the battlefield tapped. TAP: Add WHITE or BLACK to your mana pool.",
+  "abilities" : [ {
+    "abilityType" : "ENTERS_THE_BATTLEFIELD_WITH",
+    "parameters" : [ ":TAPPED" ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "WHITE" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
     }
-  ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "BLACK" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
+    }
+  } ]
 }

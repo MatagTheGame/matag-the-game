@@ -1,28 +1,15 @@
 {
-  "name": "Charity Extractor",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "KNIGHT",
-    "HUMAN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Lifelink",
-  "power": 1,
-  "toughness": 5,
-  "abilities": [
-    {
-      "abilityType": "LIFELINK"
-    }
-  ]
+  "name" : "Charity Extractor",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/5/3594f726-cdbb-4b7d-bcfe-17d5f8cd5228.png?1557576411",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "KNIGHT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Lifelink",
+  "power" : 1,
+  "toughness" : 5,
+  "abilities" : [ {
+    "abilityType" : "LIFELINK"
+  } ]
 }

@@ -1,40 +1,23 @@
 {
-  "name": "SwashBuckling",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS"
-  ],
-  "types": [
-    "ENCHANTMENT"
-  ],
-  "subtypes": [
-    "AURA"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Enchant creature. Enchanted creature gets +2/+2 and has haste.",
-  "abilities": [
-    {
-      "abilityType": "ENCHANTED_CREATURE_GETS",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+2/+2",
-        "HASTE"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "SwashBuckling",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/1/01ed59b1-968b-4297-9e98-42d940f9478c.png?1562549791",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS" ],
+  "types" : [ "ENCHANTMENT" ],
+  "subtypes" : [ "AURA" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Enchant creature. Enchanted creature gets +2/+2 and has haste.",
+  "abilities" : [ {
+    "abilityType" : "ENCHANTED_CREATURE_GETS",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "+2/+2", "HASTE" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

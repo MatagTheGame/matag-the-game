@@ -1,43 +1,26 @@
 {
-  "name": "Silverback Shaman",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "APE",
-    "SHAMAN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Trample. When Silverback Shaman dies, draw a card.",
-  "power": 5,
-  "toughness": 4,
-  "abilities": [
-    {
-      "abilityType": "TRAMPLE"
-    },
-    {
-      "abilityType": "DRAW_X_CARDS",
-      "parameters": [
-        "1"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_DIE",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+  "name" : "Silverback Shaman",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/e/4e97e62e-4a77-4512-b5fa-400e01517e23.png?1563899559",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "APE", "SHAMAN" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Trample. When Silverback Shaman dies, draw a card.",
+  "power" : 5,
+  "toughness" : 4,
+  "abilities" : [ {
+    "abilityType" : "TRAMPLE"
+  }, {
+    "abilityType" : "DRAW_X_CARDS",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_DIE",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

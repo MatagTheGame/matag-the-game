@@ -1,27 +1,15 @@
 {
-  "name": "Havoc Devils",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "RED",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DEVIL"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Trample.",
-  "power": 4,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "TRAMPLE"
-    }
-  ]
+  "name" : "Havoc Devils",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/f/2f003678-0f17-4f1d-87d5-83613a82044b.png?1562301216",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DEVIL" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Trample.",
+  "power" : 4,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "TRAMPLE"
+  } ]
 }

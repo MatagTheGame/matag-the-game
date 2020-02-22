@@ -1,21 +1,11 @@
 {
-  "name": "Wild Ceratok",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "RHINO"
-  ],
-  "rarity": "COMMON",
-  "power": 4,
-  "toughness": 3
+  "name" : "Wild Ceratok",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/4/4464e11a-c5b9-40ea-8be0-dab29d14e289.png?1572893485",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "RHINO" ],
+  "rarity" : "COMMON",
+  "power" : 4,
+  "toughness" : 3
 }

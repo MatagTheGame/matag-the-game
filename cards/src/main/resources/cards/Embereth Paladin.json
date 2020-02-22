@@ -1,40 +1,22 @@
 {
-  "name": "Embereth Paladin",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "KNIGHT",
-    "HUMAN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Haste. Adamant — If at least three red mana was spent to cast this spell, Embereth Paladin enters the battlefield with a +1/+1 counter on it.",
-  "power": 4,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "HASTE"
-    },
-    {
-      "abilityType": "ADAMANT",
-      "parameters": [
-        "RED"
-      ],
-      "ability": {
-        "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
-        "parameters": [
-          "PLUS_1_COUNTERS:1"
-        ]
-      }
+  "name" : "Embereth Paladin",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/b/6bcfe06b-3bb5-434e-acf4-4bfa8a94141d.png?1572490339",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "KNIGHT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Haste. Adamant — If at least three red mana was spent to cast this spell, Embereth Paladin enters the battlefield with a +1/+1 counter on it.",
+  "power" : 4,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "HASTE"
+  }, {
+    "abilityType" : "ADAMANT",
+    "parameters" : [ "RED" ],
+    "ability" : {
+      "abilityType" : "ENTERS_THE_BATTLEFIELD_WITH",
+      "parameters" : [ "PLUS_1_COUNTERS:1" ]
     }
-  ]
+  } ]
 }

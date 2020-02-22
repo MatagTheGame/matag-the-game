@@ -1,25 +1,14 @@
 {
-  "name": "Bishop's Soldier",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "VAMPIRE",
-    "SOLDIER"
-  ],
-  "rarity": "COMMON",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "LIFELINK"
-    }
-  ]
+  "name" : "Bishop's Soldier",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/d/9/d954677c-2de6-440a-90d0-bab2e0c8b4af.png?1562564922",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "SOLDIER", "VAMPIRE" ],
+  "rarity" : "COMMON",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "LIFELINK"
+  } ]
 }

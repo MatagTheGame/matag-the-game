@@ -1,33 +1,21 @@
 {
-  "name": "Lightning Strike",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Lightning Strike deals 3 damage to target creature or player.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "ANY"
-          }
-        }
-      ],
-      "parameters": [
-        "DAMAGE:3"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Lightning Strike",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/8/084b7337-c06f-4cbf-8fc0-0b20c221f1dc.png?1562300290",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Lightning Strike deals 3 damage to target creature or player.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "ANY"
       }
+    } ],
+    "parameters" : [ "DAMAGE:3" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

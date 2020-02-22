@@ -1,26 +1,14 @@
 {
-  "name": "Grazing Whiptail",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "COMMON",
-  "power": 3,
-  "toughness": 4,
-  "abilities": [
-    {
-      "abilityType": "REACH"
-    }
-  ]
+  "name" : "Grazing Whiptail",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/5/75cbd690-4d6e-49a7-bded-e6ecee2c76b6.png?1562558237",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "COMMON",
+  "power" : 3,
+  "toughness" : 4,
+  "abilities" : [ {
+    "abilityType" : "REACH"
+  } ]
 }

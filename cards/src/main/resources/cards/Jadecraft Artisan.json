@@ -1,49 +1,30 @@
 {
-  "name": "Jadecraft Artisan",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "SHAMAN",
-    "MERFOLK"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "When Jadecraft Artisan enters the battlefield, target creature gets +2/+2 until end of turn.",
-  "power": 3,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+2/+2"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+  "name" : "Jadecraft Artisan",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/b/2b745934-c1fe-49f5-bda4-b0eafa1408e1.png?1555040670",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "MERFOLK", "SHAMAN" ],
+  "rarity" : "COMMON",
+  "ruleText" : "When Jadecraft Artisan enters the battlefield, target creature gets +2/+2 until end of turn.",
+  "power" : 3,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
+      }
+    } ],
+    "parameters" : [ "+2/+2" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

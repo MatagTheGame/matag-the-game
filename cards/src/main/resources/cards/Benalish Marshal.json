@@ -1,41 +1,25 @@
 {
-  "name": "Benalish Marshal",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "WHITE",
-    "WHITE"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "KNIGHT",
-    "HUMAN"
-  ],
-  "rarity": "RARE",
-  "ruleText": "Other creatures you control get +1/+1.",
-  "power": 3,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "ofType": [
-          "CREATURE"
-        ],
-        "controllerType": "PLAYER",
-        "others": true
-      },
-      "parameters": [
-        "+1/+1"
-      ],
-      "trigger": {
-        "type": "STATIC"
-      }
+  "name" : "Benalish Marshal",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/d/6dd1a7fc-5dbd-4ed2-9b02-9fd5c55bb629.png?1562737424",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "WHITE", "WHITE" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "KNIGHT" ],
+  "rarity" : "RARE",
+  "ruleText" : "Other creatures you control get +1/+1.",
+  "power" : 3,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "controllerType" : "PLAYER",
+      "others" : true
+    },
+    "parameters" : [ "+1/+1" ],
+    "trigger" : {
+      "type" : "STATIC"
     }
-  ]
+  } ]
 }

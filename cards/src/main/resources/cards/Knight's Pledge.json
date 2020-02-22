@@ -1,26 +1,16 @@
 {
-  "name": "Knight's Pledge",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "ENCHANTMENT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Draw two cards.",
-  "abilities": [
-    {
-      "abilityType": "DRAW_X_CARDS",
-      "parameters": [
-        "2"
-      ],
-      "trigger": {
-        "type": "CAST"
-      }
+  "name" : "Knight's Pledge",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/3/734ff6ac-000d-4fc6-b97b-07b9b21f745c.png?1562302703",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "ENCHANTMENT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Draw two cards.",
+  "abilities" : [ {
+    "abilityType" : "DRAW_X_CARDS",
+    "parameters" : [ "2" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

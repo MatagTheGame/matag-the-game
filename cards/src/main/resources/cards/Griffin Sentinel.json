@@ -1,29 +1,17 @@
 {
-  "name": "Griffin Sentinel",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "GRIFFIN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Flying. Vigilance.",
-  "power": 1,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    },
-    {
-      "abilityType": "VIGILANCE"
-    }
-  ]
+  "name" : "Griffin Sentinel",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/b/cb13aaa4-d40a-4fb2-9fd6-62bf76db6a13.png?1563898328",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "GRIFFIN" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flying. Vigilance.",
+  "power" : 1,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  }, {
+    "abilityType" : "VIGILANCE"
+  } ]
 }

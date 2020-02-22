@@ -1,39 +1,22 @@
 {
-  "name": "Chandra's Outrage",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "RED",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "DAMAGE:4",
-        "CONTROLLER_DAMAGE:2"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Chandra's Outrage",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/d/edbfe793-6644-43ed-bbe1-e122c01c5e53.png?1563899115",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "DAMAGE:4", "CONTROLLER_DAMAGE:2" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

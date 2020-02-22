@@ -1,44 +1,26 @@
 {
-  "name": "Inspiring Veteran",
-  "colors": [
-    "RED",
-    "WHITE"
-  ],
-  "cost": [
-    "RED",
-    "WHITE"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "KNIGHT",
-    "HUMAN"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Other Knights you control get +1/+1.",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "ofType": [
-          "CREATURE"
-        ],
-        "ofSubtypeOf": [
-          "KNIGHT"
-        ],
-        "controllerType": "PLAYER",
-        "others": true
-      },
-      "parameters": [
-        "+1/+1"
-      ],
-      "trigger": {
-        "type": "STATIC"
-      }
+  "name" : "Inspiring Veteran",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/c/0c3f372d-259d-4a31-9491-2d369b3f3f8b.png?1572490775",
+  "colors" : [ "WHITE", "RED" ],
+  "cost" : [ "RED", "WHITE" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "KNIGHT" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Other Knights you control get +1/+1.",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "ofSubtypeOf" : [ "KNIGHT" ],
+      "controllerType" : "PLAYER",
+      "others" : true
+    },
+    "parameters" : [ "+1/+1" ],
+    "trigger" : {
+      "type" : "STATIC"
     }
-  ]
+  } ]
 }

@@ -1,46 +1,29 @@
 {
-  "name": "Inspiring Captain",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "KNIGHT",
-    "HUMAN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "When Inspiring Captain enters the battlefield, creatures you control get +1/+1 until end of turn.",
-  "power": 3,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "ofType": [
-          "CREATURE"
-        ],
-        "controllerType": "PLAYER"
-      },
-      "parameters": [
-        "+1/+1"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+  "name" : "Inspiring Captain",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/8/98d14836-0ab4-4df3-a996-76b0dda23ff6.png?1563898359",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "KNIGHT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "When Inspiring Captain enters the battlefield, creatures you control get +1/+1 until end of turn.",
+  "power" : 3,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "controllerType" : "PLAYER"
+    },
+    "parameters" : [ "+1/+1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

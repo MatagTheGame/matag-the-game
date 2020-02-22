@@ -1,42 +1,23 @@
 {
-  "name": "Candlelight Vigil",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "ENCHANTMENT"
-  ],
-  "subtypes": [
-    "AURA"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Enchant Creature. Enchanted creature gets +3/+2 and has vigilance.",
-  "abilities": [
-    {
-      "abilityType": "ENCHANTED_CREATURE_GETS",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+3/+2",
-        "VIGILANCE"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Candlelight Vigil",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/9/e920a75f-7dec-4815-a358-e174401da83b.png?1572892479",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "ENCHANTMENT" ],
+  "subtypes" : [ "AURA" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Enchant Creature. Enchanted creature gets +3/+2 and has vigilance.",
+  "abilities" : [ {
+    "abilityType" : "ENCHANTED_CREATURE_GETS",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "+3/+2", "VIGILANCE" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

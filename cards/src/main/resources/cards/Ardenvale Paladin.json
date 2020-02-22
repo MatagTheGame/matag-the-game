@@ -1,37 +1,20 @@
 {
-  "name": "Ardenvale Paladin",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "KNIGHT",
-    "HUMAN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Adamant — If at least three white mana was spent to cast this spell, Ardenvale Paladin enters the battlefield with a +1/+1 counter on it.",
-  "power": 2,
-  "toughness": 5,
-  "abilities": [
-    {
-      "abilityType": "ADAMANT",
-      "parameters": [
-        "WHITE"
-      ],
-      "ability": {
-        "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
-        "parameters": [
-          "PLUS_1_COUNTERS:1"
-        ]
-      }
+  "name" : "Ardenvale Paladin",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/3/a32fa360-6c41-4146-931b-c19e9a766803.png?1572489621",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "KNIGHT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Adamant — If at least three white mana was spent to cast this spell, Ardenvale Paladin enters the battlefield with a +1/+1 counter on it.",
+  "power" : 2,
+  "toughness" : 5,
+  "abilities" : [ {
+    "abilityType" : "ADAMANT",
+    "parameters" : [ "WHITE" ],
+    "ability" : {
+      "abilityType" : "ENTERS_THE_BATTLEFIELD_WITH",
+      "parameters" : [ "PLUS_1_COUNTERS:1" ]
     }
-  ]
+  } ]
 }

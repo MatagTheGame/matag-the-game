@@ -1,27 +1,16 @@
 {
-  "name": "Divination",
-  "colors": [
-    "BLUE"
-  ],
-  "cost": [
-    "BLUE",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "SORCERY"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Draw 2 cards.",
-  "abilities": [
-    {
-      "abilityType": "DRAW_X_CARDS",
-      "parameters": [
-        "2"
-      ],
-      "trigger": {
-        "type": "CAST"
-      }
+  "name" : "Divination",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/b/cb3b35b8-f321-46d8-a441-6b9a6efa9021.png?1562304347",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "SORCERY" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Draw 2 cards.",
+  "abilities" : [ {
+    "abilityType" : "DRAW_X_CARDS",
+    "parameters" : [ "2" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

@@ -1,60 +1,35 @@
 {
-  "name": "End-Raze Forerunners",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "GREEN",
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "BOAR"
-  ],
-  "rarity": "RARE",
-  "ruleText": "Vigilance, trample, haste. When End-Raze Forerunners enters the battlefield, other creatures you control get +2/+2 and gain vigilance and trample until end of turn.",
-  "power": 7,
-  "toughness": 7,
-  "abilities": [
-    {
-      "abilityType": "VIGILANCE"
+  "name" : "End-Raze Forerunners",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/5/a50d79fe-6d37-42f3-b7b0-0c3018282fa2.png?1572893415",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "BOAR" ],
+  "rarity" : "RARE",
+  "ruleText" : "Vigilance, trample, haste. When End-Raze Forerunners enters the battlefield, other creatures you control get +2/+2 and gain vigilance and trample until end of turn.",
+  "power" : 7,
+  "toughness" : 7,
+  "abilities" : [ {
+    "abilityType" : "VIGILANCE"
+  }, {
+    "abilityType" : "TRAMPLE"
+  }, {
+    "abilityType" : "HASTE"
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "controllerType" : "PLAYER"
     },
-    {
-      "abilityType": "TRAMPLE"
-    },
-    {
-      "abilityType": "HASTE"
-    },
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "ofType": [
-          "CREATURE"
-        ],
-        "controllerType": "PLAYER"
-      },
-      "parameters": [
-        "+2/+2",
-        "VIGILANCE",
-        "TRAMPLE"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+    "parameters" : [ "+2/+2", "VIGILANCE", "TRAMPLE" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

@@ -1,40 +1,22 @@
 {
-  "name": "Fiery Finish",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "RED",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "SORCERY"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Fiery Finish deals 7 damage to target creature.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "DAMAGE:7"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Fiery Finish",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/e/3e38127d-63af-4d26-9ff5-358c8a61f39c.png?1562301715",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "SORCERY" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Fiery Finish deals 7 damage to target creature.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "DAMAGE:7" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

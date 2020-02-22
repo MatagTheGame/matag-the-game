@@ -1,43 +1,26 @@
 {
-  "name": "Sun-Collared Raptor",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Trample. PAY 2 1 RED: Sun-Collared Raptor gets +3/+0 until end of turn.",
-  "power": 1,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "TRAMPLE"
+  "name" : "Sun-Collared Raptor",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/2/62fbd1bc-3e57-43d5-ad54-443ca740fcc4.png?1555040553",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Trample. PAY 2 1 RED: Sun-Collared Raptor gets +3/+0 until end of turn.",
+  "power" : 1,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "TRAMPLE"
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "itself" : true
     },
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "itself": true
-      },
-      "parameters": [
-        "+3/+0"
-      ],
-      "trigger": {
-        "type": "ACTIVATED_ABILITY",
-        "cost": [
-          "RED",
-          "COLORLESS",
-          "COLORLESS"
-        ]
-      }
+    "parameters" : [ "+3/+0" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "RED", "COLORLESS", "COLORLESS" ]
     }
-  ]
+  } ]
 }

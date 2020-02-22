@@ -1,49 +1,31 @@
 {
-  "name": "Watertrap Weaver",
-  "colors": [
-    "BLUE"
-  ],
-  "cost": [
-    "BLUE",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "MERFOLK",
-    "WIZARD"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "When Watertrap Weaver enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ],
-            "controllerType": "OPPONENT"
-          }
-        }
-      ],
-      "parameters": [
-        ":TAPPED_DOES_NOT_UNTAP_NEXT_TURN"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+  "name" : "Watertrap Weaver",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/d/0d973568-d7b0-443f-a09d-44f6b02da5d4.png?1562550617",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "MERFOLK", "WIZARD" ],
+  "rarity" : "COMMON",
+  "ruleText" : "When Watertrap Weaver enters the battlefield, tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step.",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ],
+        "controllerType" : "OPPONENT"
+      }
+    } ],
+    "parameters" : [ ":TAPPED_DOES_NOT_UNTAP_NEXT_TURN" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

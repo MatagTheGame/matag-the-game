@@ -1,19 +1,11 @@
 {
-  "name": "Raptor Companion",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "COMMON",
-  "power": 3,
-  "toughness": 1
+  "name" : "Raptor Companion",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/5/45385c8e-fff9-46e7-97e8-f946306b5147.png?1562909010",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "COMMON",
+  "power" : 3,
+  "toughness" : 1
 }

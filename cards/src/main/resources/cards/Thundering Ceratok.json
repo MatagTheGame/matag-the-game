@@ -1,50 +1,32 @@
 {
-  "name": "Thundering Ceratok",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "RHINO"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Trample. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.",
-  "power": 4,
-  "toughness": 5,
-  "abilities": [
-    {
-      "abilityType": "TRAMPLE"
+  "name" : "Thundering Ceratok",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/8/9888d9a4-ad72-43f6-8031-1031877171a9.png?1557577026",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "RHINO" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Trample. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.",
+  "power" : 4,
+  "toughness" : 5,
+  "abilities" : [ {
+    "abilityType" : "TRAMPLE"
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "controllerType" : "PLAYER",
+      "others" : true
     },
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "ofType": [
-          "CREATURE"
-        ],
-        "controllerType": "PLAYER",
-        "others": true
-      },
-      "parameters": [
-        "TRAMPLE"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+    "parameters" : [ "TRAMPLE" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

@@ -1,21 +1,11 @@
 {
-  "name": "Loxodon Line Breaker",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "ELEPHANT",
-    "SOLDIER"
-  ],
-  "rarity": "COMMON",
-  "power": 3,
-  "toughness": 2
+  "name" : "Loxodon Line Breaker",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/2/928d4250-c379-4134-a263-7811c80a8760.png?1562302989",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "ELEPHANT", "SOLDIER" ],
+  "rarity" : "COMMON",
+  "power" : 3,
+  "toughness" : 2
 }

@@ -1,20 +1,11 @@
 {
-  "name": "Orazca Frillback",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "COMMON",
-  "power": 4,
-  "toughness": 3
+  "name" : "Orazca Frillback",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/0/00c81160-192c-4077-8ed1-3643919a2025.png?1555040703",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "COMMON",
+  "power" : 4,
+  "toughness" : 3
 }

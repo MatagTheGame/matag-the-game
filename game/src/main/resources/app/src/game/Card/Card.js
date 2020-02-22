@@ -17,12 +17,12 @@ class Card extends Component {
     return get(this.props.cardInstance, 'card.name', 'card')
   }
 
-  imageUrl() {
+  imageCardUrl() {
     const name = CardUtils.normalizeCardName(this.name())
     if (name === 'card') {
       return 'url("/img/card-back.jpg")'
     } else {
-      return `url("/img/cards/${name}.jpg")`
+      return `url("${this.props.cardInstance.card.imageUrl}")`
     }
   }
 
@@ -70,10 +70,9 @@ class Card extends Component {
   }
 
   onWheel(e) {
-    const name = CardUtils.normalizeCardName(this.name())
-    if (name !== 'card') {
+    if (this.name() !== 'card') {
       if (e.deltaY < 0) {
-        this.props.maximizeCard(this.imageUrl())
+        this.props.maximizeCard(this.imageCardUrl())
       }
     }
   }
@@ -83,7 +82,7 @@ class Card extends Component {
       return (
         <div id={`card-${this.props.cardInstance.id}`}
           className={this.getClasses()}
-          style={{backgroundImage: this.imageUrl(), ...this.props.style}}
+          style={{backgroundImage: this.imageCardUrl(), ...this.props.style}}
           onClick={this.props.onclick}
           onWheel={this.onWheel}
           title={this.props.cardInstance.card.name}
@@ -92,7 +91,7 @@ class Card extends Component {
         </div>
       )
     } else {
-      return <div className='card' style={{backgroundImage: this.imageUrl(), ...this.props.style}} />
+      return <div className='card' style={{backgroundImage: this.imageCardUrl(), ...this.props.style}} />
     }
   }
 }

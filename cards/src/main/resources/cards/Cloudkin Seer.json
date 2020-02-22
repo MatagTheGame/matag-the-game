@@ -1,38 +1,24 @@
 {
-  "name": "Cloudkin Seer",
-  "colors": [
-    "BLUE"
-  ],
-  "cost": [
-    "BLUE",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "ELEMENTAL",
-    "WIZARD"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Flying. When Cloudkin Seer enters the battlefield, draw a card.",
-  "power": 2,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "DRAW_X_CARDS",
-      "parameters": [
-        "1"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+  "name" : "Cloudkin Seer",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/2/e2111753-a930-403f-9d94-a86dfcb069da.png?1563898564",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "ELEMENTAL", "WIZARD" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flying. When Cloudkin Seer enters the battlefield, draw a card.",
+  "power" : 2,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "DRAW_X_CARDS",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

@@ -1,34 +1,21 @@
 {
-  "name": "Precision Bolt",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "SORCERY"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Precision Bolt deals 3 damage to any target.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "ANY"
-          }
-        }
-      ],
-      "parameters": [
-        "DAMAGE:3"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Precision Bolt",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/5/a59b4e5b-e9e0-4507-b9e7-8fba7e3a54f9.png?1572894271",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS", "COLORLESS" ],
+  "types" : [ "SORCERY" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Precision Bolt deals 3 damage to any target.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "ANY"
       }
+    } ],
+    "parameters" : [ "DAMAGE:3" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

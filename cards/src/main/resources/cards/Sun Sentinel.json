@@ -1,26 +1,15 @@
 {
-  "name": "Sun Sentinel",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "SOLDIER",
-    "HUMAN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Vigilance.",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "VIGILANCE"
-    }
-  ]
+  "name" : "Sun Sentinel",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/c/5cd0b4d6-9753-46a3-924c-2adf3dad2819.png?1562302244",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "SOLDIER" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Vigilance.",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "VIGILANCE"
+  } ]
 }

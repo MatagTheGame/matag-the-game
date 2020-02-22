@@ -1,24 +1,15 @@
 {
-  "name": "Sedge Scorpion",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "SCORPION"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Deathtouch.",
-  "power": 1,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "DEATHTOUCH"
-    }
-  ]
+  "name" : "Sedge Scorpion",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/8/9864f811-db2e-4d6d-ad59-a491a790bdd4.png?1563899539",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "SCORPION" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Deathtouch.",
+  "power" : 1,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "DEATHTOUCH"
+  } ]
 }

@@ -1,26 +1,14 @@
 {
-  "name": "Bartizan Bats",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "BAT"
-  ],
-  "rarity": "COMMON",
-  "power": 3,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    }
-  ]
+  "name" : "Bartizan Bats",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/4/445e41d8-317d-46ce-b858-54df716e0214.png?1563900356",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "BAT" ],
+  "rarity" : "COMMON",
+  "power" : 3,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  } ]
 }

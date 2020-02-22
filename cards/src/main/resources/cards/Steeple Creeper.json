@@ -1,43 +1,24 @@
 {
-  "name": "Steeple Creeper",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "SNAKE",
-    "FROG"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "PAY 3 1 BLUE: Steeple Creeper gains flying until end of turn.",
-  "power": 4,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "itself": true
-      },
-      "parameters": [
-        "FLYING"
-      ],
-      "trigger": {
-        "type": "ACTIVATED_ABILITY",
-        "cost": [
-          "BLUE",
-          "COLORLESS",
-          "COLORLESS",
-          "COLORLESS"
-        ]
-      }
+  "name" : "Steeple Creeper",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/4/f4afafb4-3fc0-4ccf-a942-e4bd2f146d89.png?1572893551",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "FROG", "SNAKE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "PAY 3 1 BLUE: Steeple Creeper gains flying until end of turn.",
+  "power" : 4,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "itself" : true
+    },
+    "parameters" : [ "FLYING" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "BLUE", "COLORLESS", "COLORLESS", "COLORLESS" ]
     }
-  ]
+  } ]
 }

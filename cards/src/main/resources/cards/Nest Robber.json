@@ -1,25 +1,15 @@
 {
-  "name": "Nest Robber",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Haste",
-  "power": 2,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "HASTE"
-    }
-  ]
+  "name" : "Nest Robber",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/7/576d3845-f45a-4db0-9f7c-845cedb64c49.png?1562555717",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Haste",
+  "power" : 2,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "HASTE"
+  } ]
 }

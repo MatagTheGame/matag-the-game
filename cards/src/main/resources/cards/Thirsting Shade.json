@@ -1,42 +1,26 @@
 {
-  "name": "Thirsting Shade",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "SHADE"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Lifelink. PAY 2 1 BLACK: Thirsting Shade gets +1/+1 until end of turn.",
-  "power": 1,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "LIFELINK"
+  "name" : "Thirsting Shade",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/9/a920c2e6-4a1f-487c-ad3f-b772443f0633.png?1572893131",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "SHADE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Lifelink. PAY 2 1 BLACK: Thirsting Shade gets +1/+1 until end of turn.",
+  "power" : 1,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "LIFELINK"
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "itself" : true
     },
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "itself": true
-      },
-      "parameters": [
-        "+1/+1"
-      ],
-      "trigger": {
-        "type": "ACTIVATED_ABILITY",
-        "cost": [
-          "BLACK",
-          "COLORLESS",
-          "COLORLESS"
-        ]
-      }
+    "parameters" : [ "+1/+1" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "BLACK", "COLORLESS", "COLORLESS" ]
     }
-  ]
+  } ]
 }

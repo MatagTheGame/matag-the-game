@@ -1,45 +1,28 @@
 {
-  "name": "Bladebrand",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Target creature gains deathtouch until end of turn. Draw a card.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "DEATHTOUCH"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Bladebrand",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/f/af78f76e-30cd-4939-9577-5a4bd1f93e63.png?1563898818",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Target creature gains deathtouch until end of turn. Draw a card.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
-    },
-    {
-      "abilityType": "DRAW_X_CARDS",
-      "parameters": [
-        "1"
-      ],
-      "trigger": {
-        "type": "CAST"
-      }
+    } ],
+    "parameters" : [ "DEATHTOUCH" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  }, {
+    "abilityType" : "DRAW_X_CARDS",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
 }

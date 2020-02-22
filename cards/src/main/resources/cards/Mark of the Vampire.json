@@ -1,42 +1,23 @@
 {
-  "name": "Mark of the Vampire",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "ENCHANTMENT"
-  ],
-  "subtypes": [
-    "AURA"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Enchant creature. Enchanted creature gets +2/+2 and has lifelink.",
-  "abilities": [
-    {
-      "abilityType": "ENCHANTED_CREATURE_GETS",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+2/+2",
-        "LIFELINK"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Mark of the Vampire",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/5/150090cc-27ac-4d18-b6e6-3ddaa40c822e.png?1549764953",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "ENCHANTMENT" ],
+  "subtypes" : [ "AURA" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Enchant creature. Enchanted creature gets +2/+2 and has lifelink.",
+  "abilities" : [ {
+    "abilityType" : "ENCHANTED_CREATURE_GETS",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "+2/+2", "LIFELINK" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

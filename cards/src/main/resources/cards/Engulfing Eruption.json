@@ -1,38 +1,22 @@
 {
-  "name": "Engulfing Eruption",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "RED",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "SORCERY"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Engulfing Eruption deals 5 damage to target creature.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "DAMAGE:5"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Engulfing Eruption",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/1/f198c7e3-8a85-48f3-a7c2-93320fd4fb81.png?1563900416",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS" ],
+  "types" : [ "SORCERY" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Engulfing Eruption deals 5 damage to target creature.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "DAMAGE:5" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

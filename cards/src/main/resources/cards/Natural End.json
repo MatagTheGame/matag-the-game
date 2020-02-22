@@ -1,47 +1,28 @@
 {
-  "name": "Natural End",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Destroy target artifact or enchantment. You gain 3 life.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "ARTIFACT",
-              "ENCHANTMENT"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        ":DESTROYED"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Natural End",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/4/84dcd314-f4d2-461e-a66e-7b1d8f141879.png?1563899473",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Destroy target artifact or enchantment. You gain 3 life.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "ARTIFACT", "ENCHANTMENT" ]
       }
-    },
-    {
-      "abilityType": "ADD_X_LIFE",
-      "parameters": [
-        "3"
-      ],
-      "trigger": {
-        "type": "CAST"
-      }
+    } ],
+    "parameters" : [ ":DESTROYED" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  }, {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "3" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
 }

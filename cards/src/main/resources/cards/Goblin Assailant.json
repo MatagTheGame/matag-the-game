@@ -1,20 +1,11 @@
 {
-  "name": "Goblin Assailant",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "GOBLIN",
-    "WARRIOR"
-  ],
-  "rarity": "COMMON",
-  "power": 2,
-  "toughness": 2
+  "name" : "Goblin Assailant",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/c/8cfefb65-b6e4-44a1-baa9-d3c00ee8ba96.png?1563900428",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "GOBLIN", "WARRIOR" ],
+  "rarity" : "COMMON",
+  "power" : 2,
+  "toughness" : 2
 }

@@ -1,37 +1,24 @@
 {
-  "name": "Rakdos Guildgate",
-  "types": [
-    "LAND"
-  ],
-  "subtypes": [
-    "GATE"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Rakdos Guildgate enters the battlefield tapped. TAP: Add BLACK or RED to your mana pool.",
-  "abilities": [
-    {
-      "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
-      "parameters": [
-        ":TAPPED"
-      ]
-    },
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "BLACK"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
-    },
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "RED"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
+  "name" : "Rakdos Guildgate",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/e/5e378faf-b1f2-46df-945a-37681d392104.png?1568005321",
+  "types" : [ "LAND" ],
+  "subtypes" : [ "GATE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Rakdos Guildgate enters the battlefield tapped. TAP: Add BLACK or RED to your mana pool.",
+  "abilities" : [ {
+    "abilityType" : "ENTERS_THE_BATTLEFIELD_WITH",
+    "parameters" : [ ":TAPPED" ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "BLACK" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
     }
-  ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "RED" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
+    }
+  } ]
 }

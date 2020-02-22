@@ -1,22 +1,11 @@
 {
-  "name": "Catacomb Crocodile",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "CROCODILE"
-  ],
-  "rarity": "COMMON",
-  "power": 3,
-  "toughness": 7
+  "name" : "Catacomb Crocodile",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/4/440c53f0-7922-4e14-802d-d7a22f8fed85.png?1572892979",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "CROCODILE" ],
+  "rarity" : "COMMON",
+  "power" : 3,
+  "toughness" : 7
 }

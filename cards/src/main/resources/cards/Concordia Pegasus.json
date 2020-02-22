@@ -1,25 +1,15 @@
 {
-  "name": "Concordia Pegasus",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "PEGASUS"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Flying",
-  "power": 1,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    }
-  ]
+  "name" : "Concordia Pegasus",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/5/55f32ff8-3b49-4ce8-96a0-ba0d99477de1.png?1563900272",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "PEGASUS" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flying",
+  "power" : 1,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  } ]
 }

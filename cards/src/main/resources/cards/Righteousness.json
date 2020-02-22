@@ -1,38 +1,23 @@
 {
-  "name": "Righteousness",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Target blocking creature gets +7/+7 until end of turn.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ],
-            "statusTypes": [
-              "BLOCKING"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+7/+7"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Righteousness",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/d/2/d2910df2-e288-4fa0-9859-c5ca35da2d55.png?1572489762",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Target blocking creature gets +7/+7 until end of turn.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ],
+        "statusTypes" : [ "BLOCKING" ]
       }
+    } ],
+    "parameters" : [ "+7/+7" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

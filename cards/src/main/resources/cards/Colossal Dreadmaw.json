@@ -1,29 +1,15 @@
 {
-  "name": "Colossal Dreadmaw",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Trample",
-  "power": 6,
-  "toughness": 6,
-  "abilities": [
-    {
-      "abilityType": "TRAMPLE"
-    }
-  ]
+  "name" : "Colossal Dreadmaw",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/0/80d4ce4f-8255-419b-9e7f-544d9798e5c8.png?1562302903",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Trample",
+  "power" : 6,
+  "toughness" : 6,
+  "abilities" : [ {
+    "abilityType" : "TRAMPLE"
+  } ]
 }

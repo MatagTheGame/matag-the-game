@@ -1,37 +1,22 @@
 {
-  "name": "Gift of Strength",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Target creature gets +3/+3 and gains reach until end of turn.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+3/+3",
-        "REACH"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Gift of Strength",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/5/75f5e144-4dd6-441f-b3e2-433aa82bdf7b.png?1581480614",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Target creature gets +3/+3 and gains reach until end of turn.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "+3/+3", "REACH" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

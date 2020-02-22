@@ -1,26 +1,15 @@
 {
-  "name": "Wary Okapi",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "ANTELOPE"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Vigilance",
-  "power": 3,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "VIGILANCE"
-    }
-  ]
+  "name" : "Wary Okapi",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/4/54f26697-0d4b-4af4-a644-3d0ae13f1d2e.png?1572893478",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "ANTELOPE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Vigilance",
+  "power" : 3,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "VIGILANCE"
+  } ]
 }

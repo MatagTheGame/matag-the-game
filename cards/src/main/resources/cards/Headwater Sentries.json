@@ -1,22 +1,11 @@
 {
-  "name": "Headwater Sentries",
-  "colors": [
-    "BLUE"
-  ],
-  "cost": [
-    "BLUE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "MERFOLK",
-    "WARRIOR"
-  ],
-  "rarity": "COMMON",
-  "power": 2,
-  "toughness": 5
+  "name" : "Headwater Sentries",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/a/2af2c338-f5e9-4596-9435-c6aa965ae541.png?1562552575",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "MERFOLK", "WARRIOR" ],
+  "rarity" : "COMMON",
+  "power" : 2,
+  "toughness" : 5
 }

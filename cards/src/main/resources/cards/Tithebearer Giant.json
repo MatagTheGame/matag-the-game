@@ -1,55 +1,35 @@
 {
-  "name": "Tithebearer Giant",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "GIANT",
-    "WARRIOR"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "When Tithebearer Giant enters the battlefield, you draw a card and you lose 1 life. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.",
-  "power": 4,
-  "toughness": 5,
-  "abilities": [
-    {
-      "abilityType": "DRAW_X_CARDS",
-      "parameters": [
-        "1"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
-      }
-    },
-    {
-      "abilityType": "ADD_X_LIFE",
-      "parameters": [
-        "-1"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+  "name" : "Tithebearer Giant",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/c/3c305ccb-62f5-496a-a205-e818e34ead82.png?1557576568",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "GIANT", "WARRIOR" ],
+  "rarity" : "COMMON",
+  "ruleText" : "When Tithebearer Giant enters the battlefield, you draw a card and you lose 1 life. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.",
+  "power" : 4,
+  "toughness" : 5,
+  "abilities" : [ {
+    "abilityType" : "DRAW_X_CARDS",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  }, {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "-1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
+      }
+    }
+  } ]
 }

@@ -1,37 +1,22 @@
 {
-  "name": "Disenchant",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Destroy target artifact or enchantment.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "ARTIFACT",
-              "ENCHANTMENT"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        ":DESTROYED"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Disenchant",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/b/1b6a2b01-da95-46fa-8673-30ffdfdee0a5.png?1563898267",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Destroy target artifact or enchantment.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "ARTIFACT", "ENCHANTMENT" ]
       }
+    } ],
+    "parameters" : [ ":DESTROYED" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

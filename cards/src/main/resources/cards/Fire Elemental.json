@@ -1,22 +1,11 @@
 {
-  "name": "Fire Elemental",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "RED",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "ELEMENTAL"
-  ],
-  "rarity": "COMMON",
-  "power": 5,
-  "toughness": 4
+  "name" : "Fire Elemental",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/d/4df16df8-3270-4a09-8167-5b6a2068edb9.png?1563899167",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "ELEMENTAL" ],
+  "rarity" : "COMMON",
+  "power" : 5,
+  "toughness" : 4
 }

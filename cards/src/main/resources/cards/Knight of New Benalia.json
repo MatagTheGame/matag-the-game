@@ -1,20 +1,11 @@
 {
-  "name": "Knight of New Benalia",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "KNIGHT",
-    "HUMAN"
-  ],
-  "rarity": "COMMON",
-  "power": 3,
-  "toughness": 1
+  "name" : "Knight of New Benalia",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/8/88c50c4b-a2c8-4cdc-a171-aa3ff9ef107f.png?1562739093",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "KNIGHT" ],
+  "rarity" : "COMMON",
+  "power" : 3,
+  "toughness" : 1
 }

@@ -1,22 +1,11 @@
 {
-  "name": "Thornhide Wolves",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "WOLF"
-  ],
-  "rarity": "COMMON",
-  "power": 4,
-  "toughness": 5
+  "name" : "Thornhide Wolves",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/c/fc0f3812-bb6c-4d99-b505-9dfd84e3fd95.png?1562305290",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "WOLF" ],
+  "rarity" : "COMMON",
+  "power" : 4,
+  "toughness" : 5
 }

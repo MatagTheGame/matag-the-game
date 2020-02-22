@@ -1,23 +1,11 @@
 {
-  "name": "Bogstomper",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "BEAST"
-  ],
-  "rarity": "COMMON",
-  "power": 6,
-  "toughness": 5
+  "name" : "Bogstomper",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/d/ad005eef-d4e4-4f46-81a5-9bbce87014ce.png?1563900363",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "BLACK", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "BEAST" ],
+  "rarity" : "COMMON",
+  "power" : 6,
+  "toughness" : 5
 }

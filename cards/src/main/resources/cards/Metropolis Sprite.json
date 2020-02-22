@@ -1,42 +1,26 @@
 {
-  "name": "Metropolis Sprite",
-  "colors": [
-    "BLUE"
-  ],
-  "cost": [
-    "BLUE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "ROGUE",
-    "FAERIE"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Flying. Pay BLUE: Metropolis Sprite gets +1/-1 until end of turn.",
-  "power": 1,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
+  "name" : "Metropolis Sprite",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/c/fce74849-2e08-4d08-b387-4693f1b9f653.png?1563898656",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "FAERIE", "ROGUE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flying. Pay BLUE: Metropolis Sprite gets +1/-1 until end of turn.",
+  "power" : 1,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "itself" : true
     },
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "itself": true
-      },
-      "parameters": [
-        "+1/-1"
-      ],
-      "trigger": {
-        "type": "ACTIVATED_ABILITY",
-        "cost": [
-          "BLUE"
-        ]
-      }
+    "parameters" : [ "+1/-1" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "BLUE" ]
     }
-  ]
+  } ]
 }

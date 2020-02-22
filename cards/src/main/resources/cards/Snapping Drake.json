@@ -1,27 +1,15 @@
 {
-  "name": "Snapping Drake",
-  "colors": [
-    "BLUE"
-  ],
-  "cost": [
-    "BLUE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DRAKE"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Flying.",
-  "power": 3,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    }
-  ]
+  "name" : "Snapping Drake",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/f/ef46580c-a204-4b0b-8526-2310b1ca32b4.png?1563900350",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DRAKE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flying.",
+  "power" : 3,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  } ]
 }

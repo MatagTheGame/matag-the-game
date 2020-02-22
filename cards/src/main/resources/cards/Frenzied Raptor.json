@@ -1,20 +1,11 @@
 {
-  "name": "Frenzied Raptor",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "COMMON",
-  "power": 4,
-  "toughness": 2
+  "name" : "Frenzied Raptor",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/7/a7c3a1c9-ffa2-4990-aa4b-db9d688f1ed4.png?1562561647",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "COMMON",
+  "power" : 4,
+  "toughness" : 2
 }

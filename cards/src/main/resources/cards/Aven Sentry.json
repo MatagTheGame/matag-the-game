@@ -1,28 +1,15 @@
 {
-  "name": "Aven Sentry",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "BIRD",
-    "SOLDIER"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Flying.",
-  "power": 3,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    }
-  ]
+  "name" : "Aven Sentry",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/f/bf49e5bf-07fb-44b0-8e74-092088d9019f.png?1562742173",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "BIRD", "SOLDIER" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flying.",
+  "power" : 3,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  } ]
 }

@@ -6,6 +6,7 @@ import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.player.PlayerType;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 import java.util.Objects;
@@ -57,6 +58,7 @@ public class CardInstanceSelector {
         this.turnStatusType = turnStatusType;
     }
 
+    @JsonIgnore
     public String getText() {
         StringBuilder stringBuilder = new StringBuilder();
 

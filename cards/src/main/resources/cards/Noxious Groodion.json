@@ -1,26 +1,15 @@
 {
-  "name": "Noxious Groodion",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "BEAST"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Deathtouch",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "DEATHTOUCH"
-    }
-  ]
+  "name" : "Noxious Groodion",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/6/b6cb3d78-1a60-4e9b-b387-afeb58677536.png?1572893061",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "BEAST" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Deathtouch",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "DEATHTOUCH"
+  } ]
 }

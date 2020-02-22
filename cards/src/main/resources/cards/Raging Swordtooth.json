@@ -1,48 +1,31 @@
 {
-  "name": "Raging Swordtooth",
-  "colors": [
-    "GREEN",
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "GREEN",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Trample. When Raging Swordtooth enters the battlefield, it deals 1 damage to each other creature.",
-  "power": 5,
-  "toughness": 5,
-  "abilities": [
-    {
-      "abilityType": "TRAMPLE"
+  "name" : "Raging Swordtooth",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/5/15a79137-9589-4c24-9bea-31041fd3c9ae.png?1562551139",
+  "colors" : [ "RED", "GREEN" ],
+  "cost" : [ "RED", "GREEN", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Trample. When Raging Swordtooth enters the battlefield, it deals 1 damage to each other creature.",
+  "power" : 5,
+  "toughness" : 5,
+  "abilities" : [ {
+    "abilityType" : "TRAMPLE"
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "others" : true
     },
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "ofType": [
-          "CREATURE"
-        ],
-        "others": true
-      },
-      "parameters": [
-        "DAMAGE:1"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+    "parameters" : [ "DAMAGE:1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

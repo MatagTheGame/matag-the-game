@@ -1,20 +1,11 @@
 {
-  "name": "Queen's Bay Soldier",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "VAMPIRE",
-    "SOLDIER"
-  ],
-  "rarity": "COMMON",
-  "power": 2,
-  "toughness": 2
+  "name" : "Queen's Bay Soldier",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/e/ce2ca2e6-f920-4529-88d2-d984bdb7490a.png?1562564130",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "SOLDIER", "VAMPIRE" ],
+  "rarity" : "COMMON",
+  "power" : 2,
+  "toughness" : 2
 }

@@ -1,27 +1,15 @@
 {
-  "name": "Pyromantic Pilgrim",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "HUMAN",
-    "WIZARD"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Haste",
-  "power": 3,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "HASTE"
-    }
-  ]
+  "name" : "Pyromantic Pilgrim",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/6/f670d02b-9bfc-4671-97ed-59bfbe633d82.png?1562745757",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "WIZARD" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Haste",
+  "power" : 3,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "HASTE"
+  } ]
 }

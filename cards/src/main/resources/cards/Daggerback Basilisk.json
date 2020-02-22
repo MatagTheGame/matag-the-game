@@ -1,24 +1,13 @@
 {
-  "name": "Daggerback Basilisk",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "BASILISK"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Deathtouch",
-  "abilities": [
-    {
-      "abilityType": "DEATHTOUCH"
-    }
-  ]
+  "name" : "Daggerback Basilisk",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/b/7bc8325b-c7a8-49a5-8a54-a419800ffb93.png?1562302881",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "BASILISK" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Deathtouch",
+  "abilities" : [ {
+    "abilityType" : "DEATHTOUCH"
+  } ]
 }

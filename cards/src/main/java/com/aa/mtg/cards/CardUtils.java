@@ -22,7 +22,7 @@ public class CardUtils {
   }
 
   public static Card hiddenCard() {
-    return new Card("card", new TreeSet<>(), emptyList(), new TreeSet<>(), new TreeSet<>(), Rarity.COMMON, "", 0, 0, emptyList());
+    return new Card("card", "/img/card-back.jpg", new TreeSet<>(), emptyList(), new TreeSet<>(), new TreeSet<>(), Rarity.COMMON, "", 0, 0, emptyList(), false);
   }
 
   public static List<Color> colorsOfManaThatCanGenerate(Card card) {

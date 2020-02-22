@@ -1,38 +1,25 @@
 {
-  "name": "Skyscanner",
-  "cost": [
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "ARTIFACT",
-    "CREATURE"
-  ],
-  "subtypes": [
-    "THOPTER"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Flying. When Skyscanner enters the battlefield, draw a card.",
-  "power": 1,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    },
-    {
-      "abilityType": "DRAW_X_CARDS",
-      "parameters": [
-        "1"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+  "name" : "Skyscanner",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/d/bd2c1fb7-3c1d-49a9-b2c2-78ba2264df38.png?1562303917",
+  "cost" : [ "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "ARTIFACT", "CREATURE" ],
+  "subtypes" : [ "THOPTER" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flying. When Skyscanner enters the battlefield, draw a card.",
+  "power" : 1,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  }, {
+    "abilityType" : "DRAW_X_CARDS",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

@@ -1,38 +1,21 @@
 {
-  "name": "Overflowing Insight",
-  "colors": [
-    "BLUE"
-  ],
-  "cost": [
-    "BLUE",
-    "BLUE",
-    "BLUE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "MYTHIC",
-  "ruleText": "Target player draws seven cards.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PLAYER"
-          }
-        }
-      ],
-      "parameters": [
-        "DRAW:7"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Overflowing Insight",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/6/f6b3dd8f-902e-45b8-a422-370705621294.png?1562566847",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "BLUE", "BLUE", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "MYTHIC",
+  "ruleText" : "Target player draws seven cards.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PLAYER"
       }
+    } ],
+    "parameters" : [ "DRAW:7" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

@@ -1,31 +1,17 @@
 {
-  "name": "Serra Angel",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "ANGEL"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Flying, vigilance",
-  "power": 4,
-  "toughness": 4,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    },
-    {
-      "abilityType": "VIGILANCE"
-    }
-  ]
+  "name" : "Serra Angel",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/5/b56b9131-4f7e-4912-ba47-63ed82f21d1b.png?1562741601",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "ANGEL" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Flying, vigilance",
+  "power" : 4,
+  "toughness" : 4,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  }, {
+    "abilityType" : "VIGILANCE"
+  } ]
 }

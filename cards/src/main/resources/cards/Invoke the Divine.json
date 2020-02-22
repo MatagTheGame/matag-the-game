@@ -1,47 +1,28 @@
 {
-  "name": "Invoke the Divine",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Destroy target artifact or enchantment. You gain 4 life.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "ARTIFACT",
-              "ENCHANTMENT"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        ":DESTROYED"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Invoke the Divine",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/c/7c1d36b5-37fb-4e52-ad85-c3a09a990ea0.png?1562302885",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Destroy target artifact or enchantment. You gain 4 life.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "ARTIFACT", "ENCHANTMENT" ]
       }
-    },
-    {
-      "abilityType": "ADD_X_LIFE",
-      "parameters": [
-        "4"
-      ],
-      "trigger": {
-        "type": "CAST"
-      }
+    } ],
+    "parameters" : [ ":DESTROYED" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  }, {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "4" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
 }

@@ -1,40 +1,26 @@
 {
-  "name": "Clear the Mind",
-  "colors": [
-    "BLUE"
-  ],
-  "cost": [
-    "BLUE",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "SORCERY"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Target player shuffles their graveyard into their library. Draw a card.",
-  "abilities": [
-    {
-      "abilityType": "SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PLAYER"
-          }
-        }
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Clear the Mind",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/7/a7da6982-9e57-41d2-a052-f2a3bb646436.png?1572892722",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "SORCERY" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Target player shuffles their graveyard into their library. Draw a card.",
+  "abilities" : [ {
+    "abilityType" : "SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PLAYER"
       }
-    },
-    {
-      "abilityType": "DRAW_X_CARDS",
-      "parameters": [
-        "1"
-      ],
-      "trigger": {
-        "type": "CAST"
-      }
+    } ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  }, {
+    "abilityType" : "DRAW_X_CARDS",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
 }

@@ -1,21 +1,11 @@
 {
-  "name": "Bastion Enforcer",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DWARF",
-    "SOLDIER"
-  ],
-  "rarity": "COMMON",
-  "power": 3,
-  "toughness": 2
+  "name" : "Bastion Enforcer",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/c/7cbf17a0-2dbc-4e79-9cfa-ea49b1605105.png?1564022975",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DWARF", "SOLDIER" ],
+  "rarity" : "COMMON",
+  "power" : 3,
+  "toughness" : 2
 }

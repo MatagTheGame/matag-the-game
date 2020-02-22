@@ -1,45 +1,26 @@
 {
-  "name": "Shivan Dragon",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "RED",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DRAGON"
-  ],
-  "rarity": "RARE",
-  "ruleText": "Flying. PAY RED: Shivan Dragon gets +1/+0 until end of turn.",
-  "power": 1,
-  "toughness": 1,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
+  "name" : "Shivan Dragon",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/2/227cf1b5-f85b-41fe-be98-66e383652039.png?1563900441",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DRAGON" ],
+  "rarity" : "RARE",
+  "ruleText" : "Flying. PAY RED: Shivan Dragon gets +1/+0 until end of turn.",
+  "power" : 1,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "itself" : true
     },
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "itself": true
-      },
-      "parameters": [
-        "+1/+0"
-      ],
-      "trigger": {
-        "type": "ACTIVATED_ABILITY",
-        "cost": [
-          "RED"
-        ]
-      }
+    "parameters" : [ "+1/+0" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "RED" ]
     }
-  ]
+  } ]
 }

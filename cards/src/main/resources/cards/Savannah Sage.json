@@ -1,37 +1,24 @@
 {
-  "name": "Savannah Sage",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "CLERIC",
-    "CAT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "When Savannah Sage enters the battlefield, you gain 2 life.",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "ADD_X_LIFE",
-      "parameters": [
-        "2"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+  "name" : "Savannah Sage",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/b/5b5fa4bb-e061-456f-808e-8d98b2c8abf5.png?1563900151",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "CAT", "CLERIC" ],
+  "rarity" : "COMMON",
+  "ruleText" : "When Savannah Sage enters the battlefield, you gain 2 life.",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "2" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

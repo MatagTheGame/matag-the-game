@@ -1,21 +1,11 @@
 {
-  "name": "Orazca Raptor",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "RED",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "COMMON",
-  "power": 3,
-  "toughness": 4
+  "name" : "Orazca Raptor",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/7/b7080f86-0a9f-4471-a52b-0d44d19e6e59.png?1555040479",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "COMMON",
+  "power" : 3,
+  "toughness" : 4
 }

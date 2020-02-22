@@ -1,31 +1,17 @@
 {
-  "name": "Charging Monstrosaur",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "DINOSAUR"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Trample, haste",
-  "power": 5,
-  "toughness": 5,
-  "abilities": [
-    {
-      "abilityType": "TRAMPLE"
-    },
-    {
-      "abilityType": "HASTE"
-    }
-  ]
+  "name" : "Charging Monstrosaur",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/d/5/d5222448-95d1-4b63-ab76-d5060febcf38.png?1562564658",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "DINOSAUR" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Trample, haste",
+  "power" : 5,
+  "toughness" : 5,
+  "abilities" : [ {
+    "abilityType" : "TRAMPLE"
+  }, {
+    "abilityType" : "HASTE"
+  } ]
 }

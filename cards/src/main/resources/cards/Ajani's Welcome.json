@@ -1,33 +1,22 @@
 {
-  "name": "Ajani's Welcome",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE"
-  ],
-  "types": [
-    "ENCHANTMENT"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Whenever a creature enters the battlefield under your control, you gain 1 life.",
-  "abilities": [
-    {
-      "abilityType": "ADD_X_LIFE",
-      "parameters": [
-        "1"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "ofType": [
-            "CREATURE"
-          ],
-          "controllerType": "PLAYER"
-        }
+  "name" : "Ajani's Welcome",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/9/c9045fcb-b633-4c35-8058-6234311551ae.png?1562304330",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE" ],
+  "types" : [ "ENCHANTMENT" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Whenever a creature enters the battlefield under your control, you gain 1 life.",
+  "abilities" : [ {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ],
+        "controllerType" : "PLAYER"
       }
     }
-  ]
+  } ]
 }

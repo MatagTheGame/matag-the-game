@@ -1,39 +1,24 @@
 {
-  "name": "Centaur Peacemaker",
-  "colors": [
-    "GREEN",
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "GREEN",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "CLERIC",
-    "CENTAUR"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "When Centaur Peacemaker enters the battlefield, each player gains 4 life.",
-  "power": 3,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "EACH_PLAYERS_ADD_X_LIFE",
-      "parameters": [
-        "4"
-      ],
-      "trigger": {
-        "type": "TRIGGERED_ABILITY",
-        "subtype": "WHEN_ENTER_THE_BATTLEFIELD",
-        "cardInstanceSelector": {
-          "selectorType": "PERMANENT",
-          "itself": true
-        }
+  "name" : "Centaur Peacemaker",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/e/0e630e9b-7817-4255-9de1-795b2a788d80.png?1572893538",
+  "colors" : [ "WHITE", "GREEN" ],
+  "cost" : [ "WHITE", "GREEN", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "CENTAUR", "CLERIC" ],
+  "rarity" : "COMMON",
+  "ruleText" : "When Centaur Peacemaker enters the battlefield, each player gains 4 life.",
+  "power" : 3,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "EACH_PLAYERS_ADD_X_LIFE",
+    "parameters" : [ "4" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
       }
     }
-  ]
+  } ]
 }

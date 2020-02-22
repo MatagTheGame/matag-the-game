@@ -1,28 +1,15 @@
 {
-  "name": "Prized Griffin",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "GRIFFIN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Flying",
-  "power": 3,
-  "toughness": 4,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    }
-  ]
+  "name" : "Prized Griffin",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/7/877bd423-83ff-4a28-b0d2-447a7821bb8c.png?1572489744",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "GRIFFIN" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flying",
+  "power" : 3,
+  "toughness" : 4,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  } ]
 }

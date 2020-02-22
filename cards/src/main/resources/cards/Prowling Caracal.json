@@ -1,19 +1,11 @@
 {
-  "name": "Prowling Caracal",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "CAT"
-  ],
-  "rarity": "COMMON",
-  "power": 3,
-  "toughness": 1
+  "name" : "Prowling Caracal",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/e/1e689e4a-fc54-46f4-b0c5-c0e65d88340e.png?1563900298",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "CAT" ],
+  "rarity" : "COMMON",
+  "power" : 3,
+  "toughness" : 1
 }

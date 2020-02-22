@@ -1,37 +1,24 @@
 {
-  "name": "Golgari Guildgate",
-  "types": [
-    "LAND"
-  ],
-  "subtypes": [
-    "GATE"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Golgari Guildgate enters the battlefield tapped. TAP: Add BLACK or GREEN to your mana pool.",
-  "abilities": [
-    {
-      "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
-      "parameters": [
-        ":TAPPED"
-      ]
-    },
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "BLACK"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
-    },
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "GREEN"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
+  "name" : "Golgari Guildgate",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/b/9baed2e6-687f-4ab4-b378-4282f3a43c9c.png?1568005149",
+  "types" : [ "LAND" ],
+  "subtypes" : [ "GATE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Golgari Guildgate enters the battlefield tapped. TAP: Add BLACK or GREEN to your mana pool.",
+  "abilities" : [ {
+    "abilityType" : "ENTERS_THE_BATTLEFIELD_WITH",
+    "parameters" : [ ":TAPPED" ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "BLACK" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
     }
-  ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "GREEN" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
+    }
+  } ]
 }

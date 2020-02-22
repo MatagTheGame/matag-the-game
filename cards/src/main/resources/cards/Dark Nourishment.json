@@ -1,48 +1,28 @@
 {
-  "name": "Dark Nourishment",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Dark Nourishment deals 3 damage to target creature or player. You gain 3 life.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "DAMAGE:3"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Dark Nourishment",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/5/053c4cf0-992b-4f76-b8d1-cd67f894172c.png?1562550007",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Dark Nourishment deals 3 damage to target creature or player. You gain 3 life.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
-    },
-    {
-      "abilityType": "ADD_X_LIFE",
-      "parameters": [
-        "3"
-      ],
-      "trigger": {
-        "type": "CAST"
-      }
+    } ],
+    "parameters" : [ "DAMAGE:3" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  }, {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "3" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
 }

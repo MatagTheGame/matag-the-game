@@ -1,26 +1,15 @@
 {
-  "name": "Skyblade of the Legion",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "VAMPIRE",
-    "SOLDIER"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Flying.",
-  "power": 1,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    }
-  ]
+  "name" : "Skyblade of the Legion",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/7/67e788e2-12e9-4041-8210-753aaef2576c.png?1562556870",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "SOLDIER", "VAMPIRE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flying.",
+  "power" : 1,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  } ]
 }

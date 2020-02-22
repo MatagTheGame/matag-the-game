@@ -1,36 +1,22 @@
 {
-  "name": "Lash of Thorns",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Target creature gets +2/+1 and gains deathtouch until end of turn.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+2/+1",
-        "DEATHTOUCH"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Lash of Thorns",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/a/ea45e972-6e4a-4854-9be3-6ffb24e7d7a5.png?1572490162",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Target creature gets +2/+1 and gains deathtouch until end of turn.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "+2/+1", "DEATHTOUCH" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

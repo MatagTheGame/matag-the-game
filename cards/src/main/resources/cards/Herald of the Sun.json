@@ -1,55 +1,29 @@
 {
-  "name": "Herald of the Sun",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "ANGEL"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Flying. Pay 3 1 WHITE: Put a +1/+1 counter on another target creature with flying.",
-  "power": 4,
-  "toughness": 4,
-  "abilities": [
-    {
-      "abilityType": "FLYING"
-    },
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ],
-            "withAbilityType": "FLYING"
-          }
-        }
-      ],
-      "parameters": [
-        "PLUS_1_COUNTERS:1"
-      ],
-      "trigger": {
-        "type": "ACTIVATED_ABILITY",
-        "cost": [
-          "WHITE",
-          "COLORLESS",
-          "COLORLESS",
-          "COLORLESS"
-        ]
+  "name" : "Herald of the Sun",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/c/9c62f724-7fb4-4498-b5c1-cf65d86d8e95.png?1563898345",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "WHITE", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "ANGEL" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Flying. Pay 3 1 WHITE: Put a +1/+1 counter on another target creature with flying.",
+  "power" : 4,
+  "toughness" : 4,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  }, {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ],
+        "withAbilityType" : "FLYING"
       }
+    } ],
+    "parameters" : [ "PLUS_1_COUNTERS:1" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ]
     }
-  ]
+  } ]
 }

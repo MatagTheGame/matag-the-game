@@ -1,26 +1,15 @@
 {
-  "name": "Nimble Birdsticker",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "GOBLIN"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Reach.",
-  "power": 2,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "REACH"
-    }
-  ]
+  "name" : "Nimble Birdsticker",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/f/4ff9bcbd-48fe-4a74-aae5-a447c99aa64b.png?1564023032",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "GOBLIN" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Reach.",
+  "power" : 2,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "REACH"
+  } ]
 }

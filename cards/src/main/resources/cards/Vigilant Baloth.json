@@ -1,28 +1,15 @@
 {
-  "name": "Vigilant Baloth",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "BEAST"
-  ],
-  "rarity": "UNCOMMON",
-  "ruleText": "Vigilance",
-  "power": 5,
-  "toughness": 5,
-  "abilities": [
-    {
-      "abilityType": "VIGILANCE"
-    }
-  ]
+  "name" : "Vigilant Baloth",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/4/34ad8e5d-0c26-4588-8161-b22197715d63.png?1562301653",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "BEAST" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Vigilance",
+  "power" : 5,
+  "toughness" : 5,
+  "abilities" : [ {
+    "abilityType" : "VIGILANCE"
+  } ]
 }

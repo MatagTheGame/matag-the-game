@@ -1,37 +1,22 @@
 {
-  "name": "Bombard",
-  "colors": [
-    "RED"
-  ],
-  "cost": [
-    "RED",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Bombard deals 4 damage to target creature.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "DAMAGE:4"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Bombard",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/a/0a605abc-78e8-47ba-9022-0fad9006fd05.png?1555040368",
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Bombard deals 4 damage to target creature.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "DAMAGE:4" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

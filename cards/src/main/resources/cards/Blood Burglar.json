@@ -1,37 +1,24 @@
 {
-  "name": "Blood Burglar",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "VAMPIRE",
-    "ROGUE"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "As long as it's your turn, Blood Burglar has lifelink.",
-  "power": 2,
-  "toughness": 2,
-  "abilities": [
-    {
-      "abilityType": "SELECTED_PERMANENTS_GET",
-      "cardInstanceSelector": {
-        "selectorType": "PERMANENT",
-        "itself": true,
-        "turnStatusType": "YOUR_TURN"
-      },
-      "parameters": [
-        "LIFELINK"
-      ],
-      "trigger": {
-        "type": "STATIC"
-      }
+  "name" : "Blood Burglar",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/1/01efd5af-ed6d-4132-8f33-37f6a9fa55d0.png?1563898834",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "ROGUE", "VAMPIRE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "As long as it's your turn, Blood Burglar has lifelink.",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "itself" : true,
+      "turnStatusType" : "YOUR_TURN"
+    },
+    "parameters" : [ "LIFELINK" ],
+    "trigger" : {
+      "type" : "STATIC"
     }
-  ]
+  } ]
 }

@@ -1,39 +1,23 @@
 {
-  "name": "Cobbled Wings",
-  "cost": [
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "ARTIFACT"
-  ],
-  "subtypes": [
-    "EQUIPMENT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Equipped creature has flying. Equip 1",
-  "abilities": [
-    {
-      "abilityType": "EQUIPPED_CREATURE_GETS",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "FLYING"
-      ],
-      "trigger": {
-        "type": "ACTIVATED_ABILITY",
-        "cost": [
-          "COLORLESS"
-        ]
+  "name" : "Cobbled Wings",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/b/3b2ff4f0-0dd1-4551-826b-68e8ff1e5860.png?1562553698",
+  "cost" : [ "COLORLESS", "COLORLESS" ],
+  "types" : [ "ARTIFACT" ],
+  "subtypes" : [ "EQUIPMENT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Equipped creature has flying. Equip 1",
+  "abilities" : [ {
+    "abilityType" : "EQUIPPED_CREATURE_GETS",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "FLYING" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "COLORLESS" ]
     }
-  ]
+  } ]
 }

@@ -1,26 +1,15 @@
 {
-  "name": "Sporecap Spider",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "SPIDER"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Reach",
-  "power": 1,
-  "toughness": 5,
-  "abilities": [
-    {
-      "abilityType": "REACH"
-    }
-  ]
+  "name" : "Sporecap Spider",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/b/7bc33252-145f-45c0-bb70-23183c698f66.png?1572490669",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "SPIDER" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Reach",
+  "power" : 1,
+  "toughness" : 5,
+  "abilities" : [ {
+    "abilityType" : "REACH"
+  } ]
 }

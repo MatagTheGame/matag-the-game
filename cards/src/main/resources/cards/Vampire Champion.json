@@ -1,28 +1,15 @@
 {
-  "name": "Vampire Champion",
-  "colors": [
-    "BLACK"
-  ],
-  "cost": [
-    "BLACK",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "CREATURE"
-  ],
-  "subtypes": [
-    "VAMPIRE",
-    "SOLDIER"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Deathtouch.",
-  "power": 3,
-  "toughness": 3,
-  "abilities": [
-    {
-      "abilityType": "DEATHTOUCH"
-    }
-  ]
+  "name" : "Vampire Champion",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/d/4/d47f91ff-c916-4938-8e01-2c684004dd9a.png?1555041165",
+  "colors" : [ "BLACK" ],
+  "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "SOLDIER", "VAMPIRE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Deathtouch.",
+  "power" : 3,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "DEATHTOUCH"
+  } ]
 }

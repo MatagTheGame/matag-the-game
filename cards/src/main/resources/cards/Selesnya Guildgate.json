@@ -1,37 +1,24 @@
 {
-  "name": "Selesnya Guildgate",
-  "types": [
-    "LAND"
-  ],
-  "subtypes": [
-    "GATE"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Selesnya Guildgate enters the battlefield tapped. TAP: Add GREEN or WHITE to your mana pool.",
-  "abilities": [
-    {
-      "abilityType": "ENTERS_THE_BATTLEFIELD_WITH",
-      "parameters": [
-        ":TAPPED"
-      ]
-    },
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "GREEN"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
-    },
-    {
-      "abilityType": "TAP_ADD_MANA",
-      "parameters": [
-        "WHITE"
-      ],
-      "trigger": {
-        "type": "MANA_ABILITY"
-      }
+  "name" : "Selesnya Guildgate",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/d/6d5ee7a5-937a-4c2b-af8c-6e5734677c53.png?1572894191",
+  "types" : [ "LAND" ],
+  "subtypes" : [ "GATE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Selesnya Guildgate enters the battlefield tapped. TAP: Add GREEN or WHITE to your mana pool.",
+  "abilities" : [ {
+    "abilityType" : "ENTERS_THE_BATTLEFIELD_WITH",
+    "parameters" : [ ":TAPPED" ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "GREEN" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
     }
-  ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "WHITE" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
+    }
+  } ]
 }

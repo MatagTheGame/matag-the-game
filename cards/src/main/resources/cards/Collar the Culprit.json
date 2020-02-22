@@ -1,43 +1,27 @@
 {
-  "name": "Collar the Culprit",
-  "colors": [
-    "WHITE"
-  ],
-  "cost": [
-    "WHITE",
-    "COLORLESS",
-    "COLORLESS",
-    "COLORLESS"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Destroy target creature with toughness 4 or greater.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ],
-            "powerToughnessConstraint": {
-              "powerOrToughness": "TOUGHNESS",
-              "powerToughnessConstraintType": "GREATER_OR_EQUAL",
-              "value": 4
-            }
-          }
+  "name" : "Collar the Culprit",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/d/cdf305b7-d1f7-4770-9201-8f3fb6735cd9.png?1572892497",
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Destroy target creature with toughness 4 or greater.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ],
+        "powerToughnessConstraint" : {
+          "powerOrToughness" : "TOUGHNESS",
+          "powerToughnessConstraintType" : "GREATER_OR_EQUAL",
+          "value" : 4
         }
-      ],
-      "parameters": [
-        ":DESTROYED"
-      ],
-      "trigger": {
-        "type": "CAST"
       }
+    } ],
+    "parameters" : [ ":DESTROYED" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

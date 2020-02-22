@@ -1,35 +1,22 @@
 {
-  "name": "Giant Growth",
-  "colors": [
-    "GREEN"
-  ],
-  "cost": [
-    "GREEN"
-  ],
-  "types": [
-    "INSTANT"
-  ],
-  "rarity": "COMMON",
-  "ruleText": "Target creature gets +3/+3 until end of turn.",
-  "abilities": [
-    {
-      "abilityType": "THAT_TARGETS_GET",
-      "targets": [
-        {
-          "cardInstanceSelector": {
-            "selectorType": "PERMANENT",
-            "ofType": [
-              "CREATURE"
-            ]
-          }
-        }
-      ],
-      "parameters": [
-        "+3/+3"
-      ],
-      "trigger": {
-        "type": "CAST"
+  "name" : "Giant Growth",
+  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/6/06ec9e8b-4bd8-4caf-a559-6514b7ab4ca4.png?1557576917",
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Target creature gets +3/+3 until end of turn.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
       }
+    } ],
+    "parameters" : [ "+3/+3" ],
+    "trigger" : {
+      "type" : "CAST"
     }
-  ]
+  } ]
 }

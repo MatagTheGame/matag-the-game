@@ -18,8 +18,12 @@ public class Cards {
     String[] cardsFile = new File(CARDS_PATH).list();
     Objects.requireNonNull(cardsFile);
     for (String cardFile : cardsFile) {
-      Card card = objectMapper.readValue(new File(CARDS_PATH + "/" + cardFile), Card.class);
-      CARDS.put(card.getName(), card);
+      try {
+        Card card = objectMapper.readValue(new File(CARDS_PATH + "/" + cardFile), Card.class);
+        CARDS.put(card.getName(), card);
+      } catch (Exception e) {
+        throw new RuntimeException("Failed to load card: " + cardFile, e);
+      }
     }
   }
 
