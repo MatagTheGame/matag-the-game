@@ -1,18 +1,18 @@
 package com.aa.mtg.cards.sets;
 
-import static com.aa.mtg.cards.CardsConfiguration.RESOURCES_PATH;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Objects;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
+
+import static com.aa.mtg.cards.CardsConfiguration.getResourcesPath;
 
 @Component
 public class MtgSets {
-    private static final String SETS_PATH = RESOURCES_PATH + "/sets";
+    private static final String SETS_PATH = getResourcesPath() + "/sets";
 
     private Map<String, MtgSet> SETS = new LinkedHashMap<>();
 

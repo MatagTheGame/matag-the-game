@@ -6,11 +6,11 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.util.*;
 
-import static com.aa.mtg.cards.CardsConfiguration.RESOURCES_PATH;
+import static com.aa.mtg.cards.CardsConfiguration.getResourcesPath;
 
 @Component
 public class Cards {
-  private static final String CARDS_PATH = RESOURCES_PATH + "/cards";
+  private static final String CARDS_PATH = getResourcesPath() + "/cards";
 
   private Map<String, Card> CARDS = new LinkedHashMap<>();
 
