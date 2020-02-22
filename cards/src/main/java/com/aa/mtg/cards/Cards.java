@@ -20,6 +20,7 @@ public class Cards {
   public Cards(ObjectMapper objectMapper) {
     LOGGER.log(Level.INFO, "Current Directory: " + new File("").getAbsolutePath());
     LOGGER.log(Level.INFO, "Cards Path: " + CARDS_PATH);
+    LOGGER.log(Level.INFO, "ls: " + new File("").list());
     String[] cardsFile = new File(CARDS_PATH).list();
     Objects.requireNonNull(cardsFile);
     for (String cardFile : cardsFile) {
