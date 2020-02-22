@@ -3,6 +3,7 @@ package application.cleanup;
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import application.testcategory.Regression;
+import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
@@ -14,9 +15,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.aa.mtg.cards.Cards.ISLAND;
-import static com.aa.mtg.cards.Cards.MOUNTAIN;
-import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.player.PlayerType.OPPONENT;
 import static com.aa.mtg.player.PlayerType.PLAYER;
 import static com.aa.mtg.game.turn.phases.EndTurnPhase.ET;
@@ -29,6 +27,9 @@ public class DiscardACardAtEndOfTurnIfMoreThanSevenTest extends AbstractApplicat
 
     @Autowired
     private InitTestServiceDecorator initTestServiceDecorator;
+
+    @Autowired
+    private Cards cards;
 
     public void setupGame() {
         initTestServiceDecorator.setInitTestService(new DiscardACardAtEndOfTurnIfMoreThanSevenTest.InitTestServiceForTest());
@@ -49,11 +50,11 @@ public class DiscardACardAtEndOfTurnIfMoreThanSevenTest extends AbstractApplicat
         browser.player1().getMessageHelper().close();
 
         // When player clicks on a card to discard
-        browser.player1().getHandHelper(PLAYER).getFirstCard(PLAINS).click();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Plains")).click();
 
         // Then that card is discarded (down to 8)
-        browser.player1().getHandHelper(PLAYER).doesNotContain(PLAINS);
-        browser.player1().getGraveyardHelper(PLAYER).contains(PLAINS);
+        browser.player1().getHandHelper(PLAYER).doesNotContain(cards.get("Plains"));
+        browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Plains"));
         browser.getHandHelper(PLAYER).toHaveSize(8);
 
         // It stops asking to discard a card
@@ -61,11 +62,11 @@ public class DiscardACardAtEndOfTurnIfMoreThanSevenTest extends AbstractApplicat
         browser.player1().getStatusHelper().hasMessage("Choose a card to discard.");
 
         // When player clicks on a card to discard
-        browser.player1().getHandHelper(PLAYER).getFirstCard(MOUNTAIN).click();
+        browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Mountain")).click();
 
         // Then that card is discarded (down to 7)
-        browser.player1().getHandHelper(PLAYER).doesNotContain(MOUNTAIN);
-        browser.player1().getGraveyardHelper(PLAYER).contains(MOUNTAIN);
+        browser.player1().getHandHelper(PLAYER).doesNotContain(cards.get("Mountain"));
+        browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Mountain"));
         browser.getHandHelper(PLAYER).toHaveSize(7);
 
         // Priority is finally passed
@@ -76,19 +77,19 @@ public class DiscardACardAtEndOfTurnIfMoreThanSevenTest extends AbstractApplicat
         @Override
         public void initGameStatus(GameStatus gameStatus) {
             // Current Player
-            addCardToCurrentPlayerHand(gameStatus, ISLAND);
-            addCardToCurrentPlayerHand(gameStatus, ISLAND);
-            addCardToCurrentPlayerHand(gameStatus, ISLAND);
-            addCardToCurrentPlayerHand(gameStatus, ISLAND);
-            addCardToCurrentPlayerHand(gameStatus, PLAINS);
-            addCardToCurrentPlayerHand(gameStatus, MOUNTAIN);
-            addCardToCurrentPlayerHand(gameStatus, ISLAND);
-            addCardToCurrentPlayerHand(gameStatus, ISLAND);
-            addCardToCurrentPlayerHand(gameStatus, ISLAND);
-            addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
+            addCardToCurrentPlayerHand(gameStatus, cards.get("Island"));
+            addCardToCurrentPlayerHand(gameStatus, cards.get("Island"));
+            addCardToCurrentPlayerHand(gameStatus, cards.get("Island"));
+            addCardToCurrentPlayerHand(gameStatus, cards.get("Island"));
+            addCardToCurrentPlayerHand(gameStatus, cards.get("Plains"));
+            addCardToCurrentPlayerHand(gameStatus, cards.get("Mountain"));
+            addCardToCurrentPlayerHand(gameStatus, cards.get("Island"));
+            addCardToCurrentPlayerHand(gameStatus, cards.get("Island"));
+            addCardToCurrentPlayerHand(gameStatus, cards.get("Island"));
+            addCardToCurrentPlayerLibrary(gameStatus, cards.get("Island"));
 
             // Non Current Player
-            addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
+            addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Mountain"));
         }
     }
 }

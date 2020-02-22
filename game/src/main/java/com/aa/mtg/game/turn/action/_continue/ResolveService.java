@@ -2,7 +2,7 @@ package com.aa.mtg.game.turn.action._continue;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
-import com.aa.mtg.cards.ability.action.AbilityAction;
+import com.aa.mtg.cardinstance.ability.AbilityAction;
 import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.game.message.MessageException;

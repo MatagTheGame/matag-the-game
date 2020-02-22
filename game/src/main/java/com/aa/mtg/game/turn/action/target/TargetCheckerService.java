@@ -6,7 +6,7 @@ import static com.aa.mtg.player.PlayerType.OPPONENT;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
-import com.aa.mtg.cards.ability.action.AbilityAction;
+import com.aa.mtg.cardinstance.ability.AbilityAction;
 import com.aa.mtg.cards.ability.selector.CardInstanceSelector;
 import com.aa.mtg.cards.ability.selector.SelectorType;
 import com.aa.mtg.cards.ability.target.Target;

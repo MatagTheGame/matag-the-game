@@ -1,0 +1,18 @@
+{
+  "name": "Island",
+  "types": [
+    "BASIC","LAND"
+  ],
+  "rarity": "COMMON",
+  "abilities": [
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "BLUE"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    }
+  ]
+}

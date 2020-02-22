@@ -1,7 +1,8 @@
 package com.aa.mtg.game.init.test;
 
-import com.aa.mtg.cards.Card;
 import com.aa.mtg.cardinstance.CardInstanceFactory;
+import com.aa.mtg.cards.Card;
+import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.status.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ public abstract class InitTestService {
     private static final Logger LOGGER = LoggerFactory.getLogger(InitTestService.class);
 
     protected CardInstanceFactory cardInstanceFactory;
+    protected Cards cards;
 
     public void initGameStatusForTest(GameStatus gameStatus) {
         LOGGER.warn("Application is running in test mode: Initializing the gameStatus with test data.");
@@ -66,7 +68,15 @@ public abstract class InitTestService {
         this.cardInstanceFactory = cardInstanceFactory;
     }
 
+    public void setCards(Cards cards) {
+        this.cards = cards;
+    }
+
     public CardInstanceFactory getCardInstanceFactory() {
         return cardInstanceFactory;
+    }
+
+    public Cards getCards() {
+        return cards;
     }
 }

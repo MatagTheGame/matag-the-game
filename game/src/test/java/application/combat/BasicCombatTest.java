@@ -2,6 +2,7 @@ package application.combat;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
+import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
@@ -14,11 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.COMBAT_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.aa.mtg.cards.sets.Ixalan.ANCIENT_BRONTODON;
-import static com.aa.mtg.cards.sets.Ixalan.HEADWATER_SENTRIES;
-import static com.aa.mtg.cards.sets.Ixalan.NEST_ROBBER;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.AXEBANE_BEAST;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.CORAL_COMMANDO;
 import static com.aa.mtg.game.turn.phases.AfterDeclareBlockersPhase.AB;
 import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
 import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
@@ -34,6 +30,9 @@ public class BasicCombatTest extends AbstractApplicationTest {
 
     @Autowired
     private InitTestServiceDecorator initTestServiceDecorator;
+    
+    @Autowired
+    private Cards cards;
 
     public void setupGame() {
         initTestServiceDecorator.setInitTestService(new BasicCombatTest.InitTestServiceForTest());
@@ -51,30 +50,30 @@ public class BasicCombatTest extends AbstractApplicationTest {
         browser.player1().getStatusHelper().hasMessage("Choose creatures you want to attack with.");
 
         // When declare attacker
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Headwater Sentries")).click();
 
         // Then attacker is moved forward
-        browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(HEADWATER_SENTRIES).isFrontendTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Headwater Sentries")).isFrontendTapped();
 
         // When withdraw attacker
-        browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(HEADWATER_SENTRIES).click();
+        browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Headwater Sentries")).click();
 
         // Then attacker is moved backward
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).isNotTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Headwater Sentries")).isNotTapped();
 
         // When declare illegal attacker
-        int nestRobberId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(NEST_ROBBER).getCardIdNumeric();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(NEST_ROBBER).click();
+        int nestRobberId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nest Robber")).getCardIdNumeric();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nest Robber")).click();
 
         // Then a message is displayed
         browser.getMessageHelper().hasMessage("\"" + nestRobberId + " - Nest Robber\" is already tapped and cannot attack.");
         browser.getMessageHelper().close();
 
         // The four attackers are declared as attacker and continue
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).click();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CORAL_COMMANDO).click();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(AXEBANE_BEAST).click();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(ANCIENT_BRONTODON).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Headwater Sentries")).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Coral Commando")).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Axebane Beast")).click();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Ancient Brontodon")).click();
         browser.player1().getActionHelper().clickContinue();
 
         // Priority passes to the opponent
@@ -82,8 +81,8 @@ public class BasicCombatTest extends AbstractApplicationTest {
         browser.player2().getPhaseHelper().is(DA, PLAYER);
 
         // When opponent click on a card nothing happens
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(NEST_ROBBER).click();
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(NEST_ROBBER);
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nest Robber")).click();
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Nest Robber"));
 
         // Opponent continue
         browser.player2().getActionHelper().clickContinue();
@@ -92,40 +91,40 @@ public class BasicCombatTest extends AbstractApplicationTest {
         browser.player1().getPhaseHelper().is(DB, OPPONENT);
         browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
         browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).toHaveSize(4);
-        browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(HEADWATER_SENTRIES).isTapped();
+        browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Headwater Sentries")).isTapped();
 
         // And the opponent sees the same
         browser.player2().getPhaseHelper().is(DB, PLAYER);
         browser.player2().getStatusHelper().hasMessage("Choose creatures you want to block with.");
         browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).toHaveSize(4);
-        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(HEADWATER_SENTRIES).isTapped();
+        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Headwater Sentries")).isTapped();
 
         // Opponent select a creature to block
-        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(ANCIENT_BRONTODON).click();
-        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(ANCIENT_BRONTODON).isSelected();
+        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Ancient Brontodon")).click();
+        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Ancient Brontodon")).isSelected();
 
         // Opponent decide to block that creature
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CORAL_COMMANDO).click();
-        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).contains(CORAL_COMMANDO);
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Coral Commando")).click();
+        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).contains(cards.get("Coral Commando"));
 
         // Opponent decide to withdraw that block
-        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(CORAL_COMMANDO).click();
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(CORAL_COMMANDO);
+        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Coral Commando")).click();
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Coral Commando"));
 
         // Opponent declare blockers
-        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(HEADWATER_SENTRIES).click();
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).click();
-        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(HEADWATER_SENTRIES).parentHasStyle("margin-left: 390px; margin-top: 0px;");
+        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Headwater Sentries")).click();
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Headwater Sentries")).click();
+        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Headwater Sentries")).parentHasStyle("margin-left: 390px; margin-top: 0px;");
 
-        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(CORAL_COMMANDO).click();
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(CORAL_COMMANDO).click();
-        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(CORAL_COMMANDO).parentHasStyle("margin-left: 130px; margin-top: 0px;");
+        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Coral Commando")).click();
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Coral Commando")).click();
+        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Coral Commando")).parentHasStyle("margin-left: 130px; margin-top: 0px;");
 
-        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(AXEBANE_BEAST).click();
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(NEST_ROBBER).click();
-        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(NEST_ROBBER).parentHasStyle("margin-left: -130px; margin-top: 0px;");
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).click();
-        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getCard(HEADWATER_SENTRIES, 1).parentHasStyle("margin-left: -105px; margin-top: 50px;");
+        browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Axebane Beast")).click();
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nest Robber")).click();
+        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Nest Robber")).parentHasStyle("margin-left: -130px; margin-top: 0px;");
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Headwater Sentries")).click();
+        browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getCard(cards.get("Headwater Sentries"), 1).parentHasStyle("margin-left: -105px; margin-top: 50px;");
 
         // And continue
         browser.player2().getActionHelper().clickContinue();
@@ -149,21 +148,21 @@ public class BasicCombatTest extends AbstractApplicationTest {
         browser.player1().getPhaseHelper().is(M2, PLAYER);
 
         // Cards are now
-        browser.player1().getGraveyardHelper(PLAYER).contains(CORAL_COMMANDO, AXEBANE_BEAST);
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(HEADWATER_SENTRIES, ANCIENT_BRONTODON);
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).hasDamage(2);
-        browser.player1().getGraveyardHelper(OPPONENT).contains(CORAL_COMMANDO, NEST_ROBBER);
-        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).contains(HEADWATER_SENTRIES, HEADWATER_SENTRIES);
-        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getCard(HEADWATER_SENTRIES, 0).hasDamage(2);
-        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getCard(HEADWATER_SENTRIES, 1).hasDamage(2);
+        browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Coral Commando"), cards.get("Axebane Beast"));
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Headwater Sentries"), cards.get("Ancient Brontodon"));
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Headwater Sentries")).hasDamage(2);
+        browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Coral Commando"), cards.get("Nest Robber"));
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).contains(cards.get("Headwater Sentries"), cards.get("Headwater Sentries"));
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getCard(cards.get("Headwater Sentries"), 0).hasDamage(2);
+        browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getCard(cards.get("Headwater Sentries"), 1).hasDamage(2);
 
-        browser.player2().getGraveyardHelper(OPPONENT).contains(CORAL_COMMANDO, AXEBANE_BEAST);
-        browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).contains(HEADWATER_SENTRIES, ANCIENT_BRONTODON);
-        browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(HEADWATER_SENTRIES).hasDamage(2);
-        browser.player2().getGraveyardHelper(PLAYER).contains(CORAL_COMMANDO, NEST_ROBBER);
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(HEADWATER_SENTRIES, HEADWATER_SENTRIES);
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(HEADWATER_SENTRIES, 0).hasDamage(2);
-        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(HEADWATER_SENTRIES, 1).hasDamage(2);
+        browser.player2().getGraveyardHelper(OPPONENT).contains(cards.get("Coral Commando"), cards.get("Axebane Beast"));
+        browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).contains(cards.get("Headwater Sentries"), cards.get("Ancient Brontodon"));
+        browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Headwater Sentries")).hasDamage(2);
+        browser.player2().getGraveyardHelper(PLAYER).contains(cards.get("Coral Commando"), cards.get("Nest Robber"));
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Headwater Sentries"), cards.get("Headwater Sentries"));
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Headwater Sentries"), 0).hasDamage(2);
+        browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Headwater Sentries"), 1).hasDamage(2);
 
         // Life is
         browser.player2().getPlayerInfoHelper(PLAYER).toHaveLife(11);
@@ -177,23 +176,23 @@ public class BasicCombatTest extends AbstractApplicationTest {
         @Override
         public void initGameStatus(GameStatus gameStatus) {
             // Single block both survive
-            addCardToCurrentPlayerBattlefield(gameStatus, HEADWATER_SENTRIES); // 2/5
-            addCardToNonCurrentPlayerBattlefield(gameStatus, HEADWATER_SENTRIES); // 2/5
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Headwater Sentries")); // 2/5
+            addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Headwater Sentries")); // 2/5
 
             // Single block both die
-            addCardToCurrentPlayerBattlefield(gameStatus, CORAL_COMMANDO); // 3/2
-            addCardToNonCurrentPlayerBattlefield(gameStatus, CORAL_COMMANDO); // 3/2
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Coral Commando")); // 3/2
+            addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Coral Commando")); // 3/2
 
             // Double block attacker dies one blocker dies
-            addCardToCurrentPlayerBattlefield(gameStatus, AXEBANE_BEAST); // 3/4
-            addCardToNonCurrentPlayerBattlefield(gameStatus, NEST_ROBBER); // 2/1
-            addCardToNonCurrentPlayerBattlefield(gameStatus, HEADWATER_SENTRIES); // 2/5
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Axebane Beast")); // 3/4
+            addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Nest Robber")); // 2/1
+            addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Headwater Sentries")); // 2/5
 
             // Non blocked damage to player
-            addCardToCurrentPlayerBattlefield(gameStatus, ANCIENT_BRONTODON); // 9/9
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Ancient Brontodon")); // 9/9
 
             // Cannot attack as tapped
-            addCardToCurrentPlayerBattlefield(gameStatus, NEST_ROBBER);
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Nest Robber"));
             gameStatus.getCurrentPlayer().getBattlefield().getCards().get(4).getModifiers().tap();
         }
     }

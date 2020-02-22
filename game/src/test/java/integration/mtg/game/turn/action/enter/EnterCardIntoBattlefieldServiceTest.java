@@ -2,6 +2,7 @@ package integration.mtg.game.turn.action.enter;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.CardInstanceFactory;
+import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.draw.DrawXCardsService;
 import com.aa.mtg.game.turn.action.enter.EnterCardIntoBattlefieldService;
@@ -13,12 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.aa.mtg.cards.Cards.SWAMP;
-import static com.aa.mtg.cards.ability.Abilities.WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_2_2;
-import static com.aa.mtg.cards.sets.CoreSet2019.DIREGRAF_GHOUL;
-import static com.aa.mtg.cards.sets.RivalsOfIxalan.JADECRAFT_ARTISAN;
-import static com.aa.mtg.cards.sets.ThroneOfEldraine.ARDENVALE_PALADIN;
-import static com.aa.mtg.cards.sets.ThroneOfEldraine.CLOCKWORK_SERVANT;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -40,11 +35,14 @@ public class EnterCardIntoBattlefieldServiceTest {
   @Autowired
   private DrawXCardsService drawXCardsService;
 
+  @Autowired
+  private Cards cards;
+
   @Test
   public void enterTheBattlefield() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, SWAMP, "player-name");
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
     card.setController("player-name");
 
     // When
@@ -59,7 +57,7 @@ public class EnterCardIntoBattlefieldServiceTest {
   public void enterTheBattlefieldOpponent() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, SWAMP, "opponent-name");
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "opponent-name");
     card.setController("opponent-name");
 
     // When
@@ -74,7 +72,7 @@ public class EnterCardIntoBattlefieldServiceTest {
   public void enterTheBattlefieldTapped() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, DIREGRAF_GHOUL, "player-name");
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Diregraf Ghoul"), "player-name");
     card.setController("player-name");
 
     // When
@@ -88,7 +86,7 @@ public class EnterCardIntoBattlefieldServiceTest {
   public void enterTheBattlefieldTrigger() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, JADECRAFT_ARTISAN, "player-name");
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Jadecraft Artisan"), "player-name");
     card.setController("player-name");
 
     // When
@@ -96,14 +94,15 @@ public class EnterCardIntoBattlefieldServiceTest {
 
     // Then
     assertThat(gameStatus.getStack().getItems()).contains(card);
-    assertThat(card.getTriggeredAbilities()).contains(WHEN_IT_ENTERS_THE_BATTLEFIELD_TARGET_CREATURE_GETS_PLUS_2_2);
+    assertThat(card.getTriggeredAbilities()).hasSize(1);
+    assertThat(card.getTriggeredAbilities().get(0).getAbilityTypeText()).isEqualTo("That targets get +2/+2.");
   }
 
   @Test
   public void enterTheBattlefieldAdamantTriggered() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, ARDENVALE_PALADIN, "player-name");
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Ardenvale Paladin"), "player-name");
     card.setController("player-name");
 
     gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
@@ -124,7 +123,7 @@ public class EnterCardIntoBattlefieldServiceTest {
   public void enterTheBattlefieldAdamantNotTriggered() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, ARDENVALE_PALADIN, "player-name");
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Ardenvale Paladin"), "player-name");
     card.setController("player-name");
 
     gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
@@ -145,7 +144,7 @@ public class EnterCardIntoBattlefieldServiceTest {
   public void enterTheBattlefieldAdamantSameTriggered() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, CLOCKWORK_SERVANT, "player-name");
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Clockwork Servant"), "player-name");
     card.setController("player-name");
 
     gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
@@ -166,7 +165,7 @@ public class EnterCardIntoBattlefieldServiceTest {
   public void enterTheBattlefieldAdamantSameNotTriggered() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, CLOCKWORK_SERVANT, "player-name");
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Clockwork Servant"), "player-name");
     card.setController("player-name");
 
     gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(

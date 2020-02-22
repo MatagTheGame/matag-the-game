@@ -1,8 +1,8 @@
 package com.aa.mtg.game.turn.action.cast;
 
 import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.cost.CostService;
 import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
+import com.aa.mtg.cards.cost.CostService;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.game.message.MessageException;
 import com.aa.mtg.game.player.Player;

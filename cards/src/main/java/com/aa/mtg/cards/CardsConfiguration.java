@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackageClasses = CardsConfiguration.class)
+@ComponentScan(basePackageClasses = {CardsConfiguration.class})
 public class CardsConfiguration {
-    public static final String RESOURCES_PATH = "src/main/resources";
+    public static final String RESOURCES_PATH = "../cards/src/main/resources";
 
     @Bean
     public ObjectMapper cardsObjectMapper() {

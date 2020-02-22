@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 import static com.aa.mtg.cards.CardsConfiguration.RESOURCES_PATH;
 
@@ -25,11 +23,18 @@ public class Cards {
     }
   }
 
-  public Map<String, Card> getCards() {
+  public List<Card> getAll() {
+    return new ArrayList<>(CARDS.values());
+  }
+
+  public Map<String, Card> getCardsMap() {
     return CARDS;
   }
 
-  public Card getCard(String name) {
-    return CARDS.get(name);
+  public Card get(String name) {
+    if (CARDS.containsKey(name)) {
+      return CARDS.get(name);
+    }
+    throw new RuntimeException("Card " + name + " not found!");
   }
 }

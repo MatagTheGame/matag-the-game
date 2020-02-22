@@ -5,6 +5,8 @@ import com.aa.mtg.cards.ability.target.Target;
 import com.aa.mtg.cards.ability.trigger.Trigger;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -27,9 +29,9 @@ public class Ability {
         @JsonProperty("cardInstanceSelector") CardInstanceSelector cardInstanceSelector, @JsonProperty("parameters") List<String> parameters,
         @JsonProperty("trigger") Trigger trigger, @JsonProperty("ability") Ability ability) {
         this.abilityType = abilityType;
-        this.targets = targets;
+        this.targets = targets != null ? targets : new ArrayList<>();
         this.cardInstanceSelector = cardInstanceSelector;
-        this.parameters = parameters;
+        this.parameters = parameters != null ? parameters : new ArrayList<>();
         this.trigger = trigger;
         this.ability = ability;
     }

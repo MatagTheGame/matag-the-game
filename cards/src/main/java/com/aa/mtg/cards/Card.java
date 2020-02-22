@@ -9,8 +9,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.TreeSet;
 
 @Getter
 @EqualsAndHashCode
@@ -18,10 +19,10 @@ import java.util.Set;
 @Builder
 public class Card {
   private final String name;
-  private final Set<Color> colors;
+  private final TreeSet<Color> colors;
   private final List<Cost> cost;
-  private final Set<Type> types;
-  private final Set<Subtype> subtypes;
+  private final TreeSet<Type> types;
+  private final TreeSet<Subtype> subtypes;
   private final Rarity rarity;
   private final String ruleText;
   private final int power;
@@ -30,20 +31,24 @@ public class Card {
 
   @JsonCreator
   public Card(@JsonProperty("name") String name,
-      @JsonProperty("colors") Set<Color> colors, @JsonProperty("cost") List<Cost> cost,
-      @JsonProperty("types") Set<Type> types, @JsonProperty("subtypes") Set<Subtype> subtypes,
+      @JsonProperty("colors") TreeSet<Color> colors, @JsonProperty("cost") List<Cost> cost,
+      @JsonProperty("types") TreeSet<Type> types, @JsonProperty("subtypes") TreeSet<Subtype> subtypes,
       @JsonProperty("rarity") Rarity rarity, @JsonProperty("ruleText") String ruleText,
       @JsonProperty("power") int power, @JsonProperty("toughness") int toughness,
       @JsonProperty("abilities") List<Ability> abilities) {
     this.name = name;
-    this.colors = colors;
-    this.cost = cost;
-    this.types = types;
-    this.subtypes = subtypes;
+    this.colors = colors != null ? colors : new TreeSet<>();
+    this.cost = cost != null ? cost : new ArrayList<>();
+    this.types = types != null ? types : new TreeSet<>();
+    this.subtypes = subtypes != null ? subtypes : new TreeSet<>();
     this.rarity = rarity;
-    this.ruleText = ruleText;
+    this.ruleText = ruleText != null ? ruleText : "";
     this.power = power;
     this.toughness = toughness;
-    this.abilities = abilities;
+    this.abilities = abilities != null ? abilities : new ArrayList<>();
+  }
+
+  public boolean isInstantSpeed() {
+    return types.contains(Type.INSTANT);
   }
 }

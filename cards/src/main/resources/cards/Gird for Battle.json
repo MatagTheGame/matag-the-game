@@ -1,0 +1,45 @@
+{
+  "name": "Gird for Battle",
+  "colors": [
+    "WHITE"
+  ],
+  "cost": [
+    "WHITE"
+  ],
+  "types": [
+    "SORCERY"
+  ],
+  "rarity": "UNCOMMON",
+  "ruleText": "Put a +1/+1 counter on each of up to two target creatures.",
+  "abilities": [
+    {
+      "abilityType": "THAT_TARGETS_GET",
+      "targets": [
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          }
+        },
+        {
+          "cardInstanceSelector": {
+            "selectorType": "PERMANENT",
+            "ofType": [
+              "CREATURE"
+            ]
+          },
+          "optional": true,
+          "other": true
+        }
+      ],
+      "parameters": [
+        "PLUS_1_COUNTERS:1"
+      ],
+      "trigger": {
+        "type": "CAST"
+      }
+    }
+  ]
+}

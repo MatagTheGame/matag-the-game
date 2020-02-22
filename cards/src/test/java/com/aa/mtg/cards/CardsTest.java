@@ -29,12 +29,12 @@ public class CardsTest {
 
     @Test
     public void shouldLoadAllCards() {
-        assertThat(cards.getCards()).isNotEmpty();
+        assertThat(cards.getAll()).isNotEmpty();
     }
 
     @Test
     public void shouldLoadACardWithoutAbilities() {
-        Card card = cards.getCard("Bishop's Soldier");
+        Card card = cards.get("Bishop's Soldier");
         assertThat(card.getName()).isEqualTo("Bishop's Soldier");
         assertThat(card.getColors()).containsExactly(Color.WHITE);
         assertThat(card.getCost()).containsExactly(Cost.WHITE, Cost.COLORLESS);
@@ -48,7 +48,7 @@ public class CardsTest {
 
     @Test
     public void shouldLoadACardWithAbilities() {
-        Card card = cards.getCard("Act of Treason");
+        Card card = cards.get("Act of Treason");
         assertThat(card.getName()).isEqualTo("Act of Treason");
         assertThat(card.getColors()).containsExactly(Color.RED);
         assertThat(card.getCost()).containsExactly(Cost.RED, Cost.COLORLESS, Cost.COLORLESS);

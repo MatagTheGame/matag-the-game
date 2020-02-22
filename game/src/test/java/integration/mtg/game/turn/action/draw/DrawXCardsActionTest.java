@@ -2,7 +2,10 @@ package integration.mtg.game.turn.action.draw;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.CardInstanceFactory;
-import com.aa.mtg.cards.sets.CoreSet2020;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
+import com.aa.mtg.cards.Cards;
+import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.draw.DrawXCardsAction;
 import integration.TestUtils;
@@ -12,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.aa.mtg.cards.ability.Abilities.DRAW_1_CARD;
-import static com.aa.mtg.cards.ability.Abilities.DRAW_2_CARDS;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -29,14 +31,18 @@ public class DrawXCardsActionTest {
     @Autowired
     private TestUtils testUtils;
 
+    @Autowired
+    private Cards cards;
+
     @Test
     public void controllerDraw3Cards() {
         // Given
         GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 12, CoreSet2020.DARK_REMEDY, "opponent-name");
+        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 12, cards.get("Dark Remedy"), "opponent-name");
+        CardInstanceAbility draw2Cards = new CardInstanceAbility(Ability.builder().abilityType(AbilityType.DRAW_X_CARDS).parameters(singletonList("2")).build());
 
         // When
-        drawXCardsAction.perform(cardInstance, gameStatus, DRAW_2_CARDS);
+        drawXCardsAction.perform(cardInstance, gameStatus, draw2Cards);
 
         // Then
         assertThat(gameStatus.getPlayerByName("opponent-name").getHand().size()).isEqualTo(9);
@@ -47,9 +53,10 @@ public class DrawXCardsActionTest {
     public void currentPlayerDraw1Card() {
         // Given
         GameStatus gameStatus = testUtils.testGameStatus();
+        CardInstanceAbility draw1Cards = new CardInstanceAbility(Ability.builder().abilityType(AbilityType.DRAW_X_CARDS).parameters(singletonList("1")).build());
 
         // When
-        drawXCardsAction.perform(null, gameStatus, DRAW_1_CARD);
+        drawXCardsAction.perform(null, gameStatus, draw1Cards);
 
         // Then
         assertThat(gameStatus.getPlayerByName("player-name").getHand().size()).isEqualTo(8);

@@ -2,7 +2,7 @@ package integration.mtg.game.turn.action.cast;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.CardInstanceFactory;
-import com.aa.mtg.cards.sets.Dominaria;
+import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.cast.PlayLandService;
 import com.aa.mtg.game.turn.action.enter.EnterCardIntoBattlefieldService;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.aa.mtg.cards.Cards.SWAMP;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
@@ -33,6 +32,9 @@ public class PlayLandServiceTest {
     
     @Autowired
     private TestUtils testUtils;
+    
+    @Autowired
+    private Cards cards;
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -41,7 +43,7 @@ public class PlayLandServiceTest {
     public void playLand() {
         // Given
         GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance card = cardInstanceFactory.create(gameStatus, 100, SWAMP, "player-name");
+        CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
         gameStatus.getPlayer1().getHand().addCard(card);
 
         // When
@@ -55,7 +57,7 @@ public class PlayLandServiceTest {
     public void playLandErrorNotALand() {
         // Given
         GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance card = cardInstanceFactory.create(gameStatus, 100, Dominaria.BEFUDDLE, "player-name");
+        CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Befuddle"), "player-name");
         gameStatus.getPlayer1().getHand().addCard(card);
 
         // Expect
@@ -69,9 +71,9 @@ public class PlayLandServiceTest {
     public void playLandMultipleLand() {
         // Given
         GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance card1 = cardInstanceFactory.create(gameStatus, 100, SWAMP, "player-name");
+        CardInstance card1 = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
         gameStatus.getPlayer1().getHand().addCard(card1);
-        CardInstance card2 = cardInstanceFactory.create(gameStatus, 101, SWAMP, "player-name");
+        CardInstance card2 = cardInstanceFactory.create(gameStatus, 101, cards.get("Swamp"), "player-name");
         gameStatus.getPlayer1().getHand().addCard(card2);
 
         // When
@@ -92,7 +94,7 @@ public class PlayLandServiceTest {
         // Given
         GameStatus gameStatus = testUtils.testGameStatus();
         gameStatus.getTurn().setCurrentPhase("FS");
-        CardInstance card = cardInstanceFactory.create(gameStatus, 100, SWAMP, "player-name");
+        CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
         gameStatus.getPlayer1().getHand().addCard(card);
 
         // Expect

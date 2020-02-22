@@ -2,7 +2,7 @@ package integration.mtg.cards;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.CardInstanceFactory;
-import com.aa.mtg.cards.sets.Dominaria;
+import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.status.GameStatus;
 import integration.TestUtils;
 import integration.TestUtilsConfiguration;
@@ -22,6 +22,9 @@ public class CardInstanceFactoryTest {
     private CardInstanceFactory cardInstanceFactory;
 
     @Autowired
+    private Cards cards;
+
+    @Autowired
     private TestUtils testUtils;
 
     @Test
@@ -30,7 +33,7 @@ public class CardInstanceFactoryTest {
         GameStatus gameStatus = testUtils.testGameStatus();
 
         // When
-        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, Dominaria.SHORT_SWORD, "player-name");
+        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
 
         // Then
         assertThat(cardInstance.getId()).isEqualTo(1);
@@ -43,8 +46,8 @@ public class CardInstanceFactoryTest {
         GameStatus gameStatus = testUtils.testGameStatus();
 
         // When
-        CardInstance cardInstance1 = cardInstanceFactory.create(gameStatus, 1, Dominaria.SHORT_SWORD, "player-name");
-        CardInstance cardInstance2 = cardInstanceFactory.create(gameStatus, 2, Dominaria.BEFUDDLE, "opponent-name");
+        CardInstance cardInstance1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
+        CardInstance cardInstance2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Befuddle"), "opponent-name");
 
         // Then
         assertThat(cardInstance1).isNotSameAs(cardInstance2);

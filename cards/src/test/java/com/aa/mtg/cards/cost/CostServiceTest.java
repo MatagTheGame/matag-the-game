@@ -29,7 +29,7 @@ public class CostServiceTest {
     @Test
     public void isCastingCostFulfilledFeralMaakaCorrectCosts() {
         // Given
-        Card card = cards.getCard("Feral Maaka");
+        Card card = cards.get("Feral Maaka");
         List<Cost> manaPaid = asList(GREEN, RED);
 
         // When
@@ -42,7 +42,7 @@ public class CostServiceTest {
     @Test
     public void isCastingCostFulfilledFeralMaakaNoMana() {
         // Given
-        Card card = cards.getCard("Feral Maaka");
+        Card card = cards.get("Feral Maaka");
         List<Cost> manaPaid = Collections.emptyList();
 
         // When
@@ -55,7 +55,7 @@ public class CostServiceTest {
     @Test
     public void isCastingCostFulfilledFeralMaakaWrongCost() {
         // Given
-        Card card = cards.getCard("Feral Maaka");
+        Card card = cards.get("Feral Maaka");
         List<Cost> manaPaid = asList(WHITE, GREEN);
 
         // When
@@ -68,7 +68,7 @@ public class CostServiceTest {
     @Test
     public void isCastingCostFulfilledFeralMaakaOneLessMana() {
         // Given
-        Card card = cards.getCard("Feral Maaka");
+        Card card = cards.get("Feral Maaka");
         List<Cost> manaPaid = Collections.singletonList(RED);
 
         // When
@@ -81,7 +81,7 @@ public class CostServiceTest {
     @Test
     public void isCastingCostFulfilledAxebaneBeastCorrectCosts() {
         // Given
-        Card card = cards.getCard("Axebane Beast");
+        Card card = cards.get("Axebane Beast");
         List<Cost> manaPaid = asList(GREEN, GREEN, RED, RED);
 
         // When

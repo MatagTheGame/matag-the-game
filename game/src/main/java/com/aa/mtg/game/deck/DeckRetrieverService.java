@@ -1,12 +1,12 @@
 package com.aa.mtg.game.deck;
 
-import com.aa.mtg.cards.Card;
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.CardInstanceFactory;
+import com.aa.mtg.cards.Card;
+import com.aa.mtg.cards.Cards;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Type;
 import com.aa.mtg.cards.search.CardSearch;
-import com.aa.mtg.cards.sets.MtgSets;
 import com.aa.mtg.game.security.SecurityToken;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +17,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.aa.mtg.cards.Cards.*;
+import static com.aa.mtg.cards.CardUtils.colorsOfManaThatCanGenerate;
 import static com.aa.mtg.cards.properties.Color.*;
 import static java.util.Arrays.asList;
 
 @Component
 public class DeckRetrieverService {
-
-    private final MtgSets mtgSets;
     private final CardInstanceFactory cardInstanceFactory;
+    private final Cards cards;
 
     @Autowired
-    public DeckRetrieverService(MtgSets mtgSets, CardInstanceFactory cardInstanceFactory) {
-        this.mtgSets = mtgSets;
+    public DeckRetrieverService(CardInstanceFactory cardInstanceFactory, Cards cards) {
         this.cardInstanceFactory = cardInstanceFactory;
+        this.cards = cards;
     }
 
     public List<CardInstance> retrieveDeckForUser(SecurityToken token, String playerName, GameStatus gameStatus) {
@@ -61,15 +60,15 @@ public class DeckRetrieverService {
     private Card getBasicLandForColor(Color color) {
         switch (color) {
             case WHITE:
-                return PLAINS;
+                return cards.get("Plains");
             case BLUE:
-                return ISLAND;
+                return cards.get("Island");
             case BLACK:
-                return SWAMP;
+                return cards.get("Swamp");
             case RED:
-                return MOUNTAIN;
+                return cards.get("Mountain");
             case GREEN:
-                return FOREST;
+                return cards.get("Forest");
             default:
                 throw new RuntimeException("Basic Land for color " + color + " does not exist.");
         }
@@ -84,14 +83,14 @@ public class DeckRetrieverService {
     private List<Card> getRandomSpellsForColors(List<Color> deckColors) {
         ArrayList<Card> selectedCards = new ArrayList<>();
 
-        List<Card> creatureCardsOfTheseColors = new CardSearch(mtgSets.getAllCards())
+        List<Card> creatureCardsOfTheseColors = new CardSearch(cards.getAll())
                 .ofAnyOfTheColors(deckColors)
                 .ofType(Type.CREATURE)
                 .getCards();
         Collections.shuffle(creatureCardsOfTheseColors);
         selectedCards.addAll(creatureCardsOfTheseColors.subList(0, 5));
 
-        List<Card> nonCreatureCardsOfTheseColors = new CardSearch(mtgSets.getAllCards())
+        List<Card> nonCreatureCardsOfTheseColors = new CardSearch(cards.getAll())
                 .ofAnyOfTheColors(deckColors)
                 .notOfType(Type.CREATURE)
                 .getCards();
@@ -102,19 +101,19 @@ public class DeckRetrieverService {
     }
 
     private Card getRandomNonBasicLandOfTheseColors(List<Color> deckColors) {
-        List<Card> nonBasicLands = new CardSearch(mtgSets.getAllCards())
+        List<Card> nonBasicLands = new CardSearch(cards.getAll())
                 .ofType(Type.LAND)
                 .notOfType(Type.BASIC)
                 .getCards()
                 .stream()
-                .filter(card -> card.colorsOfManaThatCanGenerate().size() == 0 || deckColors.contains(card.colorsOfManaThatCanGenerate().get(0)))
+                .filter(card -> colorsOfManaThatCanGenerate(card).size() == 0 || deckColors.contains(colorsOfManaThatCanGenerate(card).get(0)))
                 .collect(Collectors.toList());
         Collections.shuffle(nonBasicLands);
         return nonBasicLands.get(0);
     }
 
     private Card getRandomColorlessCard() {
-        List<Card> allColorlessCards = new CardSearch(mtgSets.getAllCards())
+        List<Card> allColorlessCards = new CardSearch(cards.getAll())
                 .colorless()
                 .getCards();
         Collections.shuffle(allColorlessCards);

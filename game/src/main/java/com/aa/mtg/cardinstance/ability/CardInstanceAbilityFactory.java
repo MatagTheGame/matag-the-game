@@ -1,6 +1,6 @@
 package com.aa.mtg.cardinstance.ability;
 
-import com.aa.mtg.cards.ability.Abilities;
+import com.aa.mtg.cards.ability.type.AbilityType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,12 +11,8 @@ import static java.util.stream.Collectors.toList;
 
 @Component
 public class CardInstanceAbilityFactory {
-    private CardInstanceAbility get(String ability) {
-        try {
-            return (CardInstanceAbility) Abilities.class.getField(ability).get(null);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException("Ability " + ability  + " does not exist.");
-        }
+    private CardInstanceAbility get(String abilityType) {
+        return new CardInstanceAbility(AbilityType.valueOf(abilityType));
     }
 
     public List<CardInstanceAbility> abilitiesFromParameters(List<String> parameters) {

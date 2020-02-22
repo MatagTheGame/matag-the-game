@@ -1,11 +1,12 @@
 package com.aa.mtg.cardinstance;
 
-import com.aa.mtg.cards.Card;
 import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
+import com.aa.mtg.cardinstance.modifiers.CardModifiers;
+import com.aa.mtg.cards.Card;
+import com.aa.mtg.cards.CardUtils;
 import com.aa.mtg.cards.ability.trigger.TriggerSubtype;
 import com.aa.mtg.cards.ability.trigger.TriggerType;
 import com.aa.mtg.cards.ability.type.AbilityType;
-import com.aa.mtg.cardinstance.modifiers.CardModifiers;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Subtype;
 import com.aa.mtg.cards.properties.Type;
@@ -26,6 +27,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.aa.mtg.cardinstance.ability.CardInstanceAbility.getCardInstanceAbilities;
 import static com.aa.mtg.cards.ability.trigger.TriggerType.MANA_ABILITY;
 import static com.aa.mtg.cards.ability.type.AbilityType.*;
 import static com.aa.mtg.cards.properties.Type.INSTANT;
@@ -129,7 +131,7 @@ public class CardInstance {
     }
 
     public boolean isOfType(Type type) {
-        return card.isOfType(type);
+        return CardUtils.isOfType(card, type);
     }
 
     public boolean ofAnyOfTheTypes(List<Type> types) {
@@ -151,7 +153,7 @@ public class CardInstance {
     }
 
     public boolean isOfColor(Color color) {
-        return card.isOfColor(color);
+        return CardUtils.isOfColor(card, color);
     }
 
     public boolean ofAnyOfTheColors(List<Color> colors) {
@@ -236,7 +238,7 @@ public class CardInstance {
 
     public List<CardInstanceAbility> getFixedAbilities() {
         List<CardInstanceAbility> abilities = new ArrayList<>();
-        abilities.addAll(card.getAbilities());
+        abilities.addAll(getCardInstanceAbilities(card));
         abilities.addAll(modifiers.getAbilities());
         abilities.addAll(modifiers.getAbilitiesUntilEndOfTurn());
         abilities.addAll(getAttachmentsAbilities());

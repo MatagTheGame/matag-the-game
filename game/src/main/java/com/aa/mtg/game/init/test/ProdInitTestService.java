@@ -1,87 +1,71 @@
 package com.aa.mtg.game.init.test;
 
-import com.aa.mtg.cardinstance.CardInstanceFactory;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import static com.aa.mtg.cards.Cards.*;
-import static com.aa.mtg.cards.sets.CoreSet2019.MARAUDERS_AXE;
-import static com.aa.mtg.cards.sets.CoreSet2020.OVERCOME;
-import static com.aa.mtg.cards.sets.GuildsOfRavnica.CANDLELIGHT_VIGIL;
-import static com.aa.mtg.cards.sets.Ixalan.*;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.CIVIC_STALWART;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.CLEAR_THE_MIND;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.PRECISION_BOLT;
-import static com.aa.mtg.cards.sets.RivalsOfIxalan.DEAD_WEIGHT;
-
 @Profile("test")
 @Component
 public class ProdInitTestService extends InitTestService {
-
-    public ProdInitTestService(CardInstanceFactory cardInstanceFactory) {
-        this.cardInstanceFactory = cardInstanceFactory;
-    }
-
     @Override
     public void initGameStatus(GameStatus gameStatus) {
         // Current Player
-        addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
-        addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
-        addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
-        addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
-        addCardToCurrentPlayerLibrary(gameStatus, PLAINS);
-        addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
-        addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
-        addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
-        addCardToCurrentPlayerLibrary(gameStatus, ISLAND);
+        addCardToCurrentPlayerLibrary(gameStatus, cards.get("Plains"));
+        addCardToCurrentPlayerLibrary(gameStatus, cards.get("Plains"));
+        addCardToCurrentPlayerLibrary(gameStatus, cards.get("Plains"));
+        addCardToCurrentPlayerLibrary(gameStatus, cards.get("Plains"));
+        addCardToCurrentPlayerLibrary(gameStatus, cards.get("Plains"));
+        addCardToCurrentPlayerLibrary(gameStatus, cards.get("Island"));
+        addCardToCurrentPlayerLibrary(gameStatus, cards.get("Island"));
+        addCardToCurrentPlayerLibrary(gameStatus, cards.get("Island"));
+        addCardToCurrentPlayerLibrary(gameStatus, cards.get("Island"));
 
-        addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-        addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-        addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-        addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-        addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
-        addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
-        addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
-        addCardToCurrentPlayerBattlefield(gameStatus, ISLAND);
+        addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
+        addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
+        addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
+        addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
+        addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
+        addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
+        addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
+        addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
 
-        addCardToCurrentPlayerHand(gameStatus, HUATLIS_SNUBHORN);
-        addCardToCurrentPlayerHand(gameStatus, LEGIONS_JUDGMENT);
-        addCardToCurrentPlayerHand(gameStatus, AIR_ELEMENTAL);
-        addCardToCurrentPlayerHand(gameStatus, CLEAR_THE_MIND);
-        addCardToCurrentPlayerHand(gameStatus, CIVIC_STALWART);
-        addCardToCurrentPlayerHand(gameStatus, CANDLELIGHT_VIGIL);
-        addCardToCurrentPlayerHand(gameStatus, OVERFLOWING_INSIGHT);
+        addCardToCurrentPlayerHand(gameStatus, cards.get("Huatli's Snubhorn"));
+        addCardToCurrentPlayerHand(gameStatus, cards.get("Legion's Judgment"));
+        addCardToCurrentPlayerHand(gameStatus, cards.get("Air Elemental"));
+        addCardToCurrentPlayerHand(gameStatus, cards.get("Clear the Mind"));
+        addCardToCurrentPlayerHand(gameStatus, cards.get("Civic Stalwart"));
+        addCardToCurrentPlayerHand(gameStatus, cards.get("Candlelight Vigil"));
+        addCardToCurrentPlayerHand(gameStatus, cards.get("Overflowing Insight"));
 
-        addCardToCurrentPlayerGraveyard(gameStatus, PLAINS);
+        addCardToCurrentPlayerGraveyard(gameStatus, cards.get("Plains"));
 
         // Non Current Player
-        addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
-        addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
-        addCardToNonCurrentPlayerLibrary(gameStatus, MOUNTAIN);
-        addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
-        addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
-        addCardToNonCurrentPlayerLibrary(gameStatus, FOREST);
-        addCardToNonCurrentPlayerLibrary(gameStatus, SWAMP);
-        addCardToNonCurrentPlayerLibrary(gameStatus, SWAMP);
-        addCardToNonCurrentPlayerLibrary(gameStatus, SWAMP);
+        addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Mountain"));
+        addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Mountain"));
+        addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Mountain"));
+        addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Forest"));
+        addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Forest"));
+        addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Forest"));
+        addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Swamp"));
+        addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Swamp"));
+        addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Swamp"));
 
-        addCardToNonCurrentPlayerBattlefield(gameStatus, SWAMP);
-        addCardToNonCurrentPlayerBattlefield(gameStatus, SWAMP);
-        addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
-        addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
-        addCardToNonCurrentPlayerBattlefield(gameStatus, MOUNTAIN);
-        addCardToNonCurrentPlayerBattlefield(gameStatus, FOREST);
-        addCardToNonCurrentPlayerBattlefield(gameStatus, FOREST);
-        addCardToNonCurrentPlayerBattlefield(gameStatus, FOREST);
+        addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
+        addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
+        addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
+        addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
+        addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"));
+        addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Forest"));
+        addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Forest"));
+        addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Forest"));
 
-        addCardToNonCurrentPlayerHand(gameStatus, GILDED_SENTINEL);
-        addCardToNonCurrentPlayerHand(gameStatus, CHARGING_MONSTROSAUR);
-        addCardToNonCurrentPlayerHand(gameStatus, PRECISION_BOLT);
-        addCardToNonCurrentPlayerHand(gameStatus, OVERCOME);
-        addCardToNonCurrentPlayerHand(gameStatus, MARAUDERS_AXE);
-        addCardToNonCurrentPlayerHand(gameStatus, DEAD_WEIGHT);
+        addCardToNonCurrentPlayerHand(gameStatus, cards.get("Gilded Sentinel"));
+        addCardToNonCurrentPlayerHand(gameStatus, cards.get("Charging Monstrosaur"));
+        addCardToNonCurrentPlayerHand(gameStatus, cards.get("Precision Bold"));
+        addCardToNonCurrentPlayerHand(gameStatus, cards.get("Overcome"));
+        addCardToNonCurrentPlayerHand(gameStatus, cards.get("Marauders Axe"));
+        addCardToNonCurrentPlayerHand(gameStatus, cards.get("Dead Weight"));
 
-        addCardToNonCurrentPlayerGraveyard(gameStatus, MOUNTAIN);
+        addCardToNonCurrentPlayerGraveyard(gameStatus, cards.get("Mountain"));
     }
 }

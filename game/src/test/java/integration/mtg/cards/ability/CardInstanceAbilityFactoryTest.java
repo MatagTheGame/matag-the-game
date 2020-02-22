@@ -1,12 +1,14 @@
-package com.aa.mtg.cardinstance.ability;
+package integration.mtg.cards.ability;
 
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbilityFactory;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.Optional;
 
-import static com.aa.mtg.cards.ability.Abilities.HASTE;
-import static com.aa.mtg.cards.ability.Abilities.TRAMPLE;
+import static com.aa.mtg.cards.ability.type.AbilityType.HASTE;
+import static com.aa.mtg.cards.ability.type.AbilityType.TRAMPLE;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,7 +24,7 @@ public class CardInstanceAbilityFactoryTest {
         List<CardInstanceAbility> abilities = cardInstanceAbilityFactory.abilitiesFromParameters(parameters);
 
         // Then
-        assertThat(abilities).isEqualTo(asList(TRAMPLE, HASTE));
+        assertThat(abilities).isEqualTo(asList(new CardInstanceAbility(TRAMPLE), new CardInstanceAbility(HASTE)));
     }
 
     @Test
@@ -46,6 +48,6 @@ public class CardInstanceAbilityFactoryTest {
         Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
 
         // Then
-        assertThat(ability).isEqualTo(Optional.of(TRAMPLE));
+        assertThat(ability).isEqualTo(Optional.of(new CardInstanceAbility(TRAMPLE)));
     }
 }

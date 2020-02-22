@@ -1,7 +1,7 @@
 package com.aa.mtg.cardinstance;
 
-import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cards.Card;
+import com.aa.mtg.cards.CardUtils;
 import com.aa.mtg.game.status.GameStatus;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -35,7 +35,7 @@ public class CardInstanceFactory implements ApplicationContextAware {
     }
 
     public CardInstance mask(CardInstance cardInstance) {
-        return create(cardInstance.getGameStatus(), cardInstance.getId(), Card.hiddenCard(), cardInstance.getOwner());
+        return create(cardInstance.getGameStatus(), cardInstance.getId(), CardUtils.hiddenCard(), cardInstance.getOwner());
     }
 
     public List<CardInstance> mask(List<CardInstance> cardInstanceList) {

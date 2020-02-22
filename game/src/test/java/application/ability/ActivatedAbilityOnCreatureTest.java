@@ -2,6 +2,7 @@ package application.ability;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
+import com.aa.mtg.cards.Cards;
 import com.aa.mtg.game.MtgApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
@@ -14,8 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.aa.mtg.cards.Cards.PLAINS;
-import static com.aa.mtg.cards.sets.ThroneOfEldraine.JOUSTING_DUMMY;
 import static com.aa.mtg.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
@@ -26,6 +25,9 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
     @Autowired
     private InitTestServiceDecorator initTestServiceDecorator;
 
+    @Autowired
+    private Cards cards;
+
     public void setupGame() {
         initTestServiceDecorator.setInitTestService(new ActivatedAbilityOnCreatureTest.InitTestServiceForTest());
     }
@@ -33,12 +35,12 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
     @Test
     public void activatedAbilityOnCreature() {
         // When increasing jousting dummy
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 0).tap();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 1).tap();
-        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(PLAINS, 2).tap();
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(JOUSTING_DUMMY).click();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 2).tap();
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).click();
 
-        int joustingDummyId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(JOUSTING_DUMMY).getCardIdNumeric();
+        int joustingDummyId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).getCardIdNumeric();
 
         // then ability goes on the stack
         browser.player1().getStackHelper().containsAbility("Pippo's Jousting Dummy (" + joustingDummyId + "): Gets +1/+0 until end of turn.");
@@ -47,16 +49,16 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
         browser.player2().getActionHelper().clickContinue();
 
         // power of jousting dummy is increased
-        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(JOUSTING_DUMMY).hasPowerAndToughness("3/1");
+        browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).hasPowerAndToughness("3/1");
     }
 
     static class InitTestServiceForTest extends InitTestService {
         @Override
         public void initGameStatus(GameStatus gameStatus) {
-            addCardToCurrentPlayerBattlefield(gameStatus, JOUSTING_DUMMY);
-            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
-            addCardToCurrentPlayerBattlefield(gameStatus, PLAINS);
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Jousting Dummy"));
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
         }
     }
 }

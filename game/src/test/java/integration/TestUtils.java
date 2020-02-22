@@ -13,16 +13,17 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class TestUtils {
-
   private final GameStatusFactory gameStatusFactory;
   private final PlayerFactory playerFactory;
   private final CardInstanceFactory cardInstanceFactory;
+  private final Cards cards;
 
   @Autowired
-  public TestUtils(GameStatusFactory gameStatusFactory, PlayerFactory playerFactory, CardInstanceFactory cardInstanceFactory) {
+  public TestUtils(GameStatusFactory gameStatusFactory, PlayerFactory playerFactory, CardInstanceFactory cardInstanceFactory, Cards cards) {
     this.gameStatusFactory = gameStatusFactory;
     this.playerFactory = playerFactory;
     this.cardInstanceFactory = cardInstanceFactory;
+    this.cards = cards;
   }
 
   public GameStatus testGameStatus() {
@@ -46,7 +47,7 @@ public class TestUtils {
   private List<CardInstance> testLibrary(GameStatus gameStatus, String playerName) {
     return IntStream.rangeClosed(1, 40)
             .boxed()
-            .map(i -> cardInstanceFactory.create(gameStatus, i, Cards.PLAINS, playerName))
+            .map(i -> cardInstanceFactory.create(gameStatus, i, cards.get("Plains"), playerName))
             .collect(Collectors.toList());
   }
 }

@@ -2,6 +2,7 @@ package integration.mtg.game.turn.action.cast;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.CardInstanceFactory;
+import com.aa.mtg.cards.Cards;
 import com.aa.mtg.cards.properties.Cost;
 import com.aa.mtg.game.player.Player;
 import com.aa.mtg.game.status.GameStatus;
@@ -21,13 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.aa.mtg.cards.Cards.ISLAND;
-import static com.aa.mtg.cards.Cards.PLAINS;
 import static com.aa.mtg.cards.properties.Cost.BLUE;
 import static com.aa.mtg.cards.properties.Cost.WHITE;
-import static com.aa.mtg.cards.sets.CoreSet2020.DARK_REMEDY;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.AZORIUS_GUILDGATE;
-import static com.aa.mtg.cards.sets.RavnicaAllegiance.GYRE_ENGINEER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -43,6 +39,9 @@ public class ManaCountServiceTest {
     @Autowired
     private TestUtils testUtils;
 
+    @Autowired
+    private Cards cards;
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -57,9 +56,9 @@ public class ManaCountServiceTest {
         GameStatus gameStatus = testUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, PLAINS, player.getName(), player.getName()));
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 2, PLAINS, player.getName(), player.getName()));
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 3, ISLAND, player.getName(), player.getName()));
+        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
+        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 2, cards.get("Plains"), player.getName(), player.getName()));
+        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 3, cards.get("Island"), player.getName(), player.getName()));
 
         // When
         ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
@@ -77,7 +76,7 @@ public class ManaCountServiceTest {
         GameStatus gameStatus = testUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, DARK_REMEDY, player.getName(), player.getName()));
+        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), player.getName(), player.getName()));
 
         thrown.expectMessage("\"1 - Dark Remedy\" cannot be tapped for mana.");
 
@@ -94,7 +93,7 @@ public class ManaCountServiceTest {
         GameStatus gameStatus = testUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
 
-        CardInstance plains = cardInstanceFactory.create(gameStatus, 1, PLAINS, player.getName(), player.getName());
+        CardInstance plains = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName());
         plains.getModifiers().tap();
         player.getBattlefield().addCard(plains);
 
@@ -113,7 +112,7 @@ public class ManaCountServiceTest {
         GameStatus gameStatus = testUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, PLAINS, player.getName(), player.getName()));
+        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
 
         thrown.expectMessage("\"1 - Plains\" cannot produce BLUE");
 
@@ -130,7 +129,7 @@ public class ManaCountServiceTest {
         GameStatus gameStatus = testUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, AZORIUS_GUILDGATE, player.getName(), player.getName()));
+        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
 
         // When
         ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
@@ -148,7 +147,7 @@ public class ManaCountServiceTest {
         GameStatus gameStatus = testUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, AZORIUS_GUILDGATE, player.getName(), player.getName()));
+        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
 
         thrown.expectMessage("\"1 - Azorius Guildgate\" cannot produce BLACK");
 
@@ -165,7 +164,7 @@ public class ManaCountServiceTest {
         GameStatus gameStatus = testUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, GYRE_ENGINEER, player.getName(), player.getName()));
+        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
 
         // When
         manaCountService.verifyManaPaid(mana, player);
@@ -180,7 +179,7 @@ public class ManaCountServiceTest {
         GameStatus gameStatus = testUtils.testGameStatus();
         Player player = gameStatus.getPlayer1();
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, GYRE_ENGINEER, player.getName(), player.getName()));
+        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
 
         thrown.expectMessage("\"1 - Gyre Engineer\" cannot produce BLACK");
 

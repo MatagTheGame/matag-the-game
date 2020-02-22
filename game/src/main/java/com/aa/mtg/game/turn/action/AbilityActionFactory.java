@@ -1,6 +1,6 @@
 package com.aa.mtg.game.turn.action;
 
-import com.aa.mtg.cards.ability.action.AbilityAction;
+import com.aa.mtg.cardinstance.ability.AbilityAction;
 import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.game.turn.action.attach.AttachAction;
 import com.aa.mtg.game.turn.action.draw.DrawXCardsAction;

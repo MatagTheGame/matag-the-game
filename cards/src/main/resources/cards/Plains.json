@@ -1,0 +1,18 @@
+{
+  "name": "Plains",
+  "types": [
+    "BASIC","LAND"
+  ],
+  "rarity": "COMMON",
+  "abilities": [
+    {
+      "abilityType": "TAP_ADD_MANA",
+      "parameters": [
+        "WHITE"
+      ],
+      "trigger": {
+        "type": "MANA_ABILITY"
+      }
+    }
+  ]
+}

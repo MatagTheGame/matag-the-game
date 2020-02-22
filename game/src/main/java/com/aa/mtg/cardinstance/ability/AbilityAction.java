@@ -1,4 +1,4 @@
-package com.aa.mtg.cards.ability.action;
+package com.aa.mtg.cardinstance.ability;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.ability.CardInstanceAbility;

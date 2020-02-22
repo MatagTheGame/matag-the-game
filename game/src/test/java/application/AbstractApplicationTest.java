@@ -9,6 +9,8 @@ import static java.lang.Integer.parseInt;
 import application.browser.MtgBrowser;
 import com.aa.mtg.cardinstance.CardInstanceFactory;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import com.aa.mtg.cards.Cards;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
@@ -112,9 +114,10 @@ public abstract class AbstractApplicationTest {
     @Configuration
     public static class InitGameTestConfiguration {
         @Bean
-        public InitTestServiceDecorator initTestServiceDecorator(CardInstanceFactory cardInstanceFactory) {
+        public InitTestServiceDecorator initTestServiceDecorator(CardInstanceFactory cardInstanceFactory, Cards cards) {
             InitTestServiceDecorator initTestServiceDecorator = new InitTestServiceDecorator();
             initTestServiceDecorator.setCardInstanceFactory(cardInstanceFactory);
+            initTestServiceDecorator.setCards(cards);
             return initTestServiceDecorator;
         }
     }

@@ -1,5 +1,6 @@
 package com.aa.mtg.cardinstance.ability;
 
+import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.ability.AbilityService;
 import com.aa.mtg.cards.ability.selector.CardInstanceSelector;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toList;
 
 public class CardInstanceAbility extends Ability {
     public CardInstanceAbility(Ability ability) {
@@ -57,7 +59,7 @@ public class CardInstanceAbility extends Ability {
     }
 
     public CardInstanceAbility getAbility() {
-        return Optional.ofNullable(ability).map(CardInstanceAbility::new).orElse(null);
+        return getCardInstanceAbility(ability);
     }
 
     public String getParameter(int i) {
@@ -71,4 +73,14 @@ public class CardInstanceAbility extends Ability {
         return !targets.isEmpty();
     }
 
+    public static List<CardInstanceAbility> getCardInstanceAbilities(Card card) {
+        if (card.getAbilities() == null) {
+            return null;
+        }
+        return card.getAbilities().stream().map(CardInstanceAbility::getCardInstanceAbility).collect(toList());
+    }
+
+    public static CardInstanceAbility getCardInstanceAbility(Ability ability) {
+        return Optional.ofNullable(ability).map(CardInstanceAbility::new).orElse(null);
+    }
 }

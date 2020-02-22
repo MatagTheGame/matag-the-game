@@ -20,11 +20,12 @@ import static java.util.Arrays.asList;
 public class AttachmentsService {
     private static final List<AbilityType> ATTACHED_ABILITY_TYPES = asList(ENCHANTED_CREATURE_GETS, EQUIPPED_CREATURE_GETS);
 
-    private AbilityService abilityService;
-    private CardInstanceAbilityFactory cardInstanceAbilityFactory;
+    private final AbilityService abilityService;
+    private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
 
-    public AttachmentsService(AbilityService abilityService) {
+    public AttachmentsService(AbilityService abilityService, CardInstanceAbilityFactory cardInstanceAbilityFactory) {
         this.abilityService = abilityService;
+        this.cardInstanceAbilityFactory = cardInstanceAbilityFactory;
     }
 
     public List<CardInstance> getAttachedCards(GameStatus gameStatus, CardInstance cardInstance) {
@@ -56,6 +57,7 @@ public class AttachmentsService {
     private List<CardInstanceAbility> getAttachedCardsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
         return getAttachedCards(gameStatus, cardInstance).stream()
                 .flatMap(attachedCard -> attachedCard.getCard().getAbilities().stream())
+                .map(CardInstanceAbility::new)
                 .filter(ability -> ATTACHED_ABILITY_TYPES.contains(ability.getAbilityType()))
                 .collect(Collectors.toList());
     }

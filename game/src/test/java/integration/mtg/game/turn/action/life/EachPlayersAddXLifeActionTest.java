@@ -2,7 +2,10 @@ package integration.mtg.game.turn.action.life;
 
 import com.aa.mtg.cardinstance.CardInstance;
 import com.aa.mtg.cardinstance.CardInstanceFactory;
-import com.aa.mtg.cards.sets.CoreSet2020;
+import com.aa.mtg.cardinstance.ability.CardInstanceAbility;
+import com.aa.mtg.cards.Cards;
+import com.aa.mtg.cards.ability.Ability;
+import com.aa.mtg.cards.ability.type.AbilityType;
 import com.aa.mtg.game.status.GameStatus;
 import com.aa.mtg.game.turn.action.life.EachPlayersAddXLifeAction;
 import integration.TestUtils;
@@ -12,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.aa.mtg.cards.ability.Abilities.LOSE_4_LIFE;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -28,14 +31,18 @@ public class EachPlayersAddXLifeActionTest {
     @Autowired
     private TestUtils testUtils;
 
+    @Autowired
+    private Cards cards;
+
     @Test
     public void subtractXLifeToEachPlayer() {
         // Given
         GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, CoreSet2020.DARK_REMEDY, "player-name");
+        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), "player-name");
 
         // When
-        eachPlayersAddXLifeAction.perform(cardInstance, gameStatus, LOSE_4_LIFE);
+        Ability lose4Life = Ability.builder().abilityType(AbilityType.ADD_X_LIFE).parameters(singletonList("-4")).build();
+        eachPlayersAddXLifeAction.perform(cardInstance, gameStatus, new CardInstanceAbility(lose4Life));
 
         // Then
         assertThat(gameStatus.getPlayerByName("player-name").getLife()).isEqualTo(16);
