@@ -6,6 +6,7 @@
   "types" : [ "INSTANT" ],
   "rarity" : "COMMON",
   "ruleText" : "Chandra's Outrage deals 4 damage to target creature and 2 damage to that creature's controller.",
+  "instantSpeed": true,
   "abilities" : [ {
     "abilityType" : "THAT_TARGETS_GET",
     "targets" : [ {
