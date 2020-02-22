@@ -7,16 +7,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GameStatusFactory implements ApplicationContextAware {
-    private ApplicationContext applicationContext;
+  private ApplicationContext applicationContext;
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
-    }
+  @Override
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    this.applicationContext = applicationContext;
+  }
 
-    public GameStatus create(String gameId) {
-        GameStatus gameStatus = applicationContext.getBean(GameStatus.class);
-        gameStatus.setGameId(gameId);
-        return gameStatus;
-    }
+  public GameStatus create(String gameId) {
+    GameStatus gameStatus = applicationContext.getBean(GameStatus.class);
+    gameStatus.setGameId(gameId);
+    return gameStatus;
+  }
 }

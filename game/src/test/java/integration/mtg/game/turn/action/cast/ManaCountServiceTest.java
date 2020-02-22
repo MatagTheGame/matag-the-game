@@ -30,160 +30,160 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(classes = CastTestConfiguration.class)
 public class ManaCountServiceTest {
 
-    @Autowired
-    private ManaCountService manaCountService;
-    
-    @Autowired
-    private CardInstanceFactory cardInstanceFactory;
+  @Autowired
+  private ManaCountService manaCountService;
 
-    @Autowired
-    private TestUtils testUtils;
+  @Autowired
+  private CardInstanceFactory cardInstanceFactory;
 
-    @Autowired
-    private Cards cards;
+  @Autowired
+  private TestUtils testUtils;
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+  @Autowired
+  private Cards cards;
 
-    @Test
-    public void countManaPaidForSimpleLands() {
-        // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("WHITE"),
-                2, ImmutableList.of("WHITE"),
-                3, ImmutableList.of("BLUE")
-        );
-        GameStatus gameStatus = testUtils.testGameStatus();
-        Player player = gameStatus.getPlayer1();
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 2, cards.get("Plains"), player.getName(), player.getName()));
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 3, cards.get("Island"), player.getName(), player.getName()));
+  @Test
+  public void countManaPaidForSimpleLands() {
+    // Given
+    Map<Integer, List<String>> mana = ImmutableMap.of(
+      1, ImmutableList.of("WHITE"),
+      2, ImmutableList.of("WHITE"),
+      3, ImmutableList.of("BLUE")
+    );
+    GameStatus gameStatus = testUtils.testGameStatus();
+    Player player = gameStatus.getPlayer1();
 
-        // When
-        ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 2, cards.get("Plains"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 3, cards.get("Island"), player.getName(), player.getName()));
 
-        // Then
-        assertThat(colors).isEqualTo(ImmutableList.of(WHITE, WHITE, BLUE));
-    }
+    // When
+    ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
 
-    @Test
-    public void countManaPaidTappingInstant() {
-        // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("WHITE")
-        );
-        GameStatus gameStatus = testUtils.testGameStatus();
-        Player player = gameStatus.getPlayer1();
+    // Then
+    assertThat(colors).isEqualTo(ImmutableList.of(WHITE, WHITE, BLUE));
+  }
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), player.getName(), player.getName()));
+  @Test
+  public void countManaPaidTappingInstant() {
+    // Given
+    Map<Integer, List<String>> mana = ImmutableMap.of(
+      1, ImmutableList.of("WHITE")
+    );
+    GameStatus gameStatus = testUtils.testGameStatus();
+    Player player = gameStatus.getPlayer1();
 
-        thrown.expectMessage("\"1 - Dark Remedy\" cannot be tapped for mana.");
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), player.getName(), player.getName()));
 
-        // When
-        manaCountService.verifyManaPaid(mana, player);
-    }
+    thrown.expectMessage("\"1 - Dark Remedy\" cannot be tapped for mana.");
 
-    @Test
-    public void countManaPaidTappingAlreadyTappedLand() {
-        // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("WHITE")
-        );
-        GameStatus gameStatus = testUtils.testGameStatus();
-        Player player = gameStatus.getPlayer1();
+    // When
+    manaCountService.verifyManaPaid(mana, player);
+  }
 
-        CardInstance plains = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName());
-        plains.getModifiers().tap();
-        player.getBattlefield().addCard(plains);
+  @Test
+  public void countManaPaidTappingAlreadyTappedLand() {
+    // Given
+    Map<Integer, List<String>> mana = ImmutableMap.of(
+      1, ImmutableList.of("WHITE")
+    );
+    GameStatus gameStatus = testUtils.testGameStatus();
+    Player player = gameStatus.getPlayer1();
 
-        thrown.expectMessage("\"1 - Plains\" is already tapped.");
+    CardInstance plains = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName());
+    plains.getModifiers().tap();
+    player.getBattlefield().addCard(plains);
 
-        // When
-        manaCountService.verifyManaPaid(mana, player);
-    }
+    thrown.expectMessage("\"1 - Plains\" is already tapped.");
 
-    @Test
-    public void countManaPaidTappingLandForWrongColor() {
-        // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("BLUE")
-        );
-        GameStatus gameStatus = testUtils.testGameStatus();
-        Player player = gameStatus.getPlayer1();
+    // When
+    manaCountService.verifyManaPaid(mana, player);
+  }
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
+  @Test
+  public void countManaPaidTappingLandForWrongColor() {
+    // Given
+    Map<Integer, List<String>> mana = ImmutableMap.of(
+      1, ImmutableList.of("BLUE")
+    );
+    GameStatus gameStatus = testUtils.testGameStatus();
+    Player player = gameStatus.getPlayer1();
 
-        thrown.expectMessage("\"1 - Plains\" cannot produce BLUE");
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
 
-        // When
-        manaCountService.verifyManaPaid(mana, player);
-    }
+    thrown.expectMessage("\"1 - Plains\" cannot produce BLUE");
 
-    @Test
-    public void countManaPaidTappingLandForDualLand() {
-        // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("BLUE")
-        );
-        GameStatus gameStatus = testUtils.testGameStatus();
-        Player player = gameStatus.getPlayer1();
+    // When
+    manaCountService.verifyManaPaid(mana, player);
+  }
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
+  @Test
+  public void countManaPaidTappingLandForDualLand() {
+    // Given
+    Map<Integer, List<String>> mana = ImmutableMap.of(
+      1, ImmutableList.of("BLUE")
+    );
+    GameStatus gameStatus = testUtils.testGameStatus();
+    Player player = gameStatus.getPlayer1();
 
-        // When
-        ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
 
-        // Then
-        assertThat(colors).isEqualTo(ImmutableList.of(BLUE));
-    }
+    // When
+    ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
 
-    @Test
-    public void countManaPaidTappingLandForDualLandError() {
-        // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("BLACK")
-        );
-        GameStatus gameStatus = testUtils.testGameStatus();
-        Player player = gameStatus.getPlayer1();
+    // Then
+    assertThat(colors).isEqualTo(ImmutableList.of(BLUE));
+  }
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
+  @Test
+  public void countManaPaidTappingLandForDualLandError() {
+    // Given
+    Map<Integer, List<String>> mana = ImmutableMap.of(
+      1, ImmutableList.of("BLACK")
+    );
+    GameStatus gameStatus = testUtils.testGameStatus();
+    Player player = gameStatus.getPlayer1();
 
-        thrown.expectMessage("\"1 - Azorius Guildgate\" cannot produce BLACK");
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
 
-        // When
-        manaCountService.verifyManaPaid(mana, player);
-    }
+    thrown.expectMessage("\"1 - Azorius Guildgate\" cannot produce BLACK");
 
-    @Test
-    public void countManaPaidTappingCreatureWhichGeneratesTwoMana() {
-        // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("GREEN", "BLUE")
-        );
-        GameStatus gameStatus = testUtils.testGameStatus();
-        Player player = gameStatus.getPlayer1();
+    // When
+    manaCountService.verifyManaPaid(mana, player);
+  }
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
+  @Test
+  public void countManaPaidTappingCreatureWhichGeneratesTwoMana() {
+    // Given
+    Map<Integer, List<String>> mana = ImmutableMap.of(
+      1, ImmutableList.of("GREEN", "BLUE")
+    );
+    GameStatus gameStatus = testUtils.testGameStatus();
+    Player player = gameStatus.getPlayer1();
 
-        // When
-        manaCountService.verifyManaPaid(mana, player);
-    }
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
 
-    @Test
-    public void countManaPaidTappingCreatureWhichGeneratesTwoManaException() {
-        // Given
-        Map<Integer, List<String>> mana = ImmutableMap.of(
-                1, ImmutableList.of("GREEN", "BLACK")
-        );
-        GameStatus gameStatus = testUtils.testGameStatus();
-        Player player = gameStatus.getPlayer1();
+    // When
+    manaCountService.verifyManaPaid(mana, player);
+  }
 
-        player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
+  @Test
+  public void countManaPaidTappingCreatureWhichGeneratesTwoManaException() {
+    // Given
+    Map<Integer, List<String>> mana = ImmutableMap.of(
+      1, ImmutableList.of("GREEN", "BLACK")
+    );
+    GameStatus gameStatus = testUtils.testGameStatus();
+    Player player = gameStatus.getPlayer1();
 
-        thrown.expectMessage("\"1 - Gyre Engineer\" cannot produce BLACK");
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
 
-        // When
-        manaCountService.verifyManaPaid(mana, player);
-    }
+    thrown.expectMessage("\"1 - Gyre Engineer\" cannot produce BLACK");
+
+    // When
+    manaCountService.verifyManaPaid(mana, player);
+  }
 }

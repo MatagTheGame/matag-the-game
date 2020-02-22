@@ -13,41 +13,41 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CardInstanceAbilityFactoryTest {
-    private CardInstanceAbilityFactory cardInstanceAbilityFactory = new CardInstanceAbilityFactory();
+  private CardInstanceAbilityFactory cardInstanceAbilityFactory = new CardInstanceAbilityFactory();
 
-    @Test
-    public void testAbilitiesFromParameters() {
-        // Given
-        List<String> parameters = asList("+2/+2", "TRAMPLE", "DAMAGE:2", "HASTE");
+  @Test
+  public void testAbilitiesFromParameters() {
+    // Given
+    List<String> parameters = asList("+2/+2", "TRAMPLE", "DAMAGE:2", "HASTE");
 
-        // When
-        List<CardInstanceAbility> abilities = cardInstanceAbilityFactory.abilitiesFromParameters(parameters);
+    // When
+    List<CardInstanceAbility> abilities = cardInstanceAbilityFactory.abilitiesFromParameters(parameters);
 
-        // Then
-        assertThat(abilities).isEqualTo(asList(new CardInstanceAbility(TRAMPLE), new CardInstanceAbility(HASTE)));
-    }
+    // Then
+    assertThat(abilities).isEqualTo(asList(new CardInstanceAbility(TRAMPLE), new CardInstanceAbility(HASTE)));
+  }
 
-    @Test
-    public void testNoAbilityFromParameter() {
-        // Given
-        String parameter = "+2/+2";
+  @Test
+  public void testNoAbilityFromParameter() {
+    // Given
+    String parameter = "+2/+2";
 
-        // When
-        Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
+    // When
+    Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
 
-        // Then
-        assertThat(ability).isEmpty();
-    }
+    // Then
+    assertThat(ability).isEmpty();
+  }
 
-    @Test
-    public void testTrampleAbilityFromParameter() {
-        // Given
-        String parameter = "TRAMPLE";
+  @Test
+  public void testTrampleAbilityFromParameter() {
+    // Given
+    String parameter = "TRAMPLE";
 
-        // When
-        Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
+    // When
+    Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
 
-        // Then
-        assertThat(ability).isEqualTo(Optional.of(new CardInstanceAbility(TRAMPLE)));
-    }
+    // Then
+    assertThat(ability).isEqualTo(Optional.of(new CardInstanceAbility(TRAMPLE)));
+  }
 }

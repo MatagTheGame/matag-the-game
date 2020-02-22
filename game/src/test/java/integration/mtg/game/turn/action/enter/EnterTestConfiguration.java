@@ -15,18 +15,18 @@ import org.springframework.context.annotation.Import;
 @Import(TestUtilsConfiguration.class)
 public class EnterTestConfiguration {
 
-    @Bean
-    public ManaCountService manaCountService() {
-      return new ManaCountService();
-    }
+  @Bean
+  public ManaCountService manaCountService() {
+    return new ManaCountService();
+  }
 
-    @Bean
-    public DrawXCardsService drawXCardsService() {
-        return Mockito.mock(DrawXCardsService.class);
-    }
+  @Bean
+  public DrawXCardsService drawXCardsService() {
+    return Mockito.mock(DrawXCardsService.class);
+  }
 
-    @Bean
-    public CardInstanceSelectorService cardInstanceSelectorService() {
-        return new CardInstanceSelectorService();
-    }
+  @Bean
+  public CardInstanceSelectorService cardInstanceSelectorService() {
+    return new CardInstanceSelectorService();
+  }
 }

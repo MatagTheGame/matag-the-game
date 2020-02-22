@@ -21,86 +21,86 @@ import static org.mockito.Mockito.verify;
 @ContextConfiguration(classes = CastTestConfiguration.class)
 public class PlayLandServiceTest {
 
-    @Autowired
-    private PlayLandService playLandService;
+  @Autowired
+  private PlayLandService playLandService;
 
-    @Autowired
-    private CardInstanceFactory cardInstanceFactory;
+  @Autowired
+  private CardInstanceFactory cardInstanceFactory;
 
-    @Autowired
-    private EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
-    
-    @Autowired
-    private TestUtils testUtils;
-    
-    @Autowired
-    private Cards cards;
+  @Autowired
+  private EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+  @Autowired
+  private TestUtils testUtils;
 
-    @Test
-    public void playLand() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
-        gameStatus.getPlayer1().getHand().addCard(card);
+  @Autowired
+  private Cards cards;
 
-        // When
-        playLandService.playLand(gameStatus, card.getId());
+  @Rule
+  public ExpectedException thrown = ExpectedException.none();
 
-        // Then
-        verify(enterCardIntoBattlefieldService).enter(gameStatus, card);
-    }
+  @Test
+  public void playLand() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
+    gameStatus.getPlayer1().getHand().addCard(card);
 
-    @Test
-    public void playLandErrorNotALand() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Befuddle"), "player-name");
-        gameStatus.getPlayer1().getHand().addCard(card);
+    // When
+    playLandService.playLand(gameStatus, card.getId());
 
-        // Expect
-        thrown.expectMessage("Playing \"100 - Befuddle\" as land.");
+    // Then
+    verify(enterCardIntoBattlefieldService).enter(gameStatus, card);
+  }
 
-        // When
-        playLandService.playLand(gameStatus, card.getId());
-    }
+  @Test
+  public void playLandErrorNotALand() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Befuddle"), "player-name");
+    gameStatus.getPlayer1().getHand().addCard(card);
 
-    @Test
-    public void playLandMultipleLand() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance card1 = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
-        gameStatus.getPlayer1().getHand().addCard(card1);
-        CardInstance card2 = cardInstanceFactory.create(gameStatus, 101, cards.get("Swamp"), "player-name");
-        gameStatus.getPlayer1().getHand().addCard(card2);
+    // Expect
+    thrown.expectMessage("Playing \"100 - Befuddle\" as land.");
 
-        // When
-        playLandService.playLand(gameStatus, card1.getId());
+    // When
+    playLandService.playLand(gameStatus, card.getId());
+  }
 
-        // Then
-        verify(enterCardIntoBattlefieldService).enter(gameStatus, card1);
+  @Test
+  public void playLandMultipleLand() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstance card1 = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
+    gameStatus.getPlayer1().getHand().addCard(card1);
+    CardInstance card2 = cardInstanceFactory.create(gameStatus, 101, cards.get("Swamp"), "player-name");
+    gameStatus.getPlayer1().getHand().addCard(card2);
 
-        // Expect
-        thrown.expectMessage("You already played a land this turn.");
+    // When
+    playLandService.playLand(gameStatus, card1.getId());
 
-        // When
-        playLandService.playLand(gameStatus, card2.getId());
-    }
+    // Then
+    verify(enterCardIntoBattlefieldService).enter(gameStatus, card1);
 
-    @Test
-    public void playLandNotInMainPhase() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
-        gameStatus.getTurn().setCurrentPhase("FS");
-        CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
-        gameStatus.getPlayer1().getHand().addCard(card);
+    // Expect
+    thrown.expectMessage("You already played a land this turn.");
 
-        // Expect
-        thrown.expectMessage("You can only play lands during main phases.");
+    // When
+    playLandService.playLand(gameStatus, card2.getId());
+  }
 
-        // When
-        playLandService.playLand(gameStatus, card.getId());
-    }
+  @Test
+  public void playLandNotInMainPhase() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase("FS");
+    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
+    gameStatus.getPlayer1().getHand().addCard(card);
+
+    // Expect
+    thrown.expectMessage("You can only play lands during main phases.");
+
+    // When
+    playLandService.playLand(gameStatus, card.getId());
+  }
 }

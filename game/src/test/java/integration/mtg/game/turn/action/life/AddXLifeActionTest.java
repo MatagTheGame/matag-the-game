@@ -22,29 +22,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(classes = LifeTestConfiguration.class)
 public class AddXLifeActionTest {
 
-    @Autowired
-    private AddXLifeAction addXLifeAction;
+  @Autowired
+  private AddXLifeAction addXLifeAction;
 
-    @Autowired
-    private CardInstanceFactory cardInstanceFactory;
+  @Autowired
+  private CardInstanceFactory cardInstanceFactory;
 
-    @Autowired
-    private TestUtils testUtils;
+  @Autowired
+  private TestUtils testUtils;
 
-    @Autowired
-    private Cards cards;
+  @Autowired
+  private Cards cards;
 
-    @Test
-    public void addLifeToPlayer() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Lich's Caress"), "player-name", "player-name");
+  @Test
+  public void addLifeToPlayer() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Lich's Caress"), "player-name", "player-name");
 
-        // When
-        Ability gain3Life = Ability.builder().abilityType(AbilityType.ADD_X_LIFE).parameters(singletonList("3")).build();
-        addXLifeAction.perform(cardInstance, gameStatus, new CardInstanceAbility(gain3Life));
+    // When
+    Ability gain3Life = Ability.builder().abilityType(AbilityType.ADD_X_LIFE).parameters(singletonList("3")).build();
+    addXLifeAction.perform(cardInstance, gameStatus, new CardInstanceAbility(gain3Life));
 
-        // Then
-        assertThat(gameStatus.getPlayerByName("player-name").getLife()).isEqualTo(23);
-    }
+    // Then
+    assertThat(gameStatus.getPlayerByName("player-name").getLife()).isEqualTo(23);
+  }
 }

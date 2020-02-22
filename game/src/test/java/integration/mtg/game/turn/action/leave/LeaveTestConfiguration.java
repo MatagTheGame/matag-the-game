@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Import;
 @Import(TestUtilsConfiguration.class)
 public class LeaveTestConfiguration {
 
-    @Bean
-    public CardInstanceSelectorService cardInstanceSelectorService() {
-        return Mockito.mock(CardInstanceSelectorService.class);
-    }
+  @Bean
+  public CardInstanceSelectorService cardInstanceSelectorService() {
+    return Mockito.mock(CardInstanceSelectorService.class);
+  }
 }

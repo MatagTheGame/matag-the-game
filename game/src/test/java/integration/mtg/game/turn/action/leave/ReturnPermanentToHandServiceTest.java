@@ -18,30 +18,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(classes = LeaveTestConfiguration.class)
 public class ReturnPermanentToHandServiceTest {
 
-    @Autowired
-    private ReturnPermanentToHandService returnPermanentToHandService;
+  @Autowired
+  private ReturnPermanentToHandService returnPermanentToHandService;
 
-    @Autowired
-    private CardInstanceFactory cardInstanceFactory;
+  @Autowired
+  private CardInstanceFactory cardInstanceFactory;
 
-    @Autowired
-    private TestUtils testUtils;
+  @Autowired
+  private TestUtils testUtils;
 
-    @Autowired
-    private Cards cards;
+  @Autowired
+  private Cards cards;
 
-    @Test
-    public void testReturnToHand() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
-        gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
+  @Test
+  public void testReturnToHand() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
-        // When
-        returnPermanentToHandService.returnPermanentToHand(gameStatus, 61);
+    // When
+    returnPermanentToHandService.returnPermanentToHand(gameStatus, 61);
 
-        // Then
-        assertThat(gameStatus.getPlayer1().getBattlefield().size()).isEqualTo(0);
-        assertThat(gameStatus.getPlayer1().getHand().getCards()).contains(cardInstance);
-    }
+    // Then
+    assertThat(gameStatus.getPlayer1().getBattlefield().size()).isEqualTo(0);
+    assertThat(gameStatus.getPlayer1().getHand().getCards()).contains(cardInstance);
+  }
 }

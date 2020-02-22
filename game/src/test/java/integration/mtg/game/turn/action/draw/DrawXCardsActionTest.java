@@ -22,44 +22,44 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(classes = DrawTestConfiguration.class)
 public class DrawXCardsActionTest {
 
-    @Autowired
-    private DrawXCardsAction drawXCardsAction;
-    
-    @Autowired
-    private CardInstanceFactory cardInstanceFactory;
+  @Autowired
+  private DrawXCardsAction drawXCardsAction;
 
-    @Autowired
-    private TestUtils testUtils;
+  @Autowired
+  private CardInstanceFactory cardInstanceFactory;
 
-    @Autowired
-    private Cards cards;
+  @Autowired
+  private TestUtils testUtils;
 
-    @Test
-    public void controllerDraw3Cards() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 12, cards.get("Dark Remedy"), "opponent-name");
-        CardInstanceAbility draw2Cards = new CardInstanceAbility(Ability.builder().abilityType(AbilityType.DRAW_X_CARDS).parameters(singletonList("2")).build());
+  @Autowired
+  private Cards cards;
 
-        // When
-        drawXCardsAction.perform(cardInstance, gameStatus, draw2Cards);
+  @Test
+  public void controllerDraw3Cards() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 12, cards.get("Dark Remedy"), "opponent-name");
+    CardInstanceAbility draw2Cards = new CardInstanceAbility(Ability.builder().abilityType(AbilityType.DRAW_X_CARDS).parameters(singletonList("2")).build());
 
-        // Then
-        assertThat(gameStatus.getPlayerByName("opponent-name").getHand().size()).isEqualTo(9);
-        assertThat(gameStatus.getPlayerByName("opponent-name").getLibrary().size()).isEqualTo(31);
-    }
+    // When
+    drawXCardsAction.perform(cardInstance, gameStatus, draw2Cards);
 
-    @Test
-    public void currentPlayerDraw1Card() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstanceAbility draw1Cards = new CardInstanceAbility(Ability.builder().abilityType(AbilityType.DRAW_X_CARDS).parameters(singletonList("1")).build());
+    // Then
+    assertThat(gameStatus.getPlayerByName("opponent-name").getHand().size()).isEqualTo(9);
+    assertThat(gameStatus.getPlayerByName("opponent-name").getLibrary().size()).isEqualTo(31);
+  }
 
-        // When
-        drawXCardsAction.perform(null, gameStatus, draw1Cards);
+  @Test
+  public void currentPlayerDraw1Card() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstanceAbility draw1Cards = new CardInstanceAbility(Ability.builder().abilityType(AbilityType.DRAW_X_CARDS).parameters(singletonList("1")).build());
 
-        // Then
-        assertThat(gameStatus.getPlayerByName("player-name").getHand().size()).isEqualTo(8);
-        assertThat(gameStatus.getPlayerByName("player-name").getLibrary().size()).isEqualTo(32);
-    }
+    // When
+    drawXCardsAction.perform(null, gameStatus, draw1Cards);
+
+    // Then
+    assertThat(gameStatus.getPlayerByName("player-name").getHand().size()).isEqualTo(8);
+    assertThat(gameStatus.getPlayerByName("player-name").getLibrary().size()).isEqualTo(32);
+  }
 }

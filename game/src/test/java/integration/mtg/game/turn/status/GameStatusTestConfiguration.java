@@ -12,16 +12,16 @@ import org.springframework.context.annotation.Primary;
 @ComponentScan("com.aa.mtg.game.status")
 public class GameStatusTestConfiguration {
 
-    @Bean
-    @Primary
-    public SecurityHelper securityHelper() {
-        return Mockito.mock(SecurityHelper.class);
-    }
+  @Bean
+  @Primary
+  public SecurityHelper securityHelper() {
+    return Mockito.mock(SecurityHelper.class);
+  }
 
-    @Bean
-    @Primary
-    public EventSender eventSender() {
-        return Mockito.mock(EventSender.class);
-    }
+  @Bean
+  @Primary
+  public EventSender eventSender() {
+    return Mockito.mock(EventSender.class);
+  }
 
 }

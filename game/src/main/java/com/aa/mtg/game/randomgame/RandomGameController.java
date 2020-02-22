@@ -9,11 +9,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Controller
 public class RandomGameController {
 
-    private AtomicInteger atomicInteger = new AtomicInteger(1);
+  private AtomicInteger atomicInteger = new AtomicInteger(1);
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String randomGame() {
-        return "redirect:/ui/game/" + atomicInteger.incrementAndGet() / 2;
-    }
+  @RequestMapping(path = "/", method = RequestMethod.GET)
+  public String randomGame() {
+    return "redirect:/ui/game/" + atomicInteger.incrementAndGet() / 2;
+  }
 
 }

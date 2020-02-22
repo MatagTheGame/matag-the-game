@@ -106,10 +106,10 @@ public class EnterCardIntoBattlefieldServiceTest {
     card.setController("player-name");
 
     gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
-        1, singletonList("WHITE"),
-        2, singletonList("WHITE"),
-        3, singletonList("WHITE"),
-        4, singletonList("BLUE")
+      1, singletonList("WHITE"),
+      2, singletonList("WHITE"),
+      3, singletonList("WHITE"),
+      4, singletonList("BLUE")
     ));
 
     // When
@@ -127,10 +127,10 @@ public class EnterCardIntoBattlefieldServiceTest {
     card.setController("player-name");
 
     gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
-            1, singletonList("WHITE"),
-            2, singletonList("WHITE"),
-            3, singletonList("BLUE"),
-            4, singletonList("BLUE")
+      1, singletonList("WHITE"),
+      2, singletonList("WHITE"),
+      3, singletonList("BLUE"),
+      4, singletonList("BLUE")
     ));
 
     // When
@@ -148,10 +148,10 @@ public class EnterCardIntoBattlefieldServiceTest {
     card.setController("player-name");
 
     gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
-            1, singletonList("WHITE"),
-            2, singletonList("WHITE"),
-            3, singletonList("BLUE"),
-            4, singletonList("BLUE")
+      1, singletonList("WHITE"),
+      2, singletonList("WHITE"),
+      3, singletonList("BLUE"),
+      4, singletonList("BLUE")
     ));
 
     // When
@@ -169,10 +169,10 @@ public class EnterCardIntoBattlefieldServiceTest {
     card.setController("player-name");
 
     gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
-            1, singletonList("BLACK"),
-            2, singletonList("BLACK"),
-            3, singletonList("BLUE"),
-            4, singletonList("BLACK")
+      1, singletonList("BLACK"),
+      2, singletonList("BLACK"),
+      3, singletonList("BLUE"),
+      4, singletonList("BLACK")
     ));
 
     // When

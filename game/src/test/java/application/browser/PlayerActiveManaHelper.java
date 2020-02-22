@@ -11,25 +11,25 @@ import java.util.stream.Collectors;
 
 public class PlayerActiveManaHelper {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(PlayerActiveManaHelper.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(PlayerActiveManaHelper.class);
 
-    private MtgBrowser mtgBrowser;
+  private MtgBrowser mtgBrowser;
 
-    PlayerActiveManaHelper(MtgBrowser mtgBrowser) {
-        this.mtgBrowser = mtgBrowser;
-    }
+  PlayerActiveManaHelper(MtgBrowser mtgBrowser) {
+    this.mtgBrowser = mtgBrowser;
+  }
 
-    public void toHaveMana(List<Color> colors) {
-        mtgBrowser.wait(driver -> {
-            List<WebElement> imgs = getElementContainer().findElements(By.tagName("img"));
-            List<String> alts = imgs.stream().map((webElement -> webElement.getAttribute("alt"))).sorted().collect(Collectors.toList());
-            List<String> expectedColors = colors.stream().map(Enum::name).sorted().collect(Collectors.toList());
-            LOGGER.info("alts={}   expectedColors={}", alts, expectedColors);
-            return expectedColors.equals(alts);
-        });
-    }
+  public void toHaveMana(List<Color> colors) {
+    mtgBrowser.wait(driver -> {
+      List<WebElement> imgs = getElementContainer().findElements(By.tagName("img"));
+      List<String> alts = imgs.stream().map((webElement -> webElement.getAttribute("alt"))).sorted().collect(Collectors.toList());
+      List<String> expectedColors = colors.stream().map(Enum::name).sorted().collect(Collectors.toList());
+      LOGGER.info("alts={}   expectedColors={}", alts, expectedColors);
+      return expectedColors.equals(alts);
+    });
+  }
 
-    private WebElement getElementContainer() {
-        return mtgBrowser.findElement(By.id("player-active-mana"));
-    }
+  private WebElement getElementContainer() {
+    return mtgBrowser.findElement(By.id("player-active-mana"));
+  }
 }

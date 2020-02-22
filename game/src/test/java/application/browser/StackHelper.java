@@ -11,34 +11,34 @@ import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
 public class StackHelper extends AbstractCardContainerHelper {
-    private static final Logger LOGGER = LoggerFactory.getLogger(StackHelper.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(StackHelper.class);
 
-    StackHelper(MtgBrowser mtgBrowser) {
-        super(mtgBrowser);
-    }
+  StackHelper(MtgBrowser mtgBrowser) {
+    super(mtgBrowser);
+  }
 
-    @Override
-    protected WebElement containerElement() {
-        return mtgBrowser.findElement(By.id("stack"));
-    }
+  @Override
+  protected WebElement containerElement() {
+    return mtgBrowser.findElement(By.id("stack"));
+  }
 
-    public void containsAbility(String ability) {
-        containsAbilitiesExactly(singletonList(ability));
-    }
+  public void containsAbility(String ability) {
+    containsAbilitiesExactly(singletonList(ability));
+  }
 
-    public void containsAbilitiesExactly(List<String> expectedTriggeredAbilities) {
-        mtgBrowser.wait(driver -> {
-            List<String> actualTriggeredAbilities = triggeredAbilities(containerElement());
-            LOGGER.info("actualTriggeredAbilities={}   expectedTriggeredAbilities={}", actualTriggeredAbilities, expectedTriggeredAbilities);
-            return expectedTriggeredAbilities.equals(actualTriggeredAbilities);
-        });
-    }
+  public void containsAbilitiesExactly(List<String> expectedTriggeredAbilities) {
+    mtgBrowser.wait(driver -> {
+      List<String> actualTriggeredAbilities = triggeredAbilities(containerElement());
+      LOGGER.info("actualTriggeredAbilities={}   expectedTriggeredAbilities={}", actualTriggeredAbilities, expectedTriggeredAbilities);
+      return expectedTriggeredAbilities.equals(actualTriggeredAbilities);
+    });
+  }
 
-    private List<String> triggeredAbilities(WebElement containerElement) {
-        List<WebElement> cardElements = containerElement.findElements(By.className("triggered-ability"));
-        return cardElements.stream()
-                .map(WebElement::getText)
-                .map(text -> text.replace("\n", " "))
-                .collect(toList());
-    }
+  private List<String> triggeredAbilities(WebElement containerElement) {
+    List<WebElement> cardElements = containerElement.findElements(By.className("triggered-ability"));
+    return cardElements.stream()
+      .map(WebElement::getText)
+      .map(text -> text.replace("\n", " "))
+      .collect(toList());
+  }
 }

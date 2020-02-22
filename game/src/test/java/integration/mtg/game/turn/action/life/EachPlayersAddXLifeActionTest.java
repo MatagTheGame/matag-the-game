@@ -22,30 +22,30 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ContextConfiguration(classes = LifeTestConfiguration.class)
 public class EachPlayersAddXLifeActionTest {
 
-    @Autowired
-    private EachPlayersAddXLifeAction eachPlayersAddXLifeAction;
+  @Autowired
+  private EachPlayersAddXLifeAction eachPlayersAddXLifeAction;
 
-    @Autowired
-    private CardInstanceFactory cardInstanceFactory;
+  @Autowired
+  private CardInstanceFactory cardInstanceFactory;
 
-    @Autowired
-    private TestUtils testUtils;
+  @Autowired
+  private TestUtils testUtils;
 
-    @Autowired
-    private Cards cards;
+  @Autowired
+  private Cards cards;
 
-    @Test
-    public void subtractXLifeToEachPlayer() {
-        // Given
-        GameStatus gameStatus = testUtils.testGameStatus();
-        CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), "player-name");
+  @Test
+  public void subtractXLifeToEachPlayer() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), "player-name");
 
-        // When
-        Ability lose4Life = Ability.builder().abilityType(AbilityType.ADD_X_LIFE).parameters(singletonList("-4")).build();
-        eachPlayersAddXLifeAction.perform(cardInstance, gameStatus, new CardInstanceAbility(lose4Life));
+    // When
+    Ability lose4Life = Ability.builder().abilityType(AbilityType.ADD_X_LIFE).parameters(singletonList("-4")).build();
+    eachPlayersAddXLifeAction.perform(cardInstance, gameStatus, new CardInstanceAbility(lose4Life));
 
-        // Then
-        assertThat(gameStatus.getPlayerByName("player-name").getLife()).isEqualTo(16);
-        assertThat(gameStatus.getPlayerByName("opponent-name").getLife()).isEqualTo(16);
-    }
+    // Then
+    assertThat(gameStatus.getPlayerByName("player-name").getLife()).isEqualTo(16);
+    assertThat(gameStatus.getPlayerByName("opponent-name").getLife()).isEqualTo(16);
+  }
 }

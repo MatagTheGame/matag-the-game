@@ -12,23 +12,23 @@ import java.util.Objects;
 @Component
 public class SecurityHelper {
 
-    private final PlayerService playerService;
+  private final PlayerService playerService;
 
-    @Autowired
-    public SecurityHelper(PlayerService playerService) {
-        this.playerService = playerService;
-    }
+  @Autowired
+  public SecurityHelper(PlayerService playerService) {
+    this.playerService = playerService;
+  }
 
-    public SecurityToken extractSecurityToken(SimpMessageHeaderAccessor headerAccessor) {
-        String sessionId = headerAccessor.getSessionId();
-        String gameId = Objects.requireNonNull(headerAccessor.getNativeHeader("gameId")).get(0);
-        return new SecurityToken(sessionId, gameId);
-    }
+  public SecurityToken extractSecurityToken(SimpMessageHeaderAccessor headerAccessor) {
+    String sessionId = headerAccessor.getSessionId();
+    String gameId = Objects.requireNonNull(headerAccessor.getNativeHeader("gameId")).get(0);
+    return new SecurityToken(sessionId, gameId);
+  }
 
-    public void isPlayerAllowedToExecuteAction(GameStatus gameStatus, String sessionId) {
-        Player currentPlayer = playerService.getPlayerBySessionId(gameStatus, sessionId);
-        if (!gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
-            throw new SecurityException("Player " + currentPlayer.getName() + " is not allowed to execute an action. turn=[" + gameStatus.getTurn() + "]");
-        }
+  public void isPlayerAllowedToExecuteAction(GameStatus gameStatus, String sessionId) {
+    Player currentPlayer = playerService.getPlayerBySessionId(gameStatus, sessionId);
+    if (!gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
+      throw new SecurityException("Player " + currentPlayer.getName() + " is not allowed to execute an action. turn=[" + gameStatus.getTurn() + "]");
     }
+  }
 }

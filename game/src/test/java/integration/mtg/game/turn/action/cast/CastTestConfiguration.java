@@ -16,21 +16,21 @@ import org.springframework.context.annotation.Primary;
 @Import(TestUtilsConfiguration.class)
 public class CastTestConfiguration {
 
-    @Bean
-    @Primary
-    public TargetCheckerService targetCheckerService() {
-        return Mockito.mock(TargetCheckerService.class);
-    }
+  @Bean
+  @Primary
+  public TargetCheckerService targetCheckerService() {
+    return Mockito.mock(TargetCheckerService.class);
+  }
 
-    @Bean
-    @Primary
-    public EnterCardIntoBattlefieldService enterCardIntoBattlefieldService() {
-        return Mockito.mock(EnterCardIntoBattlefieldService.class);
-    }
+  @Bean
+  @Primary
+  public EnterCardIntoBattlefieldService enterCardIntoBattlefieldService() {
+    return Mockito.mock(EnterCardIntoBattlefieldService.class);
+  }
 
-    @Bean
-    @Primary
-    public TapPermanentService tapPermanentService() {
-        return Mockito.mock(TapPermanentService.class);
-    }
+  @Bean
+  @Primary
+  public TapPermanentService tapPermanentService() {
+    return Mockito.mock(TapPermanentService.class);
+  }
 }
