@@ -13,6 +13,14 @@ import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 import static java.util.Collections.emptyList;
 
 public class CardUtils {
+  public static String normalizeCardName(String cardName) {
+    return cardName.toLowerCase()
+            .replaceAll(" ", "_")
+            .replaceAll("-", "_")
+            .replaceAll(",", "")
+            .replaceAll("'", "");
+  }
+
   public static Card hiddenCard() {
     return new Card("card", new TreeSet<>(), emptyList(), new TreeSet<>(), new TreeSet<>(), Rarity.COMMON, "", 0, 0, emptyList());
   }
