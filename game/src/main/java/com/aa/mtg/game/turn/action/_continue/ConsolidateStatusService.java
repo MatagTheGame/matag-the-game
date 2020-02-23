@@ -17,14 +17,18 @@ public class ConsolidateStatusService {
     this.destroyPermanentService = destroyPermanentService;
   }
 
+  // Destroy all creatures with toughness - damage > 0. If a creature is destroyed it needs to be reevaluated as that creature
+  // might have "other creatures get +1/+1" and keeping them alive.
   public void consolidate(GameStatus gameStatus) {
     boolean repeat;
     do {
       repeat = false;
       for (CardInstance card : gameStatus.getAllBattlefieldCards().getCards()) {
         if (card.isOfType(CREATURE) && card.getToughness() - card.getModifiers().getDamage() <= 0) {
-          destroyPermanentService.destroy(gameStatus, card.getId());
-          repeat = true;
+          boolean destroyed = destroyPermanentService.destroy(gameStatus, card.getId());
+          if (destroyed) {
+            repeat = true;
+          }
         }
       }
     } while (repeat);

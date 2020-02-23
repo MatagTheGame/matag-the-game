@@ -11,6 +11,7 @@ public enum AbilityType {
   EQUIPPED_CREATURE_GETS("Equipped creature gets %s."),
   FLYING("Flying."),
   HASTE("Haste."),
+  INDESTRUCTIBLE("Indestructible."),
   LIFELINK("Lifelink."),
   REACH("Reach."),
   SELECTED_PERMANENTS_GET("%s %s"),

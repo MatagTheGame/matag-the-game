@@ -25,8 +25,8 @@ public class DealDamageToCreatureService {
       LOGGER.info("{} is getting {} damage.", cardInstance.getIdAndName(), damage);
       cardInstance.getModifiers().dealDamage(damage);
       if (cardInstance.getToughness() - cardInstance.getModifiers().getDamage() <= 0 || deathtouch) {
+        LOGGER.info("{} is being destroyed...", cardInstance.getIdAndName());
         destroyPermanentService.destroy(gameStatus, cardInstance.getId());
-        LOGGER.info("{} has been destroyed.", cardInstance.getIdAndName());
       }
     }
   }
