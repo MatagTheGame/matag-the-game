@@ -1,6 +1,9 @@
 {
   "name" : "Ajani's Welcome",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/9/c9045fcb-b633-4c35-8058-6234311551ae.png?1562304330",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/9/c9045fcb-b633-4c35-8058-6234311551ae.jpg?1562304330",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/9/c9045fcb-b633-4c35-8058-6234311551ae.png?1562304330"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE" ],
   "types" : [ "ENCHANTMENT" ],

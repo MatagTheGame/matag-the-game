@@ -1,6 +1,9 @@
 {
   "name" : "Primordial Wurm",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/c/fc0e8298-adac-4922-8824-a1fafa089f72.png?1557576992",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/c/fc0e8298-adac-4922-8824-a1fafa089f72.jpg?1557576992",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/c/fc0e8298-adac-4922-8824-a1fafa089f72.png?1557576992"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

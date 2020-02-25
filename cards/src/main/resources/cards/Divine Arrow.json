@@ -1,6 +1,9 @@
 {
   "name" : "Divine Arrow",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/3/73cbb58a-1b00-4883-9b45-da7ded7317e3.png?1557575917",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/3/73cbb58a-1b00-4883-9b45-da7ded7317e3.jpg?1557575917",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/3/73cbb58a-1b00-4883-9b45-da7ded7317e3.png?1557575917"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS" ],
   "types" : [ "INSTANT" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Agonizing Syphon",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/d/0d8efd95-1c2f-4dd1-b70b-3cfb10ff3a28.png?1563898795",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/d/0d8efd95-1c2f-4dd1-b70b-3cfb10ff3a28.jpg?1563898795",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/d/0d8efd95-1c2f-4dd1-b70b-3cfb10ff3a28.png?1563898795"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "SORCERY" ],

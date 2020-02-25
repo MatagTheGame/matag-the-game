@@ -1,6 +1,9 @@
 {
   "name" : "Orzhov Guildgate",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/b/cbadf8cf-02bf-45f6-b3c1-a684d9bc5228.png?1558667700",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/b/cbadf8cf-02bf-45f6-b3c1-a684d9bc5228.jpg?1558667700",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/b/cbadf8cf-02bf-45f6-b3c1-a684d9bc5228.png?1558667700"
+  },
   "types" : [ "LAND" ],
   "subtypes" : [ "GATE" ],
   "rarity" : "COMMON",

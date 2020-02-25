@@ -12,17 +12,23 @@ import java.net.URLEncoder;
 import java.util.stream.Collectors;
 
 public class CardImageLinker {
-  private final String name;
-
-  public CardImageLinker(Card card) {
-    this.name = card.getName();
-  }
+  private final String lowResolution;
+  private final String highResolution;
 
   @SneakyThrows
-  public String getImageUrl() {
-    String file = readHttpResource("https://api.scryfall.com/cards/named?fuzzy=" + URLEncoder.encode(name, "UTF-8"));
+  public CardImageLinker(Card card) {
+    String file = readHttpResource("https://api.scryfall.com/cards/named?fuzzy=" + URLEncoder.encode(card.getName(), "UTF-8"));
     JsonNode jsonNode = new ObjectMapper().readTree(file);
-    return jsonNode.path("image_uris").path("png").asText();
+    lowResolution = jsonNode.path("image_uris").path("normal").asText();
+    highResolution = jsonNode.path("image_uris").path("png").asText();
+  }
+
+  public String getLowResolution() {
+    return lowResolution;
+  }
+
+  public String getHighResolution() {
+    return highResolution;
   }
 
   @SneakyThrows

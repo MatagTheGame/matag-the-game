@@ -1,6 +1,9 @@
 {
   "name" : "Lightning Strike",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/8/084b7337-c06f-4cbf-8fc0-0b20c221f1dc.png?1562300290",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/8/084b7337-c06f-4cbf-8fc0-0b20c221f1dc.jpg?1562300290",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/8/084b7337-c06f-4cbf-8fc0-0b20c221f1dc.png?1562300290"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS" ],
   "types" : [ "INSTANT" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Raging Swordtooth",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/5/15a79137-9589-4c24-9bea-31041fd3c9ae.png?1562551139",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/1/5/15a79137-9589-4c24-9bea-31041fd3c9ae.jpg?1562551139",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/1/5/15a79137-9589-4c24-9bea-31041fd3c9ae.png?1562551139"
+  },
   "colors" : [ "RED", "GREEN" ],
   "cost" : [ "RED", "GREEN", "COLORLESS" ],
   "types" : [ "CREATURE" ],

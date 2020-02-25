@@ -1,6 +1,9 @@
 {
   "name" : "Skittering Heartstopper",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/7/0722fbdf-c092-4e80-913f-29390177cdcb.png?1562550153",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/7/0722fbdf-c092-4e80-913f-29390177cdcb.jpg?1562550153",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/7/0722fbdf-c092-4e80-913f-29390177cdcb.png?1562550153"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK" ],
   "types" : [ "CREATURE" ],

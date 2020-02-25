@@ -1,6 +1,9 @@
 {
   "name" : "Spinal Centipede",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/4/74d579fb-615a-43a6-a1c1-c535087abf2a.png?1572893058",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/4/74d579fb-615a-43a6-a1c1-c535087abf2a.jpg?1572893058",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/4/74d579fb-615a-43a6-a1c1-c535087abf2a.png?1572893058"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

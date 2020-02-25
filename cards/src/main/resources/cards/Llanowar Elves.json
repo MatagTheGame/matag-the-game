@@ -1,6 +1,9 @@
 {
   "name" : "Llanowar Elves",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/3/73542493-cd0b-4bb7-a5b8-8f889c76e4d6.png?1562302708",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/3/73542493-cd0b-4bb7-a5b8-8f889c76e4d6.jpg?1562302708",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/3/73542493-cd0b-4bb7-a5b8-8f889c76e4d6.png?1562302708"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN" ],
   "types" : [ "CREATURE" ],

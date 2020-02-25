@@ -1,6 +1,9 @@
 {
   "name" : "Dark Remedy",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/c/5c926d38-a741-47a9-8961-f5bcf2909939.png?1563900371",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/5/c/5c926d38-a741-47a9-8961-f5bcf2909939.jpg?1563900371",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/5/c/5c926d38-a741-47a9-8961-f5bcf2909939.png?1563900371"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS" ],
   "types" : [ "INSTANT" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Bartizan Bats",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/4/445e41d8-317d-46ce-b858-54df716e0214.png?1563900356",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/4/445e41d8-317d-46ce-b858-54df716e0214.jpg?1563900356",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/4/445e41d8-317d-46ce-b858-54df716e0214.png?1563900356"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Benalish Marshal",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/d/6dd1a7fc-5dbd-4ed2-9b02-9fd5c55bb629.png?1562737424",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/d/6dd1a7fc-5dbd-4ed2-9b02-9fd5c55bb629.jpg?1562737424",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/d/6dd1a7fc-5dbd-4ed2-9b02-9fd5c55bb629.png?1562737424"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "WHITE", "WHITE" ],
   "types" : [ "CREATURE" ],

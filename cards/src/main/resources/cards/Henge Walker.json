@@ -1,6 +1,9 @@
 {
   "name" : "Henge Walker",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/9/9925f0bc-8685-4e38-8864-0ad3a9549ab5.png?1572490988",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/9/9925f0bc-8685-4e38-8864-0ad3a9549ab5.jpg?1572490988",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/9/9925f0bc-8685-4e38-8864-0ad3a9549ab5.png?1572490988"
+  },
   "cost" : [ "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "ARTIFACT", "CREATURE" ],
   "subtypes" : [ "GOLEM" ],

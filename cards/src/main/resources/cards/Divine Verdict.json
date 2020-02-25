@@ -1,6 +1,9 @@
 {
   "name" : "Divine Verdict",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/d/ed07b708-7232-4b87-b5d9-edaa20a69293.png?1555039673",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/e/d/ed07b708-7232-4b87-b5d9-edaa20a69293.jpg?1555039673",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/e/d/ed07b708-7232-4b87-b5d9-edaa20a69293.png?1555039673"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

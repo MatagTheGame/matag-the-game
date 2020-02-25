@@ -1,6 +1,9 @@
 {
   "name" : "Knight of New Benalia",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/8/88c50c4b-a2c8-4cdc-a171-aa3ff9ef107f.png?1562739093",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/8/88c50c4b-a2c8-4cdc-a171-aa3ff9ef107f.jpg?1562739093",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/8/88c50c4b-a2c8-4cdc-a171-aa3ff9ef107f.png?1562739093"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

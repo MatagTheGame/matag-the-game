@@ -1,6 +1,9 @@
 {
   "name" : "Vorstclaw",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/9/79719ed0-468d-4946-8dfc-fb7e2b2e305e.png?1563899606",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/9/79719ed0-468d-4946-8dfc-fb7e2b2e305e.jpg?1563899606",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/9/79719ed0-468d-4946-8dfc-fb7e2b2e305e.png?1563899606"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

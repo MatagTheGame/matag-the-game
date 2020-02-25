@@ -1,6 +1,9 @@
 {
   "name" : "Act of Treason",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/0/20234668-53ce-4cc8-892f-30ee3ecfc34c.png?1563899077",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/0/20234668-53ce-4cc8-892f-30ee3ecfc34c.jpg?1563899077",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/0/20234668-53ce-4cc8-892f-30ee3ecfc34c.png?1563899077"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS", "COLORLESS" ],
   "types" : [ "SORCERY" ],

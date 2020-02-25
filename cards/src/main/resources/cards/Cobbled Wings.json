@@ -1,6 +1,9 @@
 {
   "name" : "Cobbled Wings",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/b/3b2ff4f0-0dd1-4551-826b-68e8ff1e5860.png?1562553698",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/b/3b2ff4f0-0dd1-4551-826b-68e8ff1e5860.jpg?1562553698",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/b/3b2ff4f0-0dd1-4551-826b-68e8ff1e5860.png?1562553698"
+  },
   "cost" : [ "COLORLESS", "COLORLESS" ],
   "types" : [ "ARTIFACT" ],
   "subtypes" : [ "EQUIPMENT" ],

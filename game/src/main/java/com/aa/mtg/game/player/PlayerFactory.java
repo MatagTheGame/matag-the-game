@@ -20,6 +20,7 @@ public class PlayerFactory implements ApplicationContextAware {
     Player player = applicationContext.getBean(Player.class);
     player.setSessionId(sessionId);
     player.setName(name);
+    player.setResolution("lowResolution");
     return player;
   }
 }

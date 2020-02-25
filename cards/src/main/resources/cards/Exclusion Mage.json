@@ -1,6 +1,9 @@
 {
   "name" : "Exclusion Mage",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/c/ccad82f5-5c5c-42ad-b66e-942f0d9631ca.png?1562304356",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/c/ccad82f5-5c5c-42ad-b66e-942f0d9631ca.jpg?1562304356",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/c/ccad82f5-5c5c-42ad-b66e-942f0d9631ca.png?1562304356"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

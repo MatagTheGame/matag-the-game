@@ -1,6 +1,9 @@
 {
   "name" : "Azorius Guildgate",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/3/93cf5412-c711-41b4-ab3b-7788a0a22228.png?1572894323",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/3/93cf5412-c711-41b4-ab3b-7788a0a22228.jpg?1572894323",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/3/93cf5412-c711-41b4-ab3b-7788a0a22228.png?1572894323"
+  },
   "types" : [ "LAND" ],
   "subtypes" : [ "GATE" ],
   "rarity" : "COMMON",

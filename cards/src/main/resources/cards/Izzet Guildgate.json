@@ -1,6 +1,9 @@
 {
   "name" : "Izzet Guildgate",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/6/c60c576b-a1ea-41d2-a1d8-4417c11ed48e.png?1568005192",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/6/c60c576b-a1ea-41d2-a1d8-4417c11ed48e.jpg?1568005192",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/6/c60c576b-a1ea-41d2-a1d8-4417c11ed48e.png?1568005192"
+  },
   "types" : [ "LAND" ],
   "subtypes" : [ "GATE" ],
   "rarity" : "COMMON",

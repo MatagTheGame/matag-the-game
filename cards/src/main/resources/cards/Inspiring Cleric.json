@@ -1,6 +1,9 @@
 {
   "name" : "Inspiring Cleric",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/1/31b8f1da-c8ea-41d5-b1ad-b714c22d3683.png?1562552997",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/1/31b8f1da-c8ea-41d5-b1ad-b714c22d3683.jpg?1562552997",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/1/31b8f1da-c8ea-41d5-b1ad-b714c22d3683.png?1562552997"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

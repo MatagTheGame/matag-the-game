@@ -1,6 +1,9 @@
 {
   "name" : "Giant Growth",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/6/06ec9e8b-4bd8-4caf-a559-6514b7ab4ca4.png?1557576917",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/6/06ec9e8b-4bd8-4caf-a559-6514b7ab4ca4.jpg?1557576917",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/6/06ec9e8b-4bd8-4caf-a559-6514b7ab4ca4.png?1557576917"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN" ],
   "types" : [ "INSTANT" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Engulfing Eruption",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/1/f198c7e3-8a85-48f3-a7c2-93320fd4fb81.png?1563900416",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/1/f198c7e3-8a85-48f3-a7c2-93320fd4fb81.jpg?1563900416",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/1/f198c7e3-8a85-48f3-a7c2-93320fd4fb81.png?1563900416"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS" ],
   "types" : [ "SORCERY" ],

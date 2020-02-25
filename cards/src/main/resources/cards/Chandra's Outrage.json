@@ -1,6 +1,9 @@
 {
   "name" : "Chandra's Outrage",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/d/edbfe793-6644-43ed-bbe1-e122c01c5e53.png?1563899115",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/e/d/edbfe793-6644-43ed-bbe1-e122c01c5e53.jpg?1563899115",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/e/d/edbfe793-6644-43ed-bbe1-e122c01c5e53.png?1563899115"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

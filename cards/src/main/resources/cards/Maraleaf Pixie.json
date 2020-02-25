@@ -1,6 +1,9 @@
 {
   "name" : "Maraleaf Pixie",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/6/e6d7f9c9-dd83-4684-a949-1c22f316138a.png?1572490787",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/e/6/e6d7f9c9-dd83-4684-a949-1c22f316138a.jpg?1572490787",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/e/6/e6d7f9c9-dd83-4684-a949-1c22f316138a.png?1572490787"
+  },
   "colors" : [ "BLUE", "GREEN" ],
   "cost" : [ "GREEN", "BLUE" ],
   "types" : [ "CREATURE" ],

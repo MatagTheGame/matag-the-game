@@ -1,6 +1,9 @@
 {
   "name" : "Righteousness",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/d/2/d2910df2-e288-4fa0-9859-c5ca35da2d55.png?1572489762",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/d/2/d2910df2-e288-4fa0-9859-c5ca35da2d55.jpg?1572489762",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/d/2/d2910df2-e288-4fa0-9859-c5ca35da2d55.png?1572489762"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE" ],
   "types" : [ "INSTANT" ],

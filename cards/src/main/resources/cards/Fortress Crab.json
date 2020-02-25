@@ -1,6 +1,9 @@
 {
   "name" : "Fortress Crab",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/2/324681da-a28e-47ec-9810-5678de53e494.png?1563898609",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/2/324681da-a28e-47ec-9810-5678de53e494.jpg?1563898609",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/2/324681da-a28e-47ec-9810-5678de53e494.png?1563898609"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

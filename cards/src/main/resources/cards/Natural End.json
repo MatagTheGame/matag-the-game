@@ -1,6 +1,9 @@
 {
   "name" : "Natural End",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/4/84dcd314-f4d2-461e-a66e-7b1d8f141879.png?1563899473",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/4/84dcd314-f4d2-461e-a66e-7b1d8f141879.jpg?1563899473",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/4/84dcd314-f4d2-461e-a66e-7b1d8f141879.png?1563899473"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

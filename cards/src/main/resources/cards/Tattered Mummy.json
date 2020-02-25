@@ -1,6 +1,9 @@
 {
   "name" : "Tattered Mummy",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/a/6a27ce41-69e7-4b86-9b9c-1a724d0728e9.png?1580816509",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/a/6a27ce41-69e7-4b86-9b9c-1a724d0728e9.jpg?1580816509",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/a/6a27ce41-69e7-4b86-9b9c-1a724d0728e9.png?1580816509"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS" ],
   "types" : [ "CREATURE" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Axebane Beast",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/f/2f420b35-1f73-41c8-a15f-1aee4af0999c.png?1572893390",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/f/2f420b35-1f73-41c8-a15f-1aee4af0999c.jpg?1572893390",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/f/2f420b35-1f73-41c8-a15f-1aee4af0999c.png?1572893390"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

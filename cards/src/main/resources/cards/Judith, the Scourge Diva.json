@@ -1,6 +1,9 @@
 {
   "name" : "Judith, the Scourge Diva",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/a/0a742125-730d-4082-bfd8-5feb7733def4.png?1572893873",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/a/0a742125-730d-4082-bfd8-5feb7733def4.jpg?1572893873",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/a/0a742125-730d-4082-bfd8-5feb7733def4.png?1572893873"
+  },
   "colors" : [ "BLACK", "RED" ],
   "cost" : [ "BLACK", "RED", "COLORLESS" ],
   "types" : [ "CREATURE", "LEGENDARY" ],

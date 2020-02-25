@@ -1,6 +1,9 @@
 {
   "name" : "Daybreak Chaplain",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/c/0ce89a0b-d0e4-4c71-b131-0d3b0b76bc3b.png?1563898250",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/c/0ce89a0b-d0e4-4c71-b131-0d3b0b76bc3b.jpg?1563898250",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/c/0ce89a0b-d0e4-4c71-b131-0d3b0b76bc3b.png?1563898250"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

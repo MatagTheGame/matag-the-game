@@ -1,6 +1,9 @@
 {
   "name" : "Rakdos Guildgate",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/e/5e378faf-b1f2-46df-945a-37681d392104.png?1568005321",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/5/e/5e378faf-b1f2-46df-945a-37681d392104.jpg?1568005321",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/5/e/5e378faf-b1f2-46df-945a-37681d392104.png?1568005321"
+  },
   "types" : [ "LAND" ],
   "subtypes" : [ "GATE" ],
   "rarity" : "COMMON",

@@ -1,6 +1,9 @@
 {
   "name" : "Lava Axe",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/3/c3dab325-8f4f-4288-9f3f-960e52b4335b.png?1562304308",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/3/c3dab325-8f4f-4288-9f3f-960e52b4335b.jpg?1562304308",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/3/c3dab325-8f4f-4288-9f3f-960e52b4335b.png?1562304308"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "SORCERY" ],

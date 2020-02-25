@@ -1,6 +1,9 @@
 {
   "name" : "Coral Merfolk",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/7/97a74ccf-8165-4db1-a87c-52c2d8ea0058.png?1563900331",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/7/97a74ccf-8165-4db1-a87c-52c2d8ea0058.jpg?1563900331",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/7/97a74ccf-8165-4db1-a87c-52c2d8ea0058.png?1563900331"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

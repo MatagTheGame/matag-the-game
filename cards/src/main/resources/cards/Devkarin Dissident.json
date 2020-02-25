@@ -1,6 +1,9 @@
 {
   "name" : "Devkarin Dissident",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/9/490cd287-5f09-442f-9150-4a6ac2cf3e2e.png?1572893332",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/9/490cd287-5f09-442f-9150-4a6ac2cf3e2e.jpg?1572893332",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/9/490cd287-5f09-442f-9150-4a6ac2cf3e2e.png?1572893332"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS" ],
   "types" : [ "CREATURE" ],

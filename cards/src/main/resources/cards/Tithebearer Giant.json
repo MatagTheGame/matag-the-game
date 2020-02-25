@@ -1,6 +1,9 @@
 {
   "name" : "Tithebearer Giant",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/c/3c305ccb-62f5-496a-a205-e818e34ead82.png?1557576568",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/c/3c305ccb-62f5-496a-a205-e818e34ead82.jpg?1557576568",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/c/3c305ccb-62f5-496a-a205-e818e34ead82.png?1557576568"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

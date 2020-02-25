@@ -1,6 +1,9 @@
 {
   "name" : "Noxious Grasp",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/e/8e5758cc-1f84-455d-a983-8ec471727eaf.png?1563898977",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/e/8e5758cc-1f84-455d-a983-8ec471727eaf.jpg?1563898977",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/e/8e5758cc-1f84-455d-a983-8ec471727eaf.png?1563898977"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS" ],
   "types" : [ "INSTANT" ],

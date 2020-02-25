@@ -1,6 +1,9 @@
 {
   "name" : "Jadecraft Artisan",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/b/2b745934-c1fe-49f5-bda4-b0eafa1408e1.png?1555040670",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/b/2b745934-c1fe-49f5-bda4-b0eafa1408e1.jpg?1555040670",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/b/2b745934-c1fe-49f5-bda4-b0eafa1408e1.png?1555040670"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

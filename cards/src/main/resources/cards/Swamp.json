@@ -1,6 +1,9 @@
 {
   "name" : "Swamp",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/6/66bb5192-58bc-4efe-a145-2e804fd3483d.png?1581481510",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/6/66bb5192-58bc-4efe-a145-2e804fd3483d.jpg?1581481510",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/6/66bb5192-58bc-4efe-a145-2e804fd3483d.png?1581481510"
+  },
   "types" : [ "BASIC", "LAND" ],
   "rarity" : "COMMON",
   "abilities" : [ {

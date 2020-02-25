@@ -1,6 +1,9 @@
 {
   "name" : "Yaroks Wavecrasher",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/8/c86a8974-df86-43ee-b07f-fd2837c08a6a.png?1563898777",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/8/c86a8974-df86-43ee-b07f-fd2837c08a6a.jpg?1563898777",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/8/c86a8974-df86-43ee-b07f-fd2837c08a6a.png?1563898777"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

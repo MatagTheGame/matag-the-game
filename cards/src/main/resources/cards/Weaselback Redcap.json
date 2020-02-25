@@ -1,6 +1,9 @@
 {
   "name" : "Weaselback Redcap",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/3/33a78207-fd76-4112-a257-54a25da6f818.png?1579623767",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/3/33a78207-fd76-4112-a257-54a25da6f818.jpg?1579623767",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/3/33a78207-fd76-4112-a257-54a25da6f818.png?1579623767"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED" ],
   "types" : [ "CREATURE" ],

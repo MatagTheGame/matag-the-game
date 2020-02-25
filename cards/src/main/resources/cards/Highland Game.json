@@ -1,6 +1,9 @@
 {
   "name" : "Highland Game",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/e/4ec59964-42c1-4c29-8c60-37b7f376c347.png?1562302156",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/e/4ec59964-42c1-4c29-8c60-37b7f376c347.jpg?1562302156",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/e/4ec59964-42c1-4c29-8c60-37b7f376c347.png?1562302156"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS" ],
   "types" : [ "CREATURE" ],

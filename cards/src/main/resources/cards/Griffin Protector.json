@@ -1,6 +1,9 @@
 {
   "name" : "Griffin Protector",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/c/5c32c4f2-4fa5-4874-8413-eac822121a0b.png?1563898317",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/5/c/5c32c4f2-4fa5-4874-8413-eac822121a0b.jpg?1563898317",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/5/c/5c32c4f2-4fa5-4874-8413-eac822121a0b.png?1563898317"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

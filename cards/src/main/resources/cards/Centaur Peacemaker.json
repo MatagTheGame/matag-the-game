@@ -1,6 +1,9 @@
 {
   "name" : "Centaur Peacemaker",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/e/0e630e9b-7817-4255-9de1-795b2a788d80.png?1572893538",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/e/0e630e9b-7817-4255-9de1-795b2a788d80.jpg?1572893538",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/e/0e630e9b-7817-4255-9de1-795b2a788d80.png?1572893538"
+  },
   "colors" : [ "WHITE", "GREEN" ],
   "cost" : [ "WHITE", "GREEN", "COLORLESS" ],
   "types" : [ "CREATURE" ],

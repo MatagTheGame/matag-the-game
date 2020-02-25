@@ -1,6 +1,9 @@
 {
   "name" : "Lich's Caress",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/2/32bd3acd-aa62-4708-9336-e3430fd0e541.png?1562301277",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/2/32bd3acd-aa62-4708-9336-e3430fd0e541.jpg?1562301277",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/2/32bd3acd-aa62-4708-9336-e3430fd0e541.png?1562301277"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "SORCERY" ],

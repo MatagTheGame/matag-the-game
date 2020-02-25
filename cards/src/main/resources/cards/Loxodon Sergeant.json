@@ -1,6 +1,9 @@
 {
   "name" : "Loxodon Sergeant",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/5/c57f873b-5fb2-4638-b66c-f6d1aec156ba.png?1557575998",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/5/c57f873b-5fb2-4638-b66c-f6d1aec156ba.jpg?1557575998",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/5/c57f873b-5fb2-4638-b66c-f6d1aec156ba.png?1557575998"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

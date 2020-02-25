@@ -1,6 +1,9 @@
 {
   "name" : "Gift of Strength",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/5/75f5e144-4dd6-441f-b3e2-433aa82bdf7b.png?1581480614",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/5/75f5e144-4dd6-441f-b3e2-433aa82bdf7b.jpg?1581480614",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/5/75f5e144-4dd6-441f-b3e2-433aa82bdf7b.png?1581480614"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS" ],
   "types" : [ "INSTANT" ],

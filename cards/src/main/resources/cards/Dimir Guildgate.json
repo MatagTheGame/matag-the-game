@@ -1,6 +1,9 @@
 {
   "name" : "Dimir Guildgate",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/7/b7129bdf-de02-4ed2-b5de-f774b8a7d302.png?1572894125",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/b/7/b7129bdf-de02-4ed2-b5de-f774b8a7d302.jpg?1572894125",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/b/7/b7129bdf-de02-4ed2-b5de-f774b8a7d302.png?1572894125"
+  },
   "types" : [ "LAND" ],
   "subtypes" : [ "GATE" ],
   "rarity" : "COMMON",

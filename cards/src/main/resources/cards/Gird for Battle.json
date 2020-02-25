@@ -1,6 +1,9 @@
 {
   "name" : "Gird for Battle",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/9/f9f731df-eb40-44c8-a72d-f377c824584d.png?1572892549",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/9/f9f731df-eb40-44c8-a72d-f377c824584d.jpg?1572892549",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/9/f9f731df-eb40-44c8-a72d-f377c824584d.png?1572892549"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE" ],
   "types" : [ "SORCERY" ],

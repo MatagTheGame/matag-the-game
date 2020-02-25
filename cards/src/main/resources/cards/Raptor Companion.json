@@ -1,6 +1,9 @@
 {
   "name" : "Raptor Companion",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/5/45385c8e-fff9-46e7-97e8-f946306b5147.png?1562909010",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/5/45385c8e-fff9-46e7-97e8-f946306b5147.jpg?1562909010",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/5/45385c8e-fff9-46e7-97e8-f946306b5147.png?1562909010"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Disfigure",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/8/18069340-a698-4f75-82cc-cc94fcf82184.png?1563898883",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/1/8/18069340-a698-4f75-82cc-cc94fcf82184.jpg?1563898883",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/1/8/18069340-a698-4f75-82cc-cc94fcf82184.png?1563898883"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK" ],
   "types" : [ "INSTANT" ],

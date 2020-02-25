@@ -1,6 +1,9 @@
 {
   "name" : "Rile",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/0/80925750-6c90-42d1-9525-27f1f0313398.png?1562558975",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/0/80925750-6c90-42d1-9525-27f1f0313398.jpg?1562558975",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/0/80925750-6c90-42d1-9525-27f1f0313398.png?1562558975"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED" ],
   "types" : [ "SORCERY" ],

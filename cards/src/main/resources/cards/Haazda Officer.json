@@ -1,6 +1,9 @@
 {
   "name" : "Haazda Officer",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/7/f766418a-eb1d-4536-ae51-7f3e8969bb78.png?1563900279",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/7/f766418a-eb1d-4536-ae51-7f3e8969bb78.jpg?1563900279",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/7/f766418a-eb1d-4536-ae51-7f3e8969bb78.png?1563900279"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

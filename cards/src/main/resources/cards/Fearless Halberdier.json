@@ -1,6 +1,9 @@
 {
   "name" : "Fearless Halberdier",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/9/89f08297-f477-4330-a99e-3f0847c31364.png?1563900422",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/9/89f08297-f477-4330-a99e-3f0847c31364.jpg?1563900422",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/9/89f08297-f477-4330-a99e-3f0847c31364.png?1563900422"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

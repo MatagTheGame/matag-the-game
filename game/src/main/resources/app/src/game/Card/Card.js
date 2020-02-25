@@ -22,7 +22,7 @@ class Card extends Component {
     if (name === 'card') {
       return 'url("/img/card-back.jpg")'
     } else {
-      return `url("${this.props.cardInstance.card.imageUrl}")`
+      return `url("${this.props.cardInstance.card.imageUrls[this.props.resolution]}")`
     }
   }
 
@@ -107,7 +107,8 @@ const maximizeCardEvent = (cardImage) => {
 
 const mapStateToProps = state => {
   return {
-    targetIdsForLastSpell: get(state, 'stack[0].modifiers.targets', [])
+    targetIdsForLastSpell: get(state, 'stack[0].modifiers.targets', []),
+    resolution: get(state, 'player.resolution', 'lowResolution')
   }
 }
 
@@ -124,7 +125,8 @@ Card.propTypes = {
   area: PropTypes.string,
   style: PropTypes.object,
   cardInstance: PropTypes.object,
-  selected: PropTypes.bool
+  selected: PropTypes.bool,
+  resolution: PropTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Card)

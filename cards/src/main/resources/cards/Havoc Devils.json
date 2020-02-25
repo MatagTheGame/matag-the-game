@@ -1,6 +1,9 @@
 {
   "name" : "Havoc Devils",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/f/2f003678-0f17-4f1d-87d5-83613a82044b.png?1562301216",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/f/2f003678-0f17-4f1d-87d5-83613a82044b.jpg?1562301216",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/f/2f003678-0f17-4f1d-87d5-83613a82044b.png?1562301216"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

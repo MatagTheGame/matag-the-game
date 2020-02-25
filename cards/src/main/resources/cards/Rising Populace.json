@@ -1,6 +1,9 @@
 {
   "name" : "Rising Populace",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/d/edcacc28-aacf-4d40-b8cc-f8c028380340.png?1557576058",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/e/d/edcacc28-aacf-4d40-b8cc-f8c028380340.jpg?1557576058",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/e/d/edcacc28-aacf-4d40-b8cc-f8c028380340.png?1557576058"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

@@ -1,5 +1,6 @@
 package com.aa.mtg.cards;
 
+import com.aa.mtg.cards.properties.CardImageUrls;
 import com.aa.mtg.cards.properties.Color;
 import com.aa.mtg.cards.properties.Rarity;
 import com.aa.mtg.cards.properties.Type;
@@ -22,7 +23,8 @@ public class CardUtils {
   }
 
   public static Card hiddenCard() {
-    return new Card("card", "/img/card-back.jpg", new TreeSet<>(), emptyList(), new TreeSet<>(), new TreeSet<>(), Rarity.COMMON, "", 0, 0, emptyList());
+    CardImageUrls backImageUrls = new CardImageUrls("/img/card-back.jpg", "/img/card-back.jpg");
+    return new Card("card", backImageUrls, new TreeSet<>(), emptyList(), new TreeSet<>(), new TreeSet<>(), Rarity.COMMON, "", 0, 0, emptyList());
   }
 
   public static List<Color> colorsOfManaThatCanGenerate(Card card) {

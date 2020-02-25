@@ -1,6 +1,9 @@
 {
   "name" : "Crash Through",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/9/a9737a83-8c58-44b5-816e-d8df8a577921.png?1562303813",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/a/9/a9737a83-8c58-44b5-816e-d8df8a577921.jpg?1562303813",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/a/9/a9737a83-8c58-44b5-816e-d8df8a577921.png?1562303813"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED" ],
   "types" : [ "SORCERY" ],

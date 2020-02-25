@@ -1,6 +1,9 @@
 {
   "name" : "Selesnya Guildgate",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/d/6d5ee7a5-937a-4c2b-af8c-6e5734677c53.png?1572894191",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/d/6d5ee7a5-937a-4c2b-af8c-6e5734677c53.jpg?1572894191",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/d/6d5ee7a5-937a-4c2b-af8c-6e5734677c53.png?1572894191"
+  },
   "types" : [ "LAND" ],
   "subtypes" : [ "GATE" ],
   "rarity" : "COMMON",

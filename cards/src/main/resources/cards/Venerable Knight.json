@@ -1,6 +1,9 @@
 {
   "name" : "Venerable Knight",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/0/0001f1ef-b957-4a55-b47f-14839cdbab6f.png?1572489814",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/0/0001f1ef-b957-4a55-b47f-14839cdbab6f.jpg?1572489814",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/0/0001f1ef-b957-4a55-b47f-14839cdbab6f.png?1572489814"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE" ],
   "types" : [ "CREATURE" ],

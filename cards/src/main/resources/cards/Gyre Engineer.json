@@ -1,6 +1,9 @@
 {
   "name" : "Gyre Engineer",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/6/26dd6a1d-4dcb-4392-9856-c0e4140efbd7.png?1572893835",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/6/26dd6a1d-4dcb-4392-9856-c0e4140efbd7.jpg?1572893835",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/6/26dd6a1d-4dcb-4392-9856-c0e4140efbd7.png?1572893835"
+  },
   "colors" : [ "BLUE", "GREEN" ],
   "cost" : [ "GREEN", "BLUE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

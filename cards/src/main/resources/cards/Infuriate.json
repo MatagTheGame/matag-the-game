@@ -1,6 +1,9 @@
 {
   "name" : "Infuriate",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/5/85a74392-4056-428c-a807-b062957e838e.png?1581480233",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/5/85a74392-4056-428c-a807-b062957e838e.jpg?1581480233",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/5/85a74392-4056-428c-a807-b062957e838e.png?1581480233"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED" ],
   "types" : [ "INSTANT" ],

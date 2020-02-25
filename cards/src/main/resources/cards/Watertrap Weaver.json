@@ -1,6 +1,9 @@
 {
   "name" : "Watertrap Weaver",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/d/0d973568-d7b0-443f-a09d-44f6b02da5d4.png?1562550617",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/d/0d973568-d7b0-443f-a09d-44f6b02da5d4.jpg?1562550617",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/d/0d973568-d7b0-443f-a09d-44f6b02da5d4.png?1562550617"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

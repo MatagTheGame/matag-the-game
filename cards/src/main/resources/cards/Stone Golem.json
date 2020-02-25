@@ -1,6 +1,9 @@
 {
   "name" : "Stone Golem",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/b/1b4de70a-729b-4566-b6f3-c76f551405a5.png?1563899869",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/1/b/1b4de70a-729b-4566-b6f3-c76f551405a5.jpg?1563899869",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/1/b/1b4de70a-729b-4566-b6f3-c76f551405a5.png?1563899869"
+  },
   "cost" : [ "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "ARTIFACT", "CREATURE" ],
   "subtypes" : [ "GOLEM" ],

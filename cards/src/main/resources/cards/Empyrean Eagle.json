@@ -1,6 +1,9 @@
 {
   "name" : "Empyrean Eagle",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/c/ac555709-c7cc-4c64-8a6f-8fe2bc149fcd.png?1563899654",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/a/c/ac555709-c7cc-4c64-8a6f-8fe2bc149fcd.jpg?1563899654",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/a/c/ac555709-c7cc-4c64-8a6f-8fe2bc149fcd.png?1563899654"
+  },
   "colors" : [ "WHITE", "BLUE" ],
   "cost" : [ "WHITE", "BLUE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

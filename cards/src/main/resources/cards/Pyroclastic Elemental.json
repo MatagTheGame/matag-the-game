@@ -1,6 +1,9 @@
 {
   "name" : "Pyroclastic Elemental",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/d/2d57f8b5-fde9-498d-82bf-34bfb2370703.png?1563900232",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/d/2d57f8b5-fde9-498d-82bf-34bfb2370703.jpg?1563900232",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/d/2d57f8b5-fde9-498d-82bf-34bfb2370703.png?1563900232"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

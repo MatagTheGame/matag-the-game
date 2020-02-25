@@ -1,6 +1,9 @@
 {
   "name" : "Air Elemental",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/2/a27efec0-40c4-48bc-a21a-3af28a6529b5.png?1563898494",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/a/2/a27efec0-40c4-48bc-a21a-3af28a6529b5.jpg?1563898494",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/a/2/a27efec0-40c4-48bc-a21a-3af28a6529b5.png?1563898494"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "BLUE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

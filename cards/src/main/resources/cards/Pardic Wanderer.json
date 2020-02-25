@@ -1,6 +1,9 @@
 {
   "name" : "Pardic Wanderer",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/f/2fffe967-3a99-4f00-af46-f4e5567598df.png?1562733512",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/f/2fffe967-3a99-4f00-af46-f4e5567598df.jpg?1562733512",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/f/2fffe967-3a99-4f00-af46-f4e5567598df.png?1562733512"
+  },
   "cost" : [ "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "ARTIFACT", "CREATURE" ],
   "subtypes" : [ "GOLEM" ],

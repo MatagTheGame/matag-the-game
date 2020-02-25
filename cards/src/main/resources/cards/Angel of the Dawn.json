@@ -1,6 +1,9 @@
 {
   "name" : "Angel of the Dawn",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/4/f4bae0e4-1143-4dc4-afb1-e6b4201ff101.png?1562305274",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/4/f4bae0e4-1143-4dc4-afb1-e6b4201ff101.jpg?1562305274",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/4/f4bae0e4-1143-4dc4-afb1-e6b4201ff101.png?1562305274"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

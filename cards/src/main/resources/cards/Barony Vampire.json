@@ -1,6 +1,9 @@
 {
   "name" : "Barony Vampire",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/0/b0130d04-05f2-44f5-bd6c-8b11f798b69e.png?1563898811",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/b/0/b0130d04-05f2-44f5-bd6c-8b11f798b69e.jpg?1563898811",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/b/0/b0130d04-05f2-44f5-bd6c-8b11f798b69e.png?1563898811"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

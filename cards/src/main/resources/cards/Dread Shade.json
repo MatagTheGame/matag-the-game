@@ -1,6 +1,9 @@
 {
   "name" : "Dread Shade",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/6/46b8b1d7-9d2b-4943-bb3b-238a6333ce93.png?1562734973",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/6/46b8b1d7-9d2b-4943-bb3b-238a6333ce93.jpg?1562734973",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/6/46b8b1d7-9d2b-4943-bb3b-238a6333ce93.png?1562734973"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "BLACK", "BLACK" ],
   "types" : [ "CREATURE" ],

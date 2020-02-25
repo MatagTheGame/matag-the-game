@@ -1,6 +1,9 @@
 {
   "name" : "Aegis of the Heavens",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/5/0503c55d-74bb-4165-9273-127c01bb2214.png?1562300260",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/5/0503c55d-74bb-4165-9273-127c01bb2214.jpg?1562300260",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/5/0503c55d-74bb-4165-9273-127c01bb2214.png?1562300260"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS" ],
   "types" : [ "INSTANT" ],

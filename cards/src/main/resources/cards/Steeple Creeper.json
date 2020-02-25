@@ -1,6 +1,9 @@
 {
   "name" : "Steeple Creeper",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/4/f4afafb4-3fc0-4ccf-a942-e4bd2f146d89.png?1572893551",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/4/f4afafb4-3fc0-4ccf-a942-e4bd2f146d89.jpg?1572893551",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/4/f4afafb4-3fc0-4ccf-a942-e4bd2f146d89.png?1572893551"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

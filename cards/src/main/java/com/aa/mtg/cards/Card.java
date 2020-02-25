@@ -3,6 +3,7 @@ package com.aa.mtg.cards;
 import com.aa.mtg.cards.ability.Ability;
 import com.aa.mtg.cards.properties.*;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -17,9 +18,10 @@ import java.util.TreeSet;
 @EqualsAndHashCode
 @ToString
 @Builder(toBuilder = true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Card {
   private final String name;
-  private final String imageUrl;
+  private final CardImageUrls imageUrls;
   private final TreeSet<Color> colors;
   private final List<Cost> cost;
   private final TreeSet<Type> types;
@@ -31,14 +33,14 @@ public class Card {
   private final List<Ability> abilities;
 
   @JsonCreator
-  public Card(@JsonProperty("name") String name, @JsonProperty("imageUrl") String imageUrl,
+  public Card(@JsonProperty("name") String name, @JsonProperty("imageUrls") CardImageUrls imageUrls,
               @JsonProperty("colors") TreeSet<Color> colors, @JsonProperty("cost") List<Cost> cost,
               @JsonProperty("types") TreeSet<Type> types, @JsonProperty("subtypes") TreeSet<Subtype> subtypes,
               @JsonProperty("rarity") Rarity rarity, @JsonProperty("ruleText") String ruleText,
               @JsonProperty("power") int power, @JsonProperty("toughness") int toughness,
               @JsonProperty("abilities") List<Ability> abilities) {
     this.name = name;
-    this.imageUrl = imageUrl;
+    this.imageUrls = imageUrls;
     this.colors = colors != null ? colors : new TreeSet<>();
     this.cost = cost != null ? cost : new ArrayList<>();
     this.types = types != null ? types : new TreeSet<>();

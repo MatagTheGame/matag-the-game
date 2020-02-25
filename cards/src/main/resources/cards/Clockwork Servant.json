@@ -1,6 +1,9 @@
 {
   "name" : "Clockwork Servant",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/3/c3af5942-d171-401a-9444-3b59c579e4db.png?1572490948",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/3/c3af5942-d171-401a-9444-3b59c579e4db.jpg?1572490948",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/3/c3af5942-d171-401a-9444-3b59c579e4db.png?1572490948"
+  },
   "cost" : [ "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "ARTIFACT", "CREATURE" ],
   "subtypes" : [ "GNOME" ],

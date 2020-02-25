@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.platform.commons.util.StringUtils;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
@@ -92,13 +91,14 @@ public class CardsTest {
     ObjectMapper objectMapper = createCardsObjectMapper();
 
     List<Card> cardsWithoutImage = cards.getAll().stream()
-      .filter(card -> StringUtils.isBlank(card.getImageUrl()))
+      .filter(card -> card.getImageUrls() == null)
       .collect(toList());
 
     for (int i = 0; i < cardsWithoutImage.size(); i++) {
       Card card = cardsWithoutImage.get(i);
-      String imageUrl = new CardImageLinker(card).getImageUrl();
-      Card cardWithImage = card.toBuilder().imageUrl(imageUrl).build();
+      CardImageLinker cardImageLinker = new CardImageLinker(card);
+      CardImageUrls imageUrls = new CardImageUrls(cardImageLinker.getLowResolution(), cardImageLinker.getHighResolution());
+      Card cardWithImage = card.toBuilder().imageUrls(imageUrls).build();
       String cardJson = objectMapper.writeValueAsString(cardWithImage);
       Files.write(Paths.get(getResourcesPath() + "/cards/" + card.getName() + ".json"), cardJson.getBytes());
       System.out.println("Downloaded " + (i + 1) + " of " + cardsWithoutImage.size());
@@ -107,7 +107,7 @@ public class CardsTest {
 
   private void validateCard(Card card) {
     String name = card.getName();
-    if (StringUtils.isBlank(card.getImageUrl())) {
+    if (card.getImageUrls() == null) {
       throw new RuntimeException("Card '" + name + "' does not have an imageUrl. Run cardImageLinker");
     }
 

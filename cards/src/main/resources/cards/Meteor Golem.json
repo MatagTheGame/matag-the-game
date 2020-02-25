@@ -1,6 +1,9 @@
 {
   "name" : "Meteor Golem",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/6/f6a705fc-c779-4813-80fb-eecf71caa23f.png?1568004937",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/6/f6a705fc-c779-4813-80fb-eecf71caa23f.jpg?1568004937",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/6/f6a705fc-c779-4813-80fb-eecf71caa23f.png?1568004937"
+  },
   "cost" : [ "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "ARTIFACT", "CREATURE" ],
   "subtypes" : [ "GOLEM" ],

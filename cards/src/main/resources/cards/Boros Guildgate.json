@@ -1,6 +1,9 @@
 {
   "name" : "Boros Guildgate",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/8/28d6c68f-5e41-4b10-b4fa-8f7aee6b587b.png?1570759821",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/8/28d6c68f-5e41-4b10-b4fa-8f7aee6b587b.jpg?1570759821",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/8/28d6c68f-5e41-4b10-b4fa-8f7aee6b587b.png?1570759821"
+  },
   "types" : [ "LAND" ],
   "subtypes" : [ "GATE" ],
   "rarity" : "COMMON",

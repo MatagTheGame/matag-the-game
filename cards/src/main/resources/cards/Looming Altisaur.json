@@ -1,6 +1,9 @@
 {
   "name" : "Looming Altisaur",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/f/cfcff1c6-0db6-4ff6-b4af-d7048b426368.png?1562564237",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/f/cfcff1c6-0db6-4ff6-b4af-d7048b426368.jpg?1562564237",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/f/cfcff1c6-0db6-4ff6-b4af-d7048b426368.png?1562564237"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

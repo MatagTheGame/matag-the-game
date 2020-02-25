@@ -1,6 +1,9 @@
 {
   "name" : "Overcome",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/1/718352b9-1a68-44a1-947b-34f525f21223.png?1563899495",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/1/718352b9-1a68-44a1-947b-34f525f21223.jpg?1563899495",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/1/718352b9-1a68-44a1-947b-34f525f21223.png?1563899495"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

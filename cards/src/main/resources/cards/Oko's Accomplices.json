@@ -1,6 +1,9 @@
 {
   "name" : "Oko's Accomplices",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/1/71c52b50-35aa-4858-8c8e-c81dcb29a7fc.png?1572482736",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/1/71c52b50-35aa-4858-8c8e-c81dcb29a7fc.jpg?1572482736",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/1/71c52b50-35aa-4858-8c8e-c81dcb29a7fc.png?1572482736"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

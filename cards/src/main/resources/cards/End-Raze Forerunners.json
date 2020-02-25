@@ -1,6 +1,9 @@
 {
   "name" : "End-Raze Forerunners",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/5/a50d79fe-6d37-42f3-b7b0-0c3018282fa2.png?1572893415",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/a/5/a50d79fe-6d37-42f3-b7b0-0c3018282fa2.jpg?1572893415",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/a/5/a50d79fe-6d37-42f3-b7b0-0c3018282fa2.png?1572893415"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

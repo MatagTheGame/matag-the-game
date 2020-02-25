@@ -1,6 +1,9 @@
 {
   "name" : "Knight of the Keep",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/d/0d49653d-cd4e-40a7-99de-fc531b5d8594.png?1572489715",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/d/0d49653d-cd4e-40a7-99de-fc531b5d8594.jpg?1572489715",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/d/0d49653d-cd4e-40a7-99de-fc531b5d8594.png?1572489715"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

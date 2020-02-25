@@ -1,6 +1,9 @@
 {
   "name" : "Mystic Archaeologist",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/b/1b19cad0-5754-4625-8303-c8310bc7cbd5.png?1562300755",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/1/b/1b19cad0-5754-4625-8303-c8310bc7cbd5.jpg?1562300755",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/1/b/1b19cad0-5754-4625-8303-c8310bc7cbd5.png?1562300755"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

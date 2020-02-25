@@ -1,6 +1,9 @@
 {
   "name" : "Defiant Strike",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/d/c/dc183a40-7e15-40b1-9faa-b243401b3d10.png?1557575911",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/d/c/dc183a40-7e15-40b1-9faa-b243401b3d10.jpg?1557575911",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/d/c/dc183a40-7e15-40b1-9faa-b243401b3d10.png?1557575911"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE" ],
   "types" : [ "INSTANT" ],

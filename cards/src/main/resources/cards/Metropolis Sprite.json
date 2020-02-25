@@ -1,6 +1,9 @@
 {
   "name" : "Metropolis Sprite",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/c/fce74849-2e08-4d08-b387-4693f1b9f653.png?1563898656",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/c/fce74849-2e08-4d08-b387-4693f1b9f653.jpg?1563898656",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/c/fce74849-2e08-4d08-b387-4693f1b9f653.png?1563898656"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

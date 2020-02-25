@@ -1,6 +1,9 @@
 {
   "name" : "Lightning Stormkin",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/3/43c6db4e-cc37-4473-b0f5-48d8a0b82f33.png?1563899685",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/3/43c6db4e-cc37-4473-b0f5-48d8a0b82f33.jpg?1563899685",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/3/43c6db4e-cc37-4473-b0f5-48d8a0b82f33.png?1563899685"
+  },
   "colors" : [ "BLUE", "RED" ],
   "cost" : [ "BLUE", "RED" ],
   "types" : [ "CREATURE" ],

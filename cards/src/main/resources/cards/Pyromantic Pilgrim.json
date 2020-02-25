@@ -1,6 +1,9 @@
 {
   "name" : "Pyromantic Pilgrim",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/6/f670d02b-9bfc-4671-97ed-59bfbe633d82.png?1562745757",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/6/f670d02b-9bfc-4671-97ed-59bfbe633d82.jpg?1562745757",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/6/f670d02b-9bfc-4671-97ed-59bfbe633d82.png?1562745757"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

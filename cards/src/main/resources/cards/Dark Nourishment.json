@@ -1,6 +1,9 @@
 {
   "name" : "Dark Nourishment",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/5/053c4cf0-992b-4f76-b8d1-cd67f894172c.png?1562550007",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/5/053c4cf0-992b-4f76-b8d1-cd67f894172c.jpg?1562550007",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/5/053c4cf0-992b-4f76-b8d1-cd67f894172c.png?1562550007"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

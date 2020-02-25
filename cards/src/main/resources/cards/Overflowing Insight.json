@@ -1,6 +1,9 @@
 {
   "name" : "Overflowing Insight",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/6/f6b3dd8f-902e-45b8-a422-370705621294.png?1562566847",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/6/f6b3dd8f-902e-45b8-a422-370705621294.jpg?1562566847",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/6/f6b3dd8f-902e-45b8-a422-370705621294.png?1562566847"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "BLUE", "BLUE", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

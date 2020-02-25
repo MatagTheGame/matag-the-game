@@ -1,6 +1,9 @@
 {
   "name" : "Savannah Sage",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/b/5b5fa4bb-e061-456f-808e-8d98b2c8abf5.png?1563900151",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/5/b/5b5fa4bb-e061-456f-808e-8d98b2c8abf5.jpg?1563900151",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/5/b/5b5fa4bb-e061-456f-808e-8d98b2c8abf5.png?1563900151"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

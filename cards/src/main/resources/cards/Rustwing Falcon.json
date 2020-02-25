@@ -1,6 +1,9 @@
 {
   "name" : "Rustwing Falcon",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/6/c6691e62-8887-41e8-8e74-76ee2353d45e.png?1562304316",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/6/c6691e62-8887-41e8-8e74-76ee2353d45e.jpg?1562304316",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/6/c6691e62-8887-41e8-8e74-76ee2353d45e.png?1562304316"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE" ],
   "types" : [ "CREATURE" ],

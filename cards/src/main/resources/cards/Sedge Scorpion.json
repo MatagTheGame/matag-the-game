@@ -1,6 +1,9 @@
 {
   "name" : "Sedge Scorpion",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/8/9864f811-db2e-4d6d-ad59-a491a790bdd4.png?1563899539",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/8/9864f811-db2e-4d6d-ad59-a491a790bdd4.jpg?1563899539",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/8/9864f811-db2e-4d6d-ad59-a491a790bdd4.png?1563899539"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN" ],
   "types" : [ "CREATURE" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Druid of the Cowl",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/6/76ceff1d-9e83-41cc-b54b-8bf90d985da9.png?1562302734",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/6/76ceff1d-9e83-41cc-b54b-8bf90d985da9.jpg?1562302734",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/6/76ceff1d-9e83-41cc-b54b-8bf90d985da9.png?1562302734"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS" ],
   "types" : [ "CREATURE" ],

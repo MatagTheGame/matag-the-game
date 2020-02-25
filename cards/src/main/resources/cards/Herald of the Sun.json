@@ -1,6 +1,9 @@
 {
   "name" : "Herald of the Sun",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/c/9c62f724-7fb4-4498-b5c1-cf65d86d8e95.png?1563898345",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/c/9c62f724-7fb4-4498-b5c1-cf65d86d8e95.jpg?1563898345",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/c/9c62f724-7fb4-4498-b5c1-cf65d86d8e95.png?1563898345"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "WHITE", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

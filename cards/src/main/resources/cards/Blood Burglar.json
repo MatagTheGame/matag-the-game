@@ -1,6 +1,9 @@
 {
   "name" : "Blood Burglar",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/1/01efd5af-ed6d-4132-8f33-37f6a9fa55d0.png?1563898834",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/1/01efd5af-ed6d-4132-8f33-37f6a9fa55d0.jpg?1563898834",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/1/01efd5af-ed6d-4132-8f33-37f6a9fa55d0.png?1563898834"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS" ],
   "types" : [ "CREATURE" ],

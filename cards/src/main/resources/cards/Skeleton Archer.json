@@ -1,6 +1,9 @@
 {
   "name" : "Skeleton Archer",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/d/3db03880-0138-44f8-8147-f2c07878a7d8.png?1563900390",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/d/3db03880-0138-44f8-8147-f2c07878a7d8.jpg?1563900390",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/d/3db03880-0138-44f8-8147-f2c07878a7d8.png?1563900390"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

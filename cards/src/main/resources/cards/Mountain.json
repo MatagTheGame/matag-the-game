@@ -1,6 +1,9 @@
 {
   "name" : "Mountain",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/d/c/dc3f4154-9347-4ceb-8744-9f1ace90d33f.png?1581482260",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/d/c/dc3f4154-9347-4ceb-8744-9f1ace90d33f.jpg?1581482260",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/d/c/dc3f4154-9347-4ceb-8744-9f1ace90d33f.png?1581482260"
+  },
   "types" : [ "BASIC", "LAND" ],
   "rarity" : "COMMON",
   "abilities" : [ {

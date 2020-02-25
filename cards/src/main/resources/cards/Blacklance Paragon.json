@@ -1,6 +1,9 @@
 {
   "name" : "Blacklance Paragon",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/f/e/fe0a63bb-dd94-429f-aa9b-21f3d1c53ae5.png?1572490086",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/f/e/fe0a63bb-dd94-429f-aa9b-21f3d1c53ae5.jpg?1572490086",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/f/e/fe0a63bb-dd94-429f-aa9b-21f3d1c53ae5.png?1572490086"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS" ],
   "types" : [ "CREATURE" ],

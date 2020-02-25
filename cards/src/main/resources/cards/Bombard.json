@@ -1,6 +1,9 @@
 {
   "name" : "Bombard",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/a/0a605abc-78e8-47ba-9022-0fad9006fd05.png?1555040368",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/a/0a605abc-78e8-47ba-9022-0fad9006fd05.jpg?1555040368",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/a/0a605abc-78e8-47ba-9022-0fad9006fd05.png?1555040368"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

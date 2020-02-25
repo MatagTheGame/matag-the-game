@@ -1,6 +1,9 @@
 {
   "name" : "Swab Goblin",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/4/0403b8e5-29c5-4a4a-b9e7-1e79a7452f14.png?1555041207",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/4/0403b8e5-29c5-4a4a-b9e7-1e79a7452f14.jpg?1555041207",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/4/0403b8e5-29c5-4a4a-b9e7-1e79a7452f14.png?1555041207"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS" ],
   "types" : [ "CREATURE" ],

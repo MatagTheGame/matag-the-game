@@ -1,6 +1,9 @@
 {
   "name" : "Murder",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/a/6a2b22bc-e81b-4f27-a52b-9f3edad25439.png?1563898971",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/a/6a2b22bc-e81b-4f27-a52b-9f3edad25439.jpg?1563898971",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/a/6a2b22bc-e81b-4f27-a52b-9f3edad25439.png?1563898971"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

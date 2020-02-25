@@ -1,6 +1,9 @@
 {
   "name" : "Aggressive Mammoth",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/e/4e68b3bd-996e-4383-b134-f529bcb768de.png?1563900453",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/e/4e68b3bd-996e-4383-b134-f529bcb768de.jpg?1563900453",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/e/4e68b3bd-996e-4383-b134-f529bcb768de.png?1563900453"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

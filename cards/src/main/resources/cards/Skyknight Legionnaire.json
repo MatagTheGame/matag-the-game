@@ -1,6 +1,9 @@
 {
   "name" : "Skyknight Legionnaire",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/c/3c27f2ce-702a-4ec2-a470-982171a9ec73.png?1572893806",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/c/3c27f2ce-702a-4ec2-a470-982171a9ec73.jpg?1572893806",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/c/3c27f2ce-702a-4ec2-a470-982171a9ec73.png?1572893806"
+  },
   "colors" : [ "WHITE", "RED" ],
   "cost" : [ "RED", "WHITE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

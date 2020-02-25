@@ -1,6 +1,9 @@
 {
   "name" : "Feral Maaka",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/c/3c969aa0-b0e5-42cd-abba-0a3c7266142c.png?1572893230",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/c/3c969aa0-b0e5-42cd-abba-0a3c7266142c.jpg?1572893230",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/c/3c969aa0-b0e5-42cd-abba-0a3c7266142c.png?1572893230"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS" ],
   "types" : [ "CREATURE" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Prodigious Growth",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/a/ba2b0966-4e9e-44dc-9145-3c1e644578bc.png?1562303878",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/b/a/ba2b0966-4e9e-44dc-9145-3c1e644578bc.jpg?1562303878",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/b/a/ba2b0966-4e9e-44dc-9145-3c1e644578bc.png?1562303878"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "ENCHANTMENT" ],

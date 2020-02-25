@@ -1,6 +1,9 @@
 {
   "name" : "Invoke the Divine",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/c/7c1d36b5-37fb-4e52-ad85-c3a09a990ea0.png?1562302885",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/c/7c1d36b5-37fb-4e52-ad85-c3a09a990ea0.jpg?1562302885",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/c/7c1d36b5-37fb-4e52-ad85-c3a09a990ea0.png?1562302885"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

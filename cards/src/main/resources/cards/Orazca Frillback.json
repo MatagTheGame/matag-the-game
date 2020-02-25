@@ -1,6 +1,9 @@
 {
   "name" : "Orazca Frillback",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/0/00c81160-192c-4077-8ed1-3643919a2025.png?1555040703",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/0/00c81160-192c-4077-8ed1-3643919a2025.jpg?1555040703",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/0/00c81160-192c-4077-8ed1-3643919a2025.png?1555040703"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

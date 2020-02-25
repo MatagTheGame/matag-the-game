@@ -1,6 +1,9 @@
 {
   "name" : "Veiled Shade",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/5/35cb18ae-0229-40a1-8838-ffb678ab2ed9.png?1572893072",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/5/35cb18ae-0229-40a1-8838-ffb678ab2ed9.jpg?1572893072",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/5/35cb18ae-0229-40a1-8838-ffb678ab2ed9.png?1572893072"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

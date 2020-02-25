@@ -1,6 +1,9 @@
 {
   "name" : "Vampire of the Dire Moon",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/3/b3c185b9-5d97-4a5a-af0b-8b9c44dcd235.png?1563899051",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/b/3/b3c185b9-5d97-4a5a-af0b-8b9c44dcd235.jpg?1563899051",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/b/3/b3c185b9-5d97-4a5a-af0b-8b9c44dcd235.png?1563899051"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK" ],
   "types" : [ "CREATURE" ],

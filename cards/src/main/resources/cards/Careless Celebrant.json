@@ -1,6 +1,9 @@
 {
   "name" : "Careless Celebrant",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/a/bac6bdd4-b25b-41f6-835d-7d1570cdb951.png?1581480091",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/b/a/bac6bdd4-b25b-41f6-835d-7d1570cdb951.jpg?1581480091",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/b/a/bac6bdd4-b25b-41f6-835d-7d1570cdb951.png?1581480091"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS" ],
   "types" : [ "CREATURE" ],

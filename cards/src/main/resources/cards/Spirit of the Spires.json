@@ -1,6 +1,9 @@
 {
   "name" : "Spirit of the Spires",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/d/b/dbd11910-58e2-4233-a18c-e97413126597.png?1572892641",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/d/b/dbd11910-58e2-4233-a18c-e97413126597.jpg?1572892641",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/d/b/dbd11910-58e2-4233-a18c-e97413126597.png?1572892641"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

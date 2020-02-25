@@ -1,6 +1,9 @@
 {
   "name" : "Consign to the Pit",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/9/09991fad-4282-4a17-bfb1-03eaa13502df.png?1572892993",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/9/09991fad-4282-4a17-bfb1-03eaa13502df.jpg?1572892993",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/9/09991fad-4282-4a17-bfb1-03eaa13502df.png?1572892993"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "SORCERY" ],

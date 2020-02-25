@@ -1,6 +1,9 @@
 {
   "name" : "Frost Lynx",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/4/64e1a5af-442f-4fcf-be99-6f62176be36c.png?1563898625",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/4/64e1a5af-442f-4fcf-be99-6f62176be36c.jpg?1563898625",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/4/64e1a5af-442f-4fcf-be99-6f62176be36c.png?1563898625"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

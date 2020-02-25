@@ -1,6 +1,9 @@
 {
   "name" : "Bright Reprisal",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/3/3340ffb9-9513-4551-ad64-821600596b2e.png?1562553092",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/3/3340ffb9-9513-4551-ad64-821600596b2e.jpg?1562553092",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/3/3340ffb9-9513-4551-ad64-821600596b2e.png?1562553092"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

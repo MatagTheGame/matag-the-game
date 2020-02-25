@@ -1,6 +1,9 @@
 {
   "name" : "SwashBuckling",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/1/01ed59b1-968b-4297-9e98-42d940f9478c.png?1562549791",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/1/01ed59b1-968b-4297-9e98-42d940f9478c.jpg?1562549791",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/1/01ed59b1-968b-4297-9e98-42d940f9478c.png?1562549791"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS" ],
   "types" : [ "ENCHANTMENT" ],

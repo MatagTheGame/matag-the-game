@@ -1,6 +1,9 @@
 {
   "name" : "Windstorm Drake",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/2/120aa3b3-d358-4df3-be39-9b7ce926673a.png?1572892926",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/1/2/120aa3b3-d358-4df3-be39-9b7ce926673a.jpg?1572892926",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/1/2/120aa3b3-d358-4df3-be39-9b7ce926673a.png?1572892926"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Sparring Construct",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/b/a/badc7db8-386e-4fb6-aefa-591e99747eb2.png?1562741935",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/b/a/badc7db8-386e-4fb6-aefa-591e99747eb2.jpg?1562741935",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/b/a/badc7db8-386e-4fb6-aefa-591e99747eb2.png?1562741935"
+  },
   "cost" : [ "COLORLESS" ],
   "types" : [ "ARTIFACT", "CREATURE" ],
   "subtypes" : [ "CONSTRUCT" ],

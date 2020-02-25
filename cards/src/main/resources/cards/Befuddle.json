@@ -1,6 +1,9 @@
 {
   "name" : "Befuddle",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/4/1414939c-7f15-4eb3-abeb-6e75c52d2b52.png?1563898515",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/1/4/1414939c-7f15-4eb3-abeb-6e75c52d2b52.jpg?1563898515",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/1/4/1414939c-7f15-4eb3-abeb-6e75c52d2b52.png?1563898515"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Healer of the Glade",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/b/cbe262f2-e35b-4c85-938d-3e9e9c764c1b.png?1563899427",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/b/cbe262f2-e35b-4c85-938d-3e9e9c764c1b.jpg?1563899427",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/b/cbe262f2-e35b-4c85-938d-3e9e9c764c1b.png?1563899427"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN" ],
   "types" : [ "CREATURE" ],

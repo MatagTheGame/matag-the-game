@@ -1,6 +1,9 @@
 {
   "name" : "Twilight Panther",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/f/5fb149cc-74ca-4bc3-8efc-10ce872b59fb.png?1572892677",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/5/f/5fb149cc-74ca-4bc3-8efc-10ce872b59fb.jpg?1572892677",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/5/f/5fb149cc-74ca-4bc3-8efc-10ce872b59fb.png?1572892677"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE" ],
   "types" : [ "CREATURE" ],

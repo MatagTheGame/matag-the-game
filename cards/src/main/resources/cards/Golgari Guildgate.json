@@ -1,6 +1,9 @@
 {
   "name" : "Golgari Guildgate",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/b/9baed2e6-687f-4ab4-b378-4282f3a43c9c.png?1568005149",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/b/9baed2e6-687f-4ab4-b378-4282f3a43c9c.jpg?1568005149",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/b/9baed2e6-687f-4ab4-b378-4282f3a43c9c.png?1568005149"
+  },
   "types" : [ "LAND" ],
   "subtypes" : [ "GATE" ],
   "rarity" : "COMMON",

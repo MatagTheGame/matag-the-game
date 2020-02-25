@@ -1,6 +1,9 @@
 {
   "name" : "Electrify",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/0/60bee89d-d916-4095-830f-6270f8c4f0d8.png?1562302617",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/0/60bee89d-d916-4095-830f-6270f8c4f0d8.jpg?1562302617",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/0/60bee89d-d916-4095-830f-6270f8c4f0d8.png?1562302617"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

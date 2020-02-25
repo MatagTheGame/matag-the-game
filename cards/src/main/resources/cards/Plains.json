@@ -1,6 +1,9 @@
 {
   "name" : "Plains",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/0/40aca5ca-a37b-4919-aef6-2510b4779161.png?1581481482",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/0/40aca5ca-a37b-4919-aef6-2510b4779161.jpg?1581481482",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/0/40aca5ca-a37b-4919-aef6-2510b4779161.png?1581481482"
+  },
   "types" : [ "BASIC", "LAND" ],
   "rarity" : "COMMON",
   "abilities" : [ {

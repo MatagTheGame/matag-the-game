@@ -1,6 +1,9 @@
 {
   "name" : "Civic Stalwart",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/a/aa981489-4301-43f6-b1d7-2aa42e00cf75.png?1572892522",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/a/a/aa981489-4301-43f6-b1d7-2aa42e00cf75.jpg?1572892522",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/a/a/aa981489-4301-43f6-b1d7-2aa42e00cf75.png?1572892522"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

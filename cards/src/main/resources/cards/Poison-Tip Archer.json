@@ -1,6 +1,9 @@
 {
   "name" : "Poison-Tip Archer",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/e/5e058ff8-043c-498b-8310-0ca45466ac27.png?1562302266",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/5/e/5e058ff8-043c-498b-8310-0ca45466ac27.jpg?1562302266",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/5/e/5e058ff8-043c-498b-8310-0ca45466ac27.png?1562302266"
+  },
   "colors" : [ "BLACK", "GREEN" ],
   "cost" : [ "BLACK", "GREEN", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

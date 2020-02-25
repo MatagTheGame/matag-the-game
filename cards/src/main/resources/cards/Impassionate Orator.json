@@ -1,6 +1,9 @@
 {
   "name" : "Impassionate Orator",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/9/696d6c4b-69d7-498b-87d4-0a03b16cc971.png?1563900287",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/9/696d6c4b-69d7-498b-87d4-0a03b16cc971.jpg?1563900287",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/9/696d6c4b-69d7-498b-87d4-0a03b16cc971.png?1563900287"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

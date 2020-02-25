@@ -1,6 +1,9 @@
 {
   "name" : "Goblin Assault Team",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/8/8/880047fd-d258-40fb-bcd5-37cb26678dfe.png?1557576703",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/8/880047fd-d258-40fb-bcd5-37cb26678dfe.jpg?1557576703",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/8/880047fd-d258-40fb-bcd5-37cb26678dfe.png?1557576703"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

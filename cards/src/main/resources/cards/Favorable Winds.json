@@ -1,6 +1,9 @@
 {
   "name" : "Favorable Winds",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/a/d/adfe8174-4e75-4e8f-b59c-f80a98492b5f.png?1562562093",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/a/d/adfe8174-4e75-4e8f-b59c-f80a98492b5f.jpg?1562562093",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/a/d/adfe8174-4e75-4e8f-b59c-f80a98492b5f.png?1562562093"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS" ],
   "types" : [ "ENCHANTMENT" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Vantress Paladin",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/5/2/52dd633f-9a07-47df-adb1-36013fc2f43a.png?1576313470",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/5/2/52dd633f-9a07-47df-adb1-36013fc2f43a.jpg?1576313470",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/5/2/52dd633f-9a07-47df-adb1-36013fc2f43a.png?1576313470"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

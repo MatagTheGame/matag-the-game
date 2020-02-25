@@ -1,6 +1,9 @@
 {
   "name" : "Gravel-Hide Goblin",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/9/4942068c-ffde-4a6b-849e-8acf05e1d2e1.png?1572893269",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/9/4942068c-ffde-4a6b-849e-8acf05e1d2e1.jpg?1572893269",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/9/4942068c-ffde-4a6b-849e-8acf05e1d2e1.png?1572893269"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS" ],
   "types" : [ "CREATURE" ],

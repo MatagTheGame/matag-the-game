@@ -1,6 +1,9 @@
 {
   "name" : "Vampire Champion",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/d/4/d47f91ff-c916-4938-8e01-2c684004dd9a.png?1555041165",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/d/4/d47f91ff-c916-4938-8e01-2c684004dd9a.jpg?1555041165",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/d/4/d47f91ff-c916-4938-8e01-2c684004dd9a.png?1555041165"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

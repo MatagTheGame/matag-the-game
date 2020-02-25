@@ -1,6 +1,9 @@
 {
   "name" : "Rhox Oracle",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/8/281f04d5-af45-4494-ac11-a605d3a06643.png?1562300827",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/8/281f04d5-af45-4494-ac11-a605d3a06643.jpg?1562300827",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/8/281f04d5-af45-4494-ac11-a605d3a06643.png?1562300827"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

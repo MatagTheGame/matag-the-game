@@ -1,6 +1,9 @@
 {
   "name" : "Make a Stand",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/a/4a0857fa-f2cc-4c01-9fe5-8f74d08d1b29.png?1562301795",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/a/4a0857fa-f2cc-4c01-9fe5-8f74d08d1b29.jpg?1562301795",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/a/4a0857fa-f2cc-4c01-9fe5-8f74d08d1b29.png?1562301795"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

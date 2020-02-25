@@ -1,6 +1,9 @@
 {
   "name" : "Island",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/2/92daaa39-cd2f-4c03-8f41-92d99d0a3366.png?1581481496",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/2/92daaa39-cd2f-4c03-8f41-92d99d0a3366.jpg?1581481496",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/2/92daaa39-cd2f-4c03-8f41-92d99d0a3366.png?1581481496"
+  },
   "types" : [ "BASIC", "LAND" ],
   "rarity" : "COMMON",
   "abilities" : [ {

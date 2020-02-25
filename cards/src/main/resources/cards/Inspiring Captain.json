@@ -1,6 +1,9 @@
 {
   "name" : "Inspiring Captain",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/8/98d14836-0ab4-4df3-a996-76b0dda23ff6.png?1563898359",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/8/98d14836-0ab4-4df3-a996-76b0dda23ff6.jpg?1563898359",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/8/98d14836-0ab4-4df3-a996-76b0dda23ff6.png?1563898359"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

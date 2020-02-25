@@ -1,6 +1,9 @@
 {
   "name" : "One With the Wind",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/c/2c00f8bf-0088-44ad-b40b-26a2951a2428.png?1562552635",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/c/2c00f8bf-0088-44ad-b40b-26a2951a2428.jpg?1562552635",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/c/2c00f8bf-0088-44ad-b40b-26a2951a2428.png?1562552635"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS" ],
   "types" : [ "ENCHANTMENT" ],

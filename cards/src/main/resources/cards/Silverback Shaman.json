@@ -1,6 +1,9 @@
 {
   "name" : "Silverback Shaman",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/4/e/4e97e62e-4a77-4512-b5fa-400e01517e23.png?1563899559",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/4/e/4e97e62e-4a77-4512-b5fa-400e01517e23.jpg?1563899559",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/4/e/4e97e62e-4a77-4512-b5fa-400e01517e23.png?1563899559"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

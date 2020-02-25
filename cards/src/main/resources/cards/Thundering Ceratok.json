@@ -1,6 +1,9 @@
 {
   "name" : "Thundering Ceratok",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/9/8/9888d9a4-ad72-43f6-8031-1031877171a9.png?1557577026",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/8/9888d9a4-ad72-43f6-8031-1031877171a9.jpg?1557577026",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/8/9888d9a4-ad72-43f6-8031-1031877171a9.png?1557577026"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

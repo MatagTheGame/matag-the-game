@@ -1,6 +1,9 @@
 {
   "name" : "Aggressive Urge",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/e/3/e38252c3-fcc1-4bb7-8dd7-ba0e54ade6b7.png?1555040580",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/e/3/e38252c3-fcc1-4bb7-8dd7-ba0e54ade6b7.jpg?1555040580",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/e/3/e38252c3-fcc1-4bb7-8dd7-ba0e54ade6b7.png?1555040580"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS" ],
   "types" : [ "INSTANT" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Crash the Ramparts",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/2/0/20b52d17-7efb-4c6e-9e6a-4763d1ef1daa.png?1562551952",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/0/20b52d17-7efb-4c6e-9e6a-4763d1ef1daa.jpg?1562551952",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/0/20b52d17-7efb-4c6e-9e6a-4763d1ef1daa.png?1562551952"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
   "types" : [ "INSTANT" ],

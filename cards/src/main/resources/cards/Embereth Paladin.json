@@ -1,6 +1,9 @@
 {
   "name" : "Embereth Paladin",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/b/6bcfe06b-3bb5-434e-acf4-4bfa8a94141d.png?1572490339",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/b/6bcfe06b-3bb5-434e-acf4-4bfa8a94141d.jpg?1572490339",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/b/6bcfe06b-3bb5-434e-acf4-4bfa8a94141d.png?1572490339"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

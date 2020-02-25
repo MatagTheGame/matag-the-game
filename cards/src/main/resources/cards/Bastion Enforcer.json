@@ -1,6 +1,9 @@
 {
   "name" : "Bastion Enforcer",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/c/7cbf17a0-2dbc-4e79-9cfa-ea49b1605105.png?1564022975",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/c/7cbf17a0-2dbc-4e79-9cfa-ea49b1605105.jpg?1564022975",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/c/7cbf17a0-2dbc-4e79-9cfa-ea49b1605105.png?1564022975"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

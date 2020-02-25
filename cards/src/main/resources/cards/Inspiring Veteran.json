@@ -1,6 +1,9 @@
 {
   "name" : "Inspiring Veteran",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/0/c/0c3f372d-259d-4a31-9491-2d369b3f3f8b.png?1572490775",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/c/0c3f372d-259d-4a31-9491-2d369b3f3f8b.jpg?1572490775",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/c/0c3f372d-259d-4a31-9491-2d369b3f3f8b.png?1572490775"
+  },
   "colors" : [ "WHITE", "RED" ],
   "cost" : [ "RED", "WHITE" ],
   "types" : [ "CREATURE" ],

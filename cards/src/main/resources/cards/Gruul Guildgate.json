@@ -1,6 +1,9 @@
 {
   "name" : "Gruul Guildgate",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/3/33d10573-1695-4a73-b92d-d478572b85ec.png?1572894367",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/3/33d10573-1695-4a73-b92d-d478572b85ec.jpg?1572894367",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/3/33d10573-1695-4a73-b92d-d478572b85ec.png?1572894367"
+  },
   "types" : [ "LAND" ],
   "subtypes" : [ "GATE" ],
   "rarity" : "COMMON",

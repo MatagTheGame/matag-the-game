@@ -1,6 +1,9 @@
 {
   "name" : "Mark of the Vampire",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/5/150090cc-27ac-4d18-b6e6-3ddaa40c822e.png?1549764953",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/1/5/150090cc-27ac-4d18-b6e6-3ddaa40c822e.jpg?1549764953",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/1/5/150090cc-27ac-4d18-b6e6-3ddaa40c822e.png?1549764953"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "ENCHANTMENT" ],

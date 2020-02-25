@@ -1,6 +1,9 @@
 {
   "name" : "Sworn Guardian",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/4/6452ba94-6bb0-409c-99f7-71e6457c3f2a.png?1555040076",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/4/6452ba94-6bb0-409c-99f7-71e6457c3f2a.jpg?1555040076",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/4/6452ba94-6bb0-409c-99f7-71e6457c3f2a.png?1555040076"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "COLORLESS" ],
   "types" : [ "CREATURE" ],

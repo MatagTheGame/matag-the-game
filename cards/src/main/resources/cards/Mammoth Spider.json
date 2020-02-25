@@ -1,6 +1,9 @@
 {
   "name" : "Mammoth Spider",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/1/e/1ee9bca2-1195-4bd0-aa5c-16b3726a8ff2.png?1563899461",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/1/e/1ee9bca2-1195-4bd0-aa5c-16b3726a8ff2.jpg?1563899461",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/1/e/1ee9bca2-1195-4bd0-aa5c-16b3726a8ff2.png?1563899461"
+  },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "CREATURE" ],

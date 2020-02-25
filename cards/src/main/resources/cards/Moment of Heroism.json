@@ -1,6 +1,9 @@
 {
   "name" : "Moment of Heroism",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/7/b/7bbc462b-3736-4441-96ee-8dc5615b4529.png?1563898396",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/7/b/7bbc462b-3736-4441-96ee-8dc5615b4529.jpg?1563898396",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/7/b/7bbc462b-3736-4441-96ee-8dc5615b4529.png?1563898396"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS" ],
   "types" : [ "INSTANT" ],

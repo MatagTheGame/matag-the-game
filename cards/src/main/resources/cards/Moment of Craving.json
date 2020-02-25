@@ -1,6 +1,9 @@
 {
   "name" : "Moment of Craving",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/c/0/c0e3ea55-162d-4466-ba4e-b938a0845fb5.png?1555040271",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/0/c0e3ea55-162d-4466-ba4e-b938a0845fb5.jpg?1555040271",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/0/c0e3ea55-162d-4466-ba4e-b938a0845fb5.png?1555040271"
+  },
   "colors" : [ "BLACK" ],
   "cost" : [ "BLACK", "COLORLESS" ],
   "types" : [ "INSTANT" ],

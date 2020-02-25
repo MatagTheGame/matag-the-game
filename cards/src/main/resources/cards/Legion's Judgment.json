@@ -1,6 +1,9 @@
 {
   "name" : "Legion's Judgment",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/8/385bea20-c196-4da8-bc3e-36f8d50dcc17.png?1562553483",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/8/385bea20-c196-4da8-bc3e-36f8d50dcc17.jpg?1562553483",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/8/385bea20-c196-4da8-bc3e-36f8d50dcc17.png?1562553483"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ],
   "types" : [ "SORCERY" ],

@@ -1,6 +1,9 @@
 {
   "name" : "Fiery Finish",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/3/e/3e38127d-63af-4d26-9ff5-358c8a61f39c.png?1562301715",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/3/e/3e38127d-63af-4d26-9ff5-358c8a61f39c.jpg?1562301715",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/3/e/3e38127d-63af-4d26-9ff5-358c8a61f39c.png?1562301715"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "RED", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
   "types" : [ "SORCERY" ],

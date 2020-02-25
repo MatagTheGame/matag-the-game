@@ -1,6 +1,9 @@
 {
   "name" : "Sun-Collared Raptor",
-  "imageUrl" : "https://img.scryfall.com/cards/png/front/6/2/62fbd1bc-3e57-43d5-ad54-443ca740fcc4.png?1555040553",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/2/62fbd1bc-3e57-43d5-ad54-443ca740fcc4.jpg?1555040553",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/2/62fbd1bc-3e57-43d5-ad54-443ca740fcc4.png?1555040553"
+  },
   "colors" : [ "RED" ],
   "cost" : [ "RED", "COLORLESS" ],
   "types" : [ "CREATURE" ],
