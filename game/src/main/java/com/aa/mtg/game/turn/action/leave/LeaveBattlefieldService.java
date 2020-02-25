@@ -35,7 +35,7 @@ public class LeaveBattlefieldService {
 
     for (CardInstance attachedCard : attachmentsService.getAttachedCards(gameStatus, cardInstance)) {
       if (attachedCard.isOfType(ENCHANTMENT)) {
-        destroyPermanentService.destroy(gameStatus, attachedCard.getId());
+        destroyPermanentService.markToBeDestroyed(gameStatus, attachedCard.getId());
 
       } else if (attachedCard.isOfType(ARTIFACT)) {
         attachService.detach(cardInstance, attachedCard);

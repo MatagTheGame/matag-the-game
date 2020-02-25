@@ -24,6 +24,14 @@ public class DestroyPermanentService {
     this.whenDieService = whenDieService;
   }
 
+  public void markToBeDestroyed(GameStatus gameStatus, int permanentId) {
+    CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId);
+
+    if (cardInstance != null) {
+      cardInstance.setToBeDestroyed(true);
+    }
+  }
+
   public boolean destroy(GameStatus gameStatus, int permanentId) {
     CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId);
 

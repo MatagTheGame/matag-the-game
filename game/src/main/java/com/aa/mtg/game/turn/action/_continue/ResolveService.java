@@ -57,13 +57,13 @@ public class ResolveService {
 
         stackItemToResolve.getTriggeredAbilities().stream()
           .filter(triggeredAbility -> !triggeredAbility.getTrigger().getType().equals(TriggerType.TRIGGERED_ABILITY))
-          .forEach(t -> stackItemToResolve.acknowledgeBy(controllerName));
+          .forEach(t -> stackItemToResolve.acknowledgedBy(controllerName));
 
         if (gameStatus.getActivePlayer().getName().equals(controllerName) && !stackItemToResolve.getAcknowledgedBy().contains(controllerName)) {
           if (targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus)) {
             targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
           }
-          stackItemToResolve.acknowledgeBy(controllerName);
+          stackItemToResolve.acknowledgedBy(controllerName);
 
         } else if (!stackItemToResolve.getAcknowledgedBy().contains(otherPlayerName)) {
           boolean needsTargets = stackItemToResolve.getTriggeredAbilities().stream()
@@ -72,7 +72,7 @@ public class ResolveService {
             .count() > 0;
           boolean hasSelectedTargets = !stackItemToResolve.getModifiers().getTargets().isEmpty();
           if (!needsTargets || hasSelectedTargets) {
-            stackItemToResolve.acknowledgeBy(otherPlayerName);
+            stackItemToResolve.acknowledgedBy(otherPlayerName);
           }
         }
 

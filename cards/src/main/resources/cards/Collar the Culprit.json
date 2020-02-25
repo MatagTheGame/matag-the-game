@@ -23,6 +23,5 @@
     "trigger" : {
       "type" : "CAST"
     }
-  } ],
-  "instantSpeed" : true
+  } ]
 }

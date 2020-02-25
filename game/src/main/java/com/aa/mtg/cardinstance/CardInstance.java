@@ -16,8 +16,7 @@ import com.aa.mtg.game.turn.action.attach.AttachmentsService;
 import com.aa.mtg.game.turn.action.selection.AbilitiesFromOtherPermanentsService;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -35,8 +34,7 @@ import static com.aa.mtg.cards.properties.Type.SORCERY;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
-@ToString
-@EqualsAndHashCode
+@Data
 @JsonAutoDetect(
   fieldVisibility = JsonAutoDetect.Visibility.NONE,
   setterVisibility = JsonAutoDetect.Visibility.NONE,
@@ -58,7 +56,9 @@ public class CardInstance {
   private CardModifiers modifiers = new CardModifiers();
   @JsonProperty
   private List<CardInstanceAbility> triggeredAbilities = new ArrayList<>();
-  private Set<String> acknowledgeBy = new HashSet<>();
+  private Set<String> acknowledgedBy = new HashSet<>();
+  private boolean toBeDestroyed;
+  private boolean toBeReturnedToHand;
 
   private GameStatus gameStatus;
   private final AttachmentsService attachmentsService;
@@ -73,25 +73,9 @@ public class CardInstance {
     this.abilitiesFromOtherPermanentsService = abilitiesFromOtherPermanentsService;
   }
 
-  public GameStatus getGameStatus() {
-    return gameStatus;
-  }
-
   @JsonProperty
   public int getId() {
     return modifiers.getPermanentId() > 0 ? modifiers.getPermanentId() : id;
-  }
-
-  public String getIdAndName() {
-    return "\"" + getId() + " - " + card.getName() + "\"";
-  }
-
-  public Card getCard() {
-    return card;
-  }
-
-  public String getOwner() {
-    return owner;
   }
 
   @JsonProperty
@@ -107,32 +91,43 @@ public class CardInstance {
     return controller;
   }
 
-  public void setGameStatus(GameStatus gameStatus) {
-    this.gameStatus = gameStatus;
+  @JsonProperty
+  public int getPower() {
+    return card.getPower() +
+      modifiers.getExtraPowerToughnessUntilEndOfTurn().getPower() +
+      modifiers.getExtraPowerToughnessFromCounters().getPower() +
+      getAttachmentsPower() +
+      getPowerFromOtherPermanents();
   }
 
-  public void setId(int id) {
-    this.id = id;
+  @JsonProperty
+  public int getToughness() {
+    return card.getToughness() +
+      modifiers.getExtraPowerToughnessUntilEndOfTurn().getToughness() +
+      modifiers.getExtraPowerToughnessFromCounters().getToughness() +
+      getAttachmentsToughness() +
+      getToughnessFromOtherPermanents();
   }
 
-  public void setCard(Card card) {
-    this.card = card;
+  @JsonProperty
+  public List<CardInstanceAbility> getAbilities() {
+    List<CardInstanceAbility> abilities = getFixedAbilities();
+    abilities.addAll(getAbilitiesFormOtherPermanents());
+    return abilities;
   }
 
-  public void setOwner(String owner) {
-    this.owner = owner;
+  @JsonProperty
+  public boolean isSummoningSickness() {
+    return modifiers.isSummoningSickness() && !hasAbilityType(HASTE);
   }
 
-  public void setController(String controller) {
-    this.controller = controller;
+  @JsonProperty
+  public boolean isInstantSpeed() {
+    return card.getTypes().contains(INSTANT) || hasAbilityType(FLASH);
   }
 
-  public CardModifiers getModifiers() {
-    return modifiers;
-  }
-
-  public List<CardInstanceAbility> getTriggeredAbilities() {
-    return triggeredAbilities;
+  public String getIdAndName() {
+    return "\"" + getId() + " - " + card.getName() + "\"";
   }
 
   public boolean isOfType(Type type) {
@@ -184,11 +179,6 @@ public class CardInstance {
     }
   }
 
-  @JsonProperty
-  public boolean isSummoningSickness() {
-    return modifiers.isSummoningSickness() && !hasAbilityType(HASTE);
-  }
-
   public void declareAsAttacker() {
     if (!hasAbilityType(VIGILANCE)) {
       modifiers.tap();
@@ -216,29 +206,8 @@ public class CardInstance {
     modifiers.setBlockingCardId(attackingCreatureId);
   }
 
-  @JsonProperty
-  public int getPower() {
-    return card.getPower() +
-      modifiers.getExtraPowerToughnessUntilEndOfTurn().getPower() +
-      modifiers.getExtraPowerToughnessFromCounters().getPower() +
-      getAttachmentsPower() +
-      getPowerFromOtherPermanents();
-  }
-
-  @JsonProperty
-  public int getToughness() {
-    return card.getToughness() +
-      modifiers.getExtraPowerToughnessUntilEndOfTurn().getToughness() +
-      modifiers.getExtraPowerToughnessFromCounters().getToughness() +
-      getAttachmentsToughness() +
-      getToughnessFromOtherPermanents();
-  }
-
-  @JsonProperty
-  public List<CardInstanceAbility> getAbilities() {
-    List<CardInstanceAbility> abilities = getFixedAbilities();
-    abilities.addAll(getAbilitiesFormOtherPermanents());
-    return abilities;
+  public void acknowledgedBy(String playerName) {
+    acknowledgedBy.add(playerName);
   }
 
   public List<CardInstanceAbility> getFixedAbilities() {
@@ -302,6 +271,15 @@ public class CardInstance {
     return this.card.getSubtypes().contains(subtype);
   }
 
+  public void cleanup() {
+    modifiers.cleanupUntilEndOfTurnModifiers();
+    acknowledgedBy.clear();
+  }
+
+  public void resetAllModifiers() {
+    modifiers = new CardModifiers();
+  }
+
   private int getAttachmentsPower() {
     return attachmentsService != null ? attachmentsService.getAttachmentsPower(gameStatus, this) : 0;
   }
@@ -324,22 +302,5 @@ public class CardInstance {
 
   private List<CardInstanceAbility> getAbilitiesFormOtherPermanents() {
     return abilitiesFromOtherPermanentsService != null ? abilitiesFromOtherPermanentsService.getAbilitiesFormOtherPermanents(gameStatus, this) : emptyList();
-  }
-
-  public void cleanup() {
-    modifiers.cleanupUntilEndOfTurnModifiers();
-    acknowledgeBy.clear();
-  }
-
-  public void resetAllModifiers() {
-    modifiers = new CardModifiers();
-  }
-
-  public Set<String> getAcknowledgedBy() {
-    return acknowledgeBy;
-  }
-
-  public void acknowledgeBy(String playerName) {
-    acknowledgeBy.add(playerName);
   }
 }

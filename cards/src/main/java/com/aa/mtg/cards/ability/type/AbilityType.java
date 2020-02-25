@@ -9,6 +9,7 @@ public enum AbilityType {
   ENCHANTED_CREATURE_GETS("Enchanted creature gets %s."),
   ENTERS_THE_BATTLEFIELD_WITH("Enters the battlefield %s."),
   EQUIPPED_CREATURE_GETS("Equipped creature gets %s."),
+  FLASH("Flash."),
   FLYING("Flying."),
   HASTE("Haste."),
   INDESTRUCTIBLE("Indestructible."),

@@ -65,7 +65,7 @@ To run them against ChromeDriver change JUnit VM options in IntelliJ configurati
 
 If you want to use a chromedriver version with some extensions (e.g. redux tools)
 
-    -D"webdriver.chrome.userDataDir=/tmp/Chrome/Mtg/"
+    -D"webdriver.chrome.userDataDir=/path/to/an/empty/folder"
 
 Then put a breakpoint on some test and while is executing open a new tab and install everything you want.
 Next time the test will rerun will use that same profile.

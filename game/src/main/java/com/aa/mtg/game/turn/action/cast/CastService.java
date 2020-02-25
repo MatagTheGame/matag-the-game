@@ -51,7 +51,7 @@ public class CastService {
       castedFrom = "BATTLEFIELD";
     }
 
-    if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !cardToCast.getCard().isInstantSpeed()) {
+    if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !cardToCast.isInstantSpeed()) {
       throw new MessageException("You can only play Instants during a NON main phases.");
 
     } else {

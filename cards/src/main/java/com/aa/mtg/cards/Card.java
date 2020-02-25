@@ -29,7 +29,6 @@ public class Card {
   private final int power;
   private final int toughness;
   private final List<Ability> abilities;
-  private final boolean instantSpeed;
 
   @JsonCreator
   public Card(@JsonProperty("name") String name, @JsonProperty("imageUrl") String imageUrl,
@@ -37,7 +36,7 @@ public class Card {
               @JsonProperty("types") TreeSet<Type> types, @JsonProperty("subtypes") TreeSet<Subtype> subtypes,
               @JsonProperty("rarity") Rarity rarity, @JsonProperty("ruleText") String ruleText,
               @JsonProperty("power") int power, @JsonProperty("toughness") int toughness,
-              @JsonProperty("abilities") List<Ability> abilities, @JsonProperty("instantSpeed") boolean instantSpeed) {
+              @JsonProperty("abilities") List<Ability> abilities) {
     this.name = name;
     this.imageUrl = imageUrl;
     this.colors = colors != null ? colors : new TreeSet<>();
@@ -49,6 +48,5 @@ public class Card {
     this.power = power;
     this.toughness = toughness;
     this.abilities = abilities != null ? abilities : new ArrayList<>();
-    this.instantSpeed = instantSpeed;
   }
 }

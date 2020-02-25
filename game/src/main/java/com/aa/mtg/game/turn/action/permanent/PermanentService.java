@@ -69,7 +69,7 @@ public class PermanentService {
     dealDamageToPlayerService.dealDamageToPlayer(gameStatus, controllerDamage, gameStatus.getPlayerByName(cardInstance.getController()));
 
     if (abilityService.destroyedFromParameter(parameter)) {
-      destroyPermanentService.destroy(gameStatus, target.getId());
+      destroyPermanentService.markToBeDestroyed(gameStatus, target.getId());
     }
 
     if (abilityService.tappedFromParameter(parameter)) {
@@ -85,7 +85,7 @@ public class PermanentService {
     }
 
     if (abilityService.returnToOwnerHandFromParameter(parameter)) {
-      returnPermanentToHandService.returnPermanentToHand(gameStatus, target.getId());
+      returnPermanentToHandService.markAsToBeReturnedToHand(gameStatus, target.getId());
     }
 
     if (abilityService.controlledFromParameter(parameter)) {

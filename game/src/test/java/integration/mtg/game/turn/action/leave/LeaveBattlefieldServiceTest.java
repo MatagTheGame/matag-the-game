@@ -73,9 +73,8 @@ public class LeaveBattlefieldServiceTest {
     leaveBattlefieldService.leaveTheBattlefield(gameStatus, 61);
 
     // Then
-    assertThat(gameStatus.getPlayer1().getBattlefield().size()).isEqualTo(1);
-    assertThat(gameStatus.getPlayer1().getBattlefield().getCards()).contains(equipment);
-    assertThat(gameStatus.getPlayer1().getGraveyard().getCards()).contains(enchantment1);
-    assertThat(gameStatus.getPlayer2().getGraveyard().getCards()).contains(enchantment2);
+    assertThat(gameStatus.getPlayer1().getBattlefield().getCards()).containsExactlyInAnyOrder(equipment, enchantment1);
+    assertThat(enchantment1.isToBeDestroyed()).isTrue();
+    assertThat(equipment.getModifiers().getAttachedToId()).isEqualTo(0);
   }
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ContinueTurnService {
-
   private final PhaseFactory phaseFactory;
 
   @Autowired

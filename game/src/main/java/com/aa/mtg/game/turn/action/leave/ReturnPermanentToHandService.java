@@ -8,20 +8,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReturnPermanentToHandService {
   private final LeaveBattlefieldService leaveBattlefieldService;
-  private final PutIntoHandService returnToHand;
+  private final PutIntoHandService putIntoHandService;
 
   @Autowired
-  public ReturnPermanentToHandService(LeaveBattlefieldService leaveBattlefieldService, PutIntoHandService returnToHand) {
+  public ReturnPermanentToHandService(LeaveBattlefieldService leaveBattlefieldService, PutIntoHandService putIntoHandService) {
     this.leaveBattlefieldService = leaveBattlefieldService;
-    this.returnToHand = returnToHand;
+    this.putIntoHandService = putIntoHandService;
   }
 
-  public void returnPermanentToHand(GameStatus gameStatus, int targetId) {
+  public void markAsToBeReturnedToHand(GameStatus gameStatus, int targetId) {
+    CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(targetId);
+
+    if (cardInstance != null) {
+      cardInstance.setToBeReturnedToHand(true);
+    }
+  }
+
+  public boolean returnPermanentToHand(GameStatus gameStatus, int targetId) {
     CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(targetId);
 
     if (cardInstance != null) {
       leaveBattlefieldService.leaveTheBattlefield(gameStatus, targetId);
-      returnToHand.returnToHand(gameStatus, cardInstance);
+      putIntoHandService.returnToHand(gameStatus, cardInstance);
+      return true;
     }
+
+    return false;
   }
 }

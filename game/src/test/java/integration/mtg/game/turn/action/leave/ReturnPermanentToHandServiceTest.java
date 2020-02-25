@@ -31,6 +31,20 @@ public class ReturnPermanentToHandServiceTest {
   private Cards cards;
 
   @Test
+  public void testMarkReturnToHand() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
+
+    // When
+    returnPermanentToHandService.markAsToBeReturnedToHand(gameStatus, 61);
+
+    // Then
+    assertThat(cardInstance.isToBeReturnedToHand()).isTrue();
+  }
+
+  @Test
   public void testReturnToHand() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
