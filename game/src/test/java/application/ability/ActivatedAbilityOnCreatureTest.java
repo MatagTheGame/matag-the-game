@@ -34,10 +34,16 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
 
   @Test
   public void activatedAbilityOnCreature() {
-    // When increasing jousting dummy
+    // Playing jousting dummy
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
+    browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Jousting Dummy")).click();
+    browser.player2().getActionHelper().clickContinue();
+
+    // When increasing jousting dummy
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 2).tap();
+    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 3).tap();
+    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 4).tap();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).click();
 
     int joustingDummyId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).getCardIdNumeric();
@@ -55,7 +61,9 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
   static class InitTestServiceForTest extends InitTestService {
     @Override
     public void initGameStatus(GameStatus gameStatus) {
-      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Jousting Dummy"));
+      addCardToCurrentPlayerHand(gameStatus, cards.get("Jousting Dummy"));
+      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
+      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));

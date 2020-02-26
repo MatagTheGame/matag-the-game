@@ -1,4 +1,5 @@
 import stompClient from '../WebSocket'
+import get from 'lodash/get'
 import Phase from 'Main/game/Turn/Phase'
 import CostUtils from 'Main/game/Card/CostUtils'
 import CardUtils from 'Main/game/Card/CardUtils'
@@ -58,7 +59,7 @@ export default class ClientEventsReducer {
               if (CardUtils.needsTargets(newState, cardInstance, 'CAST')) {
                 PlayerUtils.handleSelectTargets(newState, cardInstance, ability)
               } else {
-                PlayerUtils.cast(newState, cardId, {}, TurnUtils.getAbilityToBePlayed(ability))
+                PlayerUtils.cast(newState, cardId, {}, get(ability, 'abilityType'))
               }
             }
           }
@@ -110,7 +111,7 @@ export default class ClientEventsReducer {
                   if (CardUtils.needsTargets(newState, cardInstance, 'ACTIVATED_ABILITY')) {
                     PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
                   } else {
-                    PlayerUtils.cast(newState, cardId, {}, TurnUtils.getAbilityToBePlayed(playedAbility))
+                    PlayerUtils.cast(newState, cardId, {}, get(playedAbility, 'abilityType'))
                   }
                 }
               }
