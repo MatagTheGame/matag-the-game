@@ -1,4 +1,4 @@
-package com.aa.mtg.admin.authentication;
+package com.aa.mtg.admin.auth;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public class AuthenticationControllerTest {
+public class AuthControllerTest {
   @Autowired
   private TestRestTemplate restTemplate;
 
