@@ -25,6 +25,9 @@ The application is divided in modules:
 
 The backlog is managed in Kanban style at:
  - https://github.com/antonioalonzi/mtg/projects/1
+ 
+Stories labelled `with guidelines` are very well described and easy to be picked up for people who want to start
+contributing and learning the project.
 
 
 # CI/CD
