@@ -17,7 +17,7 @@ CardsTests.cardImageLinker() test.
 
 
 After a card is coded is a very good idea to test it by starting the app in test mode:
- - adding the `-Ptest` profile in the maven command or intellij startup command
+ - adding the `-Dspring.profile=test` profile in the maven command or intellij startup command
  - modifying the `ProdInitTestService` class by setting the board as you would like to start your test.
 
   
