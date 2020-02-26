@@ -83,11 +83,16 @@ Travis instead runs only non regression tests (as I'm on a free plan):
 
     mvn test -DexcludedGroups="application.testcategory.Regression"
 
-## Run the application locally
+### Run the application locally
 
 Startup the app as spring boot
 
     # from intellij or with
     mvn spring-boot:run
 
-It is possible to run with `test` profile in order to start custom decks rather than random (see `InitTestService`)
+It is possible to run with `test` profile in order to start custom decks rather than random (see `ProdInitTestService`)
+
+
+## Cards Scripting
+
+See [Cards Scripting](game/CARDS_SCRIPTING.md)
