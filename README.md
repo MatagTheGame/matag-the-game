@@ -16,8 +16,10 @@ For any questions or comments, please contact antonioalonzi85@gmail.com.
 # Architecture
 
 The application is divided in modules:
-- [game](game/README.md): responsible for playing matches.
 - [admin](admin/README.md): responsible for user and decks management (not implemented yet).
+- [cards](cards/README.md): shared library for cards.
+- [game](game/README.md): responsible for playing matches.
+- utils: some utils functions.
 
 
 

@@ -3,6 +3,7 @@
 This application is taking care of playing matches between players.
 It is deployed at https://aa-mtg-game.herokuapp.com/ui/game
 
+
 ## Requisites
 
  * Install JDK 1.8
@@ -17,7 +18,7 @@ The application is written using:
  * Java ([Spring](https://spring.io/))
  * Javascript ([React](https://reactjs.org/) + [Redux](https://redux.js.org/))
 
-The use of an IDE like [IntelliJ](https://www.jetbrains.com/idea/download/#section=mac) will help much during development.
+The use of an IDE like [IntelliJ](https://www.jetbrains.com/idea/download/) will help much during development.
 (Community edition is available).
 
 ### Build
@@ -95,4 +96,4 @@ It is possible to run with `test` profile in order to start custom decks rather 
 
 ## Cards Scripting
 
-See [Cards Scripting](game/CARDS_SCRIPTING.md)
+See [Cards Scripting](../cards/README.md)

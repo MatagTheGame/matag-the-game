@@ -1,8 +1,13 @@
-# Cards Scripting
+# Cards
+
+This module contains all the cards available in this game.
+
+
+## Scripting
 
 If you are brave enough and want to add a missing card, here's some tips.
 
-Cards are in [cards/src/main/resources](https://github.com/antonioalonzi/mtg/tree/master/cards/src/main/resources/cards).
+Cards are in [cards/src/main/resources](src/main/resources/cards).
 
 Are in json format and it's a bit of a guessing game figure out what abilities have been already implemented.
 The best thing is to perform a text search on this folder for a similar card.
