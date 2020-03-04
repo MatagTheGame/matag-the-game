@@ -19,7 +19,8 @@
         "selectorType" : "PERMANENT",
         "ofType" : [ "CREATURE" ],
         "controllerType" : "OPPONENT"
-      }
+      },
+      "optional" : true
     } ],
     "parameters" : [ ":RETURN_TO_OWNER_HAND" ],
     "trigger" : {

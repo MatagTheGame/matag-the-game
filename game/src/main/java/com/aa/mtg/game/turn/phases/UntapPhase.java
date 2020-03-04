@@ -28,7 +28,7 @@ public class UntapPhase implements Phase {
 
     for (CardInstance cardInstance : new CardInstanceSearch(cards).tapped().getCards()) {
       if (cardInstance.getModifiers().isDoesNotUntapNextTurn()) {
-        cardInstance.getModifiers().doesNotUntapNextTurn(false);
+        cardInstance.getModifiers().setDoesNotUntapNextTurn(false);
       } else {
         tapPermanentService.untap(gameStatus, cardInstance.getId());
         cardInstance.getModifiers().untap();

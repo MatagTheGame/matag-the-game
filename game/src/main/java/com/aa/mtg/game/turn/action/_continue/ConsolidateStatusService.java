@@ -34,7 +34,7 @@ public class ConsolidateStatusService {
           }
         }
 
-        if (card.isToBeReturnedToHand()) {
+        if (card.getModifiers().isToBeReturnedToHand()) {
           boolean returnedToHand = returnPermanentToHandService.returnPermanentToHand(gameStatus, card.getId());
           if (returnedToHand) {
             repeat = true;
@@ -45,7 +45,7 @@ public class ConsolidateStatusService {
   }
 
   private boolean isToBeDestroyed(CardInstance card) {
-    return card.isPermanent() && card.isToBeDestroyed() ||
+    return card.isPermanent() && card.getModifiers().isToBeDestroyed() ||
       card.isOfType(CREATURE) && card.getToughness() - card.getModifiers().getDamage() <= 0;
   }
 }

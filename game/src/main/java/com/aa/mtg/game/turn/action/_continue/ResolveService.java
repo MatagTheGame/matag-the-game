@@ -69,7 +69,7 @@ public class ResolveService {
           boolean needsTargets = stackItemToResolve.getTriggeredAbilities().stream()
             .map(CardInstanceAbility::getTargets)
             .flatMap(List::stream)
-            .count() > 0;
+            .anyMatch(target -> !target.isOptional());
           boolean hasSelectedTargets = !stackItemToResolve.getModifiers().getTargets().isEmpty();
           if (!needsTargets || hasSelectedTargets) {
             stackItemToResolve.acknowledgedBy(otherPlayerName);

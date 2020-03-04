@@ -28,7 +28,7 @@ public class DestroyPermanentService {
     CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId);
 
     if (cardInstance != null) {
-      cardInstance.setToBeDestroyed(true);
+      cardInstance.getModifiers().setToBeDestroyed(true);
     }
   }
 

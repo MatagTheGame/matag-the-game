@@ -16,7 +16,7 @@ public class DealDamageToCreatureService {
       cardInstance.getModifiers().dealDamage(damage);
       if (cardInstance.getToughness() - cardInstance.getModifiers().getDamage() <= 0 || deathtouch) {
         LOGGER.info("{} marked to be destroyed.", cardInstance.getIdAndName());
-        cardInstance.setToBeDestroyed(true);
+        cardInstance.getModifiers().setToBeDestroyed(true);
       }
     }
   }

@@ -57,8 +57,6 @@ public class CardInstance {
   @JsonProperty
   private List<CardInstanceAbility> triggeredAbilities = new ArrayList<>();
   private Set<String> acknowledgedBy = new HashSet<>();
-  private boolean toBeDestroyed;
-  private boolean toBeReturnedToHand;
 
   private GameStatus gameStatus;
   private final AttachmentsService attachmentsService;

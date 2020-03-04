@@ -47,7 +47,7 @@ public class CreatureEntersTheBattlefieldReturnTargetToHandTest extends Abstract
     browser.player1().getStackHelper().containsAbility("Pippo's Exclusion Mage (" + exclusionMageId + "): That targets get returned to its owner's hand.");
 
     // When player 1 selects opponent creature to return
-    browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Bogstomper")).target();
+    browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Banehound")).target();
     browser.player2().getActionHelper().clickContinue();
 
     // Then it's returned to its owner hand
@@ -65,6 +65,21 @@ public class CreatureEntersTheBattlefieldReturnTargetToHandTest extends Abstract
     browser.player1().getActionHelper().clickContinue();
     browser.player1().getStackHelper().isEmpty();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Exclusion Mage"), cards.get("Exclusion Mage"));
+
+    // Moving to player 1 main phase
+    browser.player2().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinue(); // FIXME why does not continue?
+    browser.player2().getPhaseHelper().is("M1", PLAYER);
+
+    // Replaying Banehound
+    browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getFirstCard(cards.get("Swamp")).tap();
+    browser.player2().getHandHelper(PLAYER).getFirstCard(cards.get("Banehound")).click();
+    browser.player1().getActionHelper().clickContinue();
+    browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Banehound"));
   }
 
   static class InitTestServiceForTest extends InitTestService {
@@ -79,7 +94,9 @@ public class CreatureEntersTheBattlefieldReturnTargetToHandTest extends Abstract
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
 
-      addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Bogstomper"));
+      addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Swamp"));
+      addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
+      addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Banehound"));
     }
   }
 }
