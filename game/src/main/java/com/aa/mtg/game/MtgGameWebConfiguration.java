@@ -9,7 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @Import({CardsConfiguration.class, CardInstanceConfiguration.class})
-public class MtgWebConfiguration implements WebMvcConfigurer {
+public class MtgGameWebConfiguration implements WebMvcConfigurer {
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
     registry.addViewController("/").setViewName("redirect:/ui/");

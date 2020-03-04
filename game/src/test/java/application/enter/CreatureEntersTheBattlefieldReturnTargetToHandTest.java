@@ -3,7 +3,7 @@ package application.enter;
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import com.aa.mtg.cards.Cards;
-import com.aa.mtg.game.MtgApplication;
+import com.aa.mtg.game.MtgGameApplication;
 import com.aa.mtg.game.init.test.InitTestService;
 import com.aa.mtg.game.status.GameStatus;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import static com.aa.mtg.player.PlayerType.OPPONENT;
 import static com.aa.mtg.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MtgApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = MtgGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CreatureEntersTheBattlefieldReturnTargetToHandTest.InitGameTestConfiguration.class})
 public class CreatureEntersTheBattlefieldReturnTargetToHandTest extends AbstractApplicationTest {
 

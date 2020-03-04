@@ -1,7 +1,7 @@
 package application.auth;
 
 import application.ApplicationTestConfiguration;
-import com.aa.mtg.admin.AdminApplication;
+import com.aa.mtg.admin.MtgAdminApplication;
 import com.aa.mtg.admin.auth.LoginRequest;
 import com.aa.mtg.admin.auth.LoginResponse;
 import com.aa.mtg.admin.user.UserRepository;
@@ -21,7 +21,7 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = AdminApplication.class, webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes = MtgAdminApplication.class, webEnvironment = RANDOM_PORT)
 @Import(ApplicationTestConfiguration.class)
 public class AuthControllerTest {
   @Autowired

@@ -6,8 +6,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class MtgApplication {
+public class MtgGameApplication {
   public static void main(String[] args) {
-    SpringApplication.run(MtgApplication.class, args);
+    SpringApplication.run(MtgGameApplication.class, args);
   }
 }
