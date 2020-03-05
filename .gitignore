@@ -5,6 +5,8 @@
 /admin/admin.iml
 /admin/node
 /admin/node_modules
+/admin/yarn-error.log
+/admin/src/main/resources/public/js/
 /admin/target
 
 /cards/cards.iml
