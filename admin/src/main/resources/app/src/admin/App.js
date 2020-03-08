@@ -12,12 +12,16 @@ class App extends Component {
     return (
       <div>
         <h2>Login</h2>
-        <form onSubmit={this.handleSubmit()}>
-          <label>Username</label>
-          <input type='text' name='username'/>
-          <label>Password</label>
-          <input type='password' name='password'/>
-          <input type='submit'/>
+        <form className="mtg-form" onSubmit={this.handleSubmit()}>
+          <div className="grid grid-label-value">
+            <label htmlFor='username'>Username: </label><input type='text' name='username'/>
+          </div>
+          <div className="grid grid-label-value">
+            <label htmlFor='password'>Password: </label><input type='password' name='password'/>
+          </div>
+          <div className="grid">
+            <input type='submit' value='Login'/>
+          </div>
         </form>
       </div>
     )

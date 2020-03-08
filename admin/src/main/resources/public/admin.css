@@ -1,6 +1,102 @@
 body {
-  background-color: black;
+  background-color: #292a2b;
+  color: #afafaf;
   margin: 0;
   padding: 0;
-  color: white;
+  box-sizing: border-box;
+  outline: none;
+}
+
+*:focus {
+  outline: none;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+button, input[type=button], input[type=submit], input[type=reset]
+label {
+  cursor: pointer;
+}
+
+select {
+  appearance: none;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select:-moz-focusring {
+  color: transparent !important;
+  text-shadow: 0 0 0 #afafaf;
+}
+
+textarea {
+  resize: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/** Form  */
+@media screen and (min-width: 600px) {
+  .mtg-form .grid {
+    display: grid;
+    grid-gap: 1.5rem;
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mtg-form .grid-label-value {
+    grid-template-columns: 1fr 10fr;
+  }
+}
+
+.mtg-form select,
+.mtg-form input,
+.mtg-form textarea,
+.mtg-form button {
+  width: 100%;
+  line-height: 1.5;
+  padding: 10px 10px;
+  border: 1px solid hsl(0, 0%, 10%);
+  color: #afafaf;
+  background: hsl(0, 0%, 14%);
+}
+
+.mtg-form label {
+  line-height: 1.5;
+  padding: 10px 10px;
+}
+
+.mtg-form textarea {
+  height: 170px;
+}
+
+.mtg-form ::placeholder {
+  color: inherit;
+  opacity: 1;
+}
+
+.mtg-form select:focus,
+.mtg-form input:focus,
+.mtg-form textarea:focus,
+.mtg-form button:focus {
+  border: 1px solid hsl(0, 0%, 14%);
+  background: hsl(0, 0%, 18%);
+}
+
+.mtg-form input[type=button]:enabled:hover,
+.mtg-form input[type=submit]:enabled:hover,
+.mtg-form input[type=reset]:enabled:hover {
+  border: 1px solid hsl(0, 0%, 14%);
+  background: hsl(0, 0%, 18%);
 }
