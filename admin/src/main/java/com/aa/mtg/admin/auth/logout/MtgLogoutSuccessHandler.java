@@ -1,17 +1,16 @@
-package com.aa.mtg.admin.auth;
+package com.aa.mtg.admin.auth.logout;
 
 import com.aa.mtg.admin.session.MtgSessionRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.aa.mtg.admin.auth.AuthSessionFilter.SESSION_NAME;
+import static com.aa.mtg.admin.session.AuthSessionFilter.SESSION_NAME;
 
 @Component
 public class MtgLogoutSuccessHandler implements LogoutSuccessHandler {

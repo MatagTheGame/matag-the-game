@@ -1,4 +1,4 @@
-package com.aa.mtg.admin.auth;
+package com.aa.mtg.admin.auth.login;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,9 +1,9 @@
-package application.auth;
+package application.auth.login;
 
 import application.ApplicationTestConfiguration;
 import com.aa.mtg.admin.MtgAdminApplication;
-import com.aa.mtg.admin.auth.LoginRequest;
-import com.aa.mtg.admin.auth.LoginResponse;
+import com.aa.mtg.admin.auth.login.LoginRequest;
+import com.aa.mtg.admin.auth.login.LoginResponse;
 import com.aa.mtg.admin.user.MtgUserRepository;
 import org.junit.After;
 import org.junit.Test;
@@ -28,7 +28,7 @@ import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgAdminApplication.class, webEnvironment = RANDOM_PORT)
 @Import(ApplicationTestConfiguration.class)
-public class AuthControllerTest {
+public class LoginControllerTest {
   @Autowired
   private TestRestTemplate restTemplate;
 

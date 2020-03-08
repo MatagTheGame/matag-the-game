@@ -1,9 +1,9 @@
-package com.aa.mtg.admin.auth;
+package com.aa.mtg.admin.session;
 
-import com.aa.mtg.admin.session.MtgSession;
-import com.aa.mtg.admin.session.MtgSessionRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -13,8 +13,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Optional;
 
+@Component
 public class AuthSessionFilter extends GenericFilterBean {
   public final static String SESSION_NAME = "session";
 
@@ -32,7 +34,7 @@ public class AuthSessionFilter extends GenericFilterBean {
     if (StringUtils.hasText(sessionId)) {
       Optional<MtgSession> mtgSession = mtgSessionRepository.findById(sessionId);
       mtgSession.ifPresent(session -> SecurityContextHolder.getContext().setAuthentication(
-        new UsernamePasswordAuthenticationToken(session.getMtgUserId(), ""))
+        new UsernamePasswordAuthenticationToken(session.getMtgUser(), session.getMtgUser().getPassword(), Collections.singletonList(new SimpleGrantedAuthority("USER"))))
       );
     }
 

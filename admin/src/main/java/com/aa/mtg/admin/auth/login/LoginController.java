@@ -1,4 +1,4 @@
-package com.aa.mtg.admin.auth;
+package com.aa.mtg.admin.auth.login;
 
 import com.aa.mtg.admin.session.MtgSession;
 import com.aa.mtg.admin.session.MtgSessionRepository;
@@ -20,12 +20,12 @@ import static com.aa.mtg.admin.user.MtgUserStatus.ACTIVE;
 
 @RestController
 @RequestMapping("/auth")
-public class AuthController {
+public class LoginController {
   private final MtgUserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final MtgSessionRepository mtgSessionRepository;
 
-  public AuthController(MtgUserRepository userRepository, PasswordEncoder passwordEncoder, MtgSessionRepository mtgSessionRepository) {
+  public LoginController(MtgUserRepository userRepository, PasswordEncoder passwordEncoder, MtgSessionRepository mtgSessionRepository) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
     this.mtgSessionRepository = mtgSessionRepository;
@@ -41,7 +41,7 @@ public class AuthController {
         if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
           String sessionId = UUID.randomUUID().toString();
 
-          MtgSession session = new MtgSession(sessionId, user.getId(), LocalDateTime.now().plusDays(1));
+          MtgSession session = new MtgSession(sessionId, user, LocalDateTime.now().plusDays(1));
           mtgSessionRepository.save(session);
 
           return ResponseEntity.ok(new LoginResponse(sessionId));

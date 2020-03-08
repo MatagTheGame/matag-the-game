@@ -1,6 +1,7 @@
 package com.aa.mtg.admin;
 
-import com.aa.mtg.admin.auth.MtgLogoutSuccessHandler;
+import com.aa.mtg.admin.auth.logout.MtgLogoutSuccessHandler;
+import com.aa.mtg.admin.session.AuthSessionFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
+import org.springframework.security.web.context.SecurityContextPersistenceFilter;
 import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
 
 import java.util.HashMap;
@@ -25,6 +27,9 @@ import java.util.Map;
 public class MtgAdminWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Autowired
   private MtgLogoutSuccessHandler mtgLogoutSuccessHandler;
+
+  @Autowired
+  private AuthSessionFilter authSessionFilter;
 
   @Override
   public void configure(WebSecurity web) {
@@ -37,6 +42,7 @@ public class MtgAdminWebSecurityConfiguration extends WebSecurityConfigurerAdapt
   protected void configure(HttpSecurity http) throws Exception {
     http
       .csrf().disable()
+      .addFilterAfter(authSessionFilter, SecurityContextPersistenceFilter.class)
       .sessionManagement(cust -> cust.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .logout(cust -> {
         cust.logoutUrl("/auth/logout");
