@@ -1,5 +1,5 @@
 package com.aa.mtg.admin.user;
 
-public enum UserStatus {
+public enum MtgUserStatus {
   ACTIVE, INACTIVE, VERIFYING
 }

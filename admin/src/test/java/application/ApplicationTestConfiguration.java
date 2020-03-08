@@ -1,6 +1,7 @@
 package application;
 
-import com.aa.mtg.admin.user.UserRepository;
+import com.aa.mtg.admin.session.MtgSessionRepository;
+import com.aa.mtg.admin.user.MtgUserRepository;
 import org.mockito.Mockito;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -13,7 +14,13 @@ import org.springframework.context.annotation.Primary;
 public class ApplicationTestConfiguration {
   @Bean
   @Primary
-  public UserRepository userRepository() {
-    return Mockito.mock(UserRepository.class);
+  public MtgUserRepository userRepository() {
+    return Mockito.mock(MtgUserRepository.class);
+  }
+
+  @Bean
+  @Primary
+  public MtgSessionRepository sessionRepository() {
+    return Mockito.mock(MtgSessionRepository.class);
   }
 }

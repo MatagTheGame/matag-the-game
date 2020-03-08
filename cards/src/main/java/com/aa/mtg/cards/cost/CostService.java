@@ -2,7 +2,7 @@ package com.aa.mtg.cards.cost;
 
 import com.aa.mtg.cards.Card;
 import com.aa.mtg.cards.properties.Cost;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 import static com.aa.mtg.cards.ability.type.AbilityType.abilityType;
 import static com.aa.mtg.cards.properties.Cost.COLORLESS;
 
-@Service
+@Component
 public class CostService {
 
   public boolean isCastingCostFulfilled(Card card, List<Cost> manaPaid, String ability) {
