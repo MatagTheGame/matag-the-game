@@ -13,7 +13,6 @@ public class EndTurnPhase implements Phase {
 
   private final CleanupPhase cleanupPhase;
 
-  @Autowired
   public EndTurnPhase(CleanupPhase cleanupPhase) {
     this.cleanupPhase = cleanupPhase;
   }

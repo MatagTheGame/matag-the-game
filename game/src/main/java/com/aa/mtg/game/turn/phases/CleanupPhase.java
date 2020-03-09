@@ -13,7 +13,6 @@ public class CleanupPhase implements Phase {
 
   private final UntapPhase untapPhase;
 
-  @Autowired
   public CleanupPhase(UntapPhase untapPhase) {
     this.untapPhase = untapPhase;
   }

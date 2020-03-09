@@ -12,7 +12,6 @@ public class AfterDeclareBlockersPhase implements Phase {
 
   private final FirstStrikePhase firstStrikePhase;
 
-  @Autowired
   public AfterDeclareBlockersPhase(FirstStrikePhase firstStrikePhase) {
     this.firstStrikePhase = firstStrikePhase;
   }

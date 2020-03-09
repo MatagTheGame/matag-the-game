@@ -36,7 +36,6 @@ public class PhaseFactory {
   private final EndTurnPhase endTurnPhase;
   private final CleanupPhase cleanupPhase;
 
-  @Autowired
   public PhaseFactory(UntapPhase untapPhase, UpkeepPhase upkeepPhase, DrawPhase drawPhase,
                       Main1Phase main1Phase, BeginCombatPhase beginCombatPhase, DeclareAttackersPhase declareAttackersPhase, DeclareBlockersPhase declareBlockersPhase,
                       AfterDeclareBlockersPhase afterDeclareBlockersPhase, FirstStrikePhase firstStrikePhase, CombatDamagePhase combatDamagePhase, EndOfCombatPhase endOfCombatPhase, Main2Phase main2Phase,

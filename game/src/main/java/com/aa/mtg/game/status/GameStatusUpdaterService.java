@@ -14,7 +14,6 @@ public class GameStatusUpdaterService {
 
   private final EventSender eventSender;
 
-  @Autowired
   public GameStatusUpdaterService(EventSender eventSender) {
     this.eventSender = eventSender;
   }

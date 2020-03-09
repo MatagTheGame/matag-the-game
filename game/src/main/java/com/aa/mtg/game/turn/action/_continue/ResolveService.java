@@ -33,7 +33,6 @@ public class ResolveService {
   private final PutIntoGraveyardService putIntoGraveyardService;
   private final TargetCheckerService targetCheckerService;
 
-  @Autowired
   public ResolveService(ContinueTurnService continueTurnService, AbilityActionFactory abilityActionFactory,
                         EnterCardIntoBattlefieldService enterCardIntoBattlefieldService, PutIntoGraveyardService putIntoGraveyardService, TargetCheckerService targetCheckerService) {
     this.continueTurnService = continueTurnService;

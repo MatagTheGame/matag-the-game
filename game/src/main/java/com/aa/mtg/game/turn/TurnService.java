@@ -23,7 +23,6 @@ public class TurnService {
   private final DeclareAttackerService declareAttackerService;
   private final DeclareBlockerService declareBlockerService;
 
-  @Autowired
   public TurnService(ContinueTurnService continueTurnService, PlayLandService playLandService, CastService castService, ResolveService resolveService, DeclareAttackerService declareAttackerService, DeclareBlockerService declareBlockerService) {
     this.continueTurnService = continueTurnService;
     this.playLandService = playLandService;

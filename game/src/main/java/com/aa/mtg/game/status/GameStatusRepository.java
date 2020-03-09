@@ -12,7 +12,6 @@ public class GameStatusRepository {
 
   private final SecurityHelper securityHelper;
 
-  @Autowired
   public GameStatusRepository(SecurityHelper securityHelper) {
     this.securityHelper = securityHelper;
   }

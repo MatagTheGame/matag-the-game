@@ -22,7 +22,6 @@ public class AbilitiesFromOtherPermanentsService {
   private final AbilityService abilityService;
   private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
 
-  @Autowired
   public AbilitiesFromOtherPermanentsService(CardInstanceSelectorService cardInstanceSelectorService, AbilityService abilityService, CardInstanceAbilityFactory cardInstanceAbilityFactory) {
     this.cardInstanceSelectorService = cardInstanceSelectorService;
     this.abilityService = abilityService;

@@ -14,7 +14,6 @@ public class ConsolidateStatusService {
   private final DestroyPermanentService destroyPermanentService;
   private final ReturnPermanentToHandService returnPermanentToHandService;
 
-  @Autowired
   public ConsolidateStatusService(DestroyPermanentService destroyPermanentService, ReturnPermanentToHandService returnPermanentToHandService) {
     this.destroyPermanentService = destroyPermanentService;
     this.returnPermanentToHandService = returnPermanentToHandService;

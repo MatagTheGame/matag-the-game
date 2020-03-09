@@ -22,7 +22,6 @@ public class EventSender {
   private final SimpMessagingTemplate webSocketTemplate;
   private final ObjectMapper objectMapper;
 
-  @Autowired
   public EventSender(SimpMessagingTemplate simpleMessagingTemplate, ObjectMapper objectMapper) {
     this.webSocketTemplate = simpleMessagingTemplate;
     this.objectMapper = objectMapper;

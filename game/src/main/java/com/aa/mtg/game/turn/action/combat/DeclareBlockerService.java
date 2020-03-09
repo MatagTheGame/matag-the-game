@@ -18,7 +18,6 @@ public class DeclareBlockerService {
 
   private final ContinueTurnService continueTurnService;
 
-  @Autowired
   public DeclareBlockerService(ContinueTurnService continueTurnService) {
     this.continueTurnService = continueTurnService;
   }

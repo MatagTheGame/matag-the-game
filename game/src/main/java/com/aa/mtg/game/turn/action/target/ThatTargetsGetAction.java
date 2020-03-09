@@ -28,7 +28,6 @@ public class ThatTargetsGetAction implements AbilityAction {
   private final DealDamageToPlayerService dealDamageToPlayerService;
   private final AbilityService abilityService;
 
-  @Autowired
   public ThatTargetsGetAction(LifeService lifeService, DrawXCardsService drawXCardsService, PermanentService permanentService, DealDamageToPlayerService dealDamageToPlayerService, AbilityService abilityService) {
     this.lifeService = lifeService;
     this.drawXCardsService = drawXCardsService;

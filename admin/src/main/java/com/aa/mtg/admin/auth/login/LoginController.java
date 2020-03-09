@@ -35,20 +35,24 @@ public class LoginController {
   public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
     Optional<MtgUser> userOptional = userRepository.findByUsername(loginRequest.getUsername());
 
-    if (userOptional.isPresent()) {
-      MtgUser user = userOptional.get();
-      if (user.getStatus() == ACTIVE) {
-        if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-          String sessionId = UUID.randomUUID().toString();
-
-          MtgSession session = new MtgSession(sessionId, user, LocalDateTime.now().plusDays(1));
-          mtgSessionRepository.save(session);
-
-          return ResponseEntity.ok(new LoginResponse(sessionId));
-        }
-      }
+    if (!userOptional.isPresent()) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    MtgUser user = userOptional.get();
+    if (user.getStatus() != ACTIVE) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
+    if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
+    String sessionId = UUID.randomUUID().toString();
+
+    MtgSession session = new MtgSession(sessionId, user, LocalDateTime.now().plusDays(1));
+    mtgSessionRepository.save(session);
+
+    return ResponseEntity.ok(new LoginResponse(sessionId));
   }
 }

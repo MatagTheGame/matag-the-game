@@ -62,7 +62,6 @@ public class CardInstance {
   private final AttachmentsService attachmentsService;
   private final AbilitiesFromOtherPermanentsService abilitiesFromOtherPermanentsService;
 
-  @Autowired
   public CardInstance(
     @Autowired(required = false) AttachmentsService attachmentsService,
     @Autowired(required = false) AbilitiesFromOtherPermanentsService abilitiesFromOtherPermanentsService

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 public class ContinueTurnService {
   private final PhaseFactory phaseFactory;
 
-  @Autowired
   public ContinueTurnService(PhaseFactory phaseFactory) {
     this.phaseFactory = phaseFactory;
   }

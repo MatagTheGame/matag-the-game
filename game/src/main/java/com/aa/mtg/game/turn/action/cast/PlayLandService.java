@@ -17,7 +17,6 @@ public class PlayLandService {
 
   private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
 
-  @Autowired
   public PlayLandService(EnterCardIntoBattlefieldService enterCardIntoBattlefieldService) {
     this.enterCardIntoBattlefieldService = enterCardIntoBattlefieldService;
   }

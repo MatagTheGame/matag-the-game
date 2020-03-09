@@ -27,7 +27,6 @@ public class EntersTheBattlefieldWithService {
   private final DrawXCardsService drawXCardsService;
   private final AbilityService abilityService;
 
-  @Autowired
   public EntersTheBattlefieldWithService(ManaCountService manaCountService, DrawXCardsService drawXCardsService, AbilityService abilityService) {
     this.manaCountService = manaCountService;
     this.drawXCardsService = drawXCardsService;

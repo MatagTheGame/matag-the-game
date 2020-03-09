@@ -22,7 +22,6 @@ public class GameStatus {
   private Turn turn;
   private SpellStack stack;
 
-  @Autowired
   public GameStatus(Turn turn, SpellStack stack) {
     this.turn = turn;
     this.stack = stack;

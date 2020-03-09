@@ -12,7 +12,6 @@ public class UpkeepPhase implements Phase {
 
   private final DrawPhase drawPhase;
 
-  @Autowired
   public UpkeepPhase(DrawPhase drawPhase) {
     this.drawPhase = drawPhase;
   }

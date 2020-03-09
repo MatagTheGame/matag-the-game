@@ -28,7 +28,6 @@ public class TargetCheckerService {
   private final AbilityActionFactory abilityActionFactory;
   private final CardInstanceSelectorService cardInstanceSelectorService;
 
-  @Autowired
   public TargetCheckerService(AbilityActionFactory abilityActionFactory, CardInstanceSelectorService cardInstanceSelectorService) {
     this.abilityActionFactory = abilityActionFactory;
     this.cardInstanceSelectorService = cardInstanceSelectorService;

@@ -12,7 +12,6 @@ public class Main2Phase implements Phase {
 
   private final EndTurnPhase endTurnPhase;
 
-  @Autowired
   public Main2Phase(EndTurnPhase endTurnPhase) {
     this.endTurnPhase = endTurnPhase;
   }

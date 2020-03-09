@@ -21,7 +21,6 @@ public class WhenDieService {
 
   private final CardInstanceSelectorService cardInstanceSelectorService;
 
-  @Autowired
   public WhenDieService(CardInstanceSelectorService cardInstanceSelectorService) {
     this.cardInstanceSelectorService = cardInstanceSelectorService;
   }

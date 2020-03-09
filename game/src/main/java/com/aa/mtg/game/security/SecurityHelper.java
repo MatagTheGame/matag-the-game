@@ -14,7 +14,6 @@ public class SecurityHelper {
 
   private final PlayerService playerService;
 
-  @Autowired
   public SecurityHelper(PlayerService playerService) {
     this.playerService = playerService;
   }

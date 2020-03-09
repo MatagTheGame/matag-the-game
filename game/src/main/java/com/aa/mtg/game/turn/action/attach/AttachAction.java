@@ -14,7 +14,6 @@ public class AttachAction implements AbilityAction {
 
   private final AttachService attachService;
 
-  @Autowired
   public AttachAction(AttachService attachService) {
     this.attachService = attachService;
   }

@@ -26,7 +26,6 @@ public class DeckRetrieverService {
   private final CardInstanceFactory cardInstanceFactory;
   private final Cards cards;
 
-  @Autowired
   public DeckRetrieverService(CardInstanceFactory cardInstanceFactory, Cards cards) {
     this.cardInstanceFactory = cardInstanceFactory;
     this.cards = cards;

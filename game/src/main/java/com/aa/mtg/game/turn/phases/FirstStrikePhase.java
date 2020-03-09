@@ -12,7 +12,6 @@ public class FirstStrikePhase implements Phase {
 
   private final CombatDamagePhase combatDamagePhase;
 
-  @Autowired
   public FirstStrikePhase(CombatDamagePhase combatDamagePhase) {
     this.combatDamagePhase = combatDamagePhase;
   }

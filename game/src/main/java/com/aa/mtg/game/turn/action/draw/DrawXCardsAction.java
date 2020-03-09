@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 public class DrawXCardsAction implements AbilityAction {
   private final DrawXCardsService drawXCardsService;
 
-  @Autowired
   public DrawXCardsAction(DrawXCardsService drawXCardsService) {
     this.drawXCardsService = drawXCardsService;
   }

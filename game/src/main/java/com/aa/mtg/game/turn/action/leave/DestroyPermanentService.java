@@ -17,7 +17,6 @@ public class DestroyPermanentService {
   private final PutIntoGraveyardService putIntoGraveyardService;
   private final WhenDieService whenDieService;
 
-  @Autowired
   public DestroyPermanentService(LeaveBattlefieldService leaveBattlefieldService, PutIntoGraveyardService putIntoGraveyardService, WhenDieService whenDieService) {
     this.leaveBattlefieldService = leaveBattlefieldService;
     this.putIntoGraveyardService = putIntoGraveyardService;

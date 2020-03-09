@@ -14,7 +14,6 @@ public class DeclareAttackerService {
 
   private final ContinueTurnService continueTurnService;
 
-  @Autowired
   public DeclareAttackerService(ContinueTurnService continueTurnService) {
     this.continueTurnService = continueTurnService;
   }

@@ -21,7 +21,6 @@ public class WhenEnterTheBattlefieldService {
 
   private final CardInstanceSelectorService cardInstanceSelectorService;
 
-  @Autowired
   public WhenEnterTheBattlefieldService(CardInstanceSelectorService cardInstanceSelectorService) {
     this.cardInstanceSelectorService = cardInstanceSelectorService;
   }

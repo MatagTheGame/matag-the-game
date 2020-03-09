@@ -1,5 +1,6 @@
 package com.aa.mtg.admin.session;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +23,7 @@ public class AuthSessionFilter extends GenericFilterBean {
 
   private final MtgSessionRepository mtgSessionRepository;
 
+  @Autowired
   public AuthSessionFilter(MtgSessionRepository mtgSessionRepository) {
     this.mtgSessionRepository = mtgSessionRepository;
   }

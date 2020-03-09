@@ -19,7 +19,6 @@ public class CombatService {
   private final DealDamageToCreatureService dealDamageToCreatureService;
   private final DealDamageToPlayerService dealDamageToPlayerService;
 
-  @Autowired
   public CombatService(LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService, DealDamageToPlayerService dealDamageToPlayerService) {
     this.lifeService = lifeService;
     this.dealDamageToCreatureService = dealDamageToCreatureService;

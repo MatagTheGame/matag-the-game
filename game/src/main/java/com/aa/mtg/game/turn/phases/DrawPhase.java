@@ -13,7 +13,6 @@ public class DrawPhase implements Phase {
 
   private final DrawXCardsService drawXCardsService;
 
-  @Autowired
   public DrawPhase(DrawXCardsService drawXCardsService) {
     this.drawXCardsService = drawXCardsService;
   }

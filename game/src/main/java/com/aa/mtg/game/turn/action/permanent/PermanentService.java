@@ -35,7 +35,6 @@ public class PermanentService {
   private final AbilityService abilityService;
   private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
 
-  @Autowired
   public PermanentService(DealDamageToCreatureService dealDamageToCreatureService, DealDamageToPlayerService dealDamageToPlayerService, DestroyPermanentService destroyPermanentService,
                           TapPermanentService tapPermanentService, ReturnPermanentToHandService returnPermanentToHandService, GainControlPermanentService gainControlPermanentService, CountersService countersService, AbilityService abilityService, CardInstanceAbilityFactory cardInstanceAbilityFactory) {
     this.dealDamageToCreatureService = dealDamageToCreatureService;

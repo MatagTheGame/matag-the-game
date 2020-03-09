@@ -12,7 +12,6 @@ public class Main1Phase implements Phase {
 
   private final BeginCombatPhase beginCombatPhase;
 
-  @Autowired
   public Main1Phase(BeginCombatPhase beginCombatPhase) {
     this.beginCombatPhase = beginCombatPhase;
   }

@@ -14,7 +14,6 @@ public class CombatDamagePhase implements Phase {
   private final CombatService combatService;
   private final EndOfCombatPhase endOfCombatPhase;
 
-  @Autowired
   public CombatDamagePhase(CombatService combatService, EndOfCombatPhase endOfCombatPhase) {
     this.combatService = combatService;
     this.endOfCombatPhase = endOfCombatPhase;

@@ -17,7 +17,6 @@ public class EnterCardIntoBattlefieldService {
   private final EntersTheBattlefieldWithService entersTheBattlefieldWithService;
   private final WhenEnterTheBattlefieldService whenEnterTheBattlefieldService;
 
-  @Autowired
   public EnterCardIntoBattlefieldService(
     EntersTheBattlefieldWithService entersTheBattlefieldWithService,
     WhenEnterTheBattlefieldService whenEnterTheBattlefieldService) {

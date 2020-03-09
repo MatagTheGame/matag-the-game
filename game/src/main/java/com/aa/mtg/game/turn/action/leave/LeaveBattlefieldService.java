@@ -22,7 +22,6 @@ public class LeaveBattlefieldService {
   private final DestroyPermanentService destroyPermanentService;
 
   @Lazy
-  @Autowired
   public LeaveBattlefieldService(AttachService attachService, AttachmentsService attachmentsService, DestroyPermanentService destroyPermanentService) {
     this.attachService = attachService;
     this.attachmentsService = attachmentsService;

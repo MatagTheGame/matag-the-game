@@ -14,13 +14,13 @@ import org.springframework.context.annotation.Primary;
 public class ApplicationTestConfiguration {
   @Bean
   @Primary
-  public MtgUserRepository userRepository() {
+  public MtgUserRepository mtgUserRepository() {
     return Mockito.mock(MtgUserRepository.class);
   }
 
   @Bean
   @Primary
-  public MtgSessionRepository sessionRepository() {
+  public MtgSessionRepository mtgSessionRepository() {
     return Mockito.mock(MtgSessionRepository.class);
   }
 }

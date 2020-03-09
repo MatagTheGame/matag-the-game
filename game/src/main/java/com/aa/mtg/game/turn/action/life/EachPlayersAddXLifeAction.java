@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 public class EachPlayersAddXLifeAction implements AbilityAction {
   private final LifeService lifeService;
 
-  @Autowired
   public EachPlayersAddXLifeAction(LifeService lifeService) {
     this.lifeService = lifeService;
   }

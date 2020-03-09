@@ -10,7 +10,6 @@ public class ReturnPermanentToHandService {
   private final LeaveBattlefieldService leaveBattlefieldService;
   private final PutIntoHandService putIntoHandService;
 
-  @Autowired
   public ReturnPermanentToHandService(LeaveBattlefieldService leaveBattlefieldService, PutIntoHandService putIntoHandService) {
     this.leaveBattlefieldService = leaveBattlefieldService;
     this.putIntoHandService = putIntoHandService;

@@ -15,7 +15,6 @@ public class Hand extends CardListComponent {
 
   private final CardInstanceFactory cardInstanceFactory;
 
-  @Autowired
   public Hand(CardInstanceFactory cardInstanceFactory) {
     this.cardInstanceFactory = cardInstanceFactory;
   }

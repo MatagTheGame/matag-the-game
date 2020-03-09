@@ -15,7 +15,6 @@ public class DealDamageToPlayerService {
 
   private final LifeService lifeService;
 
-  @Autowired
   public DealDamageToPlayerService(LifeService lifeService) {
     this.lifeService = lifeService;
   }

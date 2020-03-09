@@ -32,7 +32,6 @@ public class InitController {
   private final GameStatusRepository gameStatusRepository;
   private final DeckRetrieverService deckRetrieverService;
 
-  @Autowired
   public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerFactory playerFactory, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
     this.securityHelper = securityHelper;
     this.eventSender = eventSender;

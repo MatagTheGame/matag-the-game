@@ -17,7 +17,6 @@ public class UntapPhase implements Phase {
 
   private final TapPermanentService tapPermanentService;
 
-  @Autowired
   public UntapPhase(TapPermanentService tapPermanentService) {
     this.tapPermanentService = tapPermanentService;
   }

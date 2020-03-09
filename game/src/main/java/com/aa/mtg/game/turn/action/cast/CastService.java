@@ -29,7 +29,6 @@ public class CastService {
   private final TapPermanentService tapPermanentService;
   private final CostService costService;
 
-  @Autowired
   public CastService(TargetCheckerService targetCheckerService, ManaCountService manaCountService, TapPermanentService tapPermanentService, CostService costService) {
     this.targetCheckerService = targetCheckerService;
     this.manaCountService = manaCountService;

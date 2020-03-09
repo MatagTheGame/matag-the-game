@@ -14,7 +14,6 @@ public class DeclareAttackersPhase implements Phase {
 
   private final FirstStrikePhase firstStrikePhase;
 
-  @Autowired
   public DeclareAttackersPhase(FirstStrikePhase firstStrikePhase) {
     this.firstStrikePhase = firstStrikePhase;
   }
