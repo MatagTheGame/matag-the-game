@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,11 +26,13 @@ public class LoginController {
   private final MtgUserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final MtgSessionRepository mtgSessionRepository;
+  private final Clock clock;
 
-  public LoginController(MtgUserRepository userRepository, PasswordEncoder passwordEncoder, MtgSessionRepository mtgSessionRepository) {
+  public LoginController(MtgUserRepository userRepository, PasswordEncoder passwordEncoder, MtgSessionRepository mtgSessionRepository, Clock clock) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
     this.mtgSessionRepository = mtgSessionRepository;
+    this.clock = clock;
   }
 
   @PostMapping("/login")
@@ -52,8 +55,8 @@ public class LoginController {
     MtgSession session = MtgSession.builder()
       .id(UUID.randomUUID().toString())
       .mtgUser(user)
-      .createdAt(LocalDateTime.now())
-      .validUntil(LocalDateTime.now().plusSeconds(SESSION_DURATION_TIME))
+      .createdAt(LocalDateTime.now(clock))
+      .validUntil(LocalDateTime.now(clock).plusSeconds(SESSION_DURATION_TIME))
       .build();
     mtgSessionRepository.save(session);
 

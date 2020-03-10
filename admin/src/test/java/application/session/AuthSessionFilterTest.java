@@ -1,51 +1,44 @@
-package application.auth.logout;
+package application.session;
 
 import application.AbstractApplicationTest;
 import com.aa.mtg.admin.MtgAdminApplication;
-import com.aa.mtg.admin.session.MtgSessionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MtgAdminApplication.class, webEnvironment = RANDOM_PORT)
 @Import(AbstractApplicationTest.ApplicationTestConfiguration.class)
-public class LogoutControllerTest extends AbstractApplicationTest {
+public class AuthSessionFilterTest extends AbstractApplicationTest {
   @Autowired
   private TestRestTemplate restTemplate;
 
-  @Autowired
-  private MtgSessionRepository mtgSessionRepository;
-
   @Test
-  public void shouldLogoutAUser() {
-    // Given
-    mtgSessionRepository.deleteAll();
-    user1IsLoggedIn();
-
+  public void shouldGrantAccessToAResourceToLoggedInUsers() {
     // When
-    ResponseEntity<String> logoutResponse = restTemplate.getForEntity("/auth/logout", String.class);
+    user1IsLoggedIn();
+    ResponseEntity<String> response = restTemplate.getForEntity("/path/to/a/resource", String.class);
 
     // Then
-    assertThat(logoutResponse.getStatusCode()).isEqualTo(OK);
-    assertThat(mtgSessionRepository.count()).isEqualTo(0);
+    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
   }
 
   @Test
-  public void shouldLogoutANonLoggedInUser() {
+  public void shouldNotGrantAccessToAResourceToNonLoggedInUsers() {
     // When
-    ResponseEntity<String> logoutResponse = restTemplate.getForEntity("/auth/logout", String.class);
+    ResponseEntity<String> response = restTemplate.getForEntity("/path/to/a/resource", String.class);
 
     // Then
-    assertThat(logoutResponse.getStatusCode()).isEqualTo(OK);
+    assertThat(response.getStatusCode()).isEqualTo(FORBIDDEN);
   }
 }
