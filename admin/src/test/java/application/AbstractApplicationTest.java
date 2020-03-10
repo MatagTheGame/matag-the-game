@@ -13,8 +13,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.UUID;
@@ -41,6 +43,8 @@ public abstract class AbstractApplicationTest {
 
   @Before
   public void setupDatabase() {
+    setCurrentTime(Instant.parse("2020-01-01T00:00:00Z"));
+
     testRestTemplate.getRestTemplate().getInterceptors().clear();
 
     mtgUserRepository.save(user1());
@@ -58,6 +62,10 @@ public abstract class AbstractApplicationTest {
   public void cleanupDatabase() {
     mtgUserRepository.deleteAll();
     mtgSessionRepository.deleteAll();
+  }
+
+  public void setCurrentTime(Instant currentTime) {
+    ((MockClock) clock).setCurrentTime(currentTime);
   }
 
   public void user1IsLoggedIn() {
@@ -79,6 +87,12 @@ public abstract class AbstractApplicationTest {
     @Bean
     public MtgSessionRepository mtgSessionRepository() {
       return new MtgSessionInMemoryRepository();
+    }
+
+    @Bean
+    @Primary
+    public Clock clock() {
+      return new MockClock();
     }
   }
 }

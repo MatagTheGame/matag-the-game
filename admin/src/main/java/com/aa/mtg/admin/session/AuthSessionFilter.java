@@ -14,7 +14,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.time.Clock;
+import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -23,10 +26,12 @@ public class AuthSessionFilter extends GenericFilterBean {
   public final static int SESSION_DURATION_TIME = 60 * 60;
 
   private final MtgSessionRepository mtgSessionRepository;
+  private final Clock clock;
 
   @Autowired
-  public AuthSessionFilter(MtgSessionRepository mtgSessionRepository) {
+  public AuthSessionFilter(MtgSessionRepository mtgSessionRepository, Clock clock) {
     this.mtgSessionRepository = mtgSessionRepository;
+    this.clock = clock;
   }
 
   @Override
@@ -36,9 +41,18 @@ public class AuthSessionFilter extends GenericFilterBean {
 
     if (StringUtils.hasText(sessionId)) {
       Optional<MtgSession> mtgSession = mtgSessionRepository.findById(sessionId);
-      mtgSession.ifPresent(session -> SecurityContextHolder.getContext().setAuthentication(
-        new UsernamePasswordAuthenticationToken(session.getMtgUser(), session.getMtgUser().getPassword(), Collections.singletonList(new SimpleGrantedAuthority("USER"))))
-      );
+      mtgSession.ifPresent(session -> {
+        if (LocalDateTime.now(clock).isBefore(session.getValidUntil())) {
+          List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("USER"));
+          UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(session.getMtgUser(), session.getMtgUser().getPassword(), authorities);
+          SecurityContextHolder.getContext().setAuthentication(authentication);
+
+          if (LocalDateTime.now(clock).plusSeconds(SESSION_DURATION_TIME / 2).isAfter(session.getValidUntil())) {
+            session.setValidUntil(LocalDateTime.now(clock).plusSeconds(SESSION_DURATION_TIME));
+            mtgSessionRepository.save(session);
+          }
+        }
+      });
     }
 
     filterChain.doFilter(request, response);
