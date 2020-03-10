@@ -2,6 +2,7 @@ package com.aa.mtg.admin.session;
 
 import com.aa.mtg.admin.user.MtgUser;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "mtg_session")
 public class MtgSession {
@@ -19,5 +21,6 @@ public class MtgSession {
   @ManyToOne
   @JoinColumn(referencedColumnName = "id")
   private MtgUser mtgUser;
+  private LocalDateTime createdAt;
   private LocalDateTime validUntil;
 }

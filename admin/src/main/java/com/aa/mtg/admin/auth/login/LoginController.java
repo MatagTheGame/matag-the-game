@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
+import static com.aa.mtg.admin.session.AuthSessionFilter.SESSION_DURATION_TIME;
 import static com.aa.mtg.admin.user.MtgUserStatus.ACTIVE;
 
 @RestController
@@ -48,11 +49,14 @@ public class LoginController {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
-    String sessionId = UUID.randomUUID().toString();
-
-    MtgSession session = new MtgSession(sessionId, user, LocalDateTime.now().plusDays(1));
+    MtgSession session = MtgSession.builder()
+      .id(UUID.randomUUID().toString())
+      .mtgUser(user)
+      .createdAt(LocalDateTime.now())
+      .validUntil(LocalDateTime.now().plusSeconds(SESSION_DURATION_TIME))
+      .build();
     mtgSessionRepository.save(session);
 
-    return ResponseEntity.ok(new LoginResponse(sessionId));
+    return ResponseEntity.ok(new LoginResponse(session.getId()));
   }
 }

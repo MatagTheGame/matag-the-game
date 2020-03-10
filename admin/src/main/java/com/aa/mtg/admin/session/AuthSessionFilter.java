@@ -20,6 +20,7 @@ import java.util.Optional;
 @Component
 public class AuthSessionFilter extends GenericFilterBean {
   public final static String SESSION_NAME = "session";
+  public final static int SESSION_DURATION_TIME = 60 * 60;
 
   private final MtgSessionRepository mtgSessionRepository;
 
