@@ -2,9 +2,9 @@ package com.matag.admin.auth.login;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.Value;
 
-@Data
+@Value
 public class LoginRequest {
   private final String username;
   private final String password;
