@@ -3,7 +3,7 @@
 Early Access version of an MTG-like game implementation.
 Please note that we are not affiliated in any way with the MTG creators, nor we claim any copyright over their game or art assets.
 
-Try it out: https://aa-mtg-game.herokuapp.com/ui/game
+Try it out: https://matag-game.herokuapp.com/ui/game
 
 In case you are the only one online, you can play against yourself by opening two browser sessions (windows/tabs) with the address above.
 
@@ -36,9 +36,9 @@ contributing and learning the project.
 
 ## Continuous Integration on Travis
 
-[![Build Status](https://travis-ci.com/antonioalonzi/mtg.svg?branch=master)](https://travis-ci.com/antonioalonzi/mtg)
+[![Build Status](https://travis-ci.com/antonioalonzi/matag.svg?branch=master)](https://travis-ci.com/antonioalonzi/matag)
 
- - Travis: https://travis-ci.com/antonioalonzi/mtg
+ - Travis: https://travis-ci.com/antonioalonzi/matag
 
 Tests run for all the modules together.
 For the `game` module `Regression` tests are skipped. Read module readme for more info.
@@ -46,8 +46,8 @@ For the `game` module `Regression` tests are skipped. Read module readme for mor
 ## Continuous Deployment on Heroku
 
 Applications are continuously deployed on heroku:
- - Admin: https://dashboard.heroku.com/apps/aa-mtg-admin
- - Game: https://dashboard.heroku.com/apps/aa-mtg-game
+ - Admin: https://dashboard.heroku.com/apps/matag-admin
+ - Game: https://dashboard.heroku.com/apps/matag-game
 
 
 ## License

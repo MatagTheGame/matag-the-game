@@ -1,7 +1,7 @@
 # Admin
 
 This application is taking care of user management and deck building.
-It is deployed at https://aa-mtg-admin.herokuapp.com/admin.html
+It is deployed at https://matag-admin.herokuapp.com/
 
 
 ## Requisites

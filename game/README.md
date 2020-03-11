@@ -1,7 +1,7 @@
 # Game
 
 This application is taking care of playing matches between players.
-It is deployed at https://aa-mtg-game.herokuapp.com/ui/game
+It is deployed at https://matag-game.herokuapp.com/ui/game
 
 
 ## Requisites
