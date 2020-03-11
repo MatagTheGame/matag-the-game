@@ -11,6 +11,10 @@ body {
   outline: none;
 }
 
+a {
+  color: #92b4f3;
+}
+
 input,
 select,
 textarea,
