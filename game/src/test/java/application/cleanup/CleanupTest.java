@@ -2,11 +2,11 @@ package application.cleanup;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
-import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cards.Cards;
-import com.aa.mtg.game.MtgGameApplication;
-import com.aa.mtg.game.init.test.InitTestService;
-import com.aa.mtg.game.status.GameStatus;
+import com.matag.cardinstance.CardInstance;
+import com.matag.cards.Cards;
+import com.matag.game.MatagGameApplication;
+import com.matag.game.init.test.InitTestService;
+import com.matag.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +15,17 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.aa.mtg.cardinstance.modifiers.TappedModifier.TAPPED;
-import static com.aa.mtg.cards.properties.PowerToughness.powerToughness;
-import static com.aa.mtg.game.turn.phases.EndTurnPhase.ET;
-import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
-import static com.aa.mtg.game.turn.phases.Main2Phase.M2;
-import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
-import static com.aa.mtg.player.PlayerType.OPPONENT;
-import static com.aa.mtg.player.PlayerType.PLAYER;
+import static com.matag.cardinstance.modifiers.TappedModifier.TAPPED;
+import static com.matag.cards.properties.PowerToughness.powerToughness;
+import static com.matag.game.turn.phases.EndTurnPhase.ET;
+import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.game.turn.phases.Main2Phase.M2;
+import static com.matag.game.turn.phases.UpkeepPhase.UP;
+import static com.matag.player.PlayerType.OPPONENT;
+import static com.matag.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MtgGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = MatagGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CleanupTest.InitGameTestConfiguration.class})
 public class CleanupTest extends AbstractApplicationTest {
 

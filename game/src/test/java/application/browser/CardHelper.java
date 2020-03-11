@@ -1,7 +1,7 @@
 package application.browser;
 
-import com.aa.mtg.cards.Card;
-import com.aa.mtg.player.PlayerType;
+import com.matag.cards.Card;
+import com.matag.player.PlayerType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
@@ -16,11 +16,11 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class CardHelper {
   private WebElement webElement;
-  private MtgBrowser mtgBrowser;
+  private MatagBrowser matagBrowser;
 
-  CardHelper(WebElement webElement, MtgBrowser mtgBrowser) {
+  CardHelper(WebElement webElement, MatagBrowser matagBrowser) {
     this.webElement = webElement;
-    this.mtgBrowser = mtgBrowser;
+    this.matagBrowser = matagBrowser;
   }
 
   public static List<String> cardNames(Card... cards) {
@@ -111,7 +111,7 @@ public class CardHelper {
   }
 
   public void hasSummoningSickness() {
-    mtgBrowser.wait(presenceOfElementLocated(cardCssSelector(".summoning-sickness")));
+    matagBrowser.wait(presenceOfElementLocated(cardCssSelector(".summoning-sickness")));
   }
 
   public void doesNotHaveSummoningSickness() {
@@ -123,7 +123,7 @@ public class CardHelper {
   }
 
   public void hasDamage(int damage) {
-    mtgBrowser.wait(textToBe(cardCssSelector(".damage"), String.valueOf(damage)));
+    matagBrowser.wait(textToBe(cardCssSelector(".damage"), String.valueOf(damage)));
   }
 
   public void doesNotHaveDamage() {
@@ -131,7 +131,7 @@ public class CardHelper {
   }
 
   public void hasPowerAndToughness(String powerAndToughness) {
-    mtgBrowser.wait(textToBe(cardCssSelector(".power-toughness"), String.valueOf(powerAndToughness)));
+    matagBrowser.wait(textToBe(cardCssSelector(".power-toughness"), String.valueOf(powerAndToughness)));
   }
 
   public void parentHasStyle(String style) {
@@ -140,11 +140,11 @@ public class CardHelper {
   }
 
   private void hasClass(String classValue) {
-    mtgBrowser.wait(attributeContains(By.id(getCardId()), "class", classValue));
+    matagBrowser.wait(attributeContains(By.id(getCardId()), "class", classValue));
   }
 
   private void doesNotHaveClass(String classValue) {
-    mtgBrowser.wait(not(attributeContains(By.id(getCardId()), "class", classValue)));
+    matagBrowser.wait(not(attributeContains(By.id(getCardId()), "class", classValue)));
   }
 
   private By cardCssSelector(String cssSelector) {
@@ -153,8 +153,8 @@ public class CardHelper {
 
   private void waitForAbsenceOfElement(By locator) {
     try {
-      mtgBrowser.findElement(locator);
-      mtgBrowser.wait(invisibilityOfElementLocated(locator));
+      matagBrowser.findElement(locator);
+      matagBrowser.wait(invisibilityOfElementLocated(locator));
 
     } catch (NotFoundException e) {
       System.out.println("Element " + locator + " is not present at all. That's okay.");
@@ -162,17 +162,17 @@ public class CardHelper {
   }
 
   private void playerHasPriority() {
-    new PhaseHelper(mtgBrowser).isPriority(PlayerType.PLAYER);
+    new PhaseHelper(matagBrowser).isPriority(PlayerType.PLAYER);
   }
 
   private void declareAsAttackerOrBlocker() {
     playerHasPriority();
     String cardId = this.getCardId();
     click();
-    mtgBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + cardId)));
+    matagBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + cardId)));
   }
 
   public void hasPlus1Counters(int counters) {
-    mtgBrowser.wait(textToBe(cardCssSelector(".plus-1-counters"), String.valueOf(counters)));
+    matagBrowser.wait(textToBe(cardCssSelector(".plus-1-counters"), String.valueOf(counters)));
   }
 }

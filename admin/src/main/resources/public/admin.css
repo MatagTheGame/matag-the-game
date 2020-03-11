@@ -51,7 +51,7 @@ ul {
 
 /** Form  */
 @media screen and (min-width: 600px) {
-  .mtg-form .grid {
+  .matag-form .grid {
     display: grid;
     grid-gap: 1.5rem;
     margin-top: 1rem;
@@ -59,15 +59,15 @@ ul {
     align-items: center;
   }
 
-  .mtg-form .grid-label-value {
+  .matag-form .grid-label-value {
     grid-template-columns: 1fr 10fr;
   }
 }
 
-.mtg-form select,
-.mtg-form input,
-.mtg-form textarea,
-.mtg-form button {
+.matag-form select,
+.matag-form input,
+.matag-form textarea,
+.matag-form button {
   width: 100%;
   line-height: 1.5;
   padding: 10px 10px;
@@ -76,31 +76,31 @@ ul {
   background: hsl(0, 0%, 14%);
 }
 
-.mtg-form label {
+.matag-form label {
   line-height: 1.5;
   padding: 10px 10px;
 }
 
-.mtg-form textarea {
+.matag-form textarea {
   height: 170px;
 }
 
-.mtg-form ::placeholder {
+.matag-form ::placeholder {
   color: inherit;
   opacity: 1;
 }
 
-.mtg-form select:focus,
-.mtg-form input:focus,
-.mtg-form textarea:focus,
-.mtg-form button:focus {
+.matag-form select:focus,
+.matag-form input:focus,
+.matag-form textarea:focus,
+.matag-form button:focus {
   border: 1px solid hsl(0, 0%, 14%);
   background: hsl(0, 0%, 18%);
 }
 
-.mtg-form input[type=button]:enabled:hover,
-.mtg-form input[type=submit]:enabled:hover,
-.mtg-form input[type=reset]:enabled:hover {
+.matag-form input[type=button]:enabled:hover,
+.matag-form input[type=submit]:enabled:hover,
+.matag-form input[type=reset]:enabled:hover {
   border: 1px solid hsl(0, 0%, 14%);
   background: hsl(0, 0%, 18%);
 }

@@ -1,0 +1,29 @@
+package com.matag.game.turn.action.shuffle;
+
+import com.matag.cardinstance.CardInstance;
+import com.matag.cardinstance.ability.CardInstanceAbility;
+import com.matag.cardinstance.ability.AbilityAction;
+import com.matag.game.player.Player;
+import com.matag.game.status.GameStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+
+@Component
+public class ShuffleTargetGraveyardIntoLibraryAction implements AbilityAction {
+  private static final Logger LOGGER = LoggerFactory.getLogger(ShuffleTargetGraveyardIntoLibraryAction.class);
+
+  @Override
+  public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
+    String targetPlayerName = (String) cardInstance.getModifiers().getTargets().get(0);
+    Player targetPlayer = gameStatus.getPlayerByName(targetPlayerName);
+
+    ArrayList<CardInstance> graveyardCards = targetPlayer.getGraveyard().extractAllCards();
+    targetPlayer.getLibrary().addCards(graveyardCards);
+    targetPlayer.getLibrary().shuffle();
+
+    LOGGER.info("{} drew shuffled graveyard into library.", targetPlayer.getName());
+  }
+}

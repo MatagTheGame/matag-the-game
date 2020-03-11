@@ -13,13 +13,13 @@ import static java.util.stream.Collectors.toList;
 public class StackHelper extends AbstractCardContainerHelper {
   private static final Logger LOGGER = LoggerFactory.getLogger(StackHelper.class);
 
-  StackHelper(MtgBrowser mtgBrowser) {
-    super(mtgBrowser);
+  StackHelper(MatagBrowser matagBrowser) {
+    super(matagBrowser);
   }
 
   @Override
   protected WebElement containerElement() {
-    return mtgBrowser.findElement(By.id("stack"));
+    return matagBrowser.findElement(By.id("stack"));
   }
 
   public void containsAbility(String ability) {
@@ -27,7 +27,7 @@ public class StackHelper extends AbstractCardContainerHelper {
   }
 
   public void containsAbilitiesExactly(List<String> expectedTriggeredAbilities) {
-    mtgBrowser.wait(driver -> {
+    matagBrowser.wait(driver -> {
       List<String> actualTriggeredAbilities = triggeredAbilities(containerElement());
       LOGGER.info("actualTriggeredAbilities={}   expectedTriggeredAbilities={}", actualTriggeredAbilities, expectedTriggeredAbilities);
       return expectedTriggeredAbilities.equals(actualTriggeredAbilities);

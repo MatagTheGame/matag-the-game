@@ -3,10 +3,10 @@ package application.enter;
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import application.testcategory.Regression;
-import com.aa.mtg.cards.Cards;
-import com.aa.mtg.game.MtgGameApplication;
-import com.aa.mtg.game.init.test.InitTestService;
-import com.aa.mtg.game.status.GameStatus;
+import com.matag.cards.Cards;
+import com.matag.game.MatagGameApplication;
+import com.matag.game.init.test.InitTestService;
+import com.matag.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -17,11 +17,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.aa.mtg.player.PlayerType.PLAYER;
+import static com.matag.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MtgGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = MatagGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({WheneverACreatureEntersTheBattlefieldAbilityTest.InitGameTestConfiguration.class})
 @Category(Regression.class)
 public class WheneverACreatureEntersTheBattlefieldAbilityTest extends AbstractApplicationTest {

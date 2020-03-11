@@ -1,15 +1,14 @@
 package integration;
 
-import com.aa.mtg.cardinstance.CardInstanceFactory;
-import com.aa.mtg.cards.Cards;
-import com.aa.mtg.game.player.PlayerFactory;
-import com.aa.mtg.game.stack.SpellStack;
-import com.aa.mtg.game.status.GameStatusFactory;
-import com.aa.mtg.game.turn.Turn;
-import integration.mtg.cards.CardsTestConfiguration;
-import integration.mtg.game.turn.player.PlayerTestConfiguration;
-import integration.mtg.game.turn.status.GameStatusTestConfiguration;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.matag.cardinstance.CardInstanceFactory;
+import com.matag.cards.Cards;
+import com.matag.game.player.PlayerFactory;
+import com.matag.game.stack.SpellStack;
+import com.matag.game.status.GameStatusFactory;
+import com.matag.game.turn.Turn;
+import integration.cards.CardsTestConfiguration;
+import integration.turn.player.PlayerTestConfiguration;
+import integration.turn.status.GameStatusTestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

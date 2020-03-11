@@ -5,13 +5,13 @@ import org.openqa.selenium.By;
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBe;
 
 public class StatusHelper {
-  private MtgBrowser mtgBrowser;
+  private MatagBrowser matagBrowser;
 
-  StatusHelper(MtgBrowser mtgBrowser) {
-    this.mtgBrowser = mtgBrowser;
+  StatusHelper(MatagBrowser matagBrowser) {
+    this.matagBrowser = matagBrowser;
   }
 
   public void hasMessage(String message) {
-    mtgBrowser.wait(textToBe(By.id("status-message"), message));
+    matagBrowser.wait(textToBe(By.id("status-message"), message));
   }
 }

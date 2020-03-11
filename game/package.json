@@ -1,7 +1,7 @@
 {
-  "name": "mtg-game",
+  "name": "matag-game",
   "version": "1.0.0",
-  "description": "mtg game ui",
+  "description": "matag game ui",
   "private": true,
   "scripts": {
     "build-dev": "webpack -d",

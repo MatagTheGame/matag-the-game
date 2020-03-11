@@ -1,8 +1,8 @@
 package application.auth.logout;
 
 import application.AbstractApplicationTest;
-import com.aa.mtg.admin.MtgAdminApplication;
-import com.aa.mtg.admin.session.MtgSessionRepository;
+import com.matag.admin.MatagAdminApplication;
+import com.matag.admin.session.MatagSessionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static org.springframework.http.HttpStatus.OK;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MtgAdminApplication.class, webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes = MatagAdminApplication.class, webEnvironment = RANDOM_PORT)
 @Import(AbstractApplicationTest.ApplicationTestConfiguration.class)
 @ActiveProfiles("test")
 public class LogoutControllerTest extends AbstractApplicationTest {
@@ -26,12 +26,12 @@ public class LogoutControllerTest extends AbstractApplicationTest {
   private TestRestTemplate restTemplate;
 
   @Autowired
-  private MtgSessionRepository mtgSessionRepository;
+  private MatagSessionRepository matagSessionRepository;
 
   @Test
   public void shouldLogoutAUser() {
     // Given
-    mtgSessionRepository.deleteAll();
+    matagSessionRepository.deleteAll();
     user1IsLoggedIn();
 
     // When
@@ -39,7 +39,7 @@ public class LogoutControllerTest extends AbstractApplicationTest {
 
     // Then
     assertThat(logoutResponse.getStatusCode()).isEqualTo(OK);
-    assertThat(mtgSessionRepository.count()).isEqualTo(0);
+    assertThat(matagSessionRepository.count()).isEqualTo(0);
   }
 
   @Test

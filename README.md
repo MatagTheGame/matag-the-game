@@ -1,4 +1,4 @@
-# Mtg
+# Matag
 
 Early Access version of an MTG-like game implementation.
 Please note that we are not affiliated in any way with the MTG creators, nor we claim any copyright over their game or art assets.
@@ -26,7 +26,7 @@ The application is divided in modules:
 # Backlog
 
 The backlog is managed in Kanban style at:
- - https://github.com/antonioalonzi/mtg/projects/1
+ - https://github.com/antonioalonzi/matag/projects/1
  
 Stories labelled `with guidelines` are very well described and easy to be picked up for people who want to start
 contributing and learning the project.
@@ -52,7 +52,7 @@ Applications are continuously deployed on heroku:
 
 ## License
 
-Copyright © 2019,2020 Antonio Alonzi and [contributors](https://github.com/antonioalonzi/mtg/graphs/contributors)
+Copyright © 2019,2020 Antonio Alonzi and [contributors](https://github.com/antonioalonzi/matag/graphs/contributors)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by

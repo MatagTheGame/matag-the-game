@@ -1,11 +1,11 @@
 package integration;
 
-import com.aa.mtg.cardinstance.CardInstance;
-import com.aa.mtg.cardinstance.CardInstanceFactory;
-import com.aa.mtg.cards.Cards;
-import com.aa.mtg.game.player.PlayerFactory;
-import com.aa.mtg.game.status.GameStatus;
-import com.aa.mtg.game.status.GameStatusFactory;
+import com.matag.cardinstance.CardInstance;
+import com.matag.cardinstance.CardInstanceFactory;
+import com.matag.cards.Cards;
+import com.matag.game.player.PlayerFactory;
+import com.matag.game.status.GameStatus;
+import com.matag.game.status.GameStatusFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

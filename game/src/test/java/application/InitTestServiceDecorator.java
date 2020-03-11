@@ -1,7 +1,7 @@
 package application;
 
-import com.aa.mtg.game.init.test.InitTestService;
-import com.aa.mtg.game.status.GameStatus;
+import com.matag.game.init.test.InitTestService;
+import com.matag.game.status.GameStatus;
 
 public class InitTestServiceDecorator extends InitTestService {
   private InitTestService initTestService;

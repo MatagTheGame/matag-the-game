@@ -9,15 +9,15 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>com.aa.mtg</groupId>
-        <artifactId>mtg</artifactId>
+        <groupId>com.matag</groupId>
+        <artifactId>matag</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <dependencies>
         <!-- Production -->
         <dependency>
-            <groupId>com.aa.mtg</groupId>
+            <groupId>com.matag</groupId>
             <artifactId>utils</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>

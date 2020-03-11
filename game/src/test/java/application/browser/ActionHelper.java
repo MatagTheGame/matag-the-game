@@ -3,28 +3,28 @@ package application.browser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static com.aa.mtg.player.PlayerType.PLAYER;
+import static com.matag.player.PlayerType.PLAYER;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 public class ActionHelper {
-  private MtgBrowser mtgBrowser;
+  private MatagBrowser matagBrowser;
 
-  ActionHelper(MtgBrowser mtgBrowser) {
-    this.mtgBrowser = mtgBrowser;
+  ActionHelper(MatagBrowser matagBrowser) {
+    this.matagBrowser = matagBrowser;
   }
 
   public void canContinue() {
-    mtgBrowser.wait(elementToBeClickable(getContinueSelector()));
+    matagBrowser.wait(elementToBeClickable(getContinueSelector()));
   }
 
   public void cannotContinue() {
-    mtgBrowser.wait(ExpectedConditions.not(elementToBeClickable(getContinueSelector())));
+    matagBrowser.wait(ExpectedConditions.not(elementToBeClickable(getContinueSelector())));
   }
 
   public void clickContinue() {
-    mtgBrowser.getPhaseHelper().isPriority(PLAYER);
+    matagBrowser.getPhaseHelper().isPriority(PLAYER);
     canContinue();
-    mtgBrowser.findElement(getContinueSelector()).click();
+    matagBrowser.findElement(getContinueSelector()).click();
   }
 
   private By getContinueSelector() {

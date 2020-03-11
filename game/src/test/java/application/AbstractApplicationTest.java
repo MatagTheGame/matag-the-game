@@ -1,17 +1,17 @@
 package application;
 
-import static com.aa.mtg.player.PlayerType.OPPONENT;
-import static com.aa.mtg.player.PlayerType.PLAYER;
-import static com.aa.mtg.game.turn.phases.Main1Phase.M1;
-import static com.aa.mtg.game.turn.phases.UpkeepPhase.UP;
+import static com.matag.player.PlayerType.OPPONENT;
+import static com.matag.player.PlayerType.PLAYER;
+import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.game.turn.phases.UpkeepPhase.UP;
 import static java.lang.Integer.parseInt;
 
-import application.browser.MtgBrowser;
-import com.aa.mtg.cardinstance.CardInstanceFactory;
+import application.browser.MatagBrowser;
+import com.matag.cardinstance.CardInstanceFactory;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.aa.mtg.cards.Cards;
+import com.matag.cards.Cards;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
@@ -30,7 +30,7 @@ public abstract class AbstractApplicationTest {
   @LocalServerPort
   private int port;
 
-  protected MtgBrowser browser;
+  protected MatagBrowser browser;
 
   public abstract void setupGame();
 
@@ -62,7 +62,7 @@ public abstract class AbstractApplicationTest {
     setupGame();
 
     // When player1 joins the game is waiting for opponent
-    browser = new MtgBrowser(port, GAME_ID.incrementAndGet());
+    browser = new MatagBrowser(port, GAME_ID.incrementAndGet());
     browser.getMessageHelper().hasMessage("Waiting for opponent...");
 
     // When player2 joins the game both players see the table with the cards

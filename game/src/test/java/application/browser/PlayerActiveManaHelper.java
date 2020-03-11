@@ -1,6 +1,6 @@
 package application.browser;
 
-import com.aa.mtg.cards.properties.Color;
+import com.matag.cards.properties.Color;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
@@ -13,14 +13,14 @@ public class PlayerActiveManaHelper {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PlayerActiveManaHelper.class);
 
-  private MtgBrowser mtgBrowser;
+  private MatagBrowser matagBrowser;
 
-  PlayerActiveManaHelper(MtgBrowser mtgBrowser) {
-    this.mtgBrowser = mtgBrowser;
+  PlayerActiveManaHelper(MatagBrowser matagBrowser) {
+    this.matagBrowser = matagBrowser;
   }
 
   public void toHaveMana(List<Color> colors) {
-    mtgBrowser.wait(driver -> {
+    matagBrowser.wait(driver -> {
       List<WebElement> imgs = getElementContainer().findElements(By.tagName("img"));
       List<String> alts = imgs.stream().map((webElement -> webElement.getAttribute("alt"))).sorted().collect(Collectors.toList());
       List<String> expectedColors = colors.stream().map(Enum::name).sorted().collect(Collectors.toList());
@@ -30,6 +30,6 @@ public class PlayerActiveManaHelper {
   }
 
   private WebElement getElementContainer() {
-    return mtgBrowser.findElement(By.id("player-active-mana"));
+    return matagBrowser.findElement(By.id("player-active-mana"));
   }
 }

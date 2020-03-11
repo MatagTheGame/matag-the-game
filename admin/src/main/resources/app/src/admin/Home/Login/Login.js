@@ -5,7 +5,7 @@ export default class Login extends Component {
     return (
       <div>
         <h2>Login</h2>
-        <form className="mtg-form">
+        <form className="matag-form">
           <div className="grid grid-label-value">
             <label htmlFor='username'>Username: </label><input type='text' name='username'/>
           </div>

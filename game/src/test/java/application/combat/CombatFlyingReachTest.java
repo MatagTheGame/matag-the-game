@@ -4,10 +4,10 @@ import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import application.browser.CardHelper;
 import application.testcategory.Regression;
-import com.aa.mtg.cards.Cards;
-import com.aa.mtg.game.MtgGameApplication;
-import com.aa.mtg.game.init.test.InitTestService;
-import com.aa.mtg.game.status.GameStatus;
+import com.matag.cards.Cards;
+import com.matag.game.MatagGameApplication;
+import com.matag.game.init.test.InitTestService;
+import com.matag.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -18,14 +18,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.COMBAT_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.aa.mtg.game.turn.phases.BeginCombatPhase.BC;
-import static com.aa.mtg.game.turn.phases.DeclareAttackersPhase.DA;
-import static com.aa.mtg.game.turn.phases.DeclareBlockersPhase.DB;
-import static com.aa.mtg.player.PlayerType.OPPONENT;
-import static com.aa.mtg.player.PlayerType.PLAYER;
+import static com.matag.game.turn.phases.BeginCombatPhase.BC;
+import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
+import static com.matag.player.PlayerType.OPPONENT;
+import static com.matag.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MtgGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = MatagGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({CombatFlyingReachTest.InitGameTestConfiguration.class})
 @Category(Regression.class)
 public class CombatFlyingReachTest extends AbstractApplicationTest {

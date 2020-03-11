@@ -6,21 +6,21 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.textToBe;
 import org.openqa.selenium.By;
 
 public class MessageHelper {
-  private MtgBrowser mtgBrowser;
+  private MatagBrowser matagBrowser;
 
-  MessageHelper(MtgBrowser mtgBrowser) {
-    this.mtgBrowser = mtgBrowser;
+  MessageHelper(MatagBrowser matagBrowser) {
+    this.matagBrowser = matagBrowser;
   }
 
   public void hasMessage(String message) {
-    mtgBrowser.wait(textToBe(By.id("message-text"), message));
+    matagBrowser.wait(textToBe(By.id("message-text"), message));
   }
 
   public void hasNoMessage() {
-    mtgBrowser.wait(invisibilityOfElementLocated(By.id("message")));
+    matagBrowser.wait(invisibilityOfElementLocated(By.id("message")));
   }
 
   public void close() {
-    mtgBrowser.findElement(By.id("popup-close")).click();
+    matagBrowser.findElement(By.id("popup-close")).click();
   }
 }

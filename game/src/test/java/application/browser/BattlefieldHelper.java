@@ -1,6 +1,6 @@
 package application.browser;
 
-import com.aa.mtg.player.PlayerType;
+import com.matag.player.PlayerType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -12,8 +12,8 @@ public class BattlefieldHelper extends AbstractCardContainerHelper {
   private final PlayerType playerType;
   private final String lineType;
 
-  BattlefieldHelper(MtgBrowser mtgBrowser, PlayerType playerType, String lineType) {
-    super(mtgBrowser);
+  BattlefieldHelper(MatagBrowser matagBrowser, PlayerType playerType, String lineType) {
+    super(matagBrowser);
     this.playerType = playerType;
     this.lineType = lineType;
   }
@@ -25,9 +25,9 @@ public class BattlefieldHelper extends AbstractCardContainerHelper {
 
   private WebElement playerTypeContainer() {
     if (playerType == PlayerType.PLAYER) {
-      return mtgBrowser.findElement(By.id("player-battlefield"));
+      return matagBrowser.findElement(By.id("player-battlefield"));
     } else {
-      return mtgBrowser.findElement(By.id("opponent-battlefield"));
+      return matagBrowser.findElement(By.id("opponent-battlefield"));
     }
   }
 }

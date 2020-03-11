@@ -1,8 +1,8 @@
 package application.session;
 
 import application.AbstractApplicationTest;
-import com.aa.mtg.admin.MtgAdminApplication;
-import com.aa.mtg.admin.session.MtgSessionRepository;
+import com.matag.admin.MatagAdminApplication;
+import com.matag.admin.session.MatagSessionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MtgAdminApplication.class, webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes = MatagAdminApplication.class, webEnvironment = RANDOM_PORT)
 @Import(AbstractApplicationTest.ApplicationTestConfiguration.class)
 @ActiveProfiles("test")
 public class AuthSessionFilterTest extends AbstractApplicationTest {
@@ -30,7 +30,7 @@ public class AuthSessionFilterTest extends AbstractApplicationTest {
   private TestRestTemplate restTemplate;
 
   @Autowired
-  private MtgSessionRepository mtgSessionRepository;
+  private MatagSessionRepository matagSessionRepository;
 
   @Test
   public void shouldGrantAccessToAResourceToLoggedInUsers() {
@@ -76,7 +76,7 @@ public class AuthSessionFilterTest extends AbstractApplicationTest {
     restTemplate.getForEntity("/path/to/a/resource", String.class);
 
     // Then
-    assertThat(mtgSessionRepository.findById(USER_1_SESSION_TOKEN).isPresent()).isTrue();
-    assertThat(mtgSessionRepository.findById(USER_1_SESSION_TOKEN).get().getValidUntil()).isEqualTo(LocalDateTime.parse("2020-01-01T01:45:00"));
+    assertThat(matagSessionRepository.findById(USER_1_SESSION_TOKEN).isPresent()).isTrue();
+    assertThat(matagSessionRepository.findById(USER_1_SESSION_TOKEN).get().getValidUntil()).isEqualTo(LocalDateTime.parse("2020-01-01T01:45:00"));
   }
 }

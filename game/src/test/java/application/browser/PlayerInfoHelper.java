@@ -1,6 +1,6 @@
 package application.browser;
 
-import com.aa.mtg.player.PlayerType;
+import com.matag.player.PlayerType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
@@ -12,30 +12,30 @@ public class PlayerInfoHelper {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PlayerInfoHelper.class);
 
-  private MtgBrowser mtgBrowser;
+  private MatagBrowser matagBrowser;
   private PlayerType playerType;
 
-  PlayerInfoHelper(MtgBrowser mtgBrowser, PlayerType playerType) {
-    this.mtgBrowser = mtgBrowser;
+  PlayerInfoHelper(MatagBrowser matagBrowser, PlayerType playerType) {
+    this.matagBrowser = matagBrowser;
     this.playerType = playerType;
   }
 
   public void toHaveName() {
-    mtgBrowser.wait(driver -> {
+    matagBrowser.wait(driver -> {
       LOGGER.info("actualPlayerName={}", getPlayerName());
       return !getPlayerName().equals("");
     });
   }
 
   public void toHaveName(String expectedPlayerName) {
-    mtgBrowser.wait(driver -> {
+    matagBrowser.wait(driver -> {
       LOGGER.info("actualPlayerName={}   expectedPlayerName={}", getPlayerName(), expectedPlayerName);
       return getPlayerName().equals(expectedPlayerName);
     });
   }
 
   public void toHaveLife(int expectedPlayerLife) {
-    mtgBrowser.wait(driver -> {
+    matagBrowser.wait(driver -> {
       LOGGER.info("actualPlayerName={}   expectedPlayerLife={}", getPlayerLife(), expectedPlayerLife);
       return getPlayerLife().equals(String.valueOf(expectedPlayerLife));
     });
@@ -58,7 +58,7 @@ public class PlayerInfoHelper {
   }
 
   private void toHaveClass(String cssClass) {
-    mtgBrowser.wait(driver -> {
+    matagBrowser.wait(driver -> {
       String playerClasses = playerInfoElement().getAttribute("class");
       LOGGER.info("playerClasses={}", playerClasses);
       return Arrays.asList(playerClasses.split(" ")).contains(cssClass);
@@ -67,9 +67,9 @@ public class PlayerInfoHelper {
 
   private WebElement playerInfoElement() {
     if (playerType == PlayerType.PLAYER) {
-      return mtgBrowser.findElement(By.id("player-info"));
+      return matagBrowser.findElement(By.id("player-info"));
     } else {
-      return mtgBrowser.findElement(By.id("opponent-info"));
+      return matagBrowser.findElement(By.id("opponent-info"));
     }
   }
 }

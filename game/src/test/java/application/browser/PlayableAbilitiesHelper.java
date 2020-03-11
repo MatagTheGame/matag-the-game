@@ -12,14 +12,14 @@ public class PlayableAbilitiesHelper {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PlayableAbilitiesHelper.class);
 
-  private MtgBrowser mtgBrowser;
+  private MatagBrowser matagBrowser;
 
-  PlayableAbilitiesHelper(MtgBrowser mtgBrowser) {
-    this.mtgBrowser = mtgBrowser;
+  PlayableAbilitiesHelper(MatagBrowser matagBrowser) {
+    this.matagBrowser = matagBrowser;
   }
 
   public void toHaveAbilities(List<String> expectedAbilities) {
-    mtgBrowser.wait(driver -> {
+    matagBrowser.wait(driver -> {
       List<String> abilities = abilities().stream().map(ability -> ability.getAttribute("title")).collect(Collectors.toList());
       LOGGER.info("abilities={}   expectedAbilities={}", abilities, expectedAbilities);
       return expectedAbilities.equals(abilities);
@@ -35,6 +35,6 @@ public class PlayableAbilitiesHelper {
   }
 
   private WebElement getElementContainer() {
-    return mtgBrowser.findElement(By.id("playable-abilities"));
+    return matagBrowser.findElement(By.id("playable-abilities"));
   }
 }

@@ -1,10 +1,10 @@
 package application;
 
-import application.inmemoryrepositories.MtgSessionInMemoryRepository;
-import application.inmemoryrepositories.MtgUserInMemoryRepository;
-import com.aa.mtg.admin.session.MtgSession;
-import com.aa.mtg.admin.session.MtgSessionRepository;
-import com.aa.mtg.admin.user.MtgUserRepository;
+import application.inmemoryrepositories.MatagSessionInMemoryRepository;
+import application.inmemoryrepositories.MatagUserInMemoryRepository;
+import com.matag.admin.session.MatagSession;
+import com.matag.admin.session.MatagSessionRepository;
+import com.matag.admin.user.MatagUserRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +23,17 @@ import java.util.UUID;
 
 import static application.TestUtils.inactive;
 import static application.TestUtils.user1;
-import static com.aa.mtg.admin.session.AuthSessionFilter.SESSION_DURATION_TIME;
-import static com.aa.mtg.admin.session.AuthSessionFilter.SESSION_NAME;
+import static com.matag.admin.session.AuthSessionFilter.SESSION_DURATION_TIME;
+import static com.matag.admin.session.AuthSessionFilter.SESSION_NAME;
 
 public abstract class AbstractApplicationTest {
   public static final String USER_1_SESSION_TOKEN = "00000000-0000-0000-0000-000000000000";
 
   @Autowired
-  private MtgUserRepository mtgUserRepository;
+  private MatagUserRepository matagUserRepository;
 
   @Autowired
-  private MtgSessionRepository mtgSessionRepository;
+  private MatagSessionRepository matagSessionRepository;
 
   @Autowired
   private Clock clock;
@@ -47,12 +47,12 @@ public abstract class AbstractApplicationTest {
 
     testRestTemplate.getRestTemplate().getInterceptors().clear();
 
-    mtgUserRepository.save(user1());
-    mtgUserRepository.save(inactive());
+    matagUserRepository.save(user1());
+    matagUserRepository.save(inactive());
 
-    mtgSessionRepository.save(MtgSession.builder()
+    matagSessionRepository.save(MatagSession.builder()
       .id(UUID.fromString(USER_1_SESSION_TOKEN).toString())
-      .mtgUser(user1())
+      .matagUser(user1())
       .createdAt(LocalDateTime.now(clock))
       .validUntil(LocalDateTime.now(clock).plusSeconds(SESSION_DURATION_TIME))
       .build());
@@ -60,8 +60,8 @@ public abstract class AbstractApplicationTest {
 
   @After
   public void cleanupDatabase() {
-    mtgUserRepository.deleteAll();
-    mtgSessionRepository.deleteAll();
+    matagUserRepository.deleteAll();
+    matagSessionRepository.deleteAll();
   }
 
   public void setCurrentTime(Instant currentTime) {
@@ -80,13 +80,13 @@ public abstract class AbstractApplicationTest {
   @EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
   public static class ApplicationTestConfiguration {
     @Bean
-    public MtgUserRepository mtgUserRepository() {
-      return new MtgUserInMemoryRepository();
+    public MatagUserRepository matagUserRepository() {
+      return new MatagUserInMemoryRepository();
     }
 
     @Bean
-    public MtgSessionRepository mtgSessionRepository() {
-      return new MtgSessionInMemoryRepository();
+    public MatagSessionRepository matagSessionRepository() {
+      return new MatagSessionInMemoryRepository();
     }
 
     @Bean

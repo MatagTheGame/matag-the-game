@@ -1,7 +1,7 @@
 {
-  "name": "mtg-admin",
+  "name": "matag-admin",
   "version": "1.0.0",
-  "description": "mtg admin ui",
+  "description": "matag admin ui",
   "private": true,
   "scripts": {
     "build-dev": "webpack -d",
