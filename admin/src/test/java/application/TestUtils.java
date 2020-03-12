@@ -18,6 +18,16 @@ public class TestUtils {
     return matagUser;
   }
 
+  public static MatagUser user2() {
+    MatagUser matagUser = new MatagUser();
+    matagUser.setId(2L);
+    matagUser.setUsername("user2");
+    matagUser.setPassword(PASSWORD_ENCODED);
+    matagUser.setEmailAddress("user2@matag.com");
+    matagUser.setStatus(ACTIVE);
+    return matagUser;
+  }
+
   public static MatagUser inactive() {
     MatagUser matagUser = new MatagUser();
     matagUser.setId(10L);

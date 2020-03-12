@@ -14,9 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
@@ -57,7 +54,7 @@ public class AuthSessionFilterTest extends AbstractApplicationTest {
   public void shouldNotGrantAccessToAResourceIfUserSessionIsExpired() {
     // Given
     user1IsLoggedIn();
-    setCurrentTime(Instant.parse("2020-01-01T01:01:00Z"));
+    setCurrentTime(TEST_START_TIME.plusHours(1).plusMinutes(1));
 
     // When
     ResponseEntity<String> response = restTemplate.getForEntity("/path/to/a/resource", String.class);
@@ -70,13 +67,13 @@ public class AuthSessionFilterTest extends AbstractApplicationTest {
   public void shouldExtendTheSessionAfterHalfOfItsLife() {
     // Given
     user1IsLoggedIn();
-    setCurrentTime(Instant.parse("2020-01-01T00:45:00Z"));
+    setCurrentTime(TEST_START_TIME.plusMinutes(45));
 
     // When
     restTemplate.getForEntity("/path/to/a/resource", String.class);
 
     // Then
     assertThat(matagSessionRepository.findById(USER_1_SESSION_TOKEN).isPresent()).isTrue();
-    assertThat(matagSessionRepository.findById(USER_1_SESSION_TOKEN).get().getValidUntil()).isEqualTo(LocalDateTime.parse("2020-01-01T01:45:00"));
+    assertThat(matagSessionRepository.findById(USER_1_SESSION_TOKEN).get().getValidUntil()).isEqualTo(TEST_START_TIME.plusHours(1).plusMinutes(45));
   }
 }

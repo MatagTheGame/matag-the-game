@@ -16,18 +16,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
 import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Collections;
 import java.util.UUID;
 
-import static application.TestUtils.inactive;
-import static application.TestUtils.user1;
+import static application.TestUtils.*;
 import static com.matag.admin.session.AuthSessionFilter.SESSION_DURATION_TIME;
 import static com.matag.admin.session.AuthSessionFilter.SESSION_NAME;
 
 public abstract class AbstractApplicationTest {
-  public static final String USER_1_SESSION_TOKEN = "00000000-0000-0000-0000-000000000000";
+  public static final String USER_1_SESSION_TOKEN = "00000000-0000-0000-0000-000000000001";
+  public static final String USER_2_SESSION_TOKEN = "00000000-0000-0000-0000-000000000002";
+
+  public static final LocalDateTime TEST_START_TIME = LocalDateTime.parse("2020-01-01T00:00:00");
 
   @Autowired
   private MatagUserRepository matagUserRepository;
@@ -43,19 +45,15 @@ public abstract class AbstractApplicationTest {
 
   @Before
   public void setupDatabase() {
-    setCurrentTime(Instant.parse("2020-01-01T00:00:00Z"));
+    setCurrentTime(TEST_START_TIME);
 
     testRestTemplate.getRestTemplate().getInterceptors().clear();
 
     matagUserRepository.save(user1());
+    matagUserRepository.save(user2());
     matagUserRepository.save(inactive());
 
-    matagSessionRepository.save(MatagSession.builder()
-      .id(UUID.fromString(USER_1_SESSION_TOKEN).toString())
-      .matagUser(user1())
-      .createdAt(LocalDateTime.now(clock))
-      .validUntil(LocalDateTime.now(clock).plusSeconds(SESSION_DURATION_TIME))
-      .build());
+    loginUser(USER_1_SESSION_TOKEN);
   }
 
   @After
@@ -64,8 +62,17 @@ public abstract class AbstractApplicationTest {
     matagSessionRepository.deleteAll();
   }
 
-  public void setCurrentTime(Instant currentTime) {
-    ((MockClock) clock).setCurrentTime(currentTime);
+  public void setCurrentTime(LocalDateTime currentTime) {
+    ((MockClock) clock).setCurrentTime(currentTime.toInstant(ZoneOffset.UTC));
+  }
+
+  public void loginUser(String userToken) {
+    matagSessionRepository.save(MatagSession.builder()
+      .id(UUID.fromString(userToken).toString())
+      .matagUser(user1())
+      .createdAt(LocalDateTime.now(clock))
+      .validUntil(LocalDateTime.now(clock).plusSeconds(SESSION_DURATION_TIME))
+      .build());
   }
 
   public void user1IsLoggedIn() {

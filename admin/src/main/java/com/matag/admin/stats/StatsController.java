@@ -7,10 +7,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/stats")
 public class StatsController {
+  private final StatsService statsService;
+
+  public StatsController(StatsService statsService) {
+    this.statsService = statsService;
+  }
 
   @GetMapping
   public StatsResponse stats() {
-    return new StatsResponse(0, 0);
+    long totalUsers = statsService.countTotalUsers();
+    long onlineUsers = statsService.countOnlineUsers();
+    return new StatsResponse(totalUsers, onlineUsers);
   }
-
 }

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static com.matag.admin.session.AuthSessionFilter.SESSION_NAME;
+
 @Component
 public class MatagLogoutSuccessHandler implements LogoutSuccessHandler {
   private final MatagSessionRepository matagSessionRepository;
@@ -21,7 +23,7 @@ public class MatagLogoutSuccessHandler implements LogoutSuccessHandler {
 
   @Override
   public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
-    String sessionId = request.getHeader(AuthSessionFilter.SESSION_NAME);
+    String sessionId = request.getHeader(SESSION_NAME);
     if (StringUtils.hasText(sessionId)) {
       matagSessionRepository.deleteById(sessionId);
     }

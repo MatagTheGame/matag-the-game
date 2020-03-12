@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import static com.matag.admin.user.MatagUserStatus.ACTIVE;
+
 public class MatagUserInMemoryRepository implements MatagUserRepository {
   private final Map<Long, MatagUser> DATA = new HashMap<>();
 
@@ -79,5 +81,10 @@ public class MatagUserInMemoryRepository implements MatagUserRepository {
     return DATA.values().stream()
       .filter(matagUser -> matagUser.getUsername().equals(username))
       .findFirst();
+  }
+
+  @Override
+  public long countActiveUsers() {
+    return DATA.values().stream().filter(u -> u.getStatus() == ACTIVE).count();
   }
 }

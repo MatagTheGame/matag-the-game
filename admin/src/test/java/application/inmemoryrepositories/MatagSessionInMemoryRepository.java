@@ -3,6 +3,7 @@ package application.inmemoryrepositories;
 import com.matag.admin.session.MatagSession;
 import com.matag.admin.session.MatagSessionRepository;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -72,5 +73,10 @@ public class MatagSessionInMemoryRepository implements MatagSessionRepository {
   @Override
   public void deleteAll() {
     DATA.clear();
+  }
+
+  @Override
+  public long countOnlineUsers(LocalDateTime now) {
+    return DATA.values().stream().filter(s -> s.getValidUntil().isAfter(now)).count();
   }
 }

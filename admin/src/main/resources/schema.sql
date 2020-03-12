@@ -10,7 +10,7 @@ create table matag_user (
 );
 
 create table matag_session (
-  id char(35) primary key,
+  id char(36) primary key,
   matag_user_id bigint not null,
   created_at timestamp not null default current_timestamp,
   valid_until timestamp not null,
