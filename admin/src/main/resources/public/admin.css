@@ -3,6 +3,7 @@ body {
   color: #afafaf;
   box-sizing: border-box;
   outline: none;
+  font-size: large;
 }
 
 *:focus {
