@@ -44,10 +44,6 @@ textarea {
   resize: none;
 }
 
-ul {
-  list-style: none;
-}
-
 .loader {
   -webkit-animation: rotation 3s infinite linear;
 }
