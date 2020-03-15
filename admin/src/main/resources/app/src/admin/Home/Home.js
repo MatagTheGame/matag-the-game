@@ -1,8 +1,22 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import {bindActionCreators} from 'redux'
+import {connect} from 'react-redux'
+import get from 'lodash/get'
 import Login from './Login/Login'
+import Loader from '../Common/Loader'
 
-export default class Home extends Component {
+class Home extends Component {
+  componentDidMount() {
+    this.props.loadStats()
+  }
+
+  stats() {
+    if (this.props.loadStats) {
+      return <Loader/>
+    }
+  }
+
   render() {
     return (
       <div>
@@ -19,7 +33,7 @@ export default class Home extends Component {
         </section>
 
         <section id='stats'>
-
+          { this.stats() }
         </section>
 
         <div><Link to="/ui/admin/decks">Decks</Link></div>
@@ -29,3 +43,23 @@ export default class Home extends Component {
     )
   }
 }
+
+const loadStats = () => {
+  return {
+    type: 'LOAD_STATS'
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    loading: get(state, 'stats.loading', false)
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loadStats: bindActionCreators(loadStats, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

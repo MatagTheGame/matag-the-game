@@ -47,6 +47,16 @@ ul {
   list-style: none;
 }
 
+.loader {
+  -webkit-animation: rotation 3s infinite linear;
+}
+
+@-webkit-keyframes rotation {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
 /** Form  */
 @media screen and (min-width: 600px) {
   .matag-form .grid {

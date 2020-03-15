@@ -11,7 +11,12 @@ export default (state, action) => {
   if (!state) {
     return {}
 
+  } else if (action.type === 'LOAD_STATS') {
+    newState.stats = {loading: true}
+
   } else {
     throw new Error(`Unknown action type ${action.type}`)
   }
+
+  return newState
 }
