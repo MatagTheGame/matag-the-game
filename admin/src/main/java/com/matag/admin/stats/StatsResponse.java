@@ -8,10 +8,12 @@ import lombok.Value;
 public class StatsResponse {
   private final long totalUsers;
   private final long onlineUsers;
+  private final int totalCards;
 
   @JsonCreator
-  public StatsResponse(@JsonProperty("totalUsers") long totalUsers, @JsonProperty("onlineUsers") long onlineUsers) {
+  public StatsResponse(@JsonProperty("totalUsers") long totalUsers, @JsonProperty("onlineUsers") long onlineUsers, @JsonProperty("totalCards") int totalCards) {
     this.totalUsers = totalUsers;
     this.onlineUsers = onlineUsers;
+    this.totalCards = totalCards;
   }
 }

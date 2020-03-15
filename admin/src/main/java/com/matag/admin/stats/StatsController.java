@@ -17,6 +17,7 @@ public class StatsController {
   public StatsResponse stats() {
     long totalUsers = statsService.countTotalUsers();
     long onlineUsers = statsService.countOnlineUsers();
-    return new StatsResponse(totalUsers, onlineUsers);
+    int totalCards = statsService.countCards();
+    return new StatsResponse(totalUsers, onlineUsers, totalCards);
   }
 }

@@ -31,4 +31,11 @@ public class MtgSets {
   public MtgSet getSet(String code) {
     return SETS.get(code);
   }
+
+  public int countCards() {
+    return SETS.values().stream()
+      .map(set -> set.getCards().size())
+      .reduce(Integer::sum)
+      .orElse(0);
+  }
 }
