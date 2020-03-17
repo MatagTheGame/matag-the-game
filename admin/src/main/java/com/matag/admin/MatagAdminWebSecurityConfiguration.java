@@ -35,7 +35,7 @@ public class MatagAdminWebSecurityConfiguration extends WebSecurityConfigurerAda
   public void configure(WebSecurity web) {
     web
       .ignoring()
-      .antMatchers("/js/**", "/img/**", "/admin.css");
+      .antMatchers("/js/**", "/img/**");
   }
 
   @Override

@@ -44,6 +44,21 @@ textarea {
   resize: none;
 }
 
+/* Template */
+header {
+  margin-top: 0;
+  top: 0;
+  left: 0;
+  margin-left: 0;
+  width: 100%;
+  min-width: 980px;
+}
+
+header div {
+  margin-left: calc((100% - 980px) / 2);
+  width: 980px
+}
+
 .loader {
   -webkit-animation: rotation 3s infinite linear;
 }
@@ -54,7 +69,7 @@ textarea {
   }
 }
 
-/** Form  */
+/* Form  */
 @media screen and (min-width: 600px) {
   .matag-form .grid {
     display: grid;
