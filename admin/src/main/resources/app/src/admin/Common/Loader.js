@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import './loader.scss'
 
 export default class Loader extends Component {
   render() {

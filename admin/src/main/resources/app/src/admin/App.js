@@ -4,6 +4,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import Home from './Home/Home'
 import './admin.scss'
+import Header from './Header/Header'
 
 // Copy layout from https://www.wix.com/website-template/view/html/1791?siteId=97d5d35e-d343-4d48-860f-22d22a8b6a6d&metaSiteId=a9f72a56-c68c-4a21-89d9-e8cfeb881d10&originUrl=https%3A%2F%2Fwww.wix.com%2Fwebsite%2Ftemplates
 
@@ -12,11 +13,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <header>
-            <div>
-              <p>MATAG</p>
-            </div>
-          </header>
+          <Header/>
           <Switch>
             <Route path="/ui/admin/decks">
               <h1>Decks</h1>

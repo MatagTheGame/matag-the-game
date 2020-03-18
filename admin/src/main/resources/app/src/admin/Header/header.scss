@@ -1,0 +1,25 @@
+$header-width: 980px;
+
+header {
+  margin-top: 0;
+  top: 0;
+  left: 0;
+  margin-left: 0;
+  width: 100%;
+  min-width: $header-width;
+
+  .header-container {
+    margin-left: calc((100% - 980px) / 2);
+    width: $header-width;
+    height: 36px;
+    display: flex;
+
+    #logo {
+      font-size: 22px;
+    }
+
+    #menu {
+
+    }
+  }
+}
