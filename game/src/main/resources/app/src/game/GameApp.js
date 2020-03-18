@@ -12,9 +12,10 @@ import MaximizedCard from './Card/MaximizedCard'
 import Stack from './Stack/Stack'
 import {UserInterface} from './UserInterface/UserInterface'
 import PlayerActiveMana from 'Main/game/Card/PlayerActiveMana'
+import './game.scss'
 
 
-class App extends Component {
+class GameApp extends Component {
   componentDidMount() {
     stompClient.init(this.props.receive)
   }
@@ -54,4 +55,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(GameApp)

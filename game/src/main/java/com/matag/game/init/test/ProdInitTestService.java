@@ -1,5 +1,7 @@
 package com.matag.game.init.test;
 
+import com.matag.cardinstance.CardInstanceFactory;
+import com.matag.cards.Cards;
 import com.matag.game.status.GameStatus;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -7,6 +9,12 @@ import org.springframework.stereotype.Component;
 @Profile("test")
 @Component
 public class ProdInitTestService extends InitTestService {
+
+  public ProdInitTestService(CardInstanceFactory cardInstanceFactory, Cards cards) {
+    super.cardInstanceFactory = cardInstanceFactory;
+    super.cards = cards;
+  }
+
   @Override
   public void initGameStatus(GameStatus gameStatus) {
     // Current Player
@@ -61,9 +69,9 @@ public class ProdInitTestService extends InitTestService {
 
     addCardToNonCurrentPlayerHand(gameStatus, cards.get("Gilded Sentinel"));
     addCardToNonCurrentPlayerHand(gameStatus, cards.get("Charging Monstrosaur"));
-    addCardToNonCurrentPlayerHand(gameStatus, cards.get("Precision Bold"));
+    addCardToNonCurrentPlayerHand(gameStatus, cards.get("Precision Bolt"));
     addCardToNonCurrentPlayerHand(gameStatus, cards.get("Overcome"));
-    addCardToNonCurrentPlayerHand(gameStatus, cards.get("Marauders Axe"));
+    addCardToNonCurrentPlayerHand(gameStatus, cards.get("Marauder's Axe"));
     addCardToNonCurrentPlayerHand(gameStatus, cards.get("Dead Weight"));
 
     addCardToNonCurrentPlayerGraveyard(gameStatus, cards.get("Mountain"));
