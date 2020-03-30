@@ -1,0 +1,52 @@
+#player-info {
+  bottom: 35%;
+}
+
+#opponent-info {
+  top: 40%;
+}
+
+.player-info {
+  position: absolute;
+  transform-style: preserve-3d;
+  background-image: url("/img/materials/paper.jpg");
+  width: 12%;
+  height: 40px;
+  right: 1%;
+  transform: rotateX(-45deg) translateZ(35px);
+  padding: 10px 20px 10px 20px;
+  font-size: xx-large;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  .non-positive {
+    color: red;
+  }
+}
+
+.player-info.active-player span:first-child {
+  text-decoration: underline;
+}
+
+.player-info.inactive-player {
+  color: grey;
+}
+
+.player-info.winner, .player-info.inactive-player.winner {
+  color: green;
+}
+
+#player-info:after, #opponent-info:after {
+  content: '';
+  position: absolute;
+  transform-style: preserve-3d;
+  background-image: url("/img/materials/paper.jpg");
+  filter: brightness(50%);
+  width: 100%;
+  height: 40px;
+  bottom: 40px;
+  left: 0;
+  transform: rotateX(-60deg) translateY(20px);
+}

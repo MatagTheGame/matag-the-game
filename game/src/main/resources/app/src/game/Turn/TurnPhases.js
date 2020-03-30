@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import get from 'lodash/get'
 import Phase from './Phase'
 import PropTypes from 'prop-types'
+import './turhPhases.scss'
 
 class TurnPhases extends Component {
   isPhaseActiveForPlayer() {

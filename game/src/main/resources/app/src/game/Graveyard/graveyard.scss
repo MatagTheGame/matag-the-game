@@ -1,0 +1,25 @@
+#player-graveyard {
+  bottom: 5%;
+}
+
+#opponent-graveyard {
+  top: 5%;
+  transform: rotate(180deg);
+  justify-content: flex-end;
+}
+
+.graveyard {
+  position: absolute;
+  left: 1%;
+  width: 22%;
+  height: 20%;
+  display: flex;
+
+  div {
+    margin-left: -160px;
+  }
+
+  div:first-child {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,20 @@
+#player-hand {
+  bottom: 40px;
+  left: 1%;
+  width: 99%;
+  z-index: 5;
+}
+
+#opponent-hand {
+  top: -120px;
+  transform: scale(0.5,0.5);
+  z-index: 1;
+}
+
+.hand {
+  position: absolute;
+  justify-content: center;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+}

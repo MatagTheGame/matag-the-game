@@ -7,6 +7,7 @@ import CardSearch from '../Card/CardSearch'
 import CardUtils from '../Card/CardUtils'
 import PlayerUtils from '../PlayerInfo/PlayerUtils'
 import PropTypes from 'prop-types'
+import './battlefield.scss'
 
 class Battlefield extends Component {
   constructor(props) {

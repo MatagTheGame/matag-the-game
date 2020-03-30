@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
+import './playerInfo.scss'
 
 class PlayerInfo extends Component {
   getId () {

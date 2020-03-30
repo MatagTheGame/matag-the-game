@@ -1,11 +1,30 @@
-.triggered-ability {
-  width: 450px;
-  height: 250px;
-  margin: 0 0 0 -80px;
-  padding: 5px;
-  font-size: xx-large;
-  background-color: rgba(250, 235, 215, .9);
-  border: 1px solid black;
-  cursor: pointer;
-  z-index: 1;
+#stack {
+  position: absolute;
+  left: 0;
+  bottom: 42%;
+  transform-style: preserve-3d;
+  transform: translateZ(60px);
+
+  div:first-child {
+    box-shadow: 50px 100px 4px rgba(0, 0, 0, 0.4);
+  }
+
+  span {
+    position: absolute;
+  }
+
+  .triggered-ability {
+    width: 450px;
+    height: 250px;
+    margin: 0 0 0 -80px;
+    padding: 5px;
+    font-size: xx-large;
+    background-color: rgba(250, 235, 215, .9);
+    border: 1px solid black;
+    cursor: pointer;
+    z-index: 1;
+  }
 }
+
+
+

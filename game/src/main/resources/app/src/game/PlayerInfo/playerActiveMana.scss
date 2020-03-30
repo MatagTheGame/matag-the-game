@@ -1,0 +1,22 @@
+#player-active-mana {
+  position: absolute;
+  bottom: 30%;
+  width: 13%;
+  right: 1%;
+  font-size: x-large;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin-right: 5px;
+
+    img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+}

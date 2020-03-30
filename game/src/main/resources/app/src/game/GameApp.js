@@ -11,7 +11,7 @@ import PlayerInfo from './PlayerInfo/PlayerInfo'
 import MaximizedCard from './Card/MaximizedCard'
 import Stack from './Stack/Stack'
 import {UserInterface} from './UserInterface/UserInterface'
-import PlayerActiveMana from 'Main/game/Card/PlayerActiveMana'
+import PlayerActiveMana from './PlayerInfo/PlayerActiveMana'
 import './game.scss'
 
 

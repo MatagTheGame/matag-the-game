@@ -1,0 +1,50 @@
+#player-library {
+  bottom: 30%;
+
+  .library-size {
+    bottom: 20px;
+  }
+}
+
+#opponent-library {
+  top: 30%;
+
+  .library-size {
+    top: 20px;
+  }
+}
+
+.player-library {
+  position: absolute;
+  left: 10%;
+  transform-style: preserve-3d;
+
+  .card {
+    margin: 0;
+  }
+
+  .card-bottom-thickness {
+    background-color: #1E211A;
+    position: absolute;
+    width: 180px;
+    transform-style: preserve-3d;
+  }
+
+  .card-right-thickness {
+    background-color: #252821;
+    position: absolute;
+    height: 250px;
+    transform-style: preserve-3d;
+  }
+
+  .library-size {
+    position: absolute;
+    font-size: xx-large;
+    z-index: 9;
+    background: #534d67;
+    border: 2px solid black;
+    padding: 4px;
+    color: yellow;
+    left: 60px;
+  }
+}

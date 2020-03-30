@@ -1,0 +1,50 @@
+#player-battlefield {
+  bottom: 10%;
+  transform: translateZ(1px);
+
+  .combat-line {
+    padding-right: 35%;
+  }
+}
+
+#opponent-battlefield {
+  position: absolute;
+  top: 2%;
+  transform: rotate(180deg) translateZ(1px);
+
+  .combat-line {
+    padding-left: 35%;
+  }
+}
+
+.battlefield {
+  position: absolute;
+  left: 17%;
+  width: 80%;
+
+  .battlefield-area {
+    display: flex;
+    justify-content: center;
+    min-height: 250px;
+  }
+
+  .combat-line span {
+    position: absolute;
+    min-height: 250px;
+  }
+
+  .first-line, .second-line {
+    span.group {
+      min-width: 180px;
+      min-height: 250px;
+
+      span {
+        position: absolute;
+      }
+    }
+  }
+}
+
+
+
+

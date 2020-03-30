@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import {LibraryUiUtils} from './LibraryUiUtils'
 import Card from '../Card/Card'
 import PropTypes from 'prop-types'
+import './library.scss'
 
 class Library extends Component {
   getId() {

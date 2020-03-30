@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import './playerActiveMana.scss'
 
 class PlayerActiveMana extends Component {
   render() {

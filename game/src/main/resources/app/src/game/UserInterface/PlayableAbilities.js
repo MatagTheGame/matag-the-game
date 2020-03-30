@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
+import './playableAbilities.scss'
 
 class PossibleAbility extends Component {
   static renderColors(colors) {

@@ -3,6 +3,7 @@ import get from 'lodash/get'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
+import './userAction.scss'
 
 class UserAction extends Component {
   constructor(props) {
