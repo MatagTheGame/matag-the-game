@@ -5,6 +5,7 @@ import Card from '../Card/Card'
 import PropTypes from 'prop-types'
 import StackUtils from './StackUtils'
 import {TriggeredAbility} from './TriggeredAbility'
+import './stack.scss'
 
 class Stack extends Component {
 

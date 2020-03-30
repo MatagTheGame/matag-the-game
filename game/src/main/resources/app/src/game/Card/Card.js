@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {Modifiers} from './Modifiers'
 import PropTypes from 'prop-types'
+import './card.scss'
 
 class Card extends Component {
   constructor(props) {
