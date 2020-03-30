@@ -3,13 +3,14 @@ package com.matag.game.deck;
 import com.matag.cardinstance.CardInstance;
 import com.matag.cardinstance.CardInstanceFactory;
 import com.matag.cards.Card;
+import com.matag.cards.CardUtils;
 import com.matag.cards.Cards;
 import com.matag.cards.properties.Color;
 import com.matag.cards.properties.Type;
 import com.matag.cards.search.CardSearch;
 import com.matag.game.security.SecurityToken;
 import com.matag.game.status.GameStatus;
-import com.matag.cards.CardUtils;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -21,14 +22,10 @@ import static com.matag.cards.properties.Color.*;
 import static java.util.Arrays.asList;
 
 @Component
+@AllArgsConstructor
 public class DeckRetrieverService {
   private final CardInstanceFactory cardInstanceFactory;
   private final Cards cards;
-
-  public DeckRetrieverService(CardInstanceFactory cardInstanceFactory, Cards cards) {
-    this.cardInstanceFactory = cardInstanceFactory;
-    this.cards = cards;
-  }
 
   public List<CardInstance> retrieveDeckForUser(SecurityToken token, String playerName, GameStatus gameStatus) {
     return randomDeck(playerName, gameStatus);

@@ -1,35 +1,30 @@
 package com.matag.game.turn.action.target;
 
-import static com.matag.cards.ability.type.AbilityType.abilityType;
-
 import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.ability.CardInstanceAbility;
+import com.matag.cardinstance.CardInstanceSearch;
 import com.matag.cardinstance.ability.AbilityAction;
+import com.matag.cardinstance.ability.CardInstanceAbility;
 import com.matag.cards.ability.selector.CardInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.target.Target;
-import com.matag.cardinstance.CardInstanceSearch;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.AbilityActionFactory;
 import com.matag.game.turn.action.selection.CardInstanceSelectorService;
+import com.matag.player.PlayerType;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 
-import com.matag.player.PlayerType;
-import org.springframework.stereotype.Component;
+import static com.matag.cards.ability.type.AbilityType.abilityType;
 
 @Component
+@AllArgsConstructor
 public class TargetCheckerService {
-
   private final AbilityActionFactory abilityActionFactory;
   private final CardInstanceSelectorService cardInstanceSelectorService;
-
-  public TargetCheckerService(AbilityActionFactory abilityActionFactory, CardInstanceSelectorService cardInstanceSelectorService) {
-    this.abilityActionFactory = abilityActionFactory;
-    this.cardInstanceSelectorService = cardInstanceSelectorService;
-  }
 
   public void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
     for (CardInstanceAbility ability : cardToCast.getAbilities()) {

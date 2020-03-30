@@ -9,9 +9,11 @@ import com.matag.game.turn.action.life.EachPlayersAddXLifeAction;
 import com.matag.game.turn.action.selection.SelectedPermanentsGetXUntilEndOfTurnAction;
 import com.matag.game.turn.action.shuffle.ShuffleTargetGraveyardIntoLibraryAction;
 import com.matag.game.turn.action.target.ThatTargetsGetAction;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class AbilityActionFactory {
   private final ThatTargetsGetAction thatTargetsGetAction;
   private final DrawXCardsAction drawXCardsAction;
@@ -20,18 +22,6 @@ public class AbilityActionFactory {
   private final ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction;
   private final SelectedPermanentsGetXUntilEndOfTurnAction selectedPermanentsGetXUntilEndOfTurnAction;
   private final AttachAction attachAction;
-
-  public AbilityActionFactory(ThatTargetsGetAction thatTargetsGetAction, DrawXCardsAction drawXCardsAction,
-                              AddXLifeAction addXLifeAction, EachPlayersAddXLifeAction eachPlayersAddXLifeAction, ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction,
-                              SelectedPermanentsGetXUntilEndOfTurnAction selectedPermanentsGetXUntilEndOfTurnAction, AttachAction attachAction) {
-    this.thatTargetsGetAction = thatTargetsGetAction;
-    this.drawXCardsAction = drawXCardsAction;
-    this.addXLifeAction = addXLifeAction;
-    this.eachPlayersAddXLifeAction = eachPlayersAddXLifeAction;
-    this.shuffleTargetGraveyardIntoLibraryAction = shuffleTargetGraveyardIntoLibraryAction;
-    this.selectedPermanentsGetXUntilEndOfTurnAction = selectedPermanentsGetXUntilEndOfTurnAction;
-    this.attachAction = attachAction;
-  }
 
   public AbilityAction getAbilityAction(AbilityType abilityType) {
     if (abilityType == null) {

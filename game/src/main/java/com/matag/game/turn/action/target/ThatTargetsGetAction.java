@@ -1,15 +1,16 @@
 package com.matag.game.turn.action.target;
 
 import com.matag.cardinstance.CardInstance;
+import com.matag.cardinstance.ability.AbilityAction;
 import com.matag.cardinstance.ability.CardInstanceAbility;
 import com.matag.cards.ability.AbilityService;
-import com.matag.cardinstance.ability.AbilityAction;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
 import com.matag.game.turn.action.draw.DrawXCardsService;
 import com.matag.game.turn.action.life.LifeService;
 import com.matag.game.turn.action.permanent.PermanentService;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 public class ThatTargetsGetAction implements AbilityAction {
   private static final Logger LOGGER = LoggerFactory.getLogger(ThatTargetsGetAction.class);
 
@@ -26,14 +28,6 @@ public class ThatTargetsGetAction implements AbilityAction {
   private final PermanentService permanentService;
   private final DealDamageToPlayerService dealDamageToPlayerService;
   private final AbilityService abilityService;
-
-  public ThatTargetsGetAction(LifeService lifeService, DrawXCardsService drawXCardsService, PermanentService permanentService, DealDamageToPlayerService dealDamageToPlayerService, AbilityService abilityService) {
-    this.lifeService = lifeService;
-    this.drawXCardsService = drawXCardsService;
-    this.permanentService = permanentService;
-    this.dealDamageToPlayerService = dealDamageToPlayerService;
-    this.abilityService = abilityService;
-  }
 
   @Override
   public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {

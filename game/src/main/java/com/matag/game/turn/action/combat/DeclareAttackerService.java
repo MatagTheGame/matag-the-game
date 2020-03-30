@@ -4,18 +4,15 @@ import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.Turn;
 import com.matag.game.turn.action._continue.ContinueTurnService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class DeclareAttackerService {
-
   private final ContinueTurnService continueTurnService;
-
-  public DeclareAttackerService(ContinueTurnService continueTurnService) {
-    this.continueTurnService = continueTurnService;
-  }
 
   public void declareAttackers(GameStatus gameStatus, List<Integer> cardIds) {
     Turn turn = gameStatus.getTurn();

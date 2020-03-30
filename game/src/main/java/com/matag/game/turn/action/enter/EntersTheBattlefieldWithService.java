@@ -6,6 +6,7 @@ import com.matag.cards.ability.AbilityService;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.cast.ManaCountService;
 import com.matag.game.turn.action.draw.DrawXCardsService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,19 +19,13 @@ import static com.matag.cards.ability.type.AbilityType.ENTERS_THE_BATTLEFIELD_WI
 import static java.util.stream.Collectors.toList;
 
 @Component
+@AllArgsConstructor
 public class EntersTheBattlefieldWithService {
-
   private static final int ADAMANT_THRESHOLD = 3;
 
   private final ManaCountService manaCountService;
   private final DrawXCardsService drawXCardsService;
   private final AbilityService abilityService;
-
-  public EntersTheBattlefieldWithService(ManaCountService manaCountService, DrawXCardsService drawXCardsService, AbilityService abilityService) {
-    this.manaCountService = manaCountService;
-    this.drawXCardsService = drawXCardsService;
-    this.abilityService = abilityService;
-  }
 
   void entersTheBattlefieldWith(GameStatus gameStatus, CardInstance cardInstance) {
     List<String> parameters = addEntersTheBattlefieldWithParameters(cardInstance);

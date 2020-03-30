@@ -11,6 +11,7 @@ import com.matag.game.turn.Turn;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import com.matag.game.turn.action.target.TargetCheckerService;
 import com.matag.game.turn.phases.PhaseUtils;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -19,21 +20,14 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@AllArgsConstructor
 public class CastService {
-
   private static final Logger LOGGER = LoggerFactory.getLogger(CastService.class);
 
   private final TargetCheckerService targetCheckerService;
   private final ManaCountService manaCountService;
   private final TapPermanentService tapPermanentService;
   private final CostService costService;
-
-  public CastService(TargetCheckerService targetCheckerService, ManaCountService manaCountService, TapPermanentService tapPermanentService, CostService costService) {
-    this.targetCheckerService = targetCheckerService;
-    this.manaCountService = manaCountService;
-    this.tapPermanentService = tapPermanentService;
-    this.costService = costService;
-  }
 
   public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
     Turn turn = gameStatus.getTurn();

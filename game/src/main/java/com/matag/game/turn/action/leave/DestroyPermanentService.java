@@ -2,6 +2,7 @@ package com.matag.game.turn.action.leave;
 
 import com.matag.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -9,18 +10,13 @@ import org.springframework.stereotype.Component;
 import static com.matag.cards.ability.type.AbilityType.INDESTRUCTIBLE;
 
 @Component
+@AllArgsConstructor
 public class DestroyPermanentService {
   private static final Logger LOGGER = LoggerFactory.getLogger(DestroyPermanentService.class);
 
   private final LeaveBattlefieldService leaveBattlefieldService;
   private final PutIntoGraveyardService putIntoGraveyardService;
   private final WhenDieService whenDieService;
-
-  public DestroyPermanentService(LeaveBattlefieldService leaveBattlefieldService, PutIntoGraveyardService putIntoGraveyardService, WhenDieService whenDieService) {
-    this.leaveBattlefieldService = leaveBattlefieldService;
-    this.putIntoGraveyardService = putIntoGraveyardService;
-    this.whenDieService = whenDieService;
-  }
 
   public void markToBeDestroyed(GameStatus gameStatus, int permanentId) {
     CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId);

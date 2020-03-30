@@ -1,5 +1,6 @@
 package com.matag.game.turn.phases;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import static com.matag.game.turn.phases.BeginCombatPhase.BC;
@@ -15,6 +16,7 @@ import static com.matag.game.turn.phases.UntapPhase.UT;
 import static com.matag.game.turn.phases.UpkeepPhase.UP;
 
 @Component
+@AllArgsConstructor
 public class PhaseFactory {
 
   private final UntapPhase untapPhase;
@@ -31,26 +33,6 @@ public class PhaseFactory {
   private final Main2Phase main2Phase;
   private final EndTurnPhase endTurnPhase;
   private final CleanupPhase cleanupPhase;
-
-  public PhaseFactory(UntapPhase untapPhase, UpkeepPhase upkeepPhase, DrawPhase drawPhase,
-                      Main1Phase main1Phase, BeginCombatPhase beginCombatPhase, DeclareAttackersPhase declareAttackersPhase, DeclareBlockersPhase declareBlockersPhase,
-                      AfterDeclareBlockersPhase afterDeclareBlockersPhase, FirstStrikePhase firstStrikePhase, CombatDamagePhase combatDamagePhase, EndOfCombatPhase endOfCombatPhase, Main2Phase main2Phase,
-                      EndTurnPhase endTurnPhase, CleanupPhase cleanupPhase) {
-    this.untapPhase = untapPhase;
-    this.upkeepPhase = upkeepPhase;
-    this.drawPhase = drawPhase;
-    this.main1Phase = main1Phase;
-    this.beginCombatPhase = beginCombatPhase;
-    this.declareAttackersPhase = declareAttackersPhase;
-    this.declareBlockersPhase = declareBlockersPhase;
-    this.afterDeclareBlockersPhase = afterDeclareBlockersPhase;
-    this.firstStrikePhase = firstStrikePhase;
-    this.combatDamagePhase = combatDamagePhase;
-    this.endOfCombatPhase = endOfCombatPhase;
-    this.main2Phase = main2Phase;
-    this.endTurnPhase = endTurnPhase;
-    this.cleanupPhase = cleanupPhase;
-  }
 
   public Phase get(String phase) {
     switch (phase) {

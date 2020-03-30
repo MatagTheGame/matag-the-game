@@ -1,7 +1,7 @@
 package com.matag.admin.auth.logout;
 
 import com.matag.admin.session.MatagSessionRepository;
-import com.matag.admin.session.AuthSessionFilter;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -14,12 +14,9 @@ import java.io.IOException;
 import static com.matag.admin.session.AuthSessionFilter.SESSION_NAME;
 
 @Component
+@AllArgsConstructor
 public class MatagLogoutSuccessHandler implements LogoutSuccessHandler {
   private final MatagSessionRepository matagSessionRepository;
-
-  public MatagLogoutSuccessHandler(MatagSessionRepository matagSessionRepository) {
-    this.matagSessionRepository = matagSessionRepository;
-  }
 
   @Override
   public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {

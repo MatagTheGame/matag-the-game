@@ -1,8 +1,9 @@
 package com.matag.game.event;
 
-import com.matag.game.player.Player;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.matag.game.player.Player;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -14,17 +15,13 @@ import java.util.List;
  * Sends events to the browser.
  */
 @Component
+@AllArgsConstructor
 public class EventSender {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EventSender.class);
 
   private final SimpMessagingTemplate webSocketTemplate;
   private final ObjectMapper objectMapper;
-
-  public EventSender(SimpMessagingTemplate simpleMessagingTemplate, ObjectMapper objectMapper) {
-    this.webSocketTemplate = simpleMessagingTemplate;
-    this.objectMapper = objectMapper;
-  }
 
   public void sendToUser(String sessionId, String username, Event event) {
     String eventString = serializeToString(event);

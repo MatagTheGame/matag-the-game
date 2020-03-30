@@ -1,8 +1,8 @@
 package com.matag.game.turn.action._continue;
 
 import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.ability.CardInstanceAbility;
 import com.matag.cardinstance.ability.AbilityAction;
+import com.matag.cardinstance.ability.CardInstanceAbility;
 import com.matag.cards.ability.target.Target;
 import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.game.message.MessageException;
@@ -11,6 +11,7 @@ import com.matag.game.turn.action.AbilityActionFactory;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
 import com.matag.game.turn.action.leave.PutIntoGraveyardService;
 import com.matag.game.turn.action.target.TargetCheckerService;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ import java.util.Map;
 import static java.util.Arrays.asList;
 
 @Component
+@AllArgsConstructor
 public class ResolveService {
   private static final Logger LOGGER = LoggerFactory.getLogger(ResolveService.class);
 
@@ -30,15 +32,6 @@ public class ResolveService {
   private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
   private final PutIntoGraveyardService putIntoGraveyardService;
   private final TargetCheckerService targetCheckerService;
-
-  public ResolveService(ContinueTurnService continueTurnService, AbilityActionFactory abilityActionFactory,
-                        EnterCardIntoBattlefieldService enterCardIntoBattlefieldService, PutIntoGraveyardService putIntoGraveyardService, TargetCheckerService targetCheckerService) {
-    this.continueTurnService = continueTurnService;
-    this.abilityActionFactory = abilityActionFactory;
-    this.enterCardIntoBattlefieldService = enterCardIntoBattlefieldService;
-    this.putIntoGraveyardService = putIntoGraveyardService;
-    this.targetCheckerService = targetCheckerService;
-  }
 
   public void resolve(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
     if (!gameStatus.getStack().isEmpty()) {

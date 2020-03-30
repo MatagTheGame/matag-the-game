@@ -1,7 +1,7 @@
 package com.matag.game.turn.action.cast;
 
-import com.matag.cards.Card;
 import com.matag.cardinstance.CardInstance;
+import com.matag.cards.Card;
 import com.matag.cards.properties.Type;
 import com.matag.game.message.MessageException;
 import com.matag.game.player.Player;
@@ -9,16 +9,13 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.turn.Turn;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
 import com.matag.game.turn.phases.PhaseUtils;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class PlayLandService {
-
   private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
-
-  public PlayLandService(EnterCardIntoBattlefieldService enterCardIntoBattlefieldService) {
-    this.enterCardIntoBattlefieldService = enterCardIntoBattlefieldService;
-  }
 
   public void playLand(GameStatus gameStatus, int cardId) {
     Turn turn = gameStatus.getTurn();

@@ -2,19 +2,17 @@ package com.matag.game.turn.phases;
 
 import com.matag.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import static com.matag.game.turn.phases.UntapPhase.UT;
 
 @Component
+@AllArgsConstructor
 public class CleanupPhase implements Phase {
   public static final String CL = "CL";
 
   private final UntapPhase untapPhase;
-
-  public CleanupPhase(UntapPhase untapPhase) {
-    this.untapPhase = untapPhase;
-  }
 
   @Override
   public void apply(GameStatus gameStatus) {

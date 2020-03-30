@@ -4,6 +4,7 @@ import com.matag.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.attach.AttachService;
 import com.matag.game.turn.action.attach.AttachmentsService;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;

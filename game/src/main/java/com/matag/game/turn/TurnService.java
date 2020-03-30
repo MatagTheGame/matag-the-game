@@ -7,29 +7,21 @@ import com.matag.game.turn.action.cast.CastService;
 import com.matag.game.turn.action.cast.PlayLandService;
 import com.matag.game.turn.action.combat.DeclareAttackerService;
 import com.matag.game.turn.action.combat.DeclareBlockerService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
 
 @Component
+@AllArgsConstructor
 public class TurnService {
-
   private final ContinueTurnService continueTurnService;
   private final PlayLandService playLandService;
   private final CastService castService;
   private final ResolveService resolveService;
   private final DeclareAttackerService declareAttackerService;
   private final DeclareBlockerService declareBlockerService;
-
-  public TurnService(ContinueTurnService continueTurnService, PlayLandService playLandService, CastService castService, ResolveService resolveService, DeclareAttackerService declareAttackerService, DeclareBlockerService declareBlockerService) {
-    this.continueTurnService = continueTurnService;
-    this.playLandService = playLandService;
-    this.castService = castService;
-    this.resolveService = resolveService;
-    this.declareAttackerService = declareAttackerService;
-    this.declareBlockerService = declareBlockerService;
-  }
 
   void continueTurn(GameStatus gameStatus) {
     continueTurnService.continueTurn(gameStatus);

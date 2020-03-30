@@ -7,6 +7,7 @@ import com.matag.cards.ability.AbilityService;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.PowerToughness;
 import com.matag.game.status.GameStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,16 +18,12 @@ import static com.matag.cards.ability.type.AbilityType.EQUIPPED_CREATURE_GETS;
 import static java.util.Arrays.asList;
 
 @Component
+@AllArgsConstructor
 public class AttachmentsService {
   private static final List<AbilityType> ATTACHED_ABILITY_TYPES = asList(ENCHANTED_CREATURE_GETS, EQUIPPED_CREATURE_GETS);
 
   private final AbilityService abilityService;
   private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
-
-  public AttachmentsService(AbilityService abilityService, CardInstanceAbilityFactory cardInstanceAbilityFactory) {
-    this.abilityService = abilityService;
-    this.cardInstanceAbilityFactory = cardInstanceAbilityFactory;
-  }
 
   public List<CardInstance> getAttachedCards(GameStatus gameStatus, CardInstance cardInstance) {
     return gameStatus.getAllBattlefieldCards().attachedToId(cardInstance.getId()).getCards();

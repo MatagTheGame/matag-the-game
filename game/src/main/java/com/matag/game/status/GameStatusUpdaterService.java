@@ -4,18 +4,15 @@ import com.matag.game.event.Event;
 import com.matag.game.event.EventSender;
 import com.matag.game.message.MessageEvent;
 import com.matag.game.player.Player;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import static java.util.Arrays.asList;
 
 @Component
+@AllArgsConstructor
 public class GameStatusUpdaterService {
-
   private final EventSender eventSender;
-
-  public GameStatusUpdaterService(EventSender eventSender) {
-    this.eventSender = eventSender;
-  }
 
   public void sendUpdateGameStatus(GameStatus gameStatus) {
     sendUpdateBattlefields(gameStatus);

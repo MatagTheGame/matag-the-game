@@ -7,6 +7,7 @@ import com.matag.cards.ability.AbilityService;
 import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.cards.properties.PowerToughness;
 import com.matag.game.status.GameStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,17 +16,11 @@ import java.util.List;
 import static com.matag.cards.ability.type.AbilityType.SELECTED_PERMANENTS_GET;
 
 @Component
+@AllArgsConstructor
 public class AbilitiesFromOtherPermanentsService {
-
   private final CardInstanceSelectorService cardInstanceSelectorService;
   private final AbilityService abilityService;
   private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
-
-  public AbilitiesFromOtherPermanentsService(CardInstanceSelectorService cardInstanceSelectorService, AbilityService abilityService, CardInstanceAbilityFactory cardInstanceAbilityFactory) {
-    this.cardInstanceSelectorService = cardInstanceSelectorService;
-    this.abilityService = abilityService;
-    this.cardInstanceAbilityFactory = cardInstanceAbilityFactory;
-  }
 
   public int getPowerFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
     return getParametersFromOtherPermanents(gameStatus, cardInstance).stream()

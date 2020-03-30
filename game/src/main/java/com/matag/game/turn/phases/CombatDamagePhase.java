@@ -2,21 +2,18 @@ package com.matag.game.turn.phases;
 
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.combat.CombatService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import static com.matag.game.turn.phases.EndOfCombatPhase.EC;
 
 @Component
+@AllArgsConstructor
 public class CombatDamagePhase implements Phase {
   public static final String CD = "CD";
 
   private final CombatService combatService;
   private final EndOfCombatPhase endOfCombatPhase;
-
-  public CombatDamagePhase(CombatService combatService, EndOfCombatPhase endOfCombatPhase) {
-    this.combatService = combatService;
-    this.endOfCombatPhase = endOfCombatPhase;
-  }
 
   @Override
   public void apply(GameStatus gameStatus) {

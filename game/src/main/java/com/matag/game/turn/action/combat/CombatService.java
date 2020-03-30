@@ -6,6 +6,7 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.damage.DealDamageToCreatureService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
 import com.matag.game.turn.action.life.LifeService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,17 +14,11 @@ import java.util.List;
 import static com.matag.cards.ability.type.AbilityType.*;
 
 @Component
+@AllArgsConstructor
 public class CombatService {
   private final LifeService lifeService;
   private final DealDamageToCreatureService dealDamageToCreatureService;
   private final DealDamageToPlayerService dealDamageToPlayerService;
-
-  public CombatService(LifeService lifeService, DealDamageToCreatureService dealDamageToCreatureService, DealDamageToPlayerService dealDamageToPlayerService) {
-    this.lifeService = lifeService;
-    this.dealDamageToCreatureService = dealDamageToCreatureService;
-    this.dealDamageToPlayerService = dealDamageToPlayerService;
-  }
-
 
   public void dealCombatDamage(GameStatus gameStatus) {
     Player currentPlayer = gameStatus.getCurrentPlayer();

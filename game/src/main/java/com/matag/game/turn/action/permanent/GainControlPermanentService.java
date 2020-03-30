@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GainControlPermanentService {
-
   private static final Logger LOGGER = LoggerFactory.getLogger(GainControlPermanentService.class);
 
   public void gainControlUntilEndOfTurn(GameStatus gameStatus, CardInstance target, String newControllerName) {

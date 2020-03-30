@@ -5,6 +5,7 @@ import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.Turn;
 import com.matag.game.turn.action._continue.ContinueTurnService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,13 +14,9 @@ import java.util.Map;
 import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
 
 @Component
+@AllArgsConstructor
 public class DeclareBlockerService {
-
   private final ContinueTurnService continueTurnService;
-
-  public DeclareBlockerService(ContinueTurnService continueTurnService) {
-    this.continueTurnService = continueTurnService;
-  }
 
   public void declareBlockers(GameStatus gameStatus, Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds) {
     Turn turn = gameStatus.getTurn();

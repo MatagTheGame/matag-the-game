@@ -1,6 +1,6 @@
 package com.matag.admin.session;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,18 +21,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 public class AuthSessionFilter extends GenericFilterBean {
   public final static String SESSION_NAME = "session";
   public final static int SESSION_DURATION_TIME = 60 * 60;
 
   private final MatagSessionRepository matagSessionRepository;
   private final Clock clock;
-
-  @Autowired
-  public AuthSessionFilter(MatagSessionRepository matagSessionRepository, Clock clock) {
-    this.matagSessionRepository = matagSessionRepository;
-    this.clock = clock;
-  }
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {

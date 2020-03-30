@@ -3,19 +3,16 @@ package com.matag.game.security;
 import com.matag.game.player.Player;
 import com.matag.game.player.PlayerService;
 import com.matag.game.status.GameStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 @Component
+@AllArgsConstructor
 public class SecurityHelper {
-
   private final PlayerService playerService;
-
-  public SecurityHelper(PlayerService playerService) {
-    this.playerService = playerService;
-  }
 
   public SecurityToken extractSecurityToken(SimpMessageHeaderAccessor headerAccessor) {
     String sessionId = headerAccessor.getSessionId();

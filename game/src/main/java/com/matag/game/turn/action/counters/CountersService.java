@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CountersService {
-
   private static final Logger LOGGER = LoggerFactory.getLogger(CountersService.class);
 
   public void addPlus1Counters(GameStatus gameStatus, CardInstance target, int counters) {

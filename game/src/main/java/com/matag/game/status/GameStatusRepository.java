@@ -8,7 +8,6 @@ import java.util.Map;
 
 @Component
 public class GameStatusRepository {
-
   private final SecurityHelper securityHelper;
 
   public GameStatusRepository(SecurityHelper securityHelper) {

@@ -2,17 +2,14 @@ package com.matag.game.turn.action.leave;
 
 import com.matag.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class ReturnPermanentToHandService {
   private final LeaveBattlefieldService leaveBattlefieldService;
   private final PutIntoHandService putIntoHandService;
-
-  public ReturnPermanentToHandService(LeaveBattlefieldService leaveBattlefieldService, PutIntoHandService putIntoHandService) {
-    this.leaveBattlefieldService = leaveBattlefieldService;
-    this.putIntoHandService = putIntoHandService;
-  }
 
   public void markAsToBeReturnedToHand(GameStatus gameStatus, int targetId) {
     CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(targetId);

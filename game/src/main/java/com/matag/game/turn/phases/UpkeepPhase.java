@@ -1,20 +1,17 @@
 package com.matag.game.turn.phases;
 
 import com.matag.game.status.GameStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import static com.matag.game.turn.phases.DrawPhase.DR;
 
 @Component
+@AllArgsConstructor
 public class UpkeepPhase implements Phase {
   public static final String UP = "UP";
 
   private final DrawPhase drawPhase;
-
-  public UpkeepPhase(DrawPhase drawPhase) {
-    this.drawPhase = drawPhase;
-  }
-
 
   @Override
   public void apply(GameStatus gameStatus) {
