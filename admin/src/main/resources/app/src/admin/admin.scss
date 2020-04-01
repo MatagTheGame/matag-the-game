@@ -27,8 +27,7 @@ button {
   font-size: 100%;
 }
 
-button, input[type=button], input[type=submit], input[type=reset]
-label {
+button, input[type=button], input[type=submit], input[type=reset], label {
   cursor: pointer;
 }
 
@@ -62,7 +61,7 @@ textarea {
   }
 
   .matag-form .grid-label-value {
-    grid-template-columns: 1fr 10fr;
+    grid-template-columns: 1fr 3fr;
   }
 }
 
@@ -81,6 +80,7 @@ textarea {
 .matag-form label {
   line-height: 1.5;
   padding: 10px 10px;
+  display: inline-block;
 }
 
 .matag-form textarea {

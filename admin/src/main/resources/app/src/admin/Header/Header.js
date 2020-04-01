@@ -1,18 +1,15 @@
 import React, {Component} from 'react'
 import './header.scss'
+import {Link} from 'react-router-dom'
 
 export default class Header extends Component {
   render() {
     return (
       <header>
-        <div className='header-container'>
-          <div id='logo'>
-            <p>MATAG</p>
-          </div>
-          <nav id='menu'>
-            <p>MATAG</p>
-          </nav>
-        </div>
+        <h1>MATAG</h1>
+        <nav id='menu'>
+          <Link to="/ui/admin/decks">Decks</Link>
+        </nav>
       </header>
     )
   }
