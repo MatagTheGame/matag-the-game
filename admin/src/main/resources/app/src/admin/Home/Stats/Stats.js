@@ -1,42 +1,36 @@
-import React, {Component} from 'react'
+import React, {useEffect} from 'react'
 import Loader from '../../Common/Loader'
 import get from 'lodash/get'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 
-class Stats extends Component {
-  componentDidMount() {
-    this.props.loadStats()
+function Stats(props) {
+  useEffect(() => {
+    props.loadStats()
     fetch('/stats')
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        this.props.statsLoaded(data)
-      })
-  }
+      .then((response) => response.json())
+      .then((data) => props.statsLoaded(data))
+  }, [])
 
-  stats() {
-    if (this.props.loading) {
+  const stats = () => {
+    if (props.loading) {
       return <Loader/>
     } else {
       return (
         <ul>
-          <li><span>Total Users: </span><span>{this.props.totalUsers}</span></li>
-          <li><span>Online Users: </span><span>{this.props.onlineUsers}</span></li>
-          <li><span>Total Cards: </span><span>{this.props.totalCards}</span></li>
+          <li><span>Total Users: </span><span>{props.totalUsers}</span></li>
+          <li><span>Online Users: </span><span>{props.onlineUsers}</span></li>
+          <li><span>Total Cards: </span><span>{props.totalCards}</span></li>
         </ul>
       )
     }
   }
 
-  render() {
-    return (
-      <section id='stats'>
-        { this.stats() }
-      </section>
-    )
-  }
+  return (
+    <section id='stats'>
+      { stats() }
+    </section>
+  )
 }
 
 const loadStats = () => {
