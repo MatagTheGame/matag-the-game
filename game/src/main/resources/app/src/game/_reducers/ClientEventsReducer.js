@@ -8,6 +8,7 @@ import StackUtils from 'Main/game/Stack/StackUtils'
 import PlayerUtils from 'Main/game/PlayerInfo/PlayerUtils'
 import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
 import {TurnUtils} from 'Main/game/Turn/TurnUtils'
+import {PhaseUtils} from '../Turn/PhaseUtils'
 
 export default class ClientEventsReducer {
 
@@ -47,7 +48,7 @@ export default class ClientEventsReducer {
           stompClient.sendEvent('turn', {action: 'RESOLVE', triggeredNonStackAction: 'DISCARD_A_CARD', cardIds: [cardId]})
         }
 
-        if (Phase.isMainPhase(newState.turn.currentPhase) || cardInstance.instantSpeed) {
+        if (PhaseUtils.isMainPhase(newState.turn.currentPhase) || cardInstance.instantSpeed) {
           if (CardUtils.isOfType(cardInstance, 'LAND')) {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardIds: [cardId]})
 

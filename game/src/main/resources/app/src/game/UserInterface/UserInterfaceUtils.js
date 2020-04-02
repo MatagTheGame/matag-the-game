@@ -2,6 +2,7 @@ import {set} from 'lodash'
 import StackUtils from 'Main/game/Stack/StackUtils'
 import Phase from 'Main/game/Turn/Phase'
 import PlayerUtils from 'Main/game/PlayerInfo/PlayerUtils'
+import {PhaseUtils} from '../Turn/PhaseUtils'
 
 export default class UserInterfaceUtils {
   static setMessage(state, message, closable = true) {
@@ -24,7 +25,7 @@ export default class UserInterfaceUtils {
         UserInterfaceUtils.setStatusMessage(state, UserInterfaceUtils.PLAY_ANY_INSTANT_OR_ABILITIES_OR_CONTINUE_STACK_NOT_EMPTY)
 
       } else {
-        if (Phase.isMainPhase(state.turn.currentPhase)) {
+        if (PhaseUtils.isMainPhase(state.turn.currentPhase)) {
           UserInterfaceUtils.setStatusMessage(state, UserInterfaceUtils.PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE)
 
         } else if (state.turn.currentPhase === 'DB' && PlayerUtils.isPlayerAbleToBlock(state)) {

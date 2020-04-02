@@ -4,14 +4,6 @@ This application is taking care of playing matches between players.
 It is deployed at https://matag-game.herokuapp.com/ui/game
 
 
-## Requisites
-
- * Install JDK 1.8
- * Install [maven](https://maven.apache.org/download.cgi)
- * Install [yarn](https://yarnpkg.com/lang/en/docs/install)
- * Download [Chromedriver](https://chromedriver.chromium.org/downloads)
-
-
 ## Development
 
 The application is written using:

@@ -1,65 +1,63 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import './playerInfo.scss'
 
-class PlayerInfo extends Component {
-  getId () {
-    return this.props.type + '-info'
+function PlayerInfo(props) {
+  const getId = () => {
+    return props.type + '-info'
   }
 
-  getName() {
-    if (this.props.type === 'player') {
-      return this.props.playerName
+  const getName = () => {
+    if (props.type === 'player') {
+      return props.playerName
     } else {
-      return this.props.opponentName
+      return props.opponentName
     }
   }
 
-  getLife() {
-    if (this.props.type === 'player') {
-      return this.props.playerLife
+  const getLife = () => {
+    if (props.type === 'player') {
+      return props.playerLife
     } else {
-      return this.props.opponentLife
+      return props.opponentLife
     }
   }
 
-  getLifeClasses() {
-    if (this.getLife() <= 0) {
+  const getLifeClasses = () => {
+    if (getLife() <= 0) {
       return 'non-positive'
     }
   }
 
-  getPlayerClasses() {
+  const getPlayerClasses = () => {
     let classes = 'player-info'
 
-    if (this.props.currentTurnPlayer === this.getName()) {
+    if (props.currentTurnPlayer === getName()) {
       classes += ' active-player'
     } else {
       classes += ' inactive-player'
     }
 
-    if (this.props.winner === this.getName()) {
+    if (props.winner === getName()) {
       classes += ' winner'
     }
 
     return classes
   }
 
-  playerClick(playerName) {
-    this.props.playerClick(playerName)
+  const playerClick = (playerName) => {
+    props.playerClick(playerName)
   }
 
-  render() {
-    return (
-      <div id={this.getId()} className={this.getPlayerClasses()} onClick={() => this.playerClick(this.getName())}>
-        <span>{this.getName()}</span>
-        <span className={this.getLifeClasses()}>{this.getLife()}</span>
-      </div>
-    )
-  }
+  return (
+    <div id={getId()} className={getPlayerClasses()} onClick={() => playerClick(getName())}>
+      <span>{getName()}</span>
+      <span className={getLifeClasses()}>{getLife()}</span>
+    </div>
+  )
 }
 
 const mapStateToProps = state => {

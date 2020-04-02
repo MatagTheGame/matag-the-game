@@ -1,17 +1,15 @@
 import get from 'lodash/get'
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import './statusMessage.scss'
 
-class StatusMessage extends Component {
-  render() {
-    return (
-      <div id='status-message'>
-        {this.props.statusMessage}
-      </div>
-    )
-  }
+function StatusMessage(props) {
+  return (
+    <div id='status-message'>
+      {props.statusMessage}
+    </div>
+  )
 }
 
 const mapStateToProps = state => {

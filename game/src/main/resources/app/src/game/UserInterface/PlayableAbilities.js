@@ -1,23 +1,21 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import './playableAbilities.scss'
 
-class PossibleAbility extends Component {
-  static renderColors(colors) {
+function PossibleAbility(props) {
+  const renderColors = (colors) => {
     return colors.map((color, index) => <img key={index} src={`/img/symbols/${color}.png`} alt={color} />)
   }
 
-  render() {
-    switch (this.props.possibleAbility.abilityType) {
-      case 'TAP_ADD_MANA':
-        const colors = this.props.possibleAbility.parameters
-        return <li onClick={this.props.onClick} title={`TAP: add ${colors}`}><img src='/img/symbols/TAP.png' alt='TAP' />: add {PossibleAbility.renderColors(colors)}</li>
-      default:
-        return <li/>
-    }
+  switch (props.possibleAbility.abilityType) {
+    case 'TAP_ADD_MANA':
+      const colors = props.possibleAbility.parameters
+      return <li onClick={props.onClick} title={`TAP: add ${colors}`}><img src='/img/symbols/TAP.png' alt='TAP' />: add {renderColors(colors)}</li>
+    default:
+      return <li/>
   }
 }
 
@@ -26,36 +24,28 @@ PossibleAbility.propTypes = {
   onClick: PropTypes.func.isRequired
 }
 
-class PlayableAbilities extends Component {
-  constructor(props) {
-    super(props)
-    this.closePlayableAbilitiesOverlay = this.closePlayableAbilitiesOverlay.bind(this)
-    this.playAbility = this.playAbility.bind(this)
+function PlayableAbilities(props) {
+  const playAbility = (index) => {
+    props.playAbilitiesAction(props.cardId, index)
   }
 
-  playAbility(index) {
-    this.props.playAbilitiesAction(this.props.cardId, index)
+  const closePlayableAbilitiesOverlay = () => {
+    props.closePlayableAbilitiesOverlay()
   }
 
-  closePlayableAbilitiesOverlay() {
-    this.props.closePlayableAbilitiesOverlay()
-  }
-
-  render() {
-    if (this.props.possibleAbilities.length > 1) {
-      return (
-        <div id='playable-abilities-overlay' onClick={this.closePlayableAbilitiesOverlay}>
-          <div id='playable-abilities' style={{left: this.props.position.x + 'px', top: (this.props.position.y - 150) + 'px'}}>
-            <ul>
-              { this.props.possibleAbilities.map((possibleAbility, index) =>
-                <PossibleAbility key={index} possibleAbility={possibleAbility} onClick={() => this.playAbility(index)} />) }
-            </ul>
-          </div>
+  if (props.possibleAbilities.length > 1) {
+    return (
+      <div id='playable-abilities-overlay' onClick={closePlayableAbilitiesOverlay}>
+        <div id='playable-abilities' style={{left: props.position.x + 'px', top: (props.position.y - 150) + 'px'}}>
+          <ul>
+            { props.possibleAbilities.map((possibleAbility, index) =>
+              <PossibleAbility key={index} possibleAbility={possibleAbility} onClick={() => playAbility(index)} />) }
+          </ul>
         </div>
-      )
-    } else {
-      return null
-    }
+      </div>
+    )
+  } else {
+    return <></>
   }
 }
 

@@ -1,52 +1,49 @@
-import React, {Component} from 'react'
+import React, {useEffect} from 'react'
 import get from 'lodash/get'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import PropTypes from 'prop-types'
 import './userAction.scss'
 
-class UserAction extends Component {
-  constructor(props) {
-    super(props)
-    this.handleContinueKey = this.handleContinueKey.bind(this)
-  }
-
-  handleContinueKey(event) {
+function UserAction(props) {
+  const handleKeyDown = (event) => {
     if (event.key === ' ') {
-      if (this.isContinueEnabled()) {
-        this.props.continueClick()
+      if (isContinueEnabled()) {
+        props.continueClick()
       }
+
     } else if (event.key === 'H') {
-      this.props.openHelpPage(true)
+      props.openHelpPage(true)
+
+    } else if (event.key === 'L') {
+      alert('Game Log coming soon!')
     }
   }
 
-  componentDidMount() {
-    document.addEventListener('keydown', this.handleContinueKey)
+  useEffect(() => {
+    // FIXME this gets called millions of time
+    console.log('registered again')
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
+  const isPhaseActiveForPlayer = () => {
+    return props.turn.currentPhaseActivePlayer === props.currentPlayerName
   }
 
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleContinueKey)
+  const isContinueEnabled = () => {
+    return !props.winner && isPhaseActiveForPlayer()
   }
 
-  isPhaseActiveForPlayer() {
-    return this.props.turn.currentPhaseActivePlayer === this.props.currentPlayerName
-  }
-
-  isContinueEnabled() {
-    return !this.props.winner && this.isPhaseActiveForPlayer()
-  }
-
-  render() {
-    return (
-      <div id='user-actions'>
-        <button title="Press SPACE to continue" id='continue-button' type='button' disabled={!this.isContinueEnabled()} onClick={this.props.continueClick}>-></button>
-        <button title="Press L to see game logs" id='logs-button' type='button' onClick={() => alert('Game Log coming soon!')}>=</button>
-        <button title="Press H to see the help page" id='help-button' type='button' onClick={this.props.openHelpPage}>?</button>
-      </div>
-
-    )
-  }
+  return (
+    <div id='user-actions'>
+      <button title="Press SPACE to continue" id='continue-button' type='button' disabled={!isContinueEnabled()} onClick={props.continueClick}>-&gt;</button>
+      <button title="Press L to see game logs" id='logs-button' type='button' onClick={() => alert('Game Log coming soon!')}>=</button>
+      <button title="Press H to see the help page" id='help-button' type='button' onClick={props.openHelpPage}>?</button>
+    </div>
+  )
 }
 
 const createContinueClickAction = () => {
