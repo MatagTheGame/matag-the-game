@@ -29,7 +29,7 @@ public class LoginControllerTest extends AbstractApplicationTest {
   @Test
   public void shouldLoginAUser() {
     // Given
-    LoginRequest request = new LoginRequest("user1", "password");
+    LoginRequest request = new LoginRequest("user1@matag.com", "password");
 
     // When
     LoginResponse response = restTemplate.postForObject("/auth/login", request, LoginResponse.class);
@@ -41,7 +41,7 @@ public class LoginControllerTest extends AbstractApplicationTest {
   @Test
   public void shouldNotLoginWithWrongPassword() {
     // Given
-    LoginRequest request = new LoginRequest("user1", "wrong-password");
+    LoginRequest request = new LoginRequest("user1@matag.com", "wrong-password");
 
     // When
     ResponseEntity<LoginResponse> response = restTemplate.postForEntity("/auth/login", request, LoginResponse.class);
@@ -53,7 +53,7 @@ public class LoginControllerTest extends AbstractApplicationTest {
   @Test
   public void shouldNotLoginNotActiveUser() {
     // Given
-    LoginRequest request = new LoginRequest("inactive", "password");
+    LoginRequest request = new LoginRequest("inactive@matag.com", "password");
 
     // When
     ResponseEntity<LoginResponse> response = restTemplate.postForEntity("/auth/login", request, LoginResponse.class);

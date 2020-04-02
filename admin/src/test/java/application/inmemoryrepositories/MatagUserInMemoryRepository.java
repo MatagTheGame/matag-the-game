@@ -77,9 +77,9 @@ public class MatagUserInMemoryRepository implements MatagUserRepository {
   }
 
   @Override
-  public Optional<MatagUser> findByUsername(String username) {
+  public Optional<MatagUser> findByEmailAddress(String email) {
     return DATA.values().stream()
-      .filter(matagUser -> matagUser.getUsername().equals(username))
+      .filter(matagUser -> matagUser.getEmailAddress().equals(email))
       .findFirst();
   }
 

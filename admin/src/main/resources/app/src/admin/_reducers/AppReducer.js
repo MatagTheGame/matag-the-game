@@ -18,6 +18,12 @@ export default (state, action) => {
     newState.stats.loading = false
     newState.stats.value = action.value
 
+  } else if (action.type === 'LOGIN_LOADING') {
+    newState.login = {loading: true}
+
+  } else if (action.type === 'LOGIN_ERROR_MESSAGE') {
+    newState.login = {loading: false, message: action.value}
+
   } else {
     throw new Error(`Unknown action type ${action.type}`)
   }

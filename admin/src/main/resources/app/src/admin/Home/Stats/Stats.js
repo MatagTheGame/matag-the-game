@@ -3,17 +3,13 @@ import Loader from '../../Common/Loader'
 import get from 'lodash/get'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import ApiClient from '../../Common/ApiClient'
 
 class Stats extends Component {
   componentDidMount() {
     this.props.loadStats()
-    fetch('/stats')
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        this.props.statsLoaded(data)
-      })
+    ApiClient.get('/stats')
+      .then(data => this.props.statsLoaded(data))
   }
 
   stats() {

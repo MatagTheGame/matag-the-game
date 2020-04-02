@@ -2,6 +2,7 @@
 $body-background-color: #292a2b;
 $body-text-color: #afafaf;
 $link-text-color: #92b4f3;
+$error-text-color: #ff7597;
 
 body {
   background-color: $body-background-color;
@@ -48,6 +49,9 @@ textarea {
   resize: none;
 }
 
+.error {
+  color: $error-text-color;
+}
 
 
 /* Form  */
@@ -62,6 +66,10 @@ textarea {
 
   .matag-form .grid-label-value {
     grid-template-columns: 1fr 3fr;
+  }
+
+  .matag-form .three-columns {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 

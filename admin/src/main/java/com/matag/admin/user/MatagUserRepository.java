@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface MatagUserRepository extends CrudRepository<MatagUser, Long> {
-  Optional<MatagUser> findByUsername(String username);
+  Optional<MatagUser> findByEmailAddress(String username);
 
   @Query("SELECT COUNT(id) FROM MatagUser WHERE status = 'ACTIVE'")
   long countActiveUsers();

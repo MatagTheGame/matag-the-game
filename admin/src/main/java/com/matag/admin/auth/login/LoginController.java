@@ -36,7 +36,7 @@ public class LoginController {
 
   @PostMapping("/login")
   public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-    Optional<MatagUser> userOptional = userRepository.findByUsername(loginRequest.getUsername());
+    Optional<MatagUser> userOptional = userRepository.findByEmailAddress(loginRequest.getEmail());
 
     if (!userOptional.isPresent()) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

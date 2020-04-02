@@ -3,59 +3,105 @@ import './login.scss'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
 import {bindActionCreators} from 'redux'
+import ApiClient from '../../Common/ApiClient'
+import Loader from '../../Common/Loader'
+import FieldValidation from '../../Common/FieldValidation'
 
 class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      username: '',
+      email: '',
       password: ''
     }
-    this.handleChangeUsername = this.handleChangeUsername.bind(this)
+    this.handleChangeEmail = this.handleChangeEmail.bind(this)
     this.handleChangePassword = this.handleChangePassword.bind(this)
-    this.login = this.login.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
+    this.handleLoginAsGuest = this.handleLoginAsGuest.bind(this)
   }
 
-  handleChangeUsername(event) {
-    this.setState({username: event.target.value})
+  handleChangeEmail(event) {
+    this.setState({email: event.target.value})
   }
 
   handleChangePassword(event) {
     this.setState({password: event.target.value})
   }
 
-  login(event) {
-    event.preventDefault()
+  login(email, password) {
+    if (!FieldValidation.isValidateEmail(email)) {
+      this.props.loginErrorMessage('Email is invalid.')
+      return
+    }
+
+    if (password.length < 4) {
+      this.props.loginErrorMessage('Password is invalid.')
+      return
+    }
+
     const request = {
-      username: this.state.username,
-      password: this.state.password
+      email: email,
+      password: password
     }
 
     this.props.loginLoading()
-    fetch('/auth/login', {method: 'POST', body: JSON.stringify(request)})
-      .then((response) => response.json())
-      .then((data) => this.props.loginResponse(data))
+    ApiClient.postNoRedirect('/auth/login', request)
+      .then(response => !response.ok ? 'Email or password are not correct.' : null)
+      .then(message => this.props.loginErrorMessage(message))
+  }
+
+  handleLogin(event) {
+    event.preventDefault()
+    this.login(this.state.email, this.state.password)
+  }
+
+  handleLoginAsGuest() {
+    this.login('guest@matag.com', 'password')
+  }
+
+  displayErrorMessage() {
+    if (this.props.errorMessage) {
+      return (
+        <div className='grid grid-label-value'>
+          <div/>
+          <div className='error'>{this.props.errorMessage}</div>
+        </div>
+      )
+    }
+  }
+
+  displayLoader() {
+    if (this.props.loading) {
+      return (
+        <div className='spinner-container'>
+          <Loader/>
+        </div>
+      )
+    }
   }
 
   render() {
     return (
       <div id='login-container'>
         <h2>Login</h2>
-        <form className='matag-form' onSubmit={this.login}>
+        <form className='matag-form' onSubmit={this.handleLogin}>
           <div className='grid grid-label-value'>
-            <label htmlFor='username'>Username: </label>
-            <input type='text' name='username' value={this.state.username} onChange={this.handleChangeUsername}/>
+            <label htmlFor='email'>Email: </label>
+            <input type='text' name='email' value={this.state.email} onChange={this.handleChangeEmail}/>
           </div>
           <div className='grid grid-label-value'>
             <label htmlFor='password'>Password: </label>
             <input type='password' name='password' value={this.state.password} onChange={this.handleChangePassword}/>
           </div>
-          <div className='grid'>
+          { this.displayErrorMessage() }
+          <div className='grid three-columns'>
+            <div/>
             <div className='login-buttons'>
               <input type='submit' value='Login'/>
               <div className='or'>or</div>
-              <input type='submit' value='Login as Guest'/>
+              <input type='button' value='Login as Guest' onClick={this.handleLoginAsGuest}/>
             </div>
+            { this.displayLoader() }
           </div>
         </form>
       </div>
@@ -69,23 +115,24 @@ const loginLoading = () => {
   }
 }
 
-const loginResponse = (data) => {
+const loginErrorMessage = (message) => {
   return {
-    type: 'LOGIN_RESPONSE',
-    value: data
+    type: 'LOGIN_ERROR_MESSAGE',
+    value: message
   }
 }
 
 const mapStateToProps = state => {
   return {
     loading: get(state, 'login.loading', false),
+    errorMessage: get(state, 'login.message', null),
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     loginLoading: bindActionCreators(loginLoading, dispatch),
-    loginResponse: bindActionCreators(loginResponse, dispatch)
+    loginErrorMessage: bindActionCreators(loginErrorMessage, dispatch)
   }
 }
 
