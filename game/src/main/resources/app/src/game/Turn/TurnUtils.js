@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 
-export class TurnUtils  {
+export default class TurnUtils  {
   static selectTarget(state, target) {
     if (!state.turn.targetsIds) {
       state.turn.targetsIds = []

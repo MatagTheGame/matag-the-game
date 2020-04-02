@@ -3,9 +3,9 @@ import './login.scss'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
 import {bindActionCreators} from 'redux'
-import ApiClient from '../../Common/ApiClient'
-import Loader from '../../Common/Loader'
-import FieldValidation from '../../Common/FieldValidation'
+import Loader from 'Main/admin/Common/Loader'
+import ApiClient from 'Main/admin/utils/ApiClient'
+import FieldValidation from 'Main/admin/utils/FieldValidation'
 
 class Login extends Component {
   constructor(props) {

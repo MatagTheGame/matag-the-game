@@ -1,12 +1,12 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
-import Card from '../Card/Card'
 import {bindActionCreators} from 'redux'
-import CardSearch from '../Card/CardSearch'
-import CardUtils from '../Card/CardUtils'
-import PlayerUtils from '../PlayerInfo/PlayerUtils'
 import PropTypes from 'prop-types'
+import Card from 'Main/game/Card/Card'
+import CardSearch from 'Main/game/Card/CardSearch'
+import CardUtils from 'Main/game/Card/CardUtils'
+import PlayerUtils from 'Main/game/PlayerInfo/PlayerUtils'
 import './battlefield.scss'
 
 class Battlefield extends Component {

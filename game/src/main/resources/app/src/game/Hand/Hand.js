@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
-import Card from '../Card/Card'
 import PropTypes from 'prop-types'
+import Card from 'Main/game/Card/Card'
 import './hand.scss'
 
 class Hand extends Component {

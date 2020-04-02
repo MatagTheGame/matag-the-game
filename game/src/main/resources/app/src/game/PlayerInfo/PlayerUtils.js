@@ -1,10 +1,10 @@
 import get from 'lodash/get'
-import stompClient from 'Main/game/WebSocket'
 import CardSearch from 'Main/game/Card/CardSearch'
-import CostUtils from 'Main/game/Card/CostUtils'
-import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
-import {TurnUtils} from 'Main/game/Turn/TurnUtils'
 import CardUtils from 'Main/game/Card/CardUtils'
+import CostUtils from 'Main/game/Card/CostUtils'
+import TurnUtils from 'Main/game/Turn/TurnUtils'
+import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
+import stompClient from 'Main/game/WebSocket'
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {

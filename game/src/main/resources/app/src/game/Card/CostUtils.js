@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import get from 'lodash/get'
-import CardSearch from 'Main/game/Card/CardSearch'
-import CardUtils from 'Main/game/Card/CardUtils'
+import CardSearch from './CardSearch'
+import CardUtils from './CardUtils'
 
 export default class CostUtils {
   static isCastingCostFulfilled(card, currentTappedMana) {

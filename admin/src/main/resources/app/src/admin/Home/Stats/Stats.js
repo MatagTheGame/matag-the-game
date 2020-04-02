@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import Loader from '../../Common/Loader'
 import get from 'lodash/get'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import ApiClient from '../../Common/ApiClient'
+import Loader from 'Main/admin/Common/Loader'
+import ApiClient from 'Main/admin/utils/ApiClient'
 
 class Stats extends Component {
   componentDidMount() {

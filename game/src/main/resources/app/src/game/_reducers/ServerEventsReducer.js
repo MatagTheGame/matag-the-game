@@ -1,6 +1,6 @@
+import CostUtils from 'Main/game/Card/CostUtils'
 import PlayerUtils from 'Main/game/PlayerInfo/PlayerUtils'
 import UserInterfaceUtils from 'Main/game/UserInterface/UserInterfaceUtils'
-import CostUtils from 'Main/game/Card/CostUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {

@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
-import {LibraryUiUtils} from './LibraryUiUtils'
-import Card from '../Card/Card'
 import PropTypes from 'prop-types'
+import {LibraryUiUtils} from './LibraryUiUtils'
+import Card from 'Main/game/Card/Card'
 import './library.scss'
 
 class Library extends Component {

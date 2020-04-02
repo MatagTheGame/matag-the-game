@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import get from 'lodash/get'
 import throttle from 'lodash/throttle'
-import CardUtils from './CardUtils'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {Modifiers} from './Modifiers'
 import PropTypes from 'prop-types'
+import CardUtils from './CardUtils'
+import {Modifiers} from './Modifiers'
 import './card.scss'
 
 class Card extends Component {

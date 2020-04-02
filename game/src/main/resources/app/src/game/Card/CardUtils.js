@@ -1,6 +1,6 @@
 import get from 'lodash/get'
-import CostUtils from 'Main/game/Card/CostUtils'
-import {TurnUtils} from 'Main/game/Turn/TurnUtils'
+import TurnUtils from 'Main/game/Turn/TurnUtils'
+import CostUtils from './CostUtils'
 
 export default class CardUtils {
   static normalizeCardName(cardName) {
