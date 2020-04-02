@@ -1,0 +1,159 @@
+$tapped-rotation: 90deg;
+$tapped-does-not-untap-next-turn-rotation: 110deg;
+$front-end-tapped-rotation: 75deg;
+$shadow-color: rgba(0, 0, 0, 0.4);
+
+.card {
+  position: relative;
+  float: left;
+  width: 180px;
+  height: 250px;
+  margin: 5px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  transition-duration: 0.5s;
+  z-index: 1;
+}
+
+.card:hover {
+  z-index: 8 !important;
+}
+
+.summoning-sickness {
+  background-image: url("/public/img/modifiers/summoning-sickness.png");
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 25px;
+  top: 50px;
+}
+
+.power-toughness {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid black;
+  padding: 1px 4px;
+  font-size: xx-large;
+}
+
+.damage {
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+  background-color: yellow;
+  color: darkred;
+  border: 1px solid black;
+  padding: 1px 4px;
+  font-size: xx-large;
+}
+
+.plus-1-counters {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  background-color: green;
+  color: white;
+  font-size: xx-large;
+  width: 30px;
+  text-align: center;
+  vertical-align: middle;
+  transform-style: preserve-3d;
+}
+
+.plus-1-counters:after {
+  content: '';
+  background-color: #005000;
+  position: absolute;
+  width: 30px;
+  height: 40px;
+}
+
+#player-battlefield .plus-1-counters:after {
+  transform: translateX(-24px) translateY(25px) rotateX(65deg);
+}
+
+#opponent-battlefield .plus-1-counters:after {
+  transform: translateX(-23px) translateY(-28px) rotateX(65deg);
+}
+
+.frontend-blocking {
+  margin-bottom: 100px;
+}
+
+.selected {
+  border: lightskyblue 6px solid;
+}
+
+#player-battlefield .flying {
+  box-shadow: 20px 60px 4px $shadow-color;
+  transform: translateY(-40px);
+  z-index: 2;
+}
+
+#opponent-battlefield .flying {
+  box-shadow: -20px -60px 4px $shadow-color;
+  transform: translateY(40px);
+  z-index: 2;
+}
+
+.targeted {
+  background-color: rgb(255, 255, 100);
+  background-blend-mode: multiply;
+}
+
+#player-battlefield .tapped, #opponent-battlefield .tapped {
+  transform: rotateZ($tapped-rotation);
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+#player-battlefield .tapped.flying {
+  transform: rotateZ($tapped-rotation) translateX(-40px);
+  box-shadow: 60px -20px 4px $shadow-color;
+}
+
+#opponent-battlefield .tapped.flying {
+  transform: rotateZ($tapped-rotation) translateX(40px);
+  box-shadow: -60px 20px 4px $shadow-color;
+}
+
+#player-battlefield .tapped-does-not-untap-next-turn, #opponent-battlefield .tapped-does-not-untap-next-turn {
+  transform: rotateZ($tapped-does-not-untap-next-turn-rotation);
+  margin-right: 40px;
+  margin-left: 40px;
+}
+
+#player-battlefield .tapped-does-not-untap-next-turn.flying {
+  transform: rotateZ($tapped-does-not-untap-next-turn-rotation) translateX(-40px);
+  box-shadow: 60px -20px 4px $shadow-color;
+}
+
+#opponent-battlefield .tapped-does-not-untap-next-turn.flying {
+  transform: rotateZ($tapped-does-not-untap-next-turn-rotation) translateX(40px);
+  box-shadow: -60px 20px 4px $shadow-color;
+}
+
+#player-battlefield .frontend-tapped, #opponent-battlefield .frontend-tapped {
+  transform: rotateZ($front-end-tapped-rotation);
+}
+
+#player-battlefield .frontend-tapped.flying {
+  transform: rotateZ($front-end-tapped-rotation) translateZ(20px);
+  box-shadow: 55px -15px 4px $shadow-color;
+}
+
+#maximized-card {
+  z-index: 11;
+  position: absolute;
+  width: 540px;
+  height: 750px;
+  left: 50%;
+  top: 50%;
+  margin-left: -270px;
+  margin-top: -375px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

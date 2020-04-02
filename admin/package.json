@@ -6,8 +6,8 @@
   "scripts": {
     "build-dev": "webpack -d",
     "build-prod": "webpack -p",
-    "lint": "eslint src/main/resources/app/src/ --ext .js --ignore-pattern node_modules/",
-    "lint-fix": "eslint src/main/resources/app/src/ --ext .js --fix",
+    "lint": "eslint src/main/js/ --ext .js --ignore-pattern node_modules/",
+    "lint-fix": "eslint src/main/js/ --ext .js --fix",
     "postinstall": "yarn build-prod",
     "test": "jest",
     "watch": "webpack -d --watch",
@@ -43,10 +43,10 @@
   },
   "jest": {
     "roots": [
-      "<rootDir>/src/test/resources/app/src"
+      "<rootDir>/src/test/js"
     ],
     "moduleNameMapper": {
-      "^Main/(.*)$": "<rootDir>/src/main/resources/app/src/$1"
+      "^admin/(.*)$": "<rootDir>/src/main/js/admin/$1"
     }
   }
 }

@@ -3,7 +3,7 @@
 var path = require('path')
 
 var BUILD_DIR = path.resolve(__dirname, 'src/main/resources/public/js')
-var APP_DIR = path.resolve(__dirname, 'src/main/resources/app/src')
+var APP_DIR = path.resolve(__dirname, 'src/main/js')
 
 module.exports = {
   entry: APP_DIR + '/admin.js',
@@ -30,7 +30,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      Main: APP_DIR
+      admin: APP_DIR + '/admin'
     }
   }
 }
