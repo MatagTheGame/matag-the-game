@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
@@ -6,38 +6,40 @@ import Card from '../Card/Card'
 import PropTypes from 'prop-types'
 import './hand.scss'
 
-function Hand(props) {
-  const getId = () => {
-    return props.type + '-hand'
+class Hand extends Component {
+  getId() {
+    return this.props.type + '-hand'
   }
 
-  const getHand = () => {
-    if (props.type === 'player') {
-      return props.playerHand
+  getHand() {
+    if (this.props.type === 'player') {
+      return this.props.playerHand
     } else {
-      return props.opponentHand
+      return this.props.opponentHand
     }
   }
 
-  const playerCardClick = (cardId) => {
-    if (props.type === 'player') {
-      return (e) => props.playerCardClick(cardId, {x: e.screenX, y: e.screenY})
+  playerCardClick(cardId) {
+    if (this.props.type === 'player') {
+      return (e) => this.props.playerCardClick(cardId, {x: e.screenX, y: e.screenY})
     } else {
       return () => {}
     }
   }
 
-  const isCardSelectedToBePlayed = (cardInstance) => {
-    return cardInstance.id === props.cardIdSelectedToBePlayed
+  isCardSelectedToBePlayed(cardInstance) {
+    return cardInstance.id === this.props.cardIdSelectedToBePlayed
   }
 
-  return (
-    <div id={getId()} className='hand'>
-      {getHand().map((cardInstance) =>
-        <Card key={cardInstance.id} cardInstance={cardInstance} onclick={playerCardClick(cardInstance.id)}
-          selected={isCardSelectedToBePlayed(cardInstance)} area='hand' />)}
-    </div>
-  )
+  render() {
+    return (
+      <div id={this.getId()} className='hand'>
+        {this.getHand().map((cardInstance) =>
+          <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
+            selected={this.isCardSelectedToBePlayed(cardInstance)} area='hand' />)}
+      </div>
+    )
+  }
 }
 
 const createHandPlayerCardClickAction = (cardId, event) => {

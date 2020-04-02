@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
 import Card from '../Card/Card'
@@ -7,8 +7,9 @@ import StackUtils from './StackUtils'
 import {TriggeredAbility} from './TriggeredAbility'
 import './stack.scss'
 
-function Stack(props) {
-  const renderStackItem = (cardInstance, i) => {
+class Stack extends Component {
+
+  static renderStackItem(cardInstance, i) {
     const style = {transform: 'translateY(-150px) translateX(' + (i * 50) + 'px) translateZ(' + (i * 150) + 'px)'}
     if (StackUtils.isACastedCard(cardInstance)) {
       return (
@@ -26,15 +27,17 @@ function Stack(props) {
     }
   }
 
-  const renderStack = () => {
-    return props.stack.map((cardInstance, index) => renderStackItem(cardInstance, index))
+  renderStack() {
+    return this.props.stack.map((cardInstance, index) => Stack.renderStackItem(cardInstance, index))
   }
 
-  return (
-    <div id='stack'>
-      {renderStack()}
-    </div>
-  )
+  render() {
+    return (
+      <div id='stack'>
+        {this.renderStack()}
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = state => {

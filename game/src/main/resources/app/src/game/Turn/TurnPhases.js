@@ -1,30 +1,31 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
 import Phase from './Phase'
 import PropTypes from 'prop-types'
 import './turhPhases.scss'
-import {PhaseUtils} from './PhaseUtils'
 
-function TurnPhases(props) {
-  const isPhaseActiveForPlayer = () => {
-    return props.turn.currentPhaseActivePlayer === props.currentPlayerName
+class TurnPhases extends Component {
+  isPhaseActiveForPlayer() {
+    return this.props.turn.currentPhaseActivePlayer === this.props.currentPlayerName
   }
 
-  const isPhaseActive = (name) => {
-    return props.turn.currentPhase === name
+  isPhaseActive(name) {
+    return this.props.turn.currentPhase === name
   }
 
-  return (
-    <div id='turn-phases'>
-      {PhaseUtils.getPhases().map((phase) =>
-        <Phase key={phase}
-          name={phase}
-          active={isPhaseActive(phase)}
-          activeForPlayer={isPhaseActiveForPlayer()}/>
-      )}
-    </div>
-  )
+  render() {
+    return (
+      <div id='turn-phases'>
+        {Phase.getPhases().map((phase) =>
+          <Phase key={phase}
+            name={phase}
+            active={this.isPhaseActive(phase)}
+            activeForPlayer={this.isPhaseActiveForPlayer()}/>
+        )}
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = state => {

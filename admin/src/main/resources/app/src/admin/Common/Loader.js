@@ -1,10 +1,12 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './loader.scss'
 
-export default function Loader() {
-  return (
-    <div>
-      <img className='loader' alt='loader' src='/img/loader.gif'/>
-    </div>
-  )
+export default class Loader extends Component {
+  render() {
+    return (
+      <div>
+        <img className='loader' alt='loader' src='/img/loader.gif' />
+      </div>
+    )
+  }
 }

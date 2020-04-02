@@ -1,29 +1,31 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
 import Card from '../Card/Card'
 import PropTypes from 'prop-types'
 import './graveyard.scss'
 
-function Graveyard(props) {
-  const getId = () => {
-    return props.type + '-graveyard'
+class Graveyard extends Component {
+  getId() {
+    return this.props.type + '-graveyard'
   }
 
-  const getGraveyard = () => {
-    if (props.type === 'player') {
-      return props.playerGraveyard
+  getGraveyard() {
+    if (this.props.type === 'player') {
+      return this.props.playerGraveyard
     } else {
-      return props.opponentGraveyard
+      return this.props.opponentGraveyard
     }
   }
 
-  return (
-    <div id={getId()} className='graveyard'>
-      {getGraveyard().map((cardInstance) =>
-        <Card key={cardInstance.id} cardInstance={cardInstance} area='graveyard' />)}
-    </div>
-  )
+  render() {
+    return (
+      <div id={this.getId()} className='graveyard'>
+        {this.getGraveyard().map((cardInstance) =>
+          <Card key={cardInstance.id} cardInstance={cardInstance} area='graveyard' />)}
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = state => {

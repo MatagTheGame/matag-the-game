@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
 import {LibraryUiUtils} from './LibraryUiUtils'
@@ -6,27 +6,29 @@ import Card from '../Card/Card'
 import PropTypes from 'prop-types'
 import './library.scss'
 
-function Library(props) {
-  const getId = () => {
-    return props.type + '-library'
+class Library extends Component {
+  getId() {
+    return this.props.type + '-library'
   }
   
-  const getLibrarySize = () => {
-    if (props.type === 'player') {
-      return props.playerLibrarySize
+  getLibrarySize() {
+    if (this.props.type === 'player') {
+      return this.props.playerLibrarySize
     } else {
-      return props.opponentLibrarySize
+      return this.props.opponentLibrarySize
     }
   }
   
-  return (
-    <div id={getId()} className='player-library'>
-      {getLibrarySize() > 0 ? <Card style={LibraryUiUtils.libraryHeight(getLibrarySize(), props.type)} area='library' /> : null}
-      <div className='card-bottom-thickness' style={LibraryUiUtils.libraryBottomThickness(getLibrarySize())} />
-      <div className='card-right-thickness' style={LibraryUiUtils.libraryRightThickness(getLibrarySize())} />
-      {getLibrarySize() > 0 ? <span className='library-size' style={LibraryUiUtils.libraryHeight(getLibrarySize(), props.type)}>{ getLibrarySize() }</span> : null}
-    </div>
-  )
+  render() {
+    return (
+      <div id={this.getId()} className='player-library'>
+        {this.getLibrarySize() > 0 ? <Card style={LibraryUiUtils.libraryHeight(this.getLibrarySize(), this.props.type)} area='library' /> : null}
+        <div className='card-bottom-thickness' style={LibraryUiUtils.libraryBottomThickness(this.getLibrarySize())} />
+        <div className='card-right-thickness' style={LibraryUiUtils.libraryRightThickness(this.getLibrarySize())} />
+        {this.getLibrarySize() > 0 ? <span className='library-size' style={LibraryUiUtils.libraryHeight(this.getLibrarySize(), this.props.type)}>{ this.getLibrarySize() }</span> : null}
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = state => {
