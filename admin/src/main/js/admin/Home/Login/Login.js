@@ -5,7 +5,6 @@ import get from 'lodash/get'
 import {bindActionCreators} from 'redux'
 import Loader from 'admin/Common/Loader'
 import ApiClient from 'admin/utils/ApiClient'
-import FieldValidation from 'admin/utils/FieldValidation'
 
 class Login extends Component {
   constructor(props) {
@@ -29,16 +28,6 @@ class Login extends Component {
   }
 
   login(email, password) {
-    if (!FieldValidation.isValidateEmail(email)) {
-      this.props.loginResponse({error: 'Email is invalid.'})
-      return
-    }
-
-    if (password.length < 4) {
-      this.props.loginResponse({error: 'Password is invalid.'})
-      return
-    }
-
     const request = {
       email: email,
       password: password
@@ -46,7 +35,7 @@ class Login extends Component {
 
     this.props.loginLoading()
     ApiClient.postNoRedirect('/auth/login', request)
-      .then(response => response.ok ? response.json() : {error: 'Email or password are not correct.'})
+      .then(response => response.json())
       .then(response => this.props.loginResponse(response))
   }
 

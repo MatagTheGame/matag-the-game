@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @RunWith(SpringRunner.class)
@@ -25,6 +26,34 @@ import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 public class LoginControllerTest extends AbstractApplicationTest {
   @Autowired
   private TestRestTemplate restTemplate;
+
+  @Test
+  public void shouldReturnInvalidEmail() {
+    // Given
+    LoginRequest request = new LoginRequest("invalidEmail", "password");
+
+    // When
+    ResponseEntity<LoginResponse> response = restTemplate.postForEntity("/auth/login", request, LoginResponse.class);
+
+    // Then
+    assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+    assertThat(response.getBody()).isNotNull();
+    assertThat(response.getBody().getError()).isEqualTo("Email is invalid.");
+  }
+
+  @Test
+  public void shouldReturnInvalidPassword() {
+    // Given
+    LoginRequest request = new LoginRequest("user1@matag.com", "xxx");
+
+    // When
+    ResponseEntity<LoginResponse> response = restTemplate.postForEntity("/auth/login", request, LoginResponse.class);
+
+    // Then
+    assertThat(response.getStatusCode()).isEqualTo(BAD_REQUEST);
+    assertThat(response.getBody()).isNotNull();
+    assertThat(response.getBody().getError()).isEqualTo("Password is invalid.");
+  }
 
   @Test
   public void shouldLoginAUser() {
@@ -39,6 +68,20 @@ public class LoginControllerTest extends AbstractApplicationTest {
   }
 
   @Test
+  public void shouldNotLoginANonExistingUser() {
+    // Given
+    LoginRequest request = new LoginRequest("non-existing-user@matag.com", "password");
+
+    // When
+    ResponseEntity<LoginResponse> response = restTemplate.postForEntity("/auth/login", request, LoginResponse.class);
+
+    // Then
+    assertThat(response.getStatusCode()).isEqualTo(UNAUTHORIZED);
+    assertThat(response.getBody()).isNotNull();
+    assertThat(response.getBody().getError()).isEqualTo("Email or password are not correct.");
+  }
+
+  @Test
   public void shouldNotLoginWithWrongPassword() {
     // Given
     LoginRequest request = new LoginRequest("user1@matag.com", "wrong-password");
@@ -48,6 +91,8 @@ public class LoginControllerTest extends AbstractApplicationTest {
 
     // Then
     assertThat(response.getStatusCode()).isEqualTo(UNAUTHORIZED);
+    assertThat(response.getBody()).isNotNull();
+    assertThat(response.getBody().getError()).isEqualTo("Email or password are not correct.");
   }
 
   @Test
@@ -60,5 +105,7 @@ public class LoginControllerTest extends AbstractApplicationTest {
 
     // Then
     assertThat(response.getStatusCode()).isEqualTo(UNAUTHORIZED);
+    assertThat(response.getBody()).isNotNull();
+    assertThat(response.getBody().getError()).isEqualTo("Account is not active.");
   }
 }
