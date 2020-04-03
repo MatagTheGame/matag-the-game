@@ -1,4 +1,5 @@
 create type matag_user_status as enum ('ACTIVE', 'INACTIVE', 'VERIFYING');
+create type matag_user_type as enum ('ADMIN', 'USER', 'GUEST');
 
 create table matag_user (
   id serial primary key,
@@ -6,6 +7,7 @@ create table matag_user (
   password varchar(255) not null unique,
   email_address varchar(100) not null unique,
   status matag_user_status,
+  type matag_user_type,
   created_at timestamp not null default current_timestamp
 );
 

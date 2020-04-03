@@ -30,12 +30,12 @@ class Login extends Component {
 
   login(email, password) {
     if (!FieldValidation.isValidateEmail(email)) {
-      this.props.loginErrorMessage('Email is invalid.')
+      this.props.loginResponse({error: 'Email is invalid.'})
       return
     }
 
     if (password.length < 4) {
-      this.props.loginErrorMessage('Password is invalid.')
+      this.props.loginResponse({error: 'Password is invalid.'})
       return
     }
 
@@ -46,8 +46,8 @@ class Login extends Component {
 
     this.props.loginLoading()
     ApiClient.postNoRedirect('/auth/login', request)
-      .then(response => !response.ok ? 'Email or password are not correct.' : null)
-      .then(message => this.props.loginErrorMessage(message))
+      .then(response => response.ok ? response.json() : {error: 'Email or password are not correct.'})
+      .then(response => this.props.loginResponse(response))
   }
 
   handleLogin(event) {
@@ -59,12 +59,12 @@ class Login extends Component {
     this.login('guest@matag.com', 'password')
   }
 
-  displayErrorMessage() {
-    if (this.props.errorMessage) {
+  displayError() {
+    if (this.props.error) {
       return (
         <div className='grid grid-label-value'>
           <div/>
-          <div className='error'>{this.props.errorMessage}</div>
+          <div className='error'>{this.props.error}</div>
         </div>
       )
     }
@@ -93,7 +93,7 @@ class Login extends Component {
             <label htmlFor='password'>Password: </label>
             <input type='password' name='password' value={this.state.password} onChange={this.handleChangePassword}/>
           </div>
-          { this.displayErrorMessage() }
+          {this.displayError()}
           <div className='grid three-columns'>
             <div/>
             <div className='login-buttons'>
@@ -101,7 +101,7 @@ class Login extends Component {
               <div className='or'>or</div>
               <input type='button' value='Login as Guest' onClick={this.handleLoginAsGuest}/>
             </div>
-            { this.displayLoader() }
+            {this.displayLoader()}
           </div>
         </form>
       </div>
@@ -115,24 +115,24 @@ const loginLoading = () => {
   }
 }
 
-const loginErrorMessage = (message) => {
+const loginResponse = (response) => {
   return {
-    type: 'LOGIN_ERROR_MESSAGE',
-    value: message
+    type: 'LOGIN_RESPONSE',
+    value: response
   }
 }
 
 const mapStateToProps = state => {
   return {
     loading: get(state, 'login.loading', false),
-    errorMessage: get(state, 'login.message', null),
+    error: get(state, 'login.error', null),
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     loginLoading: bindActionCreators(loginLoading, dispatch),
-    loginErrorMessage: bindActionCreators(loginErrorMessage, dispatch)
+    loginResponse: bindActionCreators(loginResponse, dispatch)
   }
 }
 
