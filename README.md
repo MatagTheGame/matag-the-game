@@ -41,7 +41,7 @@ contributing and learning the project.
  - Travis: https://travis-ci.com/antonioalonzi/matag
 
 Tests run for all the modules together.
-For the `game` module `Regression` tests are skipped. Read module readme for more info.
+For the `game` module `Regression` tests are skipped. Read [game README](game/README.md) for more info.
 
 ## Continuous Deployment on Heroku
 

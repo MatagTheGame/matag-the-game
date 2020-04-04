@@ -4,6 +4,13 @@ This application is taking care of playing matches between players.
 It is deployed at https://matag-game.herokuapp.com/ui/game
 
 
+## Requisites
+
+ * Install JDK 1.8
+ * Install [maven](https://maven.apache.org/download.cgi)
+ * Install [yarn 1.21.1(https://classic.yarnpkg.com/en/docs/install)
+ * Install [node v12.12.0](https://nodejs.org/en/download/)
+
 ## Development
 
 The application is written using:
@@ -23,6 +30,8 @@ Build js:
 
     yarn install
     yarn watch
+    
+(To have more helps with imports click on the js folder and mark it as resource root)
 
 
 ## Tests

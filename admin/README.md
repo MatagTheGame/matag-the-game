@@ -8,6 +8,8 @@ It is deployed at https://matag-admin.herokuapp.com/
 
  * Install JDK 1.8
  * Install [maven](https://maven.apache.org/download.cgi)
+ * Install [yarn 1.21.1(https://classic.yarnpkg.com/en/docs/install)
+ * Install [node v12.12.0](https://nodejs.org/en/download/)
  
 The application connects to a [postgresql](https://www.postgresql.org/) database.
 You can install one locally and then run the [schema.sql](src/main/resource/schema.sql)
@@ -16,6 +18,7 @@ You can install one locally and then run the [schema.sql](src/main/resource/sche
 
 The application is written using:
  * Java ([Spring](https://spring.io/))
+  * Javascript ([React](https://reactjs.org/) + [Redux](https://redux.js.org/))
 
 The use of an IDE like [IntelliJ](https://www.jetbrains.com/idea/download/) will help much during development.
 (Community edition is available).
@@ -26,6 +29,13 @@ The use of an IDE like [IntelliJ](https://www.jetbrains.com/idea/download/) will
 Build java:
 
     mvn install
+    
+Build js:
+
+    yarn install
+    yarn watch
+    
+(To have more helps with imports click on the js folder and mark it as resource root)
     
 
 ## Tests
