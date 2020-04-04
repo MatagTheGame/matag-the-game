@@ -11,7 +11,7 @@ public class RandomGameController {
 
   private AtomicInteger atomicInteger = new AtomicInteger(1);
 
-  @RequestMapping(path = {"/", "/ui", "/ui/game"}, method = RequestMethod.GET)
+  @RequestMapping(path = {"/ui", "/ui/game"}, method = RequestMethod.GET)
   public String randomGame() {
     return "redirect:/ui/game/" + atomicInteger.incrementAndGet() / 2;
   }

@@ -1,27 +1,21 @@
 package com.matag.cards.ability.target;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.matag.cards.ability.selector.CardInstanceSelector;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Value;
 
-@Getter
-@EqualsAndHashCode
-@ToString
-@Builder
+@Value
+@JsonDeserialize(builder = Target.TargetBuilder.class)
+@Builder(toBuilder = true)
 public class Target {
   private final CardInstanceSelector cardInstanceSelector;
   private final boolean optional;
   private final boolean other;
 
-  @JsonCreator
-  public Target(@JsonProperty("cardInstanceSelector") CardInstanceSelector cardInstanceSelector, @JsonProperty("optional") boolean optional,
-                @JsonProperty("other") boolean other) {
-    this.cardInstanceSelector = cardInstanceSelector;
-    this.optional = optional;
-    this.other = other;
+  @JsonPOJOBuilder(withPrefix = "")
+  public static class TargetBuilder {
+
   }
 }

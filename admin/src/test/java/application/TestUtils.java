@@ -11,7 +11,7 @@ public class TestUtils {
   public static MatagUser user1() {
     MatagUser matagUser = new MatagUser();
     matagUser.setId(1L);
-    matagUser.setUsername("user1");
+    matagUser.setUsername("User1");
     matagUser.setPassword(PASSWORD_ENCODED);
     matagUser.setEmailAddress("user1@matag.com");
     matagUser.setStatus(ACTIVE);
@@ -21,7 +21,7 @@ public class TestUtils {
   public static MatagUser user2() {
     MatagUser matagUser = new MatagUser();
     matagUser.setId(2L);
-    matagUser.setUsername("user2");
+    matagUser.setUsername("User2");
     matagUser.setPassword(PASSWORD_ENCODED);
     matagUser.setEmailAddress("user2@matag.com");
     matagUser.setStatus(ACTIVE);
@@ -31,7 +31,7 @@ public class TestUtils {
   public static MatagUser inactive() {
     MatagUser matagUser = new MatagUser();
     matagUser.setId(10L);
-    matagUser.setUsername("inactive");
+    matagUser.setUsername("Inactive");
     matagUser.setPassword(PASSWORD_ENCODED);
     matagUser.setEmailAddress("inactive@matag.com");
     matagUser.setStatus(INACTIVE);

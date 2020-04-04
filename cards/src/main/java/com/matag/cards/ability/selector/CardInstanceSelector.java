@@ -1,27 +1,23 @@
 package com.matag.cards.ability.selector;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.Color;
 import com.matag.cards.properties.Subtype;
 import com.matag.cards.properties.Type;
 import com.matag.player.PlayerType;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Value;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
-@Getter
-@EqualsAndHashCode
-@ToString
-@Builder
+@Value
+@JsonDeserialize(builder = CardInstanceSelector.CardInstanceSelectorBuilder.class)
+@Builder(toBuilder = true)
 public class CardInstanceSelector {
   private final SelectorType selectorType;
   private final List<Type> ofType;
@@ -37,27 +33,9 @@ public class CardInstanceSelector {
   private final boolean nonToken;
   private final TurnStatusType turnStatusType;
 
-  @JsonCreator
-  private CardInstanceSelector(@JsonProperty("selectorType") SelectorType selectorType, @JsonProperty("ofType") List<Type> ofType,
-                               @JsonProperty("notOfType") List<Type> notOfType, @JsonProperty("ofSubtypeOf") List<Subtype> ofSubtypeOf,
-                               @JsonProperty("withAbilityType") AbilityType withAbilityType, @JsonProperty("ofColors") List<Color> ofColors,
-                               @JsonProperty("powerToughnessConstraint") PowerToughnessConstraint powerToughnessConstraint, @JsonProperty("controllerType") PlayerType controllerType,
-                               @JsonProperty("statusTypes") List<StatusType> statusTypes, @JsonProperty("others") boolean others,
-                               @JsonProperty("itself") boolean itself, @JsonProperty("nonToken") boolean nonToken,
-                               @JsonProperty("turnStatusType") TurnStatusType turnStatusType) {
-    this.selectorType = selectorType;
-    this.ofType = ofType;
-    this.notOfType = notOfType;
-    this.ofSubtypeOf = ofSubtypeOf;
-    this.withAbilityType = withAbilityType;
-    this.ofColors = ofColors;
-    this.powerToughnessConstraint = powerToughnessConstraint;
-    this.controllerType = controllerType;
-    this.statusTypes = statusTypes;
-    this.others = others;
-    this.itself = itself;
-    this.nonToken = nonToken;
-    this.turnStatusType = turnStatusType;
+  @JsonPOJOBuilder(withPrefix = "")
+  public static class CardInstanceSelectorBuilder {
+
   }
 
   @JsonIgnore

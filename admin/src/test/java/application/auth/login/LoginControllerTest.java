@@ -65,6 +65,7 @@ public class LoginControllerTest extends AbstractApplicationTest {
 
     // Then
     assertThat(response.getToken()).isNotBlank();
+    assertThat(response.getProfile().getUsername()).isEqualTo("User1");
   }
 
   @Test

@@ -1,19 +1,20 @@
 package com.matag.admin.stats;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.Builder;
 import lombok.Value;
 
 @Value
+@JsonDeserialize(builder = StatsResponse.StatsResponseBuilder.class)
+@Builder(toBuilder = true)
 public class StatsResponse {
   private final long totalUsers;
   private final long onlineUsers;
   private final int totalCards;
 
-  @JsonCreator
-  public StatsResponse(@JsonProperty("totalUsers") long totalUsers, @JsonProperty("onlineUsers") long onlineUsers, @JsonProperty("totalCards") int totalCards) {
-    this.totalUsers = totalUsers;
-    this.onlineUsers = onlineUsers;
-    this.totalCards = totalCards;
+  @JsonPOJOBuilder(withPrefix = "")
+  public static class StatsResponseBuilder {
+
   }
 }

@@ -1,17 +1,21 @@
 package com.matag.cards.properties;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Value;
 
-@Data
+@Value
+@AllArgsConstructor
+@JsonDeserialize(builder = CardImageUrls.CardImageUrlsBuilder.class)
+@Builder(toBuilder = true)
 public class CardImageUrls {
   private final String lowResolution;
   private final String highResolution;
 
-  @JsonCreator
-  public CardImageUrls(@JsonProperty("lowResolution") String lowResolution, @JsonProperty("highResolution") String highResolution) {
-    this.lowResolution = lowResolution;
-    this.highResolution = highResolution;
+  @JsonPOJOBuilder(withPrefix = "")
+  public static class CardImageUrlsBuilder {
+
   }
 }

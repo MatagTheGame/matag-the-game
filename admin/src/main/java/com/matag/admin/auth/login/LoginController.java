@@ -6,6 +6,7 @@ import com.matag.admin.session.MatagSessionRepository;
 import com.matag.admin.user.MatagUser;
 import com.matag.admin.user.MatagUserRepository;
 import com.matag.admin.user.MatagUserStatus;
+import com.matag.admin.user.profile.MatagCurrentUserProfileService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,7 @@ public class LoginController {
   private final PasswordEncoder passwordEncoder;
   private final MatagSessionRepository matagSessionRepository;
   private final EmailRegexMatcher emailRegexMatcher;
+  private final MatagCurrentUserProfileService matagCurrentUserProfileService;
   private final Clock clock;
 
   @PostMapping("/login")
@@ -78,11 +80,18 @@ public class LoginController {
     matagSessionRepository.save(session);
 
     LOGGER.info("Login successful.");
-    return ResponseEntity.ok(new LoginResponse(session.getId(), null));
+    return ResponseEntity.ok(LoginResponse.builder()
+      .token(session.getId())
+      .profile(matagCurrentUserProfileService.getProfile(user))
+      .build());
   }
 
   private ResponseEntity<LoginResponse> response(HttpStatus status, String error) {
     LOGGER.info("Login failed with status=" + status + "; error=" + error);
-    return ResponseEntity.status(status).body(new LoginResponse(null, error));
+    return ResponseEntity
+      .status(status)
+      .body(LoginResponse.builder()
+        .error(error)
+        .build());
   }
 }

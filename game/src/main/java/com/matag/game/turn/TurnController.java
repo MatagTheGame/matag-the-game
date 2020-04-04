@@ -9,6 +9,7 @@ import com.matag.game.status.GameStatusRepository;
 import com.matag.game.status.GameStatusUpdaterService;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
 import com.matag.utils.Utils;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
@@ -17,22 +18,15 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 @Controller
+@AllArgsConstructor
 public class TurnController {
-  private Logger LOGGER = LoggerFactory.getLogger(TurnController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(TurnController.class);
 
   private final SecurityHelper securityHelper;
   private final GameStatusRepository gameStatusRepository;
   private final GameStatusUpdaterService gameStatusUpdaterService;
   private final TurnService turnService;
   private final ConsolidateStatusService consolidateStatusService;
-
-  public TurnController(SecurityHelper securityHelper, GameStatusRepository gameStatusRepository, GameStatusUpdaterService gameStatusUpdaterService, TurnService turnService, ConsolidateStatusService consolidateStatusService) {
-    this.securityHelper = securityHelper;
-    this.gameStatusRepository = gameStatusRepository;
-    this.gameStatusUpdaterService = gameStatusUpdaterService;
-    this.turnService = turnService;
-    this.consolidateStatusService = consolidateStatusService;
-  }
 
   @MessageMapping("/game/turn")
   public void turn(SimpMessageHeaderAccessor headerAccessor, TurnRequest request) {

@@ -1,32 +1,26 @@
 package com.matag.cards.ability.trigger;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.matag.cards.ability.selector.CardInstanceSelector;
 import com.matag.cards.properties.Cost;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Builder;
+import lombok.Value;
 
 import java.util.List;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
-@Getter
-@EqualsAndHashCode
-@ToString
+@Value
+@JsonDeserialize(builder = Trigger.TriggerBuilder.class)
+@Builder(toBuilder = true)
 public class Trigger {
   private final TriggerType type;
   private final TriggerSubtype subtype;
   private final List<Cost> cost;
   private final CardInstanceSelector cardInstanceSelector;
 
-  @JsonCreator
-  private Trigger(@JsonProperty("type") TriggerType type, @JsonProperty("subtype") TriggerSubtype subtype,
-                  @JsonProperty("cost") List<Cost> cost, @JsonProperty("cardInstanceSelector") CardInstanceSelector cardInstanceSelector) {
-    this.type = type;
-    this.subtype = subtype;
-    this.cost = cost;
-    this.cardInstanceSelector = cardInstanceSelector;
+  @JsonPOJOBuilder(withPrefix = "")
+  public static class TriggerBuilder {
+
   }
 
   public static Trigger castTrigger() {

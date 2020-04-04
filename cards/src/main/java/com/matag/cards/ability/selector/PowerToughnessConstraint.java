@@ -1,16 +1,15 @@
 package com.matag.cards.ability.selector;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Value;
 
-@Getter
-@EqualsAndHashCode
-@ToString
-@Builder
+@Value
+@AllArgsConstructor
+@JsonDeserialize(builder = PowerToughnessConstraint.PowerToughnessConstraintBuilder.class)
+@Builder(toBuilder = true)
 public class PowerToughnessConstraint {
   public enum PowerOrToughness {
     POWER, TOUGHNESS
@@ -20,11 +19,8 @@ public class PowerToughnessConstraint {
   private final PowerToughnessConstraintType powerToughnessConstraintType;
   private final int value;
 
-  @JsonCreator
-  public PowerToughnessConstraint(@JsonProperty("powerOrToughness") PowerOrToughness powerOrToughness,
-                                  @JsonProperty("powerToughnessConstraintType") PowerToughnessConstraintType powerToughnessConstraintType, @JsonProperty("value") int value) {
-    this.powerOrToughness = powerOrToughness;
-    this.powerToughnessConstraintType = powerToughnessConstraintType;
-    this.value = value;
+  @JsonPOJOBuilder(withPrefix = "")
+  public static class PowerToughnessConstraintBuilder {
+
   }
 }
