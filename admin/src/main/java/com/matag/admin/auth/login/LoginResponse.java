@@ -2,7 +2,7 @@ package com.matag.admin.auth.login;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.matag.admin.user.profile.MatagCurrentUserProfileDto;
+import com.matag.admin.user.profile.CurrentUserProfileDto;
 import lombok.Builder;
 import lombok.Value;
 
@@ -11,7 +11,7 @@ import lombok.Value;
 @Builder(toBuilder = true)
 public class LoginResponse {
   private final String token;
-  private final MatagCurrentUserProfileDto profile;
+  private final CurrentUserProfileDto profile;
   private final String error;
 
   @JsonPOJOBuilder(withPrefix = "")

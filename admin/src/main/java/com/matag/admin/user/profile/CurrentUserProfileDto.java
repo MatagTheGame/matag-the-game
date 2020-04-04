@@ -6,9 +6,9 @@ import lombok.Builder;
 import lombok.Value;
 
 @Value
-@JsonDeserialize(builder = MatagCurrentUserProfileDto.MatagCurrentUserProfileDtoBuilder.class)
+@JsonDeserialize(builder = CurrentUserProfileDto.MatagCurrentUserProfileDtoBuilder.class)
 @Builder(toBuilder = true)
-public class MatagCurrentUserProfileDto {
+public class CurrentUserProfileDto {
   private final String username;
 
   @JsonPOJOBuilder(withPrefix = "")

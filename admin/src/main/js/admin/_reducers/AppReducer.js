@@ -9,11 +9,11 @@ export default (state, action) => {
   const newState = clone(state)
 
   if (!state) {
-    if (sessionStorage.key('token')) {
-      return {session: {token: sessionStorage.getItem('token')}}
-    } else {
-      return {}
-    }
+    return {session: {loading: true, token: sessionStorage.getItem('token')}}
+
+  } else if (action.type === 'PROFILE_LOADED') {
+    newState.session.loading = false
+    newState.session.profile = action.value
 
   } else if (action.type === 'LOAD_STATS') {
     newState.stats = {loading: true}

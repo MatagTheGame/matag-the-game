@@ -7,7 +7,7 @@ import get from 'lodash/get'
 
 class Home extends Component {
   displayLogin() {
-    if (!this.props.profile) {
+    if (!this.props.profile.username) {
       return <Login />
     }
   }
@@ -25,7 +25,7 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    profile: get(state, 'session.profile', null),
+    profile: get(state, 'session.profile', {}),
   }
 }
 

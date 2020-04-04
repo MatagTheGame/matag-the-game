@@ -17,6 +17,13 @@ export default class ApiClient {
   }
 
   static executeNoJsonResponse(url, request, method = 'GET') {
-    return fetch(url, {method: method, body: JSON.stringify(request), headers: {'Content-Type': 'application/json'}})
+    return fetch(url, {
+      method: method,
+      body: JSON.stringify(request),
+      headers: {
+        'Content-Type': 'application/json',
+        'session': sessionStorage.getItem('token')
+      }
+    })
   }
 }

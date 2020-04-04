@@ -4,9 +4,9 @@ import com.matag.admin.user.MatagUser;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MatagCurrentUserProfileService {
-  public MatagCurrentUserProfileDto getProfile(MatagUser matagUser) {
-    return MatagCurrentUserProfileDto.builder()
+public class CurrentUserProfileService {
+  public CurrentUserProfileDto getProfile(MatagUser matagUser) {
+    return CurrentUserProfileDto.builder()
       .username(matagUser.getUsername())
       .build();
   }
