@@ -7,6 +7,8 @@ Try it out: https://matag-game.herokuapp.com/ui/game
 
 In case you are the only one online, you can play against yourself by opening two browser sessions (windows/tabs) with the address above.
 
+The name "Matag" comes from the combination of the initials of both its inspiration ("Magic: The Gathering") and its initial and main developer (Antonio Alonzi).
+
 For any questions or comments, please contact antonioalonzi85@gmail.com.
 
 ![Snapshot](README_SNAPSHOT.png)
