@@ -14,29 +14,37 @@ For any questions or comments, please contact antonioalonzi85@gmail.com.
 ![Snapshot](README_SNAPSHOT.png)
 
 
+## Try it now!
 
-# Architecture
+https://matag-game.herokuapp.com/ui/game
+
+In case you are the only one online, you can play against yourself by opening two browser sessions (windows/tabs) with the address above.
+
+
+## Building
 
 The application is divided in modules:
 - [admin](admin/README.md): responsible for user and decks management (not implemented yet).
 - [cards](cards/README.md): shared library for cards.
 - [game](game/README.md): responsible for playing matches.
-- utils: some utils functions.
+- utils: general utility functions.
 
 
+## Contributing
 
-# Backlog
+### Backlog
 
 The backlog is managed in Kanban style at:
  - https://github.com/antonioalonzi/matag/projects/1
- 
+
 Stories labelled `with guidelines` are very well described and easy to be picked up for people who want to start
 contributing and learning the project.
 
 
-# CI/CD
+### CI/CD
 
-## Continuous Integration on Travis
+
+#### Continuous Integration on Travis
 
 [![Build Status](https://travis-ci.com/antonioalonzi/matag.svg?branch=master)](https://travis-ci.com/antonioalonzi/matag)
 
@@ -45,7 +53,8 @@ contributing and learning the project.
 Tests run for all the modules together.
 For the `game` module `Regression` tests are skipped. Read [game README](game/README.md) for more info.
 
-## Continuous Deployment on Heroku
+
+#### Continuous Deployment on Heroku
 
 Applications are continuously deployed on heroku:
  - Admin: https://dashboard.heroku.com/apps/matag-admin
@@ -54,7 +63,7 @@ Applications are continuously deployed on heroku:
 
 ## License
 
-Copyright © 2019,2020 Antonio Alonzi and [contributors](https://github.com/antonioalonzi/matag/graphs/contributors)
+Copyright © 2019, 2020 Antonio Alonzi and [contributors](https://github.com/antonioalonzi/matag/graphs/contributors)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
