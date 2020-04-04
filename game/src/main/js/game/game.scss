@@ -43,7 +43,7 @@ body {
 }
 
 #table {
-  background-image: url("/public/img/materials/wood.jpg");
+  background-image: url("/img/materials/wood.jpg");
   position: absolute;
   width: 180%;
   left: -40%;
@@ -56,7 +56,7 @@ body {
 
 #table:after {
   content: '';
-  background-image: url("/public/img/materials/wood.jpg");
+  background-image: url("/img/materials/wood.jpg");
   position: absolute;
   width: 100%;
   height: 160px;
