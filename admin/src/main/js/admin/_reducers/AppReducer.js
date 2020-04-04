@@ -31,7 +31,10 @@ export default (state, action) => {
       newState.login.error = action.value.error
     } else {
       sessionStorage.setItem('token', action.value.token)
-      newState.session = {token: action.value.token}
+      newState.session = {
+        token: action.value.token,
+        profile: action.value.profile
+      }
     }
 
   } else {

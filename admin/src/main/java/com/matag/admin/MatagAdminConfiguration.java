@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Profile;
 
 import java.time.Clock;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
+@EnableScheduling
 @Import(CardsConfiguration.class)
 public class MatagAdminConfiguration {
   @Bean

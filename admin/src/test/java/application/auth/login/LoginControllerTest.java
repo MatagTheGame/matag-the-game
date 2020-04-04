@@ -1,32 +1,16 @@
 package application.auth.login;
 
-import application.AbstractApplicationTest;
-import com.matag.admin.MatagAdminApplication;
-import com.matag.admin.auth.login.LoginRequest;
-import com.matag.admin.auth.login.LoginResponse;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.context.annotation.Import;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = MatagAdminApplication.class, webEnvironment = RANDOM_PORT)
-@Import(AbstractApplicationTest.ApplicationTestConfiguration.class)
-@ActiveProfiles("test")
-public class LoginControllerTest extends AbstractApplicationTest {
-  @Autowired
-  private TestRestTemplate restTemplate;
+import application.AbstractApplicationTest;
+import com.matag.admin.auth.login.LoginRequest;
+import com.matag.admin.auth.login.LoginResponse;
+import org.junit.Test;
+import org.springframework.http.ResponseEntity;
 
+public class LoginControllerTest extends AbstractApplicationTest {
   @Test
   public void shouldReturnInvalidEmail() {
     // Given

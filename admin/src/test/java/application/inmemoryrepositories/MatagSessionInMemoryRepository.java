@@ -1,13 +1,15 @@
 package application.inmemoryrepositories;
 
+import static java.util.stream.Collectors.toList;
+
 import com.matag.admin.session.MatagSession;
 import com.matag.admin.session.MatagSessionRepository;
-
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class MatagSessionInMemoryRepository implements MatagSessionRepository {
@@ -45,7 +47,7 @@ public class MatagSessionInMemoryRepository implements MatagSessionRepository {
     return StreamSupport.stream(ids.spliterator(), false)
       .map(this::findById)
       .map(Optional::get)
-      .collect(Collectors.toList());
+      .collect(toList());
   }
 
   @Override
@@ -78,5 +80,15 @@ public class MatagSessionInMemoryRepository implements MatagSessionRepository {
   @Override
   public long countOnlineUsers(LocalDateTime now) {
     return DATA.values().stream().filter(s -> s.getValidUntil().isAfter(now)).count();
+  }
+
+  @Override
+  public void deleteValidUntilBefore(LocalDateTime now) {
+    List<String> keysToRemove = DATA.entrySet().stream()
+        .filter(e -> e.getValue().getValidUntil().isAfter(now))
+        .map(Entry::getKey)
+        .collect(toList());
+
+    keysToRemove.forEach(DATA::remove);
   }
 }
