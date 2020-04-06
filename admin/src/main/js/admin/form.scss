@@ -1,0 +1,59 @@
+@media screen and (min-width: 600px) {
+  .matag-form .grid {
+    display: grid;
+    grid-gap: 1.5rem;
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .matag-form .grid-label-value {
+    grid-template-columns: 1fr 3fr;
+  }
+
+  .matag-form .three-columns {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.matag-form select,
+.matag-form input,
+.matag-form textarea,
+.matag-form button {
+  width: 100%;
+  line-height: 1.5;
+  padding: 10px 10px;
+  border: 1px solid hsl(0, 0%, 10%);
+  color: $body-text-color;
+  background: hsl(0, 0%, 14%);
+}
+
+.matag-form label {
+  line-height: 1.5;
+  padding: 10px 10px;
+  display: inline-block;
+}
+
+.matag-form textarea {
+  height: 170px;
+}
+
+.matag-form ::placeholder {
+  color: inherit;
+  opacity: 1;
+}
+
+.matag-form select:focus,
+.matag-form input:focus,
+.matag-form textarea:focus,
+.matag-form button:focus {
+  border: 1px solid hsl(0, 0%, 14%);
+  background: hsl(0, 0%, 18%);
+}
+
+.matag-form input[type=button]:enabled:hover,
+.matag-form input[type=submit]:enabled:hover,
+.matag-form input[type=reset]:enabled:hover {
+  border: 1px solid hsl(0, 0%, 14%);
+  background: hsl(0, 0%, 18%);
+}

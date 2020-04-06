@@ -14,7 +14,8 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div className='page'>
+        <h2>Home</h2>
         <Intro/>
         <Stats/>
         { this.displayLogin() }

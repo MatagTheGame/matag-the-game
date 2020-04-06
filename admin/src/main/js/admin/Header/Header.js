@@ -8,19 +8,28 @@ import './header.scss'
 class Header extends Component {
   displayMenu() {
     if (!this.props.profile.username) {
-      return <></>
+      return (
+        <div id='menu-bar'>
+          <nav>
+            <Link to="/ui/admin">Home</Link>
+          </nav>
+        </div>
+      )
 
     } else {
       return (
         <div id='menu-bar'>
-          <nav id='menu'>
+          <nav>
+            <Link to="/ui/admin">Home</Link>
+          </nav>
+          <nav>
             <Link to="/ui/admin/decks">Decks</Link>
           </nav>
-          <nav id='menu'>
-            Welcome {this.props.profile.username}
-          </nav>
-          <nav id='menu'>
+          <nav>
             <Logout/>
+          </nav>
+          <nav className='welcome'>
+            <span>Welcome {this.props.profile.username}</span>
           </nav>
         </div>
       )

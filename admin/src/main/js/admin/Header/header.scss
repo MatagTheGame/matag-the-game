@@ -1,8 +1,10 @@
+$header-height: 50px;
 $header-background-color: #242425;
+$nav-hover-background-color: #1d1d1e;
 
 header {
   width: 100%;
-  height: 50px;
+  height: $header-height;
   display: flex;
   justify-content: space-between;
   background-color: $header-background-color;
@@ -22,9 +24,21 @@ header {
     justify-content: flex-end;
 
     nav {
-      margin: auto;
+      height: $header-height;
       min-width: 80px;
       text-align: center;
+
+      a, span {
+        line-height: $header-height;
+      }
+    }
+
+    nav:hover {
+      background-color: $nav-hover-background-color;
+    }
+
+    .welcome {
+      margin-right: 10px;
     }
   }
 }
