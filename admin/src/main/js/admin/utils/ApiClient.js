@@ -1,13 +1,19 @@
+import AuthHelper from '../Auth/AuthHelper'
+
 export default class ApiClient {
   static get(url) {
     return ApiClient.execute(url)
+  }
+
+  static getNoJson(url) {
+    return ApiClient.executeNoJsonResponse(url)
   }
 
   static post(url, request) {
     return ApiClient.execute(url, request, 'POST')
   }
 
-  static postNoRedirect(url, request) {
+  static postNoJson(url, request) {
     return ApiClient.executeNoJsonResponse(url, request, 'POST')
   }
 
@@ -22,7 +28,7 @@ export default class ApiClient {
       body: JSON.stringify(request),
       headers: {
         'Content-Type': 'application/json',
-        'session': sessionStorage.getItem('token')
+        'session': AuthHelper.getToken()
       }
     })
   }

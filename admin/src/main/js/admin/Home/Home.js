@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import Login from './Login/Login'
+import Login from '../Auth/Login/Login'
 import Stats from './Stats/Stats'
 import Intro from './Intro/Intro'
 import {connect} from 'react-redux'

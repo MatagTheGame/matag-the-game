@@ -1,3 +1,5 @@
+import AuthHelper from '../Auth/AuthHelper'
+
 const clone = (object) => {
   if (!object) {
     object = {}
@@ -9,7 +11,7 @@ export default (state, action) => {
   const newState = clone(state)
 
   if (!state) {
-    return {session: {loading: true, token: sessionStorage.getItem('token')}}
+    return {session: {loading: true, token: AuthHelper.getToken()}}
 
   } else if (action.type === 'PROFILE_LOADED') {
     newState.session.loading = false
@@ -30,8 +32,9 @@ export default (state, action) => {
     if (action.value.error) {
       newState.login.error = action.value.error
     } else {
-      sessionStorage.setItem('token', action.value.token)
+      AuthHelper.setToken(action.value.token)
       newState.session = {
+        loading: false,
         token: action.value.token,
         profile: action.value.profile
       }

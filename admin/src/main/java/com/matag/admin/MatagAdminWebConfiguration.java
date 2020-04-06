@@ -11,5 +11,6 @@ public class MatagAdminWebConfiguration implements WebMvcConfigurer {
     registry.addViewController("/").setViewName("redirect:/ui/admin");
     registry.addViewController("/ui").setViewName("redirect:/ui/admin");
     registry.addViewController("/ui/admin").setViewName("forward:/admin.html");
+    registry.addViewController("/ui/admin/**").setViewName("forward:/admin.html");
   }
 }
