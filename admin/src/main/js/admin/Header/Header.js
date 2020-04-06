@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import './header.scss'
 import {Link} from 'react-router-dom'
 import get from 'lodash/get'
 import {connect} from 'react-redux'
 import Logout from 'admin/Auth/Logout/Logout'
+import './header.scss'
 
 class Header extends Component {
   displayMenu() {
@@ -12,14 +12,17 @@ class Header extends Component {
 
     } else {
       return (
-          <>
-            <nav id='menu'>
-              <Link to="/ui/admin/decks">Decks</Link>
-            </nav>
-            <nav id='menu'>
-              <Logout/>
-            </nav>
-          </>
+        <div id='menu-bar'>
+          <nav id='menu'>
+            <Link to="/ui/admin/decks">Decks</Link>
+          </nav>
+          <nav id='menu'>
+            Welcome {this.props.profile.username}
+          </nav>
+          <nav id='menu'>
+            <Logout/>
+          </nav>
+        </div>
       )
     }
   }
@@ -27,8 +30,10 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <h1>MATAG</h1>
-        { this.displayMenu() }
+        <div id='logo'>
+          <h1>MATAG</h1>
+        </div>
+        {this.displayMenu()}
       </header>
     )
   }

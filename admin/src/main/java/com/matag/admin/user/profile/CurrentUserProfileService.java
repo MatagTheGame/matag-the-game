@@ -8,6 +8,7 @@ public class CurrentUserProfileService {
   public CurrentUserProfileDto getProfile(MatagUser matagUser) {
     return CurrentUserProfileDto.builder()
       .username(matagUser.getUsername())
+      .type(matagUser.getType().toString())
       .build();
   }
 }

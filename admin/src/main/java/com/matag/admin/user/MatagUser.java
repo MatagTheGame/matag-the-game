@@ -1,5 +1,6 @@
 package com.matag.admin.user;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,4 +23,7 @@ public class MatagUser {
   private String emailAddress;
   @Enumerated(EnumType.STRING)
   private MatagUserStatus status;
+  @Enumerated(EnumType.STRING)
+  private MatagUserType type;
+  private LocalDateTime createdAt;
 }

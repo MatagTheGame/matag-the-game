@@ -1,5 +1,8 @@
 package com.matag.admin.session;
 
+import static java.util.Collections.singletonList;
+
+import com.matag.admin.user.MatagUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -36,9 +39,10 @@ public class AuthSessionFilter extends GenericFilterBean {
 
     if (StringUtils.hasText(sessionId)) {
       Optional<MatagSession> matagSession = matagSessionRepository.findById(sessionId);
+
       matagSession.ifPresent(session -> {
         if (LocalDateTime.now(clock).isBefore(session.getValidUntil())) {
-          List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("USER"));
+          List<SimpleGrantedAuthority> authorities = singletonList(new SimpleGrantedAuthority(session.getMatagUser().getType().toString()));
           UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(session.getMatagUser(), session.getMatagUser().getPassword(), authorities);
           SecurityContextHolder.getContext().setAuthentication(authentication);
 

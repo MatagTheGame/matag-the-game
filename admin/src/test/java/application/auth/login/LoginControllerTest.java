@@ -7,6 +7,7 @@ import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import application.AbstractApplicationTest;
 import com.matag.admin.auth.login.LoginRequest;
 import com.matag.admin.auth.login.LoginResponse;
+import com.matag.admin.user.profile.CurrentUserProfileDto;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 
@@ -49,7 +50,10 @@ public class LoginControllerTest extends AbstractApplicationTest {
 
     // Then
     assertThat(response.getToken()).isNotBlank();
-    assertThat(response.getProfile().getUsername()).isEqualTo("User1");
+    assertThat(response.getProfile()).isEqualTo(CurrentUserProfileDto.builder()
+      .username("User1")
+      .type("USER")
+      .build());
   }
 
   @Test

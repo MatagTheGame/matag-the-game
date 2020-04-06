@@ -10,6 +10,7 @@ import lombok.Value;
 @Builder(toBuilder = true)
 public class CurrentUserProfileDto {
   private final String username;
+  private final String type;
 
   @JsonPOJOBuilder(withPrefix = "")
   public static class CurrentUserProfileDtoBuilder {
