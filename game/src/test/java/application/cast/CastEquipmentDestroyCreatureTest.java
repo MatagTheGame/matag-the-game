@@ -58,7 +58,7 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Prowling Caracal")).target();
 
     // Equip ability goes on the stack
-    browser.player1().getStackHelper().containsAbility("Pippo's Short Sword (" + shortSwordId + "): Equipped creature gets +1/+1.");
+    browser.player1().getStackHelper().containsAbility("Player1's Short Sword (" + shortSwordId + "): Equipped creature gets +1/+1.");
 
     // When opponent accepts the equip
     browser.player2().getActionHelper().clickContinue();

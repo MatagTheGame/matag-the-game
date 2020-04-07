@@ -44,7 +44,7 @@ public class CreatureEntersTheBattlefieldReturnTargetToHandTest extends Abstract
 
     // Then Exclusion Mage is on the battlefield and its trigger on the stack
     int exclusionMageId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Exclusion Mage")).getCardIdNumeric();
-    browser.player1().getStackHelper().containsAbility("Pippo's Exclusion Mage (" + exclusionMageId + "): That targets get returned to its owner's hand.");
+    browser.player1().getStackHelper().containsAbility("Player1's Exclusion Mage (" + exclusionMageId + "): That targets get returned to its owner's hand.");
 
     // When player 1 selects opponent creature to return
     browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Banehound")).target();

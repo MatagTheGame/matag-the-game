@@ -43,7 +43,7 @@ public class CreatureEntersTheBattlefieldDoubleAbilityTest extends AbstractAppli
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Dusk Legion Zealot")).click();
     browser.player2().getActionHelper().clickContinue();
     int duskLegionZealotId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Dusk Legion Zealot")).getCardIdNumeric();
-    browser.player1().getStackHelper().containsAbility("Pippo's Dusk Legion Zealot (" + duskLegionZealotId + "): Draw 1 cards. Lose 1 life.");
+    browser.player1().getStackHelper().containsAbility("Player1's Dusk Legion Zealot (" + duskLegionZealotId + "): Draw 1 cards. Lose 1 life.");
     browser.player1().getActionHelper().clickContinue();
     browser.player2().getActionHelper().clickContinue();
 

@@ -49,7 +49,7 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
     int joustingDummyId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).getCardIdNumeric();
 
     // then ability goes on the stack
-    browser.player1().getStackHelper().containsAbility("Pippo's Jousting Dummy (" + joustingDummyId + "): Gets +1/+0 until end of turn.");
+    browser.player1().getStackHelper().containsAbility("Player1's Jousting Dummy (" + joustingDummyId + "): Gets +1/+0 until end of turn.");
 
     // opponent accepts the ability
     browser.player2().getActionHelper().clickContinue();

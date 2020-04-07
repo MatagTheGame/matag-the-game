@@ -68,14 +68,14 @@ public abstract class AbstractApplicationTest {
     // When player2 joins the game both players see the table with the cards
     browser.openSecondTab();
 
-    // Make sure player1 is Pippo and player2 is Pluto
+    // Make sure player1 is Player1 and player2 is Player2
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveName();
     browser.player2().getPlayerInfoHelper(PLAYER).toHaveName();
-    if (browser.player1().getPlayerInfoHelper(PLAYER).getPlayerName().equals("Pluto")) {
+    if (browser.player1().getPlayerInfoHelper(PLAYER).getPlayerName().equals("Player2")) {
       browser.swapTabs();
     }
-    browser.player1().getPlayerInfoHelper(PLAYER).toHaveName("Pippo");
-    browser.player2().getPlayerInfoHelper(PLAYER).toHaveName("Pluto");
+    browser.player1().getPlayerInfoHelper(PLAYER).toHaveName("Player1");
+    browser.player2().getPlayerInfoHelper(PLAYER).toHaveName("Player2");
 
     // Message disappears
     browser.player1().getMessageHelper().hasNoMessage();

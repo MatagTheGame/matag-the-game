@@ -53,7 +53,7 @@ public class WheneverACreatureEntersTheBattlefieldAbilityTest extends AbstractAp
     // Then a the creature is on the battlefield and event is triggered
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Daybreak Chaplain"));
     int ajanisWelcomeId1 = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Ajani's Welcome"), 0).getCardIdNumeric();
-    browser.player1().getStackHelper().containsAbility("Pippo's Ajani's Welcome (" + ajanisWelcomeId1 + "): Gain 1 life.");
+    browser.player1().getStackHelper().containsAbility("Player1's Ajani's Welcome (" + ajanisWelcomeId1 + "): Gain 1 life.");
 
     // When players continue
     browser.player1().getActionHelper().clickContinue();
@@ -78,8 +78,8 @@ public class WheneverACreatureEntersTheBattlefieldAbilityTest extends AbstractAp
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Daybreak Chaplain"), cards.get("Daybreak Chaplain"));
     int ajanisWelcomeId2 = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Ajani's Welcome"), 1).getCardIdNumeric();
     browser.player1().getStackHelper().containsAbilitiesExactly(asList(
-      "Pippo's Ajani's Welcome (" + ajanisWelcomeId1 + "): Gain 1 life.",
-      "Pippo's Ajani's Welcome (" + ajanisWelcomeId2 + "): Gain 1 life."
+      "Player1's Ajani's Welcome (" + ajanisWelcomeId1 + "): Gain 1 life.",
+      "Player1's Ajani's Welcome (" + ajanisWelcomeId2 + "): Gain 1 life."
     ));
 
     // When players continue
@@ -87,7 +87,7 @@ public class WheneverACreatureEntersTheBattlefieldAbilityTest extends AbstractAp
     browser.player2().getActionHelper().clickContinue();
 
     // Then player 1 gains 1 life
-    browser.player1().getStackHelper().containsAbility("Pippo's Ajani's Welcome (" + ajanisWelcomeId1 + "): Gain 1 life.");
+    browser.player1().getStackHelper().containsAbility("Player1's Ajani's Welcome (" + ajanisWelcomeId1 + "): Gain 1 life.");
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(22);
 
     // When players continue

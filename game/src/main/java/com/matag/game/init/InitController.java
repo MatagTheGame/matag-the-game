@@ -50,7 +50,7 @@ public class InitController {
 
     if (!gameStatusRepository.contains(token.getGameId())) {
       GameStatus gameStatus = gameStatusFactory.create(token.getGameId());
-      String playerName = "Pippo";
+      String playerName = "Player1";
       gameStatus.setPlayer1(playerFactory.create(token.getSessionId(), playerName));
       gameStatus.getPlayer1().getLibrary().addCards(deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus));
       gameStatus.getPlayer1().drawHand();
@@ -60,7 +60,7 @@ public class InitController {
     } else {
       GameStatus gameStatus = gameStatusRepository.getUnsecure(token.getGameId());
       if (gameStatus.getPlayer2() == null) {
-        String playerName = "Pluto";
+        String playerName = "Player2";
         gameStatus.setPlayer2(playerFactory.create(token.getSessionId(), playerName));
         gameStatus.getPlayer2().getLibrary().addCards(deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus));
         gameStatus.getPlayer2().drawHand();

@@ -49,7 +49,7 @@ public class CreatureDiesAbilityTest extends AbstractApplicationTest {
     browser.player1().getActionHelper().clickContinue();
 
     // Then put +1/+1 counter is triggered
-    browser.player1().getStackHelper().containsAbilitiesExactly(singletonList("Pippo's Goblin Assault Team (" + firstGoblinId + "): That targets get 1 +1/+1 counters."));
+    browser.player1().getStackHelper().containsAbilitiesExactly(singletonList("Player1's Goblin Assault Team (" + firstGoblinId + "): That targets get 1 +1/+1 counters."));
 
     // When clicking on the other goblin
     browser.player2().getActionHelper().clickContinue();
