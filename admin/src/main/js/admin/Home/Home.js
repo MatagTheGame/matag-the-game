@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import Login from '../Auth/Login/Login'
-import Stats from './Stats/Stats'
-import Intro from './Intro/Intro'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
+import Login from 'admin/Auth/Login/Login'
+import Stats from './Stats/Stats'
+import Intro from './Intro/Intro'
 
 class Home extends Component {
   displayLogin() {
@@ -14,7 +14,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div className='page'>
+      <div className='page-with-margin'>
         <h2>Home</h2>
         <Intro/>
         <Stats/>

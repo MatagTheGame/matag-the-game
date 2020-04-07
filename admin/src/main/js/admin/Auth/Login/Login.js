@@ -71,28 +71,30 @@ class Login extends Component {
 
   render() {
     return (
-      <div id='login-container'>
-        <h2>Login</h2>
-        <form className='matag-form' onSubmit={this.handleLogin}>
-          <div className='grid grid-label-value'>
-            <label htmlFor='email'>Email: </label>
-            <input type='text' name='email' value={this.state.email} onChange={this.handleChangeEmail}/>
-          </div>
-          <div className='grid grid-label-value'>
-            <label htmlFor='password'>Password: </label>
-            <input type='password' name='password' value={this.state.password} onChange={this.handleChangePassword}/>
-          </div>
-          {this.displayError()}
-          <div className='grid three-columns'>
-            <div/>
-            <div className='login-buttons'>
-              <input type='submit' value='Login'/>
-              <div className='or'>or</div>
-              <input type='button' value='Login as Guest' onClick={this.handleLoginAsGuest}/>
+      <div className='page-with-margin'>
+        <div id='login-container'>
+          <h2>Login</h2>
+          <form className='matag-form' onSubmit={this.handleLogin}>
+            <div className='grid grid-label-value'>
+              <label htmlFor='email'>Email: </label>
+              <input type='text' name='email' value={this.state.email} onChange={this.handleChangeEmail}/>
             </div>
-            {this.displayLoader()}
-          </div>
-        </form>
+            <div className='grid grid-label-value'>
+              <label htmlFor='password'>Password: </label>
+              <input type='password' name='password' value={this.state.password} onChange={this.handleChangePassword}/>
+            </div>
+            {this.displayError()}
+            <div className='grid three-columns'>
+              <div/>
+              <div className='login-buttons'>
+                <input type='submit' value='Login'/>
+                <div className='or'>or</div>
+                <input type='button' value='Login as Guest' onClick={this.handleLoginAsGuest}/>
+              </div>
+              {this.displayLoader()}
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

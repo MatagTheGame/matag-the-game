@@ -1,8 +1,11 @@
 /* Global */
 $body-background-color: #292a2b;
+$page-background-color: #272829;
 $body-text-color: #afafaf;
 $link-text-color: #92b4f3;
 $error-text-color: #ff7597;
+
+$big-screen: 1200px;
 
 body {
   background-color: $body-background-color;
@@ -67,8 +70,11 @@ textarea {
   }
 }
 
-.page {
-  margin: 20px;
+.page-with-margin {
+  padding: 20px;
+  max-width: $big-screen;
+  margin: auto;
+  background-color: $page-background-color;
 
   h2 {
     margin-top: 0;

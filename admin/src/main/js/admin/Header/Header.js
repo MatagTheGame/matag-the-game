@@ -13,6 +13,9 @@ class Header extends Component {
           <nav>
             <Link to="/ui/admin">Home</Link>
           </nav>
+          <nav>
+            <Link to="/ui/admin/login">Login</Link>
+          </nav>
         </div>
       )
 
