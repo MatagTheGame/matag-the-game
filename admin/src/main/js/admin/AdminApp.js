@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Router, Route, Switch} from 'react-router-dom'
+import {Route, Router, Switch} from 'react-router-dom'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
@@ -9,6 +9,7 @@ import Decks from 'admin/Decks/Decks'
 import Header from 'admin/Header/Header'
 import Home from 'admin/Home/Home'
 import ProfileUtils from 'admin/Profile/ProfileUtils'
+import ApiClient from 'admin/utils/ApiClient'
 import history from 'admin/utils/history'
 import Play from './Play/Play'
 import './admin.scss'
@@ -17,6 +18,7 @@ import './admin.scss'
 
 class AdminApp extends Component {
   componentDidMount() {
+    ApiClient.get('/config').then(this.props.configLoaded)
     ProfileUtils.getProfile().then(this.props.profileLoaded)
   }
 
@@ -57,6 +59,13 @@ const profileLoaded = (profile) => {
   }
 }
 
+const configLoaded = (config) => {
+  return {
+    type: 'CONFIG_LOADED',
+    value: config
+  }
+}
+
 const mapStateToProps = state => {
   return {
     loading: get(state, 'session.loading', true),
@@ -65,6 +74,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    configLoaded: bindActionCreators(configLoaded, dispatch),
     profileLoaded: bindActionCreators(profileLoaded, dispatch)
   }
 }

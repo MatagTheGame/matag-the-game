@@ -13,6 +13,9 @@ export default (state, action) => {
   if (!state) {
     return {session: {loading: true, token: AuthHelper.getToken()}}
 
+  } else if (action.type === 'CONFIG_LOADED') {
+    newState.config = action.value
+
   } else if (action.type === 'PROFILE_LOADED') {
     newState.session.loading = false
     newState.session.profile = action.value

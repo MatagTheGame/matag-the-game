@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import get from 'lodash/get'
 import './play.scss'
 
 class Play extends Component {
@@ -17,7 +18,7 @@ class Play extends Component {
       alert('You need to select at least one color.')
 
     } else {
-      alert('Play random game of colors: ' + this.state.colors)
+      document.location.href = this.props.matagGameUrl
     }
   }
 
@@ -75,7 +76,9 @@ class Play extends Component {
 }
 
 const mapStateToProps = state => {
-  return {}
+  return {
+    matagGameUrl: get(state, 'config.matagGameUrl', '')
+  }
 }
 
 const mapDispatchToProps = dispatch => {
