@@ -1,4 +1,4 @@
-import AuthHelper from '../Auth/AuthHelper'
+import AuthHelper from 'admin/Auth/AuthHelper'
 
 const clone = (object) => {
   if (!object) {

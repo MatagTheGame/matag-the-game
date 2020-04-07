@@ -5,6 +5,8 @@ import get from 'lodash/get'
 import {bindActionCreators} from 'redux'
 import Loader from 'admin/Common/Loader'
 import ApiClient from 'admin/utils/ApiClient'
+import history from 'admin/utils/history'
+import AuthHelper from '../AuthHelper'
 
 class Login extends Component {
   constructor(props) {
@@ -70,8 +72,12 @@ class Login extends Component {
   }
 
   render() {
+    if (this.props.isLoggedIn) {
+      history.push("/ui/admin");
+    }
+
     return (
-      <div className='page-with-margin'>
+      <section>
         <div id='login-container'>
           <h2>Login</h2>
           <form className='matag-form' onSubmit={this.handleLogin}>
@@ -95,7 +101,7 @@ class Login extends Component {
             </div>
           </form>
         </div>
-      </div>
+      </section>
     )
   }
 }
@@ -115,6 +121,7 @@ const loginResponse = (response) => {
 
 const mapStateToProps = state => {
   return {
+    isLoggedIn: AuthHelper.isLoggedIn(state),
     loading: get(state, 'login.loading', false),
     error: get(state, 'login.error', null),
   }

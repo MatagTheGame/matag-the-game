@@ -1,32 +1,35 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import get from 'lodash/get'
 import Login from 'admin/Auth/Login/Login'
+import AuthHelper from 'admin/Auth/AuthHelper'
+import Play from 'admin/Play/Play'
 import Stats from './Stats/Stats'
 import Intro from './Intro/Intro'
 
 class Home extends Component {
-  displayLogin() {
-    if (!this.props.profile.username) {
+  displayMainAction() {
+    if (this.props.isLoggedIn) {
+      return <Play/>
+    } else {
       return <Login />
     }
   }
 
   render() {
     return (
-      <div className='page-with-margin'>
+      <section>
         <h2>Home</h2>
         <Intro/>
         <Stats/>
-        { this.displayLogin() }
-      </div>
+        { this.displayMainAction() }
+      </section>
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    profile: get(state, 'session.profile', {}),
+    isLoggedIn: AuthHelper.isLoggedIn(state)
   }
 }
 

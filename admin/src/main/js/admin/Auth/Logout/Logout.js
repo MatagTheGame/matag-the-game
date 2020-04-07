@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import AuthHelper from '../AuthHelper'
-import ApiClient from '../../utils/ApiClient'
+import AuthHelper from 'admin/Auth/AuthHelper'
+import ApiClient from 'admin/utils/ApiClient'
 
 export default class Login extends Component {
   logout() {

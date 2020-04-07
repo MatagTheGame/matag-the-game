@@ -1,17 +1,21 @@
+import has from 'lodash/has'
+
+const TOKEN = 'token'
+
 export default class AuthHelper {
   static getToken() {
-    return sessionStorage.getItem('token')
+    return sessionStorage.getItem(TOKEN)
   }
 
   static setToken(token) {
-    return sessionStorage.setItem('token', token)
+    return sessionStorage.setItem(TOKEN, token)
   }
 
   static removeToken() {
-    sessionStorage.removeItem('token')
+    sessionStorage.removeItem(TOKEN)
   }
 
-  static hasToken() {
-    return sessionStorage.key('token')
+  static isLoggedIn(state) {
+    return has(state, 'session.profile.username')
   }
 }

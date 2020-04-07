@@ -1,0 +1,15 @@
+#play {
+  ul {
+    list-style-type: none;
+
+    li {
+      display: inline-block;
+      margin-left: 3rem;
+
+      img {
+        padding-left: 2px;
+        padding-right: 5px;
+      }
+    }
+  }
+}

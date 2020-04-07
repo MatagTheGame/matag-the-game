@@ -3,23 +3,12 @@ import {Link} from 'react-router-dom'
 import get from 'lodash/get'
 import {connect} from 'react-redux'
 import Logout from 'admin/Auth/Logout/Logout'
+import AuthHelper from '../Auth/AuthHelper'
 import './header.scss'
 
 class Header extends Component {
   displayMenu() {
-    if (!this.props.profile.username) {
-      return (
-        <div id='menu-bar'>
-          <nav>
-            <Link to="/ui/admin">Home</Link>
-          </nav>
-          <nav>
-            <Link to="/ui/admin/login">Login</Link>
-          </nav>
-        </div>
-      )
-
-    } else {
+    if (this.props.isLoggedIn) {
       return (
         <div id='menu-bar'>
           <nav>
@@ -29,10 +18,24 @@ class Header extends Component {
             <Link to="/ui/admin/decks">Decks</Link>
           </nav>
           <nav>
+            <Link to="/ui/admin/play">Play</Link>
+          </nav>
+          <nav>
             <Logout/>
           </nav>
           <nav className='welcome'>
             <span>Welcome {this.props.profile.username}</span>
+          </nav>
+        </div>
+      )
+    } else {
+      return (
+        <div id='menu-bar'>
+          <nav>
+            <Link to="/ui/admin">Home</Link>
+          </nav>
+          <nav>
+            <Link to="/ui/admin/login">Login</Link>
           </nav>
         </div>
       )
@@ -53,7 +56,8 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    profile: get(state, 'session.profile', {}),
+    isLoggedIn: AuthHelper.isLoggedIn(state),
+    profile: get(state, 'session.profile', {})
   }
 }
 

@@ -1,4 +1,4 @@
-import AuthHelper from '../Auth/AuthHelper'
+import AuthHelper from 'admin/Auth/AuthHelper'
 
 export default class ApiClient {
   static get(url) {
