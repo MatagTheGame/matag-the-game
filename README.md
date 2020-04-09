@@ -3,7 +3,7 @@
 Early Access version of an MTG-like game implementation.
 Please note that we are not affiliated in any way with the MTG creators, nor we claim any copyright over their game or art assets.
 
-Try it out: https://matag-game.herokuapp.com/ui/game
+Try it out: https://matag-admin.herokuapp.com/
 
 In case you are the only one online, you can play against yourself by opening two browser sessions (windows/tabs) with the address above.
 
