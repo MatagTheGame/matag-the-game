@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
+import AuthHelper from '../Auth/AuthHelper'
 import './play.scss'
 
 class Play extends Component {
@@ -12,13 +13,9 @@ class Play extends Component {
   }
 
   handlePlay(event) {
-    event.preventDefault()
-
     if (this.state.colors.length === 0) {
       alert('You need to select at least one color.')
-
-    } else {
-      document.location.href = this.props.matagGameUrl
+      event.preventDefault()
     }
   }
 
@@ -41,7 +38,8 @@ class Play extends Component {
     return (
       <section id='play'>
         <h2>Play</h2>
-        <form className='matag-form' onSubmit={this.handlePlay}>
+        <form className='matag-form' action={this.props.matagGameUrl + '/ui/game'} method='POST' onSubmit={this.handlePlay}>
+          <input type='hidden' name='session' value={AuthHelper.getToken()} />
           <p>Choose which colors you want to play:</p>
           <ul>
             <li>
@@ -67,7 +65,7 @@ class Play extends Component {
           </ul>
           <div className='grid three-columns'>
             <div/>
-            <input type='submit' id='play-button' value='Play' onClick={this.handlePlay}/>
+            <input type='submit' id='play-button' value='Play'/>
           </div>
         </form>
       </section>

@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
@@ -17,8 +18,7 @@ public class StartGameController {
   }
 
   @RequestMapping(path = {"/ui", "/ui/game"}, method = RequestMethod.POST)
-  public String startGame() {
+  public String startGame(HttpServletRequest request) {
     return "redirect:/ui/game/" + atomicInteger.incrementAndGet() / 2;
   }
-
 }
