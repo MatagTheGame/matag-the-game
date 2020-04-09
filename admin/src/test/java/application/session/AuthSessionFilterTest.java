@@ -1,12 +1,12 @@
 package application.session;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.http.HttpStatus.FORBIDDEN;
-
 import application.AbstractApplicationTest;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 public class AuthSessionFilterTest extends AbstractApplicationTest {
   @Test
