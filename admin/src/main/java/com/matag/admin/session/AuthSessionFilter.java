@@ -1,8 +1,5 @@
 package com.matag.admin.session;
 
-import static java.util.Collections.singletonList;
-
-import com.matag.admin.user.MatagUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,9 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.time.Clock;
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.Collections.singletonList;
 
 @Component
 @AllArgsConstructor
