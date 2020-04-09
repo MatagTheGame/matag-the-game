@@ -90,7 +90,7 @@ Travis instead runs only non regression tests (as I'm on a free plan):
 Startup the app as spring boot
 
     # from intellij or with
-    mvn spring-boot:run
+    mvn spring-boot:run -Dserver.port=8080
 
 It is possible to run with `test` profile in order to start custom decks rather than random (see `ProdInitTestService`)
 
