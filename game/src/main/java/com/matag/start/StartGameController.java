@@ -1,4 +1,4 @@
-package com.matag.game.randomgame;
+package com.matag.start;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,12 +7,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
-public class RandomGameController {
-
+public class StartGameController {
   private AtomicInteger atomicInteger = new AtomicInteger(1);
 
+  @Deprecated
   @RequestMapping(path = {"/ui", "/ui/game"}, method = RequestMethod.GET)
-  public String randomGame() {
+  public String startGameGet() {
+    return "redirect:/ui/game/" + atomicInteger.incrementAndGet() / 2;
+  }
+
+  @RequestMapping(path = {"/ui", "/ui/game"}, method = RequestMethod.POST)
+  public String startGame() {
     return "redirect:/ui/game/" + atomicInteger.incrementAndGet() / 2;
   }
 
