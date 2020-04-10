@@ -34,7 +34,7 @@ public class GameService {
     if (activeGameOfPlayer.isPresent()) {
       Long activeGameId = activeGameOfPlayer.get().getGame().getId();
       return JoinGameResponse.builder()
-        .errorMessage("You are already in a game: " + activeGameId)
+        .errorMessage("You are already in a game.")
         .activeGameId(activeGameId)
         .build();
     }

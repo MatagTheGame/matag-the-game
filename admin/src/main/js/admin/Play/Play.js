@@ -37,9 +37,15 @@ class Play extends Component {
       .then(r => {
         this.setState({loading: false})
         if (r.gameId > 0) {
-          window.location.href = this.props.matagGameUrl + '/ui/game/' + r.gameId
+          this.goToGame(r.gameId)
+
         } else {
-          this.setState({errorMessage: r.errorMessage})
+          if (r.errorMessage) {
+            this.setState({errorMessage: r.errorMessage})
+          }
+          if (r.activeGameId) {
+            this.setState({activeGameId: r.activeGameId})
+          }
         }
       })
   }
@@ -59,9 +65,24 @@ class Play extends Component {
     }
   }
 
+  goToGame(id) {
+    window.location.href = this.props.matagGameUrl + '/ui/game/' + id
+  }
+
+  displayGoToGame() {
+    if (this.state.activeGameId) {
+      return <span>Go to <a href='#' onClick={() => this.goToGame(this.state.activeGameId)}>game #{this.state.activeGameId}</a></span>
+    }
+  }
+
   displayErrorMessage() {
     if (this.state.errorMessage) {
-      return <p className='error'>{this.state.errorMessage}</p>
+      return (
+        <p className='message'>
+          <span className='error'>{this.state.errorMessage}</span>
+          {this.displayGoToGame()}
+        </p>
+      )
     }
   }
 
