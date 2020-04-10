@@ -4,6 +4,7 @@ import application.AbstractApplicationTest;
 import com.matag.admin.game.Game;
 import com.matag.admin.game.GameRepository;
 import com.matag.admin.game.JoinGameRequest;
+import com.matag.admin.game.JoinGameResponse;
 import com.matag.admin.game.session.GameSession;
 import com.matag.admin.game.session.GameSessionRepository;
 import org.junit.Test;
@@ -36,10 +37,11 @@ public class GameControllerTest extends AbstractApplicationTest {
       .build();
 
     // When
-    Long response = restTemplate.postForObject("/game", request, Long.class);
+    JoinGameResponse response = restTemplate.postForObject("/game", request, JoinGameResponse.class);
 
     // Then
-    assertThat(response).isEqualTo(1);
+    assertThat(response).isEqualTo(JoinGameResponse.builder().gameId(1L).build());
+
     Optional<Game> game = gameRepository.findById(1L);
     assertThat(game).isNotEmpty();
     assertThat(game.get().getType()).isEqualTo(UNLIMITED);
@@ -63,7 +65,7 @@ public class GameControllerTest extends AbstractApplicationTest {
       .playerOptions("player1 options")
       .build();
 
-    restTemplate.postForObject("/game", player1JoinRequest, Long.class);
+    restTemplate.postForObject("/game", player1JoinRequest, JoinGameResponse.class);
 
     userIsLoggedIn(USER_2_SESSION_TOKEN, user2());
 
@@ -73,10 +75,11 @@ public class GameControllerTest extends AbstractApplicationTest {
       .build();
 
     // When
-    Long response = restTemplate.postForObject("/game", player2JoinRequest, Long.class);
+    JoinGameResponse response = restTemplate.postForObject("/game", player2JoinRequest, JoinGameResponse.class);
 
     // Then
-    assertThat(response).isEqualTo(1);
+    assertThat(response).isEqualTo(JoinGameResponse.builder().gameId(1L).build());
+
     Optional<Game> game = gameRepository.findById(1L);
     assertThat(game).isNotEmpty();
     assertThat(game.get().getType()).isEqualTo(UNLIMITED);
@@ -96,5 +99,26 @@ public class GameControllerTest extends AbstractApplicationTest {
     assertThat(secondGameSession.getSession().getId()).isEqualTo(USER_2_SESSION_TOKEN);
     assertThat(secondGameSession.getPlayer()).isEqualTo(user2());
     assertThat(secondGameSession.getPlayerOptions()).isEqualTo("player2 options");
+  }
+
+  @Test
+  public void userCannotStartAnotherGameIfAlreadyInOne() {
+    // Given
+    userIsLoggedIn(USER_1_SESSION_TOKEN, user1());
+    JoinGameRequest player1JoinRequest = JoinGameRequest.builder()
+      .gameType(UNLIMITED)
+      .playerOptions("player1 options")
+      .build();
+
+    restTemplate.postForObject("/game", player1JoinRequest, JoinGameResponse.class);
+
+    // When
+    JoinGameResponse response = restTemplate.postForObject("/game", player1JoinRequest, JoinGameResponse.class);
+
+    // Then
+    assertThat(response).isEqualTo(JoinGameResponse.builder()
+      .error("You are already in a game: 1")
+      .activeGameId(1L)
+      .build());
   }
 }

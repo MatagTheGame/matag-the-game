@@ -3,11 +3,15 @@ package application.inmemoryrepositories;
 import com.matag.admin.game.Game;
 import com.matag.admin.game.session.GameSession;
 import com.matag.admin.game.session.GameSessionRepository;
+import com.matag.admin.user.MatagUser;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static com.matag.admin.game.GameStatusType.IN_PROGRESS;
+import static com.matag.admin.game.GameStatusType.STARTING;
 import static java.util.stream.Collectors.toList;
 
 @Component
@@ -34,5 +38,13 @@ public class GameSessionAbstractInMemoryRepository extends AbstractInMemoryRepos
     return findAll().stream()
       .filter(gs -> gs.getGame().getId().equals(game.getId()))
       .collect(toList());
+  }
+
+  @Override
+  public Optional<GameSession> findPlayerActiveGameSession(MatagUser player) {
+    return findAll().stream()
+      .filter(gs -> gs.getPlayer().getId().equals(player.getId()))
+      .filter(gs -> gs.getGame().getStatus() == STARTING || gs.getGame().getStatus() == IN_PROGRESS)
+      .findFirst();
   }
 }

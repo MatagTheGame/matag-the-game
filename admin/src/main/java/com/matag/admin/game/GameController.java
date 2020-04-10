@@ -13,7 +13,7 @@ public class GameController {
   private final GameService gameService;
 
   @PostMapping
-  public long joinGame(@RequestBody JoinGameRequest joinGameRequest) {
-    return gameService.joinGame(joinGameRequest.getGameType(), joinGameRequest.getPlayerOptions());
+  public JoinGameResponse joinGame(@RequestBody JoinGameRequest joinGameRequest) {
+    return gameService.joinGame(joinGameRequest);
   }
 }
