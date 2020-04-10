@@ -10,6 +10,6 @@ import java.util.Optional;
 public interface MatagUserRepository extends CrudRepository<MatagUser, Long> {
   Optional<MatagUser> findByEmailAddress(String username);
 
-  @Query("SELECT COUNT(id) FROM MatagUser WHERE status = 'ACTIVE'")
-  long countActiveUsers();
+  @Query("SELECT COUNT(id) FROM MatagUser WHERE status = ?1")
+  long countUsersByStatus(MatagUserStatus userStatus);
 }

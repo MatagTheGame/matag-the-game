@@ -2,6 +2,8 @@ package application.inmemoryrepositories;
 
 import com.matag.admin.game.Game;
 import com.matag.admin.game.GameRepository;
+import com.matag.admin.game.GameStatusType;
+import com.matag.admin.game.GameType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,7 +29,7 @@ public class GameAbstractInMemoryRepository extends AbstractInMemoryRepository<G
   }
 
   @Override
-  public List<Game> findByTypeAndStatus() {
+  public List<Game> findByTypeAndStatus(GameType type, GameStatusType status) {
     return null;
   }
 }
