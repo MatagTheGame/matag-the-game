@@ -54,7 +54,6 @@ public class GameControllerTest extends AbstractApplicationTest {
     // Given
     userIsLoggedIn(USER_1_SESSION_TOKEN);
     JoinGameRequest player1JoinRequest = JoinGameRequest.builder()
-      .gameType(UNLIMITED)
       .playerOptions("player1 options")
       .build();
 
@@ -63,7 +62,6 @@ public class GameControllerTest extends AbstractApplicationTest {
     userIsLoggedIn(USER_2_SESSION_TOKEN);
 
     JoinGameRequest player2JoinRequest = JoinGameRequest.builder()
-      .gameType(UNLIMITED)
       .playerOptions("player2 options")
       .build();
 

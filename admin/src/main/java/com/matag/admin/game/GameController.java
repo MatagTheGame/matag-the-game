@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.matag.admin.game.GameStatusType.STARTING;
+
 @RestController
 @RequestMapping("/game")
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class GameController {
   public long joinGame(@RequestBody JoinGameRequest joinGameRequest) {
     Game game = Game.builder()
       .type(joinGameRequest.getGameType())
-      .status(GameStatusType.STARTING)
+      .status(STARTING)
       .build();
 
     gameRepository.save(game);
