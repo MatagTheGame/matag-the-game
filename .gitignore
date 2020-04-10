@@ -1,23 +1,22 @@
-/.idea
-/matag.iml
+# Ignore NPM files
+node/
+node_modules/
+yarn-error.log
+js/
+
+# Ignore binaries
+bin/
+target/
+
+# Ignore IntelliJ files
+.idea
+*.iml
+
+# Ignore MacOS files
 .DS_Store
 
-/admin/admin.iml
-/admin/node
-/admin/node_modules
-/admin/yarn-error.log
-/admin/src/main/resources/public/js/
-/admin/target
+# Ignore Eclipse files
+.project
+.classpath
+org.eclipse.*.prefs
 
-/cards/cards.iml
-/cards/target
-
-/game/game.iml
-/game/node_modules
-/game/node
-/game/yarn-error.log
-/game/src/main/resources/public/js/
-/game/target
-
-/utils/utils.iml
-/utils/target
