@@ -66,7 +66,7 @@ class Play extends Component {
   }
 
   goToGame(id) {
-    window.location.href = this.props.matagGameUrl + '/ui/game/' + id
+    ApiClient.postToUrl(this.props.matagGameUrl + '/ui/game/' + id, {session: AuthHelper.getToken()})
   }
 
   displayGoToGame() {
