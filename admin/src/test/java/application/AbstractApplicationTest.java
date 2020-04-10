@@ -1,7 +1,7 @@
 package application;
 
-import application.inmemoryrepositories.MatagSessionInMemoryRepository;
-import application.inmemoryrepositories.MatagUserInMemoryRepository;
+import application.inmemoryrepositories.AbstractInMemoryRepository;
+import application.inmemoryrepositories.MatagUserAbstractInMemoryRepository;
 import com.matag.admin.MatagAdminApplication;
 import com.matag.admin.session.MatagSession;
 import com.matag.admin.session.MatagSessionRepository;
@@ -14,10 +14,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.*;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,6 +22,7 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import static application.TestUtils.*;
@@ -45,10 +43,13 @@ public abstract class AbstractApplicationTest {
   public static final LocalDateTime TEST_START_TIME = LocalDateTime.parse("2020-01-01T00:00:00");
 
   @Autowired
-  protected MatagUserRepository matagUserRepository;
+  private MatagUserRepository matagUserRepository;
 
   @Autowired
-  protected MatagSessionRepository matagSessionRepository;
+  private MatagSessionRepository matagSessionRepository;
+
+  @Autowired
+  private List<AbstractInMemoryRepository> inMemoryRepositoryList;
 
   @Autowired
   protected Clock clock;
@@ -71,8 +72,7 @@ public abstract class AbstractApplicationTest {
 
   @After
   public void cleanupDatabase() {
-    matagUserRepository.deleteAll();
-    matagSessionRepository.deleteAll();
+    inMemoryRepositoryList.forEach(r -> matagSessionRepository.deleteAll());
   }
 
   public void setCurrentTime(LocalDateTime currentTime) {
@@ -98,17 +98,8 @@ public abstract class AbstractApplicationTest {
 
   @Configuration
   @EnableAutoConfiguration(exclude = DataSourceAutoConfiguration.class)
+  @ComponentScan(basePackageClasses = MatagUserAbstractInMemoryRepository.class)
   public static class ApplicationTestConfiguration {
-    @Bean
-    public MatagUserRepository matagUserRepository() {
-      return new MatagUserInMemoryRepository();
-    }
-
-    @Bean
-    public MatagSessionRepository matagSessionRepository() {
-      return new MatagSessionInMemoryRepository();
-    }
-
     @Bean
     @Primary
     public Clock clock() {

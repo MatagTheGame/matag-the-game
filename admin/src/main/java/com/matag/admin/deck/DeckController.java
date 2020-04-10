@@ -12,7 +12,7 @@ import static java.util.Collections.emptyList;
 @RequestMapping("/deck")
 public class DeckController {
 
-  @GetMapping()
+  @GetMapping
   public List<Deck> decks() {
     return emptyList();
   }

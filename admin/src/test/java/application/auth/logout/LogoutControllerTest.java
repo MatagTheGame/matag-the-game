@@ -4,10 +4,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.OK;
 
 import application.AbstractApplicationTest;
+import com.matag.admin.session.MatagSessionRepository;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 public class LogoutControllerTest extends AbstractApplicationTest {
+  @Autowired
+  private MatagSessionRepository matagSessionRepository;
+
   @Test
   public void shouldLogoutAUser() {
     // Given
