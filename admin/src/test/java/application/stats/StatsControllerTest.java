@@ -31,6 +31,7 @@ public class StatsControllerTest extends AbstractApplicationTest {
   @Test
   public void shouldGetOnlineUsers() {
     // Given
+    loginUser(USER_1_SESSION_TOKEN);
     setCurrentTime(LocalDateTime.parse("2000-01-01T00:00:00"));
     loginUser(USER_2_SESSION_TOKEN);
     setCurrentTime(TEST_START_TIME);

@@ -66,13 +66,14 @@ public abstract class AbstractApplicationTest {
     matagUserRepository.save(user1());
     matagUserRepository.save(user2());
     matagUserRepository.save(inactive());
-
-    loginUser(USER_1_SESSION_TOKEN);
   }
 
   @After
   public void cleanupDatabase() {
-    inMemoryRepositoryList.forEach(r -> matagSessionRepository.deleteAll());
+    inMemoryRepositoryList.forEach(r -> {
+      r.deleteAll();
+      r.resetGenerator();
+    });
   }
 
   public void setCurrentTime(LocalDateTime currentTime) {
@@ -88,10 +89,11 @@ public abstract class AbstractApplicationTest {
       .build());
   }
 
-  public void user1IsLoggedIn() {
+  public void userIsLoggedIn(String userToken) {
+    loginUser(userToken);
     restTemplate.getRestTemplate().setInterceptors(
       Collections.singletonList((request, body, execution) -> {
-        request.getHeaders().add(SESSION_NAME, USER_1_SESSION_TOKEN);
+        request.getHeaders().add(SESSION_NAME, userToken);
         return execution.execute(request, body);
       }));
   }

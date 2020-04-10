@@ -16,8 +16,7 @@ public class LogoutControllerTest extends AbstractApplicationTest {
   @Test
   public void shouldLogoutAUser() {
     // Given
-    matagSessionRepository.deleteAll();
-    user1IsLoggedIn();
+    userIsLoggedIn(USER_1_SESSION_TOKEN);
 
     // When
     ResponseEntity<String> logoutResponse = restTemplate.getForEntity("/auth/logout", String.class);

@@ -17,7 +17,7 @@ public class AuthSessionFilterTest extends AbstractApplicationTest {
   @Test
   public void shouldGrantAccessToAResourceToLoggedInUsers() {
     // Given
-    user1IsLoggedIn();
+    userIsLoggedIn(USER_1_SESSION_TOKEN);
 
     // When
     ResponseEntity<String> response = restTemplate.getForEntity("/path/to/a/resource", String.class);
@@ -38,7 +38,7 @@ public class AuthSessionFilterTest extends AbstractApplicationTest {
   @Test
   public void shouldNotGrantAccessToAResourceIfUserSessionIsExpired() {
     // Given
-    user1IsLoggedIn();
+    userIsLoggedIn(USER_1_SESSION_TOKEN);
     setCurrentTime(TEST_START_TIME.plusHours(1).plusMinutes(1));
 
     // When
@@ -51,7 +51,7 @@ public class AuthSessionFilterTest extends AbstractApplicationTest {
   @Test
   public void shouldExtendTheSessionAfterHalfOfItsLife() {
     // Given
-    user1IsLoggedIn();
+    userIsLoggedIn(USER_1_SESSION_TOKEN);
     setCurrentTime(TEST_START_TIME.plusMinutes(45));
 
     // When

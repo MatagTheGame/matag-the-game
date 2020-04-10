@@ -14,13 +14,18 @@ public class MatagUserAbstractInMemoryRepository extends AbstractInMemoryReposit
   private final AtomicLong idGenerator = new AtomicLong();
 
   @Override
-  protected Long getId(MatagUser matagUser) {
+  public Long getId(MatagUser matagUser) {
     return matagUser.getId();
   }
 
   @Override
-  protected void generateId(MatagUser user) {
+  public void generateId(MatagUser user) {
     user.setId(idGenerator.incrementAndGet());
+  }
+
+  @Override
+  public void resetGenerator() {
+    idGenerator.set(0);
   }
 
   @Override

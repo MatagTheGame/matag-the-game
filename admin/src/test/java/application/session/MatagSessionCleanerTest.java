@@ -20,6 +20,7 @@ public class MatagSessionCleanerTest extends AbstractApplicationTest {
   @Test
   public void cleanupOldSessions() {
     // Given
+    loginUser(UUID.randomUUID().toString());
     setCurrentTime(TEST_START_TIME.plusHours(1).plusMinutes(1));
     loginUser(UUID.randomUUID().toString());
 

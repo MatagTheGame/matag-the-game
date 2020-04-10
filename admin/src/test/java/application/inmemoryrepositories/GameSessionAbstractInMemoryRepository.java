@@ -11,12 +11,17 @@ public class GameSessionAbstractInMemoryRepository extends AbstractInMemoryRepos
   private final AtomicLong idGenerator = new AtomicLong();
 
   @Override
-  protected Long getId(GameSession gameSession) {
+  public Long getId(GameSession gameSession) {
     return gameSession.getId();
   }
 
   @Override
-  protected void generateId(GameSession gameSession) {
+  public void generateId(GameSession gameSession) {
     gameSession.setId(idGenerator.incrementAndGet());
+  }
+
+  @Override
+  public void resetGenerator() {
+    idGenerator.set(0);
   }
 }

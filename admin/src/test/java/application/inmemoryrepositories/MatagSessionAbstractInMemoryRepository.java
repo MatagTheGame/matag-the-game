@@ -14,12 +14,12 @@ import static java.util.stream.Collectors.toList;
 @Component
 public class MatagSessionAbstractInMemoryRepository extends AbstractInMemoryRepository<MatagSession, String> implements MatagSessionRepository {
   @Override
-  protected String getId(MatagSession matagSession) {
+  public String getId(MatagSession matagSession) {
     return matagSession.getId();
   }
 
   @Override
-  protected void generateId(MatagSession session) {
+  public void generateId(MatagSession session) {
     session.setId(UUID.randomUUID().toString());
   }
 

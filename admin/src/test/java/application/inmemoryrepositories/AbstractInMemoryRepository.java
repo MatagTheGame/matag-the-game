@@ -12,9 +12,11 @@ import static java.util.stream.Collectors.toList;
 public abstract class AbstractInMemoryRepository<T, ID> implements CrudRepository<T, ID> {
   protected final Map<ID, T> DATA = new HashMap<>();
 
-  protected abstract ID getId(T t);
+  public abstract ID getId(T t);
 
-  protected abstract void generateId(T t);
+  public abstract void generateId(T t);
+
+  public void resetGenerator() {}
 
   @NonNull
   @Override

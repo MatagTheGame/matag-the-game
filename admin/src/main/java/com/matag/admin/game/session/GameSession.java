@@ -23,12 +23,13 @@ public class GameSession {
   @ManyToOne
   @JoinColumn(referencedColumnName = "id")
   private Game game;
-  private short sessionNum;
+  private int sessionNum;
   @ManyToOne
   @JoinColumn(referencedColumnName = "id")
   private MatagSession session;
   @ManyToOne
   @JoinColumn(referencedColumnName = "id")
   private MatagUser player;
+  private String playerOptions;
 
 }
