@@ -12,7 +12,7 @@ import lombok.Value;
 @Builder(toBuilder = true)
 public class JoinGameResponse {
   private final Long gameId;
-  private final String error;
+  private final String errorMessage;
   private final Long activeGameId;
 
   @JsonPOJOBuilder(withPrefix = "")

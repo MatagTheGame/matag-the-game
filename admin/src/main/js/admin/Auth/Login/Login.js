@@ -63,11 +63,7 @@ class Login extends Component {
 
   displayLoader() {
     if (this.props.loading) {
-      return (
-        <div className='spinner-container'>
-          <Loader/>
-        </div>
-      )
+      return <Loader center/>
     }
   }
 

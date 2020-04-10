@@ -30,11 +30,11 @@ public class GameService {
     MatagUser user = securityContextHolderHelper.getUser();
     MatagSession session = securityContextHolderHelper.getSession();
 
-    Optional<GameSession> activeGameOfPlayer = gameSessionRepository.findPlayerActiveGameSession(user);
+    Optional<GameSession> activeGameOfPlayer = gameSessionRepository.findPlayerActiveGameSession(session.getId());
     if (activeGameOfPlayer.isPresent()) {
       Long activeGameId = activeGameOfPlayer.get().getGame().getId();
       return JoinGameResponse.builder()
-        .error("You are already in a game: " + activeGameId)
+        .errorMessage("You are already in a game: " + activeGameId)
         .activeGameId(activeGameId)
         .build();
     }

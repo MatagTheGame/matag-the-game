@@ -117,7 +117,7 @@ public class GameControllerTest extends AbstractApplicationTest {
 
     // Then
     assertThat(response).isEqualTo(JoinGameResponse.builder()
-      .error("You are already in a game: 1")
+      .errorMessage("You are already in a game: 1")
       .activeGameId(1L)
       .build());
   }

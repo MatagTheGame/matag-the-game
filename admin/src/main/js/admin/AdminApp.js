@@ -24,7 +24,7 @@ class AdminApp extends Component {
 
   render() {
     if (this.props.loading) {
-      return <div className='fullscreen-loader'><Loader/></div>
+      return <Loader fullscreen/>
 
     } else {
       return (

@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import get from 'lodash/get'
 import AuthHelper from '../Auth/AuthHelper'
 import './play.scss'
+import ApiClient from '../utils/ApiClient'
+import Loader from '../Common/Loader'
 
 class Play extends Component {
   constructor(props) {
@@ -13,10 +15,33 @@ class Play extends Component {
   }
 
   handlePlay(event) {
+    event.preventDefault()
+    this.setState({errorMessage: null})
+
     if (this.state.colors.length === 0) {
-      alert('You need to select at least one color.')
-      event.preventDefault()
+      this.setState({errorMessage: 'You need to select at least one color.'})
+      return
     }
+
+    const playerOptions = {
+      randomColors: this.state.colors
+    }
+
+    const request = {
+      gameType: 'UNLIMITED',
+      playerOptions: JSON.stringify(playerOptions)
+    }
+
+    this.setState({loading: true})
+    ApiClient.post('/game', request)
+      .then(r => {
+        this.setState({loading: false})
+        if (r.gameId > 0) {
+          window.location.href = this.props.matagGameUrl + '/ui/game/' + r.gameId
+        } else {
+          this.setState({errorMessage: r.errorMessage})
+        }
+      })
   }
 
   isSelected(color) {
@@ -26,7 +51,7 @@ class Play extends Component {
   toggle(color) {
     const colors = this.state.colors
     if (this.isSelected(color)) {
-      colors.splice(colors.indexOf('b'), 1)
+      colors.splice(colors.indexOf(color), 1)
       this.setState({colors: colors})
 
     } else {
@@ -34,11 +59,23 @@ class Play extends Component {
     }
   }
 
+  displayErrorMessage() {
+    if (this.state.errorMessage) {
+      return <p className='error'>{this.state.errorMessage}</p>
+    }
+  }
+
+  displayLoader() {
+    if (this.state.loading) {
+      return <Loader center/>
+    }
+  }
+
   render() {
     return (
       <section id='play'>
         <h2>Play</h2>
-        <form className='matag-form' action={this.props.matagGameUrl + '/ui/game'} method='POST' onSubmit={this.handlePlay}>
+        <form className='matag-form' onSubmit={this.handlePlay}>
           <input type='hidden' name='session' value={AuthHelper.getToken()} />
           <p>Choose which colors you want to play:</p>
           <ul>
@@ -63,6 +100,8 @@ class Play extends Component {
               <label htmlFor='color-green'><img src='/img/symbols/GREEN.png' alt='green'/>Green</label>
             </li>
           </ul>
+          { this.displayErrorMessage() }
+          { this.displayLoader() }
           <div className='grid three-columns'>
             <div/>
             <input type='submit' id='play-button' value='Play'/>
