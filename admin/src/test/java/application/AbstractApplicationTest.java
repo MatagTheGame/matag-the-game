@@ -5,6 +5,7 @@ import application.inmemoryrepositories.MatagUserAbstractInMemoryRepository;
 import com.matag.admin.MatagAdminApplication;
 import com.matag.admin.session.MatagSession;
 import com.matag.admin.session.MatagSessionRepository;
+import com.matag.admin.user.MatagUser;
 import com.matag.admin.user.MatagUserRepository;
 import org.junit.After;
 import org.junit.Before;
@@ -80,17 +81,17 @@ public abstract class AbstractApplicationTest {
     ((MockClock) clock).setCurrentTime(currentTime.toInstant(ZoneOffset.UTC));
   }
 
-  public void loginUser(String userToken) {
+  public void loginUser(String userToken, MatagUser user) {
     matagSessionRepository.save(MatagSession.builder()
       .id(UUID.fromString(userToken).toString())
-      .matagUser(user1())
+      .matagUser(user)
       .createdAt(LocalDateTime.now(clock))
       .validUntil(LocalDateTime.now(clock).plusSeconds(SESSION_DURATION_TIME))
       .build());
   }
 
-  public void userIsLoggedIn(String userToken) {
-    loginUser(userToken);
+  public void userIsLoggedIn(String userToken, MatagUser user) {
+    loginUser(userToken, user);
     restTemplate.getRestTemplate().setInterceptors(
       Collections.singletonList((request, body, execution) -> {
         request.getHeaders().add(SESSION_NAME, userToken);

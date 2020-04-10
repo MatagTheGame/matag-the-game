@@ -1,5 +1,6 @@
 package application.auth.logout;
 
+import static application.TestUtils.user1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -16,7 +17,7 @@ public class LogoutControllerTest extends AbstractApplicationTest {
   @Test
   public void shouldLogoutAUser() {
     // Given
-    userIsLoggedIn(USER_1_SESSION_TOKEN);
+    userIsLoggedIn(USER_1_SESSION_TOKEN, user1());
 
     // When
     ResponseEntity<String> logoutResponse = restTemplate.getForEntity("/auth/logout", String.class);

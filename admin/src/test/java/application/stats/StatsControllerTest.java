@@ -1,5 +1,7 @@
 package application.stats;
 
+import static application.TestUtils.user1;
+import static application.TestUtils.user2;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import application.AbstractApplicationTest;
@@ -31,9 +33,9 @@ public class StatsControllerTest extends AbstractApplicationTest {
   @Test
   public void shouldGetOnlineUsers() {
     // Given
-    loginUser(USER_1_SESSION_TOKEN);
+    loginUser(USER_1_SESSION_TOKEN, user1());
     setCurrentTime(LocalDateTime.parse("2000-01-01T00:00:00"));
-    loginUser(USER_2_SESSION_TOKEN);
+    loginUser(USER_2_SESSION_TOKEN, user2());
     setCurrentTime(TEST_START_TIME);
 
     // When

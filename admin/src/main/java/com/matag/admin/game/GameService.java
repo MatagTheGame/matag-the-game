@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Clock;
 import java.time.LocalDateTime;
+import java.util.List;
 
+import static com.matag.admin.game.GameStatusType.IN_PROGRESS;
 import static com.matag.admin.game.GameStatusType.STARTING;
 
 @Component
@@ -22,17 +24,23 @@ public class GameService {
 
   @Transactional
   public long joinGame(GameType gameType, String playerOptions) {
-    Game game = Game.builder()
-      .createdAt(LocalDateTime.now(clock))
-      .type(gameType)
-      .status(STARTING)
-      .build();
+    List<Game> games = gameRepository.findByTypeAndStatus(gameType, STARTING);
+    Game freeGame = findFreeGame(games);
 
-    gameRepository.save(game);
+    if (freeGame == null) {
+      freeGame = Game.builder()
+        .createdAt(LocalDateTime.now(clock))
+        .type(gameType)
+        .status(STARTING)
+        .build();
+    } else {
+      freeGame.setStatus(IN_PROGRESS);
+    }
+
+    gameRepository.save(freeGame);
 
     GameSession gameSession = GameSession.builder()
-      .game(game)
-      .sessionNum(1)
+      .game(freeGame)
       .session(securityContextHolderHelper.getSession())
       .player(securityContextHolderHelper.getUser())
       .playerOptions(playerOptions)
@@ -40,6 +48,18 @@ public class GameService {
 
     gameSessionRepository.save(gameSession);
 
-    return game.getId();
+    return freeGame.getId();
+  }
+
+  private Game findFreeGame(List<Game> games) {
+    for (Game game : games) {
+      List<GameSession> gameSession = gameSessionRepository.findByGame(game);
+
+      if (gameSession.size() == 1) {
+        return game;
+      }
+    }
+
+    return null;
   }
 }

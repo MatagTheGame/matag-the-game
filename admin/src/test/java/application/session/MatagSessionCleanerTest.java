@@ -1,5 +1,7 @@
 package application.session;
 
+import static application.TestUtils.user1;
+import static application.TestUtils.user2;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import application.AbstractApplicationTest;
@@ -20,9 +22,9 @@ public class MatagSessionCleanerTest extends AbstractApplicationTest {
   @Test
   public void cleanupOldSessions() {
     // Given
-    loginUser(UUID.randomUUID().toString());
+    loginUser(UUID.randomUUID().toString(), user1());
     setCurrentTime(TEST_START_TIME.plusHours(1).plusMinutes(1));
-    loginUser(UUID.randomUUID().toString());
+    loginUser(UUID.randomUUID().toString(), user2());
 
     // When
     matagSessionCleaner.cleanupOldSessions();

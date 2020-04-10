@@ -23,7 +23,6 @@ public class GameSession {
   @ManyToOne
   @JoinColumn(referencedColumnName = "id")
   private Game game;
-  private int sessionNum;
   @ManyToOne
   @JoinColumn(referencedColumnName = "id")
   private MatagSession session;

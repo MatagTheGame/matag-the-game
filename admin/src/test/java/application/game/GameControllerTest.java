@@ -9,9 +9,13 @@ import com.matag.admin.game.session.GameSessionRepository;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 import static application.TestUtils.user1;
+import static application.TestUtils.user2;
+import static com.matag.admin.game.GameStatusType.IN_PROGRESS;
+import static com.matag.admin.game.GameStatusType.STARTING;
 import static com.matag.admin.game.GameType.UNLIMITED;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,7 +29,7 @@ public class GameControllerTest extends AbstractApplicationTest {
   @Test
   public void shouldCreateAGame() {
     // Given
-    userIsLoggedIn(USER_1_SESSION_TOKEN);
+    userIsLoggedIn(USER_1_SESSION_TOKEN, user1());
     JoinGameRequest request = JoinGameRequest.builder()
       .gameType(UNLIMITED)
       .playerOptions("player1 options")
@@ -39,29 +43,32 @@ public class GameControllerTest extends AbstractApplicationTest {
     Optional<Game> game = gameRepository.findById(1L);
     assertThat(game).isNotEmpty();
     assertThat(game.get().getType()).isEqualTo(UNLIMITED);
+    assertThat(game.get().getStatus()).isEqualTo(STARTING);
 
-    Optional<GameSession> gameSession = gameSessionRepository.findById(1L);
-    assertThat(gameSession).isNotEmpty();
-    assertThat(gameSession.get().getGame()).isEqualTo(game.get());
-    assertThat(gameSession.get().getSessionNum()).isEqualTo(1);
-    assertThat(gameSession.get().getSession().getId()).isEqualTo(USER_1_SESSION_TOKEN);
-    assertThat(gameSession.get().getPlayer()).isEqualTo(user1());
-    assertThat(gameSession.get().getPlayerOptions()).isEqualTo("player1 options");
+    Iterable<GameSession> gameSessions = gameSessionRepository.findAll();
+    assertThat(gameSessions).hasSize(1);
+    GameSession gameSession = gameSessions.iterator().next();
+    assertThat(gameSession.getGame()).isEqualTo(game.get());
+    assertThat(gameSession.getSession().getId()).isEqualTo(USER_1_SESSION_TOKEN);
+    assertThat(gameSession.getPlayer()).isEqualTo(user1());
+    assertThat(gameSession.getPlayerOptions()).isEqualTo("player1 options");
   }
 
   @Test
   public void shouldJoinAnExistingGame() {
     // Given
-    userIsLoggedIn(USER_1_SESSION_TOKEN);
+    userIsLoggedIn(USER_1_SESSION_TOKEN, user1());
     JoinGameRequest player1JoinRequest = JoinGameRequest.builder()
+      .gameType(UNLIMITED)
       .playerOptions("player1 options")
       .build();
 
     restTemplate.postForObject("/game", player1JoinRequest, Long.class);
 
-    userIsLoggedIn(USER_2_SESSION_TOKEN);
+    userIsLoggedIn(USER_2_SESSION_TOKEN, user2());
 
     JoinGameRequest player2JoinRequest = JoinGameRequest.builder()
+      .gameType(UNLIMITED)
       .playerOptions("player2 options")
       .build();
 
@@ -69,6 +76,25 @@ public class GameControllerTest extends AbstractApplicationTest {
     Long response = restTemplate.postForObject("/game", player2JoinRequest, Long.class);
 
     // Then
-//    assertThat(response).isEqualTo(1);
+    assertThat(response).isEqualTo(1);
+    Optional<Game> game = gameRepository.findById(1L);
+    assertThat(game).isNotEmpty();
+    assertThat(game.get().getType()).isEqualTo(UNLIMITED);
+    assertThat(game.get().getStatus()).isEqualTo(IN_PROGRESS);
+
+    Iterable<GameSession> gameSessions = gameSessionRepository.findAll();
+    assertThat(gameSessions).hasSize(2);
+    Iterator<GameSession> iterator = gameSessions.iterator();
+    GameSession firstGameSession = iterator.next();
+    assertThat(firstGameSession.getGame()).isEqualTo(game.get());
+    assertThat(firstGameSession.getSession().getId()).isEqualTo(USER_1_SESSION_TOKEN);
+    assertThat(firstGameSession.getPlayer()).isEqualTo(user1());
+    assertThat(firstGameSession.getPlayerOptions()).isEqualTo("player1 options");
+
+    GameSession secondGameSession = iterator.next();
+    assertThat(secondGameSession.getGame()).isEqualTo(game.get());
+    assertThat(secondGameSession.getSession().getId()).isEqualTo(USER_2_SESSION_TOKEN);
+    assertThat(secondGameSession.getPlayer()).isEqualTo(user2());
+    assertThat(secondGameSession.getPlayerOptions()).isEqualTo("player2 options");
   }
 }

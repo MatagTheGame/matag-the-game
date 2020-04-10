@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import static application.TestUtils.user1;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 
@@ -17,7 +18,7 @@ public class AuthSessionFilterTest extends AbstractApplicationTest {
   @Test
   public void shouldGrantAccessToAResourceToLoggedInUsers() {
     // Given
-    userIsLoggedIn(USER_1_SESSION_TOKEN);
+    userIsLoggedIn(USER_1_SESSION_TOKEN, user1());
 
     // When
     ResponseEntity<String> response = restTemplate.getForEntity("/path/to/a/resource", String.class);
@@ -38,7 +39,7 @@ public class AuthSessionFilterTest extends AbstractApplicationTest {
   @Test
   public void shouldNotGrantAccessToAResourceIfUserSessionIsExpired() {
     // Given
-    userIsLoggedIn(USER_1_SESSION_TOKEN);
+    userIsLoggedIn(USER_1_SESSION_TOKEN, user1());
     setCurrentTime(TEST_START_TIME.plusHours(1).plusMinutes(1));
 
     // When
@@ -51,7 +52,7 @@ public class AuthSessionFilterTest extends AbstractApplicationTest {
   @Test
   public void shouldExtendTheSessionAfterHalfOfItsLife() {
     // Given
-    userIsLoggedIn(USER_1_SESSION_TOKEN);
+    userIsLoggedIn(USER_1_SESSION_TOKEN, user1());
     setCurrentTime(TEST_START_TIME.plusMinutes(45));
 
     // When

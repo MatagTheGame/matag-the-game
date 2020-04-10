@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static java.util.stream.Collectors.toList;
+
 @Component
 public class GameAbstractInMemoryRepository extends AbstractInMemoryRepository<Game, Long> implements GameRepository {
   private final AtomicLong idGenerator = new AtomicLong();
@@ -30,6 +32,9 @@ public class GameAbstractInMemoryRepository extends AbstractInMemoryRepository<G
 
   @Override
   public List<Game> findByTypeAndStatus(GameType type, GameStatusType status) {
-    return null;
+    return findAll().stream()
+      .filter(g -> g.getType().equals(type))
+      .filter(g -> g.getStatus().equals(status))
+      .collect(toList());
   }
 }

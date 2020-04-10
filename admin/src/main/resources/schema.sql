@@ -31,7 +31,6 @@ create table game_session
 (
     id             bigserial primary key,
     game_id        bigint   not null,
-    session_num    smallint not null,
     session_id     char(36) unique,
     player_id      bigint   not null,
     player_options varchar(255),

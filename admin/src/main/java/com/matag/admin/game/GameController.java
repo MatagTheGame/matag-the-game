@@ -16,6 +16,4 @@ public class GameController {
   public long joinGame(@RequestBody JoinGameRequest joinGameRequest) {
     return gameService.joinGame(joinGameRequest.getGameType(), joinGameRequest.getPlayerOptions());
   }
-
-
 }
