@@ -18,7 +18,7 @@ import javax.persistence.*;
 @Table(name = "game_session")
 public class GameSession {
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @ManyToOne
   @JoinColumn(referencedColumnName = "id")

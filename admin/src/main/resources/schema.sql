@@ -29,12 +29,13 @@ create table game
 
 create table game_session
 (
-    id              bigserial primary key,
-    game            bigint   not null,
-    session_num     smallint not null,
-    session         char(36) unique,
-    session_options varchar(255),
-    player          bigint   not null,
-    foreign key (session) references matag_session (id) on delete set null,
-    foreign key (player) references matag_user (id) on delete set null
+    id             bigserial primary key,
+    game_id        bigint   not null,
+    session_num    smallint not null,
+    session_id     char(36) unique,
+    player_id      bigint   not null,
+    player_options varchar(255),
+    foreign key (game_id) references game (id) on delete set null,
+    foreign key (session_id) references matag_session (id) on delete set null,
+    foreign key (player_id) references matag_user (id) on delete set null
 )
