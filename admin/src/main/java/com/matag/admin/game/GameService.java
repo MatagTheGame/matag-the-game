@@ -72,7 +72,7 @@ public class GameService {
     for (Game game : games) {
       List<GameSession> gameSession = gameSessionRepository.findByGame(game);
 
-      if (gameSession.size() == 1) {
+      if (gameSession.size() >= 1) {
         return game;
       }
     }

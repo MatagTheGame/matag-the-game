@@ -18,13 +18,14 @@ public class LauncherGameController {
     String session = httpServletRequest.getParameter("session");
     validateSessionFormat(session);
 
-    return "<html>\n" +
+    return
+      "<html>\n" +
       "    <head>\n" +
       "        <meta charset=\"utf-8\">\n" +
       "        <title>MATAG - Game</title>\n" +
       "        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
       "        <link rel=\"shortcut icon\" type=\"image/png\" href=\"/img/matag.png\"/>\n" +
-      "        <script>sessionStorage.setItem('token', '" + session + "')</script>" +
+      "        <script>sessionStorage.setItem('token', '" + session + "')</script>\n" +
       "    </head>\n" +
       "    <body>\n" +
       "        <div id=\"app\" ></div>\n" +
