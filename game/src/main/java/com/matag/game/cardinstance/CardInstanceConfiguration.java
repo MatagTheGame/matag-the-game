@@ -1,4 +1,4 @@
-package com.matag.cardinstance;
+package com.matag.game.cardinstance;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

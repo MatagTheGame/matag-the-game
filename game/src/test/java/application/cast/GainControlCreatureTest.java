@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.cardinstance.modifiers.TappedModifier.TAPPED;
+import static com.matag.game.cardinstance.modifiers.TappedModifier.TAPPED;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 

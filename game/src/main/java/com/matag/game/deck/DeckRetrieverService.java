@@ -1,7 +1,7 @@
 package com.matag.game.deck;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.CardInstanceFactory;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.cards.Card;
 import com.matag.cards.CardUtils;
 import com.matag.cards.Cards;

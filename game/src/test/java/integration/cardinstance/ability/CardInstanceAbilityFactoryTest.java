@@ -1,7 +1,7 @@
-package integration.cards.ability;
+package integration.cardinstance.ability;
 
-import com.matag.cardinstance.ability.CardInstanceAbility;
-import com.matag.cardinstance.ability.CardInstanceAbilityFactory;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 import org.junit.Test;
 
 import java.util.List;

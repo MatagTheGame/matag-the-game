@@ -1,6 +1,6 @@
-package integration.cards.ability;
+package integration.cardinstance.ability;
 
-import com.matag.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.cards.ability.selector.CardInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
 import org.junit.Test;

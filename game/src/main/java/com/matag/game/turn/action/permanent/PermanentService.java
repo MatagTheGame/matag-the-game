@@ -1,8 +1,8 @@
 package com.matag.game.turn.action.permanent;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.ability.CardInstanceAbility;
-import com.matag.cardinstance.ability.CardInstanceAbilityFactory;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 import com.matag.cards.ability.AbilityService;
 import com.matag.cards.properties.PowerToughness;
 import com.matag.game.status.GameStatus;

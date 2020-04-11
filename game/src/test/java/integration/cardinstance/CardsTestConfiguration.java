@@ -1,6 +1,6 @@
-package integration.cards;
+package integration.cardinstance;
 
-import com.matag.cardinstance.CardInstanceConfiguration;
+import com.matag.game.cardinstance.CardInstanceConfiguration;
 import com.matag.cards.CardsConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

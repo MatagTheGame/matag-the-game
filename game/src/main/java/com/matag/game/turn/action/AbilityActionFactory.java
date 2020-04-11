@@ -1,6 +1,6 @@
 package com.matag.game.turn.action;
 
-import com.matag.cardinstance.ability.AbilityAction;
+import com.matag.game.cardinstance.ability.AbilityAction;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.game.turn.action.attach.AttachAction;
 import com.matag.game.turn.action.draw.DrawXCardsAction;

@@ -1,6 +1,6 @@
-package com.matag.cardinstance.ability.selector;
+package com.matag.game.cardinstance.ability.selector;
 
-import com.matag.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstance;
 import com.matag.cards.ability.selector.PowerToughnessConstraint;
 
 public class PowerToughnessConstraintUtils {

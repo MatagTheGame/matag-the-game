@@ -1,6 +1,6 @@
 package com.matag.game.stack;
 
-import com.matag.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstance;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 

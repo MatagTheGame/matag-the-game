@@ -2,7 +2,7 @@ package application.cleanup;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
-import com.matag.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstance;
 import com.matag.cards.Cards;
 import com.matag.game.MatagGameApplication;
 import com.matag.game.init.test.InitTestService;
@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.cardinstance.modifiers.TappedModifier.TAPPED;
+import static com.matag.game.cardinstance.modifiers.TappedModifier.TAPPED;
 import static com.matag.cards.properties.PowerToughness.powerToughness;
 import static com.matag.game.turn.phases.EndTurnPhase.ET;
 import static com.matag.game.turn.phases.Main1Phase.M1;

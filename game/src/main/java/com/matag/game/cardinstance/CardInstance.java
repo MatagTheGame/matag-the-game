@@ -1,7 +1,7 @@
-package com.matag.cardinstance;
+package com.matag.game.cardinstance;
 
-import com.matag.cardinstance.ability.CardInstanceAbility;
-import com.matag.cardinstance.modifiers.CardModifiers;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.modifiers.CardModifiers;
 import com.matag.cards.Card;
 import com.matag.cards.CardUtils;
 import com.matag.cards.ability.trigger.TriggerSubtype;
@@ -26,7 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.matag.cardinstance.ability.CardInstanceAbility.getCardInstanceAbilities;
+import static com.matag.game.cardinstance.ability.CardInstanceAbility.getCardInstanceAbilities;
 import static com.matag.cards.properties.Type.INSTANT;
 import static com.matag.cards.properties.Type.SORCERY;
 import static java.util.Collections.emptyList;

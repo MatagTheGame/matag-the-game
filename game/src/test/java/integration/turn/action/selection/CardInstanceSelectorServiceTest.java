@@ -1,7 +1,7 @@
 package integration.turn.action.selection;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.CardInstanceFactory;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.cards.Cards;
 import com.matag.cards.ability.selector.CardInstanceSelector;
 import com.matag.cards.ability.selector.PowerToughnessConstraint;

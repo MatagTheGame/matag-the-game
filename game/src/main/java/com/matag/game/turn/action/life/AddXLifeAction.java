@@ -1,8 +1,8 @@
 package com.matag.game.turn.action.life;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.ability.AbilityAction;
-import com.matag.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.ability.AbilityAction;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import lombok.AllArgsConstructor;

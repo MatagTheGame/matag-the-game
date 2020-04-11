@@ -1,4 +1,4 @@
-package com.matag.cardinstance.modifiers;
+package com.matag.game.cardinstance.modifiers;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,8 +1,8 @@
-package integration.cards;
+package integration.cardinstance;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.CardInstanceFactory;
 import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.status.GameStatus;
 import integration.TestUtils;
 import integration.TestUtilsConfiguration;

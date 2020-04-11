@@ -1,6 +1,6 @@
 package com.matag.game.turn.action._continue;
 
-import com.matag.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.leave.DestroyPermanentService;
 import com.matag.game.turn.action.leave.ReturnPermanentToHandService;

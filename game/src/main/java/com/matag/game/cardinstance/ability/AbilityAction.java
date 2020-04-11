@@ -1,6 +1,6 @@
-package com.matag.cardinstance.ability;
+package com.matag.game.cardinstance.ability;
 
-import com.matag.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 
 public interface AbilityAction {

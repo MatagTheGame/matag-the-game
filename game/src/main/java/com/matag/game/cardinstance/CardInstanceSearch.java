@@ -1,6 +1,6 @@
-package com.matag.cardinstance;
+package com.matag.game.cardinstance;
 
-import com.matag.cardinstance.ability.selector.PowerToughnessConstraintUtils;
+import com.matag.game.cardinstance.ability.selector.PowerToughnessConstraintUtils;
 import com.matag.cards.ability.selector.PowerToughnessConstraint;
 import com.matag.cards.ability.selector.TurnStatusType;
 import com.matag.cards.ability.trigger.TriggerSubtype;

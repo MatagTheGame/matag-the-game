@@ -1,7 +1,7 @@
 package integration.turn.action.enter;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.CardInstanceFactory;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.cards.Cards;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.draw.DrawXCardsService;

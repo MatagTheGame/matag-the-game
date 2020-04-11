@@ -1,7 +1,7 @@
 package integration.turn.action.cast;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.CardInstanceFactory;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.cards.Cards;
 import com.matag.cards.properties.Cost;
 import com.matag.game.player.Player;

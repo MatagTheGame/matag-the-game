@@ -1,6 +1,6 @@
 package com.matag.game.turn.action.tap;
 
-import com.matag.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

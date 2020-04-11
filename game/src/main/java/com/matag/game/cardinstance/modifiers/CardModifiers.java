@@ -1,6 +1,6 @@
-package com.matag.cardinstance.modifiers;
+package com.matag.game.cardinstance.modifiers;
 
-import com.matag.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.cards.properties.PowerToughness;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;

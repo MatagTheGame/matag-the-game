@@ -1,8 +1,7 @@
 package com.matag.game.turn.phases;
 
-import com.matag.cardinstance.CardInstanceSearch;
+import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;

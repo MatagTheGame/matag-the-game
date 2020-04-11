@@ -1,6 +1,6 @@
 package com.matag.game.init;
 
-import com.matag.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;
 import lombok.AllArgsConstructor;
 import lombok.Data;

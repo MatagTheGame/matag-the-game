@@ -1,8 +1,8 @@
 package com.matag.game.turn.action.leave;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.CardInstanceSearch;
-import com.matag.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceSearch;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.cards.ability.trigger.TriggerSubtype;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.selection.CardInstanceSelectorService;

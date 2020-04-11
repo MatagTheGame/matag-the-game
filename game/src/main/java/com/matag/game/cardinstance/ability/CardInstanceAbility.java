@@ -1,4 +1,4 @@
-package com.matag.cardinstance.ability;
+package com.matag.game.cardinstance.ability;
 
 import com.matag.cards.Card;
 import com.matag.cards.ability.Ability;

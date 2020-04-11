@@ -1,6 +1,6 @@
 package com.matag.game.turn.action.enter;
 
-import com.matag.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;

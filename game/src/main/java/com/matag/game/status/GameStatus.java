@@ -1,7 +1,7 @@
 package com.matag.game.status;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.CardInstanceSearch;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.player.Player;
 import com.matag.game.stack.SpellStack;
 import com.matag.game.turn.Turn;

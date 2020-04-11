@@ -1,4 +1,4 @@
-package com.matag.cardinstance;
+package com.matag.game.cardinstance;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.matag.game.turn.action.cast;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.cards.cost.CostService;
 import com.matag.cards.properties.Cost;
 import com.matag.game.message.MessageException;

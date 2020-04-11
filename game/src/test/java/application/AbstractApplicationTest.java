@@ -1,17 +1,10 @@
 package application;
 
-import static com.matag.player.PlayerType.OPPONENT;
-import static com.matag.player.PlayerType.PLAYER;
-import static com.matag.game.turn.phases.Main1Phase.M1;
-import static com.matag.game.turn.phases.UpkeepPhase.UP;
-import static java.lang.Integer.parseInt;
-
 import application.browser.MatagBrowser;
-import com.matag.cardinstance.CardInstanceFactory;
-
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.launcher.LauncherGameResponseBuilder;
+import com.matag.game.launcher.LauncherTestGameController;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
@@ -21,8 +14,15 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-public abstract class AbstractApplicationTest {
+import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.game.turn.phases.UpkeepPhase.UP;
+import static com.matag.player.PlayerType.OPPONENT;
+import static com.matag.player.PlayerType.PLAYER;
+import static java.lang.Integer.parseInt;
+
+public abstract class AbstractApplicationTest {
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplicationTest.class);
 
   private static AtomicInteger GAME_ID = new AtomicInteger(0);
@@ -120,6 +120,11 @@ public abstract class AbstractApplicationTest {
       initTestServiceDecorator.setCardInstanceFactory(cardInstanceFactory);
       initTestServiceDecorator.setCards(cards);
       return initTestServiceDecorator;
+    }
+
+    @Bean
+    public LauncherTestGameController launcherTestGameController(LauncherGameResponseBuilder launcherGameResponseBuilder) {
+      return new LauncherTestGameController(launcherGameResponseBuilder);
     }
   }
 

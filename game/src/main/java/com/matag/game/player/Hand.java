@@ -1,8 +1,8 @@
 package com.matag.game.player;
 
-import com.matag.cardinstance.CardInstance;
-import com.matag.cardinstance.CardInstanceFactory;
-import com.matag.cardinstance.CardListComponent;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.cardinstance.CardListComponent;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
