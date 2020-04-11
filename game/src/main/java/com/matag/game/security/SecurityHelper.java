@@ -16,8 +16,9 @@ public class SecurityHelper {
 
   public SecurityToken extractSecurityToken(SimpMessageHeaderAccessor headerAccessor) {
     String sessionId = headerAccessor.getSessionId();
+    String token = Objects.requireNonNull(headerAccessor.getNativeHeader("token")).get(0);
     String gameId = Objects.requireNonNull(headerAccessor.getNativeHeader("gameId")).get(0);
-    return new SecurityToken(sessionId, gameId);
+    return new SecurityToken(sessionId, token, gameId);
   }
 
   public void isPlayerAllowedToExecuteAction(GameStatus gameStatus, String sessionId) {
