@@ -37,4 +37,12 @@ create table game_session
     foreign key (game_id) references game (id) on delete set null,
     foreign key (session_id) references matag_session (id) on delete set null,
     foreign key (player_id) references matag_user (id) on delete set null
-)
+);
+
+
+
+
+
+-- insert Guest (username: Guest     password: password)
+insert into matag_user(username, password, email_address, status, type)
+values ('Guest', '{argon2}$argon2id$v=19$m=65536,t=4,p=8$LI8W+vC+a36vqqNbKu9RXw$/PGm7X3l6DEro/p7KYnOmKUW7a0+vX4NeynAP6QEV7M', 'guest@matag.com', 'ACTIVE', 'GUEST');

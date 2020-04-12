@@ -5,14 +5,19 @@ import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.launcher.LauncherGameResponseBuilder;
 import com.matag.game.launcher.LauncherTestGameController;
+import com.matag.game.player.playerInfo.PlayerInfo;
+import com.matag.game.player.playerInfo.PlayerInfoRetriever;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
+import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -21,6 +26,8 @@ import static com.matag.game.turn.phases.UpkeepPhase.UP;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static java.lang.Integer.parseInt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 
 public abstract class AbstractApplicationTest {
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplicationTest.class);
@@ -32,10 +39,18 @@ public abstract class AbstractApplicationTest {
 
   protected MatagBrowser browser;
 
+  @Autowired
+  private PlayerInfoRetriever playerInfoRetriever;
+
   public abstract void setupGame();
 
   @Before
   public void setupWithRetries() {
+    given(playerInfoRetriever.retrieve(any())).willReturn(
+      new PlayerInfo("Player1"),
+      new PlayerInfo("Player2")
+    );
+
     RuntimeException lastException = null;
 
     for (int i = 0; i < getNumOfRetries(); i++) {
@@ -125,6 +140,12 @@ public abstract class AbstractApplicationTest {
     @Bean
     public LauncherTestGameController launcherTestGameController(LauncherGameResponseBuilder launcherGameResponseBuilder) {
       return new LauncherTestGameController(launcherGameResponseBuilder);
+    }
+
+    @Bean
+    @Primary
+    public PlayerInfoRetriever playerInfoRetriever() {
+      return Mockito.mock(PlayerInfoRetriever.class);
     }
   }
 

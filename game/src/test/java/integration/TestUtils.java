@@ -4,6 +4,7 @@ import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.cards.Cards;
 import com.matag.game.player.PlayerFactory;
+import com.matag.game.player.playerInfo.PlayerInfo;
 import com.matag.game.status.GameStatus;
 import com.matag.game.status.GameStatusFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +30,14 @@ public class TestUtils {
   public GameStatus testGameStatus() {
     GameStatus gameStatus = gameStatusFactory.create("game-id");
 
-    gameStatus.setPlayer1(playerFactory.create("player-session", "player-name"));
-    gameStatus.getPlayer1().getLibrary().addCards(testLibrary(gameStatus, "player-name"));
+    PlayerInfo player1 = new PlayerInfo("player-name");
+    gameStatus.setPlayer1(playerFactory.create("player-session", player1));
+    gameStatus.getPlayer1().getLibrary().addCards(testLibrary(gameStatus, player1.getPlayerName()));
     gameStatus.getPlayer1().drawHand();
 
-    gameStatus.setPlayer2(playerFactory.create("opponent-session", "opponent-name"));
-    gameStatus.getPlayer2().getLibrary().addCards(testLibrary(gameStatus, "opponent-name"));
+    PlayerInfo player2 = new PlayerInfo("opponent-name");
+    gameStatus.setPlayer2(playerFactory.create("opponent-session", player2));
+    gameStatus.getPlayer2().getLibrary().addCards(testLibrary(gameStatus, player2.getPlayerName()));
     gameStatus.getPlayer2().drawHand();
 
     gameStatus.getTurn().setCurrentTurnPlayer("player-name");

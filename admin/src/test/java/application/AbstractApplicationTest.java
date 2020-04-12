@@ -32,9 +32,7 @@ import static com.matag.admin.session.AuthSessionFilter.SESSION_NAME;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MatagAdminApplication.class, webEnvironment = RANDOM_PORT, properties =
-  "matag.game.url=http://www.matag-game.com"
-)
+@SpringBootTest(classes = MatagAdminApplication.class, webEnvironment = RANDOM_PORT)
 @Import(AbstractApplicationTest.ApplicationTestConfiguration.class)
 @ActiveProfiles("test")
 public abstract class AbstractApplicationTest {

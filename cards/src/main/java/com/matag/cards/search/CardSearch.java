@@ -6,6 +6,7 @@ import com.matag.cards.properties.Color;
 import com.matag.cards.properties.Type;
 
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -46,7 +47,7 @@ public class CardSearch {
     return new CardSearch(cards);
   }
 
-  public CardSearch ofAnyOfTheColors(List<Color> colors) {
+  public CardSearch ofAnyOfTheColors(Set<Color> colors) {
     List<Card> cards = this.cards.stream()
       .filter(card -> CardUtils.ofAnyOfTheColors(card, colors))
       .collect(toList());

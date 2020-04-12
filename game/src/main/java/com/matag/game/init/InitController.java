@@ -1,11 +1,17 @@
 package com.matag.game.init;
 
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.deck.DeckFactory;
+import com.matag.game.deck.DeckInfo;
 import com.matag.game.deck.DeckRetrieverService;
 import com.matag.game.event.Event;
 import com.matag.game.event.EventSender;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.message.MessageEvent;
+import com.matag.game.player.Player;
 import com.matag.game.player.PlayerFactory;
+import com.matag.game.player.playerInfo.PlayerInfo;
+import com.matag.game.player.playerInfo.PlayerInfoRetriever;
 import com.matag.game.security.SecurityHelper;
 import com.matag.game.security.SecurityToken;
 import com.matag.game.status.GameStatus;
@@ -19,6 +25,8 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
+
 @Controller
 public class InitController {
   private static final Logger LOGGER = LoggerFactory.getLogger(InitController.class);
@@ -26,21 +34,25 @@ public class InitController {
   private final SecurityHelper securityHelper;
   private final EventSender eventSender;
   private final GameStatusFactory gameStatusFactory;
+  private final PlayerInfoRetriever playerInfoRetriever;
   private final PlayerFactory playerFactory;
   private final GameStatusUpdaterService gameStatusUpdaterService;
   private final InitTestService initTestService;
   private final GameStatusRepository gameStatusRepository;
   private final DeckRetrieverService deckRetrieverService;
+  private final DeckFactory deckFactory;
 
-  public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerFactory playerFactory, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService) {
+  public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerInfoRetriever playerInfoRetriever, PlayerFactory playerFactory, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService, DeckFactory deckFactory) {
     this.securityHelper = securityHelper;
     this.eventSender = eventSender;
     this.gameStatusFactory = gameStatusFactory;
+    this.playerInfoRetriever = playerInfoRetriever;
     this.playerFactory = playerFactory;
     this.gameStatusUpdaterService = gameStatusUpdaterService;
     this.gameStatusRepository = gameStatusRepository;
     this.deckRetrieverService = deckRetrieverService;
     this.initTestService = initTestService;
+    this.deckFactory = deckFactory;
   }
 
   @MessageMapping("/game/init")
@@ -50,9 +62,8 @@ public class InitController {
 
     if (!gameStatusRepository.contains(token.getGameId())) {
       GameStatus gameStatus = gameStatusFactory.create(token.getGameId());
-      String playerName = "Player1";
-      gameStatus.setPlayer1(playerFactory.create(token.getSessionId(), playerName));
-      gameStatus.getPlayer1().getLibrary().addCards(deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus));
+      gameStatus.setPlayer1(retrievePlayer(token));
+      gameStatus.getPlayer1().getLibrary().addCards(retrieveDeck(token, gameStatus));
       gameStatus.getPlayer1().drawHand();
       gameStatusRepository.save(token.getGameId(), gameStatus);
       eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_WAITING_OPPONENT"));
@@ -60,9 +71,8 @@ public class InitController {
     } else {
       GameStatus gameStatus = gameStatusRepository.getUnsecure(token.getGameId());
       if (gameStatus.getPlayer2() == null) {
-        String playerName = "Player2";
-        gameStatus.setPlayer2(playerFactory.create(token.getSessionId(), playerName));
-        gameStatus.getPlayer2().getLibrary().addCards(deckRetrieverService.retrieveDeckForUser(token, playerName, gameStatus));
+        gameStatus.setPlayer2(retrievePlayer(token));
+        gameStatus.getPlayer2().getLibrary().addCards(retrieveDeck(token, gameStatus));
         gameStatus.getPlayer2().drawHand();
 
         gameStatus.getTurn().init(gameStatus.getPlayer1().getName());
@@ -87,4 +97,13 @@ public class InitController {
     }
   }
 
+  private Player retrievePlayer(SecurityToken token) {
+    PlayerInfo playerInfo = playerInfoRetriever.retrieve(token);
+    return playerFactory.create(token.getSessionId(), playerInfo);
+  }
+
+  private List<CardInstance> retrieveDeck(SecurityToken token, GameStatus gameStatus) {
+    DeckInfo deckInfo = deckRetrieverService.retrieveDeckForUser(token);
+    return deckFactory.create(retrievePlayer(token).getName(), gameStatus, deckInfo);
+  }
 }

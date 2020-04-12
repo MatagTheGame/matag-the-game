@@ -6,6 +6,7 @@ import com.matag.cards.properties.Rarity;
 import com.matag.cards.properties.Type;
 
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -51,12 +52,7 @@ public class CardUtils {
     return card.getColors().contains(color);
   }
 
-  public static boolean ofAnyOfTheColors(Card card, List<Color> colors) {
-    for (Color color : colors) {
-      if (isOfColor(card, color)) {
-        return true;
-      }
-    }
-    return false;
+  public static boolean ofAnyOfTheColors(Card card, Set<Color> colors) {
+    return colors.stream().anyMatch(color -> isOfColor(card, color));
   }
 }

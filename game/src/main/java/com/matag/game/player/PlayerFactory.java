@@ -1,5 +1,6 @@
 package com.matag.game.player;
 
+import com.matag.game.player.playerInfo.PlayerInfo;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -16,10 +17,10 @@ public class PlayerFactory implements ApplicationContextAware {
     this.applicationContext = applicationContext;
   }
 
-  public Player create(String sessionId, String name) {
+  public Player create(String sessionId, PlayerInfo playerInfo) {
     Player player = applicationContext.getBean(Player.class);
     player.setSessionId(sessionId);
-    player.setName(name);
+    player.setName(playerInfo.getPlayerName());
     player.setResolution("lowResolution");
     return player;
   }
