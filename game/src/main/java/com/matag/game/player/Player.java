@@ -1,5 +1,6 @@
 package com.matag.game.player;
 
+import com.matag.game.security.SecurityToken;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -11,8 +12,7 @@ import java.util.stream.IntStream;
 @Component
 @Scope("prototype")
 public class Player {
-
-  private String sessionId;
+  private SecurityToken token;
   private String name;
   private int life;
   private final Library library;

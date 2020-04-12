@@ -31,16 +31,6 @@ public class GameStatusUpdaterService {
     );
   }
 
-  private void sendUpdateLibrariesSize(GameStatus gameStatus) {
-    sendUpdatePlayerLibrarySize(gameStatus, gameStatus.getPlayer1());
-    sendUpdatePlayerLibrarySize(gameStatus, gameStatus.getPlayer2());
-  }
-
-  private void sendUpdateHands(GameStatus gameStatus) {
-    sendUpdatePlayerHand(gameStatus, gameStatus.getPlayer1());
-    sendUpdatePlayerHand(gameStatus, gameStatus.getPlayer2());
-  }
-
   private void sendUpdateBattlefields(GameStatus gameStatus) {
     sendUpdatePlayerBattlefield(gameStatus, gameStatus.getPlayer1());
     sendUpdatePlayerBattlefield(gameStatus, gameStatus.getPlayer2());
@@ -51,16 +41,26 @@ public class GameStatusUpdaterService {
     sendUpdatePlayerGraveyard(gameStatus, gameStatus.getPlayer2());
   }
 
-  private void sendUpdatePlayersLife(GameStatus gameStatus) {
-    sendUpdatePlayerLife(gameStatus, gameStatus.getPlayer1());
-    sendUpdatePlayerLife(gameStatus, gameStatus.getPlayer2());
-  }
-
   private void sendUpdateStack(GameStatus gameStatus) {
     eventSender.sendToPlayers(
       asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
       new Event("UPDATE_STACK", gameStatus.getStack().getItems())
     );
+  }
+
+  private void sendUpdateLibrariesSize(GameStatus gameStatus) {
+    sendUpdatePlayerLibrarySize(gameStatus, gameStatus.getPlayer1());
+    sendUpdatePlayerLibrarySize(gameStatus, gameStatus.getPlayer2());
+  }
+
+  private void sendUpdatePlayersLife(GameStatus gameStatus) {
+    sendUpdatePlayerLife(gameStatus, gameStatus.getPlayer1());
+    sendUpdatePlayerLife(gameStatus, gameStatus.getPlayer2());
+  }
+
+  private void sendUpdateHands(GameStatus gameStatus) {
+    sendUpdatePlayerHand(gameStatus, gameStatus.getPlayer1());
+    sendUpdatePlayerHand(gameStatus, gameStatus.getPlayer2());
   }
 
   public void sendMessage(String sessionId, MessageEvent messageEvent) {

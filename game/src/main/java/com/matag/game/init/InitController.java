@@ -7,9 +7,9 @@ import com.matag.game.deck.DeckRetrieverService;
 import com.matag.game.event.Event;
 import com.matag.game.event.EventSender;
 import com.matag.game.init.test.InitTestService;
-import com.matag.game.message.MessageEvent;
 import com.matag.game.player.Player;
 import com.matag.game.player.PlayerFactory;
+import com.matag.game.player.PlayerService;
 import com.matag.game.player.playerInfo.PlayerInfo;
 import com.matag.game.player.playerInfo.PlayerInfoRetriever;
 import com.matag.game.security.SecurityHelper;
@@ -36,18 +36,20 @@ public class InitController {
   private final GameStatusFactory gameStatusFactory;
   private final PlayerInfoRetriever playerInfoRetriever;
   private final PlayerFactory playerFactory;
+  private final PlayerService playerService;
   private final GameStatusUpdaterService gameStatusUpdaterService;
   private final InitTestService initTestService;
   private final GameStatusRepository gameStatusRepository;
   private final DeckRetrieverService deckRetrieverService;
   private final DeckFactory deckFactory;
 
-  public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerInfoRetriever playerInfoRetriever, PlayerFactory playerFactory, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService, DeckFactory deckFactory) {
+  public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerInfoRetriever playerInfoRetriever, PlayerFactory playerFactory, PlayerService playerService, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService, DeckFactory deckFactory) {
     this.securityHelper = securityHelper;
     this.eventSender = eventSender;
     this.gameStatusFactory = gameStatusFactory;
     this.playerInfoRetriever = playerInfoRetriever;
     this.playerFactory = playerFactory;
+    this.playerService = playerService;
     this.gameStatusUpdaterService = gameStatusUpdaterService;
     this.gameStatusRepository = gameStatusRepository;
     this.deckRetrieverService = deckRetrieverService;
@@ -70,7 +72,7 @@ public class InitController {
 
     } else {
       GameStatus gameStatus = gameStatusRepository.getUnsecure(token.getGameId());
-      if (gameStatus.getPlayer2() == null) {
+      if (gameStatus.getPlayer2() == null && !gameStatus.getPlayer1().getToken().getSessionId().equals(token.getSessionId())) {
         gameStatus.setPlayer2(retrievePlayer(token));
         gameStatus.getPlayer2().getLibrary().addCards(retrieveDeck(token, gameStatus));
         gameStatus.getPlayer2().drawHand();
@@ -92,14 +94,20 @@ public class InitController {
         gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 
       } else {
-        eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("MESSAGE", new MessageEvent("Game is full.", true)));
+        Player player = playerService.getPlayerByToken(gameStatus, token.getAdminToken());
+        player.setToken(token);
+
+        eventSender.sendToPlayer(player, new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(player)));
+        eventSender.sendToPlayer(player, new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getOtherPlayer(player))));
+
+        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
       }
     }
   }
 
   private Player retrievePlayer(SecurityToken token) {
     PlayerInfo playerInfo = playerInfoRetriever.retrieve(token);
-    return playerFactory.create(token.getSessionId(), playerInfo);
+    return playerFactory.create(token, playerInfo);
   }
 
   private List<CardInstance> retrieveDeck(SecurityToken token, GameStatus gameStatus) {

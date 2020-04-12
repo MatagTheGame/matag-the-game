@@ -2,14 +2,12 @@ package application;
 
 import application.browser.MatagBrowser;
 import com.matag.cards.Cards;
-import com.matag.cards.properties.Color;
 import com.matag.game.adminclient.AdminClient;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.deck.DeckInfo;
 import com.matag.game.launcher.LauncherGameResponseBuilder;
 import com.matag.game.launcher.LauncherTestGameController;
 import com.matag.game.player.playerInfo.PlayerInfo;
-import com.matag.game.player.playerInfo.PlayerInfoRetriever;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
@@ -45,16 +43,13 @@ public abstract class AbstractApplicationTest {
   protected MatagBrowser browser;
 
   @Autowired
-  private PlayerInfoRetriever playerInfoRetriever;
-
-  @Autowired
   private AdminClient adminClient;
 
   public abstract void setupGame();
 
   @Before
   public void setupRetrieverMocks() {
-    given(playerInfoRetriever.retrieve(any())).willReturn(
+    given(adminClient.getPlayerInfo(any())).willReturn(
       new PlayerInfo("Player1"),
       new PlayerInfo("Player2")
     );
@@ -138,7 +133,7 @@ public abstract class AbstractApplicationTest {
   public void cleanup() {
     //browser.dumpContent();
     browser.close();
-    Mockito.reset(playerInfoRetriever, adminClient);
+    Mockito.reset(adminClient);
   }
 
   @Configuration
@@ -154,12 +149,6 @@ public abstract class AbstractApplicationTest {
     @Bean
     public LauncherTestGameController launcherTestGameController(LauncherGameResponseBuilder launcherGameResponseBuilder) {
       return new LauncherTestGameController(launcherGameResponseBuilder);
-    }
-
-    @Bean
-    @Primary
-    public PlayerInfoRetriever playerInfoRetriever() {
-      return Mockito.mock(PlayerInfoRetriever.class);
     }
 
     @Bean

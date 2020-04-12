@@ -105,7 +105,7 @@ public class MatagBrowser {
   }
 
   private String getUrl() {
-    return "http://localhost:" + port + "/ui/game/" + gameId;
+    return "http://localhost:" + port + "/ui/test-game/" + gameId;
   }
 
   private void tabAt(int player2TabIndex) {

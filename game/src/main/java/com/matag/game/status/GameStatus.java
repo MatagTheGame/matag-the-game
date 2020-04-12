@@ -5,16 +5,17 @@ import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.player.Player;
 import com.matag.game.stack.SpellStack;
 import com.matag.game.turn.Turn;
+import lombok.Getter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Getter
 @Component
 @Scope("prototype")
 public class GameStatus {
-
-  private AtomicInteger nextCardId = new AtomicInteger();
+  private final AtomicInteger nextCardId = new AtomicInteger();
   private String gameId;
   private Player player1;
   private Player player2;
@@ -24,26 +25,6 @@ public class GameStatus {
   public GameStatus(Turn turn, SpellStack stack) {
     this.turn = turn;
     this.stack = stack;
-  }
-
-  public String getGameId() {
-    return gameId;
-  }
-
-  public Player getPlayer1() {
-    return player1;
-  }
-
-  public Player getPlayer2() {
-    return player2;
-  }
-
-  public Turn getTurn() {
-    return turn;
-  }
-
-  public SpellStack getStack() {
-    return stack;
   }
 
   public void setGameId(String gameId) {
@@ -128,4 +109,6 @@ public class GameStatus {
     return new CardInstanceSearch(player1.getBattlefield().getCards())
       .concat(player2.getBattlefield().getCards());
   }
+
+
 }

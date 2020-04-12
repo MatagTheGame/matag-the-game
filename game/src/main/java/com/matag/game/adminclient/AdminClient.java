@@ -2,6 +2,7 @@ package com.matag.game.adminclient;
 
 import com.matag.game.config.ConfigService;
 import com.matag.game.deck.DeckInfo;
+import com.matag.game.player.playerInfo.PlayerInfo;
 import com.matag.game.security.SecurityToken;
 import lombok.AllArgsConstructor;
 import org.springframework.http.*;
@@ -19,6 +20,10 @@ public class AdminClient {
     return get(token, "/game/active-deck", DeckInfo.class);
   }
 
+  public PlayerInfo getPlayerInfo(SecurityToken token) {
+    return get(token, "/player/info", PlayerInfo.class);
+  }
+
   private <T> T get(SecurityToken token, String url, Class<T> responseType) {
     return exchange(token, url, HttpMethod.GET, null, responseType).getBody();
   }
@@ -31,7 +36,7 @@ public class AdminClient {
     RestTemplate restTemplate = new RestTemplate();
     HttpHeaders headers = new HttpHeaders();
     headers.setAccept(singletonList(MediaType.APPLICATION_JSON));
-    headers.set("session", token.getToken());
+    headers.set("session", token.getAdminToken());
 
     HttpEntity<Object> entity = new HttpEntity<>(request, headers);
 

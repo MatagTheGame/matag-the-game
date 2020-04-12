@@ -38,7 +38,7 @@ public class EventSender {
   }
 
   public void sendToPlayer(Player player, Event event) {
-    sendToUser(player.getSessionId(), player.getName(), event);
+    sendToUser(player.getToken().getSessionId(), player.getName(), event);
   }
 
   public void sendToPlayers(List<Player> players, Event event) {

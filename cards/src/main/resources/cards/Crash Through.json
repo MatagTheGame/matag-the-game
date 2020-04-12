@@ -11,6 +11,11 @@
   "ruleText" : "Creatures you control gain trample until end of turn. Draw a card.",
   "abilities" : [ {
     "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "controllerType" : "PLAYER"
+    },
     "parameters" : [ "TRAMPLE" ],
     "trigger" : {
       "type" : "CAST"
