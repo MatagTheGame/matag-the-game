@@ -6,7 +6,7 @@ It is deployed at https://matag-game.herokuapp.com/ui/game
 
 ## Requisites
 
- * Install [JDK 1.11](https://jdk.java.net/11/)
+ * Install [JDK 11](https://jdk.java.net/11/)
  * Install [maven](https://maven.apache.org/download.cgi)
  * Install [yarn 1.21.1](https://classic.yarnpkg.com/en/docs/install)
  * Install [node v12.12.0](https://nodejs.org/en/download/)
