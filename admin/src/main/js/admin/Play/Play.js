@@ -101,23 +101,23 @@ class Play extends Component {
           <p>Choose which colors you want to play:</p>
           <ul>
             <li>
-              <input type='checkbox' id='color-white' name='white' checked={this.isSelected('white')} onChange={() => this.toggle('white')}/>
+              <input type='checkbox' id='color-white' name='white' checked={this.isSelected('WHITE')} onChange={() => this.toggle('WHITE')}/>
               <label htmlFor='color-white'><img src='/img/symbols/WHITE.png' alt='white'/>White</label>
             </li>
             <li>
-              <input type='checkbox' id='color-blue' name='blue' checked={this.isSelected('blue')} onChange={() => this.toggle('blue')}/>
+              <input type='checkbox' id='color-blue' name='blue' checked={this.isSelected('BLUE')} onChange={() => this.toggle('BLUE')}/>
               <label htmlFor='color-blue'><img src='/img/symbols/BLUE.png' alt='blue'/>Blue</label>
             </li>
             <li>
-              <input type='checkbox' id='color-black' name='black' checked={this.isSelected('black')} onChange={() => this.toggle('black')}/>
+              <input type='checkbox' id='color-black' name='black' checked={this.isSelected('BLACK')} onChange={() => this.toggle('BLACK')}/>
               <label htmlFor='color-black'><img src='/img/symbols/BLACK.png' alt='black'/>Black</label>
             </li>
             <li>
-              <input type='checkbox' id='color-red' name='red' checked={this.isSelected('red')} onChange={() => this.toggle('red')}/>
+              <input type='checkbox' id='color-red' name='red' checked={this.isSelected('RED')} onChange={() => this.toggle('RED')}/>
               <label htmlFor='color-red'><img src='/img/symbols/RED.png' alt='red'/>Red</label>
             </li>
             <li>
-              <input type='checkbox' id='color-green' name='green' checked={this.isSelected('green')} onChange={() => this.toggle('green')}/>
+              <input type='checkbox' id='color-green' name='green' checked={this.isSelected('GREEN')} onChange={() => this.toggle('GREEN')}/>
               <label htmlFor='color-green'><img src='/img/symbols/GREEN.png' alt='green'/>Green</label>
             </li>
           </ul>

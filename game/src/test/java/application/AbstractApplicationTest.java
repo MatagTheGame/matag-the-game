@@ -2,7 +2,10 @@ package application;
 
 import application.browser.MatagBrowser;
 import com.matag.cards.Cards;
+import com.matag.cards.properties.Color;
+import com.matag.game.adminclient.AdminClient;
 import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.deck.DeckInfo;
 import com.matag.game.launcher.LauncherGameResponseBuilder;
 import com.matag.game.launcher.LauncherTestGameController;
 import com.matag.game.player.playerInfo.PlayerInfo;
@@ -19,8 +22,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static com.matag.cards.properties.Color.WHITE;
 import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.game.turn.phases.UpkeepPhase.UP;
 import static com.matag.player.PlayerType.OPPONENT;
@@ -42,15 +47,23 @@ public abstract class AbstractApplicationTest {
   @Autowired
   private PlayerInfoRetriever playerInfoRetriever;
 
+  @Autowired
+  private AdminClient adminClient;
+
   public abstract void setupGame();
 
   @Before
-  public void setupWithRetries() {
+  public void setupRetrieverMocks() {
     given(playerInfoRetriever.retrieve(any())).willReturn(
       new PlayerInfo("Player1"),
       new PlayerInfo("Player2")
     );
 
+    given(adminClient.getDeckInfo(any())).willReturn(new DeckInfo(Set.of(WHITE)));
+  }
+
+  @Before
+  public void setupWithRetries() {
     RuntimeException lastException = null;
 
     for (int i = 0; i < getNumOfRetries(); i++) {
@@ -125,6 +138,7 @@ public abstract class AbstractApplicationTest {
   public void cleanup() {
     //browser.dumpContent();
     browser.close();
+    Mockito.reset(playerInfoRetriever, adminClient);
   }
 
   @Configuration
@@ -146,6 +160,12 @@ public abstract class AbstractApplicationTest {
     @Primary
     public PlayerInfoRetriever playerInfoRetriever() {
       return Mockito.mock(PlayerInfoRetriever.class);
+    }
+
+    @Bean
+    @Primary
+    public AdminClient adminClient() {
+      return Mockito.mock(AdminClient.class);
     }
   }
 
