@@ -92,7 +92,11 @@ Startup the app as spring boot
     # from intellij or with
     mvn spring-boot:run -Dserver.port=8080 -Dmatag.admin.url=http://localhost:8080
 
-It is possible to run with `test` profile in order to start custom decks rather than random (see `ProdInitTestService`)
+
+It is possible to run `game` app with `test` profile.
+This will allow to initialise the game with a custom status (cards in any area) as defined in `ProdInitTestService`.
+Furthermore this allows to access a test game without having authentication at:
+ - http://localhost:8080/ui/test-game
 
 
 ## Cards Scripting

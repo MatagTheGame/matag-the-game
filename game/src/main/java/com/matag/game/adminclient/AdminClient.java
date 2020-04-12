@@ -5,12 +5,14 @@ import com.matag.game.deck.DeckInfo;
 import com.matag.game.player.playerInfo.PlayerInfo;
 import com.matag.game.security.SecurityToken;
 import lombok.AllArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import static java.util.Collections.singletonList;
 
+@Profile("!test")
 @AllArgsConstructor
 @Component
 public class AdminClient {
