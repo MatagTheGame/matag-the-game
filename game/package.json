@@ -14,7 +14,7 @@
     "watch-htmlunit": "webpack -p --watch"
   },
   "author": "Antonio Alonzi",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "dependencies": {
     "@stomp/stompjs": "^5.2.0",
     "lodash": "^4.17.14",
