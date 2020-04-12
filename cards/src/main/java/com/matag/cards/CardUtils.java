@@ -15,14 +15,6 @@ import static com.matag.cards.properties.Cost.COLORLESS;
 import static java.util.Collections.emptyList;
 
 public class CardUtils {
-  public static String normalizeCardName(String cardName) {
-    return cardName.toLowerCase()
-      .replaceAll(" ", "_")
-      .replaceAll("-", "_")
-      .replaceAll(",", "")
-      .replaceAll("'", "");
-  }
-
   public static Card hiddenCard() {
     CardImageUrls backImageUrls = new CardImageUrls("/img/card-back.jpg", "/img/card-back.jpg");
     return new Card("card", backImageUrls, new TreeSet<>(), emptyList(), new TreeSet<>(), new TreeSet<>(), Rarity.COMMON, "", 0, 0, emptyList());
@@ -52,7 +44,16 @@ public class CardUtils {
     return card.getColors().contains(color);
   }
 
-  public static boolean ofAnyOfTheColors(Card card, Set<Color> colors) {
-    return colors.stream().anyMatch(color -> isOfColor(card, color));
+  public static boolean isOfOnlyAnyOfTheColors(Card card, Set<Color> colors) {
+    if (card.getColors().isEmpty()) {
+      return false;
+    }
+
+    for (Color color : card.getColors()) {
+      if (!colors.contains(color)) {
+        return false;
+      }
+    }
+    return true;
   }
 }

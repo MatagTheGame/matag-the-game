@@ -47,9 +47,9 @@ public class CardSearch {
     return new CardSearch(cards);
   }
 
-  public CardSearch ofAnyOfTheColors(Set<Color> colors) {
+  public CardSearch ofOnlyAnyOfTheColors(Set<Color> colors) {
     List<Card> cards = this.cards.stream()
-      .filter(card -> CardUtils.ofAnyOfTheColors(card, colors))
+      .filter(card -> CardUtils.isOfOnlyAnyOfTheColors(card, colors))
       .collect(toList());
     return new CardSearch(cards);
   }

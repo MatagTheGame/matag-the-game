@@ -83,14 +83,14 @@ public class DeckFactory {
     ArrayList<Card> selectedCards = new ArrayList<>();
 
     List<Card> creatureCardsOfTheseColors = new CardSearch(cards.getAll())
-      .ofAnyOfTheColors(deckColors)
+      .ofOnlyAnyOfTheColors(deckColors)
       .ofType(Type.CREATURE)
       .getCards();
     Collections.shuffle(creatureCardsOfTheseColors);
     selectedCards.addAll(creatureCardsOfTheseColors.subList(0, 5));
 
     List<Card> nonCreatureCardsOfTheseColors = new CardSearch(cards.getAll())
-      .ofAnyOfTheColors(deckColors)
+      .ofOnlyAnyOfTheColors(deckColors)
       .notOfType(Type.CREATURE)
       .getCards();
     Collections.shuffle(nonCreatureCardsOfTheseColors);
