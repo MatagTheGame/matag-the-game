@@ -6,9 +6,9 @@ It is deployed at https://matag-admin.herokuapp.com/
 
 ## Requisites
 
- * Install JDK 1.8
+ * Install [JDK 1.14](https://jdk.java.net/14/)
  * Install [maven](https://maven.apache.org/download.cgi)
- * Install [yarn 1.21.1(https://classic.yarnpkg.com/en/docs/install)
+ * Install [yarn 1.21.1](https://classic.yarnpkg.com/en/docs/install)
  * Install [node v12.12.0](https://nodejs.org/en/download/)
  
 The application connects to a [postgresql](https://www.postgresql.org/) database.
