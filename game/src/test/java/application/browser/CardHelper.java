@@ -2,10 +2,7 @@ package application.browser;
 
 import com.matag.cards.Card;
 import com.matag.player.PlayerType;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -39,7 +36,7 @@ public class CardHelper {
     try {
       webElement.click();
     } catch (ElementClickInterceptedException e) {
-      webElement.findElement(By.tagName("div")).click();
+      matagBrowser.getJavascriptExecutor().executeScript("arguments[0].click()", webElement);
     }
   }
 

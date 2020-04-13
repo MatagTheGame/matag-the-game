@@ -1,7 +1,7 @@
 package application.browser;
 
-import com.matag.player.PlayerType;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.matag.player.PlayerType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -102,6 +102,10 @@ public class MatagBrowser {
 
   public StackHelper getStackHelper() {
     return new StackHelper(this);
+  }
+
+  public JavascriptExecutor getJavascriptExecutor() {
+    return (JavascriptExecutor)webDriver;
   }
 
   private String getUrl() {

@@ -8,6 +8,7 @@ import com.matag.game.deck.DeckInfo;
 import com.matag.game.launcher.LauncherGameResponseBuilder;
 import com.matag.game.launcher.LauncherTestGameController;
 import com.matag.game.player.playerInfo.PlayerInfo;
+import com.matag.game.status.GameStatusRepository;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
@@ -44,6 +45,9 @@ public abstract class AbstractApplicationTest {
 
   @Autowired
   private AdminClient adminClient;
+
+  @Autowired
+  private GameStatusRepository gameStatusRepository;
 
   public abstract void setupGame();
 
@@ -134,6 +138,7 @@ public abstract class AbstractApplicationTest {
     //browser.dumpContent();
     browser.close();
     Mockito.reset(adminClient);
+    gameStatusRepository.clear();
   }
 
   @Configuration

@@ -33,4 +33,8 @@ public class GameStatusRepository {
     securityHelper.isPlayerAllowedToExecuteAction(gameStatus, sessionId);
     return gameStatus;
   }
+
+  public void clear() {
+    games.clear();
+  }
 }
