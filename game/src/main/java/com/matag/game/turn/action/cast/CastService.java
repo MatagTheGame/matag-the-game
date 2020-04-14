@@ -28,6 +28,7 @@ public class CastService {
   private final ManaCountService manaCountService;
   private final TapPermanentService tapPermanentService;
   private final CostService costService;
+  private final InstantSpeedService instantSpeedService;
 
   public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
     Turn turn = gameStatus.getTurn();
@@ -43,7 +44,7 @@ public class CastService {
       castedFrom = "BATTLEFIELD";
     }
 
-    if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !cardToCast.isInstantSpeed()) {
+    if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !instantSpeedService.isAtInstantSpeed(cardToCast, playedAbility)) {
       throw new MessageException("You can only play Instants during a NON main phases.");
 
     } else {

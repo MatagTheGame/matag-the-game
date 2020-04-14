@@ -23,9 +23,8 @@ public class DeclareAttackersPhase implements Phase {
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
       } else {
-        gameStatus.getTurn().setCurrentPhase(FirstStrikePhase.FS);
+        gameStatus.getTurn().setCurrentPhase(AfterDeclareBlockersPhase.AB);
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-        firstStrikePhase.apply(gameStatus);
       }
     }
   }

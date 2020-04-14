@@ -51,6 +51,8 @@ public class CombatLifelinkTest extends AbstractApplicationTest {
     browser.player1().getActionHelper().clickContinue();
     browser.player2().getPhaseHelper().is(DA, PLAYER);
     browser.player2().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinue();
 
     // Then
     browser.player1().getPhaseHelper().is(M2, PLAYER);

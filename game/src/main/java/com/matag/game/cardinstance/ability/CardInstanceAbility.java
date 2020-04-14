@@ -1,5 +1,6 @@
 package com.matag.game.cardinstance.ability;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.matag.cards.Card;
 import com.matag.cards.ability.Ability;
 import com.matag.cards.ability.AbilityService;
@@ -7,7 +8,6 @@ import com.matag.cards.ability.selector.CardInstanceSelector;
 import com.matag.cards.ability.target.Target;
 import com.matag.cards.ability.trigger.Trigger;
 import com.matag.cards.ability.type.AbilityType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,27 +18,19 @@ import static java.util.stream.Collectors.toList;
 public class CardInstanceAbility extends Ability {
   public CardInstanceAbility(Ability ability) {
     super(ability.getAbilityType(), ability.getTargets(), ability.getCardInstanceSelector(), ability.getParameters(),
-      ability.getTrigger(), ability.getAbility());
+      ability.getTrigger(), ability.getAbility(), ability.isSorcerySpeed());
   }
 
   public CardInstanceAbility(AbilityType abilityType) {
-    super(abilityType, emptyList(), null, emptyList(), null, null);
-  }
-
-  public CardInstanceAbility(AbilityType abilityType, List<String> parameters) {
-    super(abilityType, emptyList(), null, parameters, null, null);
-  }
-
-  public CardInstanceAbility(AbilityType abilityType, List<String> parameters, CardInstanceAbility ability) {
-    super(abilityType, emptyList(), null, parameters, null, ability);
+    super(abilityType, emptyList(), null, emptyList(), null, null, false);
   }
 
   public CardInstanceAbility(AbilityType abilityType, List<Target> targets, List<String> parameters, Trigger trigger) {
-    super(abilityType, targets, null, parameters, trigger, null);
+    super(abilityType, targets, null, parameters, trigger, null, false);
   }
 
   public CardInstanceAbility(AbilityType abilityType, CardInstanceSelector cardInstanceSelector, List<String> parameters, Trigger trigger) {
-    super(abilityType, emptyList(), cardInstanceSelector, parameters, trigger, null);
+    super(abilityType, emptyList(), cardInstanceSelector, parameters, trigger, null, false);
   }
 
   @JsonProperty

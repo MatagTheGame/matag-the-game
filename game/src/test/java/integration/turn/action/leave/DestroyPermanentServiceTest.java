@@ -1,9 +1,9 @@
 package integration.turn.action.leave;
 
+import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.cards.Cards;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.leave.DestroyPermanentService;
 import integration.TestUtils;
@@ -15,6 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static com.matag.cards.ability.type.AbilityType.INDESTRUCTIBLE;
 import static com.matag.cards.ability.type.AbilityType.THAT_TARGETS_GET;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -84,12 +85,12 @@ public class DestroyPermanentServiceTest {
   }
 
   @Test
-  public void testReduceToughnessToZeroOfIndestructibleDestroyesIt() {
+  public void testReduceToughnessToZeroOfIndestructibleDestroysIt() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().getAbilitiesUntilEndOfTurn().add(new CardInstanceAbility(INDESTRUCTIBLE));
-    cardInstance.getModifiers().getAbilitiesUntilEndOfTurn().add(new CardInstanceAbility(THAT_TARGETS_GET, singletonList("-3/-3")));
+    cardInstance.getModifiers().getAbilitiesUntilEndOfTurn().add(new CardInstanceAbility(THAT_TARGETS_GET, emptyList(), singletonList("-3/-3"), null));
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When

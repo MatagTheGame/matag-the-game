@@ -22,6 +22,7 @@
     "trigger" : {
       "type" : "ACTIVATED_ABILITY",
       "cost" : [ "COLORLESS" ]
-    }
+    },
+    "sorcerySpeed" : true
   } ]
 }
