@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.EndTurnPhase.ET;
 import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
@@ -69,6 +70,7 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
     // Next turn target is still tapped
     browser.player1().getActionHelper().clickContinue();
     browser.player1().getActionHelper().clickContinue();
+    browser.player2().getPhaseHelper().is(ET, PLAYER);
     browser.player2().getActionHelper().clickContinue();
     browser.player2().getActionHelper().clickContinue();
     browser.player2().getPhaseHelper().is(M1, PLAYER);
