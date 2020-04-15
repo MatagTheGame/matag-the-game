@@ -6,7 +6,7 @@
   },
   "colors" : [ "GREEN" ],
   "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS" ],
-  "types" : [ "INSTANT" ],
+  "types" : [ "SORCERY" ],
   "rarity" : "UNCOMMON",
   "ruleText" : "Creatures you control get +2/+2 and gain trample until end of turn.",
   "abilities" : [ {
