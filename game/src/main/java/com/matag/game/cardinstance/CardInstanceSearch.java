@@ -1,6 +1,5 @@
 package com.matag.game.cardinstance;
 
-import com.matag.game.cardinstance.ability.selector.PowerToughnessConstraintUtils;
 import com.matag.cards.ability.selector.PowerToughnessConstraint;
 import com.matag.cards.ability.selector.TurnStatusType;
 import com.matag.cards.ability.trigger.TriggerSubtype;
@@ -8,6 +7,7 @@ import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.Color;
 import com.matag.cards.properties.Subtype;
 import com.matag.cards.properties.Type;
+import com.matag.game.cardinstance.ability.selector.PowerToughnessConstraintUtils;
 import com.matag.game.status.GameStatus;
 
 import java.util.List;
@@ -15,154 +15,111 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static java.util.stream.Collectors.toList;
-
 public class CardInstanceSearch {
 
-  private final List<CardInstance> cards;
+  private final Stream<CardInstance> cards;
 
   public CardInstanceSearch(List<CardInstance> cards) {
+    this.cards = cards.stream();
+  }
+
+  public CardInstanceSearch(Stream<CardInstance> cards) {
     this.cards = cards;
   }
 
   public Optional<CardInstance> withId(int cardId) {
-    return cards.stream()
+    return cards
       .filter(cardInstance -> cardInstance.getId() == cardId)
       .findFirst();
   }
 
   public CardInstanceSearch notWithId(int cardId) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.getId() != cardId)
-      .collect(toList());
-
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getId() != cardId));
   }
 
   public CardInstanceSearch ofType(Type type) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.isOfType(type))
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.isOfType(type)));
   }
 
   public CardInstanceSearch ofAnyOfTheTypes(List<Type> types) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.ofAnyOfTheTypes(types))
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.ofAnyOfTheTypes(types)));
   }
 
   public CardInstanceSearch notOfTypes(List<Type> types) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> !cardInstance.ofAnyOfTheTypes(types))
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> !cardInstance.ofAnyOfTheTypes(types)));
   }
 
   public CardInstanceSearch ofAnyOfTheSubtypes(List<Subtype> subtypes) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.ofAnyOfTheSubtypes(subtypes))
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.ofAnyOfTheSubtypes(subtypes)));
   }
 
   public CardInstanceSearch ofAnyOfTheColors(List<Color> colors) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.ofAnyOfTheColors(colors))
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.ofAnyOfTheColors(colors)));
   }
 
   public CardInstanceSearch tapped() {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.getModifiers().isTapped())
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getModifiers().isTapped()));
   }
 
   public CardInstanceSearch untapped() {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.getModifiers().isUntapped())
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getModifiers().isUntapped()));
   }
 
   public CardInstanceSearch withSummoningSickness() {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(CardInstance::isSummoningSickness)
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(CardInstance::isSummoningSickness));
   }
 
   public CardInstanceSearch withoutSummoningSickness() {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> !cardInstance.isSummoningSickness())
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> !cardInstance.isSummoningSickness()));
   }
 
   public CardInstanceSearch attacking() {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.getModifiers().isAttacking())
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getModifiers().isAttacking()));
   }
 
   public CardInstanceSearch blocking() {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.getModifiers().isBlocking())
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getModifiers().isBlocking()));
   }
 
   public CardInstanceSearch attackingOrBlocking() {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.getModifiers().isAttacking() || cardInstance.getModifiers().isBlocking())
-      .collect(toList());
-    return new CardInstanceSearch(cards);
-  }
-
-  public CardInstanceSearch blockingCreatureFor(int attackingCardId) {
-    List<CardInstance> cards = blocking().getCards().stream()
-      .filter(cardInstance -> cardInstance.getModifiers().getBlockingCardId() == attackingCardId)
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getModifiers().isAttacking() || cardInstance.getModifiers().isBlocking()));
   }
 
   public CardInstanceSearch ofPowerToughnessConstraint(PowerToughnessConstraint powerToughnessConstraint) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(card -> PowerToughnessConstraintUtils.check(powerToughnessConstraint, card))
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(card -> PowerToughnessConstraintUtils.check(powerToughnessConstraint, card)));
   }
 
   public CardInstanceSearch concat(List<CardInstance> moreCards) {
-    List<CardInstance> cards = Stream.concat(this.cards.stream(), moreCards.stream()).collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(Stream.concat(this.cards, moreCards.stream()));
   }
 
   public CardInstanceSearch controlledBy(String playerName) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.getController().equals(playerName))
-      .collect(toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getController().equals(playerName)));
   }
 
   public CardInstanceSearch withFixedAbility(AbilityType abilityType) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.hasFixedAbility(abilityType))
-      .collect(toList());
-
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.hasFixedAbility(abilityType)));
   }
 
   public CardInstanceSearch withTriggerSubtype(TriggerSubtype triggerSubtype) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter(cardInstance -> cardInstance.hasFixedAbilityWithTriggerSubType(triggerSubtype))
-      .collect(toList());
-
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.hasFixedAbilityWithTriggerSubType(triggerSubtype)));
   }
 
   public CardInstanceSearch onTurnStatusType(TurnStatusType turnStatusType, GameStatus gameStatus) {
@@ -175,22 +132,24 @@ public class CardInstanceSearch {
   }
 
   public boolean isEmpty() {
-    return cards.isEmpty();
+    return cards.count() == 0;
   }
 
   public boolean isNotEmpty() {
-    return !cards.isEmpty();
+    return cards.count() > 0;
   }
 
   public List<CardInstance> getCards() {
+    return cards.collect(Collectors.toList());
+  }
+
+  public Stream<CardInstance> asStream() {
     return cards;
   }
 
   public CardInstanceSearch attachedToId(int attachedToId) {
-    List<CardInstance> cards = this.cards.stream()
-      .filter((cardInstance -> cardInstance.getModifiers().getAttachedToId() == attachedToId))
-      .collect(Collectors.toList());
-    return new CardInstanceSearch(cards);
+    return new CardInstanceSearch(this.cards
+      .filter((cardInstance -> cardInstance.getModifiers().getAttachedToId() == attachedToId)));
   }
 
   public boolean canAnyCreatureAttack() {
@@ -204,5 +163,13 @@ public class CardInstanceSearch {
     return ofType(Type.CREATURE)
       .untapped()
       .isNotEmpty();
+  }
+  
+  public CardInstanceSearch withInstantSpeed() {
+    return new CardInstanceSearch(this.cards.filter((CardInstance::isInstantSpeed)));
+  }
+
+  public CardInstanceSearch withoutInstantSpeed() {
+    return new CardInstanceSearch(this.cards.filter((ci -> !ci.isInstantSpeed())));
   }
 }

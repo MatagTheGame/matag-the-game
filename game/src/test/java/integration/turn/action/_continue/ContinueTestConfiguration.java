@@ -1,6 +1,7 @@
 package integration.turn.action._continue;
 
 import com.matag.game.turn.action.AbilityActionFactory;
+import com.matag.game.turn.action.cast.InstantSpeedService;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
 import com.matag.game.turn.action.target.TargetCheckerService;
 import com.matag.game.turn.phases.PhaseFactory;
@@ -12,6 +13,11 @@ import org.springframework.context.annotation.*;
 @ComponentScan("com.matag.game.turn.action._continue")
 @Import(TestUtilsConfiguration.class)
 public class ContinueTestConfiguration {
+  @Bean
+  public InstantSpeedService instantSpeedService() {
+    return new InstantSpeedService();
+  }
+
   @Bean
   @Primary
   public PhaseFactory phaseFactory() {
