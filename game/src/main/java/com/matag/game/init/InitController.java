@@ -18,6 +18,7 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.status.GameStatusFactory;
 import com.matag.game.status.GameStatusRepository;
 import com.matag.game.status.GameStatusUpdaterService;
+import com.matag.game.turn.action._continue.ContinueTurnService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,9 @@ public class InitController {
   private final GameStatusRepository gameStatusRepository;
   private final DeckRetrieverService deckRetrieverService;
   private final DeckFactory deckFactory;
+  private final ContinueTurnService continueTurnService;
 
-  public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerInfoRetriever playerInfoRetriever, PlayerFactory playerFactory, PlayerService playerService, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService, DeckFactory deckFactory) {
+  public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerInfoRetriever playerInfoRetriever, PlayerFactory playerFactory, PlayerService playerService, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService, DeckFactory deckFactory, ContinueTurnService continueTurnService) {
     this.securityHelper = securityHelper;
     this.eventSender = eventSender;
     this.gameStatusFactory = gameStatusFactory;
@@ -55,6 +57,7 @@ public class InitController {
     this.deckRetrieverService = deckRetrieverService;
     this.initTestService = initTestService;
     this.deckFactory = deckFactory;
+    this.continueTurnService = continueTurnService;
   }
 
   @MessageMapping("/game/init")
@@ -90,6 +93,9 @@ public class InitController {
 
         eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer2())));
         eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer1())));
+
+        // FIXME no implemented card yet can be played at the first game upkeep... so let's just continue.
+        continueTurnService.continueTurn(gameStatus);
 
         gameStatusUpdaterService.sendUpdateTurn(gameStatus);
 

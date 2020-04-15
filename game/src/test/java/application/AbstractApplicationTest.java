@@ -108,23 +108,31 @@ public abstract class AbstractApplicationTest {
     browser.player1().getMessageHelper().hasNoMessage();
     browser.player2().getMessageHelper().hasNoMessage();
 
-    // Status and Phase are
-    browser.player1().getPhaseHelper().is(UP, PLAYER);
-    browser.player1().getStatusHelper().hasMessage("Play any instant or ability or continue (SPACE).");
-    browser.player2().getPhaseHelper().is(UP, OPPONENT);
-    browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
+    if (browser.player1().getPhaseHelper().getPhase().equals(UP)) {
+      // UP is only active if player can play something
+      if (browser.player1().getPhaseHelper().getPriority().equals(PLAYER)) {
+        // Status and Phase are
+        browser.player1().getPhaseHelper().is(UP, PLAYER);
+        browser.player1().getStatusHelper().hasMessage("Play any instant or ability or continue (SPACE).");
+        browser.player2().getPhaseHelper().is(UP, OPPONENT);
+        browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
 
-    // Player1 continues
-    browser.player1().getActionHelper().clickContinue();
+        // Player1 continues
+        browser.player1().getActionHelper().clickContinue();
+      }
 
-    // Status and Phase are
-    browser.player1().getPhaseHelper().is(UP, OPPONENT);
-    browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
-    browser.player2().getPhaseHelper().is(UP, PLAYER);
-    browser.player2().getStatusHelper().hasMessage("Play any instant or ability or continue (SPACE).");
+      // UP is only active if opponent can play something
+      if (browser.player1().getPhaseHelper().getPriority().equals(OPPONENT)) {
+        // Status and Phase are
+        browser.player1().getPhaseHelper().is(UP, OPPONENT);
+        browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
+        browser.player2().getPhaseHelper().is(UP, PLAYER);
+        browser.player2().getStatusHelper().hasMessage("Play any instant or ability or continue (SPACE).");
 
-    // Player2 continues
-    browser.player2().getActionHelper().clickContinue();
+        // Player2 continues
+        browser.player2().getActionHelper().clickContinue();
+      }
+    }
 
     // Status is
     browser.player1().getPhaseHelper().is(M1, PLAYER);

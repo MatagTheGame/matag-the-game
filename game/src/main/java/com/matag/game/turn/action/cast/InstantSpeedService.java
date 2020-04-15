@@ -1,19 +1,23 @@
 package com.matag.game.turn.action.cast;
 
-import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @AllArgsConstructor
 public class InstantSpeedService {
   public boolean isAtInstantSpeed(CardInstance cardToCast, String playedAbility) {
     if (playedAbility != null) {
-      if (!getCardInstanceAbility(cardToCast, playedAbility).isSorcerySpeed()) {
-        return true;
+      List<CardInstanceAbility> abilities = cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility));
+      for (CardInstanceAbility ability : abilities) {
+        if (!ability.isSorcerySpeed()) {
+          return true;
+        }
       }
     }
 
@@ -24,9 +28,4 @@ public class InstantSpeedService {
     return false;
   }
 
-  private CardInstanceAbility getCardInstanceAbility(CardInstance cardToCast, String playedAbility) {
-    return cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility)).stream()
-      .findFirst()
-      .orElseThrow(RuntimeException::new);
-  }
 }

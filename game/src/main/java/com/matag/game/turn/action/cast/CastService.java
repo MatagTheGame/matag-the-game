@@ -2,7 +2,7 @@ package com.matag.game.turn.action.cast;
 
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.cards.cost.CostService;
+import com.matag.game.cardinstance.cost.CostService;
 import com.matag.cards.properties.Cost;
 import com.matag.game.message.MessageException;
 import com.matag.game.player.Player;
@@ -45,7 +45,7 @@ public class CastService {
     }
 
     if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !instantSpeedService.isAtInstantSpeed(cardToCast, playedAbility)) {
-      throw new MessageException("You can only play Instants during a NON main phases.");
+      throw new MessageException(cardToCast.getIdAndName() + (playedAbility == null ? "'s ability" : "") + " cannot be cast at instant speed.");
 
     } else {
       checkSpellOrAbilityCost(mana, activePlayer, cardToCast, playedAbility);
@@ -75,7 +75,7 @@ public class CastService {
 
   private void checkSpellOrAbilityCost(Map<Integer, List<String>> mana, Player currentPlayer, CardInstance cardToCast, String ability) {
     List<Cost> paidCost = manaCountService.verifyManaPaid(mana, currentPlayer);
-    if (!costService.isCastingCostFulfilled(cardToCast.getCard(), paidCost, ability)) {
+    if (!costService.isCastingCostFulfilled(cardToCast, ability, paidCost)) {
       throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
     }
   }

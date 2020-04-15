@@ -72,7 +72,6 @@ public class CreatureEntersTheBattlefieldReturnTargetToHandTest extends Abstract
     browser.player1().getActionHelper().clickContinue();
     browser.player2().getActionHelper().clickContinue();
     browser.player2().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue(); // FIXME why does not continue?
     browser.player2().getPhaseHelper().is("M1", PLAYER);
 
     // Replaying Banehound
