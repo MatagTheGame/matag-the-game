@@ -1,6 +1,5 @@
 package com.matag.game.turn.action._continue;
 
-import com.matag.cards.ability.type.AbilityType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
@@ -13,6 +12,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.matag.cards.ability.trigger.TriggerType.ACTIVATED_ABILITY;
+
 @Component
 @AllArgsConstructor
 public class AutocontinueChecker {
@@ -20,7 +21,7 @@ public class AutocontinueChecker {
   private final InstantSpeedService instantSpeedService;
 
   public boolean canPerformAnyAction(GameStatus gameStatus) {
-    Player player = gameStatus.getCurrentPlayer();
+    Player player = gameStatus.getActivePlayer();
 
     List<CardInstance> instants = new CardInstanceSearch(player.getHand().getCards()).withInstantSpeed().getCards();
     for (CardInstance cardInstance : instants) {
@@ -33,7 +34,7 @@ public class AutocontinueChecker {
     for (CardInstance card : cards) {
       List<CardInstanceAbility> cardAbilities = card.getAbilities();
       for (CardInstanceAbility cardAbility : cardAbilities) {
-        if (!cardAbility.getAbilityType().equals(AbilityType.TAP_ADD_MANA)) {
+        if (cardAbility.getTrigger() != null && cardAbility.getTrigger().getType().equals(ACTIVATED_ABILITY)) {
           if (instantSpeedService.isAtInstantSpeed(card, cardAbility.getAbilityType().toString())) {
             return true;
           }

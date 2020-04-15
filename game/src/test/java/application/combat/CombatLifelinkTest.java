@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.turn.phases.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
@@ -42,8 +41,6 @@ public class CombatLifelinkTest extends AbstractApplicationTest {
   public void combatLifelink() {
     // When going to combat
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(BC, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
     browser.player1().getPhaseHelper().is(DA, PLAYER);
 
     // When attacking

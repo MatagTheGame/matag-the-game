@@ -71,7 +71,6 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
     browser.player1().getActionHelper().clickContinue();
     browser.player2().getActionHelper().clickContinue();
     browser.player2().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue();
     browser.player2().getPhaseHelper().is(M1, PLAYER);
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).isTapped();
     browser.player2().getHandHelper(PLAYER).contains(cards.get("Forest"));
@@ -81,13 +80,11 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
     browser.player2().getActionHelper().clickContinue();
     browser.player1().getActionHelper().clickContinue();
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
     browser.player1().getPhaseHelper().is(M1, PLAYER);
     browser.player1().getHandHelper(PLAYER).contains(cards.get("Island"));
 
     // Next next next turn target is untapped
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
     browser.player1().getActionHelper().clickContinue();
     browser.player2().getActionHelper().clickContinue();
     browser.player1().getActionHelper().clickContinue();

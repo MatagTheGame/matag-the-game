@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static application.browser.BattlefieldHelper.COMBAT_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
-import static com.matag.game.turn.phases.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.Main2Phase.M2;
@@ -42,8 +41,6 @@ public class BasicCombatTest extends AbstractApplicationTest {
   public void basicCombat() {
     // When continuing
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(BC, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
 
     // Message and status are about declaring attackers
     browser.player1().getPhaseHelper().is(DA, PLAYER);

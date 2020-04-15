@@ -44,8 +44,6 @@ public class CombatFlyingReachTest extends AbstractApplicationTest {
   public void combatFlyingReach() {
     // When going to combat
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(BC, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
     browser.player1().getPhaseHelper().is(DA, PLAYER);
 
     // creature with flying should have the correct class
