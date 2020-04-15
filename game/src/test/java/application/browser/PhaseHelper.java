@@ -5,8 +5,7 @@ import org.openqa.selenium.By;
 
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
-import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
-import static org.openqa.selenium.support.ui.ExpectedConditions.textToBe;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public class PhaseHelper {
   public static final By PHASE_CSS_SELECTOR = By.cssSelector("#turn-phases .active");
@@ -28,6 +27,7 @@ public class PhaseHelper {
   }
 
   public String getPhase() {
+    matagBrowser.wait(visibilityOfElementLocated(PHASE_CSS_SELECTOR));
     return matagBrowser.findElement(PHASE_CSS_SELECTOR).getText();
   }
 
