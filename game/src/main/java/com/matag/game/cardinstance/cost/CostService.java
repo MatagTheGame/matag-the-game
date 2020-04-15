@@ -43,7 +43,7 @@ public class CostService {
   }
 
   public boolean canAfford(CardInstance cardInstance, String ability, GameStatus gameStatus) {
-    List<CardInstance> cardsThatCanGenerateMana = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+    List<CardInstance> cardsThatCanGenerateMana = new CardInstanceSearch(gameStatus.getActivePlayer().getBattlefield().getCards())
       .untapped()
       .withFixedAbility(TAP_ADD_MANA)
       .getCards();

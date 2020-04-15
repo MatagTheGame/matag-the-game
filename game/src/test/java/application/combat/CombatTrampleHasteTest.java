@@ -53,8 +53,6 @@ public class CombatTrampleHasteTest extends AbstractApplicationTest {
 
     // When going to combat
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(BC, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
     browser.player1().getPhaseHelper().is(DA, PLAYER);
 
     // When declare attacker

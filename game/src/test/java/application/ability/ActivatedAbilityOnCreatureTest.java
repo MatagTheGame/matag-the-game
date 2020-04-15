@@ -59,7 +59,6 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
 
     // move at AfterBlocking phase
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).declareAsAttacker();
     browser.player1().getActionHelper().clickContinue();
     browser.player2().getActionHelper().clickContinue();

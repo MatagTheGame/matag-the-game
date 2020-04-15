@@ -75,4 +75,19 @@ public class AutocontinueCheckerTest {
     // Then
     assertThat(result).isFalse();
   }
+
+  @Test
+  public void canPerformAnyActionReturnsFalseIfUPAndCardWithTriggeredAbility() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase("UP");
+    gameStatus.getPlayer1().getHand().getCards().clear();
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Exclusion Mage"), "player-name"));
+
+    // When
+    boolean result = autocontinueChecker.canPerformAnyAction(gameStatus);
+
+    // Then
+    assertThat(result).isFalse();
+  }
 }

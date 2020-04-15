@@ -58,8 +58,6 @@ public class CreatureEntersTheBattlefieldWithAbilityAllCreaturesYouControlTest e
 
     // And gives them vigilance
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(BC, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
     browser.player1().getPhaseHelper().is(DA, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Enforcer Griffin")).declareAsAttacker();
     browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Enforcer Griffin")).isNotTapped();
