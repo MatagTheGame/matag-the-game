@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static com.matag.game.turn.phases.EndTurnPhase.ET;
@@ -70,7 +71,7 @@ public class DiscardACardAtEndOfTurnIfMoreThanSevenTest extends AbstractApplicat
     browser.getHandHelper(PLAYER).toHaveSize(7);
 
     // Priority is finally passed
-    browser.player1().getPhaseHelper().is(ET, OPPONENT);
+    browser.player1().getPhaseHelper().is(M1, OPPONENT);
   }
 
   static class InitTestServiceForTest extends InitTestService {

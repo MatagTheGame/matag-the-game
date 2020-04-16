@@ -17,7 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.turn.phases.EndTurnPhase.ET;
 import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
@@ -70,27 +69,23 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
     // Next turn target is still tapped
     browser.player1().getActionHelper().clickContinue();
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(ET, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
     browser.player2().getPhaseHelper().is(M1, PLAYER);
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).isTapped();
     browser.player2().getHandHelper(PLAYER).contains(cards.get("Forest"));
+    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinue();
 
     // Next next turn target is still tapped
-    browser.player2().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue();
     browser.player1().getPhaseHelper().is(M1, PLAYER);
+    browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).isTapped();
     browser.player1().getHandHelper(PLAYER).contains(cards.get("Island"));
+    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinue();
 
     // Next next next turn target is untapped
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getPhaseHelper().is(M1, PLAYER);
+    browser.player2().getHandHelper(PLAYER).contains(cards.get("Forest"), cards.get("Forest"));
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).isNotTapped();
   }
 
@@ -104,6 +99,7 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
       addCardToCurrentPlayerLibrary(gameStatus, cards.get("Island"));
 
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Canopy Spider"));
+      addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Forest"));
       addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Forest"));
     }
   }

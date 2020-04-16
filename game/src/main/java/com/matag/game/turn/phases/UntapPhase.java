@@ -3,6 +3,7 @@ package com.matag.game.turn.phases;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,8 @@ public class UntapPhase implements Phase {
   public static final String UT = "UT";
 
   private final TapPermanentService tapPermanentService;
+  private final AutocontinueChecker autocontinueChecker;
+  private final UpkeepPhase upkeepPhase;
 
   @Override
   public void apply(GameStatus gameStatus) {
@@ -33,5 +36,9 @@ public class UntapPhase implements Phase {
       .forEach(cardInstance -> cardInstance.getModifiers().setSummoningSickness(false));
 
     gameStatus.getTurn().setCurrentPhase(UpkeepPhase.UP);
+
+    if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
+      upkeepPhase.apply(gameStatus);
+    }
   }
 }

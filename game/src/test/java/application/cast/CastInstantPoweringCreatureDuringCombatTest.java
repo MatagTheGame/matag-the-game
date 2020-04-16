@@ -18,8 +18,8 @@ import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.game.turn.phases.Main2Phase.M2;
-import static com.matag.game.turn.phases.UpkeepPhase.UP;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -55,9 +55,9 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
     browser.player2().getActionHelper().clickContinue();
 
     // Then player 2 can pump up its creature
+    browser.player2().getPhaseHelper().is(AB, PLAYER);
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();
-    browser.player2().getPhaseHelper().is(AB, PLAYER);
     browser.player2().getHandHelper(PLAYER).getFirstCard(cards.get("Dark Remedy")).select();
     browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Bartizan Bats")).target();
 
@@ -89,10 +89,9 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
 
     // When moving to next turn
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
 
     // Then extra power and toughness is cleaned up
-    browser.player2().getPhaseHelper().is(UP, PLAYER);
+    browser.player2().getPhaseHelper().is(M1, PLAYER);
     browser.getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Bartizan Bats")).hasPowerAndToughness("3/1");
   }
 
@@ -105,6 +104,7 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Bartizan Bats"));
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
+      addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Swamp"));
     }
   }
 }

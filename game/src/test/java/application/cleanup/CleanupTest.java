@@ -2,9 +2,9 @@ package application.cleanup;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.cards.Cards;
 import com.matag.game.MatagGameApplication;
+import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
 import org.junit.Test;
@@ -15,12 +15,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.cardinstance.modifiers.TappedModifier.TAPPED;
 import static com.matag.cards.properties.PowerToughness.powerToughness;
-import static com.matag.game.turn.phases.EndTurnPhase.ET;
+import static com.matag.game.cardinstance.modifiers.TappedModifier.TAPPED;
 import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.game.turn.phases.Main2Phase.M2;
-import static com.matag.game.turn.phases.UpkeepPhase.UP;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -64,10 +62,7 @@ public class CleanupTest extends AbstractApplicationTest {
     browser.player1().getActionHelper().clickContinue();
 
     // Phase is
-    browser.player1().getPhaseHelper().is(ET, OPPONENT);
-    browser.player2().getPhaseHelper().is(ET, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(UP, OPPONENT);
+    browser.player1().getPhaseHelper().is(M1, OPPONENT);
 
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Huatli's Snubhorn")).doesNotHaveDamage();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Huatli's Snubhorn")).isTapped();
