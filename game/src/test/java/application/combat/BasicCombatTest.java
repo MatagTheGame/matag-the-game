@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.COMBAT_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.Main2Phase.M2;
@@ -73,17 +72,6 @@ public class BasicCombatTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Ancient Brontodon")).click();
     browser.player1().getActionHelper().clickContinue();
 
-    // Priority passes to the opponent
-    browser.player1().getPhaseHelper().is(DA, OPPONENT);
-    browser.player2().getPhaseHelper().is(DA, PLAYER);
-
-    // When opponent click on a card nothing happens
-    browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nest Robber")).click();
-    browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Nest Robber"));
-
-    // Opponent continue
-    browser.player2().getActionHelper().clickContinue();
-
     // The phase move to Declare blocker
     browser.player1().getPhaseHelper().is(DB, OPPONENT);
     browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
@@ -122,20 +110,6 @@ public class BasicCombatTest extends AbstractApplicationTest {
     browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Nest Robber")).parentHasStyle("margin-left: -130px; margin-top: 0px;");
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Headwater Sentries")).click();
     browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getCard(cards.get("Headwater Sentries"), 1).parentHasStyle("margin-left: -105px; margin-top: 50px;");
-
-    // And continue
-    browser.player2().getActionHelper().clickContinue();
-
-    // Phase is moved to AB for Player1
-    browser.player1().getPhaseHelper().is(AB, PLAYER);
-    browser.player2().getPhaseHelper().is(AB, OPPONENT);
-
-    // And continue
-    browser.player1().getActionHelper().clickContinue();
-
-    // Phase is moved to AB for Player2
-    browser.player1().getPhaseHelper().is(AB, OPPONENT);
-    browser.player2().getPhaseHelper().is(AB, PLAYER);
 
     // And continue
     browser.player2().getActionHelper().clickContinue();

@@ -15,14 +15,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static application.browser.BattlefieldHelper.COMBAT_LINE;
-import static application.browser.BattlefieldHelper.FIRST_LINE;
-import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.player.PlayerType.OPPONENT;
-import static com.matag.player.PlayerType.PLAYER;
-import static com.matag.game.turn.phases.BeginCombatPhase.BC;
+import static application.browser.BattlefieldHelper.*;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.Main2Phase.M2;
+import static com.matag.player.PlayerType.OPPONENT;
+import static com.matag.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MatagGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -60,14 +57,8 @@ public class CombatTrampleHasteTest extends AbstractApplicationTest {
     browser.player1().getActionHelper().clickContinue();
 
     // Declare blocker
-    browser.player2().getPhaseHelper().is(DA, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
     browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Charging Monstrosaur")).select();
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Huatli's Snubhorn")).declareAsBlocker();
-    browser.player2().getActionHelper().clickContinue();
-
-    // No instant played during combat
-    browser.player1().getActionHelper().clickContinue();
     browser.player2().getActionHelper().clickContinue();
 
     // Then

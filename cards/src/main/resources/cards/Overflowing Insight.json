@@ -6,7 +6,7 @@
   },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE", "BLUE", "BLUE", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
-  "types" : [ "INSTANT" ],
+  "types" : [ "SORCERY" ],
   "rarity" : "MYTHIC",
   "ruleText" : "Target player draws seven cards.",
   "abilities" : [ {

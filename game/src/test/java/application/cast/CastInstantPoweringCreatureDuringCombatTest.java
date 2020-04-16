@@ -54,10 +54,6 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Bartizan Bats")).declareAsBlocker();
     browser.player2().getActionHelper().clickContinue();
 
-    // And player 1 don't play anything
-    browser.player1().getPhaseHelper().is(AB, PLAYER);
-    browser.player1().getActionHelper().clickContinue();
-
     // Then player 2 can pump up its creature
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();

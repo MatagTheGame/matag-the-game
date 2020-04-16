@@ -2,6 +2,7 @@ package com.matag.game.turn.phases;
 
 import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action._continue.AutocontinueChecker;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -10,12 +11,17 @@ import org.springframework.stereotype.Component;
 public class DeclareAttackersPhase implements Phase {
   public static final String DA = "DA";
 
-  private final FirstStrikePhase firstStrikePhase;
+  private final AutocontinueChecker autocontinueChecker;
+  private final AfterDeclareBlockersPhase afterDeclareBlockersPhase;
 
   @Override
   public void apply(GameStatus gameStatus) {
     if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
+
+      if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
+        apply(gameStatus);
+      }
 
     } else {
       if (!gameStatus.getCurrentPlayer().getBattlefield().getAttackingCreatures().isEmpty() && new CardInstanceSearch(gameStatus.getNonCurrentPlayer().getBattlefield().getCards()).canAnyCreatureBlock()) {
@@ -25,6 +31,10 @@ public class DeclareAttackersPhase implements Phase {
       } else {
         gameStatus.getTurn().setCurrentPhase(AfterDeclareBlockersPhase.AB);
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+
+        if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
+          afterDeclareBlockersPhase.apply(gameStatus);
+        }
       }
     }
   }

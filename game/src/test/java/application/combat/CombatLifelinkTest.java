@@ -46,10 +46,6 @@ public class CombatLifelinkTest extends AbstractApplicationTest {
     // When attacking
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Charity Extractor")).declareAsAttacker();
     browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(DA, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
 
     // Then
     browser.player1().getPhaseHelper().is(M2, PLAYER);
