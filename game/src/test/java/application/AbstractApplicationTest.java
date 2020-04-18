@@ -1,13 +1,13 @@
 package application;
 
 import application.browser.MatagBrowser;
+import com.matag.adminentities.DeckInfo;
+import com.matag.adminentities.PlayerInfo;
 import com.matag.cards.Cards;
 import com.matag.game.adminclient.AdminClient;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.deck.DeckInfo;
 import com.matag.game.launcher.LauncherGameResponseBuilder;
 import com.matag.game.launcher.LauncherTestGameController;
-import com.matag.game.player.playerInfo.PlayerInfo;
 import com.matag.game.status.GameStatusRepository;
 import lombok.SneakyThrows;
 import org.junit.After;

@@ -1,8 +1,8 @@
 package com.matag.game.adminclient;
 
+import com.matag.adminentities.DeckInfo;
+import com.matag.adminentities.PlayerInfo;
 import com.matag.game.config.ConfigService;
-import com.matag.game.deck.DeckInfo;
-import com.matag.game.player.playerInfo.PlayerInfo;
 import com.matag.game.security.SecurityToken;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Profile;

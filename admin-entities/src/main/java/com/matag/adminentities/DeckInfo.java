@@ -1,8 +1,7 @@
-package com.matag.admin.game.deck;
+package com.matag.adminentities;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.matag.cards.properties.CardImageUrls;
 import com.matag.cards.properties.Color;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,5 +1,6 @@
 package com.matag.game.deck;
 
+import com.matag.adminentities.DeckInfo;
 import com.matag.game.adminclient.AdminClient;
 import com.matag.game.security.SecurityToken;
 import lombok.AllArgsConstructor;

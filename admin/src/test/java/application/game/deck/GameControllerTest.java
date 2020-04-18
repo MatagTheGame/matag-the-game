@@ -3,7 +3,7 @@ package application.game.deck;
 import application.AbstractApplicationTest;
 import com.matag.admin.game.JoinGameRequest;
 import com.matag.admin.game.JoinGameResponse;
-import com.matag.admin.game.deck.DeckInfo;
+import com.matag.adminentities.DeckInfo;
 import org.junit.Test;
 
 import java.util.Set;

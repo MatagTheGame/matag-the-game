@@ -1,5 +1,6 @@
 package com.matag.game.deck;
 
+import com.matag.adminentities.DeckInfo;
 import com.matag.cards.Card;
 import com.matag.cards.CardUtils;
 import com.matag.cards.Cards;

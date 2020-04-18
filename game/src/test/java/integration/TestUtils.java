@@ -1,10 +1,10 @@
 package integration;
 
+import com.matag.adminentities.PlayerInfo;
+import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.cards.Cards;
 import com.matag.game.player.PlayerFactory;
-import com.matag.game.player.playerInfo.PlayerInfo;
 import com.matag.game.security.SecurityToken;
 import com.matag.game.status.GameStatus;
 import com.matag.game.status.GameStatusFactory;

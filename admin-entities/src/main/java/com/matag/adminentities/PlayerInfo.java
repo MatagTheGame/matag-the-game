@@ -1,23 +1,20 @@
-package com.matag.game.deck;
+package com.matag.adminentities;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.matag.cards.properties.Color;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
 
-import java.util.Set;
-
 @Value
 @AllArgsConstructor
-@JsonDeserialize(builder = DeckInfo.DeckInfoBuilder.class)
+@JsonDeserialize(builder = PlayerInfo.PlayerInfoBuilder.class)
 @Builder(toBuilder = true)
-public class DeckInfo {
-  private final Set<Color> randomColors;
+public class PlayerInfo {
+  private final String playerName;
 
   @JsonPOJOBuilder(withPrefix = "")
-  public static class DeckInfoBuilder {
+  public static class PlayerInfoBuilder {
 
   }
 }

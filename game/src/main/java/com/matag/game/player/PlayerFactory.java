@@ -1,6 +1,6 @@
 package com.matag.game.player;
 
-import com.matag.game.player.playerInfo.PlayerInfo;
+import com.matag.adminentities.PlayerInfo;
 import com.matag.game.security.SecurityToken;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

@@ -19,6 +19,7 @@
 
     <modules>
         <module>admin</module>
+        <module>admin-entities</module>
         <module>cards</module>
         <module>game</module>
         <module>utils</module>

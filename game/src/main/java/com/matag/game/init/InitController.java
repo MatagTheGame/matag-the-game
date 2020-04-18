@@ -1,8 +1,9 @@
 package com.matag.game.init;
 
+import com.matag.adminentities.DeckInfo;
+import com.matag.adminentities.PlayerInfo;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.deck.DeckFactory;
-import com.matag.game.deck.DeckInfo;
 import com.matag.game.deck.DeckRetrieverService;
 import com.matag.game.event.Event;
 import com.matag.game.event.EventSender;
@@ -10,7 +11,6 @@ import com.matag.game.init.test.InitTestService;
 import com.matag.game.player.Player;
 import com.matag.game.player.PlayerFactory;
 import com.matag.game.player.PlayerService;
-import com.matag.game.player.playerInfo.PlayerInfo;
 import com.matag.game.player.playerInfo.PlayerInfoRetriever;
 import com.matag.game.security.SecurityHelper;
 import com.matag.game.security.SecurityToken;
