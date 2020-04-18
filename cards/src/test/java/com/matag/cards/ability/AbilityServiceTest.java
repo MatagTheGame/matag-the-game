@@ -5,11 +5,17 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static com.matag.cards.ability.AbilityService.replaceLast;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AbilityServiceTest {
     private AbilityService abilityService = new AbilityService();
+
+    @Test
+    public void replaceLastTest() {
+        assertThat(replaceLast("cat dog cat", "cat", "other")).isEqualTo("cat dog other");
+    }
 
     @Test
     public void testPowerAndToughnessFromParameter() {

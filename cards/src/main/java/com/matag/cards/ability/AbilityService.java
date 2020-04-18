@@ -1,7 +1,6 @@
 package com.matag.cards.ability;
 
 import com.matag.cards.properties.PowerToughness;
-import com.matag.utils.Utils;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -85,7 +84,7 @@ public class AbilityService {
 
   public static String parametersAsString(List<String> parameters) {
     String text = parameters.stream().map(AbilityService::parameterAsString).collect(Collectors.joining(", "));
-    return Utils.replaceLast(text, ",", " and");
+    return replaceLast(text, ",", " and");
   }
 
   private static String parameterAsString(String parameter) {
@@ -108,5 +107,9 @@ public class AbilityService {
     } else {
       return parameter.replace(":", "").toLowerCase();
     }
+  }
+
+  public static String replaceLast(String text, String regex, String replacement) {
+    return text.replaceFirst("(?s)" + regex + "(?!.*?" + regex + ")", replacement);
   }
 }

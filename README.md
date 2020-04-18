@@ -25,9 +25,9 @@ In case you are the only one online, you can play against yourself by opening tw
 
 The application is divided in modules:
 - [admin](admin/README.md): responsible for user and decks management (not implemented yet).
+- [admin-entities](admin-entities/README.md): entities exposed by admin over REST.
 - [cards](cards/README.md): shared library for cards.
 - [game](game/README.md): responsible for playing matches.
-- utils: general utility functions.
 
 
 ## Contributing

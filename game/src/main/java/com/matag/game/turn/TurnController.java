@@ -8,7 +8,6 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.status.GameStatusRepository;
 import com.matag.game.status.GameStatusUpdaterService;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
-import com.matag.utils.Utils;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +15,10 @@ import org.springframework.messaging.handler.annotation.MessageExceptionHandler;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @AllArgsConstructor
@@ -48,7 +51,7 @@ public class TurnController {
     } else if ("DECLARE_ATTACKERS".equals(request.getAction())) {
       turnService.declareAttackers(gameStatus, request.getCardIds());
     } else if ("DECLARE_BLOCKERS".equals(request.getAction())) {
-      turnService.declareBlockers(gameStatus, Utils.toMapListInteger(request.getTargetsIdsForCardIds()));
+      turnService.declareBlockers(gameStatus, toMapListInteger(request.getTargetsIdsForCardIds()));
     }
 
     consolidateStatusService.consolidate(gameStatus);
@@ -58,5 +61,15 @@ public class TurnController {
   @MessageExceptionHandler
   public void handleException(SimpMessageHeaderAccessor headerAccessor, MessageException e) {
     gameStatusUpdaterService.sendMessage(headerAccessor.getSessionId(), new MessageEvent(e.getMessage(), true));
+  }
+
+  public static Map<Integer, List<Integer>> toMapListInteger(Map<Integer, List<Object>> mapListObject) {
+    return mapListObject.entrySet()
+      .stream()
+      .collect(Collectors.toMap(Map.Entry::getKey, entry -> toListInteger(entry.getValue())));
+  }
+
+  private static List<Integer> toListInteger(List<Object> listObject) {
+    return listObject.stream().map((item) -> (int) item).collect(Collectors.toList());
   }
 }

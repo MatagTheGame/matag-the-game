@@ -17,11 +17,6 @@
     <dependencies>
         <!-- Production -->
         <dependency>
-            <groupId>com.matag</groupId>
-            <artifactId>utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
             <version>${spring.boot.version}</version>
