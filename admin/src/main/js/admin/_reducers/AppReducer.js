@@ -42,6 +42,12 @@ export default (state, action) => {
         profile: action.value.profile
       }
     }
+  } else if (action.type === 'LOAD_ACTIVE_GAME') {
+    newState.activeGame = {loading: true}
+
+  } else if (action.type === 'ACTIVE_GAME_LOADED') {
+    newState.activeGame.loading = false
+    newState.activeGame.value = action.value
 
   } else {
     throw new Error(`Unknown action type ${action.type}`)

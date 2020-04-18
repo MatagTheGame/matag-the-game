@@ -1,7 +1,8 @@
-package com.matag.admin.game;
+package com.matag.admin.game.join;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.matag.admin.game.game.GameType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;

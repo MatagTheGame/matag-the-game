@@ -1,4 +1,8 @@
 #play {
+  margin-top: 3rem;
+}
+
+#play-form {
   ul {
     list-style-type: none;
 
@@ -20,4 +24,8 @@
       margin-right: 1rem;
     }
   }
+}
+
+.active-game {
+  margin: 2rem;
 }

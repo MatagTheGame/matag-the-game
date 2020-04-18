@@ -1,4 +1,4 @@
-package com.matag.admin.game;
+package com.matag.admin.game.game;
 
 public enum GameStatusType {
   STARTING, IN_PROGRESS, CANCELLED, FINISHED

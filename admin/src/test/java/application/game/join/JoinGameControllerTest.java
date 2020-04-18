@@ -1,10 +1,10 @@
-package application.game;
+package application.game.join;
 
 import application.AbstractApplicationTest;
-import com.matag.admin.game.Game;
-import com.matag.admin.game.GameRepository;
-import com.matag.admin.game.JoinGameRequest;
-import com.matag.admin.game.JoinGameResponse;
+import com.matag.admin.game.game.Game;
+import com.matag.admin.game.game.GameRepository;
+import com.matag.admin.game.join.JoinGameRequest;
+import com.matag.admin.game.join.JoinGameResponse;
 import com.matag.admin.game.session.GameSession;
 import com.matag.admin.game.session.GameSessionRepository;
 import org.junit.Test;
@@ -15,12 +15,12 @@ import java.util.Optional;
 
 import static application.TestUtils.user1;
 import static application.TestUtils.user2;
-import static com.matag.admin.game.GameStatusType.IN_PROGRESS;
-import static com.matag.admin.game.GameStatusType.STARTING;
-import static com.matag.admin.game.GameType.UNLIMITED;
+import static com.matag.admin.game.game.GameStatusType.IN_PROGRESS;
+import static com.matag.admin.game.game.GameStatusType.STARTING;
+import static com.matag.admin.game.game.GameType.UNLIMITED;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GameControllerTest extends AbstractApplicationTest {
+public class JoinGameControllerTest extends AbstractApplicationTest {
   @Autowired
   private GameRepository gameRepository;
 

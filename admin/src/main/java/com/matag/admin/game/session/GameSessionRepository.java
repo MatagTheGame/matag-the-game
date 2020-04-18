@@ -1,7 +1,6 @@
 package com.matag.admin.game.session;
 
-import com.matag.admin.game.Game;
-import com.matag.admin.user.MatagUser;
+import com.matag.admin.game.game.Game;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

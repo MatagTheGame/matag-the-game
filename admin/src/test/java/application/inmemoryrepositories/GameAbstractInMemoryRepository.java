@@ -1,9 +1,9 @@
 package application.inmemoryrepositories;
 
-import com.matag.admin.game.Game;
-import com.matag.admin.game.GameRepository;
-import com.matag.admin.game.GameStatusType;
-import com.matag.admin.game.GameType;
+import com.matag.admin.game.game.Game;
+import com.matag.admin.game.game.GameRepository;
+import com.matag.admin.game.game.GameStatusType;
+import com.matag.admin.game.game.GameType;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

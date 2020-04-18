@@ -16,6 +16,10 @@
   .matag-form .three-columns {
     grid-template-columns: 1fr 1fr 1fr;
   }
+
+  .matag-form .grid-50-50 {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .matag-form select,
@@ -25,9 +29,9 @@
   width: 100%;
   line-height: 1.5;
   padding: 5px;
-  border: 1px solid hsl(0, 0%, 10%);
+  border: 1px solid $input-border-color;
   color: $body-text-color;
-  background: hsl(0, 0%, 14%);
+  background-color: $input-background-color;
 }
 
 .matag-form label {
@@ -49,13 +53,13 @@
 .matag-form input:focus,
 .matag-form textarea:focus,
 .matag-form button:focus {
-  border: 1px solid hsl(0, 0%, 14%);
-  background: hsl(0, 0%, 18%);
+  border: 1px solid $input-enhanced-border-color;
+  background-color: $input-enhanced-background-color;
 }
 
 .matag-form input[type=button]:enabled:hover,
 .matag-form input[type=submit]:enabled:hover,
 .matag-form input[type=reset]:enabled:hover {
-  border: 1px solid hsl(0, 0%, 14%);
-  background: hsl(0, 0%, 18%);
+  border: 1px solid $input-enhanced-border-color;
+  background-color: $input-enhanced-background-color;
 }

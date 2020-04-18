@@ -1,4 +1,4 @@
-package com.matag.admin.game;
+package com.matag.admin.game.join;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;

@@ -1,4 +1,4 @@
-package com.matag.admin.game;
+package com.matag.admin.game.game;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

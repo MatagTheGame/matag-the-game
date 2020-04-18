@@ -1,4 +1,4 @@
-package com.matag.admin.game;
+package com.matag.admin.game.game;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
