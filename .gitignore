@@ -2,7 +2,7 @@
 node/
 node_modules/
 yarn-error.log
-js/
+*/src/main/resources/public/js/*
 
 # Ignore binaries
 bin/

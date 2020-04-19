@@ -1,0 +1,26 @@
+@import 'constants';
+
+.matag-card {
+  padding: 2rem;
+  min-height: 100px;
+  min-width: 100px;
+  max-width: 600px;
+  background-color: $card-background-color;
+
+  dl {
+    display: grid;
+    grid-template-columns: min-content max-content;
+    grid-gap: .5em;
+    margin: 0 0 2rem 0;
+
+    dt {
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+      padding-right: 10px;
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+}
