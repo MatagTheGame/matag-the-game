@@ -56,7 +56,7 @@ export default (state, action) => {
     newState.activeGame.deleting = false
 
     if (!action.response.error) {
-      newState.activeGame.value = null
+      newState.activeGame.value = {}
     } else {
       newState.activeGame.deletingError = action.response.error
     }

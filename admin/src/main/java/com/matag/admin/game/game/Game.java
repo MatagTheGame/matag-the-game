@@ -25,4 +25,5 @@ public class Game {
   private GameStatusType status;
   @Enumerated(EnumType.STRING)
   private GameResultType result;
+  private LocalDateTime finishedAt;
 }

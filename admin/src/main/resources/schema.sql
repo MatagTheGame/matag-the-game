@@ -20,27 +20,25 @@ create table matag_session
 
 create table game
 (
-    id         bigserial primary key,
-    created_at timestamp   not null default current_timestamp,
-    type       varchar(20) not null,
-    status     varchar(20) not null,
-    result     varchar(20)
+    id          bigserial primary key,
+    created_at  timestamp   not null default current_timestamp,
+    type        varchar(20) not null,
+    status      varchar(20) not null,
+    result      varchar(20),
+    finished_at timestamp
 );
 
 create table game_session
 (
     id             bigserial primary key,
-    game_id        bigint   not null,
+    game_id        bigint not null,
     session_id     char(36) unique,
-    player_id      bigint   not null,
+    player_id      bigint not null,
     player_options varchar(255),
     foreign key (game_id) references game (id) on delete set null,
     foreign key (session_id) references matag_session (id) on delete set null,
     foreign key (player_id) references matag_user (id) on delete set null
 );
-
-
-
 
 
 -- insert Guest (username: Guest     password: password)
