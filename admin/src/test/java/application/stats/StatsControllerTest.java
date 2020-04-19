@@ -53,4 +53,13 @@ public class StatsControllerTest extends AbstractApplicationTest {
     // Then
     assertThat(response.getTotalCards()).isGreaterThan(100);
   }
+
+  @Test
+  public void shouldGetNumOfSets() {
+    // When
+    StatsResponse response = restTemplate.getForObject("/stats", StatsResponse.class);
+
+    // Then
+    assertThat(response.getTotalSets()).isGreaterThan(10);
+  }
 }

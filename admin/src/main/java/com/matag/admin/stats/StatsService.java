@@ -31,4 +31,8 @@ public class StatsService {
   public int countCards() {
     return mtgSets.countCards();
   }
+
+  public int countSets() {
+    return mtgSets.getSets().size();
+  }
 }

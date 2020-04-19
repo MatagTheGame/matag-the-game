@@ -13,9 +13,11 @@ public class StatsController {
 
   @GetMapping
   public StatsResponse stats() {
-    long totalUsers = statsService.countTotalUsers();
-    long onlineUsers = statsService.countOnlineUsers();
-    int totalCards = statsService.countCards();
-    return new StatsResponse(totalUsers, onlineUsers, totalCards);
+    return StatsResponse.builder()
+      .totalUsers(statsService.countTotalUsers())
+      .onlineUsers(statsService.countOnlineUsers())
+      .totalCards(statsService.countCards())
+      .totalSets(statsService.countSets())
+      .build();
   }
 }

@@ -1,0 +1,11 @@
+{
+  "name" : "Adaptive Shimmerer",
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "TURTLE" ],
+  "rarity" : "COMMON",
+  "ruleText" : "",
+  "power" : 0,
+  "toughness" : 5
+}

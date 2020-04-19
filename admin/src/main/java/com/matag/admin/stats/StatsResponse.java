@@ -12,6 +12,7 @@ public class StatsResponse {
   private final long totalUsers;
   private final long onlineUsers;
   private final int totalCards;
+  private final int totalSets;
 
   @JsonPOJOBuilder(withPrefix = "")
   public static class StatsResponseBuilder {

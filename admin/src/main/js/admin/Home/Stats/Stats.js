@@ -17,9 +17,10 @@ class Stats extends Component {
     } else {
       return (
         <ul>
-          <li><span>Total Users: </span><span>{this.props.totalUsers}</span></li>
-          <li><span>Online Users: </span><span>{this.props.onlineUsers}</span></li>
-          <li><span>Total Cards: </span><span>{this.props.totalCards}</span></li>
+          <li><span>Total Users: </span><span>{this.props.stats.totalUsers}</span></li>
+          <li><span>Online Users: </span><span>{this.props.stats.onlineUsers}</span></li>
+          <li><span>Total Cards: </span><span>{this.props.stats.totalCards}</span></li>
+          <li><span>Total Sets: </span><span>{this.props.stats.totalSets} (from Ixalan)</span></li>
         </ul>
       )
     }
@@ -50,9 +51,7 @@ const statsLoaded = (stats) => {
 const mapStateToProps = state => {
   return {
     loading: get(state, 'stats.loading', false),
-    totalUsers: get(state, 'stats.value.totalUsers', 0),
-    onlineUsers: get(state, 'stats.value.onlineUsers', 0),
-    totalCards: get(state, 'stats.value.totalCards', 0)
+    stats: get(state, 'stats.value', {})
   }
 }
 
