@@ -2,7 +2,6 @@ package com.matag.admin.game.cancel;
 
 import com.matag.admin.auth.SecurityContextHolderHelper;
 import com.matag.admin.game.game.GameRepository;
-import com.matag.admin.game.join.JoinGameResponse;
 import com.matag.admin.game.session.GameSessionRepository;
 import com.matag.admin.game.session.GameSessionService;
 import lombok.AllArgsConstructor;
@@ -21,7 +20,10 @@ public class CancelGameService {
   private final Clock clock;
 
   @Transactional
-  public void cancel(Long gameId) {
+  public CancelGameResponse cancel(Long gameId) {
     System.out.println();
+    return CancelGameResponse.builder()
+      .error("Functionality not yet implemented.")
+      .build();
   }
 }

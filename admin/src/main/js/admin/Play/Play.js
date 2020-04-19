@@ -12,8 +12,7 @@ import AuthHelper from '../Auth/AuthHelper'
 class Play extends Component {
   componentDidMount() {
     this.props.loadActiveGame()
-    ApiClient.get('/game')
-      .then(data => this.props.activeGameLoaded(data))
+    ApiClient.get('/game').then(this.props.activeGameLoaded)
     this.goToGame = this.goToGame.bind(this)
   }
 

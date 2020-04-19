@@ -3,11 +3,33 @@ import DateUtils from '../utils/DateUtils'
 import get from 'lodash/get'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
+import ApiClient from '../utils/ApiClient'
 
 class ActiveGame extends Component {
+  constructor(props) {
+    super(props)
+    this.cancelGame = this.cancelGame.bind(this)
+  }
+
   displayGoToGame() {
     const gameId = this.props.activeGame.gameId
     return <span>Go to <a href='#' onClick={() => this.props.goToGame(gameId)}>game #{gameId}</a></span>
+  }
+
+  cancelGame() {
+    this.props.deletingActiveGame()
+    ApiClient.delete('/game/' + this.props.activeGame.gameId)
+      .then(response => this.props.deletedActiveGame(response))
+  }
+
+  displayErrorMessage() {
+    if (this.props.deletingError) {
+      return (
+        <p className='message'>
+          <span className='error'>{this.props.deletingError}</span>
+        </p>
+      )
+    }
   }
 
   render() {
@@ -33,10 +55,12 @@ class ActiveGame extends Component {
             <dd>{game.opponentOptions}</dd>
           </dl>
 
+          { this.displayErrorMessage() }
+
           <div className='matag-form'>
             <div className='grid grid-50-50'>
               <input type='button' value='Go to Game' onClick={() => this.props.goToGame(game.gameId)} />
-              <input type='button' value='Cancel Game' onClick={() => alert('Coming Soon')} />
+              <input type='button' value='Cancel Game' onClick={this.cancelGame} />
             </div>
           </div>
         </div>
@@ -52,16 +76,18 @@ const deletingActiveGame = () => {
   }
 }
 
-const deletedActiveGame = () => {
+const deletedActiveGame = (response) => {
   return {
-    type: 'ACTIVE_GAME_DELETED'
+    type: 'ACTIVE_GAME_DELETED',
+    response: response
   }
 }
 
 const mapStateToProps = state => {
   return {
-    deleting: get(state, 'activeGame.deleting', false),
     activeGame: get(state, 'activeGame.value', {}),
+    deleting: get(state, 'activeGame.deleting', false),
+    deletingError: get(state, 'activeGame.deletingError', null),
     matagGameUrl: get(state, 'config.matagGameUrl', '')
   }
 }

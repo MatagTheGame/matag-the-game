@@ -8,8 +8,7 @@ import ApiClient from 'admin/utils/ApiClient'
 class Stats extends Component {
   componentDidMount() {
     this.props.loadStats()
-    ApiClient.get('/stats')
-      .then(data => this.props.statsLoaded(data))
+    ApiClient.get('/stats').then(this.props.statsLoaded)
   }
 
   stats() {

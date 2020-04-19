@@ -51,11 +51,15 @@ export default (state, action) => {
 
   } else if (action.type === 'ACTIVE_GAME_DELETING') {
     newState.activeGame.deleting = true
-    newState.activeGame.value = action.value
 
   } else if (action.type === 'ACTIVE_GAME_DELETED') {
     newState.activeGame.deleting = false
-    newState.activeGame.value = null
+
+    if (!action.response.error) {
+      newState.activeGame.value = null
+    } else {
+      newState.activeGame.deletingError = action.response.error
+    }
 
   } else {
     throw new Error(`Unknown action type ${action.type}`)

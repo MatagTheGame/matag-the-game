@@ -17,6 +17,10 @@ export default class ApiClient {
     return ApiClient.executeNoJsonResponse(url, request, 'POST')
   }
 
+  static delete(url) {
+    return ApiClient.execute(url, {}, 'DELETE')
+  }
+
   static execute(url, request, method = 'GET') {
     return ApiClient.executeNoJsonResponse(url, request, method)
       .then((response) => response.json())

@@ -28,4 +28,12 @@
 
 .active-game {
   margin: 2rem;
+
+  .message {
+    text-align: center;
+
+    .error {
+      margin-right: 1rem;
+    }
+  }
 }
