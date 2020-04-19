@@ -1,0 +1,27 @@
+{
+  "name" : "Bronze Sword",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/b/0b33162d-8d8f-4312-b31e-04ce86e3b914.jpg?1581481182",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/b/0b33162d-8d8f-4312-b31e-04ce86e3b914.png?1581481182"
+  },
+  "cost" : [ "COLORLESS" ],
+  "types" : [ "ARTIFACT" ],
+  "subtypes" : [ "EQUIPMENT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Equipped creature gets +2/+0. Equip 3",
+  "abilities" : [ {
+    "abilityType" : "EQUIPPED_CREATURE_GETS",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
+      }
+    } ],
+    "parameters" : [ "+2/+0" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "COLORLESS", "COLORLESS", "COLORLESS" ]
+    },
+    "sorcerySpeed" : true
+  } ]
+}

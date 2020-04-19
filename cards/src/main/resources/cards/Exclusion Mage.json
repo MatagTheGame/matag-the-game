@@ -9,7 +9,7 @@
   "types" : [ "CREATURE" ],
   "subtypes" : [ "HUMAN", "WIZARD" ],
   "rarity" : "UNCOMMON",
-  "ruleText" : "\tWhen Exclusion Mage enters the battlefield, return target creature an opponent controls to its owner's hand.",
+  "ruleText" : "When Exclusion Mage enters the battlefield, return target creature an opponent controls to its owner's hand.",
   "power" : 2,
   "toughness" : 2,
   "abilities" : [ {

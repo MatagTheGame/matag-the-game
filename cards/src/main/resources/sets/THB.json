@@ -2,14 +2,29 @@
   "code": "THB",
   "name": "Theros Beyond Death",
   "cards": [
+    "Bronze Sword",
     "Careless Celebrant",
+    "Gift of Strength",
+    "Grim Physician",
     "Hyrax Tower Scout",
+    "Indomitable Will",
+    "Infuriate",
+    "Mire's Grasp",
     "Moss Viper",
     "Nylea's Forerunner",
     "Nyxborn Brute",
     "Nyxborn Colossus",
     "Nyxborn Courser",
     "Nyxborn Marauder",
-    "Nyxborn Seaguard"
+    "Nyxborn Seaguard",
+    "Plummet",
+    "Rage-Scarred Berserker",
+    "Sea God's Scorn",
+    "Setessan Training",
+    "Stern Dismissal",
+    "Storm's Wrath",
+    "Sunmane Pegasus",
+    "Triumphant Surge",
+    "Vexing Gull"
   ]
 }

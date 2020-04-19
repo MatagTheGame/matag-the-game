@@ -1,0 +1,20 @@
+{
+  "name" : "Vexing Gull",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/6/869fee23-df75-448d-9fca-6ba6713d459f.jpg?1581479638",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/6/869fee23-df75-448d-9fca-6ba6713d459f.png?1581479638"
+  },
+  "colors" : [ "BLUE" ],
+  "cost" : [ "BLUE", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "BIRD" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Flash. Flying.",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "FLASH"
+  }, {
+    "abilityType" : "FLYING"
+  } ]
+}

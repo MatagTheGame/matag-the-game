@@ -17,31 +17,7 @@
         "ofType" : [ "CREATURE" ]
       }
     } ],
-    "parameters" : [ ":CONTROLLED" ],
-    "trigger" : {
-      "type" : "CAST"
-    }
-  }, {
-    "abilityType" : "THAT_TARGETS_GET",
-    "targets" : [ {
-      "cardInstanceSelector" : {
-        "selectorType" : "PERMANENT",
-        "ofType" : [ "CREATURE" ]
-      }
-    } ],
-    "parameters" : [ ":UNTAPPED" ],
-    "trigger" : {
-      "type" : "CAST"
-    }
-  }, {
-    "abilityType" : "THAT_TARGETS_GET",
-    "targets" : [ {
-      "cardInstanceSelector" : {
-        "selectorType" : "PERMANENT",
-        "ofType" : [ "CREATURE" ]
-      }
-    } ],
-    "parameters" : [ "HASTE" ],
+    "parameters" : [ ":CONTROLLED", ":UNTAPPED", "HASTE" ],
     "trigger" : {
       "type" : "CAST"
     }

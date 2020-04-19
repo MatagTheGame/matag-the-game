@@ -10,6 +10,7 @@ public enum Subtype {
   BASILISK,
   BAT,
   BEAST,
+  BERSERKER,
   BIRD,
   BOAR,
   CAT,
