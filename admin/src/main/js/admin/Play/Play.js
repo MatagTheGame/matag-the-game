@@ -45,7 +45,7 @@ class Play extends Component {
 
 const loadActiveGame = () => {
   return {
-    type: 'LOAD_ACTIVE_GAME'
+    type: 'ACTIVE_GAME_LOADING'
   }
 }
 

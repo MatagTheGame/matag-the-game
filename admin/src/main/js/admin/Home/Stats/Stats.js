@@ -37,7 +37,7 @@ class Stats extends Component {
 
 const loadStats = () => {
   return {
-    type: 'LOAD_STATS'
+    type: 'STATS_LOADING'
   }
 }
 

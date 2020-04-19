@@ -20,7 +20,7 @@ export default (state, action) => {
     newState.session.loading = false
     newState.session.profile = action.value
 
-  } else if (action.type === 'LOAD_STATS') {
+  } else if (action.type === 'STATS_LOADING') {
     newState.stats = {loading: true}
 
   } else if (action.type === 'STATS_LOADED') {
@@ -42,12 +42,20 @@ export default (state, action) => {
         profile: action.value.profile
       }
     }
-  } else if (action.type === 'LOAD_ACTIVE_GAME') {
+  } else if (action.type === 'ACTIVE_GAME_LOADING') {
     newState.activeGame = {loading: true}
 
   } else if (action.type === 'ACTIVE_GAME_LOADED') {
     newState.activeGame.loading = false
     newState.activeGame.value = action.value
+
+  } else if (action.type === 'ACTIVE_GAME_DELETING') {
+    newState.activeGame.deleting = true
+    newState.activeGame.value = action.value
+
+  } else if (action.type === 'ACTIVE_GAME_DELETED') {
+    newState.activeGame.deleting = false
+    newState.activeGame.value = null
 
   } else {
     throw new Error(`Unknown action type ${action.type}`)

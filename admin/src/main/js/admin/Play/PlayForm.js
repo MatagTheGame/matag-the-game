@@ -36,7 +36,7 @@ class PlayForm extends Component {
       .then(r => {
         this.setState({loading: false})
         if (r.gameId > 0) {
-          this.goToGame(r.gameId)
+          this.props.goToGame(r.gameId)
 
         } else {
           if (r.errorMessage) {
