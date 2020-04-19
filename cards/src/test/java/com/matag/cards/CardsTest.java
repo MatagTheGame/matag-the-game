@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -69,7 +70,7 @@ public class CardsTest {
     assertThat(card.getRuleText()).isEqualTo("Gain control of target creature until end of turn. Untap that creature. It gains haste until end of turn.");
     assertThat(card.getPower()).isEqualTo(0);
     assertThat(card.getToughness()).isEqualTo(0);
-    assertThat(card.getAbilities()).hasSize(3);
+    assertThat(card.getAbilities()).hasSize(1);
     assertThat(card.getAbilities().get(0)).isEqualTo(
       Ability.builder()
         .abilityType(AbilityType.THAT_TARGETS_GET)
@@ -79,7 +80,7 @@ public class CardsTest {
             .ofType(singletonList(Type.CREATURE))
             .build())
           .build()))
-        .parameters(singletonList(":CONTROLLED"))
+        .parameters(asList(":CONTROLLED", ":UNTAPPED", "HASTE"))
         .trigger(Trigger.castTrigger())
         .build()
     );
