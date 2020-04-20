@@ -81,8 +81,7 @@ public class CostService {
 
     // populate choices
     int inverseCumulativeSizes = choices;
-    for (int i = 0; i < cardsThatCanGenerateMana.size(); i++) {
-      CardInstance instance = cardsThatCanGenerateMana.get(i);
+    for (CardInstance instance : cardsThatCanGenerateMana) {
       List<CardInstanceAbility> addManaAbilities = instance.getAbilitiesByType(TAP_ADD_MANA);
       inverseCumulativeSizes /= addManaAbilities.size();
 
