@@ -2,11 +2,13 @@ package application.ability;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
+import application.testcategory.Regression;
 import com.matag.cards.Cards;
 import com.matag.game.MatagGameApplication;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +21,7 @@ import static com.matag.player.PlayerType.PLAYER;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MatagGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({ActivatedAbilityOnCreatureTest.InitGameTestConfiguration.class})
+@Category(Regression.class)
 public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
 
   @Autowired

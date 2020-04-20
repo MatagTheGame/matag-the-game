@@ -21,7 +21,13 @@ public class CostService {
   public boolean isCastingCostFulfilled(CardInstance cardInstance, String ability, List<Cost> manaPaid) {
     ArrayList<Cost> manaPaidCopy = new ArrayList<>(manaPaid);
 
-    for (Cost cost : getCost(cardInstance.getCard(), ability)) {
+    if (needsTapping(cardInstance.getCard(), ability)) {
+      if (cardInstance.getModifiers().isTapped() || cardInstance.getModifiers().isSummoningSickness()) {
+        return false;
+      }
+    }
+
+    for (Cost cost : getSimpleCost(cardInstance.getCard(), ability)) {
       boolean removed = false;
 
       if (cost == COLORLESS) {
@@ -92,7 +98,15 @@ public class CostService {
     return manaOptions;
   }
 
-  private static List<Cost> getCost(Card card, String ability) {
+  public boolean needsTapping(Card card, String ability) {
+    return getCost(card, ability).stream().anyMatch(c -> c == Cost.TAP);
+  }
+
+  private List<Cost> getSimpleCost(Card card, String ability) {
+    return getCost(card, ability).stream().filter(c -> c != Cost.TAP).collect(toList());
+  }
+
+  private List<Cost> getCost(Card card, String ability) {
     if (ability == null || getAbilityCost(card, ability) == null) {
       return card.getCost();
 
@@ -101,7 +115,7 @@ public class CostService {
     }
   }
 
-  private static List<Cost> getAbilityCost(Card card, String ability) {
+  private List<Cost> getAbilityCost(Card card, String ability) {
     return card.getAbilities().stream()
       .findFirst()
       .filter(c -> c.getAbilityType().equals(abilityType(ability)))

@@ -1,14 +1,14 @@
 package com.matag.game.turn.action.cast;
 
+import com.matag.cards.properties.Cost;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.cardinstance.cost.CostService;
-import com.matag.cards.properties.Cost;
+import com.matag.game.cardinstance.cost.PayCostService;
 import com.matag.game.message.MessageException;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.Turn;
-import com.matag.game.turn.action.tap.TapPermanentService;
 import com.matag.game.turn.action.target.TargetCheckerService;
 import com.matag.game.turn.phases.PhaseUtils;
 import lombok.AllArgsConstructor;
@@ -26,8 +26,8 @@ public class CastService {
 
   private final TargetCheckerService targetCheckerService;
   private final ManaCountService manaCountService;
-  private final TapPermanentService tapPermanentService;
   private final CostService costService;
+  private final PayCostService payCostService;
   private final InstantSpeedService instantSpeedService;
 
   public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
@@ -63,13 +63,9 @@ public class CastService {
         gameStatus.getStack().add(cardToCast);
       }
 
-      gameStatus.getTurn().passPriority(gameStatus);
+      payCostService.pay(gameStatus, activePlayer, cardToCast, playedAbility, mana);
 
-      // FIXME Antonio: Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
-      mana.keySet().stream()
-        .map(cardInstanceId -> activePlayer.getBattlefield().findCardById(cardInstanceId))
-        .forEach(card -> tapPermanentService.tap(gameStatus, card.getId()));
-      gameStatus.getTurn().setLastManaPaid(mana);
+      gameStatus.getTurn().passPriority(gameStatus);
     }
   }
 

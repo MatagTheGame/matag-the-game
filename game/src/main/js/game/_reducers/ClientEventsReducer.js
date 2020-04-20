@@ -55,7 +55,7 @@ export default class ClientEventsReducer {
             // TODO Antonio: this is very similar to the one for battlefield click
             const currentTappedMana = CostUtils.getMana(newState)
             const ability = CardUtils.getAbilitiesForTriggerType(cardInstance, 'CAST')[0]
-            if (CostUtils.isCastingCostFulfilled(cardInstance.card, currentTappedMana)) {
+            if (CostUtils.isCastingCostFulfilled(cardInstance, currentTappedMana)) {
               if (CardUtils.needsTargets(newState, cardInstance, 'CAST')) {
                 PlayerUtils.handleSelectTargets(newState, cardInstance, ability)
               } else {
@@ -107,7 +107,7 @@ export default class ClientEventsReducer {
               const playedAbility = CardUtils.getAbilitiesForTriggerType(cardInstance, 'ACTIVATED_ABILITY')[0]
               if (playedAbility) {
                 const currentTappedMana = CostUtils.getMana(newState)
-                if (CostUtils.isAbilityCostFulfilled(playedAbility, currentTappedMana)) {
+                if (CostUtils.isAbilityCostFulfilled(cardInstance, playedAbility, currentTappedMana)) {
                   if (CardUtils.needsTargets(newState, cardInstance, 'ACTIVATED_ABILITY')) {
                     PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
                   } else {

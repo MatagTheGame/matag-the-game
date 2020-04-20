@@ -38,6 +38,10 @@ public class CardInstanceSearch {
       .filter(cardInstance -> cardInstance.getId() != cardId));
   }
 
+  public CardInstanceSearch withName(String name) {
+    return new CardInstanceSearch(this.cards.filter((ci -> ci.getCard().getName().equals(name))));
+  }
+
   public CardInstanceSearch ofType(Type type) {
     return new CardInstanceSearch(this.cards
       .filter(cardInstance -> cardInstance.isOfType(type)));

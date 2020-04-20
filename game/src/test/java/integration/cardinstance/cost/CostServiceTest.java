@@ -111,6 +111,35 @@ public class CostServiceTest {
   }
 
   @Test
+  public void isCastingCostFulfilledCheckpointOfficerTapAbility() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstance cardInstance = createCardInstance(gameStatus, "Checkpoint Officer");
+    List<Cost> manaPaid = asList(WHITE, WHITE);
+
+    // When
+    boolean fulfilled = costService.isCastingCostFulfilled(cardInstance, "THAT_TARGETS_GET", manaPaid);
+
+    // Then
+    assertThat(fulfilled).isTrue();
+  }
+
+  @Test
+  public void isCastingCostFulfilledCheckpointOfficerTapAbilityOfTappedCreature() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    CardInstance cardInstance = createCardInstance(gameStatus, "Checkpoint Officer");
+    cardInstance.getModifiers().tap();
+    List<Cost> manaPaid = asList(WHITE, WHITE);
+
+    // When
+    boolean fulfilled = costService.isCastingCostFulfilled(cardInstance, "THAT_TARGETS_GET", manaPaid);
+
+    // Then
+    assertThat(fulfilled).isFalse();
+  }
+
+  @Test
   public void canAffordReturnsFalseIfNoLandsAvailable() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
@@ -174,6 +203,8 @@ public class CostServiceTest {
 
   private CardInstance createCardInstance(GameStatus gameStatus, String cardName) {
     Card card = cards.get(cardName);
-    return cardInstanceFactory.create(gameStatus, ++cardInstanceId, card, "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, ++cardInstanceId, card, "player-name", "player-name");
+    gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance);
+    return cardInstance;
   }
 }

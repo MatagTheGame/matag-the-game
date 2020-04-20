@@ -4,12 +4,21 @@ import CardSearch from './CardSearch'
 import CardUtils from './CardUtils'
 
 export default class CostUtils {
-  static isCastingCostFulfilled(card, currentTappedMana) {
-    return CostUtils.isCostFulfilled(card.cost, currentTappedMana)
+  static isCastingCostFulfilled(cardInstance, currentTappedMana) {
+    return CostUtils.isCostFulfilled(cardInstance.card.cost, currentTappedMana)
   }
 
-  static isAbilityCostFulfilled(ability, currentTappedMana) {
-    return CostUtils.isCostFulfilled(ability.trigger.cost, currentTappedMana)
+  static isAbilityCostFulfilled(cardInstance, ability, currentTappedMana) {
+    const costWithoutTap = ability.trigger.cost.filter(v => v !=='TAP')
+    const needsTapping = ability.trigger.cost.find(v => v ==='TAP')
+
+    if (needsTapping) {
+      if (CardUtils.isTapped(cardInstance) || CardUtils.hasSummoningSickness(cardInstance)) {
+        return false
+      }
+    }
+
+    return CostUtils.isCostFulfilled(costWithoutTap, currentTappedMana)
   }
 
   static isCostFulfilled(costToFulfill, currentTappedMana) {
