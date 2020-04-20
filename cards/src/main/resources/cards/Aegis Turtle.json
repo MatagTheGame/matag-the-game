@@ -1,11 +1,13 @@
 {
-  "name" : "Adaptive Shimmerer",
+  "name" : "Aegis Turtle",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/e/4/e433e7f0-7417-4dfe-a7a4-3f222b0a835f.jpg?1586514932",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/e/4/e433e7f0-7417-4dfe-a7a4-3f222b0a835f.png?1586514932"
+  },
   "colors" : [ "BLUE" ],
   "cost" : [ "BLUE" ],
   "types" : [ "CREATURE" ],
   "subtypes" : [ "TURTLE" ],
   "rarity" : "COMMON",
-  "ruleText" : "",
-  "power" : 0,
   "toughness" : 5
 }
