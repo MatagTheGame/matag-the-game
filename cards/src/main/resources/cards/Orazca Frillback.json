@@ -10,5 +10,5 @@
   "subtypes" : [ "DINOSAUR" ],
   "rarity" : "COMMON",
   "power" : 4,
-  "toughness" : 3
+  "toughness" : 2
 }
