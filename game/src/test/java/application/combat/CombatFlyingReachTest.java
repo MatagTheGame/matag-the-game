@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.COMBAT_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.turn.phases.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
 import static com.matag.player.PlayerType.OPPONENT;
