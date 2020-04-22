@@ -2,6 +2,7 @@ package com.matag.game.turn.phases;
 
 import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
 import com.matag.game.turn.action.combat.CombatService;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import static com.matag.game.turn.phases.AfterFirstStrikePhase.AF;
 public class FirstStrikePhase implements Phase {
   public static final String FS = "FS";
 
+  private final AutocontinueChecker autocontinueChecker;
   private final CombatService combatService;
   private final ConsolidateStatusService consolidateStatusService;
   private final AfterFirstStrikePhase afterFirstStrikePhase;
@@ -36,7 +38,9 @@ public class FirstStrikePhase implements Phase {
 
       if (!gameStatus.getTurn().isEnded()) {
         gameStatus.getTurn().setCurrentPhase(AF);
-        afterFirstStrikePhase.apply(gameStatus);
+        if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
+          afterFirstStrikePhase.apply(gameStatus);
+        }
       }
 
     } else {

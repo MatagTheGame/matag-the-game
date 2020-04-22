@@ -25,10 +25,7 @@ public class AfterFirstStrikePhase implements Phase {
     } else {
       gameStatus.getTurn().setCurrentPhase(CombatDamagePhase.CD);
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-
-      if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-        combatDamagePhase.apply(gameStatus);
-      }
+      combatDamagePhase.apply(gameStatus);
     }
   }
 }
