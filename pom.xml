@@ -31,7 +31,7 @@
                 <version>3.0.0-M4</version>
                 <configuration>
                     <forkCount>4</forkCount>
-                    <reuseForks>true</reuseForks>
+                    <reuseForks>false</reuseForks>
                 </configuration>
             </plugin>
         </plugins>
