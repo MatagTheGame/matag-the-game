@@ -49,7 +49,7 @@ public class PermanentService {
     ability.ifPresent(value -> target.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
 
     int damage = abilityService.damageFromParameter(parameter);
-    dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false);
+    dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false, cardInstance);
 
     int controllerDamage = abilityService.controllerDamageFromParameter(parameter);
     dealDamageToPlayerService.dealDamageToPlayer(gameStatus, controllerDamage, gameStatus.getPlayerByName(cardInstance.getController()));

@@ -254,6 +254,10 @@ public class CardInstance {
     return getFixedAbilitiesByType(abilityType).size() > 0;
   }
 
+  public boolean hasAnyFixedAbility(List<AbilityType> abilityTypes) {
+    return abilityTypes.stream().anyMatch( abilityType -> getFixedAbilitiesByType(abilityType).size() > 0);
+  }
+
   public boolean hasFixedAbilityWithTriggerSubType(TriggerSubtype triggerSubtype) {
     return getAbilitiesByTriggerSubType(triggerSubtype).size() > 0;
   }

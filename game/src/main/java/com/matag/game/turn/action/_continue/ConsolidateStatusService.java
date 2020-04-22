@@ -15,7 +15,8 @@ public class ConsolidateStatusService {
   private final DestroyPermanentService destroyPermanentService;
   private final ReturnPermanentToHandService returnPermanentToHandService;
 
-  // Destroy all creatures with toughness - damage > 0. If a creature is destroyed it needs to be reevaluated as that creature
+  // Destroy all creatures with toughness - damage > 0.
+  // If a creature is destroyed the entire GameStatus needs to be reevaluated as that creature
   // might have "other creatures get +1/+1" and keeping them alive.
   public void consolidate(GameStatus gameStatus) {
     boolean repeat;

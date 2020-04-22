@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 public class DealDamageToCreatureService {
   private static final Logger LOGGER = LoggerFactory.getLogger(DealDamageToCreatureService.class);
 
-  public void dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch) {
+  public void dealDamageToCreature(GameStatus gameStatus, CardInstance cardInstance, int damage, boolean deathtouch, CardInstance damageDealer) {
     if (damage > 0) {
-      LOGGER.info("{} is getting {} damage.", cardInstance.getIdAndName(), damage);
+      LOGGER.info("{} is getting {} damage from {}.", cardInstance.getIdAndName(), damage, damageDealer.getIdAndName());
       cardInstance.getModifiers().dealDamage(damage);
       if (cardInstance.getToughness() - cardInstance.getModifiers().getDamage() <= 0 || deathtouch) {
         LOGGER.info("{} marked to be destroyed.", cardInstance.getIdAndName());

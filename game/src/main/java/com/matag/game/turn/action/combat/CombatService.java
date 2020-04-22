@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 import static com.matag.cards.ability.type.AbilityType.*;
+import static com.matag.game.turn.phases.FirstStrikePhase.FS;
 
 @Component
 @AllArgsConstructor
@@ -55,12 +56,27 @@ public class CombatService {
     for (CardInstance blockingCreature : blockingCreatures) {
       int damageToCurrentBlocker = Math.min(remainingDamageForAttackingCreature, blockingCreature.getToughness());
 
-      dealDamageToCreatureService.dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.hasAbilityType(DEATHTOUCH));
-      dealDamageToCreatureService.dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.hasAbilityType(DEATHTOUCH));
+      if (shouldDealDamage(gameStatus, blockingCreature)) {
+        dealDamageToCreatureService.dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.hasAbilityType(DEATHTOUCH), blockingCreature);
+        remainingDamageForAttackingCreature -= damageToCurrentBlocker;
+      } else {
+        remainingDamageForAttackingCreature = 0;
+      }
 
-      remainingDamageForAttackingCreature -= damageToCurrentBlocker;
+      if (shouldDealDamage(gameStatus, attackingCreature)) {
+        dealDamageToCreatureService.dealDamageToCreature(gameStatus, blockingCreature, damageToCurrentBlocker, attackingCreature.hasAbilityType(DEATHTOUCH), attackingCreature);
+      }
     }
     return remainingDamageForAttackingCreature;
   }
 
+  private boolean shouldDealDamage(GameStatus gameStatus, CardInstance cardInstance) {
+    if (gameStatus.getTurn().getCurrentPhase().equals(FS)) {
+      return cardInstance.hasAnyFixedAbility(List.of(FIRST_STRIKE));
+
+    } else {
+      return !cardInstance.hasFixedAbility(FIRST_STRIKE);
+
+    }
+  }
 }
