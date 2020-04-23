@@ -87,6 +87,7 @@ public class CardsTest {
   }
 
   @Test
+  @Ignore
   public void cardImageLinker() throws Exception {
     ObjectMapper objectMapper = createCardsObjectMapper();
 
