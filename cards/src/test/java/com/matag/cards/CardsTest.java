@@ -1,16 +1,16 @@
 package com.matag.cards;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.matag.cards.ability.Ability;
 import com.matag.cards.ability.selector.CardInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.target.Target;
+import com.matag.cards.ability.trigger.Trigger;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.*;
 import com.matag.downloader.CardImageLinker;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.matag.cards.ability.trigger.Trigger;
 import org.assertj.core.api.Assertions;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -87,6 +87,7 @@ public class CardsTest {
   }
 
   @Test
+  @Ignore
   public void cardImageLinker() throws Exception {
     ObjectMapper objectMapper = createCardsObjectMapper();
 

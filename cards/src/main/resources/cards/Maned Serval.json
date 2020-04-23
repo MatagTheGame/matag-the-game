@@ -1,5 +1,9 @@
 {
-  "name" : "Greenwood Sentinel",
+  "name" : "Maned Serval",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/5/a/5ac51e35-e2c5-4457-981c-e59894584288.jpg?1586514703",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/5/a/5ac51e35-e2c5-4457-981c-e59894584288.png?1586514703"
+  },
   "colors" : [ "WHITE" ],
   "cost" : [ "WHITE", "COLORLESS" ],
   "types" : [ "CREATURE" ],
