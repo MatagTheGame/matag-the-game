@@ -1,17 +1,13 @@
 package com.matag.game.turn.action.selection;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.cards.ability.selector.CardInstanceSelector;
-import com.matag.game.status.GameStatus;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.selector.StatusType;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceSearch;
+import com.matag.game.status.GameStatus;
 import com.matag.player.PlayerType;
 import org.springframework.stereotype.Component;
-
-import java.util.Collections;
-
-import static java.util.Collections.emptyList;
 
 @Component
 public class CardInstanceSelectorService {
@@ -71,11 +67,15 @@ public class CardInstanceSelectorService {
     }
 
     if (cardInstanceSelector.isItself()) {
-      cards = cards.withId(cardInstance.getId()).map(Collections::singletonList).map(CardInstanceSearch::new).orElse(new CardInstanceSearch(emptyList()));
+      cards = cards.withIdAsList(cardInstance.getId());
     }
 
     if (cardInstanceSelector.getTurnStatusType() != null) {
       cards = cards.onTurnStatusType(cardInstanceSelector.getTurnStatusType(), gameStatus);
+    }
+
+    if (cardInstanceSelector.isCurrentEnchanted()) {
+      cards = cards.withIdAsList((cardInstance.getModifiers().getAttachedToId()));
     }
 
     return cards;

@@ -33,6 +33,11 @@ public class CardInstanceSearch {
       .findFirst();
   }
 
+  public CardInstanceSearch withIdAsList(int cardId) {
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getId() == cardId));
+  }
+
   public CardInstanceSearch notWithId(int cardId) {
     return new CardInstanceSearch(this.cards
       .filter(cardInstance -> cardInstance.getId() != cardId));

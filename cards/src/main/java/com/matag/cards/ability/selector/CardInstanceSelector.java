@@ -31,6 +31,7 @@ public class CardInstanceSelector {
   private final boolean others;
   private final boolean itself;
   private final boolean nonToken;
+  private final boolean currentEnchanted;
   private final TurnStatusType turnStatusType;
 
   @JsonPOJOBuilder(withPrefix = "")
@@ -50,6 +51,10 @@ public class CardInstanceSelector {
       } else {
         if (others) {
           stringBuilder.append("other ");
+        }
+
+        if (currentEnchanted) {
+          stringBuilder.append("enchanted ");
         }
 
         if (ofType != null) {

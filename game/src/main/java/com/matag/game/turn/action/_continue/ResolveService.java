@@ -50,8 +50,10 @@ public class ResolveService {
           .forEach(t -> stackItemToResolve.acknowledgedBy(controllerName));
 
         if (gameStatus.getActivePlayer().getName().equals(controllerName) && !stackItemToResolve.getAcknowledgedBy().contains(controllerName)) {
-          if (targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus)) {
-            targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
+          if (targetCheckerService.checkIfRequiresTarget(stackItemToResolve, gameStatus)) {
+            if (targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus)) {
+              targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
+            }
           }
           stackItemToResolve.acknowledgedBy(controllerName);
 

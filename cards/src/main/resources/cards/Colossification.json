@@ -23,7 +23,12 @@
       "type" : "CAST"
     }
   }, {
-    "abilityType" : "ENCHANTED_CREATURE_GETS",
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "currentEnchanted" : true
+    },
     "parameters" : [ ":TAPPED" ],
     "trigger" : {
       "type" : "TRIGGERED_ABILITY",

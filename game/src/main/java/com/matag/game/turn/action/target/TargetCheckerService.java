@@ -1,12 +1,12 @@
 package com.matag.game.turn.action.target;
 
+import com.matag.cards.ability.selector.CardInstanceSelector;
+import com.matag.cards.ability.selector.SelectorType;
+import com.matag.cards.ability.target.Target;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.cardinstance.ability.AbilityAction;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.cards.ability.selector.CardInstanceSelector;
-import com.matag.cards.ability.selector.SelectorType;
-import com.matag.cards.ability.target.Target;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.AbilityActionFactory;
@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
+import static com.matag.cards.ability.type.AbilityType.THAT_TARGETS_GET;
 import static com.matag.cards.ability.type.AbilityType.abilityType;
 
 @Component
@@ -68,21 +69,20 @@ public class TargetCheckerService {
     return targetsIds.stream().filter(t -> t.equals(targetId)).count();
   }
 
+  public boolean checkIfRequiresTarget(CardInstance cardToCast, GameStatus gameStatus) {
+    for (CardInstanceAbility ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
+      return ability.requiresTarget();
+    }
+
+    return false;
+  }
+
   public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
-    for (CardInstanceAbility ability : cardToCast.getAbilities()) {
-      AbilityAction abilityAction = abilityActionFactory.getAbilityAction(abilityType("THAT_TARGETS_GET"));
-      if (abilityAction == null) {
-        return true;
-
-      } else if (!ability.requiresTarget()) {
-        return true;
-
-      } else {
-        for (Target target : ability.getTargets()) {
-          CardInstanceSearch cards = cardInstanceSelectorService.select(gameStatus, cardToCast, target.getCardInstanceSelector());
-          if (cards.isNotEmpty()) {
-            return true;
-          }
+    for (CardInstanceAbility ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
+      for (Target target : ability.getTargets()) {
+        CardInstanceSearch cards = cardInstanceSelectorService.select(gameStatus, cardToCast, target.getCardInstanceSelector());
+        if (cards.isNotEmpty()) {
+          return true;
         }
       }
     }
@@ -113,7 +113,7 @@ public class TargetCheckerService {
 
       int targetCardId = (int) targetId;
       CardInstanceSearch cards = cardInstanceSelectorService.select(gameStatus, cardInstance, cardInstanceSelector);
-      if (!cards.withId(targetCardId).isPresent()) {
+      if (cards.withId(targetCardId).isEmpty()) {
         throw new MessageException("Selected targets were not valid.");
       }
     }

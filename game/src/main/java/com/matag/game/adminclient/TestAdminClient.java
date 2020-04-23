@@ -25,6 +25,6 @@ public class TestAdminClient extends AdminClient {
   }
 
   public PlayerInfo getPlayerInfo(SecurityToken token) {
-    return new PlayerInfo("Guest-" + GUEST_COUNTER.incrementAndGet());
+    return new PlayerInfo("Guest-" + ((GUEST_COUNTER.incrementAndGet() / 2) + 1));
   }
 }

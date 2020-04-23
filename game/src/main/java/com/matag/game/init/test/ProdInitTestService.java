@@ -68,11 +68,11 @@ public class ProdInitTestService extends InitTestService {
     addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Forest"));
 
     addCardToNonCurrentPlayerHand(gameStatus, cards.get("Gilded Sentinel"));
-    addCardToNonCurrentPlayerHand(gameStatus, cards.get("Charging Monstrosaur"));
+    addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Charging Monstrosaur"));
     addCardToNonCurrentPlayerHand(gameStatus, cards.get("Precision Bolt"));
     addCardToNonCurrentPlayerHand(gameStatus, cards.get("Overcome"));
     addCardToNonCurrentPlayerHand(gameStatus, cards.get("Marauder's Axe"));
-    addCardToNonCurrentPlayerHand(gameStatus, cards.get("Dead Weight"));
+    addCardToNonCurrentPlayerHand(gameStatus, cards.get("Colossification"));
 
     addCardToNonCurrentPlayerGraveyard(gameStatus, cards.get("Mountain"));
   }

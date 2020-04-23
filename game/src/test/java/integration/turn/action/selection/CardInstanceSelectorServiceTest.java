@@ -703,6 +703,29 @@ public class CardInstanceSelectorServiceTest {
   }
 
   @Test
+  public void selectionCurrentEnchanted() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).currentEnchanted(true).build();
+
+    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
+    aPermanent.setController("player-name");
+    CardInstance theEnchantment = cardInstanceFactory.create(gameStatus, 2, cards.get("Colossification"), "player-name");
+    theEnchantment.setController("player-name");
+    theEnchantment.getModifiers().setAttachedToId(aPermanent.getId());
+
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(aPermanent);
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(theEnchantment);
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus, theEnchantment, cardInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(aPermanent);
+  }
+
+  @Test
   public void creaturesYouControlGetText() {
     assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build().getText()).isEqualTo("Creatures you control get");
   }
