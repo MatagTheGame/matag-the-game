@@ -18,7 +18,7 @@
       "cardInstanceSelector" : {
         "selectorType" : "PERMANENT",
         "ofType" : [ "CREATURE" ],
-        "ofSubtypeOf" : [ "KNIGHT" ]
+        "ofSubtype" : [ "KNIGHT" ]
       }
     } ],
     "parameters" : [ "PLUS_1_COUNTERS:1" ],

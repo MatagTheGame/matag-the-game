@@ -30,8 +30,8 @@ public class CardInstanceSelectorService {
       throw new RuntimeException("Missing selectorType.");
     }
 
-    if (cardInstanceSelector.getOfSubtypeOf() != null) {
-      cards = cards.ofAnyOfTheSubtypes(cardInstanceSelector.getOfSubtypeOf());
+    if (cardInstanceSelector.getOfSubtype() != null) {
+      cards = cards.ofAnyOfTheSubtypes(cardInstanceSelector.getOfSubtype());
     }
 
     if (cardInstanceSelector.getControllerType() == PlayerType.PLAYER) {

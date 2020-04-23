@@ -17,7 +17,7 @@
     "cardInstanceSelector" : {
       "selectorType" : "PERMANENT",
       "ofType" : [ "CREATURE" ],
-      "ofSubtypeOf" : [ "ZOMBIE" ],
+      "ofSubtype" : [ "ZOMBIE" ],
       "controllerType" : "PLAYER"
     },
     "parameters" : [ "+1/+1" ],
@@ -29,7 +29,7 @@
     "cardInstanceSelector" : {
       "selectorType" : "PERMANENT",
       "ofType" : [ "CREATURE" ],
-      "ofSubtypeOf" : [ "ZOMBIE" ],
+      "ofSubtype" : [ "ZOMBIE" ],
       "controllerType" : "PLAYER"
     },
     "parameters" : [ "DEATHTOUCH" ],
@@ -41,7 +41,7 @@
     "cardInstanceSelector" : {
       "selectorType" : "PERMANENT",
       "ofType" : [ "CREATURE" ],
-      "ofSubtypeOf" : [ "ZOMBIE" ],
+      "ofSubtype" : [ "ZOMBIE" ],
       "controllerType" : "PLAYER",
       "others" : true
     },
@@ -54,7 +54,7 @@
     "cardInstanceSelector" : {
       "selectorType" : "PERMANENT",
       "ofType" : [ "CREATURE" ],
-      "ofSubtypeOf" : [ "ZOMBIE" ],
+      "ofSubtype" : [ "ZOMBIE" ],
       "controllerType" : "PLAYER",
       "others" : true
     },

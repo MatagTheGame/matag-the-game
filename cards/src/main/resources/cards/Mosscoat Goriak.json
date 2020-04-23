@@ -1,0 +1,18 @@
+{
+  "name" : "Mosscoat Goriak",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/c/2/c23139d4-0db5-4683-8d49-f4600fbe29e2.jpg?1586218226",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/c/2/c23139d4-0db5-4683-8d49-f4600fbe29e2.png?1586218226"
+  },
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "BEAST" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Vigilance.",
+  "power" : 2,
+  "toughness" : 4,
+  "abilities" : [ {
+    "abilityType" : "VIGILANCE"
+  } ]
+}

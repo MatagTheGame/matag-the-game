@@ -1,0 +1,57 @@
+{
+  "name" : "Inspired Ultimatum",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/d/d/dd64f064-8f05-41ef-b95b-1b723137f846.jpg?1586524450",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/d/d/dd64f064-8f05-41ef-b95b-1b723137f846.png?1586524450"
+  },
+  "colors" : [ "BLUE", "RED", "GREEN" ],
+  "cost" : [ "BLUE", "BLUE", "RED", "RED", "RED", "GREEN", "GREEN" ],
+  "types" : [ "SORCERY" ],
+  "rarity" : "RARE",
+  "ruleText" : "Target player gains 5 life. Inspired Ultimatum deals 5 damage to any target. You draw five cards.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "ANY"
+      }
+    } ],
+    "parameters" : [ "DAMAGE:5" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  }, {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PLAYER"
+      }
+    } ],
+    "parameters" : [ "LIFE:5" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  }, {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PLAYER"
+      }
+    } ],
+    "parameters" : [ "LIFE:5" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  }, {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PLAYER"
+      }
+    } ],
+    "parameters" : [ "DRAW:5" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
+}

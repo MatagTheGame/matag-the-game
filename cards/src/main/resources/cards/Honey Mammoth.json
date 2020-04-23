@@ -1,0 +1,27 @@
+{
+  "name" : "Honey Mammoth",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/4/84b9bee2-b973-4de7-b72d-7f36f8e8153c.jpg?1586697553",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/4/84b9bee2-b973-4de7-b72d-7f36f8e8153c.png?1586697553"
+  },
+  "colors" : [ "GREEN" ],
+  "cost" : [ "GREEN", "GREEN", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "ELEPHANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "When Honey Mammoth enters the battlefield, you gain 4 life.",
+  "power" : 6,
+  "toughness" : 6,
+  "abilities" : [ {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "6" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
+      }
+    }
+  } ]
+}

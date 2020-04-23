@@ -1,0 +1,37 @@
+{
+  "name" : "Dismal Backwater",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/a/5/a5ff247f-82d1-4b79-9ac0-1471a1f0f58b.jpg?1563899906",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/a/5/a5ff247f-82d1-4b79-9ac0-1471a1f0f58b.png?1563899906"
+  },
+  "types" : [ "LAND" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Dismal Backwater enters the battlefield tapped. When Dismal Backwater enters the battlefield, you gain 1 life. TAP: Add BLUE or BLACK to your mana pool.",
+  "abilities" : [ {
+    "abilityType" : "ENTERS_THE_BATTLEFIELD_WITH",
+    "parameters" : [ ":TAPPED" ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "BLUE" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
+    }
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "BLACK" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
+    }
+  }, {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
+      }
+    }
+  } ]
+}

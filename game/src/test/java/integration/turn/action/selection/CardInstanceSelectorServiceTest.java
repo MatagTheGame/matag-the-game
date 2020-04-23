@@ -575,7 +575,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtypeOf(singletonList(ZOMBIE)).others(true).build();
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtype(singletonList(ZOMBIE)).others(true).build();
     CardInstance otherZombiesCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Death Baron"), "player-name");
     otherZombiesCreature.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(otherZombiesCreature);

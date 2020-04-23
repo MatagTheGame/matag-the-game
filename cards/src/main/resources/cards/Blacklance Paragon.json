@@ -19,7 +19,7 @@
       "cardInstanceSelector" : {
         "selectorType" : "PERMANENT",
         "ofType" : [ "CREATURE" ],
-        "ofSubtypeOf" : [ "KNIGHT" ]
+        "ofSubtype" : [ "KNIGHT" ]
       }
     } ],
     "parameters" : [ "DEATHTOUCH", "LIFELINK" ],

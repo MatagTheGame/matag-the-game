@@ -22,7 +22,7 @@ public class CardInstanceSelector {
   private final SelectorType selectorType;
   private final List<Type> ofType;
   private final List<Type> notOfType;
-  private final List<Subtype> ofSubtypeOf;
+  private final List<Subtype> ofSubtype;
   private final AbilityType withAbilityType;
   private final List<Color> ofColors;
   private final PowerToughnessConstraint powerToughnessConstraint;

@@ -1,0 +1,37 @@
+{
+  "name" : "Swiftwater Cliffs",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/2/a/2a6f4398-51f3-4f73-802a-9528e0c86061.jpg?1568005422",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/2/a/2a6f4398-51f3-4f73-802a-9528e0c86061.png?1568005422"
+  },
+  "types" : [ "LAND" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Swiftwater Cliffs enters the battlefield tapped. When Swiftwater Cliffs enters the battlefield, you gain 1 life. TAP: Add BLUE or RED to your mana pool.",
+  "abilities" : [ {
+    "abilityType" : "ENTERS_THE_BATTLEFIELD_WITH",
+    "parameters" : [ ":TAPPED" ]
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "BLUE" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
+    }
+  }, {
+    "abilityType" : "TAP_ADD_MANA",
+    "parameters" : [ "RED" ],
+    "trigger" : {
+      "type" : "MANA_ABILITY"
+    }
+  }, {
+    "abilityType" : "ADD_X_LIFE",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
+      }
+    }
+  } ]
+}
