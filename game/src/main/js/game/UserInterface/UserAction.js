@@ -12,12 +12,15 @@ class UserAction extends Component {
   }
 
   handleContinueKey(event) {
-    if (event.key === ' ') {
-      if (this.isContinueEnabled()) {
-        this.props.continueClick()
+    console.log('isPopupOpen: ', this.props.isPopupOpen)
+    if (!this.props.isPopupOpen) {
+      if (event.key === ' ') {
+        if (this.isContinueEnabled()) {
+          this.props.continueClick()
+        }
+      } else if (event.key === 'H') {
+        this.props.openHelpPage(true)
       }
-    } else if (event.key === 'H') {
-      this.props.openHelpPage(true)
     }
   }
 
@@ -65,7 +68,8 @@ const mapStateToProps = state => {
   return {
     turn: get(state, 'turn', {}),
     currentPlayerName: get(state, 'player.name', ''),
-    winner: get(state, 'turn.winner')
+    winner: get(state, 'turn.winner'),
+    isPopupOpen: get(state, 'userInterface.message.text', false)
   }
 }
 
