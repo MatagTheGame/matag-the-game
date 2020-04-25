@@ -1,0 +1,45 @@
+{
+  "name" : "Goblin Chainwhirler",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/b/8bdb2883-3cfd-4fb0-9f99-6a57277f7fe4.jpg?1562739277",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/b/8bdb2883-3cfd-4fb0-9f99-6a57277f7fe4.png?1562739277"
+  },
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "RED", "RED" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "GOBLIN", "WARRIOR" ],
+  "rarity" : "RARE",
+  "ruleText" : "First strike. When Goblin Chainwhirler enters the battlefield, it deals 1 damage to each opponent and each creature and planeswalker they control.",
+  "power" : 3,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "FIRST_STRIKE"
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE", "PLANESWALKER" ],
+      "controllerType" : "OPPONENT"
+    },
+    "parameters" : [ "DAMAGE:1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
+      }
+    }
+  }, {
+    "abilityType" : "EACH_PLAYERS_ADD_X_LIFE",
+    "parameters" : [ "-1" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
+      }
+    }
+  } ]
+}

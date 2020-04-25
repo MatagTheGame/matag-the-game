@@ -1,0 +1,33 @@
+{
+  "name" : "Cavalry Drillmaster",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/2/62d2e929-7ae3-4560-9cfa-53b89c8a6016.jpg?1562302622",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/2/62d2e929-7ae3-4560-9cfa-53b89c8a6016.png?1562302622"
+  },
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "KNIGHT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "When Cavalry Drillmaster enters the battlefield, target creature gets +2/+0 and gains first strike until end of turn.",
+  "power" : 2,
+  "toughness" : 1,
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
+      }
+    } ],
+    "parameters" : [ "+2/+0", "FIRST_STRIKE" ],
+    "trigger" : {
+      "type" : "TRIGGERED_ABILITY",
+      "subtype" : "WHEN_ENTER_THE_BATTLEFIELD",
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "itself" : true
+      }
+    }
+  } ]
+}

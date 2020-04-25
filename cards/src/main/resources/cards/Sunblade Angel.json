@@ -1,0 +1,24 @@
+{
+  "name" : "Sunblade Angel",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/2/9211c0e1-b314-495f-9c43-9a0e95c9efb9.jpg?1557576072",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/2/9211c0e1-b314-495f-9c43-9a0e95c9efb9.png?1557576072"
+  },
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "ANGEL" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Flying, first strike, vigilance, lifelink.",
+  "power" : 3,
+  "toughness" : 3,
+  "abilities" : [ {
+    "abilityType" : "FLYING"
+  }, {
+    "abilityType" : "FIRST_STRIKE"
+  }, {
+    "abilityType" : "VIGILANCE"
+  }, {
+    "abilityType" : "LIFELINK"
+  } ]
+}

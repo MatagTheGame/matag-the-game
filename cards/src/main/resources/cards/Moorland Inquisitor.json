@@ -1,0 +1,27 @@
+{
+  "name" : "Moorland Inquisitor",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/9/d/9d7b1446-7c9f-4b62-9877-e3d1060948aa.jpg?1563898404",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/9/d/9d7b1446-7c9f-4b62-9877-e3d1060948aa.png?1563898404"
+  },
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "SOLDIER" ],
+  "rarity" : "COMMON",
+  "ruleText" : "PAY 2, 1 WHITE: Moorland Inquisitor gains first strike until end of turn.",
+  "power" : 2,
+  "toughness" : 2,
+  "abilities" : [ {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "itself" : true
+    },
+    "parameters" : [ "FIRST_STRIKE" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "WHITE", "COLORLESS", "COLORLESS" ]
+    }
+  } ]
+}

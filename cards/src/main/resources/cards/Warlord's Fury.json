@@ -1,0 +1,32 @@
+{
+  "name" : "Warlord's Fury",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/0/e/0ebd63cf-7e8c-4c8d-844d-98535d5f3039.jpg?1562731381",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/0/e/0ebd63cf-7e8c-4c8d-844d-98535d5f3039.png?1562731381"
+  },
+  "colors" : [ "RED" ],
+  "cost" : [ "RED" ],
+  "types" : [ "SORCERY" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Creatures you control gain first strike until end of turn. Draw a card.",
+  "abilities" : [ {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ],
+        "controllerType" : "PLAYER"
+      }
+    } ],
+    "parameters" : [ "FIRST_STRIKE" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  }, {
+    "abilityType" : "DRAW_X_CARDS",
+    "parameters" : [ "1" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
+}

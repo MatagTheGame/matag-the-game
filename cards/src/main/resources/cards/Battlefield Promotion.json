@@ -1,0 +1,25 @@
+{
+  "name" : "Battlefield Promotion",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/9/89f8e970-b90c-4829-8970-0a3364027bbb.jpg?1557575884",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/9/89f8e970-b90c-4829-8970-0a3364027bbb.png?1557575884"
+  },
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Put a +1/+1 counter on target creature. That creature gains first strike until end of turn. You gain 2 life.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
+      }
+    } ],
+    "parameters" : [ "FIRST_STRIKE", "PLUS_1_COUNTERS:1" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
+}

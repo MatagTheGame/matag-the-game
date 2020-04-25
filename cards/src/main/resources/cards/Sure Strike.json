@@ -1,0 +1,25 @@
+{
+  "name" : "Sure Strike",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/d/8d01f1ce-9931-4712-a907-72c2c6d5ee76.jpg?1572893274",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/d/8d01f1ce-9931-4712-a907-72c2c6d5ee76.png?1572893274"
+  },
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "COMMON",
+  "ruleText" : "Target creature gets +3/+0 and gains first strike until end of turn.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
+      }
+    } ],
+    "parameters" : [ "+3/+0", "FIRST_STRIKE" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
+}
