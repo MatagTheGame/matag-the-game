@@ -1,0 +1,25 @@
+{
+  "name" : "Uncaged Fury",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/8/3/837557f2-6151-489c-a997-00862173cd15.jpg?1563899347",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/8/3/837557f2-6151-489c-a997-00862173cd15.png?1563899347"
+  },
+  "colors" : [ "RED" ],
+  "cost" : [ "RED", "COLORLESS", "COLORLESS" ],
+  "types" : [ "INSTANT" ],
+  "rarity" : "UNCOMMON",
+  "ruleText" : "Target creature gets +1/+1 and gains double strike until end of turn.",
+  "abilities" : [ {
+    "abilityType" : "THAT_TARGETS_GET",
+    "targets" : [ {
+      "cardInstanceSelector" : {
+        "selectorType" : "PERMANENT",
+        "ofType" : [ "CREATURE" ]
+      }
+    } ],
+    "parameters" : [ "+1/+1", "DOUBLE_STRIKE" ],
+    "trigger" : {
+      "type" : "CAST"
+    }
+  } ]
+}

@@ -23,7 +23,8 @@
     "cardInstanceSelector" : {
       "selectorType" : "PERMANENT",
       "ofType" : [ "CREATURE" ],
-      "controllerType" : "PLAYER"
+      "controllerType" : "PLAYER",
+      "others" : true
     },
     "parameters" : [ "+2/+2", "VIGILANCE", "TRAMPLE" ],
     "trigger" : {

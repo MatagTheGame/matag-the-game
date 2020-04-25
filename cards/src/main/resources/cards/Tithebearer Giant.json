@@ -9,7 +9,7 @@
   "types" : [ "CREATURE" ],
   "subtypes" : [ "GIANT", "WARRIOR" ],
   "rarity" : "COMMON",
-  "ruleText" : "When Tithebearer Giant enters the battlefield, you draw a card and you lose 1 life. When Thundering Ceratok enters the battlefield, other creatures you control gain trample until end of turn.",
+  "ruleText" : "When Tithebearer Giant enters the battlefield, you draw a card and you lose 1 life.",
   "power" : 4,
   "toughness" : 5,
   "abilities" : [ {

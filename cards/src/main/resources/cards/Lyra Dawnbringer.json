@@ -24,7 +24,8 @@
       "selectorType" : "PERMANENT",
       "ofType" : [ "CREATURE" ],
       "ofSubtype" : [ "ANGEL" ],
-      "controllerType" : "PLAYER"
+      "controllerType" : "PLAYER",
+      "others" : true
     },
     "parameters" : [ "+1/+1", "LIFELINK" ],
     "trigger" : {

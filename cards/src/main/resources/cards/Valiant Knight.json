@@ -1,0 +1,42 @@
+{
+  "name" : "Valiant Knight",
+  "imageUrls" : {
+    "lowResolution" : "https://img.scryfall.com/cards/normal/front/6/a/6ad750bc-850b-483b-8910-eb6562f925bc.jpg?1562302667",
+    "highResolution" : "https://img.scryfall.com/cards/png/front/6/a/6ad750bc-850b-483b-8910-eb6562f925bc.png?1562302667"
+  },
+  "colors" : [ "WHITE" ],
+  "cost" : [ "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ],
+  "types" : [ "CREATURE" ],
+  "subtypes" : [ "HUMAN", "KNIGHT" ],
+  "rarity" : "RARE",
+  "ruleText" : "Other Knights you control get +1/+1. PAY 3, 2 WHITE: Knights you control gain double strike until end of turn.",
+  "power" : 3,
+  "toughness" : 4,
+  "abilities" : [ {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "ofSubtype" : [ "KNIGHT" ],
+      "controllerType" : "PLAYER",
+      "others" : true
+    },
+    "parameters" : [ "+1/+1" ],
+    "trigger" : {
+      "type" : "STATIC"
+    }
+  }, {
+    "abilityType" : "SELECTED_PERMANENTS_GET",
+    "cardInstanceSelector" : {
+      "selectorType" : "PERMANENT",
+      "ofType" : [ "CREATURE" ],
+      "ofSubtype" : [ "KNIGHT" ],
+      "controllerType" : "PLAYER"
+    },
+    "parameters" : [ "DOUBLE_STRIKE" ],
+    "trigger" : {
+      "type" : "ACTIVATED_ABILITY",
+      "cost" : [ "WHITE", "WHITE", "COLORLESS", "COLORLESS", "COLORLESS" ]
+    }
+  } ]
+}

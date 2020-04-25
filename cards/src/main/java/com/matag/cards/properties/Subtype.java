@@ -27,6 +27,7 @@ public enum Subtype {
   DRAKE,
   DRUID,
   DWARF,
+  ELDER,
   ELEMENTAL,
   ELEPHANT,
   ELF,
