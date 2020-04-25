@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
+
 @Component
 @AllArgsConstructor
 public class DeclareAttackerService {
@@ -18,7 +20,7 @@ public class DeclareAttackerService {
     Turn turn = gameStatus.getTurn();
     Player currentPlayer = gameStatus.getCurrentPlayer();
 
-    if (!turn.getCurrentPhase().equals("DA")) {
+    if (!turn.getCurrentPhase().equals(DA)) {
       throw new RuntimeException("Attackers declared during phase: " + turn.getCurrentPhase());
     }
 

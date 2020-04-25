@@ -16,6 +16,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.*;
+import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
+import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.matag.player.PlayerType.PLAYER;
 
 @RunWith(SpringRunner.class)
@@ -62,10 +64,10 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
 
     // move at AfterBlocking phase
     browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is("DA", PLAYER);
+    browser.player1().getPhaseHelper().is(DA, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).declareAsAttacker();
     browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is("AB", PLAYER);
+    browser.player1().getPhaseHelper().is(AB, PLAYER);
 
     // check can increase jousting dummy at instant speed
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 5).tap();

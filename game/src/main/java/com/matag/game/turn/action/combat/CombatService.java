@@ -33,12 +33,16 @@ public class CombatService {
       List<CardInstance> blockingCreaturesFor = nonCurrentPlayer.getBattlefield().getBlockingCreaturesFor(attackingCreature.getId());
       int remainingDamage = dealCombatDamageForOneAttackingCreature(gameStatus, attackingCreature, blockingCreaturesFor);
 
-      if (blockingCreaturesFor.isEmpty() || attackingCreature.hasAbilityType(TRAMPLE)) {
-        damageFromUnblockedCreatures += remainingDamage;
+      if (!attackingCreature.getModifiers().isBlocked() || attackingCreature.hasAbilityType(TRAMPLE)) {
+        if (shouldDealDamage(gameStatus, attackingCreature)) {
+          damageFromUnblockedCreatures += remainingDamage;
+        }
       }
 
       if (attackingCreature.hasAbilityType(LIFELINK)) {
-        lifelink += attackingCreature.getPower();
+        if (!attackingCreature.getModifiers().isBlocked() || !blockingCreaturesFor.isEmpty()) {
+          lifelink += attackingCreature.getPower();
+        }
       }
     }
 
@@ -72,11 +76,10 @@ public class CombatService {
 
   private boolean shouldDealDamage(GameStatus gameStatus, CardInstance cardInstance) {
     if (gameStatus.getTurn().getCurrentPhase().equals(FS)) {
-      return cardInstance.hasAnyFixedAbility(List.of(FIRST_STRIKE));
+      return cardInstance.hasAnyFixedAbility(List.of(FIRST_STRIKE, DOUBLE_STRIKE));
 
     } else {
       return !cardInstance.hasFixedAbility(FIRST_STRIKE);
-
     }
   }
 }

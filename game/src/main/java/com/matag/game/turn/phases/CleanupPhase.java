@@ -23,8 +23,7 @@ public class CleanupPhase implements Phase {
 
   private void cleanup(GameStatus gameStatus) {
     gameStatus.getTurn().getCardsPlayedWithinTurn().clear();
-    gameStatus.getCurrentPlayer().getBattlefield().getCards().forEach(CardInstance::cleanup);
-    gameStatus.getNonCurrentPlayer().getBattlefield().getCards().forEach(CardInstance::cleanup);
+    gameStatus.getAllBattlefieldCards().getCards().forEach(CardInstance::cleanup);
   }
 
   private void moveToNextPlayer(GameStatus gameStatus) {

@@ -15,6 +15,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static com.matag.game.turn.phases.Main1Phase.M1;
+
 public class TestUtils {
   private final GameStatusFactory gameStatusFactory;
   private final PlayerFactory playerFactory;
@@ -46,7 +48,7 @@ public class TestUtils {
 
     gameStatus.getTurn().setCurrentTurnPlayer("player-name");
     gameStatus.getTurn().setCurrentPhaseActivePlayer("player-name");
-    gameStatus.getTurn().setCurrentPhase("M1");
+    gameStatus.getTurn().setCurrentPhase(M1);
 
     return gameStatus;
   }

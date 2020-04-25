@@ -1,9 +1,9 @@
 package com.matag.game.cardinstance.modifiers;
 
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.cards.properties.PowerToughness;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.matag.cards.properties.PowerToughness;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +29,8 @@ public class CardModifiers {
   private boolean summoningSickness;
   @JsonProperty
   private boolean attacking;
+  private boolean attacked;
+  private boolean blocked;
   @JsonProperty
   private Integer blockingCardId;
   @JsonProperty
@@ -55,6 +57,8 @@ public class CardModifiers {
     abilitiesUntilEndOfTurn = new ArrayList<>();
     extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
     controllerUntilEndOfTurn = null;
+    attacked = false;
+    blocked = false;
   }
 
   public boolean isTapped() {

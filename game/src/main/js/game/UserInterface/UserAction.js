@@ -12,7 +12,6 @@ class UserAction extends Component {
   }
 
   handleContinueKey(event) {
-    console.log('isPopupOpen: ', this.props.isPopupOpen)
     if (!this.props.isPopupOpen) {
       if (event.key === ' ') {
         if (this.isContinueEnabled()) {

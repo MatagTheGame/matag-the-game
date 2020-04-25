@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
 import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
 import static com.matag.game.turn.phases.AfterFirstStrikePhase.AF;
 
@@ -29,7 +30,7 @@ public class FirstStrikePhase implements Phase {
     gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
 
     boolean executePhase = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
-      .withAnyFixedAbility(List.of(FIRST_STRIKE))
+      .withAnyFixedAbility(List.of(FIRST_STRIKE, DOUBLE_STRIKE))
       .isNotEmpty();
 
     if (executePhase) {

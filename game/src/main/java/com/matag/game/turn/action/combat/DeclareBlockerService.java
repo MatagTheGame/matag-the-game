@@ -32,9 +32,11 @@ public class DeclareBlockerService {
       nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).checkIfCanBlock(blockedCreature);
     });
 
-    blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) ->
-      nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(blockedCreaturesIds.get(0))
-    );
+    blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
+      Integer attackingCreatureId = blockedCreaturesIds.get(0);
+      currentPlayer.getBattlefield().findCardById(attackingCreatureId).getModifiers().setBlocked(true);
+      nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(attackingCreatureId);
+    });
 
     continueTurnService.continueTurn(gameStatus);
   }

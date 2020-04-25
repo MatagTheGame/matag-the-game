@@ -3,6 +3,7 @@ package com.matag.cards.ability.type;
 public enum AbilityType {
   ADAMANT("Adamant"),
   DEATHTOUCH("Deathtouch."),
+  DOUBLE_STRIKE("Double strike."),
   DRAW_X_CARDS("Draw %s cards."),
   ADD_X_LIFE("%s %s life."),
   EACH_PLAYERS_ADD_X_LIFE("Each player %s %s life."),

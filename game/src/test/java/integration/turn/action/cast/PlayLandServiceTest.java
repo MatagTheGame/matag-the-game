@@ -1,8 +1,8 @@
 package integration.turn.action.cast;
 
+import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.cards.Cards;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.cast.PlayLandService;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static com.matag.game.turn.phases.FirstStrikePhase.FS;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
@@ -93,7 +94,7 @@ public class PlayLandServiceTest {
   public void playLandNotInMainPhase() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase("FS");
+    gameStatus.getTurn().setCurrentPhase(FS);
     CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
     gameStatus.getPlayer1().getHand().addCard(card);
 
