@@ -20,9 +20,6 @@ import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = MatagGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import({CastNegativeAuraOnOpponentCreatureTest.InitGameTestConfiguration.class})
 @Category(Regression.class)
 public class CastNegativeAuraOnOpponentCreatureTest extends AbstractApplicationTest {
 

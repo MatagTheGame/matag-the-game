@@ -3,6 +3,7 @@ package application;
 import application.inmemoryrepositories.AbstractInMemoryRepository;
 import application.inmemoryrepositories.MatagUserAbstractInMemoryRepository;
 import com.matag.admin.MatagAdminApplication;
+import com.matag.admin.config.ConfigService;
 import com.matag.admin.session.MatagSession;
 import com.matag.admin.session.MatagSessionRepository;
 import com.matag.admin.user.MatagUser;
@@ -56,6 +57,9 @@ public abstract class AbstractApplicationTest {
   @Autowired
   protected TestRestTemplate restTemplate;
 
+  @Autowired
+  private ConfigService configService;
+
   @Before
   public void setupDatabase() {
     setCurrentTime(TEST_START_TIME);
@@ -93,6 +97,14 @@ public abstract class AbstractApplicationTest {
     restTemplate.getRestTemplate().setInterceptors(
       Collections.singletonList((request, body, execution) -> {
         request.getHeaders().add(SESSION_NAME, userToken);
+        return execution.execute(request, body);
+      }));
+  }
+
+  public void adminAuthentication() {
+    restTemplate.getRestTemplate().setInterceptors(
+      Collections.singletonList((request, body, execution) -> {
+        request.getHeaders().add("admin", configService.getMatagAdminPassword());
         return execution.execute(request, body);
       }));
   }

@@ -14,6 +14,9 @@ public class ConfigService {
   @Value("${matag.game.url}")
   private String matagGameUrl;
 
+  @Value("${matag.admin.password}")
+  private String matagAdminPassword;
+
   public Map<String, String> getConfig() {
     return singletonMap("matagGameUrl", matagGameUrl);
   }

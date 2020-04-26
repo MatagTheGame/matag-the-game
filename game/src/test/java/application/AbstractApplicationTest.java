@@ -4,6 +4,7 @@ import application.browser.MatagBrowser;
 import com.matag.adminentities.DeckInfo;
 import com.matag.adminentities.PlayerInfo;
 import com.matag.cards.Cards;
+import com.matag.game.MatagGameApplication;
 import com.matag.game.adminclient.AdminClient;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.launcher.LauncherGameResponseBuilder;
@@ -12,14 +13,18 @@ import com.matag.game.status.GameStatusRepository;
 import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -33,6 +38,9 @@ import static java.lang.Integer.parseInt;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = MatagGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Import({AbstractApplicationTest.InitGameTestConfiguration.class})
 public abstract class AbstractApplicationTest {
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplicationTest.class);
 

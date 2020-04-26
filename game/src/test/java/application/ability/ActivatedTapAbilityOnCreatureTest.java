@@ -3,25 +3,17 @@ package application.ability;
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import com.matag.cards.Cards;
-import com.matag.game.MatagGameApplication;
 import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = MatagGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@Import({ActivatedTapAbilityOnCreatureTest.InitGameTestConfiguration.class})
 public class ActivatedTapAbilityOnCreatureTest extends AbstractApplicationTest {
 
   @Autowired
