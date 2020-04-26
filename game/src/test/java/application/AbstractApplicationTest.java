@@ -188,7 +188,7 @@ public abstract class AbstractApplicationTest {
     try {
       return parseInt(System.getProperty("test.gameSetup.retries"));
     } catch (Exception e) {
-      return 10;
+      return 3;
     }
   }
 }
