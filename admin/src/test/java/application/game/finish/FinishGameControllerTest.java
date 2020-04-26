@@ -1,17 +1,26 @@
 package application.game.finish;
 
 import application.AbstractApplicationTest;
+import com.matag.admin.game.game.Game;
 import com.matag.admin.game.game.GameRepository;
 import com.matag.admin.game.join.JoinGameRequest;
 import com.matag.admin.game.join.JoinGameResponse;
+import com.matag.admin.game.session.GameSession;
 import com.matag.admin.game.session.GameSessionRepository;
 import com.matag.adminentities.FinishGameRequest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
+
 import static application.TestUtils.user1;
 import static application.TestUtils.user2;
+import static com.matag.admin.game.game.GameResultType.R1;
+import static com.matag.admin.game.game.GameStatusType.FINISHED;
 import static com.matag.admin.game.game.GameType.UNLIMITED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
@@ -62,5 +71,15 @@ public class FinishGameControllerTest extends AbstractApplicationTest {
 
     // Then
     assertThat(response.getStatusCode()).isEqualTo(OK);
+    Optional<Game> game = gameRepository.findById(gameId);
+    assertThat(game).isPresent();
+    assertThat(game.get().getStatus()).isEqualTo(FINISHED);
+    assertThat(game.get().getResult()).isEqualTo(R1);
+    assertThat(game.get().getFinishedAt()).isNotNull();
+
+    List<GameSession> gameSessions = StreamSupport.stream(gameSessionRepository.findAll().spliterator(), false).collect(Collectors.toList());
+    assertThat(gameSessions).hasSize(2);
+    assertThat(gameSessions.get(0).getSession()).isNull();
+    assertThat(gameSessions.get(1).getSession()).isNull();
   }
 }

@@ -1,10 +1,9 @@
 package com.matag.admin.game.cancel;
 
 import com.matag.admin.auth.SecurityContextHolderHelper;
+import com.matag.admin.game.finish.FinishGameService;
 import com.matag.admin.game.game.Game;
 import com.matag.admin.game.game.GameRepository;
-import com.matag.admin.game.game.GameResultType;
-import com.matag.admin.game.game.GameStatusType;
 import com.matag.admin.game.session.GamePlayers;
 import com.matag.admin.game.session.GameSession;
 import com.matag.admin.game.session.GameSessionRepository;
@@ -14,8 +13,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Component
@@ -25,7 +22,7 @@ public class CancelGameService {
   private final GameRepository gameRepository;
   private final GameSessionRepository gameSessionRepository;
   private final GameSessionService gameSessionService;
-  private final Clock clock;
+  private final FinishGameService finishGameService;
 
   @Transactional
   public CancelGameResponse cancel(Long gameId) {
@@ -40,25 +37,20 @@ public class CancelGameService {
           gameRepository.delete(game);
 
         } else {
-          game.setStatus(GameStatusType.FINISHED);
-          GameResultType gameResultType;
-          if (gamePlayers.getPlayerSession().getSession().getId().equals(securityContextHolderHelper.getSession().getId())) {
-            gameResultType = GameResultType.R2;
-          } else {
-            gameResultType = GameResultType.R1;
-          }
-          game.setResult(gameResultType);
-          game.setFinishedAt(LocalDateTime.now(clock));
-          gameRepository.save(game);
-
-          gamePlayers.getPlayerSession().setSession(null);
-          gameSessionRepository.save(gamePlayers.getPlayerSession());
-          gamePlayers.getOpponentSession().setSession(null);
-          gameSessionRepository.save(gamePlayers.getOpponentSession());
+          String winnerSessionId = findOpponentSessionId(gamePlayers, session);
+          finishGameService.finishGame(game, gamePlayers, winnerSessionId);
         }
       }
     }
 
     return CancelGameResponse.builder().build();
+  }
+
+  private String findOpponentSessionId(GamePlayers gamePlayers, MatagSession session) {
+    if (gamePlayers.getPlayerSession().getSession().getId().equals(session.getId())) {
+      return gamePlayers.getOpponentSession().getSession().getId();
+    } else {
+      return gamePlayers.getPlayerSession().getSession().getId();
+    }
   }
 }
