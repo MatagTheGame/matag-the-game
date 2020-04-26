@@ -46,6 +46,7 @@ contributing and learning the project.
 
 #### Continuous Integration with Github Actions
 
+![Java CI with Maven](https://github.com/antonioalonzi/matag/workflows/Java%20CI%20with%20Maven/badge.svg)
  - https://github.com/antonioalonzi/matag/actions
 
 
