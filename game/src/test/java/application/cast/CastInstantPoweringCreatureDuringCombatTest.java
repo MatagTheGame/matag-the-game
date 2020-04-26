@@ -39,6 +39,7 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
     browser.player1().getPhaseHelper().is(DA, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Bastion Enforcer")).declareAsAttacker();
     browser.player1().getActionHelper().clickContinue();
+    browser.player2().getPhaseHelper().is(DA, PLAYER);
 
     // And player 2 plays the game by blocking
     browser.player2().getActionHelper().clickContinue();

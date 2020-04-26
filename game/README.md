@@ -56,7 +56,7 @@ There are two types of java tests **application** and **integration**.
 #### Run application tests
 
 Application tests span the entire SpringBootApplication and open browser to hit the server.
-They run against HtmlUnit on Travis but can be run against ChromeDriver locally.
+They run against HtmlUnit on CI but can be run against ChromeDriver locally.
 
 You may want to change the following options in IntelliJ for all of your tests:
  - Run -> Edit Configuration -> Templates -> JUnit -> VM Options
@@ -76,14 +76,6 @@ Tests are by default executed 10 times in case of failures.
 When running in IntelliJ is good to add as well:
 
     -Dtest.gameSetup.retries=1 
-
-Some tests have been moved to regression to speed up the process.
-
-    mvn test -Dgroups="application.testcategory.Regression"
-    
-Travis instead runs only non regression tests (as I'm on a free plan):
-
-    mvn test -DexcludedGroups="application.testcategory.Regression"
 
 ### Run the application locally
 

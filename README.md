@@ -44,14 +44,9 @@ contributing and learning the project.
 ### CI/CD
 
 
-#### Continuous Integration on Travis
+#### Continuous Integration with Github Actions
 
-[![Build Status](https://travis-ci.com/antonioalonzi/matag.svg?branch=master)](https://travis-ci.com/antonioalonzi/matag)
-
- - Travis: https://travis-ci.com/antonioalonzi/matag
-
-Tests run for all the modules together.
-For the `game` module `Regression` tests are skipped. Read [game README](game/README.md) for more info.
+ - https://github.com/antonioalonzi/matag/actions
 
 
 #### Continuous Deployment on Heroku
