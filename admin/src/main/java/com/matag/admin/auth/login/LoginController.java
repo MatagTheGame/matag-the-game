@@ -58,7 +58,7 @@ public class LoginController {
 
     Optional<MatagUser> userOptional = userRepository.findByEmailAddress(loginRequest.getEmail());
 
-    if (!userOptional.isPresent()) {
+    if (userOptional.isEmpty()) {
       return response(UNAUTHORIZED, EMAIL_OR_PASSWORD_ARE_INCORRECT);
     }
 

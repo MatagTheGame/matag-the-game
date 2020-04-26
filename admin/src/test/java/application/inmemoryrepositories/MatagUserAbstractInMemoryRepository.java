@@ -35,6 +35,13 @@ public class MatagUserAbstractInMemoryRepository extends AbstractInMemoryReposit
   }
 
   @Override
+  public Optional<MatagUser> findByUsername(String username) {
+    return DATA.values().stream()
+      .filter(matagUser -> matagUser.getUsername().equals(username))
+      .findFirst();
+  }
+
+  @Override
   public long countUsersByStatus(MatagUserStatus matagUserStatus) {
     return DATA.values().stream().filter(u -> u.getStatus() == matagUserStatus).count();
   }
