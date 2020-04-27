@@ -35,7 +35,7 @@ The application is divided in modules:
 ### Backlog
 
 The backlog is managed in Kanban style at:
- - https://github.com/AA-Matag/matag/projects/1
+ - https://github.com/MatagTheGame/matag/projects/1
 
 Stories labelled `with guidelines` are very well described and easy to be picked up for people who want to start
 contributing and learning the project.
@@ -46,8 +46,8 @@ contributing and learning the project.
 
 #### Continuous Integration with Github Actions
 
-![Java CI with Maven](https://github.com/AA-Matag/matag/workflows/Java%20CI%20with%20Maven/badge.svg)
- - https://github.com/AA-Matag/matag/actions
+![Java CI with Maven](https://github.com/MatagTheGame/matag/workflows/Java%20CI%20with%20Maven/badge.svg)
+ - https://github.com/MatagTheGame/matag/actions
 
 
 #### Continuous Deployment on Heroku
@@ -59,7 +59,7 @@ Applications are continuously deployed on heroku:
 
 ## License
 
-Copyright © 2019, 2020 Antonio Alonzi and [contributors](https://github.com/AA-Matag/matag/graphs/contributors)
+Copyright © 2019, 2020 Antonio Alonzi and [contributors](https://github.com/MatagTheGame/matag/graphs/contributors)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
