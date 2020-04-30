@@ -45,4 +45,4 @@ jobs:
       - name: Build with Maven
         run: mvn clean install -DskipTests
       - name: Test with Maven
-        run: mvn test -pl game -Dgroups="application.testcategory.Regression"
+        run: mvn test -Dgroups="application.testcategory.Regression"

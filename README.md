@@ -3,6 +3,14 @@
 This application is taking care of playing matches between players.
 It is deployed at https://matag-game.herokuapp.com/ui/game
 
+See [Matag: The Game](https://github.com/MatagTheGame/matag-the-game/wiki) wiki
+
+
+## Automated Build
+
+![Java CI with Maven](https://github.com/MatagTheGame/matag-the-game/workflows/Java%20CI%20with%20Maven/badge.svg)
+ - https://github.com/MatagTheGame/matag-the-game/actions
+ 
 
 ## Requisites
 
