@@ -53,7 +53,7 @@ public class AdminClient {
     HttpHeaders headers = new HttpHeaders();
     headers.setAccept(singletonList(MediaType.APPLICATION_JSON));
     headers.set("session", token.getAdminToken());
-    headers.set("admin", configService.getAdminPassword());
+//    headers.set("admin", configService.getAdminPassword());
 
     HttpEntity<Object> entity = new HttpEntity<>(request, headers);
 
