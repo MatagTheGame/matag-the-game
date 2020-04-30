@@ -1,22 +1,7 @@
-# Ignore NPM files
-node/
-node_modules/
-yarn-error.log
-*/src/main/resources/public/js/*
+/.idea
+/*.iml
+/target
 
-# Ignore binaries
-bin/
-target/
-
-# Ignore IntelliJ files
-.idea
-*.iml
-
-# Ignore MacOS files
-.DS_Store
-
-# Ignore Eclipse files
-.project
-.classpath
-org.eclipse.*.prefs
-
+/src/main/resources/public/js
+/node
+/node_modules
