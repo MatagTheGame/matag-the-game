@@ -86,7 +86,7 @@ When running in IntelliJ is good to add as well:
 Startup the app as spring boot
 
     # from intellij or with
-    mvn spring-boot:run -Dserver.port=8080 -Dmatag.admin.url=http://localhost:8082 -Dmatag.admin.password=password
+    mvn spring-boot:run -Dspring-boot.run.profiles=dev
 
 
 It is possible to run `game` app with `test` profile.
