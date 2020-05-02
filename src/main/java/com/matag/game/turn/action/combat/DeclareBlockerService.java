@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
 
@@ -29,7 +30,15 @@ public class DeclareBlockerService {
 
     blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
       CardInstance blockedCreature = currentPlayer.getBattlefield().findCardById(blockedCreaturesIds.get(0));
-      nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).checkIfCanBlock(blockedCreature);
+      CardInstance mainBlocker = nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId);
+      List<CardInstance> blockers = blockingCreaturesIdsForAttackingCreaturesIds
+              .keySet()
+              .stream()
+              .map(creatureId -> nonCurrentPlayer.getBattlefield().findCardById(creatureId))
+              .filter(blocker -> blocker != mainBlocker)
+              .filter(blocker -> blockingCreaturesIdsForAttackingCreaturesIds.get(blocker.getId()).indexOf(blockedCreature.getId()) == 0)
+              .collect(Collectors.toList());
+      mainBlocker.checkIfCanBlock(blockedCreature, blockers);
     });
 
     blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
