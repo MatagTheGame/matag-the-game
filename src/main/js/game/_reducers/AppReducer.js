@@ -11,10 +11,10 @@ const clone = (object) => {
 export default (state, action) => {
   const newState = clone(state)
 
-  if (ServerEventsReducer.getEvents().find(event => action.type === event)) {
+  if (ServerEventsReducer.getEvents().indexOf(action.type) >= 0) {
     return ServerEventsReducer.reduceEvent(newState, action)
 
-  } else if (ClientEventsReducer.getEvents().find(event => action.type === event)) {
+  } else if (ClientEventsReducer.getEvents().indexOf(action.type) >= 0) {
     return ClientEventsReducer.reduceEvent(newState, action)
 
   } else if (!state) {
