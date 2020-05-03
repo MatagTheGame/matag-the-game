@@ -24,17 +24,22 @@ public class DeclareAttackersPhase implements Phase {
       }
 
     } else {
-      if (!gameStatus.getCurrentPlayer().getBattlefield().getAttackingCreatures().isEmpty() && new CardInstanceSearch(gameStatus.getNonCurrentPlayer().getBattlefield().getCards()).canAnyCreatureBlock()) {
-        gameStatus.getTurn().setCurrentPhase(DeclareBlockersPhase.DB);
-        gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
+      if (!gameStatus.getCurrentPlayer().getBattlefield().getAttackingCreatures().isEmpty()) {
+        if (new CardInstanceSearch(gameStatus.getNonCurrentPlayer().getBattlefield().getCards()).canAnyCreatureBlock()) {
+          gameStatus.getTurn().setCurrentPhase(DeclareBlockersPhase.DB);
+          gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
-      } else {
-        gameStatus.getTurn().setCurrentPhase(AfterDeclareBlockersPhase.AB);
-        gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+        } else {
+          gameStatus.getTurn().setCurrentPhase(AfterDeclareBlockersPhase.AB);
+          gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
 
-        if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-          afterDeclareBlockersPhase.apply(gameStatus);
+          if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
+            afterDeclareBlockersPhase.apply(gameStatus);
+          }
         }
+      } else {
+        gameStatus.getTurn().setCurrentPhase(Main2Phase.M2);
+        gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
       }
     }
   }
