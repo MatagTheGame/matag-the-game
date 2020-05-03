@@ -90,4 +90,38 @@ public class AutocontinueCheckerTest {
     // Then
     assertThat(result).isFalse();
   }
+
+  @Test
+  public void canPerformAnyActionReturnsFalseIfUPAndCardWithNotAffordableActivatedAbility() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase("UP");
+    gameStatus.getPlayer1().getHand().getCards().clear();
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Locthwain Gargoyle"), "player-name"));
+
+    // When
+    boolean result = autocontinueChecker.canPerformAnyAction(gameStatus);
+
+    // Then
+    assertThat(result).isFalse();
+  }
+
+  @Test
+  public void canPerformAnyActionReturnsTrueIfUPAndCardAffordableActivatedAbility() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase("UP");
+    gameStatus.getPlayer1().getHand().getCards().clear();
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Locthwain Gargoyle"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 63, cards.get("Plains"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 64, cards.get("Plains"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 65, cards.get("Plains"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 66, cards.get("Plains"), "player-name"));
+
+    // When
+    boolean result = autocontinueChecker.canPerformAnyAction(gameStatus);
+
+    // Then
+    assertThat(result).isTrue();
+  }
 }

@@ -31,12 +31,15 @@ public class AutocontinueChecker {
     }
 
     List<CardInstance> cards = player.getBattlefield().getCards();
-    for (CardInstance card : cards) {
-      List<CardInstanceAbility> cardAbilities = card.getAbilities();
+    for (CardInstance cardInstance : cards) {
+      List<CardInstanceAbility> cardAbilities = cardInstance.getAbilities();
       for (CardInstanceAbility cardAbility : cardAbilities) {
         if (cardAbility.getTrigger() != null && cardAbility.getTrigger().getType().equals(ACTIVATED_ABILITY)) {
-          if (instantSpeedService.isAtInstantSpeed(card, cardAbility.getAbilityType().toString())) {
-            return true;
+          String ability = cardAbility.getAbilityType().toString();
+          if (instantSpeedService.isAtInstantSpeed(cardInstance, ability)) {
+            if (costService.canAfford(cardInstance, ability, gameStatus)) {
+              return true;
+            }
           }
         }
       }
