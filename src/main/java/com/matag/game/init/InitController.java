@@ -67,8 +67,9 @@ public class InitController {
 
     if (!gameStatusRepository.contains(token.getGameId())) {
       GameStatus gameStatus = gameStatusFactory.create(token.getGameId());
-      gameStatus.setPlayer1(retrievePlayer(token));
-      gameStatus.getPlayer1().getLibrary().addCards(retrieveDeck(token, gameStatus));
+      Player player1 = retrievePlayer(token);
+      gameStatus.setPlayer1(player1);
+      gameStatus.getPlayer1().getLibrary().addCards(retrieveDeck(player1, gameStatus));
       gameStatus.getPlayer1().drawHand();
       gameStatusRepository.save(token.getGameId(), gameStatus);
       eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_WAITING_OPPONENT"));
@@ -76,8 +77,9 @@ public class InitController {
     } else {
       GameStatus gameStatus = gameStatusRepository.getUnsecure(token.getGameId());
       if (gameStatus.getPlayer2() == null && !gameStatus.getPlayer1().getToken().getSessionId().equals(token.getSessionId())) {
-        gameStatus.setPlayer2(retrievePlayer(token));
-        gameStatus.getPlayer2().getLibrary().addCards(retrieveDeck(token, gameStatus));
+        Player player2 = retrievePlayer(token);
+        gameStatus.setPlayer2(player2);
+        gameStatus.getPlayer2().getLibrary().addCards(retrieveDeck(player2, gameStatus));
         gameStatus.getPlayer2().drawHand();
 
         gameStatus.getTurn().init(gameStatus.getPlayer1().getName());
@@ -116,8 +118,8 @@ public class InitController {
     return playerFactory.create(token, playerInfo);
   }
 
-  private List<CardInstance> retrieveDeck(SecurityToken token, GameStatus gameStatus) {
-    DeckInfo deckInfo = deckRetrieverService.retrieveDeckForUser(token);
-    return deckFactory.create(retrievePlayer(token).getName(), gameStatus, deckInfo);
+  private List<CardInstance> retrieveDeck(Player player, GameStatus gameStatus) {
+    DeckInfo deckInfo = deckRetrieverService.retrieveDeckForUser(player.getToken());
+    return deckFactory.create(player.getName(), gameStatus, deckInfo);
   }
 }
