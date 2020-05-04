@@ -33,14 +33,15 @@ public class CombatService {
       List<CardInstance> blockingCreaturesFor = nonCurrentPlayer.getBattlefield().getBlockingCreaturesFor(attackingCreature.getId());
       int remainingDamage = dealCombatDamageForOneAttackingCreature(gameStatus, attackingCreature, blockingCreaturesFor);
 
-      if (!attackingCreature.getModifiers().isBlocked() || attackingCreature.hasAbilityType(TRAMPLE)) {
+      boolean isBlocked = attackingCreature.getModifiers().getModifiersUntilEndOfTurn().isBlocked();
+      if (!isBlocked || attackingCreature.hasAbilityType(TRAMPLE)) {
         if (shouldDealDamage(gameStatus, attackingCreature)) {
           damageFromUnblockedCreatures += remainingDamage;
         }
       }
 
       if (attackingCreature.hasAbilityType(LIFELINK)) {
-        if (!attackingCreature.getModifiers().isBlocked() || !blockingCreaturesFor.isEmpty()) {
+        if (!isBlocked || !blockingCreaturesFor.isEmpty()) {
           lifelink += attackingCreature.getPower();
         }
       }

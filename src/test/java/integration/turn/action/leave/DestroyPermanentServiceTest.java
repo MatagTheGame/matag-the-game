@@ -72,7 +72,7 @@ public class DestroyPermanentServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
-    cardInstance.getModifiers().getAbilitiesUntilEndOfTurn().add(new CardInstanceAbility(INDESTRUCTIBLE));
+    cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(INDESTRUCTIBLE));
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When
@@ -89,8 +89,8 @@ public class DestroyPermanentServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
-    cardInstance.getModifiers().getAbilitiesUntilEndOfTurn().add(new CardInstanceAbility(INDESTRUCTIBLE));
-    cardInstance.getModifiers().getAbilitiesUntilEndOfTurn().add(new CardInstanceAbility(THAT_TARGETS_GET, emptyList(), singletonList("-3/-3"), null));
+    cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(INDESTRUCTIBLE));
+    cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(THAT_TARGETS_GET, emptyList(), singletonList("-3/-3"), null));
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When

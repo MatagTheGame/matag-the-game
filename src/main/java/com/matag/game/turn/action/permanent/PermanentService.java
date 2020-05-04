@@ -43,10 +43,10 @@ public class PermanentService {
 
   private void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
     PowerToughness PowerToughness = abilityService.powerToughnessFromParameter(parameter);
-    target.getModifiers().addExtraPowerToughnessUntilEndOfTurn(PowerToughness);
+    target.getModifiers().getModifiersUntilEndOfTurn().addExtraPowerToughnessUntilEndOfTurn(PowerToughness);
 
     Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
-    ability.ifPresent(value -> target.getModifiers().getAbilitiesUntilEndOfTurn().add(value));
+    ability.ifPresent(value -> target.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(value));
 
     int damage = abilityService.damageFromParameter(parameter);
     dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false, cardInstance);

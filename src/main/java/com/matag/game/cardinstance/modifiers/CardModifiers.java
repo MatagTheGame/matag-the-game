@@ -29,8 +29,6 @@ public class CardModifiers {
   private boolean summoningSickness;
   @JsonProperty
   private boolean attacking;
-  private boolean attacked;
-  private boolean blocked;
   @JsonProperty
   private Integer blockingCardId;
   @JsonProperty
@@ -38,31 +36,17 @@ public class CardModifiers {
   @JsonProperty
   private List<CardInstanceAbility> abilities = new ArrayList<>();
   @JsonProperty
-  private List<CardInstanceAbility> abilitiesUntilEndOfTurn = new ArrayList<>();
-  @JsonProperty
-  private PowerToughness extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
-  @JsonProperty
   private List<Object> targets = new ArrayList<>();
   @JsonProperty
   private int attachedToId;
   private String controller;
-  private String controllerUntilEndOfTurn;
   @JsonProperty
   private Counters counters = new Counters();
-  private boolean toBeDestroyed;
-  private boolean toBeReturnedToHand;
+  private CardModifiersUntilEndOfTurn modifiersUntilEndOfTurn = new CardModifiersUntilEndOfTurn();
 
   public void cleanupUntilEndOfTurnModifiers() {
-    attacking = false;
-    attacked = false;
-    blocked = false;
     damage = 0;
-    blockingCardId = null;
-    abilitiesUntilEndOfTurn = new ArrayList<>();
-    extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
-    controllerUntilEndOfTurn = null;
-    toBeDestroyed = false;
-    toBeReturnedToHand = false;
+    modifiersUntilEndOfTurn = new CardModifiersUntilEndOfTurn();
   }
 
   public boolean isTapped() {
@@ -99,16 +83,6 @@ public class CardModifiers {
 
   public void dealDamage(int damage) {
     this.damage += damage;
-  }
-
-  public PowerToughness getExtraPowerToughnessUntilEndOfTurn() {
-    return extraPowerToughnessUntilEndOfTurn;
-  }
-
-  public void addExtraPowerToughnessUntilEndOfTurn(PowerToughness extraPowerToughnessUntilEndOfTurn) {
-    int newPower = this.extraPowerToughnessUntilEndOfTurn.getPower() + extraPowerToughnessUntilEndOfTurn.getPower();
-    int newToughness = this.extraPowerToughnessUntilEndOfTurn.getToughness() + extraPowerToughnessUntilEndOfTurn.getToughness();
-    this.extraPowerToughnessUntilEndOfTurn = new PowerToughness(newPower, newToughness);
   }
 
   public void unsetAttachedId() {

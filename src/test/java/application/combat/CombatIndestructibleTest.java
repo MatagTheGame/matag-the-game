@@ -11,8 +11,11 @@ import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
+import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.EndTurnPhase.ET;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.game.turn.phases.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
@@ -53,12 +56,16 @@ public class CombatIndestructibleTest extends AbstractApplicationTest {
     browser.player2().getActionHelper().clickContinue();
 
     // Make a Stand
+    browser.player1().getPhaseHelper().is(AB, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 2).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Make a Stand")).click();
+    browser.player1().getPhaseHelper().is(AB, OPPONENT);
     browser.player2().getActionHelper().clickContinue();
+    browser.player1().getPhaseHelper().is(AB, PLAYER);
     browser.player1().getActionHelper().clickContinue();
+    browser.player1().getPhaseHelper().is(AB, OPPONENT);
     browser.player2().getActionHelper().clickContinue();
 
     // Then
@@ -68,15 +75,20 @@ public class CombatIndestructibleTest extends AbstractApplicationTest {
 
     // Finally indestructible still gets destroyed if toughness reaches 0
     browser.player1().getActionHelper().clickContinue();
+    browser.player2().getPhaseHelper().is(ET, PLAYER);
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player2().getHandHelper(PLAYER).getFirstCard(cards.get("Disfigure")).select();
     browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Nyxborn Marauder")).target();
     browser.player1().getActionHelper().clickContinue();
+    browser.player2().getPhaseHelper().is(ET, PLAYER);
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();
     browser.player2().getHandHelper(PLAYER).getFirstCard(cards.get("Disfigure")).select();
     browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Nyxborn Marauder")).target();
     browser.player1().getActionHelper().clickContinue();
+    browser.player1().getPhaseHelper().is(ET, OPPONENT);
     browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Nyxborn Marauder"));
+    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getPhaseHelper().is(M1, PLAYER);
   }
 
   static class InitTestServiceForTest extends InitTestService {
@@ -89,12 +101,14 @@ public class CombatIndestructibleTest extends AbstractApplicationTest {
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Nyxborn Marauder"));
       addCardToCurrentPlayerHand(gameStatus, cards.get("Make a Stand"));
 
+
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
       addCardToNonCurrentPlayerHand(gameStatus, cards.get("Disfigure"));
       addCardToNonCurrentPlayerHand(gameStatus, cards.get("Disfigure"));
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Nyxborn Colossus"));
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Nyxborn Brute"));
+      addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Swamp"));
     }
   }
 }

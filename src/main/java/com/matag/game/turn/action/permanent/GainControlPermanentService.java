@@ -11,7 +11,7 @@ public class GainControlPermanentService {
   private static final Logger LOGGER = LoggerFactory.getLogger(GainControlPermanentService.class);
 
   public void gainControlUntilEndOfTurn(GameStatus gameStatus, CardInstance target, String newControllerName) {
-    target.getModifiers().setControllerUntilEndOfTurn(newControllerName);
+    target.getModifiers().getModifiersUntilEndOfTurn().setNewController(newControllerName);
     LOGGER.info("Changed controller until end of turn of " + target.getIdAndName() + " to " + newControllerName);
   }
 }

@@ -34,7 +34,7 @@ public class DeclareBlockerService {
 
     blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
       Integer attackingCreatureId = blockedCreaturesIds.get(0);
-      currentPlayer.getBattlefield().findCardById(attackingCreatureId).getModifiers().setBlocked(true);
+      currentPlayer.getBattlefield().findCardById(attackingCreatureId).getModifiers().getModifiersUntilEndOfTurn().setBlocked(true);
       nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(attackingCreatureId);
     });
 

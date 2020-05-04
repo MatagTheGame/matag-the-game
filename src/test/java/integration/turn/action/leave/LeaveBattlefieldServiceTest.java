@@ -74,7 +74,7 @@ public class LeaveBattlefieldServiceTest {
 
     // Then
     assertThat(gameStatus.getPlayer1().getBattlefield().getCards()).containsExactlyInAnyOrder(equipment, enchantment1);
-    assertThat(enchantment1.getModifiers().isToBeDestroyed()).isTrue();
+    assertThat(enchantment1.getModifiers().getModifiersUntilEndOfTurn().isToBeDestroyed()).isTrue();
     assertThat(equipment.getModifiers().getAttachedToId()).isEqualTo(0);
   }
 }

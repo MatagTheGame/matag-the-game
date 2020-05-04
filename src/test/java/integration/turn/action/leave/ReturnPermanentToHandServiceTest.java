@@ -41,7 +41,7 @@ public class ReturnPermanentToHandServiceTest {
     returnPermanentToHandService.markAsToBeReturnedToHand(gameStatus, 61);
 
     // Then
-    assertThat(cardInstance.getModifiers().isToBeReturnedToHand()).isTrue();
+    assertThat(cardInstance.getModifiers().getModifiersUntilEndOfTurn().isToBeReturnedToHand()).isTrue();
   }
 
   @Test

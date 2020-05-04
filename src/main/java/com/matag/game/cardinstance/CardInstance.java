@@ -75,8 +75,8 @@ public class CardInstance {
 
   @JsonProperty
   public String getController() {
-    if (modifiers.getControllerUntilEndOfTurn() != null) {
-      return modifiers.getControllerUntilEndOfTurn();
+    if (modifiers.getModifiersUntilEndOfTurn().getNewController() != null) {
+      return modifiers.getModifiersUntilEndOfTurn().getNewController();
     }
 
     if (modifiers.getController() != null) {
@@ -89,7 +89,7 @@ public class CardInstance {
   @JsonProperty
   public int getPower() {
     return card.getPower() +
-      modifiers.getExtraPowerToughnessUntilEndOfTurn().getPower() +
+      modifiers.getModifiersUntilEndOfTurn().getExtraPowerToughness().getPower() +
       modifiers.getExtraPowerToughnessFromCounters().getPower() +
       getAttachmentsPower() +
       getPowerFromOtherPermanents();
@@ -98,7 +98,7 @@ public class CardInstance {
   @JsonProperty
   public int getToughness() {
     return card.getToughness() +
-      modifiers.getExtraPowerToughnessUntilEndOfTurn().getToughness() +
+      modifiers.getModifiersUntilEndOfTurn().getExtraPowerToughness().getToughness() +
       modifiers.getExtraPowerToughnessFromCounters().getToughness() +
       getAttachmentsToughness() +
       getToughnessFromOtherPermanents();
@@ -209,7 +209,7 @@ public class CardInstance {
     List<CardInstanceAbility> abilities = new ArrayList<>();
     abilities.addAll(getCardInstanceAbilities(card));
     abilities.addAll(modifiers.getAbilities());
-    abilities.addAll(modifiers.getAbilitiesUntilEndOfTurn());
+    abilities.addAll(modifiers.getModifiersUntilEndOfTurn().getExtraAbilities());
     abilities.addAll(getAttachmentsAbilities());
     return abilities;
   }

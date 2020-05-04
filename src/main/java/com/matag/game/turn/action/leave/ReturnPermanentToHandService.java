@@ -15,7 +15,7 @@ public class ReturnPermanentToHandService {
     CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(targetId);
 
     if (cardInstance != null) {
-      cardInstance.getModifiers().setToBeReturnedToHand(true);
+      cardInstance.getModifiers().getModifiersUntilEndOfTurn().setToBeReturnedToHand(true);
     }
   }
 
