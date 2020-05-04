@@ -99,7 +99,7 @@ public class CardInstanceSearch {
 
   public CardInstanceSearch blocking() {
     return new CardInstanceSearch(this.cards
-      .filter(cardInstance -> cardInstance.getModifiers().isBlocking()));
+        .filter(cardInstance -> cardInstance.getModifiers().isBlocking()));
   }
 
   public CardInstanceSearch attackingOrBlocking() {

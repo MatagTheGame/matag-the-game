@@ -181,26 +181,6 @@ public class CardInstance {
     modifiers.setAttacking(true);
   }
 
-  public void checkIfCanBlock(CardInstance blockedCreature, List<CardInstance> blockers) {
-    if (!isOfType(Type.CREATURE)) {
-      throw new MessageException(getIdAndName() + " is not of type Creature.");
-    }
-
-    if (modifiers.isTapped()) {
-      throw new MessageException(getIdAndName() + " is tapped and cannot block.");
-    }
-
-    if (blockedCreature.hasAbilityType(AbilityType.FLYING)) {
-      if (!(hasAbilityType(AbilityType.FLYING) || hasAbilityType(AbilityType.REACH))) {
-        throw new MessageException(getIdAndName() + " cannot block " + blockedCreature.getIdAndName() + " as it has flying.");
-      }
-    }
-
-    if (blockedCreature.hasAbilityType(AbilityType.MENACE) && blockers.size() < 1) {
-      throw new MessageException(getIdAndName() + " cannot block " + blockedCreature.getIdAndName() + " as it has menace.");
-    }
-  }
-
   public void declareAsBlocker(int attackingCreatureId) {
     modifiers.setBlockingCardId(attackingCreatureId);
   }
