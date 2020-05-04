@@ -18,6 +18,7 @@ import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
 @AllArgsConstructor
 public class DeclareBlockerService {
   private final ContinueTurnService continueTurnService;
+  private final BlockerChecker blockerChecker;
 
   public void declareBlockers(GameStatus gameStatus, Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds) {
     Turn turn = gameStatus.getTurn();
@@ -29,16 +30,9 @@ public class DeclareBlockerService {
     }
 
     blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
-      CardInstance blockedCreature = currentPlayer.getBattlefield().findCardById(blockedCreaturesIds.get(0));
-      CardInstance mainBlocker = nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId);
-      List<CardInstance> blockers = blockingCreaturesIdsForAttackingCreaturesIds
-              .keySet()
-              .stream()
-              .map(creatureId -> nonCurrentPlayer.getBattlefield().findCardById(creatureId))
-              .filter(blocker -> blocker != mainBlocker)
-              .filter(blocker -> blockingCreaturesIdsForAttackingCreaturesIds.get(blocker.getId()).indexOf(blockedCreature.getId()) == 0)
-              .collect(Collectors.toList());
-      mainBlocker.checkIfCanBlock(blockedCreature, blockers);
+      CardInstance attacker = currentPlayer.getBattlefield().findCardById(blockedCreaturesIds.get(0));
+      List<CardInstance> blockers = findBlockers(blockingCreaturesIdsForAttackingCreaturesIds, nonCurrentPlayer, attacker);
+      blockerChecker.checkIfCanBlock(attacker, blockers);
     });
 
     blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
@@ -48,5 +42,13 @@ public class DeclareBlockerService {
     });
 
     continueTurnService.continueTurn(gameStatus);
+  }
+
+  private List<CardInstance> findBlockers(Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds, Player nonCurrentPlayer, CardInstance attacker) {
+    return blockingCreaturesIdsForAttackingCreaturesIds.keySet()
+        .stream()
+        .map(creatureId -> nonCurrentPlayer.getBattlefield().findCardById(creatureId))
+        .filter(blocker -> blockingCreaturesIdsForAttackingCreaturesIds.get(blocker.getId()).indexOf(attacker.getId()) == 0)
+        .collect(Collectors.toList());
   }
 }
