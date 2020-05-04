@@ -16,7 +16,7 @@ public class BlockerChecker {
     }
 
     if (attacker.hasAbilityType(AbilityType.MENACE) && blockers.size() == 1) {
-      throw new MessageException(blockers.get(0).getIdAndName() + " cannot block " + attacker.getIdAndName() + " as it has menace.");
+      throw new MessageException(blockers.get(0).getIdAndName() + " cannot block " + attacker.getIdAndName() + " alone as it has menace.");
     }
   }
 
