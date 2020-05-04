@@ -11,6 +11,8 @@ $shadow-color: rgba(0, 0, 0, 0.4);
   margin: 5px;
   background-repeat: no-repeat;
   background-size: cover;
+  -webkit-border-radius: 4.75% / 3.5%;
+  border-radius: 4.75% / 3.5%;
   cursor: pointer;
   transition-duration: 0.5s;
   z-index: 1;
@@ -156,4 +158,6 @@ $shadow-color: rgba(0, 0, 0, 0.4);
   margin-top: -375px;
   background-repeat: no-repeat;
   background-size: cover;
+  -webkit-border-radius: 4.75% / 3.5%;
+  border-radius: 4.75% / 3.5%;
 }
