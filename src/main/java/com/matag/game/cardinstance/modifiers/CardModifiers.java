@@ -53,12 +53,16 @@ public class CardModifiers {
   private boolean toBeReturnedToHand;
 
   public void cleanupUntilEndOfTurnModifiers() {
+    attacking = false;
+    attacked = false;
+    blocked = false;
     damage = 0;
+    blockingCardId = null;
     abilitiesUntilEndOfTurn = new ArrayList<>();
     extraPowerToughnessUntilEndOfTurn = new PowerToughness(0, 0);
     controllerUntilEndOfTurn = null;
-    attacked = false;
-    blocked = false;
+    toBeDestroyed = false;
+    toBeReturnedToHand = false;
   }
 
   public boolean isTapped() {

@@ -36,14 +36,15 @@ public class ProdInitTestService extends InitTestService {
     addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
     addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
     addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
+    addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
 
     addCardToCurrentPlayerHand(gameStatus, cards.get("Huatli's Snubhorn"));
     addCardToCurrentPlayerHand(gameStatus, cards.get("Legion's Judgment"));
     addCardToCurrentPlayerHand(gameStatus, cards.get("Air Elemental"));
     addCardToCurrentPlayerHand(gameStatus, cards.get("Clear the Mind"));
     addCardToCurrentPlayerHand(gameStatus, cards.get("Civic Stalwart"));
-    addCardToCurrentPlayerHand(gameStatus, cards.get("Candlelight Vigil"));
-    addCardToCurrentPlayerHand(gameStatus, cards.get("Overflowing Insight"));
+    addCardToCurrentPlayerHand(gameStatus, cards.get("Unlikely Aid"));
+    addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Huatli's Snubhorn"));
 
     addCardToCurrentPlayerGraveyard(gameStatus, cards.get("Plains"));
 
