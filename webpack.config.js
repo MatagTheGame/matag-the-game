@@ -11,6 +11,7 @@ module.exports = {
     path: BUILD_DIR,
     filename: 'game.js'
   },
+  devtool: 'eval-source-map',
   module: {
     rules: [
       {

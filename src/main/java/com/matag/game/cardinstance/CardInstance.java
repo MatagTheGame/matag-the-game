@@ -196,7 +196,7 @@ public class CardInstance {
       }
     }
 
-    if (blockedCreature.hasAbilityType(AbilityType.MENACE) && blockers.size() < 2) {
+    if (blockedCreature.hasAbilityType(AbilityType.MENACE) && blockers.size() < 1) {
       throw new MessageException(getIdAndName() + " cannot block " + blockedCreature.getIdAndName() + " as it has menace.");
     }
   }
