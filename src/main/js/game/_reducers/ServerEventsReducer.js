@@ -4,7 +4,7 @@ import UserInterfaceUtils from 'game/UserInterface/UserInterfaceUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {
-    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER', 'INIT_OPPONENT', 'UPDATE_TURN', 'UPDATE_STACK',
+    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER_AND_OPPONENT', 'UPDATE_TURN', 'UPDATE_STACK',
       'UPDATE_PLAYER_BATTLEFIELD', 'UPDATE_PLAYER_HAND', 'UPDATE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE', 'UPDATE_PLAYER_LIBRARY_SIZE']
   }
 
@@ -23,12 +23,9 @@ export default class ServerEventsReducer {
       UserInterfaceUtils.unsetMessage(newState)
       break
 
-    case 'INIT_PLAYER':
-      newState.player = action.value
-      break
-
-    case 'INIT_OPPONENT':
-      newState.opponent = action.value
+    case 'INIT_PLAYER_AND_OPPONENT':
+      newState.player = action.value.player
+      newState.opponent = action.value.opponent
       break
 
     case 'UPDATE_TURN':

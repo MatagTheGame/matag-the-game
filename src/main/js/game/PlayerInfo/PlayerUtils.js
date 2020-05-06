@@ -12,7 +12,7 @@ export default class PlayerUtils {
   }
 
   static isCurrentPlayerActive(state) {
-    return state.turn.currentPhaseActivePlayer === state.player.name
+    return state.player && state.turn && state.turn.currentPhaseActivePlayer === state.player.name
   }
 
   static getPlayerByName(state, playerName) {
