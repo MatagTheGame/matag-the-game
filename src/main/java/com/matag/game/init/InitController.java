@@ -1,5 +1,6 @@
 package com.matag.game.init;
 
+import com.google.common.collect.ImmutableMap;
 import com.matag.adminentities.DeckInfo;
 import com.matag.adminentities.PlayerInfo;
 import com.matag.game.cardinstance.CardInstance;
@@ -27,6 +28,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class InitController {
@@ -90,11 +92,8 @@ public class InitController {
           initTestService.initGameStatusForTest(gameStatusRepository.getUnsecure(token.getGameId()));
         }
 
-        eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer1())));
-        eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(gameStatus.getPlayer2())));
-
-        eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer2())));
-        eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getPlayer1())));
+        eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(gameStatus.getPlayer1(), gameStatus.getPlayer2())));
+        eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(gameStatus.getPlayer2(), gameStatus.getPlayer1())));
 
         // FIXME no implemented card yet can be played at the first game upkeep... so let's just continue.
         continueTurnService.continueTurn(gameStatus);
@@ -105,8 +104,7 @@ public class InitController {
         Player player = playerService.getPlayerByToken(gameStatus, token.getAdminToken());
         player.setToken(token);
 
-        eventSender.sendToPlayer(player, new Event("INIT_PLAYER", InitPlayerEvent.createForPlayer(player)));
-        eventSender.sendToPlayer(player, new Event("INIT_OPPONENT", InitPlayerEvent.createForOpponent(gameStatus.getOtherPlayer(player))));
+        eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(player, gameStatus.getOtherPlayer(player))));
 
         gameStatusUpdaterService.sendUpdateTurn(gameStatus);
       }
@@ -121,5 +119,11 @@ public class InitController {
   private List<CardInstance> retrieveDeck(Player player, GameStatus gameStatus) {
     DeckInfo deckInfo = deckRetrieverService.retrieveDeckForUser(player.getToken());
     return deckFactory.create(player.getName(), gameStatus, deckInfo);
+  }
+
+  private static Map<String, InitPlayerEvent> initPlayerAndOpponentEvent(Player player, Player opponent) {
+    return ImmutableMap.of(
+            "player", InitPlayerEvent.createForPlayer(player),
+            "opponent", InitPlayerEvent.createForOpponent(opponent));
   }
 }
