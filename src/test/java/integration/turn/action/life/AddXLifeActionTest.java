@@ -38,7 +38,7 @@ public class AddXLifeActionTest {
   public void addLifeToPlayer() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Lich's Caress"), "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Lich's Caress"), "player-name", "player-name");
 
     // When
     Ability gain3Life = Ability.builder().abilityType(AbilityType.ADD_X_LIFE).parameters(singletonList("3")).build();

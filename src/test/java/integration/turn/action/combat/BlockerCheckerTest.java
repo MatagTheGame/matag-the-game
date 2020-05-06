@@ -39,9 +39,9 @@ public class BlockerCheckerTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstance boggartBrute = cardInstanceFactory.create(gameStatus, 1, cards.get("Boggart Brute"), "player");
-    CardInstance firstAirElemental = cardInstanceFactory.create(gameStatus, 2, cards.get("Air Elemental"), "opponent");
-    CardInstance secondAirElemental = cardInstanceFactory.create(gameStatus, 3, cards.get("Air Elemental"), "opponent");
+    CardInstance boggartBrute = cardInstanceFactory.create(1, cards.get("Boggart Brute"), "player");
+    CardInstance firstAirElemental = cardInstanceFactory.create(2, cards.get("Air Elemental"), "opponent");
+    CardInstance secondAirElemental = cardInstanceFactory.create(3, cards.get("Air Elemental"), "opponent");
 
     // When
     blockerChecker.checkIfCanBlock(boggartBrute, List.of(firstAirElemental, secondAirElemental));
@@ -54,8 +54,8 @@ public class BlockerCheckerTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstance boggartBrute = cardInstanceFactory.create(gameStatus, 1, cards.get("Boggart Brute"), "player");
-    CardInstance airElemental = cardInstanceFactory.create(gameStatus, 2, cards.get("Air Elemental"), "opponent");
+    CardInstance boggartBrute = cardInstanceFactory.create(1, cards.get("Boggart Brute"), "player");
+    CardInstance airElemental = cardInstanceFactory.create(2, cards.get("Air Elemental"), "opponent");
 
     // Expect
     thrown.expectMessage("\"2 - Air Elemental\" cannot block \"1 - Boggart Brute\" alone as it has menace.");

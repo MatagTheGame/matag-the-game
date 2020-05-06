@@ -74,7 +74,7 @@ public class CombatServiceTest {
   public void unblockedCreatureDealsDamageToPlayer() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), "player", "player");
+    CardInstance attackingCreature = cardInstanceFactory.create(1, cards.get("Feral Maaka"), "player", "player");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
 
     // When
@@ -91,12 +91,12 @@ public class CombatServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase(DA);
-    CardInstance attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
-    CardInstance attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
+    CardInstance attackingCreature1 = cardInstanceFactory.create(1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
+    CardInstance attackingCreature2 = cardInstanceFactory.create(2, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature2);
 
-    CardInstance blockingCreature = cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
+    CardInstance blockingCreature = cardInstanceFactory.create(3, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
 
     // When
@@ -115,10 +115,10 @@ public class CombatServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase(DA);
-    CardInstance attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Charging Monstrosaur"), PLAYER, PLAYER);
+    CardInstance attackingCreature = cardInstanceFactory.create(1, cards.get("Charging Monstrosaur"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
 
-    CardInstance blockingCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
+    CardInstance blockingCreature = cardInstanceFactory.create(2, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
 
     // When
@@ -139,10 +139,10 @@ public class CombatServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase(DA);
-    CardInstance attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
+    CardInstance attackingCreature = cardInstanceFactory.create(1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
 
-    CardInstance blockingCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
+    CardInstance blockingCreature = cardInstanceFactory.create(2, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
 
     // When
@@ -162,10 +162,10 @@ public class CombatServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase(DA);
-    CardInstance attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
+    CardInstance attackingCreature = cardInstanceFactory.create(1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
 
-    CardInstance blockingCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
+    CardInstance blockingCreature = cardInstanceFactory.create(2, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
 
     // When
@@ -187,12 +187,12 @@ public class CombatServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase(DA);
-    CardInstance attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Fencing Ace"), PLAYER, PLAYER); // 1/1 double strike
-    CardInstance attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Youthful Knight"), PLAYER, PLAYER); // 2/1 first strike
+    CardInstance attackingCreature1 = cardInstanceFactory.create(1, cards.get("Fencing Ace"), PLAYER, PLAYER); // 1/1 double strike
+    CardInstance attackingCreature2 = cardInstanceFactory.create(2, cards.get("Youthful Knight"), PLAYER, PLAYER); // 2/1 first strike
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature2);
 
-    CardInstance blockingCreature = cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT); // 2/2
+    CardInstance blockingCreature = cardInstanceFactory.create(3, cards.get("Feral Maaka"), OPPONENT, OPPONENT); // 2/2
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
 
     // When
@@ -214,12 +214,12 @@ public class CombatServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase(DA);
-    CardInstance attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Fencing Ace"), PLAYER, PLAYER);
-    CardInstance attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Youthful Knight"), PLAYER, PLAYER);
+    CardInstance attackingCreature1 = cardInstanceFactory.create(1, cards.get("Fencing Ace"), PLAYER, PLAYER);
+    CardInstance attackingCreature2 = cardInstanceFactory.create(2, cards.get("Youthful Knight"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature2);
 
-    CardInstance blockingCreature = cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
+    CardInstance blockingCreature = cardInstanceFactory.create(3, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
 
     // When

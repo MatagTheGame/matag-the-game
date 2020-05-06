@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
-@Component
-@Scope("prototype")
 public class GameStatus {
   private final AtomicInteger nextCardId = new AtomicInteger();
   private String gameId;

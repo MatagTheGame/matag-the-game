@@ -34,7 +34,7 @@ public class ConsolidateStatusServiceTest {
   public void consolidateShouldReturnACreatureToHandAndClearTheModifiers() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().getModifiersUntilEndOfTurn().setToBeReturnedToHand(true);
     cardInstance.getModifiers().dealDamage(1);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
@@ -52,7 +52,7 @@ public class ConsolidateStatusServiceTest {
   public void consolidateShouldDestroyACreatureAndClearTheModifiers() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().getModifiersUntilEndOfTurn().setToBeDestroyed(true);
     cardInstance.getModifiers().dealDamage(1);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);

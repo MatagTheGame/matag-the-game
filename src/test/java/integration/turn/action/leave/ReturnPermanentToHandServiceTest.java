@@ -34,7 +34,7 @@ public class ReturnPermanentToHandServiceTest {
   public void testMarkReturnToHand() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(61, cards.get("Canopy Spider"), "player-name", "player-name");
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When
@@ -48,7 +48,7 @@ public class ReturnPermanentToHandServiceTest {
   public void testReturnToHand() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(61, cards.get("Canopy Spider"), "player-name", "player-name");
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When

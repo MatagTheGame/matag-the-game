@@ -1,5 +1,7 @@
 package com.matag.game.status;
 
+import com.matag.game.stack.SpellStack;
+import com.matag.game.turn.Turn;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -15,7 +17,7 @@ public class GameStatusFactory implements ApplicationContextAware {
   }
 
   public GameStatus create(String gameId) {
-    GameStatus gameStatus = applicationContext.getBean(GameStatus.class);
+    GameStatus gameStatus = new GameStatus(new Turn(), new SpellStack());
     gameStatus.setGameId(gameId);
     return gameStatus;
   }

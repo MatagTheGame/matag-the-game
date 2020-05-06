@@ -6,8 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 
-@Component
-@Scope("prototype")
 public class SpellStack {
   private LinkedList<CardInstance> items = new LinkedList<>();
 

@@ -20,9 +20,8 @@ public class CardInstanceFactory implements ApplicationContextAware {
     this.applicationContext = applicationContext;
   }
 
-  public CardInstance create(GameStatus gameStatus, int id, Card card, String owner, String controller) {
-    CardInstance cardInstance = applicationContext.getBean(CardInstance.class);
-    cardInstance.setGameStatus(gameStatus);
+  public CardInstance create(int id, Card card, String owner, String controller) {
+    CardInstance cardInstance = new CardInstance();
     cardInstance.setId(id);
     cardInstance.setCard(card);
     cardInstance.setOwner(owner);
@@ -30,12 +29,12 @@ public class CardInstanceFactory implements ApplicationContextAware {
     return cardInstance;
   }
 
-  public CardInstance create(GameStatus gameStatus, int id, Card card, String owner) {
-    return create(gameStatus, id, card, owner, null);
+  public CardInstance create(int id, Card card, String owner) {
+    return create(id, card, owner, null);
   }
 
   public CardInstance mask(CardInstance cardInstance) {
-    return create(cardInstance.getGameStatus(), cardInstance.getId(), CardUtils.hiddenCard(), cardInstance.getOwner());
+    return create(cardInstance.getId(), CardUtils.hiddenCard(), cardInstance.getOwner());
   }
 
   public List<CardInstance> mask(List<CardInstance> cardInstanceList) {

@@ -49,8 +49,8 @@ public class AutocontinueCheckerTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase("UP");
     gameStatus.getPlayer1().getHand().getCards().clear();
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 61, cards.get("Mountain"), "player-name", "player-name"));
-    gameStatus.getPlayer1().getHand().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Infuriate"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(61, cards.get("Mountain"), "player-name", "player-name"));
+    gameStatus.getPlayer1().getHand().addCard(cardInstanceFactory.create(62, cards.get("Infuriate"), "player-name"));
 
     // When
     boolean result = autocontinueChecker.canPerformAnyAction(gameStatus);
@@ -65,9 +65,9 @@ public class AutocontinueCheckerTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase("UP");
     gameStatus.getPlayer1().getHand().getCards().clear();
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 61, cards.get("Mountain"), "player-name", "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(61, cards.get("Mountain"), "player-name", "player-name"));
     gameStatus.getPlayer1().getBattlefield().getCards().get(0).getModifiers().tap();
-    gameStatus.getPlayer1().getHand().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Infuriate"), "player-name"));
+    gameStatus.getPlayer1().getHand().addCard(cardInstanceFactory.create(62, cards.get("Infuriate"), "player-name"));
 
     // When
     boolean result = autocontinueChecker.canPerformAnyAction(gameStatus);
@@ -82,7 +82,7 @@ public class AutocontinueCheckerTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase("UP");
     gameStatus.getPlayer1().getHand().getCards().clear();
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Exclusion Mage"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(62, cards.get("Exclusion Mage"), "player-name"));
 
     // When
     boolean result = autocontinueChecker.canPerformAnyAction(gameStatus);
@@ -97,7 +97,7 @@ public class AutocontinueCheckerTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase("UP");
     gameStatus.getPlayer1().getHand().getCards().clear();
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Locthwain Gargoyle"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(62, cards.get("Locthwain Gargoyle"), "player-name"));
 
     // When
     boolean result = autocontinueChecker.canPerformAnyAction(gameStatus);
@@ -112,11 +112,11 @@ public class AutocontinueCheckerTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase("UP");
     gameStatus.getPlayer1().getHand().getCards().clear();
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Locthwain Gargoyle"), "player-name"));
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 63, cards.get("Plains"), "player-name"));
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 64, cards.get("Plains"), "player-name"));
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 65, cards.get("Plains"), "player-name"));
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 66, cards.get("Plains"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(62, cards.get("Locthwain Gargoyle"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(63, cards.get("Plains"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(64, cards.get("Plains"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(65, cards.get("Plains"), "player-name"));
+    gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(66, cards.get("Plains"), "player-name"));
 
     // When
     boolean result = autocontinueChecker.canPerformAnyAction(gameStatus);

@@ -37,13 +37,13 @@ public class TestUtils {
     PlayerInfo player1 = new PlayerInfo("player-name");
     SecurityToken player1SecurityToken = new SecurityToken("player-session", UUID.randomUUID().toString(), "1");
     gameStatus.setPlayer1(playerFactory.create(player1SecurityToken, player1));
-    gameStatus.getPlayer1().getLibrary().addCards(testLibrary(gameStatus, player1.getPlayerName()));
+    gameStatus.getPlayer1().getLibrary().addCards(testLibrary(player1.getPlayerName()));
     gameStatus.getPlayer1().drawHand();
 
     PlayerInfo player2 = new PlayerInfo("opponent-name");
     SecurityToken player2SecurityToken = new SecurityToken("opponent-session", UUID.randomUUID().toString(), "1");
     gameStatus.setPlayer2(playerFactory.create(player2SecurityToken, player2));
-    gameStatus.getPlayer2().getLibrary().addCards(testLibrary(gameStatus, player2.getPlayerName()));
+    gameStatus.getPlayer2().getLibrary().addCards(testLibrary(player2.getPlayerName()));
     gameStatus.getPlayer2().drawHand();
 
     gameStatus.getTurn().setCurrentTurnPlayer("player-name");
@@ -53,10 +53,10 @@ public class TestUtils {
     return gameStatus;
   }
 
-  private List<CardInstance> testLibrary(GameStatus gameStatus, String playerName) {
+  private List<CardInstance> testLibrary(String playerName) {
     return IntStream.rangeClosed(1, 40)
       .boxed()
-      .map(i -> cardInstanceFactory.create(gameStatus, i, cards.get("Plains"), playerName))
+      .map(i -> cardInstanceFactory.create(i, cards.get("Plains"), playerName))
       .collect(Collectors.toList());
   }
 }
