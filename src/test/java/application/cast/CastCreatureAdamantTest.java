@@ -6,6 +6,7 @@ import application.testcategory.Regression;
 import com.matag.cards.Cards;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.phases.Main1Phase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class CastCreatureAdamantTest extends AbstractApplicationTest {
   }
 
   @Test
-  public void castCreatureAlternativeCost() {
+  public void castCreatureAdemantCost() {
     // When casting Ardenvale Paladin with 4 white
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
@@ -38,6 +39,7 @@ public class CastCreatureAdamantTest extends AbstractApplicationTest {
 
     // Then the creature enters with a counter
     browser.player2().getActionHelper().clickContinue();
+    browser.player1().getPhaseHelper().is(Main1Phase.M1, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Ardenvale Paladin"), 0).hasPlus1Counters(1);
   }
 
