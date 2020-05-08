@@ -6,6 +6,7 @@ import application.testcategory.Regression;
 import com.matag.cards.Cards;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.phases.Main1Phase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Jousting Dummy")).click();
     browser.player2().getActionHelper().clickContinue();
+    browser.player1().getPhaseHelper().is(Main1Phase.M1, PLAYER);
 
     // When increasing jousting dummy (as well on summoning sickness creature)
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 2).tap();
@@ -49,6 +51,7 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
 
     // opponent accepts the ability
     browser.player2().getActionHelper().clickContinue();
+    browser.player1().getPhaseHelper().is(Main1Phase.M1, PLAYER);
 
     // power of jousting dummy is increased
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Jousting Dummy"), 1).hasSummoningSickness();
@@ -74,6 +77,7 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
 
     // opponent accepts the ability
     browser.player2().getActionHelper().clickContinue();
+    browser.player1().getPhaseHelper().is(AB, PLAYER);
 
     // power of jousting dummy is increased
     browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getCard(cards.get("Jousting Dummy"), 0).doesNotHaveSummoningSickness();
