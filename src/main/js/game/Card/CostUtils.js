@@ -9,8 +9,8 @@ export default class CostUtils {
   }
 
   static isAbilityCostFulfilled(cardInstance, ability, currentTappedMana) {
-    const costWithoutTap = ability.trigger.cost.filter(v => v !=='TAP')
-    const needsTapping = ability.trigger.cost.find(v => v ==='TAP')
+    const costWithoutTap = CostUtils.costWithoutTapping(ability.trigger.cost)
+    const needsTapping = CostUtils.needsTapping(ability.trigger.cost)
 
     if (needsTapping) {
       if (CardUtils.isTapped(cardInstance) || CardUtils.hasSummoningSickness(cardInstance)) {
@@ -46,6 +46,22 @@ export default class CostUtils {
     }
 
     return true
+  }
+
+  static needsTapping(cost) {
+    return cost.find(c => c === 'TAP')
+  }
+
+  static costWithoutTapping(cost) {
+    return cost.filter(c => c !== 'TAP')
+  }
+
+  static colorlessCost(cost) {
+    return cost.filter(c => c === 'COLORLESS').length
+  }
+
+  static costWithoutColorless(cost) {
+    return cost.filter(c => c !== 'COLORLESS')
   }
 
   static getMana(state) {

@@ -4,21 +4,40 @@ import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import './playableAbilities.scss'
+import CostUtils from 'game/Card/CostUtils'
 
 class PossibleAbility extends Component {
-  static renderColors(colors) {
-    return colors.map((color, index) => <img key={index} src={`/img/symbols/${color}.png`} alt={color} />)
+  static renderCost(cost) {
+    const needsTapping = CostUtils.needsTapping(cost)
+    cost = CostUtils.costWithoutTapping(cost)
+
+    const colorlessCost = CostUtils.colorlessCost(cost)
+    cost = CostUtils.costWithoutColorless(cost)
+
+    return (
+      <>
+        { colorlessCost > 0 && PossibleAbility.renderSymbols([colorlessCost]) }
+        { PossibleAbility.renderSymbols(cost) }
+        { colorlessCost > 0 && cost.length > 0 && needsTapping && ', ' }
+        { needsTapping && PossibleAbility.renderSymbols(['TAP']) }
+      </>
+    )
+  }
+
+  static renderSymbols(symbols) {
+    return symbols.map((symbol, index) => <img key={index} src={`/img/symbols/${symbol}.png`} alt={symbol} />)
   }
 
   render() {
     switch (this.props.possibleAbility.trigger.type) {
       case 'MANA_ABILITY':
         const colors = this.props.possibleAbility.parameters
-        return <li onClick={this.props.onClick} title={`TAP: add ${colors}`}><img src='/img/symbols/TAP.png' alt='TAP' />: add {PossibleAbility.renderColors(colors)}</li>
+        return <li onClick={this.props.onClick} title={this.props.possibleAbility.abilityTypeText}>{PossibleAbility.renderCost(['TAP'])}: add {PossibleAbility.renderSymbols(colors)}</li>
       case 'ACTIVATED_ABILITY':
-        return <li onClick={this.props.onClick}>Play Ability</li>
+        const cost = this.props.possibleAbility.trigger.cost
+        return <li onClick={this.props.onClick} title={this.props.possibleAbility.abilityTypeText}>{PossibleAbility.renderCost(cost)}: {this.props.possibleAbility.abilityTypeText}</li>
       default:
-        throw new Error('Ability not recognised.')
+        throw new Error('Trigger type for ability not recognised: ' + JSON.stringify(this.props.possibleAbility))
     }
   }
 }
