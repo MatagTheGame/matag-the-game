@@ -1,6 +1,5 @@
 package com.matag.game.init;
 
-import com.google.common.collect.ImmutableMap;
 import com.matag.adminentities.DeckInfo;
 import com.matag.adminentities.PlayerInfo;
 import com.matag.game.cardinstance.CardInstance;
@@ -122,7 +121,7 @@ public class InitController {
   }
 
   private static Map<String, InitPlayerEvent> initPlayerAndOpponentEvent(Player player, Player opponent) {
-    return ImmutableMap.of(
+    return Map.of(
             "player", InitPlayerEvent.createForPlayer(player),
             "opponent", InitPlayerEvent.createForOpponent(opponent));
   }
