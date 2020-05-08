@@ -36,7 +36,22 @@ export default class ClientEventsReducer {
 
     case 'PLAY_ABILITIES_CLICK':
       const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
-      CardUtils.activateManaAbility(newState, cardInstance, action.index)
+
+      const playedAbility = CardUtils.getAbilitiesForTriggerTypes(cardInstance, ['ACTIVATED_ABILITY', 'MANA_ABILITY'])[action.index]
+      if (playedAbility.trigger.type === 'MANA_ABILITY') {
+        CardUtils.activateManaAbility(newState, cardInstance, action.index)
+
+      } else if (playedAbility.trigger.type === 'ACTIVATED_ABILITY') {
+        const currentTappedMana = CostUtils.getMana(newState)
+        if (CostUtils.isAbilityCostFulfilled(cardInstance, playedAbility, currentTappedMana)) {
+          if (playedAbility.targets.length > TurnUtils.getTargetsIds(newState).length) {
+            PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
+          } else {
+            PlayerUtils.cast(newState, action.cardId, {}, get(playedAbility, 'abilityType'))
+          }
+        }
+      }
+
       break
 
     case 'PLAYER_HAND_CARD_CLICK':
@@ -56,7 +71,7 @@ export default class ClientEventsReducer {
             const currentTappedMana = CostUtils.getMana(newState)
             const ability = CardUtils.getAbilitiesForTriggerType(cardInstance, 'CAST')[0]
             if (CostUtils.isCastingCostFulfilled(cardInstance, currentTappedMana)) {
-              if (CardUtils.needsTargets(newState, cardInstance, 'CAST')) {
+              if (CardUtils.needsTargets(newState, ability)) {
                 PlayerUtils.handleSelectTargets(newState, cardInstance, ability)
               } else {
                 PlayerUtils.cast(newState, cardId, {}, get(ability, 'abilityType'))
@@ -95,7 +110,8 @@ export default class ClientEventsReducer {
         } else {
           const possibleAbilities = CardUtils.getAbilitiesForTriggerTypes(cardInstance, ['MANA_ABILITY', 'ACTIVATED_ABILITY'])
 
-          // FIXME this is wrong. It should be still possible to play an ability of a tapped card. And if a card is tapped in the dropdown list should not appear all the abilities that require tapping
+          // FIXME this is wrong. It should be still possible to play an ability of a tapped card.
+          //  And if a card is tapped in the dropdown list should not appear all the abilities that require tapping.
           if (!CardUtils.isFrontendTapped(cardInstance) && possibleAbilities.length > 1) {
             UserInterfaceUtils.setPlayableAbilities(newState, cardId, possibleAbilities, action.position)
 
@@ -108,7 +124,7 @@ export default class ClientEventsReducer {
               if (playedAbility) {
                 const currentTappedMana = CostUtils.getMana(newState)
                 if (CostUtils.isAbilityCostFulfilled(cardInstance, playedAbility, currentTappedMana)) {
-                  if (CardUtils.needsTargets(newState, cardInstance, 'ACTIVATED_ABILITY')) {
+                  if (CardUtils.needsTargets(newState, playedAbility)) {
                     PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
                   } else {
                     PlayerUtils.cast(newState, cardId, {}, get(playedAbility, 'abilityType'))

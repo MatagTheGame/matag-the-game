@@ -1,5 +1,6 @@
 package com.matag.game.turn.action.cast;
 
+import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.Cost;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
@@ -57,7 +58,7 @@ public class CastService {
         gameStatus.getStack().add(cardToCast);
 
       } else {
-        CardInstanceAbility triggeredAbility = cardToCast.getAbilities().get(0);
+        CardInstanceAbility triggeredAbility = cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility)).get(0);
         cardToCast.getTriggeredAbilities().add(triggeredAbility);
         LOGGER.info("Player {} triggered ability {} for {}.", activePlayer.getName(), triggeredAbility.getAbilityType(), cardToCast.getModifiers());
         gameStatus.getStack().add(cardToCast);
