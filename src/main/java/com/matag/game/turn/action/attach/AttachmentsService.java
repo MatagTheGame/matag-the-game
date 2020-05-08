@@ -6,12 +6,15 @@ import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 import com.matag.cards.ability.AbilityService;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.PowerToughness;
+import com.matag.game.player.Battlefield;
+import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.matag.cards.ability.type.AbilityType.ENCHANTED_CREATURE_GETS;
 import static com.matag.cards.ability.type.AbilityType.EQUIPPED_CREATURE_GETS;
@@ -24,6 +27,17 @@ public class AttachmentsService {
 
   private final AbilityService abilityService;
   private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
+
+  public void updateGameStatus(GameStatus gameStatus) {
+    Stream.of(gameStatus.getPlayer1(), gameStatus.getPlayer2())
+            .map(Player::getBattlefield)
+            .flatMap(battlefield -> battlefield.getCards().stream())
+            .forEach(cardInstance -> {
+              cardInstance.setAttachmentsPower(getAttachmentsPower(gameStatus, cardInstance));
+              cardInstance.setAttachmentsToughness(getAttachmentsToughness(gameStatus, cardInstance));
+              cardInstance.setAttachmentsAbilities(getAttachmentsAbilities(gameStatus, cardInstance));
+            });
+  }
 
   public List<CardInstance> getAttachedCards(GameStatus gameStatus, CardInstance cardInstance) {
     return gameStatus.getAllBattlefieldCards().attachedToId(cardInstance.getId()).getCards();
