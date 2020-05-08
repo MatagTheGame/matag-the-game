@@ -187,12 +187,12 @@ public class CombatServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase(DA);
-    CardInstance attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Fencing Ace"), PLAYER, PLAYER);
-    CardInstance attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Youthful Knight"), PLAYER, PLAYER);
+    CardInstance attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Fencing Ace"), PLAYER, PLAYER); // 1/1 double strike
+    CardInstance attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Youthful Knight"), PLAYER, PLAYER); // 2/1 first strike
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature2);
 
-    CardInstance blockingCreature = cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
+    CardInstance blockingCreature = cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT); // 2/2
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
 
     // When
@@ -206,7 +206,7 @@ public class CombatServiceTest {
     // Then
     verify(dealDamageToCreatureService).dealDamageToCreature(gameStatus, blockingCreature, 1, false, attackingCreature1);
     verifyNoMoreInteractions(dealDamageToCreatureService);
-    verify(dealDamageToPlayerService).dealDamageToPlayer(gameStatus, 1, gameStatus.getNonCurrentPlayer());
+    verify(dealDamageToPlayerService).dealDamageToPlayer(gameStatus, 2, gameStatus.getNonCurrentPlayer());
   }
 
   @Test

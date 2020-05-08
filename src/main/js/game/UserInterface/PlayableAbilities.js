@@ -11,12 +11,14 @@ class PossibleAbility extends Component {
   }
 
   render() {
-    switch (this.props.possibleAbility.abilityType) {
-      case 'TAP_ADD_MANA':
+    switch (this.props.possibleAbility.trigger.type) {
+      case 'MANA_ABILITY':
         const colors = this.props.possibleAbility.parameters
         return <li onClick={this.props.onClick} title={`TAP: add ${colors}`}><img src='/img/symbols/TAP.png' alt='TAP' />: add {PossibleAbility.renderColors(colors)}</li>
+      case 'ACTIVATED_ABILITY':
+        return <li onClick={this.props.onClick}>Play Ability</li>
       default:
-        return <li/>
+        throw new Error('Ability not recognised.')
     }
   }
 }

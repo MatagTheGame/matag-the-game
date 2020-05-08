@@ -208,20 +208,14 @@ export default class CardUtils {
     return map
   }
 
-  static needsTargets(state, cardInstance, triggerType) {
-    let ability
-    if (triggerType === 'TRIGGERED_ABILITY') {
-      ability = get(cardInstance, 'triggeredAbilities[0]')
-    } else {
-      ability = CardUtils.getAbilitiesForTriggerType(cardInstance, triggerType)[0]
-    }
+  static needsTargets(state, ability) {
     if (ability) {
       return ability.targets.length > TurnUtils.getTargetsIds(state).length
     }
   }
 
   static getAbilitiesForTriggerType(cardInstance, triggerType) {
-    return cardInstance.abilities.filter(ability => get(ability, 'trigger.type') === triggerType)
+    return CardUtils.getAbilitiesForTriggerTypes(cardInstance, [triggerType])
   }
 
   static getAbilitiesForTriggerTypes(cardInstance, triggerTypes) {
