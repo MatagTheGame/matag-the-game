@@ -42,7 +42,7 @@ public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getFirstCard(cards.get("Azorius Guildgate")).click();
 
     // Then it's possible to chose which mana generate
-    browser.player1().getPlayableAbilitiesHelper().toHaveAbilities(asList("TAP: add WHITE", "TAP: add BLUE"));
+    browser.player1().getPlayableAbilitiesHelper().toHaveAbilities(asList("Tap add white mana.", "Tap add blue mana."));
 
     // When clicking on the WHITE
     browser.player1().getPlayableAbilitiesHelper().playAbility(0);
