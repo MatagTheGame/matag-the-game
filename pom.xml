@@ -90,12 +90,6 @@
             <version>2.35.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>28.2-jre</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 
     <build>
