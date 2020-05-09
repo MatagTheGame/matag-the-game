@@ -36,38 +36,29 @@ public class CombatFirstStrikeTest extends AbstractApplicationTest {
   @Test
   public void combatFirstStrike() {
     // Stops to play instants
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(BC, OPPONENT);
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(DA, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // When attacking
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Youthful Knight")).declareAsAttacker();
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, OPPONENT);
 
     // Stop to play instants
-    browser.player1().getPhaseHelper().is(DA, OPPONENT);
-    browser.player2().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(DB, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
 
     // And blocking
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Coral Merfolk")).declareAsBlocker();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
 
     // Then stop to play instants before first strike
-    browser.player1().getPhaseHelper().is(AB, PLAYER);
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(AB, OPPONENT);
-    browser.player2().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(AB, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(AF, PLAYER);
 
     // Then stop to play instants after first strike before combat damage
-    browser.player1().getPhaseHelper().is(AF, PLAYER);
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(AF, OPPONENT);
-    browser.player2().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(AF, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
-    // Then only the non first stike creature dies
-    browser.player1().getPhaseHelper().is(M2, PLAYER);
+    // Then only the non first strike creature dies
     browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Coral Merfolk"));
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Youthful Knight"));
   }

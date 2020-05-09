@@ -34,8 +34,7 @@ public class CombatFlyingReachTest extends AbstractApplicationTest {
   @Test
   public void combatFlyingReach() {
     // When going to combat
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(DA, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // creature with flying should have the correct class
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Air Elemental")).hasFlying();
@@ -44,7 +43,7 @@ public class CombatFlyingReachTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Air Elemental")).declareAsAttacker();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Air Elemental")).declareAsAttacker();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Air Elemental")).declareAsAttacker();
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
 
     // Declare blocker
     browser.player2().getPhaseHelper().is(DB, PLAYER);

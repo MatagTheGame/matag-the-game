@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 
@@ -33,14 +36,14 @@ public class WheneverACreatureEntersTheBattlefieldAbilityTest extends AbstractAp
     // When Playing Ajani's Welcome
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Ajani's Welcome")).click();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Ajani's Welcome"));
 
     // And then a creature
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 2).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Daybreak Chaplain")).click();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then a the creature is on the battlefield and event is triggered
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Daybreak Chaplain"));
@@ -48,8 +51,8 @@ public class WheneverACreatureEntersTheBattlefieldAbilityTest extends AbstractAp
     browser.player1().getStackHelper().containsAbility("Player1's Ajani's Welcome (" + ajanisWelcomeId1 + "): Gain 1 life.");
 
     // When players continue
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then player 1 gains 1 life
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(21);
@@ -57,14 +60,14 @@ public class WheneverACreatureEntersTheBattlefieldAbilityTest extends AbstractAp
     // When Playing another Ajani's Welcome
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 3).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Ajani's Welcome")).click();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Ajani's Welcome"));
 
     // And then another creature
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 4).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 5).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Daybreak Chaplain")).click();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then a both creatures are on the battlefield two events is triggered
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Daybreak Chaplain"), cards.get("Daybreak Chaplain"));
@@ -75,16 +78,16 @@ public class WheneverACreatureEntersTheBattlefieldAbilityTest extends AbstractAp
     ));
 
     // When players continue
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then player 1 gains 1 life
     browser.player1().getStackHelper().containsAbility("Player1's Ajani's Welcome (" + ajanisWelcomeId1 + "): Gain 1 life.");
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(22);
 
     // When players continue
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // Then player 1 gains 1 life
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(23);

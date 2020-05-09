@@ -44,17 +44,11 @@ public class CleanupTest extends AbstractApplicationTest {
     // Phase is
     browser.player1().getPhaseHelper().is(M1, PLAYER);
 
-    // When Player1 clicks continue
-    browser.player1().getActionHelper().clickContinue();
+    // Player1 goes to M2
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
-    // Phase is
-    browser.player1().getPhaseHelper().is(M2, PLAYER);
-
-    // When Player1 clicks continue
-    browser.player1().getActionHelper().clickContinue();
-
-    // Phase is
-    browser.player1().getPhaseHelper().is(M1, OPPONENT);
+    // Player1 passes the turn
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
 
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Huatli's Snubhorn")).doesNotHaveDamage();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Huatli's Snubhorn")).isTapped();

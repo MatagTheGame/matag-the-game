@@ -32,15 +32,13 @@ public class CombatLifelinkTest extends AbstractApplicationTest {
   @Test
   public void combatLifelink() {
     // When going to combat
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(DA, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // When attacking
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Charity Extractor")).declareAsAttacker();
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
     // Then
-    browser.player1().getPhaseHelper().is(M2, PLAYER);
     browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(19);
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(21);
   }

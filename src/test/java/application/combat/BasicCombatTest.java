@@ -31,10 +31,9 @@ public class BasicCombatTest extends AbstractApplicationTest {
   @Test
   public void basicCombat() {
     // When continuing
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // Message and status are about declaring attackers
-    browser.player1().getPhaseHelper().is(DA, PLAYER);
     browser.player1().getStatusHelper().hasMessage("Choose creatures you want to attack with.");
 
     // When declare attacker
@@ -62,16 +61,14 @@ public class BasicCombatTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Coral Commando")).click();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Axebane Beast")).click();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Ancient Brontodon")).click();
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
 
     // The phase move to Declare blocker
-    browser.player1().getPhaseHelper().is(DB, OPPONENT);
     browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
     browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).toHaveSize(4);
     browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Headwater Sentries")).isTapped();
 
     // And the opponent sees the same
-    browser.player2().getPhaseHelper().is(DB, PLAYER);
     browser.player2().getStatusHelper().hasMessage("Choose creatures you want to block with.");
     browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).toHaveSize(4);
     browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Headwater Sentries")).isTapped();
@@ -103,12 +100,8 @@ public class BasicCombatTest extends AbstractApplicationTest {
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Headwater Sentries")).click();
     browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getCard(cards.get("Headwater Sentries"), 1).parentHasStyle("margin-left: -105px; margin-top: 50px;");
 
-    // And continue
-    browser.player2().getActionHelper().clickContinue();
-
-    // Phase is moved to M2
-    browser.player2().getPhaseHelper().is(M2, OPPONENT);
-    browser.player1().getPhaseHelper().is(M2, PLAYER);
+    // Continue to M2
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
     // Cards are now
     browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Coral Commando"), cards.get("Axebane Beast"));

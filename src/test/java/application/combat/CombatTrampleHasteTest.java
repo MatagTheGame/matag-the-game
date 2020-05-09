@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.game.turn.phases.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
@@ -38,23 +40,21 @@ public class CombatTrampleHasteTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 3).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 4).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Charging Monstrosaur")).click();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // When going to combat
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(DA, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // When declare attacker
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Charging Monstrosaur")).declareAsAttacker();
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
 
     // Declare blocker
     browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Charging Monstrosaur")).select();
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Huatli's Snubhorn")).declareAsBlocker();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
     // Then
-    browser.player1().getPhaseHelper().is(M2, PLAYER);
     browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(17);
 
     browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Huatli's Snubhorn"));

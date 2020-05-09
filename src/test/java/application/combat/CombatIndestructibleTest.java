@@ -14,6 +14,7 @@ import static application.browser.BattlefieldHelper.*;
 import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.EndTurnPhase.ET;
 import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.game.turn.phases.Main2Phase.M2;
@@ -36,58 +37,48 @@ public class CombatIndestructibleTest extends AbstractApplicationTest {
   @Test
   public void indestructible() {
     // When going to combat
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(BC, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(DA, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // When declare attacker
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nyxborn Courser")).declareAsAttacker();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nyxborn Marauder")).declareAsAttacker();
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, OPPONENT);
 
     // Declare blocker
-    browser.player2().getPhaseHelper().is(DA, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
     browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Nyxborn Courser")).select();
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nyxborn Brute")).declareAsBlocker();
     browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Nyxborn Marauder")).select();
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nyxborn Colossus")).declareAsBlocker();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
 
     // Make a Stand
-    browser.player1().getPhaseHelper().is(AB, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 2).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Make a Stand")).click();
     browser.player1().getPhaseHelper().is(AB, OPPONENT);
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(AB, PLAYER);
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(AB, OPPONENT);
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(AB, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
     // Then
-    browser.player1().getPhaseHelper().is(M2, PLAYER);
     browser.player1().getGraveyardHelper(PLAYER).containsExactly(cards.get("Make a Stand"));
     browser.player1().getGraveyardHelper(OPPONENT).containsExactly(cards.get("Nyxborn Brute"));
 
     // Finally indestructible still gets destroyed if toughness reaches 0
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(ET, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(ET, OPPONENT);
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player2().getHandHelper(PLAYER).getFirstCard(cards.get("Disfigure")).select();
     browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Nyxborn Marauder")).target();
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(ET, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(ET, OPPONENT);
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();
     browser.player2().getHandHelper(PLAYER).getFirstCard(cards.get("Disfigure")).select();
     browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Nyxborn Marauder")).target();
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(ET, OPPONENT);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(ET, OPPONENT);
     browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Nyxborn Marauder"));
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
     browser.player2().getPhaseHelper().is(M1, PLAYER);
   }
 
