@@ -33,22 +33,17 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
   @Test
   public void castInstantPoweringCreatureDuringCombat() {
     // When player one attack thinking to win the fight
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(BC, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(DA, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Bastion Enforcer")).declareAsAttacker();
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(DA, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, OPPONENT);
 
     // And player 2 plays the game by blocking
-    browser.player2().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(DB, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Bartizan Bats")).declareAsBlocker();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, OPPONENT);
 
     // Then player 2 can pump up its creature
-    browser.player2().getPhaseHelper().is(AB, PLAYER);
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();
     browser.player2().getHandHelper(PLAYER).getFirstCard(cards.get("Dark Remedy")).select();
@@ -59,8 +54,7 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
     browser.player1().getStackHelper().contains(cards.get("Dark Remedy"));
 
     // When player 1 continue
-    browser.player1().getPhaseHelper().is(AB, PLAYER);
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(AB, OPPONENT);
 
     // Then spell is resolved from the stack and creature gets the +1/+3
     browser.player1().getStackHelper().isEmpty();
@@ -73,18 +67,16 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
     browser.player2().getPhaseHelper().is(AB, PLAYER);
 
     // When player 2 continues
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
     // Then combat is ended
-    browser.player2().getPhaseHelper().is(M2, OPPONENT);
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Bartizan Bats")).hasDamage(3);
     browser.player2().getGraveyardHelper(OPPONENT).contains(cards.get("Bastion Enforcer"));
 
     // When moving to next turn
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
 
     // Then extra power and toughness is cleaned up
-    browser.player2().getPhaseHelper().is(M1, PLAYER);
     browser.getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Bartizan Bats")).hasPowerAndToughness("3/1");
   }
 

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -37,23 +38,19 @@ public class CreatureEntersTheBattlefieldWithAbilityAllCreaturesYouControlTest e
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 3).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 4).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Angel of the Dawn")).click();
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is("M1", PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
     int angelOfTheDawnId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Angel of the Dawn")).getCardIdNumeric();
 
     // Then the enter the battlefield event gets triggered
     browser.player1().getStackHelper().containsAbility("Player1's Angel of the Dawn (" + angelOfTheDawnId + "): Creatures you control get +1/+1 and vigilance until end of turn.");
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is("M1", OPPONENT);
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is("M1", PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Which increases other creatures
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Enforcer Griffin")).hasPowerAndToughness("4/5");
 
     // And gives them vigilance
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(DA, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Enforcer Griffin")).declareAsAttacker();
     browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Enforcer Griffin")).isNotTapped();
   }

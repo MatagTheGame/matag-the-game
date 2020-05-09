@@ -50,15 +50,14 @@ public class CastMultipleInstantsTest extends AbstractApplicationTest {
 
     // Player 1 continues
     browser.player1().getPhaseHelper().is(M1, PLAYER);
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
     browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Douser of Lights")).hasPowerAndToughness("5/8");
     browser.player1().getStackHelper().contains(cards.get("Engulfing Eruption"));
     browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Dark Remedy"));
 
     // Players 2 continues
-    browser.player2().getPhaseHelper().is(M1, PLAYER);
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Douser of Lights")).hasPowerAndToughness("5/8");
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
     browser.player2().getStackHelper().isEmpty();
     browser.player2().getGraveyardHelper(OPPONENT).contains(cards.get("Engulfing Eruption"));
   }

@@ -4,19 +4,15 @@ import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import application.testcategory.Regression;
 import com.matag.cards.Cards;
-import com.matag.game.MatagGameApplication;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -45,7 +41,7 @@ public class CastNegativeAuraOnOpponentCreatureTest extends AbstractApplicationT
     browser.player1().getStackHelper().containsExactly(cards.get("Dead Weight"));
 
     // When opponent accepts enchantment
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then the attachment and its effect are on the battlefield
     browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).contains(cards.get("Dead Weight"));
@@ -61,7 +57,7 @@ public class CastNegativeAuraOnOpponentCreatureTest extends AbstractApplicationT
     browser.player1().getStackHelper().containsExactly(cards.get("Dead Weight"));
 
     // When opponent accepts enchantment
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then the creature immediately dies
     browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Dead Weight"));

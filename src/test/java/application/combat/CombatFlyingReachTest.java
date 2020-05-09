@@ -46,7 +46,6 @@ public class CombatFlyingReachTest extends AbstractApplicationTest {
     browser.player1().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
 
     // Declare blocker
-    browser.player2().getPhaseHelper().is(DB, PLAYER);
     browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getCard(cards.get("Air Elemental"), 0).click();
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Air Elemental")).click();
 

@@ -79,7 +79,6 @@ public class CombatIndestructibleTest extends AbstractApplicationTest {
     browser.player1().getActionHelper().clickContinueAndExpectPhase(ET, OPPONENT);
     browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Nyxborn Marauder"));
     browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
-    browser.player2().getPhaseHelper().is(M1, PLAYER);
   }
 
   static class InitTestServiceForTest extends InitTestService {

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static com.matag.game.turn.phases.EndTurnPhase.ET;
 import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.game.turn.phases.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -31,12 +32,11 @@ public class DiscardACardAtEndOfTurnIfMoreThanSevenTest extends AbstractApplicat
   @Test
   public void discardACardAtEndOfTurnIfMoreThanSeven() {
     // When arriving to End of Turn with 9 cards
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue();
-    browser.getHandHelper(PLAYER).toHaveSize(9);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(ET, PLAYER);
+    browser.player1().getHandHelper(PLAYER).toHaveSize(9);
 
     // It stops asking to discard a card
-    browser.player1().getPhaseHelper().is(ET, PLAYER);
     browser.player1().getStatusHelper().hasMessage("Choose a card to discard.");
     browser.player1().getActionHelper().clickContinue();
     browser.player1().getMessageHelper().hasMessage("Choose a card to discard.");

@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.game.turn.phases.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -36,10 +38,10 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Island"), 1).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Island"), 2).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Frost Lynx")).click();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Player 1 cannot resolve without choosing a target if there are targets available
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
     int frostLynxId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Frost Lynx")).getCardIdNumeric();
     browser.player1().getMessageHelper().hasMessage("\"" + frostLynxId + " - Frost Lynx\" requires a valid target.");
     browser.player1().getMessageHelper().close();
@@ -47,36 +49,31 @@ public class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest ex
     // Player 1 chooses a target
     browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).click();
     browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).isTargeted();
-    browser.player1().getPhaseHelper().is(M1, OPPONENT);
 
     // Player 2 just continues
     browser.player2().getPhaseHelper().is(M1, PLAYER);
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).isTargeted();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Player 1 has priority again and target is tapped
-    browser.player1().getPhaseHelper().is(M1, PLAYER);
     browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).isTappedDoesNotUntapNextTurn();
 
     // Next turn target is still tapped
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(M1, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).isTapped();
     browser.player2().getHandHelper(PLAYER).contains(cards.get("Forest"));
-    browser.player2().getActionHelper().clickContinue();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Next next turn target is still tapped
-    browser.player1().getPhaseHelper().is(M1, PLAYER);
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).isTapped();
     browser.player1().getHandHelper(PLAYER).contains(cards.get("Island"));
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue();
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
 
     // Next next next turn target is untapped
-    browser.player2().getPhaseHelper().is(M1, PLAYER);
     browser.player2().getHandHelper(PLAYER).contains(cards.get("Forest"), cards.get("Forest"));
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Canopy Spider")).isNotTapped();
   }

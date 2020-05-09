@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.matag.game.cardinstance.modifiers.TappedModifier.TAPPED;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -43,7 +44,7 @@ public class GainControlCreatureTest extends AbstractApplicationTest {
     browser.player1().getStackHelper().containsExactly(cards.get("Act of Treason"));
 
     // When opponent accepts
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Player1 now control the creature
     browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).isEmpty();

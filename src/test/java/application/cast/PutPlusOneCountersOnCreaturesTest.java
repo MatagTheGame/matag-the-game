@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
 @Category(Regression.class)
@@ -43,7 +45,7 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
     browser.player1().getStackHelper().containsExactly(cards.get("Gird for Battle"));
 
     // When opponent accepts
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then the counters are added on both creatures
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Concordia Pegasus"), 0).hasPlus1Counters(1);
@@ -68,13 +70,13 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Gird for Battle")).select();
     browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Concordia Pegasus"), 0).click();
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
 
     // Sorcery goes on the stack
     browser.player1().getStackHelper().containsExactly(cards.get("Gird for Battle"));
 
     // When opponent accepts
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then the counter is added on the creature
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Concordia Pegasus"), 0).hasPlus1Counters(2);

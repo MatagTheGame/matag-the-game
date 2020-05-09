@@ -84,7 +84,7 @@ public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
     browser.player2().getPhaseHelper().is(M1, PLAYER);
 
     // When player 2 resolves the spell
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then the creature is destroyed
     browser.player1().getStackHelper().isEmpty();

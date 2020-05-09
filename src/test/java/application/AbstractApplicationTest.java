@@ -43,8 +43,7 @@ import static org.mockito.BDDMockito.given;
 @Import({AbstractApplicationTest.InitGameTestConfiguration.class})
 public abstract class AbstractApplicationTest {
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplicationTest.class);
-
-  private static AtomicInteger GAME_ID = new AtomicInteger(0);
+  private static final AtomicInteger GAME_ID = new AtomicInteger();
 
   @LocalServerPort
   private int port;
@@ -116,7 +115,7 @@ public abstract class AbstractApplicationTest {
     browser.player1().getMessageHelper().hasNoMessage();
     browser.player2().getMessageHelper().hasNoMessage();
 
-    if (browser.player1().getPhaseHelper().getPhase().equals(UP)) {
+    while (browser.player1().getPhaseHelper().getPhase().equals(UP)) {
       // UP is only active if player can play something
       if (browser.player1().getPhaseHelper().getPriority().equals(PLAYER)) {
         // Status and Phase are
