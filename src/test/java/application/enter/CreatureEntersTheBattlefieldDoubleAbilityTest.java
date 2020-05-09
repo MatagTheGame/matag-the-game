@@ -6,13 +6,14 @@ import application.testcategory.Regression;
 import com.matag.cards.Cards;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.phases.Main1Phase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
 @Category(Regression.class)
@@ -34,14 +35,11 @@ public class CreatureEntersTheBattlefieldDoubleAbilityTest extends AbstractAppli
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Dusk Legion Zealot")).click();
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(Main1Phase.M1, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
     int duskLegionZealotId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Dusk Legion Zealot")).getCardIdNumeric();
     browser.player1().getStackHelper().containsAbility("Player1's Dusk Legion Zealot (" + duskLegionZealotId + "): Draw 1 cards. Lose 1 life.");
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is(Main1Phase.M1, PLAYER);
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(Main1Phase.M1, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then both abilities happen
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Dusk Legion Zealot"));

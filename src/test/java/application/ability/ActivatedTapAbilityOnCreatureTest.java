@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -32,7 +33,7 @@ public class ActivatedTapAbilityOnCreatureTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Checkpoint Officer")).click();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Prepare the mana
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 2).tap();
@@ -53,7 +54,7 @@ public class ActivatedTapAbilityOnCreatureTest extends AbstractApplicationTest {
 
     // Ability goes on the stack
     browser.player2().getStackHelper().containsAbility("Player1's Checkpoint Officer (" + checkpointOfficerId + "): That targets get tapped.");
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Both creatures are tapped
     browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).isTapped();

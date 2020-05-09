@@ -1,8 +1,10 @@
 package application.browser;
 
+import com.matag.player.PlayerType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
@@ -27,7 +29,21 @@ public class ActionHelper {
     matagBrowser.findElement(getContinueSelector()).click();
   }
 
+  public void clickContinueAndExpectPhase(String expectStatus, PlayerType player) {
+    clickContinue();
+    matagBrowser.player1().getPhaseHelper().is(expectStatus, player);
+    matagBrowser.player2().getPhaseHelper().is(expectStatus, other(player));
+  }
+
   private By getContinueSelector() {
     return By.id("continue-button");
+  }
+
+  private PlayerType other(PlayerType player) {
+    if (PLAYER == player) {
+      return OPPONENT;
+    } else {
+      return PLAYER;
+    }
   }
 }

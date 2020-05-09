@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.PLAYER;
 
 @Category(Regression.class)
@@ -38,8 +39,7 @@ public class CastCreatureAdamantTest extends AbstractApplicationTest {
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Ardenvale Paladin")).click();
 
     // Then the creature enters with a counter
-    browser.player2().getActionHelper().clickContinue();
-    browser.player1().getPhaseHelper().is(Main1Phase.M1, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Ardenvale Paladin"), 0).hasPlus1Counters(1);
   }
 

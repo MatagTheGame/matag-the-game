@@ -94,7 +94,7 @@ public class CastCreatureTest extends AbstractApplicationTest {
     browser.player2().getActionHelper().canContinue();
 
     // When player2 acknowledge the spell casted
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Creature goes on the battlefield (stack is empty)
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Headwater Sentries"));

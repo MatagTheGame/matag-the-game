@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.PLAYER;
 
 @Category(Regression.class)
@@ -37,7 +38,7 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
     browser.player1().getStackHelper().containsExactly(cards.get("Short Sword"));
 
     // When opponent accepts equipment
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then the attachment and its effect are on the battlefield
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Short Sword"));
@@ -53,7 +54,7 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
     browser.player1().getStackHelper().containsAbility("Player1's Short Sword (" + shortSwordId + "): Equipped creature gets +1/+1.");
 
     // When opponent accepts the equip
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then the target creature is equipped
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).containsExactly(cards.get("Prowling Caracal"), cards.get("Short Sword"));
@@ -65,7 +66,7 @@ public class CastEquipmentDestroyCreatureTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 4).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Legion's Judgment")).select();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Prowling Caracal")).target();
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Creature is in the graveyard
     browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Prowling Caracal"), cards.get("Legion's Judgment"));

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.BeginCombatPhase.BC;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -33,9 +35,7 @@ public class CastAuraDestroyTest extends AbstractApplicationTest {
     castArcaneFlight(2, "4/6");
 
     // Player1 continues
-    browser.player1().getActionHelper().clickContinue();
-    browser.player2().getPhaseHelper().is("BC", PLAYER);
-
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
 
     // When Player2 destroys an enchantment
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
@@ -44,7 +44,7 @@ public class CastAuraDestroyTest extends AbstractApplicationTest {
     browser.player2().getHandHelper(PLAYER).getFirstCard(cards.get("Invoke the Divine")).select();
     browser.player2().getStatusHelper().hasMessage("Select targets for Invoke the Divine.");
     browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Arcane Flight")).target();
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
 
     // The enchantments and the instant are in the graveyard
     browser.player2().getGraveyardHelper(PLAYER).contains(cards.get("Invoke the Divine"));
@@ -58,7 +58,7 @@ public class CastAuraDestroyTest extends AbstractApplicationTest {
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 2).tap();
     browser.player2().getHandHelper(PLAYER).getFirstCard(cards.get("Murder")).select();
     browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Concordia Pegasus")).target();
-    browser.player1().getActionHelper().clickContinue();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
 
     // Creature and its enchantments are in the graveyard
     browser.player2().getGraveyardHelper(PLAYER).contains(cards.get("Invoke the Divine"), cards.get("Murder"));
@@ -77,7 +77,7 @@ public class CastAuraDestroyTest extends AbstractApplicationTest {
     browser.player1().getStackHelper().containsExactly(cards.get("Arcane Flight"));
 
     // When opponent accepts enchantment
-    browser.player2().getActionHelper().clickContinue();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
     // Then the attachment and its effect are on the battlefield
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).contains(cards.get("Arcane Flight"));
