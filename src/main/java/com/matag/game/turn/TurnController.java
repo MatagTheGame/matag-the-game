@@ -58,8 +58,9 @@ public class TurnController {
       turnService.declareBlockers(gameStatus, toMapListInteger(request.getTargetsIdsForCardIds()));
     }
 
-    attachmentsService.updateGameStatus(gameStatus);
+    consolidateStatusService.consolidate(gameStatus);
     abilitiesFromOtherPermanentsService.updateGameStatus(gameStatus);
+    attachmentsService.updateGameStatus(gameStatus);
     consolidateStatusService.consolidate(gameStatus);
     gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);
   }
