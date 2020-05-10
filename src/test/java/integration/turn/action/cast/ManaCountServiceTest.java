@@ -56,9 +56,9 @@ public class ManaCountServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
 
-    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
-    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 2, cards.get("Plains"), player.getName(), player.getName()));
-    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 3, cards.get("Island"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(1, cards.get("Plains"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(2, cards.get("Plains"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(3, cards.get("Island"), player.getName(), player.getName()));
 
     // When
     ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
@@ -76,7 +76,7 @@ public class ManaCountServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
 
-    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(1, cards.get("Dark Remedy"), player.getName(), player.getName()));
 
     thrown.expectMessage("\"1 - Dark Remedy\" cannot be tapped for mana.");
 
@@ -93,7 +93,7 @@ public class ManaCountServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
 
-    CardInstance plains = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName());
+    CardInstance plains = cardInstanceFactory.create(1, cards.get("Plains"), player.getName(), player.getName());
     plains.getModifiers().tap();
     player.getBattlefield().addCard(plains);
 
@@ -112,7 +112,7 @@ public class ManaCountServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
 
-    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(1, cards.get("Plains"), player.getName(), player.getName()));
 
     thrown.expectMessage("\"1 - Plains\" cannot produce BLUE");
 
@@ -129,7 +129,7 @@ public class ManaCountServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
 
-    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
 
     // When
     ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
@@ -147,7 +147,7 @@ public class ManaCountServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
 
-    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
 
     thrown.expectMessage("\"1 - Azorius Guildgate\" cannot produce BLACK");
 
@@ -164,7 +164,7 @@ public class ManaCountServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
 
-    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
 
     // When
     manaCountService.verifyManaPaid(mana, player);
@@ -179,7 +179,7 @@ public class ManaCountServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
 
-    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
 
     thrown.expectMessage("\"1 - Gyre Engineer\" cannot produce BLACK");
 

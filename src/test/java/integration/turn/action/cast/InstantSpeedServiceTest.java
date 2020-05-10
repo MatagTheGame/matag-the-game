@@ -33,7 +33,7 @@ public class InstantSpeedServiceTest {
   public void isInstantSpeedReturnsFalseForLand() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), "player");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Plains"), "player");
 
     // When
     boolean result = instantSpeedService.isAtInstantSpeed(cardInstance, null);
@@ -46,7 +46,7 @@ public class InstantSpeedServiceTest {
   public void isInstantSpeedReturnsTrueForInstant() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Murder"), "player");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Murder"), "player");
 
     // When
     boolean result = instantSpeedService.isAtInstantSpeed(cardInstance, null);
@@ -59,7 +59,7 @@ public class InstantSpeedServiceTest {
   public void isInstantSpeedReturnsTrueForMetropolisSpriteSelectedPermanentsGet() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Metropolis Sprite"), "player");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Metropolis Sprite"), "player");
     String playedAbility = "SELECTED_PERMANENTS_GET";
 
     // When
@@ -73,7 +73,7 @@ public class InstantSpeedServiceTest {
   public void isInstantSpeedReturnsFalseForEquip() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Cobbled Wings"), "player");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Cobbled Wings"), "player");
     String playedAbility = "EQUIPPED_CREATURE_GETS";
 
     // When

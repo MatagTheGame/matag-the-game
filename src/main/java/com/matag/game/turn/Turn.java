@@ -14,8 +14,6 @@ import java.util.Map;
 
 @ToString
 @EqualsAndHashCode
-@Component
-@Scope("prototype")
 public class Turn {
   private int turnNumber;
   private String currentTurnPlayer;

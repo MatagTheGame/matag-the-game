@@ -33,7 +33,7 @@ public class CardInstanceFactoryTest {
     GameStatus gameStatus = testUtils.testGameStatus();
 
     // When
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Short Sword"), "player-name");
 
     // Then
     assertThat(cardInstance.getId()).isEqualTo(1);
@@ -46,8 +46,8 @@ public class CardInstanceFactoryTest {
     GameStatus gameStatus = testUtils.testGameStatus();
 
     // When
-    CardInstance cardInstance1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
-    CardInstance cardInstance2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Befuddle"), "opponent-name");
+    CardInstance cardInstance1 = cardInstanceFactory.create(1, cards.get("Short Sword"), "player-name");
+    CardInstance cardInstance2 = cardInstanceFactory.create(2, cards.get("Befuddle"), "opponent-name");
 
     // Then
     assertThat(cardInstance1).isNotSameAs(cardInstance2);

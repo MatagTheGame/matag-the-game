@@ -59,7 +59,7 @@ public class CardInstanceSelectorServiceTest {
       .selectorType(PERMANENT)
       .build();
 
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
 
     // When
     List<CardInstance> selection = selectorService.select(gameStatus, cardInstance, cardInstanceSelector).getCards();
@@ -76,7 +76,7 @@ public class CardInstanceSelectorServiceTest {
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
       .selectorType(PERMANENT)
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
@@ -95,7 +95,7 @@ public class CardInstanceSelectorServiceTest {
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Plains"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
@@ -114,7 +114,7 @@ public class CardInstanceSelectorServiceTest {
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
@@ -134,7 +134,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .powerToughnessConstraint(new PowerToughnessConstraint(POWER, EQUAL, 2))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
@@ -154,7 +154,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .powerToughnessConstraint(new PowerToughnessConstraint(POWER, EQUAL, 3))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
@@ -174,7 +174,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .powerToughnessConstraint(new PowerToughnessConstraint(POWER, GREATER, 4))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
@@ -194,7 +194,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .powerToughnessConstraint(new PowerToughnessConstraint(POWER, GREATER, 2))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
@@ -214,7 +214,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .powerToughnessConstraint(new PowerToughnessConstraint(TOUGHNESS, LESS_OR_EQUAL, 3))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
@@ -234,7 +234,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .powerToughnessConstraint(new PowerToughnessConstraint(TOUGHNESS, LESS_OR_EQUAL, 4))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
@@ -254,7 +254,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .powerToughnessConstraint(new PowerToughnessConstraint(TOUGHNESS, LESS_OR_EQUAL, 5))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
@@ -274,7 +274,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .controllerType(PLAYER)
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -295,7 +295,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .controllerType(PLAYER)
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     cardInstance.setController("opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -316,7 +316,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .controllerType(OPPONENT)
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "opponent-name");
     cardInstance.setController("opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -337,7 +337,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .controllerType(OPPONENT)
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -358,7 +358,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .statusTypes(singletonList(ATTACKING))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     cardInstance.getModifiers().setAttacking(true);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
@@ -380,7 +380,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .statusTypes(singletonList(ATTACKING))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -401,7 +401,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .statusTypes(singletonList(BLOCKING))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     cardInstance.getModifiers().setBlockingCardId(2);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
@@ -423,7 +423,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .statusTypes(singletonList(BLOCKING))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -444,7 +444,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .statusTypes(asList(ATTACKING, BLOCKING))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     cardInstance.getModifiers().setAttacking(true);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
@@ -466,7 +466,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .statusTypes(asList(ATTACKING, BLOCKING))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     cardInstance.getModifiers().setBlockingCardId(2);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
@@ -488,7 +488,7 @@ public class CardInstanceSelectorServiceTest {
       .ofType(singletonList(CREATURE))
       .statusTypes(asList(ATTACKING, BLOCKING))
       .build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -505,8 +505,8 @@ public class CardInstanceSelectorServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().others(true).selectorType(PERMANENT).ofType(singletonList(CREATURE)).build();
-    CardInstance cardInstance1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
-    CardInstance cardInstance2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Frenzied Raptor"), "player-name");
+    CardInstance cardInstance1 = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance2 = cardInstanceFactory.create(2, cards.get("Frenzied Raptor"), "player-name");
     cardInstance1.setController("player-name");
     cardInstance2.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance1);
@@ -525,7 +525,7 @@ public class CardInstanceSelectorServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().others(true).selectorType(PERMANENT).ofType(singletonList(CREATURE)).build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -542,7 +542,7 @@ public class CardInstanceSelectorServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).notOfType(singletonList(LAND)).build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Grazing Whiptail"), "player-name");
     cardInstance.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -559,7 +559,7 @@ public class CardInstanceSelectorServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).notOfType(singletonList(LAND)).build();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Plains"), "player-name");
     cardInstance.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
 
@@ -576,19 +576,19 @@ public class CardInstanceSelectorServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtype(singletonList(ZOMBIE)).others(true).build();
-    CardInstance otherZombiesCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Death Baron"), "player-name");
+    CardInstance otherZombiesCreature = cardInstanceFactory.create(1, cards.get("Death Baron"), "player-name");
     otherZombiesCreature.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(otherZombiesCreature);
 
-    CardInstance aZombie = cardInstanceFactory.create(gameStatus, 2, cards.get("Diregraf Ghoul"), "player-name");
+    CardInstance aZombie = cardInstanceFactory.create(2, cards.get("Diregraf Ghoul"), "player-name");
     aZombie.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aZombie);
 
-    CardInstance aNonZombie = cardInstanceFactory.create(gameStatus, 3, cards.get("Daybreak Chaplain"), "player-name");
+    CardInstance aNonZombie = cardInstanceFactory.create(3, cards.get("Daybreak Chaplain"), "player-name");
     aNonZombie.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aNonZombie);
 
-    CardInstance anOpponentZombie = cardInstanceFactory.create(gameStatus, 4, cards.get("Daybreak Chaplain"), "player-name");
+    CardInstance anOpponentZombie = cardInstanceFactory.create(4, cards.get("Daybreak Chaplain"), "player-name");
     anOpponentZombie.setController("opponent-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(anOpponentZombie);
 
@@ -605,19 +605,19 @@ public class CardInstanceSelectorServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).others(true).ofType(singletonList(CREATURE)).withAbilityType(FLYING).controllerType(PLAYER).build();
-    CardInstance otherFliersCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
+    CardInstance otherFliersCreature = cardInstanceFactory.create(1, cards.get("Empyrean Eagle"), "player-name");
     otherFliersCreature.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(otherFliersCreature);
 
-    CardInstance aFlier = cardInstanceFactory.create(gameStatus, 2, cards.get("Dawning Angel"), "player-name");
+    CardInstance aFlier = cardInstanceFactory.create(2, cards.get("Dawning Angel"), "player-name");
     aFlier.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aFlier);
 
-    CardInstance aNonFlier = cardInstanceFactory.create(gameStatus, 3, cards.get("Daybreak Chaplain"), "player-name");
+    CardInstance aNonFlier = cardInstanceFactory.create(3, cards.get("Daybreak Chaplain"), "player-name");
     aNonFlier.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aNonFlier);
 
-    CardInstance anOpponentFlier = cardInstanceFactory.create(gameStatus, 4, cards.get("Dawning Angel"), "player-name");
+    CardInstance anOpponentFlier = cardInstanceFactory.create(4, cards.get("Dawning Angel"), "player-name");
     anOpponentFlier.setController("opponent-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(anOpponentFlier);
 
@@ -636,10 +636,10 @@ public class CardInstanceSelectorServiceTest {
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).ofType(asList(CREATURE, PLANESWALKER)).ofColors(asList(GREEN, WHITE)).build();
 
-    CardInstance whiteCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
+    CardInstance whiteCreature = cardInstanceFactory.create(1, cards.get("Empyrean Eagle"), "player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(whiteCreature);
 
-    CardInstance blackCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Barony Vampire"), "player-name");
+    CardInstance blackCreature = cardInstanceFactory.create(2, cards.get("Barony Vampire"), "player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(blackCreature);
 
     // When
@@ -656,7 +656,7 @@ public class CardInstanceSelectorServiceTest {
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build();
 
-    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
+    CardInstance aPermanent = cardInstanceFactory.create(1, cards.get("Empyrean Eagle"), "player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aPermanent);
 
     // When
@@ -673,7 +673,7 @@ public class CardInstanceSelectorServiceTest {
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build();
 
-    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
+    CardInstance aPermanent = cardInstanceFactory.create(1, cards.get("Empyrean Eagle"), "player-name");
     aPermanent.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aPermanent);
 
@@ -691,7 +691,7 @@ public class CardInstanceSelectorServiceTest {
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build();
 
-    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "opponent-name");
+    CardInstance aPermanent = cardInstanceFactory.create(1, cards.get("Empyrean Eagle"), "opponent-name");
     aPermanent.setController("opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(aPermanent);
 
@@ -709,9 +709,9 @@ public class CardInstanceSelectorServiceTest {
 
     CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).currentEnchanted(true).build();
 
-    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
+    CardInstance aPermanent = cardInstanceFactory.create(1, cards.get("Empyrean Eagle"), "player-name");
     aPermanent.setController("player-name");
-    CardInstance theEnchantment = cardInstanceFactory.create(gameStatus, 2, cards.get("Colossification"), "player-name");
+    CardInstance theEnchantment = cardInstanceFactory.create(2, cards.get("Colossification"), "player-name");
     theEnchantment.setController("player-name");
     theEnchantment.getModifiers().setAttachedToId(aPermanent.getId());
 

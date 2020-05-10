@@ -38,7 +38,7 @@ public class EachPlayersAddXLifeActionTest {
   public void subtractXLifeToEachPlayer() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(1, cards.get("Dark Remedy"), "player-name");
 
     // When
     Ability lose4Life = Ability.builder().abilityType(AbilityType.ADD_X_LIFE).parameters(singletonList("-4")).build();

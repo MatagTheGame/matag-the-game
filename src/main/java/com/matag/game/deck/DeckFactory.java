@@ -38,7 +38,7 @@ public class DeckFactory {
     }
 
     return cards.stream()
-      .map(card -> cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, playerName))
+      .map(card -> cardInstanceFactory.create(gameStatus.nextCardId(), card, playerName))
       .collect(Collectors.toList());
   }
 

@@ -8,6 +8,8 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.status.GameStatusRepository;
 import com.matag.game.status.GameStatusUpdaterService;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
+import com.matag.game.turn.action.attach.AttachmentsService;
+import com.matag.game.turn.action.selection.AbilitiesFromOtherPermanentsService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +32,8 @@ public class TurnController {
   private final GameStatusUpdaterService gameStatusUpdaterService;
   private final TurnService turnService;
   private final ConsolidateStatusService consolidateStatusService;
+  private final AttachmentsService attachmentsService;
+  private final AbilitiesFromOtherPermanentsService abilitiesFromOtherPermanentsService;
 
   @MessageMapping("/game/turn")
   public void turn(SimpMessageHeaderAccessor headerAccessor, TurnRequest request) {
@@ -54,6 +58,9 @@ public class TurnController {
       turnService.declareBlockers(gameStatus, toMapListInteger(request.getTargetsIdsForCardIds()));
     }
 
+    consolidateStatusService.consolidate(gameStatus);
+    abilitiesFromOtherPermanentsService.updateGameStatus(gameStatus);
+    attachmentsService.updateGameStatus(gameStatus);
     consolidateStatusService.consolidate(gameStatus);
     gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);
   }

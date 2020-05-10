@@ -39,7 +39,7 @@ public class DestroyPermanentServiceTest {
   public void testDestroy() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(61, cards.get("Canopy Spider"), "player-name", "player-name");
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When
@@ -55,7 +55,7 @@ public class DestroyPermanentServiceTest {
   public void testDestroyDontBlowUpIfCardsIsNotAnymoreInTheBattlefield() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(61, cards.get("Canopy Spider"), "player-name", "player-name");
     gameStatus.getPlayer1().getGraveyard().addCard(cardInstance);
 
     // When
@@ -71,7 +71,7 @@ public class DestroyPermanentServiceTest {
   public void testDestroyIndestructibleDoesNotDestroyIt() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(INDESTRUCTIBLE));
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
@@ -88,7 +88,7 @@ public class DestroyPermanentServiceTest {
   public void testReduceToughnessToZeroOfIndestructibleDestroysIt() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(INDESTRUCTIBLE));
     cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(THAT_TARGETS_GET, emptyList(), singletonList("-3/-3"), null));
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);

@@ -85,7 +85,7 @@ public class PayCostServiceTest {
 
   private CardInstance createCardInstance(GameStatus gameStatus, String cardName) {
     Card card = cards.get(cardName);
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, ++cardInstanceId, card, "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(++cardInstanceId, card, "player-name", "player-name");
     gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance);
     return cardInstance;
   }

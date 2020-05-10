@@ -38,7 +38,7 @@ public class LeaveBattlefieldServiceTest {
   public void testLeaveBattlefield() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    CardInstance cardInstance = cardInstanceFactory.create(61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().tap();
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
@@ -54,18 +54,18 @@ public class LeaveBattlefieldServiceTest {
   public void testLeaveBattlefieldWithAttachments() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance creature = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    CardInstance creature = cardInstanceFactory.create(61, cards.get("Canopy Spider"), "player-name", "player-name");
     gameStatus.getPlayer1().getBattlefield().addCard(creature);
 
-    CardInstance enchantment1 = cardInstanceFactory.create(gameStatus, 62, cards.get("Knight's Pledge"), "player-name", "player-name");
+    CardInstance enchantment1 = cardInstanceFactory.create(62, cards.get("Knight's Pledge"), "player-name", "player-name");
     gameStatus.getPlayer1().getBattlefield().addCard(enchantment1);
     attachService.attach(gameStatus, enchantment1, creature.getId());
 
-    CardInstance enchantment2 = cardInstanceFactory.create(gameStatus, 63, cards.get("Knight's Pledge"), "opponent-name", "opponent-name");
+    CardInstance enchantment2 = cardInstanceFactory.create(63, cards.get("Knight's Pledge"), "opponent-name", "opponent-name");
     gameStatus.getPlayer2().getBattlefield().addCard(enchantment2);
     attachService.attach(gameStatus, enchantment2, creature.getId());
 
-    CardInstance equipment = cardInstanceFactory.create(gameStatus, 64, cards.get("Marauder's Axe"), "player-name", "player-name");
+    CardInstance equipment = cardInstanceFactory.create(64, cards.get("Marauder's Axe"), "player-name", "player-name");
     gameStatus.getPlayer1().getBattlefield().addCard(equipment);
     attachService.attach(gameStatus, equipment, creature.getId());
 

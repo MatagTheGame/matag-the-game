@@ -40,8 +40,6 @@ import static java.util.stream.Collectors.toList;
   isGetterVisibility = JsonAutoDetect.Visibility.NONE,
   creatorVisibility = JsonAutoDetect.Visibility.NONE
 )
-@Component
-@Scope("prototype")
 public class CardInstance {
 
   private int id;
@@ -56,17 +54,14 @@ public class CardInstance {
   private List<CardInstanceAbility> triggeredAbilities = new ArrayList<>();
   private Set<String> acknowledgedBy = new HashSet<>();
 
-  private GameStatus gameStatus;
-  private final AttachmentsService attachmentsService;
-  private final AbilitiesFromOtherPermanentsService abilitiesFromOtherPermanentsService;
+  private int attachmentsPower = 0;
+  private int attachmentsToughness = 0;
+  private int powerFromOtherPermanents = 0;
+  private int toughnessFromOtherPermanents = 0;
+  private List<CardInstanceAbility> attachmentsAbilities = emptyList();
+  private List<CardInstanceAbility> abilitiesFormOtherPermanents = emptyList();
 
-  public CardInstance(
-    @Autowired(required = false) AttachmentsService attachmentsService,
-    @Autowired(required = false) AbilitiesFromOtherPermanentsService abilitiesFromOtherPermanentsService
-  ) {
-    this.attachmentsService = attachmentsService;
-    this.abilitiesFromOtherPermanentsService = abilitiesFromOtherPermanentsService;
-  }
+
 
   @JsonProperty
   public int getId() {
@@ -261,29 +256,5 @@ public class CardInstance {
 
   public void resetAllModifiers() {
     modifiers = new CardModifiers();
-  }
-
-  private int getAttachmentsPower() {
-    return attachmentsService != null ? attachmentsService.getAttachmentsPower(gameStatus, this) : 0;
-  }
-
-  private int getAttachmentsToughness() {
-    return attachmentsService != null ? attachmentsService.getAttachmentsToughness(gameStatus, this) : 0;
-  }
-
-  private List<CardInstanceAbility> getAttachmentsAbilities() {
-    return attachmentsService != null ? attachmentsService.getAttachmentsAbilities(gameStatus, this) : emptyList();
-  }
-
-  private int getPowerFromOtherPermanents() {
-    return abilitiesFromOtherPermanentsService != null ? abilitiesFromOtherPermanentsService.getPowerFromOtherPermanents(gameStatus, this) : 0;
-  }
-
-  private int getToughnessFromOtherPermanents() {
-    return abilitiesFromOtherPermanentsService != null ? abilitiesFromOtherPermanentsService.getToughnessFromOtherPermanents(gameStatus, this) : 0;
-  }
-
-  private List<CardInstanceAbility> getAbilitiesFormOtherPermanents() {
-    return abilitiesFromOtherPermanentsService != null ? abilitiesFromOtherPermanentsService.getAbilitiesFormOtherPermanents(gameStatus, this) : emptyList();
   }
 }

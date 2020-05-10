@@ -38,7 +38,7 @@ public class DrawXCardsActionTest {
   public void controllerDraw3Cards() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 12, cards.get("Dark Remedy"), "opponent-name");
+    CardInstance cardInstance = cardInstanceFactory.create(12, cards.get("Dark Remedy"), "opponent-name");
     CardInstanceAbility draw2Cards = new CardInstanceAbility(Ability.builder().abilityType(AbilityType.DRAW_X_CARDS).parameters(singletonList("2")).build());
 
     // When
