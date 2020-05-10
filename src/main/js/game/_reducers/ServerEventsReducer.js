@@ -5,7 +5,7 @@ import UserInterfaceUtils from 'game/UserInterface/UserInterfaceUtils'
 export default class ServerEventsReducer {
   static getEvents() {
     return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER_AND_OPPONENT', 'UPDATE_GAME_STATUS', 'UPDATE_STACK',
-      'UPDATE_PLAYER_BATTLEFIELD', 'UPDATE_PLAYER_HAND', 'UPDATE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE', 'UPDATE_PLAYER_LIBRARY_SIZE']
+      'UPDATE_PLAYER_BATTLEFIELD', 'UPDATE_PLAYER_HAND', 'UPDATE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIBRARY_SIZE']
   }
 
   static reduceEvent(newState, action) {
@@ -31,6 +31,13 @@ export default class ServerEventsReducer {
     case 'UPDATE_GAME_STATUS':
       newState.turn = action.value.turn
       newState.turn.blockingCardPosition = 0
+
+      for (let i = 0; i < action.value.playersUpdateEvents.length; i++) {
+        const playerUpdateEvent = action.value.playersUpdateEvents[i]
+        player = PlayerUtils.getPlayerByName(newState, playerUpdateEvent.name)
+        player.life = playerUpdateEvent.life
+      }
+
       UserInterfaceUtils.computeStatusMessage(newState)
       break
 
@@ -52,11 +59,6 @@ export default class ServerEventsReducer {
     case 'UPDATE_PLAYER_GRAVEYARD':
       player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
       player.graveyard = action.value.value
-      break
-
-    case 'UPDATE_PLAYER_LIFE':
-      player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
-      player.life = action.value.value
       break
 
     case 'UPDATE_PLAYER_LIBRARY_SIZE':

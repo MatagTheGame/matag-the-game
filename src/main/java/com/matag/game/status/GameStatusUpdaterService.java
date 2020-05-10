@@ -4,8 +4,11 @@ import com.matag.game.event.Event;
 import com.matag.game.event.EventSender;
 import com.matag.game.message.MessageEvent;
 import com.matag.game.player.Player;
+import com.matag.game.player.PlayerUpdateEvent;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 import static java.util.Arrays.asList;
 
@@ -19,17 +22,27 @@ public class GameStatusUpdaterService {
     sendUpdateGraveyards(gameStatus);
     sendUpdateStack(gameStatus);
     sendUpdateLibrariesSize(gameStatus);
-    sendUpdatePlayersLife(gameStatus);
     sendUpdateHands(gameStatus);
 
     GameStatusUpdateEvent gameStatusUpdateEvent = GameStatusUpdateEvent.builder()
       .turn(gameStatus.getTurn())
+      .playersUpdateEvents(Set.of(
+        playerUpdateEvent(gameStatus.getPlayer1()),
+        playerUpdateEvent(gameStatus.getPlayer2())
+      ))
       .build();
 
     eventSender.sendToPlayers(
       asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
       new Event("UPDATE_GAME_STATUS", gameStatusUpdateEvent)
     );
+  }
+
+  private PlayerUpdateEvent playerUpdateEvent(Player player) {
+    return PlayerUpdateEvent.builder()
+      .name(player.getName())
+      .life(player.getLife())
+      .build();
   }
 
   private void sendUpdateBattlefields(GameStatus gameStatus) {
