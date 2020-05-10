@@ -1,11 +1,10 @@
-import CostUtils from 'game/Card/CostUtils'
 import PlayerUtils from 'game/PlayerInfo/PlayerUtils'
 import UserInterfaceUtils from 'game/UserInterface/UserInterfaceUtils'
+import CostUtils from 'game/Card/CostUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {
-    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER_AND_OPPONENT', 'UPDATE_GAME_STATUS', 'UPDATE_STACK',
-      'UPDATE_PLAYER_BATTLEFIELD', 'UPDATE_PLAYER_HAND', 'UPDATE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIBRARY_SIZE']
+    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER_AND_OPPONENT', 'UPDATE_GAME_STATUS', 'UPDATE_PLAYER_HAND']
   }
 
   static reduceEvent(newState, action) {
@@ -30,40 +29,25 @@ export default class ServerEventsReducer {
 
     case 'UPDATE_GAME_STATUS':
       newState.turn = action.value.turn
-      newState.turn.blockingCardPosition = 0
+      newState.stack = action.value.stack
 
       for (let i = 0; i < action.value.playersUpdateEvents.length; i++) {
         const playerUpdateEvent = action.value.playersUpdateEvents[i]
         player = PlayerUtils.getPlayerByName(newState, playerUpdateEvent.name)
         player.life = playerUpdateEvent.life
+        player.librarySize = playerUpdateEvent.librarySize
+        player.battlefield = playerUpdateEvent.battlefield
+        player.graveyard = playerUpdateEvent.graveyard
       }
 
-      UserInterfaceUtils.computeStatusMessage(newState)
-      break
-
-    case 'UPDATE_STACK':
-      newState.stack = action.value
-      break
-
-    case 'UPDATE_PLAYER_BATTLEFIELD':
-      player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
-      player.battlefield = action.value.value
+      newState.turn.blockingCardPosition = 0
       CostUtils.clearMana(newState)
+      UserInterfaceUtils.computeStatusMessage(newState)
       break
 
     case 'UPDATE_PLAYER_HAND':
       player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
       player.hand = action.value.value
-      break
-
-    case 'UPDATE_PLAYER_GRAVEYARD':
-      player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
-      player.graveyard = action.value.value
-      break
-
-    case 'UPDATE_PLAYER_LIBRARY_SIZE':
-      player = PlayerUtils.getPlayerByName(newState, action.value.playerName)
-      player.librarySize = action.value.value
       break
     }
 

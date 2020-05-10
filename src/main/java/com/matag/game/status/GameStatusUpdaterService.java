@@ -18,14 +18,11 @@ public class GameStatusUpdaterService {
   private final EventSender eventSender;
 
   public void sendUpdateGameStatus(GameStatus gameStatus) {
-    sendUpdateBattlefields(gameStatus);
-    sendUpdateGraveyards(gameStatus);
-    sendUpdateStack(gameStatus);
-    sendUpdateLibrariesSize(gameStatus);
     sendUpdateHands(gameStatus);
 
     GameStatusUpdateEvent gameStatusUpdateEvent = GameStatusUpdateEvent.builder()
       .turn(gameStatus.getTurn())
+      .stack(gameStatus.getStack().getItems())
       .playersUpdateEvents(Set.of(
         playerUpdateEvent(gameStatus.getPlayer1()),
         playerUpdateEvent(gameStatus.getPlayer2())
@@ -42,34 +39,10 @@ public class GameStatusUpdaterService {
     return PlayerUpdateEvent.builder()
       .name(player.getName())
       .life(player.getLife())
+      .librarySize(player.getLibrary().size())
+      .battlefield(player.getBattlefield().getCards())
+      .graveyard(player.getGraveyard().getCards())
       .build();
-  }
-
-  private void sendUpdateBattlefields(GameStatus gameStatus) {
-    sendUpdatePlayerBattlefield(gameStatus, gameStatus.getPlayer1());
-    sendUpdatePlayerBattlefield(gameStatus, gameStatus.getPlayer2());
-  }
-
-  private void sendUpdateGraveyards(GameStatus gameStatus) {
-    sendUpdatePlayerGraveyard(gameStatus, gameStatus.getPlayer1());
-    sendUpdatePlayerGraveyard(gameStatus, gameStatus.getPlayer2());
-  }
-
-  private void sendUpdateStack(GameStatus gameStatus) {
-    eventSender.sendToPlayers(
-      asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-      new Event("UPDATE_STACK", gameStatus.getStack().getItems())
-    );
-  }
-
-  private void sendUpdateLibrariesSize(GameStatus gameStatus) {
-    sendUpdatePlayerLibrarySize(gameStatus, gameStatus.getPlayer1());
-    sendUpdatePlayerLibrarySize(gameStatus, gameStatus.getPlayer2());
-  }
-
-  private void sendUpdatePlayersLife(GameStatus gameStatus) {
-    sendUpdatePlayerLife(gameStatus, gameStatus.getPlayer1());
-    sendUpdatePlayerLife(gameStatus, gameStatus.getPlayer2());
   }
 
   private void sendUpdateHands(GameStatus gameStatus) {
@@ -81,37 +54,9 @@ public class GameStatusUpdaterService {
     eventSender.sendToUser(sessionId, new Event("MESSAGE", messageEvent));
   }
 
-  private void sendUpdatePlayerLibrarySize(GameStatus gameStatus, Player player) {
-    eventSender.sendToPlayers(
-      asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-      new Event("UPDATE_PLAYER_LIBRARY_SIZE", player, player.getLibrary().size())
-    );
-  }
-
   private void sendUpdatePlayerHand(GameStatus gameStatus, Player player) {
     Player otherPlayer = gameStatus.getOtherPlayer(player);
     eventSender.sendToPlayer(player, new Event("UPDATE_PLAYER_HAND", player, player.getHand().getCards()));
     eventSender.sendToPlayer(otherPlayer, new Event("UPDATE_PLAYER_HAND", player, player.getHand().maskedHand()));
-  }
-
-  private void sendUpdatePlayerBattlefield(GameStatus gameStatus, Player player) {
-    eventSender.sendToPlayers(
-      asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-      new Event("UPDATE_PLAYER_BATTLEFIELD", player, player.getBattlefield().getCards())
-    );
-  }
-
-  private void sendUpdatePlayerGraveyard(GameStatus gameStatus, Player player) {
-    eventSender.sendToPlayers(
-      asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-      new Event("UPDATE_PLAYER_GRAVEYARD", player, player.getGraveyard().getCards())
-    );
-  }
-
-  private void sendUpdatePlayerLife(GameStatus gameStatus, Player player) {
-    eventSender.sendToPlayers(
-      asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-      new Event("UPDATE_PLAYER_LIFE", player, player.getLife())
-    );
   }
 }
