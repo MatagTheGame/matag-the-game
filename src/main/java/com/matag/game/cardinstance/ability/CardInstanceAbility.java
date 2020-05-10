@@ -40,11 +40,12 @@ public class CardInstanceAbility extends Ability {
     boolean negative = parametersString.startsWith("-");
     switch (abilityType) {
       case ADD_X_LIFE:
-        return String.format(abilityType.getText(), negative ? "Lose" : "Gain", parametersString.replace("-", ""));
-      case EACH_PLAYERS_ADD_X_LIFE:
-        return String.format(abilityType.getText(), negative ? "loses" : "gains", parametersString.replace("-", ""));
+        String verb = (negative ? "lose" : "gain") + (cardInstanceSelector.isItself() ? "" : "s");
+        return String.format(abilityType.getText(), cardInstanceSelector.getText(), verb, parametersString.replace("-", ""));
+
       case SELECTED_PERMANENTS_GET:
         return String.format(abilityType.getText(), cardInstanceSelector.getText(), parametersString) + " until end of turn.";
+
       default:
         return String.format(abilityType.getText(), parametersString);
     }

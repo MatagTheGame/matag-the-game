@@ -1,10 +1,12 @@
 package integration.turn.action.selection;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.cards.Cards;
 import com.matag.cards.ability.selector.CardInstanceSelector;
 import com.matag.cards.ability.selector.PowerToughnessConstraint;
+import com.matag.cards.ability.selector.SelectorType;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.selection.CardInstanceSelectorService;
 import integration.TestUtils;
@@ -726,22 +728,47 @@ public class CardInstanceSelectorServiceTest {
   }
 
   @Test
-  public void creaturesYouControlGetText() {
-    assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build().getText()).isEqualTo("Creatures you control get");
+  public void selectPlayer() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build();
+    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
+
+    // When
+    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, cardInstanceSelector);
+
+    // Then
+    assertThat(selection).containsExactly(gameStatus.getPlayer1());
   }
 
   @Test
-  public void otherCreaturesYouControlGetText() {
-    assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).others(true).build().getText()).isEqualTo("Other creatures you control get");
+  public void selectOpponent() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build();
+    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
+
+    // When
+    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, cardInstanceSelector);
+
+    // Then
+    assertThat(selection).containsExactly(gameStatus.getPlayer2());
   }
 
   @Test
-  public void allOtherCreaturesGetText() {
-    assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).others(true).build().getText()).isEqualTo("Other creatures get");
-  }
+  public void selectAllPlayers() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
 
-  @Test
-  public void itGetsText() {
-    assertThat(CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build().getText()).isEqualTo("Gets");
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(PLAYER).build();
+    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
+
+    // When
+    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, cardInstanceSelector);
+
+    // Then
+    assertThat(selection).containsExactlyInAnyOrder(gameStatus.getPlayer1(), gameStatus.getPlayer2());
   }
 }

@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import static com.matag.cards.ability.type.AbilityType.*;
 import static com.matag.cards.properties.Type.CREATURE;
+import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -42,31 +43,31 @@ public class CardInstanceAbilityTest {
   @Test
   public void gainXLifeText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(ADD_X_LIFE, emptyList(), singletonList("2"), null);
+    CardInstanceAbility ability = new CardInstanceAbility(ADD_X_LIFE, CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build(), singletonList("2"), null);
 
     // When
     String text = ability.getAbilityTypeText();
 
     // Then
-    assertThat(text).isEqualTo("Gain 2 life.");
+    assertThat(text).isEqualTo("You gain 2 life.");
   }
 
   @Test
   public void loseXLifeText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(ADD_X_LIFE, emptyList(), singletonList("-2"), null);
+    CardInstanceAbility ability = new CardInstanceAbility(ADD_X_LIFE, CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build(), singletonList("-2"), null);
 
     // When
     String text = ability.getAbilityTypeText();
 
     // Then
-    assertThat(text).isEqualTo("Lose 2 life.");
+    assertThat(text).isEqualTo("You lose 2 life.");
   }
 
   @Test
   public void eachPlayerGainsXLifeText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(EACH_PLAYERS_ADD_X_LIFE, emptyList(), singletonList("2"), null);
+    CardInstanceAbility ability = new CardInstanceAbility(ADD_X_LIFE, CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).build(), singletonList("2"), null);
 
     // When
     String text = ability.getAbilityTypeText();
@@ -78,13 +79,13 @@ public class CardInstanceAbilityTest {
   @Test
   public void eachPlayerLosesXLifeText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(EACH_PLAYERS_ADD_X_LIFE, emptyList(), singletonList("-2"), null);
+    CardInstanceAbility ability = new CardInstanceAbility(ADD_X_LIFE, CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build(), singletonList("-2"), null);
 
     // When
     String text = ability.getAbilityTypeText();
 
     // Then
-    assertThat(text).isEqualTo("Each player loses 2 life.");
+    assertThat(text).isEqualTo("Each opponent loses 2 life.");
   }
 
   @Test

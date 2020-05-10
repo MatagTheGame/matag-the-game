@@ -5,9 +5,13 @@ import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.selector.StatusType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceSearch;
+import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.player.PlayerType;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class CardInstanceSelectorService {
@@ -79,5 +83,25 @@ public class CardInstanceSelectorService {
     }
 
     return cards;
+  }
+
+  public List<Player> selectPlayers(GameStatus gameStatus, CardInstance cardInstance, CardInstanceSelector cardInstanceSelector) {
+    List<Player> players = new ArrayList<>();
+
+    if (cardInstanceSelector.getSelectorType().equals(SelectorType.PLAYER)) {
+      if (cardInstanceSelector.isItself()) {
+        players.add(gameStatus.getPlayerByName(cardInstance.getController()));
+
+      } else {
+        Player player = gameStatus.getPlayerByName(cardInstance.getController());
+        Player opponent = gameStatus.getOtherPlayer(player);
+        players.add(opponent);
+        if (cardInstanceSelector.getControllerType() != PlayerType.OPPONENT) {
+          players.add(player);
+        }
+      }
+    }
+
+    return players;
   }
 }
