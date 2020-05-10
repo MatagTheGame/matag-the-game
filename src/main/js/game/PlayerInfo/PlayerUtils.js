@@ -16,7 +16,7 @@ export default class PlayerUtils {
   }
 
   static getPlayerByName(state, playerName) {
-    if (state.player.name === playerName) {
+    if (get(state, 'player.name') === playerName) {
       return state.player
     } else {
       return state.opponent

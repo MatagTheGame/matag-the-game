@@ -122,7 +122,7 @@ public class InitController {
 
   private static Map<String, InitPlayerEvent> initPlayerAndOpponentEvent(Player player, Player opponent) {
     return Map.of(
-            "player", InitPlayerEvent.createForPlayer(player),
-            "opponent", InitPlayerEvent.createForOpponent(opponent));
+            "player", InitPlayerEvent.create(player),
+            "opponent", InitPlayerEvent.create(opponent));
   }
 }

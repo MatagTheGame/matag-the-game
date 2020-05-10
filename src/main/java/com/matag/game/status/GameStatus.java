@@ -109,6 +109,4 @@ public class GameStatus {
     return new CardInstanceSearch(player1.getBattlefield().getCards())
       .concat(player2.getBattlefield().getCards());
   }
-
-
 }
