@@ -97,7 +97,7 @@ public class InitController {
         // FIXME no implemented card yet can be played at the first game upkeep... so let's just continue.
         continueTurnService.continueTurn(gameStatus);
 
-        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
+        gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);
 
       } else {
         Player player = playerService.getPlayerByToken(gameStatus, token.getAdminToken());
@@ -105,7 +105,7 @@ public class InitController {
 
         eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(player, gameStatus.getOtherPlayer(player))));
 
-        gameStatusUpdaterService.sendUpdateTurn(gameStatus);
+        gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);
       }
     }
   }

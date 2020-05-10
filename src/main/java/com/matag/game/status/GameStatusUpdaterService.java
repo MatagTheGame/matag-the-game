@@ -21,13 +21,14 @@ public class GameStatusUpdaterService {
     sendUpdateLibrariesSize(gameStatus);
     sendUpdatePlayersLife(gameStatus);
     sendUpdateHands(gameStatus);
-    sendUpdateTurn(gameStatus);
-  }
 
-  public void sendUpdateTurn(GameStatus gameStatus) {
+    GameStatusUpdateEvent gameStatusUpdateEvent = GameStatusUpdateEvent.builder()
+      .turn(gameStatus.getTurn())
+      .build();
+
     eventSender.sendToPlayers(
       asList(gameStatus.getPlayer1(), gameStatus.getPlayer2()),
-      new Event("UPDATE_TURN", gameStatus.getTurn())
+      new Event("UPDATE_GAME_STATUS", gameStatusUpdateEvent)
     );
   }
 

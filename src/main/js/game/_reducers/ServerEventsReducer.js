@@ -4,7 +4,7 @@ import UserInterfaceUtils from 'game/UserInterface/UserInterfaceUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {
-    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER_AND_OPPONENT', 'UPDATE_TURN', 'UPDATE_STACK',
+    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER_AND_OPPONENT', 'UPDATE_GAME_STATUS', 'UPDATE_STACK',
       'UPDATE_PLAYER_BATTLEFIELD', 'UPDATE_PLAYER_HAND', 'UPDATE_PLAYER_GRAVEYARD', 'UPDATE_PLAYER_LIFE', 'UPDATE_PLAYER_LIBRARY_SIZE']
   }
 
@@ -28,8 +28,8 @@ export default class ServerEventsReducer {
       newState.opponent = action.value.opponent
       break
 
-    case 'UPDATE_TURN':
-      newState.turn = action.value
+    case 'UPDATE_GAME_STATUS':
+      newState.turn = action.value.turn
       newState.turn.blockingCardPosition = 0
       UserInterfaceUtils.computeStatusMessage(newState)
       break
