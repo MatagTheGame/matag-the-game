@@ -7,6 +7,7 @@ import PropTypes from 'prop-types'
 import CardUtils from './CardUtils'
 import {Modifiers} from './Modifiers'
 import './card.scss'
+import StackUtils from 'game/Stack/StackUtils'
 
 class Card extends Component {
   constructor(props) {
@@ -108,7 +109,7 @@ const maximizeCardEvent = (cardImage) => {
 
 const mapStateToProps = state => {
   return {
-    targetIdsForLastSpell: get(state, 'stack[0].modifiers.targets', [])
+    targetIdsForLastSpell: get(StackUtils.getTopSpell(state), 'modifiers.targets', [])
   }
 }
 

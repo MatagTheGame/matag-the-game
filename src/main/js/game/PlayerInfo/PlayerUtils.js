@@ -5,6 +5,7 @@ import CostUtils from 'game/Card/CostUtils'
 import TurnUtils from 'game/Turn/TurnUtils'
 import UserInterfaceUtils from 'game/UserInterface/UserInterfaceUtils'
 import stompClient from 'game/WebSocket'
+import StackUtils from 'game/Stack/StackUtils'
 
 export default class PlayerUtils {
   static isCurrentPlayerTurn(state) {
@@ -94,7 +95,7 @@ export default class PlayerUtils {
       }
 
     } else if (get(state, 'stack.length', 0) > 0) {
-      return CardUtils.getAbilitiesForTriggerType(state.stack[0], 'TRIGGERED_ABILITY')[0]
+      return CardUtils.getAbilitiesForTriggerType(StackUtils.getTopSpell(state), 'TRIGGERED_ABILITY')[0]
     }
   }
 
@@ -104,8 +105,8 @@ export default class PlayerUtils {
       if (TurnUtils.getCardIdSelectedToBePlayed(state)) {
         PlayerUtils.castSelectedCard(state)
 
-      } else if (get(state, 'stack[0].triggeredAbilities[0].targets[0]')) {
-        stompClient.sendEvent('turn', {action: 'RESOLVE', targetsIdsForCardIds: {[get(state, 'stack[0].id')]: TurnUtils.getTargetsIds(state)}})
+      } else if (get(StackUtils.getTopSpell(state), 'triggeredAbilities[0].targets[0]')) {
+        stompClient.sendEvent('turn', {action: 'RESOLVE', targetsIdsForCardIds: {[StackUtils.getTopSpell(state).id]: TurnUtils.getTargetsIds(state)}})
       }
     }
   }
