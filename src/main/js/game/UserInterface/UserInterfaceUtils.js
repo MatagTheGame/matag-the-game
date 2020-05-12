@@ -4,6 +4,10 @@ import Phase from 'game/Turn/Phase'
 import PlayerUtils from 'game/PlayerInfo/PlayerUtils'
 
 export default class UserInterfaceUtils {
+  static setLastHealthcheckReceived(state) {
+    set(state, 'userInterface.websocket.lastHealthcheckReceived', new Date())
+  }
+
   static setMessage(state, message, closable = true) {
     set(state, 'userInterface.message', {text: message, closable: closable})
   }

@@ -22,3 +22,27 @@
     background-color: cadetblue;
   }
 }
+
+#connection-status {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+}
+
+#connection-status.connected {
+  background-color: green;
+}
+
+#connection-status.disconnected {
+  background-color: firebrick;
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.5;
+  }
+}

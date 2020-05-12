@@ -17,6 +17,10 @@ import java.util.Set;
 public class GameStatusUpdaterService {
   private final EventSender eventSender;
 
+  public void sendHealthcheck(String sessionId) {
+    eventSender.sendToUser(sessionId, new Event("HEALTHCHECK"));
+  }
+
   public void sendUpdateGameStatus(GameStatus gameStatus) {
     eventSender.sendToPlayer(
       gameStatus.getPlayer1(),

@@ -13,6 +13,10 @@ stompClient.sendEvent = (destination, body) => {
   stompClient.send(`/api/game/${destination}`, headers, JSON.stringify(body))
 }
 
+stompClient.sendHeartbeat = () => {
+  stompClient.send('/api/healthcheck')
+}
+
 stompClient.init = (receiveCallback) => {
   stompClient.connect({}, () => {
     const sessionId = socket._transport.url.split('/')[5]

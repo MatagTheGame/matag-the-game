@@ -25,10 +25,12 @@ public class EventSender {
 
   public void sendToUser(String sessionId, String username, Event event) {
     String eventString = serializeToString(event);
-    if (username != null) {
-      LOGGER.info("Sending event to {} - {}: {}", sessionId, username, eventString);
-    } else {
-      LOGGER.info("Sending event to {}: {}", sessionId, eventString);
+    if (!event.getType().equals("HEALTHCHECK")) {
+      if (username != null) {
+        LOGGER.info("Sending event to {} - {}: {}", sessionId, username, eventString);
+      } else {
+        LOGGER.info("Sending event to {}: {}", sessionId, eventString);
+      }
     }
     webSocketTemplate.convertAndSendToUser(sessionId, "/events", eventString);
   }

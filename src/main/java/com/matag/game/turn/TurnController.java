@@ -31,6 +31,11 @@ public class TurnController {
   private final TurnService turnService;
   private final ConsolidateStatusService consolidateStatusService;
 
+  @MessageMapping("/healthcheck")
+  public void healthcheck(SimpMessageHeaderAccessor headerAccessor) {
+    gameStatusUpdaterService.sendHealthcheck(headerAccessor.getSessionId());
+  }
+
   @MessageMapping("/game/turn")
   public void turn(SimpMessageHeaderAccessor headerAccessor, TurnRequest request) {
     SecurityToken token = securityHelper.extractSecurityToken(headerAccessor);

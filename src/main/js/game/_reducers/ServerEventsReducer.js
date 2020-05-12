@@ -4,11 +4,15 @@ import CostUtils from 'game/Card/CostUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {
-    return ['MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER_AND_OPPONENT', 'UPDATE_GAME_STATUS']
+    return ['HEALTHCHECK', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER_AND_OPPONENT', 'UPDATE_GAME_STATUS']
   }
 
   static reduceEvent(newState, action) {
     switch (action.type) {
+    case 'HEALTHCHECK':
+      UserInterfaceUtils.setLastHealthcheckReceived(newState)
+      break
+
     case 'MESSAGE':
       UserInterfaceUtils.setMessage(newState, action.value.text, action.value.closable)
       break
