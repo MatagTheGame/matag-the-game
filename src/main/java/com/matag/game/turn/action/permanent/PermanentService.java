@@ -52,7 +52,7 @@ public class PermanentService {
     dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false, cardInstance);
 
     int controllerDamage = abilityService.controllerDamageFromParameter(parameter);
-    dealDamageToPlayerService.dealDamageToPlayer(gameStatus, controllerDamage, gameStatus.getPlayerByName(cardInstance.getController()));
+    dealDamageToPlayerService.dealDamageToPlayer(gameStatus, controllerDamage, gameStatus.getPlayerByName(target.getController()));
 
     if (abilityService.destroyedFromParameter(parameter)) {
       destroyPermanentService.markToBeDestroyed(gameStatus, target.getId());
@@ -75,7 +75,7 @@ public class PermanentService {
     }
 
     if (abilityService.controlledFromParameter(parameter)) {
-      gainControlPermanentService.gainControlUntilEndOfTurn(gameStatus, target, cardInstance.getController());
+      gainControlPermanentService.gainControlUntilEndOfTurn(target, cardInstance.getController());
     }
 
     int counters = abilityService.plus1CountersFromParameter(parameter);

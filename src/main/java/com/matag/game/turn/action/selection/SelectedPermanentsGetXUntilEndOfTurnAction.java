@@ -23,5 +23,4 @@ public class SelectedPermanentsGetXUntilEndOfTurnAction implements AbilityAction
       permanentService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), card);
     }
   }
-
 }
