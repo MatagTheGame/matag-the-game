@@ -83,6 +83,7 @@ public abstract class AbstractApplicationTest {
       } catch (RuntimeException e) {
         sleep5Secs();
         lastException = e;
+        gameStatusRepository.clear();
         LOGGER.info("Setup failed: {}", e.getMessage());
       }
     }
