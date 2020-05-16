@@ -4,7 +4,7 @@ import CostUtils from 'game/Card/CostUtils'
 
 export default class ServerEventsReducer {
   static getEvents() {
-    return ['HEALTHCHECK', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER_AND_OPPONENT', 'UPDATE_GAME_STATUS']
+    return ['HEALTHCHECK', 'MESSAGE', 'INIT_WAITING_OPPONENT', 'OPPONENT_JOINED', 'INIT_PLAYER_AND_OPPONENT', 'UPDATE_GAME_STATUS']
   }
 
   static reduceEvent(newState, action) {

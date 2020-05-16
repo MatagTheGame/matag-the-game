@@ -41,7 +41,7 @@ class Connected extends Component {
 
 const mapStateToProps = state => {
   return {
-    lastHealthcheckReceived: get(state, 'userInterface.websocket.lastHealthcheckReceived', new Date())
+    lastHealthcheckReceived: new Date(get(state, 'userInterface.websocket.lastHealthcheckReceived', new Date()))
   }
 }
 
