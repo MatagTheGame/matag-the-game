@@ -154,6 +154,7 @@ public abstract class AbstractApplicationTest {
     browser.close();
     Mockito.reset(adminClient);
     gameStatusRepository.clear();
+    LOGGER.info("Test cleaned up.");
   }
 
   @Configuration
