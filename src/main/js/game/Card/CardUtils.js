@@ -254,6 +254,6 @@ export default class CardUtils {
   }
 
   static getPlus1Counters(cardInstance) {
-    return cardInstance.modifiers.counters.plus1Counters;
+    return cardInstance.modifiers.counters.plus1Counters
   }
 }

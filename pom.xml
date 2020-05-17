@@ -116,6 +116,28 @@
                             <goal>yarn</goal>
                         </goals>
                     </execution>
+<!--                    <execution>-->
+<!--                        <id>compile</id>-->
+<!--                        <goals>-->
+<!--                            <goal>yarn</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>compile</phase>-->
+<!--                        <configuration>-->
+<!--                            <yarnInheritsProxyConfigFromMaven>false</yarnInheritsProxyConfigFromMaven>-->
+<!--                            <arguments>run lint</arguments>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+                    <execution>
+                        <id>tests</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <phase>test</phase>
+                        <configuration>
+                            <yarnInheritsProxyConfigFromMaven>false</yarnInheritsProxyConfigFromMaven>
+                            <arguments>run test</arguments>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>

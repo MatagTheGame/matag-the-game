@@ -42,7 +42,7 @@ class UserAction extends Component {
   render() {
     return (
       <div id='user-actions'>
-        <button title="Press SPACE to continue" id='continue-button' type='button' disabled={!this.isContinueEnabled()} onClick={this.props.continueClick}>-></button>
+        <button title="Press SPACE to continue" id='continue-button' type='button' disabled={!this.isContinueEnabled()} onClick={this.props.continueClick}>-&gt;</button>
         <button title="Press L to see game logs" id='logs-button' type='button' onClick={() => alert('Game Log coming soon!')}>=</button>
         <button title="Press H to see the help page" id='help-button' type='button' onClick={this.props.openHelpPage}>?</button>
       </div>

@@ -30,11 +30,11 @@ class HelpPage extends Component {
 
   static renderContent() {
     return (
-        <span>
+      <span>
         <h2>Help</h2>
         <h4>This is an online version of the card game <i>Magic the Gathering</i>.
           If you have never played before, please refer to the
-          <a target="_blank" href="https://magic.wizards.com/en/magic-gameplay"><i>official game rules</i></a>.
+        <a target="_blank" href="https://magic.wizards.com/en/magic-gameplay"><i>official game rules</i></a>.
         </h4>
         <h5>The following are rules specific to this version:</h5>
         <ul>
@@ -50,19 +50,19 @@ class HelpPage extends Component {
           <li>SCROLL - on a card to maximize/minimize it</li>
         </ul>
       </span>
-    );
+    )
   }
 
   render() {
     if (this.props.helpOpen) {
       return (
-          <Fragment>
-            <div id='modal-container' />
-            <div id='popup'>
-              { this.renderCloseButton() }
-              { HelpPage.renderContent() }
-            </div>
-          </Fragment>
+        <Fragment>
+          <div id='modal-container' />
+          <div id='popup'>
+            { this.renderCloseButton() }
+            { HelpPage.renderContent() }
+          </div>
+        </Fragment>
       )
     } else {
       return <Fragment />

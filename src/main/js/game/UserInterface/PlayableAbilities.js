@@ -30,14 +30,14 @@ class PossibleAbility extends Component {
 
   render() {
     switch (this.props.possibleAbility.trigger.type) {
-      case 'MANA_ABILITY':
-        const colors = this.props.possibleAbility.parameters
-        return <li onClick={this.props.onClick} title={this.props.possibleAbility.abilityTypeText}>{PossibleAbility.renderCost(['TAP'])}: add {PossibleAbility.renderSymbols(colors)}</li>
-      case 'ACTIVATED_ABILITY':
-        const cost = this.props.possibleAbility.trigger.cost
-        return <li onClick={this.props.onClick} title={this.props.possibleAbility.abilityTypeText}>{PossibleAbility.renderCost(cost)}: {this.props.possibleAbility.abilityTypeText}</li>
-      default:
-        throw new Error('Trigger type for ability not recognised: ' + JSON.stringify(this.props.possibleAbility))
+    case 'MANA_ABILITY':
+      const colors = this.props.possibleAbility.parameters
+      return <li onClick={this.props.onClick} title={this.props.possibleAbility.abilityTypeText}>{PossibleAbility.renderCost(['TAP'])}: add {PossibleAbility.renderSymbols(colors)}</li>
+    case 'ACTIVATED_ABILITY':
+      const cost = this.props.possibleAbility.trigger.cost
+      return <li onClick={this.props.onClick} title={this.props.possibleAbility.abilityTypeText}>{PossibleAbility.renderCost(cost)}: {this.props.possibleAbility.abilityTypeText}</li>
+    default:
+      throw new Error('Trigger type for ability not recognised: ' + JSON.stringify(this.props.possibleAbility))
     }
   }
 }

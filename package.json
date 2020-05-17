@@ -6,8 +6,8 @@
   "scripts": {
     "build-dev": "webpack -d",
     "build-prod": "webpack -p",
-    "lint": "eslint game/src/main/js --ext .js --ignore-pattern node_modules/",
-    "lint-fix": "eslint game/src/main/js --ext .js --fix",
+    "lint": "eslint src/main/js --ext .js --ignore-pattern node_modules/",
+    "lint-fix": "eslint src/main/js --ext .js --fix",
     "postinstall": "yarn build-prod",
     "test": "jest",
     "watch": "webpack -d --watch",
