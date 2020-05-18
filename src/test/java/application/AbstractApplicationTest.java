@@ -106,8 +106,10 @@ public abstract class AbstractApplicationTest {
     // Make sure player1 is Player1 and player2 is Player2
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveName();
     browser.player2().getPlayerInfoHelper(PLAYER).toHaveName();
+    LOGGER.info("player1.name: {};   player2.name: {}", browser.player1().getPlayerInfoHelper(PLAYER).getPlayerName(), browser.player2().getPlayerInfoHelper(PLAYER).getPlayerName());
     if (browser.player1().getPlayerInfoHelper(PLAYER).getPlayerName().equals("Player2")) {
       browser.swapTabs();
+      LOGGER.info("After swapping tabs: player1.name: {};   player2.name: {}", browser.player1().getPlayerInfoHelper(PLAYER).getPlayerName(), browser.player2().getPlayerInfoHelper(PLAYER).getPlayerName());
     }
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveName("Player1");
     browser.player2().getPlayerInfoHelper(PLAYER).toHaveName("Player2");
