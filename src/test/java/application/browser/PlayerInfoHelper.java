@@ -12,8 +12,8 @@ public class PlayerInfoHelper {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(PlayerInfoHelper.class);
 
-  private MatagBrowser matagBrowser;
-  private PlayerType playerType;
+  private final MatagBrowser matagBrowser;
+  private final PlayerType playerType;
 
   PlayerInfoHelper(MatagBrowser matagBrowser, PlayerType playerType) {
     this.matagBrowser = matagBrowser;
@@ -22,7 +22,7 @@ public class PlayerInfoHelper {
 
   public void toHaveName() {
     matagBrowser.wait(driver -> {
-      LOGGER.info("actualPlayerName={}", getPlayerName());
+      LOGGER.info("playerName={}", getPlayerName());
       return !getPlayerName().equals("");
     });
   }

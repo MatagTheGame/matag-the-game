@@ -76,11 +76,6 @@ If you want to use a chromedriver version with some extensions (e.g. redux tools
 Then put a breakpoint on some test and while is executing open a new tab and install everything you want.
 Next time the test will rerun will use that same profile.
 
-Tests are by default executed 3 times in case of failures.
-When running in IntelliJ is good to add as well:
-
-    -Dtest.gameSetup.retries=1
-
 ### Run the application locally
 
 Startup the app as spring boot

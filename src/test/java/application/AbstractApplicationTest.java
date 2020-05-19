@@ -9,11 +9,12 @@ import com.matag.game.adminclient.AdminClient;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.launcher.LauncherGameResponseBuilder;
 import com.matag.game.launcher.LauncherTestGameController;
+import com.matag.game.security.SecurityToken;
 import com.matag.game.status.GameStatusRepository;
-import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,15 +28,15 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.matag.cards.properties.Color.WHITE;
+import static com.matag.game.launcher.LauncherTestGameController.TEST_ADMIN_TOKEN;
 import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.game.turn.phases.UpkeepPhase.UP;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
-import static java.lang.Integer.parseInt;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
@@ -43,7 +44,6 @@ import static org.mockito.BDDMockito.given;
 @Import({AbstractApplicationTest.InitGameTestConfiguration.class})
 public abstract class AbstractApplicationTest {
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractApplicationTest.class);
-  private static final AtomicInteger GAME_ID = new AtomicInteger();
 
   @LocalServerPort
   private int port;
@@ -60,57 +60,29 @@ public abstract class AbstractApplicationTest {
 
   @Before
   public void setupRetrieverMocks() {
-    given(adminClient.getPlayerInfo(any())).willReturn(
-      new PlayerInfo("Player1"),
-      new PlayerInfo("Player2")
-    );
+    given(adminClient.getPlayerInfo(argThat(new SecurityTokenMatcher("1")))).willReturn(new PlayerInfo("Player1"));
+    given(adminClient.getPlayerInfo(argThat(new SecurityTokenMatcher("2")))).willReturn(new PlayerInfo("Player2"));
 
     given(adminClient.getDeckInfo(any())).willReturn(new DeckInfo(Set.of(WHITE)));
   }
 
   @Before
-  public void setupWithRetries() {
-    RuntimeException lastException = null;
-
-    for (int i = 0; i < getNumOfRetries(); i++) {
-      try {
-        lastException = null;
-        LOGGER.info("Setup (attempt {})", i);
-        setup();
-        LOGGER.info("Setup succeeded");
-        break;
-
-      } catch (RuntimeException e) {
-        sleep5Secs();
-        lastException = e;
-        gameStatusRepository.clear();
-        LOGGER.info("Setup failed: {}", e.getMessage());
-      }
-    }
-
-    if (lastException != null) {
-      throw lastException;
-    }
-  }
-
-  private void setup() {
+  public void setup() {
     setupGame();
+    LOGGER.info("TOKEN_PLAYER1: " + TEST_ADMIN_TOKEN.get());
 
     // When player1 joins the game is waiting for opponent
-    browser = new MatagBrowser(port, GAME_ID.incrementAndGet());
+    browser = new MatagBrowser(port);
     browser.getMessageHelper().hasMessage("Waiting for opponent...");
 
     // When player2 joins the game both players see the table with the cards
+    LOGGER.info("TOKEN_PLAYER2: " + TEST_ADMIN_TOKEN.get());
     browser.openSecondTab();
 
-    // Make sure player1 is Player1 and player2 is Player2
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveName();
     browser.player2().getPlayerInfoHelper(PLAYER).toHaveName();
-    LOGGER.info("player1.name: {};   player2.name: {}", browser.player1().getPlayerInfoHelper(PLAYER).getPlayerName(), browser.player2().getPlayerInfoHelper(PLAYER).getPlayerName());
-    if (browser.player1().getPlayerInfoHelper(PLAYER).getPlayerName().equals("Player2")) {
-      browser.swapTabs();
-      LOGGER.info("After swapping tabs: player1.name: {};   player2.name: {}", browser.player1().getPlayerInfoHelper(PLAYER).getPlayerName(), browser.player2().getPlayerInfoHelper(PLAYER).getPlayerName());
-    }
+
+    // Make sure player1 is Player1 and player2 is Player2
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveName("Player1");
     browser.player2().getPlayerInfoHelper(PLAYER).toHaveName("Player2");
 
@@ -152,11 +124,16 @@ public abstract class AbstractApplicationTest {
   }
 
   @After
-  public void cleanup() {
+  public void closeBrowser() {
     //browser.dumpContent();
     browser.close();
+  }
+
+  @After
+  public void cleanup() {
     Mockito.reset(adminClient);
     gameStatusRepository.clear();
+    TEST_ADMIN_TOKEN.set(0);
     LOGGER.info("Test cleaned up.");
   }
 
@@ -182,16 +159,16 @@ public abstract class AbstractApplicationTest {
     }
   }
 
-  @SneakyThrows
-  private void sleep5Secs() {
-    Thread.sleep(3000);
-  }
+  public static class SecurityTokenMatcher implements ArgumentMatcher<SecurityToken> {
+    private final String adminToken;
 
-  private int getNumOfRetries() {
-    try {
-      return parseInt(System.getProperty("test.gameSetup.retries"));
-    } catch (Exception e) {
-      return 3;
+    public SecurityTokenMatcher(String adminToken) {
+      this.adminToken = adminToken;
+    }
+
+    @Override
+    public boolean matches(SecurityToken argument) {
+      return argument != null && adminToken.equals(argument.getAdminToken());
     }
   }
 }

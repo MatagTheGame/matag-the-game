@@ -8,8 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,14 +18,9 @@ import java.util.ArrayList;
 public class MatagBrowser {
   private final WebDriver webDriver;
   private final int port;
-  private final int gameId;
 
-  private int player1TabIndex = 0;
-  private int player2TabIndex = 1;
-
-  public MatagBrowser(int port, int gameId) {
+  public MatagBrowser(int port) {
     this.port = port;
-    this.gameId = gameId;
     webDriver = getWebDriver();
     webDriver.get(getUrl());
   }
@@ -38,26 +31,22 @@ public class MatagBrowser {
     this.getMessageHelper().hasNoMessage();
   }
 
-  public void swapTabs() {
-    player1TabIndex = 1;
-    player2TabIndex = 0;
-  }
-
   public MatagBrowser player1() {
-    tabAt(player1TabIndex);
+    tabAt(0);
     return this;
   }
 
   public MatagBrowser player2() {
-    tabAt(player2TabIndex);
+    tabAt(1);
     return this;
   }
 
   public void close() {
-    tabAt(1);
-    webDriver.close();
-    tabAt(0);
-    webDriver.close();
+    int numOfTabs = new ArrayList<>(webDriver.getWindowHandles()).size();
+    for (int i = 0; i < numOfTabs; i++) {
+      tabAt(0);
+      webDriver.close();
+    }
   }
 
   public MessageHelper getMessageHelper() {
@@ -112,28 +101,24 @@ public class MatagBrowser {
     return "http://localhost:" + port + "/ui/test-game";
   }
 
-  private void tabAt(int player2TabIndex) {
-    webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(player2TabIndex));
+  private void tabAt(int index) {
+    webDriver.switchTo().window(new ArrayList<>(webDriver.getWindowHandles()).get(index));
   }
 
   private WebDriver getWebDriver() {
-    String webdriverChromeDriver = System.getProperty("webdriver.chrome.driver");
-    String webdriverUserDataDir = System.getProperty("webdriver.chrome.userDataDir");
-    String webdriverFirefox = System.getProperty("webdriver.gecko.driver");
-
-    if (StringUtils.hasText(webdriverChromeDriver)) {
+    if (isChrome()) {
+      String webdriverUserDataDir = System.getProperty("webdriver.chrome.userDataDir");
       ChromeOptions chromeOptions = new ChromeOptions();
       chromeOptions.addArguments("user-data-dir=" + webdriverUserDataDir);
       return new ChromeDriver(chromeOptions);
 
-    } else if (StringUtils.hasText(webdriverFirefox)) {
-      FirefoxOptions options = new FirefoxOptions();
-      options.addArguments("--headless");
-      return new FirefoxDriver(options);
-
     } else {
       return new HtmlUnitDriver(BrowserVersion.CHROME, true);
     }
+  }
+
+  public boolean isChrome() {
+    return StringUtils.hasText(System.getProperty("webdriver.chrome.driver"));
   }
 
   WebElement findElement(By element) {
