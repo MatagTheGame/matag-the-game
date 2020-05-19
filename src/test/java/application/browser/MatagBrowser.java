@@ -19,6 +19,9 @@ public class MatagBrowser {
   private final WebDriver webDriver;
   private final int port;
 
+  private int player1TabIndex = 0;
+  private int player2TabIndex = 1;
+
   public MatagBrowser(int port) {
     this.port = port;
     webDriver = getWebDriver();
@@ -31,13 +34,18 @@ public class MatagBrowser {
     this.getMessageHelper().hasNoMessage();
   }
 
+  public void swapTabs() {
+    player1TabIndex = 1;
+    player2TabIndex = 0;
+  }
+
   public MatagBrowser player1() {
-    tabAt(0);
+    tabAt(player1TabIndex);
     return this;
   }
 
   public MatagBrowser player2() {
-    tabAt(1);
+    tabAt(player2TabIndex);
     return this;
   }
 
