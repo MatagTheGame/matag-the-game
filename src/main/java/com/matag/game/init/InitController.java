@@ -19,6 +19,7 @@ import com.matag.game.status.GameStatusFactory;
 import com.matag.game.status.GameStatusRepository;
 import com.matag.game.status.GameStatusUpdaterService;
 import com.matag.game.turn.action._continue.ContinueTurnService;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,6 +98,7 @@ public class InitController {
         // FIXME no implemented card yet can be played at the first game upkeep... so let's just continue.
         continueTurnService.continueTurn(gameStatus);
 
+        addDelayBeforeSendingUpdateGameStatusEvent();
         gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);
 
       } else {
@@ -118,6 +120,11 @@ public class InitController {
   private List<CardInstance> retrieveDeck(Player player, GameStatus gameStatus) {
     DeckInfo deckInfo = deckRetrieverService.retrieveDeckForUser(player.getToken());
     return deckFactory.create(player.getName(), gameStatus, deckInfo);
+  }
+
+  @SneakyThrows
+  private void addDelayBeforeSendingUpdateGameStatusEvent() {
+    Thread.sleep(100);
   }
 
   private static Map<String, InitPlayerEvent> initPlayerAndOpponentEvent(Player player, Player opponent) {

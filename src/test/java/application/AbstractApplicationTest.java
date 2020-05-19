@@ -69,7 +69,6 @@ public abstract class AbstractApplicationTest {
   @Before
   public void setup() {
     setupGame();
-    LOGGER.info("TOKEN_PLAYER1: " + TEST_ADMIN_TOKEN.get());
 
     // When player1 joins the game is waiting for opponent
     browser = new MatagBrowser(port);
