@@ -1,5 +1,3 @@
-/* global describe, expect */
-
 import CostUtils from 'game/Card/CostUtils'
 
 describe('isCostFulfilled', () => {
