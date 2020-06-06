@@ -72,6 +72,14 @@ public class CardInstanceSearch {
       .filter(cardInstance -> cardInstance.ofAnyOfTheColors(colors)));
   }
 
+  public CardInstanceSearch colorless() {
+    return new CardInstanceSearch(this.cards.filter(CardInstance::isColorless));
+  }
+
+  public CardInstanceSearch multicolor() {
+    return new CardInstanceSearch(this.cards.filter(CardInstance::isMulticolor));
+  }
+
   public CardInstanceSearch tapped() {
     return new CardInstanceSearch(this.cards
       .filter(cardInstance -> cardInstance.getModifiers().isTapped()));
@@ -145,22 +153,6 @@ public class CardInstanceSearch {
     return this;
   }
 
-  public boolean isEmpty() {
-    return cards.count() == 0;
-  }
-
-  public boolean isNotEmpty() {
-    return cards.count() > 0;
-  }
-
-  public List<CardInstance> getCards() {
-    return cards.collect(Collectors.toList());
-  }
-
-  public Stream<CardInstance> asStream() {
-    return cards;
-  }
-
   public CardInstanceSearch attachedToId(int attachedToId) {
     return new CardInstanceSearch(this.cards
       .filter((cardInstance -> cardInstance.getModifiers().getAttachedToId() == attachedToId)));
@@ -185,5 +177,25 @@ public class CardInstanceSearch {
 
   public CardInstanceSearch withoutInstantSpeed() {
     return new CardInstanceSearch(this.cards.filter((ci -> !ci.isInstantSpeed())));
+  }
+
+  public CardInstanceSearch historic() {
+    return new CardInstanceSearch(this.cards.filter((CardInstance::isHistoric)));
+  }
+
+  public boolean isEmpty() {
+    return cards.count() == 0;
+  }
+
+  public boolean isNotEmpty() {
+    return cards.count() > 0;
+  }
+
+  public List<CardInstance> getCards() {
+    return cards.collect(Collectors.toList());
+  }
+
+  public Stream<CardInstance> asStream() {
+    return cards;
   }
 }

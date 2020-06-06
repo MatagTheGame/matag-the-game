@@ -26,8 +26,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.matag.cards.properties.Type.INSTANT;
-import static com.matag.cards.properties.Type.SORCERY;
+import static com.matag.cards.properties.Subtype.SAGA;
+import static com.matag.cards.properties.Type.*;
 import static com.matag.game.cardinstance.ability.CardInstanceAbility.getCardInstanceAbilities;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
@@ -119,6 +119,11 @@ public class CardInstance {
   @JsonProperty
   public boolean isInstantSpeed() {
     return card.getTypes().contains(INSTANT) || hasAbilityType(AbilityType.FLASH);
+  }
+
+  @JsonProperty
+  public boolean isHistoric() {
+    return card.getTypes().contains(ARTIFACT) || card.getTypes().contains(LEGENDARY) || card.getSubtypes().contains(SAGA);
   }
 
   public String getIdAndName() {

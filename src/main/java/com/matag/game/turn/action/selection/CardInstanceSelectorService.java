@@ -69,6 +69,14 @@ public class CardInstanceSelectorService {
       cards = cards.ofAnyOfTheColors(cardInstanceSelector.getOfColors());
     }
 
+    if (cardInstanceSelector.isColorless()) {
+      cards = cards.colorless();
+    }
+
+    if (cardInstanceSelector.isMulticolor()) {
+      cards = cards.multicolor();
+    }
+
     if (cardInstanceSelector.isOthers()) {
       cards = cards.notWithId(cardInstance.getId());
     }
@@ -83,6 +91,10 @@ public class CardInstanceSelectorService {
 
     if (cardInstanceSelector.isCurrentEnchanted()) {
       cards = cards.withIdAsList((cardInstance.getModifiers().getAttachedToId()));
+    }
+
+    if (cardInstanceSelector.isHistoric()) {
+      cards = cards.historic();
     }
 
     return cards;
