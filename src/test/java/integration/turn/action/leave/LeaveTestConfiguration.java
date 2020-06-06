@@ -1,6 +1,6 @@
 package integration.turn.action.leave;
 
-import com.matag.game.turn.action.selection.CardInstanceSelectorService;
+import com.matag.game.turn.action.trigger.WhenTriggerService;
 import integration.TestUtilsConfiguration;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Import;
 public class LeaveTestConfiguration {
 
   @Bean
-  public CardInstanceSelectorService cardInstanceSelectorService() {
-    return Mockito.mock(CardInstanceSelectorService.class);
+  public WhenTriggerService whenTriggerService() {
+    return Mockito.mock(WhenTriggerService.class);
   }
 }

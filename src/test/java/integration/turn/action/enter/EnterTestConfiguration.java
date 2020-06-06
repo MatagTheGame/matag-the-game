@@ -3,6 +3,7 @@ package integration.turn.action.enter;
 import com.matag.game.turn.action.cast.ManaCountService;
 import com.matag.game.turn.action.draw.DrawXCardsService;
 import com.matag.game.turn.action.selection.CardInstanceSelectorService;
+import com.matag.game.turn.action.trigger.WhenTriggerService;
 import integration.TestUtilsConfiguration;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -28,5 +29,10 @@ public class EnterTestConfiguration {
   @Bean
   public CardInstanceSelectorService cardInstanceSelectorService() {
     return new CardInstanceSelectorService();
+  }
+
+  @Bean
+  public WhenTriggerService whenTriggerService(CardInstanceSelectorService cardInstanceSelectorService) {
+    return new WhenTriggerService(cardInstanceSelectorService);
   }
 }

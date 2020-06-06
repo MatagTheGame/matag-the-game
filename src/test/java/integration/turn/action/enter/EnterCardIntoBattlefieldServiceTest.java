@@ -1,12 +1,12 @@
 package integration.turn.action.enter;
 
+import com.google.common.collect.ImmutableMap;
+import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.cards.Cards;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.draw.DrawXCardsService;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
-import com.google.common.collect.ImmutableMap;
 import integration.TestUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;

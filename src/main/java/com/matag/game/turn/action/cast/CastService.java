@@ -12,6 +12,7 @@ import com.matag.game.stack.SpellType;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.Turn;
 import com.matag.game.turn.action.target.TargetCheckerService;
+import com.matag.game.turn.action.trigger.WhenTriggerService;
 import com.matag.game.turn.phases.PhaseUtils;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_CAST;
 import static com.matag.game.stack.SpellType.ABILITY;
 import static com.matag.game.stack.SpellType.SPELL;
 
@@ -34,7 +36,7 @@ public class CastService {
   private final CostService costService;
   private final PayCostService payCostService;
   private final InstantSpeedService instantSpeedService;
-  private final WhenCastService whenCastService;
+  private final WhenTriggerService whenTriggerService;
 
   public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
     Turn turn = gameStatus.getTurn();
@@ -61,7 +63,7 @@ public class CastService {
         activePlayer.getHand().extractCardById(cardId);
         cardToCast.setController(activePlayer.getName());
         gameStatus.getStack().add(cardToCast);
-        whenCastService.whenTriggered(gameStatus, cardToCast);
+        whenTriggerService.whenTriggered(gameStatus, cardToCast, WHEN_CAST);
 
       } else {
         CardInstanceAbility triggeredAbility = cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility)).get(0);

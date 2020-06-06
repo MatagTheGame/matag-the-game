@@ -2,11 +2,13 @@ package com.matag.game.turn.action.leave;
 
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action.trigger.WhenTriggerService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_DIE;
 import static com.matag.cards.ability.type.AbilityType.INDESTRUCTIBLE;
 
 @Component
@@ -16,7 +18,7 @@ public class DestroyPermanentService {
 
   private final LeaveBattlefieldService leaveBattlefieldService;
   private final PutIntoGraveyardService putIntoGraveyardService;
-  private final WhenDieService whenDieService;
+  private final WhenTriggerService whenTriggerService;
 
   public void markToBeDestroyed(GameStatus gameStatus, int permanentId) {
     CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId);
@@ -46,7 +48,7 @@ public class DestroyPermanentService {
   }
 
   private boolean destroyAction(GameStatus gameStatus, int permanentId, CardInstance cardInstance) {
-    whenDieService.whenTriggered(gameStatus, cardInstance);
+    whenTriggerService.whenTriggered(gameStatus, cardInstance, WHEN_DIE);
     leaveBattlefieldService.leaveTheBattlefield(gameStatus, permanentId);
     putIntoGraveyardService.putIntoGraveyard(gameStatus, cardInstance);
     LOGGER.info("{} has been destroyed.", cardInstance.getIdAndName());
