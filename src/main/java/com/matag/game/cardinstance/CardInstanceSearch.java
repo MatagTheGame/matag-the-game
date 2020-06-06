@@ -139,7 +139,7 @@ public class CardInstanceSearch {
   public CardInstanceSearch onTurnStatusType(TurnStatusType turnStatusType, GameStatus gameStatus) {
     if (turnStatusType == TurnStatusType.YOUR_TURN) {
       return controlledBy(gameStatus.getCurrentPlayer().getName());
-    } else if (turnStatusType == TurnStatusType.YOUR_OPPONENT_TURN) {
+    } else if (turnStatusType == TurnStatusType.OPPONENT_TURN) {
       return controlledBy(gameStatus.getNonCurrentPlayer().getName());
     }
     return this;

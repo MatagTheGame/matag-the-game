@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.matag.cards.ability.type.AbilityType.TAP_ADD_MANA;
 import static java.util.Collections.nCopies;
 
 @Component
@@ -106,7 +107,7 @@ public class DeckFactory {
       .notOfType(Type.BASIC)
       .getCards()
       .stream()
-      .filter(card -> CardUtils.colorsOfManaThatCanGenerate(card).size() == 0 || deckColors.contains(CardUtils.colorsOfManaThatCanGenerate(card).get(0)))
+      .filter(card -> colorsOfManaThatCanGenerate(card).size() == 0 || deckColors.contains(CardUtils.colorsOfManaThatCanGenerate(card).get(0)))
       .collect(Collectors.toList());
     Collections.shuffle(nonBasicLands);
     return nonBasicLands.get(0);
@@ -119,5 +120,13 @@ public class DeckFactory {
     Collections.shuffle(allColorlessCards);
 
     return allColorlessCards.get(0);
+  }
+
+  private List<Color> colorsOfManaThatCanGenerate(Card card) {
+    return card.getAbilities().stream()
+      .filter(ability -> ability.getAbilityType().equals(TAP_ADD_MANA))
+      .flatMap(ability -> ability.getParameters().stream())
+      .map(Color::valueOf)
+      .collect(Collectors.toList());
   }
 }

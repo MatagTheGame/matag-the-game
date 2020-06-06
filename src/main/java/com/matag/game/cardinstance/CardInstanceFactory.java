@@ -1,7 +1,7 @@
 package com.matag.game.cardinstance;
 
 import com.matag.cards.Card;
-import com.matag.cards.CardUtils;
+import com.matag.cards.properties.Rarity;
 import com.matag.game.status.GameStatus;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -9,7 +9,10 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 @Component
 public class CardInstanceFactory implements ApplicationContextAware {
@@ -35,12 +38,16 @@ public class CardInstanceFactory implements ApplicationContextAware {
   }
 
   public CardInstance mask(CardInstance cardInstance) {
-    return create(cardInstance.getGameStatus(), cardInstance.getId(), CardUtils.hiddenCard(), cardInstance.getOwner());
+    return create(cardInstance.getGameStatus(), cardInstance.getId(), hiddenCard(), cardInstance.getOwner());
   }
 
   public List<CardInstance> mask(List<CardInstance> cardInstanceList) {
     return cardInstanceList.stream()
       .map(this::mask)
       .collect(Collectors.toList());
+  }
+
+  private Card hiddenCard() {
+    return new Card("card", "/img/card-back.jpg", new TreeSet<>(), emptyList(), new TreeSet<>(), new TreeSet<>(), Rarity.COMMON, "", 0, 0, emptyList());
   }
 }
