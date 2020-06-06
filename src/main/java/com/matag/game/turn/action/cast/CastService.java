@@ -8,6 +8,7 @@ import com.matag.game.cardinstance.cost.CostService;
 import com.matag.game.cardinstance.cost.PayCostService;
 import com.matag.game.message.MessageException;
 import com.matag.game.player.Player;
+import com.matag.game.stack.SpellType;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.Turn;
 import com.matag.game.turn.action.target.TargetCheckerService;
@@ -20,6 +21,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;
 
+import static com.matag.game.stack.SpellType.ABILITY;
+import static com.matag.game.stack.SpellType.SPELL;
+
 @Component
 @AllArgsConstructor
 public class CastService {
@@ -30,19 +34,20 @@ public class CastService {
   private final CostService costService;
   private final PayCostService payCostService;
   private final InstantSpeedService instantSpeedService;
+  private final WhenCastService whenCastService;
 
   public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
     Turn turn = gameStatus.getTurn();
     Player activePlayer = gameStatus.getActivePlayer();
 
     CardInstance cardToCast;
-    String castedFrom;
+    SpellType spellType;
     if (activePlayer.getHand().hasCardById(cardId)) {
       cardToCast = activePlayer.getHand().findCardById(cardId);
-      castedFrom = "HAND";
+      spellType = SPELL;
     } else {
       cardToCast = activePlayer.getBattlefield().findCardById(cardId);
-      castedFrom = "BATTLEFIELD";
+      spellType = ABILITY;
     }
 
     if (!PhaseUtils.isMainPhase(turn.getCurrentPhase()) && !instantSpeedService.isAtInstantSpeed(cardToCast, playedAbility)) {
@@ -52,10 +57,11 @@ public class CastService {
       checkSpellOrAbilityCost(mana, activePlayer, cardToCast, playedAbility);
       targetCheckerService.checkSpellOrAbilityTargetRequisites(cardToCast, gameStatus, targetsIdsForCardIds, playedAbility);
 
-      if (castedFrom.equals("HAND")) {
+      if (spellType.equals(SPELL)) {
         activePlayer.getHand().extractCardById(cardId);
         cardToCast.setController(activePlayer.getName());
         gameStatus.getStack().add(cardToCast);
+        whenCastService.whenTriggered(gameStatus, cardToCast);
 
       } else {
         CardInstanceAbility triggeredAbility = cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility)).get(0);
@@ -65,7 +71,6 @@ public class CastService {
       }
 
       payCostService.pay(gameStatus, activePlayer, cardToCast, playedAbility, mana);
-
       gameStatus.getTurn().passPriority(gameStatus);
     }
   }

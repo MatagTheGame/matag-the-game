@@ -57,6 +57,10 @@ public class PlayerInfoHelper {
     toHaveClass("inactive-player");
   }
 
+  public void click() {
+    playerInfoElement().click();
+  }
+
   private void toHaveClass(String cssClass) {
     matagBrowser.wait(driver -> {
       String playerClasses = playerInfoElement().getAttribute("class");

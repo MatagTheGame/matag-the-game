@@ -20,18 +20,21 @@ public class CardInstanceSelectorService {
     if (cardInstanceSelector.getSelectorType().equals(SelectorType.PERMANENT)) {
       cards = gameStatus.getAllBattlefieldCards();
 
-      if (cardInstanceSelector.getOfType() != null) {
-        cards = cards.ofAnyOfTheTypes(cardInstanceSelector.getOfType());
-
-      } else if (cardInstanceSelector.getNotOfType() != null) {
-        cards = cards.notOfTypes(cardInstanceSelector.getNotOfType());
-      }
+    } else if (cardInstanceSelector.getSelectorType().equals(SelectorType.SPELL)) {
+      cards = new CardInstanceSearch(gameStatus.getStack().getItems());
 
     } else if (cardInstanceSelector.getSelectorType().equals(SelectorType.ANY)) {
       cards = gameStatus.getAllBattlefieldCards();
 
     } else {
       throw new RuntimeException("Missing selectorType.");
+    }
+
+    if (cardInstanceSelector.getOfType() != null) {
+      cards = cards.ofAnyOfTheTypes(cardInstanceSelector.getOfType());
+
+    } else if (cardInstanceSelector.getNotOfType() != null) {
+      cards = cards.notOfTypes(cardInstanceSelector.getNotOfType());
     }
 
     if (cardInstanceSelector.getOfSubtype() != null) {

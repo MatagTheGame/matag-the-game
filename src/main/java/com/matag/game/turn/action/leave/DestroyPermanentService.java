@@ -46,7 +46,7 @@ public class DestroyPermanentService {
   }
 
   private boolean destroyAction(GameStatus gameStatus, int permanentId, CardInstance cardInstance) {
-    whenDieService.whenDie(gameStatus, cardInstance);
+    whenDieService.whenTriggered(gameStatus, cardInstance);
     leaveBattlefieldService.leaveTheBattlefield(gameStatus, permanentId);
     putIntoGraveyardService.putIntoGraveyard(gameStatus, cardInstance);
     LOGGER.info("{} has been destroyed.", cardInstance.getIdAndName());

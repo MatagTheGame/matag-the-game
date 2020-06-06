@@ -22,6 +22,7 @@ import static com.matag.cards.ability.selector.PowerToughnessConstraint.PowerOrT
 import static com.matag.cards.ability.selector.PowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
 import static com.matag.cards.ability.selector.PowerToughnessConstraintType.*;
 import static com.matag.cards.ability.selector.SelectorType.PERMANENT;
+import static com.matag.cards.ability.selector.SelectorType.SPELL;
 import static com.matag.cards.ability.selector.StatusType.ATTACKING;
 import static com.matag.cards.ability.selector.StatusType.BLOCKING;
 import static com.matag.cards.ability.selector.TurnStatusType.YOUR_TURN;
@@ -770,5 +771,82 @@ public class CardInstanceSelectorServiceTest {
 
     // Then
     assertThat(selection).containsExactlyInAnyOrder(gameStatus.getPlayer1(), gameStatus.getPlayer2());
+  }
+
+  @Test
+  public void selectionSpellEmpty() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+      .selectorType(SPELL)
+      .build();
+
+    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus, cardInstance, cardInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).isEmpty();
+  }
+
+  @Test
+  public void selectionAnySpell() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+      .selectorType(SPELL)
+      .build();
+
+    CardInstance aSpell = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    gameStatus.getStack().add(aSpell);
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus, aSpell, cardInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(aSpell);
+  }
+
+  @Test
+  public void selectionAnInstantNotMatched() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+      .selectorType(SPELL)
+      .ofType(List.of(INSTANT))
+      .build();
+
+    CardInstance aSpell = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    gameStatus.getStack().add(aSpell);
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus, aSpell, cardInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).isEmpty();
+  }
+
+  @Test
+  public void selectionAnInstantOfSorcerySpell() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+      .selectorType(SPELL)
+      .ofType(List.of(INSTANT, SORCERY))
+      .build();
+
+    CardInstance anInstant = cardInstanceFactory.create(gameStatus, 1, cards.get("Precision Bolt"), "player-name");
+    gameStatus.getStack().add(anInstant);
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus, anInstant, cardInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(anInstant);
   }
 }

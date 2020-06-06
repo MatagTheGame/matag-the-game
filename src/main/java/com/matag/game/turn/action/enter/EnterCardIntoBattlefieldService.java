@@ -30,7 +30,7 @@ public class EnterCardIntoBattlefieldService {
     LOGGER.info(cardInstance.getIdAndName() + " entered the battlefield.");
 
     entersTheBattlefieldWithService.entersTheBattlefieldWith(gameStatus, cardInstance);
-    whenEnterTheBattlefieldService.whenEnterTheBattlefield(gameStatus, cardInstance);
+    whenEnterTheBattlefieldService.whenTriggered(gameStatus, cardInstance);
   }
 
 }

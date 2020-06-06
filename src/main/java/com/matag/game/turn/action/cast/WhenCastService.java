@@ -1,20 +1,20 @@
-package com.matag.game.turn.action.enter;
+package com.matag.game.turn.action.cast;
 
 import com.matag.cards.ability.trigger.TriggerSubtype;
 import com.matag.game.turn.action.selection.CardInstanceSelectorService;
 import com.matag.game.turn.action.when.WhenTriggerService;
 import org.springframework.stereotype.Component;
 
-import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ENTER_THE_BATTLEFIELD;
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_CAST;
 
 @Component
-public class WhenEnterTheBattlefieldService extends WhenTriggerService {
-  public WhenEnterTheBattlefieldService(CardInstanceSelectorService cardInstanceSelectorService) {
+public class WhenCastService extends WhenTriggerService {
+  public WhenCastService(CardInstanceSelectorService cardInstanceSelectorService) {
     super(cardInstanceSelectorService);
   }
 
   @Override
   public TriggerSubtype triggerSubtype() {
-    return WHEN_ENTER_THE_BATTLEFIELD;
+    return WHEN_CAST;
   }
 }
