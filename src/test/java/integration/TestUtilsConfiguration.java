@@ -8,6 +8,7 @@ import com.matag.game.stack.SpellStack;
 import com.matag.game.status.GameStatusFactory;
 import com.matag.game.turn.Turn;
 import integration.cardinstance.CardsTestConfiguration;
+import integration.deck.DeckTestConfiguration;
 import integration.turn.player.PlayerTestConfiguration;
 import integration.turn.status.GameStatusTestConfiguration;
 import org.mockito.Mockito;
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@Import({CardsTestConfiguration.class, GameStatusTestConfiguration.class, PlayerTestConfiguration.class, Turn.class, SpellStack.class})
+@Import({CardsTestConfiguration.class, GameStatusTestConfiguration.class, PlayerTestConfiguration.class, Turn.class, SpellStack.class, DeckTestConfiguration.class})
 public class TestUtilsConfiguration {
   @Bean
   public TestUtils testUtils(GameStatusFactory gameStatusFactory, PlayerFactory playerFactory, CardInstanceFactory cardInstanceFactory, Cards cards) {

@@ -1,7 +1,7 @@
 package com.matag.game.cardinstance;
 
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.game.cardinstance.modifiers.CardModifiers;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.matag.cards.Card;
 import com.matag.cards.CardUtils;
 import com.matag.cards.ability.trigger.TriggerSubtype;
@@ -10,13 +10,13 @@ import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.Color;
 import com.matag.cards.properties.Subtype;
 import com.matag.cards.properties.Type;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.modifiers.CardModifiers;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.attach.AttachmentsService;
 import com.matag.game.turn.action.selection.AbilitiesFromOtherPermanentsService;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -26,9 +26,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.matag.game.cardinstance.ability.CardInstanceAbility.getCardInstanceAbilities;
 import static com.matag.cards.properties.Type.INSTANT;
 import static com.matag.cards.properties.Type.SORCERY;
+import static com.matag.game.cardinstance.ability.CardInstanceAbility.getCardInstanceAbilities;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
@@ -158,6 +158,14 @@ public class CardInstance {
       }
     }
     return false;
+  }
+
+  public boolean isColorless() {
+    return CardUtils.isColorless(card);
+  }
+
+  public boolean isMulticolor() {
+    return CardUtils.isMulticolor(card);
   }
 
   public void checkIfCanAttack() {

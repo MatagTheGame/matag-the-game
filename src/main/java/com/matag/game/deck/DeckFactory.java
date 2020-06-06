@@ -2,7 +2,6 @@ package com.matag.game.deck;
 
 import com.matag.adminentities.DeckInfo;
 import com.matag.cards.Card;
-import com.matag.cards.CardUtils;
 import com.matag.cards.Cards;
 import com.matag.cards.properties.Color;
 import com.matag.cards.properties.Type;
@@ -105,12 +104,24 @@ public class DeckFactory {
     List<Card> nonBasicLands = new CardSearch(cards.getAll())
       .ofType(Type.LAND)
       .notOfType(Type.BASIC)
-      .getCards()
-      .stream()
-      .filter(card -> colorsOfManaThatCanGenerate(card).size() == 0 || deckColors.contains(CardUtils.colorsOfManaThatCanGenerate(card).get(0)))
+      .getCards();
+
+    List<Card> nonBasicLandsMatchingBothColors = nonBasicLands.stream()
+      .filter(card -> matchesColors(card, deckColors))
       .collect(Collectors.toList());
-    Collections.shuffle(nonBasicLands);
-    return nonBasicLands.get(0);
+
+    if (!nonBasicLandsMatchingBothColors.isEmpty()) {
+      Collections.shuffle(nonBasicLandsMatchingBothColors);
+      return nonBasicLandsMatchingBothColors.get(0);
+
+    } else {
+      List<Card> nonBasicLandsMatchingOneColor = nonBasicLands.stream()
+        .filter(card -> matchesOneColor(card, deckColors))
+        .collect(Collectors.toList());
+
+      Collections.shuffle(nonBasicLandsMatchingOneColor);
+      return nonBasicLandsMatchingOneColor.get(0);
+    }
   }
 
   private Card getRandomColorlessCard() {
@@ -122,11 +133,30 @@ public class DeckFactory {
     return allColorlessCards.get(0);
   }
 
-  private List<Color> colorsOfManaThatCanGenerate(Card card) {
+  private boolean matchesColors(Card card, Set<Color> deckColors) {
+    Set<Color> cardColors = colorsOfManaThatCanGenerate(card);
+    return deckColors.containsAll(cardColors);
+  }
+
+  private boolean matchesOneColor(Card card, Set<Color> deckColors) {
+    Set<Color> cardColors = colorsOfManaThatCanGenerate(card);
+    for (Color deckColor : deckColors) {
+      for (Color cardColor : cardColors) {
+        if (deckColor == cardColor) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  private Set<Color> colorsOfManaThatCanGenerate(Card card) {
     return card.getAbilities().stream()
       .filter(ability -> ability.getAbilityType().equals(TAP_ADD_MANA))
       .flatMap(ability -> ability.getParameters().stream())
+      .filter(cost -> !cost.equals("COLORLESS"))
       .map(Color::valueOf)
-      .collect(Collectors.toList());
+      .collect(Collectors.toSet());
   }
 }
