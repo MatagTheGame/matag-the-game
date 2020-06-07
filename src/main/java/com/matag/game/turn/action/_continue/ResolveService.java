@@ -119,7 +119,7 @@ public class ResolveService {
       performAbilityAction(gameStatus, cardToResolve, ability);
     }
 
-    cardToResolve.getModifiers().setTargets(new ArrayList<>());
+    cardToResolve.getModifiers().resetTargets();
   }
 
   private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve, CardInstanceAbility ability) {

@@ -106,7 +106,7 @@ public class CostService {
   }
 
   private List<Cost> getCost(Card card, String ability) {
-    if (ability == null || getAbilityCost(card, ability) == null) {
+    if (ability == null) {
       return card.getCost();
 
     } else {

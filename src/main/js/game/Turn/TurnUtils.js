@@ -23,7 +23,9 @@ export default class TurnUtils  {
   }
 
   static getAbilityToBePlayed(state) {
-    return get(state, 'turn.abilityToBePlayed.abilityType')
+    if (get(state, 'turn.abilityToBePlayed.trigger.type') === 'ACTIVATED_ABILITY') {
+      return get(state, 'turn.abilityToBePlayed.abilityType')
+    }
   }
 
   static getTargetsIds(state) {

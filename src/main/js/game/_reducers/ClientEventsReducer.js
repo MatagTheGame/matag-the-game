@@ -44,10 +44,10 @@ export default class ClientEventsReducer {
       } else if (playedAbility.trigger.type === 'ACTIVATED_ABILITY') {
         const currentTappedMana = CostUtils.getMana(newState)
         if (CostUtils.isAbilityCostFulfilled(cardInstance, playedAbility, currentTappedMana)) {
-          if (playedAbility.targets.length > TurnUtils.getTargetsIds(newState).length) {
+          if (CardUtils.needsTargets(newState, playedAbility)) {
             PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
           } else {
-            PlayerUtils.cast(newState, action.cardId, {}, get(playedAbility, 'abilityType'))
+            PlayerUtils.cast(newState, action.cardId, {}, playedAbility.abilityType)
           }
         }
       }
@@ -74,7 +74,7 @@ export default class ClientEventsReducer {
               if (CardUtils.needsTargets(newState, ability)) {
                 PlayerUtils.handleSelectTargets(newState, cardInstance, ability)
               } else {
-                PlayerUtils.cast(newState, cardId, {}, get(ability, 'abilityType'))
+                PlayerUtils.cast(newState, cardId, {})
               }
             }
           }
@@ -127,7 +127,7 @@ export default class ClientEventsReducer {
                   if (CardUtils.needsTargets(newState, playedAbility)) {
                     PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
                   } else {
-                    PlayerUtils.cast(newState, cardId, {}, get(playedAbility, 'abilityType'))
+                    PlayerUtils.cast(newState, cardId, {}, playedAbility.abilityType)
                   }
                 }
               }

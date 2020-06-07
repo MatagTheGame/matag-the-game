@@ -22,10 +22,6 @@ public class AbilityActionFactory {
   private final AttachAction attachAction;
 
   public AbilityAction getAbilityAction(AbilityType abilityType) {
-    if (abilityType == null) {
-      return null;
-    }
-
     switch (abilityType) {
       case DRAW_X_CARDS:
         return drawXCardsAction;

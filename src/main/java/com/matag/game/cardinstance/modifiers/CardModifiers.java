@@ -92,5 +92,13 @@ public class CardModifiers {
   public PowerToughness getExtraPowerToughnessFromCounters() {
     return new PowerToughness(counters.getPlus1Counters(), counters.getPlus1Counters());
   }
+
+  public void resetTargets() {
+    targets = new ArrayList<>();
+  }
+
+  public void addTargets(List<Object> targetsIds) {
+    targets.addAll(targetsIds);
+  }
 }
 

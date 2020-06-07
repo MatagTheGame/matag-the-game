@@ -3,13 +3,12 @@ package com.matag.game.turn.action.target;
 import com.matag.cards.ability.selector.CardInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.target.Target;
+import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceSearch;
-import com.matag.game.cardinstance.ability.AbilityAction;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.AbilityActionFactory;
 import com.matag.game.turn.action.selection.CardInstanceSelectorService;
 import com.matag.player.PlayerType;
 import lombok.AllArgsConstructor;
@@ -24,13 +23,13 @@ import static com.matag.cards.ability.type.AbilityType.abilityType;
 @Component
 @AllArgsConstructor
 public class TargetCheckerService {
-  private final AbilityActionFactory abilityActionFactory;
   private final CardInstanceSelectorService cardInstanceSelectorService;
 
   public void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
-    for (CardInstanceAbility ability : cardToCast.getAbilities()) {
-      AbilityAction abilityAction = abilityActionFactory.getAbilityAction(abilityType(playedAbility));
-      if (abilityAction != null && ability.requiresTarget()) {
+    List<CardInstanceAbility> playedAbilities = playedAbilities(cardToCast, playedAbility);
+
+    for (CardInstanceAbility ability : playedAbilities) {
+      if (ability.requiresTarget()) {
         if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId())) {
           throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
         }
@@ -42,8 +41,16 @@ public class TargetCheckerService {
           check(gameStatus, cardToCast, ability.getTargets().get(i), targetId);
         }
 
-        cardToCast.getModifiers().setTargets(targetsIds);
+        cardToCast.getModifiers().addTargets(targetsIds);
       }
+    }
+  }
+
+  private List<CardInstanceAbility> playedAbilities(CardInstance cardToCast, String playedAbility) {
+    if (playedAbility != null) {
+      return cardToCast.getAbilitiesByType(abilityType(playedAbility));
+    } else {
+      return cardToCast.getAbilitiesByTriggerType(TriggerType.CAST);
     }
   }
 

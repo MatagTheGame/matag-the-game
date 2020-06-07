@@ -1,4 +1,4 @@
-package application.cast;
+package application.counters;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
@@ -31,7 +31,7 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
 
   @Test
   public void putPlusOneCountersOnCreaturesTest() {
-    // When cast the sorcery targeting two creatures player control
+    // When cast Gird for Battle targeting two creatures player control
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Gird for Battle")).select();
     browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");
@@ -54,7 +54,7 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Concordia Pegasus"), 1).hasPowerAndToughness("2/4");
 
 
-    // When cast the sorcery targeting twice the same creature
+    // When cast Gird for Battle targeting twice the same creature
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Gird for Battle")).select();
     browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");

@@ -1,4 +1,4 @@
-package application.cast;
+package application.gainControl;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
