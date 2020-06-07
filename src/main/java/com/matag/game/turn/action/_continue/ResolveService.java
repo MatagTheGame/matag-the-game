@@ -1,10 +1,10 @@
 package com.matag.game.turn.action._continue;
 
+import com.matag.cards.ability.target.Target;
+import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.AbilityAction;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.cards.ability.target.Target;
-import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.AbilityActionFactory;
@@ -16,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +49,7 @@ public class ResolveService {
           .forEach(t -> stackItemToResolve.acknowledgedBy(controllerName));
 
         if (gameStatus.getActivePlayer().getName().equals(controllerName) && !stackItemToResolve.getAcknowledgedBy().contains(controllerName)) {
-          if (targetCheckerService.checkIfRequiresTarget(stackItemToResolve, gameStatus)) {
+          if (targetCheckerService.checkIfRequiresTarget(stackItemToResolve)) {
             if (targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus)) {
               targetCheckerService.checkSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus, targetsIdsForCardIds, "THAT_TARGETS_GET");
             }
@@ -138,15 +137,8 @@ public class ResolveService {
   private void checkTargets(GameStatus gameStatus, CardInstance cardToResolve, CardInstanceAbility ability) {
     for (int i = 0; i < ability.getTargets().size(); i++) {
       Target target = ability.getTargets().get(i);
-      Object targetId = getTargetIdAtIndex(cardToResolve, i);
+      Object targetId = targetCheckerService.getTargetIdAtIndex(cardToResolve, ability, i);
       targetCheckerService.check(gameStatus, cardToResolve, target, targetId);
     }
-  }
-
-  private Object getTargetIdAtIndex(CardInstance cardToResolve, int i) {
-    if (i < cardToResolve.getModifiers().getTargets().size()) {
-      return cardToResolve.getModifiers().getTargets().get(i);
-    }
-    return null;
   }
 }

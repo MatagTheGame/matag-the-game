@@ -14,6 +14,7 @@ import com.matag.player.PlayerType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -27,17 +28,14 @@ public class TargetCheckerService {
 
   public void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
     List<CardInstanceAbility> playedAbilities = playedAbilities(cardToCast, playedAbility);
+    List<Object> targetsIds = getTargetsIds(targetsIdsForCardIds, cardToCast.getId());
 
+    int targetIndex = 0;
     for (CardInstanceAbility ability : playedAbilities) {
       if (ability.requiresTarget()) {
-        if (targetsIdsForCardIds == null || !targetsIdsForCardIds.containsKey(cardToCast.getId())) {
-          throw new MessageException(cardToCast.getIdAndName() + " requires a valid target.");
-        }
-
-        List<Object> targetsIds = targetsIdsForCardIds.get(cardToCast.getId());
         checkThatTargetsAreDifferent(ability.getTargets(), targetsIds);
-        for (int i = 0; i < ability.getTargets().size(); i++) {
-          Object targetId = getTargetIdAtIndex(targetsIds, i);
+        for (int i = 0; i < ability.getTargets().size(); i++, targetIndex++) {
+          Object targetId = targetIndex < targetsIds.size() ? targetsIds.get(targetIndex) : null;
           check(gameStatus, cardToCast, ability.getTargets().get(i), targetId);
         }
 
@@ -46,37 +44,7 @@ public class TargetCheckerService {
     }
   }
 
-  private List<CardInstanceAbility> playedAbilities(CardInstance cardToCast, String playedAbility) {
-    if (playedAbility != null) {
-      return cardToCast.getAbilitiesByType(abilityType(playedAbility));
-    } else {
-      return cardToCast.getAbilitiesByTriggerType(TriggerType.CAST);
-    }
-  }
-
-  private Object getTargetIdAtIndex(List<Object> targetsIds, int i) {
-    if (i < targetsIds.size()) {
-      return targetsIds.get(i);
-    }
-    return null;
-  }
-
-  private void checkThatTargetsAreDifferent(List<Target> targets, List<Object> targetsIds) {
-    for (int i = 0; i < Math.min(targets.size(), targetsIds.size()); i++) {
-      Target target = targets.get(i);
-      if (target.isOther()) {
-        if (countTargetsWithId(targetsIds, targetsIds.get(i)) > 1) {
-          throw new MessageException("Targets must be different.");
-        }
-      }
-    }
-  }
-
-  private long countTargetsWithId(List<Object> targetsIds, Object targetId) {
-    return targetsIds.stream().filter(t -> t.equals(targetId)).count();
-  }
-
-  public boolean checkIfRequiresTarget(CardInstance cardToCast, GameStatus gameStatus) {
+  public boolean checkIfRequiresTarget(CardInstance cardToCast) {
     for (CardInstanceAbility ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
       return ability.requiresTarget();
     }
@@ -101,7 +69,7 @@ public class TargetCheckerService {
     CardInstanceSelector cardInstanceSelector = target.getCardInstanceSelector();
     if (targetId == null) {
       if (!target.isOptional()) {
-        throw new MessageException("A target is required.");
+        throw new MessageException(cardInstance.getIdAndName() + " requires a valid target.");
       }
 
     } else if (targetId instanceof String) {
@@ -124,5 +92,50 @@ public class TargetCheckerService {
         throw new MessageException("Selected targets were not valid.");
       }
     }
+  }
+
+  public Object getTargetIdAtIndex(CardInstance cardInstance, CardInstanceAbility ability, int index) {
+    int abilityIndex = cardInstance.getAbilities().indexOf(ability);
+    int firstTargetIndex = 0;
+    for (int i = 0; i < abilityIndex; i++) {
+      firstTargetIndex += cardInstance.getAbilities().get(i).getTargets().size();
+    }
+
+    if (cardInstance.getModifiers().getTargets().size() > firstTargetIndex + index) {
+      return cardInstance.getModifiers().getTargets().get(firstTargetIndex + index);
+    }
+
+    return null;
+  }
+
+  private List<CardInstanceAbility> playedAbilities(CardInstance cardToCast, String playedAbility) {
+    if (playedAbility != null) {
+      return cardToCast.getAbilitiesByType(abilityType(playedAbility));
+    } else {
+      return cardToCast.getAbilitiesByTriggerType(TriggerType.CAST);
+    }
+  }
+
+  private List<Object> getTargetsIds(Map<Integer, List<Object>> targetsIdsForCardIds, int cardId) {
+    if (targetsIdsForCardIds == null) {
+      return Collections.emptyList();
+    }
+
+    return targetsIdsForCardIds.getOrDefault(cardId, Collections.emptyList());
+  }
+
+  private void checkThatTargetsAreDifferent(List<Target> targets, List<Object> targetsIds) {
+    for (int i = 0; i < Math.min(targets.size(), targetsIds.size()); i++) {
+      Target target = targets.get(i);
+      if (target.isOther()) {
+        if (countTargetsWithId(targetsIds, targetsIds.get(i)) > 1) {
+          throw new MessageException("Targets must be different.");
+        }
+      }
+    }
+  }
+
+  private long countTargetsWithId(List<Object> targetsIds, Object targetId) {
+    return targetsIds.stream().filter(t -> t.equals(targetId)).count();
   }
 }

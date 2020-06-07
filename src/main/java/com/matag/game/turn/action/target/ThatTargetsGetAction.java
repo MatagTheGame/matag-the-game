@@ -1,9 +1,9 @@
 package com.matag.game.turn.action.target;
 
+import com.matag.cards.ability.AbilityService;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.AbilityAction;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.cards.ability.AbilityService;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
@@ -23,6 +23,7 @@ import java.util.Optional;
 public class ThatTargetsGetAction implements AbilityAction {
   private static final Logger LOGGER = LoggerFactory.getLogger(ThatTargetsGetAction.class);
 
+  private final TargetCheckerService targetCheckerService;
   private final LifeService lifeService;
   private final DrawXCardsService drawXCardsService;
   private final PermanentService permanentService;
@@ -31,22 +32,26 @@ public class ThatTargetsGetAction implements AbilityAction {
 
   @Override
   public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
-    for (Object targetId : cardInstance.getModifiers().getTargets()) {
-      if (targetId instanceof String) {
-        String targetPlayerName = (String) targetId;
-        thatTargetPlayerGet(cardInstance, gameStatus, ability.getParameters(), targetPlayerName);
+    for (int i = 0; i < ability.getTargets().size(); i++) {
+      Object targetId = targetCheckerService.getTargetIdAtIndex(cardInstance, ability, i);
 
-      } else {
-        int targetCardId = (int) targetId;
-
-        Optional<CardInstance> targetOptional = gameStatus.getAllBattlefieldCards().withId(targetCardId);
-
-        if (targetOptional.isPresent()) {
-          CardInstance target = targetOptional.get();
-          permanentService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), target);
+      if (targetId != null) {
+        if (targetId instanceof String) {
+          String targetPlayerName = (String) targetId;
+          thatTargetPlayerGet(cardInstance, gameStatus, ability.getParameters(), targetPlayerName);
 
         } else {
-          LOGGER.info("target {} is not anymore valid.", targetCardId);
+          int targetCardId = (int) targetId;
+
+          Optional<CardInstance> targetOptional = gameStatus.getAllBattlefieldCards().withId(targetCardId);
+
+          if (targetOptional.isPresent()) {
+            CardInstance target = targetOptional.get();
+            permanentService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), target);
+
+          } else {
+            LOGGER.info("target {} is not anymore valid.", targetCardId);
+          }
         }
       }
     }

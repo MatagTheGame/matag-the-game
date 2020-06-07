@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ToString
@@ -22,7 +23,8 @@ import java.util.List;
 public class Counters {
   @JsonProperty
   private int plus1Counters;
-  private List<AbilityType> keywordCounters;
+  @JsonProperty
+  private List<AbilityType> keywordCounters = new ArrayList<>();
 
   public void addPlus1Counters(int n) {
     plus1Counters += n;

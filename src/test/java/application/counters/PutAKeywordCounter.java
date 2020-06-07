@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -29,16 +30,27 @@ public class PutAKeywordCounter extends AbstractApplicationTest {
   }
 
   @Test
-  public void putPlusOneCountersOnCreaturesTest() {
+  public void putAKeywordCounterOnCreatureTest() {
     // When cast Blood Curdle
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Blood Curdle")).select();
-    browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Concordia Pegasus")).select();
-    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Concordia Pegasus")).select();
+    browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Concordia Pegasus")).click();
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Concordia Pegasus")).target();
 
+    // And opponent accepts
+    browser.player2().getPhaseHelper().is(M1, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
+
+    // Then
+    browser.player1().getPhaseHelper().is(M1, PLAYER);
+    browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Blood Curdle"));
+    browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Concordia Pegasus"));
+
+    // TODO continue from here... MENACE counter is in the redux store for the card.
+    //  it is not actually giving menace to the creature and not visible from the front-end... but that's elementary!
     System.out.println("");
   }
 

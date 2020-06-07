@@ -1,5 +1,6 @@
 package com.matag.game.turn.action.permanent;
 
+import com.matag.cards.ability.type.AbilityType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
@@ -79,7 +80,12 @@ public class PermanentService {
     }
 
     int counters = abilityService.plus1CountersFromParameter(parameter);
-    countersService.addPlus1Counters(gameStatus, target, counters);
+    countersService.addPlus1Counters(target, counters);
+
+    AbilityType keywordCounter = abilityService.keywordCounterFromParameter(parameter);
+    if (keywordCounter != null) {
+      countersService.addKeywordCounter(target, keywordCounter);
+    }
 
     LOGGER.info("PermanentService: {} target {} which gets {}", cardInstance.getIdAndName(), target.getIdAndName(), parameter);
   }
