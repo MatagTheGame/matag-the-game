@@ -1,8 +1,8 @@
 package integration.cardinstance.ability;
 
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.cards.ability.selector.CardInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import org.junit.Test;
 
 import static com.matag.cards.ability.type.AbilityType.*;

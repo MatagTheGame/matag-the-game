@@ -1,8 +1,8 @@
 package integration.turn.action._continue;
 
+import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.cards.Cards;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
 import integration.TestUtils;

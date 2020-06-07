@@ -1,11 +1,11 @@
 package integration.turn.action.draw;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.cards.Cards;
 import com.matag.cards.ability.Ability;
 import com.matag.cards.ability.type.AbilityType;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.draw.DrawXCardsAction;
 import integration.TestUtils;

@@ -1,7 +1,5 @@
 package integration.turn.action.cast;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
 import com.matag.cards.Cards;
 import com.matag.cards.properties.Cost;
 import com.matag.game.cardinstance.CardInstance;
@@ -48,10 +46,10 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidForSimpleLands() {
     // Given
-    Map<Integer, List<String>> mana = ImmutableMap.of(
-      1, ImmutableList.of("WHITE"),
-      2, ImmutableList.of("WHITE"),
-      3, ImmutableList.of("BLUE")
+    Map<Integer, List<String>> mana = Map.of(
+      1, List.of("WHITE"),
+      2, List.of("WHITE"),
+      3, List.of("BLUE")
     );
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
@@ -64,14 +62,14 @@ public class ManaCountServiceTest {
     ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
 
     // Then
-    assertThat(colors).isEqualTo(ImmutableList.of(WHITE, WHITE, BLUE));
+    assertThat(colors).isEqualTo(List.of(WHITE, WHITE, BLUE));
   }
 
   @Test
   public void countManaPaidTappingInstant() {
     // Given
-    Map<Integer, List<String>> mana = ImmutableMap.of(
-      1, ImmutableList.of("WHITE")
+    Map<Integer, List<String>> mana = Map.of(
+      1, List.of("WHITE")
     );
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
@@ -87,8 +85,8 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingAlreadyTappedLand() {
     // Given
-    Map<Integer, List<String>> mana = ImmutableMap.of(
-      1, ImmutableList.of("WHITE")
+    Map<Integer, List<String>> mana = Map.of(
+      1, List.of("WHITE")
     );
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
@@ -106,9 +104,7 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingLandForWrongColor() {
     // Given
-    Map<Integer, List<String>> mana = ImmutableMap.of(
-      1, ImmutableList.of("BLUE")
-    );
+    Map<Integer, List<String>> mana = Map.of(1, List.of("BLUE"));
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
 
@@ -123,8 +119,8 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingLandForDualLand() {
     // Given
-    Map<Integer, List<String>> mana = ImmutableMap.of(
-      1, ImmutableList.of("BLUE")
+    Map<Integer, List<String>> mana = Map.of(
+      1, List.of("BLUE")
     );
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
@@ -135,14 +131,14 @@ public class ManaCountServiceTest {
     ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
 
     // Then
-    assertThat(colors).isEqualTo(ImmutableList.of(BLUE));
+    assertThat(colors).isEqualTo(List.of(BLUE));
   }
 
   @Test
   public void countManaPaidTappingLandForDualLandError() {
     // Given
-    Map<Integer, List<String>> mana = ImmutableMap.of(
-      1, ImmutableList.of("BLACK")
+    Map<Integer, List<String>> mana = Map.of(
+      1, List.of("BLACK")
     );
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
@@ -158,8 +154,8 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingCreatureWhichGeneratesTwoMana() {
     // Given
-    Map<Integer, List<String>> mana = ImmutableMap.of(
-      1, ImmutableList.of("GREEN", "BLUE")
+    Map<Integer, List<String>> mana = Map.of(
+      1, List.of("GREEN", "BLUE")
     );
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();
@@ -173,8 +169,8 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingCreatureWhichGeneratesTwoManaException() {
     // Given
-    Map<Integer, List<String>> mana = ImmutableMap.of(
-      1, ImmutableList.of("GREEN", "BLACK")
+    Map<Integer, List<String>> mana = Map.of(
+      1, List.of("GREEN", "BLACK")
     );
     GameStatus gameStatus = testUtils.testGameStatus();
     Player player = gameStatus.getPlayer1();

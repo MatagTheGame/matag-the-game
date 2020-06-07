@@ -1,6 +1,5 @@
 package integration.turn.action.enter;
 
-import com.google.common.collect.ImmutableMap;
 import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
@@ -13,6 +12,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.Map;
 
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -105,7 +106,7 @@ public class EnterCardIntoBattlefieldServiceTest {
     CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Ardenvale Paladin"), "player-name");
     card.setController("player-name");
 
-    gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
+    gameStatus.getTurn().setLastManaPaid(Map.of(
       1, singletonList("WHITE"),
       2, singletonList("WHITE"),
       3, singletonList("WHITE"),
@@ -126,7 +127,7 @@ public class EnterCardIntoBattlefieldServiceTest {
     CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Ardenvale Paladin"), "player-name");
     card.setController("player-name");
 
-    gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
+    gameStatus.getTurn().setLastManaPaid(Map.of(
       1, singletonList("WHITE"),
       2, singletonList("WHITE"),
       3, singletonList("BLUE"),
@@ -147,7 +148,7 @@ public class EnterCardIntoBattlefieldServiceTest {
     CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Clockwork Servant"), "player-name");
     card.setController("player-name");
 
-    gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
+    gameStatus.getTurn().setLastManaPaid(Map.of(
       1, singletonList("WHITE"),
       2, singletonList("WHITE"),
       3, singletonList("BLUE"),
@@ -168,7 +169,7 @@ public class EnterCardIntoBattlefieldServiceTest {
     CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Clockwork Servant"), "player-name");
     card.setController("player-name");
 
-    gameStatus.getTurn().setLastManaPaid(ImmutableMap.of(
+    gameStatus.getTurn().setLastManaPaid(Map.of(
       1, singletonList("BLACK"),
       2, singletonList("BLACK"),
       3, singletonList("BLUE"),

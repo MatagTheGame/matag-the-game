@@ -1,8 +1,8 @@
 package integration.turn.action.leave;
 
+import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.cards.Cards;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.leave.ReturnPermanentToHandService;
 import integration.TestUtils;

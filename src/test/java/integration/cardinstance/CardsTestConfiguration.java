@@ -1,7 +1,7 @@
 package integration.cardinstance;
 
-import com.matag.game.cardinstance.CardInstanceConfiguration;
 import com.matag.cards.CardsConfiguration;
+import com.matag.game.cardinstance.CardInstanceConfiguration;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
