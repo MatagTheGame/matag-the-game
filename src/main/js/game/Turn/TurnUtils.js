@@ -13,19 +13,19 @@ export default class TurnUtils  {
     }
   }
 
-  static selectCardToBePlayed(state, cardInstance, ability) {
+  static selectCardToBePlayed(state, cardInstance, abilities) {
     state.turn.cardIdSelectedToBePlayed = cardInstance.id
-    state.turn.abilityToBePlayed = ability
+    state.turn.abilitiesToBePlayed = abilities
   }
 
   static getCardIdSelectedToBePlayed(state) {
     return state.turn.cardIdSelectedToBePlayed
   }
 
-  static getAbilityToBePlayed(state) {
-    if (get(state, 'turn.abilityToBePlayed.trigger.type') === 'ACTIVATED_ABILITY') {
-      return get(state, 'turn.abilityToBePlayed.abilityType')
-    }
+  static getAbilitiesToBePlayed(state) {
+    return get(state, 'turn.abilitiesToBePlayed', [])
+      .filter(ability => get(ability, 'trigger.type') === 'ACTIVATED_ABILITY')
+      .map(ability => ability.abilityType)
   }
 
   static getTargetsIds(state) {

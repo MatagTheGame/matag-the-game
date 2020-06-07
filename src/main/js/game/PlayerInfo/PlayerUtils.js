@@ -63,39 +63,39 @@ export default class PlayerUtils {
   }
 
   static castSelectedCard(state) {
-    const playedAbility = TurnUtils.getAbilityToBePlayed(state)
-    PlayerUtils.cast(state, TurnUtils.getCardIdSelectedToBePlayed(state), {[TurnUtils.getCardIdSelectedToBePlayed(state)]: TurnUtils.getTargetsIds(state)}, playedAbility)
+    const playedAbilities = TurnUtils.getAbilitiesToBePlayed(state)
+    PlayerUtils.cast(state, TurnUtils.getCardIdSelectedToBePlayed(state), {[TurnUtils.getCardIdSelectedToBePlayed(state)]: TurnUtils.getTargetsIds(state)}, playedAbilities[0])
     TurnUtils.resetTarget(state)
   }
 
-  static handleSelectTargets(state, cardInstance, ability) {
+  static handleSelectTargets(state, cardInstance, abilities) {
     if (TurnUtils.getCardIdSelectedToBePlayed(state) === cardInstance.id) {
       TurnUtils.resetTarget(state)
       UserInterfaceUtils.setStatusMessage(state, UserInterfaceUtils.PLAY_ANY_SPELL_OR_ABILITIES_OR_CONTINUE)
     } else {
-      TurnUtils.selectCardToBePlayed(state, cardInstance, ability)
+      TurnUtils.selectCardToBePlayed(state, cardInstance, abilities)
       UserInterfaceUtils.setStatusMessage(state, `Select targets for ${cardInstance.card.name}.`)
     }
   }
 
   static shouldHandleTargets(state) {
-    const ability = PlayerUtils.getPlayedAbility(state)
-    return CardUtils.needsTargets(state, ability)
+    const abilities = PlayerUtils.getPlayedAbility(state)
+    return CardUtils.needsTargets(state, abilities)
   }
 
   static getPlayedAbility(state) {
     if (TurnUtils.getCardIdSelectedToBePlayed(state)) {
       let cardInstance = CardSearch.cards(state.player.hand).withId(TurnUtils.getCardIdSelectedToBePlayed(state))
       if (cardInstance) {
-        return CardUtils.getAbilitiesForTriggerType(cardInstance, 'CAST')[0]
+        return CardUtils.getAbilitiesForTriggerType(cardInstance, 'CAST')
 
       } else {
         cardInstance = CardSearch.cards(state.player.battlefield).withId(TurnUtils.getCardIdSelectedToBePlayed(state))
-        return CardUtils.getAbilitiesForTriggerType(cardInstance, 'ACTIVATED_ABILITY')[0]
+        return CardUtils.getAbilitiesForTriggerType(cardInstance, 'ACTIVATED_ABILITY')
       }
 
     } else if (get(state, 'stack.length', 0) > 0) {
-      return CardUtils.getAbilitiesForTriggerType(StackUtils.getTopSpell(state), 'TRIGGERED_ABILITY')[0]
+      return CardUtils.getAbilitiesForTriggerType(StackUtils.getTopSpell(state), 'TRIGGERED_ABILITY')
     }
   }
 

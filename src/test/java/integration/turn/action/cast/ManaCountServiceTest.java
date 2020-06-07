@@ -62,7 +62,7 @@ public class ManaCountServiceTest {
     ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
 
     // Then
-    assertThat(colors).isEqualTo(List.of(WHITE, WHITE, BLUE));
+    assertThat(colors).containsExactlyInAnyOrder(WHITE, WHITE, BLUE);
   }
 
   @Test

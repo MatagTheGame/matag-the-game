@@ -1,4 +1,3 @@
-import get from 'lodash/get'
 import CardSearch from 'game/Card/CardSearch'
 import CardUtils from 'game/Card/CardUtils'
 import CostUtils from 'game/Card/CostUtils'
@@ -44,8 +43,8 @@ export default class ClientEventsReducer {
       } else if (playedAbility.trigger.type === 'ACTIVATED_ABILITY') {
         const currentTappedMana = CostUtils.getMana(newState)
         if (CostUtils.isAbilityCostFulfilled(cardInstance, playedAbility, currentTappedMana)) {
-          if (CardUtils.needsTargets(newState, playedAbility)) {
-            PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
+          if (CardUtils.needsTargets(newState, [playedAbility])) {
+            PlayerUtils.handleSelectTargets(newState, cardInstance, [playedAbility])
           } else {
             PlayerUtils.cast(newState, action.cardId, {}, playedAbility.abilityType)
           }
@@ -69,10 +68,10 @@ export default class ClientEventsReducer {
           } else {
             // TODO Antonio: this is very similar to the one for battlefield click
             const currentTappedMana = CostUtils.getMana(newState)
-            const ability = CardUtils.getAbilitiesForTriggerType(cardInstance, 'CAST')[0]
+            const castAbilities = CardUtils.getAbilitiesForTriggerType(cardInstance, 'CAST')
             if (CostUtils.isCastingCostFulfilled(cardInstance, currentTappedMana)) {
-              if (CardUtils.needsTargets(newState, ability)) {
-                PlayerUtils.handleSelectTargets(newState, cardInstance, ability)
+              if (CardUtils.needsTargets(newState, castAbilities)) {
+                PlayerUtils.handleSelectTargets(newState, cardInstance, castAbilities)
               } else {
                 PlayerUtils.cast(newState, cardId, {})
               }
@@ -115,20 +114,18 @@ export default class ClientEventsReducer {
           if (!CardUtils.isFrontendTapped(cardInstance) && possibleAbilities.length > 1) {
             UserInterfaceUtils.setPlayableAbilities(newState, cardId, possibleAbilities, action.position)
 
-          } else {
-            if (CardUtils.getAbilitiesForTriggerType(cardInstance, 'MANA_ABILITY').length > 0) {
+          } else if (CardUtils.getAbilitiesForTriggerType(cardInstance, 'MANA_ABILITY').length > 0) {
               CardUtils.activateManaAbility(newState, cardInstance)
 
-            } else {
-              const playedAbility = CardUtils.getAbilitiesForTriggerType(cardInstance, 'ACTIVATED_ABILITY')[0]
-              if (playedAbility) {
-                const currentTappedMana = CostUtils.getMana(newState)
-                if (CostUtils.isAbilityCostFulfilled(cardInstance, playedAbility, currentTappedMana)) {
-                  if (CardUtils.needsTargets(newState, playedAbility)) {
-                    PlayerUtils.handleSelectTargets(newState, cardInstance, playedAbility)
-                  } else {
-                    PlayerUtils.cast(newState, cardId, {}, playedAbility.abilityType)
-                  }
+          } else {
+            const playedAbility = CardUtils.getAbilitiesForTriggerType(cardInstance, 'ACTIVATED_ABILITY')[0]
+            if (playedAbility) {
+              const currentTappedMana = CostUtils.getMana(newState)
+              if (CostUtils.isAbilityCostFulfilled(cardInstance, playedAbility, currentTappedMana)) {
+                if (CardUtils.needsTargets(newState, [playedAbility])) {
+                  PlayerUtils.handleSelectTargets(newState, cardInstance, [playedAbility])
+                } else {
+                  PlayerUtils.cast(newState, cardId, {}, playedAbility.abilityType)
                 }
               }
             }

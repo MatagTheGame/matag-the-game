@@ -208,9 +208,10 @@ export default class CardUtils {
     return map
   }
 
-  static needsTargets(state, ability) {
-    if (ability) {
-      return ability.targets.length > TurnUtils.getTargetsIds(state).length
+  static needsTargets(state, abilities) {
+    if (abilities) {
+      const numOrTargetsOnAbilities = abilities.map(a => a.targets.length).reduce((l, r) => l + r, 0)
+      return numOrTargetsOnAbilities > TurnUtils.getTargetsIds(state).length
     }
   }
 
