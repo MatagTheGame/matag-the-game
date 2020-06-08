@@ -91,7 +91,7 @@ public class CardInstanceAbilityTest {
   @Test
   public void enchantedCreatureGetOneAbilityText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(ENCHANTED_CREATURE_GETS, emptyList(), singletonList("+2/+2"), null);
+    CardInstanceAbility ability = new CardInstanceAbility(ENCHANT, emptyList(), singletonList("+2/+2"), null);
 
     // When
     String text = ability.getAbilityTypeText();
@@ -103,7 +103,7 @@ public class CardInstanceAbilityTest {
   @Test
   public void enchantedCreatureGetMultipleAbilitiesText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(ENCHANTED_CREATURE_GETS, emptyList(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+    CardInstanceAbility ability = new CardInstanceAbility(ENCHANT, emptyList(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
 
     // When
     String text = ability.getAbilityTypeText();

@@ -13,14 +13,14 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.matag.cards.ability.type.AbilityType.ENCHANTED_CREATURE_GETS;
-import static com.matag.cards.ability.type.AbilityType.EQUIPPED_CREATURE_GETS;
+import static com.matag.cards.ability.type.AbilityType.ENCHANT;
+import static com.matag.cards.ability.type.AbilityType.EQUIP;
 import static java.util.Arrays.asList;
 
 @Component
 @AllArgsConstructor
 public class AttachmentsService {
-  private static final List<AbilityType> ATTACHED_ABILITY_TYPES = asList(ENCHANTED_CREATURE_GETS, EQUIPPED_CREATURE_GETS);
+  private static final List<AbilityType> ATTACHED_ABILITY_TYPES = asList(ENCHANT, EQUIP);
 
   private final AbilityService abilityService;
   private final CardInstanceAbilityFactory cardInstanceAbilityFactory;

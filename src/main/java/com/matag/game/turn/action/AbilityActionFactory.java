@@ -33,8 +33,8 @@ public class AbilityActionFactory {
         return thatTargetsGetAction;
       case SELECTED_PERMANENTS_GET:
         return selectedPermanentsGetXUntilEndOfTurnAction;
-      case ENCHANTED_CREATURE_GETS:
-      case EQUIPPED_CREATURE_GETS:
+      case ENCHANT:
+      case EQUIP:
         return attachAction;
       default:
         return null;

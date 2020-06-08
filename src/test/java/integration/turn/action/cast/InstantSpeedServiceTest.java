@@ -74,7 +74,7 @@ public class InstantSpeedServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Cobbled Wings"), "player");
-    String playedAbility = "EQUIPPED_CREATURE_GETS";
+    String playedAbility = "EQUIP";
 
     // When
     boolean result = instantSpeedService.isAtInstantSpeed(cardInstance, playedAbility);
