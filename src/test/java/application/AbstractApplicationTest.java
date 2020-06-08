@@ -11,7 +11,6 @@ import com.matag.game.launcher.LauncherGameResponseBuilder;
 import com.matag.game.launcher.LauncherTestGameController;
 import com.matag.game.security.SecurityToken;
 import com.matag.game.status.GameStatusRepository;
-import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -94,7 +93,6 @@ public abstract class AbstractApplicationTest {
     browser.player1().getMessageHelper().hasNoMessage();
     browser.player2().getMessageHelper().hasNoMessage();
 
-    sleepABit();
     while (browser.player1().getPhaseHelper().getPhase().equals(UP)) {
       // UP is only active if player can play something
       if (browser.player1().getPhaseHelper().getPriority().equals(PLAYER)) {
@@ -106,7 +104,6 @@ public abstract class AbstractApplicationTest {
 
         // Player1 continues
         browser.player1().getActionHelper().clickContinue();
-        sleepABit();
       }
 
       // UP is only active if opponent can play something
@@ -127,11 +124,6 @@ public abstract class AbstractApplicationTest {
     browser.player1().getStatusHelper().hasMessage("Play any spell or ability or continue (SPACE).");
     browser.player2().getPhaseHelper().is(M1, OPPONENT);
     browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
-  }
-
-  @SneakyThrows
-  private void sleepABit() {
-    Thread.sleep(100);
   }
 
   @After
