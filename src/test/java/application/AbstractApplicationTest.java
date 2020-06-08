@@ -11,6 +11,7 @@ import com.matag.game.launcher.LauncherGameResponseBuilder;
 import com.matag.game.launcher.LauncherTestGameController;
 import com.matag.game.security.SecurityToken;
 import com.matag.game.status.GameStatusRepository;
+import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -93,9 +94,11 @@ public abstract class AbstractApplicationTest {
     browser.player1().getMessageHelper().hasNoMessage();
     browser.player2().getMessageHelper().hasNoMessage();
 
-    while (browser.player1().getPhaseHelper().getPhase().equals(UP)) {
-      // UP is only active if player can play something
-      if (browser.player1().getPhaseHelper().getPriority().equals(PLAYER)) {
+    while (browser.player1().getPhaseHelper().getPhase().equals(UP) && browser.player2().getPhaseHelper().getPhase().equals(UP)) {
+
+      if (browser.player1().getPhaseHelper().getPriority().equals(PLAYER) && browser.player2().getPhaseHelper().getPriority().equals(OPPONENT)) {
+        // UP is only active if player can play something
+
         // Status and Phase are
         browser.player1().getPhaseHelper().is(UP, PLAYER);
         browser.player1().getStatusHelper().hasMessage("Play any instant or ability or continue (SPACE).");
@@ -104,10 +107,9 @@ public abstract class AbstractApplicationTest {
 
         // Player1 continues
         browser.player1().getActionHelper().clickContinue();
-      }
+      } else if (browser.player1().getPhaseHelper().getPriority().equals(OPPONENT) && browser.player2().getPhaseHelper().getPriority().equals(PLAYER)) {
+        // UP is only active if opponent can play something
 
-      // UP is only active if opponent can play something
-      if (browser.player1().getPhaseHelper().getPriority().equals(OPPONENT)) {
         // Status and Phase are
         browser.player1().getPhaseHelper().is(UP, OPPONENT);
         browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
@@ -116,6 +118,10 @@ public abstract class AbstractApplicationTest {
 
         // Player2 continues
         browser.player2().getActionHelper().clickContinue();
+        browser.player1().getPhaseHelper().is(M1, PLAYER);
+
+      } else {
+        sleepABit();
       }
     }
 
@@ -138,6 +144,11 @@ public abstract class AbstractApplicationTest {
     gameStatusRepository.clear();
     TEST_ADMIN_TOKEN.set(0);
     LOGGER.info("Test cleaned up.");
+  }
+
+  @SneakyThrows
+  private void sleepABit() {
+    Thread.sleep(100);
   }
 
   @Configuration
