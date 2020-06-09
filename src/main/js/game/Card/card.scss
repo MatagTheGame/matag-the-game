@@ -16,6 +16,7 @@ $shadow-color: rgba(0, 0, 0, 0.4);
   cursor: pointer;
   transition-duration: 0.5s;
   z-index: 1;
+  transform-style: preserve-3d;
 }
 
 .card:hover {
@@ -52,33 +53,59 @@ $shadow-color: rgba(0, 0, 0, 0.4);
   font-size: xx-large;
 }
 
-.plus-1-counters {
+$counter-size: 36px;
+.counters {
   position: absolute;
-  top: 50px;
-  left: 50px;
-  background-color: green;
-  color: white;
-  font-size: xx-large;
-  width: 30px;
-  text-align: center;
-  vertical-align: middle;
-  transform-style: preserve-3d;
+  top: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+
+  .counter {
+    transform-style: preserve-3d;
+    font-size: xx-large;
+    width: $counter-size;
+    height: $counter-size;
+    text-align: center;
+    vertical-align: middle;
+    transform: translateZ(18px);
+  }
+
+  .counter:after {
+    content: '';
+    position: absolute;
+    width: $counter-size;
+    height: ($counter-size / 2);
+  }
+
+  .keyword-counter {
+    background-color: white;
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: black;
+  }
+
+  .plus-1-counter {
+    background-color: green;
+    color: white;
+  }
+
+  .keyword-counter:after {
+    background-color: darkgrey;
+  }
+
+  .plus-1-counter:after {
+    background-color: darkgreen;
+  }
 }
 
-.plus-1-counters:after {
-  content: '';
-  background-color: #005000;
-  position: absolute;
-  width: 30px;
-  height: 40px;
+#player-battlefield .counter:after {
+  transform: translateX(-27px) translateY(25px) translateZ(-9px) rotateX(90deg);
 }
 
-#player-battlefield .plus-1-counters:after {
-  transform: translateX(-24px) translateY(25px) rotateX(65deg);
-}
-
-#opponent-battlefield .plus-1-counters:after {
-  transform: translateX(-23px) translateY(-28px) rotateX(65deg);
+#opponent-battlefield .counter:after {
+  transform: translateX(-26px) translateY(-28px) translateZ(-9px) rotateX(90deg);
 }
 
 .frontend-blocking {

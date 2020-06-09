@@ -17,7 +17,7 @@ import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
 @Category(Regression.class)
-public class PutAKeywordCounter extends AbstractApplicationTest {
+public class PutAKeywordCounterTest extends AbstractApplicationTest {
 
   @Autowired
   private InitTestServiceDecorator initTestServiceDecorator;
@@ -26,7 +26,7 @@ public class PutAKeywordCounter extends AbstractApplicationTest {
   private Cards cards;
 
   public void setupGame() {
-    initTestServiceDecorator.setInitTestService(new PutAKeywordCounter.InitTestServiceForTest());
+    initTestServiceDecorator.setInitTestService(new PutAKeywordCounterTest.InitTestServiceForTest());
   }
 
   @Test
@@ -37,8 +37,8 @@ public class PutAKeywordCounter extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Blood Curdle")).select();
-    browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Concordia Pegasus")).click();
-    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Concordia Pegasus")).target();
+    browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Catacomb Crocodile")).click();
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Catacomb Crocodile")).target();
 
     // And opponent accepts
     browser.player2().getPhaseHelper().is(M1, PLAYER);
@@ -47,7 +47,7 @@ public class PutAKeywordCounter extends AbstractApplicationTest {
     // Then
     browser.player1().getPhaseHelper().is(M1, PLAYER);
     browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Blood Curdle"));
-    browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Concordia Pegasus"));
+    browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Catacomb Crocodile"));
 
     // TODO continue from here... MENACE counter is in the redux store for the card.
     //  it is not actually giving menace to the creature and not visible from the front-end... but that's elementary!
@@ -65,10 +65,10 @@ public class PutAKeywordCounter extends AbstractApplicationTest {
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
-      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Concordia Pegasus"));
+      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Catacomb Crocodile"));
 
-      addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Concordia Pegasus"));
-      addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Concordia Pegasus"));
+      addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Catacomb Crocodile"));
+      addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Catacomb Crocodile"));
     }
   }
 }

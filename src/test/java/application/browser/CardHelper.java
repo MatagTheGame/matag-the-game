@@ -170,6 +170,6 @@ public class CardHelper {
   }
 
   public void hasPlus1Counters(int counters) {
-    matagBrowser.wait(textToBe(cardCssSelector(".plus-1-counters"), String.valueOf(counters)));
+    matagBrowser.wait(textToBe(cardCssSelector(".plus-1-counter"), String.valueOf(counters)));
   }
 }

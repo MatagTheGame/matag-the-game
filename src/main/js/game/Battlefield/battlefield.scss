@@ -1,6 +1,7 @@
 #player-battlefield {
   bottom: 10%;
   transform: translateZ(1px);
+  transform-style: preserve-3d;
 
   .combat-line {
     padding-right: 35%;
@@ -11,6 +12,7 @@
   position: absolute;
   top: 2%;
   transform: rotate(180deg) translateZ(1px);
+  transform-style: preserve-3d;
 
   .combat-line {
     padding-left: 35%;

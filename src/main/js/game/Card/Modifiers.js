@@ -1,5 +1,31 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import CardUtils from './CardUtils'
+
+class Counters extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  plus1Counters() {
+    const plus1Counters = this.props.counters.plus1Counters
+    if (plus1Counters > 0) {
+      return <div className={'counter plus-1-counter'}>{plus1Counters}</div>
+    }
+  }
+
+  keywordCounters() {
+    return this.props.counters.keywordCounters
+      .map(keyword => keyword.toLowerCase())
+      .map(keyword => <div key={keyword} className={'counter keyword-counter'} title={keyword} style={{'background-image': `url("/img/abilities/${keyword}.png")`}} >&nbsp;&nbsp;</div>)
+  }
+
+  render() {
+    return <div className={'counters'}>
+      {this.plus1Counters()}
+      {this.keywordCounters()}
+    </div>
+  }
+}
 
 export class Modifiers extends Component {
   constructor(props) {
@@ -29,19 +55,16 @@ export class Modifiers extends Component {
     }
   }
 
-  plus1Counters() {
-    let plus1Counters = CardUtils.getPlus1Counters(this.props.cardInstance)
-    if (plus1Counters > 0) {
-      return <div className={'plus-1-counters'}>{plus1Counters}</div>
-    }
+  counters() {
+    return <Counters counters={CardUtils.getCounters(this.props.cardInstance)} />
   }
 
   render() {
-    return <Fragment>
+    return <>
       {this.summoningSickness()}
-      {this.plus1Counters()}
+      {this.counters()}
       {this.damage()}
       {this.powerToughness()}
-    </Fragment>
+    </>
   }
 }
