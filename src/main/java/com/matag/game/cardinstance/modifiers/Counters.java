@@ -3,12 +3,15 @@ package com.matag.game.cardinstance.modifiers;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.matag.cards.ability.type.AbilityType;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @ToString
 @EqualsAndHashCode
@@ -32,5 +35,12 @@ public class Counters {
 
   public void addKeywordCounter(AbilityType abilityType) {
     keywordCounters.add(abilityType);
+  }
+
+  public List<CardInstanceAbility> getKeywordCountersAbilities() {
+    return keywordCounters.stream()
+      .map(CardInstanceAbility::new)
+      .map(CardInstanceAbility::getCardInstanceAbility)
+      .collect(toList());
   }
 }

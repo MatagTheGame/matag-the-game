@@ -67,10 +67,12 @@ public class CardInstanceAbility extends Ability {
   }
 
   public static List<CardInstanceAbility> getCardInstanceAbilities(Card card) {
-    if (card.getAbilities() == null) {
-      return null;
-    }
-    return card.getAbilities().stream().map(CardInstanceAbility::getCardInstanceAbility).collect(toList());
+    return Optional.ofNullable(card)
+      .map(Card::getAbilities)
+      .orElse(emptyList())
+      .stream()
+      .map(CardInstanceAbility::getCardInstanceAbility)
+      .collect(toList());
   }
 
   public static CardInstanceAbility getCardInstanceAbility(Ability ability) {

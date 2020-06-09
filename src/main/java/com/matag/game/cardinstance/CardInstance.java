@@ -21,10 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.matag.cards.properties.Subtype.SAGA;
 import static com.matag.cards.properties.Type.*;
@@ -207,6 +204,7 @@ public class CardInstance {
     abilities.addAll(getCardInstanceAbilities(card));
     abilities.addAll(modifiers.getAbilities());
     abilities.addAll(modifiers.getModifiersUntilEndOfTurn().getExtraAbilities());
+    abilities.addAll(modifiers.getCounters().getKeywordCountersAbilities());
     abilities.addAll(getAttachmentsAbilities());
     return abilities;
   }

@@ -10,8 +10,11 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static application.browser.BattlefieldHelper.FIRST_LINE;
-import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static application.browser.BattlefieldHelper.*;
+import static com.matag.cards.ability.type.AbilityType.MENACE;
+import static com.matag.game.turn.phases.CombatDamagePhase.CD;
+import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
@@ -48,10 +51,27 @@ public class PutAKeywordCounterTest extends AbstractApplicationTest {
     browser.player1().getPhaseHelper().is(M1, PLAYER);
     browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Blood Curdle"));
     browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Catacomb Crocodile"));
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Catacomb Crocodile")).hasKeywordCounters(MENACE);
 
-    // TODO continue from here... MENACE counter is in the redux store for the card.
-    //  it is not actually giving menace to the creature and not visible from the front-end... but that's elementary!
-    System.out.println("");
+    // When attacking
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
+    int attackingCreature = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Catacomb Crocodile")).getCardIdNumeric();
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Catacomb Crocodile")).declareAsAttacker();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
+
+    // When attempting to block
+    int blockingCreature = browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Catacomb Crocodile")).getCardIdNumeric();
+    browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Catacomb Crocodile")).declareAsBlocker();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
+
+    // Then cannot as the opponent attacker as menace
+    browser.player2().getMessageHelper().hasMessage("\"" + blockingCreature + " - Catacomb Crocodile" + "\" cannot block \"" + attackingCreature + " - Catacomb Crocodile\" alone as it has menace.");
+    browser.player2().getMessageHelper().close();
+
+    // So need to remove the blocker continue and lose
+    browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Catacomb Crocodile")).click();
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(CD, PLAYER);
+    browser.player2().getMessageHelper().hasMessage("Player1 Win!");
   }
 
   static class InitTestServiceForTest extends InitTestService {

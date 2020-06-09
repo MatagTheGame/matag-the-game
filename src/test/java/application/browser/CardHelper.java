@@ -1,8 +1,12 @@
 package application.browser;
 
 import com.matag.cards.Card;
+import com.matag.cards.ability.type.AbilityType;
 import com.matag.player.PlayerType;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementClickInterceptedException;
+import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -171,5 +175,9 @@ public class CardHelper {
 
   public void hasPlus1Counters(int counters) {
     matagBrowser.wait(textToBe(cardCssSelector(".plus-1-counter"), String.valueOf(counters)));
+  }
+
+  public void hasKeywordCounters(AbilityType keywordAbility) {
+    matagBrowser.wait(attributeContains(By.cssSelector("#" + this.getCardId() + " .keyword-counter"), "title", keywordAbility.name().toLowerCase()));
   }
 }
