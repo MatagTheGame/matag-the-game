@@ -86,26 +86,28 @@ $counter-size: 36px;
     color: black;
   }
 
+  .keyword-counter:after {
+    background-color: white;
+  }
+
   .plus-1-counter {
     background-color: green;
     color: white;
   }
 
-  .keyword-counter:after {
-    background-color: darkgrey;
-  }
-
   .plus-1-counter:after {
-    background-color: darkgreen;
+    background-color: green;
   }
 }
 
 #player-battlefield .counter:after {
+  filter: brightness(65%);
   transform: translateX(-27px) translateY(25px) translateZ(-9px) rotateX(90deg);
 }
 
 #opponent-battlefield .counter:after {
-  transform: translateX(-26px) translateY(-28px) translateZ(-9px) rotateX(90deg);
+  filter: brightness(65%);
+  transform: translateX(-26px) translateY(-28px) translateZ(5px) rotateX(90deg);
 }
 
 .frontend-blocking {
