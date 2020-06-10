@@ -2,12 +2,10 @@ package application.ability;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
-import application.testcategory.Regression;
 import com.matag.cards.Cards;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
@@ -16,7 +14,6 @@ import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.PLAYER;
 
-@Category(Regression.class)
 public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
 
   @Autowired
