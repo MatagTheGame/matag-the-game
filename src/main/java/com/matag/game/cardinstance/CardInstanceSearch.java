@@ -67,6 +67,11 @@ public class CardInstanceSearch {
       .filter(cardInstance -> cardInstance.ofAnyOfTheSubtypes(subtypes)));
   }
 
+  public CardInstanceSearch notOfSubtypes(List<Subtype> subtypes) {
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> !cardInstance.ofAnyOfTheSubtypes(subtypes)));
+  }
+
   public CardInstanceSearch ofAnyOfTheColors(List<Color> colors) {
     return new CardInstanceSearch(this.cards
       .filter(cardInstance -> cardInstance.ofAnyOfTheColors(colors)));

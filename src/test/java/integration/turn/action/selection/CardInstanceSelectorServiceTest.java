@@ -411,7 +411,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtype(singletonList(ZOMBIE)).others(true).build();
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtype(singletonList(ZOMBIE)).controllerType(PLAYER).others(true).build();
     CardInstance otherZombiesCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Death Baron"), "player-name");
     otherZombiesCreature.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(otherZombiesCreature);
@@ -424,15 +424,36 @@ public class CardInstanceSelectorServiceTest {
     aNonZombie.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aNonZombie);
 
-    CardInstance anOpponentZombie = cardInstanceFactory.create(gameStatus, 4, cards.get("Daybreak Chaplain"), "player-name");
+    CardInstance anOpponentZombie = cardInstanceFactory.create(gameStatus, 4, cards.get("Diregraf Ghoul"), "player-name");
     anOpponentZombie.setController("opponent-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(anOpponentZombie);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, otherZombiesCreature, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, aZombie, cardInstanceSelector).getCards();
 
     // Then
-    assertThat(selection).containsExactly(aZombie);
+    assertThat(selection).containsExactly(otherZombiesCreature);
+  }
+
+  @Test
+  public void selectionNonZombies() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).notOfSubtype(singletonList(ZOMBIE)).build();
+    CardInstance aZombie = cardInstanceFactory.create(gameStatus, 1, cards.get("Diregraf Ghoul"), "player-name");
+    aZombie.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(aZombie);
+
+    CardInstance aNonZombie = cardInstanceFactory.create(gameStatus, 2, cards.get("Daybreak Chaplain"), "player-name");
+    aNonZombie.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(aNonZombie);
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(aNonZombie);
   }
 
   @Test

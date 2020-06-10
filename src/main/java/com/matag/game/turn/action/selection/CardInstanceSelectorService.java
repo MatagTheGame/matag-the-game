@@ -39,6 +39,9 @@ public class CardInstanceSelectorService {
 
     if (cardInstanceSelector.getOfSubtype() != null) {
       cards = cards.ofAnyOfTheSubtypes(cardInstanceSelector.getOfSubtype());
+
+    } else if (cardInstanceSelector.getNotOfSubtype() != null) {
+      cards = cards.notOfSubtypes(cardInstanceSelector.getNotOfSubtype());
     }
 
     if (cardInstanceSelector.getControllerType() == PlayerType.PLAYER) {
