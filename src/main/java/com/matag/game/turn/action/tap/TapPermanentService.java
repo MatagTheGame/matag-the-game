@@ -21,8 +21,7 @@ public class TapPermanentService {
     }
   }
 
-  public void tapDoesNotUntapNextTurn(GameStatus gameStatus, int targetId) {
-    tap(gameStatus, targetId);
+  public void doesNotUntapNextTurn(GameStatus gameStatus, int targetId) {
     CardInstance cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);
     if (cardToTap != null) {
       cardToTap.getModifiers().doesNotUntapNextTurn();
