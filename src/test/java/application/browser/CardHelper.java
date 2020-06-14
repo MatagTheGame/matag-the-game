@@ -177,6 +177,10 @@ public class CardHelper {
     matagBrowser.wait(textToBe(cardCssSelector(".plus-1-counter"), String.valueOf(counters)));
   }
 
+  public void hasMinus1Counters(int counters) {
+    matagBrowser.wait(textToBe(cardCssSelector(".minus-1-counter"), String.valueOf(counters)));
+  }
+
   public void hasKeywordCounters(AbilityType keywordAbility) {
     matagBrowser.wait(attributeContains(By.cssSelector("#" + this.getCardId() + " .keyword-counter"), "title", keywordAbility.name().toLowerCase()));
   }

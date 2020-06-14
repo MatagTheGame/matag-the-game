@@ -98,6 +98,15 @@ $counter-size: 36px;
   .plus-1-counter:after {
     background-color: green;
   }
+
+  .minus-1-counter {
+    background-color: #222222;
+    color: white;
+  }
+
+  .minus-1-counter:after {
+    background-color: #222222;
+  }
 }
 
 #player-battlefield .counter:after {

@@ -27,10 +27,18 @@ public class Counters {
   @JsonProperty
   private int plus1Counters;
   @JsonProperty
+  private int minus1Counters;
+  @JsonProperty
   private List<AbilityType> keywordCounters = new ArrayList<>();
 
   public void addPlus1Counters(int n) {
     plus1Counters += n;
+    balanceCounters();
+  }
+
+  public void addMinus1Counters(int n) {
+    minus1Counters += n;
+    balanceCounters();
   }
 
   public void addKeywordCounter(AbilityType abilityType) {
@@ -42,5 +50,11 @@ public class Counters {
       .map(CardInstanceAbility::new)
       .map(CardInstanceAbility::getCardInstanceAbility)
       .collect(toList());
+  }
+
+  private void balanceCounters() {
+    int min = Math.min(plus1Counters, minus1Counters);
+    plus1Counters -= min;
+    minus1Counters -= min;
   }
 }

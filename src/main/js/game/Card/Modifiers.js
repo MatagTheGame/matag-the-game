@@ -13,6 +13,13 @@ class Counters extends Component {
     }
   }
 
+  minus1Counters() {
+    const minus1Counters = this.props.counters.minus1Counters
+    if (minus1Counters > 0) {
+      return <div className={'counter minus-1-counter'}>{minus1Counters}</div>
+    }
+  }
+
   keywordCounters() {
     return this.props.counters.keywordCounters
       .map(keyword => keyword.toLowerCase())
@@ -22,6 +29,7 @@ class Counters extends Component {
   render() {
     return <div className={'counters'}>
       {this.plus1Counters()}
+      {this.minus1Counters()}
       {this.keywordCounters()}
     </div>
   }

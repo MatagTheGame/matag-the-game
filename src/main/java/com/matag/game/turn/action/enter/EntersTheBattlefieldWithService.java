@@ -77,6 +77,9 @@ public class EntersTheBattlefieldWithService {
       int plus1Counters = abilityService.plus1CountersFromParameter(parameter);
       cardInstance.getModifiers().getCounters().addPlus1Counters(plus1Counters);
 
+      int minus1Counters = abilityService.minus1CountersFromParameter(parameter);
+      cardInstance.getModifiers().getCounters().addMinus1Counters(minus1Counters);
+
       int cardsToDraw = abilityService.drawFromParameter(parameter);
       drawXCardsService.drawXCards(gameStatus.getPlayerByName(cardInstance.getController()), cardsToDraw);
     }

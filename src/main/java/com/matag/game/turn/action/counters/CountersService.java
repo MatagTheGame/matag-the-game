@@ -17,6 +17,13 @@ public class CountersService {
     }
   }
 
+  public void addMinus1Counters(CardInstance target, int counters) {
+    if (counters > 0) {
+      target.getModifiers().getCounters().addMinus1Counters(1);
+      LOGGER.info(target.getIdAndName() + " got " + counters + " -1/-1 counters");
+    }
+  }
+
   public void addKeywordCounter(CardInstance target, AbilityType keywordCounter) {
     target.getModifiers().getCounters().addKeywordCounter(keywordCounter);
     LOGGER.info(target.getIdAndName() + " got " + keywordCounter + " counters");

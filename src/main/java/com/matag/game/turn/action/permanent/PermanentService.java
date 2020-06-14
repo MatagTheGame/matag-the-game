@@ -79,8 +79,11 @@ public class PermanentService {
       gainControlPermanentService.gainControlUntilEndOfTurn(target, cardInstance.getController());
     }
 
-    int counters = abilityService.plus1CountersFromParameter(parameter);
-    countersService.addPlus1Counters(target, counters);
+    int plusCounters = abilityService.plus1CountersFromParameter(parameter);
+    countersService.addPlus1Counters(target, plusCounters);
+
+    int minusCounters = abilityService.minus1CountersFromParameter(parameter);
+    countersService.addMinus1Counters(target, minusCounters);
 
     AbilityType keywordCounter = abilityService.keywordCounterFromParameter(parameter);
     if (keywordCounter != null) {

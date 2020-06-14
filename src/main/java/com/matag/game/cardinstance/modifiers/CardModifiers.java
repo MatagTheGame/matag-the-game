@@ -90,7 +90,8 @@ public class CardModifiers {
   }
 
   public PowerToughness getExtraPowerToughnessFromCounters() {
-    return new PowerToughness(counters.getPlus1Counters(), counters.getPlus1Counters());
+    int countersExtra = counters.getPlus1Counters() - counters.getMinus1Counters();
+    return new PowerToughness(countersExtra, countersExtra);
   }
 
   public void resetTargets() {
