@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.cardinstance.modifiers.TappedModifier.TAPPED;
 import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
@@ -63,7 +62,7 @@ public class GainControlCreatureTest extends AbstractApplicationTest {
 
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Concordia Pegasus"));
       gameStatus.getNonCurrentPlayer().getBattlefield().getCards().get(0).getModifiers().setSummoningSickness(true);
-      gameStatus.getNonCurrentPlayer().getBattlefield().getCards().get(0).getModifiers().setTapped(TAPPED);
+      gameStatus.getNonCurrentPlayer().getBattlefield().getCards().get(0).getModifiers().setTapped(true);
     }
   }
 }

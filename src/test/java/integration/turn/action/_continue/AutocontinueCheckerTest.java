@@ -66,7 +66,7 @@ public class AutocontinueCheckerTest {
     gameStatus.getTurn().setCurrentPhase("UP");
     gameStatus.getPlayer1().getHand().getCards().clear();
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 61, cards.get("Mountain"), "player-name", "player-name"));
-    gameStatus.getPlayer1().getBattlefield().getCards().get(0).getModifiers().tap();
+    gameStatus.getPlayer1().getBattlefield().getCards().get(0).getModifiers().setTapped(true);
     gameStatus.getPlayer1().getHand().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Infuriate"), "player-name"));
 
     // When

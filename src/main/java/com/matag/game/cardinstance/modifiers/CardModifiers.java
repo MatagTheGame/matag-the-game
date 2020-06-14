@@ -23,7 +23,7 @@ public class CardModifiers {
   @JsonProperty
   private int permanentId;
   @JsonProperty
-  private TappedModifier tapped;
+  private boolean tapped;
   @JsonProperty
   private boolean doesNotUntapNextTurn;
   private boolean summoningSickness;
@@ -50,19 +50,11 @@ public class CardModifiers {
   }
 
   public boolean isTapped() {
-    return tapped != null;
+    return tapped;
   }
 
   public boolean isUntapped() {
-    return !isTapped();
-  }
-
-  public void tap() {
-    this.tapped = TappedModifier.TAPPED;
-  }
-
-  public void untap() {
-    this.tapped = null;
+    return !tapped;
   }
 
   public void doesNotUntapNextTurn() {

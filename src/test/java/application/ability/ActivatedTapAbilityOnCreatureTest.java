@@ -67,7 +67,7 @@ public class ActivatedTapAbilityOnCreatureTest extends AbstractApplicationTest {
       addCardToCurrentPlayerHand(gameStatus, cards.get("Checkpoint Officer"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Checkpoint Officer"));
       new CardInstanceSearch(gameStatus.getPlayer1().getBattlefield().getCards()).withName("Checkpoint Officer")
-        .getCards().get(0).getModifiers().tap();
+        .getCards().get(0).getModifiers().setTapped(true);
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Checkpoint Officer"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));

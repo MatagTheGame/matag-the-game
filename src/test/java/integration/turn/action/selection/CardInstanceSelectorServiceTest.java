@@ -419,6 +419,32 @@ public class CardInstanceSelectorServiceTest {
   }
 
   @Test
+  public void selectionTappedCreature() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+      .selectorType(PERMANENT)
+      .statusTypes(singletonList(TAPPED))
+      .build();
+
+    CardInstance tappedCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    tappedCreature.setController("player-name");
+    tappedCreature.getModifiers().setTapped(true);
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(tappedCreature);
+
+    CardInstance untappedCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Grazing Whiptail"), "player-name");
+    untappedCreature.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(untappedCreature);
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(tappedCreature);
+  }
+
+  @Test
   public void selectionAnother() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();

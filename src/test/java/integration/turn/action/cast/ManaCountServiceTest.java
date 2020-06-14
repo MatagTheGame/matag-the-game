@@ -92,7 +92,7 @@ public class ManaCountServiceTest {
     Player player = gameStatus.getPlayer1();
 
     CardInstance plains = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName());
-    plains.getModifiers().tap();
+    plains.getModifiers().setTapped(true);
     player.getBattlefield().addCard(plains);
 
     thrown.expectMessage("\"1 - Plains\" is already tapped.");

@@ -138,7 +138,7 @@ export default class CardUtils {
   }
 
   static isTapped(cardInstance) {
-    return cardInstance.modifiers.tapped === 'TAPPED'
+    return cardInstance.modifiers.tapped === true
   }
 
   static isTappedOrFrontendTapped(cardInstance) {

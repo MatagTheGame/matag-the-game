@@ -149,7 +149,7 @@ public class BasicCombatTest extends AbstractApplicationTest {
 
       // Cannot attack as tapped
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Nest Robber"));
-      gameStatus.getCurrentPlayer().getBattlefield().getCards().get(4).getModifiers().tap();
+      gameStatus.getCurrentPlayer().getBattlefield().getCards().get(4).getModifiers().setTapped(true);
     }
   }
 }

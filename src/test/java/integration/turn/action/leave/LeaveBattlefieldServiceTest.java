@@ -39,7 +39,7 @@ public class LeaveBattlefieldServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
-    cardInstance.getModifiers().tap();
+    cardInstance.getModifiers().setTapped(true);
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When

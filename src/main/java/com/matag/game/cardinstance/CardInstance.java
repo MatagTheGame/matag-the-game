@@ -185,9 +185,6 @@ public class CardInstance {
   }
 
   public void declareAsAttacker() {
-    if (!hasAbilityType(AbilityType.VIGILANCE)) {
-      modifiers.tap();
-    }
     modifiers.setAttacking(true);
   }
 

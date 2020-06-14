@@ -13,7 +13,7 @@ public class TapPermanentService {
   public void tap(GameStatus gameStatus, int targetId) {
     CardInstance cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);
     if (cardToTap != null) {
-      cardToTap.getModifiers().tap();
+      cardToTap.getModifiers().setTapped(true);
       LOGGER.info("{} tapped.", cardToTap.getIdAndName());
 
     } else {
@@ -35,7 +35,7 @@ public class TapPermanentService {
   public void untap(GameStatus gameStatus, int targetId) {
     CardInstance cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);
     if (cardToTap != null) {
-      cardToTap.getModifiers().untap();
+      cardToTap.getModifiers().setTapped(false);
       LOGGER.info("{} tapped.", cardToTap.getIdAndName());
 
     } else {

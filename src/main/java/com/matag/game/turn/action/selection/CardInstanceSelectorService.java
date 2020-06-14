@@ -65,12 +65,18 @@ public class CardInstanceSelectorService {
         cards = cards.attacking();
       } else if (cardInstanceSelector.getStatusTypes().contains(StatusType.BLOCKING)) {
         cards = cards.blocking();
-      } else if (cardInstanceSelector.getStatusTypes().contains(StatusType.ATTACKED) && cardInstanceSelector.getStatusTypes().contains(StatusType.BLOCKED)) {
+      }
+
+      if (cardInstanceSelector.getStatusTypes().contains(StatusType.ATTACKED) && cardInstanceSelector.getStatusTypes().contains(StatusType.BLOCKED)) {
         cards = cards.attackedOrBlocked();
       } else if (cardInstanceSelector.getStatusTypes().contains(StatusType.ATTACKED)) {
         cards = cards.attacked();
       } else if (cardInstanceSelector.getStatusTypes().contains(StatusType.BLOCKED)) {
         cards = cards.blocked();
+      }
+
+      if (cardInstanceSelector.getStatusTypes().contains(StatusType.TAPPED)) {
+        cards = cards.tapped();
       }
     }
 

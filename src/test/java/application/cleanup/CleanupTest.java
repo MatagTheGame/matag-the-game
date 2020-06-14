@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.matag.cards.properties.PowerToughness.powerToughness;
-import static com.matag.game.cardinstance.modifiers.TappedModifier.TAPPED;
 import static com.matag.game.turn.phases.Main1Phase.M1;
 import static com.matag.game.turn.phases.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
@@ -70,7 +69,7 @@ public class CleanupTest extends AbstractApplicationTest {
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Grazing Whiptail"));
 
       CardInstance huatlisShubhorn = gameStatus.getCurrentPlayer().getBattlefield().getCards().get(0);
-      huatlisShubhorn.getModifiers().setTapped(TAPPED);
+      huatlisShubhorn.getModifiers().setTapped(true);
       huatlisShubhorn.getModifiers().dealDamage(1);
 
       CardInstance grazingWhiptail = gameStatus.getCurrentPlayer().getBattlefield().getCards().get(1);
@@ -83,7 +82,7 @@ public class CleanupTest extends AbstractApplicationTest {
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Air Elemental"));
       CardInstance nestRobber = gameStatus.getNonCurrentPlayer().getBattlefield().getCards().get(0);
       nestRobber.getModifiers().dealDamage(1);
-      nestRobber.getModifiers().setTapped(TAPPED);
+      nestRobber.getModifiers().setTapped(true);
     }
   }
 }

@@ -1,11 +1,12 @@
 package com.matag.game.turn.action.enter;
 
+import com.matag.cards.ability.AbilityService;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.cards.ability.AbilityService;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.cast.ManaCountService;
 import com.matag.game.turn.action.draw.DrawXCardsService;
+import com.matag.game.turn.action.tap.TapPermanentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -26,6 +27,7 @@ public class EntersTheBattlefieldWithService {
   private final ManaCountService manaCountService;
   private final DrawXCardsService drawXCardsService;
   private final AbilityService abilityService;
+  private final TapPermanentService tapPermanentService;
 
   void entersTheBattlefieldWith(GameStatus gameStatus, CardInstance cardInstance) {
     List<String> parameters = addEntersTheBattlefieldWithParameters(cardInstance);
@@ -71,7 +73,7 @@ public class EntersTheBattlefieldWithService {
   private void executeParameters(GameStatus gameStatus, CardInstance cardInstance, List<String> parameters) {
     for (String parameter : parameters) {
       if (abilityService.tappedFromParameter(parameter)) {
-        cardInstance.getModifiers().tap();
+        tapPermanentService.tap(gameStatus, cardInstance.getId());
       }
 
       int plus1Counters = abilityService.plus1CountersFromParameter(parameter);

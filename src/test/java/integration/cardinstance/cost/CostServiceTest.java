@@ -129,7 +129,7 @@ public class CostServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
     CardInstance cardInstance = createCardInstance(gameStatus, "Checkpoint Officer");
-    cardInstance.getModifiers().tap();
+    cardInstance.getModifiers().setTapped(true);
     List<Cost> manaPaid = asList(WHITE, WHITE);
 
     // When
