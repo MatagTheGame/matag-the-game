@@ -23,8 +23,7 @@ import static com.matag.cards.ability.selector.PowerToughnessConstraint.PowerOrT
 import static com.matag.cards.ability.selector.PowerToughnessConstraintType.*;
 import static com.matag.cards.ability.selector.SelectorType.PERMANENT;
 import static com.matag.cards.ability.selector.SelectorType.SPELL;
-import static com.matag.cards.ability.selector.StatusType.ATTACKING;
-import static com.matag.cards.ability.selector.StatusType.BLOCKING;
+import static com.matag.cards.ability.selector.StatusType.*;
 import static com.matag.cards.ability.selector.TurnStatusType.YOUR_TURN;
 import static com.matag.cards.ability.type.AbilityType.FLYING;
 import static com.matag.cards.properties.Color.GREEN;
@@ -305,6 +304,33 @@ public class CardInstanceSelectorServiceTest {
   }
 
   @Test
+  public void selectionCreatureWhoAttacked() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+      .selectorType(PERMANENT)
+      .ofType(singletonList(CREATURE))
+      .statusTypes(singletonList(ATTACKED))
+      .build();
+
+    CardInstance creatureWhoAttacked = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    creatureWhoAttacked.setController("player-name");
+    creatureWhoAttacked.getModifiers().getModifiersUntilEndOfTurn().setAttacked(true);
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(creatureWhoAttacked);
+
+    CardInstance creatureWhoDidNotAttacked = cardInstanceFactory.create(gameStatus, 2, cards.get("Grazing Whiptail"), "player-name");
+    creatureWhoDidNotAttacked.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(creatureWhoDidNotAttacked);
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus,  null, cardInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(creatureWhoAttacked);
+  }
+
+  @Test
   public void selectionBlockingCreature() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
@@ -325,10 +351,39 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(nonBlockingCreature);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, nonBlockingCreature, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(blockingCreature);
+  }
+
+  @Test
+  public void selectionCreatureWhoBlocked() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+      .selectorType(PERMANENT)
+      .ofType(singletonList(CREATURE))
+      .statusTypes(singletonList(BLOCKED))
+      .build();
+
+    CardInstance creatureWhoBlocked = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    creatureWhoBlocked.setController("player-name");
+    creatureWhoBlocked.getModifiers().setBlockingCardId(3);
+    creatureWhoBlocked.getModifiers().getModifiersUntilEndOfTurn().setBlocked(true);
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(creatureWhoBlocked);
+
+    CardInstance creatureWhoDidNotBlocked = cardInstanceFactory.create(gameStatus, 2, cards.get("Grazing Whiptail"), "player-name");
+    creatureWhoDidNotBlocked.setController("player-name");
+    creatureWhoDidNotBlocked.getModifiers().setBlockingCardId(3);
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(creatureWhoDidNotBlocked);
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(creatureWhoBlocked);
   }
 
   @Test

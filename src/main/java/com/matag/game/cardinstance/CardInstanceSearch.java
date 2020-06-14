@@ -120,6 +120,22 @@ public class CardInstanceSearch {
       .filter(cardInstance -> cardInstance.getModifiers().isAttacking() || cardInstance.getModifiers().isBlocking()));
   }
 
+  public CardInstanceSearch attacked() {
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getModifiers().getModifiersUntilEndOfTurn().isAttacked()));
+  }
+
+  public CardInstanceSearch blocked() {
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getModifiers().getModifiersUntilEndOfTurn().isBlocked()));
+  }
+
+  public CardInstanceSearch attackedOrBlocked() {
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> cardInstance.getModifiers().getModifiersUntilEndOfTurn().isAttacked() ||
+        cardInstance.getModifiers().getModifiersUntilEndOfTurn().isBlocked()));
+  }
+
   public CardInstanceSearch ofPowerToughnessConstraint(PowerToughnessConstraint powerToughnessConstraint) {
     return new CardInstanceSearch(this.cards
       .filter(card -> PowerToughnessConstraintUtils.check(powerToughnessConstraint, card)));
