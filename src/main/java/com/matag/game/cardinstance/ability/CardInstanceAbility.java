@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.matag.cards.Card;
 import com.matag.cards.ability.Ability;
 import com.matag.cards.ability.AbilityService;
+import com.matag.cards.ability.AbilityTransposer;
 import com.matag.cards.ability.selector.CardInstanceSelector;
 import com.matag.cards.ability.target.Target;
 import com.matag.cards.ability.trigger.Trigger;
@@ -76,6 +77,9 @@ public class CardInstanceAbility extends Ability {
   }
 
   public static CardInstanceAbility getCardInstanceAbility(Ability ability) {
-    return Optional.ofNullable(ability).map(CardInstanceAbility::new).orElse(null);
+    return Optional.ofNullable(ability)
+      .map(AbilityTransposer::transpose)
+      .map(CardInstanceAbility::new)
+      .orElse(null);
   }
 }
