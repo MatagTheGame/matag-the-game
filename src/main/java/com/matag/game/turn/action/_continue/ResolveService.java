@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static java.util.Arrays.asList;
 
@@ -75,7 +76,7 @@ public class ResolveService {
 
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonActivePlayer().getName());
 
-    } else if (gameStatus.getTurn().getTriggeredNonStackAction().equals(triggeredNonStackAction)) {
+    } else if (Objects.equals(gameStatus.getTurn().getTriggeredNonStackAction(), triggeredNonStackAction)) {
       resolveTriggeredNonStackAction(gameStatus, triggeredNonStackAction, targetCardIds);
 
     } else {
