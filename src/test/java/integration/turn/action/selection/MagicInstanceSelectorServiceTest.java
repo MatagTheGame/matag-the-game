@@ -1,14 +1,14 @@
 package integration.turn.action.selection;
 
 import com.matag.cards.Cards;
-import com.matag.cards.ability.selector.CardInstanceSelector;
+import com.matag.cards.ability.selector.MagicInstanceSelector;
 import com.matag.cards.ability.selector.PowerToughnessConstraint;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.selection.CardInstanceSelectorService;
+import com.matag.game.turn.action.selection.MagicInstanceSelectorService;
 import integration.TestUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,10 +38,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = SelectionTestConfiguration.class)
-public class CardInstanceSelectorServiceTest {
+public class MagicInstanceSelectorServiceTest {
 
   @Autowired
-  private CardInstanceSelectorService selectorService;
+  private MagicInstanceSelectorService selectorService;
 
   @Autowired
   private CardInstanceFactory cardInstanceFactory;
@@ -56,10 +56,10 @@ public class CardInstanceSelectorServiceTest {
   public void emptyBattlefield() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).build();
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).isEmpty();
@@ -70,14 +70,14 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .build();
     CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstance);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(cardInstance);
@@ -88,7 +88,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .build();
@@ -99,7 +99,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(aLand);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(aCreature);
@@ -110,7 +110,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .powerToughnessConstraint(new PowerToughnessConstraint(POWER, EQUAL, 3))
@@ -122,7 +122,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(creaturePower4);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(creaturePower3);
@@ -133,7 +133,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .powerToughnessConstraint(new PowerToughnessConstraint(POWER, GREATER, 3))
@@ -145,7 +145,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(creaturePower4);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(creaturePower4);
@@ -156,7 +156,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .powerToughnessConstraint(new PowerToughnessConstraint(TOUGHNESS, LESS_OR_EQUAL, 3))
@@ -168,7 +168,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(creaturePower4);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(creaturePower3);
@@ -179,7 +179,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .controllerType(PLAYER)
@@ -194,7 +194,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(opponentCard);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).contains(playerCard);
@@ -205,7 +205,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .colorless(true)
       .build();
@@ -219,7 +219,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(colorlessCreature);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(colorlessCreature);
@@ -230,7 +230,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .multicolor(true)
       .build();
@@ -244,7 +244,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(multicolorCreature);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(multicolorCreature);
@@ -255,7 +255,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .controllerType(OPPONENT)
@@ -270,7 +270,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(opponentCreature);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(opponentCreature);
@@ -281,7 +281,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .statusTypes(singletonList(ATTACKING))
@@ -297,7 +297,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(nonAttackingCreature);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus,  null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus,  null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(attackingCreature);
@@ -308,7 +308,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .statusTypes(singletonList(ATTACKED))
@@ -324,7 +324,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(creatureWhoDidNotAttacked);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus,  null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus,  null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(creatureWhoAttacked);
@@ -335,7 +335,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .statusTypes(singletonList(BLOCKING))
@@ -351,7 +351,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(nonBlockingCreature);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(blockingCreature);
@@ -362,7 +362,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .statusTypes(singletonList(BLOCKED))
@@ -380,7 +380,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(creatureWhoDidNotBlocked);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(creatureWhoBlocked);
@@ -391,7 +391,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .ofType(singletonList(CREATURE))
       .statusTypes(asList(ATTACKING, BLOCKING))
@@ -412,7 +412,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(otherCreature);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, otherCreature, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, otherCreature, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(attackingCreature, blockingCreature);
@@ -423,7 +423,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(PERMANENT)
       .statusTypes(singletonList(TAPPED))
       .build();
@@ -438,7 +438,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(untappedCreature);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(tappedCreature);
@@ -449,7 +449,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().others(true).selectorType(PERMANENT).ofType(singletonList(CREATURE)).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().others(true).selectorType(PERMANENT).ofType(singletonList(CREATURE)).build();
     CardInstance aCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
     aCreature.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aCreature);
@@ -459,7 +459,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(anotherCreature);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, aCreature, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, aCreature, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(anotherCreature);
@@ -470,7 +470,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).notOfType(singletonList(LAND)).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).notOfType(singletonList(LAND)).build();
 
     CardInstance nonLand = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
     nonLand.setController("player-name");
@@ -481,7 +481,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(land);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(nonLand);
@@ -492,7 +492,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtype(singletonList(ZOMBIE)).controllerType(PLAYER).others(true).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).ofSubtype(singletonList(ZOMBIE)).controllerType(PLAYER).others(true).build();
     CardInstance otherZombiesCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Death Baron"), "player-name");
     otherZombiesCreature.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(otherZombiesCreature);
@@ -510,7 +510,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(anOpponentZombie);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, aZombie, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, aZombie, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(otherZombiesCreature);
@@ -521,7 +521,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).notOfSubtype(singletonList(ZOMBIE)).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).notOfSubtype(singletonList(ZOMBIE)).build();
     CardInstance aZombie = cardInstanceFactory.create(gameStatus, 1, cards.get("Diregraf Ghoul"), "player-name");
     aZombie.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aZombie);
@@ -531,7 +531,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aNonZombie);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(aNonZombie);
@@ -542,7 +542,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).others(true).ofType(singletonList(CREATURE)).withAbilityType(FLYING).controllerType(PLAYER).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).others(true).ofType(singletonList(CREATURE)).withAbilityType(FLYING).controllerType(PLAYER).build();
     CardInstance otherFliersCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
     otherFliersCreature.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(otherFliersCreature);
@@ -560,7 +560,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(anOpponentFlier);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, otherFliersCreature, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, otherFliersCreature, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(aFlier);
@@ -572,7 +572,7 @@ public class CardInstanceSelectorServiceTest {
     GameStatus gameStatus = testUtils.testGameStatus();
 
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).ofType(asList(CREATURE, PLANESWALKER)).ofColors(asList(GREEN, WHITE)).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).ofType(asList(CREATURE, PLANESWALKER)).ofColors(asList(GREEN, WHITE)).build();
 
     CardInstance whiteCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(whiteCreature);
@@ -581,7 +581,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(blackCreature);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(whiteCreature);
@@ -592,13 +592,13 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).itself(true).build();
 
     CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aPermanent);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, aPermanent, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, aPermanent, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(aPermanent);
@@ -609,14 +609,14 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build();
 
     CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
     aPermanent.setController("player-name");
     gameStatus.getCurrentPlayer().getBattlefield().addCard(aPermanent);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, aPermanent, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, aPermanent, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(aPermanent);
@@ -627,14 +627,14 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).itself(true).turnStatusType(YOUR_TURN).build();
 
     CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "opponent-name");
     aPermanent.setController("opponent-name");
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(aPermanent);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, aPermanent, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, aPermanent, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).isEmpty();
@@ -645,7 +645,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).currentEnchanted(true).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).currentEnchanted(true).build();
 
     CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name");
     aPermanent.setController("player-name");
@@ -657,7 +657,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(theEnchantment);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, theEnchantment, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, theEnchantment, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(aPermanent);
@@ -668,7 +668,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(PERMANENT).historic(true).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).historic(true).build();
 
     CardInstance aCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
     aCreature.setController("player-name");
@@ -679,7 +679,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getCurrentPlayer().getBattlefield().addCard(anArtifact);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(anArtifact);
@@ -690,11 +690,11 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build();
     CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
 
     // When
-    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, cardInstanceSelector);
+    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
 
     // Then
     assertThat(selection).containsExactly(gameStatus.getPlayer1());
@@ -705,11 +705,11 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build();
     CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
 
     // When
-    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, cardInstanceSelector);
+    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
 
     // Then
     assertThat(selection).containsExactly(gameStatus.getPlayer2());
@@ -720,11 +720,11 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(PLAYER).build();
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(PLAYER).build();
     CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
 
     // When
-    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, cardInstanceSelector);
+    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
 
     // Then
     assertThat(selection).containsExactlyInAnyOrder(gameStatus.getPlayer1(), gameStatus.getPlayer2());
@@ -735,14 +735,14 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(SPELL)
       .build();
 
     CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "opponent-name");
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, cardInstance, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, cardInstance, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).isEmpty();
@@ -753,7 +753,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(SPELL)
       .build();
 
@@ -761,7 +761,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getStack().add(aSpell);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, aSpell, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, aSpell, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(aSpell);
@@ -772,7 +772,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(SPELL)
       .ofType(List.of(INSTANT))
       .build();
@@ -781,7 +781,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getStack().add(aSpell);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, aSpell, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, aSpell, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).isEmpty();
@@ -792,7 +792,7 @@ public class CardInstanceSelectorServiceTest {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
 
-    CardInstanceSelector cardInstanceSelector = CardInstanceSelector.builder()
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
       .selectorType(SPELL)
       .ofType(List.of(INSTANT, SORCERY))
       .build();
@@ -801,7 +801,7 @@ public class CardInstanceSelectorServiceTest {
     gameStatus.getStack().add(anInstant);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, anInstant, cardInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, anInstant, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).containsExactly(anInstant);

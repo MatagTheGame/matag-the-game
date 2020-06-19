@@ -2,7 +2,7 @@ package integration.turn.action.enter;
 
 import com.matag.game.turn.action.cast.ManaCountService;
 import com.matag.game.turn.action.draw.DrawXCardsService;
-import com.matag.game.turn.action.selection.CardInstanceSelectorService;
+import com.matag.game.turn.action.selection.MagicInstanceSelectorService;
 import com.matag.game.turn.action.trigger.WhenTriggerService;
 import integration.TestUtilsConfiguration;
 import org.mockito.Mockito;
@@ -27,12 +27,12 @@ public class EnterTestConfiguration {
   }
 
   @Bean
-  public CardInstanceSelectorService cardInstanceSelectorService() {
-    return new CardInstanceSelectorService();
+  public MagicInstanceSelectorService magicInstanceSelectorService() {
+    return new MagicInstanceSelectorService();
   }
 
   @Bean
-  public WhenTriggerService whenTriggerService(CardInstanceSelectorService cardInstanceSelectorService) {
-    return new WhenTriggerService(cardInstanceSelectorService);
+  public WhenTriggerService whenTriggerService(MagicInstanceSelectorService magicInstanceSelectorService) {
+    return new WhenTriggerService(magicInstanceSelectorService);
   }
 }

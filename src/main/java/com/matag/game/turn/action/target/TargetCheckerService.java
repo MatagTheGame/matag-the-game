@@ -1,6 +1,6 @@
 package com.matag.game.turn.action.target;
 
-import com.matag.cards.ability.selector.CardInstanceSelector;
+import com.matag.cards.ability.selector.MagicInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.target.Target;
 import com.matag.cards.ability.trigger.TriggerType;
@@ -9,7 +9,7 @@ import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.selection.CardInstanceSelectorService;
+import com.matag.game.turn.action.selection.MagicInstanceSelectorService;
 import com.matag.player.PlayerType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ import static com.matag.cards.ability.type.AbilityType.abilityType;
 @Component
 @AllArgsConstructor
 public class TargetCheckerService {
-  private final CardInstanceSelectorService cardInstanceSelectorService;
+  private final MagicInstanceSelectorService magicInstanceSelectorService;
 
   public void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
     List<CardInstanceAbility> playedAbilities = playedAbilities(cardToCast, playedAbility);
@@ -55,7 +55,7 @@ public class TargetCheckerService {
   public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
     for (CardInstanceAbility ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
       for (Target target : ability.getTargets()) {
-        CardInstanceSearch cards = cardInstanceSelectorService.select(gameStatus, cardToCast, target.getCardInstanceSelector());
+        CardInstanceSearch cards = magicInstanceSelectorService.select(gameStatus, cardToCast, target.getMagicInstanceSelector());
         if (cards.isNotEmpty()) {
           return true;
         }
@@ -66,28 +66,28 @@ public class TargetCheckerService {
   }
 
   public void check(GameStatus gameStatus, CardInstance cardInstance, Target target, Object targetId) {
-    CardInstanceSelector cardInstanceSelector = target.getCardInstanceSelector();
+    MagicInstanceSelector magicInstanceSelector = target.getMagicInstanceSelector();
     if (targetId == null) {
       if (!target.isOptional()) {
         throw new MessageException(cardInstance.getIdAndName() + " requires a valid target.");
       }
 
     } else if (targetId instanceof String) {
-      if (!(cardInstanceSelector.getSelectorType().equals(SelectorType.PLAYER) || cardInstanceSelector.getSelectorType().equals(SelectorType.ANY))) {
-        throw new MessageException(targetId + " is not valid for type " + cardInstanceSelector.getSelectorType());
+      if (!(magicInstanceSelector.getSelectorType().equals(SelectorType.PLAYER) || magicInstanceSelector.getSelectorType().equals(SelectorType.ANY))) {
+        throw new MessageException(targetId + " is not valid for type " + magicInstanceSelector.getSelectorType());
       }
 
-      if (PlayerType.OPPONENT.equals(cardInstanceSelector.getControllerType()) && cardInstance.getController().equals(targetId)) {
-        throw new MessageException(targetId + " is not valid for type " + cardInstanceSelector.getSelectorType() + " (needs to be an opponent)");
+      if (PlayerType.OPPONENT.equals(magicInstanceSelector.getControllerType()) && cardInstance.getController().equals(targetId)) {
+        throw new MessageException(targetId + " is not valid for type " + magicInstanceSelector.getSelectorType() + " (needs to be an opponent)");
       }
 
     } else {
-      if (cardInstanceSelector.getSelectorType().equals(SelectorType.PLAYER)) {
-        throw new MessageException(targetId + " is not valid for type " + cardInstanceSelector.getSelectorType());
+      if (magicInstanceSelector.getSelectorType().equals(SelectorType.PLAYER)) {
+        throw new MessageException(targetId + " is not valid for type " + magicInstanceSelector.getSelectorType());
       }
 
       int targetCardId = (int) targetId;
-      CardInstanceSearch cards = cardInstanceSelectorService.select(gameStatus, cardInstance, cardInstanceSelector);
+      CardInstanceSearch cards = magicInstanceSelectorService.select(gameStatus, cardInstance, magicInstanceSelector);
       if (cards.withId(targetCardId).isEmpty()) {
         throw new MessageException("Selected targets were not valid.");
       }

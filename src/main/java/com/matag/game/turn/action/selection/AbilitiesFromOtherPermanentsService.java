@@ -18,7 +18,7 @@ import static com.matag.cards.ability.type.AbilityType.SELECTED_PERMANENTS_GET;
 @Component
 @AllArgsConstructor
 public class AbilitiesFromOtherPermanentsService {
-  private final CardInstanceSelectorService cardInstanceSelectorService;
+  private final MagicInstanceSelectorService magicInstanceSelectorService;
   private final AbilityService abilityService;
   private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
 
@@ -49,7 +49,7 @@ public class AbilitiesFromOtherPermanentsService {
     for (CardInstance card : cards) {
       for (CardInstanceAbility ability : card.getFixedAbilitiesByType(SELECTED_PERMANENTS_GET)) {
         if (ability.getTrigger().getType() == TriggerType.STATIC) {
-          if (cardInstanceSelectorService.select(gameStatus, card, ability.getCardInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
+          if (magicInstanceSelectorService.select(gameStatus, card, ability.getMagicInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
             parameters.addAll(ability.getParameters());
           }
         }
