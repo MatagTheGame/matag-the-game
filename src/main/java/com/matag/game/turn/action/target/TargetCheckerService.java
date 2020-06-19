@@ -55,9 +55,14 @@ public class TargetCheckerService {
   public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
     for (CardInstanceAbility ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
       for (Target target : ability.getTargets()) {
-        CardInstanceSearch cards = magicInstanceSelectorService.select(gameStatus, cardToCast, target.getMagicInstanceSelector());
-        if (cards.isNotEmpty()) {
+        if (target.getMagicInstanceSelector().getSelectorType().equals(SelectorType.PLAYER)) {
           return true;
+
+        } else {
+          CardInstanceSearch cards = magicInstanceSelectorService.select(gameStatus, cardToCast, target.getMagicInstanceSelector());
+          if (cards.isNotEmpty()) {
+            return true;
+          }
         }
       }
     }
