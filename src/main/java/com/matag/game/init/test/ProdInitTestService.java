@@ -36,14 +36,12 @@ public class ProdInitTestService extends InitTestService {
     addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
     addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
     addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"));
-    addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"));
 
     addCardToCurrentPlayerHand(gameStatus, cards.get("Huatli's Snubhorn"));
     addCardToCurrentPlayerHand(gameStatus, cards.get("Legion's Judgment"));
     addCardToCurrentPlayerHand(gameStatus, cards.get("Air Elemental"));
     addCardToCurrentPlayerHand(gameStatus, cards.get("Clear the Mind"));
     addCardToCurrentPlayerHand(gameStatus, cards.get("Civic Stalwart"));
-    addCardToCurrentPlayerHand(gameStatus, cards.get("Unlikely Aid"));
     addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Huatli's Snubhorn"));
 
     addCardToCurrentPlayerGraveyard(gameStatus, cards.get("Plains"));
@@ -68,7 +66,7 @@ public class ProdInitTestService extends InitTestService {
     addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Forest"));
     addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Bloodfell Caves"));
 
-    addCardToNonCurrentPlayerHand(gameStatus, cards.get("Gilded Sentinel"));
+    addCardToNonCurrentPlayerHand(gameStatus, cards.get("Hostile Minotaur"));
     addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Swarm Guildmage"));
     addCardToNonCurrentPlayerHand(gameStatus, cards.get("Precision Bolt"));
     addCardToNonCurrentPlayerHand(gameStatus, cards.get("Overcome"));
