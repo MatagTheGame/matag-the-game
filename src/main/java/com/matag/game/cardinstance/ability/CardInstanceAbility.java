@@ -6,6 +6,7 @@ import com.matag.cards.ability.Ability;
 import com.matag.cards.ability.AbilityService;
 import com.matag.cards.ability.AbilityTransposer;
 import com.matag.cards.ability.selector.MagicInstanceSelector;
+import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.target.Target;
 import com.matag.cards.ability.trigger.Trigger;
 import com.matag.cards.ability.type.AbilityType;
@@ -38,17 +39,15 @@ public class CardInstanceAbility extends Ability {
   public String getAbilityTypeText() {
     String parametersString = AbilityService.parametersAsString(parameters);
 
-    boolean negative = parametersString.startsWith("-");
-    switch (abilityType) {
-      case ADD_X_LIFE:
-        String verb = (negative ? "lose" : "gain") + (magicInstanceSelector.isItself() ? "" : "s");
-        return String.format(abilityType.getText(), magicInstanceSelector.getText(), verb, parametersString.replace("-", ""));
-
-      case SELECTED_PERMANENTS_GET:
+    if (abilityType == AbilityType.SELECTED_PERMANENTS_GET) {
+      if (magicInstanceSelector.getSelectorType() == SelectorType.PLAYER) {
+        return String.format(abilityType.getText(), magicInstanceSelector.getText(), parametersString) + ".";
+      } else {
         return String.format(abilityType.getText(), magicInstanceSelector.getText(), parametersString) + " until end of turn.";
+      }
 
-      default:
-        return String.format(abilityType.getText(), parametersString);
+    } else {
+      return String.format(abilityType.getText(), parametersString);
     }
   }
 

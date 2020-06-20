@@ -1,6 +1,7 @@
 package integration.turn.action.selection;
 
-import com.matag.game.turn.action.permanent.PermanentService;
+import com.matag.game.turn.action.permanent.PermanentGetService;
+import com.matag.game.turn.action.player.PlayerGetService;
 import integration.TestUtilsConfiguration;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.*;
@@ -12,7 +13,13 @@ public class SelectionTestConfiguration {
 
   @Bean
   @Primary
-  public PermanentService permanentService() {
-    return Mockito.mock(PermanentService.class);
+  public PermanentGetService permanentService() {
+    return Mockito.mock(PermanentGetService.class);
+  }
+
+  @Bean
+  @Primary
+  public PlayerGetService playerGetService() {
+    return Mockito.mock(PlayerGetService.class);
   }
 }

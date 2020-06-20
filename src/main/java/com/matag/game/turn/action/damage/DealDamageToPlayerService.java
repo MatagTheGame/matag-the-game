@@ -17,7 +17,7 @@ public class DealDamageToPlayerService {
 
   public void dealDamageToPlayer(GameStatus gameStatus, int damage, Player player) {
     if (damage > 0) {
-      lifeService.subtract(player, damage, gameStatus);
+      lifeService.add(player, -damage, gameStatus);
       LOGGER.info("AbilityActionExecuted: deals {} damage to {}", damage, player.getName());
     }
   }

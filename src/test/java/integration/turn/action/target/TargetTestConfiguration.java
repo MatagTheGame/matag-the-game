@@ -4,7 +4,7 @@ import com.matag.cards.ability.AbilityService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
 import com.matag.game.turn.action.draw.DrawXCardsService;
 import com.matag.game.turn.action.life.LifeService;
-import com.matag.game.turn.action.permanent.PermanentService;
+import com.matag.game.turn.action.permanent.PermanentGetService;
 import integration.TestUtilsConfiguration;
 import integration.turn.action.selection.SelectionTestConfiguration;
 import org.mockito.Mockito;
@@ -29,8 +29,8 @@ public class TargetTestConfiguration {
 
   @Bean
   @Primary
-  public PermanentService permanentService() {
-    return Mockito.mock(PermanentService.class);
+  public PermanentGetService permanentService() {
+    return Mockito.mock(PermanentGetService.class);
   }
 
   @Bean

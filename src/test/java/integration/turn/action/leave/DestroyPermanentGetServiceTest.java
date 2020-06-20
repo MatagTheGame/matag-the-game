@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = LeaveTestConfiguration.class)
-public class DestroyPermanentServiceTest {
+public class DestroyPermanentGetServiceTest {
 
   @Autowired
   private DestroyPermanentService destroyPermanentService;

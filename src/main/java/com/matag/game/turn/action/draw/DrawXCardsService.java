@@ -11,11 +11,13 @@ public class DrawXCardsService {
   private static final Logger LOGGER = LoggerFactory.getLogger(DrawXCardsService.class);
 
   public void drawXCards(Player player, int cardsToDraw) {
-    for (int i = 0; i < cardsToDraw; i++) {
-      CardInstance drawnCardInstance = player.getLibrary().draw();
-      player.getHand().addCard(drawnCardInstance);
-    }
+    if (cardsToDraw > 0) {
+      for (int i = 0; i < cardsToDraw; i++) {
+        CardInstance drawnCardInstance = player.getLibrary().draw();
+        player.getHand().addCard(drawnCardInstance);
+      }
 
-    LOGGER.info("{} drew {} cards.", player.getName(), cardsToDraw);
+      LOGGER.info("{} drew {} cards.", player.getName(), cardsToDraw);
+    }
   }
 }

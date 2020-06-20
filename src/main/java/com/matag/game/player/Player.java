@@ -35,12 +35,7 @@ public class Player {
       .forEach(i -> this.hand.addCard(this.library.draw()));
   }
 
-  public void increaseLife(int life) {
+  public void addLife(int life) {
     this.life += life;
   }
-
-  public void decreaseLife(int life) {
-    this.life -= life;
-  }
-
 }

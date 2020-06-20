@@ -50,6 +50,7 @@ public class CastAuraDestroyTest extends AbstractApplicationTest {
     browser.player2().getGraveyardHelper(PLAYER).contains(cards.get("Invoke the Divine"));
     browser.player2().getGraveyardHelper(OPPONENT).contains(cards.get("Arcane Flight"));
     browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Concordia Pegasus")).hasPowerAndToughness("3/5");
+    browser.player2().getPlayerInfoHelper(PLAYER).toHaveLife(24);
 
 
     // When Player2 destroys the creature

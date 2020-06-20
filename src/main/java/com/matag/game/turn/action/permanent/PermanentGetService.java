@@ -23,8 +23,8 @@ import java.util.Optional;
 
 @Component
 @AllArgsConstructor
-public class PermanentService {
-  private static final Logger LOGGER = LoggerFactory.getLogger(PermanentService.class);
+public class PermanentGetService {
+  private static final Logger LOGGER = LoggerFactory.getLogger(PermanentGetService.class);
 
   private final DealDamageToCreatureService dealDamageToCreatureService;
   private final DealDamageToPlayerService dealDamageToPlayerService;
@@ -37,9 +37,7 @@ public class PermanentService {
   private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
 
   public void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, List<String> parameters, CardInstance target) {
-    for (String parameter : parameters) {
-      thatPermanentGets(cardInstance, gameStatus, parameter, target);
-    }
+    parameters.forEach(parameter -> thatPermanentGets(cardInstance, gameStatus, parameter, target));
   }
 
   private void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
