@@ -29,18 +29,6 @@ public class CardInstanceAbilityTest {
   }
 
   @Test
-  public void drawXCardsText() {
-    // Given
-    CardInstanceAbility ability = new CardInstanceAbility(DRAW_X_CARDS, emptyList(), singletonList("2"), null);
-
-    // When
-    String text = ability.getAbilityTypeText();
-
-    // Then
-    assertThat(text).isEqualTo("Draw 2 cards.");
-  }
-
-  @Test
   public void enchantedCreatureGetOneAbilityText() {
     // Given
     CardInstanceAbility ability = new CardInstanceAbility(ENCHANT, emptyList(), singletonList("+2/+2"), null);

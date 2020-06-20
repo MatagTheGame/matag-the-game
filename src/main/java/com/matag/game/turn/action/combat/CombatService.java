@@ -5,7 +5,7 @@ import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.damage.DealDamageToCreatureService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
-import com.matag.game.turn.action.life.LifeService;
+import com.matag.game.turn.action.player.LifeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

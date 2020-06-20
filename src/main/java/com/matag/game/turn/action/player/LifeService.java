@@ -1,4 +1,4 @@
-package com.matag.game.turn.action.life;
+package com.matag.game.turn.action.player;
 
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;

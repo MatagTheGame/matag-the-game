@@ -1,7 +1,7 @@
 package integration.turn.action.enter;
 
 import com.matag.game.turn.action.cast.ManaCountService;
-import com.matag.game.turn.action.draw.DrawXCardsService;
+import com.matag.game.turn.action.player.DrawXCardsService;
 import com.matag.game.turn.action.selection.MagicInstanceSelectorService;
 import com.matag.game.turn.action.trigger.WhenTriggerService;
 import integration.TestUtilsConfiguration;

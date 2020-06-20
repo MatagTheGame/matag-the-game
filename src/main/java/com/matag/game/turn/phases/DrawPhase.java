@@ -1,7 +1,7 @@
 package com.matag.game.turn.phases;
 
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.draw.DrawXCardsService;
+import com.matag.game.turn.action.player.DrawXCardsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.matag.game.turn.action.draw;
+package com.matag.game.turn.action.player;
 
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;

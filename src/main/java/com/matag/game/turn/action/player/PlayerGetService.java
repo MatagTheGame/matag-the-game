@@ -5,8 +5,6 @@ import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
-import com.matag.game.turn.action.draw.DrawXCardsService;
-import com.matag.game.turn.action.life.LifeService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,10 +17,10 @@ import java.util.List;
 public class PlayerGetService {
   private static final Logger LOGGER = LoggerFactory.getLogger(PlayerGetService.class);
 
+  private final AbilityService abilityService;
   private final LifeService lifeService;
   private final DrawXCardsService drawXCardsService;
   private final DealDamageToPlayerService dealDamageToPlayerService;
-  private final AbilityService abilityService;
 
   public void thatPlayerGets(CardInstance cardInstance, GameStatus gameStatus, List<String> parameters, Player player) {
     parameters.forEach(parameter -> thatPlayerGets(cardInstance, gameStatus, player, parameter));
@@ -34,7 +32,6 @@ public class PlayerGetService {
 
     int life = abilityService.lifeFromParameter(parameter);
     lifeService.add(player, life, gameStatus);
-
 
     int cardsToDraw = abilityService.drawFromParameter(parameter);
     drawXCardsService.drawXCards(player, cardsToDraw);

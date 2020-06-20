@@ -5,7 +5,7 @@ import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.cast.ManaCountService;
-import com.matag.game.turn.action.draw.DrawXCardsService;
+import com.matag.game.turn.action.player.DrawXCardsService;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

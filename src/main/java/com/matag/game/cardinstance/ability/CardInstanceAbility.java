@@ -37,7 +37,7 @@ public class CardInstanceAbility extends Ability {
 
   @JsonProperty
   public String getAbilityTypeText() {
-    String parametersString = AbilityService.parametersAsString(parameters);
+    String parametersString = new AbilityService().parametersAsString(parameters);
 
     if (abilityType == AbilityType.SELECTED_PERMANENTS_GET) {
       if (magicInstanceSelector.getSelectorType() == SelectorType.PLAYER) {

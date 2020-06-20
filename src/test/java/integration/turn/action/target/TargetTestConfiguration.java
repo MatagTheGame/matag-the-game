@@ -2,9 +2,9 @@ package integration.turn.action.target;
 
 import com.matag.cards.ability.AbilityService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
-import com.matag.game.turn.action.draw.DrawXCardsService;
-import com.matag.game.turn.action.life.LifeService;
 import com.matag.game.turn.action.permanent.PermanentGetService;
+import com.matag.game.turn.action.player.DrawXCardsService;
+import com.matag.game.turn.action.player.LifeService;
 import integration.TestUtilsConfiguration;
 import integration.turn.action.selection.SelectionTestConfiguration;
 import org.mockito.Mockito;

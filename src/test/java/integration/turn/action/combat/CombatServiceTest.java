@@ -9,7 +9,7 @@ import com.matag.game.turn.action.combat.DeclareAttackerService;
 import com.matag.game.turn.action.combat.DeclareBlockerService;
 import com.matag.game.turn.action.damage.DealDamageToCreatureService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
-import com.matag.game.turn.action.life.LifeService;
+import com.matag.game.turn.action.player.LifeService;
 import integration.TestUtils;
 import org.junit.After;
 import org.junit.Test;

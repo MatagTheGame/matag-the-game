@@ -3,7 +3,7 @@ package integration.turn.action.combat;
 import com.matag.game.turn.action._continue.ContinueTurnService;
 import com.matag.game.turn.action.damage.DealDamageToCreatureService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
-import com.matag.game.turn.action.life.LifeService;
+import com.matag.game.turn.action.player.LifeService;
 import integration.TestUtilsConfiguration;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.*;
