@@ -3,7 +3,7 @@ package com.matag.game.turn.action;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.game.cardinstance.ability.AbilityAction;
 import com.matag.game.turn.action.attach.AttachAction;
-import com.matag.game.turn.action.selection.SelectedPermanentsGetXUntilEndOfTurnAction;
+import com.matag.game.turn.action.selection.SelectedPermanentsGetAction;
 import com.matag.game.turn.action.shuffle.ShuffleTargetGraveyardIntoLibraryAction;
 import com.matag.game.turn.action.target.ThatTargetsGetAction;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class AbilityActionFactory {
   private final ThatTargetsGetAction thatTargetsGetAction;
   private final ShuffleTargetGraveyardIntoLibraryAction shuffleTargetGraveyardIntoLibraryAction;
-  private final SelectedPermanentsGetXUntilEndOfTurnAction selectedPermanentsGetXUntilEndOfTurnAction;
+  private final SelectedPermanentsGetAction selectedPermanentsGetAction;
   private final AttachAction attachAction;
 
   public AbilityAction getAbilityAction(AbilityType abilityType) {
@@ -24,7 +24,7 @@ public class AbilityActionFactory {
       case THAT_TARGETS_GET:
         return thatTargetsGetAction;
       case SELECTED_PERMANENTS_GET:
-        return selectedPermanentsGetXUntilEndOfTurnAction;
+        return selectedPermanentsGetAction;
       case ENCHANT:
       case EQUIP:
         return attachAction;

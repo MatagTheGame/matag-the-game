@@ -9,7 +9,7 @@ import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.selection.MagicInstanceSelectorService;
+import com.matag.game.turn.action.selection.MagicInstancePermanentSelectorService;
 import com.matag.player.PlayerType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,7 +24,7 @@ import static com.matag.cards.ability.type.AbilityType.abilityType;
 @Component
 @AllArgsConstructor
 public class TargetCheckerService {
-  private final MagicInstanceSelectorService magicInstanceSelectorService;
+  private final MagicInstancePermanentSelectorService magicInstancePermanentSelectorService;
 
   public void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
     List<CardInstanceAbility> playedAbilities = playedAbilities(cardToCast, playedAbility);
@@ -59,7 +59,7 @@ public class TargetCheckerService {
           return true;
 
         } else {
-          CardInstanceSearch cards = magicInstanceSelectorService.select(gameStatus, cardToCast, target.getMagicInstanceSelector());
+          CardInstanceSearch cards = magicInstancePermanentSelectorService.select(gameStatus, cardToCast, target.getMagicInstanceSelector());
           if (cards.isNotEmpty()) {
             return true;
           }
@@ -92,7 +92,7 @@ public class TargetCheckerService {
       }
 
       int targetCardId = (int) targetId;
-      CardInstanceSearch cards = magicInstanceSelectorService.select(gameStatus, cardInstance, magicInstanceSelector);
+      CardInstanceSearch cards = magicInstancePermanentSelectorService.select(gameStatus, cardInstance, magicInstanceSelector);
       if (cards.withId(targetCardId).isEmpty()) {
         throw new MessageException("Selected targets were not valid.");
       }

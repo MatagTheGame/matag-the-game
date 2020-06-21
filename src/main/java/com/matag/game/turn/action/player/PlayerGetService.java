@@ -27,14 +27,9 @@ public class PlayerGetService {
   }
 
   private void thatPlayerGets(CardInstance cardInstance, GameStatus gameStatus, Player player, String parameter) {
-    int damage = abilityService.damageFromParameter(parameter);
-    dealDamageToPlayerService.dealDamageToPlayer(gameStatus, damage, player);
-
-    int life = abilityService.lifeFromParameter(parameter);
-    lifeService.add(player, life, gameStatus);
-
-    int cardsToDraw = abilityService.drawFromParameter(parameter);
-    drawXCardsService.drawXCards(player, cardsToDraw);
+    dealDamageToPlayerService.dealDamageToPlayer(gameStatus, abilityService.damageFromParameter(parameter), player);
+    lifeService.add(player, abilityService.lifeFromParameter(parameter), gameStatus);
+    drawXCardsService.drawXCards(player, abilityService.drawFromParameter(parameter));
     LOGGER.info("AbilityActionExecuted: card {}, parameter {}, player {}", cardInstance.getIdAndName(), parameter, player.getName());
   }
 }

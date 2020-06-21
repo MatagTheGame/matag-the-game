@@ -3,12 +3,10 @@ package integration.turn.action.selection;
 import com.matag.cards.Cards;
 import com.matag.cards.ability.selector.MagicInstanceSelector;
 import com.matag.cards.ability.selector.PowerToughnessConstraint;
-import com.matag.cards.ability.selector.SelectorType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.selection.MagicInstanceSelectorService;
+import com.matag.game.turn.action.selection.MagicInstancePermanentSelectorService;
 import integration.TestUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,10 +36,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = SelectionTestConfiguration.class)
-public class MagicInstanceSelectorServiceTest {
+public class MagicInstancePermanentSelectorServiceTest {
 
   @Autowired
-  private MagicInstanceSelectorService selectorService;
+  private MagicInstancePermanentSelectorService selectorService;
 
   @Autowired
   private CardInstanceFactory cardInstanceFactory;
@@ -683,51 +681,6 @@ public class MagicInstanceSelectorServiceTest {
 
     // Then
     assertThat(selection).containsExactly(anArtifact);
-  }
-
-  @Test
-  public void selectPlayer() {
-    // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-
-    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build();
-    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
-
-    // When
-    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
-
-    // Then
-    assertThat(selection).containsExactly(gameStatus.getPlayer1());
-  }
-
-  @Test
-  public void selectOpponent() {
-    // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-
-    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build();
-    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
-
-    // When
-    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
-
-    // Then
-    assertThat(selection).containsExactly(gameStatus.getPlayer2());
-  }
-
-  @Test
-  public void selectAllPlayers() {
-    // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-
-    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(PLAYER).build();
-    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
-
-    // When
-    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
-
-    // Then
-    assertThat(selection).containsExactlyInAnyOrder(gameStatus.getPlayer1(), gameStatus.getPlayer2());
   }
 
   @Test

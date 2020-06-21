@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class SelectedPermanentsGetXUntilEndOfTurnAction implements AbilityAction {
-  private final MagicInstanceSelectorService magicInstanceSelectorService;
+public class SelectedPermanentsGetAction implements AbilityAction {
+  private final MagicInstancePermanentSelectorService magicInstancePermanentSelectorService;
+  private final MagicInstancePlayerSelectorService magicInstancePlayerSelectorService;
   private final PermanentGetService permanentGetService;
   private final PlayerGetService playerGetService;
 
@@ -22,11 +23,11 @@ public class SelectedPermanentsGetXUntilEndOfTurnAction implements AbilityAction
   public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
     MagicInstanceSelector magicInstanceSelector = ability.getMagicInstanceSelector();
     if (magicInstanceSelector.getSelectorType() == SelectorType.PLAYER) {
-      magicInstanceSelectorService.selectPlayers(gameStatus, cardInstance, magicInstanceSelector)
+      magicInstancePlayerSelectorService.selectPlayers(gameStatus, cardInstance, magicInstanceSelector)
         .forEach(player -> playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getParameters(), player));
 
     } else {
-      magicInstanceSelectorService.select(gameStatus, cardInstance, magicInstanceSelector).getCards()
+      magicInstancePermanentSelectorService.select(gameStatus, cardInstance, magicInstanceSelector).getCards()
         .forEach(card -> permanentGetService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), card));
     }
   }
