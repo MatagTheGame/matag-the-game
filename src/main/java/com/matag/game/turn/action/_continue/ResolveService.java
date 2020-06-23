@@ -43,7 +43,7 @@ public class ResolveService {
 
       } else {
         String controllerName = stackItemToResolve.getController();
-        String otherPlayerName = gameStatus.getOtherPlayer(gameStatus.getPlayerByName(controllerName)).getName();
+        String otherPlayerName = gameStatus.getOtherPlayer(controllerName).getName();
 
         stackItemToResolve.getTriggeredAbilities().stream()
           .filter(triggeredAbility -> !triggeredAbility.getTrigger().getType().equals(TriggerType.TRIGGERED_ABILITY))

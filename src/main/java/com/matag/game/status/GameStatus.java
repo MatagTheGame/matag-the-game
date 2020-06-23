@@ -48,7 +48,11 @@ public class GameStatus {
   }
 
   public Player getOtherPlayer(Player player) {
-    if (player1.getName().equals(player.getName())) {
+    return getOtherPlayer(player.getName());
+  }
+
+  public Player getOtherPlayer(String playerName) {
+    if (player1.getName().equals(playerName)) {
       return player2;
     } else {
       return player1;

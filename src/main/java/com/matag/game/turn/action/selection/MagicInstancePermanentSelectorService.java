@@ -41,9 +41,9 @@ public class MagicInstancePermanentSelectorService {
     }
 
     if (magicInstanceSelector.getControllerType() == PlayerType.PLAYER) {
-      cards = cards.controlledBy(gameStatus.getCurrentPlayer().getName());
+      cards = cards.controlledBy(getControllerOrOwner(cardInstance));
     } else if (magicInstanceSelector.getControllerType() == PlayerType.OPPONENT) {
-      cards = cards.controlledBy(gameStatus.getNonCurrentPlayer().getName());
+      cards = cards.controlledBy(gameStatus.getOtherPlayer(getControllerOrOwner(cardInstance)).getName());
     }
 
     if (magicInstanceSelector.getWithAbilityType() != null) {
@@ -109,5 +109,9 @@ public class MagicInstancePermanentSelectorService {
     }
 
     return cards;
+  }
+
+  private String getControllerOrOwner(CardInstance cardInstance) {
+    return cardInstance.getController() != null ? cardInstance.getController() : cardInstance.getOwner();
   }
 }

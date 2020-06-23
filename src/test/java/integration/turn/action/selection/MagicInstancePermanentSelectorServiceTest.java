@@ -192,10 +192,62 @@ public class MagicInstancePermanentSelectorServiceTest {
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(opponentCard);
 
     // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
+    List<CardInstance> selection = selectorService.select(gameStatus, playerCard, magicInstanceSelector).getCards();
 
     // Then
     assertThat(selection).contains(playerCard);
+  }
+
+  @Test
+  public void selectionOpponentCreature() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
+      .selectorType(PERMANENT)
+      .ofType(singletonList(CREATURE))
+      .controllerType(OPPONENT)
+      .build();
+
+    CardInstance playerCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    playerCreature.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(playerCreature);
+
+    CardInstance opponentCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Grazing Whiptail"), "opponent-name");
+    opponentCreature.setController("opponent-name");
+    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(opponentCreature);
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus, playerCreature, magicInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(opponentCreature);
+  }
+
+  @Test
+  public void selectionPlayerCreatureOnOpponentTurnUsingOwnershipWhenControllerIsMissing() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentTurnPlayer("opponent-name");
+
+    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
+      .selectorType(PERMANENT)
+      .ofType(singletonList(CREATURE))
+      .controllerType(OPPONENT)
+      .build();
+
+    CardInstance playerCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Battlefield Promotion"), "player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(playerCreature);
+
+    CardInstance opponentCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Grazing Whiptail"), "opponent-name");
+    opponentCreature.setController("opponent-name");
+    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(opponentCreature);
+
+    // When
+    List<CardInstance> selection = selectorService.select(gameStatus, playerCreature, magicInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(opponentCreature);
   }
 
   @Test
@@ -246,32 +298,6 @@ public class MagicInstancePermanentSelectorServiceTest {
 
     // Then
     assertThat(selection).containsExactly(multicolorCreature);
-  }
-
-  @Test
-  public void selectionOpponentCreatureCorrect() {
-    // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-
-    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder()
-      .selectorType(PERMANENT)
-      .ofType(singletonList(CREATURE))
-      .controllerType(OPPONENT)
-      .build();
-
-    CardInstance playerCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
-    playerCreature.setController("player-name");
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(playerCreature);
-
-    CardInstance opponentCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Grazing Whiptail"), "opponent-name");
-    opponentCreature.setController("opponent-name");
-    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(opponentCreature);
-
-    // When
-    List<CardInstance> selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
-
-    // Then
-    assertThat(selection).containsExactly(opponentCreature);
   }
 
   @Test
