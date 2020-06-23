@@ -22,7 +22,7 @@ export default class CostUtils {
   }
 
   static isCostFulfilled(costToFulfill, currentTappedMana) {
-    const manaPaid = _.flatten(_.values(currentTappedMana))
+    const manaPaid = CostUtils.getPaidMana(currentTappedMana)
     for (const cost of costToFulfill) {
       let removed = false
 
@@ -80,11 +80,27 @@ export default class CostUtils {
   }
 
   static clearMana(state) {
-    for (let cardId in this.getMana(state)) {
+    for (let cardId in CostUtils.getMana(state)) {
       const cardInstance = CardSearch.cards(state.player.battlefield).withId(cardId)
       if (!CardUtils.isFrontendTapped(cardInstance)) {
         CostUtils.removeMana(state, cardId)
       }
     }
+  }
+
+  static getDisplayMana(currentTappedMana) {
+    let manaPaid = CostUtils.getPaidMana(currentTappedMana)
+    const colorlessCost = CostUtils.colorlessCost(manaPaid)
+
+    manaPaid = CostUtils.costWithoutColorless(manaPaid)
+    if (colorlessCost > 0) {
+      manaPaid.unshift(colorlessCost.toString())
+    }
+
+    return manaPaid
+  }
+
+  static getPaidMana(currentTappedMana) {
+    return _.flatten(_.values(currentTappedMana))
   }
 }

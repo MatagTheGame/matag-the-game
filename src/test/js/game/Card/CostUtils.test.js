@@ -36,4 +36,15 @@ describe('isCostFulfilled', () => {
     // Then
     expect(fulfilled).toBe(false)
   })
+
+  test('getDisplayMana', () => {
+    // Given
+    const mana = ['WHITE', 'COLORLESS', 'COLORLESS']
+
+    // When
+    const displayMana = CostUtils.getDisplayMana(mana)
+
+    // Then
+    expect(displayMana).toEqual(['2', 'WHITE'])
+  })
 })

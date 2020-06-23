@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
-import _ from 'lodash'
 import PropTypes from 'prop-types'
+import CostUtils from 'game/Card/CostUtils'
 import './playerActiveMana.scss'
 
 class PlayerActiveMana extends Component {
@@ -10,7 +10,7 @@ class PlayerActiveMana extends Component {
     return (
       <div id='player-active-mana'>
         <ul>
-          { _.flatten(_.values(this.props.mana)).sort().map((mana, index) => <li key={index}><img alt={mana} title={mana} src={`/img/symbols/${mana}.png`} /></li>) }
+          { CostUtils.getDisplayMana(this.props.mana).map((mana, index) => <li key={index}><img alt={mana} title={mana} src={`/img/symbols/${mana}.png`} /></li>) }
         </ul>
       </div>
     )

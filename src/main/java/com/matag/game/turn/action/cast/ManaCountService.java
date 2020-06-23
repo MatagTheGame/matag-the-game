@@ -30,7 +30,7 @@ public class ManaCountService {
         } else if (cardInstanceToTap.getModifiers().isTapped()) {
           throw new MessageException(cardInstanceToTap.getIdAndName() + " is already tapped.");
 
-        } else if (!cardInstanceToTap.canProduceMana(Color.valueOf(requestedMana))) {
+        } else if (!requestedMana.equals("COLORLESS") && !cardInstanceToTap.canProduceMana(Color.valueOf(requestedMana))) {
           throw new MessageException(cardInstanceToTap.getIdAndName() + " cannot produce " + requestedMana);
 
         } else {

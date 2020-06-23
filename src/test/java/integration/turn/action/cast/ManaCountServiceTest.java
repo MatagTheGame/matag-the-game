@@ -152,6 +152,23 @@ public class ManaCountServiceTest {
   }
 
   @Test
+  public void countManaPaidColorlessMana() {
+    // Given
+    Map<Integer, List<String>> mana = Map.of(
+      1, List.of("WHITE"),
+      2, List.of("COLORLESS")
+    );
+    GameStatus gameStatus = testUtils.testGameStatus();
+    Player player = gameStatus.getPlayer1();
+
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
+    player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 2, cards.get("Sunscorched Desert"), player.getName(), player.getName()));
+
+    // When
+    manaCountService.verifyManaPaid(mana, player);
+  }
+
+  @Test
   public void countManaPaidTappingCreatureWhichGeneratesTwoMana() {
     // Given
     Map<Integer, List<String>> mana = Map.of(
