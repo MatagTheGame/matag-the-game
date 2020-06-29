@@ -48,12 +48,20 @@ public class BasicCombatTest extends AbstractApplicationTest {
     // Then attacker is moved backward
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Headwater Sentries")).isNotTapped();
 
-    // When declare illegal attacker
+    // When declare illegal attacker - already tapped
     int nestRobberId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nest Robber")).getCardIdNumeric();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nest Robber")).click();
 
     // Then a message is displayed
-    browser.getMessageHelper().hasMessage("\"" + nestRobberId + " - Nest Robber\" is already tapped and cannot attack.");
+    browser.getMessageHelper().hasMessage("\"" + nestRobberId + " - Nest Robber\" is tapped and cannot attack.");
+    browser.getMessageHelper().close();
+
+    // When declare illegal attacker - defender
+    int guardiansOfMeletisId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Guardians of Meletis")).getCardIdNumeric();
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Guardians of Meletis")).click();
+
+    // Then a message is displayed
+    browser.getMessageHelper().hasMessage("\"" + guardiansOfMeletisId + " - Guardians of Meletis\" has defender and cannot attack.");
     browser.getMessageHelper().close();
 
     // The four attackers are declared as attacker and continue
@@ -149,6 +157,10 @@ public class BasicCombatTest extends AbstractApplicationTest {
 
       // Cannot attack as tapped
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Nest Robber"));
+      gameStatus.getCurrentPlayer().getBattlefield().getCards().get(4).getModifiers().setTapped(true);
+
+      // Cannot attack as defender
+      addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Guardians of Meletis"));
       gameStatus.getCurrentPlayer().getBattlefield().getCards().get(4).getModifiers().setTapped(true);
     }
   }

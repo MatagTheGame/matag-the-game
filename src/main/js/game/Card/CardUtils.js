@@ -172,7 +172,11 @@ export default class CardUtils {
     }
 
     if (CardUtils.isTapped(attackingCard)) {
-      return `${attackingCardName} is already tapped and cannot attack.`
+      return `${attackingCardName} is tapped and cannot attack.`
+    }
+
+    if (CardUtils.hasAbility(attackingCard, 'DEFENDER')) {
+      return `${attackingCardName} has defender and cannot attack.`
     }
 
     return true

@@ -176,11 +176,15 @@ public class CardInstance {
     }
 
     if (modifiers.isTapped()) {
-      throw new MessageException(getIdAndName() + " is already tapped and cannot attack.");
+      throw new MessageException(getIdAndName() + " is tapped and cannot attack.");
     }
 
     if (isSummoningSickness()) {
       throw new MessageException(getIdAndName() + " has summoning sickness and cannot attack.");
+    }
+
+    if (hasAbilityType(AbilityType.DEFENDER)) {
+      throw new MessageException(getIdAndName() + " has defender and cannot attack.");
     }
   }
 
