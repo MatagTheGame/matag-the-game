@@ -18,7 +18,7 @@ import java.util.Map;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = EnterTestConfiguration.class)
@@ -159,7 +159,7 @@ public class EnterCardIntoBattlefieldServiceTest {
     enterCardIntoBattlefieldService.enter(gameStatus, card);
 
     // Then
-    verifyZeroInteractions(drawXCardsService);
+    verifyNoMoreInteractions(drawXCardsService);
   }
 
   @Test

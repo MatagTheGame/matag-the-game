@@ -10,6 +10,7 @@ import com.matag.game.turn.action.combat.DeclareBlockerService;
 import com.matag.game.turn.action.damage.DealDamageToCreatureService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
 import com.matag.game.turn.action.player.LifeService;
+import com.matag.game.turn.action.trigger.WhenTriggerService;
 import integration.TestUtils;
 import org.junit.After;
 import org.junit.Test;
@@ -22,6 +23,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 import java.util.Map;
 
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ATTACK;
 import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.FirstStrikePhase.FS;
@@ -60,6 +62,9 @@ public class CombatServiceTest {
   @Autowired
   private LifeService lifeService;
 
+  @Autowired
+  private WhenTriggerService whenTriggerService;
+
   @After
   public void cleanup() {
     Mockito.reset(lifeService, dealDamageToCreatureService, dealDamageToPlayerService);
@@ -90,7 +95,6 @@ public class CombatServiceTest {
   public void lifelinkCreatureGainsLifeWhenDealingDamage() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase(DA);
     CardInstance attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
     CardInstance attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1);
@@ -114,7 +118,6 @@ public class CombatServiceTest {
   public void trampleCreatureDealsRemainingDamageToPlayer() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase(DA);
     CardInstance attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Charging Monstrosaur"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
 
@@ -138,7 +141,6 @@ public class CombatServiceTest {
   public void deathtouchDamageToCreature() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase(DA);
     CardInstance attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
 
@@ -161,7 +163,6 @@ public class CombatServiceTest {
   public void lifelinkNotHappeningIfBlockedCreatureIsReturnedToHandAndNoDamageIsDealt() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase(DA);
     CardInstance attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
 
@@ -186,7 +187,6 @@ public class CombatServiceTest {
   public void onlyFirstStrikeAndDoubleStrikeCreaturesDealDamageDuringFirstStrike() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase(DA);
     CardInstance attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Fencing Ace"), PLAYER, PLAYER); // 1/1 double strike
     CardInstance attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Youthful Knight"), PLAYER, PLAYER); // 2/1 first strike
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1);
@@ -213,7 +213,6 @@ public class CombatServiceTest {
   public void firstStrikeCreaturesDoNotDealDamageDuringCombat() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase(DA);
     CardInstance attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Fencing Ace"), PLAYER, PLAYER);
     CardInstance attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Youthful Knight"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1);
@@ -234,5 +233,21 @@ public class CombatServiceTest {
     verify(dealDamageToCreatureService).dealDamageToCreature(gameStatus, attackingCreature1, 2, false, blockingCreature);
     verifyNoMoreInteractions(dealDamageToCreatureService);
     verifyNoInteractions(dealDamageToPlayerService);
+  }
+
+  @Test
+  public void declareAttackerTrigger() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase(DA);
+    CardInstance attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Brazen Wolves"), PLAYER, PLAYER);
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
+
+    // When
+    gameStatus.getTurn().setCurrentPhase(DA);
+    declareAttackerService.declareAttackers(gameStatus, List.of(1));
+
+    // Then
+    whenTriggerService.whenTriggered(gameStatus, attackingCreature, WHEN_ATTACK);
   }
 }

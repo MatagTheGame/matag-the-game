@@ -36,7 +36,7 @@ public class ThatTargetsGetAction implements AbilityAction {
         } else {
           int targetCardId = (int) targetId;
 
-          Optional<CardInstance> targetOptional = gameStatus.getAllBattlefieldCards().withId(targetCardId);
+          Optional<CardInstance> targetOptional = gameStatus.getAllBattlefieldCardsSearch().withId(targetCardId);
 
           if (targetOptional.isPresent()) {
             CardInstance target = targetOptional.get();

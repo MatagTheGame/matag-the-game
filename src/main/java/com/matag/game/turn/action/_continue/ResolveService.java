@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static java.util.Arrays.asList;
-
 @Component
 @AllArgsConstructor
 public class ResolveService {
@@ -68,7 +66,7 @@ public class ResolveService {
           }
         }
 
-        if (stackItemToResolve.getAcknowledgedBy().containsAll(asList(controllerName, otherPlayerName))) {
+        if (stackItemToResolve.acknowledged()) {
           gameStatus.getStack().remove();
           resolveTriggeredAbility(gameStatus, stackItemToResolve);
         }

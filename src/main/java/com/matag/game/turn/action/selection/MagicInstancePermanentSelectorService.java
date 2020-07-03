@@ -14,13 +14,13 @@ public class MagicInstancePermanentSelectorService {
   public CardInstanceSearch select(GameStatus gameStatus, CardInstance cardInstance, MagicInstanceSelector magicInstanceSelector) {
     CardInstanceSearch cards;
     if (magicInstanceSelector.getSelectorType().equals(SelectorType.PERMANENT)) {
-      cards = gameStatus.getAllBattlefieldCards();
+      cards = gameStatus.getAllBattlefieldCardsSearch();
 
     } else if (magicInstanceSelector.getSelectorType().equals(SelectorType.SPELL)) {
-      cards = new CardInstanceSearch(gameStatus.getStack().getItems());
+      cards = gameStatus.getStack().search();
 
     } else if (magicInstanceSelector.getSelectorType().equals(SelectorType.ANY)) {
-      cards = gameStatus.getAllBattlefieldCards();
+      cards = gameStatus.getAllBattlefieldCardsSearch();
 
     } else {
       throw new RuntimeException("Missing selectorType.");

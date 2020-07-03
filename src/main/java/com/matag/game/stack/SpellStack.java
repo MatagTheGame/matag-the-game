@@ -1,6 +1,7 @@
 package com.matag.game.stack;
 
 import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceSearch;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -33,5 +34,9 @@ public class SpellStack {
 
   public void setItems(LinkedList<CardInstance> items) {
     this.items = items;
+  }
+
+  public CardInstanceSearch search() {
+    return new CardInstanceSearch(items);
   }
 }

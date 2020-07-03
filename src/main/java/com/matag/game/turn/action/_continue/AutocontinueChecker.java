@@ -45,6 +45,10 @@ public class AutocontinueChecker {
       }
     }
 
+    if (gameStatus.getStack().search().notAcknowledged().isNotEmpty()) {
+      return true;
+    }
+
 
     // TODO Autocontinue main phases in future
 

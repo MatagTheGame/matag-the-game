@@ -200,6 +200,14 @@ public class CardInstance {
     acknowledgedBy.add(playerName);
   }
 
+  public boolean acknowledged() {
+    return acknowledgedBy.size() == 2;
+  }
+
+  public boolean notAcknowledged() {
+    return !acknowledged();
+  }
+
   public List<CardInstanceAbility> getFixedAbilities() {
     List<CardInstanceAbility> abilities = new ArrayList<>();
     abilities.addAll(getCardInstanceAbilities(card));

@@ -44,7 +44,7 @@ public class AbilitiesFromOtherPermanentsService {
 
   private List<String> getParametersFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
     List<String> parameters = new ArrayList<>();
-    List<CardInstance> cards = gameStatus.getAllBattlefieldCards().withFixedAbility(SELECTED_PERMANENTS_GET).getCards();
+    List<CardInstance> cards = gameStatus.getAllBattlefieldCardsSearch().withFixedAbility(SELECTED_PERMANENTS_GET).getCards();
 
     for (CardInstance card : cards) {
       for (CardInstanceAbility ability : card.getFixedAbilitiesByType(SELECTED_PERMANENTS_GET)) {

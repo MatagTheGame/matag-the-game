@@ -1,6 +1,7 @@
 package integration.turn.action._continue;
 
 import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.UpkeepPhase.UP;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -33,7 +36,7 @@ public class AutocontinueCheckerTest {
   public void canPerformAnyActionReturnsFalseIfUPAndNoCardsInHandOrBattlefield() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase("UP");
+    gameStatus.getTurn().setCurrentPhase(UP);
     gameStatus.getPlayer1().getHand().getCards().clear();
 
     // When
@@ -47,7 +50,7 @@ public class AutocontinueCheckerTest {
   public void canPerformAnyActionReturnsTrueIfUPAndAffordableInstantInHand() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase("UP");
+    gameStatus.getTurn().setCurrentPhase(UP);
     gameStatus.getPlayer1().getHand().getCards().clear();
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 61, cards.get("Mountain"), "player-name", "player-name"));
     gameStatus.getPlayer1().getHand().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Infuriate"), "player-name"));
@@ -63,7 +66,7 @@ public class AutocontinueCheckerTest {
   public void canPerformAnyActionReturnsFalseIfUPAndNotAffordableInstantInHand() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase("UP");
+    gameStatus.getTurn().setCurrentPhase(UP);
     gameStatus.getPlayer1().getHand().getCards().clear();
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 61, cards.get("Mountain"), "player-name", "player-name"));
     gameStatus.getPlayer1().getBattlefield().getCards().get(0).getModifiers().setTapped(true);
@@ -80,7 +83,7 @@ public class AutocontinueCheckerTest {
   public void canPerformAnyActionReturnsFalseIfUPAndCardWithTriggeredAbility() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase("UP");
+    gameStatus.getTurn().setCurrentPhase(UP);
     gameStatus.getPlayer1().getHand().getCards().clear();
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Exclusion Mage"), "player-name"));
 
@@ -95,7 +98,7 @@ public class AutocontinueCheckerTest {
   public void canPerformAnyActionReturnsFalseIfUPAndCardWithNotAffordableActivatedAbility() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase("UP");
+    gameStatus.getTurn().setCurrentPhase(UP);
     gameStatus.getPlayer1().getHand().getCards().clear();
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Locthwain Gargoyle"), "player-name"));
 
@@ -110,7 +113,7 @@ public class AutocontinueCheckerTest {
   public void canPerformAnyActionReturnsTrueIfUPAndCardAffordableActivatedAbility() {
     // Given
     GameStatus gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase("UP");
+    gameStatus.getTurn().setCurrentPhase(UP);
     gameStatus.getPlayer1().getHand().getCards().clear();
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 62, cards.get("Locthwain Gargoyle"), "player-name"));
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 63, cards.get("Plains"), "player-name"));
@@ -123,5 +126,42 @@ public class AutocontinueCheckerTest {
 
     // Then
     assertThat(result).isTrue();
+  }
+
+  @Test
+  public void canPerformAnyActionReturnsTrueEvenIfDAButSomethingIsOnTheStackUnacknowledged() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase(DA);
+    gameStatus.getPlayer1().getHand().getCards().clear();
+    CardInstance brazenWolves = cardInstanceFactory.create(gameStatus, 62, cards.get("Brazen Wolves"), "player-name");
+
+    brazenWolves.acknowledgedBy("player1");
+    gameStatus.getStack().add(brazenWolves);
+
+    // When
+    boolean result = autocontinueChecker.canPerformAnyAction(gameStatus);
+
+    // Then
+    assertThat(result).isTrue();
+  }
+
+  @Test
+  public void canPerformAnyActionReturnsFalseIfDAAndSomethingIsOnTheStackAcknowledgedByBothPlayers() {
+    // Given
+    GameStatus gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase(DA);
+    gameStatus.getPlayer1().getHand().getCards().clear();
+    CardInstance brazenWolves = cardInstanceFactory.create(gameStatus, 62, cards.get("Brazen Wolves"), "player-name");
+
+    brazenWolves.acknowledgedBy("player1");
+    brazenWolves.acknowledgedBy("player2");
+    gameStatus.getStack().add(brazenWolves);
+
+    // When
+    boolean result = autocontinueChecker.canPerformAnyAction(gameStatus);
+
+    // Then
+    assertThat(result).isFalse();
   }
 }

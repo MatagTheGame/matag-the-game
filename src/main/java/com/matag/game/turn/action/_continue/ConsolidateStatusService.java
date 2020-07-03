@@ -22,7 +22,7 @@ public class ConsolidateStatusService {
     boolean repeat;
     do {
       repeat = false;
-      for (CardInstance card : gameStatus.getAllBattlefieldCards().getCards()) {
+      for (CardInstance card : gameStatus.getAllBattlefieldCards()) {
         if (isToBeDestroyed(card)) {
           boolean destroyed = destroyPermanentService.destroy(gameStatus, card.getId());
           if (destroyed) {

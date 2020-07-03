@@ -9,6 +9,7 @@ import lombok.Getter;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Getter
@@ -109,8 +110,12 @@ public class GameStatus {
     return null;
   }
 
-  public CardInstanceSearch getAllBattlefieldCards() {
+  public CardInstanceSearch getAllBattlefieldCardsSearch() {
     return new CardInstanceSearch(player1.getBattlefield().getCards())
       .concat(player2.getBattlefield().getCards());
+  }
+
+  public List<CardInstance> getAllBattlefieldCards() {
+    return getAllBattlefieldCardsSearch().getCards();
   }
 }

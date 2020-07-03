@@ -26,7 +26,7 @@ public class AttachmentsService {
   private final CardInstanceAbilityFactory cardInstanceAbilityFactory;
 
   public List<CardInstance> getAttachedCards(GameStatus gameStatus, CardInstance cardInstance) {
-    return gameStatus.getAllBattlefieldCards().attachedToId(cardInstance.getId()).getCards();
+    return gameStatus.getAllBattlefieldCardsSearch().attachedToId(cardInstance.getId()).getCards();
   }
 
   public int getAttachmentsPower(GameStatus gameStatus, CardInstance cardInstance) {

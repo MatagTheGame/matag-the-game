@@ -179,6 +179,10 @@ public class CardInstanceSearch {
       .filter((cardInstance -> cardInstance.getModifiers().getAttachedToId() == attachedToId)));
   }
 
+  public CardInstanceSearch notAcknowledged() {
+    return new CardInstanceSearch(this.cards.filter((CardInstance::notAcknowledged)));
+  }
+
   public boolean canAnyCreatureAttack() {
     return ofType(Type.CREATURE)
       .untapped()

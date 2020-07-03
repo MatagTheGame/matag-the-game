@@ -21,7 +21,7 @@ public class WhenTriggerService {
   private final MagicInstancePermanentSelectorService magicInstancePermanentSelectorService;
 
   public void whenTriggered(GameStatus gameStatus, CardInstance cardInstance, TriggerSubtype triggerSubtype) {
-    List<CardInstance> cardsWithTriggerAbility = gameStatus.getAllBattlefieldCards().withTriggerSubtype(triggerSubtype).getCards();
+    List<CardInstance> cardsWithTriggerAbility = gameStatus.getAllBattlefieldCardsSearch().withTriggerSubtype(triggerSubtype).getCards();
 
     for (CardInstance cardWithTriggerAbility : cardsWithTriggerAbility) {
       for (CardInstanceAbility ability : cardWithTriggerAbility.getAbilitiesByTriggerSubType(triggerSubtype)) {

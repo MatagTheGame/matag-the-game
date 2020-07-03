@@ -4,6 +4,7 @@ import com.matag.game.turn.action._continue.ContinueTurnService;
 import com.matag.game.turn.action.damage.DealDamageToCreatureService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
 import com.matag.game.turn.action.player.LifeService;
+import com.matag.game.turn.action.trigger.WhenTriggerService;
 import integration.TestUtilsConfiguration;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.*;
@@ -35,5 +36,11 @@ public class CombatTestConfiguration {
   @Primary
   public ContinueTurnService continueTurnService() {
     return Mockito.mock(ContinueTurnService.class);
+  }
+
+  @Bean
+  @Primary
+  public WhenTriggerService whenTriggerService() {
+    return Mockito.mock(WhenTriggerService.class);
   }
 }
