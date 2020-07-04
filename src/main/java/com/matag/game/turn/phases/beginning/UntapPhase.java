@@ -21,7 +21,7 @@ public class UntapPhase implements Phase {
   private final UpkeepPhase upkeepPhase;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     List<CardInstance> cards = gameStatus.getCurrentPlayer().getBattlefield().getCards();
 
     for (CardInstance cardInstance : new CardInstanceSearch(cards).tapped().getCards()) {
@@ -38,7 +38,7 @@ public class UntapPhase implements Phase {
     gameStatus.getTurn().setCurrentPhase(UpkeepPhase.UP);
 
     if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-      upkeepPhase.apply(gameStatus);
+      upkeepPhase.next(gameStatus);
     }
   }
 }

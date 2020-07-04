@@ -14,9 +14,9 @@ public class Main2Phase implements Phase {
   private final EndTurnPhase endTurnPhase;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     gameStatus.getTurn().setCurrentPhase(EndTurnPhase.ET);
     gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-    endTurnPhase.apply(gameStatus);
+    endTurnPhase.next(gameStatus);
   }
 }

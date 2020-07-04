@@ -18,7 +18,7 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.status.GameStatusFactory;
 import com.matag.game.status.GameStatusRepository;
 import com.matag.game.status.GameStatusUpdaterService;
-import com.matag.game.turn.action._continue.ContinueTurnService;
+import com.matag.game.turn.action._continue.ContinueService;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,9 +45,9 @@ public class InitController {
   private final GameStatusRepository gameStatusRepository;
   private final DeckRetrieverService deckRetrieverService;
   private final DeckFactory deckFactory;
-  private final ContinueTurnService continueTurnService;
+  private final ContinueService continueService;
 
-  public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerInfoRetriever playerInfoRetriever, PlayerFactory playerFactory, PlayerService playerService, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService, DeckFactory deckFactory, ContinueTurnService continueTurnService) {
+  public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerInfoRetriever playerInfoRetriever, PlayerFactory playerFactory, PlayerService playerService, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService, DeckFactory deckFactory, ContinueService continueService) {
     this.securityHelper = securityHelper;
     this.eventSender = eventSender;
     this.gameStatusFactory = gameStatusFactory;
@@ -59,7 +59,7 @@ public class InitController {
     this.deckRetrieverService = deckRetrieverService;
     this.initTestService = initTestService;
     this.deckFactory = deckFactory;
-    this.continueTurnService = continueTurnService;
+    this.continueService = continueService;
   }
 
   @MessageMapping("/game/init")
@@ -96,7 +96,7 @@ public class InitController {
         eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(gameStatus.getPlayer2(), gameStatus.getPlayer1())));
 
         // FIXME no implemented card yet can be played at the first game upkeep... so let's just continue.
-        continueTurnService.continueTurn(gameStatus);
+        continueService.next(gameStatus);
 
         addDelayBeforeSendingUpdateGameStatusEvent();
         gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);

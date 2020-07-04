@@ -16,8 +16,8 @@ public class Main1Phase implements Phase {
   private final BeginCombatPhase beginCombatPhase;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     gameStatus.getTurn().setCurrentPhase(BC);
-    beginCombatPhase.apply(gameStatus);
+    beginCombatPhase.next(gameStatus);
   }
 }

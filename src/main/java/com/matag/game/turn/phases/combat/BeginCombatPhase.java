@@ -18,13 +18,13 @@ public class BeginCombatPhase implements Phase {
   private final AutocontinueChecker autocontinueChecker;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
       if (new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards()).canAnyCreatureAttack()) {
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
         if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-          apply(gameStatus);
+          next(gameStatus);
         }
 
       } else {

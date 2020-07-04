@@ -17,10 +17,10 @@ public class CleanupPhase implements Phase {
   private final UntapPhase untapPhase;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     cleanup(gameStatus);
     moveToNextPlayer(gameStatus);
-    untapPhase.apply(gameStatus);
+    untapPhase.next(gameStatus);
   }
 
   private void cleanup(GameStatus gameStatus) {

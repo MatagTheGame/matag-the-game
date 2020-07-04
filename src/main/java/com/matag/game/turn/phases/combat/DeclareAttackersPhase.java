@@ -17,12 +17,12 @@ public class DeclareAttackersPhase implements Phase {
   private final AfterDeclareBlockersPhase afterDeclareBlockersPhase;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
       if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-        apply(gameStatus);
+        next(gameStatus);
       }
 
     } else {
@@ -36,7 +36,7 @@ public class DeclareAttackersPhase implements Phase {
           gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
 
           if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-            afterDeclareBlockersPhase.apply(gameStatus);
+            afterDeclareBlockersPhase.next(gameStatus);
           }
         }
       } else {

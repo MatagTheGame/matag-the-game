@@ -10,7 +10,7 @@ public class EndOfCombatPhase implements Phase {
   public static final String EC = "EC";
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     gameStatus.getTurn().setCurrentPhase(Main2Phase.M2);
     gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
 

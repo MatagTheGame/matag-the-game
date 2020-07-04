@@ -15,18 +15,18 @@ public class AfterFirstStrikePhase implements Phase {
   private final CombatDamagePhase combatDamagePhase;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
       if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-        apply(gameStatus);
+        next(gameStatus);
       }
 
     } else {
       gameStatus.getTurn().setCurrentPhase(CombatDamagePhase.CD);
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-      combatDamagePhase.apply(gameStatus);
+      combatDamagePhase.next(gameStatus);
     }
   }
 }

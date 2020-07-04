@@ -4,7 +4,6 @@ import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.phases.Phase;
-import com.matag.game.turn.phases.ending.CleanupPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,7 @@ public class EndTurnPhase implements Phase {
   private final AutocontinueChecker autocontinueChecker;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     if (gameStatus.getCurrentPlayer().getHand().size() > 7) {
       if (gameStatus.getTurn().getTriggeredNonStackAction() == null) {
         gameStatus.getTurn().setTriggeredNonStackAction("DISCARD_A_CARD");
@@ -32,13 +31,13 @@ public class EndTurnPhase implements Phase {
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
         if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-          apply(gameStatus);
+          next(gameStatus);
         }
 
       } else {
         gameStatus.getTurn().setCurrentPhase(CL);
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-        cleanupPhase.apply(gameStatus);
+        cleanupPhase.next(gameStatus);
       }
     }
   }

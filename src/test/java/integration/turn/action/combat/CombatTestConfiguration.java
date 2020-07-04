@@ -1,6 +1,6 @@
 package integration.turn.action.combat;
 
-import com.matag.game.turn.action._continue.ContinueTurnService;
+import com.matag.game.turn.action._continue.ContinueService;
 import com.matag.game.turn.action.damage.DealDamageToCreatureService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
 import com.matag.game.turn.action.player.LifeService;
@@ -34,8 +34,8 @@ public class CombatTestConfiguration {
 
   @Bean
   @Primary
-  public ContinueTurnService continueTurnService() {
-    return Mockito.mock(ContinueTurnService.class);
+  public ContinueService continueTurnService() {
+    return Mockito.mock(ContinueService.class);
   }
 
   @Bean

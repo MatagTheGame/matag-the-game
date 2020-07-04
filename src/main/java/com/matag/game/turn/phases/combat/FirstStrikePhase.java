@@ -6,8 +6,6 @@ import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
 import com.matag.game.turn.action.combat.CombatService;
 import com.matag.game.turn.phases.Phase;
-import com.matag.game.turn.phases.combat.AfterFirstStrikePhase;
-import com.matag.game.turn.phases.combat.CombatDamagePhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +27,7 @@ public class FirstStrikePhase implements Phase {
   private final CombatDamagePhase combatDamagePhase;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
 
     boolean executePhase = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
@@ -43,14 +41,14 @@ public class FirstStrikePhase implements Phase {
       if (!gameStatus.getTurn().isEnded()) {
         gameStatus.getTurn().setCurrentPhase(AF);
         if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-          afterFirstStrikePhase.apply(gameStatus);
+          afterFirstStrikePhase.next(gameStatus);
         }
       }
 
     } else {
       if (!gameStatus.getTurn().isEnded()) {
         gameStatus.getTurn().setCurrentPhase(CombatDamagePhase.CD);
-        combatDamagePhase.apply(gameStatus);
+        combatDamagePhase.next(gameStatus);
       }
     }
   }

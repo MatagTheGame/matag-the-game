@@ -17,13 +17,13 @@ public class CombatDamagePhase implements Phase {
   private final EndOfCombatPhase endOfCombatPhase;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     combatService.dealCombatDamage(gameStatus);
 
     if (!gameStatus.getTurn().isEnded()) {
       gameStatus.getTurn().setCurrentPhase(EC);
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-      endOfCombatPhase.apply(gameStatus);
+      endOfCombatPhase.next(gameStatus);
     }
   }
 }

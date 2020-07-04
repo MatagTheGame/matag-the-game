@@ -1,7 +1,7 @@
 package com.matag.game.turn;
 
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action._continue.ContinueTurnService;
+import com.matag.game.turn.action._continue.ContinueService;
 import com.matag.game.turn.action._continue.ResolveService;
 import com.matag.game.turn.action.cast.CastService;
 import com.matag.game.turn.action.cast.PlayLandService;
@@ -16,7 +16,7 @@ import java.util.Map;
 @Component
 @AllArgsConstructor
 public class TurnService {
-  private final ContinueTurnService continueTurnService;
+  private final ContinueService continueService;
   private final PlayLandService playLandService;
   private final CastService castService;
   private final ResolveService resolveService;
@@ -24,7 +24,7 @@ public class TurnService {
   private final DeclareBlockerService declareBlockerService;
 
   void continueTurn(GameStatus gameStatus) {
-    continueTurnService.continueTurn(gameStatus);
+    continueService.next(gameStatus);
   }
 
   void playLand(GameStatus gameStatus, int cardId) {

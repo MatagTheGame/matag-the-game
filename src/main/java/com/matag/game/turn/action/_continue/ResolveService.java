@@ -25,7 +25,7 @@ import java.util.Objects;
 public class ResolveService {
   private static final Logger LOGGER = LoggerFactory.getLogger(ResolveService.class);
 
-  private final ContinueTurnService continueTurnService;
+  private final ContinueService continueService;
   private final AbilityActionFactory abilityActionFactory;
   private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
   private final PutIntoGraveyardService putIntoGraveyardService;
@@ -109,7 +109,7 @@ public class ResolveService {
         break;
       }
     }
-    continueTurnService.continueTurn(gameStatus);
+    continueService.next(gameStatus);
   }
 
   private void performAbilitiesActions(GameStatus gameStatus, CardInstance cardToResolve, List<CardInstanceAbility> abilities) {

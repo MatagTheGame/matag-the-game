@@ -4,7 +4,7 @@ import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.Turn;
-import com.matag.game.turn.action._continue.ContinueTurnService;
+import com.matag.game.turn.action._continue.ContinueService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 @Component
 @AllArgsConstructor
 public class DeclareBlockerService {
-  private final ContinueTurnService continueTurnService;
+  private final ContinueService continueService;
   private final BlockerChecker blockerChecker;
 
   public void declareBlockers(GameStatus gameStatus, Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds) {
@@ -41,7 +41,7 @@ public class DeclareBlockerService {
       nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(attackingCreatureId);
     });
 
-    continueTurnService.continueTurn(gameStatus);
+    continueService.next(gameStatus);
   }
 
   private List<CardInstance> findBlockers(Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds, Player nonCurrentPlayer, CardInstance attacker) {

@@ -5,7 +5,7 @@ import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.Turn;
-import com.matag.game.turn.action._continue.ContinueTurnService;
+import com.matag.game.turn.action._continue.ContinueService;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import com.matag.game.turn.action.trigger.WhenTriggerService;
 import lombok.AllArgsConstructor;
@@ -19,7 +19,7 @@ import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 @Component
 @AllArgsConstructor
 public class DeclareAttackerService {
-  private final ContinueTurnService continueTurnService;
+  private final ContinueService continueService;
   private final TapPermanentService tapPermanentService;
   private final WhenTriggerService whenTriggerService;
 
@@ -34,7 +34,7 @@ public class DeclareAttackerService {
     cardIds.forEach(cardId -> checkIfCanAttack(currentPlayer, cardId));
     cardIds.forEach(cardId -> declareAsAttacker(gameStatus, currentPlayer, cardId));
 
-    continueTurnService.continueTurn(gameStatus);
+    continueService.next(gameStatus);
   }
 
   private void checkIfCanAttack(Player currentPlayer, Integer cardId) {

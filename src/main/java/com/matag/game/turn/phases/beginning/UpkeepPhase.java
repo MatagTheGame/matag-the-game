@@ -3,7 +3,6 @@ package com.matag.game.turn.phases.beginning;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.phases.Phase;
-import com.matag.game.turn.phases.beginning.DrawPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -18,18 +17,18 @@ public class UpkeepPhase implements Phase {
   private final AutocontinueChecker autocontinueChecker;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
       gameStatus.getTurn().passPriority(gameStatus);
 
       if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-        apply(gameStatus);
+        next(gameStatus);
       }
 
     } else {
       gameStatus.getTurn().setCurrentPhase(DR);
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-      drawPhase.apply(gameStatus);
+      drawPhase.next(gameStatus);
     }
   }
 }

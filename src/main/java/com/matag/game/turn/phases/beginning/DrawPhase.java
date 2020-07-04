@@ -15,7 +15,7 @@ public class DrawPhase implements Phase {
   private final DrawXCardsService drawXCardsService;
 
   @Override
-  public void apply(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     if (gameStatus.getTurn().getTurnNumber() > 1) {
       drawXCardsService.drawXCards(gameStatus.getCurrentPlayer(), 1);
     }

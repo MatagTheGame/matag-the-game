@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class ContinueTurnService {
+public class ContinueService {
   private final PhaseFactory phaseFactory;
 
-  public void continueTurn(GameStatus gameStatus) {
+  public void next(GameStatus gameStatus) {
     Phase phase = phaseFactory.get(gameStatus.getTurn().getCurrentPhase());
-    phase.apply(gameStatus);
+    phase.next(gameStatus);
   }
 }
