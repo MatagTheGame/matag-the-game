@@ -5,7 +5,7 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
 import com.matag.game.turn.action.combat.CombatService;
-import com.matag.game.turn.phases.Phase;
+import com.matag.game.turn.phases.AbstractPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import static com.matag.game.turn.phases.combat.AfterFirstStrikePhase.AF;
 
 @Component
 @AllArgsConstructor
-public class FirstStrikePhase implements Phase {
+public class FirstStrikePhase extends AbstractPhase {
   public static final String FS = "FS";
 
   private final AutocontinueChecker autocontinueChecker;
@@ -25,6 +25,11 @@ public class FirstStrikePhase implements Phase {
   private final ConsolidateStatusService consolidateStatusService;
   private final AfterFirstStrikePhase afterFirstStrikePhase;
   private final CombatDamagePhase combatDamagePhase;
+
+  @Override
+  public String getName() {
+    return FS;
+  }
 
   @Override
   public void next(GameStatus gameStatus) {

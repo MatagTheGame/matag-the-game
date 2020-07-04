@@ -80,9 +80,9 @@ public class CleanupTest extends AbstractApplicationTest {
       addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Mountain"));
 
       addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Air Elemental"));
-      CardInstance nestRobber = gameStatus.getNonCurrentPlayer().getBattlefield().getCards().get(0);
-      nestRobber.getModifiers().dealDamage(1);
-      nestRobber.getModifiers().setTapped(true);
+      CardInstance airElemental = gameStatus.getNonCurrentPlayer().getBattlefield().getCards().get(0);
+      airElemental.getModifiers().dealDamage(1);
+      airElemental.getModifiers().setTapped(true);
     }
   }
 }

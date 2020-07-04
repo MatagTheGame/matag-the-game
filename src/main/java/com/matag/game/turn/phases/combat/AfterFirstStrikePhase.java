@@ -2,17 +2,22 @@ package com.matag.game.turn.phases.combat;
 
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
-import com.matag.game.turn.phases.Phase;
+import com.matag.game.turn.phases.AbstractPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor
-public class AfterFirstStrikePhase implements Phase {
+public class AfterFirstStrikePhase extends AbstractPhase {
   public static final String AF = "AF";
 
   private final AutocontinueChecker autocontinueChecker;
   private final CombatDamagePhase combatDamagePhase;
+
+  @Override
+  public String getName() {
+    return AF;
+  }
 
   @Override
   public void next(GameStatus gameStatus) {

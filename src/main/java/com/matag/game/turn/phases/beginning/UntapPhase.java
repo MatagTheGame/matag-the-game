@@ -5,7 +5,7 @@ import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.action.tap.TapPermanentService;
-import com.matag.game.turn.phases.Phase;
+import com.matag.game.turn.phases.AbstractPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class UntapPhase implements Phase {
+public class UntapPhase extends AbstractPhase {
   public static final String UT = "UT";
 
   private final TapPermanentService tapPermanentService;
@@ -21,7 +21,13 @@ public class UntapPhase implements Phase {
   private final UpkeepPhase upkeepPhase;
 
   @Override
-  public void next(GameStatus gameStatus) {
+  public String getName() {
+    return UT;
+  }
+
+  @Override
+  public void action(GameStatus gameStatus) {
+    super.action(gameStatus);
     List<CardInstance> cards = gameStatus.getCurrentPlayer().getBattlefield().getCards();
 
     for (CardInstance cardInstance : new CardInstanceSearch(cards).tapped().getCards()) {
@@ -34,9 +40,12 @@ public class UntapPhase implements Phase {
 
     new CardInstanceSearch(cards).withSummoningSickness().getCards()
       .forEach(cardInstance -> cardInstance.getModifiers().setSummoningSickness(false));
+  }
 
+  @Override
+  public void next(GameStatus gameStatus) {
+    super.next(gameStatus);
     gameStatus.getTurn().setCurrentPhase(UpkeepPhase.UP);
-
     if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
       upkeepPhase.next(gameStatus);
     }
