@@ -1,7 +1,9 @@
-package com.matag.game.turn.phases;
+package com.matag.game.turn.phases.combat;
 
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
+import com.matag.game.turn.phases.Phase;
+import com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

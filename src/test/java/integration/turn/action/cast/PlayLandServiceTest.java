@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.matag.game.turn.phases.FirstStrikePhase.FS;
+import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
 import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)

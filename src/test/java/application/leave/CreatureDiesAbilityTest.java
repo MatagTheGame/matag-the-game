@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
-import static com.matag.game.turn.phases.BeginCombatPhase.BC;
+import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static java.util.Collections.singletonList;

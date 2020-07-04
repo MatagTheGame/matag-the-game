@@ -1,11 +1,12 @@
-package com.matag.game.turn.phases;
+package com.matag.game.turn.phases.combat;
 
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.combat.CombatService;
+import com.matag.game.turn.phases.Phase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.matag.game.turn.phases.EndOfCombatPhase.EC;
+import static com.matag.game.turn.phases.combat.EndOfCombatPhase.EC;
 
 @Component
 @AllArgsConstructor

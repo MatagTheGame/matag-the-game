@@ -32,8 +32,8 @@ import java.util.Set;
 
 import static com.matag.cards.properties.Color.WHITE;
 import static com.matag.game.launcher.LauncherTestGameController.TEST_ADMIN_TOKEN;
-import static com.matag.game.turn.phases.Main1Phase.M1;
-import static com.matag.game.turn.phases.UpkeepPhase.UP;
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
+import static com.matag.game.turn.phases.beginning.UpkeepPhase.UP;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static org.mockito.ArgumentMatchers.any;

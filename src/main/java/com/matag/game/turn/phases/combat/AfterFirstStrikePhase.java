@@ -1,19 +1,18 @@
-package com.matag.game.turn.phases;
+package com.matag.game.turn.phases.combat;
 
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
+import com.matag.game.turn.phases.Phase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.matag.game.turn.phases.FirstStrikePhase.FS;
-
 @Component
 @AllArgsConstructor
-public class AfterDeclareBlockersPhase implements Phase {
-  public static final String AB = "AB";
+public class AfterFirstStrikePhase implements Phase {
+  public static final String AF = "AF";
 
   private final AutocontinueChecker autocontinueChecker;
-  private final FirstStrikePhase firstStrikePhase;
+  private final CombatDamagePhase combatDamagePhase;
 
   @Override
   public void apply(GameStatus gameStatus) {
@@ -25,9 +24,9 @@ public class AfterDeclareBlockersPhase implements Phase {
       }
 
     } else {
-      gameStatus.getTurn().setCurrentPhase(FS);
+      gameStatus.getTurn().setCurrentPhase(CombatDamagePhase.CD);
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-      firstStrikePhase.apply(gameStatus);
+      combatDamagePhase.apply(gameStatus);
     }
   }
 }

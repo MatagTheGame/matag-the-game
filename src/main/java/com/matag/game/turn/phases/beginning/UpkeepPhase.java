@@ -1,31 +1,35 @@
-package com.matag.game.turn.phases;
+package com.matag.game.turn.phases.beginning;
 
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
+import com.matag.game.turn.phases.Phase;
+import com.matag.game.turn.phases.beginning.DrawPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import static com.matag.game.turn.phases.beginning.DrawPhase.DR;
+
 @Component
 @AllArgsConstructor
-public class AfterFirstStrikePhase implements Phase {
-  public static final String AF = "AF";
+public class UpkeepPhase implements Phase {
+  public static final String UP = "UP";
 
+  private final DrawPhase drawPhase;
   private final AutocontinueChecker autocontinueChecker;
-  private final CombatDamagePhase combatDamagePhase;
 
   @Override
   public void apply(GameStatus gameStatus) {
     if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
-      gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
+      gameStatus.getTurn().passPriority(gameStatus);
 
       if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
         apply(gameStatus);
       }
 
     } else {
-      gameStatus.getTurn().setCurrentPhase(CombatDamagePhase.CD);
+      gameStatus.getTurn().setCurrentPhase(DR);
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-      combatDamagePhase.apply(gameStatus);
+      drawPhase.apply(gameStatus);
     }
   }
 }

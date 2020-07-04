@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.COMBAT_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
-import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
-import static com.matag.game.turn.phases.Main2Phase.M2;
+import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
+import static com.matag.game.turn.phases.main2.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 

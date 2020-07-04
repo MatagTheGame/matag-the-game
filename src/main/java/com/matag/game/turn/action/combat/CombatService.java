@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 import static com.matag.cards.ability.type.AbilityType.*;
-import static com.matag.game.turn.phases.FirstStrikePhase.FS;
+import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
 
 @Component
 @AllArgsConstructor

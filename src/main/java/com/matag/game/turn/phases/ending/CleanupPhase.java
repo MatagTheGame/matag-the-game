@@ -1,11 +1,13 @@
-package com.matag.game.turn.phases;
+package com.matag.game.turn.phases.ending;
 
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.phases.Phase;
+import com.matag.game.turn.phases.beginning.UntapPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.matag.game.turn.phases.UntapPhase.UT;
+import static com.matag.game.turn.phases.beginning.UntapPhase.UT;
 
 @Component
 @AllArgsConstructor

@@ -1,10 +1,13 @@
-package com.matag.game.turn.phases;
+package com.matag.game.turn.phases.combat;
 
 import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
 import com.matag.game.turn.action.combat.CombatService;
+import com.matag.game.turn.phases.Phase;
+import com.matag.game.turn.phases.combat.AfterFirstStrikePhase;
+import com.matag.game.turn.phases.combat.CombatDamagePhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +15,7 @@ import java.util.List;
 
 import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
 import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
-import static com.matag.game.turn.phases.AfterFirstStrikePhase.AF;
+import static com.matag.game.turn.phases.combat.AfterFirstStrikePhase.AF;
 
 @Component
 @AllArgsConstructor

@@ -5,14 +5,12 @@ import application.InitTestServiceDecorator;
 import com.matag.cards.Cards;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.phases.Main1Phase;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
-import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 

@@ -1,23 +1,31 @@
 package com.matag.game.turn.phases;
 
+import com.matag.game.turn.phases.beginning.DrawPhase;
+import com.matag.game.turn.phases.beginning.UntapPhase;
+import com.matag.game.turn.phases.beginning.UpkeepPhase;
+import com.matag.game.turn.phases.combat.*;
+import com.matag.game.turn.phases.ending.CleanupPhase;
+import com.matag.game.turn.phases.ending.EndTurnPhase;
+import com.matag.game.turn.phases.main1.Main1Phase;
+import com.matag.game.turn.phases.main2.Main2Phase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
-import static com.matag.game.turn.phases.AfterFirstStrikePhase.AF;
-import static com.matag.game.turn.phases.BeginCombatPhase.BC;
-import static com.matag.game.turn.phases.CleanupPhase.CL;
-import static com.matag.game.turn.phases.CombatDamagePhase.CD;
-import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
-import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
-import static com.matag.game.turn.phases.DrawPhase.DR;
-import static com.matag.game.turn.phases.EndOfCombatPhase.EC;
-import static com.matag.game.turn.phases.EndTurnPhase.ET;
-import static com.matag.game.turn.phases.FirstStrikePhase.FS;
-import static com.matag.game.turn.phases.Main1Phase.M1;
-import static com.matag.game.turn.phases.Main2Phase.M2;
-import static com.matag.game.turn.phases.UntapPhase.UT;
-import static com.matag.game.turn.phases.UpkeepPhase.UP;
+import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
+import static com.matag.game.turn.phases.combat.AfterFirstStrikePhase.AF;
+import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
+import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
+import static com.matag.game.turn.phases.combat.CombatDamagePhase.CD;
+import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
+import static com.matag.game.turn.phases.beginning.DrawPhase.DR;
+import static com.matag.game.turn.phases.combat.EndOfCombatPhase.EC;
+import static com.matag.game.turn.phases.ending.EndTurnPhase.ET;
+import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
+import static com.matag.game.turn.phases.main2.Main2Phase.M2;
+import static com.matag.game.turn.phases.beginning.UntapPhase.UT;
+import static com.matag.game.turn.phases.beginning.UpkeepPhase.UP;
 
 @Component
 @AllArgsConstructor

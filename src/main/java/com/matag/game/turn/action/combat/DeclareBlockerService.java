@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
+import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 
 @Component
 @AllArgsConstructor

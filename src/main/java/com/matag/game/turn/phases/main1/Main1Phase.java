@@ -1,10 +1,12 @@
-package com.matag.game.turn.phases;
+package com.matag.game.turn.phases.main1;
 
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.phases.Phase;
+import com.matag.game.turn.phases.combat.BeginCombatPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.matag.game.turn.phases.BeginCombatPhase.BC;
+import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 
 @Component
 @AllArgsConstructor

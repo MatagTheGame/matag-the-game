@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ATTACK;
-import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
-import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
-import static com.matag.game.turn.phases.FirstStrikePhase.FS;
+import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
+import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
 import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)

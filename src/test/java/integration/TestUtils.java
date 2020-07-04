@@ -15,7 +15,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 
 public class TestUtils {
   private final GameStatusFactory gameStatusFactory;

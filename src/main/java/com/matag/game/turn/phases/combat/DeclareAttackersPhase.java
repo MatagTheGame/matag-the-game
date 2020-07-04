@@ -1,8 +1,10 @@
-package com.matag.game.turn.phases;
+package com.matag.game.turn.phases.combat;
 
 import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
+import com.matag.game.turn.phases.main2.Main2Phase;
+import com.matag.game.turn.phases.Phase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

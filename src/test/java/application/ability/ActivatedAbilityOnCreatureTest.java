@@ -9,9 +9,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
-import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
-import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
-import static com.matag.game.turn.phases.Main1Phase.M1;
+import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
+import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.PLAYER;
 
 public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {

@@ -11,12 +11,12 @@ import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.turn.phases.AfterDeclareBlockersPhase.AB;
-import static com.matag.game.turn.phases.AfterFirstStrikePhase.AF;
-import static com.matag.game.turn.phases.BeginCombatPhase.BC;
-import static com.matag.game.turn.phases.DeclareAttackersPhase.DA;
-import static com.matag.game.turn.phases.DeclareBlockersPhase.DB;
-import static com.matag.game.turn.phases.Main2Phase.M2;
+import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
+import static com.matag.game.turn.phases.combat.AfterFirstStrikePhase.AF;
+import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
+import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
+import static com.matag.game.turn.phases.main2.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
