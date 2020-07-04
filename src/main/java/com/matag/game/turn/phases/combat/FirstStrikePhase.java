@@ -6,6 +6,7 @@ import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
 import com.matag.game.turn.action.combat.CombatService;
 import com.matag.game.turn.phases.AbstractPhase;
+import com.matag.game.turn.phases.Phase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,11 @@ public class FirstStrikePhase extends AbstractPhase {
   @Override
   public String getName() {
     return FS;
+  }
+
+  @Override
+  public Phase getNextPhase(GameStatus gameStatus) {
+    return afterFirstStrikePhase;
   }
 
   @Override

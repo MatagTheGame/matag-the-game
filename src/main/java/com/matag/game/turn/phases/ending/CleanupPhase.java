@@ -3,6 +3,7 @@ package com.matag.game.turn.phases.ending;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.phases.AbstractPhase;
+import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.beginning.UntapPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,9 +23,20 @@ public class CleanupPhase extends AbstractPhase {
   }
 
   @Override
-  public void next(GameStatus gameStatus) {
+  public Phase getNextPhase(GameStatus gameStatus) {
+    return untapPhase;
+  }
+
+  @Override
+  public void action(GameStatus gameStatus) {
+    super.action(gameStatus);
     cleanup(gameStatus);
     moveToNextPlayer(gameStatus);
+  }
+
+  @Override
+  public void next(GameStatus gameStatus) {
+    super.next(gameStatus);
     untapPhase.next(gameStatus);
   }
 

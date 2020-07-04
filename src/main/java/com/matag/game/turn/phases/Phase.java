@@ -8,6 +8,8 @@ public interface Phase {
 
   void action(GameStatus gameStatus);
 
+  Phase getNextPhase(GameStatus gameStatus);
+
   void next(GameStatus gameStatus);
 
 }

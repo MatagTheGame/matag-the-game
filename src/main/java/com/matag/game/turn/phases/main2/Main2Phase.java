@@ -2,6 +2,7 @@ package com.matag.game.turn.phases.main2;
 
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.phases.AbstractPhase;
+import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.ending.EndTurnPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,11 @@ public class Main2Phase extends AbstractPhase {
   @Override
   public String getName() {
     return M2;
+  }
+
+  @Override
+  public Phase getNextPhase(GameStatus gameStatus) {
+    return endTurnPhase;
   }
 
   @Override

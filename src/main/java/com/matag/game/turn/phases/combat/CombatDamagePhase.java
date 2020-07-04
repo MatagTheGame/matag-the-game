@@ -3,6 +3,7 @@ package com.matag.game.turn.phases.combat;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.combat.CombatService;
 import com.matag.game.turn.phases.AbstractPhase;
+import com.matag.game.turn.phases.Phase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +23,19 @@ public class CombatDamagePhase extends AbstractPhase {
   }
 
   @Override
-  public void next(GameStatus gameStatus) {
+  public Phase getNextPhase(GameStatus gameStatus) {
+    return endOfCombatPhase;
+  }
+
+  @Override
+  public void action(GameStatus gameStatus) {
+    super.action(gameStatus);
     combatService.dealCombatDamage(gameStatus);
+  }
+
+  @Override
+  public void next(GameStatus gameStatus) {
+    super.next(gameStatus);
 
     if (!gameStatus.getTurn().isEnded()) {
       gameStatus.getTurn().setCurrentPhase(EC);

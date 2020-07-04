@@ -4,6 +4,7 @@ import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.phases.AbstractPhase;
+import com.matag.game.turn.phases.Phase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +21,11 @@ public class EndTurnPhase extends AbstractPhase {
   @Override
   public String getName() {
     return ET;
+  }
+
+  @Override
+  public Phase getNextPhase(GameStatus gameStatus) {
+    return cleanupPhase;
   }
 
   @Override

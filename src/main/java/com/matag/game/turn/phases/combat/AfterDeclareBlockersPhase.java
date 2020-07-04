@@ -3,6 +3,7 @@ package com.matag.game.turn.phases.combat;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.phases.AbstractPhase;
+import com.matag.game.turn.phases.Phase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +20,11 @@ public class AfterDeclareBlockersPhase extends AbstractPhase {
   @Override
   public String getName() {
     return AB;
+  }
+
+  @Override
+  public Phase getNextPhase(GameStatus gameStatus) {
+    return firstStrikePhase;
   }
 
   @Override
