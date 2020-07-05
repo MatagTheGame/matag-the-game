@@ -69,7 +69,8 @@ public class CombatIndestructibleTest extends AbstractApplicationTest {
     browser.player1().getGraveyardHelper(OPPONENT).containsExactly(cards.get("Nyxborn Brute"));
 
     // Finally indestructible still gets destroyed if toughness reaches 0
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(ET, OPPONENT);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M2, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(ET, OPPONENT);
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player2().getHandHelper(PLAYER).getFirstCard(cards.get("Disfigure")).select();
     browser.player2().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Nyxborn Marauder")).target();

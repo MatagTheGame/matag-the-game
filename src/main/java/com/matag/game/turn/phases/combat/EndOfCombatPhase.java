@@ -31,5 +31,7 @@ public class EndOfCombatPhase extends AbstractPhase {
 
     gameStatus.getCurrentPlayer().getBattlefield().removeAttacking();
     gameStatus.getNonCurrentPlayer().getBattlefield().removeBlocking();
+    gameStatus.getTurn().setPhaseActioned(false);
+    main2Phase.next(gameStatus);
   }
 }

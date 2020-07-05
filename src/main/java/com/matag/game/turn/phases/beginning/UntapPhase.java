@@ -6,18 +6,23 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@AllArgsConstructor
 public class UntapPhase extends AbstractPhase {
   public static final String UT = "UT";
 
   private final TapPermanentService tapPermanentService;
-  private final UpkeepPhase upkeepPhase;
+
+  @Autowired
+  private UpkeepPhase upkeepPhase;
+
+  public UntapPhase(TapPermanentService tapPermanentService) {
+    this.tapPermanentService = tapPermanentService;
+  }
 
   @Override
   public String getName() {

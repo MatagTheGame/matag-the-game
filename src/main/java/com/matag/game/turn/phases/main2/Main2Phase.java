@@ -23,11 +23,4 @@ public class Main2Phase extends AbstractPhase {
   public Phase getNextPhase(GameStatus gameStatus) {
     return endTurnPhase;
   }
-
-  @Override
-  public void next(GameStatus gameStatus) {
-    gameStatus.getTurn().setCurrentPhase(EndTurnPhase.ET);
-    gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-    endTurnPhase.next(gameStatus);
-  }
 }

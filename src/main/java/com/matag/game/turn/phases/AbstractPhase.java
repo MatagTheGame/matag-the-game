@@ -26,14 +26,14 @@ public abstract class AbstractPhase implements Phase {
 
     } else {
       action(gameStatus);
-      if (!isMainPhase(getName())) {
+      if (!isMainPhase(getName()) && gameStatus.getTurn().getTriggeredNonStackAction() == null) {
         evaluateNext(gameStatus);
       }
     }
   }
 
   private void evaluateNext(GameStatus gameStatus) {
-    if (List.of("UT", "UP", "DR", "M1", "CL").contains(getName())) {
+    if (List.of("UT", "UP", "DR", "M1", "M2", "ET", "CL").contains(getName())) {
       if (isPriorityAllowed(getName())) {
         if (isCurrentPlayerActive(gameStatus)) {
           gameStatus.getTurn().passPriority(gameStatus);

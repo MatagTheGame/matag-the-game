@@ -16,6 +16,7 @@ public class DeclareAttackersPhase extends AbstractPhase {
 
   private final AutocontinueChecker autocontinueChecker;
   private final AfterDeclareBlockersPhase afterDeclareBlockersPhase;
+  private final Main2Phase main2Phase;
 
   @Override
   public String getName() {
@@ -52,6 +53,8 @@ public class DeclareAttackersPhase extends AbstractPhase {
         }
       } else {
         gameStatus.getTurn().setCurrentPhase(Main2Phase.M2);
+        gameStatus.getTurn().setPhaseActioned(false);
+        main2Phase.next(gameStatus);
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
       }
     }
