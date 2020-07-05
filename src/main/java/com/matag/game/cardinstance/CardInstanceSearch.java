@@ -219,8 +219,4 @@ public class CardInstanceSearch {
   public List<CardInstance> getCards() {
     return cards.collect(Collectors.toList());
   }
-
-  public Stream<CardInstance> asStream() {
-    return cards;
-  }
 }

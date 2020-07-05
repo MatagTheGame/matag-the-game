@@ -39,7 +39,7 @@ public class DeclareAttackersPhase extends AbstractPhase {
 
     } else {
       if (!gameStatus.getCurrentPlayer().getBattlefield().getAttackingCreatures().isEmpty()) {
-        if (new CardInstanceSearch(gameStatus.getNonCurrentPlayer().getBattlefield().getCards()).canAnyCreatureBlock()) {
+        if (gameStatus.getNonCurrentPlayer().getBattlefield().search().canAnyCreatureBlock()) {
           gameStatus.getTurn().setCurrentPhase(DeclareBlockersPhase.DB);
           gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 

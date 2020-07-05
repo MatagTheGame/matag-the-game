@@ -3,7 +3,6 @@ package application.ability;
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
 import org.junit.Test;
@@ -66,7 +65,7 @@ public class ActivatedTapAbilityOnCreatureTest extends AbstractApplicationTest {
     public void initGameStatus(GameStatus gameStatus) {
       addCardToCurrentPlayerHand(gameStatus, cards.get("Checkpoint Officer"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Checkpoint Officer"));
-      new CardInstanceSearch(gameStatus.getPlayer1().getBattlefield().getCards()).withName("Checkpoint Officer")
+      gameStatus.getPlayer1().getBattlefield().search().withName("Checkpoint Officer")
         .getCards().get(0).getModifiers().setTapped(true);
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Checkpoint Officer"));
       addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"));

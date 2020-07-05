@@ -3,7 +3,6 @@ package com.matag.game.cardinstance.cost;
 import com.matag.cards.Card;
 import com.matag.cards.properties.Cost;
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.status.GameStatus;
 import org.springframework.stereotype.Component;
@@ -49,7 +48,7 @@ public class CostService {
   }
 
   public boolean canAfford(CardInstance cardInstance, String ability, GameStatus gameStatus) {
-    List<CardInstance> cardsThatCanGenerateMana = new CardInstanceSearch(gameStatus.getActivePlayer().getBattlefield().getCards())
+    List<CardInstance> cardsThatCanGenerateMana = gameStatus.getActivePlayer().getBattlefield().search()
       .untapped()
       .withFixedAbility(TAP_ADD_MANA)
       .getCards();

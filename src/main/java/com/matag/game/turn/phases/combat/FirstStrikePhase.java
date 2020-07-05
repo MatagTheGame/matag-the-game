@@ -41,7 +41,7 @@ public class FirstStrikePhase extends AbstractPhase {
   public void next(GameStatus gameStatus) {
     gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
 
-    boolean executePhase = new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards())
+    boolean executePhase = gameStatus.getCurrentPlayer().getBattlefield().search()
       .withAnyFixedAbility(List.of(FIRST_STRIKE, DOUBLE_STRIKE))
       .isNotEmpty();
 

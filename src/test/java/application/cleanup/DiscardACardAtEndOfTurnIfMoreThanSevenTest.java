@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static com.matag.game.turn.phases.ending.EndTurnPhase.ET;
+import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.game.turn.phases.main2.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
@@ -33,7 +33,7 @@ public class DiscardACardAtEndOfTurnIfMoreThanSevenTest extends AbstractApplicat
   public void discardACardAtEndOfTurnIfMoreThanSeven() {
     // When arriving to End of Turn with 9 cards
     browser.player1().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(ET, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(CL, PLAYER);
     browser.player1().getHandHelper(PLAYER).toHaveSize(9);
 
     // It stops asking to discard a card
@@ -50,8 +50,8 @@ public class DiscardACardAtEndOfTurnIfMoreThanSevenTest extends AbstractApplicat
     browser.player1().getGraveyardHelper(PLAYER).contains(cards.get("Plains"));
     browser.getHandHelper(PLAYER).toHaveSize(8);
 
-    // It stops asking to discard a card
-    browser.player1().getPhaseHelper().is(ET, PLAYER);
+    // It stops asking to discard a card again
+    browser.player1().getPhaseHelper().is(CL, PLAYER);
     browser.player1().getStatusHelper().hasMessage("Choose a card to discard.");
 
     // When player clicks on a card to discard

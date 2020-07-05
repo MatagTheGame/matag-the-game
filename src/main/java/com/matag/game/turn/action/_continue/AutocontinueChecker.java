@@ -1,7 +1,6 @@
 package com.matag.game.turn.action._continue;
 
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.cardinstance.cost.CostService;
 import com.matag.game.player.Player;
@@ -23,7 +22,7 @@ public class AutocontinueChecker {
   public boolean canPerformAnyAction(GameStatus gameStatus) {
     Player player = gameStatus.getActivePlayer();
 
-    List<CardInstance> instants = new CardInstanceSearch(player.getHand().getCards()).withInstantSpeed().getCards();
+    List<CardInstance> instants = player.getHand().search().withInstantSpeed().getCards();
     for (CardInstance cardInstance : instants) {
       if (costService.canAfford(cardInstance, null, gameStatus)) {
         return true;

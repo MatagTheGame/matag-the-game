@@ -33,22 +33,25 @@ public abstract class AbstractPhase implements Phase {
   }
 
   private void evaluateNext(GameStatus gameStatus) {
-    if (List.of("UT", "UP", "DR", "M1", "M2", "ET", "CL").contains(getName())) {
-      if (isPriorityAllowed(getName())) {
-        if (isCurrentPlayerActive(gameStatus)) {
-          gameStatus.getTurn().passPriority(gameStatus);
+    // TODO delete this when abstraction is complete
+    if (List.of("BC", "DA", "DB", "AB", "AF", "FS", "CD", "EC").contains(getName())) {
+      return;
+    }
 
-          if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-            next(gameStatus);
-          }
+    if (isPriorityAllowed(getName())) {
+      if (isCurrentPlayerActive(gameStatus)) {
+        gameStatus.getTurn().passPriority(gameStatus);
 
-        } else {
-          moveToNextPhase(gameStatus);
+        if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
+          next(gameStatus);
         }
 
       } else {
         moveToNextPhase(gameStatus);
       }
+
+    } else {
+      moveToNextPhase(gameStatus);
     }
   }
 

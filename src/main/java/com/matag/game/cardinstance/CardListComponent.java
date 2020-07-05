@@ -6,16 +6,16 @@ import java.util.List;
 public abstract class CardListComponent {
   protected List<CardInstance> cards = new ArrayList<>();
 
+  public CardInstanceSearch search() {
+    return new CardInstanceSearch(cards);
+  }
+
   public List<CardInstance> getCards() {
     return cards;
   }
 
   public void setCards(List<CardInstance> cards) {
     this.cards = cards;
-  }
-
-  public List<CardInstance> getCardsCopy() {
-    return new ArrayList<>(cards);
   }
 
   public int size() {
@@ -31,12 +31,11 @@ public abstract class CardListComponent {
   }
 
   public boolean hasCardById(int cardId) {
-    return new CardInstanceSearch(cards).withId(cardId).isPresent();
+    return search().withId(cardId).isPresent();
   }
 
   public CardInstance findCardById(int cardId) {
-    return new CardInstanceSearch(cards).withId(cardId)
-      .orElseThrow(() -> new RuntimeException("Card with id " + cardId + " not found."));
+    return search().withId(cardId).orElseThrow(() -> new RuntimeException("Card with id " + cardId + " not found."));
   }
 
   public CardInstance extractCardById(int cardId) {

@@ -1,6 +1,5 @@
 package com.matag.game.turn.phases.combat;
 
-import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.phases.AbstractPhase;
@@ -38,7 +37,7 @@ public class BeginCombatPhase extends AbstractPhase {
   @Override
   public void next(GameStatus gameStatus) {
     if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
-      if (new CardInstanceSearch(gameStatus.getCurrentPlayer().getBattlefield().getCards()).canAnyCreatureAttack()) {
+      if (gameStatus.getCurrentPlayer().getBattlefield().search().canAnyCreatureAttack()) {
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
         if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
