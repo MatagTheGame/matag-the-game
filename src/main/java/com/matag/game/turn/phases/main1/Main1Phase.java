@@ -7,8 +7,6 @@ import com.matag.game.turn.phases.combat.BeginCombatPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
-
 @Component
 @AllArgsConstructor
 public class Main1Phase extends AbstractPhase {
@@ -24,11 +22,5 @@ public class Main1Phase extends AbstractPhase {
   @Override
   public String getName() {
     return M1;
-  }
-
-  @Override
-  public void next(GameStatus gameStatus) {
-    gameStatus.getTurn().setCurrentPhase(BC);
-    beginCombatPhase.next(gameStatus);
   }
 }

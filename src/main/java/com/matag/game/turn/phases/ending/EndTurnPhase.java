@@ -48,6 +48,7 @@ public class EndTurnPhase extends AbstractPhase {
       } else {
         gameStatus.getTurn().setCurrentPhase(CL);
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+        gameStatus.getTurn().setPhaseActioned(false);
         cleanupPhase.next(gameStatus);
       }
     }

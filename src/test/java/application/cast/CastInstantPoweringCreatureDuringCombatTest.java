@@ -33,7 +33,8 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
   @Test
   public void castInstantPoweringCreatureDuringCombat() {
     // When player one attack thinking to win the fight
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Bastion Enforcer")).declareAsAttacker();
     browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, OPPONENT);
@@ -77,7 +78,7 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
     browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
 
     // Then extra power and toughness is cleaned up
-    browser.getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Bartizan Bats")).hasPowerAndToughness("3/1");
+    browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Bartizan Bats")).hasPowerAndToughness("3/1");
   }
 
   static class InitTestServiceForTest extends InitTestService {

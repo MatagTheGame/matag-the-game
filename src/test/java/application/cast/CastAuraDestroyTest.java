@@ -29,13 +29,14 @@ public class CastAuraDestroyTest extends AbstractApplicationTest {
 
   @Test
   public void castAuraDestroy() {
-    // Player1 casts 4 auras
+    // Player1 casts 3 auras
     castArcaneFlight(0, "2/4");
     castArcaneFlight(1, "3/5");
     castArcaneFlight(2, "4/6");
 
     // Player1 continues
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
 
     // When Player2 destroys an enchantment
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();

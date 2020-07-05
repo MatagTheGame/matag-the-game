@@ -3,6 +3,8 @@ package com.matag.game.turn;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -14,6 +16,8 @@ import java.util.Map;
 
 @ToString
 @EqualsAndHashCode
+@Getter
+@Setter
 @Component
 @Scope("prototype")
 public class Turn {
@@ -21,6 +25,7 @@ public class Turn {
   private String currentTurnPlayer;
   private String currentPhase;
   private String currentPhaseActivePlayer;
+  private boolean phaseActioned;
   private List<CardInstance> cardsPlayedWithinTurn = new ArrayList<>();
   private Map<Integer, List<String>> lastManaPaid = new HashMap<>();
   private String triggeredNonStackAction;
@@ -33,76 +38,12 @@ public class Turn {
     this.currentPhaseActivePlayer = playerName;
   }
 
-  public int getTurnNumber() {
-    return turnNumber;
-  }
-
-  public void setTurnNumber(int turnNumber) {
-    this.turnNumber = turnNumber;
-  }
-
   public void increaseTurnNumber() {
     turnNumber++;
   }
 
-  public String getCurrentTurnPlayer() {
-    return currentTurnPlayer;
-  }
-
-  public void setCurrentTurnPlayer(String currentTurnPlayer) {
-    this.currentTurnPlayer = currentTurnPlayer;
-  }
-
-  public String getCurrentPhase() {
-    return currentPhase;
-  }
-
-  public void setCurrentPhase(String currentPhase) {
-    this.currentPhase = currentPhase;
-  }
-
-  public String getCurrentPhaseActivePlayer() {
-    return currentPhaseActivePlayer;
-  }
-
-  public void setCurrentPhaseActivePlayer(String currentPhaseActivePlayer) {
-    this.currentPhaseActivePlayer = currentPhaseActivePlayer;
-  }
-
-  public List<CardInstance> getCardsPlayedWithinTurn() {
-    return cardsPlayedWithinTurn;
-  }
-
   public void addCardToCardsPlayedWithinTurn(CardInstance cardInstance) {
     cardsPlayedWithinTurn.add(cardInstance);
-  }
-
-  public void setCardsPlayedWithinTurn(List<CardInstance> cardsPlayedWithinTurn) {
-    this.cardsPlayedWithinTurn = cardsPlayedWithinTurn;
-  }
-
-  public Map<Integer, List<String>> getLastManaPaid() {
-    return lastManaPaid;
-  }
-
-  public void setLastManaPaid(Map<Integer, List<String>> mana) {
-    this.lastManaPaid = mana;
-  }
-
-  public String getTriggeredNonStackAction() {
-    return triggeredNonStackAction;
-  }
-
-  public void setTriggeredNonStackAction(String triggeredNonStackAction) {
-    this.triggeredNonStackAction = triggeredNonStackAction;
-  }
-
-  public void setWinner(String winner) {
-    this.winner = winner;
-  }
-
-  public String getWinner() {
-    return winner;
   }
 
   public boolean isEnded() {

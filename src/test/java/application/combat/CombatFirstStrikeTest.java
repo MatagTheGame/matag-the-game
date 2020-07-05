@@ -16,6 +16,7 @@ import static com.matag.game.turn.phases.combat.AfterFirstStrikePhase.AF;
 import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.game.turn.phases.main2.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
@@ -36,7 +37,8 @@ public class CombatFirstStrikeTest extends AbstractApplicationTest {
   @Test
   public void combatFirstStrike() {
     // Stops to play instants
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // When attacking

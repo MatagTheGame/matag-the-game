@@ -51,5 +51,6 @@ public class CleanupPhase extends AbstractPhase {
     String nextCurrentPlayer = gameStatus.getNonCurrentPlayer().getName();
     gameStatus.getTurn().setCurrentTurnPlayer(nextCurrentPlayer);
     gameStatus.getTurn().setCurrentPhaseActivePlayer(nextCurrentPlayer);
+    gameStatus.getTurn().setPhaseActioned(false);
   }
 }

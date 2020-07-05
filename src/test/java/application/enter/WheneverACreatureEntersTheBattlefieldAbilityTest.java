@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
+import static com.matag.game.turn.phases.main2.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
@@ -84,7 +84,7 @@ public class WheneverACreatureEntersTheBattlefieldAbilityTest extends AbstractAp
 
     // When players continue
     browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
     // Then player 1 gains 1 life
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveLife(23);

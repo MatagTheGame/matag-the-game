@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static java.util.Collections.singletonList;
@@ -33,7 +34,8 @@ public class CreatureDiesAbilityTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Goblin Assault Team"), 1).getCardIdNumeric();
 
     // When opponent kills 1 goblin
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 2).tap();

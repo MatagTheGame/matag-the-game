@@ -37,7 +37,8 @@ public class CombatIndestructibleTest extends AbstractApplicationTest {
   @Test
   public void indestructible() {
     // When going to combat
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // When declare attacker
