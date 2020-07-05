@@ -1,4 +1,4 @@
-package integration.turn.status;
+package integration.status;
 
 import com.matag.game.event.EventSender;
 import com.matag.game.security.SecurityHelper;
