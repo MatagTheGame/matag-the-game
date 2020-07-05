@@ -8,8 +8,6 @@ import com.matag.game.turn.phases.beginning.UntapPhase;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import static com.matag.game.turn.phases.beginning.UntapPhase.UT;
-
 @Component
 @AllArgsConstructor
 public class CleanupPhase extends AbstractPhase {
@@ -30,27 +28,7 @@ public class CleanupPhase extends AbstractPhase {
   @Override
   public void action(GameStatus gameStatus) {
     super.action(gameStatus);
-    cleanup(gameStatus);
-    moveToNextPlayer(gameStatus);
-  }
-
-  @Override
-  public void next(GameStatus gameStatus) {
-    super.next(gameStatus);
-    untapPhase.next(gameStatus);
-  }
-
-  private void cleanup(GameStatus gameStatus) {
     gameStatus.getTurn().getCardsPlayedWithinTurn().clear();
     gameStatus.getAllBattlefieldCards().forEach(CardInstance::cleanup);
-  }
-
-  private void moveToNextPlayer(GameStatus gameStatus) {
-    gameStatus.getTurn().increaseTurnNumber();
-    gameStatus.getTurn().setCurrentPhase(UT);
-    String nextCurrentPlayer = gameStatus.getNonCurrentPlayer().getName();
-    gameStatus.getTurn().setCurrentTurnPlayer(nextCurrentPlayer);
-    gameStatus.getTurn().setCurrentPhaseActivePlayer(nextCurrentPlayer);
-    gameStatus.getTurn().setPhaseActioned(false);
   }
 }

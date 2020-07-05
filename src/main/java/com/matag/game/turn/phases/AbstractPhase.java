@@ -8,6 +8,7 @@ import java.util.List;
 
 import static com.matag.game.turn.phases.PhaseUtils.isMainPhase;
 import static com.matag.game.turn.phases.PhaseUtils.isPriorityAllowed;
+import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
 
 public abstract class AbstractPhase implements Phase {
   @Autowired
@@ -32,7 +33,7 @@ public abstract class AbstractPhase implements Phase {
   }
 
   private void evaluateNext(GameStatus gameStatus) {
-    if (List.of("UT", "UP", "DR", "M1").contains(getName())) {
+    if (List.of("UT", "UP", "DR", "M1", "CL").contains(getName())) {
       if (isPriorityAllowed(getName())) {
         if (isCurrentPlayerActive(gameStatus)) {
           gameStatus.getTurn().passPriority(gameStatus);
@@ -56,9 +57,14 @@ public abstract class AbstractPhase implements Phase {
   }
 
   private void moveToNextPhase(GameStatus gameStatus) {
+    if (getName().equals(CL)) {
+      gameStatus.getTurn().setCurrentTurnPlayer(gameStatus.getNonCurrentPlayer().getName());
+      gameStatus.getTurn().increaseTurnNumber();
+    }
+
     Phase nextPhase = getNextPhase(gameStatus);
     gameStatus.getTurn().setCurrentPhase(nextPhase.getName());
-    gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+    gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getTurn().getCurrentTurnPlayer());
     gameStatus.getTurn().setPhaseActioned(false);
     nextPhase.next(gameStatus);
   }
