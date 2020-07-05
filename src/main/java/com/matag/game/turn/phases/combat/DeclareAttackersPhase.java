@@ -1,22 +1,28 @@
 package com.matag.game.turn.phases.combat;
 
-import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.main2.Main2Phase;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 public class DeclareAttackersPhase extends AbstractPhase {
   public static final String DA = "DA";
 
   private final AutocontinueChecker autocontinueChecker;
-  private final AfterDeclareBlockersPhase afterDeclareBlockersPhase;
-  private final Main2Phase main2Phase;
+
+  @Autowired
+  private AfterDeclareBlockersPhase afterDeclareBlockersPhase;
+
+  @Autowired
+  private Main2Phase main2Phase;
+
+  public DeclareAttackersPhase(AutocontinueChecker autocontinueChecker) {
+    this.autocontinueChecker = autocontinueChecker;
+  }
 
   @Override
   public String getName() {

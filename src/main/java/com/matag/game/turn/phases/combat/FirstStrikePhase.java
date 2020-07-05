@@ -1,13 +1,12 @@
 package com.matag.game.turn.phases.combat;
 
-import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
 import com.matag.game.turn.action.combat.CombatService;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,15 +16,24 @@ import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
 import static com.matag.game.turn.phases.combat.AfterFirstStrikePhase.AF;
 
 @Component
-@AllArgsConstructor
 public class FirstStrikePhase extends AbstractPhase {
   public static final String FS = "FS";
 
   private final AutocontinueChecker autocontinueChecker;
   private final CombatService combatService;
   private final ConsolidateStatusService consolidateStatusService;
-  private final AfterFirstStrikePhase afterFirstStrikePhase;
-  private final CombatDamagePhase combatDamagePhase;
+
+  @Autowired
+  private AfterFirstStrikePhase afterFirstStrikePhase;
+
+  @Autowired
+  private CombatDamagePhase combatDamagePhase;
+
+  public FirstStrikePhase(AutocontinueChecker autocontinueChecker, CombatService combatService, ConsolidateStatusService consolidateStatusService) {
+    this.autocontinueChecker = autocontinueChecker;
+    this.combatService = combatService;
+    this.consolidateStatusService = consolidateStatusService;
+  }
 
   @Override
   public String getName() {

@@ -6,15 +6,15 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.beginning.UntapPhase;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 public class CleanupPhase extends AbstractPhase {
   public static final String CL = "CL";
 
-  private final UntapPhase untapPhase;
+  @Autowired
+  private UntapPhase untapPhase;
 
   @Override
   public String getName() {

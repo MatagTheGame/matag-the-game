@@ -4,16 +4,21 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 public class DeclareBlockersPhase extends AbstractPhase {
   public static final String DB = "DB";
 
-  private AutocontinueChecker autocontinueChecker;
+  private final AutocontinueChecker autocontinueChecker;
+
+  @Autowired
   private AfterDeclareBlockersPhase afterDeclareBlockersPhase;
+
+  public DeclareBlockersPhase(AutocontinueChecker autocontinueChecker) {
+    this.autocontinueChecker = autocontinueChecker;
+  }
 
   @Override
   public String getName() {

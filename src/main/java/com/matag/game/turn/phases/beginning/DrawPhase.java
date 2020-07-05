@@ -5,16 +5,21 @@ import com.matag.game.turn.action.player.DrawXCardsService;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.main1.Main1Phase;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@AllArgsConstructor
 public class DrawPhase extends AbstractPhase {
   public static final String DR = "DR";
 
   private final DrawXCardsService drawXCardsService;
-  private final Main1Phase main1Phase;
+
+  @Autowired
+  private Main1Phase main1Phase;
+
+  public DrawPhase(DrawXCardsService drawXCardsService) {
+    this.drawXCardsService = drawXCardsService;
+  }
 
   @Override
   public String getName() {
