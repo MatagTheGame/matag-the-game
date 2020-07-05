@@ -2,6 +2,8 @@ package com.matag.game.turn.phases;
 
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
+import com.matag.game.turn.phases.combat.BeginCombatPhase;
+import com.matag.game.turn.phases.combat.DeclareAttackersPhase;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -34,7 +36,7 @@ public abstract class AbstractPhase implements Phase {
 
   private void evaluateNext(GameStatus gameStatus) {
     // TODO delete this when abstraction is complete
-    if (List.of("BC", "DA", "DB", "AB", "AF", "FS", "CD", "EC").contains(getName())) {
+    if (List.of("DA", "DB", "AB", "AF", "FS", "CD", "EC").contains(getName())) {
       return;
     }
 
@@ -69,6 +71,10 @@ public abstract class AbstractPhase implements Phase {
     gameStatus.getTurn().setCurrentPhase(nextPhase.getName());
     gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getTurn().getCurrentTurnPlayer());
     gameStatus.getTurn().setPhaseActioned(false);
-    nextPhase.next(gameStatus);
+
+    // TODO delete this temporary hack while doing abstraction
+    if (!(nextPhase instanceof DeclareAttackersPhase)){
+      nextPhase.next(gameStatus);
+    }
   }
 }

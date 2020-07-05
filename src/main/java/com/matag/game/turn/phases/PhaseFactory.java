@@ -1,14 +1,14 @@
 package com.matag.game.turn.phases;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@AllArgsConstructor
 @Component
 public class PhaseFactory {
-  @Autowired
-  private List<Phase> phases;
+  private final List<Phase> phases;
 
   public Phase get(String phaseName) {
     return phases.stream()
