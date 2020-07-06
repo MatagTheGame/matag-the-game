@@ -18,8 +18,8 @@ public class CardModifiersUntilEndOfTurn {
   private boolean toBeReturnedToHand;
 
   public void addExtraPowerToughnessUntilEndOfTurn(PowerToughness extraPowerToughness) {
-    int newPower = this.extraPowerToughness.getPower() + extraPowerToughness.getPower();
-    int newToughness = this.extraPowerToughness.getToughness() + extraPowerToughness.getToughness();
+    var newPower = this.extraPowerToughness.getPower() + extraPowerToughness.getPower();
+    var newToughness = this.extraPowerToughness.getToughness() + extraPowerToughness.getToughness();
     this.extraPowerToughness = new PowerToughness(newPower, newToughness);
   }
 }

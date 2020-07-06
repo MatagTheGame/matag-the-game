@@ -10,7 +10,7 @@ import java.util.List;
 
 @Value
 @JsonDeserialize(builder = PlayerUpdateEvent.PlayerUpdateEventBuilder.class)
-@Builder(toBuilder = true)
+@Builder
 public class PlayerUpdateEvent {
   String name;
   int life;
@@ -20,7 +20,5 @@ public class PlayerUpdateEvent {
   List<CardInstance> graveyard;
 
   @JsonPOJOBuilder(withPrefix = "")
-  public static class PlayerUpdateEventBuilder {
-
-  }
+  public static class PlayerUpdateEventBuilder {}
 }

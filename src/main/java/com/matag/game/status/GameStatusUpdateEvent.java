@@ -13,14 +13,12 @@ import java.util.Set;
 
 @Value
 @JsonDeserialize(builder = GameStatusUpdateEvent.GameStatusUpdateEventBuilder.class)
-@Builder(toBuilder = true)
+@Builder
 public class GameStatusUpdateEvent {
   Turn turn;
   LinkedList<CardInstance> stack;
   Set<PlayerUpdateEvent> playersUpdateEvents;
 
   @JsonPOJOBuilder(withPrefix = "")
-  public static class GameStatusUpdateEventBuilder {
-
-  }
+  public static class GameStatusUpdateEventBuilder {}
 }

@@ -24,7 +24,7 @@ public class CardInstanceFactory implements ApplicationContextAware {
   }
 
   public CardInstance create(GameStatus gameStatus, int id, Card card, String owner, String controller) {
-    CardInstance cardInstance = applicationContext.getBean(CardInstance.class);
+    var cardInstance = applicationContext.getBean(CardInstance.class);
     cardInstance.setGameStatus(gameStatus);
     cardInstance.setId(id);
     cardInstance.setCard(card);

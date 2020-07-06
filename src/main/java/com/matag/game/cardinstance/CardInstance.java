@@ -103,7 +103,7 @@ public class CardInstance {
 
   @JsonProperty
   public List<CardInstanceAbility> getAbilities() {
-    List<CardInstanceAbility> abilities = getFixedAbilities();
+    var abilities = getFixedAbilities();
     abilities.addAll(getAbilitiesFormOtherPermanents());
     return abilities;
   }
@@ -132,7 +132,7 @@ public class CardInstance {
   }
 
   public boolean ofAnyOfTheTypes(List<Type> types) {
-    for (Type type : types) {
+    for (var type : types) {
       if (isOfType(type)) {
         return true;
       }
@@ -141,7 +141,7 @@ public class CardInstance {
   }
 
   public boolean ofAnyOfTheSubtypes(List<Subtype> subtypes) {
-    for (Subtype subtype : subtypes) {
+    for (var subtype : subtypes) {
       if (isOfSubtype(subtype)) {
         return true;
       }
@@ -154,7 +154,7 @@ public class CardInstance {
   }
 
   public boolean ofAnyOfTheColors(List<Color> colors) {
-    for (Color color : colors) {
+    for (var color : colors) {
       if (isOfColor(color)) {
         return true;
       }
@@ -209,7 +209,7 @@ public class CardInstance {
   }
 
   public List<CardInstanceAbility> getFixedAbilities() {
-    List<CardInstanceAbility> abilities = new ArrayList<>();
+    var abilities = new ArrayList<CardInstanceAbility>();
     abilities.addAll(getCardInstanceAbilities(card));
     abilities.addAll(modifiers.getAbilities());
     abilities.addAll(modifiers.getModifiersUntilEndOfTurn().getExtraAbilities());

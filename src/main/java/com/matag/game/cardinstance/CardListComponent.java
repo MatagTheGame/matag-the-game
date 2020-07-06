@@ -39,13 +39,13 @@ public abstract class CardListComponent {
   }
 
   public CardInstance extractCardById(int cardId) {
-    CardInstance cardInstance = findCardById(cardId);
-    this.cards.remove(cardInstance);
+    var cardInstance = findCardById(cardId);
+    cards.remove(cardInstance);
     return cardInstance;
   }
 
   public ArrayList<CardInstance> extractAllCards() {
-    ArrayList<CardInstance> removedCards = new ArrayList<>();
+    var removedCards = new ArrayList<CardInstance>();
     while (!cards.isEmpty()) {
       removedCards.add(cards.remove(0));
     }

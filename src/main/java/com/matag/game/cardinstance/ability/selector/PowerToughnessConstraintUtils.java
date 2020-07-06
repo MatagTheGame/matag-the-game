@@ -5,7 +5,7 @@ import com.matag.cards.ability.selector.PowerToughnessConstraint;
 
 public class PowerToughnessConstraintUtils {
   public static boolean check(PowerToughnessConstraint powerToughnessConstraint, CardInstance cardInstance) {
-    int value = getValue(powerToughnessConstraint.getPowerOrToughness(), cardInstance);
+    var value = getValue(powerToughnessConstraint.getPowerOrToughness(), cardInstance);
 
     switch (powerToughnessConstraint.getPowerToughnessConstraintType()) {
       case EQUAL:

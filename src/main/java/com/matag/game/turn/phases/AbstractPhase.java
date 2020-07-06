@@ -2,7 +2,6 @@ package com.matag.game.turn.phases;
 
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
-import com.matag.game.turn.phases.combat.BeginCombatPhase;
 import com.matag.game.turn.phases.combat.DeclareAttackersPhase;
 import org.springframework.beans.factory.annotation.Autowired;
 

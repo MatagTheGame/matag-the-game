@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.toList;
 @Component
 public class CostService {
   public boolean isCastingCostFulfilled(CardInstance cardInstance, String ability, List<Cost> manaPaid) {
-    ArrayList<Cost> manaPaidCopy = new ArrayList<>(manaPaid);
+    var manaPaidCopy = new ArrayList<>(manaPaid);
 
     if (needsTapping(cardInstance.getCard(), ability)) {
       if (cardInstance.getModifiers().isTapped() || cardInstance.getModifiers().isSummoningSickness()) {
@@ -26,8 +26,8 @@ public class CostService {
       }
     }
 
-    for (Cost cost : getSimpleCost(cardInstance.getCard(), ability)) {
-      boolean removed = false;
+    for (var cost : getSimpleCost(cardInstance.getCard(), ability)) {
+      var removed = false;
 
       if (cost == COLORLESS) {
         if (manaPaidCopy.size() > 0) {
@@ -48,15 +48,15 @@ public class CostService {
   }
 
   public boolean canAfford(CardInstance cardInstance, String ability, GameStatus gameStatus) {
-    List<CardInstance> cardsThatCanGenerateMana = gameStatus.getActivePlayer().getBattlefield().search()
+    var cardsThatCanGenerateMana = gameStatus.getActivePlayer().getBattlefield().search()
       .untapped()
       .withFixedAbility(TAP_ADD_MANA)
       .getCards();
 
-    List<List<Cost>> manaOptions = generatePossibleManaOptions(cardsThatCanGenerateMana);
+    var manaOptions = generatePossibleManaOptions(cardsThatCanGenerateMana);
 
     // try all options
-    for (List<Cost> manaOption : manaOptions) {
+    for (var manaOption : manaOptions) {
       if (isCastingCostFulfilled(cardInstance, ability, manaOption)) {
         return true;
       }
@@ -73,20 +73,20 @@ public class CostService {
       .reduce((left, right) -> left * right).orElse(1);
 
     // populate empty costs
-    List<List<Cost>> manaOptions = new ArrayList<>(choices);
-    for (int j = 0; j < choices; j++) {
+    var manaOptions = new ArrayList<List<Cost>>(choices);
+    for (var j = 0; j < choices; j++) {
       manaOptions.add(new ArrayList<>());
     }
 
     // populate choices
-    int inverseCumulativeSizes = choices;
-    for (CardInstance instance : cardsThatCanGenerateMana) {
-      List<CardInstanceAbility> addManaAbilities = instance.getAbilitiesByType(TAP_ADD_MANA);
+    var inverseCumulativeSizes = choices;
+    for (var instance : cardsThatCanGenerateMana) {
+      var addManaAbilities = instance.getAbilitiesByType(TAP_ADD_MANA);
       inverseCumulativeSizes /= addManaAbilities.size();
 
       for (int j = 0; j < choices; j++) {
-        int index = (j / inverseCumulativeSizes) % addManaAbilities.size();
-        List<Cost> mana = addManaAbilities.get(index).getParameters().stream()
+        var index = (j / inverseCumulativeSizes) % addManaAbilities.size();
+        var mana = addManaAbilities.get(index).getParameters().stream()
           .map(Cost::valueOf)
           .collect(toList());
         manaOptions.get(j).addAll(mana);

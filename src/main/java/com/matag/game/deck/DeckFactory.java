@@ -12,10 +12,7 @@ import com.matag.game.status.GameStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.matag.cards.ability.type.AbilityType.TAP_ADD_MANA;
@@ -28,16 +25,11 @@ public class DeckFactory {
   private final Cards cards;
 
   public List<CardInstance> create(String playerName, GameStatus gameStatus, DeckInfo deckInfo) {
-    List<Card> cards;
-
-    if (deckInfo.getRandomColors() != null) {
-      cards = randomColorsCards(deckInfo.getRandomColors());
-
-    } else {
-      throw new UnsupportedOperationException();
-    }
-
-    return cards.stream()
+    return Optional.ofNullable(deckInfo)
+      .map(DeckInfo::getRandomColors)
+      .map(this::randomColorsCards)   // TODO this can be a flatmap
+      .orElseThrow(UnsupportedOperationException::new)
+      .stream()
       .map(card -> cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, playerName))
       .collect(Collectors.toList());
   }

@@ -61,8 +61,8 @@ public class AdminClient {
   }
 
   private <T> ResponseEntity<T> exchange(SecurityToken token, String url, HttpMethod method, Object request, Class<T> responseType) {
-    RestTemplate restTemplate = new RestTemplate();
-    HttpHeaders headers = new HttpHeaders();
+    var restTemplate = new RestTemplate();
+    var headers = new HttpHeaders();
     headers.setAccept(singletonList(MediaType.APPLICATION_JSON));
 
     if (token != null) {
@@ -71,7 +71,7 @@ public class AdminClient {
       headers.set("admin", configService.getAdminPassword());
     }
 
-    HttpEntity<Object> entity = new HttpEntity<>(request, headers);
+    var entity = new HttpEntity<>(request, headers);
 
     return restTemplate.exchange(configService.getMatagAdminUrl() + url, method, entity, responseType);
   }

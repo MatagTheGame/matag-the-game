@@ -53,7 +53,7 @@ public class Counters {
   }
 
   private void balanceCounters() {
-    int min = Math.min(plus1Counters, minus1Counters);
+    var min = Math.min(plus1Counters, minus1Counters);
     plus1Counters -= min;
     minus1Counters -= min;
   }

@@ -23,7 +23,7 @@ public class CardInstanceAbilityFactory {
   }
 
   public Optional<CardInstanceAbility> abilityFromParameter(String parameter) {
-    List<CardInstanceAbility> abilities = abilitiesFromParameters(singletonList(parameter));
+    var abilities = abilitiesFromParameters(singletonList(parameter));
     if (abilities.isEmpty()) {
       return Optional.empty();
     } else {
