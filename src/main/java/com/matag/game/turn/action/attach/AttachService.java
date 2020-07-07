@@ -11,7 +11,7 @@ public class AttachService {
   private static final Logger LOGGER = LoggerFactory.getLogger(AttachService.class);
 
   public void attach(GameStatus gameStatus, CardInstance cardInstance, int attachedToId) {
-    CardInstance attachTo = gameStatus.findCardByIdFromAnyBattlefield(attachedToId);
+    var attachTo = gameStatus.findCardByIdFromAnyBattlefield(attachedToId);
     cardInstance.getModifiers().setAttachedToId(attachedToId);
     LOGGER.info("attached {} to {}", cardInstance.getIdAndName(), attachTo.getIdAndName());
   }

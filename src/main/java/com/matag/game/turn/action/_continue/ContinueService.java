@@ -12,7 +12,7 @@ public class ContinueService {
   private final PhaseFactory phaseFactory;
 
   public void next(GameStatus gameStatus) {
-    Phase phase = phaseFactory.get(gameStatus.getTurn().getCurrentPhase());
+    var phase = phaseFactory.get(gameStatus.getTurn().getCurrentPhase());
     phase.next(gameStatus);
   }
 }

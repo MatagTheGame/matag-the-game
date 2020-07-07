@@ -18,12 +18,12 @@ import static com.matag.cards.ability.type.AbilityType.TAP_ADD_MANA;
 public class ManaCountService {
 
   public ArrayList<Cost> verifyManaPaid(Map<Integer, List<String>> mana, Player currentPlayer) {
-    ArrayList<Cost> paidCost = new ArrayList<>();
-    for (int cardInstanceId : mana.keySet()) {
-      List<String> requestedManas = mana.get(cardInstanceId);
+    var paidCost = new ArrayList<Cost>();
+    for (var cardInstanceId : mana.keySet()) {
+      var requestedManas = mana.get(cardInstanceId);
 
-      for (String requestedMana : requestedManas) {
-        CardInstance cardInstanceToTap = currentPlayer.getBattlefield().findCardById(cardInstanceId);
+      for (var requestedMana : requestedManas) {
+        var cardInstanceToTap = currentPlayer.getBattlefield().findCardById(cardInstanceId);
         if (!cardInstanceToTap.hasAbilityType(TAP_ADD_MANA)) {
           throw new MessageException(cardInstanceToTap.getIdAndName() + " cannot be tapped for mana.");
 
@@ -42,10 +42,10 @@ public class ManaCountService {
   }
 
   public Map<String, Integer> countManaPaid(Map<Integer, List<String>> mana) {
-    Map<String, Integer> map = new HashMap<>();
+    var map = new HashMap<String, Integer>();
 
-    for (List<String> values : mana.values()) {
-      for (String value : values) {
+    for (var values : mana.values()) {
+      for (var value : values) {
         if (!map.containsKey(value)) {
           map.put(value, 0);
         }

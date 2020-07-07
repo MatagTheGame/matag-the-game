@@ -35,7 +35,7 @@ public class Event {
   }
 
   private static Map<String, Object> map(String player, Object value) {
-    Map<String, Object> map = new HashMap<>();
+    var map = new HashMap<String, Object>();
     map.put("playerName", player);
     map.put("value", value);
     return map;

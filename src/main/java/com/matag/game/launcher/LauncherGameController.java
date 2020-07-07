@@ -20,7 +20,7 @@ public class LauncherGameController {
   @ResponseBody
   @PostMapping(path = {"/ui/game/{id}"})
   public String launchGame(@PathVariable("id") Long id, HttpServletRequest httpServletRequest) {
-    String session = httpServletRequest.getParameter("session");
+    var session = httpServletRequest.getParameter("session");
     validateSessionFormat(session);
 
     return launcherGameResponseBuilder.build(session);

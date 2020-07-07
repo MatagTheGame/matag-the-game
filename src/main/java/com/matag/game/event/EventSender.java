@@ -24,7 +24,7 @@ public class EventSender {
   private final ObjectMapper objectMapper;
 
   public void sendToUser(String sessionId, String username, Event event) {
-    String eventString = serializeToString(event);
+    var eventString = serializeToString(event);
     if (!event.getType().equals("HEALTHCHECK")) {
       if (username != null) {
         LOGGER.info("Sending event to {} - {}: {}", sessionId, username, eventString);

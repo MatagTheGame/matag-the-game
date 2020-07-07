@@ -35,17 +35,17 @@ public class DeckFactory {
   }
 
   private List<Card> randomColorsCards(Set<Color> randomColors) {
-    List<Card> cards = new ArrayList<>();
+    var cards = new ArrayList<Card>();
 
     // Lands
-    for (int i = 0; i < 22; i++) {
-      Color color = new ArrayList<>(randomColors).get(i % randomColors.size());
+    for (var i = 0; i < 22; i++) {
+      var color = new ArrayList<>(randomColors).get(i % randomColors.size());
       cards.add(getBasicLandForColor(color));
     }
     cards.addAll(nCopies(2, getRandomNonBasicLandOfTheseColors(randomColors)));
 
     // Spells
-    for (Card randomCard : getRandomSpellsForColors(randomColors)) {
+    for (var randomCard : getRandomSpellsForColors(randomColors)) {
       cards.addAll(nCopies(4, randomCard));
     }
     cards.addAll(nCopies(4, getRandomColorlessCard()));
@@ -56,33 +56,26 @@ public class DeckFactory {
   }
 
   private Card getBasicLandForColor(Color color) {
-    switch (color) {
-      case WHITE:
-        return cards.get("Plains");
-      case BLUE:
-        return cards.get("Island");
-      case BLACK:
-        return cards.get("Swamp");
-      case RED:
-        return cards.get("Mountain");
-      case GREEN:
-        return cards.get("Forest");
-      default:
-        throw new RuntimeException("Basic Land for color " + color + " does not exist.");
-    }
+    return switch (color) {
+      case WHITE -> cards.get("Plains");
+      case BLUE -> cards.get("Island");
+      case BLACK -> cards.get("Swamp");
+      case RED -> cards.get("Mountain");
+      case GREEN -> cards.get("Forest");
+    };
   }
 
   private List<Card> getRandomSpellsForColors(Set<Color> deckColors) {
-    ArrayList<Card> selectedCards = new ArrayList<>();
+    var selectedCards = new ArrayList<Card>();
 
-    List<Card> creatureCardsOfTheseColors = new CardSearch(cards.getAll())
+    var creatureCardsOfTheseColors = new CardSearch(cards.getAll())
       .ofOnlyAnyOfTheColors(deckColors)
       .ofType(Type.CREATURE)
       .getCards();
     Collections.shuffle(creatureCardsOfTheseColors);
     selectedCards.addAll(creatureCardsOfTheseColors.subList(0, 5));
 
-    List<Card> nonCreatureCardsOfTheseColors = new CardSearch(cards.getAll())
+    var nonCreatureCardsOfTheseColors = new CardSearch(cards.getAll())
       .ofOnlyAnyOfTheColors(deckColors)
       .notOfType(Type.CREATURE)
       .getCards();
@@ -93,12 +86,12 @@ public class DeckFactory {
   }
 
   private Card getRandomNonBasicLandOfTheseColors(Set<Color> deckColors) {
-    List<Card> nonBasicLands = new CardSearch(cards.getAll())
+    var nonBasicLands = new CardSearch(cards.getAll())
       .ofType(Type.LAND)
       .notOfType(Type.BASIC)
       .getCards();
 
-    List<Card> nonBasicLandsMatchingBothColors = nonBasicLands.stream()
+    var nonBasicLandsMatchingBothColors = nonBasicLands.stream()
       .filter(card -> matchesColors(card, deckColors))
       .collect(Collectors.toList());
 
@@ -107,7 +100,7 @@ public class DeckFactory {
       return nonBasicLandsMatchingBothColors.get(0);
 
     } else {
-      List<Card> nonBasicLandsMatchingOneColor = nonBasicLands.stream()
+      var nonBasicLandsMatchingOneColor = nonBasicLands.stream()
         .filter(card -> matchesOneColor(card, deckColors))
         .collect(Collectors.toList());
 
@@ -117,7 +110,7 @@ public class DeckFactory {
   }
 
   private Card getRandomColorlessCard() {
-    List<Card> allColorlessCards = new CardSearch(cards.getAll())
+    var allColorlessCards = new CardSearch(cards.getAll())
       .colorless()
       .getCards();
     Collections.shuffle(allColorlessCards);
@@ -126,14 +119,14 @@ public class DeckFactory {
   }
 
   private boolean matchesColors(Card card, Set<Color> deckColors) {
-    Set<Color> cardColors = colorsOfManaThatCanGenerate(card);
+    var cardColors = colorsOfManaThatCanGenerate(card);
     return deckColors.containsAll(cardColors);
   }
 
   private boolean matchesOneColor(Card card, Set<Color> deckColors) {
-    Set<Color> cardColors = colorsOfManaThatCanGenerate(card);
-    for (Color deckColor : deckColors) {
-      for (Color cardColor : cardColors) {
+    var cardColors = colorsOfManaThatCanGenerate(card);
+    for (var deckColor : deckColors) {
+      for (var cardColor : cardColors) {
         if (deckColor == cardColor) {
           return true;
         }

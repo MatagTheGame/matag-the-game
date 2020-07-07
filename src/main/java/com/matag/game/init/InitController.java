@@ -64,12 +64,12 @@ public class InitController {
 
   @MessageMapping("/game/init")
   void init(SimpMessageHeaderAccessor headerAccessor) {
-    SecurityToken token = securityHelper.extractSecurityToken(headerAccessor);
+    var token = securityHelper.extractSecurityToken(headerAccessor);
     LOGGER.info("Init request received for sessionId '{}', gameId '{}'.", token.getSessionId(), token.getGameId());
 
     if (!gameStatusRepository.contains(token.getGameId())) {
-      GameStatus gameStatus = gameStatusFactory.create(token.getGameId());
-      Player player1 = retrievePlayer(token);
+      var gameStatus = gameStatusFactory.create(token.getGameId());
+      var player1 = retrievePlayer(token);
       gameStatus.setPlayer1(player1);
       gameStatus.getPlayer1().getLibrary().addCards(retrieveDeck(player1, gameStatus));
       gameStatus.getPlayer1().drawHand();
@@ -77,9 +77,9 @@ public class InitController {
       eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_WAITING_OPPONENT"));
 
     } else {
-      GameStatus gameStatus = gameStatusRepository.getUnsecure(token.getGameId());
+      var gameStatus = gameStatusRepository.getUnsecure(token.getGameId());
       if (gameStatus.getPlayer2() == null && !gameStatus.getPlayer1().getToken().getSessionId().equals(token.getSessionId())) {
-        Player player2 = retrievePlayer(token);
+        var player2 = retrievePlayer(token);
         gameStatus.setPlayer2(player2);
         gameStatus.getPlayer2().getLibrary().addCards(retrieveDeck(player2, gameStatus));
         gameStatus.getPlayer2().drawHand();
@@ -102,7 +102,7 @@ public class InitController {
         gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);
 
       } else {
-        Player player = playerService.getPlayerByToken(gameStatus, token.getAdminToken());
+        var player = playerService.getPlayerByToken(gameStatus, token.getAdminToken());
         player.setToken(token);
 
         eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(player, gameStatus.getOtherPlayer(player))));
@@ -113,12 +113,12 @@ public class InitController {
   }
 
   private Player retrievePlayer(SecurityToken token) {
-    PlayerInfo playerInfo = playerInfoRetriever.retrieve(token);
+    var playerInfo = playerInfoRetriever.retrieve(token);
     return playerFactory.create(token, playerInfo);
   }
 
   private List<CardInstance> retrieveDeck(Player player, GameStatus gameStatus) {
-    DeckInfo deckInfo = deckRetrieverService.retrieveDeckForUser(player.getToken());
+    var deckInfo = deckRetrieverService.retrieveDeckForUser(player.getToken());
     return deckFactory.create(player.getName(), gameStatus, deckInfo);
   }
 

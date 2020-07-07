@@ -15,7 +15,7 @@ public class GameStatusFactory implements ApplicationContextAware {
   }
 
   public GameStatus create(String gameId) {
-    GameStatus gameStatus = applicationContext.getBean(GameStatus.class);
+    var gameStatus = applicationContext.getBean(GameStatus.class);
     gameStatus.setGameId(gameId);
     return gameStatus;
   }

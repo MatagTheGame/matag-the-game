@@ -22,16 +22,16 @@ public class ConsolidateStatusService {
     boolean repeat;
     do {
       repeat = false;
-      for (CardInstance card : gameStatus.getAllBattlefieldCards()) {
+      for (var card : gameStatus.getAllBattlefieldCards()) {
         if (isToBeDestroyed(card)) {
-          boolean destroyed = destroyPermanentService.destroy(gameStatus, card.getId());
+          var destroyed = destroyPermanentService.destroy(gameStatus, card.getId());
           if (destroyed) {
             repeat = true;
           }
         }
 
         if (card.getModifiers().getModifiersUntilEndOfTurn().isToBeReturnedToHand()) {
-          boolean returnedToHand = returnPermanentToHandService.returnPermanentToHand(gameStatus, card.getId());
+          var returnedToHand = returnPermanentToHandService.returnPermanentToHand(gameStatus, card.getId());
           if (returnedToHand) {
             repeat = true;
           }

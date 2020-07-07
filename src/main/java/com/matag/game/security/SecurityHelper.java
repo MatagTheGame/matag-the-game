@@ -15,14 +15,14 @@ public class SecurityHelper {
   private final PlayerService playerService;
 
   public SecurityToken extractSecurityToken(SimpMessageHeaderAccessor headerAccessor) {
-    String sessionId = headerAccessor.getSessionId();
-    String token = Objects.requireNonNull(headerAccessor.getNativeHeader("token")).get(0);
-    String gameId = Objects.requireNonNull(headerAccessor.getNativeHeader("gameId")).get(0);
+    var sessionId = headerAccessor.getSessionId();
+    var token = Objects.requireNonNull(headerAccessor.getNativeHeader("token")).get(0);
+    var gameId = Objects.requireNonNull(headerAccessor.getNativeHeader("gameId")).get(0);
     return new SecurityToken(sessionId, token, gameId);
   }
 
   public void isPlayerAllowedToExecuteAction(GameStatus gameStatus, String sessionId) {
-    Player currentPlayer = playerService.getPlayerBySessionId(gameStatus, sessionId);
+    var currentPlayer = playerService.getPlayerBySessionId(gameStatus, sessionId);
     if (!gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(currentPlayer.getName())) {
       throw new SecurityException("Player " + currentPlayer.getName() + " is not allowed to execute an action. turn=[" + gameStatus.getTurn() + "]");
     }

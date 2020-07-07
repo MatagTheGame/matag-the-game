@@ -13,8 +13,8 @@ import java.util.List;
 public class InstantSpeedService {
   public boolean isAtInstantSpeed(CardInstance cardToCast, String playedAbility) {
     if (playedAbility != null) {
-      List<CardInstanceAbility> abilities = cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility));
-      for (CardInstanceAbility ability : abilities) {
+      var abilities = cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility));
+      for (var ability : abilities) {
         if (!ability.isSorcerySpeed()) {
           return true;
         }

@@ -37,8 +37,8 @@ public abstract class InitTestService {
   }
 
   protected void addCardToCurrentPlayerBattlefield(GameStatus gameStatus, Card card) {
-    String owner = gameStatus.getCurrentPlayer().getName();
-    String controller = gameStatus.getCurrentPlayer().getName();
+    var owner = gameStatus.getCurrentPlayer().getName();
+    var controller = gameStatus.getCurrentPlayer().getName();
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, owner, controller));
   }
 
@@ -55,8 +55,8 @@ public abstract class InitTestService {
   }
 
   protected void addCardToNonCurrentPlayerBattlefield(GameStatus gameStatus, Card card) {
-    String owner = gameStatus.getNonCurrentPlayer().getName();
-    String controller = gameStatus.getNonCurrentPlayer().getName();
+    var owner = gameStatus.getNonCurrentPlayer().getName();
+    var controller = gameStatus.getNonCurrentPlayer().getName();
     gameStatus.getNonCurrentPlayer().getBattlefield().addCard(cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, owner, controller));
   }
 

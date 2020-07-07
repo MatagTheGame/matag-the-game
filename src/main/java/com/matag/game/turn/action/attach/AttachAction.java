@@ -17,8 +17,8 @@ public class AttachAction implements AbilityAction {
 
   @Override
   public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
-    String target = cardInstance.getModifiers().getTargets().get(0).toString();
-    int attachedToId = parseInt(target);
+    var target = cardInstance.getModifiers().getTargets().get(0).toString();
+    var attachedToId = parseInt(target);
     attachService.attach(gameStatus, cardInstance, attachedToId);
   }
 }

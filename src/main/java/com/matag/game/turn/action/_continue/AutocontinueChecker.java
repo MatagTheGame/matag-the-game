@@ -20,23 +20,23 @@ public class AutocontinueChecker {
   private final InstantSpeedService instantSpeedService;
 
   public boolean canPerformAnyAction(GameStatus gameStatus) {
-    Player player = gameStatus.getActivePlayer();
+    var player = gameStatus.getActivePlayer();
 
-    List<CardInstance> instants = player.getHand().search().withInstantSpeed().getCards();
-    for (CardInstance cardInstance : instants) {
-      if (costService.canAfford(cardInstance, null, gameStatus)) {
+    var instants = player.getHand().search().withInstantSpeed().getCards();
+    for (var instant : instants) {
+      if (costService.canAfford(instant, null, gameStatus)) {
         return true;
       }
     }
 
-    List<CardInstance> cards = player.getBattlefield().getCards();
-    for (CardInstance cardInstance : cards) {
-      List<CardInstanceAbility> cardAbilities = cardInstance.getAbilities();
-      for (CardInstanceAbility cardAbility : cardAbilities) {
+    var cards = player.getBattlefield().getCards();
+    for (var card : cards) {
+      var cardAbilities = card.getAbilities();
+      for (var cardAbility : cardAbilities) {
         if (cardAbility.getTrigger() != null && cardAbility.getTrigger().getType().equals(ACTIVATED_ABILITY)) {
-          String ability = cardAbility.getAbilityType().toString();
-          if (instantSpeedService.isAtInstantSpeed(cardInstance, ability)) {
-            if (costService.canAfford(cardInstance, ability, gameStatus)) {
+          var ability = cardAbility.getAbilityType().toString();
+          if (instantSpeedService.isAtInstantSpeed(card, ability)) {
+            if (costService.canAfford(card, ability, gameStatus)) {
               return true;
             }
           }

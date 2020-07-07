@@ -39,8 +39,8 @@ public class CastService {
   private final WhenTriggerService whenTriggerService;
 
   public void cast(GameStatus gameStatus, int cardId, Map<Integer, List<String>> mana, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
-    Turn turn = gameStatus.getTurn();
-    Player activePlayer = gameStatus.getActivePlayer();
+    var turn = gameStatus.getTurn();
+    var activePlayer = gameStatus.getActivePlayer();
 
     CardInstance cardToCast;
     SpellType spellType;
@@ -66,7 +66,7 @@ public class CastService {
         whenTriggerService.whenTriggered(gameStatus, cardToCast, WHEN_CAST);
 
       } else {
-        CardInstanceAbility triggeredAbility = cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility)).get(0);
+        var triggeredAbility = cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility)).get(0);
         cardToCast.getTriggeredAbilities().add(triggeredAbility);
         LOGGER.info("Player {} triggered ability {} for {}.", activePlayer.getName(), triggeredAbility.getAbilityType(), cardToCast.getModifiers());
         gameStatus.getStack().add(cardToCast);
@@ -78,7 +78,7 @@ public class CastService {
   }
 
   private void checkSpellOrAbilityCost(Map<Integer, List<String>> mana, Player currentPlayer, CardInstance cardToCast, String ability) {
-    List<Cost> paidCost = manaCountService.verifyManaPaid(mana, currentPlayer);
+    var paidCost = manaCountService.verifyManaPaid(mana, currentPlayer);
     if (!costService.isCastingCostFulfilled(cardToCast, ability, paidCost)) {
       throw new MessageException("There was an error while paying the cost for " + cardToCast.getIdAndName() + ".");
     }

@@ -18,8 +18,8 @@ public class PlayLandService {
   private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
 
   public void playLand(GameStatus gameStatus, int cardId) {
-    Turn turn = gameStatus.getTurn();
-    Player activePlayer = gameStatus.getActivePlayer();
+    var turn = gameStatus.getTurn();
+    var activePlayer = gameStatus.getActivePlayer();
 
     if (!PhaseUtils.isMainPhase(turn.getCurrentPhase())) {
       throw new MessageException("You can only play lands during main phases.");
@@ -31,7 +31,7 @@ public class PlayLandService {
       throw new MessageException("You already played a land this turn.");
 
     } else {
-      CardInstance cardInstance = activePlayer.getHand().findCardById(cardId);
+      var cardInstance = activePlayer.getHand().findCardById(cardId);
       if (cardInstance.isOfType(Type.LAND)) {
         cardInstance = activePlayer.getHand().extractCardById(cardId);
         cardInstance.setController(activePlayer.getName());

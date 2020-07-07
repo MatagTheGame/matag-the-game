@@ -29,7 +29,7 @@ public class GameStatusRepository {
   }
 
   public GameStatus get(String gameId, String sessionId) {
-    GameStatus gameStatus = games.get(gameId);
+    var gameStatus = games.get(gameId);
     securityHelper.isPlayerAllowedToExecuteAction(gameStatus, sessionId);
     return gameStatus;
   }
