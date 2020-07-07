@@ -21,7 +21,7 @@ public class DestroyPermanentService {
   private final WhenTriggerService whenTriggerService;
 
   public void markToBeDestroyed(GameStatus gameStatus, int permanentId) {
-    CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId);
+    var cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId);
 
     if (cardInstance != null) {
       cardInstance.getModifiers().getModifiersUntilEndOfTurn().setToBeDestroyed(true);
@@ -29,7 +29,7 @@ public class DestroyPermanentService {
   }
 
   public boolean destroy(GameStatus gameStatus, int permanentId) {
-    CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId);
+    var cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId);
 
     if (cardInstance == null) {
       return false;

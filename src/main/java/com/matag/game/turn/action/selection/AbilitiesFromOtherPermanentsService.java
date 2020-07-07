@@ -1,11 +1,11 @@
 package com.matag.game.turn.action.selection;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 import com.matag.cards.ability.AbilityService;
 import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.cards.properties.PowerToughness;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 import com.matag.game.status.GameStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -43,11 +43,11 @@ public class AbilitiesFromOtherPermanentsService {
   }
 
   private List<String> getParametersFromOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
-    List<String> parameters = new ArrayList<>();
-    List<CardInstance> cards = gameStatus.getAllBattlefieldCardsSearch().withFixedAbility(SELECTED_PERMANENTS_GET).getCards();
+    var parameters = new ArrayList<String>();
+    var cards = gameStatus.getAllBattlefieldCardsSearch().withFixedAbility(SELECTED_PERMANENTS_GET).getCards();
 
-    for (CardInstance card : cards) {
-      for (CardInstanceAbility ability : card.getFixedAbilitiesByType(SELECTED_PERMANENTS_GET)) {
+    for (var card : cards) {
+      for (var ability : card.getFixedAbilitiesByType(SELECTED_PERMANENTS_GET)) {
         if (ability.getTrigger().getType() == TriggerType.STATIC) {
           if (magicInstancePermanentSelectorService.select(gameStatus, card, ability.getMagicInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
             parameters.addAll(ability.getParameters());

@@ -12,7 +12,7 @@ public class ReturnPermanentToHandService {
   private final PutIntoHandService putIntoHandService;
 
   public void markAsToBeReturnedToHand(GameStatus gameStatus, int targetId) {
-    CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(targetId);
+    var cardInstance = gameStatus.findCardByIdFromAnyBattlefield(targetId);
 
     if (cardInstance != null) {
       cardInstance.getModifiers().getModifiersUntilEndOfTurn().setToBeReturnedToHand(true);
@@ -20,7 +20,7 @@ public class ReturnPermanentToHandService {
   }
 
   public boolean returnPermanentToHand(GameStatus gameStatus, int targetId) {
-    CardInstance cardInstance = gameStatus.findCardByIdFromAnyBattlefield(targetId);
+    var cardInstance = gameStatus.findCardByIdFromAnyBattlefield(targetId);
 
     if (cardInstance != null) {
       leaveBattlefieldService.leaveTheBattlefield(gameStatus, targetId);

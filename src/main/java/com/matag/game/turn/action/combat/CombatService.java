@@ -22,18 +22,18 @@ public class CombatService {
   private final DealDamageToPlayerService dealDamageToPlayerService;
 
   public void dealCombatDamage(GameStatus gameStatus) {
-    Player currentPlayer = gameStatus.getCurrentPlayer();
-    Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
+    var currentPlayer = gameStatus.getCurrentPlayer();
+    var nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
 
-    List<CardInstance> attackingCreatures = currentPlayer.getBattlefield().getAttackingCreatures();
+    var attackingCreatures = currentPlayer.getBattlefield().getAttackingCreatures();
 
     int damageFromUnblockedCreatures = 0;
     int lifelink = 0;
-    for (CardInstance attackingCreature : attackingCreatures) {
-      List<CardInstance> blockingCreaturesFor = nonCurrentPlayer.getBattlefield().getBlockingCreaturesFor(attackingCreature.getId());
-      int remainingDamage = dealCombatDamageForOneAttackingCreature(gameStatus, attackingCreature, blockingCreaturesFor);
+    for (var attackingCreature : attackingCreatures) {
+      var blockingCreaturesFor = nonCurrentPlayer.getBattlefield().getBlockingCreaturesFor(attackingCreature.getId());
+      var remainingDamage = dealCombatDamageForOneAttackingCreature(gameStatus, attackingCreature, blockingCreaturesFor);
 
-      boolean isBlocked = attackingCreature.getModifiers().getModifiersUntilEndOfTurn().isBlocked();
+      var isBlocked = attackingCreature.getModifiers().getModifiersUntilEndOfTurn().isBlocked();
       if (!isBlocked || attackingCreature.hasAbilityType(TRAMPLE)) {
         if (shouldDealDamage(gameStatus, attackingCreature)) {
           damageFromUnblockedCreatures += remainingDamage;
@@ -57,9 +57,9 @@ public class CombatService {
   }
 
   private int dealCombatDamageForOneAttackingCreature(GameStatus gameStatus, CardInstance attackingCreature, List<CardInstance> blockingCreatures) {
-    int remainingDamageForAttackingCreature = attackingCreature.getPower();
-    for (CardInstance blockingCreature : blockingCreatures) {
-      int damageToCurrentBlocker = Math.min(remainingDamageForAttackingCreature, blockingCreature.getToughness());
+    var remainingDamageForAttackingCreature = attackingCreature.getPower();
+    for (var blockingCreature : blockingCreatures) {
+      var damageToCurrentBlocker = Math.min(remainingDamageForAttackingCreature, blockingCreature.getToughness());
 
       if (shouldDealDamage(gameStatus, blockingCreature)) {
         dealDamageToCreatureService.dealDamageToCreature(gameStatus, attackingCreature, blockingCreature.getPower(), blockingCreature.hasAbilityType(DEATHTOUCH), blockingCreature);

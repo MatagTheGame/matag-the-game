@@ -21,22 +21,22 @@ public class DeclareBlockerService {
   private final BlockerChecker blockerChecker;
 
   public void declareBlockers(GameStatus gameStatus, Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds) {
-    Turn turn = gameStatus.getTurn();
-    Player currentPlayer = gameStatus.getCurrentPlayer();
-    Player nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
+    var turn = gameStatus.getTurn();
+    var currentPlayer = gameStatus.getCurrentPlayer();
+    var nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
 
     if (!turn.getCurrentPhase().equals(DB)) {
       throw new RuntimeException("Blockers declared during phase: " + turn.getCurrentPhase());
     }
 
     blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
-      CardInstance attacker = currentPlayer.getBattlefield().findCardById(blockedCreaturesIds.get(0));
-      List<CardInstance> blockers = findBlockers(blockingCreaturesIdsForAttackingCreaturesIds, nonCurrentPlayer, attacker);
+      var attacker = currentPlayer.getBattlefield().findCardById(blockedCreaturesIds.get(0));
+      var blockers = findBlockers(blockingCreaturesIdsForAttackingCreaturesIds, nonCurrentPlayer, attacker);
       blockerChecker.checkIfCanBlock(attacker, blockers);
     });
 
     blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
-      Integer attackingCreatureId = blockedCreaturesIds.get(0);
+      var attackingCreatureId = blockedCreaturesIds.get(0);
       currentPlayer.getBattlefield().findCardById(attackingCreatureId).getModifiers().getModifiersUntilEndOfTurn().setBlocked(true);
       nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(attackingCreatureId);
     });

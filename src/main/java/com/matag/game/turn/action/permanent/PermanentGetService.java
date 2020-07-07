@@ -41,16 +41,16 @@ public class PermanentGetService {
   }
 
   private void thatPermanentGets(CardInstance cardInstance, GameStatus gameStatus, String parameter, CardInstance target) {
-    PowerToughness PowerToughness = abilityService.powerToughnessFromParameter(parameter);
+    var PowerToughness = abilityService.powerToughnessFromParameter(parameter);
     target.getModifiers().getModifiersUntilEndOfTurn().addExtraPowerToughnessUntilEndOfTurn(PowerToughness);
 
-    Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
+    var ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
     ability.ifPresent(value -> target.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(value));
 
-    int damage = abilityService.damageFromParameter(parameter);
+    var damage = abilityService.damageFromParameter(parameter);
     dealDamageToCreatureService.dealDamageToCreature(gameStatus, target, damage, false, cardInstance);
 
-    int controllerDamage = abilityService.controllerDamageFromParameter(parameter);
+    var controllerDamage = abilityService.controllerDamageFromParameter(parameter);
     dealDamageToPlayerService.dealDamageToPlayer(gameStatus, controllerDamage, gameStatus.getPlayerByName(target.getController()));
 
     if (abilityService.destroyedFromParameter(parameter)) {
@@ -77,13 +77,13 @@ public class PermanentGetService {
       gainControlPermanentService.gainControlUntilEndOfTurn(target, cardInstance.getController());
     }
 
-    int plusCounters = abilityService.plus1CountersFromParameter(parameter);
+    var plusCounters = abilityService.plus1CountersFromParameter(parameter);
     countersService.addPlus1Counters(target, plusCounters);
 
-    int minusCounters = abilityService.minus1CountersFromParameter(parameter);
+    var minusCounters = abilityService.minus1CountersFromParameter(parameter);
     countersService.addMinus1Counters(target, minusCounters);
 
-    AbilityType keywordCounter = abilityService.keywordCounterFromParameter(parameter);
+    var keywordCounter = abilityService.keywordCounterFromParameter(parameter);
     if (keywordCounter != null) {
       countersService.addKeywordCounter(target, keywordCounter);
     }

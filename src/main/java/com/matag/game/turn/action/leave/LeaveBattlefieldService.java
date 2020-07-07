@@ -28,10 +28,10 @@ public class LeaveBattlefieldService {
   }
 
   public void leaveTheBattlefield(GameStatus gameStatus, int permanentId) {
-    CardInstance cardInstance = gameStatus.extractCardByIdFromAnyBattlefield(permanentId);
+    var cardInstance = gameStatus.extractCardByIdFromAnyBattlefield(permanentId);
     cardInstance.resetAllModifiers();
 
-    for (CardInstance attachedCard : attachmentsService.getAttachedCards(gameStatus, cardInstance)) {
+    for (var attachedCard : attachmentsService.getAttachedCards(gameStatus, cardInstance)) {
       if (attachedCard.isOfType(ENCHANTMENT)) {
         destroyPermanentService.markToBeDestroyed(gameStatus, attachedCard.getId());
 

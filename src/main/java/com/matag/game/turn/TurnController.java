@@ -38,9 +38,9 @@ public class TurnController {
 
   @MessageMapping("/game/turn")
   public void turn(SimpMessageHeaderAccessor headerAccessor, TurnRequest request) {
-    SecurityToken token = securityHelper.extractSecurityToken(headerAccessor);
+    var token = securityHelper.extractSecurityToken(headerAccessor);
     LOGGER.info("Turn request received for sessionId '{}', gameId '{}': {}", token.getSessionId(), token.getGameId(), request);
-    GameStatus gameStatus = gameStatusRepository.get(token.getGameId(), token.getSessionId());
+    var gameStatus = gameStatusRepository.get(token.getGameId(), token.getSessionId());
     if (gameStatus.getTurn().isEnded()) {
       throw new RuntimeException("Game is ended, no more actions are permitted.");
     }

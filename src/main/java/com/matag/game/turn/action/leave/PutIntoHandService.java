@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PutIntoHandService {
   public void returnToHand(GameStatus gameStatus, CardInstance cardInstance) {
-    Player owner = gameStatus.getPlayerByName(cardInstance.getOwner());
+    var owner = gameStatus.getPlayerByName(cardInstance.getOwner());
     cardInstance.resetAllModifiers();
     owner.getHand().addCard(cardInstance);
   }

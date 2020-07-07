@@ -49,7 +49,7 @@ public class FirstStrikePhase extends AbstractPhase {
   public void next(GameStatus gameStatus) {
     gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
 
-    boolean executePhase = gameStatus.getCurrentPlayer().getBattlefield().search()
+    var executePhase = gameStatus.getCurrentPlayer().getBattlefield().search()
       .withAnyFixedAbility(List.of(FIRST_STRIKE, DOUBLE_STRIKE))
       .isNotEmpty();
 

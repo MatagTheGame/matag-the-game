@@ -21,7 +21,7 @@ public class SelectedPermanentsGetAction implements AbilityAction {
 
   @Override
   public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
-    MagicInstanceSelector magicInstanceSelector = ability.getMagicInstanceSelector();
+    var magicInstanceSelector = ability.getMagicInstanceSelector();
     if (magicInstanceSelector.getSelectorType() == SelectorType.PLAYER) {
       magicInstancePlayerSelectorService.selectPlayers(gameStatus, cardInstance, magicInstanceSelector)
         .forEach(player -> playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getParameters(), player));

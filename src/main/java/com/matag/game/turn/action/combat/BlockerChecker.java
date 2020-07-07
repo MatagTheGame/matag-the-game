@@ -11,7 +11,7 @@ import java.util.List;
 @Component
 public class BlockerChecker {
   public void checkIfCanBlock(CardInstance attacker, List<CardInstance> blockers) {
-    for (CardInstance blocker : blockers) {
+    for (var blocker : blockers) {
       checkIfCanBlock(attacker, blocker);
     }
 

@@ -25,21 +25,21 @@ public class ThatTargetsGetAction implements AbilityAction {
 
   @Override
   public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
-    for (int i = 0; i < ability.getTargets().size(); i++) {
-      Object targetId = targetCheckerService.getTargetIdAtIndex(cardInstance, ability, i);
+    for (var i = 0; i < ability.getTargets().size(); i++) {
+      var targetId = targetCheckerService.getTargetIdAtIndex(cardInstance, ability, i);
 
       if (targetId != null) {
         if (targetId instanceof String) {
-          Player player = gameStatus.getPlayerByName((String) targetId);
+          var player = gameStatus.getPlayerByName((String) targetId);
           playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getParameters(), player);
 
         } else {
-          int targetCardId = (int) targetId;
+          var targetCardId = (int) targetId;
 
-          Optional<CardInstance> targetOptional = gameStatus.getAllBattlefieldCardsSearch().withId(targetCardId);
+          var targetOptional = gameStatus.getAllBattlefieldCardsSearch().withId(targetCardId);
 
           if (targetOptional.isPresent()) {
-            CardInstance target = targetOptional.get();
+            var target = targetOptional.get();
             permanentGetService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), target);
 
           } else {

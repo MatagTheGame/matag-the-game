@@ -20,7 +20,7 @@ public class EnterCardIntoBattlefieldService {
   private final WhenTriggerService whenTriggerService;
 
   public void enter(GameStatus gameStatus, CardInstance cardInstance) {
-    String controller = cardInstance.getController();
+    var controller = cardInstance.getController();
     gameStatus.getPlayerByName(controller).getBattlefield().addCard(cardInstance);
 
     cardInstance.getModifiers().setPermanentId(gameStatus.nextCardId());

@@ -66,7 +66,7 @@ public abstract class AbstractPhase implements Phase {
       gameStatus.getTurn().increaseTurnNumber();
     }
 
-    Phase nextPhase = getNextPhase(gameStatus);
+    var nextPhase = getNextPhase(gameStatus);
     gameStatus.getTurn().setCurrentPhase(nextPhase.getName());
     gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getTurn().getCurrentTurnPlayer());
     gameStatus.getTurn().setPhaseActioned(false);

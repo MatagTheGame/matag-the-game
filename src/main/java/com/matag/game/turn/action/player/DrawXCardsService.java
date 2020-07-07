@@ -1,6 +1,5 @@
 package com.matag.game.turn.action.player;
 
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +11,8 @@ public class DrawXCardsService {
 
   public void drawXCards(Player player, int cardsToDraw) {
     if (cardsToDraw > 0) {
-      for (int i = 0; i < cardsToDraw; i++) {
-        CardInstance drawnCardInstance = player.getLibrary().draw();
+      for (var i = 0; i < cardsToDraw; i++) {
+        var drawnCardInstance = player.getLibrary().draw();
         player.getHand().addCard(drawnCardInstance);
       }
 

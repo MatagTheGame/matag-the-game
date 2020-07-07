@@ -35,7 +35,7 @@ public class UntapPhase extends AbstractPhase {
   public void action(GameStatus gameStatus) {
     super.action(gameStatus);
 
-    for (CardInstance cardInstance : gameStatus.getCurrentPlayer().getBattlefield().search().tapped().getCards()) {
+    for (var cardInstance : gameStatus.getCurrentPlayer().getBattlefield().search().tapped().getCards()) {
       if (cardInstance.getModifiers().isDoesNotUntapNextTurn()) {
         cardInstance.getModifiers().setDoesNotUntapNextTurn(false);
       } else {

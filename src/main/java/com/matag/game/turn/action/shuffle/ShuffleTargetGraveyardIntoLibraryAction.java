@@ -17,10 +17,10 @@ public class ShuffleTargetGraveyardIntoLibraryAction implements AbilityAction {
 
   @Override
   public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
-    String targetPlayerName = (String) cardInstance.getModifiers().getTargets().get(0);
-    Player targetPlayer = gameStatus.getPlayerByName(targetPlayerName);
+    var targetPlayerName = (String) cardInstance.getModifiers().getTargets().get(0);
+    var targetPlayer = gameStatus.getPlayerByName(targetPlayerName);
 
-    ArrayList<CardInstance> graveyardCards = targetPlayer.getGraveyard().extractAllCards();
+    var graveyardCards = targetPlayer.getGraveyard().extractAllCards();
     targetPlayer.getLibrary().addCards(graveyardCards);
     targetPlayer.getLibrary().shuffle();
 

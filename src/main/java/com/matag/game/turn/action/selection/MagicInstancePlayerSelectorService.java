@@ -14,15 +14,15 @@ import java.util.List;
 @Component
 public class MagicInstancePlayerSelectorService {
   public List<Player> selectPlayers(GameStatus gameStatus, CardInstance cardInstance, MagicInstanceSelector magicInstanceSelector) {
-    List<Player> players = new ArrayList<>();
+    var players = new ArrayList<Player>();
 
     if (magicInstanceSelector.getSelectorType().equals(SelectorType.PLAYER)) {
       if (magicInstanceSelector.isItself()) {
         players.add(gameStatus.getPlayerByName(cardInstance.getController()));
 
       } else {
-        Player player = gameStatus.getPlayerByName(cardInstance.getController());
-        Player opponent = gameStatus.getOtherPlayer(player);
+        var player = gameStatus.getPlayerByName(cardInstance.getController());
+        var opponent = gameStatus.getOtherPlayer(player);
         players.add(opponent);
         if (magicInstanceSelector.getControllerType() != PlayerType.OPPONENT) {
           players.add(player);

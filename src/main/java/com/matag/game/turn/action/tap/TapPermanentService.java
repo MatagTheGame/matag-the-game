@@ -11,7 +11,7 @@ public class TapPermanentService {
   private static final Logger LOGGER = LoggerFactory.getLogger(TapPermanentService.class);
 
   public void tap(GameStatus gameStatus, int targetId) {
-    CardInstance cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);
+    var cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);
     if (cardToTap != null) {
       cardToTap.getModifiers().setTapped(true);
       LOGGER.info("{} tapped.", cardToTap.getIdAndName());
@@ -22,7 +22,7 @@ public class TapPermanentService {
   }
 
   public void doesNotUntapNextTurn(GameStatus gameStatus, int targetId) {
-    CardInstance cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);
+    var cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);
     if (cardToTap != null) {
       cardToTap.getModifiers().doesNotUntapNextTurn();
       LOGGER.info("{} does not untap next turn.", cardToTap.getIdAndName());
@@ -33,7 +33,7 @@ public class TapPermanentService {
   }
 
   public void untap(GameStatus gameStatus, int targetId) {
-    CardInstance cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);
+    var cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId);
     if (cardToTap != null) {
       cardToTap.getModifiers().setTapped(false);
       LOGGER.info("{} tapped.", cardToTap.getIdAndName());

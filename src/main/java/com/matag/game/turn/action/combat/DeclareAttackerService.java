@@ -24,8 +24,8 @@ public class DeclareAttackerService {
   private final WhenTriggerService whenTriggerService;
 
   public void declareAttackers(GameStatus gameStatus, List<Integer> cardIds) {
-    Turn turn = gameStatus.getTurn();
-    Player currentPlayer = gameStatus.getCurrentPlayer();
+    var turn = gameStatus.getTurn();
+    var currentPlayer = gameStatus.getCurrentPlayer();
 
     if (!turn.getCurrentPhase().equals(DA)) {
       throw new RuntimeException("Attackers declared during phase: " + turn.getCurrentPhase());
@@ -42,7 +42,7 @@ public class DeclareAttackerService {
   }
 
   private void declareAsAttacker(GameStatus gameStatus, Player currentPlayer, Integer cardId) {
-    CardInstance cardInstance = currentPlayer.getBattlefield().findCardById(cardId);
+    var cardInstance = currentPlayer.getBattlefield().findCardById(cardId);
     if (!cardInstance.hasAbilityType(AbilityType.VIGILANCE)) {
       tapPermanentService.tap(gameStatus, cardId);
     }

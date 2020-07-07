@@ -18,19 +18,13 @@ public class AbilityActionFactory {
   private final AttachAction attachAction;
 
   public AbilityAction getAbilityAction(AbilityType abilityType) {
-    switch (abilityType) {
-      case SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER:
-        return shuffleTargetGraveyardIntoLibraryAction;
-      case THAT_TARGETS_GET:
-        return thatTargetsGetAction;
-      case SELECTED_PERMANENTS_GET:
-        return selectedPermanentsGetAction;
-      case ENCHANT:
-      case EQUIP:
-        return attachAction;
-      default:
-        return null;
-    }
+    return switch (abilityType) {
+      case SHUFFLE_GRAVEYARD_INTO_LIBRARY_FOR_TARGET_PLAYER -> shuffleTargetGraveyardIntoLibraryAction;
+      case THAT_TARGETS_GET -> thatTargetsGetAction;
+      case SELECTED_PERMANENTS_GET -> selectedPermanentsGetAction;
+      case ENCHANT, EQUIP -> attachAction;
+      default -> null;
+    };
   }
 
 }

@@ -30,25 +30,25 @@ public class EntersTheBattlefieldWithService {
   private final TapPermanentService tapPermanentService;
 
   void entersTheBattlefieldWith(GameStatus gameStatus, CardInstance cardInstance) {
-    List<String> parameters = addEntersTheBattlefieldWithParameters(cardInstance);
+    var parameters = addEntersTheBattlefieldWithParameters(cardInstance);
     parameters.addAll(addAdamantEntersTheBattlefieldWithParameters(gameStatus, cardInstance));
     executeParameters(gameStatus, cardInstance, parameters);
   }
 
   private List<String> addEntersTheBattlefieldWithParameters(CardInstance cardInstance) {
-    List<CardInstanceAbility> entersTheBattlefieldWith = cardInstance.getAbilitiesByType(ENTERS_THE_BATTLEFIELD_WITH);
+    var entersTheBattlefieldWith = cardInstance.getAbilitiesByType(ENTERS_THE_BATTLEFIELD_WITH);
     return entersTheBattlefieldWith.stream().map(CardInstanceAbility::getParameters).flatMap(Collection::stream).collect(toList());
   }
 
   private List<String> addAdamantEntersTheBattlefieldWithParameters(GameStatus gameStatus, CardInstance cardInstance) {
-    List<String> parameters = new ArrayList<>();
-    List<CardInstanceAbility> adamantAbilities = cardInstance.getAbilitiesByType(ADAMANT);
+    var parameters = new ArrayList<String>();
+    var adamantAbilities = cardInstance.getAbilitiesByType(ADAMANT);
 
-    for (CardInstanceAbility adamant : adamantAbilities) {
-      Map<Integer, List<String>> manaPaid = gameStatus.getTurn().getLastManaPaid();
-      Map<String, Integer> manaPaidByColor = manaCountService.countManaPaid(manaPaid);
-      String adamantColor = adamant.getParameter(0);
-      boolean adamantFulfilled = isAdamantFulfilled(manaPaidByColor, adamantColor);
+    for (var adamant : adamantAbilities) {
+      var manaPaid = gameStatus.getTurn().getLastManaPaid();
+      var manaPaidByColor = manaCountService.countManaPaid(manaPaid);
+      var adamantColor = adamant.getParameter(0);
+      var adamantFulfilled = isAdamantFulfilled(manaPaidByColor, adamantColor);
 
       if (adamantFulfilled) {
         parameters.addAll(adamant.getAbility().getParameters());
@@ -71,18 +71,18 @@ public class EntersTheBattlefieldWithService {
   }
 
   private void executeParameters(GameStatus gameStatus, CardInstance cardInstance, List<String> parameters) {
-    for (String parameter : parameters) {
+    for (var parameter : parameters) {
       if (abilityService.tappedFromParameter(parameter)) {
         tapPermanentService.tap(gameStatus, cardInstance.getId());
       }
 
-      int plus1Counters = abilityService.plus1CountersFromParameter(parameter);
+      var plus1Counters = abilityService.plus1CountersFromParameter(parameter);
       cardInstance.getModifiers().getCounters().addPlus1Counters(plus1Counters);
 
-      int minus1Counters = abilityService.minus1CountersFromParameter(parameter);
+      var minus1Counters = abilityService.minus1CountersFromParameter(parameter);
       cardInstance.getModifiers().getCounters().addMinus1Counters(minus1Counters);
 
-      int cardsToDraw = abilityService.drawFromParameter(parameter);
+      var cardsToDraw = abilityService.drawFromParameter(parameter);
       drawXCardsService.drawXCards(gameStatus.getPlayerByName(cardInstance.getController()), cardsToDraw);
     }
   }

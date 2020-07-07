@@ -27,15 +27,15 @@ public class TargetCheckerService {
   private final MagicInstancePermanentSelectorService magicInstancePermanentSelectorService;
 
   public void checkSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus, Map<Integer, List<Object>> targetsIdsForCardIds, String playedAbility) {
-    List<CardInstanceAbility> playedAbilities = playedAbilities(cardToCast, playedAbility);
-    List<Object> targetsIds = getTargetsIds(targetsIdsForCardIds, cardToCast.getId());
+    var playedAbilities = playedAbilities(cardToCast, playedAbility);
+    var targetsIds = getTargetsIds(targetsIdsForCardIds, cardToCast.getId());
 
-    int targetIndex = 0;
-    for (CardInstanceAbility ability : playedAbilities) {
+    var targetIndex = 0;
+    for (var ability : playedAbilities) {
       if (ability.requiresTarget()) {
         checkThatTargetsAreDifferent(ability.getTargets(), targetsIds);
-        for (int i = 0; i < ability.getTargets().size(); i++, targetIndex++) {
-          Object targetId = targetIndex < targetsIds.size() ? targetsIds.get(targetIndex) : null;
+        for (var i = 0; i < ability.getTargets().size(); i++, targetIndex++) {
+          var targetId = targetIndex < targetsIds.size() ? targetsIds.get(targetIndex) : null;
           check(gameStatus, cardToCast, ability.getTargets().get(i), targetId);
         }
 
@@ -45,7 +45,7 @@ public class TargetCheckerService {
   }
 
   public boolean checkIfRequiresTarget(CardInstance cardToCast) {
-    for (CardInstanceAbility ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
+    for (var ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
       return ability.requiresTarget();
     }
 
@@ -53,13 +53,13 @@ public class TargetCheckerService {
   }
 
   public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
-    for (CardInstanceAbility ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
-      for (Target target : ability.getTargets()) {
+    for (var ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
+      for (var target : ability.getTargets()) {
         if (target.getMagicInstanceSelector().getSelectorType().equals(SelectorType.PLAYER)) {
           return true;
 
         } else {
-          CardInstanceSearch cards = magicInstancePermanentSelectorService.select(gameStatus, cardToCast, target.getMagicInstanceSelector());
+          var cards = magicInstancePermanentSelectorService.select(gameStatus, cardToCast, target.getMagicInstanceSelector());
           if (cards.isNotEmpty()) {
             return true;
           }
@@ -71,7 +71,7 @@ public class TargetCheckerService {
   }
 
   public void check(GameStatus gameStatus, CardInstance cardInstance, Target target, Object targetId) {
-    MagicInstanceSelector magicInstanceSelector = target.getMagicInstanceSelector();
+    var magicInstanceSelector = target.getMagicInstanceSelector();
     if (targetId == null) {
       if (!target.isOptional()) {
         throw new MessageException(cardInstance.getIdAndName() + " requires a valid target.");
@@ -91,8 +91,8 @@ public class TargetCheckerService {
         throw new MessageException(targetId + " is not valid for type " + magicInstanceSelector.getSelectorType());
       }
 
-      int targetCardId = (int) targetId;
-      CardInstanceSearch cards = magicInstancePermanentSelectorService.select(gameStatus, cardInstance, magicInstanceSelector);
+      var targetCardId = (int) targetId;
+      var cards = magicInstancePermanentSelectorService.select(gameStatus, cardInstance, magicInstanceSelector);
       if (cards.withId(targetCardId).isEmpty()) {
         throw new MessageException("Selected targets were not valid.");
       }
@@ -100,9 +100,9 @@ public class TargetCheckerService {
   }
 
   public Object getTargetIdAtIndex(CardInstance cardInstance, CardInstanceAbility ability, int index) {
-    int abilityIndex = cardInstance.getAbilities().indexOf(ability);
-    int firstTargetIndex = 0;
-    for (int i = 0; i < abilityIndex; i++) {
+    var abilityIndex = cardInstance.getAbilities().indexOf(ability);
+    var firstTargetIndex = 0;
+    for (var i = 0; i < abilityIndex; i++) {
       firstTargetIndex += cardInstance.getAbilities().get(i).getTargets().size();
     }
 
@@ -130,8 +130,8 @@ public class TargetCheckerService {
   }
 
   private void checkThatTargetsAreDifferent(List<Target> targets, List<Object> targetsIds) {
-    for (int i = 0; i < Math.min(targets.size(), targetsIds.size()); i++) {
-      Target target = targets.get(i);
+    for (var i = 0; i < Math.min(targets.size(), targetsIds.size()); i++) {
+      var target = targets.get(i);
       if (target.isOther()) {
         if (countTargetsWithId(targetsIds, targetsIds.get(i)) > 1) {
           throw new MessageException("Targets must be different.");
