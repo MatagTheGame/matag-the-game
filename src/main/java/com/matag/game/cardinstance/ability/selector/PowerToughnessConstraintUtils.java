@@ -29,13 +29,10 @@ public class PowerToughnessConstraintUtils {
   }
 
   private static int getValue(PowerToughnessConstraint.PowerOrToughness powerOrToughness, CardInstance cardInstance) {
-    switch (powerOrToughness) {
-      case POWER:
-        return cardInstance.getPower();
-      case TOUGHNESS:
-        return cardInstance.getToughness();
-      default:
-        throw new RuntimeException("powerOrToughness is null");
-    }
+    return switch (powerOrToughness) {
+      case POWER -> cardInstance.getPower();
+      case TOUGHNESS -> cardInstance.getToughness();
+      default -> throw new RuntimeException("powerOrToughness is null");
+    };
   }
 }
