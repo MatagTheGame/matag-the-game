@@ -1,6 +1,5 @@
 package integration.cardinstance.cost;
 
-import com.matag.cards.Card;
 import com.matag.cards.Cards;
 import com.matag.cards.CardsConfiguration;
 import com.matag.game.cardinstance.CardInstance;
@@ -44,12 +43,12 @@ public class PayCostServiceTest {
   @Test
   public void isCastingCostFulfilledFeralMaakaCorrectCosts() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = createCardInstance(gameStatus, "Feral Maaka");
-    CardInstance mountain1 = createCardInstance(gameStatus, "Mountain");
-    CardInstance mountain2 = createCardInstance(gameStatus, "Mountain");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = createCardInstance(gameStatus, "Feral Maaka");
+    var mountain1 = createCardInstance(gameStatus, "Mountain");
+    var mountain2 = createCardInstance(gameStatus, "Mountain");
 
-    Map<Integer, List<String>> manaPaid = Map.of(
+    var manaPaid = Map.of(
       mountain1.getId(), List.of("RED"),
       mountain2.getId(), List.of("RED")
     );
@@ -65,11 +64,11 @@ public class PayCostServiceTest {
   @Test
   public void isCastingCostFulfilledCheckpointOfficerTapAbility() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = createCardInstance(gameStatus, "Checkpoint Officer");
-    CardInstance plains1 = createCardInstance(gameStatus, "Plains");
-    CardInstance plains2 = createCardInstance(gameStatus, "Plains");
-    Map<Integer, List<String>> manaPaid = Map.of(
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = createCardInstance(gameStatus, "Checkpoint Officer");
+    var plains1 = createCardInstance(gameStatus, "Plains");
+    var plains2 = createCardInstance(gameStatus, "Plains");
+    var manaPaid = Map.of(
       plains1.getId(), List.of("WHITE"),
       plains2.getId(), List.of("WHITE")
     );
@@ -84,8 +83,8 @@ public class PayCostServiceTest {
   }
 
   private CardInstance createCardInstance(GameStatus gameStatus, String cardName) {
-    Card card = cards.get(cardName);
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, ++cardInstanceId, card, "player-name", "player-name");
+    var card = cards.get(cardName);
+    var cardInstance = cardInstanceFactory.create(gameStatus, ++cardInstanceId, card, "player-name", "player-name");
     gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance);
     return cardInstance;
   }

@@ -1,11 +1,11 @@
 package com.matag.game.turn.action.attach;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 import com.matag.cards.ability.AbilityService;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.PowerToughness;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 import com.matag.game.status.GameStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

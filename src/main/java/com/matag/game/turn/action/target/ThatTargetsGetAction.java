@@ -3,7 +3,6 @@ package com.matag.game.turn.action.target;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.AbilityAction;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.permanent.PermanentGetService;
 import com.matag.game.turn.action.player.PlayerGetService;
@@ -11,8 +10,6 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor

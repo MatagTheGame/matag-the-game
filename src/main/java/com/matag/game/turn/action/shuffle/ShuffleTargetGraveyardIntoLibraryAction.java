@@ -1,15 +1,12 @@
 package com.matag.game.turn.action.shuffle;
 
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.cardinstance.ability.AbilityAction;
-import com.matag.game.player.Player;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.status.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 
 @Component
 public class ShuffleTargetGraveyardIntoLibraryAction implements AbilityAction {

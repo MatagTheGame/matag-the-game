@@ -3,7 +3,6 @@ package com.matag.game.cardinstance.cost;
 import com.matag.cards.Card;
 import com.matag.cards.properties.Cost;
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.status.GameStatus;
 import org.springframework.stereotype.Component;
 

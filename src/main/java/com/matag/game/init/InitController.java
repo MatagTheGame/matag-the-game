@@ -1,7 +1,5 @@
 package com.matag.game.init;
 
-import com.matag.adminentities.DeckInfo;
-import com.matag.adminentities.PlayerInfo;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.deck.DeckFactory;
 import com.matag.game.deck.DeckRetrieverService;

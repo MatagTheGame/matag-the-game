@@ -1,11 +1,7 @@
 package integration.turn.action.cast;
 
 import com.matag.cards.Cards;
-import com.matag.cards.properties.Cost;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.player.Player;
-import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.cast.ManaCountService;
 import integration.TestUtils;
 import org.junit.Rule;
@@ -16,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,20 +41,20 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidForSimpleLands() {
     // Given
-    Map<Integer, List<String>> mana = Map.of(
+    var mana = Map.of(
       1, List.of("WHITE"),
       2, List.of("WHITE"),
       3, List.of("BLUE")
     );
-    GameStatus gameStatus = testUtils.testGameStatus();
-    Player player = gameStatus.getPlayer1();
+    var gameStatus = testUtils.testGameStatus();
+    var player = gameStatus.getPlayer1();
 
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 2, cards.get("Plains"), player.getName(), player.getName()));
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 3, cards.get("Island"), player.getName(), player.getName()));
 
     // When
-    ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
+    var colors = manaCountService.verifyManaPaid(mana, player);
 
     // Then
     assertThat(colors).containsExactlyInAnyOrder(WHITE, WHITE, BLUE);
@@ -68,11 +63,11 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingInstant() {
     // Given
-    Map<Integer, List<String>> mana = Map.of(
+    var mana = Map.of(
       1, List.of("WHITE")
     );
-    GameStatus gameStatus = testUtils.testGameStatus();
-    Player player = gameStatus.getPlayer1();
+    var gameStatus = testUtils.testGameStatus();
+    var player = gameStatus.getPlayer1();
 
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), player.getName(), player.getName()));
 
@@ -85,13 +80,13 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingAlreadyTappedLand() {
     // Given
-    Map<Integer, List<String>> mana = Map.of(
+    var mana = Map.of(
       1, List.of("WHITE")
     );
-    GameStatus gameStatus = testUtils.testGameStatus();
-    Player player = gameStatus.getPlayer1();
+    var gameStatus = testUtils.testGameStatus();
+    var player = gameStatus.getPlayer1();
 
-    CardInstance plains = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName());
+    var plains = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName());
     plains.getModifiers().setTapped(true);
     player.getBattlefield().addCard(plains);
 
@@ -104,9 +99,9 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingLandForWrongColor() {
     // Given
-    Map<Integer, List<String>> mana = Map.of(1, List.of("BLUE"));
-    GameStatus gameStatus = testUtils.testGameStatus();
-    Player player = gameStatus.getPlayer1();
+    var mana = Map.of(1, List.of("BLUE"));
+    var gameStatus = testUtils.testGameStatus();
+    var player = gameStatus.getPlayer1();
 
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
 
@@ -119,16 +114,16 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingLandForDualLand() {
     // Given
-    Map<Integer, List<String>> mana = Map.of(
+    var mana = Map.of(
       1, List.of("BLUE")
     );
-    GameStatus gameStatus = testUtils.testGameStatus();
-    Player player = gameStatus.getPlayer1();
+    var gameStatus = testUtils.testGameStatus();
+    var player = gameStatus.getPlayer1();
 
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
 
     // When
-    ArrayList<Cost> colors = manaCountService.verifyManaPaid(mana, player);
+    var colors = manaCountService.verifyManaPaid(mana, player);
 
     // Then
     assertThat(colors).isEqualTo(List.of(BLUE));
@@ -137,11 +132,11 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingLandForDualLandError() {
     // Given
-    Map<Integer, List<String>> mana = Map.of(
+    var mana = Map.of(
       1, List.of("BLACK")
     );
-    GameStatus gameStatus = testUtils.testGameStatus();
-    Player player = gameStatus.getPlayer1();
+    var gameStatus = testUtils.testGameStatus();
+    var player = gameStatus.getPlayer1();
 
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.getName(), player.getName()));
 
@@ -154,12 +149,12 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidColorlessMana() {
     // Given
-    Map<Integer, List<String>> mana = Map.of(
+    var mana = Map.of(
       1, List.of("WHITE"),
       2, List.of("COLORLESS")
     );
-    GameStatus gameStatus = testUtils.testGameStatus();
-    Player player = gameStatus.getPlayer1();
+    var gameStatus = testUtils.testGameStatus();
+    var player = gameStatus.getPlayer1();
 
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.getName(), player.getName()));
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 2, cards.get("Sunscorched Desert"), player.getName(), player.getName()));
@@ -171,11 +166,11 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingCreatureWhichGeneratesTwoMana() {
     // Given
-    Map<Integer, List<String>> mana = Map.of(
+    var mana = Map.of(
       1, List.of("GREEN", "BLUE")
     );
-    GameStatus gameStatus = testUtils.testGameStatus();
-    Player player = gameStatus.getPlayer1();
+    var gameStatus = testUtils.testGameStatus();
+    var player = gameStatus.getPlayer1();
 
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
 
@@ -186,11 +181,11 @@ public class ManaCountServiceTest {
   @Test
   public void countManaPaidTappingCreatureWhichGeneratesTwoManaException() {
     // Given
-    Map<Integer, List<String>> mana = Map.of(
+    var mana = Map.of(
       1, List.of("GREEN", "BLACK")
     );
-    GameStatus gameStatus = testUtils.testGameStatus();
-    Player player = gameStatus.getPlayer1();
+    var gameStatus = testUtils.testGameStatus();
+    var player = gameStatus.getPlayer1();
 
     player.getBattlefield().addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.getName(), player.getName()));
 

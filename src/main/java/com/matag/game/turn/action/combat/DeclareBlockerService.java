@@ -3,7 +3,6 @@ package com.matag.game.turn.action.combat;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.Turn;
 import com.matag.game.turn.action._continue.ContinueService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

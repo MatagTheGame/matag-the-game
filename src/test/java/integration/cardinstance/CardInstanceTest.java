@@ -1,9 +1,7 @@
 package integration.cardinstance;
 
 import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.status.GameStatus;
 import integration.TestUtils;
 import integration.TestUtilsConfiguration;
 import org.junit.Rule;
@@ -32,8 +30,8 @@ public class CardInstanceTest {
   @Test
   public void checkIfCanAttackShouldWorkForCreatures() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), "player-name");
 
     // When
     cardInstance.checkIfCanAttack();
@@ -42,8 +40,8 @@ public class CardInstanceTest {
   @Test
   public void checkIfCanAttackShouldThrowExceptionForNonCreatures() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
 
     // Expects
     thrown.expectMessage("\"1 - Short Sword\" is not of type Creature.");
@@ -55,8 +53,8 @@ public class CardInstanceTest {
   @Test
   public void checkIfCanAttackShouldThrowExceptionForTappedCreatures() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), "player-name");
     cardInstance.getModifiers().setTapped(true);
 
     // Expects
@@ -69,8 +67,8 @@ public class CardInstanceTest {
   @Test
   public void checkIfCanAttackShouldThrowExceptionForCreaturesWithSummoningSickness() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), "player-name");
     cardInstance.getModifiers().setSummoningSickness(true);
 
     // Expects
@@ -83,8 +81,8 @@ public class CardInstanceTest {
   @Test
   public void checkIfCanAttackShouldBeOkForCreaturesWithSummoningSicknessButHaste() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Nest Robber"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Nest Robber"), "player-name");
     cardInstance.getModifiers().setSummoningSickness(true);
 
     // When
@@ -94,8 +92,8 @@ public class CardInstanceTest {
   @Test
   public void checkIfCanAttackShouldThrowExceptionForCreaturesWithDefender() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Guardians of Meletis"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Guardians of Meletis"), "player-name");
 
     // Expects
     thrown.expectMessage("\"1 - Guardians of Meletis\" has defender and cannot attack.");

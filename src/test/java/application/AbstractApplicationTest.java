@@ -33,7 +33,6 @@ import java.util.Set;
 import static com.matag.cards.properties.Color.WHITE;
 import static com.matag.game.launcher.LauncherTestGameController.TEST_ADMIN_TOKEN;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
-import static com.matag.game.turn.phases.beginning.UpkeepPhase.UP;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static org.mockito.ArgumentMatchers.any;
@@ -140,7 +139,7 @@ public abstract class AbstractApplicationTest {
   public static class InitGameTestConfiguration {
     @Bean
     public InitTestServiceDecorator initTestServiceDecorator(CardInstanceFactory cardInstanceFactory, Cards cards) {
-      InitTestServiceDecorator initTestServiceDecorator = new InitTestServiceDecorator();
+      var initTestServiceDecorator = new InitTestServiceDecorator();
       initTestServiceDecorator.setCardInstanceFactory(cardInstanceFactory);
       initTestServiceDecorator.setCards(cards);
       return initTestServiceDecorator;

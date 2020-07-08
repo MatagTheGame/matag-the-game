@@ -4,7 +4,6 @@ import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.Optional;
 
 import static com.matag.cards.ability.type.AbilityType.HASTE;
@@ -18,10 +17,10 @@ public class CardInstanceAbilityFactoryTest {
   @Test
   public void testAbilitiesFromParameters() {
     // Given
-    List<String> parameters = asList("+2/+2", "TRAMPLE", "DAMAGE:2", "HASTE");
+    var parameters = asList("+2/+2", "TRAMPLE", "DAMAGE:2", "HASTE");
 
     // When
-    List<CardInstanceAbility> abilities = cardInstanceAbilityFactory.abilitiesFromParameters(parameters);
+    var abilities = cardInstanceAbilityFactory.abilitiesFromParameters(parameters);
 
     // Then
     assertThat(abilities).isEqualTo(asList(new CardInstanceAbility(TRAMPLE), new CardInstanceAbility(HASTE)));
@@ -30,10 +29,10 @@ public class CardInstanceAbilityFactoryTest {
   @Test
   public void testNoAbilityFromParameter() {
     // Given
-    String parameter = "+2/+2";
+    var parameter = "+2/+2";
 
     // When
-    Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
+    var ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
 
     // Then
     assertThat(ability).isEmpty();
@@ -42,10 +41,10 @@ public class CardInstanceAbilityFactoryTest {
   @Test
   public void testTrampleAbilityFromParameter() {
     // Given
-    String parameter = "TRAMPLE";
+    var parameter = "TRAMPLE";
 
     // When
-    Optional<CardInstanceAbility> ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
+    var ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
 
     // Then
     assertThat(ability).isEqualTo(Optional.of(new CardInstanceAbility(TRAMPLE)));

@@ -1,10 +1,8 @@
 package integration.turn.action.leave;
 
 import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.leave.DestroyPermanentService;
 import integration.TestUtils;
 import org.junit.Test;
@@ -38,12 +36,12 @@ public class DestroyPermanentGetServiceTest {
   @Test
   public void testDestroy() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When
-    boolean destroyed = destroyPermanentService.destroy(gameStatus, 61);
+    var destroyed = destroyPermanentService.destroy(gameStatus, 61);
 
     // Then
     assertThat(destroyed).isTrue();
@@ -54,12 +52,12 @@ public class DestroyPermanentGetServiceTest {
   @Test
   public void testDestroyDontBlowUpIfCardsIsNotAnymoreInTheBattlefield() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
     gameStatus.getPlayer1().getGraveyard().addCard(cardInstance);
 
     // When
-    boolean destroyed = destroyPermanentService.destroy(gameStatus, 61);
+    var destroyed = destroyPermanentService.destroy(gameStatus, 61);
 
     // Then
     assertThat(destroyed).isFalse();
@@ -70,13 +68,13 @@ public class DestroyPermanentGetServiceTest {
   @Test
   public void testDestroyIndestructibleDoesNotDestroyIt() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(INDESTRUCTIBLE));
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When
-    boolean destroyed = destroyPermanentService.destroy(gameStatus, 61);
+    var destroyed = destroyPermanentService.destroy(gameStatus, 61);
 
     // Then
     assertThat(destroyed).isFalse();
@@ -87,14 +85,14 @@ public class DestroyPermanentGetServiceTest {
   @Test
   public void testReduceToughnessToZeroOfIndestructibleDestroysIt() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(INDESTRUCTIBLE));
     cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(THAT_TARGETS_GET, emptyList(), singletonList("-3/-3"), null));
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When
-    boolean destroyed = destroyPermanentService.destroy(gameStatus, 61);
+    var destroyed = destroyPermanentService.destroy(gameStatus, 61);
 
     // Then
     assertThat(destroyed).isFalse();

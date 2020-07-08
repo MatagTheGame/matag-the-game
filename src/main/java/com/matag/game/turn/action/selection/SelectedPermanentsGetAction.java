@@ -1,6 +1,5 @@
 package com.matag.game.turn.action.selection;
 
-import com.matag.cards.ability.selector.MagicInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.AbilityAction;

@@ -1,9 +1,7 @@
 package com.matag.game.turn.action._continue;
 
-import com.matag.cards.ability.target.Target;
 import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.AbilityAction;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;

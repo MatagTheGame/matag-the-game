@@ -1,9 +1,7 @@
 package integration.turn.action.cast;
 
 import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.cast.InstantSpeedService;
 import integration.TestUtils;
 import org.junit.Test;
@@ -32,11 +30,11 @@ public class InstantSpeedServiceTest {
   @Test
   public void isInstantSpeedReturnsFalseForLand() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), "player");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), "player");
 
     // When
-    boolean result = instantSpeedService.isAtInstantSpeed(cardInstance, null);
+    var result = instantSpeedService.isAtInstantSpeed(cardInstance, null);
 
     // Then
     assertThat(result).isFalse();
@@ -45,11 +43,11 @@ public class InstantSpeedServiceTest {
   @Test
   public void isInstantSpeedReturnsTrueForInstant() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Murder"), "player");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Murder"), "player");
 
     // When
-    boolean result = instantSpeedService.isAtInstantSpeed(cardInstance, null);
+    var result = instantSpeedService.isAtInstantSpeed(cardInstance, null);
 
     // Then
     assertThat(result).isTrue();
@@ -58,12 +56,12 @@ public class InstantSpeedServiceTest {
   @Test
   public void isInstantSpeedReturnsTrueForMetropolisSpriteSelectedPermanentsGet() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Metropolis Sprite"), "player");
-    String playedAbility = "SELECTED_PERMANENTS_GET";
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Metropolis Sprite"), "player");
+    var playedAbility = "SELECTED_PERMANENTS_GET";
 
     // When
-    boolean result = instantSpeedService.isAtInstantSpeed(cardInstance, playedAbility);
+    var result = instantSpeedService.isAtInstantSpeed(cardInstance, playedAbility);
 
     // Then
     assertThat(result).isTrue();
@@ -72,12 +70,12 @@ public class InstantSpeedServiceTest {
   @Test
   public void isInstantSpeedReturnsFalseForEquip() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Cobbled Wings"), "player");
-    String playedAbility = "EQUIP";
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Cobbled Wings"), "player");
+    var playedAbility = "EQUIP";
 
     // When
-    boolean result = instantSpeedService.isAtInstantSpeed(cardInstance, playedAbility);
+    var result = instantSpeedService.isAtInstantSpeed(cardInstance, playedAbility);
 
     // Then
     assertThat(result).isFalse();

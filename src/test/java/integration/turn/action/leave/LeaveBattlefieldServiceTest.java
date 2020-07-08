@@ -1,9 +1,7 @@
 package integration.turn.action.leave;
 
 import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.attach.AttachService;
 import com.matag.game.turn.action.leave.LeaveBattlefieldService;
 import integration.TestUtils;
@@ -37,8 +35,8 @@ public class LeaveBattlefieldServiceTest {
   @Test
   public void testLeaveBattlefield() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().setTapped(true);
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
@@ -53,19 +51,19 @@ public class LeaveBattlefieldServiceTest {
   @Test
   public void testLeaveBattlefieldWithAttachments() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance creature = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var creature = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
     gameStatus.getPlayer1().getBattlefield().addCard(creature);
 
-    CardInstance enchantment1 = cardInstanceFactory.create(gameStatus, 62, cards.get("Knight's Pledge"), "player-name", "player-name");
+    var enchantment1 = cardInstanceFactory.create(gameStatus, 62, cards.get("Knight's Pledge"), "player-name", "player-name");
     gameStatus.getPlayer1().getBattlefield().addCard(enchantment1);
     attachService.attach(gameStatus, enchantment1, creature.getId());
 
-    CardInstance enchantment2 = cardInstanceFactory.create(gameStatus, 63, cards.get("Knight's Pledge"), "opponent-name", "opponent-name");
+    var enchantment2 = cardInstanceFactory.create(gameStatus, 63, cards.get("Knight's Pledge"), "opponent-name", "opponent-name");
     gameStatus.getPlayer2().getBattlefield().addCard(enchantment2);
     attachService.attach(gameStatus, enchantment2, creature.getId());
 
-    CardInstance equipment = cardInstanceFactory.create(gameStatus, 64, cards.get("Marauder's Axe"), "player-name", "player-name");
+    var equipment = cardInstanceFactory.create(gameStatus, 64, cards.get("Marauder's Axe"), "player-name", "player-name");
     gameStatus.getPlayer1().getBattlefield().addCard(equipment);
     attachService.attach(gameStatus, equipment, creature.getId());
 

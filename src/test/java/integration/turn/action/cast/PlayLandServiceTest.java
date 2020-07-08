@@ -1,9 +1,7 @@
 package integration.turn.action.cast;
 
 import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.cast.PlayLandService;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
 import integration.TestUtils;
@@ -43,8 +41,8 @@ public class PlayLandServiceTest {
   @Test
   public void playLand() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
     gameStatus.getPlayer1().getHand().addCard(card);
 
     // When
@@ -57,8 +55,8 @@ public class PlayLandServiceTest {
   @Test
   public void playLandErrorNotALand() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Befuddle"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Befuddle"), "player-name");
     gameStatus.getPlayer1().getHand().addCard(card);
 
     // Expect
@@ -71,10 +69,10 @@ public class PlayLandServiceTest {
   @Test
   public void playLandMultipleLand() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance card1 = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var card1 = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
     gameStatus.getPlayer1().getHand().addCard(card1);
-    CardInstance card2 = cardInstanceFactory.create(gameStatus, 101, cards.get("Swamp"), "player-name");
+    var card2 = cardInstanceFactory.create(gameStatus, 101, cards.get("Swamp"), "player-name");
     gameStatus.getPlayer1().getHand().addCard(card2);
 
     // When
@@ -93,9 +91,9 @@ public class PlayLandServiceTest {
   @Test
   public void playLandNotInMainPhase() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
+    var gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase(FS);
-    CardInstance card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
+    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
     gameStatus.getPlayer1().getHand().addCard(card);
 
     // Expect

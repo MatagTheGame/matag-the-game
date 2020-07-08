@@ -48,7 +48,7 @@ public class ActivatedTapAbilityOnCreatureTest extends AbstractApplicationTest {
 
     // Playing a tapping ability on a creature with summoning sickness does nothing
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Checkpoint Officer"), 1).select();
-    int checkpointOfficerId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Checkpoint Officer"), 1).getCardIdNumeric();
+    var checkpointOfficerId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Checkpoint Officer"), 1).getCardIdNumeric();
     browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).target();
 
     // Ability goes on the stack

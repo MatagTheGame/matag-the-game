@@ -1,6 +1,5 @@
 package com.matag.game.turn.action.leave;
 
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

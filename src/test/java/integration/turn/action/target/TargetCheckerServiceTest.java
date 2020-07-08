@@ -1,9 +1,7 @@
 package integration.turn.action.target;
 
 import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.target.TargetCheckerService;
 import integration.TestUtils;
 import org.junit.Test;
@@ -32,11 +30,11 @@ public class TargetCheckerServiceTest {
   @Test
   public void checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisitesShouldReturnAlwaysTrueForPlayer() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance sunscorchedDesert = cardInstanceFactory.create(gameStatus, 1, cards.get("Sunscorched Desert"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var sunscorchedDesert = cardInstanceFactory.create(gameStatus, 1, cards.get("Sunscorched Desert"), "player-name");
 
     // When
-    boolean isValid = targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(sunscorchedDesert, gameStatus);
+    var isValid = targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(sunscorchedDesert, gameStatus);
 
     // Then
     assertThat(isValid).isTrue();
@@ -45,13 +43,13 @@ public class TargetCheckerServiceTest {
   @Test
   public void checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisitesShouldReturnTrueIfThereIsSomethingToTarget() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance darkRemedy = cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), "player-name");
-    CardInstance aCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Banehound"), "opponent-name");
+    var gameStatus = testUtils.testGameStatus();
+    var darkRemedy = cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), "player-name");
+    var aCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Banehound"), "opponent-name");
     gameStatus.getPlayer2().getBattlefield().addCard(aCreature);
 
     // When
-    boolean isValid = targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(darkRemedy, gameStatus);
+    var isValid = targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(darkRemedy, gameStatus);
 
     // Then
     assertThat(isValid).isTrue();
@@ -60,11 +58,11 @@ public class TargetCheckerServiceTest {
   @Test
   public void checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisitesShouldReturnFalseIfThereIsNothingToTarget() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance darkRemedy = cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var darkRemedy = cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), "player-name");
 
     // When
-    boolean isValid = targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(darkRemedy, gameStatus);
+    var isValid = targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(darkRemedy, gameStatus);
 
     // Then
     assertThat(isValid).isFalse();

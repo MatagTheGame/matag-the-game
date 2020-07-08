@@ -2,7 +2,6 @@ package integration.deck;
 
 import com.matag.adminentities.DeckInfo;
 import com.matag.cards.properties.Color;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.deck.DeckFactory;
 import integration.TestUtils;
 import integration.TestUtilsConfiguration;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -29,10 +27,10 @@ public class DeckFactoryTest {
   @Test
   public void oneColorDeck() {
     // Given
-    DeckInfo deckInfo = new DeckInfo(Set.of(Color.WHITE));
+    var deckInfo = new DeckInfo(Set.of(Color.WHITE));
 
     // When
-    List<CardInstance> cards = deckFactory.create("playerName", testUtils.testGameStatus(), deckInfo);
+    var cards = deckFactory.create("playerName", testUtils.testGameStatus(), deckInfo);
 
     // Then
     assertThat(cards).hasSize(60);
@@ -41,10 +39,10 @@ public class DeckFactoryTest {
   @Test
   public void twoColorsDeck() {
     // Given
-    DeckInfo deckInfo = new DeckInfo(Set.of(Color.WHITE, Color.RED));
+    var deckInfo = new DeckInfo(Set.of(Color.WHITE, Color.RED));
 
     // When
-    List<CardInstance> cards = deckFactory.create("playerName", testUtils.testGameStatus(), deckInfo);
+    var cards = deckFactory.create("playerName", testUtils.testGameStatus(), deckInfo);
 
     // Then
     assertThat(cards).hasSize(60);

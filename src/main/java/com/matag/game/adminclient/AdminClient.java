@@ -1,7 +1,5 @@
 package com.matag.game.adminclient;
 
-import static java.util.Collections.singletonList;
-
 import com.matag.adminentities.DeckInfo;
 import com.matag.adminentities.FinishGameRequest;
 import com.matag.adminentities.PlayerInfo;
@@ -12,13 +10,11 @@ import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
+import static java.util.Collections.singletonList;
 
 @Profile("!test")
 @AllArgsConstructor

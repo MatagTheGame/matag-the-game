@@ -3,10 +3,7 @@ package integration.turn.action.selection;
 import com.matag.cards.Cards;
 import com.matag.cards.ability.selector.MagicInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.player.Player;
-import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.selection.MagicInstancePlayerSelectorService;
 import integration.TestUtils;
 import org.junit.Test;
@@ -14,8 +11,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
@@ -40,13 +35,13 @@ public class MagicInstancePlayerSelectorServiceTest {
   @Test
   public void selectPlayer() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
+    var gameStatus = testUtils.testGameStatus();
 
-    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build();
-    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
+    var magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build();
+    var aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
 
     // When
-    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
+    var selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
 
     // Then
     assertThat(selection).containsExactly(gameStatus.getPlayer1());
@@ -55,13 +50,13 @@ public class MagicInstancePlayerSelectorServiceTest {
   @Test
   public void selectOpponent() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
+    var gameStatus = testUtils.testGameStatus();
 
-    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build();
-    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
+    var magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build();
+    var aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
 
     // When
-    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
+    var selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
 
     // Then
     assertThat(selection).containsExactly(gameStatus.getPlayer2());
@@ -70,13 +65,13 @@ public class MagicInstancePlayerSelectorServiceTest {
   @Test
   public void selectAllPlayers() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
+    var gameStatus = testUtils.testGameStatus();
 
-    MagicInstanceSelector magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(PLAYER).build();
-    CardInstance aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
+    var magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(PLAYER).build();
+    var aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
 
     // When
-    List<Player> selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
+    var selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
 
     // Then
     assertThat(selection).containsExactlyInAnyOrder(gameStatus.getPlayer1(), gameStatus.getPlayer2());

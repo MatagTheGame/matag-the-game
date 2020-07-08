@@ -1,9 +1,7 @@
 package integration.turn.action.combat;
 
 import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.combat.BlockerChecker;
 import integration.TestUtils;
 import org.junit.Rule;
@@ -37,11 +35,11 @@ public class BlockerCheckerTest {
   @Test
   public void shouldBlockWhenItHasTwoOrMoreBlockers() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
+    var gameStatus = testUtils.testGameStatus();
 
-    CardInstance boggartBrute = cardInstanceFactory.create(gameStatus, 1, cards.get("Boggart Brute"), "player");
-    CardInstance firstAirElemental = cardInstanceFactory.create(gameStatus, 2, cards.get("Air Elemental"), "opponent");
-    CardInstance secondAirElemental = cardInstanceFactory.create(gameStatus, 3, cards.get("Air Elemental"), "opponent");
+    var boggartBrute = cardInstanceFactory.create(gameStatus, 1, cards.get("Boggart Brute"), "player");
+    var firstAirElemental = cardInstanceFactory.create(gameStatus, 2, cards.get("Air Elemental"), "opponent");
+    var secondAirElemental = cardInstanceFactory.create(gameStatus, 3, cards.get("Air Elemental"), "opponent");
 
     // When
     blockerChecker.checkIfCanBlock(boggartBrute, List.of(firstAirElemental, secondAirElemental));
@@ -52,10 +50,10 @@ public class BlockerCheckerTest {
   @Test
   public void shouldNotBlockWhenItHasOneBlocker() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
+    var gameStatus = testUtils.testGameStatus();
 
-    CardInstance boggartBrute = cardInstanceFactory.create(gameStatus, 1, cards.get("Boggart Brute"), "player");
-    CardInstance airElemental = cardInstanceFactory.create(gameStatus, 2, cards.get("Air Elemental"), "opponent");
+    var boggartBrute = cardInstanceFactory.create(gameStatus, 1, cards.get("Boggart Brute"), "player");
+    var airElemental = cardInstanceFactory.create(gameStatus, 2, cards.get("Air Elemental"), "opponent");
 
     // Expect
     thrown.expectMessage("\"2 - Air Elemental\" cannot block \"1 - Boggart Brute\" alone as it has menace.");

@@ -1,9 +1,7 @@
 package integration.turn.action._continue;
 
 import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
 import integration.TestUtils;
 import integration.turn.action.leave.LeaveTestConfiguration;
@@ -33,8 +31,8 @@ public class ConsolidateStatusServiceTest {
   @Test
   public void consolidateShouldReturnACreatureToHandAndClearTheModifiers() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().getModifiersUntilEndOfTurn().setToBeReturnedToHand(true);
     cardInstance.getModifiers().dealDamage(1);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);
@@ -51,8 +49,8 @@ public class ConsolidateStatusServiceTest {
   @Test
   public void consolidateShouldDestroyACreatureAndClearTheModifiers() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
+    var gameStatus = testUtils.testGameStatus();
+    var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
     cardInstance.getModifiers().getModifiersUntilEndOfTurn().setToBeDestroyed(true);
     cardInstance.getModifiers().dealDamage(1);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(cardInstance);

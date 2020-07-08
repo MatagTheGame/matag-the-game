@@ -20,7 +20,7 @@ public class PlayableAbilitiesHelper {
 
   public void toHaveAbilities(List<String> expectedAbilities) {
     matagBrowser.wait(driver -> {
-      List<String> abilities = abilities().stream().map(ability -> ability.getAttribute("title")).collect(Collectors.toList());
+      var abilities = abilities().stream().map(ability -> ability.getAttribute("title")).collect(Collectors.toList());
       LOGGER.info("abilities={}   expectedAbilities={}", abilities, expectedAbilities);
       return expectedAbilities.equals(abilities);
     });

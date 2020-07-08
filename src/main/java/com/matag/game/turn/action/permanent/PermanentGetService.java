@@ -1,10 +1,7 @@
 package com.matag.game.turn.action.permanent;
 
 import com.matag.cards.ability.AbilityService;
-import com.matag.cards.ability.type.AbilityType;
-import com.matag.cards.properties.PowerToughness;
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.counters.CountersService;
@@ -19,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @Component
 @AllArgsConstructor

@@ -1,10 +1,8 @@
 package com.matag.game.turn.action.combat;
 
 import com.matag.cards.ability.type.AbilityType;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
-import com.matag.game.turn.Turn;
 import com.matag.game.turn.action._continue.ContinueService;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import com.matag.game.turn.action.trigger.WhenTriggerService;

@@ -29,7 +29,7 @@ public class CardHelper {
   }
 
   public static List<String> cardNames(WebElement element) {
-    List<WebElement> cardElements = element.findElements(By.className("card"));
+    var cardElements = element.findElements(By.className("card"));
     return cardElements.stream()
       .map(cardElement -> cardElement.getAttribute("aria-label"))
       .sorted()
@@ -136,7 +136,7 @@ public class CardHelper {
   }
 
   public void parentHasStyle(String style) {
-    WebElement parent = webElement.findElement(By.xpath("./.."));
+    var parent = webElement.findElement(By.xpath("./.."));
     assertThat(parent.getAttribute("style")).contains(style);
   }
 
@@ -168,9 +168,8 @@ public class CardHelper {
 
   private void declareAsAttackerOrBlocker() {
     playerHasPriority();
-    String cardId = this.getCardId();
     click();
-    matagBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + cardId)));
+    matagBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + getCardId())));
   }
 
   public void hasPlus1Counters(int counters) {

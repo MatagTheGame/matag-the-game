@@ -19,10 +19,10 @@ public class CardInstanceAbilityTest {
   @Test
   public void simpleAbilityText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(FLYING);
+    var ability = new CardInstanceAbility(FLYING);
 
     // When
-    String text = ability.getAbilityTypeText();
+    var text = ability.getAbilityTypeText();
 
     // Then
     assertThat(text).isEqualTo("Flying.");
@@ -31,10 +31,10 @@ public class CardInstanceAbilityTest {
   @Test
   public void enchantedCreatureGetOneAbilityText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(ENCHANT, emptyList(), singletonList("+2/+2"), null);
+    var ability = new CardInstanceAbility(ENCHANT, emptyList(), singletonList("+2/+2"), null);
 
     // When
-    String text = ability.getAbilityTypeText();
+    var text = ability.getAbilityTypeText();
 
     // Then
     assertThat(text).isEqualTo("Enchanted creature gets +2/+2.");
@@ -43,10 +43,10 @@ public class CardInstanceAbilityTest {
   @Test
   public void enchantedCreatureGetMultipleAbilitiesText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(ENCHANT, emptyList(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+    var ability = new CardInstanceAbility(ENCHANT, emptyList(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
 
     // When
-    String text = ability.getAbilityTypeText();
+    var text = ability.getAbilityTypeText();
 
     // Then
     assertThat(text).isEqualTo("Enchanted creature gets +2/+2, trample and haste.");
@@ -55,10 +55,10 @@ public class CardInstanceAbilityTest {
   @Test
   public void selectedPermanentsGetMultipleAbilitiesText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
 
     // When
-    String text = ability.getAbilityTypeText();
+    var text = ability.getAbilityTypeText();
 
     // Then
     assertThat(text).isEqualTo("Creatures you control get +2/+2, trample and haste until end of turn.");
@@ -67,10 +67,10 @@ public class CardInstanceAbilityTest {
   @Test
   public void itGetMultipleAbilitiesText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PERMANENT).itself(true).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PERMANENT).itself(true).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
 
     // When
-    String text = ability.getAbilityTypeText();
+    var text = ability.getAbilityTypeText();
 
     // Then
     assertThat(text).isEqualTo("Gets +2/+2, trample and haste until end of turn.");
@@ -79,10 +79,10 @@ public class CardInstanceAbilityTest {
   @Test
   public void gainXLifeText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build(), singletonList("LIFE:2"), null);
+    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build(), singletonList("LIFE:2"), null);
 
     // When
-    String text = ability.getAbilityTypeText();
+    var text = ability.getAbilityTypeText();
 
     // Then
     assertThat(text).isEqualTo("You gain 2 life.");
@@ -91,10 +91,10 @@ public class CardInstanceAbilityTest {
   @Test
   public void loseXLifeText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build(), singletonList("LIFE:-2"), null);
+    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build(), singletonList("LIFE:-2"), null);
 
     // When
-    String text = ability.getAbilityTypeText();
+    var text = ability.getAbilityTypeText();
 
     // Then
     assertThat(text).isEqualTo("You lose 2 life.");
@@ -103,10 +103,10 @@ public class CardInstanceAbilityTest {
   @Test
   public void eachPlayerGainsXLifeText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).build(), singletonList("LIFE:2"), null);
+    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).build(), singletonList("LIFE:2"), null);
 
     // When
-    String text = ability.getAbilityTypeText();
+    var text = ability.getAbilityTypeText();
 
     // Then
     assertThat(text).isEqualTo("Each player gain 2 life.");
@@ -115,10 +115,10 @@ public class CardInstanceAbilityTest {
   @Test
   public void eachPlayerLosesXLifeText() {
     // Given
-    CardInstanceAbility ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build(), singletonList("LIFE:-2"), null);
+    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build(), singletonList("LIFE:-2"), null);
 
     // When
-    String text = ability.getAbilityTypeText();
+    var text = ability.getAbilityTypeText();
 
     // Then
     assertThat(text).isEqualTo("Each opponent lose 2 life.");

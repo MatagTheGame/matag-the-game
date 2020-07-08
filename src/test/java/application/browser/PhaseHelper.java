@@ -32,7 +32,7 @@ public class PhaseHelper {
   }
 
   public PlayerType getPriority() {
-    String classes = matagBrowser.findElement(PRIORITY_CSS_SELECTOR).getAttribute("class");
+    var classes = matagBrowser.findElement(PRIORITY_CSS_SELECTOR).getAttribute("class");
     if (classes.contains("active-for-player")) {
       return PLAYER;
     } else {

@@ -1,6 +1,5 @@
 package com.matag.game.turn.phases.beginning;
 
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import com.matag.game.turn.phases.AbstractPhase;

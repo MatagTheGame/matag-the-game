@@ -63,7 +63,7 @@ public class PlayerInfoHelper {
 
   private void toHaveClass(String cssClass) {
     matagBrowser.wait(driver -> {
-      String playerClasses = playerInfoElement().getAttribute("class");
+      var playerClasses = playerInfoElement().getAttribute("class");
       LOGGER.info("playerClasses={}", playerClasses);
       return Arrays.asList(playerClasses.split(" ")).contains(cssClass);
     });

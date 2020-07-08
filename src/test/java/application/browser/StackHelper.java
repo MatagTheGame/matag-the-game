@@ -28,15 +28,14 @@ public class StackHelper extends AbstractCardContainerHelper {
 
   public void containsAbilitiesExactly(List<String> expectedTriggeredAbilities) {
     matagBrowser.wait(driver -> {
-      List<String> actualTriggeredAbilities = triggeredAbilities(containerElement());
+      var actualTriggeredAbilities = triggeredAbilities(containerElement());
       LOGGER.info("actualTriggeredAbilities={}   expectedTriggeredAbilities={}", actualTriggeredAbilities, expectedTriggeredAbilities);
       return expectedTriggeredAbilities.equals(actualTriggeredAbilities);
     });
   }
 
   private List<String> triggeredAbilities(WebElement containerElement) {
-    List<WebElement> cardElements = containerElement.findElements(By.className("triggered-ability"));
-    return cardElements.stream()
+    return containerElement.findElements(By.className("triggered-ability")).stream()
       .map(WebElement::getText)
       .map(text -> text.replace("\n", " "))
       .collect(toList());

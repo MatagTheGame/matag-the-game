@@ -1,7 +1,6 @@
 package com.matag.game.turn.action.leave;
 
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import org.springframework.stereotype.Component;
 

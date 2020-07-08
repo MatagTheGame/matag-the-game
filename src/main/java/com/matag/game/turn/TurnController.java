@@ -3,8 +3,6 @@ package com.matag.game.turn;
 import com.matag.game.message.MessageEvent;
 import com.matag.game.message.MessageException;
 import com.matag.game.security.SecurityHelper;
-import com.matag.game.security.SecurityToken;
-import com.matag.game.status.GameStatus;
 import com.matag.game.status.GameStatusRepository;
 import com.matag.game.status.GameStatusUpdaterService;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;

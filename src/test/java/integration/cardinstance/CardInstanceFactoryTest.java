@@ -1,9 +1,7 @@
 package integration.cardinstance;
 
 import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.status.GameStatus;
 import integration.TestUtils;
 import integration.TestUtilsConfiguration;
 import org.junit.Test;
@@ -30,10 +28,10 @@ public class CardInstanceFactoryTest {
   @Test
   public void shouldCreateACardInstance() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
+    var gameStatus = testUtils.testGameStatus();
 
     // When
-    CardInstance cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
+    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
 
     // Then
     assertThat(cardInstance.getId()).isEqualTo(1);
@@ -43,11 +41,11 @@ public class CardInstanceFactoryTest {
   @Test
   public void shouldCreateTwoDifferentCardInstances() {
     // Given
-    GameStatus gameStatus = testUtils.testGameStatus();
+    var gameStatus = testUtils.testGameStatus();
 
     // When
-    CardInstance cardInstance1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
-    CardInstance cardInstance2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Befuddle"), "opponent-name");
+    var cardInstance1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
+    var cardInstance2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Befuddle"), "opponent-name");
 
     // Then
     assertThat(cardInstance1).isNotSameAs(cardInstance2);

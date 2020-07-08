@@ -50,8 +50,8 @@ public class MatagBrowser {
   }
 
   public void close() {
-    int numOfTabs = new ArrayList<>(webDriver.getWindowHandles()).size();
-    for (int i = 0; i < numOfTabs; i++) {
+    var numOfTabs = new ArrayList<>(webDriver.getWindowHandles()).size();
+    for (var i = 0; i < numOfTabs; i++) {
       tabAt(0);
       webDriver.close();
     }
@@ -115,8 +115,8 @@ public class MatagBrowser {
 
   private WebDriver getWebDriver() {
     if (isChrome()) {
-      String webdriverUserDataDir = System.getProperty("webdriver.chrome.userDataDir");
-      ChromeOptions chromeOptions = new ChromeOptions();
+      var webdriverUserDataDir = System.getProperty("webdriver.chrome.userDataDir");
+      var chromeOptions = new ChromeOptions();
       chromeOptions.addArguments("user-data-dir=" + webdriverUserDataDir);
       return new ChromeDriver(chromeOptions);
 
