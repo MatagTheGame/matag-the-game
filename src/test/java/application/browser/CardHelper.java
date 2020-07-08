@@ -3,6 +3,7 @@ package application.browser;
 import com.matag.cards.Card;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.player.PlayerType;
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NotFoundException;
@@ -15,14 +16,10 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
+@AllArgsConstructor
 public class CardHelper {
-  private WebElement webElement;
-  private MatagBrowser matagBrowser;
-
-  CardHelper(WebElement webElement, MatagBrowser matagBrowser) {
-    this.webElement = webElement;
-    this.matagBrowser = matagBrowser;
-  }
+  private final WebElement webElement;
+  private final MatagBrowser matagBrowser;
 
   public static List<String> cardNames(Card... cards) {
     return Stream.of(cards).map(Card::getName).sorted().collect(toList());
@@ -168,8 +165,9 @@ public class CardHelper {
 
   private void declareAsAttackerOrBlocker() {
     playerHasPriority();
+    var cardId = getCardId();
     click();
-    matagBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + getCardId())));
+    matagBrowser.wait(presenceOfElementLocated(By.cssSelector(".combat-line #" + cardId)));
   }
 
   public void hasPlus1Counters(int counters) {
