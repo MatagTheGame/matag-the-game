@@ -26,13 +26,11 @@ public class ThatTargetsGetAction implements AbilityAction {
       var targetId = targetCheckerService.getTargetIdAtIndex(cardInstance, ability, i);
 
       if (targetId != null) {
-        if (targetId instanceof String) {
-          var player = gameStatus.getPlayerByName((String) targetId);
+        if (targetId instanceof String targetPlayer) {
+          var player = gameStatus.getPlayerByName(targetPlayer);
           playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getParameters(), player);
 
-        } else {
-          var targetCardId = (int) targetId;
-
+        } else if (targetId instanceof Integer targetCardId) {
           var targetOptional = gameStatus.getAllBattlefieldCardsSearch().withId(targetCardId);
 
           if (targetOptional.isPresent()) {
