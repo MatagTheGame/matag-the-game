@@ -45,6 +45,7 @@ public class CombatDamagePhase extends AbstractPhase {
     if (!gameStatus.getTurn().isEnded()) {
       gameStatus.getTurn().setCurrentPhase(EC);
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+      gameStatus.getTurn().setPhaseActioned(false);
       endOfCombatPhase.next(gameStatus);
     }
   }

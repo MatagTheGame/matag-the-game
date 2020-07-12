@@ -15,6 +15,7 @@ import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
+import static com.matag.game.turn.phases.combat.EndOfCombatPhase.EC;
 import static com.matag.game.turn.phases.ending.EndTurnPhase.ET;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.game.turn.phases.main2.Main2Phase.M2;
@@ -62,6 +63,7 @@ public class CombatIndestructibleTest extends AbstractApplicationTest {
     browser.player1().getPhaseHelper().is(AB, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
     browser.player1().getActionHelper().clickContinueAndExpectPhase(AB, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(EC, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
     // Then

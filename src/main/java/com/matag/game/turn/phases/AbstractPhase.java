@@ -35,7 +35,7 @@ public abstract class AbstractPhase implements Phase {
 
   private void evaluateNext(GameStatus gameStatus) {
     // TODO delete this when abstraction is complete
-    if (List.of("DA", "DB", "AB", "AF", "FS", "CD", "EC").contains(getName())) {
+    if (List.of("DA", "DB", "AB", "AF", "FS", "CD").contains(getName())) {
       return;
     }
 

@@ -20,18 +20,14 @@ public class EndOfCombatPhase extends AbstractPhase {
   }
 
   @Override
-  public Phase getNextPhase(GameStatus gameStatus) {
-    return main2Phase;
+  public void action(GameStatus gameStatus) {
+    super.action(gameStatus);
+    gameStatus.getCurrentPlayer().getBattlefield().removeAttacking();
+    gameStatus.getNonCurrentPlayer().getBattlefield().removeBlocking();
   }
 
   @Override
-  public void next(GameStatus gameStatus) {
-    gameStatus.getTurn().setCurrentPhase(Main2Phase.M2);
-    gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-
-    gameStatus.getCurrentPlayer().getBattlefield().removeAttacking();
-    gameStatus.getNonCurrentPlayer().getBattlefield().removeBlocking();
-    gameStatus.getTurn().setPhaseActioned(false);
-    main2Phase.next(gameStatus);
+  public Phase getNextPhase(GameStatus gameStatus) {
+    return main2Phase;
   }
 }
