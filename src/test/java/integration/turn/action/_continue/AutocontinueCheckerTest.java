@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static com.matag.game.turn.phases.beginning.UpkeepPhase.UP;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -30,6 +32,50 @@ public class AutocontinueCheckerTest {
 
   @Autowired
   private CardInstanceFactory cardInstanceFactory;
+
+  @Test
+  public void canPerformAnyActionReturnsTrueIfM1Player() {
+    // Given
+    var gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase(M1);
+    gameStatus.getPlayer1().getHand().getCards().clear();
+
+    // When
+    var result = autocontinueChecker.canPerformAnyAction(gameStatus);
+
+    // Then
+    assertThat(result).isTrue();
+  }
+
+  @Test
+  public void canPerformAnyActionReturnsFalseIfM1Opponent() {
+    // Given
+    var gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase(M1);
+    gameStatus.getTurn().setCurrentTurnPlayer("Player2");
+    gameStatus.getPlayer1().getHand().getCards().clear();
+
+    // When
+    var result = autocontinueChecker.canPerformAnyAction(gameStatus);
+
+    // Then
+    assertThat(result).isFalse();
+  }
+
+  @Test
+  public void canPerformAnyActionReturnsTrueIfNonStackAction() {
+    // Given
+    var gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase(CL);
+    gameStatus.getTurn().setTriggeredNonStackAction("NonStackAction");
+    gameStatus.getPlayer1().getHand().getCards().clear();
+
+    // When
+    var result = autocontinueChecker.canPerformAnyAction(gameStatus);
+
+    // Then
+    assertThat(result).isTrue();
+  }
 
   @Test
   public void canPerformAnyActionReturnsFalseIfUPAndNoCardsInHandOrBattlefield() {

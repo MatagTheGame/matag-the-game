@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
 import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
+import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.PLAYER;
@@ -53,6 +54,7 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Jousting Dummy"), 1).hasPowerAndToughness("3/1");
 
     // move at AfterBlocking phase
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, PLAYER);
     browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).declareAsAttacker();
     browser.player1().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);

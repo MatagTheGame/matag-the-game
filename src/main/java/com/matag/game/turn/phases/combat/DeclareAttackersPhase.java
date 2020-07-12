@@ -36,7 +36,7 @@ public class DeclareAttackersPhase extends AbstractPhase {
 
   @Override
   public void next(GameStatus gameStatus) {
-    if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
+    if (gameStatus.isCurrentPlayerActive()) {
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
       if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
@@ -60,8 +60,8 @@ public class DeclareAttackersPhase extends AbstractPhase {
       } else {
         gameStatus.getTurn().setCurrentPhase(Main2Phase.M2);
         gameStatus.getTurn().setPhaseActioned(false);
-        main2Phase.next(gameStatus);
         gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
+        main2Phase.next(gameStatus);
       }
     }
   }

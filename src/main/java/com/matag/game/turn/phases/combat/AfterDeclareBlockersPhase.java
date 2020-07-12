@@ -7,7 +7,10 @@ import com.matag.game.turn.phases.Phase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
+import java.util.List;
+
+import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
+import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
 
 @Component
 public class AfterDeclareBlockersPhase extends AbstractPhase {
@@ -17,6 +20,9 @@ public class AfterDeclareBlockersPhase extends AbstractPhase {
 
   @Autowired
   private FirstStrikePhase firstStrikePhase;
+
+  @Autowired
+  private CombatDamagePhase combatDamagePhase;
 
   public AfterDeclareBlockersPhase(AutocontinueChecker autocontinueChecker) {
     this.autocontinueChecker = autocontinueChecker;
@@ -29,12 +35,20 @@ public class AfterDeclareBlockersPhase extends AbstractPhase {
 
   @Override
   public Phase getNextPhase(GameStatus gameStatus) {
-    return firstStrikePhase;
+    var hasFirstStrike = gameStatus.getCurrentPlayer().getBattlefield().search()
+      .withAnyFixedAbility(List.of(FIRST_STRIKE, DOUBLE_STRIKE))
+      .isNotEmpty();
+
+    if (hasFirstStrike) {
+      return firstStrikePhase;
+    } else {
+      return combatDamagePhase;
+    }
   }
 
   @Override
   public void next(GameStatus gameStatus) {
-    if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName())) {
+    if (gameStatus.isCurrentPlayerActive()) {
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
 
       if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
@@ -42,9 +56,11 @@ public class AfterDeclareBlockersPhase extends AbstractPhase {
       }
 
     } else {
-      gameStatus.getTurn().setCurrentPhase(FS);
+      var nextPhase = getNextPhase(gameStatus);
+      gameStatus.getTurn().setCurrentPhase(nextPhase.getName());
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-      firstStrikePhase.next(gameStatus);
+      gameStatus.getTurn().setPhaseActioned(false);
+      getNextPhase(gameStatus).next(gameStatus);
     }
   }
 }

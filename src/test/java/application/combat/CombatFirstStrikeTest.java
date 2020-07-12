@@ -17,6 +17,7 @@ import static com.matag.game.turn.phases.combat.CombatDamagePhase.CD;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.combat.EndOfCombatPhase.EC;
+import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.game.turn.phases.main2.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
@@ -39,7 +40,8 @@ public class CombatFirstStrikeTest extends AbstractApplicationTest {
   public void combatFirstStrike() {
     // Stops to play instants
     browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, OPPONENT);
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(BC, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // When attacking
@@ -57,9 +59,12 @@ public class CombatFirstStrikeTest extends AbstractApplicationTest {
     browser.player1().getActionHelper().clickContinueAndExpectPhase(AB, OPPONENT);
 
     // Then stop to play instants after first strike, before combat damage and at end of combat
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(FS, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(FS, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(CD, PLAYER);
     browser.player1().getActionHelper().clickContinueAndExpectPhase(CD, OPPONENT);
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(EC, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(EC, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(EC, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
     // Then only the non first strike creature dies

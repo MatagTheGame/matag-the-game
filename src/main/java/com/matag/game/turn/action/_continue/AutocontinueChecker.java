@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import static com.matag.cards.ability.trigger.TriggerType.ACTIVATED_ABILITY;
+import static com.matag.game.turn.phases.PhaseUtils.isMainPhase;
 
 @Component
 @AllArgsConstructor
@@ -15,6 +16,14 @@ public class AutocontinueChecker {
   private final InstantSpeedService instantSpeedService;
 
   public boolean canPerformAnyAction(GameStatus gameStatus) {
+    if (isMainPhase(gameStatus.getTurn().getCurrentPhase()) && gameStatus.isCurrentPlayerActive()) {
+      return true;
+    }
+
+    if (gameStatus.getTurn().getTriggeredNonStackAction() != null) {
+      return true;
+    }
+
     var player = gameStatus.getActivePlayer();
 
     var instants = player.getHand().search().withInstantSpeed().getCards();

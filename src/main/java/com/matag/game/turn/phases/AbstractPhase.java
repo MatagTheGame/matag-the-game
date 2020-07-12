@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static com.matag.game.turn.phases.PhaseUtils.isMainPhase;
 import static com.matag.game.turn.phases.PhaseUtils.isPriorityAllowed;
 import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
 
@@ -26,30 +25,26 @@ public abstract class AbstractPhase implements Phase {
       return;
     }
 
-    if (gameStatus.getTurn().isPhaseActioned()) {
-      evaluateNext(gameStatus);
+    if (!gameStatus.getTurn().isPhaseActioned()) {
+      action(gameStatus);
+      if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
+        moveNext(gameStatus);
+      }
 
     } else {
-      action(gameStatus);
-      if (!isMainPhase(getName()) && gameStatus.getTurn().getTriggeredNonStackAction() == null) {
-        evaluateNext(gameStatus);
-      }
+      moveNext(gameStatus);
     }
   }
 
-  private void evaluateNext(GameStatus gameStatus) {
+  private void moveNext(GameStatus gameStatus) {
     // TODO delete this when abstraction is complete
-    if (List.of("DA", "DB", "AB", "FS").contains(getName())) {
+    if (List.of("DA", "DB", "AB").contains(getName())) {
       return;
     }
 
     if (isPriorityAllowed(getName())) {
-      if (isCurrentPlayerActive(gameStatus)) {
-        gameStatus.getTurn().passPriority(gameStatus);
-
-        if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-          next(gameStatus);
-        }
+      if (gameStatus.isCurrentPlayerActive()) {
+        moveToNextPlayer(gameStatus);
 
       } else {
         moveToNextPhase(gameStatus);
@@ -60,8 +55,12 @@ public abstract class AbstractPhase implements Phase {
     }
   }
 
-  private boolean isCurrentPlayerActive(GameStatus gameStatus) {
-    return gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(gameStatus.getCurrentPlayer().getName());
+  private void moveToNextPlayer(GameStatus gameStatus) {
+    gameStatus.getTurn().passPriority(gameStatus);
+
+    if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
+      moveToNextPhase(gameStatus);
+    }
   }
 
   private void moveToNextPhase(GameStatus gameStatus) {

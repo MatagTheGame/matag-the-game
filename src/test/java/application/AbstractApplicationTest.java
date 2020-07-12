@@ -11,7 +11,6 @@ import com.matag.game.launcher.LauncherGameResponseBuilder;
 import com.matag.game.launcher.LauncherTestGameController;
 import com.matag.game.security.SecurityToken;
 import com.matag.game.status.GameStatusRepository;
-import lombok.SneakyThrows;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -93,19 +92,22 @@ public abstract class AbstractApplicationTest {
     browser.player1().getMessageHelper().hasNoMessage();
     browser.player2().getMessageHelper().hasNoMessage();
 
-    while (!browser.player1().getPhaseHelper().getPhase().equals(M1) && !browser.player2().getPhaseHelper().getPhase().equals(M1)) {
-      if (browser.player1().getPhaseHelper().getPriority().equals(PLAYER) && browser.player2().getPhaseHelper().getPriority().equals(OPPONENT)) {
-        browser.player1().getStatusHelper().hasMessage("Play any instant or ability or continue (SPACE).");
-        browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
-        browser.player1().getActionHelper().clickContinue();
+    while (true) {
+      try {
+        browser.player1().getPhaseHelper().is(M1, PLAYER);
+        break;
 
-      } else if (browser.player1().getPhaseHelper().getPriority().equals(OPPONENT) && browser.player2().getPhaseHelper().getPriority().equals(PLAYER)) {
-        browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
-        browser.player2().getStatusHelper().hasMessage("Play any instant or ability or continue (SPACE).");
-        browser.player2().getActionHelper().clickContinue();
+      } catch (Exception e) {
+        if (browser.player1().getPhaseHelper().getPriority().equals(PLAYER) && browser.player2().getPhaseHelper().getPriority().equals(OPPONENT)) {
+          browser.player1().getStatusHelper().hasMessage("Play any instant or ability or continue (SPACE).");
+          browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
+          browser.player1().getActionHelper().clickContinue();
 
-      } else {
-        sleepABit();
+        } else if (browser.player1().getPhaseHelper().getPriority().equals(OPPONENT) && browser.player2().getPhaseHelper().getPriority().equals(PLAYER)) {
+          browser.player1().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
+          browser.player2().getStatusHelper().hasMessage("Play any instant or ability or continue (SPACE).");
+          browser.player2().getActionHelper().clickContinue();
+        }
       }
     }
 
@@ -128,11 +130,6 @@ public abstract class AbstractApplicationTest {
     gameStatusRepository.clear();
     TEST_ADMIN_TOKEN.set(0);
     LOGGER.info("Test cleaned up.");
-  }
-
-  @SneakyThrows
-  private void sleepABit() {
-    Thread.sleep(100);
   }
 
   @Configuration

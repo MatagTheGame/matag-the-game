@@ -118,4 +118,8 @@ public class GameStatus {
   public List<CardInstance> getAllBattlefieldCards() {
     return getAllBattlefieldCardsSearch().getCards();
   }
+
+  public boolean isCurrentPlayerActive() {
+    return getTurn().getCurrentPhaseActivePlayer().equals(getCurrentPlayer().getName());
+  }
 }
