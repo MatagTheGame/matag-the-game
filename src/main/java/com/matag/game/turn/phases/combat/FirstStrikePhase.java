@@ -13,7 +13,7 @@ import java.util.List;
 
 import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
 import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
-import static com.matag.game.turn.phases.combat.AfterFirstStrikePhase.AF;
+import static com.matag.game.turn.phases.combat.CombatDamagePhase.CD;
 
 @Component
 public class FirstStrikePhase extends AbstractPhase {
@@ -22,9 +22,6 @@ public class FirstStrikePhase extends AbstractPhase {
   private final AutocontinueChecker autocontinueChecker;
   private final CombatService combatService;
   private final ConsolidateStatusService consolidateStatusService;
-
-  @Autowired
-  private AfterFirstStrikePhase afterFirstStrikePhase;
 
   @Autowired
   private CombatDamagePhase combatDamagePhase;
@@ -42,7 +39,7 @@ public class FirstStrikePhase extends AbstractPhase {
 
   @Override
   public Phase getNextPhase(GameStatus gameStatus) {
-    return afterFirstStrikePhase;
+    return combatDamagePhase;
   }
 
   @Override
@@ -58,15 +55,15 @@ public class FirstStrikePhase extends AbstractPhase {
       consolidateStatusService.consolidate(gameStatus);
 
       if (!gameStatus.getTurn().isEnded()) {
-        gameStatus.getTurn().setCurrentPhase(AF);
+        gameStatus.getTurn().setCurrentPhase(CD);
         if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-          afterFirstStrikePhase.next(gameStatus);
+          combatDamagePhase.next(gameStatus);
         }
       }
 
     } else {
       if (!gameStatus.getTurn().isEnded()) {
-        gameStatus.getTurn().setCurrentPhase(CombatDamagePhase.CD);
+        gameStatus.getTurn().setCurrentPhase(CD);
         combatDamagePhase.next(gameStatus);
       }
     }

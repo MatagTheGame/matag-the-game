@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 export default class Phase extends Component {
 
   static getPhases() {
-    return ['UT', 'UP', 'DR', 'M1', 'BC', 'DA', 'DB', 'AB', 'FS', 'AF', 'CD', 'EC', 'M2', 'ET', 'CL']
+    return ['UT', 'UP', 'DR', 'M1', 'BC', 'DA', 'DB', 'AB', 'FS', 'CD', 'EC', 'M2', 'ET', 'CL']
   }
 
   static isMainPhase(phase) {
