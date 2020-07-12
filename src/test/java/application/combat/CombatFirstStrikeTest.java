@@ -14,6 +14,7 @@ import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.combat.AfterFirstStrikePhase.AF;
 import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
+import static com.matag.game.turn.phases.combat.CombatDamagePhase.CD;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.combat.EndOfCombatPhase.EC;
@@ -59,6 +60,7 @@ public class CombatFirstStrikeTest extends AbstractApplicationTest {
 
     // Then stop to play instants after first strike, before combat damage and at end of combat
     browser.player1().getActionHelper().clickContinueAndExpectPhase(AF, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(CD, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(EC, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 

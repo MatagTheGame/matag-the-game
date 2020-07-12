@@ -22,6 +22,10 @@ public abstract class AbstractPhase implements Phase {
 
   @Override
   public void next(GameStatus gameStatus) {
+    if (gameStatus.getTurn().isEnded()) {
+      return;
+    }
+
     if (gameStatus.getTurn().isPhaseActioned()) {
       evaluateNext(gameStatus);
 
@@ -35,7 +39,7 @@ public abstract class AbstractPhase implements Phase {
 
   private void evaluateNext(GameStatus gameStatus) {
     // TODO delete this when abstraction is complete
-    if (List.of("DA", "DB", "AB", "AF", "FS", "CD").contains(getName())) {
+    if (List.of("DA", "DB", "AB", "AF", "FS").contains(getName())) {
       return;
     }
 

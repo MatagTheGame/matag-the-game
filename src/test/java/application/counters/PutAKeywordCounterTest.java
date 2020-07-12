@@ -70,7 +70,7 @@ public class PutAKeywordCounterTest extends AbstractApplicationTest {
 
     // So need to remove the blocker continue and lose
     browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Catacomb Crocodile")).click();
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(CD, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(CD, OPPONENT);
     browser.player2().getMessageHelper().hasMessage("Player1 Win!");
   }
 

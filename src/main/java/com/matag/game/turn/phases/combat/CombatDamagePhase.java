@@ -7,8 +7,6 @@ import com.matag.game.turn.phases.Phase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.matag.game.turn.phases.combat.EndOfCombatPhase.EC;
-
 @Component
 public class CombatDamagePhase extends AbstractPhase {
   public static final String CD = "CD";
@@ -36,17 +34,5 @@ public class CombatDamagePhase extends AbstractPhase {
   public void action(GameStatus gameStatus) {
     super.action(gameStatus);
     combatService.dealCombatDamage(gameStatus);
-  }
-
-  @Override
-  public void next(GameStatus gameStatus) {
-    super.next(gameStatus);
-
-    if (!gameStatus.getTurn().isEnded()) {
-      gameStatus.getTurn().setCurrentPhase(EC);
-      gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getCurrentPlayer().getName());
-      gameStatus.getTurn().setPhaseActioned(false);
-      endOfCombatPhase.next(gameStatus);
-    }
   }
 }
