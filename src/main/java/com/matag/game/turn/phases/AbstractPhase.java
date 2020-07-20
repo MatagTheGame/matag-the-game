@@ -2,10 +2,7 @@ package com.matag.game.turn.phases;
 
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
-import com.matag.game.turn.phases.combat.DeclareAttackersPhase;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
 
 import static com.matag.game.turn.phases.PhaseUtils.isPriorityAllowed;
 import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
@@ -15,8 +12,13 @@ public abstract class AbstractPhase implements Phase {
   private AutocontinueChecker autocontinueChecker;
 
   @Override
-  public void action(GameStatus gameStatus) {
-    gameStatus.getTurn().setPhaseActioned(true);
+  public void action(GameStatus gameStatus) {}
+
+  @Override
+  public void set(GameStatus gameStatus) {
+    if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
+      next(gameStatus);
+    }
   }
 
   @Override
@@ -25,23 +27,10 @@ public abstract class AbstractPhase implements Phase {
       return;
     }
 
-    if (!gameStatus.getTurn().isPhaseActioned()) {
-      action(gameStatus);
-      if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
-        moveNext(gameStatus);
-      }
-
-    } else {
-      moveNext(gameStatus);
-    }
+    moveNext(gameStatus);
   }
 
   private void moveNext(GameStatus gameStatus) {
-    // TODO delete this when abstraction is complete
-    if (List.of("DA", "DB", "AB").contains(getName())) {
-      return;
-    }
-
     if (isPriorityAllowed(getName())) {
       if (gameStatus.isCurrentPlayerActive()) {
         moveToNextPlayer(gameStatus);
@@ -72,10 +61,9 @@ public abstract class AbstractPhase implements Phase {
     var nextPhase = getNextPhase(gameStatus);
     gameStatus.getTurn().setCurrentPhase(nextPhase.getName());
     gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getTurn().getCurrentTurnPlayer());
-    gameStatus.getTurn().setPhaseActioned(false);
+    nextPhase.action(gameStatus);
 
-    // TODO delete this temporary hack while doing abstraction
-    if (!(nextPhase instanceof DeclareAttackersPhase)){
+    if (!autocontinueChecker.canPerformAnyAction(gameStatus)) {
       nextPhase.next(gameStatus);
     }
   }

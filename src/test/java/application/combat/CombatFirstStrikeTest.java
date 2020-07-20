@@ -11,7 +11,6 @@ import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.combat.CombatDamagePhase.CD;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
@@ -46,6 +45,7 @@ public class CombatFirstStrikeTest extends AbstractApplicationTest {
 
     // When attacking
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Youthful Knight")).declareAsAttacker();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
     browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, OPPONENT);
 
     // Stop to play instants
@@ -53,10 +53,10 @@ public class CombatFirstStrikeTest extends AbstractApplicationTest {
 
     // And blocking
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Coral Merfolk")).declareAsBlocker();
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, PLAYER);
 
     // Then stop to play instants before first strike
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(AB, OPPONENT);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
 
     // Then stop to play instants after first strike, before combat damage and at end of combat
     browser.player2().getActionHelper().clickContinueAndExpectPhase(FS, PLAYER);

@@ -32,6 +32,10 @@ export default class TurnUtils  {
     return get(state, 'turn.targetsIds', [])
   }
 
+  static triggeredNonStackActionIs(state, action) {
+    return state.turn.triggeredNonStackAction === action
+  }
+
   static resetTarget(state) {
     state.turn.cardIdSelectedToBePlayed = null
     state.turn.abilityToBePlayed = null

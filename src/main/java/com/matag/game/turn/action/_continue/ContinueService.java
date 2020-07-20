@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 public class ContinueService {
   private final PhaseFactory phaseFactory;
 
+  public void set(GameStatus gameStatus) {
+    var phase = phaseFactory.get(gameStatus.getTurn().getCurrentPhase());
+    phase.set(gameStatus);
+  }
+
   public void next(GameStatus gameStatus) {
     var phase = phaseFactory.get(gameStatus.getTurn().getCurrentPhase());
     phase.next(gameStatus);

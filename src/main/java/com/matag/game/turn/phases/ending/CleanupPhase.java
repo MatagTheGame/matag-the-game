@@ -9,6 +9,8 @@ import com.matag.game.turn.phases.beginning.UntapPhase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.matag.game.turn.action._continue.NonStackActions.DISCARD_A_CARD;
+
 @Component
 public class CleanupPhase extends AbstractPhase {
   public static final String CL = "CL";
@@ -31,15 +33,13 @@ public class CleanupPhase extends AbstractPhase {
     super.action(gameStatus);
 
     if (gameStatus.getCurrentPlayer().getHand().size() > 7) {
-      gameStatus.getTurn().setPhaseActioned(false);
       if (gameStatus.getTurn().getTriggeredNonStackAction() == null) {
-        gameStatus.getTurn().setTriggeredNonStackAction("DISCARD_A_CARD");
-      } else {
-        throw new MessageException("Choose a card to discard.");
+        gameStatus.getTurn().setTriggeredNonStackAction(DISCARD_A_CARD);
       }
-    }
 
-    gameStatus.getTurn().getCardsPlayedWithinTurn().clear();
-    gameStatus.getAllBattlefieldCards().forEach(CardInstance::cleanup);
+    } else {
+      gameStatus.getTurn().getCardsPlayedWithinTurn().clear();
+      gameStatus.getAllBattlefieldCards().forEach(CardInstance::cleanup);
+    }
   }
 }

@@ -11,7 +11,6 @@ import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
-import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.main2.Main2Phase.M2;
@@ -42,21 +41,21 @@ public class CastCreatureWithFlashGivingAbilitiesToOtherCreatures extends Abstra
 
     // Block with Ancient Brontodon
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Ancient Brontodon")).declareAsBlocker();
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, PLAYER);
 
     // Playing Blacklance Paragon
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Blacklance Paragon")).click();
     browser.player1().getStackHelper().contains(cards.get("Blacklance Paragon"));
-    browser.player1().getPhaseHelper().is(AB, OPPONENT);
+    browser.player1().getPhaseHelper().is(DB, OPPONENT);
 
     // Opponent just accepts it
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, PLAYER);
 
     // Player select Ardenvale Paladin as target
     browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Ardenvale Paladin")).click();
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, PLAYER);
     browser.player1().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
 
     // Ancient Brontodon dies because of the deathtouch and player gets 2 life

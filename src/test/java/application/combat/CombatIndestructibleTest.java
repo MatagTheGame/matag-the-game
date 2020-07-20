@@ -11,7 +11,6 @@ import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
-import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.combat.CombatDamagePhase.CD;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
@@ -47,6 +46,7 @@ public class CombatIndestructibleTest extends AbstractApplicationTest {
     // When declare attacker
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nyxborn Courser")).declareAsAttacker();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nyxborn Marauder")).declareAsAttacker();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
     browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, OPPONENT);
 
     // Declare blocker
@@ -55,16 +55,16 @@ public class CombatIndestructibleTest extends AbstractApplicationTest {
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nyxborn Brute")).declareAsBlocker();
     browser.player2().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Nyxborn Marauder")).select();
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Nyxborn Colossus")).declareAsBlocker();
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, PLAYER);
 
     // Make a Stand
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 2).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Make a Stand")).click();
-    browser.player1().getPhaseHelper().is(AB, OPPONENT);
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(AB, OPPONENT);
+    browser.player1().getPhaseHelper().is(DB, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(CD, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(EC, OPPONENT);
     browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);

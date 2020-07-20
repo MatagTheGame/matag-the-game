@@ -37,14 +37,16 @@ public class WhenAttackTest extends AbstractApplicationTest {
     // attacking with a creature with when attacks ability
     int brazenWolvesId = browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Brazen Wolves")).getCardIdNumeric();
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Brazen Wolves")).declareAsAttacker();
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, OPPONENT);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // attacking ability is on the stack
+    browser.player1().getStackHelper().containsAbility("Player1's Brazen Wolves (" + brazenWolvesId + "): Gets +2/+0 until end of turn.");
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, OPPONENT);
     browser.player2().getStackHelper().containsAbility("Player1's Brazen Wolves (" + brazenWolvesId + "): Gets +2/+0 until end of turn.");
     browser.player2().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, OPPONENT); // FIXME this should not be happening
 
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
+    // continuing
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);
     browser.player1().getPlayerInfoHelper(OPPONENT).toHaveLife(16);
   }
 

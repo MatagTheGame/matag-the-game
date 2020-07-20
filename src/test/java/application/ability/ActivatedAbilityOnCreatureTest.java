@@ -9,9 +9,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
-import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.PLAYER;
 
@@ -57,7 +57,8 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
     browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, PLAYER);
     browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Jousting Dummy")).declareAsAttacker();
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DB, PLAYER);
 
     // check can increase jousting dummy at instant speed
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 5).tap();
@@ -71,7 +72,7 @@ public class ActivatedAbilityOnCreatureTest extends AbstractApplicationTest {
     browser.player1().getStackHelper().containsAbility("Player1's Jousting Dummy (" + firstJoustingDummyId + "): Gets +1/+0 until end of turn.");
 
     // opponent accepts the ability
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, PLAYER);
 
     // power of jousting dummy is increased
     browser.player1().getBattlefieldHelper(PLAYER, COMBAT_LINE).getCard(cards.get("Jousting Dummy"), 0).doesNotHaveSummoningSickness();

@@ -34,35 +34,6 @@ public class AutocontinueCheckerTest {
   private CardInstanceFactory cardInstanceFactory;
 
   @Test
-  public void canPerformAnyActionReturnsTrueIfM1Player() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase(M1);
-    gameStatus.getPlayer1().getHand().getCards().clear();
-
-    // When
-    var result = autocontinueChecker.canPerformAnyAction(gameStatus);
-
-    // Then
-    assertThat(result).isTrue();
-  }
-
-  @Test
-  public void canPerformAnyActionReturnsFalseIfM1Opponent() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase(M1);
-    gameStatus.getTurn().setCurrentTurnPlayer("Player2");
-    gameStatus.getPlayer1().getHand().getCards().clear();
-
-    // When
-    var result = autocontinueChecker.canPerformAnyAction(gameStatus);
-
-    // Then
-    assertThat(result).isFalse();
-  }
-
-  @Test
   public void canPerformAnyActionReturnsTrueIfNonStackAction() {
     // Given
     var gameStatus = testUtils.testGameStatus();

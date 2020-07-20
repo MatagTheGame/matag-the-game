@@ -9,7 +9,6 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
-import static com.matag.game.turn.phases.combat.AfterDeclareBlockersPhase.AB;
 import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
@@ -42,7 +41,7 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
     // And player 2 plays the game by blocking
     browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
     browser.player2().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Bartizan Bats")).declareAsBlocker();
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(AB, OPPONENT);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
 
     // Then player 2 can pump up its creature
     browser.player2().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
@@ -55,17 +54,17 @@ public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplica
     browser.player1().getStackHelper().contains(cards.get("Dark Remedy"));
 
     // When player 1 continue
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(AB, OPPONENT);
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
 
     // Then spell is resolved from the stack and creature gets the +1/+3
     browser.player1().getStackHelper().isEmpty();
     browser.player1().getGraveyardHelper(OPPONENT).contains(cards.get("Dark Remedy"));
     browser.player1().getBattlefieldHelper(OPPONENT, COMBAT_LINE).getFirstCard(cards.get("Bartizan Bats")).hasPowerAndToughness("4/4");
-    browser.player1().getPhaseHelper().is(AB, OPPONENT);
+    browser.player1().getPhaseHelper().is(DB, OPPONENT);
     browser.player2().getStackHelper().isEmpty();
     browser.player2().getGraveyardHelper(PLAYER).contains(cards.get("Dark Remedy"));
     browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Bartizan Bats")).hasPowerAndToughness("4/4");
-    browser.player2().getPhaseHelper().is(AB, PLAYER);
+    browser.player2().getPhaseHelper().is(DB, PLAYER);
 
     // When player 2 continues
     browser.player2().getActionHelper().clickContinueAndExpectPhase(M2, PLAYER);

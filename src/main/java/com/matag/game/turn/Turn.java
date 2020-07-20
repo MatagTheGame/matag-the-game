@@ -25,7 +25,6 @@ public class Turn {
   private String currentTurnPlayer;
   private String currentPhase;
   private String currentPhaseActivePlayer;
-  private boolean phaseActioned;
   private List<CardInstance> cardsPlayedWithinTurn = new ArrayList<>();
   private Map<Integer, List<String>> lastManaPaid = new HashMap<>();
   private String triggeredNonStackAction;

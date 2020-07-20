@@ -44,6 +44,9 @@ public class TurnController {
     }
 
     if ("CONTINUE_TURN".equals(request.getAction())) {
+      if (gameStatus.getTurn().getTriggeredNonStackAction() != null) {
+        throw new MessageException("Cannot continue: " + gameStatus.getTurn().getTriggeredNonStackAction());
+      }
       turnService.continueTurn(gameStatus);
     } else if ("PLAY_LAND".equals(request.getAction())) {
       turnService.playLand(gameStatus, request.getCardIds().get(0));

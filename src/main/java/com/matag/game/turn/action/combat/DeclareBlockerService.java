@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.matag.game.turn.action._continue.NonStackActions.DECLARE_BLOCKERS;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 
 @Component
@@ -24,8 +25,8 @@ public class DeclareBlockerService {
     var currentPlayer = gameStatus.getCurrentPlayer();
     var nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
 
-    if (!turn.getCurrentPhase().equals(DB)) {
-      throw new RuntimeException("Blockers declared during phase: " + turn.getCurrentPhase());
+    if (!turn.getCurrentPhase().equals(DB) || !DECLARE_BLOCKERS.equals(turn.getTriggeredNonStackAction())) {
+      throw new RuntimeException("Cannot declare blockers. Phase=" + turn.getCurrentPhase());
     }
 
     blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
@@ -40,7 +41,9 @@ public class DeclareBlockerService {
       nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(attackingCreatureId);
     });
 
-    continueService.next(gameStatus);
+    turn.setTriggeredNonStackAction(null);
+    turn.setCurrentPhaseActivePlayer(turn.getCurrentTurnPlayer());
+    continueService.set(gameStatus);
   }
 
   private List<CardInstance> findBlockers(Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds, Player nonCurrentPlayer, CardInstance attacker) {

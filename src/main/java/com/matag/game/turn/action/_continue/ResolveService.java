@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.matag.game.turn.action._continue.NonStackActions.DISCARD_A_CARD;
+
 @Component
 @AllArgsConstructor
 public class ResolveService {
@@ -99,7 +101,7 @@ public class ResolveService {
   }
 
   private void resolveTriggeredNonStackAction(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> cardIds) {
-    if ("DISCARD_A_CARD".equals(triggeredNonStackAction)) {
+    if (DISCARD_A_CARD.equals(triggeredNonStackAction)) {
       CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
       putIntoGraveyardService.putIntoGraveyard(gameStatus, cardInstance);
       gameStatus.getTurn().setTriggeredNonStackAction(null);

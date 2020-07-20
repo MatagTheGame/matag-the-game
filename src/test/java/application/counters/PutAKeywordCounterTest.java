@@ -15,7 +15,6 @@ import static com.matag.cards.ability.type.AbilityType.MENACE;
 import static com.matag.game.turn.phases.combat.CombatDamagePhase.CD;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
-import static com.matag.game.turn.phases.combat.EndOfCombatPhase.EC;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
@@ -71,7 +70,7 @@ public class PutAKeywordCounterTest extends AbstractApplicationTest {
 
     // So need to remove the blocker continue and lose
     browser.player2().getBattlefieldHelper(PLAYER, COMBAT_LINE).getFirstCard(cards.get("Catacomb Crocodile")).click();
-    browser.player2().getActionHelper().clickContinueAndExpectPhase(EC, PLAYER);
+    browser.player2().getActionHelper().clickContinueAndExpectPhase(CD, PLAYER);
     browser.player2().getMessageHelper().hasMessage("Player1 Win!");
   }
 

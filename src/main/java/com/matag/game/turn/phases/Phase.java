@@ -10,6 +10,7 @@ public interface Phase {
 
   Phase getNextPhase(GameStatus gameStatus);
 
-  void next(GameStatus gameStatus);
+  void set(GameStatus gameStatus);
 
+  void next(GameStatus gameStatus);
 }

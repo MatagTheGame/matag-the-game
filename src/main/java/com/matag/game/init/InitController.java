@@ -93,8 +93,7 @@ public class InitController {
         eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(gameStatus.getPlayer1(), gameStatus.getPlayer2())));
         eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(gameStatus.getPlayer2(), gameStatus.getPlayer1())));
 
-        // FIXME no implemented card yet can be played at the first game upkeep... so let's just continue.
-        continueService.next(gameStatus);
+        continueService.set(gameStatus);
 
         addDelayBeforeSendingUpdateGameStatusEvent();
         gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);
