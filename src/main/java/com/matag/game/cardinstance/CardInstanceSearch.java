@@ -160,6 +160,11 @@ public class CardInstanceSearch {
       .filter(cardInstance -> cardInstance.hasAnyFixedAbility(abilityTypes)));
   }
 
+  public CardInstanceSearch withoutFixedAbility(AbilityType abilityType) {
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> !cardInstance.hasFixedAbility(abilityType)));
+  }
+
   public CardInstanceSearch withTriggerSubtype(TriggerSubtype triggerSubtype) {
     return new CardInstanceSearch(this.cards
       .filter(cardInstance -> cardInstance.hasFixedAbilityWithTriggerSubType(triggerSubtype)));

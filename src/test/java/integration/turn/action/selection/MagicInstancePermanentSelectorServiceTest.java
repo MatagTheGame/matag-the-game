@@ -589,6 +589,31 @@ public class MagicInstancePermanentSelectorServiceTest {
   }
 
   @Test
+  public void selectionNotFliersYouControl() {
+    // Given
+    var gameStatus = testUtils.testGameStatus();
+
+    var magicInstanceSelector = MagicInstanceSelector.builder().selectorType(PERMANENT).ofType(singletonList(CREATURE)).withoutAbilityType(FLYING).controllerType(PLAYER).build();
+    var aFlier = cardInstanceFactory.create(gameStatus, 1, cards.get("Dawning Angel"), "player-name");
+    aFlier.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(aFlier);
+
+    var aNonFlier = cardInstanceFactory.create(gameStatus, 2, cards.get("Daybreak Chaplain"), "player-name");
+    aNonFlier.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(aNonFlier);
+
+    var anOpponentFlier = cardInstanceFactory.create(gameStatus, 3, cards.get("Dawning Angel"), "player-name");
+    anOpponentFlier.setController("opponent-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(anOpponentFlier);
+
+    // When
+    var selection = selectorService.select(gameStatus, aFlier, magicInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(aNonFlier);
+  }
+
+  @Test
   public void selectionCreatureOrPlaneswalkerGreenOrWhite() {
     // Given
     var gameStatus = testUtils.testGameStatus();

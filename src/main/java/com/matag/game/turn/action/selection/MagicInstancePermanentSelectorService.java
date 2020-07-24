@@ -50,6 +50,10 @@ public class MagicInstancePermanentSelectorService {
       cards = cards.withFixedAbility(magicInstanceSelector.getWithAbilityType());
     }
 
+    if (magicInstanceSelector.getWithoutAbilityType() != null) {
+      cards = cards.withoutFixedAbility(magicInstanceSelector.getWithoutAbilityType());
+    }
+
     if (magicInstanceSelector.getPowerToughnessConstraint() != null) {
       cards = cards.ofPowerToughnessConstraint(magicInstanceSelector.getPowerToughnessConstraint());
     }
