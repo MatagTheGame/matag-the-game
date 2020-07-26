@@ -20,19 +20,11 @@ import static java.util.stream.Collectors.toList;
 public class CardInstanceAbility extends Ability {
   public CardInstanceAbility(Ability ability) {
     super(ability.getAbilityType(), ability.getTargets(), ability.getMagicInstanceSelector(), ability.getParameters(),
-      ability.getTrigger(), ability.getAbility(), ability.isSorcerySpeed());
+      ability.getTrigger(), ability.getAbility(), ability.isSorcerySpeed(), ability.isOptional());
   }
 
   public CardInstanceAbility(AbilityType abilityType) {
-    super(abilityType, emptyList(), null, emptyList(), null, null, false);
-  }
-
-  public CardInstanceAbility(AbilityType abilityType, List<Target> targets, List<String> parameters, Trigger trigger) {
-    super(abilityType, targets, null, parameters, trigger, null, false);
-  }
-
-  public CardInstanceAbility(AbilityType abilityType, MagicInstanceSelector magicInstanceSelector, List<String> parameters, Trigger trigger) {
-    super(abilityType, emptyList(), magicInstanceSelector, parameters, trigger, null, false);
+    super(abilityType, emptyList(), null, emptyList(), null, null, false, false);
   }
 
   @JsonProperty

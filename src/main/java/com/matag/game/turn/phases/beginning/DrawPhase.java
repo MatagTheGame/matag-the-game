@@ -36,7 +36,7 @@ public class DrawPhase extends AbstractPhase {
     super.action(gameStatus);
 
     if (gameStatus.getTurn().getTurnNumber() > 1) {
-      drawXCardsService.drawXCards(gameStatus.getCurrentPlayer(), 1);
+      drawXCardsService.drawXCards(gameStatus.getCurrentPlayer(), 1, gameStatus);
     }
   }
 }

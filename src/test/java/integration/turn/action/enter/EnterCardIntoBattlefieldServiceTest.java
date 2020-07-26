@@ -178,6 +178,6 @@ public class EnterCardIntoBattlefieldServiceTest {
     enterCardIntoBattlefieldService.enter(gameStatus, card);
 
     // Then
-    verify(drawXCardsService).drawXCards(gameStatus.getPlayer1(), 1);
+    verify(drawXCardsService).drawXCards(gameStatus.getPlayer1(), 1, gameStatus);
   }
 }

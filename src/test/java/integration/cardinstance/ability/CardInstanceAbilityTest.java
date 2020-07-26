@@ -1,25 +1,36 @@
 package integration.cardinstance.ability;
 
-import com.matag.cards.ability.selector.MagicInstanceSelector;
-import com.matag.cards.ability.selector.SelectorType;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import integration.TestUtils;
+import integration.TestUtilsConfiguration;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.matag.cards.ability.type.AbilityType.*;
-import static com.matag.cards.properties.Type.CREATURE;
-import static com.matag.player.PlayerType.OPPONENT;
-import static com.matag.player.PlayerType.PLAYER;
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(SpringRunner.class)
+@ContextConfiguration(classes = TestUtilsConfiguration.class)
 public class CardInstanceAbilityTest {
+
+  @Autowired
+  private TestUtils testUtils;
+
+  @Autowired
+  private CardInstanceFactory cardInstanceFactory;
+
+  @Autowired
+  private Cards cards;
 
   @Test
   public void simpleAbilityText() {
     // Given
-    var ability = new CardInstanceAbility(FLYING);
+    var card = cardInstance("Aven Sentry");
+    var ability = card.getAbilities().get(0);
 
     // When
     var text = ability.getAbilityTypeText();
@@ -31,7 +42,8 @@ public class CardInstanceAbilityTest {
   @Test
   public void enchantedCreatureGetOneAbilityText() {
     // Given
-    var ability = new CardInstanceAbility(ENCHANT, emptyList(), singletonList("+2/+2"), null);
+    var card = cardInstance("Knight's Pledge");
+    var ability = card.getAbilities().get(0);
 
     // When
     var text = ability.getAbilityTypeText();
@@ -43,43 +55,47 @@ public class CardInstanceAbilityTest {
   @Test
   public void enchantedCreatureGetMultipleAbilitiesText() {
     // Given
-    var ability = new CardInstanceAbility(ENCHANT, emptyList(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+    var card = cardInstance("Arcane Flight");
+    var ability = card.getAbilities().get(0);
 
     // When
     var text = ability.getAbilityTypeText();
 
     // Then
-    assertThat(text).isEqualTo("Enchanted creature gets +2/+2, trample and haste.");
+    assertThat(text).isEqualTo("Enchanted creature gets +1/+1 and flying.");
   }
 
   @Test
   public void selectedPermanentsGetMultipleAbilitiesText() {
     // Given
-    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PERMANENT).ofType(singletonList(CREATURE)).controllerType(PLAYER).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+    var card = cardInstance("Make a Stand");
+    var ability = card.getAbilities().get(0);
 
     // When
     var text = ability.getAbilityTypeText();
 
     // Then
-    assertThat(text).isEqualTo("Creatures you control get +2/+2, trample and haste until end of turn.");
+    assertThat(text).isEqualTo("Creatures you control get +1/+0 and indestructible until end of turn.");
   }
 
   @Test
-  public void itGetMultipleAbilitiesText() {
+  public void itGetsAbilitiesText() {
     // Given
-    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PERMANENT).itself(true).build(), asList("+2/+2", "TRAMPLE", "HASTE"), null);
+    var card = cardInstance("Brazen Wolves");
+    var ability = card.getAbilities().get(0);
 
     // When
     var text = ability.getAbilityTypeText();
 
     // Then
-    assertThat(text).isEqualTo("Gets +2/+2, trample and haste until end of turn.");
+    assertThat(text).isEqualTo("Gets +2/+0 until end of turn.");
   }
 
   @Test
   public void gainXLifeText() {
     // Given
-    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build(), singletonList("LIFE:2"), null);
+    var card = cardInstance("Highland Game");
+    var ability = card.getAbilities().get(0);
 
     // When
     var text = ability.getAbilityTypeText();
@@ -89,38 +105,46 @@ public class CardInstanceAbilityTest {
   }
 
   @Test
-  public void loseXLifeText() {
+  public void drawXCardsAndLoseXLifeText() {
     // Given
-    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build(), singletonList("LIFE:-2"), null);
+    var card = cardInstance("Tithebearer Giant");
+    var ability = card.getAbilities().get(0);
 
     // When
     var text = ability.getAbilityTypeText();
 
     // Then
-    assertThat(text).isEqualTo("You lose 2 life.");
+    assertThat(text).isEqualTo("You draw 1 card and lose 1 life.");
   }
 
   @Test
   public void eachPlayerGainsXLifeText() {
     // Given
-    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).build(), singletonList("LIFE:2"), null);
+    var card = cardInstance("Centaur Peacemaker");
+    var ability = card.getAbilities().get(0);
 
     // When
     var text = ability.getAbilityTypeText();
 
     // Then
-    assertThat(text).isEqualTo("Each player gain 2 life.");
+    assertThat(text).isEqualTo("Each player gain 4 life.");
   }
 
   @Test
-  public void eachPlayerLosesXLifeText() {
+  public void eachOpponentLosesXLifeText() {
     // Given
-    var ability = new CardInstanceAbility(SELECTED_PERMANENTS_GET, MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build(), singletonList("LIFE:-2"), null);
+    var card = cardInstance("Infectious Horror");
+    var ability = card.getAbilities().get(0);
 
     // When
     var text = ability.getAbilityTypeText();
 
     // Then
     assertThat(text).isEqualTo("Each opponent lose 2 life.");
+  }
+
+  private CardInstance cardInstance(String cardName) {
+    var gameStatus = testUtils.testGameStatus();
+    return cardInstanceFactory.create(gameStatus, 1, cards.get(cardName), "player-name");
   }
 }

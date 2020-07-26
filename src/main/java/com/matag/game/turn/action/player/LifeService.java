@@ -21,7 +21,9 @@ public class LifeService {
       LOGGER.info("Player {} add {} life bringing it to {}", player.getName(), amount, player.getLife());
 
       if (player.getLife() <= 0) {
-        finishGameService.setWinner(gameStatus, gameStatus.getOtherPlayer(player));
+        var winner = gameStatus.getOtherPlayer(player);
+        LOGGER.info("Player {} lose, Player {} win", player.getName(), winner.getName());
+        finishGameService.setWinner(gameStatus, winner);
       }
     }
   }

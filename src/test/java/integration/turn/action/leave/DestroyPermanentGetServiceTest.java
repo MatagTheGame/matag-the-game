@@ -12,9 +12,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static com.matag.cards.ability.type.AbilityType.INDESTRUCTIBLE;
-import static com.matag.cards.ability.type.AbilityType.THAT_TARGETS_GET;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -86,17 +83,17 @@ public class DestroyPermanentGetServiceTest {
   public void testReduceToughnessToZeroOfIndestructibleDestroysIt() {
     // Given
     var gameStatus = testUtils.testGameStatus();
-    var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
-    cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(INDESTRUCTIBLE));
-    cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(THAT_TARGETS_GET, emptyList(), singletonList("-3/-3"), null));
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
+    var aCreature = cardInstanceFactory.create(gameStatus, 61, cards.get("Seraph of the Suns"), "player-name", "player-name");
+    var instantMinus4 = cardInstanceFactory.create(gameStatus, 62, cards.get("Grasp of Darkness"), "player-name", "player-name");
+    aCreature.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(instantMinus4.getAbilities().get(0));
+    gameStatus.getPlayer1().getBattlefield().addCard(aCreature);
 
     // When
     var destroyed = destroyPermanentService.destroy(gameStatus, 61);
 
     // Then
     assertThat(destroyed).isFalse();
-    assertThat(gameStatus.getPlayer1().getBattlefield().getCards()).contains(cardInstance);
+    assertThat(gameStatus.getPlayer1().getBattlefield().getCards()).contains(aCreature);
     assertThat(gameStatus.getPlayer1().getGraveyard().size()).isEqualTo(0);
   }
 }
