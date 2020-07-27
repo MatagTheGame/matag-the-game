@@ -181,19 +181,19 @@ public class MagicInstancePermanentSelectorServiceTest {
       .controllerType(PLAYER)
       .build();
 
-    var playerCard = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
-    playerCard.setController("player-name");
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(playerCard);
+    var playerCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    playerCreature.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(playerCreature);
 
-    var opponentCard = cardInstanceFactory.create(gameStatus, 2, cards.get("Grazing Whiptail"), "opponent-name");
-    opponentCard.setController("opponent-name");
-    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(opponentCard);
+    var opponentCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Grazing Whiptail"), "opponent-name");
+    opponentCreature.setController("opponent-name");
+    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(opponentCreature);
 
     // When
-    var selection = selectorService.select(gameStatus, playerCard, magicInstanceSelector).getCards();
+    var selection = selectorService.select(gameStatus, playerCreature, magicInstanceSelector).getCards();
 
     // Then
-    assertThat(selection).contains(playerCard);
+    assertThat(selection).contains(playerCreature);
   }
 
   @Test
@@ -807,5 +807,32 @@ public class MagicInstancePermanentSelectorServiceTest {
 
     // Then
     assertThat(selection).containsExactly(anInstant);
+  }
+
+  @Test
+  public void selectionAsTargetSkipsHexproof() {
+    // Given
+    var gameStatus = testUtils.testGameStatus();
+
+    var playerHexproof = cardInstanceFactory.create(gameStatus, 1, cards.get("Cold-Water Snapper"), "player-name");
+    gameStatus.getPlayer1().getBattlefield().addCard(playerHexproof);
+
+    var playerNonHexproof = cardInstanceFactory.create(gameStatus, 2, cards.get("Yoked Ox"), "player-name");
+    gameStatus.getPlayer1().getBattlefield().addCard(playerNonHexproof);
+
+    var opponentHexproof = cardInstanceFactory.create(gameStatus, 3, cards.get("Cold-Water Snapper"), "opponent-name");
+    gameStatus.getPlayer2().getBattlefield().addCard(opponentHexproof);
+
+    var opponentNonHexproof = cardInstanceFactory.create(gameStatus, 4, cards.get("Yoked Ox"), "opponent-name");
+    gameStatus.getPlayer2().getBattlefield().addCard(opponentNonHexproof);
+
+    var playerInstant = cardInstanceFactory.create(gameStatus, 5, cards.get("Disfigure"), "player-name");
+    var playerInstantSelector = playerInstant.getAbilities().get(0).getTargets().get(0).getMagicInstanceSelector();
+
+    // When
+    var selection = selectorService.selectAsTarget(gameStatus, playerInstant, playerInstantSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(playerHexproof, playerNonHexproof, opponentNonHexproof);
   }
 }

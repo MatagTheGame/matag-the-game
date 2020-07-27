@@ -141,13 +141,14 @@ public class CardInstanceSearch {
       .filter(card -> PowerToughnessConstraintUtils.check(powerToughnessConstraint, card)));
   }
 
-  public CardInstanceSearch concat(List<CardInstance> moreCards) {
-    return new CardInstanceSearch(Stream.concat(this.cards, moreCards.stream()));
-  }
-
   public CardInstanceSearch controlledBy(String playerName) {
     return new CardInstanceSearch(this.cards
       .filter(cardInstance -> cardInstance.getController().equals(playerName)));
+  }
+
+  public CardInstanceSearch notControlledBy(String playerName) {
+    return new CardInstanceSearch(this.cards
+      .filter(cardInstance -> !cardInstance.getController().equals(playerName)));
   }
 
   public CardInstanceSearch withFixedAbility(AbilityType abilityType) {
@@ -205,12 +206,16 @@ public class CardInstanceSearch {
     return new CardInstanceSearch(this.cards.filter((CardInstance::isInstantSpeed)));
   }
 
-  public CardInstanceSearch withoutInstantSpeed() {
-    return new CardInstanceSearch(this.cards.filter((ci -> !ci.isInstantSpeed())));
-  }
-
   public CardInstanceSearch historic() {
     return new CardInstanceSearch(this.cards.filter((CardInstance::isHistoric)));
+  }
+
+  public CardInstanceSearch concat(List<CardInstance> moreCards) {
+    return new CardInstanceSearch(Stream.concat(this.cards, moreCards.stream()));
+  }
+
+  public CardInstanceSearch concat(CardInstanceSearch moreCards) {
+    return concat(moreCards.getCards());
   }
 
   public boolean isEmpty() {

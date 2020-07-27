@@ -9,6 +9,8 @@ import com.matag.game.status.GameStatus;
 import com.matag.player.PlayerType;
 import org.springframework.stereotype.Component;
 
+import static com.matag.cards.ability.type.AbilityType.HEXPROOF;
+
 @Component
 public class MagicInstancePermanentSelectorService {
   public CardInstanceSearch select(GameStatus gameStatus, CardInstance cardInstance, MagicInstanceSelector magicInstanceSelector) {
@@ -41,9 +43,9 @@ public class MagicInstancePermanentSelectorService {
     }
 
     if (magicInstanceSelector.getControllerType() == PlayerType.PLAYER) {
-      cards = cards.controlledBy(getControllerOrOwner(cardInstance));
+      cards = cards.controlledBy(cardInstance.getController());
     } else if (magicInstanceSelector.getControllerType() == PlayerType.OPPONENT) {
-      cards = cards.controlledBy(gameStatus.getOtherPlayer(getControllerOrOwner(cardInstance)).getName());
+      cards = cards.controlledBy(gameStatus.getOtherPlayer(cardInstance.getController()).getName());
     }
 
     if (magicInstanceSelector.getWithAbilityType() != null) {
@@ -115,7 +117,10 @@ public class MagicInstancePermanentSelectorService {
     return cards;
   }
 
-  private String getControllerOrOwner(CardInstance cardInstance) {
-    return cardInstance.getController() != null ? cardInstance.getController() : cardInstance.getOwner();
+  public CardInstanceSearch selectAsTarget(GameStatus gameStatus, CardInstance cardInstance, MagicInstanceSelector magicInstanceSelector) {
+    var cards = select(gameStatus, cardInstance, magicInstanceSelector).getCards();
+    CardInstanceSearch playerCards = new CardInstanceSearch(cards).controlledBy(cardInstance.getController());
+    CardInstanceSearch opponentCardsWithoutHexproof = new CardInstanceSearch(cards).notControlledBy(cardInstance.getController()).withoutFixedAbility(HEXPROOF);
+    return playerCards.concat(opponentCardsWithoutHexproof);
   }
 }

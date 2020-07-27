@@ -16,8 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static com.matag.cards.ability.type.AbilityType.THAT_TARGETS_GET;
-import static com.matag.cards.ability.type.AbilityType.abilityType;
+import static com.matag.cards.ability.type.AbilityType.*;
 
 @Component
 @AllArgsConstructor
@@ -57,8 +56,8 @@ public class TargetCheckerService {
           return true;
 
         } else {
-          var cards = magicInstancePermanentSelectorService.select(gameStatus, cardToCast, target.getMagicInstanceSelector());
-          if (cards.isNotEmpty()) {
+          var possibleTargets = magicInstancePermanentSelectorService.selectAsTarget(gameStatus, cardToCast, target.getMagicInstanceSelector());
+          if (possibleTargets.isNotEmpty()) {
             return true;
           }
         }
@@ -90,8 +89,8 @@ public class TargetCheckerService {
       }
 
       var targetCardId = (int) targetId;
-      var cards = magicInstancePermanentSelectorService.select(gameStatus, cardInstance, magicInstanceSelector);
-      if (cards.withId(targetCardId).isEmpty()) {
+      var possibleTargets = magicInstancePermanentSelectorService.selectAsTarget(gameStatus, cardInstance, magicInstanceSelector);
+      if (possibleTargets.withId(targetCardId).isEmpty()) {
         throw new MessageException("Selected targets were not valid.");
       }
     }

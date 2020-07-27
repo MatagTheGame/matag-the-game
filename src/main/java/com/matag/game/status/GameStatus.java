@@ -111,8 +111,7 @@ public class GameStatus {
   }
 
   public CardInstanceSearch getAllBattlefieldCardsSearch() {
-    return new CardInstanceSearch(player1.getBattlefield().getCards())
-      .concat(player2.getBattlefield().getCards());
+    return new CardInstanceSearch(player1.getBattlefield().getCards()).concat(player2.getBattlefield().getCards());
   }
 
   public List<CardInstance> getAllBattlefieldCards() {
