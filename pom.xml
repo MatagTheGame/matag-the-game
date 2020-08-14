@@ -14,13 +14,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>14</maven.compiler.target>
         <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
+        <frontend-maven-plugin.version>1.10.0</frontend-maven-plugin.version>
         <bytebuddy.version>1.10.8</bytebuddy.version>
         <htmlunit.version>2.35.1</htmlunit.version>
         <jakarta.version>2.3.2</jakarta.version>
-        <lombok.version>1.18.6</lombok.version>
+        <lombok.version>1.18.12</lombok.version>
         <matag.version>1.1.1-SNAPSHOT</matag.version>
         <selenium.version>3.141.59</selenium.version>
-        <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
+        <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
     </properties>
 
     <repositories>
@@ -102,7 +105,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
@@ -112,7 +115,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>${maven.surefire.plugin.version}</version>
                 <configuration>
                     <argLine>--enable-preview</argLine>
                 </configuration>
@@ -120,7 +123,7 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.6</version>
+                <version>${frontend-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>install node and yarn</id>
