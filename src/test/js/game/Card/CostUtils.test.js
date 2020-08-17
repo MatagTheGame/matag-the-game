@@ -63,7 +63,7 @@ describe('isCostFulfilled', () => {
 
   test('getDisplayMana', () => {
     // Given
-    const mana = ['WHITE', 'COLORLESS', 'COLORLESS']
+    const mana = ['WHITE', 'ANY', 'COLORLESS']
 
     // When
     const displayMana = CostUtils.getDisplayMana(mana)

@@ -11,14 +11,14 @@ class PossibleAbility extends Component {
     const needsTapping = CostUtils.needsTapping(cost)
     cost = CostUtils.costWithoutTapping(cost)
 
-    const colorlessCost = CostUtils.colorlessCost(cost)
-    cost = CostUtils.costWithoutColorless(cost)
+    const anyColorCost = CostUtils.anyColorCost(cost)
+    cost = CostUtils.costWithoutAnyColor(cost)
 
     return (
       <>
-        { colorlessCost > 0 && PossibleAbility.renderSymbols([colorlessCost]) }
+        { anyColorCost > 0 && PossibleAbility.renderSymbols([anyColorCost]) }
         { PossibleAbility.renderSymbols(cost) }
-        { colorlessCost > 0 && cost.length > 0 && needsTapping && ', ' }
+        { anyColorCost > 0 && cost.length > 0 && needsTapping && ', ' }
         { needsTapping && PossibleAbility.renderSymbols(['TAP']) }
       </>
     )

@@ -57,11 +57,19 @@ export default class CostUtils {
   }
 
   static colorlessCost(cost) {
-    return cost.filter(c => c === 'COLORLESS' || c === 'ANY').length
+    return cost.filter(c => c === 'COLORLESS').length
   }
 
   static costWithoutColorless(cost) {
-    return cost.filter(c => c !== 'COLORLESS' || c !== 'ANY')
+    return cost.filter(c => c !== 'COLORLESS')
+  }
+
+  static anyColorCost(cost) {
+    return cost.filter(c => c === 'ANY').length
+  }
+
+  static costWithoutAnyColor(cost) {
+    return cost.filter(c => c !== 'ANY')
   }
 
   static getMana(state) {
@@ -90,11 +98,16 @@ export default class CostUtils {
 
   static getDisplayMana(currentTappedMana) {
     let manaPaid = CostUtils.getPaidMana(currentTappedMana)
-    const colorlessCost = CostUtils.colorlessCost(manaPaid)
 
+    const anyColorCost = CostUtils.anyColorCost(manaPaid)
+    const colorlessCost = CostUtils.colorlessCost(manaPaid)
+    const noColorCost = anyColorCost + colorlessCost;
+
+    manaPaid = CostUtils.costWithoutAnyColor(manaPaid)
     manaPaid = CostUtils.costWithoutColorless(manaPaid)
-    if (colorlessCost > 0) {
-      manaPaid.unshift(colorlessCost.toString())
+
+    if (anyColorCost > 0) {
+      manaPaid.unshift(noColorCost.toString())
     }
 
     return manaPaid
