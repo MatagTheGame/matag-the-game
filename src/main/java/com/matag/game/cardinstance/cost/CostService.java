@@ -11,7 +11,7 @@ import java.util.List;
 
 import static com.matag.cards.ability.type.AbilityType.TAP_ADD_MANA;
 import static com.matag.cards.ability.type.AbilityType.abilityType;
-import static com.matag.cards.properties.Cost.COLORLESS;
+import static com.matag.cards.properties.Cost.ANY;
 import static java.util.stream.Collectors.toList;
 
 @Component
@@ -28,7 +28,7 @@ public class CostService {
     for (var cost : getSimpleCost(cardInstance.getCard(), ability)) {
       var removed = false;
 
-      if (cost == COLORLESS) {
+      if (cost == ANY) {
         if (manaPaidCopy.size() > 0) {
           manaPaidCopy.remove(0);
           removed = true;

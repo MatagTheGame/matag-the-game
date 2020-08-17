@@ -155,10 +155,10 @@ public class CostServiceTest {
   public void canAffordReturnsTrueIfEnoughMana() {
     // Given
     var gameStatus = testUtils.testGameStatus();
-    gameStatus.getPlayer1().getBattlefield().addCard(createCardInstance(gameStatus, "Forest"));
-    gameStatus.getPlayer1().getBattlefield().addCard(createCardInstance(gameStatus, "Forest"));
-    gameStatus.getPlayer1().getBattlefield().addCard(createCardInstance(gameStatus, "Forest"));
-    gameStatus.getPlayer1().getBattlefield().addCard(createCardInstance(gameStatus, "Forest"));
+    createCardInstance(gameStatus, "Forest");
+    createCardInstance(gameStatus, "Forest");
+    createCardInstance(gameStatus, "Forest");
+    createCardInstance(gameStatus, "Forest");
     var cardInstance = createCardInstance(gameStatus, "Axebane Beast");
 
     // When
@@ -172,9 +172,9 @@ public class CostServiceTest {
   public void canAffordReturnsTrueIfCorrectManaDualLands() {
     // Given
     var gameStatus = testUtils.testGameStatus();
-    gameStatus.getPlayer1().getBattlefield().addCard(createCardInstance(gameStatus, "Selesnya Guildgate")); // GREEN, WHITE
-    gameStatus.getPlayer1().getBattlefield().addCard(createCardInstance(gameStatus, "Llanowar Elves")); // GREEN
-    gameStatus.getPlayer1().getBattlefield().addCard(createCardInstance(gameStatus, "Leyline Prowler")); // any color
+    createCardInstance(gameStatus, "Selesnya Guildgate"); // GREEN, WHITE
+    createCardInstance(gameStatus, "Llanowar Elves"); // GREEN
+    createCardInstance(gameStatus, "Leyline Prowler"); // any color
     var cardInstance = createCardInstance(gameStatus, "Skyknight Legionnaire"); // "RED", "WHITE", "COLORLESS"
 
     // When
@@ -188,9 +188,9 @@ public class CostServiceTest {
   public void canAffordReturnsFalseIfWrongManaDualLands() {
     // Given
     var gameStatus = testUtils.testGameStatus();
-    gameStatus.getPlayer1().getBattlefield().addCard(createCardInstance(gameStatus, "Selesnya Guildgate")); // GREEN, WHITE
-    gameStatus.getPlayer1().getBattlefield().addCard(createCardInstance(gameStatus, "Llanowar Elves")); // GREEN
-    gameStatus.getPlayer1().getBattlefield().addCard(createCardInstance(gameStatus, "Dimir Guildgate")); // BLUE, BLACK
+    createCardInstance(gameStatus, "Selesnya Guildgate"); // GREEN, WHITE
+    createCardInstance(gameStatus, "Llanowar Elves"); // GREEN
+    createCardInstance(gameStatus, "Dimir Guildgate"); // BLUE, BLACK
     var cardInstance = createCardInstance(gameStatus, "Skyknight Legionnaire"); // "RED", "WHITE", "COLORLESS"
 
     // When
@@ -198,6 +198,40 @@ public class CostServiceTest {
 
     // Then
     assertThat(result).isFalse();
+  }
+
+  @Test
+  public void cardThatReallyNeedsColorlessManaShouldFailIfNotColorlessManaFalse() {
+    // Given
+    var gameStatus = testUtils.testGameStatus();
+
+    createCardInstance(gameStatus, "Forest");
+
+    CardInstance blindingDrone = createCardInstance(gameStatus, "Blinding Drone");
+    gameStatus.getPlayer1().getBattlefield().addCard(blindingDrone);
+
+    // When
+    boolean result = costService.canAfford(blindingDrone, "THAT_TARGETS_GET", gameStatus);
+
+    // Then
+    assertThat(result).isFalse();
+  }
+
+  @Test
+  public void cardThatReallyNeedsColorlessManaShouldFailIfNotColorlessManaTrue() {
+    // Given
+    var gameStatus = testUtils.testGameStatus();
+
+    createCardInstance(gameStatus, "Wastes");
+
+    CardInstance blindingDrone = createCardInstance(gameStatus, "Blinding Drone");
+    gameStatus.getPlayer1().getBattlefield().addCard(blindingDrone);
+
+    // When
+    boolean result = costService.canAfford(blindingDrone, "THAT_TARGETS_GET", gameStatus);
+
+    // Then
+    assertThat(result).isTrue();
   }
 
   private CardInstance createCardInstance(GameStatus gameStatus, String cardName) {
