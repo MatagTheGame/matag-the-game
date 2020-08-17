@@ -26,7 +26,7 @@ export default class CostUtils {
     for (const cost of costToFulfill) {
       let removed = false
 
-      if (cost !== 'COLORLESS') {
+      if (cost !== 'ANY') {
         const index = manaPaid.indexOf(cost)
         if (index >= 0) {
           removed = true
@@ -57,11 +57,11 @@ export default class CostUtils {
   }
 
   static colorlessCost(cost) {
-    return cost.filter(c => c === 'COLORLESS').length
+    return this.costWithoutColorless(cost).length
   }
 
   static costWithoutColorless(cost) {
-    return cost.filter(c => c !== 'COLORLESS')
+    return cost.filter(c => c !== 'COLORLESS' || c === 'ANY')
   }
 
   static getMana(state) {
