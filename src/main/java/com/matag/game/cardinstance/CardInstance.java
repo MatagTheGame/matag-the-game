@@ -144,6 +144,15 @@ public class CardInstance {
     return false;
   }
 
+  public boolean ofAllOfTheTypes(List<Type> types) {
+    for (var type : types) {
+      if (!isOfType(type)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public boolean ofAnyOfTheSubtypes(List<Subtype> subtypes) {
     for (var subtype : subtypes) {
       if (isOfSubtype(subtype)) {

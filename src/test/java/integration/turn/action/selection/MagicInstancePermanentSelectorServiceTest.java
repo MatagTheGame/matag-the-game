@@ -733,6 +733,35 @@ public class MagicInstancePermanentSelectorServiceTest {
   }
 
   @Test
+  public void selectionArtifactCreature() {
+    // Given
+    var gameStatus = testUtils.testGameStatus();
+
+    var magicInstanceSelector = MagicInstanceSelector.builder()
+      .selectorType(PERMANENT)
+      .ofAllTypes(List.of(ARTIFACT, CREATURE))
+      .build();
+
+    var aCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
+    aCreature.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(aCreature);
+
+    var anArtifact = cardInstanceFactory.create(gameStatus, 1, cards.get("Brawler's Plate"), "player-name");
+    anArtifact.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(aCreature);
+
+    var anArtifactCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Jousting Dummy"), "player-name");
+    anArtifactCreature.setController("player-name");
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(anArtifactCreature);
+
+    // When
+    var selection = selectorService.select(gameStatus, null, magicInstanceSelector).getCards();
+
+    // Then
+    assertThat(selection).containsExactly(anArtifactCreature);
+  }
+
+  @Test
   public void selectionSpellEmpty() {
     // Given
     var gameStatus = testUtils.testGameStatus();

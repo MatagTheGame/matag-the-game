@@ -35,6 +35,10 @@ public class MagicInstancePermanentSelectorService {
       cards = cards.notOfTypes(magicInstanceSelector.getNotOfType());
     }
 
+    if (magicInstanceSelector.getOfAllTypes() != null) {
+      cards = cards.ofAllOfTheTypes(magicInstanceSelector.getOfAllTypes());
+    }
+
     if (magicInstanceSelector.getOfSubtype() != null) {
       cards = cards.ofAnyOfTheSubtypes(magicInstanceSelector.getOfSubtype());
 
