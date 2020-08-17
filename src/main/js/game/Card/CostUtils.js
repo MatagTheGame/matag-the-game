@@ -57,11 +57,11 @@ export default class CostUtils {
   }
 
   static colorlessCost(cost) {
-    return this.costWithoutColorless(cost).length
+    return cost.filter(c => c === 'COLORLESS' || c === 'ANY').length
   }
 
   static costWithoutColorless(cost) {
-    return cost.filter(c => c !== 'COLORLESS' || c === 'ANY')
+    return cost.filter(c => c !== 'COLORLESS' || c !== 'ANY')
   }
 
   static getMana(state) {
