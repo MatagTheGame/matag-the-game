@@ -1,4 +1,4 @@
-package application.cast;
+package application.enchantment;
 
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;

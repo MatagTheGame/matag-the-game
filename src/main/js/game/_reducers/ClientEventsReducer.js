@@ -11,8 +11,9 @@ import stompClient from 'game/WebSocket'
 export default class ClientEventsReducer {
 
   static getEvents() {
-    return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'OPPONENT_BATTLEFIELD_CARD_CLICK', 'CONTINUE_CLICK',
-      'PLAYER_CLICK', 'MAXIMIZE_MINIMIZE_CARD', 'CLOSE_PLAYABLE_ABILITIES_CLICK', 'PLAY_ABILITIES_CLICK', 'OPEN_HELP_PAGE', 'CLOSE_HELP_PAGE']
+    return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'OPPONENT_BATTLEFIELD_CARD_CLICK', 'STACK_ELEMENT_CLICK',
+      'CONTINUE_CLICK', 'PLAYER_CLICK', 'MAXIMIZE_MINIMIZE_CARD', 'CLOSE_PLAYABLE_ABILITIES_CLICK', 'PLAY_ABILITIES_CLICK', 'OPEN_HELP_PAGE',
+      'CLOSE_HELP_PAGE']
   }
 
   static reduceEvent(newState, action) {
@@ -144,6 +145,15 @@ export default class ClientEventsReducer {
           }
 
         } else if (PlayerUtils.shouldHandleTargets(newState)) {
+          PlayerUtils.handleSelectedTarget(newState, cardInstance)
+        }
+      }
+      break
+
+    case 'STACK_ELEMENT_CLICK':
+      if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
+        const cardInstance = CardSearch.cards(newState.stack).withId(action.cardId)
+        if (PlayerUtils.shouldHandleTargets(newState)) {
           PlayerUtils.handleSelectedTarget(newState, cardInstance)
         }
       }

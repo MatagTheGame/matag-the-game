@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import Card from 'game/Card/Card'
@@ -9,12 +10,12 @@ import './stack.scss'
 
 class Stack extends Component {
 
-  static renderStackItem(cardInstance, i) {
+  renderStackItem(cardInstance, i) {
     const style = {transform: 'translateY(-150px) translateX(' + (i * 50) + 'px) translateZ(' + (i * 150) + 'px)'}
     if (StackUtils.isACastedCard(cardInstance)) {
       return (
         <span key={cardInstance.id} style={style}>
-          <Card cardInstance={cardInstance} area='stack'/>
+          <Card cardInstance={cardInstance} area='stack' onclick={this.playerElementClick(cardInstance.id)}/>
         </span>
       )
 
@@ -27,8 +28,12 @@ class Stack extends Component {
     }
   }
 
+  playerElementClick(cardId) {
+    return (e) => this.props.playerElementClick(cardId, {x: e.screenX, y: e.screenY})
+  }
+
   renderStack() {
-    return this.props.stack.map((cardInstance, index) => Stack.renderStackItem(cardInstance, index))
+    return this.props.stack.map((cardInstance, index) => this.renderStackItem(cardInstance, index))
   }
 
   render() {
@@ -37,6 +42,20 @@ class Stack extends Component {
         {this.renderStack()}
       </div>
     )
+  }
+}
+
+const createStackElementClickAction = (cardId, event) => {
+  return {
+    type: 'STACK_ELEMENT_CLICK',
+    cardId: cardId,
+    event: event
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    playerElementClick: bindActionCreators(createStackElementClickAction, dispatch)
   }
 }
 
@@ -50,4 +69,4 @@ Stack.propTypes = {
   stack: PropTypes.array.isRequired
 }
 
-export default connect(mapStateToProps)(Stack)
+export default connect(mapStateToProps, mapDispatchToProps)(Stack)
