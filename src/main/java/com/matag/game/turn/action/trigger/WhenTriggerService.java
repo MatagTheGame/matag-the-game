@@ -29,7 +29,7 @@ public class WhenTriggerService {
 
       if (!cardWithTriggerAbility.getTriggeredAbilities().isEmpty()) {
         LOGGER.info("{} triggered {} because of {}.", cardInstance.getIdAndName(), triggerSubtype, cardInstance.getIdAndName());
-        gameStatus.getStack().add(cardWithTriggerAbility);
+        gameStatus.getStack().push(cardWithTriggerAbility);
       }
     }
   }

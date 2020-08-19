@@ -36,7 +36,7 @@ public class ResolveService {
       var stackItemToResolve = gameStatus.getStack().peek();
 
       if (stackItemToResolve.getTriggeredAbilities().isEmpty()) {
-        gameStatus.getStack().remove();
+        gameStatus.getStack().pop();
         resolveCardInstanceFromStack(gameStatus, stackItemToResolve);
 
       } else {
@@ -67,7 +67,7 @@ public class ResolveService {
         }
 
         if (stackItemToResolve.acknowledged()) {
-          gameStatus.getStack().remove();
+          gameStatus.getStack().pop();
           resolveTriggeredAbility(gameStatus, stackItemToResolve);
         }
       }

@@ -23,25 +23,50 @@ public class ThatTargetsGetAction implements AbilityAction {
   @Override
   public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
     for (var i = 0; i < ability.getTargets().size(); i++) {
+      var target = ability.getTargets().get(i);
       var targetId = targetCheckerService.getTargetIdAtIndex(cardInstance, ability, i);
 
       if (targetId != null) {
-        if (targetId instanceof String targetPlayer) {
-          var player = gameStatus.getPlayerByName(targetPlayer);
-          playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getParameters(), player);
-
-        } else if (targetId instanceof Integer targetCardId) {
-          var targetOptional = gameStatus.getAllBattlefieldCardsSearch().withId(targetCardId);
-
-          if (targetOptional.isPresent()) {
-            var target = targetOptional.get();
-            permanentGetService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), target);
-
-          } else {
-            LOGGER.info("target {} is not anymore valid.", targetCardId);
-          }
+        switch (target.getMagicInstanceSelector().getSelectorType()) {
+          case PERMANENT -> thatPermanentGets(gameStatus, cardInstance, ability, (int)targetId);
+          case PLAYER -> thatPlayerGets(gameStatus, cardInstance, ability, (String)targetId);
+          case SPELL -> thatSpellGets(gameStatus, cardInstance, ability, (int)targetId);
+          case ANY -> thatAnyTargetGets(cardInstance, gameStatus, ability, targetId);
         }
       }
+    }
+  }
+
+  private void thatPlayerGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, String targetPlayer) {
+    var player = gameStatus.getPlayerByName(targetPlayer);
+    playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getParameters(), player);
+  }
+
+  private void thatPermanentGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, int targetId) {
+    var targetOptional = gameStatus.getAllBattlefieldCardsSearch().withId(targetId);
+    thatTargetGets(gameStatus, cardInstance, ability, targetId, targetOptional);
+  }
+
+  private void thatSpellGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, int targetId) {
+    var targetOptional = gameStatus.getStack().search().withId(targetId);
+    thatTargetGets(gameStatus, cardInstance, ability, targetId, targetOptional);
+  }
+
+  private void thatAnyTargetGets(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability, Object targetId) {
+    if (targetId instanceof String) {
+      thatPlayerGets(gameStatus, cardInstance, ability, (String) targetId);
+    } else if (targetId instanceof Integer) {
+      thatPermanentGets(gameStatus, cardInstance, ability, (int) targetId);
+    }
+  }
+
+  private void thatTargetGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, int targetCardId, java.util.Optional<CardInstance> targetOptional) {
+    if (targetOptional.isPresent()) {
+      var target = targetOptional.get();
+      permanentGetService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), target);
+
+    } else {
+      LOGGER.info("target {} is not anymore valid.", targetCardId);
     }
   }
 }

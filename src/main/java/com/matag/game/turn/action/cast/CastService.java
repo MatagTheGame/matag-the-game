@@ -59,14 +59,14 @@ public class CastService {
       if (spellType.equals(SPELL)) {
         activePlayer.getHand().extractCardById(cardId);
         cardToCast.setController(activePlayer.getName());
-        gameStatus.getStack().add(cardToCast);
+        gameStatus.getStack().push(cardToCast);
         whenTriggerService.whenTriggered(gameStatus, cardToCast, WHEN_CAST);
 
       } else {
         var triggeredAbility = cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility)).get(0);
         cardToCast.getTriggeredAbilities().add(triggeredAbility);
         LOGGER.info("Player {} triggered ability {} for {}.", activePlayer.getName(), triggeredAbility.getAbilityType(), cardToCast.getModifiers());
-        gameStatus.getStack().add(cardToCast);
+        gameStatus.getStack().push(cardToCast);
       }
 
       payCostService.pay(gameStatus, activePlayer, cardToCast, playedAbility, mana);

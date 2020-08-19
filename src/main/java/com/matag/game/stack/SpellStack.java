@@ -16,7 +16,7 @@ public class SpellStack {
     return items.isEmpty();
   }
 
-  public void add(CardInstance cardInstance) {
+  public void push(CardInstance cardInstance) {
     items.addLast(cardInstance);
   }
 
@@ -24,8 +24,12 @@ public class SpellStack {
     return items.peekLast();
   }
 
-  public CardInstance remove() {
+  public CardInstance pop() {
     return items.removeLast();
+  }
+
+  public void remove(CardInstance card) {
+    items.remove(card);  
   }
 
   public LinkedList<CardInstance> getItems() {

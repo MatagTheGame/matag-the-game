@@ -789,7 +789,7 @@ public class MagicInstancePermanentSelectorServiceTest {
       .build();
 
     var aSpell = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
-    gameStatus.getStack().add(aSpell);
+    gameStatus.getStack().push(aSpell);
 
     // When
     var selection = selectorService.select(gameStatus, aSpell, magicInstanceSelector).getCards();
@@ -809,7 +809,7 @@ public class MagicInstancePermanentSelectorServiceTest {
       .build();
 
     var aSpell = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name");
-    gameStatus.getStack().add(aSpell);
+    gameStatus.getStack().push(aSpell);
 
     // When
     var selection = selectorService.select(gameStatus, aSpell, magicInstanceSelector).getCards();
@@ -829,7 +829,7 @@ public class MagicInstancePermanentSelectorServiceTest {
       .build();
 
     var anInstant = cardInstanceFactory.create(gameStatus, 1, cards.get("Precision Bolt"), "player-name");
-    gameStatus.getStack().add(anInstant);
+    gameStatus.getStack().push(anInstant);
 
     // When
     var selection = selectorService.select(gameStatus, anInstant, magicInstanceSelector).getCards();

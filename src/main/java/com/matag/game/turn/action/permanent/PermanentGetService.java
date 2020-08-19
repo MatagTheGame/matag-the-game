@@ -8,6 +8,7 @@ import com.matag.game.turn.action.counters.CountersService;
 import com.matag.game.turn.action.damage.DealDamageToCreatureService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
 import com.matag.game.turn.action.leave.DestroyPermanentService;
+import com.matag.game.turn.action.leave.PutIntoGraveyardService;
 import com.matag.game.turn.action.leave.ReturnPermanentToHandService;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class PermanentGetService {
   private final DealDamageToPlayerService dealDamageToPlayerService;
   private final DestroyPermanentService destroyPermanentService;
   private final TapPermanentService tapPermanentService;
+  private final PutIntoGraveyardService putIntoGraveyardService;
   private final ReturnPermanentToHandService returnPermanentToHandService;
   private final GainControlPermanentService gainControlPermanentService;
   private final CountersService countersService;
@@ -63,6 +65,14 @@ public class PermanentGetService {
 
     if (abilityService.untappedFromParameter(parameter)) {
       tapPermanentService.untap(gameStatus, target.getId());
+    }
+
+    if (abilityService.cancelledFromParameter(parameter)) {
+      var cardToCancel = gameStatus.getStack().search().withId(target.getId());
+      cardToCancel.ifPresent((card) -> {
+        gameStatus.getStack().remove(card);
+        putIntoGraveyardService.putIntoGraveyard(gameStatus, card);
+      });
     }
 
     if (abilityService.returnToOwnerHandFromParameter(parameter)) {

@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static com.matag.game.turn.phases.beginning.UpkeepPhase.UP;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
-import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -153,7 +152,7 @@ public class AutocontinueCheckerTest {
     CardInstance brazenWolves = cardInstanceFactory.create(gameStatus, 62, cards.get("Brazen Wolves"), "player-name");
 
     brazenWolves.acknowledgedBy("player1");
-    gameStatus.getStack().add(brazenWolves);
+    gameStatus.getStack().push(brazenWolves);
 
     // When
     var result = autocontinueChecker.canPerformAnyAction(gameStatus);
@@ -172,7 +171,7 @@ public class AutocontinueCheckerTest {
 
     brazenWolves.acknowledgedBy("player1");
     brazenWolves.acknowledgedBy("player2");
-    gameStatus.getStack().add(brazenWolves);
+    gameStatus.getStack().push(brazenWolves);
 
     // When
     var result = autocontinueChecker.canPerformAnyAction(gameStatus);
