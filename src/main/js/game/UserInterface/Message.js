@@ -30,8 +30,11 @@ class Message extends Component {
     }
   }
 
-  renderMessageText() {
-    return <p id='message-text'>{ this.props.message.text }</p>
+  getMessage() {
+    if (this.props.message.text && this.props.message.text.indexOf('Win!') > 0) {
+      return <>{this.props.message.text} <a href={this.props.adminUrl}>Go back to admin.</a></>
+    }
+    return this.props.message.text
   }
 
   render() {
@@ -41,7 +44,7 @@ class Message extends Component {
           <div id='modal-container' />
           <div id='popup'>
             { this.renderCloseButton() }
-            { this.renderMessageText() }
+            <p id='message-text'>{this.getMessage()}</p>
           </div>
         </Fragment>
       )
@@ -60,7 +63,8 @@ const closeMessageEvent = () => {
 
 const mapStateToProps = state => {
   return {
-    message: get(state, 'userInterface.message', {})
+    message: get(state, 'userInterface.message', {}),
+    adminUrl: get(state, 'player.gameConfig.adminUrl', '')
   }
 }
 

@@ -19,6 +19,7 @@ export default class UserInterfaceUtils {
   static computeStatusMessage(state) {
     if (state.turn.winner) {
       UserInterfaceUtils.setMessage(state, state.turn.winner + ' Win!')
+      UserInterfaceUtils.setStatusMessage(state, state.turn.winner + ' Win!')
 
     } else if (!PlayerUtils.isCurrentPlayerActive(state)) {
       UserInterfaceUtils.setStatusMessage(state, UserInterfaceUtils.WAIT_FOR_AN_OPPONENT_TO_PERFORM_ITS_ACTION)

@@ -1,6 +1,7 @@
 package com.matag.game.init;
 
 import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.config.ConfigService;
 import com.matag.game.deck.DeckFactory;
 import com.matag.game.deck.DeckRetrieverService;
 import com.matag.game.event.Event;
@@ -17,10 +18,10 @@ import com.matag.game.status.GameStatusFactory;
 import com.matag.game.status.GameStatusRepository;
 import com.matag.game.status.GameStatusUpdaterService;
 import com.matag.game.turn.action._continue.ContinueService;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
@@ -29,11 +30,13 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@AllArgsConstructor
 public class InitController {
   private static final Logger LOGGER = LoggerFactory.getLogger(InitController.class);
 
   private final SecurityHelper securityHelper;
   private final EventSender eventSender;
+  private final ConfigService configService;
   private final GameStatusFactory gameStatusFactory;
   private final PlayerInfoRetriever playerInfoRetriever;
   private final PlayerFactory playerFactory;
@@ -44,21 +47,6 @@ public class InitController {
   private final DeckRetrieverService deckRetrieverService;
   private final DeckFactory deckFactory;
   private final ContinueService continueService;
-
-  public InitController(SecurityHelper securityHelper, EventSender eventSender, GameStatusFactory gameStatusFactory, PlayerInfoRetriever playerInfoRetriever, PlayerFactory playerFactory, PlayerService playerService, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository, DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService, DeckFactory deckFactory, ContinueService continueService) {
-    this.securityHelper = securityHelper;
-    this.eventSender = eventSender;
-    this.gameStatusFactory = gameStatusFactory;
-    this.playerInfoRetriever = playerInfoRetriever;
-    this.playerFactory = playerFactory;
-    this.playerService = playerService;
-    this.gameStatusUpdaterService = gameStatusUpdaterService;
-    this.gameStatusRepository = gameStatusRepository;
-    this.deckRetrieverService = deckRetrieverService;
-    this.initTestService = initTestService;
-    this.deckFactory = deckFactory;
-    this.continueService = continueService;
-  }
 
   @MessageMapping("/game/init")
   void init(SimpMessageHeaderAccessor headerAccessor) {
@@ -124,9 +112,11 @@ public class InitController {
     Thread.sleep(100);
   }
 
-  private static Map<String, InitPlayerEvent> initPlayerAndOpponentEvent(Player player, Player opponent) {
+  private Map<String, InitPlayerEvent> initPlayerAndOpponentEvent(Player player, Player opponent) {
+    var gameConfig = new GameConfig(configService.getMatagAdminUrl());
     return Map.of(
-            "player", InitPlayerEvent.create(player),
-            "opponent", InitPlayerEvent.create(opponent));
+            "player", new InitPlayerEvent(player.getName(), gameConfig),
+            "opponent", new InitPlayerEvent(opponent.getName(), null)
+    );
   }
 }
