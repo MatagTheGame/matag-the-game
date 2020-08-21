@@ -3,7 +3,7 @@
   background-image: url('/img/materials/silver.jpg');
   right: 0;
   bottom: 44%;
-  width: 900px;
+  width: 470px;
   height: 8%;
   display: flex;
   justify-content: space-between;
@@ -19,6 +19,8 @@
     margin: 6px;
     display: inline-block;
     background-color: darkolivegreen;
+    width: 50px;
+    text-align: center;
   }
 
   span.active {
@@ -26,19 +28,17 @@
   }
 
   span.active-for-player:before {
-    content: 'o';
+    content: url(/img/ui/arrow-down.gif);
     position: absolute;
-    bottom: 0;
-    text-align: center;
-    margin-left: 10px;
+    bottom: -20%;
+    left: 43%;
   }
 
   span.active-for-opponent:before {
-    content: 'o';
+    content: url(/img/ui/arrow-up.gif);
     position: absolute;
-    top: 0;
-    text-align: center;
-    margin-left: 10px;
+    top: -20%;
+    left: 43%;
   }
 }
 

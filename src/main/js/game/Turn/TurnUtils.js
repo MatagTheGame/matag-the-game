@@ -1,6 +1,22 @@
 import get from 'lodash/get'
+import Phase from 'game/Turn/Phase'
 
 export default class TurnUtils  {
+  static phasesToRender(currentPhase) {
+    let phases = Phase.getPhases()
+    const activePhaseIndex = Phase.getPhases().indexOf(currentPhase)
+
+    if (activePhaseIndex < 3) {
+      return [...phases.splice(0, 4), '...']
+    }
+
+    if (activePhaseIndex > phases.length - 4) {
+      return ['...', ...phases.splice(phases.length - 4, 4)]
+    }
+
+    return ['...', ...phases.splice(activePhaseIndex - 1, 3), '...']
+  }
+
   static selectTarget(state, target) {
     if (!state.turn.targetsIds) {
       state.turn.targetsIds = []

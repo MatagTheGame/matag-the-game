@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import Phase from './Phase'
 import PropTypes from 'prop-types'
 import './turhPhases.scss'
+import TurnUtils from 'game/Turn/TurnUtils'
 
 class TurnPhases extends Component {
   isPhaseActiveForPlayer() {
@@ -15,11 +16,13 @@ class TurnPhases extends Component {
   }
 
   render() {
+    const phases = TurnUtils.phasesToRender(this.props.turn.currentPhase)
     return (
       <div id='turn-phases'>
-        {Phase.getPhases().map((phase) =>
+        {phases.map((phase) =>
           <Phase key={phase}
             name={phase}
+            title={Phase.getPhaseName(phase)}
             active={this.isPhaseActive(phase)}
             activeForPlayer={this.isPhaseActiveForPlayer()}/>
         )}
