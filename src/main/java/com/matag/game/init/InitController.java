@@ -31,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@AllArgsConstructor
 public class InitController {
   private static final Logger LOGGER = LoggerFactory.getLogger(InitController.class);
 
