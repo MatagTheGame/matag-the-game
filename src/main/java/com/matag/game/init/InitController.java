@@ -22,6 +22,7 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
@@ -47,6 +48,26 @@ public class InitController {
   private final DeckRetrieverService deckRetrieverService;
   private final DeckFactory deckFactory;
   private final ContinueService continueService;
+
+  public InitController(SecurityHelper securityHelper, EventSender eventSender, ConfigService configService,
+                        GameStatusFactory gameStatusFactory, PlayerInfoRetriever playerInfoRetriever, PlayerFactory playerFactory,
+                        PlayerService playerService, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository,
+                        DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService,
+                        DeckFactory deckFactory, ContinueService continueService) {
+    this.securityHelper = securityHelper;
+    this.eventSender = eventSender;
+    this.configService = configService;
+    this.gameStatusFactory = gameStatusFactory;
+    this.playerInfoRetriever = playerInfoRetriever;
+    this.playerFactory = playerFactory;
+    this.playerService = playerService;
+    this.gameStatusUpdaterService = gameStatusUpdaterService;
+    this.gameStatusRepository = gameStatusRepository;
+    this.deckRetrieverService = deckRetrieverService;
+    this.initTestService = initTestService;
+    this.deckFactory = deckFactory;
+    this.continueService = continueService;
+  }
 
   @MessageMapping("/game/init")
   void init(SimpMessageHeaderAccessor headerAccessor) {
