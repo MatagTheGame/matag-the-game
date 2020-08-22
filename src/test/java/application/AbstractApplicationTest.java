@@ -27,9 +27,8 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Set;
+import java.util.List;
 
-import static com.matag.cards.properties.Color.WHITE;
 import static com.matag.game.launcher.LauncherTestGameController.TEST_ADMIN_TOKEN;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
@@ -55,6 +54,9 @@ public abstract class AbstractApplicationTest {
   @Autowired
   private GameStatusRepository gameStatusRepository;
 
+  @Autowired
+  private Cards cards;
+
   public abstract void setupGame();
 
   @Before
@@ -62,7 +64,15 @@ public abstract class AbstractApplicationTest {
     given(adminClient.getPlayerInfo(argThat(new SecurityTokenMatcher("1")))).willReturn(new PlayerInfo("Player1"));
     given(adminClient.getPlayerInfo(argThat(new SecurityTokenMatcher("2")))).willReturn(new PlayerInfo("Player2"));
 
-    given(adminClient.getDeckInfo(any())).willReturn(new DeckInfo(Set.of(WHITE)));
+    given(adminClient.getDeckInfo(any())).willReturn(new DeckInfo(List.of(
+      cards.get("Plains"),
+      cards.get("Plains"),
+      cards.get("Plains"),
+      cards.get("Plains"),
+      cards.get("Plains"),
+      cards.get("Plains"),
+      cards.get("Plains")
+    )));
   }
 
   @Before

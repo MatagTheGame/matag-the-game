@@ -7,6 +7,7 @@ import com.matag.game.security.SecurityToken;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import static com.matag.cards.properties.Color.WHITE;
@@ -21,7 +22,7 @@ public class TestAdminClient extends AdminClient {
   }
 
   public DeckInfo getDeckInfo(SecurityToken token) {
-    return new DeckInfo(Set.of(WHITE));
+    return new DeckInfo(new ArrayList<>());
   }
 
   public PlayerInfo getPlayerInfo(SecurityToken token) {

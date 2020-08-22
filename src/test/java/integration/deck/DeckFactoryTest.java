@@ -1,6 +1,7 @@
 package integration.deck;
 
 import com.matag.adminentities.DeckInfo;
+import com.matag.cards.Cards;
 import com.matag.cards.properties.Color;
 import com.matag.game.deck.DeckFactory;
 import integration.TestUtils;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -24,27 +26,18 @@ public class DeckFactoryTest {
   @Autowired
   private DeckFactory deckFactory;
 
+  @Autowired
+  private Cards cards;
+
   @Test
-  public void oneColorDeck() {
+  public void testFactory() {
     // Given
-    var deckInfo = new DeckInfo(Set.of(Color.WHITE));
+    var deckInfo = new DeckInfo(List.of(cards.get("Plains")));
 
     // When
     var cards = deckFactory.create("playerName", testUtils.testGameStatus(), deckInfo);
 
     // Then
-    assertThat(cards).hasSize(60);
-  }
-
-  @Test
-  public void twoColorsDeck() {
-    // Given
-    var deckInfo = new DeckInfo(Set.of(Color.WHITE, Color.RED));
-
-    // When
-    var cards = deckFactory.create("playerName", testUtils.testGameStatus(), deckInfo);
-
-    // Then
-    assertThat(cards).hasSize(60);
+    assertThat(cards).hasSize(1);
   }
 }
