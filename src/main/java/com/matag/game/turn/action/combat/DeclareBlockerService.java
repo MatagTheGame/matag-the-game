@@ -4,6 +4,7 @@ import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.ContinueService;
+import com.matag.game.turn.action.trigger.WhenTriggerService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_BLOCK;
 import static com.matag.game.turn.action._continue.NonStackActions.DECLARE_BLOCKERS;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 
@@ -19,6 +21,7 @@ import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 public class DeclareBlockerService {
   private final ContinueService continueService;
   private final BlockerChecker blockerChecker;
+  private final WhenTriggerService whenTriggerService;
 
   public void declareBlockers(GameStatus gameStatus, Map<Integer, List<Integer>> blockingCreaturesIdsForAttackingCreaturesIds) {
     var turn = gameStatus.getTurn();
@@ -38,7 +41,9 @@ public class DeclareBlockerService {
     blockingCreaturesIdsForAttackingCreaturesIds.forEach((blockingCreatureId, blockedCreaturesIds) -> {
       var attackingCreatureId = blockedCreaturesIds.get(0);
       currentPlayer.getBattlefield().findCardById(attackingCreatureId).getModifiers().getModifiersUntilEndOfTurn().setBlocked(true);
-      nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId).declareAsBlocker(attackingCreatureId);
+      CardInstance blockingCreature = nonCurrentPlayer.getBattlefield().findCardById(blockingCreatureId);
+      blockingCreature.declareAsBlocker(attackingCreatureId);
+      whenTriggerService.whenTriggered(gameStatus, blockingCreature, WHEN_BLOCK);
     });
 
     turn.setTriggeredNonStackAction(null);

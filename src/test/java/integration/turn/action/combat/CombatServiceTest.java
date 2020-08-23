@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ATTACK;
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_BLOCK;
 import static com.matag.game.turn.action._continue.NonStackActions.DECLARE_ATTACKERS;
 import static com.matag.game.turn.action._continue.NonStackActions.DECLARE_BLOCKERS;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
@@ -252,7 +253,6 @@ public class CombatServiceTest {
   public void declareAttackerTrigger() {
     // Given
     var gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase(DA);
     var attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Brazen Wolves"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
 
@@ -262,6 +262,29 @@ public class CombatServiceTest {
     declareAttackerService.declareAttackers(gameStatus, List.of(1));
 
     // Then
-    whenTriggerService.whenTriggered(gameStatus, attackingCreature, WHEN_ATTACK);
+    verify(whenTriggerService).whenTriggered(gameStatus, attackingCreature, WHEN_ATTACK);
+  }
+
+  @Test
+  public void declareBlockerTrigger() {
+    // Given a creature is attacking
+    var gameStatus = testUtils.testGameStatus();
+    gameStatus.getTurn().setCurrentPhase(DA);
+    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    var attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), PLAYER, PLAYER);
+    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
+    declareAttackerService.declareAttackers(gameStatus, List.of(1));
+
+    // And a creature with a when block trigger blocks it
+    var blockingCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Hamlet Captain"), OPPONENT, OPPONENT);
+    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
+
+    // When
+    gameStatus.getTurn().setCurrentPhase(DB);
+    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_BLOCKERS);
+    declareBlockerService.declareBlockers(gameStatus, Map.of(2, List.of(1)));
+
+    // Then
+    verify(whenTriggerService).whenTriggered(gameStatus, blockingCreature, WHEN_BLOCK);
   }
 }
