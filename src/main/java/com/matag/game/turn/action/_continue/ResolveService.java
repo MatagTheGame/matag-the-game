@@ -110,8 +110,10 @@ public class ResolveService {
   }
 
   private void performAbilitiesActions(GameStatus gameStatus, CardInstance cardToResolve, List<CardInstanceAbility> abilities) {
-    for (var ability : abilities) {
-      performAbilityAction(gameStatus, cardToResolve, ability);
+    try {
+      abilities.forEach(ability -> performAbilityAction(gameStatus, cardToResolve, ability));
+    } catch (MessageException e) {
+      LOGGER.info("{}: Target is now invalid during resolution, Cancelling the entire spell. [{}] ", cardToResolve.getIdAndName(), e.getMessage());
     }
 
     cardToResolve.getModifiers().resetTargets();
@@ -120,13 +122,8 @@ public class ResolveService {
   private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve, CardInstanceAbility ability) {
     var abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
     if (abilityAction != null) {
-      try {
-        checkTargets(gameStatus, cardToResolve, ability);
-        abilityAction.perform(cardToResolve, gameStatus, ability);
-
-      } catch (MessageException e) {
-        LOGGER.info("{}: Target is now invalid during resolution, dropping the action. [{}] ", cardToResolve.getIdAndName(), e.getMessage());
-      }
+      checkTargets(gameStatus, cardToResolve, ability);
+      abilityAction.perform(cardToResolve, gameStatus, ability);
     }
   }
 
