@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static com.matag.game.turn.action._continue.NonStackActions.DISCARD_A_CARD;
+import static com.matag.game.turn.action._continue.NonStackActions.SCRY;
 
 @Component
 @AllArgsConstructor
@@ -105,6 +106,10 @@ public class ResolveService {
       CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
       putIntoGraveyardService.putIntoGraveyard(gameStatus, cardInstance);
       gameStatus.getTurn().setTriggeredNonStackAction(null);
+
+    } else if (SCRY.equals(triggeredNonStackAction)) {
+      // TODO here goes the code to scry
+      System.out.println("here");
     }
     continueService.next(gameStatus);
   }

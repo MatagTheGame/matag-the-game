@@ -28,6 +28,7 @@ public class Turn {
   private List<CardInstance> cardsPlayedWithinTurn = new ArrayList<>();
   private Map<Integer, List<String>> lastManaPaid = new HashMap<>();
   private String triggeredNonStackAction;
+  private String triggeredNonStackActionParameter;
   private String winner;
 
   public void init(String playerName) {

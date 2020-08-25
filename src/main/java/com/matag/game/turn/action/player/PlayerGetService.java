@@ -18,9 +18,10 @@ public class PlayerGetService {
   private static final Logger LOGGER = LoggerFactory.getLogger(PlayerGetService.class);
 
   private final AbilityService abilityService;
+  private final DealDamageToPlayerService dealDamageToPlayerService;
   private final LifeService lifeService;
   private final DrawXCardsService drawXCardsService;
-  private final DealDamageToPlayerService dealDamageToPlayerService;
+  private final ScryXCardsService scryXCardsService;
 
   public void thatPlayerGets(CardInstance cardInstance, GameStatus gameStatus, List<String> parameters, Player player) {
     parameters.forEach(parameter -> thatPlayerGets(cardInstance, gameStatus, player, parameter));
@@ -30,6 +31,7 @@ public class PlayerGetService {
     dealDamageToPlayerService.dealDamageToPlayer(gameStatus, abilityService.damageFromParameter(parameter), player);
     lifeService.add(player, abilityService.lifeFromParameter(parameter), gameStatus);
     drawXCardsService.drawXCards(player, abilityService.drawFromParameter(parameter), gameStatus);
+    scryXCardsService.scryXCardsTrigger(player, abilityService.scryFromParameter(parameter), gameStatus);
     LOGGER.info("AbilityActionExecuted: card {}, parameter {}, player {}", cardInstance.getIdAndName(), parameter, player.getName());
   }
 }

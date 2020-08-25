@@ -15,6 +15,7 @@ public class PlayerUpdateEvent {
   String name;
   int life;
   int librarySize;
+  List<CardInstance> visibleLibrary;
   List<CardInstance> hand;
   List<CardInstance> battlefield;
   List<CardInstance> graveyard;

@@ -6,10 +6,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.List;
 
 @Component
 @Scope("prototype")
 public class Library extends CardListComponent {
+  public List<CardInstance> peek(int n) {
+    return this.cards.subList(0, n);
+  }
+
   public CardInstance draw() {
     return this.cards.remove(0);
   }

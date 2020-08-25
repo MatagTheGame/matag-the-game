@@ -41,6 +41,7 @@ export default class ServerEventsReducer {
         const player = PlayerUtils.getPlayerByName(newState, playerUpdateEvent.name)
         player.life = playerUpdateEvent.life
         player.librarySize = playerUpdateEvent.librarySize
+        player.visibleLibrary = playerUpdateEvent.visibleLibrary
         player.battlefield = playerUpdateEvent.battlefield
         player.graveyard = playerUpdateEvent.graveyard
         player.hand = playerUpdateEvent.hand
