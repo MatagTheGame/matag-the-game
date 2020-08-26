@@ -17,15 +17,26 @@ export default class TurnUtils  {
     return ['...', ...phases.splice(activePhaseIndex - 1, 3), '...']
   }
 
+  static extractTargetValue(target) {
+    if (typeof target === 'string') {
+      return target
+    } else {
+      return target.id
+    }
+  }
+
   static selectTarget(state, target) {
     if (!state.turn.targetsIds) {
       state.turn.targetsIds = []
     }
 
-    if (typeof target === 'string') {
-      state.turn.targetsIds.push(target)
+    const targetValue = TurnUtils.extractTargetValue(target)
+
+    const index = state.turn.targetsIds.indexOf(targetValue)
+    if (index > -1) {
+      state.turn.targetsIds.splice(index, 1)
     } else {
-      state.turn.targetsIds.push(target.id)
+      state.turn.targetsIds.push(targetValue)
     }
   }
 
