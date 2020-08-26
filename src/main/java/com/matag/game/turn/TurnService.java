@@ -35,8 +35,8 @@ public class TurnService {
     castService.cast(gameStatus, cardId, mana, targetsIdsForCardIds, playedAbility);
   }
 
-  void resolve(GameStatus gameStatus, String inputRequiredAction, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
-    resolveService.resolve(gameStatus, inputRequiredAction, targetCardIds, targetsIdsForCardIds);
+  void resolve(GameStatus gameStatus, String inputRequiredAction, String inputRequiredActionParameter, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
+    resolveService.resolve(gameStatus, inputRequiredAction, inputRequiredActionParameter, targetCardIds, targetsIdsForCardIds);
   }
 
   void declareAttackers(GameStatus gameStatus, List<Integer> cardIds) {

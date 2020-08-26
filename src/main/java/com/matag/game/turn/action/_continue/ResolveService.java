@@ -32,7 +32,7 @@ public class ResolveService {
   private final PutIntoGraveyardService putIntoGraveyardService;
   private final TargetCheckerService targetCheckerService;
 
-  public void resolve(GameStatus gameStatus, String inputRequiredAction, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
+  public void resolve(GameStatus gameStatus, String inputRequiredAction, String inputRequiredActionParameter, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
     if (!gameStatus.getStack().isEmpty()) {
       var stackItemToResolve = gameStatus.getStack().peek();
 
@@ -76,7 +76,7 @@ public class ResolveService {
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonActivePlayer().getName());
 
     } else if (Objects.equals(gameStatus.getTurn().getInputRequiredAction(), inputRequiredAction)) {
-      resolveInputRequiredAction(gameStatus, inputRequiredAction, targetCardIds);
+      resolveInputRequiredAction(gameStatus, inputRequiredAction, inputRequiredActionParameter, targetCardIds);
 
     } else {
       String message = "Cannot resolve inputRequiredAction " + inputRequiredAction + " as current inputRequiredAction is " + gameStatus.getTurn().getInputRequiredAction();
@@ -101,10 +101,10 @@ public class ResolveService {
     stackItemToResolve.getTriggeredAbilities().clear();
   }
 
-  private void resolveInputRequiredAction(GameStatus gameStatus, String inputRequiredAction, List<Integer> cardIds) {
+  private void resolveInputRequiredAction(GameStatus gameStatus, String inputRequiredAction, String inputRequiredActionParameter, List<Integer> cardIds) {
     if (DISCARD_A_CARD.equals(inputRequiredAction)) {
-      CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
-      putIntoGraveyardService.putIntoGraveyard(gameStatus, cardInstance);
+      var cards = gameStatus.getCurrentPlayer().getHand().extractCardsByIds(cardIds);
+      putIntoGraveyardService.putIntoGraveyard(gameStatus, cards);
       gameStatus.getTurn().setInputRequiredAction(null);
 
     } else if (SCRY.equals(inputRequiredAction)) {

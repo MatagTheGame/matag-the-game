@@ -37,6 +37,11 @@
     transform-style: preserve-3d;
   }
 
+  .visible-cards {
+    position: absolute;
+    transform: rotateX(-60deg) translateY(-125px)
+  }
+
   .library-size {
     position: absolute;
     font-size: xx-large;

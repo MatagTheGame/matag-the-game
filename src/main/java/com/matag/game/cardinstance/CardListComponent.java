@@ -2,6 +2,7 @@ package com.matag.game.cardinstance;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class CardListComponent {
   protected List<CardInstance> cards = new ArrayList<>();
@@ -38,10 +39,15 @@ public abstract class CardListComponent {
     return search().withId(cardId).orElseThrow(() -> new RuntimeException("Card with id " + cardId + " not found."));
   }
 
+  public List<CardInstance> extractCardsByIds(List<Integer> cardIds) {
+    return cardIds.stream()
+      .map(this::findCardById)
+      .peek(cardInstance -> cards.remove(cardInstance))
+      .collect(Collectors.toList());
+  }
+
   public CardInstance extractCardById(int cardId) {
-    var cardInstance = findCardById(cardId);
-    cards.remove(cardInstance);
-    return cardInstance;
+    return extractCardsByIds(List.of(cardId)).get(0);
   }
 
   public ArrayList<CardInstance> extractAllCards() {
