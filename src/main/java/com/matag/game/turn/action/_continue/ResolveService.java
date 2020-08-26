@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.matag.game.turn.action._continue.NonStackActions.DISCARD_A_CARD;
-import static com.matag.game.turn.action._continue.NonStackActions.SCRY;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DISCARD_A_CARD;
+import static com.matag.game.turn.action._continue.InputRequiredActions.SCRY;
 
 @Component
 @AllArgsConstructor
@@ -32,7 +32,7 @@ public class ResolveService {
   private final PutIntoGraveyardService putIntoGraveyardService;
   private final TargetCheckerService targetCheckerService;
 
-  public void resolve(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
+  public void resolve(GameStatus gameStatus, String inputRequiredAction, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
     if (!gameStatus.getStack().isEmpty()) {
       var stackItemToResolve = gameStatus.getStack().peek();
 
@@ -75,11 +75,11 @@ public class ResolveService {
 
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonActivePlayer().getName());
 
-    } else if (Objects.equals(gameStatus.getTurn().getTriggeredNonStackAction(), triggeredNonStackAction)) {
-      resolveTriggeredNonStackAction(gameStatus, triggeredNonStackAction, targetCardIds);
+    } else if (Objects.equals(gameStatus.getTurn().getInputRequiredAction(), inputRequiredAction)) {
+      resolveInputRequiredAction(gameStatus, inputRequiredAction, targetCardIds);
 
     } else {
-      String message = "Cannot resolve triggeredNonStackAction " + triggeredNonStackAction + " as current triggeredNonStackAction is " + gameStatus.getTurn().getTriggeredNonStackAction();
+      String message = "Cannot resolve inputRequiredAction " + inputRequiredAction + " as current inputRequiredAction is " + gameStatus.getTurn().getInputRequiredAction();
       throw new MessageException(message);
     }
   }
@@ -101,13 +101,13 @@ public class ResolveService {
     stackItemToResolve.getTriggeredAbilities().clear();
   }
 
-  private void resolveTriggeredNonStackAction(GameStatus gameStatus, String triggeredNonStackAction, List<Integer> cardIds) {
-    if (DISCARD_A_CARD.equals(triggeredNonStackAction)) {
+  private void resolveInputRequiredAction(GameStatus gameStatus, String inputRequiredAction, List<Integer> cardIds) {
+    if (DISCARD_A_CARD.equals(inputRequiredAction)) {
       CardInstance cardInstance = gameStatus.getCurrentPlayer().getHand().extractCardById(cardIds.get(0));
       putIntoGraveyardService.putIntoGraveyard(gameStatus, cardInstance);
-      gameStatus.getTurn().setTriggeredNonStackAction(null);
+      gameStatus.getTurn().setInputRequiredAction(null);
 
-    } else if (SCRY.equals(triggeredNonStackAction)) {
+    } else if (SCRY.equals(inputRequiredAction)) {
       // TODO here goes the code to scry
       System.out.println("here");
     }

@@ -33,11 +33,11 @@ public class AutocontinueCheckerTest {
   private CardInstanceFactory cardInstanceFactory;
 
   @Test
-  public void canPerformAnyActionReturnsTrueIfNonStackAction() {
+  public void canPerformAnyActionReturnsTrueIfInputRequiredAction() {
     // Given
     var gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase(CL);
-    gameStatus.getTurn().setTriggeredNonStackAction("NonStackAction");
+    gameStatus.getTurn().setInputRequiredAction("InputRequiredAction");
     gameStatus.getPlayer1().getHand().getCards().clear();
 
     // When

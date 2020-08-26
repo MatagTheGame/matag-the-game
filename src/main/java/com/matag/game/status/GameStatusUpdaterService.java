@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Set;
 
-import static com.matag.game.turn.action._continue.NonStackActions.SCRY;
+import static com.matag.game.turn.action._continue.InputRequiredActions.SCRY;
 import static java.lang.Integer.parseInt;
+import static java.util.Collections.emptyList;
 
 @Component
 @AllArgsConstructor
@@ -62,16 +63,18 @@ public class GameStatusUpdaterService {
   }
 
   private List<CardInstance> playerVisibleLibraryToThem(GameStatus gameStatus, Player player, Player forPlayer) {
-    if (SCRY.equals(gameStatus.getTurn().getTriggeredNonStackAction())) {
-      var cardsToScry = parseInt(gameStatus.getTurn().getTriggeredNonStackActionParameter());
-      var cardsScried = player.getLibrary().peek(cardsToScry);
-      if (player == forPlayer) {
-        return cardsScried;
-      } else {
-        return cardInstanceFactory.mask(cardsScried);
+    if (SCRY.equals(gameStatus.getTurn().getInputRequiredAction())) {
+      if (gameStatus.getTurn().getCurrentPhaseActivePlayer().equals(player.getName())) {
+        var cardsToScry = parseInt(gameStatus.getTurn().getInputRequiredActionParameter());
+        var cardsScried = player.getLibrary().peek(cardsToScry);
+        if (player == forPlayer) {
+          return cardsScried;
+        } else {
+          return cardInstanceFactory.mask(cardsScried);
+        }
       }
     }
-    return null;
+    return emptyList();
   }
 
   private List<CardInstance> playerHand(Player player, Player forPlayer) {

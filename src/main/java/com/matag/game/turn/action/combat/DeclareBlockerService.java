@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_BLOCK;
-import static com.matag.game.turn.action._continue.NonStackActions.DECLARE_BLOCKERS;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 
 @Component
@@ -28,7 +28,7 @@ public class DeclareBlockerService {
     var currentPlayer = gameStatus.getCurrentPlayer();
     var nonCurrentPlayer = gameStatus.getNonCurrentPlayer();
 
-    if (!turn.getCurrentPhase().equals(DB) || !DECLARE_BLOCKERS.equals(turn.getTriggeredNonStackAction())) {
+    if (!turn.getCurrentPhase().equals(DB) || !DECLARE_BLOCKERS.equals(turn.getInputRequiredAction())) {
       throw new RuntimeException("Cannot declare blockers. Phase=" + turn.getCurrentPhase());
     }
 
@@ -46,7 +46,7 @@ public class DeclareBlockerService {
       whenTriggerService.whenTriggered(gameStatus, blockingCreature, WHEN_BLOCK);
     });
 
-    turn.setTriggeredNonStackAction(null);
+    turn.setInputRequiredAction(null);
     turn.setCurrentPhaseActivePlayer(turn.getCurrentTurnPlayer());
     continueService.set(gameStatus);
   }

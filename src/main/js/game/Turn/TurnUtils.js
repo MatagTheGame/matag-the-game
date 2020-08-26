@@ -48,8 +48,8 @@ export default class TurnUtils  {
     return get(state, 'turn.targetsIds', [])
   }
 
-  static triggeredNonStackActionIs(state, action) {
-    return state.turn.triggeredNonStackAction === action
+  static inputRequiredActionIs(state, action) {
+    return state.turn.inputRequiredAction === action
   }
 
   static resetTarget(state) {

@@ -23,8 +23,8 @@ import java.util.Map;
 
 import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ATTACK;
 import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_BLOCK;
-import static com.matag.game.turn.action._continue.NonStackActions.DECLARE_ATTACKERS;
-import static com.matag.game.turn.action._continue.NonStackActions.DECLARE_BLOCKERS;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_ATTACKERS;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
@@ -85,7 +85,7 @@ public class CombatServiceTest {
 
     // When
     gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
     declareAttackerService.declareAttackers(gameStatus, List.of(1));
     combatService.dealCombatDamage(gameStatus);
 
@@ -107,10 +107,10 @@ public class CombatServiceTest {
 
     // When
     gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
     declareAttackerService.declareAttackers(gameStatus, List.of(1, 2));
     gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_BLOCKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
     declareBlockerService.declareBlockers(gameStatus, Map.of(3, List.of(1)));
     combatService.dealCombatDamage(gameStatus);
 
@@ -130,10 +130,10 @@ public class CombatServiceTest {
 
     // When
     gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
     declareAttackerService.declareAttackers(gameStatus, List.of(1));
     gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_BLOCKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
     declareBlockerService.declareBlockers(gameStatus, Map.of(2, List.of(1)));
     combatService.dealCombatDamage(gameStatus);
 
@@ -155,10 +155,10 @@ public class CombatServiceTest {
 
     // When
     gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
     declareAttackerService.declareAttackers(gameStatus, List.of(1));
     gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_BLOCKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
     declareBlockerService.declareBlockers(gameStatus, Map.of(2, List.of(1)));
     combatService.dealCombatDamage(gameStatus);
 
@@ -179,10 +179,10 @@ public class CombatServiceTest {
 
     // When
     gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
     declareAttackerService.declareAttackers(gameStatus, List.of(1));
     gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_BLOCKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
     declareBlockerService.declareBlockers(gameStatus, Map.of(2, List.of(1)));
     gameStatus.extractCardByIdFromAnyBattlefield(2);
     combatService.dealCombatDamage(gameStatus);
@@ -207,10 +207,10 @@ public class CombatServiceTest {
 
     // When
     gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
     declareAttackerService.declareAttackers(gameStatus, List.of(1, 2));
     gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_BLOCKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
     declareBlockerService.declareBlockers(gameStatus, Map.of(3, List.of(1)));
     gameStatus.getTurn().setCurrentPhase(FS);
     combatService.dealCombatDamage(gameStatus);
@@ -235,10 +235,10 @@ public class CombatServiceTest {
 
     // When
     gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
     declareAttackerService.declareAttackers(gameStatus, List.of(1, 2));
     gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_BLOCKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
     declareBlockerService.declareBlockers(gameStatus, Map.of(3, List.of(1)));
     combatService.dealCombatDamage(gameStatus);
 
@@ -258,7 +258,7 @@ public class CombatServiceTest {
 
     // When
     gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
     declareAttackerService.declareAttackers(gameStatus, List.of(1));
 
     // Then
@@ -270,7 +270,7 @@ public class CombatServiceTest {
     // Given a creature is attacking
     var gameStatus = testUtils.testGameStatus();
     gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
     var attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), PLAYER, PLAYER);
     gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
     declareAttackerService.declareAttackers(gameStatus, List.of(1));
@@ -281,7 +281,7 @@ public class CombatServiceTest {
 
     // When
     gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_BLOCKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
     declareBlockerService.declareBlockers(gameStatus, Map.of(2, List.of(1)));
 
     // Then

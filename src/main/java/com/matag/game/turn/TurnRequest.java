@@ -1,64 +1,26 @@
 package com.matag.game.turn;
 
-import lombok.ToString;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import lombok.Builder;
+import lombok.Value;
 
 import java.util.List;
 import java.util.Map;
 
-@ToString
+@Value
+@JsonDeserialize(builder = TurnRequest.TurnRequestBuilder.class)
+@Builder
 public class TurnRequest {
-  private String action;
-  private String triggeredNonStackAction;
-  private Map<Integer, List<String>> mana;
-  private List<Integer> cardIds;
-  private Map<Integer, List<Object>> targetsIdsForCardIds;
-  private String playedAbility;
+  String action;
+  String inputRequiredAction;
+  String inputRequiredActionParameter;
+  Map<Integer, List<String>> mana;
+  List<Integer> cardIds;
+  Map<Integer, List<Object>> targetsIdsForCardIds;
+  String playedAbility;
 
-  public String getAction() {
-    return action;
-  }
+  @JsonPOJOBuilder(withPrefix = "")
+  public static class TurnRequestBuilder {}
 
-  public void setAction(String action) {
-    this.action = action;
-  }
-
-  public String getTriggeredNonStackAction() {
-    return triggeredNonStackAction;
-  }
-
-  public void setTriggeredNonStackAction(String triggeredNonStackAction) {
-    this.triggeredNonStackAction = triggeredNonStackAction;
-  }
-
-  public List<Integer> getCardIds() {
-    return cardIds;
-  }
-
-  public void setCardIds(List<Integer> cardIds) {
-    this.cardIds = cardIds;
-  }
-
-  public Map<Integer, List<String>> getMana() {
-    return mana;
-  }
-
-  public void setMana(Map<Integer, List<String>> mana) {
-    this.mana = mana;
-  }
-
-  public Map<Integer, List<Object>> getTargetsIdsForCardIds() {
-    return targetsIdsForCardIds;
-  }
-
-  public void setTargetsIdsForCardIds(Map<Integer, List<Object>> targetsIdsForCardIds) {
-    this.targetsIdsForCardIds = targetsIdsForCardIds;
-  }
-
-  public String getPlayedAbility() {
-    return playedAbility;
-  }
-
-  public void setPlayedAbility(String playedAbility) {
-    this.playedAbility = playedAbility;
-  }
 }

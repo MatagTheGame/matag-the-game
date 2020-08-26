@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ATTACK;
-import static com.matag.game.turn.action._continue.NonStackActions.DECLARE_ATTACKERS;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_ATTACKERS;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 
 @Component
@@ -26,14 +26,14 @@ public class DeclareAttackerService {
     var turn = gameStatus.getTurn();
     var currentPlayer = gameStatus.getCurrentPlayer();
 
-    if (!turn.getCurrentPhase().equals(DA) || !DECLARE_ATTACKERS.equals(turn.getTriggeredNonStackAction())) {
+    if (!turn.getCurrentPhase().equals(DA) || !DECLARE_ATTACKERS.equals(turn.getInputRequiredAction())) {
       throw new RuntimeException("Cannot declare attackers. Phase=" + turn.getCurrentPhase());
     }
 
     cardIds.forEach(cardId -> checkIfCanAttack(currentPlayer, cardId));
     cardIds.forEach(cardId -> declareAsAttacker(gameStatus, currentPlayer, cardId));
 
-    turn.setTriggeredNonStackAction(null);
+    turn.setInputRequiredAction(null);
     continueService.set(gameStatus);
   }
 

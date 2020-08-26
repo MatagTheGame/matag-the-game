@@ -20,7 +20,7 @@ public class AutocontinueChecker {
       return true;
     }
 
-    if (gameStatus.getTurn().getTriggeredNonStackAction() != null) {
+    if (gameStatus.getTurn().getInputRequiredAction() != null) {
       return true;
     }
 

@@ -7,7 +7,7 @@ import com.matag.game.turn.phases.main2.Main2Phase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.matag.game.turn.action._continue.NonStackActions.DECLARE_ATTACKERS;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_ATTACKERS;
 
 @Component
 public class DeclareAttackersPhase extends AbstractPhase {
@@ -26,7 +26,7 @@ public class DeclareAttackersPhase extends AbstractPhase {
 
   @Override
   public void action(GameStatus gameStatus) {
-    gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_ATTACKERS);
+    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
   }
 
   @Override

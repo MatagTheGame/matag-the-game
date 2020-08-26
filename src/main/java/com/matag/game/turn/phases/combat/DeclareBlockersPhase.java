@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
 import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
-import static com.matag.game.turn.action._continue.NonStackActions.DECLARE_BLOCKERS;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
 
 @Component
 public class DeclareBlockersPhase extends AbstractPhase {
@@ -30,7 +30,7 @@ public class DeclareBlockersPhase extends AbstractPhase {
   @Override
   public void action(GameStatus gameStatus) {
     if (gameStatus.getNonCurrentPlayer().getBattlefield().search().canAnyCreatureBlock()) {
-      gameStatus.getTurn().setTriggeredNonStackAction(DECLARE_BLOCKERS);
+      gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonCurrentPlayer().getName());
     }
   }

@@ -44,8 +44,8 @@ public class TurnController {
     }
 
     if ("CONTINUE_TURN".equals(request.getAction())) {
-      if (gameStatus.getTurn().getTriggeredNonStackAction() != null) {
-        throw new MessageException("Cannot continue: " + gameStatus.getTurn().getTriggeredNonStackAction());
+      if (gameStatus.getTurn().getInputRequiredAction() != null) {
+        throw new MessageException("Cannot continue: " + gameStatus.getTurn().getInputRequiredAction());
       }
       turnService.continueTurn(gameStatus);
     } else if ("PLAY_LAND".equals(request.getAction())) {
@@ -53,7 +53,7 @@ public class TurnController {
     } else if ("CAST".equals(request.getAction())) {
       turnService.cast(gameStatus, request.getCardIds().get(0), request.getMana(), request.getTargetsIdsForCardIds(), request.getPlayedAbility());
     } else if ("RESOLVE".equals(request.getAction())) {
-      turnService.resolve(gameStatus, request.getTriggeredNonStackAction(), request.getCardIds(), request.getTargetsIdsForCardIds());
+      turnService.resolve(gameStatus, request.getInputRequiredAction(), request.getCardIds(), request.getTargetsIdsForCardIds());
     } else if ("DECLARE_ATTACKERS".equals(request.getAction())) {
       turnService.declareAttackers(gameStatus, request.getCardIds());
     } else if ("DECLARE_BLOCKERS".equals(request.getAction())) {

@@ -38,7 +38,7 @@ export default class UserInterfaceUtils {
         } else if (state.turn.currentPhase === 'DA' && PlayerUtils.isPlayerAbleToAttack(state)) {
           UserInterfaceUtils.setStatusMessage(state, UserInterfaceUtils.CHOOSE_CREATURES_YOU_WANT_TO_ATTACK_WITH)
 
-        } else if (state.turn.triggeredNonStackAction) {
+        } else if (state.turn.inputRequiredAction) {
           UserInterfaceUtils.setStatusMessage(state, UserInterfaceUtils.CHOOSE_A_CARD_TO_DISCARD)
 
         } else {
