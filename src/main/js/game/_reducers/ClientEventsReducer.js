@@ -59,7 +59,13 @@ export default class ClientEventsReducer {
         const cardId = action.cardId
         const cardInstance = CardSearch.cards(newState.player.hand).withId(cardId)
         if (TurnUtils.inputRequiredActionIs(newState, 'DISCARD_A_CARD')) {
-          stompClient.sendEvent('turn', {action: 'RESOLVE', inputRequiredAction: 'DISCARD_A_CARD', cardIds: [cardId]})
+          const cardsToDiscard = parseInt(newState.turn.inputRequiredActionParameter)
+          if (TurnUtils.getTargetsIds(newState).length < cardsToDiscard) {
+            TurnUtils.selectTarget(newState, cardInstance)
+            if (TurnUtils.getTargetsIds(newState).length === cardsToDiscard) {
+              stompClient.sendEvent('turn', {action: 'RESOLVE', inputRequiredAction: 'DISCARD_A_CARD', cardIds: TurnUtils.getTargetsIds(newState)})
+            }
+          }
         }
 
         if (Phase.isMainPhase(newState.turn.currentPhase) || cardInstance.instantSpeed) {

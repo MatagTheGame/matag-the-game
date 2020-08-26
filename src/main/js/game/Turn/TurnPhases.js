@@ -19,8 +19,8 @@ class TurnPhases extends Component {
     const phases = TurnUtils.phasesToRender(this.props.turn.currentPhase)
     return (
       <div id='turn-phases'>
-        {phases.map((phase) =>
-          <Phase key={phase}
+        {phases.map((phase, index) =>
+          <Phase key={phase === '...' ? phase + index : phase}
             name={phase}
             title={Phase.getPhaseName(phase)}
             active={this.isPhaseActive(phase)}

@@ -31,9 +31,11 @@ public class CleanupPhase extends AbstractPhase {
   public void action(GameStatus gameStatus) {
     super.action(gameStatus);
 
-    if (gameStatus.getCurrentPlayer().getHand().size() > 7) {
+    var handSize = gameStatus.getCurrentPlayer().getHand().size();
+    if (handSize > 7) {
       if (gameStatus.getTurn().getInputRequiredAction() == null) {
         gameStatus.getTurn().setInputRequiredAction(DISCARD_A_CARD);
+        gameStatus.getTurn().setInputRequiredActionParameter(String.valueOf(handSize - 7));
       }
 
     } else {
