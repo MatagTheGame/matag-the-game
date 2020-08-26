@@ -8,6 +8,7 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.AbilityActionFactory;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
 import com.matag.game.turn.action.leave.PutIntoGraveyardService;
+import com.matag.game.turn.action.player.DiscardXCardsService;
 import com.matag.game.turn.action.target.TargetCheckerService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -31,6 +32,7 @@ public class ResolveService {
   private final EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
   private final PutIntoGraveyardService putIntoGraveyardService;
   private final TargetCheckerService targetCheckerService;
+  private final DiscardXCardsService discardXCardsService;
 
   public void resolve(GameStatus gameStatus, String inputRequiredAction, String inputRequiredActionParameter, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
     if (!gameStatus.getStack().isEmpty()) {
@@ -103,9 +105,7 @@ public class ResolveService {
 
   private void resolveInputRequiredAction(GameStatus gameStatus, String inputRequiredAction, String inputRequiredActionParameter, List<Integer> cardIds) {
     if (DISCARD_A_CARD.equals(inputRequiredAction)) {
-      var cards = gameStatus.getCurrentPlayer().getHand().extractCardsByIds(cardIds);
-      putIntoGraveyardService.putIntoGraveyard(gameStatus, cards);
-      gameStatus.getTurn().setInputRequiredAction(null);
+      discardXCardsService.discardXCards(cardIds, gameStatus);
 
     } else if (SCRY.equals(inputRequiredAction)) {
       // TODO here goes the code to scry

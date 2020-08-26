@@ -2,13 +2,12 @@ package com.matag.game.turn.phases.ending;
 
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action.player.DiscardXCardsService;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.beginning.UntapPhase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import static com.matag.game.turn.action._continue.InputRequiredActions.DISCARD_A_CARD;
 
 @Component
 public class CleanupPhase extends AbstractPhase {
@@ -16,6 +15,9 @@ public class CleanupPhase extends AbstractPhase {
 
   @Autowired
   private UntapPhase untapPhase;
+
+  @Autowired
+  private DiscardXCardsService discardXCardsService;
 
   @Override
   public String getName() {
@@ -34,8 +36,7 @@ public class CleanupPhase extends AbstractPhase {
     var handSize = gameStatus.getCurrentPlayer().getHand().size();
     if (handSize > 7) {
       if (gameStatus.getTurn().getInputRequiredAction() == null) {
-        gameStatus.getTurn().setInputRequiredAction(DISCARD_A_CARD);
-        gameStatus.getTurn().setInputRequiredActionParameter(String.valueOf(handSize - 7));
+        discardXCardsService.discardXCardsTrigger(gameStatus, handSize - 7);
       }
 
     } else {

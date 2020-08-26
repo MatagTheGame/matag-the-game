@@ -32,7 +32,6 @@ class Hand extends Component {
   }
 
   isCardTargeted(cardInstance) {
-    console.log('this.props.targetIds: ', this.props.targetIds)
     return this.props.targetIds.indexOf(cardInstance.id) >= 0
   }
 
