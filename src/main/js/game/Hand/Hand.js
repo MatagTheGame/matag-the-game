@@ -31,12 +31,17 @@ class Hand extends Component {
     return cardInstance.id === this.props.cardIdSelectedToBePlayed
   }
 
+  isCardTargeted(cardInstance) {
+    console.log('this.props.targetIds: ', this.props.targetIds)
+    return this.props.targetIds.indexOf(cardInstance.id) >= 0
+  }
+
   render() {
     return (
       <div id={this.getId()} className='hand'>
         {this.getHand().map((cardInstance) =>
           <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
-            selected={this.isCardSelectedToBePlayed(cardInstance)} area='hand' />)}
+            selected={this.isCardSelectedToBePlayed(cardInstance) || this.isCardTargeted(cardInstance)} area='hand' />)}
       </div>
     )
   }
@@ -54,7 +59,8 @@ const mapStateToProps = state => {
   return {
     playerHand: get(state, 'player.hand', []),
     opponentHand: get(state, 'opponent.hand', []),
-    cardIdSelectedToBePlayed: get(state, 'turn.cardIdSelectedToBePlayed')
+    cardIdSelectedToBePlayed: get(state, 'turn.cardIdSelectedToBePlayed'),
+    targetIds: get(state, 'turn.targetsIds', [])
   }
 }
 
@@ -69,7 +75,8 @@ Hand.propTypes = {
   playerHand: PropTypes.array.isRequired,
   opponentHand: PropTypes.array.isRequired,
   cardIdSelectedToBePlayed: PropTypes.number,
-  playerCardClick: PropTypes.func.isRequired
+  playerCardClick: PropTypes.func.isRequired,
+  targetIds: PropTypes.array.isRequired,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hand)
