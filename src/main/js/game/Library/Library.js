@@ -26,14 +26,20 @@ class Library extends Component {
       return []
     }
   }
-  
+
+  displayVisibleCards() {
+    return (
+      <div className='visible-cards'>
+        {this.getVisibleLibrary().map((cardInstance) => <Card key={cardInstance.id} cardInstance={cardInstance}
+                                  onClick={() => alert('visible-library')} area='visible-library' />)}
+      </div>
+    )
+  }
+
   render() {
     return (
       <div id={this.getId()} className='player-library'>
-        {this.getVisibleLibrary().length > 0 ? <div className='visible-cards'>
-          {this.getVisibleLibrary().map((cardInstance) => <Card key={cardInstance.id} cardInstance={cardInstance} area='library' />)}) }
-        </div> : null}
-
+        {this.getVisibleLibrary().length > 0 ? this.displayVisibleCards() : null}
         {this.getLibrarySize() > 0 ? <Card style={LibraryUiUtils.libraryHeight(this.getLibrarySize(), this.props.type)} area='library' /> : null}
         <div className='card-bottom-thickness' style={LibraryUiUtils.libraryBottomThickness(this.getLibrarySize())} />
         <div className='card-right-thickness' style={LibraryUiUtils.libraryRightThickness(this.getLibrarySize())} />
