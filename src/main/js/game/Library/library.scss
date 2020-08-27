@@ -39,7 +39,13 @@
 
   .visible-cards {
     position: absolute;
-    transform: rotateX(-60deg) translateY(-125px)
+    transform: rotateX(-60deg) translateY(-125px);
+    display: flex;
+    flex-direction: row-reverse;
+
+    .card {
+      margin-left: -60px;
+    }
   }
 
   .library-size {
