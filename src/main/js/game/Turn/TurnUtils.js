@@ -25,16 +25,25 @@ export default class TurnUtils  {
     }
   }
 
-  static selectTarget(state, target) {
+  static selectDifferentTargets() {
+    TurnUtils.selectTarget(state, target, true)
+  }
+
+  static selectTarget(state, target, different = false) {
     if (!state.turn.targetsIds) {
       state.turn.targetsIds = []
     }
 
     const targetValue = TurnUtils.extractTargetValue(target)
 
-    const index = state.turn.targetsIds.indexOf(targetValue)
-    if (index > -1) {
-      state.turn.targetsIds.splice(index, 1)
+    if (different) {
+      const index = state.turn.targetsIds.indexOf(targetValue)
+      if (index > -1) {
+        state.turn.targetsIds.splice(index, 1)
+      } else {
+        state.turn.targetsIds.push(targetValue)
+      }
+
     } else {
       state.turn.targetsIds.push(targetValue)
     }

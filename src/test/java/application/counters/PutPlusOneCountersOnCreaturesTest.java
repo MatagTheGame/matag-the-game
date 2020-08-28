@@ -47,9 +47,18 @@ public class PutPlusOneCountersOnCreaturesTest extends AbstractApplicationTest {
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Concordia Pegasus"), 1).hasPlus1Counters(1);
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Concordia Pegasus"), 1).hasPowerAndToughness("2/4");
 
+    // When cast Gird for Battle targeting twice the same creature
+    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
+    browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Gird for Battle")).select();
+    browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Concordia Pegasus"), 0).target();
+    browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Concordia Pegasus"), 0).click();
+
+    // An error is displayed
+    browser.getMessageHelper().hasMessage("Targets must be different.");
+    browser.getMessageHelper().close();
 
     // When cast the sorcery targeting only one creature
-    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Plains"), 1).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Gird for Battle")).select();
     browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.");
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getCard(cards.get("Concordia Pegasus"), 0).target();

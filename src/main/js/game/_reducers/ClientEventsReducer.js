@@ -61,7 +61,7 @@ export default class ClientEventsReducer {
         if (TurnUtils.inputRequiredActionIs(newState, 'DISCARD_A_CARD')) {
           const cardsToDiscard = parseInt(newState.turn.inputRequiredActionParameter)
           if (TurnUtils.getTargetsIds(newState).length < cardsToDiscard) {
-            TurnUtils.selectTarget(newState, cardInstance)
+            TurnUtils.selectDifferentTargets(newState, cardInstance)
             if (TurnUtils.getTargetsIds(newState).length === cardsToDiscard) {
               stompClient.sendEvent('turn', {action: 'RESOLVE', inputRequiredAction: 'DISCARD_A_CARD', cardIds: TurnUtils.getTargetsIds(newState)})
             }
