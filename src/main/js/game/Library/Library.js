@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import {LibraryUiUtils} from './LibraryUiUtils'
@@ -27,11 +28,19 @@ class Library extends Component {
     }
   }
 
+  visibleCardClick(cardId) {
+    if (this.props.type === 'player') {
+      return (e) => this.props.visibleCardClick(cardId, {x: e.screenX, y: e.screenY})
+    } else {
+      return () => {}
+    }
+  }
+
   displayVisibleCards() {
     return (
       <div className='visible-cards'>
         {this.getVisibleLibrary().map((cardInstance) => <Card key={cardInstance.id} cardInstance={cardInstance}
-                                  onClick={() => alert('visible-library')} area='visible-library' />)}
+                                  onclick={this.visibleCardClick(cardInstance.id)} area='visible-library' />)}
       </div>
     )
   }
@@ -49,11 +58,25 @@ class Library extends Component {
   }
 }
 
+const visibleCardClickAction = (cardId, event) => {
+  return {
+    type: 'VISIBLE_LIBRARY_CARD_CLICK',
+    cardId: cardId,
+    event: event
+  }
+}
+
 const mapStateToProps = state => {
   return {
     playerLibrarySize: get(state, 'player.librarySize', 0),
     opponentLibrarySize: get(state, 'opponent.librarySize', 0),
     visibleLibrary: get(state, 'player.visibleLibrary', [])
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    visibleCardClick: bindActionCreators(visibleCardClickAction, dispatch)
   }
 }
 
@@ -64,4 +87,4 @@ Library.propTypes = {
   visibleLibrary: PropTypes.array.isRequired,
 }
 
-export default connect(mapStateToProps)(Library)
+export default connect(mapStateToProps, mapDispatchToProps)(Library)

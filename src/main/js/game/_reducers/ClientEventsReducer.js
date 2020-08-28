@@ -12,8 +12,8 @@ export default class ClientEventsReducer {
 
   static getEvents() {
     return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'OPPONENT_BATTLEFIELD_CARD_CLICK', 'STACK_ELEMENT_CLICK',
-      'CONTINUE_CLICK', 'PLAYER_CLICK', 'MAXIMIZE_MINIMIZE_CARD', 'CLOSE_USER_INPUTS_CLICK', 'PLAY_ABILITIES_CLICK', 'OPEN_HELP_PAGE',
-      'CLOSE_HELP_PAGE']
+      'VISIBLE_LIBRARY_CARD_CLICK', 'CONTINUE_CLICK', 'PLAYER_CLICK', 'MAXIMIZE_MINIMIZE_CARD', 'CLOSE_USER_INPUTS_CLICK',
+      'PLAY_ABILITIES_CLICK', 'OPEN_HELP_PAGE', 'CLOSE_HELP_PAGE']
   }
 
   static reduceEvent(newState, action) {
@@ -162,6 +162,13 @@ export default class ClientEventsReducer {
         if (PlayerUtils.shouldHandleTargets(newState)) {
           PlayerUtils.handleSelectedTarget(newState, cardInstance)
         }
+      }
+      break
+
+    case 'VISIBLE_LIBRARY_CARD_CLICK':
+      if (TurnUtils.inputRequiredActionIs(newState, 'SCRY')) {
+        const cardsToScry = parseInt(newState.turn.inputRequiredActionParameter)
+        console.log('SCRY ' + cardsToScry)
       }
       break
 

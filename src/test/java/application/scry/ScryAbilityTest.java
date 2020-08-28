@@ -32,11 +32,11 @@ public class ScryAbilityTest extends AbstractApplicationTest {
   @Test
   public void scryAbilityTest() {
     // Given Player Plays Get the Point
+    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getFirstCard(cards.get("Mountain")).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 0).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 1).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 2).tap();
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Swamp"), 3).tap();
-    browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getCard(cards.get("Mountain"), 0).tap();
     browser.player1().getHandHelper(PLAYER).getFirstCard(cards.get("Get the Point")).select();
     browser.player1().getBattlefieldHelper(OPPONENT, SECOND_LINE).getFirstCard(cards.get("Feral Maaka")).click();
 

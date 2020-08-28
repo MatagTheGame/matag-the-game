@@ -72,7 +72,7 @@ const playAbilitiesAction = (cardId, index) => {
 
 const mapStateToProps = state => {
   return {
-    cardId: get(state, 'userInterface.playableAbilities.cardId', -1),
+    cardId: get(state, 'userInterface.userInputs.cardId', -1),
     possibleAbilities: get(state, 'userInterface.playableAbilities.possibleAbilities', [])
   }
 }
