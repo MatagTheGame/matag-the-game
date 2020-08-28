@@ -30,6 +30,7 @@ class Card extends Component {
 
   isCurrentCardATarget() {
     return this.props.targetIdsForLastSpell.indexOf(this.props.cardInstance.id) >= 0
+      || this.props.currentSelectedTargets.indexOf(this.props.cardInstance.id) > -1
   }
 
   getClasses() {
@@ -109,7 +110,8 @@ const maximizeCardEvent = (cardImage) => {
 
 const mapStateToProps = state => {
   return {
-    targetIdsForLastSpell: get(StackUtils.getTopSpell(state), 'modifiers.targets', [])
+    targetIdsForLastSpell: get(StackUtils.getTopSpell(state), 'modifiers.targets', []),
+    currentSelectedTargets: get(state, 'turn.targetsIds', [])
   }
 }
 
