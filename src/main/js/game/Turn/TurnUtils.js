@@ -25,7 +25,7 @@ export default class TurnUtils  {
     }
   }
 
-  static selectDifferentTargets() {
+  static selectDifferentTargets(state, target) {
     TurnUtils.selectTarget(state, target, true)
   }
 
