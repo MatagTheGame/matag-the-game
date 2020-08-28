@@ -93,8 +93,8 @@ public class MatagBrowser {
     return new PlayerActiveManaHelper(this);
   }
 
-  public PlayableAbilitiesHelper getPlayableAbilitiesHelper() {
-    return new PlayableAbilitiesHelper(this);
+  public UserInputsHelper getPlayableAbilitiesHelper() {
+    return new UserInputsHelper(this);
   }
 
   public StackHelper getStackHelper() {

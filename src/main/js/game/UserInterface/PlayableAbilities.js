@@ -3,10 +3,19 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
-import './playableAbilities.scss'
 import CostUtils from 'game/Card/CostUtils'
+import UserInputs from 'game/UserInterface/UserInputs'
 
-class PossibleAbility extends Component {
+class PlayableAbilities extends Component {
+  constructor(props) {
+    super(props)
+    this.playAbility = this.playAbility.bind(this)
+  }
+
+  playAbility(index) {
+    this.props.playAbilitiesAction(this.props.cardId, index)
+  }
+
   static renderCost(cost) {
     const needsTapping = CostUtils.needsTapping(cost)
     cost = CostUtils.costWithoutTapping(cost)
@@ -16,10 +25,10 @@ class PossibleAbility extends Component {
 
     return (
       <>
-        { anyColorCost > 0 && PossibleAbility.renderSymbols([anyColorCost]) }
-        { PossibleAbility.renderSymbols(cost) }
+        { anyColorCost > 0 && PlayableAbilities.renderSymbols([anyColorCost]) }
+        { PlayableAbilities.renderSymbols(cost) }
         { anyColorCost > 0 && cost.length > 0 && needsTapping && ', ' }
-        { needsTapping && PossibleAbility.renderSymbols(['TAP']) }
+        { needsTapping && PlayableAbilities.renderSymbols(['TAP']) }
       </>
     )
   }
@@ -28,61 +37,28 @@ class PossibleAbility extends Component {
     return symbols.map((symbol, index) => <img key={index} src={`/img/symbols/${symbol}.png`} alt={symbol} />)
   }
 
-  render() {
-    switch (this.props.possibleAbility.trigger.type) {
-    case 'MANA_ABILITY':
-      const colors = this.props.possibleAbility.parameters
-      return <li onClick={this.props.onClick} title={this.props.possibleAbility.abilityTypeText}>{PossibleAbility.renderCost(['TAP'])}: add {PossibleAbility.renderSymbols(colors)}</li>
-    case 'ACTIVATED_ABILITY':
-      const cost = this.props.possibleAbility.trigger.cost
-      return <li onClick={this.props.onClick} title={this.props.possibleAbility.abilityTypeText}>{PossibleAbility.renderCost(cost)}: {this.props.possibleAbility.abilityTypeText}</li>
-    default:
-      throw new Error('Trigger type for ability not recognised: ' + JSON.stringify(this.props.possibleAbility))
+  component(possibleAbility) {
+    switch (possibleAbility.trigger.type) {
+      case 'MANA_ABILITY':
+        const colors = possibleAbility.parameters
+        return <>{PlayableAbilities.renderCost(['TAP'])}: add {PlayableAbilities.renderSymbols(colors)}</>
+
+      case 'ACTIVATED_ABILITY':
+        const cost = possibleAbility.trigger.cost
+        return <>{PlayableAbilities.renderCost(cost)}: {possibleAbility.abilityTypeText}</>
     }
-  }
-}
-
-PossibleAbility.propTypes = {
-  possibleAbility: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired
-}
-
-class PlayableAbilities extends Component {
-  constructor(props) {
-    super(props)
-    this.closePlayableAbilitiesOverlay = this.closePlayableAbilitiesOverlay.bind(this)
-    this.playAbility = this.playAbility.bind(this)
-  }
-
-  playAbility(index) {
-    this.props.playAbilitiesAction(this.props.cardId, index)
-  }
-
-  closePlayableAbilitiesOverlay() {
-    this.props.closePlayableAbilitiesOverlay()
   }
 
   render() {
-    if (this.props.possibleAbilities.length > 1) {
-      return (
-        <div id='playable-abilities-overlay' onClick={this.closePlayableAbilitiesOverlay}>
-          <div id='playable-abilities' style={{left: this.props.position.x + 'px', top: (this.props.position.y - 150) + 'px'}}>
-            <ul>
-              { this.props.possibleAbilities.map((possibleAbility, index) =>
-                <PossibleAbility key={index} possibleAbility={possibleAbility} onClick={() => this.playAbility(index)} />) }
-            </ul>
-          </div>
-        </div>
-      )
-    } else {
-      return null
-    }
-  }
-}
+    const userOptions = this.props.possibleAbilities.map(possibleAbility => {
+      return {
+        title: possibleAbility.abilityTypeText,
+        component: this.component(possibleAbility),
+        func: this.playAbility
+      }
+    })
 
-const closePlayableAbilitiesAction = () => {
-  return {
-    type: 'CLOSE_PLAYABLE_ABILITIES_CLICK'
+    return <UserInputs userOptions={userOptions}/>
   }
 }
 
@@ -104,7 +80,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    closePlayableAbilitiesOverlay: bindActionCreators(closePlayableAbilitiesAction, dispatch),
     playAbilitiesAction: bindActionCreators(playAbilitiesAction, dispatch)
   }
 }

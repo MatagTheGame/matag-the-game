@@ -3,6 +3,7 @@ package integration.turn.action._continue;
 import com.matag.game.turn.action.AbilityActionFactory;
 import com.matag.game.turn.action.cast.InstantSpeedService;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
+import com.matag.game.turn.action.player.DiscardXCardsService;
 import com.matag.game.turn.action.target.TargetCheckerService;
 import com.matag.game.turn.phases.PhaseFactory;
 import integration.TestUtilsConfiguration;
@@ -40,5 +41,11 @@ public class ContinueTestConfiguration {
   @Primary
   public TargetCheckerService targetCheckerService() {
     return Mockito.mock(TargetCheckerService.class);
+  }
+
+  @Bean
+  @Primary
+  public DiscardXCardsService discardXCardsService() {
+    return Mockito.mock(DiscardXCardsService.class);
   }
 }

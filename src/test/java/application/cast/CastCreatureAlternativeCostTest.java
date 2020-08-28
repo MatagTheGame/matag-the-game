@@ -45,7 +45,7 @@ public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
     browser.player1().getPlayableAbilitiesHelper().toHaveAbilities(asList("Tap add white mana.", "Tap add blue mana."));
 
     // When clicking on the WHITE
-    browser.player1().getPlayableAbilitiesHelper().playAbility(0);
+    browser.player1().getPlayableAbilitiesHelper().choose(0);
 
     // Then WHITE mana is generated
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getFirstCard(cards.get("Azorius Guildgate")).isFrontendTapped();
@@ -75,7 +75,7 @@ public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
 
     // When clicking the dual land for BLUE
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getFirstCard(cards.get("Azorius Guildgate")).click();
-    browser.player1().getPlayableAbilitiesHelper().playAbility(1);
+    browser.player1().getPlayableAbilitiesHelper().choose(1);
 
     // Then BLUE mana is generated
     browser.player1().getBattlefieldHelper(PLAYER, FIRST_LINE).getFirstCard(cards.get("Azorius Guildgate")).isFrontendTapped();

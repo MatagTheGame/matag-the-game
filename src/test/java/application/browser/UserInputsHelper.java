@@ -8,33 +8,33 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PlayableAbilitiesHelper {
+public class UserInputsHelper {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(PlayableAbilitiesHelper.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(UserInputsHelper.class);
 
-  private MatagBrowser matagBrowser;
+  private final MatagBrowser matagBrowser;
 
-  PlayableAbilitiesHelper(MatagBrowser matagBrowser) {
+  UserInputsHelper(MatagBrowser matagBrowser) {
     this.matagBrowser = matagBrowser;
   }
 
   public void toHaveAbilities(List<String> expectedAbilities) {
     matagBrowser.wait(driver -> {
-      var abilities = abilities().stream().map(ability -> ability.getAttribute("title")).collect(Collectors.toList());
+      var abilities = userInputs().stream().map(ability -> ability.getAttribute("title")).collect(Collectors.toList());
       LOGGER.info("abilities={}   expectedAbilities={}", abilities, expectedAbilities);
       return expectedAbilities.equals(abilities);
     });
   }
 
-  public void playAbility(int index) {
-    abilities().get(index).click();
+  public void choose(int index) {
+    userInputs().get(index).click();
   }
 
-  private List<WebElement> abilities() {
+  private List<WebElement> userInputs() {
     return getElementContainer().findElements(By.tagName("li"));
   }
 
   private WebElement getElementContainer() {
-    return matagBrowser.findElement(By.id("playable-abilities"));
+    return matagBrowser.findElement(By.id("user-inputs"));
   }
 }
