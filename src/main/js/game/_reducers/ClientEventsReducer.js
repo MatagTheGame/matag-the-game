@@ -42,14 +42,7 @@ export default class ClientEventsReducer {
         CardUtils.activateManaAbility(newState, cardInstance, action.index)
 
       } else if (playedAbility.trigger.type === 'ACTIVATED_ABILITY') {
-        const currentTappedMana = CostUtils.getMana(newState)
-        if (CostUtils.isAbilityCostFulfilled(cardInstance, playedAbility, currentTappedMana)) {
-          if (CardUtils.needsTargets(newState, [playedAbility])) {
-            PlayerUtils.handleSelectTargets(newState, cardInstance, [playedAbility])
-          } else {
-            PlayerUtils.cast(newState, action.cardId, {}, playedAbility.abilityType)
-          }
-        }
+        PlayerUtils.castOrHandleTargets(newState, cardInstance, playedAbility)
       }
 
       break
@@ -73,9 +66,9 @@ export default class ClientEventsReducer {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardIds: [cardId]})
 
           } else {
+            const castAbilities = CardUtils.getAbilitiesForTriggerType(cardInstance, 'CAST')
             // TODO Antonio: this is very similar to the one for battlefield click
             const currentTappedMana = CostUtils.getMana(newState)
-            const castAbilities = CardUtils.getAbilitiesForTriggerType(cardInstance, 'CAST')
             if (CostUtils.isCastingCostFulfilled(cardInstance, currentTappedMana)) {
               if (CardUtils.needsTargets(newState, castAbilities)) {
                 PlayerUtils.handleSelectTargets(newState, cardInstance, castAbilities)
@@ -127,14 +120,7 @@ export default class ClientEventsReducer {
           } else {
             const playedAbility = CardUtils.getAbilitiesForTriggerType(cardInstance, 'ACTIVATED_ABILITY')[0]
             if (playedAbility) {
-              const currentTappedMana = CostUtils.getMana(newState)
-              if (CostUtils.isAbilityCostFulfilled(cardInstance, playedAbility, currentTappedMana)) {
-                if (CardUtils.needsTargets(newState, [playedAbility])) {
-                  PlayerUtils.handleSelectTargets(newState, cardInstance, [playedAbility])
-                } else {
-                  PlayerUtils.cast(newState, cardId, {}, playedAbility.abilityType)
-                }
-              }
+              PlayerUtils.castOrHandleTargets(newState, cardInstance, playedAbility)
             }
           }
         }

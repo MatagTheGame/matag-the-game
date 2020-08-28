@@ -57,6 +57,17 @@ export default class PlayerUtils {
       .isNotEmpty()
   }
 
+  static castOrHandleTargets(newState, cardInstance, playedAbility) {
+    const currentTappedMana = CostUtils.getMana(newState)
+    if (CostUtils.isAbilityCostFulfilled(cardInstance, playedAbility, currentTappedMana)) {
+      if (CardUtils.needsTargets(newState, [playedAbility])) {
+        PlayerUtils.handleSelectTargets(newState, cardInstance, [playedAbility])
+      } else {
+        PlayerUtils.cast(newState, cardInstance.id, {}, playedAbility.abilityType)
+      }
+    }
+  }
+
   static cast(state, cardId, targetsIdsForCardIds, playedAbility) {
     const mana = CostUtils.getMana(state)
     stompClient.sendEvent('turn', {action: 'CAST', cardIds: [cardId], mana: mana, targetsIdsForCardIds: targetsIdsForCardIds, playedAbility: playedAbility})
