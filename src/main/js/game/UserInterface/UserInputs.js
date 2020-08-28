@@ -59,7 +59,7 @@ const closeUserInputsAction = () => {
 
 const mapStateToProps = state => {
   return {
-    position: get(state, 'userInterface.playableAbilities.position', {x: -1, y: -1})
+    position: get(state, 'userInterface.userInputs.position', {x: -1, y: -1})
   }
 }
 

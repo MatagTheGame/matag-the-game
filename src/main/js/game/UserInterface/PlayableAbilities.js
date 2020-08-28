@@ -73,8 +73,7 @@ const playAbilitiesAction = (cardId, index) => {
 const mapStateToProps = state => {
   return {
     cardId: get(state, 'userInterface.playableAbilities.cardId', -1),
-    possibleAbilities: get(state, 'userInterface.playableAbilities.possibleAbilities', []),
-    position: get(state, 'userInterface.playableAbilities.position', {x: -1, y: -1})
+    possibleAbilities: get(state, 'userInterface.playableAbilities.possibleAbilities', [])
   }
 }
 
@@ -87,7 +86,6 @@ const mapDispatchToProps = dispatch => {
 PlayableAbilities.propTypes = {
   cardId: PropTypes.number.isRequired,
   possibleAbilities: PropTypes.array.isRequired,
-  position: PropTypes.object.isRequired,
 }
 
 

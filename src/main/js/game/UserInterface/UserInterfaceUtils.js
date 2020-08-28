@@ -53,7 +53,8 @@ export default class UserInterfaceUtils {
   }
 
   static setPlayableAbilities(state, cardId, possibleAbilities, position) {
-    set(state, 'userInterface.playableAbilities', {cardId: cardId, possibleAbilities: possibleAbilities, position: position})
+    set(state, 'userInterface.playableAbilities', {cardId: cardId, possibleAbilities: possibleAbilities})
+    set(state, 'userInterface.userInputs', {position: position})
   }
 
   static unsetPlayableAbilities(state) {
