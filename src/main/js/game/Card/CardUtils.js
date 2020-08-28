@@ -252,7 +252,7 @@ export default class CardUtils {
   static activateManaAbility(state, cardInstance, index = 0) {
     if (CardUtils.isFrontendTapped(cardInstance)) {
       CostUtils.removeMana(state, cardInstance.id)
-    } else {
+    } else if (CardUtils.isUntapped(cardInstance)) {
       CostUtils.addMana(state, cardInstance.id, CardUtils.getAbilities(cardInstance, 'TAP_ADD_MANA')[index].parameters)
     }
     CardUtils.toggleFrontendTapped(cardInstance)
