@@ -52,7 +52,7 @@ export default class ClientEventsReducer {
         const cardId = action.cardId
         const cardInstance = CardSearch.cards(newState.player.hand).withId(cardId)
         if (TurnUtils.inputRequiredActionIs(newState, 'DISCARD_A_CARD')) {
-          const cardsToDiscard = parseInt(newState.turn.inputRequiredActionParameter)
+          const cardsToDiscard = TurnUtils.getInputRequiredActionParameterAsInt(newState)
           if (TurnUtils.getTargetsIds(newState).length < cardsToDiscard) {
             TurnUtils.selectDifferentTargets(newState, cardInstance)
             if (TurnUtils.getTargetsIds(newState).length === cardsToDiscard) {
@@ -179,6 +179,10 @@ export default class ClientEventsReducer {
 
         if (!StackUtils.isStackEmpty(newState)) {
           stompClient.sendEvent('turn', {action: 'RESOLVE'})
+
+        } else if (TurnUtils.inputRequiredActionIs(newState, 'SCRY')) {
+          const cardsToScry = TurnUtils.getInputRequiredActionParameterAsInt(newState)
+          stompClient.sendEvent('turn', {action: 'RESOLVE', inputRequiredAction: TurnUtils.getInputRequiredAction(newState), inputRequiredChoices: '1'})
 
         } else if (TurnUtils.getCardIdSelectedToBePlayed(newState)) {
           PlayerUtils.castSelectedCard(newState)

@@ -46,10 +46,6 @@ public class ScryAbilityTest extends AbstractApplicationTest {
     // When Player continue without scrying:
     browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
-    // Then
-    browser.player1().getMessageHelper().hasMessage("Cannot continue: SCRY");
-    browser.player1().getMessageHelper().close();
-
     // TODO At this point the front-end knows the card.
     System.out.println();
   }

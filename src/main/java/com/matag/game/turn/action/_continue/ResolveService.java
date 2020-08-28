@@ -9,18 +9,22 @@ import com.matag.game.turn.action.AbilityActionFactory;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
 import com.matag.game.turn.action.leave.PutIntoGraveyardService;
 import com.matag.game.turn.action.player.DiscardXCardsService;
+import com.matag.game.turn.action.player.ScryXCardsService;
 import com.matag.game.turn.action.target.TargetCheckerService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.matag.game.turn.action._continue.InputRequiredActions.DISCARD_A_CARD;
 import static com.matag.game.turn.action._continue.InputRequiredActions.SCRY;
+import static java.lang.Integer.parseInt;
 
 @Component
 @AllArgsConstructor
@@ -33,8 +37,9 @@ public class ResolveService {
   private final PutIntoGraveyardService putIntoGraveyardService;
   private final TargetCheckerService targetCheckerService;
   private final DiscardXCardsService discardXCardsService;
+  private final ScryXCardsService scryXCardsService;
 
-  public void resolve(GameStatus gameStatus, String inputRequiredAction, String inputRequiredActionParameter, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
+  public void resolve(GameStatus gameStatus, String inputRequiredAction, String inputRequiredActionParameter, String inputRequiredChoices, List<Integer> targetCardIds, Map<Integer, List<Object>> targetsIdsForCardIds) {
     if (!gameStatus.getStack().isEmpty()) {
       var stackItemToResolve = gameStatus.getStack().peek();
 
@@ -78,7 +83,7 @@ public class ResolveService {
       gameStatus.getTurn().setCurrentPhaseActivePlayer(gameStatus.getNonActivePlayer().getName());
 
     } else if (Objects.equals(gameStatus.getTurn().getInputRequiredAction(), inputRequiredAction)) {
-      resolveInputRequiredAction(gameStatus, inputRequiredAction, inputRequiredActionParameter, targetCardIds);
+      resolveInputRequiredAction(gameStatus, inputRequiredAction, inputRequiredActionParameter, inputRequiredChoices, targetCardIds);
 
     } else {
       String message = "Cannot resolve inputRequiredAction " + inputRequiredAction + " as current inputRequiredAction is " + gameStatus.getTurn().getInputRequiredAction();
@@ -103,13 +108,17 @@ public class ResolveService {
     stackItemToResolve.getTriggeredAbilities().clear();
   }
 
-  private void resolveInputRequiredAction(GameStatus gameStatus, String inputRequiredAction, String inputRequiredActionParameter, List<Integer> cardIds) {
+  private void resolveInputRequiredAction(GameStatus gameStatus, String inputRequiredAction, String inputRequiredActionParameter, String inputRequiredChoices, List<Integer> cardIds) {
     if (DISCARD_A_CARD.equals(inputRequiredAction)) {
       discardXCardsService.discardXCards(cardIds, gameStatus);
 
     } else if (SCRY.equals(inputRequiredAction)) {
-      // TODO here goes the code to scry
-      System.out.println("here");
+      var positions = Arrays.stream(inputRequiredChoices.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+      if (positions.size() == parseInt(inputRequiredAction)) {
+        scryXCardsService.scryXCards(gameStatus, positions);
+      } else {
+        throw new MessageException("Wrong input when scrying");
+      }
     }
     continueService.next(gameStatus);
   }

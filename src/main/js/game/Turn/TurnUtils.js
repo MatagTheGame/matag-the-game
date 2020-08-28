@@ -68,8 +68,20 @@ export default class TurnUtils  {
     return get(state, 'turn.targetsIds', [])
   }
 
+  static getInputRequiredAction(state) {
+    return get(state, 'turn.inputRequiredAction')
+  }
+
   static inputRequiredActionIs(state, action) {
-    return state.turn.inputRequiredAction === action
+    return TurnUtils.getInputRequiredAction(state) === action
+  }
+
+  static getInputRequiredActionParameter(state) {
+    return get(state, 'turn.inputRequiredActionParameter')
+  }
+
+  static getInputRequiredActionParameterAsInt(state) {
+    return parseInt(TurnUtils.getInputRequiredActionParameter(state))
   }
 
   static resetTarget(state) {

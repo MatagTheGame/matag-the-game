@@ -15,6 +15,7 @@ public class TurnRequest {
   String action;
   String inputRequiredAction;
   String inputRequiredActionParameter;
+  String inputRequiredChoices;
   Map<Integer, List<String>> mana;
   List<Integer> cardIds;
   Map<Integer, List<Object>> targetsIdsForCardIds;
