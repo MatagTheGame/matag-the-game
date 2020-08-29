@@ -2,6 +2,7 @@ import {set} from 'lodash'
 import StackUtils from 'game/Stack/StackUtils'
 import Phase from 'game/Turn/Phase'
 import PlayerUtils from 'game/PlayerInfo/PlayerUtils'
+import get from 'lodash/get'
 
 export default class UserInterfaceUtils {
   static setLastHealthcheckReceived(state) {
@@ -59,6 +60,45 @@ export default class UserInterfaceUtils {
 
   static unsetPlayableAbilities(state) {
     set(state, 'userInterface.playableAbilities', {})
+  }
+
+  static getInputRequiredAction(state) {
+    return get(state, 'userInterface.inputRequiredAction')
+  }
+
+  static getInputRequiredActionChoice(state) {
+    return get(state, 'userInterface.inputRequiredActionChoice')
+  }
+
+  static setInputRequiredActionChoice(state, choice) {
+    return set(state, 'userInterface.inputRequiredActionChoice', choice)
+  }
+
+  static getInputRequiredActionChoices(state) {
+    if (UserInterfaceUtils.getInputRequiredActionChoice(state)) {
+      return UserInterfaceUtils.getInputRequiredActionChoice(state).split(',')
+    }
+    return []
+  }
+
+  static setUserOptions(state, options) {
+    set(state, 'userInterface.userInputs.userOptions', options)
+  }
+
+  static getUserOptions(state) {
+    return get(state, 'userInterface.userInputs.userOptions', [])
+  }
+
+  static inputRequiredActionIs(state, action) {
+    return UserInterfaceUtils.getInputRequiredAction(state) === action
+  }
+
+  static getInputRequiredActionParameter(state) {
+    return get(state, 'turn.inputRequiredActionParameter')
+  }
+
+  static getInputRequiredActionParameterAsInt(state) {
+    return parseInt(UserInterfaceUtils.getInputRequiredActionParameter(state))
   }
 }
 

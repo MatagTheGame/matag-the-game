@@ -47,10 +47,6 @@ class UserInputs extends Component {
   }
 }
 
-UserInputs.propTypes = {
-  userOptions: PropTypes.array.isRequired
-}
-
 const closeUserInputsAction = () => {
   return {
     type: 'CLOSE_USER_INPUTS_CLICK'

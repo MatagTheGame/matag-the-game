@@ -1,5 +1,6 @@
 import get from 'lodash/get'
 import Phase from 'game/Turn/Phase'
+import UserInterfaceUtils from 'game/UserInterface/UserInterfaceUtils'
 
 export default class TurnUtils  {
   static phasesToRender(currentPhase) {
@@ -68,20 +69,18 @@ export default class TurnUtils  {
     return get(state, 'turn.targetsIds', [])
   }
 
-  static getInputRequiredAction(state) {
-    return get(state, 'turn.inputRequiredAction')
-  }
-
-  static inputRequiredActionIs(state, action) {
-    return TurnUtils.getInputRequiredAction(state) === action
-  }
-
-  static getInputRequiredActionParameter(state) {
-    return get(state, 'turn.inputRequiredActionParameter')
-  }
-
-  static getInputRequiredActionParameterAsInt(state) {
-    return parseInt(TurnUtils.getInputRequiredActionParameter(state))
+  static setDefaultChoiceForScry(state) {
+    const inputRequiredActionParameter = UserInterfaceUtils.getInputRequiredActionParameter(state)
+    let choice = '';
+    for (var i = 1; i <= inputRequiredActionParameter; i++) {
+      if (i > 1) {
+        choice += ',';
+      }
+      choice += i;
+    }
+    if (!UserInterfaceUtils.getInputRequiredActionChoice(state)) {
+      UserInterfaceUtils.setInputRequiredActionChoice(state, choice)
+    }
   }
 
   static resetTarget(state) {

@@ -51,8 +51,8 @@ export default class ClientEventsReducer {
       if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
         const cardId = action.cardId
         const cardInstance = CardSearch.cards(newState.player.hand).withId(cardId)
-        if (TurnUtils.inputRequiredActionIs(newState, 'DISCARD_A_CARD')) {
-          const cardsToDiscard = TurnUtils.getInputRequiredActionParameterAsInt(newState)
+        if (UserInterfaceUtils.inputRequiredActionIs(newState, 'DISCARD_A_CARD')) {
+          const cardsToDiscard = UserInterfaceUtils.getInputRequiredActionParameterAsInt(newState)
           if (TurnUtils.getTargetsIds(newState).length < cardsToDiscard) {
             TurnUtils.selectDifferentTargets(newState, cardInstance)
             if (TurnUtils.getTargetsIds(newState).length === cardsToDiscard) {
@@ -86,7 +86,7 @@ export default class ClientEventsReducer {
         const cardId = action.cardId
         const cardInstance = CardSearch.cards(newState.player.battlefield).withId(cardId)
 
-        if (newState.turn.currentPhase === 'DA' && TurnUtils.inputRequiredActionIs(newState, 'DECLARE_ATTACKERS')) {
+        if (newState.turn.currentPhase === 'DA' && UserInterfaceUtils.inputRequiredActionIs(newState, 'DECLARE_ATTACKERS')) {
           const canAttackResult = CardUtils.canAttack(cardInstance)
           if (canAttackResult === true) {
             CardUtils.toggleFrontendAttacking(cardInstance)
@@ -94,7 +94,7 @@ export default class ClientEventsReducer {
             UserInterfaceUtils.setMessage(newState, canAttackResult)
           }
 
-        } else if (newState.turn.currentPhase === 'DB' && TurnUtils.inputRequiredActionIs(newState, 'DECLARE_BLOCKERS')) {
+        } else if (newState.turn.currentPhase === 'DB' && UserInterfaceUtils.inputRequiredActionIs(newState, 'DECLARE_BLOCKERS')) {
           const blockedCard = CardSearch.cards(newState.opponent.battlefield).attacking()[newState.turn.blockingCardPosition]
           const canBlockResult = CardUtils.canBlock(cardInstance, blockedCard)
           if (canBlockResult === true) {
@@ -131,7 +131,7 @@ export default class ClientEventsReducer {
       if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
         const cardInstance = CardSearch.cards(newState.opponent.battlefield).withId(action.cardId)
 
-        if (newState.turn.currentPhase === 'DB' && TurnUtils.inputRequiredActionIs(newState, 'DECLARE_BLOCKERS')) {
+        if (newState.turn.currentPhase === 'DB' && UserInterfaceUtils.inputRequiredActionIs(newState, 'DECLARE_BLOCKERS')) {
           if (CardUtils.isOfType(cardInstance, 'CREATURE')) {
             newState.turn.blockingCardPosition = CardSearch.cards(newState.opponent.battlefield).attacking().indexOf(cardInstance)
           }
@@ -152,7 +152,7 @@ export default class ClientEventsReducer {
       break
 
     case 'VISIBLE_LIBRARY_CARD_CLICK':
-      if (TurnUtils.inputRequiredActionIs(newState, 'SCRY')) {
+      if (UserInterfaceUtils.inputRequiredActionIs(newState, 'SCRY')) {
         const cardsToScry = parseInt(newState.turn.inputRequiredActionParameter)
         console.log('SCRY ' + cardsToScry)
       }
@@ -160,7 +160,7 @@ export default class ClientEventsReducer {
 
     case 'CONTINUE_CLICK':
       if (newState.turn.currentPhaseActivePlayer === newState.player.name) {
-        if (newState.turn.currentPhase === 'DA' && TurnUtils.inputRequiredActionIs(newState, 'DECLARE_ATTACKERS')) {
+        if (newState.turn.currentPhase === 'DA' && UserInterfaceUtils.inputRequiredActionIs(newState, 'DECLARE_ATTACKERS')) {
           const attackingCreaturesIds = CardSearch.cards(newState.player.battlefield)
             .frontEndAttacking()
             .ofType('CREATURE')
@@ -168,7 +168,7 @@ export default class ClientEventsReducer {
           stompClient.sendEvent('turn', {action: 'DECLARE_ATTACKERS', cardIds: attackingCreaturesIds})
           break
 
-        } else if (newState.turn.currentPhase === 'DB' && TurnUtils.inputRequiredActionIs(newState, 'DECLARE_BLOCKERS')) {
+        } else if (newState.turn.currentPhase === 'DB' && UserInterfaceUtils.inputRequiredActionIs(newState, 'DECLARE_BLOCKERS')) {
           const blockingCreatures = CardSearch.cards(newState.player.battlefield).frontEndBlocking()
           stompClient.sendEvent('turn', {
             action: 'DECLARE_BLOCKERS',
@@ -180,9 +180,9 @@ export default class ClientEventsReducer {
         if (!StackUtils.isStackEmpty(newState)) {
           stompClient.sendEvent('turn', {action: 'RESOLVE'})
 
-        } else if (TurnUtils.inputRequiredActionIs(newState, 'SCRY')) {
-          const cardsToScry = TurnUtils.getInputRequiredActionParameterAsInt(newState)
-          stompClient.sendEvent('turn', {action: 'RESOLVE', inputRequiredAction: TurnUtils.getInputRequiredAction(newState), inputRequiredChoices: '1'})
+        } else if (UserInterfaceUtils.inputRequiredActionIs(newState, 'SCRY')) {
+          TurnUtils.setDefaultChoiceForScry(newState)
+          stompClient.sendEvent('turn', {action: 'RESOLVE', inputRequiredAction: UserInterfaceUtils.getInputRequiredAction(newState), inputRequiredChoices: UserInterfaceUtils.getInputRequiredActionChoice(newState)})
 
         } else if (TurnUtils.getCardIdSelectedToBePlayed(newState)) {
           PlayerUtils.castSelectedCard(newState)
