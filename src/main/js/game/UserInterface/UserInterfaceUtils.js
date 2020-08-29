@@ -62,10 +62,6 @@ export default class UserInterfaceUtils {
     set(state, 'userInterface.playableAbilities', {})
   }
 
-  static getInputRequiredAction(state) {
-    return get(state, 'userInterface.inputRequiredAction')
-  }
-
   static getInputRequiredActionChoice(state) {
     return get(state, 'userInterface.inputRequiredActionChoice')
   }
@@ -87,18 +83,6 @@ export default class UserInterfaceUtils {
 
   static getUserOptions(state) {
     return get(state, 'userInterface.userInputs.userOptions', [])
-  }
-
-  static inputRequiredActionIs(state, action) {
-    return UserInterfaceUtils.getInputRequiredAction(state) === action
-  }
-
-  static getInputRequiredActionParameter(state) {
-    return get(state, 'turn.inputRequiredActionParameter')
-  }
-
-  static getInputRequiredActionParameterAsInt(state) {
-    return parseInt(UserInterfaceUtils.getInputRequiredActionParameter(state))
   }
 }
 

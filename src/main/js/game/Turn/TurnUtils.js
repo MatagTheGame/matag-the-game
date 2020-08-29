@@ -70,7 +70,7 @@ export default class TurnUtils  {
   }
 
   static setDefaultChoiceForScry(state) {
-    const inputRequiredActionParameter = UserInterfaceUtils.getInputRequiredActionParameter(state)
+    const inputRequiredActionParameter = TurnUtils.getInputRequiredActionParameter(state)
     let choice = '';
     for (var i = 1; i <= inputRequiredActionParameter; i++) {
       if (i > 1) {
@@ -81,6 +81,22 @@ export default class TurnUtils  {
     if (!UserInterfaceUtils.getInputRequiredActionChoice(state)) {
       UserInterfaceUtils.setInputRequiredActionChoice(state, choice)
     }
+  }
+
+  static getInputRequiredAction(state) {
+    return get(state, 'turn.inputRequiredAction')
+  }
+
+  static inputRequiredActionIs(state, action) {
+    return TurnUtils.getInputRequiredAction(state) === action
+  }
+
+  static getInputRequiredActionParameter(state) {
+    return get(state, 'turn.inputRequiredActionParameter')
+  }
+
+  static getInputRequiredActionParameterAsInt(state) {
+    return parseInt(TurnUtils.getInputRequiredActionParameter(state))
   }
 
   static resetTarget(state) {
