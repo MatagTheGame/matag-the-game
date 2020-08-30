@@ -43,10 +43,11 @@ public class ScryAbilityTest extends AbstractApplicationTest {
     // And Opponent accepts it
     browser.player2().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
 
-    // When Player continue without scrying:
-    browser.player1().getActionHelper().clickContinueAndExpectPhase(M1, PLAYER);
+    // Player can see the top card
+    browser.player1().getLibraryHelper(PLAYER).getVisibleCardsHelper().contains("Swamp");
+    browser.player1().getLibraryHelper(PLAYER).getVisibleCardsHelper().getFirstCard(cards.get("Swamp")).click();
 
-    // TODO At this point the front-end knows the card.
+    // FIXME now clicking on the card should show two options: keep on top or put to bottom.
     System.out.println();
   }
 

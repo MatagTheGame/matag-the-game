@@ -112,7 +112,7 @@ export default class ClientEventsReducer {
           // FIXME this is wrong. It should be still possible to play an ability of a tapped card.
           //  And if a card is tapped in the dropdown list should not appear all the abilities that require tapping.
           if (!CardUtils.isFrontendTapped(cardInstance) && possibleAbilities.length > 1) {
-            UserInterfaceUtils.setPlayableAbilities(newState, cardId, possibleAbilities, action.position)
+            UserInterfaceUtils.setPlayableAbilities(newState, cardId, action.position, possibleAbilities)
 
           } else if (CardUtils.getAbilitiesForTriggerType(cardInstance, 'MANA_ABILITY').length > 0) {
               CardUtils.activateManaAbility(newState, cardInstance)
@@ -153,8 +153,8 @@ export default class ClientEventsReducer {
 
     case 'VISIBLE_LIBRARY_CARD_CLICK':
       if (TurnUtils.inputRequiredActionIs(newState, 'SCRY')) {
-        const cardsToScry = parseInt(newState.turn.inputRequiredActionParameter)
-        console.log('SCRY ' + cardsToScry)
+        const position = UserInterfaceUtils.extractPosition(action)
+        UserInterfaceUtils.setUserInputs(newState, action.cardId, position)
       }
       break
 

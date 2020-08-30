@@ -101,6 +101,10 @@ public class MatagBrowser {
     return new StackHelper(this);
   }
 
+  public LibraryHelper getLibraryHelper(PlayerType playerType) {
+    return new LibraryHelper(this, playerType);
+  }
+
   public JavascriptExecutor getJavascriptExecutor() {
     return (JavascriptExecutor)webDriver;
   }

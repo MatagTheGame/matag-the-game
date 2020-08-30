@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux'
 import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import CostUtils from 'game/Card/CostUtils'
-import UserInputs from 'game/UserInterface/UserInputs'
+import UserInputs from './UserInputs'
 
 class PlayableAbilities extends Component {
   constructor(props) {

@@ -15,7 +15,7 @@ class UserInput extends Component {
 
 UserInput.propTypes = {
   onClick: PropTypes.func.isRequired,
-  title: PropTypes.title
+  title: PropTypes.string.isRequired
 }
 
 
@@ -66,7 +66,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 UserInputs.propTypes = {
-  position: PropTypes.object.isRequired,
+  userOptions: PropTypes.array.isRequired,
+  position: PropTypes.object.isRequired
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserInputs)

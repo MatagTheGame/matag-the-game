@@ -53,13 +53,22 @@ export default class UserInterfaceUtils {
     set(state, 'userInterface.statusMessage', statusMessage)
   }
 
-  static setPlayableAbilities(state, cardId, possibleAbilities, position) {
-    set(state, 'userInterface.playableAbilities', {possibleAbilities: possibleAbilities})
+  static setUserInputs(state, cardId, position) {
     set(state, 'userInterface.userInputs', {cardId: cardId, position: position})
+  }
+
+  static unsetUserInputs(state) {
+    set(state, 'userInterface.userInputs', {})
+  }
+
+  static setPlayableAbilities(state, cardId, position, possibleAbilities) {
+    set(state, 'userInterface.playableAbilities', {possibleAbilities: possibleAbilities})
+    UserInterfaceUtils.setUserInputs(state, cardId, position)
   }
 
   static unsetPlayableAbilities(state) {
     set(state, 'userInterface.playableAbilities', {})
+    UserInterfaceUtils.unsetUserInputs(state)
   }
 
   static getInputRequiredActionChoice(state) {
@@ -83,6 +92,10 @@ export default class UserInterfaceUtils {
 
   static getUserOptions(state) {
     return get(state, 'userInterface.userInputs.userOptions', [])
+  }
+
+  static extractPosition(action) {
+    return {'x': action.event.x, 'y': action.event.y}
   }
 }
 
