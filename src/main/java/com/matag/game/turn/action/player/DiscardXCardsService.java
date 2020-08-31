@@ -31,8 +31,6 @@ public class DiscardXCardsService {
       }
 
       putIntoGraveyardService.putIntoGraveyard(gameStatus, cards);
-      gameStatus.getTurn().setInputRequiredAction(null);
-      gameStatus.getTurn().setInputRequiredActionParameter(null);
 
     } catch (Exception e) {
       throw new MessageException(e.getMessage());

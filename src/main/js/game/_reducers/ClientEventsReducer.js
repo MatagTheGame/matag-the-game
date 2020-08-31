@@ -7,13 +7,14 @@ import Phase from 'game/Turn/Phase'
 import TurnUtils from 'game/Turn/TurnUtils'
 import UserInterfaceUtils from 'game/UserInterface/UserInterfaceUtils'
 import stompClient from 'game/WebSocket'
+import UserInputUtils from 'game/UserInterface/UserInputs/UserInputUtils'
 
 export default class ClientEventsReducer {
 
   static getEvents() {
     return ['@@INIT', 'PLAYER_HAND_CARD_CLICK', 'PLAYER_BATTLEFIELD_CARD_CLICK', 'OPPONENT_BATTLEFIELD_CARD_CLICK', 'STACK_ELEMENT_CLICK',
       'VISIBLE_LIBRARY_CARD_CLICK', 'CONTINUE_CLICK', 'PLAYER_CLICK', 'MAXIMIZE_MINIMIZE_CARD', 'CLOSE_USER_INPUTS_CLICK',
-      'PLAY_ABILITIES_CLICK', 'OPEN_HELP_PAGE', 'CLOSE_HELP_PAGE']
+      'OPEN_HELP_PAGE', 'CLOSE_HELP_PAGE']
   }
 
   static reduceEvent(newState, action) {
@@ -32,19 +33,6 @@ export default class ClientEventsReducer {
 
     case 'CLOSE_USER_INPUTS_CLICK':
       UserInterfaceUtils.unsetPlayableAbilities(newState)
-      break
-
-    case 'PLAY_ABILITIES_CLICK':
-      const cardInstance = CardSearch.cards(newState.player.battlefield).withId(action.cardId)
-
-      const playedAbility = CardUtils.getAbilitiesForTriggerTypes(cardInstance, ['ACTIVATED_ABILITY', 'MANA_ABILITY'])[action.index]
-      if (playedAbility.trigger.type === 'MANA_ABILITY') {
-        CardUtils.activateManaAbility(newState, cardInstance, action.index)
-
-      } else if (playedAbility.trigger.type === 'ACTIVATED_ABILITY') {
-        PlayerUtils.castOrHandleTargets(newState, cardInstance, playedAbility)
-      }
-
       break
 
     case 'PLAYER_HAND_CARD_CLICK':
@@ -181,7 +169,9 @@ export default class ClientEventsReducer {
           stompClient.sendEvent('turn', {action: 'RESOLVE'})
 
         } else if (TurnUtils.inputRequiredActionIs(newState, 'SCRY')) {
-          TurnUtils.setDefaultChoiceForScry(newState)
+          if (!UserInterfaceUtils.getInputRequiredActionChoice(newState)) {
+            UserInterfaceUtils.setInputRequiredActionChoice(newState, UserInputUtils.getDefaultChoiceForScry(newState))
+          }
           stompClient.sendEvent('turn', {action: 'RESOLVE', inputRequiredAction: TurnUtils.getInputRequiredAction(newState), inputRequiredChoices: UserInterfaceUtils.getInputRequiredActionChoice(newState)})
 
         } else if (TurnUtils.getCardIdSelectedToBePlayed(newState)) {

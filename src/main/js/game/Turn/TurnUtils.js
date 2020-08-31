@@ -69,20 +69,6 @@ export default class TurnUtils  {
     return get(state, 'turn.targetsIds', [])
   }
 
-  static setDefaultChoiceForScry(state) {
-    const inputRequiredActionParameter = TurnUtils.getInputRequiredActionParameter(state)
-    let choice = '';
-    for (var i = 1; i <= inputRequiredActionParameter; i++) {
-      if (i > 1) {
-        choice += ',';
-      }
-      choice += i;
-    }
-    if (!UserInterfaceUtils.getInputRequiredActionChoice(state)) {
-      UserInterfaceUtils.setInputRequiredActionChoice(state, choice)
-    }
-  }
-
   static getInputRequiredAction(state) {
     return get(state, 'turn.inputRequiredAction')
   }

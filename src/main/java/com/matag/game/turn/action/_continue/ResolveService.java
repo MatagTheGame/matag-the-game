@@ -117,6 +117,9 @@ public class ResolveService {
         throw new MessageException("Please click on the visible cards to scry them.");
       }
     }
+
+    gameStatus.getTurn().setInputRequiredAction(null);
+    gameStatus.getTurn().setInputRequiredActionParameter(null);
     continueService.next(gameStatus);
   }
 

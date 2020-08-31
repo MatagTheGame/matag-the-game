@@ -1,5 +1,6 @@
 import ServerEventsReducer from './ServerEventsReducer'
 import ClientEventsReducer from './ClientEventsReducer'
+import UserInputAbilityReducer from 'game/_reducers/UserInputAbilityReducer'
 
 const clone = (object) => {
   if (!object) {
@@ -16,6 +17,9 @@ export default (state, action) => {
 
   } else if (ClientEventsReducer.getEvents().indexOf(action.type) >= 0) {
     return ClientEventsReducer.reduceEvent(newState, action)
+
+  } else if (UserInputAbilityReducer.getEvents().indexOf(action.type) >= 0) {
+    return UserInputAbilityReducer.reduceEvent(newState, action)
 
   } else if (!state) {
     return {}
