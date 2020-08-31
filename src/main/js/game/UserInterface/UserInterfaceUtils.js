@@ -97,6 +97,49 @@ export default class UserInterfaceUtils {
   static extractPosition(action) {
     return {'x': action.event.x, 'y': action.event.y}
   }
+
+  static scry(previousChoice, visibleLibrary, cardId, action) {
+    let cardToMoveIndex = -1
+    for (let i = 0; i < visibleLibrary.length; i++) {
+      if (visibleLibrary[i].id === cardId) {
+        cardToMoveIndex = i
+        break
+      }
+    }
+
+    let choice = previousChoice.split(',')
+    const value = choice[cardToMoveIndex]
+
+    if (action === 'TOP') {
+      choice[cardToMoveIndex] = 1
+    } else {
+      choice[cardToMoveIndex] = -1
+    }
+
+    for (let i = 0; i < choice.length; i++) {
+      if (i !== cardToMoveIndex) {
+        if (value > 0 && action === 'TOP') {
+          if (choice[i] > 0 && choice[i] < value) {
+            choice[i]++
+          }
+        }  else if (value > 0 && action === 'BOTTOM') {
+          if (choice[i] > value || choice[i] < 0) {
+            choice[i]--
+          }
+        } else if (value < 0 && action === 'TOP') {
+          if (choice[i] > value || choice[i] > 0) {
+            choice[i]++
+          }
+        } else if (value < 0 && action === 'BOTTOM') {
+          if (choice[i] < value) {
+            choice[i]--
+          }
+        }
+      }
+    }
+
+    return choice.join(',')
+  }
 }
 
 UserInterfaceUtils.CHOOSE_A_CARD_TO_DISCARD = 'Choose a card to discard.'

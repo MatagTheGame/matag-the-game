@@ -31,27 +31,11 @@ export default class UserInputAbilityReducer {
           choice = UserInputUtils.getDefaultChoiceForScry(newState)
         }
 
-        let cardToMoveIndex = -1
-        for (let i = 0; i < newState.player.visibleLibrary.length; i++) {
-          if (newState.player.visibleLibrary[i].id === action.cardId) {
-            cardToMoveIndex = i
-            break
-          }
-        }
-
-        // FIXME implement scry with one only choice
-        if (action.action === 'TOP') {
-          choice = '1'
-        } else {
-          choice = '-1'
-        }
-
+        choice = UserInterfaceUtils.scry(choice, newState.player.visibleLibrary, action.cardId, action.action)
         UserInterfaceUtils.setInputRequiredActionChoice(newState, choice)
-
         break
     }
 
     return newState
   }
-
 }
