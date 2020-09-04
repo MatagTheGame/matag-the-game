@@ -3,6 +3,7 @@
 /*.ipr
 /*.iws
 /target
+/logs
 
 /src/main/resources/public/js
 /node
