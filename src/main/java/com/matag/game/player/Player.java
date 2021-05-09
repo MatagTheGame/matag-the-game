@@ -1,12 +1,14 @@
 package com.matag.game.player;
 
-import com.matag.game.security.SecurityToken;
-import lombok.Data;
+import java.util.stream.IntStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.IntStream;
+import com.matag.game.security.SecurityToken;
+
+import lombok.Data;
 
 @Data
 @Component

@@ -1,18 +1,20 @@
 package com.matag.game.turn;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.status.GameStatus;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.status.GameStatus;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @ToString
 @EqualsAndHashCode

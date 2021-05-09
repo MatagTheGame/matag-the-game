@@ -1,5 +1,10 @@
 package com.matag.game.turn;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.ContinueService;
 import com.matag.game.turn.action._continue.ResolveService;
@@ -7,11 +12,8 @@ import com.matag.game.turn.action.cast.CastService;
 import com.matag.game.turn.action.cast.PlayLandService;
 import com.matag.game.turn.action.combat.DeclareAttackerService;
 import com.matag.game.turn.action.combat.DeclareBlockerService;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

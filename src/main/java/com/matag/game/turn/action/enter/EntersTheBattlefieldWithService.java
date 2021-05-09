@@ -1,5 +1,16 @@
 package com.matag.game.turn.action.enter;
 
+import static com.matag.cards.ability.type.AbilityType.ADAMANT;
+import static com.matag.cards.ability.type.AbilityType.ENTERS_THE_BATTLEFIELD_WITH;
+import static java.util.stream.Collectors.toList;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.AbilityService;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
@@ -7,17 +18,8 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.cast.ManaCountService;
 import com.matag.game.turn.action.player.DrawXCardsService;
 import com.matag.game.turn.action.tap.TapPermanentService;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
-import static com.matag.cards.ability.type.AbilityType.ADAMANT;
-import static com.matag.cards.ability.type.AbilityType.ENTERS_THE_BATTLEFIELD_WITH;
-import static java.util.stream.Collectors.toList;
 
 @Component
 @AllArgsConstructor

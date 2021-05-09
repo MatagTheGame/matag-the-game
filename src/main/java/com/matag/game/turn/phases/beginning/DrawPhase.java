@@ -1,12 +1,13 @@
 package com.matag.game.turn.phases.beginning;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.player.DrawXCardsService;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.main1.Main1Phase;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Component
 public class DrawPhase extends AbstractPhase {

@@ -1,15 +1,16 @@
 package com.matag.game.turn.action.selection;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.selector.MagicInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.player.PlayerType;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 public class MagicInstancePlayerSelectorService {

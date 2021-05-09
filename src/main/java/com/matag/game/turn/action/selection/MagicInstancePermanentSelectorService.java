@@ -1,5 +1,9 @@
 package com.matag.game.turn.action.selection;
 
+import static com.matag.cards.ability.type.AbilityType.HEXPROOF;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.selector.MagicInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.selector.StatusType;
@@ -7,9 +11,6 @@ import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceSearch;
 import com.matag.game.status.GameStatus;
 import com.matag.player.PlayerType;
-import org.springframework.stereotype.Component;
-
-import static com.matag.cards.ability.type.AbilityType.HEXPROOF;
 
 @Component
 public class MagicInstancePermanentSelectorService {

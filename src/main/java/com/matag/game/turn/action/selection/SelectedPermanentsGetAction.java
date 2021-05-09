@@ -1,5 +1,7 @@
 package com.matag.game.turn.action.selection;
 
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.AbilityAction;
@@ -7,8 +9,8 @@ import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.permanent.PermanentGetService;
 import com.matag.game.turn.action.player.PlayerGetService;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor

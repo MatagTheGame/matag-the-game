@@ -1,9 +1,10 @@
 package com.matag.game.turn.action.tap;
 
-import com.matag.game.status.GameStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.matag.game.status.GameStatus;
 
 @Component
 public class TapPermanentService {

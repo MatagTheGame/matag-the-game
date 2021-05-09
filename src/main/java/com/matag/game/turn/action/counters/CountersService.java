@@ -1,10 +1,11 @@
 package com.matag.game.turn.action.counters;
 
-import com.matag.cards.ability.type.AbilityType;
-import com.matag.game.cardinstance.CardInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.matag.cards.ability.type.AbilityType;
+import com.matag.game.cardinstance.CardInstance;
 
 @Component
 public class CountersService {

@@ -1,11 +1,12 @@
 package com.matag.game.turn.phases;
 
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action._continue.AutocontinueChecker;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import static com.matag.game.turn.phases.PhaseUtils.isPriorityAllowed;
 import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action._continue.AutocontinueChecker;
 
 public abstract class AbstractPhase implements Phase {
   @Autowired

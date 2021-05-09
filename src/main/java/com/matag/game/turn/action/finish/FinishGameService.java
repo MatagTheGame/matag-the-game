@@ -1,10 +1,12 @@
 package com.matag.game.turn.action.finish;
 
+import org.springframework.stereotype.Component;
+
 import com.matag.game.adminclient.AdminClient;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor

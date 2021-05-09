@@ -1,22 +1,24 @@
 package integration.turn.action.enter;
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
-import com.matag.game.turn.action.player.DrawXCardsService;
-import integration.TestUtils;
+import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
+import java.util.Map;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Map;
+import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
+import com.matag.game.turn.action.player.DrawXCardsService;
 
-import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import integration.TestUtils;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = EnterTestConfiguration.class)

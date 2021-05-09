@@ -1,15 +1,16 @@
 package com.matag.game.turn.action.leave;
 
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.attach.AttachService;
-import com.matag.game.turn.action.attach.AttachmentsService;
+import static com.matag.cards.properties.Type.ARTIFACT;
+import static com.matag.cards.properties.Type.ENCHANTMENT;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import static com.matag.cards.properties.Type.ARTIFACT;
-import static com.matag.cards.properties.Type.ENCHANTMENT;
+import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action.attach.AttachService;
+import com.matag.game.turn.action.attach.AttachmentsService;
 
 @Component
 public class LeaveBattlefieldService {

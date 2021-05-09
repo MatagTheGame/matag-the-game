@@ -1,12 +1,13 @@
 package com.matag.game.turn.action.combat;
 
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.Type;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.message.MessageException;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class BlockerChecker {

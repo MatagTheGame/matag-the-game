@@ -1,8 +1,9 @@
 package application.browser;
 
-import com.matag.player.PlayerType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
+import com.matag.player.PlayerType;
 
 public class LibraryHelper extends AbstractCardContainerHelper {
   private final PlayerType playerType;

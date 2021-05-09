@@ -1,16 +1,14 @@
 package com.matag.game.adminclient;
 
+import java.util.ArrayList;
+
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+
 import com.matag.adminentities.DeckInfo;
 import com.matag.adminentities.PlayerInfo;
 import com.matag.game.config.ConfigService;
 import com.matag.game.security.SecurityToken;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.Set;
-
-import static com.matag.cards.properties.Color.WHITE;
 
 @Profile("test")
 @Component

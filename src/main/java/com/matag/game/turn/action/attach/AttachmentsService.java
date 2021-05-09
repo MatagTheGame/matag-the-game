@@ -1,5 +1,14 @@
 package com.matag.game.turn.action.attach;
 
+import static com.matag.cards.ability.type.AbilityType.ENCHANT;
+import static com.matag.cards.ability.type.AbilityType.EQUIP;
+import static java.util.Arrays.asList;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.AbilityService;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.PowerToughness;
@@ -7,15 +16,8 @@ import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 import com.matag.game.status.GameStatus;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static com.matag.cards.ability.type.AbilityType.ENCHANT;
-import static com.matag.cards.ability.type.AbilityType.EQUIP;
-import static java.util.Arrays.asList;
 
 @Component
 @AllArgsConstructor

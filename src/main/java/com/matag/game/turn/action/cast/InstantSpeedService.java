@@ -1,9 +1,11 @@
 package com.matag.game.turn.action.cast;
 
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.game.cardinstance.CardInstance;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor

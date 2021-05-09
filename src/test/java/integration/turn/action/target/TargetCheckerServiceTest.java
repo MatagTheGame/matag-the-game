@@ -1,16 +1,18 @@
 package integration.turn.action.target;
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action.target.TargetCheckerService;
-import integration.TestUtils;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.turn.action.target.TargetCheckerService;
+
+import integration.TestUtils;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TargetTestConfiguration.class)

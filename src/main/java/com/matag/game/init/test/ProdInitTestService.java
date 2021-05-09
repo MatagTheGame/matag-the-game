@@ -1,10 +1,11 @@
 package com.matag.game.init.test;
 
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.status.GameStatus;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
 
 @Profile("test")
 @Component

@@ -1,5 +1,14 @@
 package com.matag.game.status;
 
+import static com.matag.game.turn.action._continue.InputRequiredActions.SCRY;
+import static java.lang.Integer.parseInt;
+import static java.util.Collections.emptyList;
+
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.event.Event;
@@ -7,15 +16,8 @@ import com.matag.game.event.EventSender;
 import com.matag.game.message.MessageEvent;
 import com.matag.game.player.Player;
 import com.matag.game.player.PlayerUpdateEvent;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Set;
-
-import static com.matag.game.turn.action._continue.InputRequiredActions.SCRY;
-import static java.lang.Integer.parseInt;
-import static java.util.Collections.emptyList;
 
 @Component
 @AllArgsConstructor

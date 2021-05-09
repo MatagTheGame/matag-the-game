@@ -1,11 +1,12 @@
 package com.matag.game.event;
 
-import com.matag.game.player.Player;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import com.matag.game.player.Player;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @ToString
 @EqualsAndHashCode

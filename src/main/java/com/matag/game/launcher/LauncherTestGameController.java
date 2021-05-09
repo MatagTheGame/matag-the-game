@@ -1,12 +1,13 @@
 package com.matag.game.launcher;
 
-import lombok.AllArgsConstructor;
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.concurrent.atomic.AtomicLong;
+import lombok.AllArgsConstructor;
 
 @Profile("test")
 @Controller

@@ -1,7 +1,7 @@
 package application.browser;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.matag.player.PlayerType;
+import java.util.ArrayList;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.matag.player.PlayerType;
 
 public class MatagBrowser {
   private final WebDriver webDriver;

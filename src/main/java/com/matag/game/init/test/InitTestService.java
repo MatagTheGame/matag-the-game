@@ -1,11 +1,12 @@
 package com.matag.game.init.test;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.matag.cards.Card;
 import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.status.GameStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class InitTestService {
   private static final Logger LOGGER = LoggerFactory.getLogger(InitTestService.class);

@@ -1,13 +1,15 @@
 package com.matag.game.turn.action._continue;
 
+import static com.matag.cards.properties.Type.CREATURE;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.leave.DestroyPermanentService;
 import com.matag.game.turn.action.leave.ReturnPermanentToHandService;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
-import static com.matag.cards.properties.Type.CREATURE;
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

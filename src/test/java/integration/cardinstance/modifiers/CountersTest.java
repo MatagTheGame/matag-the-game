@@ -1,9 +1,10 @@
 package integration.cardinstance.modifiers;
 
-import com.matag.game.cardinstance.modifiers.Counters;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.matag.game.cardinstance.modifiers.Counters;
 
 public class CountersTest {
   private Counters counters = new Counters();

@@ -1,17 +1,18 @@
 package com.matag.game.cardinstance.modifiers;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.matag.cards.ability.type.AbilityType;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.matag.cards.ability.type.AbilityType;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
 
 @ToString
 @EqualsAndHashCode

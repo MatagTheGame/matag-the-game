@@ -1,15 +1,17 @@
 package com.matag.game.turn.action.player;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.player.Player;
-import com.matag.game.status.GameStatus;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
+import static com.matag.game.turn.action._continue.InputRequiredActions.SCRY;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.matag.game.turn.action._continue.InputRequiredActions.SCRY;
+import org.springframework.stereotype.Component;
+
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.player.Player;
+import com.matag.game.status.GameStatus;
+
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

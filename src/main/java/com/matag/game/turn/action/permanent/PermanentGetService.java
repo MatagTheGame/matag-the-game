@@ -1,5 +1,11 @@
 package com.matag.game.turn.action.permanent;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.AbilityService;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
@@ -11,12 +17,8 @@ import com.matag.game.turn.action.leave.DestroyPermanentService;
 import com.matag.game.turn.action.leave.PutIntoGraveyardService;
 import com.matag.game.turn.action.leave.ReturnPermanentToHandService;
 import com.matag.game.turn.action.tap.TapPermanentService;
-import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

@@ -1,12 +1,13 @@
 package com.matag.game.player;
 
+import java.util.List;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.matag.game.cardinstance.CardInstance;
+
 import lombok.Builder;
 import lombok.Value;
-
-import java.util.List;
 
 @Value
 @JsonDeserialize(builder = PlayerUpdateEvent.PlayerUpdateEventBuilder.class)

@@ -1,23 +1,25 @@
 package integration.turn.action.player;
 
-import com.matag.cards.Card;
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.player.ScryXCardsService;
-import integration.TestUtils;
-import integration.TestUtilsConfiguration;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.matag.cards.Card;
+import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action.player.ScryXCardsService;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import integration.TestUtils;
+import integration.TestUtilsConfiguration;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {PlayerTestConfiguration.class, TestUtilsConfiguration.class})

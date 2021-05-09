@@ -1,14 +1,16 @@
 package com.matag.game.cardinstance.cost;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.tap.TapPermanentService;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.Map;
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

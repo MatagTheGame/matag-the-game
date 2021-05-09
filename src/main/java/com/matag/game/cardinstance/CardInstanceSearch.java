@@ -1,5 +1,10 @@
 package com.matag.game.cardinstance;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import com.matag.cards.ability.selector.PowerToughnessConstraint;
 import com.matag.cards.ability.selector.TurnStatusType;
 import com.matag.cards.ability.trigger.TriggerSubtype;
@@ -9,11 +14,6 @@ import com.matag.cards.properties.Subtype;
 import com.matag.cards.properties.Type;
 import com.matag.game.cardinstance.ability.selector.PowerToughnessConstraintUtils;
 import com.matag.game.status.GameStatus;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CardInstanceSearch {
 

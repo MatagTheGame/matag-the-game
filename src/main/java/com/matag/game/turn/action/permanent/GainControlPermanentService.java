@@ -1,9 +1,10 @@
 package com.matag.game.turn.action.permanent;
 
-import com.matag.game.cardinstance.CardInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.matag.game.cardinstance.CardInstance;
 
 @Component
 public class GainControlPermanentService {

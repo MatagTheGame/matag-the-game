@@ -1,17 +1,19 @@
 package integration.turn.action.player;
 
-import com.matag.game.turn.action.finish.FinishGameService;
-import com.matag.game.turn.action.player.DrawXCardsService;
-import integration.TestUtils;
-import integration.TestUtilsConfiguration;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
+import com.matag.game.turn.action.finish.FinishGameService;
+import com.matag.game.turn.action.player.DrawXCardsService;
+
+import integration.TestUtils;
+import integration.TestUtilsConfiguration;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {PlayerTestConfiguration.class, TestUtilsConfiguration.class})

@@ -1,14 +1,15 @@
 package com.matag.game.cardinstance.modifiers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.matag.cards.properties.PowerToughness;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @NoArgsConstructor

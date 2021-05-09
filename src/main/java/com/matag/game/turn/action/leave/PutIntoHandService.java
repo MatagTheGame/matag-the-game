@@ -1,8 +1,9 @@
 package com.matag.game.turn.action.leave;
 
+import org.springframework.stereotype.Component;
+
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
-import org.springframework.stereotype.Component;
 
 @Component
 public class PutIntoHandService {

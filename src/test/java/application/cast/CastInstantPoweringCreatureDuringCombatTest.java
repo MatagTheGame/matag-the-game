@@ -1,14 +1,8 @@
 package application.cast;
 
-import application.AbstractApplicationTest;
-import application.InitTestServiceDecorator;
-import com.matag.cards.Cards;
-import com.matag.game.init.test.InitTestService;
-import com.matag.game.status.GameStatus;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import static application.browser.BattlefieldHelper.*;
+import static application.browser.BattlefieldHelper.COMBAT_LINE;
+import static application.browser.BattlefieldHelper.FIRST_LINE;
+import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
@@ -16,6 +10,16 @@ import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.game.turn.phases.main2.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.matag.cards.Cards;
+import com.matag.game.init.test.InitTestService;
+import com.matag.game.status.GameStatus;
+
+import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
 
 public class CastInstantPoweringCreatureDuringCombatTest extends AbstractApplicationTest {
 

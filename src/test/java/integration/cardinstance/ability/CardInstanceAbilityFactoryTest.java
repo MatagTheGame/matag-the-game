@@ -1,15 +1,16 @@
 package integration.cardinstance.ability;
 
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
-import org.junit.Test;
-
-import java.util.Optional;
-
 import static com.matag.cards.ability.type.AbilityType.HASTE;
 import static com.matag.cards.ability.type.AbilityType.TRAMPLE;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Optional;
+
+import org.junit.Test;
+
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
 
 public class CardInstanceAbilityFactoryTest {
   private CardInstanceAbilityFactory cardInstanceAbilityFactory = new CardInstanceAbilityFactory();

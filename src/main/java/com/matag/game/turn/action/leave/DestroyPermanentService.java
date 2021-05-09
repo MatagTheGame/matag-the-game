@@ -1,15 +1,17 @@
 package com.matag.game.turn.action.leave;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.trigger.WhenTriggerService;
-import lombok.AllArgsConstructor;
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_DIE;
+import static com.matag.cards.ability.type.AbilityType.INDESTRUCTIBLE;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_DIE;
-import static com.matag.cards.ability.type.AbilityType.INDESTRUCTIBLE;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action.trigger.WhenTriggerService;
+
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

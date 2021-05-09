@@ -1,13 +1,14 @@
 package com.matag.game.turn.phases.ending;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.player.DiscardXCardsService;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.beginning.UntapPhase;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Component
 public class CleanupPhase extends AbstractPhase {

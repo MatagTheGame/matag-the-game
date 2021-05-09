@@ -1,5 +1,27 @@
 package integration.turn.action.combat;
 
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ATTACK;
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_BLOCK;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_ATTACKERS;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
+import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
+import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
+import java.util.List;
+import java.util.Map;
+
+import org.junit.After;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.turn.action.combat.CombatService;
@@ -9,26 +31,8 @@ import com.matag.game.turn.action.damage.DealDamageToCreatureService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
 import com.matag.game.turn.action.player.LifeService;
 import com.matag.game.turn.action.trigger.WhenTriggerService;
+
 import integration.TestUtils;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
-import java.util.Map;
-
-import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ATTACK;
-import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_BLOCK;
-import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_ATTACKERS;
-import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
-import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
-import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
-import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
-import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = CombatTestConfiguration.class)

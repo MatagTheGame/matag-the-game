@@ -1,10 +1,8 @@
 package integration.turn.action.cast;
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action.cast.PlayLandService;
-import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
-import integration.TestUtils;
+import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
+import static org.mockito.Mockito.verify;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -13,8 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
-import static org.mockito.Mockito.verify;
+import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.turn.action.cast.PlayLandService;
+import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
+
+import integration.TestUtils;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = CastTestConfiguration.class)

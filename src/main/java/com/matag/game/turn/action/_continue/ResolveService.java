@@ -1,5 +1,20 @@
 package com.matag.game.turn.action._continue;
 
+import static com.matag.game.turn.action._continue.InputRequiredActions.DISCARD_A_CARD;
+import static com.matag.game.turn.action._continue.InputRequiredActions.SCRY;
+import static java.lang.Integer.parseInt;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
@@ -11,17 +26,8 @@ import com.matag.game.turn.action.leave.PutIntoGraveyardService;
 import com.matag.game.turn.action.player.DiscardXCardsService;
 import com.matag.game.turn.action.player.ScryXCardsService;
 import com.matag.game.turn.action.target.TargetCheckerService;
+
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static com.matag.game.turn.action._continue.InputRequiredActions.DISCARD_A_CARD;
-import static com.matag.game.turn.action._continue.InputRequiredActions.SCRY;
-import static java.lang.Integer.parseInt;
 
 @Component
 @AllArgsConstructor

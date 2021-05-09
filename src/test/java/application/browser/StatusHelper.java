@@ -1,8 +1,8 @@
 package application.browser;
 
-import org.openqa.selenium.By;
-
 import static org.openqa.selenium.support.ui.ExpectedConditions.textToBe;
+
+import org.openqa.selenium.By;
 
 public class StatusHelper {
   private MatagBrowser matagBrowser;

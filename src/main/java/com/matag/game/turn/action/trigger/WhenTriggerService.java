@@ -1,13 +1,15 @@
 package com.matag.game.turn.action.trigger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.trigger.TriggerSubtype;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.selection.MagicInstancePermanentSelectorService;
+
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor

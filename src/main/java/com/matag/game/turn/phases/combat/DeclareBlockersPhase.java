@@ -1,16 +1,17 @@
 package com.matag.game.turn.phases.combat;
 
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.phases.AbstractPhase;
-import com.matag.game.turn.phases.Phase;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-
 import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
 import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
 import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.matag.game.status.GameStatus;
+import com.matag.game.turn.phases.AbstractPhase;
+import com.matag.game.turn.phases.Phase;
 
 @Component
 public class DeclareBlockersPhase extends AbstractPhase {

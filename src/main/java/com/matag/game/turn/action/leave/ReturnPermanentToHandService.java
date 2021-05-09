@@ -1,8 +1,10 @@
 package com.matag.game.turn.action.leave;
 
-import com.matag.game.status.GameStatus;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import com.matag.game.status.GameStatus;
+
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

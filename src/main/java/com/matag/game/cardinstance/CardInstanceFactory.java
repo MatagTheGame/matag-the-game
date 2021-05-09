@@ -1,18 +1,19 @@
 package com.matag.game.cardinstance;
 
-import com.matag.cards.Card;
-import com.matag.cards.properties.Rarity;
-import com.matag.game.status.GameStatus;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
+import static java.util.Collections.emptyList;
 
 import java.util.List;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.emptyList;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
+
+import com.matag.cards.Card;
+import com.matag.cards.properties.Rarity;
+import com.matag.game.status.GameStatus;
 
 @Component
 public class CardInstanceFactory implements ApplicationContextAware {

@@ -1,20 +1,22 @@
 package com.matag.game.turn.action.combat;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.player.Player;
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action._continue.ContinueService;
-import com.matag.game.turn.action.trigger.WhenTriggerService;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_BLOCK;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
+import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_BLOCK;
-import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
-import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
+import org.springframework.stereotype.Component;
+
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.player.Player;
+import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action._continue.ContinueService;
+import com.matag.game.turn.action.trigger.WhenTriggerService;
+
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

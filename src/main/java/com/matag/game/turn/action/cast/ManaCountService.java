@@ -1,17 +1,18 @@
 package com.matag.game.turn.action.cast;
 
-import com.matag.cards.properties.Color;
-import com.matag.cards.properties.Cost;
-import com.matag.game.message.MessageException;
-import com.matag.game.player.Player;
-import org.springframework.stereotype.Component;
+import static com.matag.cards.ability.type.AbilityType.TAP_ADD_MANA;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.matag.cards.ability.type.AbilityType.TAP_ADD_MANA;
+import org.springframework.stereotype.Component;
+
+import com.matag.cards.properties.Color;
+import com.matag.cards.properties.Cost;
+import com.matag.game.message.MessageException;
+import com.matag.game.player.Player;
 
 @Component
 public class ManaCountService {

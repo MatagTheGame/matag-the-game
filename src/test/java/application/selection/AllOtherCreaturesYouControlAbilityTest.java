@@ -1,18 +1,20 @@
 package application.selection;
 
-import application.AbstractApplicationTest;
-import application.InitTestServiceDecorator;
-import com.matag.cards.Cards;
-import com.matag.game.init.test.InitTestService;
-import com.matag.game.status.GameStatus;
-import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.matag.cards.Cards;
+import com.matag.game.init.test.InitTestService;
+import com.matag.game.status.GameStatus;
+
+import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
 
 public class AllOtherCreaturesYouControlAbilityTest extends AbstractApplicationTest {
 

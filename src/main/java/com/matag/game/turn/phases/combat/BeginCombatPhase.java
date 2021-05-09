@@ -1,11 +1,12 @@
 package com.matag.game.turn.phases.combat;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.main2.Main2Phase;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Component
 public class BeginCombatPhase extends AbstractPhase {

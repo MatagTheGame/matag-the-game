@@ -1,14 +1,16 @@
 package com.matag.game.deck;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.adminentities.DeckInfo;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.status.GameStatus;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

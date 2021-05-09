@@ -1,11 +1,12 @@
 package com.matag.game.cardinstance.modifiers;
 
-import com.matag.cards.properties.PowerToughness;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.matag.cards.properties.PowerToughness;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
+
+import lombok.Data;
 
 @Data
 public class CardModifiersUntilEndOfTurn {

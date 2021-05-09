@@ -1,7 +1,8 @@
 package com.matag.game.player;
 
-import com.matag.game.status.GameStatus;
 import org.springframework.stereotype.Component;
+
+import com.matag.game.status.GameStatus;
 
 @Component
 public class PlayerService {

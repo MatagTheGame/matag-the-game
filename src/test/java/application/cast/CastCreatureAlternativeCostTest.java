@@ -1,21 +1,25 @@
 package application.cast;
 
-import application.AbstractApplicationTest;
-import application.InitTestServiceDecorator;
-import application.testcategory.Regression;
-import com.matag.cards.Cards;
-import com.matag.game.init.test.InitTestService;
-import com.matag.game.status.GameStatus;
+import static application.browser.BattlefieldHelper.FIRST_LINE;
+import static application.browser.BattlefieldHelper.SECOND_LINE;
+import static com.matag.cards.properties.Color.BLUE;
+import static com.matag.cards.properties.Color.GREEN;
+import static com.matag.cards.properties.Color.WHITE;
+import static com.matag.player.PlayerType.PLAYER;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
+
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static application.browser.BattlefieldHelper.FIRST_LINE;
-import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.cards.properties.Color.*;
-import static com.matag.player.PlayerType.PLAYER;
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
+import com.matag.cards.Cards;
+import com.matag.game.init.test.InitTestService;
+import com.matag.game.status.GameStatus;
+
+import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
+import application.testcategory.Regression;
 
 @Category(Regression.class)
 public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {

@@ -1,13 +1,15 @@
 package com.matag.game.turn.action._continue;
 
+import static com.matag.cards.ability.trigger.TriggerType.ACTIVATED_ABILITY;
+import static com.matag.game.turn.phases.PhaseUtils.isMainPhase;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.game.cardinstance.cost.CostService;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.cast.InstantSpeedService;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
-import static com.matag.cards.ability.trigger.TriggerType.ACTIVATED_ABILITY;
-import static com.matag.game.turn.phases.PhaseUtils.isMainPhase;
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

@@ -1,12 +1,13 @@
 package application.browser;
 
-import com.matag.player.PlayerType;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import com.matag.player.PlayerType;
 
 public class ActionHelper {
   private MatagBrowser matagBrowser;

@@ -1,9 +1,5 @@
 package integration.cardinstance;
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import integration.TestUtils;
-import integration.TestUtilsConfiguration;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -11,6 +7,12 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstanceFactory;
+
+import integration.TestUtils;
+import integration.TestUtilsConfiguration;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TestUtilsConfiguration.class)

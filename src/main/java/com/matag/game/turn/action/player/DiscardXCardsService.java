@@ -1,15 +1,17 @@
 package com.matag.game.turn.action.player;
 
-import com.matag.game.message.MessageException;
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.leave.PutIntoGraveyardService;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DISCARD_A_CARD;
+import static java.lang.Integer.parseInt;
 
 import java.util.List;
 
-import static com.matag.game.turn.action._continue.InputRequiredActions.DISCARD_A_CARD;
-import static java.lang.Integer.parseInt;
+import org.springframework.stereotype.Component;
+
+import com.matag.game.message.MessageException;
+import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action.leave.PutIntoGraveyardService;
+
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

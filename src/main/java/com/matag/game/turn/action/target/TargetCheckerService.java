@@ -1,5 +1,14 @@
 package com.matag.game.turn.action.target;
 
+import static com.matag.cards.ability.type.AbilityType.THAT_TARGETS_GET;
+import static com.matag.cards.ability.type.AbilityType.abilityType;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.target.Target;
 import com.matag.cards.ability.trigger.TriggerType;
@@ -9,14 +18,8 @@ import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.selection.MagicInstancePermanentSelectorService;
 import com.matag.player.PlayerType;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
-import static com.matag.cards.ability.type.AbilityType.*;
 
 @Component
 @AllArgsConstructor

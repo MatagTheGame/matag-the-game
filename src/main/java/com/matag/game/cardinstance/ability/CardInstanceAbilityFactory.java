@@ -1,13 +1,14 @@
 package com.matag.game.cardinstance.ability;
 
-import com.matag.cards.ability.type.AbilityType;
-import org.springframework.stereotype.Component;
+import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Collections.singletonList;
-import static java.util.stream.Collectors.toList;
+import org.springframework.stereotype.Component;
+
+import com.matag.cards.ability.type.AbilityType;
 
 @Component
 public class CardInstanceAbilityFactory {

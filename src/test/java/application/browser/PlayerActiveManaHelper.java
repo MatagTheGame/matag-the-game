@@ -1,13 +1,14 @@
 package application.browser;
 
-import com.matag.cards.properties.Color;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.matag.cards.properties.Color;
 
 public class PlayerActiveManaHelper {
 

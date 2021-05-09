@@ -1,18 +1,20 @@
 package integration.turn.action.leave;
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.game.turn.action.leave.DestroyPermanentService;
-import integration.TestUtils;
+import static com.matag.cards.ability.type.AbilityType.INDESTRUCTIBLE;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.matag.cards.ability.type.AbilityType.INDESTRUCTIBLE;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.game.turn.action.leave.DestroyPermanentService;
+
+import integration.TestUtils;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = LeaveTestConfiguration.class)

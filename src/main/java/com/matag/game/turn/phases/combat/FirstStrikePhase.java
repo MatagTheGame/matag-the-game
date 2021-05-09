@@ -1,17 +1,18 @@
 package com.matag.game.turn.phases.combat;
 
+import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
+import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.ConsolidateStatusService;
 import com.matag.game.turn.action.combat.CombatService;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-
-import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
-import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
 
 @Component
 public class FirstStrikePhase extends AbstractPhase {

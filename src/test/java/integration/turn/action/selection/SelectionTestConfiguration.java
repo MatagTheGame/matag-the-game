@@ -1,10 +1,16 @@
 package integration.turn.action.selection;
 
+import org.mockito.Mockito;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
+
 import com.matag.game.turn.action.permanent.PermanentGetService;
 import com.matag.game.turn.action.player.PlayerGetService;
+
 import integration.TestUtilsConfiguration;
-import org.mockito.Mockito;
-import org.springframework.context.annotation.*;
 
 @Configuration
 @ComponentScan("com.matag.game.turn.action.selection")

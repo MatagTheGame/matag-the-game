@@ -1,12 +1,14 @@
 package com.matag.game.security;
 
-import com.matag.game.player.PlayerService;
-import com.matag.game.status.GameStatus;
-import lombok.AllArgsConstructor;
+import java.util.Objects;
+
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
+import com.matag.game.player.PlayerService;
+import com.matag.game.status.GameStatus;
+
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

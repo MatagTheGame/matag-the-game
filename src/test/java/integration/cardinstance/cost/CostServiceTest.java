@@ -1,5 +1,20 @@
 package integration.cardinstance.cost;
 
+import static com.matag.cards.properties.Cost.GREEN;
+import static com.matag.cards.properties.Cost.RED;
+import static com.matag.cards.properties.Cost.WHITE;
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import com.matag.cards.Cards;
 import com.matag.cards.CardsConfiguration;
 import com.matag.cards.properties.Cost;
@@ -7,20 +22,9 @@ import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.cardinstance.cost.CostService;
 import com.matag.game.status.GameStatus;
+
 import integration.TestUtils;
 import integration.TestUtilsConfiguration;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
-import static com.matag.cards.properties.Cost.*;
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @Import({CardsConfiguration.class, TestUtilsConfiguration.class})

@@ -1,21 +1,18 @@
 package com.matag.game.cardinstance.ability;
 
+import static java.util.Collections.emptyList;
+import static java.util.stream.Collectors.toList;
+
+import java.util.List;
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.matag.cards.Card;
 import com.matag.cards.ability.Ability;
 import com.matag.cards.ability.AbilityService;
 import com.matag.cards.ability.AbilityTransposer;
-import com.matag.cards.ability.selector.MagicInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
-import com.matag.cards.ability.target.Target;
-import com.matag.cards.ability.trigger.Trigger;
 import com.matag.cards.ability.type.AbilityType;
-
-import java.util.List;
-import java.util.Optional;
-
-import static java.util.Collections.emptyList;
-import static java.util.stream.Collectors.toList;
 
 public class CardInstanceAbility extends Ability {
   public CardInstanceAbility(Ability ability) {

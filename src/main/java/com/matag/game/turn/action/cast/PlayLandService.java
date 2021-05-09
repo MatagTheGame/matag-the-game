@@ -1,5 +1,7 @@
 package com.matag.game.turn.action.cast;
 
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.Card;
 import com.matag.cards.properties.Type;
 import com.matag.game.cardinstance.CardInstance;
@@ -7,8 +9,8 @@ import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
 import com.matag.game.turn.phases.PhaseUtils;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @Component
 @AllArgsConstructor

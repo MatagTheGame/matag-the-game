@@ -1,18 +1,19 @@
 package com.matag.game.cardinstance.cost;
 
-import com.matag.cards.Card;
-import com.matag.cards.properties.Cost;
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.status.GameStatus;
-import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.matag.cards.ability.type.AbilityType.TAP_ADD_MANA;
 import static com.matag.cards.ability.type.AbilityType.abilityType;
 import static com.matag.cards.properties.Cost.ANY;
 import static java.util.stream.Collectors.toList;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.matag.cards.Card;
+import com.matag.cards.properties.Cost;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.status.GameStatus;
 
 @Component
 public class CostService {

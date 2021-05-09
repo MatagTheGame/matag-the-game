@@ -1,9 +1,12 @@
 package integration.turn.action.cast;
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action.cast.ManaCountService;
-import integration.TestUtils;
+import static com.matag.cards.properties.Cost.BLUE;
+import static com.matag.cards.properties.Cost.WHITE;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -12,12 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
-import java.util.Map;
+import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.turn.action.cast.ManaCountService;
 
-import static com.matag.cards.properties.Cost.BLUE;
-import static com.matag.cards.properties.Cost.WHITE;
-import static org.assertj.core.api.Assertions.assertThat;
+import integration.TestUtils;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = CastTestConfiguration.class)

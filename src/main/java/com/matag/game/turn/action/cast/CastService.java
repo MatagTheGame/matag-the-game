@@ -1,5 +1,16 @@
 package com.matag.game.turn.action.cast;
 
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_CAST;
+import static com.matag.game.stack.SpellType.ABILITY;
+import static com.matag.game.stack.SpellType.SPELL;
+
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.cost.CostService;
@@ -11,17 +22,8 @@ import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.target.TargetCheckerService;
 import com.matag.game.turn.action.trigger.WhenTriggerService;
 import com.matag.game.turn.phases.PhaseUtils;
+
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Map;
-
-import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_CAST;
-import static com.matag.game.stack.SpellType.ABILITY;
-import static com.matag.game.stack.SpellType.SPELL;
 
 @Component
 @AllArgsConstructor

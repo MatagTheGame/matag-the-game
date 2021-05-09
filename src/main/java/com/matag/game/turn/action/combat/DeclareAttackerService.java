@@ -1,19 +1,21 @@
 package com.matag.game.turn.action.combat;
 
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ATTACK;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_ATTACKERS;
+import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
+
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.game.player.Player;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.ContinueService;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import com.matag.game.turn.action.trigger.WhenTriggerService;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-
-import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ATTACK;
-import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_ATTACKERS;
-import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 
 @Component
 @AllArgsConstructor

@@ -1,14 +1,16 @@
 package application.browser;
 
-import application.AbstractApplicationTest;
-import com.matag.player.PlayerType;
+import static com.matag.player.PlayerType.OPPONENT;
+import static com.matag.player.PlayerType.PLAYER;
+import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
+import static org.openqa.selenium.support.ui.ExpectedConditions.textToBe;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static com.matag.player.PlayerType.OPPONENT;
-import static com.matag.player.PlayerType.PLAYER;
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import com.matag.player.PlayerType;
 
 public class PhaseHelper {
   public static final By PHASE_CSS_SELECTOR = By.cssSelector("#turn-phases .active");

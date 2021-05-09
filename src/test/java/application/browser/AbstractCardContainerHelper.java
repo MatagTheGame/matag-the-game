@@ -1,14 +1,15 @@
 package application.browser;
 
-import com.matag.cards.Card;
+import static application.browser.CardHelper.cardNames;
+
+import java.util.Arrays;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-
-import static application.browser.CardHelper.cardNames;
+import com.matag.cards.Card;
 
 public abstract class AbstractCardContainerHelper {
 

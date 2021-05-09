@@ -1,11 +1,12 @@
 package com.matag.game.stack;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceSearch;
+import java.util.LinkedList;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedList;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceSearch;
 
 @Component
 @Scope("prototype")

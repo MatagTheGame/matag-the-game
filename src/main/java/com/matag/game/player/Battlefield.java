@@ -1,13 +1,14 @@
 package com.matag.game.player;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceSearch;
-import com.matag.game.cardinstance.CardListComponent;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceSearch;
+import com.matag.game.cardinstance.CardListComponent;
 
 @Component
 @Scope("prototype")

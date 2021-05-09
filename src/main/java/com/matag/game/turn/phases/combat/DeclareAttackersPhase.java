@@ -1,13 +1,14 @@
 package com.matag.game.turn.phases.combat;
 
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_ATTACKERS;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.main2.Main2Phase;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_ATTACKERS;
 
 @Component
 public class DeclareAttackersPhase extends AbstractPhase {

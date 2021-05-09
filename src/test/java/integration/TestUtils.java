@@ -1,5 +1,14 @@
 package integration;
 
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.matag.adminentities.PlayerInfo;
 import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstance;
@@ -8,14 +17,6 @@ import com.matag.game.player.PlayerFactory;
 import com.matag.game.security.SecurityToken;
 import com.matag.game.status.GameStatus;
 import com.matag.game.status.GameStatusFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 
 public class TestUtils {
   private final GameStatusFactory gameStatusFactory;

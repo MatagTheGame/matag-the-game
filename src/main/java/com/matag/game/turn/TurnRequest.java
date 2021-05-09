@@ -1,12 +1,13 @@
 package com.matag.game.turn;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import lombok.Builder;
-import lombok.Value;
-
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
+import lombok.Builder;
+import lombok.Value;
 
 @Value
 @JsonDeserialize(builder = TurnRequest.TurnRequestBuilder.class)

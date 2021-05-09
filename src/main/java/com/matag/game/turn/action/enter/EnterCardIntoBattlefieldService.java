@@ -1,15 +1,17 @@
 package com.matag.game.turn.action.enter;
 
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.trigger.WhenTriggerService;
-import lombok.AllArgsConstructor;
+import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ENTER_THE_BATTLEFIELD;
+import static com.matag.cards.properties.Type.CREATURE;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ENTER_THE_BATTLEFIELD;
-import static com.matag.cards.properties.Type.CREATURE;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action.trigger.WhenTriggerService;
+
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

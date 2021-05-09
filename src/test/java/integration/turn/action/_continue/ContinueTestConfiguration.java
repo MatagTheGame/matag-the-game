@@ -1,5 +1,12 @@
 package integration.turn.action._continue;
 
+import org.mockito.Mockito;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
+
 import com.matag.game.turn.action.AbilityActionFactory;
 import com.matag.game.turn.action.cast.InstantSpeedService;
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
@@ -7,9 +14,8 @@ import com.matag.game.turn.action.player.DiscardXCardsService;
 import com.matag.game.turn.action.player.ScryXCardsService;
 import com.matag.game.turn.action.target.TargetCheckerService;
 import com.matag.game.turn.phases.PhaseFactory;
+
 import integration.TestUtilsConfiguration;
-import org.mockito.Mockito;
-import org.springframework.context.annotation.*;
 
 @Configuration
 @ComponentScan("com.matag.game.turn.action._continue")

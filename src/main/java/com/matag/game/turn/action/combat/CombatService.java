@@ -1,17 +1,23 @@
 package com.matag.game.turn.action.combat;
 
+import static com.matag.cards.ability.type.AbilityType.DEATHTOUCH;
+import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
+import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
+import static com.matag.cards.ability.type.AbilityType.LIFELINK;
+import static com.matag.cards.ability.type.AbilityType.TRAMPLE;
+import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
+
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.damage.DealDamageToCreatureService;
 import com.matag.game.turn.action.damage.DealDamageToPlayerService;
 import com.matag.game.turn.action.player.LifeService;
+
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
-
-import java.util.List;
-
-import static com.matag.cards.ability.type.AbilityType.*;
-import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
 
 @Component
 @AllArgsConstructor

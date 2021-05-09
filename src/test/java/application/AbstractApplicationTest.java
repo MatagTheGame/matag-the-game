@@ -1,16 +1,15 @@
 package application;
 
-import application.browser.MatagBrowser;
-import com.matag.adminentities.DeckInfo;
-import com.matag.adminentities.PlayerInfo;
-import com.matag.cards.Cards;
-import com.matag.game.MatagGameApplication;
-import com.matag.game.adminclient.AdminClient;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.launcher.LauncherGameResponseBuilder;
-import com.matag.game.launcher.LauncherTestGameController;
-import com.matag.game.security.SecurityToken;
-import com.matag.game.status.GameStatusRepository;
+import static com.matag.game.launcher.LauncherTestGameController.TEST_ADMIN_TOKEN;
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
+import static com.matag.player.PlayerType.OPPONENT;
+import static com.matag.player.PlayerType.PLAYER;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.BDDMockito.given;
+
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -27,15 +26,18 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
+import com.matag.adminentities.DeckInfo;
+import com.matag.adminentities.PlayerInfo;
+import com.matag.cards.Cards;
+import com.matag.game.MatagGameApplication;
+import com.matag.game.adminclient.AdminClient;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.launcher.LauncherGameResponseBuilder;
+import com.matag.game.launcher.LauncherTestGameController;
+import com.matag.game.security.SecurityToken;
+import com.matag.game.status.GameStatusRepository;
 
-import static com.matag.game.launcher.LauncherTestGameController.TEST_ADMIN_TOKEN;
-import static com.matag.game.turn.phases.main1.Main1Phase.M1;
-import static com.matag.player.PlayerType.OPPONENT;
-import static com.matag.player.PlayerType.PLAYER;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.BDDMockito.given;
+import application.browser.MatagBrowser;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MatagGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

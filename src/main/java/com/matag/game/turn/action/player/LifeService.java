@@ -1,12 +1,14 @@
 package com.matag.game.turn.action.player;
 
-import com.matag.game.player.Player;
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.finish.FinishGameService;
-import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
+import com.matag.game.player.Player;
+import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action.finish.FinishGameService;
+
+import lombok.AllArgsConstructor;
 
 @Component
 @AllArgsConstructor

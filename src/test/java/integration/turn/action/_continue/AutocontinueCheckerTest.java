@@ -1,21 +1,23 @@
 package integration.turn.action._continue;
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action._continue.AutocontinueChecker;
-import integration.TestUtils;
-import integration.turn.action.leave.LeaveTestConfiguration;
+import static com.matag.game.turn.phases.beginning.UpkeepPhase.UP;
+import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
+import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static com.matag.game.turn.phases.beginning.UpkeepPhase.UP;
-import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
-import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.matag.cards.Cards;
+import com.matag.game.cardinstance.CardInstance;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.turn.action._continue.AutocontinueChecker;
+
+import integration.TestUtils;
+import integration.turn.action.leave.LeaveTestConfiguration;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = {ContinueTestConfiguration.class, LeaveTestConfiguration.class})
