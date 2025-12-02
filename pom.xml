@@ -14,10 +14,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>14</maven.compiler.target>
-        <maven.compiler.source>14</maven.compiler.source>
-        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
+        <maven.compiler.target>25</maven.compiler.target>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.plugin.version>3.14.1</maven.compiler.plugin.version>
+        <maven.surefire.plugin.version>3.5.4</maven.surefire.plugin.version>
         <frontend-maven-plugin.version>1.10.0</frontend-maven-plugin.version>
         <bytebuddy.version>1.10.8</bytebuddy.version>
         <htmlunit.version>2.35.1</htmlunit.version>
@@ -46,11 +46,6 @@
         <dependency>
             <groupId>com.matag</groupId>
             <artifactId>cards</artifactId>
-            <version>${matag.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.matag</groupId>
-            <artifactId>admin-entities</artifactId>
             <version>${matag.version}</version>
         </dependency>
 

@@ -14,29 +14,39 @@ import com.matag.cards.ability.AbilityTransposer;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.type.AbilityType;
 
-public class CardInstanceAbility extends Ability {
-  public CardInstanceAbility(Ability ability) {
-    super(ability.getAbilityType(), ability.getTargets(), ability.getMagicInstanceSelector(), ability.getParameters(),
-      ability.getTrigger(), ability.getAbility(), ability.isSorcerySpeed(), ability.isOptional());
+public class CardInstanceAbility() {
+  private final Ability ability;
+
+  public CardInstanceAbility(CardInstanceAbility cardInstanceAbility) {
+      ability = new Ability(
+            cardInstanceAbility.ability.getAbilityType(),
+            cardInstanceAbility.ability.getTargets(),
+            cardInstanceAbility.ability.getMagicInstanceSelector(),
+            cardInstanceAbility.ability.getParameters(),
+            cardInstanceAbility.ability.getTrigger(),
+            cardInstanceAbility.ability.getAbility(),
+            cardInstanceAbility.ability.getSorcerySpeed(),
+            cardInstanceAbility.ability.getOptional()
+    );
   }
 
   public CardInstanceAbility(AbilityType abilityType) {
-    super(abilityType, emptyList(), null, emptyList(), null, null, false, false);
+      ability = new Ability((abilityType, emptyList(), null, emptyList(), null, null, false, false);
   }
 
   @JsonProperty
   public String getAbilityTypeText() {
-    var parametersString = new AbilityService().parametersAsString(parameters);
+    var parametersString = new AbilityService().parametersAsString(ability.getParameters());
 
-    if (abilityType == AbilityType.SELECTED_PERMANENTS_GET) {
-      if (magicInstanceSelector.getSelectorType() == SelectorType.PLAYER) {
-        return String.format(abilityType.getText(), magicInstanceSelector.getText(), parametersString) + ".";
+    if (ability.getAbilityType() == AbilityType.SELECTED_PERMANENTS_GET) {
+      if (ability.getMagicInstanceSelector().getSelectorType() == SelectorType.PLAYER) {
+        return String.format(ability.getAbilityType().getText(), ability.getMagicInstanceSelector().text(), parametersString) + ".";
       } else {
-        return String.format(abilityType.getText(), magicInstanceSelector.getText(), parametersString) + " until end of turn.";
+        return String.format(ability.getAbilityType().getText(), ability.getMagicInstanceSelector().text(), parametersString) + " until end of turn.";
       }
 
     } else {
-      return String.format(abilityType.getText(), parametersString);
+      return String.format(ability.getAbilityType().getText(), parametersString);
     }
   }
 
@@ -45,14 +55,14 @@ public class CardInstanceAbility extends Ability {
   }
 
   public String getParameter(int i) {
-    if (parameters.size() > i) {
-      return parameters.get(i);
+    if (ability.getParameters().size() > i) {
+      return ability.getParameters().get(i);
     }
     return null;
   }
 
   public boolean requiresTarget() {
-    return !targets.isEmpty();
+    return !ability.getTargets().isEmpty();
   }
 
   public static List<CardInstanceAbility> getCardInstanceAbilities(Card card) {
