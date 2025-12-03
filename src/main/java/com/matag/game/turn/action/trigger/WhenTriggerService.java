@@ -23,7 +23,7 @@ public class WhenTriggerService {
 
     for (var cardWithTriggerAbility : cardsWithTriggerAbility) {
       for (var ability : cardWithTriggerAbility.getAbilitiesByTriggerSubType(triggerSubtype)) {
-        var selectionForCardWithTriggeredAbility = magicInstancePermanentSelectorService.select(gameStatus, cardWithTriggerAbility, ability.getTrigger().getMagicInstanceSelector());
+        var selectionForCardWithTriggeredAbility = magicInstancePermanentSelectorService.select(gameStatus, cardWithTriggerAbility, ability.getAbility().getTrigger().getMagicInstanceSelector());
         if (selectionForCardWithTriggeredAbility.withId(cardInstance.getId()).isPresent()) {
           cardWithTriggerAbility.getTriggeredAbilities().add(ability);
         }

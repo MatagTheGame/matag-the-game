@@ -50,9 +50,9 @@ public class AbilitiesFromOtherPermanentsService {
 
     for (var card : cards) {
       for (var ability : card.getFixedAbilitiesByType(SELECTED_PERMANENTS_GET)) {
-        if (ability.getTrigger().getType() == TriggerType.STATIC) {
-          if (magicInstancePermanentSelectorService.select(gameStatus, card, ability.getMagicInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
-            parameters.addAll(ability.getParameters());
+        if (ability.getAbility().getTrigger().getType() == TriggerType.STATIC) {
+          if (magicInstancePermanentSelectorService.select(gameStatus, card, ability.getAbility().getMagicInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
+            parameters.addAll(ability.getAbility().getParameters());
           }
         }
       }

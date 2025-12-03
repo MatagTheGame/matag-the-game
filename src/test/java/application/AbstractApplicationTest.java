@@ -1,31 +1,6 @@
 package application;
 
-import static com.matag.game.launcher.LauncherTestGameController.TEST_ADMIN_TOKEN;
-import static com.matag.game.turn.phases.main1.Main1Phase.M1;
-import static com.matag.player.PlayerType.OPPONENT;
-import static com.matag.player.PlayerType.PLAYER;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.argThat;
-import static org.mockito.BDDMockito.given;
-
-import java.util.List;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatcher;
-import org.mockito.Mockito;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
-import org.springframework.test.context.junit4.SpringRunner;
-
+import application.browser.MatagBrowser;
 import com.matag.adminentities.DeckInfo;
 import com.matag.adminentities.PlayerInfo;
 import com.matag.cards.Cards;
@@ -36,10 +11,33 @@ import com.matag.game.launcher.LauncherGameResponseBuilder;
 import com.matag.game.launcher.LauncherTestGameController;
 import com.matag.game.security.SecurityToken;
 import com.matag.game.status.GameStatusRepository;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatcher;
+import org.mockito.Mockito;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.Primary;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import application.browser.MatagBrowser;
+import java.util.List;
 
-@RunWith(SpringRunner.class)
+import static com.matag.game.launcher.LauncherTestGameController.TEST_ADMIN_TOKEN;
+import static com.matag.game.turn.phases.main1.Main1Phase.M1;
+import static com.matag.player.PlayerType.OPPONENT;
+import static com.matag.player.PlayerType.PLAYER;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.BDDMockito.given;
+
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = MatagGameApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import({AbstractApplicationTest.InitGameTestConfiguration.class})
 public abstract class AbstractApplicationTest {
@@ -61,7 +59,7 @@ public abstract class AbstractApplicationTest {
 
   public abstract void setupGame();
 
-  @Before
+  @BeforeEach
   public void setupRetrieverMocks() {
     given(adminClient.getPlayerInfo(argThat(new SecurityTokenMatcher("1")))).willReturn(new PlayerInfo("Player1"));
     given(adminClient.getPlayerInfo(argThat(new SecurityTokenMatcher("2")))).willReturn(new PlayerInfo("Player2"));
@@ -77,7 +75,7 @@ public abstract class AbstractApplicationTest {
     )));
   }
 
-  @Before
+  @BeforeEach
   public void setup() {
     setupGame();
 
@@ -130,13 +128,13 @@ public abstract class AbstractApplicationTest {
     browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...");
   }
 
-  @After
+  @AfterEach
   public void closeBrowser() {
     //browser.dumpContent();
     browser.close();
   }
 
-  @After
+  @AfterEach
   public void cleanup() {
     Mockito.reset(adminClient);
     gameStatusRepository.clear();

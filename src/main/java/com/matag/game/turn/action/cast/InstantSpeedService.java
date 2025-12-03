@@ -14,7 +14,7 @@ public class InstantSpeedService {
     if (playedAbility != null) {
       var abilities = cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility));
       for (var ability : abilities) {
-        if (!ability.isSorcerySpeed()) {
+        if (!ability.getAbility().getSorcerySpeed()) {
           return true;
         }
       }

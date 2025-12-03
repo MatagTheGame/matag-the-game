@@ -4,7 +4,7 @@ import static application.browser.BattlefieldHelper.FIRST_LINE;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.matag.cards.Cards;

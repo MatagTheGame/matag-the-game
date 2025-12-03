@@ -14,8 +14,8 @@ import static com.matag.game.turn.phases.main2.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
+import org.junit.jupiter.api.Test;
+//import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.matag.cards.Cards;
@@ -26,7 +26,7 @@ import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import application.testcategory.Regression;
 
-@Category(Regression.class)
+//@Category(Regression.class)
 public class CombatIndestructibleTest extends AbstractApplicationTest {
 
   @Autowired

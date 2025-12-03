@@ -22,10 +22,12 @@
         <bytebuddy.version>1.10.8</bytebuddy.version>
         <htmlunit.version>2.35.1</htmlunit.version>
         <jakarta.version>2.3.2</jakarta.version>
-        <lombok.version>1.18.20</lombok.version>
-        <matag.version>1.1.1-SNAPSHOT</matag.version>
+        <lombok.version>1.18.42</lombok.version>
+        <matag.version>2.0.0-SNAPSHOT</matag.version>
         <selenium.version>3.141.59</selenium.version>
-        <spring.boot.version>2.3.2.RELEASE</spring.boot.version>
+        <spring.boot.version>4.0.0</spring.boot.version>
+        <kotlin.version>2.2.0</kotlin.version>
+        <junit.version>6.0.1</junit.version>
     </properties>
 
     <repositories>
@@ -78,6 +80,12 @@
 
         <!-- Test -->
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${spring.boot.version}</version>
@@ -95,26 +103,21 @@
             <version>${htmlunit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <annotationProcessorPaths>
-		                <path>
-		                    <groupId>org.projectlombok</groupId>
-		                    <artifactId>lombok</artifactId>
-		                    <version>${lombok.version}</version>
-		                </path>
-		            </annotationProcessorPaths>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -177,6 +180,70 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmTarget>1.8</jvmTarget>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>testCompile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <annotationProcessorPaths>
+		                <path>
+		                    <groupId>org.projectlombok</groupId>
+		                    <artifactId>lombok</artifactId>
+		                    <version>${lombok.version}</version>
+		                </path>
+		            </annotationProcessorPaths>
+                </configuration>
             </plugin>
         </plugins>
     </build>

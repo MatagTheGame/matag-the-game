@@ -2,8 +2,6 @@ package com.matag.game.launcher;
 
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,9 +21,10 @@ public class LauncherGameController {
 
   @ResponseBody
   @PostMapping(path = {"/ui/game/{id}"})
-  public String launchGame(@PathVariable("id") Long id, HttpServletRequest httpServletRequest) {
-    var session = httpServletRequest.getParameter("session");
-    validateSessionFormat(session);
+  public String launchGame(@PathVariable("id") Long id/*, HttpServletRequest httpServletRequest*/) {
+//    var session = httpServletRequest.getParameter("session");
+      var session = UUID.randomUUID().toString();
+      validateSessionFormat(session);
 
     return launcherGameResponseBuilder.build(session);
   }

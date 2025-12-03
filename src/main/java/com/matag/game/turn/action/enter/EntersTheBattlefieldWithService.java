@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import com.matag.cards.ability.Ability;
 import org.springframework.stereotype.Component;
 
 import com.matag.cards.ability.AbilityService;
@@ -39,7 +40,11 @@ public class EntersTheBattlefieldWithService {
 
   private List<String> addEntersTheBattlefieldWithParameters(CardInstance cardInstance) {
     var entersTheBattlefieldWith = cardInstance.getAbilitiesByType(ENTERS_THE_BATTLEFIELD_WITH);
-    return entersTheBattlefieldWith.stream().map(CardInstanceAbility::getParameters).flatMap(Collection::stream).collect(toList());
+    return entersTheBattlefieldWith.stream()
+            .map(CardInstanceAbility::getAbility)
+            .map(Ability::getParameters)
+            .flatMap(Collection::stream)
+            .collect(toList());
   }
 
   private List<String> addAdamantEntersTheBattlefieldWithParameters(GameStatus gameStatus, CardInstance cardInstance) {

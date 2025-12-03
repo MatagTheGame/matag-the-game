@@ -1,20 +1,18 @@
 package integration.turn.action.cast;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.turn.action.cast.InstantSpeedService;
-
 import integration.TestUtils;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(SpringRunner.class)
+import static org.assertj.core.api.Assertions.assertThat;
+
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = CastTestConfiguration.class)
 public class InstantSpeedServiceTest {
   @Autowired

@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.matag.cards.Card;
-import com.matag.cards.CardUtils;
 import com.matag.cards.ability.trigger.TriggerSubtype;
 import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.cards.ability.type.AbilityType;
@@ -140,7 +139,7 @@ public class CardInstance {
   }
 
   public boolean isOfType(Type type) {
-    return CardUtils.isOfType(card, type);
+    return card.isOfType(type);
   }
 
   public boolean ofAnyOfTheTypes(List<Type> types) {
@@ -171,7 +170,7 @@ public class CardInstance {
   }
 
   public boolean isOfColor(Color color) {
-    return CardUtils.isOfColor(card, color);
+    return card.isOfColor(color);
   }
 
   public boolean ofAnyOfTheColors(List<Color> colors) {
@@ -184,11 +183,11 @@ public class CardInstance {
   }
 
   public boolean isColorless() {
-    return CardUtils.isColorless(card);
+    return card.isColorless();
   }
 
   public boolean isMulticolor() {
-    return CardUtils.isMulticolor(card);
+    return card.isMulticolor();
   }
 
   public void checkIfCanAttack() {
@@ -241,27 +240,27 @@ public class CardInstance {
 
   public boolean canProduceMana(Color color) {
     return getAbilitiesByTriggerType(TriggerType.MANA_ABILITY).stream()
-      .flatMap(ability -> ability.getParameters().stream())
+      .flatMap(ability -> ability.getAbility().getParameters().stream())
       .anyMatch(parameter -> parameter.equals(color.toString()));
   }
 
   public List<CardInstanceAbility> getAbilitiesByTriggerType(TriggerType triggerType) {
     return getAbilities().stream()
-      .filter(ability -> ability.getTrigger() != null)
-      .filter(ability -> ability.getTrigger().getType().equals(triggerType))
+      .filter(ability -> ability.getAbility().getTrigger() != null)
+      .filter(ability -> ability.getAbility().getTrigger().getType().equals(triggerType))
       .collect(toList());
   }
 
   public List<CardInstanceAbility> getAbilitiesByTriggerSubType(TriggerSubtype triggerSubType) {
     return getAbilities().stream()
-      .filter(ability -> ability.getTrigger() != null)
-      .filter(ability -> triggerSubType.equals(ability.getTrigger().getSubtype()))
+      .filter(ability -> ability.getAbility().getTrigger() != null)
+      .filter(ability -> triggerSubType.equals(ability.getAbility().getTrigger().getSubtype()))
       .collect(toList());
   }
 
   public List<CardInstanceAbility> getAbilitiesByType(AbilityType abilityType) {
     return getAbilities().stream()
-      .filter(currentAbility -> currentAbility.getAbilityType().equals(abilityType))
+      .filter(currentAbility -> currentAbility.getAbility().getAbilityType().equals(abilityType))
       .collect(toList());
   }
 
@@ -271,7 +270,7 @@ public class CardInstance {
 
   public List<CardInstanceAbility> getFixedAbilitiesByType(AbilityType abilityType) {
     return getFixedAbilities().stream()
-      .filter(currentAbility -> currentAbility.getAbilityType().equals(abilityType))
+      .filter(currentAbility -> currentAbility.getAbility().getAbilityType().equals(abilityType))
       .collect(toList());
   }
 

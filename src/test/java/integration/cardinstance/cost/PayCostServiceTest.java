@@ -1,16 +1,5 @@
 package integration.cardinstance.cost;
 
-import static org.mockito.Mockito.verify;
-
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.matag.cards.Cards;
 import com.matag.cards.CardsConfiguration;
 import com.matag.game.cardinstance.CardInstance;
@@ -18,11 +7,20 @@ import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.cardinstance.cost.PayCostService;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.tap.TapPermanentService;
-
 import integration.TestUtils;
 import integration.TestUtilsConfiguration;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(SpringRunner.class)
+import java.util.List;
+import java.util.Map;
+
+import static org.mockito.Mockito.verify;
+
+@ExtendWith(SpringExtension.class)
 @Import({CardsConfiguration.class, TestUtilsConfiguration.class})
 public class PayCostServiceTest {
   private int cardInstanceId = 60;

@@ -1,13 +1,13 @@
 package application.cleanup;
 
 import static application.browser.BattlefieldHelper.SECOND_LINE;
-import static com.matag.cards.properties.PowerToughness.powerToughness;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.game.turn.phases.main2.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
-import org.junit.Test;
+import com.matag.cards.properties.PowerToughness;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.matag.cards.Cards;
@@ -76,7 +76,7 @@ public class CleanupTest extends AbstractApplicationTest {
 
       CardInstance grazingWhiptail = gameStatus.getCurrentPlayer().getBattlefield().getCards().get(1);
       grazingWhiptail.getModifiers().setSummoningSickness(true);
-      grazingWhiptail.getModifiers().getModifiersUntilEndOfTurn().addExtraPowerToughnessUntilEndOfTurn(powerToughness("1/1"));
+      grazingWhiptail.getModifiers().getModifiersUntilEndOfTurn().addExtraPowerToughnessUntilEndOfTurn(new PowerToughness(1, 1));
 
       // Non Current Player
       addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Mountain"));

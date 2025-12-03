@@ -91,19 +91,19 @@ public class MagicInstancePermanentSelectorService {
       cards = cards.ofAnyOfTheColors(magicInstanceSelector.getOfColors());
     }
 
-    if (magicInstanceSelector.isColorless()) {
+    if (magicInstanceSelector.getColorless()) {
       cards = cards.colorless();
     }
 
-    if (magicInstanceSelector.isMulticolor()) {
+    if (magicInstanceSelector.getMulticolor()) {
       cards = cards.multicolor();
     }
 
-    if (magicInstanceSelector.isOthers()) {
+    if (magicInstanceSelector.getOthers()) {
       cards = cards.notWithId(cardInstance.getId());
     }
 
-    if (magicInstanceSelector.isItself()) {
+    if (magicInstanceSelector.getItself()) {
       cards = cards.withIdAsList(cardInstance.getId());
     }
 
@@ -111,11 +111,11 @@ public class MagicInstancePermanentSelectorService {
       cards = cards.onTurnStatusType(magicInstanceSelector.getTurnStatusType(), gameStatus);
     }
 
-    if (magicInstanceSelector.isCurrentEnchanted()) {
+    if (magicInstanceSelector.getCurrentEnchanted()) {
       cards = cards.withIdAsList((cardInstance.getModifiers().getAttachedToId()));
     }
 
-    if (magicInstanceSelector.isHistoric()) {
+    if (magicInstanceSelector.getHistoric()) {
       cards = cards.historic();
     }
 

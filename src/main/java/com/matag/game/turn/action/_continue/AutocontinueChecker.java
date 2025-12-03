@@ -39,8 +39,8 @@ public class AutocontinueChecker {
     for (var card : cards) {
       var cardAbilities = card.getAbilities();
       for (var cardAbility : cardAbilities) {
-        if (cardAbility.getTrigger() != null && cardAbility.getTrigger().getType().equals(ACTIVATED_ABILITY)) {
-          var ability = cardAbility.getAbilityType().toString();
+        if (cardAbility.getAbility().getTrigger() != null && cardAbility.getAbility().getTrigger().getType().equals(ACTIVATED_ABILITY)) {
+          var ability = cardAbility.getAbility().getAbilityType().toString();
           if (instantSpeedService.isAtInstantSpeed(card, ability)) {
             if (costService.canAfford(card, ability, gameStatus)) {
               return true;

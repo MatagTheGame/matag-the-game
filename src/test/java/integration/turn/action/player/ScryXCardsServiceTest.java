@@ -1,27 +1,25 @@
 package integration.turn.action.player;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.matag.cards.Card;
 import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.player.ScryXCardsService;
-
 import integration.TestUtils;
 import integration.TestUtilsConfiguration;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(SpringRunner.class)
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {PlayerTestConfiguration.class, TestUtilsConfiguration.class})
 public class ScryXCardsServiceTest {
   private int cardInstanceId = 60;

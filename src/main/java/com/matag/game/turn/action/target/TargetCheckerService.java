@@ -1,12 +1,12 @@
 package com.matag.game.turn.action.target;
 
 import static com.matag.cards.ability.type.AbilityType.THAT_TARGETS_GET;
-import static com.matag.cards.ability.type.AbilityType.abilityType;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.matag.cards.ability.type.AbilityType;
 import org.springframework.stereotype.Component;
 
 import com.matag.cards.ability.selector.SelectorType;
@@ -33,10 +33,10 @@ public class TargetCheckerService {
     var targetIndex = 0;
     for (var ability : playedAbilities) {
       if (ability.requiresTarget()) {
-        checkThatTargetsAreDifferent(ability.getTargets(), targetsIds);
-        for (var i = 0; i < ability.getTargets().size(); i++, targetIndex++) {
+        checkThatTargetsAreDifferent(ability.getAbility().getTargets(), targetsIds);
+        for (var i = 0; i < ability.getAbility().getTargets().size(); i++, targetIndex++) {
           var targetId = targetIndex < targetsIds.size() ? targetsIds.get(targetIndex) : null;
-          check(gameStatus, cardToCast, ability.getTargets().get(i), targetId);
+          check(gameStatus, cardToCast, ability.getAbility().getTargets().get(i), targetId);
         }
 
         cardToCast.getModifiers().addTargets(targetsIds);
@@ -54,7 +54,7 @@ public class TargetCheckerService {
 
   public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
     for (var ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
-      for (var target : ability.getTargets()) {
+      for (var target : ability.getAbility().getTargets()) {
         if (target.getMagicInstanceSelector().getSelectorType().equals(SelectorType.PLAYER)) {
           return true;
 
@@ -73,7 +73,7 @@ public class TargetCheckerService {
   public void check(GameStatus gameStatus, CardInstance cardInstance, Target target, Object targetId) {
     var magicInstanceSelector = target.getMagicInstanceSelector();
     if (targetId == null) {
-      if (!target.isOptional()) {
+      if (!target.getOptional()) {
         throw new MessageException(cardInstance.getIdAndName() + " requires a valid target.");
       }
 
@@ -103,7 +103,7 @@ public class TargetCheckerService {
     var abilityIndex = cardInstance.getAbilities().indexOf(ability);
     var firstTargetIndex = 0;
     for (var i = 0; i < abilityIndex; i++) {
-      firstTargetIndex += cardInstance.getAbilities().get(i).getTargets().size();
+      firstTargetIndex += cardInstance.getAbilities().get(i).getAbility().getTargets().size();
     }
 
     if (cardInstance.getModifiers().getTargets().size() > firstTargetIndex + index) {
@@ -115,7 +115,7 @@ public class TargetCheckerService {
 
   private List<CardInstanceAbility> playedAbilities(CardInstance cardToCast, String playedAbility) {
     if (playedAbility != null) {
-      return cardToCast.getAbilitiesByType(abilityType(playedAbility));
+      return cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility));
     } else {
       return cardToCast.getAbilitiesByTriggerType(TriggerType.CAST);
     }
@@ -132,7 +132,7 @@ public class TargetCheckerService {
   private void checkThatTargetsAreDifferent(List<Target> targets, List<Object> targetsIds) {
     for (var i = 0; i < Math.min(targets.size(), targetsIds.size()); i++) {
       var target = targets.get(i);
-      if (target.isOther()) {
+      if (target.getOther()) {
         if (countTargetsWithId(targetsIds, targetsIds.get(i)) > 1) {
           throw new MessageException("Targets must be different.");
         }

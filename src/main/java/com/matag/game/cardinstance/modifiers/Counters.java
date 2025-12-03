@@ -49,6 +49,7 @@ public class Counters {
   public List<CardInstanceAbility> getKeywordCountersAbilities() {
     return keywordCounters.stream()
       .map(CardInstanceAbility::new)
+      .map(CardInstanceAbility::getAbility)
       .map(CardInstanceAbility::getCardInstanceAbility)
       .collect(toList());
   }

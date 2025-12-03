@@ -18,7 +18,7 @@ public class MagicInstancePlayerSelectorService {
     var players = new ArrayList<Player>();
 
     if (magicInstanceSelector.getSelectorType().equals(SelectorType.PLAYER)) {
-      if (magicInstanceSelector.isItself()) {
+      if (magicInstanceSelector.getItself()) {
         players.add(gameStatus.getPlayerByName(cardInstance.getController()));
 
       } else {

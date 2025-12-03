@@ -7,6 +7,7 @@ import static java.util.Arrays.asList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.matag.cards.ability.Ability;
 import org.springframework.stereotype.Component;
 
 import com.matag.cards.ability.AbilityService;
@@ -33,7 +34,7 @@ public class AttachmentsService {
 
   public int getAttachmentsPower(GameStatus gameStatus, CardInstance cardInstance) {
     return getAttachedCardsAbilities(gameStatus, cardInstance).stream()
-      .map(ability -> abilityService.powerToughnessFromParameters(ability.getParameters()))
+      .map(ability -> abilityService.powerToughnessFromParameters(ability.getAbility().getParameters()))
       .map(PowerToughness::getPower)
       .reduce(Integer::sum)
       .orElse(0);
@@ -41,7 +42,7 @@ public class AttachmentsService {
 
   public int getAttachmentsToughness(GameStatus gameStatus, CardInstance cardInstance) {
     return getAttachedCardsAbilities(gameStatus, cardInstance).stream()
-      .map(ability -> abilityService.powerToughnessFromParameters(ability.getParameters()))
+      .map(ability -> abilityService.powerToughnessFromParameters(ability.getAbility().getParameters()))
       .map(PowerToughness::getToughness)
       .reduce(Integer::sum)
       .orElse(0);
@@ -49,15 +50,16 @@ public class AttachmentsService {
 
   public List<CardInstanceAbility> getAttachmentsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
     return getAttachedCardsAbilities(gameStatus, cardInstance).stream()
-      .flatMap(ability -> cardInstanceAbilityFactory.abilitiesFromParameters(ability.getParameters()).stream())
+      .flatMap(ability -> cardInstanceAbilityFactory.abilitiesFromParameters(ability.getAbility().getParameters()).stream())
       .collect(Collectors.toList());
   }
 
   private List<CardInstanceAbility> getAttachedCardsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
     return getAttachedCards(gameStatus, cardInstance).stream()
       .flatMap(attachedCard -> attachedCard.getCard().getAbilities().stream())
+      .map(Ability::getAbilityType)
       .map(CardInstanceAbility::new)
-      .filter(ability -> ATTACHED_ABILITY_TYPES.contains(ability.getAbilityType()))
+      .filter(ability -> ATTACHED_ABILITY_TYPES.contains(ability.getAbility().getAbilityType()))
       .collect(Collectors.toList());
   }
 }

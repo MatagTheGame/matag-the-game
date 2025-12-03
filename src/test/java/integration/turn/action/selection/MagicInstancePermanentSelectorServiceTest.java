@@ -1,51 +1,38 @@
 package integration.turn.action.selection;
 
+import com.matag.cards.Cards;
+import com.matag.cards.ability.selector.MagicInstanceSelector;
+import com.matag.cards.ability.selector.PowerToughnessConstraint;
+import com.matag.game.cardinstance.CardInstanceFactory;
+import com.matag.game.turn.action.selection.MagicInstancePermanentSelectorService;
+import integration.TestUtils;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.List;
+
 import static com.matag.cards.ability.selector.PowerToughnessConstraint.PowerOrToughness.POWER;
 import static com.matag.cards.ability.selector.PowerToughnessConstraint.PowerOrToughness.TOUGHNESS;
-import static com.matag.cards.ability.selector.PowerToughnessConstraintType.EQUAL;
-import static com.matag.cards.ability.selector.PowerToughnessConstraintType.GREATER;
-import static com.matag.cards.ability.selector.PowerToughnessConstraintType.LESS_OR_EQUAL;
+import static com.matag.cards.ability.selector.PowerToughnessConstraintType.*;
 import static com.matag.cards.ability.selector.SelectorType.PERMANENT;
 import static com.matag.cards.ability.selector.SelectorType.SPELL;
-import static com.matag.cards.ability.selector.StatusType.ATTACKED;
-import static com.matag.cards.ability.selector.StatusType.ATTACKING;
-import static com.matag.cards.ability.selector.StatusType.BLOCKED;
-import static com.matag.cards.ability.selector.StatusType.BLOCKING;
-import static com.matag.cards.ability.selector.StatusType.TAPPED;
+import static com.matag.cards.ability.selector.StatusType.*;
 import static com.matag.cards.ability.selector.TurnStatusType.YOUR_TURN;
 import static com.matag.cards.ability.type.AbilityType.FLYING;
 import static com.matag.cards.properties.Color.GREEN;
 import static com.matag.cards.properties.Color.WHITE;
 import static com.matag.cards.properties.Subtype.ZOMBIE;
-import static com.matag.cards.properties.Type.ARTIFACT;
-import static com.matag.cards.properties.Type.CREATURE;
-import static com.matag.cards.properties.Type.INSTANT;
-import static com.matag.cards.properties.Type.LAND;
-import static com.matag.cards.properties.Type.PLANESWALKER;
-import static com.matag.cards.properties.Type.SORCERY;
+import static com.matag.cards.properties.Type.*;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import com.matag.cards.Cards;
-import com.matag.cards.ability.selector.MagicInstanceSelector;
-import com.matag.cards.ability.selector.PowerToughnessConstraint;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action.selection.MagicInstancePermanentSelectorService;
-
-import integration.TestUtils;
-
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = SelectionTestConfiguration.class)
 public class MagicInstancePermanentSelectorServiceTest {
 

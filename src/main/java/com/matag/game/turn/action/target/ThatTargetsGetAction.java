@@ -24,8 +24,8 @@ public class ThatTargetsGetAction implements AbilityAction {
 
   @Override
   public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
-    for (var i = 0; i < ability.getTargets().size(); i++) {
-      var target = ability.getTargets().get(i);
+    for (var i = 0; i < ability.getAbility().getTargets().size(); i++) {
+      var target = ability.getAbility().getTargets().get(i);
       var targetId = targetCheckerService.getTargetIdAtIndex(cardInstance, ability, i);
 
       if (targetId != null) {
@@ -41,7 +41,7 @@ public class ThatTargetsGetAction implements AbilityAction {
 
   private void thatPlayerGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, String targetPlayer) {
     var player = gameStatus.getPlayerByName(targetPlayer);
-    playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getParameters(), player);
+    playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getAbility().getParameters(), player);
   }
 
   private void thatPermanentGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, int targetId) {
@@ -65,7 +65,7 @@ public class ThatTargetsGetAction implements AbilityAction {
   private void thatTargetGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, int targetCardId, java.util.Optional<CardInstance> targetOptional) {
     if (targetOptional.isPresent()) {
       var target = targetOptional.get();
-      permanentGetService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), target);
+      permanentGetService.thatPermanentGets(cardInstance, gameStatus, ability.getAbility().getParameters(), target);
 
     } else {
       LOGGER.info("target {} is not anymore valid.", targetCardId);

@@ -1,5 +1,13 @@
 package application.combat;
 
+import application.AbstractApplicationTest;
+import application.InitTestServiceDecorator;
+import com.matag.cards.Cards;
+import com.matag.game.init.test.InitTestService;
+import com.matag.game.status.GameStatus;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import static application.browser.BattlefieldHelper.SECOND_LINE;
 import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.combat.CombatDamagePhase.CD;
@@ -12,19 +20,7 @@ import static com.matag.game.turn.phases.main2.Main2Phase.M2;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.matag.cards.Cards;
-import com.matag.game.init.test.InitTestService;
-import com.matag.game.status.GameStatus;
-
-import application.AbstractApplicationTest;
-import application.InitTestServiceDecorator;
-import application.testcategory.Regression;
-
-@Category(Regression.class)
+//@Category(Regression.class)
 public class CombatFirstStrikeTest extends AbstractApplicationTest {
 
   @Autowired

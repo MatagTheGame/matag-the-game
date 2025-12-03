@@ -1,23 +1,21 @@
 package integration.deck;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-
-import java.util.List;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.matag.adminentities.DeckInfo;
 import com.matag.cards.Cards;
 import com.matag.game.deck.DeckFactory;
-
 import integration.TestUtils;
 import integration.TestUtilsConfiguration;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(SpringRunner.class)
+import java.util.List;
+
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = TestUtilsConfiguration.class)
 public class DeckFactoryTest {
   @Autowired

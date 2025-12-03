@@ -9,7 +9,7 @@ import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.PLAYER;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.matag.cards.Cards;

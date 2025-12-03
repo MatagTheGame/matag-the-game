@@ -1,24 +1,22 @@
 package integration.turn.action.selection;
 
-import static com.matag.player.PlayerType.OPPONENT;
-import static com.matag.player.PlayerType.PLAYER;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-
 import com.matag.cards.Cards;
 import com.matag.cards.ability.selector.MagicInstanceSelector;
 import com.matag.cards.ability.selector.SelectorType;
 import com.matag.game.cardinstance.CardInstanceFactory;
 import com.matag.game.turn.action.selection.MagicInstancePlayerSelectorService;
-
 import integration.TestUtils;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(SpringRunner.class)
+import static com.matag.player.PlayerType.OPPONENT;
+import static com.matag.player.PlayerType.PLAYER;
+import static org.assertj.core.api.Assertions.assertThat;
+
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = SelectionTestConfiguration.class)
 public class MagicInstancePlayerSelectorServiceTest {
 

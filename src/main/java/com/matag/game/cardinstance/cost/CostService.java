@@ -1,13 +1,13 @@
 package com.matag.game.cardinstance.cost;
 
 import static com.matag.cards.ability.type.AbilityType.TAP_ADD_MANA;
-import static com.matag.cards.ability.type.AbilityType.abilityType;
 import static com.matag.cards.properties.Cost.ANY;
 import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.matag.cards.ability.type.AbilityType;
 import org.springframework.stereotype.Component;
 
 import com.matag.cards.Card;
@@ -30,8 +30,8 @@ public class CostService {
       var removed = false;
 
       if (cost == ANY) {
-        if (manaPaidCopy.size() > 0) {
-          manaPaidCopy.remove(0);
+        if (!manaPaidCopy.isEmpty()) {
+          manaPaidCopy.removeFirst();
           removed = true;
         }
       } else {
@@ -86,7 +86,7 @@ public class CostService {
 
       for (int j = 0; j < choices; j++) {
         var index = (j / inverseCumulativeSizes) % addManaAbilities.size();
-        var mana = addManaAbilities.get(index).getParameters().stream()
+        var mana = addManaAbilities.get(index).getAbility().getParameters().stream()
           .map(Cost::valueOf)
           .collect(toList());
         manaOptions.get(j).addAll(mana);
@@ -115,7 +115,7 @@ public class CostService {
 
   private List<Cost> getAbilityCost(Card card, String ability) {
     return card.getAbilities().stream()
-      .filter(c -> c.getAbilityType().equals(abilityType(ability)))
+      .filter(c -> c.getAbilityType().equals(AbilityType.valueOf(ability)))
       .findFirst()
       .orElseThrow(() -> new RuntimeException("ability " + ability + " not found on card " + card.getName()))
       .getTrigger()
