@@ -29,7 +29,9 @@ data class CardInstanceAbility(
     @get:JsonProperty
     val abilityTypeText: String
         get() {
-            val parametersString: String = AbilityService().parametersAsString(ability.parameters!!)
+            val parametersString = ability.parameters?.let {
+                AbilityService().parametersAsString(it)
+            }
 
             if (ability.abilityType == AbilityType.SELECTED_PERMANENTS_GET) {
                 val magicInstanceSelector = ability.magicInstanceSelector!!
