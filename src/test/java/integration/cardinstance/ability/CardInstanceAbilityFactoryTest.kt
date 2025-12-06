@@ -1,53 +1,54 @@
-package integration.cardinstance.ability;
+package integration.cardinstance.ability
 
-import static com.matag.cards.ability.type.AbilityType.HASTE;
-import static com.matag.cards.ability.type.AbilityType.TRAMPLE;
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
+import com.matag.cards.ability.type.AbilityType
+import com.matag.game.cardinstance.ability.CardInstanceAbility
+import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory
+import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+import java.util.*
 
-import java.util.Optional;
+class CardInstanceAbilityFactoryTest {
+    private val cardInstanceAbilityFactory = CardInstanceAbilityFactory()
 
-import org.junit.jupiter.api.Test;
+    @Test
+    fun testAbilitiesFromParameters() {
+        // Given
+        val parameters = mutableListOf<String?>("+2/+2", "TRAMPLE", "DAMAGE:2", "HASTE")
 
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
+        // When
+        val abilities = cardInstanceAbilityFactory.abilitiesFromParameters(parameters)
 
-public class CardInstanceAbilityFactoryTest {
-  private CardInstanceAbilityFactory cardInstanceAbilityFactory = new CardInstanceAbilityFactory();
+        // Then
+        assertThat(abilities).isEqualTo(
+            listOf(
+                CardInstanceAbility(AbilityType.TRAMPLE),
+                CardInstanceAbility(AbilityType.HASTE)
+            )
+        )
+    }
 
-  @Test
-  public void testAbilitiesFromParameters() {
-    // Given
-    var parameters = asList("+2/+2", "TRAMPLE", "DAMAGE:2", "HASTE");
+    @Test
+    fun testNoAbilityFromParameter() {
+        // Given
+        val parameter = "+2/+2"
 
-    // When
-    var abilities = cardInstanceAbilityFactory.abilitiesFromParameters(parameters);
+        // When
+        val ability = cardInstanceAbilityFactory.abilityFromParameter(parameter)
 
-    // Then
-    assertThat(abilities).isEqualTo(asList(new CardInstanceAbility(TRAMPLE), new CardInstanceAbility(HASTE)));
-  }
+        // Then
+        assertThat(ability).isEmpty()
+    }
 
-  @Test
-  public void testNoAbilityFromParameter() {
-    // Given
-    var parameter = "+2/+2";
+    @Test
+    fun testTrampleAbilityFromParameter() {
+        // Given
+        val parameter = "TRAMPLE"
 
-    // When
-    var ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
+        // When
+        val ability = cardInstanceAbilityFactory.abilityFromParameter(parameter)
 
-    // Then
-    assertThat(ability).isEmpty();
-  }
-
-  @Test
-  public void testTrampleAbilityFromParameter() {
-    // Given
-    var parameter = "TRAMPLE";
-
-    // When
-    var ability = cardInstanceAbilityFactory.abilityFromParameter(parameter);
-
-    // Then
-    assertThat(ability).isEqualTo(Optional.of(new CardInstanceAbility(TRAMPLE)));
-  }
+        // Then
+        assertThat(ability).isEqualTo(Optional.of(CardInstanceAbility(AbilityType.TRAMPLE)))
+    }
 }

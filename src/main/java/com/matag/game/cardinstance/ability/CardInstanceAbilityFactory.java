@@ -6,6 +6,7 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import java.util.Optional;
 
+import com.matag.cards.ability.Ability;
 import org.springframework.stereotype.Component;
 
 import com.matag.cards.ability.type.AbilityType;
@@ -13,7 +14,7 @@ import com.matag.cards.ability.type.AbilityType;
 @Component
 public class CardInstanceAbilityFactory {
   private CardInstanceAbility get(String abilityType) {
-    return new CardInstanceAbility(AbilityType.valueOf(abilityType));
+    return new CardInstanceAbility(new Ability(AbilityType.valueOf(abilityType)));
   }
 
   public List<CardInstanceAbility> abilitiesFromParameters(List<String> parameters) {

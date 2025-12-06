@@ -31,7 +31,7 @@ public class EnterCardIntoBattlefieldService {
       cardInstance.getModifiers().setSummoningSickness(true);
     }
 
-    LOGGER.info(cardInstance.getIdAndName() + " entered the battlefield.");
+    LOGGER.info("{} entered the battlefield.", cardInstance.getIdAndName());
 
     entersTheBattlefieldWithService.entersTheBattlefieldWith(gameStatus, cardInstance);
     whenTriggerService.whenTriggered(gameStatus, cardInstance, WHEN_ENTER_THE_BATTLEFIELD);

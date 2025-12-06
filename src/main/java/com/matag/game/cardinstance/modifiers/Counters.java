@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.matag.cards.ability.Ability;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.game.cardinstance.ability.CardInstanceAbility;
 
@@ -48,8 +49,7 @@ public class Counters {
 
   public List<CardInstanceAbility> getKeywordCountersAbilities() {
     return keywordCounters.stream()
-      .map(CardInstanceAbility::new)
-      .map(CardInstanceAbility::getAbility)
+      .map(Ability::new)
       .map(CardInstanceAbility::getCardInstanceAbility)
       .collect(toList());
   }

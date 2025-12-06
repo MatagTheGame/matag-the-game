@@ -8,11 +8,13 @@ import com.matag.cards.ability.selector.SelectorType
 import com.matag.cards.ability.transpose
 import com.matag.cards.ability.type.AbilityType
 
-class CardInstanceAbility {
+data class CardInstanceAbility(
     val ability: Ability
+) {
+    constructor(abilityType: AbilityType) : this(Ability(abilityType))
 
-    constructor(cardInstanceAbility: CardInstanceAbility) {
-        ability = Ability(
+    constructor(cardInstanceAbility: CardInstanceAbility) : this(
+        Ability(
             cardInstanceAbility.ability.abilityType,
             cardInstanceAbility.ability.targets,
             cardInstanceAbility.ability.magicInstanceSelector,
@@ -22,12 +24,7 @@ class CardInstanceAbility {
             cardInstanceAbility.ability.sorcerySpeed,
             cardInstanceAbility.ability.optional
         )
-    }
-
-    constructor(abilityType: AbilityType) {
-        ability =
-            Ability((abilityType), listOf(), null, listOf(), null, null, false, false)
-    }
+    )
 
     @get:JsonProperty
     val abilityTypeText: String
@@ -66,7 +63,7 @@ class CardInstanceAbility {
         @JvmStatic
         fun getCardInstanceAbility(ability: Ability?): CardInstanceAbility? =
             ability?.let {
-                CardInstanceAbility(it.transpose().abilityType)
+                CardInstanceAbility(it.transpose())
         }
     }
 }

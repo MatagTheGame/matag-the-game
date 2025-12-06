@@ -58,7 +58,7 @@ public class EntersTheBattlefieldWithService {
       var adamantFulfilled = isAdamantFulfilled(manaPaidByColor, adamantColor);
 
       if (adamantFulfilled) {
-        parameters.addAll(adamant.getAbility().getParameters());
+        parameters.addAll(adamant.getAbility().getAbility().getParameters());
       }
     }
 

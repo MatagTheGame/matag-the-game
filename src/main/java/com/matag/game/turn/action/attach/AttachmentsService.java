@@ -57,7 +57,6 @@ public class AttachmentsService {
   private List<CardInstanceAbility> getAttachedCardsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
     return getAttachedCards(gameStatus, cardInstance).stream()
       .flatMap(attachedCard -> attachedCard.getCard().getAbilities().stream())
-      .map(Ability::getAbilityType)
       .map(CardInstanceAbility::new)
       .filter(ability -> ATTACHED_ABILITY_TYPES.contains(ability.getAbility().getAbilityType()))
       .collect(Collectors.toList());
