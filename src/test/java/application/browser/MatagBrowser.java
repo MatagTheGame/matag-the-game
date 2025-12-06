@@ -1,5 +1,6 @@
 package application.browser;
 
+import java.time.Duration;
 import java.util.ArrayList;
 
 import org.openqa.selenium.By;
@@ -139,7 +140,7 @@ public class MatagBrowser {
   }
 
   void wait(ExpectedCondition<?> condition) {
-    new WebDriverWait(webDriver, 1).until(condition);
+    new WebDriverWait(webDriver, Duration.ofSeconds(1)).until(condition);
   }
 
   public void dumpContent() {

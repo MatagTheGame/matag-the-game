@@ -1,79 +1,75 @@
-package integration.turn.action.selection;
+package integration.turn.action.selection
 
-import com.matag.cards.Cards;
-import com.matag.cards.ability.selector.MagicInstanceSelector;
-import com.matag.cards.ability.selector.SelectorType;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action.selection.MagicInstancePlayerSelectorService;
-import integration.TestUtils;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.matag.cards.Cards
+import com.matag.cards.ability.selector.MagicInstanceSelector
+import com.matag.cards.ability.selector.SelectorType
+import com.matag.game.cardinstance.CardInstanceFactory
+import com.matag.game.turn.action.selection.MagicInstancePlayerSelectorService
+import com.matag.player.PlayerType
+import integration.TestUtils
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-import static com.matag.player.PlayerType.OPPONENT;
-import static com.matag.player.PlayerType.PLAYER;
-import static org.assertj.core.api.Assertions.assertThat;
+@ExtendWith(SpringExtension::class)
+@ContextConfiguration(classes = [SelectionTestConfiguration::class])
+class MagicInstancePlayerSelectorServiceTest(
+    @param:Autowired val selectorService: MagicInstancePlayerSelectorService,
+    @param:Autowired val cardInstanceFactory: CardInstanceFactory,
+    @param:Autowired val testUtils: TestUtils,
+    @param:Autowired val cards: Cards
+) {
+    @Test
+    fun selectPlayer() {
+        // Given
+        val gameStatus = testUtils.testGameStatus()
+        val magicInstanceSelector = MagicInstanceSelector(
+                selectorType = SelectorType.PLAYER,
+                itself = true
+        )
+        val aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name")
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = SelectionTestConfiguration.class)
-public class MagicInstancePlayerSelectorServiceTest {
+        // When
+        val selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector)
 
-  @Autowired
-  private MagicInstancePlayerSelectorService selectorService;
+        // Then
+        assertThat(selection).containsExactly(gameStatus.player1)
+    }
 
-  @Autowired
-  private CardInstanceFactory cardInstanceFactory;
+    @Test
+    fun selectOpponent() {
+        // Given
+        val gameStatus = testUtils.testGameStatus()
+        val magicInstanceSelector = MagicInstanceSelector(
+                selectorType = SelectorType.PLAYER,
+                controllerType = PlayerType.OPPONENT
+        )
+        val aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name")
 
-  @Autowired
-  private TestUtils testUtils;
+        // When
+        val selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector)
 
-  @Autowired
-  private Cards cards;
+        // Then
+        assertThat(selection).containsExactly(gameStatus.player2)
+    }
 
-  @Test
-  public void selectPlayer() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
+    @Test
+    fun selectAllPlayers() {
+        // Given
+        val gameStatus = testUtils.testGameStatus()
+        val magicInstanceSelector = MagicInstanceSelector(
+            selectorType = SelectorType.PLAYER,
+            controllerType = PlayerType.PLAYER
+        )
+        val aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name")
 
-    var magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).itself(true).build();
-    var aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
+        // When
+        val selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector)
 
-    // When
-    var selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
-
-    // Then
-    assertThat(selection).containsExactly(gameStatus.getPlayer1());
-  }
-
-  @Test
-  public void selectOpponent() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-
-    var magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(OPPONENT).build();
-    var aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
-
-    // When
-    var selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
-
-    // Then
-    assertThat(selection).containsExactly(gameStatus.getPlayer2());
-  }
-
-  @Test
-  public void selectAllPlayers() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-
-    var magicInstanceSelector = MagicInstanceSelector.builder().selectorType(SelectorType.PLAYER).controllerType(PLAYER).build();
-    var aPermanent = cardInstanceFactory.create(gameStatus, 1, cards.get("Empyrean Eagle"), "player-name", "player-name");
-
-    // When
-    var selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector);
-
-    // Then
-    assertThat(selection).containsExactlyInAnyOrder(gameStatus.getPlayer1(), gameStatus.getPlayer2());
-  }
+        // Then
+        assertThat(selection).containsExactlyInAnyOrder(gameStatus.player1, gameStatus.getPlayer2())
+    }
 }

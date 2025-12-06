@@ -19,15 +19,15 @@
         <maven.compiler.plugin.version>3.14.1</maven.compiler.plugin.version>
         <maven.surefire.plugin.version>3.5.4</maven.surefire.plugin.version>
         <frontend-maven-plugin.version>1.10.0</frontend-maven-plugin.version>
-        <bytebuddy.version>1.10.8</bytebuddy.version>
-        <htmlunit.version>2.35.1</htmlunit.version>
-        <jakarta.version>2.3.2</jakarta.version>
+<!--        <bytebuddy.version>1.18.2</bytebuddy.version>-->
+<!--        <jakarta.version>2.3.2</jakarta.version>-->
         <lombok.version>1.18.42</lombok.version>
         <matag.version>2.0.0-SNAPSHOT</matag.version>
-        <selenium.version>3.141.59</selenium.version>
         <spring.boot.version>4.0.0</spring.boot.version>
         <kotlin.version>2.2.0</kotlin.version>
         <junit.version>6.0.1</junit.version>
+        <htmlunit.version>4.13.0</htmlunit.version>
+        <selenium.version>4.38.0</selenium.version>
     </properties>
 
     <repositories>
@@ -52,31 +52,36 @@
         </dependency>
 
         <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
-        <dependency>
-            <groupId>jakarta.xml.bind</groupId>
-            <artifactId>jakarta.xml.bind-api</artifactId>
-            <version>${jakarta.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.jaxb</groupId>
-            <artifactId>jaxb-runtime</artifactId>
-            <version>${jakarta.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>jakarta.xml.bind</groupId>-->
+<!--            <artifactId>jakarta.xml.bind-api</artifactId>-->
+<!--            <version>${jakarta.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.jaxb</groupId>-->
+<!--            <artifactId>jaxb-runtime</artifactId>-->
+<!--            <version>${jakarta.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>net.bytebuddy</groupId>
-            <artifactId>byte-buddy</artifactId>
-            <version>${bytebuddy.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>net.bytebuddy</groupId>-->
+<!--            <artifactId>byte-buddy</artifactId>-->
+<!--            <version>${bytebuddy.version}</version>-->
+<!--        </dependency>-->
 
         <!-- Test -->
         <dependency>
@@ -102,11 +107,6 @@
             <artifactId>htmlunit-driver</artifactId>
             <version>${htmlunit.version}</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-stdlib-jdk8</artifactId>
-            <version>${kotlin.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
