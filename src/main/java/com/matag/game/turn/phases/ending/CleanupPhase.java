@@ -15,9 +15,6 @@ public class CleanupPhase extends AbstractPhase {
   public static final String CL = "CL";
 
   @Autowired
-  private UntapPhase untapPhase;
-
-  @Autowired
   private DiscardXCardsService discardXCardsService;
 
   @Override
@@ -27,7 +24,7 @@ public class CleanupPhase extends AbstractPhase {
 
   @Override
   public Phase getNextPhase(GameStatus gameStatus) {
-    return untapPhase;
+    return null;
   }
 
   @Override

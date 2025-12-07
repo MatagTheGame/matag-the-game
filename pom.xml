@@ -28,6 +28,7 @@
         <junit.version>6.0.1</junit.version>
         <htmlunit.version>4.13.0</htmlunit.version>
         <selenium.version>4.38.0</selenium.version>
+        <mockito.kotlin.version>6.1.0</mockito.kotlin.version>
     </properties>
 
     <repositories>
@@ -88,6 +89,12 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito.kotlin</groupId>
+            <artifactId>mockito-kotlin</artifactId>
+            <version>${mockito.kotlin.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
