@@ -1,6 +1,6 @@
 #turn-phases {
   position: absolute;
-  background-image: url('/img/materials/silver.jpg');
+  background-image: url('../../../resources/public/img/materials/silver.jpg');
   right: 0;
   bottom: 44%;
   width: 470px;
@@ -28,14 +28,14 @@
   }
 
   span.active-for-player:before {
-    content: url(/img/ui/arrow-down.gif);
+    content: url(../../../resources/public/img/ui/arrow-down.gif);
     position: absolute;
     bottom: -20%;
     left: 43%;
   }
 
   span.active-for-opponent:before {
-    content: url(/img/ui/arrow-up.gif);
+    content: url(../../../resources/public/img/ui/arrow-up.gif);
     position: absolute;
     top: -20%;
     left: 43%;
@@ -45,7 +45,7 @@
 #turn-phases::after {
   content: '';
   position: absolute;
-  background-image: url('/img/materials/silver.jpg');
+  background-image: url('../../../resources/public/img/materials/silver.jpg');
   right: 0;
   bottom: -5px;
   width: 100%;
@@ -58,7 +58,7 @@
 #turn-phases::before {
   content: '';
   position: absolute;
-  background-image: url('/img/materials/silver.jpg');
+  background-image: url('../../../resources/public/img/materials/silver.jpg');
   left: -10px;
   bottom: 0;
   width: 20px;

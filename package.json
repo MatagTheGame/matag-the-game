@@ -4,7 +4,14 @@
   "description": "matag game ui",
   "private": true,
   "scripts": {
-
+    "build-dev": "webpack --mode development",
+    "build-prod": "webpack --mode production",
+    "lint": "eslint src/main/js src/test/js/ --ext .js --ignore-pattern node_modules/",
+    "lint-fix": "eslint src/main/js src/test/js/ --ext .js --fix",
+    "postinstall": "yarn build-prod",
+    "test": "jest",
+    "watch": "webpack --mode development --watch",
+    "watch-htmlunit": "webpack --mode production --watch"
   },
   "author": "Antonio Alonzi",
   "license": "AGPL-3.0-or-later",
@@ -29,7 +36,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-react": "^7.20.0",
     "jest": "^30.2.0",
-    "node-sass": "^9.0.0",
+    "sass": "^1.94.2",
     "sass-loader": "^16.0.6",
     "source-map-loader": "^5.0.0",
     "style-loader": "^4.0.0",
