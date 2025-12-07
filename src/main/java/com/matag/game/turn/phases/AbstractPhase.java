@@ -1,21 +1,15 @@
 package com.matag.game.turn.phases;
 
-import static com.matag.game.turn.phases.PhaseUtils.isPriorityAllowed;
-import static com.matag.game.turn.phases.beginning.UntapPhase.UT;
-import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
-
-import com.matag.game.turn.phases.beginning.UntapPhase;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action._continue.AutocontinueChecker;
+import lombok.RequiredArgsConstructor;
 
+import static com.matag.game.turn.phases.PhaseUtils.isPriorityAllowed;
+import static com.matag.game.turn.phases.ending.CleanupPhase.CL;
+
+@RequiredArgsConstructor
 public abstract class AbstractPhase implements Phase {
-  @Autowired
-  private AutocontinueChecker autocontinueChecker;
-
-  @Autowired
-  private UntapPhase untapPhase;
+  private final AutocontinueChecker autocontinueChecker;
 
   @Override
   public void action(GameStatus gameStatus) {}
@@ -64,7 +58,7 @@ public abstract class AbstractPhase implements Phase {
     if (getName().equals(CL)) {
       gameStatus.getTurn().setCurrentTurnPlayer(gameStatus.getNonCurrentPlayer().getName());
       gameStatus.getTurn().increaseTurnNumber();
-      nextPhase = untapPhase;
+      throw new RuntimeException("What can I do?");
 
     } else {
       nextPhase = getNextPhase(gameStatus);

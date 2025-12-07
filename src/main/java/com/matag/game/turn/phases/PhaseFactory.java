@@ -1,10 +1,9 @@
 package com.matag.game.turn.phases;
 
-import java.util.List;
-
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
 
 @AllArgsConstructor
 @Component

@@ -1,29 +1,31 @@
 package com.matag.game.turn.phases.combat;
 
-import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
-import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
-import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
+import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action._continue.AutocontinueChecker;
+import com.matag.game.turn.phases.AbstractPhase;
+import com.matag.game.turn.phases.Phase;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.phases.AbstractPhase;
-import com.matag.game.turn.phases.Phase;
+import static com.matag.cards.ability.type.AbilityType.DOUBLE_STRIKE;
+import static com.matag.cards.ability.type.AbilityType.FIRST_STRIKE;
+import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
 
 @Component
 public class DeclareBlockersPhase extends AbstractPhase {
   public static final String DB = "DB";
 
-  @Autowired
-  private FirstStrikePhase firstStrikePhase;
+  private final FirstStrikePhase firstStrikePhase;
+  private final CombatDamagePhase combatDamagePhase;
 
-  @Autowired
-  private CombatDamagePhase combatDamagePhase;
+    public DeclareBlockersPhase(AutocontinueChecker autocontinueChecker, FirstStrikePhase firstStrikePhase, CombatDamagePhase combatDamagePhase) {
+        super(autocontinueChecker);
+        this.firstStrikePhase = firstStrikePhase;
+        this.combatDamagePhase = combatDamagePhase;
+    }
 
-  @Override
+    @Override
   public String getName() {
     return DB;
   }

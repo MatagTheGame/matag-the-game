@@ -1,27 +1,26 @@
 package com.matag.game.turn.phases.beginning;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.action.tap.TapPermanentService;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
+import org.springframework.stereotype.Component;
 
 @Component
 public class UntapPhase extends AbstractPhase {
   public static final String UT = "UT";
 
   private final TapPermanentService tapPermanentService;
+  private final UpkeepPhase upkeepPhase;
 
-  @Autowired
-  private UpkeepPhase upkeepPhase;
+    public UntapPhase(AutocontinueChecker autocontinueChecker, TapPermanentService tapPermanentService, UpkeepPhase upkeepPhase) {
+        super(autocontinueChecker);
+        this.tapPermanentService = tapPermanentService;
+        this.upkeepPhase = upkeepPhase;
+    }
 
-  public UntapPhase(TapPermanentService tapPermanentService) {
-    this.tapPermanentService = tapPermanentService;
-  }
-
-  @Override
+    @Override
   public String getName() {
     return UT;
   }

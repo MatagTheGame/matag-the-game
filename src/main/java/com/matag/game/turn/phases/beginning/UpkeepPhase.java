@@ -1,20 +1,23 @@
 package com.matag.game.turn.phases.beginning;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
+import org.springframework.stereotype.Component;
 
 @Component
 public class UpkeepPhase extends AbstractPhase {
   public static final String UP = "UP";
 
-  @Autowired
-  private DrawPhase drawPhase;
+  private final DrawPhase drawPhase;
 
-  @Override
+    public UpkeepPhase(AutocontinueChecker autocontinueChecker, DrawPhase drawPhase) {
+        super(autocontinueChecker);
+        this.drawPhase = drawPhase;
+    }
+
+    @Override
   public String getName() {
     return UP;
   }

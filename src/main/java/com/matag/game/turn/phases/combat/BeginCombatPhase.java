@@ -1,24 +1,26 @@
 package com.matag.game.turn.phases.combat;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.matag.game.status.GameStatus;
+import com.matag.game.turn.action._continue.AutocontinueChecker;
 import com.matag.game.turn.phases.AbstractPhase;
 import com.matag.game.turn.phases.Phase;
 import com.matag.game.turn.phases.main2.Main2Phase;
+import org.springframework.stereotype.Component;
 
 @Component
 public class BeginCombatPhase extends AbstractPhase {
   public static final String BC = "BC";
 
-  @Autowired
-  private DeclareAttackersPhase declareAttackersPhase;
+  private final DeclareAttackersPhase declareAttackersPhase;
+  private final Main2Phase main2Phase;
 
-  @Autowired
-  private Main2Phase main2Phase;
+    public BeginCombatPhase(AutocontinueChecker autocontinueChecker, DeclareAttackersPhase declareAttackersPhase, Main2Phase main2Phase) {
+        super(autocontinueChecker);
+        this.declareAttackersPhase = declareAttackersPhase;
+        this.main2Phase = main2Phase;
+    }
 
-  @Override
+    @Override
   public String getName() {
     return BC;
   }
