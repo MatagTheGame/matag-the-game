@@ -29,7 +29,7 @@ data class CardInstanceAbility(
     @get:JsonProperty
     val abilityTypeText: String
         get() {
-            val parametersString = ability.parameters?.let {
+            val parametersString = ability.ability?.parameters?.let {
                 AbilityService().parametersAsString(it)
             }
 

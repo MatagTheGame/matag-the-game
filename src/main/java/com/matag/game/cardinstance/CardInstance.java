@@ -96,6 +96,7 @@ public class CardInstance {
 
   @JsonProperty
   public int getPower() {
+    if (card.getPower() == null) return 0;
     return card.getPower() +
       modifiers.getModifiersUntilEndOfTurn().getExtraPowerToughness().getPower() +
       modifiers.getExtraPowerToughnessFromCounters().getPower() +
@@ -105,6 +106,7 @@ public class CardInstance {
 
   @JsonProperty
   public int getToughness() {
+    if (card.getToughness() == null) return 0;
     return card.getToughness() +
       modifiers.getModifiersUntilEndOfTurn().getExtraPowerToughness().getToughness() +
       modifiers.getExtraPowerToughnessFromCounters().getToughness() +

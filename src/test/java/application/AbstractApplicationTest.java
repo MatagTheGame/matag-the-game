@@ -60,23 +60,20 @@ public abstract class AbstractApplicationTest {
   public abstract void setupGame();
 
   @BeforeEach
-  public void setupRetrieverMocks() {
-    given(adminClient.getPlayerInfo(argThat(new SecurityTokenMatcher("1")))).willReturn(new PlayerInfo("Player1"));
-    given(adminClient.getPlayerInfo(argThat(new SecurityTokenMatcher("2")))).willReturn(new PlayerInfo("Player2"));
-
-    given(adminClient.getDeckInfo(any())).willReturn(new DeckInfo(List.of(
-      cards.get("Plains"),
-      cards.get("Plains"),
-      cards.get("Plains"),
-      cards.get("Plains"),
-      cards.get("Plains"),
-      cards.get("Plains"),
-      cards.get("Plains")
-    )));
-  }
-
-  @BeforeEach
   public void setup() {
+      given(adminClient.getPlayerInfo(argThat(new SecurityTokenMatcher("1")))).willReturn(new PlayerInfo("Player1"));
+      given(adminClient.getPlayerInfo(argThat(new SecurityTokenMatcher("2")))).willReturn(new PlayerInfo("Player2"));
+
+      given(adminClient.getDeckInfo(any())).willReturn(new DeckInfo(List.of(
+              cards.get("Plains"),
+              cards.get("Plains"),
+              cards.get("Plains"),
+              cards.get("Plains"),
+              cards.get("Plains"),
+              cards.get("Plains"),
+              cards.get("Plains")
+      )));
+
     setupGame();
 
     // When player1 joins the game is waiting for opponent
@@ -129,13 +126,10 @@ public abstract class AbstractApplicationTest {
   }
 
   @AfterEach
-  public void closeBrowser() {
+  public void cleanup() {
     //browser.dumpContent();
     browser.close();
-  }
 
-  @AfterEach
-  public void cleanup() {
     Mockito.reset(adminClient);
     gameStatusRepository.clear();
     TEST_ADMIN_TOKEN.set(0);
