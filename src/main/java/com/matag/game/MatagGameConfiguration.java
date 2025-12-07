@@ -7,7 +7,7 @@ import com.matag.cards.CardsConfiguration;
 import com.matag.game.cardinstance.CardInstanceConfiguration;
 
 @Configuration
-@Import({CardsConfiguration.class, CardInstanceConfiguration.class})
+@Import({CardsConfiguration.class, CardInstanceConfiguration.class, MatagGameWebSocketConfiguration.class})
 public class MatagGameConfiguration {
 
 }
