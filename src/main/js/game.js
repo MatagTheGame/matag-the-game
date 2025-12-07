@@ -1,5 +1,5 @@
 import React from 'react'
-import {render} from 'react-dom'
+import {createRoot} from 'react-dom/client';
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import {composeWithDevTools} from 'redux-devtools-extension'
@@ -8,9 +8,5 @@ import AppReducer from './game/_reducers/AppReducer'
 
 const store = createStore(AppReducer, composeWithDevTools())
 
-render(
-  <Provider store={store}>
-    <GameApp/>
-  </Provider>,
-  document.getElementById('app')
-)
+const root = createRoot(document.getElementById('app'));
+root.render(<Provider store={store}><GameApp/></Provider>);
