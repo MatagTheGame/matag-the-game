@@ -3,7 +3,7 @@ import stompClient from 'game/WebSocket'
 import {connect} from 'react-redux'
 import get from 'lodash/get'
 
-const HEALTCHECK_TIMEOUT = 3000
+const HEALTCHECK_TIMEOUT = 5000
 
 class Connected extends Component {
   constructor(props) {
