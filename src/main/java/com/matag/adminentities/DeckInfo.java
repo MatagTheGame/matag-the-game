@@ -1,24 +1,15 @@
 package com.matag.adminentities;
 
+import com.matag.cards.Card;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.List;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.matag.cards.Card;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Value;
-
-@Value
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-@JsonDeserialize(builder = DeckInfo.DeckInfoBuilder.class)
-@Builder(toBuilder = true)
 public class DeckInfo {
     List<Card> cards;
-
-    @JsonPOJOBuilder(withPrefix = "")
-    public static class DeckInfoBuilder {
-
-    }
 }

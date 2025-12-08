@@ -1,21 +1,12 @@
 package com.matag.adminentities;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
-@JsonDeserialize(builder = PlayerInfo.PlayerInfoBuilder.class)
-@Builder(toBuilder = true)
 public class PlayerInfo {
     String playerName;
-
-    @JsonPOJOBuilder(withPrefix = "")
-    public static class PlayerInfoBuilder {
-
-    }
 }

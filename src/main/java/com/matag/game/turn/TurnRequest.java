@@ -1,17 +1,11 @@
 package com.matag.game.turn;
 
+import lombok.Data;
+
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-
-import lombok.Builder;
-import lombok.Value;
-
-@Value
-@JsonDeserialize(builder = TurnRequest.TurnRequestBuilder.class)
-@Builder
+@Data
 public class TurnRequest {
   String action;
   String inputRequiredAction;
@@ -21,8 +15,4 @@ public class TurnRequest {
   List<Integer> cardIds;
   Map<Integer, List<Object>> targetsIdsForCardIds;
   String playedAbility;
-
-  @JsonPOJOBuilder(withPrefix = "")
-  public static class TurnRequestBuilder {}
-
 }
