@@ -86,7 +86,7 @@ public class CostService {
 
       for (int j = 0; j < choices; j++) {
         var index = (j / inverseCumulativeSizes) % addManaAbilities.size();
-        var mana = addManaAbilities.get(index).getAbility().getParameters().stream()
+        var mana = addManaAbilities.get(index).getParameters().stream()
           .map(Cost::valueOf)
           .collect(toList());
         manaOptions.get(j).addAll(mana);

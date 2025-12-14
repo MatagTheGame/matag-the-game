@@ -5,7 +5,7 @@ import static com.matag.cards.properties.Type.ARTIFACT;
 import static com.matag.cards.properties.Type.INSTANT;
 import static com.matag.cards.properties.Type.LEGENDARY;
 import static com.matag.cards.properties.Type.SORCERY;
-import static com.matag.game.cardinstance.ability.CardInstanceAbility.getCardInstanceAbilities;
+import static com.matag.cards.ability.Ability.abilities;
 import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.toList;
 
@@ -27,7 +27,7 @@ import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.Color;
 import com.matag.cards.properties.Subtype;
 import com.matag.cards.properties.Type;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.cards.ability.Ability;
 import com.matag.game.cardinstance.modifiers.CardModifiers;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
@@ -57,7 +57,7 @@ public class CardInstance {
   @JsonProperty
   private CardModifiers modifiers = new CardModifiers();
   @JsonProperty
-  private List<CardInstanceAbility> triggeredAbilities = new ArrayList<>();
+  private List<Ability> triggeredAbilities = new ArrayList<>();
   private Set<String> acknowledgedBy = new HashSet<>();
 
   private GameStatus gameStatus;
@@ -115,7 +115,7 @@ public class CardInstance {
   }
 
   @JsonProperty
-  public List<CardInstanceAbility> getAbilities() {
+  public List<Ability> getAbilities() {
     var abilities = getFixedAbilities();
     abilities.addAll(getAbilitiesFormOtherPermanents());
     return abilities;
@@ -230,9 +230,9 @@ public class CardInstance {
     return !acknowledged();
   }
 
-  public List<CardInstanceAbility> getFixedAbilities() {
-    var abilities = new ArrayList<CardInstanceAbility>();
-    abilities.addAll(getCardInstanceAbilities(card));
+  public List<Ability> getFixedAbilities() {
+    var abilities = new ArrayList<Ability>();
+    abilities.addAll(abilities(card));
     abilities.addAll(modifiers.getAbilities());
     abilities.addAll(modifiers.getModifiersUntilEndOfTurn().getExtraAbilities());
     abilities.addAll(modifiers.getCounters().getKeywordCountersAbilities());
@@ -242,27 +242,27 @@ public class CardInstance {
 
   public boolean canProduceMana(Color color) {
     return getAbilitiesByTriggerType(TriggerType.MANA_ABILITY).stream()
-      .flatMap(ability -> ability.getAbility().getParameters().stream())
+      .flatMap(ability -> ability.getParameters().stream())
       .anyMatch(parameter -> parameter.equals(color.toString()));
   }
 
-  public List<CardInstanceAbility> getAbilitiesByTriggerType(TriggerType triggerType) {
+  public List<Ability> getAbilitiesByTriggerType(TriggerType triggerType) {
     return getAbilities().stream()
-      .filter(ability -> ability.getAbility().getTrigger() != null)
-      .filter(ability -> ability.getAbility().getTrigger().getType().equals(triggerType))
+      .filter(ability -> ability.getTrigger() != null)
+      .filter(ability -> ability.getTrigger().getType().equals(triggerType))
       .collect(toList());
   }
 
-  public List<CardInstanceAbility> getAbilitiesByTriggerSubType(TriggerSubtype triggerSubType) {
+  public List<Ability> getAbilitiesByTriggerSubType(TriggerSubtype triggerSubType) {
     return getAbilities().stream()
-      .filter(ability -> ability.getAbility().getTrigger() != null)
-      .filter(ability -> triggerSubType.equals(ability.getAbility().getTrigger().getSubtype()))
+      .filter(ability -> ability.getTrigger() != null)
+      .filter(ability -> triggerSubType.equals(ability.getTrigger().getSubtype()))
       .collect(toList());
   }
 
-  public List<CardInstanceAbility> getAbilitiesByType(AbilityType abilityType) {
+  public List<Ability> getAbilitiesByType(AbilityType abilityType) {
     return getAbilities().stream()
-      .filter(currentAbility -> currentAbility.getAbility().getAbilityType().equals(abilityType))
+      .filter(currentAbility -> currentAbility.getAbilityType().equals(abilityType))
       .collect(toList());
   }
 
@@ -270,9 +270,9 @@ public class CardInstance {
     return getAbilitiesByType(abilityType).size() > 0;
   }
 
-  public List<CardInstanceAbility> getFixedAbilitiesByType(AbilityType abilityType) {
+  public List<Ability> getFixedAbilitiesByType(AbilityType abilityType) {
     return getFixedAbilities().stream()
-      .filter(currentAbility -> currentAbility.getAbility().getAbilityType().equals(abilityType))
+      .filter(currentAbility -> currentAbility.getAbilityType().equals(abilityType))
       .collect(toList());
   }
 
@@ -313,7 +313,7 @@ public class CardInstance {
     return attachmentsService != null ? attachmentsService.getAttachmentsToughness(gameStatus, this) : 0;
   }
 
-  private List<CardInstanceAbility> getAttachmentsAbilities() {
+  private List<Ability> getAttachmentsAbilities() {
     return attachmentsService != null ? attachmentsService.getAttachmentsAbilities(gameStatus, this) : emptyList();
   }
 
@@ -325,7 +325,7 @@ public class CardInstance {
     return abilitiesFromOtherPermanentsService != null ? abilitiesFromOtherPermanentsService.getToughnessFromOtherPermanents(gameStatus, this) : 0;
   }
 
-  private List<CardInstanceAbility> getAbilitiesFormOtherPermanents() {
+  private List<Ability> getAbilitiesFormOtherPermanents() {
     return abilitiesFromOtherPermanentsService != null ? abilitiesFromOtherPermanentsService.getAbilitiesFormOtherPermanents(gameStatus, this) : emptyList();
   }
 }

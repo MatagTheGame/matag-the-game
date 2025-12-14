@@ -11,8 +11,8 @@ import com.matag.cards.ability.AbilityService;
 import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.cards.properties.PowerToughness;
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
+import com.matag.cards.ability.Ability;
+import com.matag.cards.ability.CardInstanceAbilityFactory;
 import com.matag.game.status.GameStatus;
 
 import lombok.AllArgsConstructor;
@@ -40,7 +40,7 @@ public class AbilitiesFromOtherPermanentsService {
       .orElse(0);
   }
 
-  public List<CardInstanceAbility> getAbilitiesFormOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
+  public List<Ability> getAbilitiesFormOtherPermanents(GameStatus gameStatus, CardInstance cardInstance) {
     return cardInstanceAbilityFactory.abilitiesFromParameters(getParametersFromOtherPermanents(gameStatus, cardInstance));
   }
 
@@ -50,9 +50,9 @@ public class AbilitiesFromOtherPermanentsService {
 
     for (var card : cards) {
       for (var ability : card.getFixedAbilitiesByType(SELECTED_PERMANENTS_GET)) {
-        if (ability.getAbility().getTrigger().getType() == TriggerType.STATIC) {
-          if (magicInstancePermanentSelectorService.select(gameStatus, card, ability.getAbility().getMagicInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
-            parameters.addAll(ability.getAbility().getParameters());
+        if (ability.getTrigger().getType() == TriggerType.STATIC) {
+          if (magicInstancePermanentSelectorService.select(gameStatus, card, ability.getMagicInstanceSelector()).withId(cardInstance.getId()).isPresent()) {
+            parameters.addAll(ability.getParameters());
           }
         }
       }

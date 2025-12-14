@@ -1,4 +1,4 @@
-package com.matag.game.cardinstance.ability.selector;
+package com.matag.cards.ability.selector;
 
 import com.matag.cards.ability.selector.PowerToughnessConstraint;
 import com.matag.game.cardinstance.CardInstance;

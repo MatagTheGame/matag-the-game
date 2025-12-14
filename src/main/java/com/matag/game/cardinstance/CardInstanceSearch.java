@@ -12,7 +12,7 @@ import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.Color;
 import com.matag.cards.properties.Subtype;
 import com.matag.cards.properties.Type;
-import com.matag.game.cardinstance.ability.selector.PowerToughnessConstraintUtils;
+import com.matag.cards.ability.selector.PowerToughnessConstraintUtils;
 import com.matag.game.status.GameStatus;
 
 public class CardInstanceSearch {

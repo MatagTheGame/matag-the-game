@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 
 import com.matag.cards.ability.AbilityService;
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.cast.ManaCountService;
 import com.matag.game.turn.action.player.DrawXCardsService;
@@ -41,7 +40,6 @@ public class EntersTheBattlefieldWithService {
   private List<String> addEntersTheBattlefieldWithParameters(CardInstance cardInstance) {
     var entersTheBattlefieldWith = cardInstance.getAbilitiesByType(ENTERS_THE_BATTLEFIELD_WITH);
     return entersTheBattlefieldWith.stream()
-            .map(CardInstanceAbility::getAbility)
             .map(Ability::getParameters)
             .flatMap(Collection::stream)
             .collect(toList());
@@ -54,11 +52,11 @@ public class EntersTheBattlefieldWithService {
     for (var adamant : adamantAbilities) {
       var manaPaid = gameStatus.getTurn().getLastManaPaid();
       var manaPaidByColor = manaCountService.countManaPaid(manaPaid);
-      var adamantColor = adamant.getParameter(0);
+      var adamantColor = adamant.getParameters().getFirst();
       var adamantFulfilled = isAdamantFulfilled(manaPaidByColor, adamantColor);
 
       if (adamantFulfilled) {
-        parameters.addAll(adamant.getAbility().getAbility().getParameters());
+        parameters.addAll(adamant.getAbility().getParameters());
       }
     }
 

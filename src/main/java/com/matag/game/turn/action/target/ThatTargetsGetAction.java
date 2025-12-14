@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.AbilityAction;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.cards.ability.AbilityAction;
+import com.matag.cards.ability.Ability;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.permanent.PermanentGetService;
 import com.matag.game.turn.action.player.PlayerGetService;
@@ -23,7 +23,7 @@ public class ThatTargetsGetAction implements AbilityAction {
   private final PlayerGetService playerGetService;
 
   @Override
-  public void perform(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability) {
+  public void perform(CardInstance cardInstance, GameStatus gameStatus, Ability ability) {
     for (var i = 0; i < ability.getAbility().getTargets().size(); i++) {
       var target = ability.getAbility().getTargets().get(i);
       var targetId = targetCheckerService.getTargetIdAtIndex(cardInstance, ability, i);
@@ -39,22 +39,22 @@ public class ThatTargetsGetAction implements AbilityAction {
     }
   }
 
-  private void thatPlayerGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, String targetPlayer) {
+  private void thatPlayerGets(GameStatus gameStatus, CardInstance cardInstance, Ability ability, String targetPlayer) {
     var player = gameStatus.getPlayerByName(targetPlayer);
     playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getAbility().getParameters(), player);
   }
 
-  private void thatPermanentGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, int targetId) {
+  private void thatPermanentGets(GameStatus gameStatus, CardInstance cardInstance, Ability ability, int targetId) {
     var targetOptional = gameStatus.getAllBattlefieldCardsSearch().withId(targetId);
     thatTargetGets(gameStatus, cardInstance, ability, targetId, targetOptional);
   }
 
-  private void thatSpellGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, int targetId) {
+  private void thatSpellGets(GameStatus gameStatus, CardInstance cardInstance, Ability ability, int targetId) {
     var targetOptional = gameStatus.getStack().search().withId(targetId);
     thatTargetGets(gameStatus, cardInstance, ability, targetId, targetOptional);
   }
 
-  private void thatAnyTargetGets(CardInstance cardInstance, GameStatus gameStatus, CardInstanceAbility ability, Object targetId) {
+  private void thatAnyTargetGets(CardInstance cardInstance, GameStatus gameStatus, Ability ability, Object targetId) {
     if (targetId instanceof String) {
       thatPlayerGets(gameStatus, cardInstance, ability, (String) targetId);
     } else if (targetId instanceof Integer) {
@@ -62,7 +62,7 @@ public class ThatTargetsGetAction implements AbilityAction {
     }
   }
 
-  private void thatTargetGets(GameStatus gameStatus, CardInstance cardInstance, CardInstanceAbility ability, int targetCardId, java.util.Optional<CardInstance> targetOptional) {
+  private void thatTargetGets(GameStatus gameStatus, CardInstance cardInstance, Ability ability, int targetCardId, java.util.Optional<CardInstance> targetOptional) {
     if (targetOptional.isPresent()) {
       var target = targetOptional.get();
       permanentGetService.thatPermanentGets(cardInstance, gameStatus, ability.getAbility().getParameters(), target);

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.matag.cards.ability.Ability;
 import com.matag.cards.ability.type.AbilityType;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -47,10 +46,9 @@ public class Counters {
     keywordCounters.add(abilityType);
   }
 
-  public List<CardInstanceAbility> getKeywordCountersAbilities() {
+  public List<Ability> getKeywordCountersAbilities() {
     return keywordCounters.stream()
       .map(Ability::new)
-      .map(CardInstanceAbility::getCardInstanceAbility)
       .collect(toList());
   }
 

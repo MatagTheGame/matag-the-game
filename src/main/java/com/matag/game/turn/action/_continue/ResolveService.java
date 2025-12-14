@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.AbilityActionFactory;
@@ -69,7 +68,7 @@ public class ResolveService {
 
         } else if (!stackItemToResolve.getAcknowledgedBy().contains(otherPlayerName)) {
           var needsTargets = stackItemToResolve.getTriggeredAbilities().stream()
-            .map(CardInstanceAbility::getAbility)
+            .map(Ability::getAbility)
             .map(Ability::getTargets)
             .flatMap(List::stream)
             .anyMatch(target -> !target.getOptional());
@@ -138,7 +137,7 @@ public class ResolveService {
     return Arrays.stream(inputRequiredChoices.split(",")).map(Integer::parseInt).collect(Collectors.toList());
   }
 
-  private void performAbilitiesActions(GameStatus gameStatus, CardInstance cardToResolve, List<CardInstanceAbility> abilities) {
+  private void performAbilitiesActions(GameStatus gameStatus, CardInstance cardToResolve, List<Ability> abilities) {
     try {
       abilities.forEach(ability -> performAbilityAction(gameStatus, cardToResolve, ability));
     } catch (MessageException e) {
@@ -148,7 +147,7 @@ public class ResolveService {
     cardToResolve.getModifiers().resetTargets();
   }
 
-  private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve, CardInstanceAbility ability) {
+  private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve, Ability ability) {
     var abilityAction = abilityActionFactory.getAbilityAction(ability.getAbility().getAbilityType());
     if (abilityAction != null) {
       checkTargets(gameStatus, cardToResolve, ability);
@@ -156,7 +155,7 @@ public class ResolveService {
     }
   }
 
-  private void checkTargets(GameStatus gameStatus, CardInstance cardToResolve, CardInstanceAbility ability) {
+  private void checkTargets(GameStatus gameStatus, CardInstance cardToResolve, Ability ability) {
     for (var i = 0; i < ability.getAbility().getTargets().size(); i++) {
       var target = ability.getAbility().getTargets().get(i);
       var targetId = targetCheckerService.getTargetIdAtIndex(cardToResolve, ability, i);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.matag.cards.properties.PowerToughness;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.cards.ability.Ability;
 
 import lombok.Data;
 
@@ -12,7 +12,7 @@ import lombok.Data;
 public class CardModifiersUntilEndOfTurn {
   private boolean attacked;
   private boolean blocked;
-  private List<CardInstanceAbility> extraAbilities = new ArrayList<>();
+  private List<Ability> extraAbilities = new ArrayList<>();
   private PowerToughness extraPowerToughness = new PowerToughness(0, 0);
   private String newController;
   private boolean toBeDestroyed;

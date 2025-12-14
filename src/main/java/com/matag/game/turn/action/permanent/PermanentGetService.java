@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.matag.cards.ability.AbilityService;
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
+import com.matag.cards.ability.CardInstanceAbilityFactory;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.counters.CountersService;
 import com.matag.game.turn.action.damage.DealDamageToCreatureService;

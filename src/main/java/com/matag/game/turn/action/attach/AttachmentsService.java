@@ -14,8 +14,7 @@ import com.matag.cards.ability.AbilityService;
 import com.matag.cards.ability.type.AbilityType;
 import com.matag.cards.properties.PowerToughness;
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
-import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory;
+import com.matag.cards.ability.CardInstanceAbilityFactory;
 import com.matag.game.status.GameStatus;
 
 import lombok.AllArgsConstructor;
@@ -48,16 +47,16 @@ public class AttachmentsService {
       .orElse(0);
   }
 
-  public List<CardInstanceAbility> getAttachmentsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
+  public List<Ability> getAttachmentsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
     return getAttachedCardsAbilities(gameStatus, cardInstance).stream()
       .flatMap(ability -> cardInstanceAbilityFactory.abilitiesFromParameters(ability.getAbility().getParameters()).stream())
       .collect(Collectors.toList());
   }
 
-  private List<CardInstanceAbility> getAttachedCardsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
+  private List<Ability> getAttachedCardsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
     return getAttachedCards(gameStatus, cardInstance).stream()
       .flatMap(attachedCard -> attachedCard.getCard().getAbilities().stream())
-      .map(CardInstanceAbility::new)
+      .map(Ability::new)
       .filter(ability -> ATTACHED_ABILITY_TYPES.contains(ability.getAbility().getAbilityType()))
       .collect(Collectors.toList());
   }

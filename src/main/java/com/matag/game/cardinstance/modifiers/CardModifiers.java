@@ -6,7 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.matag.cards.properties.PowerToughness;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.cards.ability.Ability;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,7 +35,7 @@ public class CardModifiers {
   @JsonProperty
   private int damage;
   @JsonProperty
-  private List<CardInstanceAbility> abilities = new ArrayList<>();
+  private List<Ability> abilities = new ArrayList<>();
   @JsonProperty
   private List<Object> targets = new ArrayList<>();
   @JsonProperty

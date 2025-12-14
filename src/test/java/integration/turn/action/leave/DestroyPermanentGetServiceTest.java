@@ -2,7 +2,7 @@ package integration.turn.action.leave;
 
 import com.matag.cards.Cards;
 import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.cards.ability.Ability;
 import com.matag.game.turn.action.leave.DestroyPermanentService;
 import integration.TestUtils;
 import org.junit.jupiter.api.Test;
@@ -67,7 +67,7 @@ public class DestroyPermanentGetServiceTest {
     // Given
     var gameStatus = testUtils.testGameStatus();
     var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
-    cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new CardInstanceAbility(INDESTRUCTIBLE));
+    cardInstance.getModifiers().getModifiersUntilEndOfTurn().getExtraAbilities().add(new Ability(INDESTRUCTIBLE));
     gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
 
     // When

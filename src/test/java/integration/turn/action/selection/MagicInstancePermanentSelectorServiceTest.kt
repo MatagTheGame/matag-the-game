@@ -143,7 +143,7 @@ class MagicInstancePermanentSelectorServiceTest {
         val selection = selectorService!!.select(gameStatus, null, magicInstanceSelector).getCards()
 
         // Then
-        Assertions.assertThat<CardInstance?>(selection).containsExactly(creaturePower4)
+        Assertions.assertThat(selection).containsExactly(creaturePower4)
     }
 
     @Test
@@ -941,7 +941,7 @@ class MagicInstancePermanentSelectorServiceTest {
 
         val playerInstant = cardInstanceFactory.create(gameStatus, 5, cards.get("Disfigure"), "player-name")
         val playerInstantSelector =
-            playerInstant.getAbilities().get(0).ability.targets!!.get(0).magicInstanceSelector
+            playerInstant.getAbilities().get(0).targets!!.get(0).magicInstanceSelector
 
         // When
         val selection = selectorService!!.selectAsTarget(gameStatus, playerInstant, playerInstantSelector).getCards()

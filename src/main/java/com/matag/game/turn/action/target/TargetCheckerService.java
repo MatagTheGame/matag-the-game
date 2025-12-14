@@ -13,7 +13,7 @@ import com.matag.cards.ability.selector.SelectorType;
 import com.matag.cards.ability.target.Target;
 import com.matag.cards.ability.trigger.TriggerType;
 import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.ability.CardInstanceAbility;
+import com.matag.cards.ability.Ability;
 import com.matag.game.message.MessageException;
 import com.matag.game.status.GameStatus;
 import com.matag.game.turn.action.selection.MagicInstancePermanentSelectorService;
@@ -32,7 +32,7 @@ public class TargetCheckerService {
 
     var targetIndex = 0;
     for (var ability : playedAbilities) {
-      if (ability.requiresTarget()) {
+      if (!ability.getAbility().getTargets().isEmpty()) {
         checkThatTargetsAreDifferent(ability.getAbility().getTargets(), targetsIds);
         for (var i = 0; i < ability.getAbility().getTargets().size(); i++, targetIndex++) {
           var targetId = targetIndex < targetsIds.size() ? targetsIds.get(targetIndex) : null;
@@ -46,7 +46,7 @@ public class TargetCheckerService {
 
   public boolean checkIfRequiresTarget(CardInstance cardToCast) {
     for (var ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
-      return ability.requiresTarget();
+      return !ability.getAbility().getTargets().isEmpty();
     }
 
     return false;
@@ -54,7 +54,7 @@ public class TargetCheckerService {
 
   public boolean checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(CardInstance cardToCast, GameStatus gameStatus) {
     for (var ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
-      for (var target : ability.getAbility().getTargets()) {
+      for (var target : ability.getTargets()) {
         if (target.getMagicInstanceSelector().getSelectorType().equals(SelectorType.PLAYER)) {
           return true;
 
@@ -99,7 +99,7 @@ public class TargetCheckerService {
     }
   }
 
-  public Object getTargetIdAtIndex(CardInstance cardInstance, CardInstanceAbility ability, int index) {
+  public Object getTargetIdAtIndex(CardInstance cardInstance, Ability ability, int index) {
     var abilityIndex = cardInstance.getAbilities().indexOf(ability);
     var firstTargetIndex = 0;
     for (var i = 0; i < abilityIndex; i++) {
@@ -113,7 +113,7 @@ public class TargetCheckerService {
     return null;
   }
 
-  private List<CardInstanceAbility> playedAbilities(CardInstance cardToCast, String playedAbility) {
+  private List<Ability> playedAbilities(CardInstance cardToCast, String playedAbility) {
     if (playedAbility != null) {
       return cardToCast.getAbilitiesByType(AbilityType.valueOf(playedAbility));
     } else {

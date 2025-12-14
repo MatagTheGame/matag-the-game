@@ -3,7 +3,7 @@ package com.matag.game.turn.action;
 import org.springframework.stereotype.Component;
 
 import com.matag.cards.ability.type.AbilityType;
-import com.matag.game.cardinstance.ability.AbilityAction;
+import com.matag.cards.ability.AbilityAction;
 import com.matag.game.turn.action.attach.AttachAction;
 import com.matag.game.turn.action.selection.SelectedPermanentsGetAction;
 import com.matag.game.turn.action.shuffle.ShuffleTargetGraveyardIntoLibraryAction;

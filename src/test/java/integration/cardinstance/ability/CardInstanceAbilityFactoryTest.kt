@@ -1,9 +1,8 @@
 package integration.cardinstance.ability
 
+import com.matag.cards.ability.Ability
+import com.matag.cards.ability.CardInstanceAbilityFactory
 import com.matag.cards.ability.type.AbilityType
-import com.matag.game.cardinstance.ability.CardInstanceAbility
-import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.util.*
@@ -22,8 +21,8 @@ class CardInstanceAbilityFactoryTest {
         // Then
         assertThat(abilities).isEqualTo(
             listOf(
-                CardInstanceAbility(AbilityType.TRAMPLE),
-                CardInstanceAbility(AbilityType.HASTE)
+                Ability(AbilityType.TRAMPLE),
+                Ability(AbilityType.HASTE)
             )
         )
     }
@@ -49,6 +48,6 @@ class CardInstanceAbilityFactoryTest {
         val ability = cardInstanceAbilityFactory.abilityFromParameter(parameter)
 
         // Then
-        assertThat(ability).isEqualTo(Optional.of(CardInstanceAbility(AbilityType.TRAMPLE)))
+        assertThat(ability).isEqualTo(Optional.of(Ability(AbilityType.TRAMPLE)))
     }
 }
