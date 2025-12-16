@@ -33,7 +33,7 @@ public class PhaseHelper {
     try {
       matagBrowser.wait(attributeContains(PRIORITY_CSS_SELECTOR, "class", getClassNameLinkedToPriority(priority)));
     } catch (Exception e) {
-      LOGGER.warn("PhaseAndPriority:" + getPhase() + " " + getPriority());
+      LOGGER.warn("PhaseAndPriority:{} {}", getPhase(), getPriority());
       throw e;
     }
   }

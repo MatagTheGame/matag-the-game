@@ -224,7 +224,6 @@ export default class CardUtils {
   }
 
   static getAbilitiesForTriggerTypes(cardInstance, triggerTypes) {
-    console.log('cardInstance.abilities: ', cardInstance.abilities) // TODO the bug is here: fucking ability inheritance
     return cardInstance.abilities.filter(ability => triggerTypes.indexOf(get(ability, 'trigger.type')) > -1)
   }
 

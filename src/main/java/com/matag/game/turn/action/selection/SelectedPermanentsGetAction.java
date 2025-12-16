@@ -22,14 +22,14 @@ public class SelectedPermanentsGetAction implements AbilityAction {
 
   @Override
   public void perform(CardInstance cardInstance, GameStatus gameStatus, Ability ability) {
-    var magicInstanceSelector = ability.getAbility().getMagicInstanceSelector();
+    var magicInstanceSelector = ability.getMagicInstanceSelector();
     if (magicInstanceSelector.getSelectorType() == SelectorType.PLAYER) {
       magicInstancePlayerSelectorService.selectPlayers(gameStatus, cardInstance, magicInstanceSelector)
-        .forEach(player -> playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getAbility().getParameters(), player));
+        .forEach(player -> playerGetService.thatPlayerGets(cardInstance, gameStatus, ability.getParameters(), player));
 
     } else {
       magicInstancePermanentSelectorService.select(gameStatus, cardInstance, magicInstanceSelector).getCards()
-        .forEach(card -> permanentGetService.thatPermanentGets(cardInstance, gameStatus, ability.getAbility().getParameters(), card));
+        .forEach(card -> permanentGetService.thatPermanentGets(cardInstance, gameStatus, ability.getParameters(), card));
     }
   }
 }

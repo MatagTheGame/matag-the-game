@@ -32,11 +32,11 @@ public class TargetCheckerService {
 
     var targetIndex = 0;
     for (var ability : playedAbilities) {
-      if (!ability.getAbility().getTargets().isEmpty()) {
-        checkThatTargetsAreDifferent(ability.getAbility().getTargets(), targetsIds);
-        for (var i = 0; i < ability.getAbility().getTargets().size(); i++, targetIndex++) {
+      if (!ability.getTargets().isEmpty()) {
+        checkThatTargetsAreDifferent(ability.getTargets(), targetsIds);
+        for (var i = 0; i < ability.getTargets().size(); i++, targetIndex++) {
           var targetId = targetIndex < targetsIds.size() ? targetsIds.get(targetIndex) : null;
-          check(gameStatus, cardToCast, ability.getAbility().getTargets().get(i), targetId);
+          check(gameStatus, cardToCast, ability.getTargets().get(i), targetId);
         }
 
         cardToCast.getModifiers().addTargets(targetsIds);

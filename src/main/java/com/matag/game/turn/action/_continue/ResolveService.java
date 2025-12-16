@@ -55,7 +55,7 @@ public class ResolveService {
         var otherPlayerName = gameStatus.getOtherPlayer(controllerName).getName();
 
         stackItemToResolve.getTriggeredAbilities().stream()
-          .filter(triggeredAbility -> !triggeredAbility.getAbility().getTrigger().getType().equals(TriggerType.TRIGGERED_ABILITY))
+          .filter(triggeredAbility -> !triggeredAbility.getTrigger().getType().equals(TriggerType.TRIGGERED_ABILITY))
           .forEach(t -> stackItemToResolve.acknowledgedBy(controllerName));
 
         if (gameStatus.getActivePlayer().getName().equals(controllerName) && !stackItemToResolve.getAcknowledgedBy().contains(controllerName)) {
@@ -68,7 +68,6 @@ public class ResolveService {
 
         } else if (!stackItemToResolve.getAcknowledgedBy().contains(otherPlayerName)) {
           var needsTargets = stackItemToResolve.getTriggeredAbilities().stream()
-            .map(Ability::getAbility)
             .map(Ability::getTargets)
             .flatMap(List::stream)
             .anyMatch(target -> !target.getOptional());
@@ -148,7 +147,7 @@ public class ResolveService {
   }
 
   private void performAbilityAction(GameStatus gameStatus, CardInstance cardToResolve, Ability ability) {
-    var abilityAction = abilityActionFactory.getAbilityAction(ability.getAbility().getAbilityType());
+    var abilityAction = abilityActionFactory.getAbilityAction(ability.getAbilityType());
     if (abilityAction != null) {
       checkTargets(gameStatus, cardToResolve, ability);
       abilityAction.perform(cardToResolve, gameStatus, ability);
@@ -156,8 +155,8 @@ public class ResolveService {
   }
 
   private void checkTargets(GameStatus gameStatus, CardInstance cardToResolve, Ability ability) {
-    for (var i = 0; i < ability.getAbility().getTargets().size(); i++) {
-      var target = ability.getAbility().getTargets().get(i);
+    for (var i = 0; i < ability.getTargets().size(); i++) {
+      var target = ability.getTargets().get(i);
       var targetId = targetCheckerService.getTargetIdAtIndex(cardToResolve, ability, i);
       targetCheckerService.check(gameStatus, cardToResolve, target, targetId);
     }
