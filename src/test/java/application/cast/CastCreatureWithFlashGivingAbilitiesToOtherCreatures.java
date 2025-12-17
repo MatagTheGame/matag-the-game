@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static application.browser.BattlefieldHelper.*;
+import static com.matag.game.turn.phases.combat.BeginCombatPhase.BC;
 import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
 import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 import static com.matag.game.turn.phases.main2.Main2Phase.M2;
@@ -31,10 +32,12 @@ public class CastCreatureWithFlashGivingAbilitiesToOtherCreatures extends Abstra
   @Test
   public void testCreatureWithFlashGivingAbilitiesToOtherCreature() {
     // Going to combat
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(BC, PLAYER);
     browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
 
     // Attack with Ardenvale Paladin
     browser.player1().getBattlefieldHelper(PLAYER, SECOND_LINE).getFirstCard(cards.get("Ardenvale Paladin")).declareAsAttacker();
+    browser.player1().getActionHelper().clickContinueAndExpectPhase(DA, PLAYER);
     browser.player1().getActionHelper().clickContinueAndExpectPhase(DB, OPPONENT);
 
     // Block with Ancient Brontodon
