@@ -46,7 +46,7 @@ public class TargetCheckerService {
 
   public boolean checkIfRequiresTarget(CardInstance cardToCast) {
     for (var ability : cardToCast.getAbilitiesByType(THAT_TARGETS_GET)) {
-      return !ability.getAbility().getTargets().isEmpty();
+      return !ability.getTargets().isEmpty();
     }
 
     return false;
