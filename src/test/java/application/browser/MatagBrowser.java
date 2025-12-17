@@ -1,23 +1,19 @@
 package application.browser;
 
-import java.time.Duration;
-import java.util.ArrayList;
-
-import org.htmlunit.BrowserVersion;
+import com.matag.player.PlayerType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.htmlunit.options.HtmlUnitDriverOptions;
-import org.openqa.selenium.htmlunit.options.HtmlUnitOption;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.util.StringUtils;
 
-import com.matag.player.PlayerType;
+import java.time.Duration;
+import java.util.ArrayList;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MatagBrowser {
   private final WebDriver webDriver;
@@ -122,21 +118,25 @@ public class MatagBrowser {
   }
 
   private WebDriver getWebDriver() {
-    if (isChrome()) {
-      var webdriverUserDataDir = System.getProperty("webdriver.chrome.userDataDir");
+      checkChrome();
       var chromeOptions = new ChromeOptions();
-      chromeOptions.addArguments("user-data-dir=" + webdriverUserDataDir);
-      return new ChromeDriver(chromeOptions);
 
-    } else {
-      HtmlUnitDriverOptions driverOptions = new HtmlUnitDriverOptions(BrowserVersion.CHROME, true);
-      driverOptions.setCapability(HtmlUnitOption.optThrowExceptionOnScriptError, false);
-      return new HtmlUnitDriver(driverOptions);
-    }
+      var webdriverUserDataDir = System.getProperty("webdriver.chrome.userDataDir");
+      chromeOptions.addArguments("user-data-dir=" + webdriverUserDataDir);
+
+      var isHeadless = "true".equalsIgnoreCase(System.getProperty("webdriver.chrome.headless"));
+      if (isHeadless) {
+          chromeOptions.addArguments("--headless=new"); // "new" is the recommended flag for modern Chrome
+          chromeOptions.addArguments("--no-sandbox");    // Required for many CI environments
+          chromeOptions.addArguments("--disable-dev-shm-usage"); // Prevents memory issues in Docker/VMs
+          chromeOptions.addArguments("--window-size=1920,1080");
+      }
+
+      return new ChromeDriver(chromeOptions);
   }
 
-  public boolean isChrome() {
-    return StringUtils.hasText(System.getProperty("webdriver.chrome.driver"));
+  public void checkChrome() {
+      assertThat(System.getProperty("webdriver.chrome.driver")).isNotEmpty();
   }
 
   WebElement findElement(By element) {
