@@ -3,6 +3,7 @@ package application.browser;
 import java.time.Duration;
 import java.util.ArrayList;
 
+import org.htmlunit.BrowserVersion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -10,11 +11,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.htmlunit.options.HtmlUnitDriverOptions;
+import org.openqa.selenium.htmlunit.options.HtmlUnitOption;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.util.StringUtils;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.matag.player.PlayerType;
 
 public class MatagBrowser {
@@ -127,7 +129,9 @@ public class MatagBrowser {
       return new ChromeDriver(chromeOptions);
 
     } else {
-      return new HtmlUnitDriver(BrowserVersion.CHROME, true);
+      HtmlUnitDriverOptions driverOptions = new HtmlUnitDriverOptions(BrowserVersion.CHROME, true);
+      driverOptions.setCapability(HtmlUnitOption.optThrowExceptionOnScriptError, false);
+      return new HtmlUnitDriver(driverOptions);
     }
   }
 
