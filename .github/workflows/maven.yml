@@ -28,7 +28,7 @@ jobs:
       - name: Build with Maven
         run: mvn clean install -DskipTests
       - name: Test with Maven
-        run: mvn test -Dwebdriver.chrome.driver=/usr/local/share/chrome_driver/chromedriver -Dwebdriver.chrome.headless=true -DexcludedGroups="Regression"
+        run: mvn test -Dwebdriver.chrome.headless=true -DexcludedGroups="Regression"
 
 
   regression-test:
@@ -47,4 +47,4 @@ jobs:
       - name: Build with Maven
         run: mvn clean install -DskipTests
       - name: Test with Maven
-        run: mvn test -Dwebdriver.chrome.driver=/usr/local/share/chrome_driver/chromedriver -Dwebdriver.chrome.headless=true -Dgroups="Regression"
+        run: mvn test -Dwebdriver.chrome.headless=true -Dgroups="Regression"
