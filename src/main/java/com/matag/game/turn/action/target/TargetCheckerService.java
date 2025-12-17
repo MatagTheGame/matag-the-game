@@ -103,7 +103,7 @@ public class TargetCheckerService {
     var abilityIndex = cardInstance.getAbilities().indexOf(ability);
     var firstTargetIndex = 0;
     for (var i = 0; i < abilityIndex; i++) {
-      firstTargetIndex += cardInstance.getAbilities().get(i).getAbility().getTargets().size();
+      firstTargetIndex += cardInstance.getAbilities().get(i).getTargets().size();
     }
 
     if (cardInstance.getModifiers().getTargets().size() > firstTargetIndex + index) {

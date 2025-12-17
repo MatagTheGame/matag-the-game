@@ -33,7 +33,7 @@ public class AttachmentsService {
 
   public int getAttachmentsPower(GameStatus gameStatus, CardInstance cardInstance) {
     return getAttachedCardsAbilities(gameStatus, cardInstance).stream()
-      .map(ability -> abilityService.powerToughnessFromParameters(ability.getAbility().getParameters()))
+      .map(ability -> abilityService.powerToughnessFromParameters(ability.getParameters()))
       .map(PowerToughness::getPower)
       .reduce(Integer::sum)
       .orElse(0);
@@ -41,7 +41,7 @@ public class AttachmentsService {
 
   public int getAttachmentsToughness(GameStatus gameStatus, CardInstance cardInstance) {
     return getAttachedCardsAbilities(gameStatus, cardInstance).stream()
-      .map(ability -> abilityService.powerToughnessFromParameters(ability.getAbility().getParameters()))
+      .map(ability -> abilityService.powerToughnessFromParameters(ability.getParameters()))
       .map(PowerToughness::getToughness)
       .reduce(Integer::sum)
       .orElse(0);
@@ -49,7 +49,7 @@ public class AttachmentsService {
 
   public List<Ability> getAttachmentsAbilities(GameStatus gameStatus, CardInstance cardInstance) {
     return getAttachedCardsAbilities(gameStatus, cardInstance).stream()
-      .flatMap(ability -> cardInstanceAbilityFactory.abilitiesFromParameters(ability.getAbility().getParameters()).stream())
+      .flatMap(ability -> cardInstanceAbilityFactory.abilitiesFromParameters(ability.getParameters()).stream())
       .collect(Collectors.toList());
   }
 
@@ -57,7 +57,7 @@ public class AttachmentsService {
     return getAttachedCards(gameStatus, cardInstance).stream()
       .flatMap(attachedCard -> attachedCard.getCard().getAbilities().stream())
       .map(Ability::new)
-      .filter(ability -> ATTACHED_ABILITY_TYPES.contains(ability.getAbility().getAbilityType()))
+      .filter(ability -> ATTACHED_ABILITY_TYPES.contains(ability.getAbilityType()))
       .collect(Collectors.toList());
   }
 }
