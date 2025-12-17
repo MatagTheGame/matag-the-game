@@ -13,8 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.ArrayList;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class MatagBrowser {
   private final WebDriver webDriver;
   private final int port;
@@ -118,7 +116,6 @@ public class MatagBrowser {
   }
 
   private WebDriver getWebDriver() {
-      checkChrome();
       var chromeOptions = new ChromeOptions();
 
       var webdriverUserDataDir = System.getProperty("webdriver.chrome.userDataDir");
@@ -133,10 +130,6 @@ public class MatagBrowser {
       }
 
       return new ChromeDriver(chromeOptions);
-  }
-
-  public void checkChrome() {
-      assertThat(System.getProperty("webdriver.chrome.driver")).isNotEmpty();
   }
 
   WebElement findElement(By element) {

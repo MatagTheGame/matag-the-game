@@ -60,21 +60,16 @@ There are two types of java tests **application** and **integration**.
 #### Run application tests
 
 Application tests span the entire SpringBootApplication and open browser to hit the server.
-They run against Chrome.
+They run against Chrome (which must be installed on the machine).
 
 Change the following options in IntelliJ for all of your tests:
  - Run -> Edit Configuration -> Templates -> JUnit -> VM Options
-
-Install Chrome and the [chromedriver](https://googlechromelabs.github.io/chrome-for-testing/).
-Then change JUnit VM options in IntelliJ configuration adding:
-
-    -Dwebdriver.chrome.driver=/path/to/your/chromedriver
 
 If you want to run headless (which is how CI runs) set:
 
     -Dwebdriver.chrome.headless=true
 
-If you want to use a chromedriver version with some extensions (e.g. redux tools)
+If you want to use a Chrome with some extensions (e.g. redux tools)
 
     -Dwebdriver.chrome.userDataDir=/path/to/an/empty/folder
 
