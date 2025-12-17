@@ -5,6 +5,7 @@ import application.InitTestServiceDecorator;
 import com.matag.cards.Cards;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -15,7 +16,7 @@ import static com.matag.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
-//@Category(Regression.class)
+@Tag("RegressionTest")
 public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
 
   @Autowired

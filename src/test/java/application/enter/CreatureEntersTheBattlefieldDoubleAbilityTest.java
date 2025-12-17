@@ -5,6 +5,7 @@ import application.InitTestServiceDecorator;
 import com.matag.cards.Cards;
 import com.matag.game.init.test.InitTestService;
 import com.matag.game.status.GameStatus;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +15,7 @@ import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
-//@Category(Regression.class)
+@Tag("RegressionTest")
 public class CreatureEntersTheBattlefieldDoubleAbilityTest extends AbstractApplicationTest {
 
   @Autowired
