@@ -11,9 +11,7 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v5
       - name: Set up JDK 25
@@ -29,7 +27,6 @@ jobs:
         run: mvn clean install -DskipTests
       - name: Test with Maven
         run: mvn test -Dwebdriver.chrome.headless=true -DexcludedGroups="Regression"
-
 
   regression-test:
     runs-on: ubuntu-latest
