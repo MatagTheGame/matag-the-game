@@ -123,10 +123,11 @@ public class MatagBrowser {
 
       var isHeadless = "true".equalsIgnoreCase(System.getProperty("webdriver.chrome.headless"));
       if (isHeadless) {
-          chromeOptions.addArguments("--headless=new"); // "new" is the recommended flag for modern Chrome
-          chromeOptions.addArguments("--no-sandbox");    // Required for many CI environments
-          chromeOptions.addArguments("--disable-dev-shm-usage"); // Prevents memory issues in Docker/VMs
+          chromeOptions.addArguments("--headless=new");
+          chromeOptions.addArguments("--no-sandbox");
+          chromeOptions.addArguments("--disable-dev-shm-usage");
           chromeOptions.addArguments("--window-size=1920,1080");
+          chromeOptions.addArguments("--start-maximized");
       }
 
       return new ChromeDriver(chromeOptions);
@@ -137,7 +138,7 @@ public class MatagBrowser {
   }
 
   void wait(ExpectedCondition<?> condition) {
-    new WebDriverWait(webDriver, Duration.ofMillis(1500L), Duration.ofMillis(200L)).until(condition);
+    new WebDriverWait(webDriver, Duration.ofMillis(1500L), Duration.ofMillis(250L)).until(condition);
   }
 
   public void dumpContent() {
