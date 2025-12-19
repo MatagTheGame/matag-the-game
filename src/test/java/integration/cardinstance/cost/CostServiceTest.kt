@@ -26,6 +26,8 @@ class CostServiceTest(
     @param:Autowired val cardInstanceFactory: CardInstanceFactory,
     @param:Autowired val costService: CostService
 ) {
+    var cardInstanceId = 1
+
     @Test
     fun isCastingCostFulfilledFeralMaakaCorrectCosts() {
         // Given
@@ -222,7 +224,7 @@ class CostServiceTest(
     }
 
     private fun createCardInstance(gameStatus: GameStatus, cardName: String) =
-        cardInstanceFactory.create(gameStatus, 1, cards.get(cardName), "player-name", "player-name").also {
+        cardInstanceFactory.create(gameStatus, cardInstanceId++, cards.get(cardName), "player-name", "player-name").also {
             gameStatus.activePlayer.battlefield.addCard(it)
         }
 }
