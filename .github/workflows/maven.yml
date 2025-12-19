@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -27,13 +27,14 @@ jobs:
         run: mvn clean install -DskipTests
       - name: Test with Maven
         run: mvn test -Dwebdriver.chrome.headless=true -DexcludedGroups="RegressionTests"
-      - name: Publish Test Report
+      - name: Publish Tests Report
+        check_name: Tests Report
         uses: scacap/action-surefire-report@v1
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-  regression-test:
+  regression-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -50,7 +51,8 @@ jobs:
         run: mvn clean install -DskipTests
       - name: Test with Maven
         run: mvn test -Dwebdriver.chrome.headless=true -Dgroups="RegressionTests"
-      - name: Publish Regression Test Report
+      - name: Publish Regression Tests Report
+        check_name: Regression Tests Report
         uses: scacap/action-surefire-report@v1
         if: always()
         with:
