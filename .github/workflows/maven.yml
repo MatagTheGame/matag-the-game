@@ -27,6 +27,11 @@ jobs:
         run: mvn clean install -DskipTests
       - name: Test with Maven
         run: mvn test -Dwebdriver.chrome.headless=true -DexcludedGroups="RegressionTests"
+      - name: Publish Test Report
+        uses: scacap/action-surefire-report@v1
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   regression-test:
     runs-on: ubuntu-latest
@@ -45,3 +50,8 @@ jobs:
         run: mvn clean install -DskipTests
       - name: Test with Maven
         run: mvn test -Dwebdriver.chrome.headless=true -Dgroups="RegressionTests"
+      - name: Publish Regression Test Report
+        uses: scacap/action-surefire-report@v1
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
