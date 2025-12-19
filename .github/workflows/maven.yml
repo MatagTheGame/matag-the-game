@@ -28,10 +28,10 @@ jobs:
       - name: Test with Maven
         run: mvn test -Dwebdriver.chrome.headless=true -DexcludedGroups="RegressionTests"
       - name: Publish Tests Report
-        check_name: Tests Report
         uses: scacap/action-surefire-report@v1
         if: always()
         with:
+          check_name: Tests Report
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
   regression-tests:
@@ -52,8 +52,8 @@ jobs:
       - name: Test with Maven
         run: mvn test -Dwebdriver.chrome.headless=true -Dgroups="RegressionTests"
       - name: Publish Regression Tests Report
-        check_name: Regression Tests Report
         uses: scacap/action-surefire-report@v1
         if: always()
         with:
+          check_name: Regression Tests Report
           github_token: ${{ secrets.GITHUB_TOKEN }}
