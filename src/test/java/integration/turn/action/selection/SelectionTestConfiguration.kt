@@ -1,31 +1,24 @@
-package integration.turn.action.selection;
+package integration.turn.action.selection
 
-import org.mockito.Mockito;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
-
-import com.matag.game.turn.action.permanent.PermanentGetService;
-import com.matag.game.turn.action.player.PlayerGetService;
-
-import integration.TestUtilsConfiguration;
+import com.matag.game.turn.action.permanent.PermanentGetService
+import com.matag.game.turn.action.player.PlayerGetService
+import integration.TestUtilsConfiguration
+import org.mockito.Mockito
+import org.springframework.context.annotation.*
 
 @Configuration
 @ComponentScan("com.matag.game.turn.action.selection")
-@Import(TestUtilsConfiguration.class)
-public class SelectionTestConfiguration {
+@Import(TestUtilsConfiguration::class)
+open class SelectionTestConfiguration {
+    @Bean
+    @Primary
+    open fun permanentService(): PermanentGetService? {
+        return Mockito.mock<PermanentGetService?>(PermanentGetService::class.java)
+    }
 
-  @Bean
-  @Primary
-  public PermanentGetService permanentService() {
-    return Mockito.mock(PermanentGetService.class);
-  }
-
-  @Bean
-  @Primary
-  public PlayerGetService playerGetService() {
-    return Mockito.mock(PlayerGetService.class);
-  }
+    @Bean
+    @Primary
+    open fun playerGetService(): PlayerGetService? {
+        return Mockito.mock<PlayerGetService?>(PlayerGetService::class.java)
+    }
 }

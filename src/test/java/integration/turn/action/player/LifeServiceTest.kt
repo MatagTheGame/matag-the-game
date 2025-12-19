@@ -1,55 +1,53 @@
-package integration.turn.action.player;
+package integration.turn.action.player
 
-import com.matag.game.turn.action.finish.FinishGameService;
-import com.matag.game.turn.action.player.LifeService;
-import integration.TestUtils;
-import integration.TestUtilsConfiguration;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.matag.game.turn.action.finish.FinishGameService
+import com.matag.game.turn.action.player.LifeService
+import integration.TestUtils
+import integration.TestUtilsConfiguration
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mockito
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
+@ExtendWith(SpringExtension::class)
+@ContextConfiguration(classes = [PlayerTestConfiguration::class, TestUtilsConfiguration::class])
+class LifeServiceTest {
+    @Autowired
+    private val lifeService: LifeService? = null
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {PlayerTestConfiguration.class, TestUtilsConfiguration.class})
-public class LifeServiceTest {
+    @Autowired
+    private val testUtils: TestUtils? = null
 
-  @Autowired
-  private LifeService lifeService;
+    @Autowired
+    private val finishGameService: FinishGameService? = null
 
-  @Autowired
-  private TestUtils testUtils;
+    @Test
+    fun addLife() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val amount = 1
 
-  @Autowired
-  private FinishGameService finishGameService;
+        // When
+        lifeService!!.add(gameStatus.getPlayer1(), amount, gameStatus)
 
-  @Test
-  public void addLife() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var amount = 1;
+        // Then
+        Assertions.assertThat(gameStatus.getPlayer1().getLife()).isEqualTo(21)
+    }
 
-    // When
-    lifeService.add(gameStatus.getPlayer1(), amount, gameStatus);
+    @Test
+    fun loseLifeAndLoseGame() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val amount = -25
 
-    // Then
-    assertThat(gameStatus.getPlayer1().getLife()).isEqualTo(21);
-  }
+        // When
+        lifeService!!.add(gameStatus.getPlayer1(), amount, gameStatus)
 
-  @Test
-  public void loseLifeAndLoseGame() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var amount = -25;
-
-    // When
-    lifeService.add(gameStatus.getPlayer1(), amount, gameStatus);
-
-    // Then
-    assertThat(gameStatus.getPlayer1().getLife()).isEqualTo(-5);
-    verify(finishGameService).setWinner(gameStatus, gameStatus.getPlayer2());
-  }
+        // Then
+        Assertions.assertThat(gameStatus.getPlayer1().getLife()).isEqualTo(-5)
+        Mockito.verify<FinishGameService?>(finishGameService).setWinner(gameStatus, gameStatus.getPlayer2())
+    }
 }

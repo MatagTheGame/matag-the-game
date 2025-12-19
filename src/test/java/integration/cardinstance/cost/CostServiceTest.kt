@@ -1,243 +1,239 @@
-package integration.cardinstance.cost;
+package integration.cardinstance.cost
 
-import com.matag.cards.Cards;
-import com.matag.cards.CardsConfiguration;
-import com.matag.cards.properties.Cost;
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.cardinstance.cost.CostService;
-import com.matag.game.status.GameStatus;
-import integration.TestUtils;
-import integration.TestUtilsConfiguration;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.matag.cards.Cards
+import com.matag.cards.CardsConfiguration
+import com.matag.cards.properties.Cost
+import com.matag.game.cardinstance.CardInstance
+import com.matag.game.cardinstance.CardInstanceFactory
+import com.matag.game.cardinstance.cost.CostService
+import com.matag.game.status.GameStatus
+import integration.TestUtils
+import integration.TestUtilsConfiguration
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.util.*
 
-import java.util.ArrayList;
-import java.util.Collections;
+@ExtendWith(SpringExtension::class)
+@Import(CardsConfiguration::class, TestUtilsConfiguration::class)
+class CostServiceTest {
+    private var cardInstanceId = 60
 
-import static com.matag.cards.properties.Cost.*;
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
+    @Autowired
+    private val testUtils: TestUtils? = null
 
-@ExtendWith(SpringExtension.class)
-@Import({CardsConfiguration.class, TestUtilsConfiguration.class})
-public class CostServiceTest {
-  private int cardInstanceId = 60;
+    @Autowired
+    private val cards: Cards? = null
 
-  @Autowired
-  private TestUtils testUtils;
+    @Autowired
+    private val cardInstanceFactory: CardInstanceFactory? = null
 
-  @Autowired
-  private Cards cards;
+    @Autowired
+    private val costService: CostService? = null
 
-  @Autowired
-  private CardInstanceFactory cardInstanceFactory;
+    @Test
+    fun isCastingCostFulfilledFeralMaakaCorrectCosts() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = createCardInstance(gameStatus, "Feral Maaka")
+        val manaPaid = Arrays.asList<Cost?>(Cost.GREEN, Cost.RED)
 
-  @Autowired
-  private CostService costService;
+        // When
+        val fulfilled = costService!!.isCastingCostFulfilled(cardInstance, null, manaPaid)
 
-  @Test
-  public void isCastingCostFulfilledFeralMaakaCorrectCosts() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = createCardInstance(gameStatus, "Feral Maaka");
-    var manaPaid = asList(GREEN, RED);
+        // Then
+        Assertions.assertThat(fulfilled).isTrue()
+    }
 
-    // When
-    var fulfilled = costService.isCastingCostFulfilled(cardInstance, null, manaPaid);
+    @Test
+    fun isCastingCostFulfilledFeralMaakaNoMana() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = createCardInstance(gameStatus, "Feral Maaka")
+        val manaPaid = ArrayList<Cost?>()
 
-    // Then
-    assertThat(fulfilled).isTrue();
-  }
+        // When
+        val fulfilled = costService!!.isCastingCostFulfilled(cardInstance, null, manaPaid)
 
-  @Test
-  public void isCastingCostFulfilledFeralMaakaNoMana() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = createCardInstance(gameStatus, "Feral Maaka");
-    var manaPaid = new ArrayList<Cost>();
+        // Then
+        Assertions.assertThat(fulfilled).isFalse()
+    }
 
-    // When
-    var fulfilled = costService.isCastingCostFulfilled(cardInstance, null, manaPaid);
+    @Test
+    fun isCastingCostFulfilledFeralMaakaWrongCost() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = createCardInstance(gameStatus, "Feral Maaka")
+        val manaPaid = Arrays.asList<Cost?>(Cost.WHITE, Cost.GREEN)
 
-    // Then
-    assertThat(fulfilled).isFalse();
-  }
+        // When
+        val fulfilled = costService!!.isCastingCostFulfilled(cardInstance, null, manaPaid)
 
-  @Test
-  public void isCastingCostFulfilledFeralMaakaWrongCost() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = createCardInstance(gameStatus, "Feral Maaka");
-    var manaPaid = asList(WHITE, GREEN);
+        // Then
+        Assertions.assertThat(fulfilled).isFalse()
+    }
 
-    // When
-    var fulfilled = costService.isCastingCostFulfilled(cardInstance, null, manaPaid);
+    @Test
+    fun isCastingCostFulfilledFeralMaakaOneLessMana() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = createCardInstance(gameStatus, "Feral Maaka")
+        val manaPaid = mutableListOf<Cost?>(Cost.RED)
 
-    // Then
-    assertThat(fulfilled).isFalse();
-  }
+        // When
+        val fulfilled = costService!!.isCastingCostFulfilled(cardInstance, null, manaPaid)
 
-  @Test
-  public void isCastingCostFulfilledFeralMaakaOneLessMana() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = createCardInstance(gameStatus, "Feral Maaka");
-    var manaPaid = Collections.singletonList(RED);
+        // Then
+        Assertions.assertThat(fulfilled).isFalse()
+    }
 
-    // When
-    var fulfilled = costService.isCastingCostFulfilled(cardInstance, null, manaPaid);
+    @Test
+    fun isCastingCostFulfilledAxebaneBeastCorrectCosts() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = createCardInstance(gameStatus, "Axebane Beast")
+        val manaPaid = Arrays.asList<Cost?>(Cost.GREEN, Cost.GREEN, Cost.RED, Cost.RED)
 
-    // Then
-    assertThat(fulfilled).isFalse();
-  }
+        // When
+        val fulfilled = costService!!.isCastingCostFulfilled(cardInstance, null, manaPaid)
 
-  @Test
-  public void isCastingCostFulfilledAxebaneBeastCorrectCosts() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = createCardInstance(gameStatus, "Axebane Beast");
-    var manaPaid = asList(GREEN, GREEN, RED, RED);
+        // Then
+        Assertions.assertThat(fulfilled).isTrue()
+    }
 
-    // When
-    var fulfilled = costService.isCastingCostFulfilled(cardInstance, null, manaPaid);
+    @Test
+    fun isCastingCostFulfilledCheckpointOfficerTapAbility() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = createCardInstance(gameStatus, "Checkpoint Officer")
+        val manaPaid = Arrays.asList<Cost?>(Cost.WHITE, Cost.WHITE)
 
-    // Then
-    assertThat(fulfilled).isTrue();
-  }
+        // When
+        val fulfilled = costService!!.isCastingCostFulfilled(cardInstance, "THAT_TARGETS_GET", manaPaid)
 
-  @Test
-  public void isCastingCostFulfilledCheckpointOfficerTapAbility() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = createCardInstance(gameStatus, "Checkpoint Officer");
-    var manaPaid = asList(WHITE, WHITE);
+        // Then
+        Assertions.assertThat(fulfilled).isTrue()
+    }
 
-    // When
-    var fulfilled = costService.isCastingCostFulfilled(cardInstance, "THAT_TARGETS_GET", manaPaid);
+    @Test
+    fun isCastingCostFulfilledCheckpointOfficerTapAbilityOfTappedCreature() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = createCardInstance(gameStatus, "Checkpoint Officer")
+        cardInstance.getModifiers().setTapped(true)
+        val manaPaid = Arrays.asList<Cost?>(Cost.WHITE, Cost.WHITE)
 
-    // Then
-    assertThat(fulfilled).isTrue();
-  }
+        // When
+        val fulfilled = costService!!.isCastingCostFulfilled(cardInstance, "THAT_TARGETS_GET", manaPaid)
 
-  @Test
-  public void isCastingCostFulfilledCheckpointOfficerTapAbilityOfTappedCreature() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = createCardInstance(gameStatus, "Checkpoint Officer");
-    cardInstance.getModifiers().setTapped(true);
-    var manaPaid = asList(WHITE, WHITE);
+        // Then
+        Assertions.assertThat(fulfilled).isFalse()
+    }
 
-    // When
-    var fulfilled = costService.isCastingCostFulfilled(cardInstance, "THAT_TARGETS_GET", manaPaid);
+    @Test
+    fun canAffordReturnsFalseIfNoLandsAvailable() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = createCardInstance(gameStatus, "Axebane Beast")
 
-    // Then
-    assertThat(fulfilled).isFalse();
-  }
+        // When
+        val result = costService!!.canAfford(cardInstance, null, gameStatus)
 
-  @Test
-  public void canAffordReturnsFalseIfNoLandsAvailable() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = createCardInstance(gameStatus, "Axebane Beast");
+        // Then
+        Assertions.assertThat(result).isFalse()
+    }
 
-    // When
-    boolean result = costService.canAfford(cardInstance, null, gameStatus);
+    @Test
+    fun canAffordReturnsTrueIfEnoughMana() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        createCardInstance(gameStatus, "Forest")
+        createCardInstance(gameStatus, "Forest")
+        createCardInstance(gameStatus, "Forest")
+        createCardInstance(gameStatus, "Forest")
+        val cardInstance = createCardInstance(gameStatus, "Axebane Beast")
 
-    // Then
-    assertThat(result).isFalse();
-  }
+        // When
+        val result = costService!!.canAfford(cardInstance, null, gameStatus)
 
-  @Test
-  public void canAffordReturnsTrueIfEnoughMana() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    createCardInstance(gameStatus, "Forest");
-    createCardInstance(gameStatus, "Forest");
-    createCardInstance(gameStatus, "Forest");
-    createCardInstance(gameStatus, "Forest");
-    var cardInstance = createCardInstance(gameStatus, "Axebane Beast");
+        // Then
+        Assertions.assertThat(result).isTrue()
+    }
 
-    // When
-    boolean result = costService.canAfford(cardInstance, null, gameStatus);
+    @Test
+    fun canAffordReturnsTrueIfCorrectManaDualLands() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        createCardInstance(gameStatus, "Selesnya Guildgate") // GREEN, WHITE
+        createCardInstance(gameStatus, "Llanowar Elves") // GREEN
+        createCardInstance(gameStatus, "Leyline Prowler") // any color
+        val cardInstance = createCardInstance(gameStatus, "Skyknight Legionnaire") // "RED", "WHITE", "COLORLESS"
 
-    // Then
-    assertThat(result).isTrue();
-  }
+        // When
+        val result = costService!!.canAfford(cardInstance, null, gameStatus)
 
-  @Test
-  public void canAffordReturnsTrueIfCorrectManaDualLands() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    createCardInstance(gameStatus, "Selesnya Guildgate"); // GREEN, WHITE
-    createCardInstance(gameStatus, "Llanowar Elves"); // GREEN
-    createCardInstance(gameStatus, "Leyline Prowler"); // any color
-    var cardInstance = createCardInstance(gameStatus, "Skyknight Legionnaire"); // "RED", "WHITE", "COLORLESS"
+        // Then
+        Assertions.assertThat(result).isTrue()
+    }
 
-    // When
-    boolean result = costService.canAfford(cardInstance, null, gameStatus);
+    @Test
+    fun canAffordReturnsFalseIfWrongManaDualLands() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        createCardInstance(gameStatus, "Selesnya Guildgate") // GREEN, WHITE
+        createCardInstance(gameStatus, "Llanowar Elves") // GREEN
+        createCardInstance(gameStatus, "Dimir Guildgate") // BLUE, BLACK
+        val cardInstance = createCardInstance(gameStatus, "Skyknight Legionnaire") // "RED", "WHITE", "COLORLESS"
 
-    // Then
-    assertThat(result).isTrue();
-  }
+        // When
+        val result = costService!!.canAfford(cardInstance, null, gameStatus)
 
-  @Test
-  public void canAffordReturnsFalseIfWrongManaDualLands() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    createCardInstance(gameStatus, "Selesnya Guildgate"); // GREEN, WHITE
-    createCardInstance(gameStatus, "Llanowar Elves"); // GREEN
-    createCardInstance(gameStatus, "Dimir Guildgate"); // BLUE, BLACK
-    var cardInstance = createCardInstance(gameStatus, "Skyknight Legionnaire"); // "RED", "WHITE", "COLORLESS"
+        // Then
+        Assertions.assertThat(result).isFalse()
+    }
 
-    // When
-    boolean result = costService.canAfford(cardInstance, null, gameStatus);
+    @Test
+    fun cardThatReallyNeedsColorlessManaShouldFailIfNotColorlessManaFalse() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
 
-    // Then
-    assertThat(result).isFalse();
-  }
+        createCardInstance(gameStatus, "Forest")
 
-  @Test
-  public void cardThatReallyNeedsColorlessManaShouldFailIfNotColorlessManaFalse() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
+        val blindingDrone = createCardInstance(gameStatus, "Blinding Drone")
+        gameStatus.getPlayer1().getBattlefield().addCard(blindingDrone)
 
-    createCardInstance(gameStatus, "Forest");
+        // When
+        val result = costService!!.canAfford(blindingDrone, "THAT_TARGETS_GET", gameStatus)
 
-    CardInstance blindingDrone = createCardInstance(gameStatus, "Blinding Drone");
-    gameStatus.getPlayer1().getBattlefield().addCard(blindingDrone);
+        // Then
+        Assertions.assertThat(result).isFalse()
+    }
 
-    // When
-    boolean result = costService.canAfford(blindingDrone, "THAT_TARGETS_GET", gameStatus);
+    @Test
+    fun cardThatReallyNeedsColorlessManaShouldFailIfNotColorlessManaTrue() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
 
-    // Then
-    assertThat(result).isFalse();
-  }
+        createCardInstance(gameStatus, "Wastes")
 
-  @Test
-  public void cardThatReallyNeedsColorlessManaShouldFailIfNotColorlessManaTrue() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
+        val blindingDrone = createCardInstance(gameStatus, "Blinding Drone")
+        gameStatus.getPlayer1().getBattlefield().addCard(blindingDrone)
 
-    createCardInstance(gameStatus, "Wastes");
+        // When
+        val result = costService!!.canAfford(blindingDrone, "THAT_TARGETS_GET", gameStatus)
 
-    CardInstance blindingDrone = createCardInstance(gameStatus, "Blinding Drone");
-    gameStatus.getPlayer1().getBattlefield().addCard(blindingDrone);
+        // Then
+        Assertions.assertThat(result).isTrue()
+    }
 
-    // When
-    boolean result = costService.canAfford(blindingDrone, "THAT_TARGETS_GET", gameStatus);
-
-    // Then
-    assertThat(result).isTrue();
-  }
-
-  private CardInstance createCardInstance(GameStatus gameStatus, String cardName) {
-    var card = cards.get(cardName);
-    var cardInstance = cardInstanceFactory.create(gameStatus, ++cardInstanceId, card, "player-name", "player-name");
-    gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance);
-    return cardInstance;
-  }
+    private fun createCardInstance(gameStatus: GameStatus, cardName: String): CardInstance {
+        val card = cards!!.get(cardName)
+        val cardInstance =
+            cardInstanceFactory!!.create(gameStatus, ++cardInstanceId, card, "player-name", "player-name")
+        gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance)
+        return cardInstance
+    }
 }

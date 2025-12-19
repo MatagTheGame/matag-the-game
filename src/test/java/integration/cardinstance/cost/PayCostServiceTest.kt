@@ -1,91 +1,89 @@
-package integration.cardinstance.cost;
+package integration.cardinstance.cost
 
-import com.matag.cards.Cards;
-import com.matag.cards.CardsConfiguration;
-import com.matag.game.cardinstance.CardInstance;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.cardinstance.cost.PayCostService;
-import com.matag.game.status.GameStatus;
-import com.matag.game.turn.action.tap.TapPermanentService;
-import integration.TestUtils;
-import integration.TestUtilsConfiguration;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.matag.cards.Cards
+import com.matag.cards.CardsConfiguration
+import com.matag.game.cardinstance.CardInstance
+import com.matag.game.cardinstance.CardInstanceFactory
+import com.matag.game.cardinstance.cost.PayCostService
+import com.matag.game.status.GameStatus
+import com.matag.game.turn.action.tap.TapPermanentService
+import integration.TestUtils
+import integration.TestUtilsConfiguration
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mockito
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.util.Map
 
-import java.util.List;
-import java.util.Map;
+@ExtendWith(SpringExtension::class)
+@Import(CardsConfiguration::class, TestUtilsConfiguration::class)
+class PayCostServiceTest {
+    private var cardInstanceId = 60
 
-import static org.mockito.Mockito.verify;
+    @Autowired
+    private val testUtils: TestUtils? = null
 
-@ExtendWith(SpringExtension.class)
-@Import({CardsConfiguration.class, TestUtilsConfiguration.class})
-public class PayCostServiceTest {
-  private int cardInstanceId = 60;
+    @Autowired
+    private val cards: Cards? = null
 
-  @Autowired
-  private TestUtils testUtils;
+    @Autowired
+    private val cardInstanceFactory: CardInstanceFactory? = null
 
-  @Autowired
-  private Cards cards;
+    @Autowired
+    private val payCostService: PayCostService? = null
 
-  @Autowired
-  private CardInstanceFactory cardInstanceFactory;
+    @Autowired
+    private val tapPermanentService: TapPermanentService? = null
 
-  @Autowired
-  private PayCostService payCostService;
+    @Test
+    fun isCastingCostFulfilledFeralMaakaCorrectCosts() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = createCardInstance(gameStatus, "Feral Maaka")
+        val mountain1 = createCardInstance(gameStatus, "Mountain")
+        val mountain2 = createCardInstance(gameStatus, "Mountain")
 
-  @Autowired
-  private TapPermanentService tapPermanentService;
+        val manaPaid: MutableMap<Int, List<String>> = Map.of<Int, List<String>>(
+            mountain1.getId(), listOf("RED"),
+            mountain2.getId(), listOf("RED")
+        )
 
-  @Test
-  public void isCastingCostFulfilledFeralMaakaCorrectCosts() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = createCardInstance(gameStatus, "Feral Maaka");
-    var mountain1 = createCardInstance(gameStatus, "Mountain");
-    var mountain2 = createCardInstance(gameStatus, "Mountain");
+        // When
+        payCostService!!.pay(gameStatus, gameStatus.getActivePlayer(), cardInstance, null, manaPaid)
 
-    var manaPaid = Map.of(
-      mountain1.getId(), List.of("RED"),
-      mountain2.getId(), List.of("RED")
-    );
+        // Then
+        Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, mountain1.getId())
+        Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, mountain2.getId())
+    }
 
-    // When
-    payCostService.pay(gameStatus, gameStatus.getActivePlayer(), cardInstance, null, manaPaid);
+    @Test
+    fun isCastingCostFulfilledCheckpointOfficerTapAbility() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = createCardInstance(gameStatus, "Checkpoint Officer")
+        val plains1 = createCardInstance(gameStatus, "Plains")
+        val plains2 = createCardInstance(gameStatus, "Plains")
+        val manaPaid: MutableMap<Int, List<String>> = Map.of<Int, List<String>>(
+            plains1.getId(), listOf("WHITE"),
+            plains2.getId(), listOf("WHITE")
+        )
 
-    // Then
-    verify(tapPermanentService).tap(gameStatus, mountain1.getId());
-    verify(tapPermanentService).tap(gameStatus, mountain2.getId());
-  }
+        // When
+        payCostService!!.pay(gameStatus, gameStatus.getActivePlayer(), cardInstance, "THAT_TARGETS_GET", manaPaid)
 
-  @Test
-  public void isCastingCostFulfilledCheckpointOfficerTapAbility() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = createCardInstance(gameStatus, "Checkpoint Officer");
-    var plains1 = createCardInstance(gameStatus, "Plains");
-    var plains2 = createCardInstance(gameStatus, "Plains");
-    var manaPaid = Map.of(
-      plains1.getId(), List.of("WHITE"),
-      plains2.getId(), List.of("WHITE")
-    );
+        // Then
+        Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, plains1.getId())
+        Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, plains2.getId())
+        Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, cardInstance.getId())
+    }
 
-    // When
-    payCostService.pay(gameStatus, gameStatus.getActivePlayer(), cardInstance, "THAT_TARGETS_GET", manaPaid);
-
-    // Then
-    verify(tapPermanentService).tap(gameStatus, plains1.getId());
-    verify(tapPermanentService).tap(gameStatus, plains2.getId());
-    verify(tapPermanentService).tap(gameStatus, cardInstance.getId());
-  }
-
-  private CardInstance createCardInstance(GameStatus gameStatus, String cardName) {
-    var card = cards.get(cardName);
-    var cardInstance = cardInstanceFactory.create(gameStatus, ++cardInstanceId, card, "player-name", "player-name");
-    gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance);
-    return cardInstance;
-  }
+    private fun createCardInstance(gameStatus: GameStatus, cardName: String): CardInstance {
+        val card = cards!!.get(cardName)
+        val cardInstance =
+            cardInstanceFactory!!.create(gameStatus, ++cardInstanceId, card, "player-name", "player-name")
+        gameStatus.getActivePlayer().getBattlefield().addCard(cardInstance)
+        return cardInstance
+    }
 }

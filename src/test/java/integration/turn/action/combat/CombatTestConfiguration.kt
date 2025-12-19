@@ -1,52 +1,45 @@
-package integration.turn.action.combat;
+package integration.turn.action.combat
 
-import org.mockito.Mockito;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
-
-import com.matag.game.turn.action._continue.ContinueService;
-import com.matag.game.turn.action.damage.DealDamageToCreatureService;
-import com.matag.game.turn.action.damage.DealDamageToPlayerService;
-import com.matag.game.turn.action.player.LifeService;
-import com.matag.game.turn.action.trigger.WhenTriggerService;
-
-import integration.TestUtilsConfiguration;
+import com.matag.game.turn.action._continue.ContinueService
+import com.matag.game.turn.action.damage.DealDamageToCreatureService
+import com.matag.game.turn.action.damage.DealDamageToPlayerService
+import com.matag.game.turn.action.player.LifeService
+import com.matag.game.turn.action.trigger.WhenTriggerService
+import integration.TestUtilsConfiguration
+import org.mockito.Mockito
+import org.springframework.context.annotation.*
 
 @Configuration
 @ComponentScan("com.matag.game.turn.action.combat")
-@Import(TestUtilsConfiguration.class)
-public class CombatTestConfiguration {
+@Import(TestUtilsConfiguration::class)
+open class CombatTestConfiguration {
+    @Bean
+    @Primary
+    open fun lifeService(): LifeService? {
+        return Mockito.mock<LifeService?>(LifeService::class.java)
+    }
 
-  @Bean
-  @Primary
-  public LifeService lifeService() {
-    return Mockito.mock(LifeService.class);
-  }
+    @Bean
+    @Primary
+    open fun dealDamageToCreatureService(): DealDamageToCreatureService? {
+        return Mockito.mock<DealDamageToCreatureService?>(DealDamageToCreatureService::class.java)
+    }
 
-  @Bean
-  @Primary
-  public DealDamageToCreatureService dealDamageToCreatureService() {
-    return Mockito.mock(DealDamageToCreatureService.class);
-  }
+    @Bean
+    @Primary
+    open fun dealDamageToPlayerService(): DealDamageToPlayerService? {
+        return Mockito.mock<DealDamageToPlayerService?>(DealDamageToPlayerService::class.java)
+    }
 
-  @Bean
-  @Primary
-  public DealDamageToPlayerService dealDamageToPlayerService() {
-    return Mockito.mock(DealDamageToPlayerService.class);
-  }
+    @Bean
+    @Primary
+    open fun continueTurnService(): ContinueService? {
+        return Mockito.mock<ContinueService?>(ContinueService::class.java)
+    }
 
-  @Bean
-  @Primary
-  public ContinueService continueTurnService() {
-    return Mockito.mock(ContinueService.class);
-  }
-
-  @Bean
-  @Primary
-  public WhenTriggerService whenTriggerService() {
-    return Mockito.mock(WhenTriggerService.class);
-  }
+    @Bean
+    @Primary
+    open fun whenTriggerService(): WhenTriggerService? {
+        return Mockito.mock<WhenTriggerService?>(WhenTriggerService::class.java)
+    }
 }

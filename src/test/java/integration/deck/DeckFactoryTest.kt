@@ -1,41 +1,41 @@
-package integration.deck;
+package integration.deck
 
-import com.matag.adminentities.DeckInfo;
-import com.matag.cards.Cards;
-import com.matag.game.deck.DeckFactory;
-import integration.TestUtils;
-import integration.TestUtilsConfiguration;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.matag.adminentities.DeckInfo
+import com.matag.cards.Card
+import com.matag.cards.Cards
+import com.matag.game.cardinstance.CardInstance
+import com.matag.game.deck.DeckFactory
+import integration.TestUtils
+import integration.TestUtilsConfiguration
+import org.assertj.core.api.AssertionsForInterfaceTypes
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.util.List
 
-import java.util.List;
+@ExtendWith(SpringExtension::class)
+@ContextConfiguration(classes = [TestUtilsConfiguration::class])
+class DeckFactoryTest {
+    @Autowired
+    private val testUtils: TestUtils? = null
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+    @Autowired
+    private val deckFactory: DeckFactory? = null
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TestUtilsConfiguration.class)
-public class DeckFactoryTest {
-  @Autowired
-  private TestUtils testUtils;
+    @Autowired
+    private val cards: Cards? = null
 
-  @Autowired
-  private DeckFactory deckFactory;
+    @Test
+    fun testFactory() {
+        // Given
+        val deckInfo = DeckInfo(List.of<Card?>(cards!!.get("Plains")))
 
-  @Autowired
-  private Cards cards;
+        // When
+        val cards = deckFactory!!.create("playerName", testUtils!!.testGameStatus(), deckInfo)
 
-  @Test
-  public void testFactory() {
-    // Given
-    var deckInfo = new DeckInfo(List.of(cards.get("Plains")));
-
-    // When
-    var cards = deckFactory.create("playerName", testUtils.testGameStatus(), deckInfo);
-
-    // Then
-    assertThat(cards).hasSize(1);
-  }
+        // Then
+        AssertionsForInterfaceTypes.assertThat<CardInstance?>(cards).hasSize(1)
+    }
 }

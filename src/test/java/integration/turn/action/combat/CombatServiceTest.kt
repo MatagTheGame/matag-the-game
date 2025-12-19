@@ -1,290 +1,320 @@
-package integration.turn.action.combat;
+package integration.turn.action.combat
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action.combat.CombatService;
-import com.matag.game.turn.action.combat.DeclareAttackerService;
-import com.matag.game.turn.action.combat.DeclareBlockerService;
-import com.matag.game.turn.action.damage.DealDamageToCreatureService;
-import com.matag.game.turn.action.damage.DealDamageToPlayerService;
-import com.matag.game.turn.action.player.LifeService;
-import com.matag.game.turn.action.trigger.WhenTriggerService;
-import integration.TestUtils;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.matag.cards.Cards
+import com.matag.cards.ability.trigger.TriggerSubtype
+import com.matag.game.cardinstance.CardInstanceFactory
+import com.matag.game.turn.action._continue.InputRequiredActions
+import com.matag.game.turn.action.combat.CombatService
+import com.matag.game.turn.action.combat.DeclareAttackerService
+import com.matag.game.turn.action.combat.DeclareBlockerService
+import com.matag.game.turn.action.damage.DealDamageToCreatureService
+import com.matag.game.turn.action.damage.DealDamageToPlayerService
+import com.matag.game.turn.action.player.LifeService
+import com.matag.game.turn.action.trigger.WhenTriggerService
+import com.matag.game.turn.phases.combat.DeclareAttackersPhase
+import com.matag.game.turn.phases.combat.DeclareBlockersPhase
+import com.matag.game.turn.phases.combat.FirstStrikePhase
+import integration.TestUtils
+import org.junit.jupiter.api.AfterEach
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mockito
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.util.Map
 
-import java.util.List;
-import java.util.Map;
+@ExtendWith(SpringExtension::class)
+@ContextConfiguration(classes = [CombatTestConfiguration::class])
+class CombatServiceTest {
+    @Autowired
+    private val cardInstanceFactory: CardInstanceFactory? = null
 
-import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_ATTACK;
-import static com.matag.cards.ability.trigger.TriggerSubtype.WHEN_BLOCK;
-import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_ATTACKERS;
-import static com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKERS;
-import static com.matag.game.turn.phases.combat.DeclareAttackersPhase.DA;
-import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
-import static com.matag.game.turn.phases.combat.FirstStrikePhase.FS;
-import static org.mockito.Mockito.*;
+    @Autowired
+    private val testUtils: TestUtils? = null
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = CombatTestConfiguration.class)
-public class CombatServiceTest {
-  private static final String PLAYER = "player-name";
-  public static final String OPPONENT = "opponent-name";
+    @Autowired
+    private val cards: Cards? = null
 
-  @Autowired
-  private CardInstanceFactory cardInstanceFactory;
+    @Autowired
+    private val combatService: CombatService? = null
 
-  @Autowired
-  private TestUtils testUtils;
+    @Autowired
+    private val declareAttackerService: DeclareAttackerService? = null
 
-  @Autowired
-  private Cards cards;
+    @Autowired
+    private val declareBlockerService: DeclareBlockerService? = null
 
-  @Autowired
-  private CombatService combatService;
+    @Autowired
+    private val dealDamageToPlayerService: DealDamageToPlayerService? = null
 
-  @Autowired
-  private DeclareAttackerService declareAttackerService;
+    @Autowired
+    private val dealDamageToCreatureService: DealDamageToCreatureService? = null
 
-  @Autowired
-  private DeclareBlockerService declareBlockerService;
+    @Autowired
+    private val lifeService: LifeService? = null
 
-  @Autowired
-  private DealDamageToPlayerService dealDamageToPlayerService;
+    @Autowired
+    private val whenTriggerService: WhenTriggerService? = null
 
-  @Autowired
-  private DealDamageToCreatureService dealDamageToCreatureService;
+    @AfterEach
+    fun cleanup() {
+        Mockito.reset<Any?>(lifeService, dealDamageToCreatureService, dealDamageToPlayerService)
+    }
 
-  @Autowired
-  private LifeService lifeService;
+    @Test
+    fun combatShouldWorkIfNoAttackingCreatures() {
+        combatService!!.dealCombatDamage(testUtils!!.testGameStatus())
+    }
 
-  @Autowired
-  private WhenTriggerService whenTriggerService;
+    @Test
+    fun unblockedCreatureDealsDamageToPlayer() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val attackingCreature =
+            cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Feral Maaka"), "player", "player")
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature)
 
-  @AfterEach
-  public void cleanup() {
-    Mockito.reset(lifeService, dealDamageToCreatureService, dealDamageToPlayerService);
-  }
+        // When
+        gameStatus.getTurn().setCurrentPhase(DeclareAttackersPhase.DA)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_ATTACKERS)
+        declareAttackerService!!.declareAttackers(gameStatus, mutableListOf<Int?>(1))
+        combatService!!.dealCombatDamage(gameStatus)
 
-  @Test
-  public void combatShouldWorkIfNoAttackingCreatures() {
-    combatService.dealCombatDamage(testUtils.testGameStatus());
-  }
+        // Then
+        Mockito.verify<DealDamageToPlayerService?>(dealDamageToPlayerService)
+            .dealDamageToPlayer(gameStatus, 2, gameStatus.getNonCurrentPlayer())
+    }
 
-  @Test
-  public void unblockedCreatureDealsDamageToPlayer() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), "player", "player");
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
+    @Test
+    fun lifelinkCreatureGainsLifeWhenDealingDamage() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val attackingCreature1 =
+            cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Vampire of the Dire Moon"), PLAYER, PLAYER)
+        val attackingCreature2 =
+            cardInstanceFactory.create(gameStatus, 2, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER)
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1)
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature2)
 
-    // When
-    gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
-    declareAttackerService.declareAttackers(gameStatus, List.of(1));
-    combatService.dealCombatDamage(gameStatus);
+        val blockingCreature =
+            cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT)
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature)
 
-    // Then
-    verify(dealDamageToPlayerService).dealDamageToPlayer(gameStatus, 2, gameStatus.getNonCurrentPlayer());
-  }
+        // When
+        gameStatus.getTurn().setCurrentPhase(DeclareAttackersPhase.DA)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_ATTACKERS)
+        declareAttackerService!!.declareAttackers(gameStatus, mutableListOf<Int?>(1, 2))
+        gameStatus.getTurn().setCurrentPhase(DeclareBlockersPhase.DB)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_BLOCKERS)
+        declareBlockerService!!.declareBlockers(gameStatus, Map.of<Int?, MutableList<Int?>?>(3, mutableListOf<Int?>(1)))
+        combatService!!.dealCombatDamage(gameStatus)
 
-  @Test
-  public void lifelinkCreatureGainsLifeWhenDealingDamage() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
-    var attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1);
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature2);
+        // Then
+        Mockito.verify<LifeService?>(lifeService).add(gameStatus.getCurrentPlayer(), 2, gameStatus)
+    }
 
-    var blockingCreature = cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
-    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
+    @Test
+    fun trampleCreatureDealsRemainingDamageToPlayer() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val attackingCreature =
+            cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Charging Monstrosaur"), PLAYER, PLAYER)
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature)
 
-    // When
-    gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
-    declareAttackerService.declareAttackers(gameStatus, List.of(1, 2));
-    gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
-    declareBlockerService.declareBlockers(gameStatus, Map.of(3, List.of(1)));
-    combatService.dealCombatDamage(gameStatus);
+        val blockingCreature =
+            cardInstanceFactory.create(gameStatus, 2, cards.get("Feral Maaka"), OPPONENT, OPPONENT)
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature)
 
-    // Then
-    verify(lifeService).add(gameStatus.getCurrentPlayer(), 2, gameStatus);
-  }
+        // When
+        gameStatus.getTurn().setCurrentPhase(DeclareAttackersPhase.DA)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_ATTACKERS)
+        declareAttackerService!!.declareAttackers(gameStatus, mutableListOf<Int?>(1))
+        gameStatus.getTurn().setCurrentPhase(DeclareBlockersPhase.DB)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_BLOCKERS)
+        declareBlockerService!!.declareBlockers(gameStatus, Map.of<Int?, MutableList<Int?>?>(2, mutableListOf<Int?>(1)))
+        combatService!!.dealCombatDamage(gameStatus)
 
-  @Test
-  public void trampleCreatureDealsRemainingDamageToPlayer() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Charging Monstrosaur"), PLAYER, PLAYER);
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
+        // Then
+        Mockito.verify<DealDamageToCreatureService?>(dealDamageToCreatureService)
+            .dealDamageToCreature(gameStatus, blockingCreature, 2, false, attackingCreature)
+        Mockito.verify<DealDamageToCreatureService?>(dealDamageToCreatureService)
+            .dealDamageToCreature(gameStatus, attackingCreature, 2, false, blockingCreature)
+        Mockito.verify<DealDamageToPlayerService?>(dealDamageToPlayerService)
+            .dealDamageToPlayer(gameStatus, 3, gameStatus.getNonCurrentPlayer())
+    }
 
-    var blockingCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
-    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
+    @Test
+    fun deathtouchDamageToCreature() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val attackingCreature =
+            cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Vampire of the Dire Moon"), PLAYER, PLAYER)
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature)
 
-    // When
-    gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
-    declareAttackerService.declareAttackers(gameStatus, List.of(1));
-    gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
-    declareBlockerService.declareBlockers(gameStatus, Map.of(2, List.of(1)));
-    combatService.dealCombatDamage(gameStatus);
+        val blockingCreature =
+            cardInstanceFactory.create(gameStatus, 2, cards.get("Feral Maaka"), OPPONENT, OPPONENT)
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature)
 
-    // Then
-    verify(dealDamageToCreatureService).dealDamageToCreature(gameStatus, blockingCreature, 2, false, attackingCreature);
-    verify(dealDamageToCreatureService).dealDamageToCreature(gameStatus, attackingCreature, 2, false, blockingCreature);
-    verify(dealDamageToPlayerService).dealDamageToPlayer(gameStatus, 3, gameStatus.getNonCurrentPlayer());
-  }
+        // When
+        gameStatus.getTurn().setCurrentPhase(DeclareAttackersPhase.DA)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_ATTACKERS)
+        declareAttackerService!!.declareAttackers(gameStatus, mutableListOf<Int?>(1))
+        gameStatus.getTurn().setCurrentPhase(DeclareBlockersPhase.DB)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_BLOCKERS)
+        declareBlockerService!!.declareBlockers(gameStatus, Map.of<Int?, MutableList<Int?>?>(2, mutableListOf<Int?>(1)))
+        combatService!!.dealCombatDamage(gameStatus)
 
-  @Test
-  public void deathtouchDamageToCreature() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
+        // Then
+        Mockito.verify<DealDamageToCreatureService?>(dealDamageToCreatureService)
+            .dealDamageToCreature(gameStatus, blockingCreature, 1, true, attackingCreature)
+        Mockito.verify<DealDamageToCreatureService?>(dealDamageToCreatureService)
+            .dealDamageToCreature(gameStatus, attackingCreature, 2, false, blockingCreature)
+    }
 
-    var blockingCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
-    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
+    @Test
+    fun lifelinkNotHappeningIfBlockedCreatureIsReturnedToHandAndNoDamageIsDealt() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val attackingCreature =
+            cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Vampire of the Dire Moon"), PLAYER, PLAYER)
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature)
 
-    // When
-    gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
-    declareAttackerService.declareAttackers(gameStatus, List.of(1));
-    gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
-    declareBlockerService.declareBlockers(gameStatus, Map.of(2, List.of(1)));
-    combatService.dealCombatDamage(gameStatus);
+        val blockingCreature =
+            cardInstanceFactory.create(gameStatus, 2, cards.get("Feral Maaka"), OPPONENT, OPPONENT)
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature)
 
-    // Then
-    verify(dealDamageToCreatureService).dealDamageToCreature(gameStatus, blockingCreature, 1, true, attackingCreature);
-    verify(dealDamageToCreatureService).dealDamageToCreature(gameStatus, attackingCreature, 2, false, blockingCreature);
-  }
+        // When
+        gameStatus.getTurn().setCurrentPhase(DeclareAttackersPhase.DA)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_ATTACKERS)
+        declareAttackerService!!.declareAttackers(gameStatus, mutableListOf<Int?>(1))
+        gameStatus.getTurn().setCurrentPhase(DeclareBlockersPhase.DB)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_BLOCKERS)
+        declareBlockerService!!.declareBlockers(gameStatus, Map.of<Int?, MutableList<Int?>?>(2, mutableListOf<Int?>(1)))
+        gameStatus.extractCardByIdFromAnyBattlefield(2)
+        combatService!!.dealCombatDamage(gameStatus)
 
-  @Test
-  public void lifelinkNotHappeningIfBlockedCreatureIsReturnedToHandAndNoDamageIsDealt() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Vampire of the Dire Moon"), PLAYER, PLAYER);
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
+        // Then
+        Mockito.verifyNoInteractions(lifeService)
+        Mockito.verifyNoInteractions(dealDamageToPlayerService)
+        Mockito.verifyNoInteractions(dealDamageToCreatureService)
+    }
 
-    var blockingCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
-    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
+    @Test
+    fun onlyFirstStrikeAndDoubleStrikeCreaturesDealDamageDuringFirstStrike() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val attackingCreature1 =
+            cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Fencing Ace"), PLAYER, PLAYER) // 1/1 double strike
+        val attackingCreature2 = cardInstanceFactory.create(
+            gameStatus,
+            2,
+            cards.get("Youthful Knight"),
+            PLAYER,
+            PLAYER
+        ) // 2/1 first strike
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1)
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature2)
 
-    // When
-    gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
-    declareAttackerService.declareAttackers(gameStatus, List.of(1));
-    gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
-    declareBlockerService.declareBlockers(gameStatus, Map.of(2, List.of(1)));
-    gameStatus.extractCardByIdFromAnyBattlefield(2);
-    combatService.dealCombatDamage(gameStatus);
+        val blockingCreature =
+            cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT) // 2/2
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature)
 
-    // Then
-    verifyNoInteractions(lifeService);
-    verifyNoInteractions(dealDamageToPlayerService);
-    verifyNoInteractions(dealDamageToCreatureService);
-  }
+        // When
+        gameStatus.getTurn().setCurrentPhase(DeclareAttackersPhase.DA)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_ATTACKERS)
+        declareAttackerService!!.declareAttackers(gameStatus, mutableListOf<Int?>(1, 2))
+        gameStatus.getTurn().setCurrentPhase(DeclareBlockersPhase.DB)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_BLOCKERS)
+        declareBlockerService!!.declareBlockers(gameStatus, Map.of<Int?, MutableList<Int?>?>(3, mutableListOf<Int?>(1)))
+        gameStatus.getTurn().setCurrentPhase(FirstStrikePhase.FS)
+        combatService!!.dealCombatDamage(gameStatus)
 
-  @Test
-  public void onlyFirstStrikeAndDoubleStrikeCreaturesDealDamageDuringFirstStrike() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Fencing Ace"), PLAYER, PLAYER); // 1/1 double strike
-    var attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Youthful Knight"), PLAYER, PLAYER); // 2/1 first strike
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1);
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature2);
+        // Then
+        Mockito.verify<DealDamageToCreatureService?>(dealDamageToCreatureService)
+            .dealDamageToCreature(gameStatus, blockingCreature, 1, false, attackingCreature1)
+        Mockito.verifyNoMoreInteractions(dealDamageToCreatureService)
+        Mockito.verify<DealDamageToPlayerService?>(dealDamageToPlayerService)
+            .dealDamageToPlayer(gameStatus, 2, gameStatus.getNonCurrentPlayer())
+    }
 
-    var blockingCreature = cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT); // 2/2
-    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
+    @Test
+    fun firstStrikeCreaturesDoNotDealDamageDuringCombat() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val attackingCreature1 = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Fencing Ace"), PLAYER, PLAYER)
+        val attackingCreature2 =
+            cardInstanceFactory.create(gameStatus, 2, cards.get("Youthful Knight"), PLAYER, PLAYER)
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1)
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature2)
 
-    // When
-    gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
-    declareAttackerService.declareAttackers(gameStatus, List.of(1, 2));
-    gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
-    declareBlockerService.declareBlockers(gameStatus, Map.of(3, List.of(1)));
-    gameStatus.getTurn().setCurrentPhase(FS);
-    combatService.dealCombatDamage(gameStatus);
+        val blockingCreature =
+            cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT)
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature)
 
-    // Then
-    verify(dealDamageToCreatureService).dealDamageToCreature(gameStatus, blockingCreature, 1, false, attackingCreature1);
-    verifyNoMoreInteractions(dealDamageToCreatureService);
-    verify(dealDamageToPlayerService).dealDamageToPlayer(gameStatus, 2, gameStatus.getNonCurrentPlayer());
-  }
+        // When
+        gameStatus.getTurn().setCurrentPhase(DeclareAttackersPhase.DA)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_ATTACKERS)
+        declareAttackerService!!.declareAttackers(gameStatus, mutableListOf<Int?>(1, 2))
+        gameStatus.getTurn().setCurrentPhase(DeclareBlockersPhase.DB)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_BLOCKERS)
+        declareBlockerService!!.declareBlockers(gameStatus, Map.of<Int?, MutableList<Int?>?>(3, mutableListOf<Int?>(1)))
+        combatService!!.dealCombatDamage(gameStatus)
 
-  @Test
-  public void firstStrikeCreaturesDoNotDealDamageDuringCombat() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var attackingCreature1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Fencing Ace"), PLAYER, PLAYER);
-    var attackingCreature2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Youthful Knight"), PLAYER, PLAYER);
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature1);
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature2);
+        // Then
+        Mockito.verify<DealDamageToCreatureService?>(dealDamageToCreatureService)
+            .dealDamageToCreature(gameStatus, blockingCreature, 1, false, attackingCreature1)
+        Mockito.verify<DealDamageToCreatureService?>(dealDamageToCreatureService)
+            .dealDamageToCreature(gameStatus, attackingCreature1, 2, false, blockingCreature)
+        Mockito.verifyNoMoreInteractions(dealDamageToCreatureService)
+        Mockito.verifyNoInteractions(dealDamageToPlayerService)
+    }
 
-    var blockingCreature = cardInstanceFactory.create(gameStatus, 3, cards.get("Feral Maaka"), OPPONENT, OPPONENT);
-    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
+    @Test
+    fun declareAttackerTrigger() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val attackingCreature =
+            cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Brazen Wolves"), PLAYER, PLAYER)
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature)
 
-    // When
-    gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
-    declareAttackerService.declareAttackers(gameStatus, List.of(1, 2));
-    gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
-    declareBlockerService.declareBlockers(gameStatus, Map.of(3, List.of(1)));
-    combatService.dealCombatDamage(gameStatus);
+        // When
+        gameStatus.getTurn().setCurrentPhase(DeclareAttackersPhase.DA)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_ATTACKERS)
+        declareAttackerService!!.declareAttackers(gameStatus, mutableListOf<Int?>(1))
 
-    // Then
-    verify(dealDamageToCreatureService).dealDamageToCreature(gameStatus, blockingCreature, 1, false, attackingCreature1);
-    verify(dealDamageToCreatureService).dealDamageToCreature(gameStatus, attackingCreature1, 2, false, blockingCreature);
-    verifyNoMoreInteractions(dealDamageToCreatureService);
-    verifyNoInteractions(dealDamageToPlayerService);
-  }
+        // Then
+        Mockito.verify<WhenTriggerService?>(whenTriggerService)
+            .whenTriggered(gameStatus, attackingCreature, TriggerSubtype.WHEN_ATTACK)
+    }
 
-  @Test
-  public void declareAttackerTrigger() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Brazen Wolves"), PLAYER, PLAYER);
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
+    @Test
+    fun declareBlockerTrigger() {
+        // Given a creature is attacking
+        val gameStatus = testUtils!!.testGameStatus()
+        gameStatus.getTurn().setCurrentPhase(DeclareAttackersPhase.DA)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_ATTACKERS)
+        val attackingCreature = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Feral Maaka"), PLAYER, PLAYER)
+        gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature)
+        declareAttackerService!!.declareAttackers(gameStatus, mutableListOf<Int?>(1))
 
-    // When
-    gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
-    declareAttackerService.declareAttackers(gameStatus, List.of(1));
+        // And a creature with a when block trigger blocks it
+        val blockingCreature =
+            cardInstanceFactory.create(gameStatus, 2, cards.get("Hamlet Captain"), OPPONENT, OPPONENT)
+        gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature)
 
-    // Then
-    verify(whenTriggerService).whenTriggered(gameStatus, attackingCreature, WHEN_ATTACK);
-  }
+        // When
+        gameStatus.getTurn().setCurrentPhase(DeclareBlockersPhase.DB)
+        gameStatus.getTurn().setInputRequiredAction(InputRequiredActions.DECLARE_BLOCKERS)
+        declareBlockerService!!.declareBlockers(gameStatus, Map.of<Int?, MutableList<Int?>?>(2, mutableListOf<Int?>(1)))
 
-  @Test
-  public void declareBlockerTrigger() {
-    // Given a creature is attacking
-    var gameStatus = testUtils.testGameStatus();
-    gameStatus.getTurn().setCurrentPhase(DA);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_ATTACKERS);
-    var attackingCreature = cardInstanceFactory.create(gameStatus, 1, cards.get("Feral Maaka"), PLAYER, PLAYER);
-    gameStatus.getCurrentPlayer().getBattlefield().addCard(attackingCreature);
-    declareAttackerService.declareAttackers(gameStatus, List.of(1));
+        // Then
+        Mockito.verify<WhenTriggerService?>(whenTriggerService)
+            .whenTriggered(gameStatus, blockingCreature, TriggerSubtype.WHEN_BLOCK)
+    }
 
-    // And a creature with a when block trigger blocks it
-    var blockingCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Hamlet Captain"), OPPONENT, OPPONENT);
-    gameStatus.getNonCurrentPlayer().getBattlefield().addCard(blockingCreature);
-
-    // When
-    gameStatus.getTurn().setCurrentPhase(DB);
-    gameStatus.getTurn().setInputRequiredAction(DECLARE_BLOCKERS);
-    declareBlockerService.declareBlockers(gameStatus, Map.of(2, List.of(1)));
-
-    // Then
-    verify(whenTriggerService).whenTriggered(gameStatus, blockingCreature, WHEN_BLOCK);
-  }
+    companion object {
+        private const val PLAYER = "player-name"
+        const val OPPONENT: String = "opponent-name"
+    }
 }

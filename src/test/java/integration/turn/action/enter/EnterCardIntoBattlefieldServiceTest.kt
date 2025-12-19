@@ -1,183 +1,188 @@
-package integration.turn.action.enter;
+package integration.turn.action.enter
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
-import com.matag.game.turn.action.player.DrawXCardsService;
-import integration.TestUtils;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.matag.cards.Cards
+import com.matag.cards.ability.Ability
+import com.matag.game.cardinstance.CardInstance
+import com.matag.game.cardinstance.CardInstanceFactory
+import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService
+import com.matag.game.turn.action.player.DrawXCardsService
+import integration.TestUtils
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mockito
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import java.util.Map
 
-import java.util.Map;
+@ExtendWith(SpringExtension::class)
+@ContextConfiguration(classes = [EnterTestConfiguration::class])
+class EnterCardIntoBattlefieldServiceTest {
+    @Autowired
+    private val enterCardIntoBattlefieldService: EnterCardIntoBattlefieldService? = null
 
-import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+    @Autowired
+    private val cardInstanceFactory: CardInstanceFactory? = null
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = EnterTestConfiguration.class)
-public class EnterCardIntoBattlefieldServiceTest {
+    @Autowired
+    private val testUtils: TestUtils? = null
 
-  @Autowired
-  private EnterCardIntoBattlefieldService enterCardIntoBattlefieldService;
+    @Autowired
+    private val drawXCardsService: DrawXCardsService? = null
 
-  @Autowired
-  private CardInstanceFactory cardInstanceFactory;
+    @Autowired
+    private val cards: Cards? = null
 
-  @Autowired
-  private TestUtils testUtils;
+    @Test
+    fun enterTheBattlefield() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val card = cardInstanceFactory!!.create(gameStatus, 100, cards!!.get("Swamp"), "player-name")
+        card.setController("player-name")
 
-  @Autowired
-  private DrawXCardsService drawXCardsService;
+        // When
+        enterCardIntoBattlefieldService!!.enter(gameStatus, card)
 
-  @Autowired
-  private Cards cards;
+        // Then
+        Assertions.assertThat(card.getModifiers().getPermanentId()).isGreaterThan(0)
+        Assertions.assertThat<CardInstance?>(gameStatus.getPlayer1().getBattlefield().getCards()).contains(card)
+    }
 
-  @Test
-  public void enterTheBattlefield() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
-    card.setController("player-name");
+    @Test
+    fun enterTheBattlefieldOpponent() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val card = cardInstanceFactory!!.create(gameStatus, 100, cards!!.get("Swamp"), "opponent-name")
+        card.setController("opponent-name")
 
-    // When
-    enterCardIntoBattlefieldService.enter(gameStatus, card);
+        // When
+        enterCardIntoBattlefieldService!!.enter(gameStatus, card)
 
-    // Then
-    assertThat(card.getModifiers().getPermanentId()).isGreaterThan(0);
-    assertThat(gameStatus.getPlayer1().getBattlefield().getCards()).contains(card);
-  }
+        // Then
+        Assertions.assertThat(card.getModifiers().getPermanentId()).isGreaterThan(0)
+        Assertions.assertThat<CardInstance?>(gameStatus.getPlayer2().getBattlefield().getCards()).contains(card)
+    }
 
-  @Test
-  public void enterTheBattlefieldOpponent() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "opponent-name");
-    card.setController("opponent-name");
+    @Test
+    fun enterTheBattlefieldTapped() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val card = cardInstanceFactory!!.create(gameStatus, 100, cards!!.get("Diregraf Ghoul"), "player-name")
+        card.setController("player-name")
 
-    // When
-    enterCardIntoBattlefieldService.enter(gameStatus, card);
+        // When
+        enterCardIntoBattlefieldService!!.enter(gameStatus, card)
 
-    // Then
-    assertThat(card.getModifiers().getPermanentId()).isGreaterThan(0);
-    assertThat(gameStatus.getPlayer2().getBattlefield().getCards()).contains(card);
-  }
+        // Then
+        card.getModifiers().isTapped()
+    }
 
-  @Test
-  public void enterTheBattlefieldTapped() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Diregraf Ghoul"), "player-name");
-    card.setController("player-name");
+    @Test
+    fun enterTheBattlefieldTrigger() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val card = cardInstanceFactory!!.create(gameStatus, 100, cards!!.get("Jadecraft Artisan"), "player-name")
+        card.setController("player-name")
 
-    // When
-    enterCardIntoBattlefieldService.enter(gameStatus, card);
+        // When
+        enterCardIntoBattlefieldService!!.enter(gameStatus, card)
 
-    // Then
-    card.getModifiers().isTapped();
-  }
+        // Then
+        Assertions.assertThat<CardInstance?>(gameStatus.getStack().getItems()).contains(card)
+        Assertions.assertThat<Ability?>(card.getTriggeredAbilities()).hasSize(1)
+        Assertions.assertThat(card.getTriggeredAbilities().get(0).abilityTypeText).isEqualTo("That targets get +2/+2.")
+    }
 
-  @Test
-  public void enterTheBattlefieldTrigger() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Jadecraft Artisan"), "player-name");
-    card.setController("player-name");
+    @Test
+    fun enterTheBattlefieldAdamantTriggered() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val card = cardInstanceFactory!!.create(gameStatus, 100, cards!!.get("Ardenvale Paladin"), "player-name")
+        card.setController("player-name")
 
-    // When
-    enterCardIntoBattlefieldService.enter(gameStatus, card);
+        gameStatus.getTurn().setLastManaPaid(
+            Map.of<Int?, MutableList<String?>?>(
+                1, mutableListOf<String?>("WHITE"),
+                2, mutableListOf<String?>("WHITE"),
+                3, mutableListOf<String?>("WHITE"),
+                4, mutableListOf<String?>("BLUE")
+            )
+        )
 
-    // Then
-    assertThat(gameStatus.getStack().getItems()).contains(card);
-    assertThat(card.getTriggeredAbilities()).hasSize(1);
-    assertThat(card.getTriggeredAbilities().get(0).getAbilityTypeText()).isEqualTo("That targets get +2/+2.");
-  }
+        // When
+        enterCardIntoBattlefieldService!!.enter(gameStatus, card)
 
-  @Test
-  public void enterTheBattlefieldAdamantTriggered() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Ardenvale Paladin"), "player-name");
-    card.setController("player-name");
+        // Then
+        Assertions.assertThat(card.getModifiers().getCounters().getPlus1Counters()).isEqualTo(1)
+    }
 
-    gameStatus.getTurn().setLastManaPaid(Map.of(
-      1, singletonList("WHITE"),
-      2, singletonList("WHITE"),
-      3, singletonList("WHITE"),
-      4, singletonList("BLUE")
-    ));
+    @Test
+    fun enterTheBattlefieldAdamantNotTriggered() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val card = cardInstanceFactory!!.create(gameStatus, 100, cards!!.get("Ardenvale Paladin"), "player-name")
+        card.setController("player-name")
 
-    // When
-    enterCardIntoBattlefieldService.enter(gameStatus, card);
+        gameStatus.getTurn().setLastManaPaid(
+            Map.of<Int?, MutableList<String?>?>(
+                1, mutableListOf<String?>("WHITE"),
+                2, mutableListOf<String?>("WHITE"),
+                3, mutableListOf<String?>("BLUE"),
+                4, mutableListOf<String?>("BLUE")
+            )
+        )
 
-    // Then
-    assertThat(card.getModifiers().getCounters().getPlus1Counters()).isEqualTo(1);
-  }
+        // When
+        enterCardIntoBattlefieldService!!.enter(gameStatus, card)
 
-  @Test
-  public void enterTheBattlefieldAdamantNotTriggered() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Ardenvale Paladin"), "player-name");
-    card.setController("player-name");
+        // Then
+        Assertions.assertThat(card.getModifiers().getCounters().getPlus1Counters()).isEqualTo(0)
+    }
 
-    gameStatus.getTurn().setLastManaPaid(Map.of(
-      1, singletonList("WHITE"),
-      2, singletonList("WHITE"),
-      3, singletonList("BLUE"),
-      4, singletonList("BLUE")
-    ));
+    @Test
+    fun enterTheBattlefieldAdamantSameTriggered() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val card = cardInstanceFactory!!.create(gameStatus, 100, cards!!.get("Clockwork Servant"), "player-name")
+        card.setController("player-name")
 
-    // When
-    enterCardIntoBattlefieldService.enter(gameStatus, card);
+        gameStatus.getTurn().setLastManaPaid(
+            Map.of<Int?, MutableList<String?>?>(
+                1, mutableListOf<String?>("WHITE"),
+                2, mutableListOf<String?>("WHITE"),
+                3, mutableListOf<String?>("BLUE"),
+                4, mutableListOf<String?>("BLUE")
+            )
+        )
 
-    // Then
-    assertThat(card.getModifiers().getCounters().getPlus1Counters()).isEqualTo(0);
-  }
+        // When
+        enterCardIntoBattlefieldService!!.enter(gameStatus, card)
 
-  @Test
-  public void enterTheBattlefieldAdamantSameTriggered() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Clockwork Servant"), "player-name");
-    card.setController("player-name");
+        // Then
+        Mockito.verifyNoMoreInteractions(drawXCardsService)
+    }
 
-    gameStatus.getTurn().setLastManaPaid(Map.of(
-      1, singletonList("WHITE"),
-      2, singletonList("WHITE"),
-      3, singletonList("BLUE"),
-      4, singletonList("BLUE")
-    ));
+    @Test
+    fun enterTheBattlefieldAdamantSameNotTriggered() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val card = cardInstanceFactory!!.create(gameStatus, 100, cards!!.get("Clockwork Servant"), "player-name")
+        card.setController("player-name")
 
-    // When
-    enterCardIntoBattlefieldService.enter(gameStatus, card);
+        gameStatus.getTurn().setLastManaPaid(
+            Map.of<Int?, MutableList<String?>?>(
+                1, mutableListOf<String?>("BLACK"),
+                2, mutableListOf<String?>("BLACK"),
+                3, mutableListOf<String?>("BLUE"),
+                4, mutableListOf<String?>("BLACK")
+            )
+        )
 
-    // Then
-    verifyNoMoreInteractions(drawXCardsService);
-  }
+        // When
+        enterCardIntoBattlefieldService!!.enter(gameStatus, card)
 
-  @Test
-  public void enterTheBattlefieldAdamantSameNotTriggered() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Clockwork Servant"), "player-name");
-    card.setController("player-name");
-
-    gameStatus.getTurn().setLastManaPaid(Map.of(
-      1, singletonList("BLACK"),
-      2, singletonList("BLACK"),
-      3, singletonList("BLUE"),
-      4, singletonList("BLACK")
-    ));
-
-    // When
-    enterCardIntoBattlefieldService.enter(gameStatus, card);
-
-    // Then
-    verify(drawXCardsService).drawXCards(gameStatus.getPlayer1(), 1, gameStatus);
-  }
+        // Then
+        Mockito.verify<DrawXCardsService?>(drawXCardsService).drawXCards(gameStatus.getPlayer1(), 1, gameStatus)
+    }
 }

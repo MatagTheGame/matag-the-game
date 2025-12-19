@@ -1,54 +1,52 @@
-package integration.cardinstance;
+package integration.cardinstance
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import integration.TestUtils;
-import integration.TestUtilsConfiguration;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.matag.cards.Cards
+import com.matag.game.cardinstance.CardInstance
+import com.matag.game.cardinstance.CardInstanceFactory
+import integration.TestUtils
+import integration.TestUtilsConfiguration
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-import static org.assertj.core.api.Assertions.assertThat;
+@ExtendWith(SpringExtension::class)
+@ContextConfiguration(classes = [TestUtilsConfiguration::class])
+class CardInstanceFactoryTest {
+    @Autowired
+    private val cardInstanceFactory: CardInstanceFactory? = null
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TestUtilsConfiguration.class)
-public class CardInstanceFactoryTest {
+    @Autowired
+    private val cards: Cards? = null
 
-  @Autowired
-  private CardInstanceFactory cardInstanceFactory;
+    @Autowired
+    private val testUtils: TestUtils? = null
 
-  @Autowired
-  private Cards cards;
+    @Test
+    fun shouldCreateACardInstance() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
 
-  @Autowired
-  private TestUtils testUtils;
+        // When
+        val cardInstance = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Short Sword"), "player-name")
 
-  @Test
-  public void shouldCreateACardInstance() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
+        // Then
+        Assertions.assertThat(cardInstance.getId()).isEqualTo(1)
+        Assertions.assertThat(cardInstance.getOwner()).isEqualTo("player-name")
+    }
 
-    // When
-    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
+    @Test
+    fun shouldCreateTwoDifferentCardInstances() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
 
-    // Then
-    assertThat(cardInstance.getId()).isEqualTo(1);
-    assertThat(cardInstance.getOwner()).isEqualTo("player-name");
-  }
+        // When
+        val cardInstance1 = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Short Sword"), "player-name")
+        val cardInstance2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Befuddle"), "opponent-name")
 
-  @Test
-  public void shouldCreateTwoDifferentCardInstances() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-
-    // When
-    var cardInstance1 = cardInstanceFactory.create(gameStatus, 1, cards.get("Short Sword"), "player-name");
-    var cardInstance2 = cardInstanceFactory.create(gameStatus, 2, cards.get("Befuddle"), "opponent-name");
-
-    // Then
-    assertThat(cardInstance1).isNotSameAs(cardInstance2);
-  }
-
+        // Then
+        Assertions.assertThat<CardInstance?>(cardInstance1).isNotSameAs(cardInstance2)
+    }
 }

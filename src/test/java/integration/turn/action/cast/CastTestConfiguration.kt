@@ -1,40 +1,37 @@
-package integration.turn.action.cast;
+package integration.turn.action.cast
 
-import org.mockito.Mockito;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-
-import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService;
-import com.matag.game.turn.action.tap.TapPermanentService;
-import com.matag.game.turn.action.target.TargetCheckerService;
-import com.matag.game.turn.action.trigger.WhenTriggerService;
-
-import integration.TestUtilsConfiguration;
+import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService
+import com.matag.game.turn.action.tap.TapPermanentService
+import com.matag.game.turn.action.target.TargetCheckerService
+import com.matag.game.turn.action.trigger.WhenTriggerService
+import integration.TestUtilsConfiguration
+import org.mockito.Mockito
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
+import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Import
 
 @Configuration
 @ComponentScan("com.matag.game.turn.action.cast")
-@Import(TestUtilsConfiguration.class)
-public class CastTestConfiguration {
+@Import(TestUtilsConfiguration::class)
+open class CastTestConfiguration {
+    @Bean
+    open fun targetCheckerService(): TargetCheckerService? {
+        return Mockito.mock<TargetCheckerService?>(TargetCheckerService::class.java)
+    }
 
-  @Bean
-  public TargetCheckerService targetCheckerService() {
-    return Mockito.mock(TargetCheckerService.class);
-  }
+    @Bean
+    open fun enterCardIntoBattlefieldService(): EnterCardIntoBattlefieldService? {
+        return Mockito.mock<EnterCardIntoBattlefieldService?>(EnterCardIntoBattlefieldService::class.java)
+    }
 
-  @Bean
-  public EnterCardIntoBattlefieldService enterCardIntoBattlefieldService() {
-    return Mockito.mock(EnterCardIntoBattlefieldService.class);
-  }
+    @Bean
+    open fun tapPermanentService(): TapPermanentService? {
+        return Mockito.mock<TapPermanentService?>(TapPermanentService::class.java)
+    }
 
-  @Bean
-  public TapPermanentService tapPermanentService() {
-    return Mockito.mock(TapPermanentService.class);
-  }
-
-  @Bean
-  public WhenTriggerService whenTriggerService() {
-    return Mockito.mock(WhenTriggerService.class);
-  }
+    @Bean
+    open fun whenTriggerService(): WhenTriggerService? {
+        return Mockito.mock<WhenTriggerService?>(WhenTriggerService::class.java)
+    }
 }

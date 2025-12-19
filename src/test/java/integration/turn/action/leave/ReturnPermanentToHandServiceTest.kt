@@ -1,59 +1,60 @@
-package integration.turn.action.leave;
+package integration.turn.action.leave
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action.leave.ReturnPermanentToHandService;
-import integration.TestUtils;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.matag.cards.Cards
+import com.matag.game.cardinstance.CardInstance
+import com.matag.game.cardinstance.CardInstanceFactory
+import com.matag.game.turn.action.leave.ReturnPermanentToHandService
+import integration.TestUtils
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-import static org.assertj.core.api.Assertions.assertThat;
+@ExtendWith(SpringExtension::class)
+@ContextConfiguration(classes = [LeaveTestConfiguration::class])
+class ReturnPermanentToHandServiceTest {
+    @Autowired
+    private val returnPermanentToHandService: ReturnPermanentToHandService? = null
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = LeaveTestConfiguration.class)
-public class ReturnPermanentToHandServiceTest {
+    @Autowired
+    private val cardInstanceFactory: CardInstanceFactory? = null
 
-  @Autowired
-  private ReturnPermanentToHandService returnPermanentToHandService;
+    @Autowired
+    private val testUtils: TestUtils? = null
 
-  @Autowired
-  private CardInstanceFactory cardInstanceFactory;
+    @Autowired
+    private val cards: Cards? = null
 
-  @Autowired
-  private TestUtils testUtils;
+    @Test
+    fun testMarkReturnToHand() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance =
+            cardInstanceFactory!!.create(gameStatus, 61, cards!!.get("Canopy Spider"), "player-name", "player-name")
+        gameStatus.getPlayer1().getBattlefield().addCard(cardInstance)
 
-  @Autowired
-  private Cards cards;
+        // When
+        returnPermanentToHandService!!.markAsToBeReturnedToHand(gameStatus, 61)
 
-  @Test
-  public void testMarkReturnToHand() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
+        // Then
+        Assertions.assertThat(cardInstance.getModifiers().getModifiersUntilEndOfTurn().isToBeReturnedToHand()).isTrue()
+    }
 
-    // When
-    returnPermanentToHandService.markAsToBeReturnedToHand(gameStatus, 61);
+    @Test
+    fun testReturnToHand() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance =
+            cardInstanceFactory!!.create(gameStatus, 61, cards!!.get("Canopy Spider"), "player-name", "player-name")
+        gameStatus.getPlayer1().getBattlefield().addCard(cardInstance)
 
-    // Then
-    assertThat(cardInstance.getModifiers().getModifiersUntilEndOfTurn().isToBeReturnedToHand()).isTrue();
-  }
+        // When
+        returnPermanentToHandService!!.returnPermanentToHand(gameStatus, 61)
 
-  @Test
-  public void testReturnToHand() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = cardInstanceFactory.create(gameStatus, 61, cards.get("Canopy Spider"), "player-name", "player-name");
-    gameStatus.getPlayer1().getBattlefield().addCard(cardInstance);
-
-    // When
-    returnPermanentToHandService.returnPermanentToHand(gameStatus, 61);
-
-    // Then
-    assertThat(gameStatus.getPlayer1().getBattlefield().size()).isEqualTo(0);
-    assertThat(gameStatus.getPlayer1().getHand().getCards()).contains(cardInstance);
-  }
+        // Then
+        Assertions.assertThat(gameStatus.getPlayer1().getBattlefield().size()).isEqualTo(0)
+        Assertions.assertThat<CardInstance?>(gameStatus.getPlayer1().getHand().getCards()).contains(cardInstance)
+    }
 }

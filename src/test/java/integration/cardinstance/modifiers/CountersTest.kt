@@ -1,40 +1,38 @@
-package integration.cardinstance.modifiers;
+package integration.cardinstance.modifiers
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.matag.game.cardinstance.modifiers.Counters
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
 
-import org.junit.jupiter.api.Test;
+class CountersTest {
+    private val counters = Counters()
 
-import com.matag.game.cardinstance.modifiers.Counters;
+    @Test
+    fun addPlus1Counters() {
+        // When
+        counters.addPlus1Counters(1)
 
-public class CountersTest {
-  private Counters counters = new Counters();
+        // Then
+        Assertions.assertThat(counters.getPlus1Counters()).isEqualTo(1)
+    }
 
-  @Test
-  public void addPlus1Counters() {
-    // When
-    counters.addPlus1Counters(1);
+    @Test
+    fun addMinus1Counters() {
+        // When
+        counters.addMinus1Counters(2)
 
-    // Then
-    assertThat(counters.getPlus1Counters()).isEqualTo(1);
-  }
+        // Then
+        Assertions.assertThat(counters.getMinus1Counters()).isEqualTo(2)
+    }
 
-  @Test
-  public void addMinus1Counters() {
-    // When
-    counters.addMinus1Counters(2);
+    @Test
+    fun countersCancelsEachOther() {
+        // When
+        counters.addPlus1Counters(2)
+        counters.addMinus1Counters(1)
 
-    // Then
-    assertThat(counters.getMinus1Counters()).isEqualTo(2);
-  }
-
-  @Test
-  public void countersCancelsEachOther() {
-    // When
-    counters.addPlus1Counters(2);
-    counters.addMinus1Counters(1);
-
-    // Then
-    assertThat(counters.getPlus1Counters()).isEqualTo(1);
-    assertThat(counters.getMinus1Counters()).isEqualTo(0);
-  }
+        // Then
+        Assertions.assertThat(counters.getPlus1Counters()).isEqualTo(1)
+        Assertions.assertThat(counters.getMinus1Counters()).isEqualTo(0)
+    }
 }

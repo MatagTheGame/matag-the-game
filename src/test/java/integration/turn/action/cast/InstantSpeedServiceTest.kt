@@ -1,83 +1,82 @@
-package integration.turn.action.cast;
+package integration.turn.action.cast
 
-import com.matag.cards.Cards;
-import com.matag.game.cardinstance.CardInstanceFactory;
-import com.matag.game.turn.action.cast.InstantSpeedService;
-import integration.TestUtils;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import com.matag.cards.Cards
+import com.matag.game.cardinstance.CardInstanceFactory
+import com.matag.game.turn.action.cast.InstantSpeedService
+import integration.TestUtils
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.test.context.ContextConfiguration
+import org.springframework.test.context.junit.jupiter.SpringExtension
 
-import static org.assertj.core.api.Assertions.assertThat;
+@ExtendWith(SpringExtension::class)
+@ContextConfiguration(classes = [CastTestConfiguration::class])
+class InstantSpeedServiceTest {
+    @Autowired
+    private val instantSpeedService: InstantSpeedService? = null
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = CastTestConfiguration.class)
-public class InstantSpeedServiceTest {
-  @Autowired
-  private InstantSpeedService instantSpeedService;
+    @Autowired
+    private val cardInstanceFactory: CardInstanceFactory? = null
 
-  @Autowired
-  private CardInstanceFactory cardInstanceFactory;
+    @Autowired
+    private val testUtils: TestUtils? = null
 
-  @Autowired
-  private TestUtils testUtils;
+    @Autowired
+    private val cards: Cards? = null
 
-  @Autowired
-  private Cards cards;
+    @Test
+    fun isInstantSpeedReturnsFalseForLand() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Plains"), "player")
 
-  @Test
-  public void isInstantSpeedReturnsFalseForLand() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), "player");
+        // When
+        val result = instantSpeedService!!.isAtInstantSpeed(cardInstance, null)
 
-    // When
-    var result = instantSpeedService.isAtInstantSpeed(cardInstance, null);
+        // Then
+        Assertions.assertThat(result).isFalse()
+    }
 
-    // Then
-    assertThat(result).isFalse();
-  }
+    @Test
+    fun isInstantSpeedReturnsTrueForInstant() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Murder"), "player")
 
-  @Test
-  public void isInstantSpeedReturnsTrueForInstant() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Murder"), "player");
+        // When
+        val result = instantSpeedService!!.isAtInstantSpeed(cardInstance, null)
 
-    // When
-    var result = instantSpeedService.isAtInstantSpeed(cardInstance, null);
+        // Then
+        Assertions.assertThat(result).isTrue()
+    }
 
-    // Then
-    assertThat(result).isTrue();
-  }
+    @Test
+    fun isInstantSpeedReturnsTrueForMetropolisSpriteSelectedPermanentsGet() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Metropolis Sprite"), "player")
+        val playedAbility = "SELECTED_PERMANENTS_GET"
 
-  @Test
-  public void isInstantSpeedReturnsTrueForMetropolisSpriteSelectedPermanentsGet() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Metropolis Sprite"), "player");
-    var playedAbility = "SELECTED_PERMANENTS_GET";
+        // When
+        val result = instantSpeedService!!.isAtInstantSpeed(cardInstance, playedAbility)
 
-    // When
-    var result = instantSpeedService.isAtInstantSpeed(cardInstance, playedAbility);
+        // Then
+        Assertions.assertThat(result).isTrue()
+    }
 
-    // Then
-    assertThat(result).isTrue();
-  }
+    @Test
+    fun isInstantSpeedReturnsFalseForEquip() {
+        // Given
+        val gameStatus = testUtils!!.testGameStatus()
+        val cardInstance = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Cobbled Wings"), "player")
+        val playedAbility = "EQUIP"
 
-  @Test
-  public void isInstantSpeedReturnsFalseForEquip() {
-    // Given
-    var gameStatus = testUtils.testGameStatus();
-    var cardInstance = cardInstanceFactory.create(gameStatus, 1, cards.get("Cobbled Wings"), "player");
-    var playedAbility = "EQUIP";
+        // When
+        val result = instantSpeedService!!.isAtInstantSpeed(cardInstance, playedAbility)
 
-    // When
-    var result = instantSpeedService.isAtInstantSpeed(cardInstance, playedAbility);
-
-    // Then
-    assertThat(result).isFalse();
-  }
+        // Then
+        Assertions.assertThat(result).isFalse()
+    }
 }
