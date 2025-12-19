@@ -13,6 +13,6 @@ import org.springframework.context.annotation.Import
 open class CardsTestConfiguration {
     @Bean
     open fun tapPermanentService(): TapPermanentService? {
-        return Mockito.mock<TapPermanentService?>(TapPermanentService::class.java)
+        return Mockito.mock(TapPermanentService::class.java)
     }
 }
