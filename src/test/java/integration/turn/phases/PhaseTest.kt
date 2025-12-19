@@ -26,7 +26,7 @@ class PhaseTest(
     @CsvSource(
         "UT,UP",
         "EC,M2",
-        "CL,null",
+        "CL,UT",
         )
     fun nextPhaseUntap(phase: String, expectedNextPhase: String) {
         // Given
