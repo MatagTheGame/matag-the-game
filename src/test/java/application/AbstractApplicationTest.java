@@ -81,7 +81,7 @@ public abstract class AbstractApplicationTest {
     browser.getMessageHelper().hasMessage("Waiting for opponent...");
 
     // When player2 joins the game both players see the table with the cards
-    LOGGER.info("TOKEN_PLAYER2: " + TEST_ADMIN_TOKEN.get());
+    LOGGER.info("TOKEN_PLAYER2: {}", TEST_ADMIN_TOKEN.get());
     browser.openSecondTab();
 
     browser.player1().getPlayerInfoHelper(PLAYER).toHaveName();

@@ -137,7 +137,7 @@ public class MatagBrowser {
   }
 
   void wait(ExpectedCondition<?> condition) {
-    new WebDriverWait(webDriver, Duration.ofSeconds(1)).until(condition);
+    new WebDriverWait(webDriver, Duration.ofMillis(1500L), Duration.ofMillis(200L)).until(condition);
   }
 
   public void dumpContent() {
