@@ -221,9 +221,8 @@ class CostServiceTest(
         assertThat(result).isTrue()
     }
 
-    private fun createCardInstance(gameStatus: GameStatus, cardName: String): CardInstance {
-        return cardInstanceFactory.create(gameStatus, 1, cards.get(cardName), "player-name", "player-name").also {
+    private fun createCardInstance(gameStatus: GameStatus, cardName: String) =
+        cardInstanceFactory.create(gameStatus, 1, cards.get(cardName), "player-name", "player-name").also {
             gameStatus.activePlayer.battlefield.addCard(it)
         }
-    }
 }
