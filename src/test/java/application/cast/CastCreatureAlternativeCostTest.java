@@ -16,7 +16,7 @@ import static com.matag.player.PlayerType.PLAYER;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
-@Tag("RegressionTest")
+@Tag("RegressionTests")
 public class CastCreatureAlternativeCostTest extends AbstractApplicationTest {
 
   @Autowired

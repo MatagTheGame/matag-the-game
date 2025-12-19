@@ -15,7 +15,7 @@ import static com.matag.game.turn.phases.main1.Main1Phase.M1;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
-@Tag("RegressionTest")
+@Tag("RegressionTests")
 public class CastSorceryDestroyingCreatureTest extends AbstractApplicationTest {
 
   @Autowired

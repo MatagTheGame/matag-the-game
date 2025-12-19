@@ -17,7 +17,7 @@ import static com.matag.game.turn.phases.combat.DeclareBlockersPhase.DB;
 import static com.matag.player.PlayerType.OPPONENT;
 import static com.matag.player.PlayerType.PLAYER;
 
-@Tag("RegressionTest")
+@Tag("RegressionTests")
 public class CombatFlyingReachTest extends AbstractApplicationTest {
 
   @Autowired
