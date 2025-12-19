@@ -1,38 +1,29 @@
 package integration.cardinstance.cost
 
-import com.matag.cards.Cards
 import com.matag.cards.CardsConfiguration
 import com.matag.cards.properties.Cost
-import com.matag.game.cardinstance.CardInstance
-import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.cardinstance.cost.CostService
 import com.matag.game.status.GameStatus
 import integration.TestUtils
 import integration.TestUtilsConfiguration
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import java.util.*
 
 @ExtendWith(SpringExtension::class)
 @Import(CardsConfiguration::class, TestUtilsConfiguration::class)
 class CostServiceTest(
     @param:Autowired val testUtils: TestUtils,
-    @param:Autowired val cards: Cards,
-    @param:Autowired val cardInstanceFactory: CardInstanceFactory,
     @param:Autowired val costService: CostService
 ) {
-    var cardInstanceId = 1
-
     @Test
     fun isCastingCostFulfilledFeralMaakaCorrectCosts() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        val cardInstance = createCardInstance(gameStatus, "Feral Maaka")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Feral Maaka")
         val manaPaid = listOf(Cost.GREEN, Cost.RED)
 
         // When
@@ -46,7 +37,7 @@ class CostServiceTest(
     fun isCastingCostFulfilledFeralMaakaNoMana() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        val cardInstance = createCardInstance(gameStatus, "Feral Maaka")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Feral Maaka")
         val manaPaid = listOf<Cost>()
 
         // When
@@ -60,7 +51,7 @@ class CostServiceTest(
     fun isCastingCostFulfilledFeralMaakaWrongCost() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        val cardInstance = createCardInstance(gameStatus, "Feral Maaka")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Feral Maaka")
         val manaPaid = listOf(Cost.WHITE, Cost.GREEN)
 
         // When
@@ -74,7 +65,7 @@ class CostServiceTest(
     fun isCastingCostFulfilledFeralMaakaOneLessMana() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        val cardInstance = createCardInstance(gameStatus, "Feral Maaka")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Feral Maaka")
         val manaPaid = listOf(Cost.RED)
 
         // When
@@ -88,7 +79,7 @@ class CostServiceTest(
     fun isCastingCostFulfilledAxebaneBeastCorrectCosts() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        val cardInstance = createCardInstance(gameStatus, "Axebane Beast")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Axebane Beast")
         val manaPaid = listOf(Cost.GREEN, Cost.GREEN, Cost.RED, Cost.RED)
 
         // When
@@ -102,7 +93,7 @@ class CostServiceTest(
     fun isCastingCostFulfilledCheckpointOfficerTapAbility() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        val cardInstance = createCardInstance(gameStatus, "Checkpoint Officer")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Checkpoint Officer")
         val manaPaid = listOf(Cost.WHITE, Cost.WHITE)
 
         // When
@@ -116,7 +107,7 @@ class CostServiceTest(
     fun isCastingCostFulfilledCheckpointOfficerTapAbilityOfTappedCreature() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        val cardInstance = createCardInstance(gameStatus, "Checkpoint Officer")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Checkpoint Officer")
         cardInstance.modifiers.isTapped = true
         val manaPaid = listOf(Cost.WHITE, Cost.WHITE)
 
@@ -131,7 +122,7 @@ class CostServiceTest(
     fun canAffordReturnsFalseIfNoLandsAvailable() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        val cardInstance = createCardInstance(gameStatus, "Axebane Beast")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Axebane Beast")
 
         // When
         val result = costService.canAfford(cardInstance, null, gameStatus)
@@ -144,11 +135,11 @@ class CostServiceTest(
     fun canAffordReturnsTrueIfEnoughMana() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        createCardInstance(gameStatus, "Forest")
-        createCardInstance(gameStatus, "Forest")
-        createCardInstance(gameStatus, "Forest")
-        createCardInstance(gameStatus, "Forest")
-        val cardInstance = createCardInstance(gameStatus, "Axebane Beast")
+        addCardToPlayerBattlefield(gameStatus, "Forest")
+        addCardToPlayerBattlefield(gameStatus, "Forest")
+        addCardToPlayerBattlefield(gameStatus, "Forest")
+        addCardToPlayerBattlefield(gameStatus, "Forest")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Axebane Beast")
 
         // When
         val result = costService.canAfford(cardInstance, null, gameStatus)
@@ -161,10 +152,10 @@ class CostServiceTest(
     fun canAffordReturnsTrueIfCorrectManaDualLands() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        createCardInstance(gameStatus, "Selesnya Guildgate") // GREEN, WHITE
-        createCardInstance(gameStatus, "Llanowar Elves") // GREEN
-        createCardInstance(gameStatus, "Leyline Prowler") // any color
-        val cardInstance = createCardInstance(gameStatus, "Skyknight Legionnaire") // "RED", "WHITE", "COLORLESS"
+        addCardToPlayerBattlefield(gameStatus, "Selesnya Guildgate") // GREEN, WHITE
+        addCardToPlayerBattlefield(gameStatus, "Llanowar Elves") // GREEN
+        addCardToPlayerBattlefield(gameStatus, "Leyline Prowler") // any color
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Skyknight Legionnaire") // "RED", "WHITE", "COLORLESS"
 
         // When
         val result = costService.canAfford(cardInstance, null, gameStatus)
@@ -177,10 +168,10 @@ class CostServiceTest(
     fun canAffordReturnsFalseIfWrongManaDualLands() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        createCardInstance(gameStatus, "Selesnya Guildgate") // GREEN, WHITE
-        createCardInstance(gameStatus, "Llanowar Elves") // GREEN
-        createCardInstance(gameStatus, "Dimir Guildgate") // BLUE, BLACK
-        val cardInstance = createCardInstance(gameStatus, "Skyknight Legionnaire") // "RED", "WHITE", "COLORLESS"
+        addCardToPlayerBattlefield(gameStatus, "Selesnya Guildgate") // GREEN, WHITE
+        addCardToPlayerBattlefield(gameStatus, "Llanowar Elves") // GREEN
+        addCardToPlayerBattlefield(gameStatus, "Dimir Guildgate") // BLUE, BLACK
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Skyknight Legionnaire") // "RED", "WHITE", "COLORLESS"
 
         // When
         val result = costService.canAfford(cardInstance, null, gameStatus)
@@ -194,9 +185,9 @@ class CostServiceTest(
         // Given
         val gameStatus = testUtils.testGameStatus()
 
-        createCardInstance(gameStatus, "Forest")
+        addCardToPlayerBattlefield(gameStatus, "Forest")
 
-        val blindingDrone = createCardInstance(gameStatus, "Blinding Drone")
+        val blindingDrone = addCardToPlayerBattlefield(gameStatus, "Blinding Drone")
         gameStatus.player1.battlefield.addCard(blindingDrone)
 
         // When
@@ -211,9 +202,9 @@ class CostServiceTest(
         // Given
         val gameStatus = testUtils.testGameStatus()
 
-        createCardInstance(gameStatus, "Wastes")
+        addCardToPlayerBattlefield(gameStatus, "Wastes")
 
-        val blindingDrone = createCardInstance(gameStatus, "Blinding Drone")
+        val blindingDrone = addCardToPlayerBattlefield(gameStatus, "Blinding Drone")
         gameStatus.player1.battlefield.addCard(blindingDrone)
 
         // When
@@ -223,8 +214,8 @@ class CostServiceTest(
         assertThat(result).isTrue()
     }
 
-    private fun createCardInstance(gameStatus: GameStatus, cardName: String) =
-        cardInstanceFactory.create(gameStatus, cardInstanceId++, cards.get(cardName), "player-name", "player-name").also {
+    private fun addCardToPlayerBattlefield(gameStatus: GameStatus, cardName: String) =
+        testUtils.createCardInstance(gameStatus, cardName).also {
             gameStatus.activePlayer.battlefield.addCard(it)
         }
 }

@@ -1,10 +1,6 @@
 package integration.cardinstance.cost
 
-import com.matag.cards.Cards
 import com.matag.cards.CardsConfiguration
-import com.matag.game.cardinstance.CardInstance
-import com.matag.game.cardinstance.CardInstanceFactory
-import com.matag.game.cardinstance.cost.CostService
 import com.matag.game.cardinstance.cost.PayCostService
 import com.matag.game.status.GameStatus
 import com.matag.game.turn.action.tap.TapPermanentService
@@ -22,20 +18,16 @@ import java.util.Map
 @Import(CardsConfiguration::class, TestUtilsConfiguration::class)
 class PayCostServiceTest(
     @param:Autowired val testUtils: TestUtils,
-    @param:Autowired val cards: Cards,
-    @param:Autowired val cardInstanceFactory: CardInstanceFactory,
     @param:Autowired val payCostService: PayCostService,
     @param:Autowired val tapPermanentService: TapPermanentService
 ) {
-    var cardInstanceId = 1;
-
     @Test
     fun isCastingCostFulfilledFeralMaakaCorrectCosts() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        val cardInstance = createCardInstance(gameStatus, "Feral Maaka")
-        val mountain1 = createCardInstance(gameStatus, "Mountain")
-        val mountain2 = createCardInstance(gameStatus, "Mountain")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Feral Maaka")
+        val mountain1 = addCardToPlayerBattlefield(gameStatus, "Mountain")
+        val mountain2 = addCardToPlayerBattlefield(gameStatus, "Mountain")
 
         val manaPaid: MutableMap<Int, List<String>> = Map.of<Int, List<String>>(
             mountain1.getId(), listOf("RED"),
@@ -54,9 +46,9 @@ class PayCostServiceTest(
     fun isCastingCostFulfilledCheckpointOfficerTapAbility() {
         // Given
         val gameStatus = testUtils.testGameStatus()
-        val cardInstance = createCardInstance(gameStatus, "Checkpoint Officer")
-        val plains1 = createCardInstance(gameStatus, "Plains")
-        val plains2 = createCardInstance(gameStatus, "Plains")
+        val cardInstance = addCardToPlayerBattlefield(gameStatus, "Checkpoint Officer")
+        val plains1 = addCardToPlayerBattlefield(gameStatus, "Plains")
+        val plains2 = addCardToPlayerBattlefield(gameStatus, "Plains")
         val manaPaid: MutableMap<Int, List<String>> = Map.of<Int, List<String>>(
             plains1.getId(), listOf("WHITE"),
             plains2.getId(), listOf("WHITE")
@@ -71,8 +63,8 @@ class PayCostServiceTest(
         Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, cardInstance.getId())
     }
 
-    private fun createCardInstance(gameStatus: GameStatus, cardName: String) =
-        cardInstanceFactory.create(gameStatus, cardInstanceId++, cards.get(cardName), "player-name", "player-name").also {
+    private fun addCardToPlayerBattlefield(gameStatus: GameStatus, cardName: String) =
+        testUtils.createCardInstance(gameStatus, cardName).also {
             gameStatus.activePlayer.battlefield.addCard(it)
         }
 }

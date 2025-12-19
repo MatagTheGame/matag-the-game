@@ -20,39 +20,33 @@ class TestUtils @Autowired constructor(
     private val cardInstanceFactory: CardInstanceFactory,
     private val cards: Cards
 ) {
+    private var cardInstanceId = 1
+
     fun testGameStatus(): GameStatus {
         val gameStatus = gameStatusFactory.create("game-id")
 
         val player1 = PlayerInfo("player-name")
         val player1SecurityToken = SecurityToken("player-session", UUID.randomUUID().toString(), "1")
-        gameStatus.setPlayer1(playerFactory.create(player1SecurityToken, player1))
-        gameStatus.getPlayer1().getLibrary().addCards(testLibrary(gameStatus, player1.getPlayerName()))
-        gameStatus.getPlayer1().drawHand()
+        gameStatus.player1 = playerFactory.create(player1SecurityToken, player1)
+        gameStatus.player1.library.addCards(testLibrary(gameStatus, player1.getPlayerName()))
+        gameStatus.player1.drawHand()
 
         val player2 = PlayerInfo("opponent-name")
         val player2SecurityToken = SecurityToken("opponent-session", UUID.randomUUID().toString(), "1")
-        gameStatus.setPlayer2(playerFactory.create(player2SecurityToken, player2))
-        gameStatus.getPlayer2().getLibrary().addCards(testLibrary(gameStatus, player2.getPlayerName()))
-        gameStatus.getPlayer2().drawHand()
+        gameStatus.player2 = playerFactory.create(player2SecurityToken, player2)
+        gameStatus.player2.library.addCards(testLibrary(gameStatus, player2.getPlayerName()))
+        gameStatus.player2.drawHand()
 
-        gameStatus.getTurn().setCurrentTurnPlayer("player-name")
-        gameStatus.getTurn().setCurrentPhaseActivePlayer("player-name")
-        gameStatus.getTurn().setCurrentPhase(Main1Phase.M1)
+        gameStatus.turn.currentTurnPlayer = "player-name"
+        gameStatus.turn.currentPhaseActivePlayer = "player-name"
+        gameStatus.turn.currentPhase = Main1Phase.M1
 
         return gameStatus
     }
 
-    private fun testLibrary(gameStatus: GameStatus?, playerName: String?): MutableList<CardInstance?> {
-        return IntStream.rangeClosed(1, 40)
-            .boxed()
-            .map<CardInstance?> { i: Int? ->
-                cardInstanceFactory.create(
-                    gameStatus,
-                    i!!,
-                    cards.get("Plains"),
-                    playerName
-                )
-            }
-            .collect(Collectors.toList())
-    }
+    fun createCardInstance(gameStatus: GameStatus, cardName: String, owner: String = "player-name", controller: String = "player-name") =
+        cardInstanceFactory.create(gameStatus, cardInstanceId++, cards.get(cardName), owner, controller)
+
+    private fun testLibrary(gameStatus: GameStatus, playerName: String) =
+        (1..40).map { cardInstanceFactory.create(gameStatus, cardInstanceId++, cards.get("Plains"), playerName) }
 }

@@ -2,6 +2,7 @@ package integration.cardinstance.modifiers
 
 import com.matag.game.cardinstance.modifiers.Counters
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class CountersTest {
@@ -13,7 +14,7 @@ class CountersTest {
         counters.addPlus1Counters(1)
 
         // Then
-        Assertions.assertThat(counters.getPlus1Counters()).isEqualTo(1)
+        assertThat(counters.plus1Counters).isEqualTo(1)
     }
 
     @Test
@@ -22,7 +23,7 @@ class CountersTest {
         counters.addMinus1Counters(2)
 
         // Then
-        Assertions.assertThat(counters.getMinus1Counters()).isEqualTo(2)
+        assertThat(counters.minus1Counters).isEqualTo(2)
     }
 
     @Test
@@ -32,7 +33,7 @@ class CountersTest {
         counters.addMinus1Counters(1)
 
         // Then
-        Assertions.assertThat(counters.getPlus1Counters()).isEqualTo(1)
-        Assertions.assertThat(counters.getMinus1Counters()).isEqualTo(0)
+        assertThat(counters.plus1Counters).isEqualTo(1)
+        assertThat(counters.minus1Counters).isEqualTo(0)
     }
 }
