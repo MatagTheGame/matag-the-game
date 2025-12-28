@@ -7,7 +7,7 @@
     <server>
       <id>github-matag-cards</id>
       <username>antonioalonzi</username>
-      <password>${env.MAVEN_REPO_PASSWORD}</password>
+      <password>d5db92b2c94d460a77c8dd1f182082d94ebbe5e0</password>
     </server>
   </servers>
 </settings>
