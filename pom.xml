@@ -7,7 +7,7 @@
     <groupId>com.matag</groupId>
     <artifactId>game</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>MATAG</name>
     <url>https://github.com/MatagTheGame</url>
@@ -58,6 +58,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
             <version>${spring.boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <version>${spring.boot.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -128,17 +134,6 @@
                             <goal>yarn</goal>
                         </goals>
                     </execution>
-<!--                    <execution>-->
-<!--                        <id>compile</id>-->
-<!--                        <goals>-->
-<!--                            <goal>yarn</goal>-->
-<!--                        </goals>-->
-<!--                        <phase>compile</phase>-->
-<!--                        <configuration>-->
-<!--                            <yarnInheritsProxyConfigFromMaven>false</yarnInheritsProxyConfigFromMaven>-->
-<!--                            <arguments>run lint</arguments>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
                     <execution>
                         <id>tests</id>
                         <goals>
@@ -230,4 +225,13 @@
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>github-matag-the-game</id>
+            <name>Github Matag The Game Maven Packages</name>
+            <url>https://maven.pkg.github.com/MatagTheGame/matag-the-game</url>
+        </repository>
+    </distributionManagement>
 </project>

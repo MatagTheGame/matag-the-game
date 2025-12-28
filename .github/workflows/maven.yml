@@ -57,3 +57,5 @@ jobs:
         with:
           check_name: Regression Tests Report
           github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish
+        run: mvn -DskipTest deploy
