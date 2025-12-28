@@ -20,7 +20,7 @@
         <maven.surefire.plugin.version>3.5.4</maven.surefire.plugin.version>
         <frontend-maven-plugin.version>1.10.0</frontend-maven-plugin.version>
         <lombok.version>1.18.42</lombok.version>
-        <matag.version>2.0.0-SNAPSHOT</matag.version>
+        <matag-cards.version>2.0.0-SNAPSHOT</matag-cards.version>
         <spring.boot.version>4.0.0</spring.boot.version>
         <kotlin.version>2.2.0</kotlin.version>
         <junit.version>6.0.1</junit.version>
@@ -34,11 +34,6 @@
             <name>Github Cards Maven Packages</name>
             <url>https://maven.pkg.github.com/MatagTheGame/matag-cards</url>
         </repository>
-        <repository>
-            <id>github-matag-admin-entities</id>
-            <name>Github Admin Entities Maven Packages</name>
-            <url>https://maven.pkg.github.com/MatagTheGame/matag-admin-entities</url>
-        </repository>
     </repositories>
 
     <dependencies>
@@ -46,7 +41,7 @@
         <dependency>
             <groupId>com.matag</groupId>
             <artifactId>cards</artifactId>
-            <version>${matag.version}</version>
+            <version>${matag-cards.version}</version>
         </dependency>
 
         <dependency>
@@ -230,7 +225,7 @@
         <repository>
             <uniqueVersion>false</uniqueVersion>
             <id>github-matag-the-game</id>
-            <name>Github Matag The Game Maven Packages</name>
+            <name>Github Matag The Game War</name>
             <url>https://maven.pkg.github.com/MatagTheGame/matag-the-game</url>
         </repository>
     </distributionManagement>

@@ -9,10 +9,5 @@
       <username>antonioalonzi</username>
       <password>${env.MAVEN_REPO_PASSWORD}</password>
     </server>
-    <server>
-      <id>github-matag-admin-entities</id>
-      <username>antonioalonzi</username>
-      <password>${env.MAVEN_REPO_PASSWORD}</password>
-    </server>
   </servers>
 </settings>
