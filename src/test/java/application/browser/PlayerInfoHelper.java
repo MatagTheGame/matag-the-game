@@ -24,7 +24,7 @@ public class PlayerInfoHelper {
   public void toHaveName() {
     matagBrowser.wait(driver -> {
       LOGGER.info("playerName={}", getPlayerName());
-      return !getPlayerName().equals("");
+      return !getPlayerName().isEmpty();
     });
   }
 
