@@ -1,26 +1,17 @@
 package application.browser;
 
-import static java.util.stream.Collectors.toList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.openqa.selenium.support.ui.ExpectedConditions.attributeContains;
-import static org.openqa.selenium.support.ui.ExpectedConditions.invisibilityOfElementLocated;
-import static org.openqa.selenium.support.ui.ExpectedConditions.not;
-import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
-import static org.openqa.selenium.support.ui.ExpectedConditions.textToBe;
+import com.matag.cards.Card;
+import com.matag.cards.ability.type.AbilityType;
+import com.matag.player.PlayerType;
+import lombok.AllArgsConstructor;
+import org.openqa.selenium.*;
 
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.WebElement;
-
-import com.matag.cards.Card;
-import com.matag.cards.ability.type.AbilityType;
-import com.matag.player.PlayerType;
-
-import lombok.AllArgsConstructor;
+import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 @AllArgsConstructor
 public class CardHelper {
@@ -160,7 +151,7 @@ public class CardHelper {
       matagBrowser.findElement(locator);
       matagBrowser.wait(invisibilityOfElementLocated(locator));
 
-    } catch (NotFoundException e) {
+    } catch (TimeoutException | NotFoundException e) {
       System.out.println("Element " + locator + " is not present at all. That's okay.");
     }
   }
