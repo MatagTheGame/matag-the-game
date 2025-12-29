@@ -73,4 +73,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: echo "<settings><servers><server><id>github-matag-cards</id><username>MatagTheGame</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
       - name: Publish
-        run: mvn -DskipTest deploy
+        run: mvn -DskipTests deploy
