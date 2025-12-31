@@ -1,7 +1,9 @@
 import SockJs from 'sockjs-client'
 import {Stomp} from '@stomp/stompjs'
 
-const socket = new SockJs('/matag/game/game-ws')
+export const APP_BASE_PATH = '/matag/game'
+
+const socket = new SockJs(APP_BASE_PATH + '/game-ws')
 const stompClient = Stomp.over(socket)
 const gameId = window.location.pathname.split('/').pop()
 

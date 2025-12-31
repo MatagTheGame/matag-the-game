@@ -8,6 +8,7 @@ import CardUtils from './CardUtils'
 import {Modifiers} from './Modifiers'
 import './card.scss'
 import StackUtils from 'game/Stack/StackUtils'
+import {APP_BASE_PATH} from 'game/WebSocket'
 
 class Card extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class Card extends Component {
   imageCardUrl() {
     const name = CardUtils.normalizeCardName(this.name())
     if (name === 'card') {
-      return 'url("/img/card-back.jpg")'
+      return `url("${APP_BASE_PATH}/img/card-back.jpg")`
     } else {
       return `url("${this.props.cardInstance.card.imageUrl}")`
     }
