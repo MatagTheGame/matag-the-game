@@ -8,8 +8,11 @@ import lombok.Getter;
 @Component
 @Getter
 public class ConfigService {
-  @Value("${matag.admin.url}")
-  private String matagAdminUrl;
+  @Value("${matag.admin.path}")
+  private String matagAdminPath;
+
+  @Value("${matag.admin.internal.url}")
+  private String matagAdminInternalUrl;
 
   @Value("${matag.admin.password}")
   private String adminPassword;

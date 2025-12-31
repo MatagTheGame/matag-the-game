@@ -75,6 +75,6 @@ public class AdminClient {
 
     var entity = new HttpEntity<>(request, headers);
 
-    return restTemplate.exchange(configService.getMatagAdminUrl() + url, method, entity, responseType);
+    return restTemplate.exchange(configService.getMatagAdminInternalUrl() + url, method, entity, responseType);
   }
 }

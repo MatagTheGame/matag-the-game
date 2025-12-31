@@ -134,7 +134,7 @@ public class InitController {
   }
 
   private Map<String, InitPlayerEvent> initPlayerAndOpponentEvent(Player player, Player opponent) {
-    var gameConfig = new GameConfig(configService.getMatagAdminUrl());
+    var gameConfig = new GameConfig(configService.getMatagAdminPath());
     return Map.of(
             "player", new InitPlayerEvent(player.getName(), gameConfig),
             "opponent", new InitPlayerEvent(opponent.getName(), null)

@@ -20,5 +20,4 @@ public class MatagGameWebSocketConfiguration implements WebSocketMessageBrokerCo
   public void registerStompEndpoints(StompEndpointRegistry registry) {
     registry.addEndpoint("/game-ws").withSockJS();
   }
-
 }

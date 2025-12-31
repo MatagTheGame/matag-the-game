@@ -21,8 +21,6 @@ The application is written using:
  * Java ([Spring](https://spring.io/))
  * Javascript ([React](https://reactjs.org/) + [Redux](https://redux.js.org/))
 
-The use of an IDE like [IntelliJ](https://www.jetbrains.com/idea/download/) will help much during development.
-(Community edition is available).
 
 ### Build
 
@@ -34,8 +32,6 @@ Build js:
 
     yarn install
     yarn watch
-    
-(To have more helps with imports click on the js folder and mark it as resource root)
 
 
 ## Tests
@@ -86,5 +82,5 @@ Startup the app as spring boot
 
 It is possible to run `game` app with `test` profile.
 This will allow to initialise the game with a custom status (cards in any area) as defined in `ProdInitTestService`.
-Further more this allows to access a test game without having authentication at:
+Furthermore this allows to access a test game without having authentication at:
  - http://localhost:8080/ui/test-game

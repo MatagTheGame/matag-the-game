@@ -1,9 +1,9 @@
 import SockJs from 'sockjs-client'
 import {Stomp} from '@stomp/stompjs'
 
-const socket = new SockJs('/game-ws')
+const socket = new SockJs('/matag/game/game-ws')
 const stompClient = Stomp.over(socket)
-const gameId = window.location.pathname.replace('/ui/game/', '')
+const gameId = window.location.pathname.split('/').pop()
 
 stompClient.sendEvent = (destination, body) => {
   const headers = {
@@ -22,11 +22,13 @@ stompClient.init = (receiveCallback) => {
     const sessionId = socket._transport.url.split('/')[5]
 
     stompClient.subscribe('/topic/events', (event) => {
+      console.log('received event', event)
       const eventBody = JSON.parse(event.body)
       receiveCallback(eventBody)
     })
 
     stompClient.subscribe(`/user/${sessionId}/events`, (event) => {
+      console.log('received event', event)
       const eventBody = JSON.parse(event.body)
       receiveCallback(eventBody)
     })
