@@ -19,10 +19,10 @@ stompClient.sendHeartbeat = () => {
 
 stompClient.init = (receiveCallback) => {
   stompClient.connect({}, () => {
-    const sessionId = socket._transport.url.split('/')[5]
+    const urlParts = socket._transport.url.split('/')
+    const sessionId = urlParts[urlParts.length - 2]
 
     stompClient.subscribe('/topic/events', (event) => {
-      console.log('received event', event)
       const eventBody = JSON.parse(event.body)
       receiveCallback(eventBody)
     })

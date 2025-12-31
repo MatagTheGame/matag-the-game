@@ -27,13 +27,13 @@ public class EventSender {
 
   public void sendToUser(String sessionId, String username, Event event) {
     var eventString = serializeToString(event);
-//    if (!event.getType().equals("HEALTHCHECK")) {
+    if (!event.getType().equals("HEALTHCHECK")) {
       if (username != null) {
         LOGGER.info("Sending event to {} - {}: {}", sessionId, username, eventString);
       } else {
         LOGGER.info("Sending event to {}: {}", sessionId, eventString);
       }
-//    }
+    }
     webSocketTemplate.convertAndSendToUser(sessionId, "/events", eventString);
   }
 
