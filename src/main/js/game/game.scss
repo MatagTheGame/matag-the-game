@@ -1,12 +1,14 @@
 body {
   background-color: black;
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
 }
 
 #app {
   perspective: 1500px;
   perspective-origin: 50%;
   height: 100%;
+  overflow: hidden;
 }
 
 #table {

@@ -1,7 +1,8 @@
 #status-message {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   width: 90%;
+  min-height: 24px;
   left: 3%;
   z-index: 9;
   background-color: darkgrey;
