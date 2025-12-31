@@ -109,7 +109,7 @@ public class MatagBrowser {
   }
 
   private String getUrl() {
-    return "http://localhost:" + port + "/ui/test-game";
+    return "http://localhost:" + port + "/matag/game/ui/test-game";
   }
 
   private void tabAt(int index) {
