@@ -1,32 +1,31 @@
 package com.matag.game.adminclient;
 
-import static java.util.Collections.singletonList;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Profile;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.matag.adminentities.DeckInfo;
 import com.matag.adminentities.FinishGameRequest;
 import com.matag.adminentities.PlayerInfo;
 import com.matag.game.config.ConfigService;
 import com.matag.game.player.Player;
 import com.matag.game.security.SecurityToken;
-
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
+import org.springframework.http.*;
+import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
+import static com.fasterxml.jackson.module.kotlin.ExtensionsKt.jacksonObjectMapper;
+import static java.util.Collections.singletonList;
 
 @Profile("!test")
 @AllArgsConstructor
 @Component
 public class AdminClient {
   private static final Logger LOGGER = LoggerFactory.getLogger(AdminClient.class);
+  private static final ObjectMapper OBJECT_MAPPER = jacksonObjectMapper().configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
 
   private final ConfigService configService;
 
@@ -47,22 +46,23 @@ public class AdminClient {
   }
 
   private <T> T get(SecurityToken token, String url, Class<T> responseType) {
-    return exchange(token, url, HttpMethod.GET, null, responseType).getBody();
+    return exchange(token, url, HttpMethod.GET, null, responseType);
   }
 
   private <T> T adminGet(String url, Class<T> responseType) {
-    return exchange(null, url, HttpMethod.GET, null, responseType).getBody();
+    return exchange(null, url, HttpMethod.GET, null, responseType);
   }
 
   private <T> T post(SecurityToken token, String url, Object body, Class<T> responseType) {
-    return exchange(token, url, HttpMethod.POST, body, responseType).getBody();
+    return exchange(token, url, HttpMethod.POST, body, responseType);
   }
 
   private <T> T adminPost(String url, Object body, Class<T> responseType) {
-    return exchange(null, url, HttpMethod.POST, body, responseType).getBody();
+    return exchange(null, url, HttpMethod.POST, body, responseType);
   }
 
-  private <T> ResponseEntity<T> exchange(SecurityToken token, String url, HttpMethod method, Object request, Class<T> responseType) {
+  @SneakyThrows
+  private <T> T exchange(SecurityToken token, String url, HttpMethod method, Object request, Class<T> responseType) {
     var restTemplate = new RestTemplate();
     var headers = new HttpHeaders();
     headers.setAccept(singletonList(MediaType.APPLICATION_JSON));
@@ -75,6 +75,7 @@ public class AdminClient {
 
     var entity = new HttpEntity<>(request, headers);
 
-    return restTemplate.exchange(configService.getMatagAdminInternalUrl() + url, method, entity, responseType);
+    ResponseEntity<String> response = restTemplate.exchange(configService.getMatagAdminInternalUrl() + url, method, entity, String.class);
+    return OBJECT_MAPPER.readValue(response.getBody(), responseType);
   }
 }
