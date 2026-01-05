@@ -4,7 +4,7 @@ import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import application.browser.CardHelper;
 import com.matag.cards.Cards;
-import com.matag.game.init.test.InitTestService;
+import application.InitTestService;
 import com.matag.game.status.GameStatus;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

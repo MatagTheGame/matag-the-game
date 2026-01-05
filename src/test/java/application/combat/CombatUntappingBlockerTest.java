@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.matag.cards.Cards;
-import com.matag.game.init.test.InitTestService;
+import application.InitTestService;
 import com.matag.game.status.GameStatus;
 
 import application.AbstractApplicationTest;

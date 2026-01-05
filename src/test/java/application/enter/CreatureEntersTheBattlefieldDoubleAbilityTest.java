@@ -3,7 +3,7 @@ package application.enter;
 import application.AbstractApplicationTest;
 import application.InitTestServiceDecorator;
 import com.matag.cards.Cards;
-import com.matag.game.init.test.InitTestService;
+import application.InitTestService;
 import com.matag.game.status.GameStatus;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;

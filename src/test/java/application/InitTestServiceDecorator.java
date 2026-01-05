@@ -1,6 +1,6 @@
 package application;
 
-import com.matag.game.init.test.InitTestService;
+import application.InitTestService;
 import com.matag.game.status.GameStatus;
 
 public class InitTestServiceDecorator extends InitTestService {

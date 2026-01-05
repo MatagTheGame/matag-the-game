@@ -1,22 +1,11 @@
 package com.matag.game.init;
 
-import java.util.List;
-import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
-import org.springframework.stereotype.Controller;
-
 import com.matag.game.cardinstance.CardInstance;
 import com.matag.game.config.ConfigService;
 import com.matag.game.deck.DeckFactory;
 import com.matag.game.deck.DeckRetrieverService;
 import com.matag.game.event.Event;
 import com.matag.game.event.EventSender;
-import com.matag.game.init.test.InitTestService;
 import com.matag.game.player.Player;
 import com.matag.game.player.PlayerFactory;
 import com.matag.game.player.PlayerService;
@@ -28,8 +17,15 @@ import com.matag.game.status.GameStatusFactory;
 import com.matag.game.status.GameStatusRepository;
 import com.matag.game.status.GameStatusUpdaterService;
 import com.matag.game.turn.action._continue.ContinueService;
-
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.stereotype.Controller;
+
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class InitController {
@@ -43,7 +39,6 @@ public class InitController {
   private final PlayerFactory playerFactory;
   private final PlayerService playerService;
   private final GameStatusUpdaterService gameStatusUpdaterService;
-  private final InitTestService initTestService;
   private final GameStatusRepository gameStatusRepository;
   private final DeckRetrieverService deckRetrieverService;
   private final DeckFactory deckFactory;
@@ -52,7 +47,7 @@ public class InitController {
   public InitController(SecurityHelper securityHelper, EventSender eventSender, ConfigService configService,
                         GameStatusFactory gameStatusFactory, PlayerInfoRetriever playerInfoRetriever, PlayerFactory playerFactory,
                         PlayerService playerService, GameStatusUpdaterService gameStatusUpdaterService, GameStatusRepository gameStatusRepository,
-                        DeckRetrieverService deckRetrieverService, @Autowired(required = false) InitTestService initTestService,
+                        DeckRetrieverService deckRetrieverService,
                         DeckFactory deckFactory, ContinueService continueService) {
     this.securityHelper = securityHelper;
     this.eventSender = eventSender;
@@ -64,7 +59,6 @@ public class InitController {
     this.gameStatusUpdaterService = gameStatusUpdaterService;
     this.gameStatusRepository = gameStatusRepository;
     this.deckRetrieverService = deckRetrieverService;
-    this.initTestService = initTestService;
     this.deckFactory = deckFactory;
     this.continueService = continueService;
   }
@@ -95,10 +89,6 @@ public class InitController {
 
         eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("OPPONENT_JOINED"));
 
-        if (initTestService != null && gameStatusRepository.getUnsecure(token.getGameId()).getPlayer2() != null) {
-          initTestService.initGameStatusForTest(gameStatusRepository.getUnsecure(token.getGameId()));
-        }
-
         eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(gameStatus.getPlayer1(), gameStatus.getPlayer2())));
         eventSender.sendToPlayer(gameStatus.getPlayer2(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(gameStatus.getPlayer2(), gameStatus.getPlayer1())));
 
@@ -111,7 +101,7 @@ public class InitController {
         var player = playerService.getPlayerByToken(gameStatus, token.getAdminToken());
         player.setToken(token);
 
-        eventSender.sendToPlayer(gameStatus.getPlayer1(), new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(player, gameStatus.getOtherPlayer(player))));
+        eventSender.sendToPlayer(player, new Event("INIT_PLAYER_AND_OPPONENT", initPlayerAndOpponentEvent(player, gameStatus.getOtherPlayer(player))));
 
         gameStatusUpdaterService.sendUpdateGameStatus(gameStatus);
       }
