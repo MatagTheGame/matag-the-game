@@ -7,7 +7,8 @@
     <server>
       <id>github-matag-cards</id>
       <username>antonioalonzi</username>
-      <password>d5db92b2c94d460a77c8dd1f182082d94ebbe5e0</password>
+      <!-- token with read:package permissions only -->
+      <password>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</password>
     </server>
   </servers>
 </settings>
