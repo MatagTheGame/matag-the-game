@@ -37,8 +37,8 @@ class Hand extends Component {
 
   render() {
     return (
-      <div id={this.getId()} className='hand'>
-        {this.getHand().map((cardInstance) =>
+      <div id={this.id} className='hand'>
+        {this.hand.map((cardInstance) =>
           <Card key={cardInstance.id} cardInstance={cardInstance} onclick={this.playerCardClick(cardInstance.id)}
             selected={this.isCardSelectedToBePlayed(cardInstance) || this.isCardTargeted(cardInstance)} area='hand' />)}
       </div>

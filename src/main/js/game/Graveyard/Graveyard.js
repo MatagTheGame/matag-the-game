@@ -20,8 +20,8 @@ class Graveyard extends Component {
 
   render() {
     return (
-      <div id={this.getId()} className='graveyard'>
-        {this.getGraveyard().map((cardInstance) =>
+      <div id={this.id} className='graveyard'>
+        {this.graveyard.map((cardInstance) =>
           <Card key={cardInstance.id} cardInstance={cardInstance} area='graveyard' />)}
       </div>
     )

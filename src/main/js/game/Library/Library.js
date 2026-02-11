@@ -47,7 +47,7 @@ class Library extends Component {
 
   render() {
     return (
-      <div id={this.getId()} className='player-library'>
+      <div id={this.id} className='player-library'>
         {this.getVisibleLibrary().length > 0 ? this.displayVisibleCards() : null}
         {this.getLibrarySize() > 0 ? <Card style={LibraryUiUtils.libraryHeight(this.getLibrarySize(), this.props.type)} area='library' /> : null}
         <div className='card-bottom-thickness' style={LibraryUiUtils.libraryBottomThickness(this.getLibrarySize())} />

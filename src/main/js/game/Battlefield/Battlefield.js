@@ -168,7 +168,7 @@ class Battlefield extends Component {
     }
 
     return (
-      <div id={this.getId()} className='battlefield'>
+      <div id={this.id} className='battlefield'>
         <div className='battlefield-area combat-line'>{this.positionedCardGroups(this.getAttackingOrBlockingCreatures())}</div>
         <div className='battlefield-area second-line'>{this.cardGroups(this.getSecondLineCards())}</div>
         <div className='battlefield-area first-line'>{this.cardGroups(this.getFirstLineCards())}</div>

@@ -27,7 +27,7 @@ class PlayerInfo extends Component {
   }
 
   getLifeClasses() {
-    if (this.getLife() <= 0) {
+    if (this.life <= 0) {
       return 'non-positive'
     }
   }
@@ -35,13 +35,13 @@ class PlayerInfo extends Component {
   getPlayerClasses() {
     let classes = 'player-info'
 
-    if (this.props.currentTurnPlayer === this.getName()) {
+    if (this.props.currentTurnPlayer === this.name) {
       classes += ' active-player'
     } else {
       classes += ' inactive-player'
     }
 
-    if (this.props.winner === this.getName()) {
+    if (this.props.winner === this.name) {
       classes += ' winner'
     }
 
@@ -54,9 +54,9 @@ class PlayerInfo extends Component {
 
   render() {
     return (
-      <div id={this.getId()} className={this.getPlayerClasses()} onClick={() => this.playerClick(this.getName())}>
-        <span>{this.getName()}</span>
-        <span className={this.getLifeClasses()}>{this.getLife()}</span>
+      <div id={this.id} className={this.getPlayerClasses()} onClick={() => this.playerClick(this.name)}>
+        <span>{this.name}</span>
+        <span className={this.getLifeClasses()}>{this.life}</span>
       </div>
     )
   }
