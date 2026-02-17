@@ -70,6 +70,6 @@ class MagicInstancePlayerSelectorServiceTest(
         val selection = selectorService.selectPlayers(gameStatus, aPermanent, magicInstanceSelector)
 
         // Then
-        assertThat(selection).containsExactlyInAnyOrder(gameStatus.player1, gameStatus.getPlayer2())
+        assertThat(selection).containsExactlyInAnyOrder(gameStatus.player1, gameStatus.player2)
     }
 }

@@ -2,25 +2,29 @@ package application.enchantment
 
 import application.AbstractApplicationTest
 import application.InitTestService
-import application.InitTestServiceDecorator
 import application.browser.BattlefieldHelper
+import application.cast.CastCreatureAlternativeCostTest.InitTestServiceForTest
 import com.matag.cards.Cards
+import com.matag.game.adminclient.AdminClient
+import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.status.GameStatus
+import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.combat.BeginCombatPhase
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-class CastAuraDestroyTest : AbstractApplicationTest() {
-    @Autowired
-    private val initTestServiceDecorator: InitTestServiceDecorator? = null
-
-    @Autowired
-    private val cards: Cards? = null
+class CastAuraDestroyTest(
+    adminClient: AdminClient,
+    gameStatusRepository: GameStatusRepository,
+    cardInstanceFactory: CardInstanceFactory,
+    cards: Cards,
+    private var initService: InitTestService,
+) : AbstractApplicationTest(adminClient, gameStatusRepository, cardInstanceFactory, cards) {
 
     override fun setupGame() {
-        initTestServiceDecorator!!.setInitTestService(InitTestServiceForTest())
+        initService = InitTestServiceForTest(cardInstanceFactory, cards)
     }
 
     @Test
@@ -31,41 +35,41 @@ class CastAuraDestroyTest : AbstractApplicationTest() {
         castArcaneFlight(2, "4/6")
 
         // Player1 continues
-        browser.player1().actionHelper.clickContinueAndExpectPhase(Main1Phase.Companion.M1, PlayerType.OPPONENT)
-        browser.player2().actionHelper.clickContinueAndExpectPhase(BeginCombatPhase.Companion.BC, PlayerType.OPPONENT)
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.OPPONENT)
+        browser.player2().getActionHelper().clickContinueAndExpectPhase(BeginCombatPhase.BC, PlayerType.OPPONENT)
 
         // When Player2 destroys an enchantment
-        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards!!.get("Plains"), 0).tap()
-        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Plains"), 1).tap()
-        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Plains"), 2).tap()
         browser.player2().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Invoke the Divine")).select()
-        browser.player2().statusHelper.hasMessage("Select targets for Invoke the Divine.")
-        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE)
+        browser.player2().getStatusHelper().hasMessage("Select targets for Invoke the Divine.")
+        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Arcane Flight")).target()
-        browser.player1().actionHelper.clickContinueAndExpectPhase(BeginCombatPhase.Companion.BC, PlayerType.OPPONENT)
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(BeginCombatPhase.BC, PlayerType.OPPONENT)
 
         // The enchantments and the instant are in the graveyard
         browser.player2().getGraveyardHelper(PlayerType.PLAYER).contains(cards.get("Invoke the Divine"))
         browser.player2().getGraveyardHelper(PlayerType.OPPONENT).contains(cards.get("Arcane Flight"))
-        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Concordia Pegasus")).hasPowerAndToughness("3/5")
         browser.player2().getPlayerInfoHelper(PlayerType.PLAYER).toHaveLife(24)
 
 
         // When Player2 destroys the creature
-        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Swamp"), 0).tap()
-        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Swamp"), 1).tap()
-        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Swamp"), 2).tap()
         browser.player2().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Murder")).select()
-        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Concordia Pegasus")).target()
-        browser.player1().actionHelper.clickContinueAndExpectPhase(BeginCombatPhase.Companion.BC, PlayerType.OPPONENT)
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(BeginCombatPhase.BC, PlayerType.OPPONENT)
 
         // Creature and its enchantments are in the graveyard
         browser.player2().getGraveyardHelper(PlayerType.PLAYER)
@@ -77,32 +81,32 @@ class CastAuraDestroyTest : AbstractApplicationTest() {
             cards.get("Arcane Flight"),
             cards.get("Arcane Flight")
         )
-        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE).isEmpty
+        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE).isEmpty
     }
 
-    private fun castArcaneFlight(indexOfLandToTap: Int, powerAndToughness: String?) {
+    private fun castArcaneFlight(indexOfLandToTap: Int, powerAndToughness: String) {
         // When casting Arcane Flight
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
-            .getCard(cards!!.get("Island"), indexOfLandToTap).tap()
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
+            .getCard(cards.get("Island"), indexOfLandToTap).tap()
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Arcane Flight")).select()
-        browser.player1().statusHelper.hasMessage("Select targets for Arcane Flight.")
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
+        browser.player1().getStatusHelper().hasMessage("Select targets for Arcane Flight.")
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Concordia Pegasus")).target()
 
         // Enchantment goes on the stack
-        browser.player1().stackHelper.containsExactly(cards.get("Arcane Flight"))
+        browser.player1().getStackHelper().containsExactly(cards.get("Arcane Flight"))
 
         // When opponent accepts enchantment
-        browser.player2().actionHelper.clickContinueAndExpectPhase(Main1Phase.Companion.M1, PlayerType.PLAYER)
+        browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
 
         // Then the attachment and its effect are on the battlefield
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .contains(cards.get("Arcane Flight"))
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Concordia Pegasus")).hasPowerAndToughness(powerAndToughness)
     }
 
-    internal class InitTestServiceForTest : InitTestService() {
+    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Concordia Pegasus"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Arcane Flight"))

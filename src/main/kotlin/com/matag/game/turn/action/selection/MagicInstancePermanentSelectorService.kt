@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 class MagicInstancePermanentSelectorService {
     fun select(
         gameStatus: GameStatus,
-        cardInstance: CardInstance,
+        cardInstance: CardInstance?,
         magicInstanceSelector: MagicInstanceSelector
     ): CardInstanceSearch {
         var cards: CardInstanceSearch
@@ -42,12 +42,6 @@ class MagicInstancePermanentSelectorService {
             cards = cards.ofAnyOfTheSubtypes(magicInstanceSelector.ofSubtype!!)
         } else if (magicInstanceSelector.notOfSubtype != null) {
             cards = cards.notOfSubtypes(magicInstanceSelector.notOfSubtype!!)
-        }
-
-        if (magicInstanceSelector.controllerType == PlayerType.PLAYER) {
-            cards = cards.controlledBy(cardInstance.controller)
-        } else if (magicInstanceSelector.controllerType == PlayerType.OPPONENT) {
-            cards = cards.controlledBy(gameStatus.getOtherPlayer(cardInstance.controller).name)
         }
 
         if (magicInstanceSelector.withAbilityType != null) {
@@ -102,24 +96,32 @@ class MagicInstancePermanentSelectorService {
             cards = cards.multicolor()
         }
 
-        if (magicInstanceSelector.others) {
-            cards = cards.notWithId(cardInstance.id)
-        }
-
-        if (magicInstanceSelector.itself) {
-            cards = cards.withIdAsList(cardInstance.id)
-        }
-
         if (magicInstanceSelector.turnStatusType != null) {
             cards = cards.onTurnStatusType(magicInstanceSelector.turnStatusType!!, gameStatus)
         }
 
-        if (magicInstanceSelector.currentEnchanted) {
-            cards = cards.withIdAsList((cardInstance.modifiers.attachedToId))
-        }
-
         if (magicInstanceSelector.historic) {
             cards = cards.historic()
+        }
+
+        if (cardInstance != null) {
+            if (magicInstanceSelector.controllerType == PlayerType.PLAYER) {
+                cards = cards.controlledBy(cardInstance.controller)
+            } else if (magicInstanceSelector.controllerType == PlayerType.OPPONENT) {
+                cards = cards.controlledBy(gameStatus.getOtherPlayer(cardInstance.controller).name)
+            }
+
+            if (magicInstanceSelector.others) {
+                cards = cards.notWithId(cardInstance.id)
+            }
+
+            if (magicInstanceSelector.itself) {
+                cards = cards.withIdAsList(cardInstance.id)
+            }
+
+            if (magicInstanceSelector.currentEnchanted) {
+                cards = cards.withIdAsList((cardInstance.modifiers.attachedToId))
+            }
         }
 
         return cards

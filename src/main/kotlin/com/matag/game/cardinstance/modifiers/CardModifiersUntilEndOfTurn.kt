@@ -4,7 +4,7 @@ import com.matag.cards.ability.Ability
 import com.matag.cards.properties.PowerToughness
 
 class CardModifiersUntilEndOfTurn {
-    val isAttacked = false
+    var isAttacked = false
     var isBlocked = false
     var extraAbilities: List<Ability> = listOf()
     var extraPowerToughness = PowerToughness(0, 0)

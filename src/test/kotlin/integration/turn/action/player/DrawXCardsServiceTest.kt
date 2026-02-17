@@ -1,6 +1,5 @@
 package integration.turn.action.player
 
-import com.matag.game.cardinstance.CardInstance
 import com.matag.game.turn.action.finish.FinishGameService
 import com.matag.game.turn.action.player.DrawXCardsService
 import integration.TestUtils
@@ -15,44 +14,41 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [PlayerTestConfiguration::class, TestUtilsConfiguration::class])
-class DrawXCardsServiceTest {
-    @Autowired
-    private val drawXCardsService: DrawXCardsService? = null
+class DrawXCardsServiceTest(
+    @param:Autowired private val drawXCardsService: DrawXCardsService,
+    @param:Autowired private val testUtils: TestUtils,
+    @param:Autowired private val finishGameService: FinishGameService
+) {
 
-    @Autowired
-    private val testUtils: TestUtils? = null
-
-    @Autowired
-    private val finishGameService: FinishGameService? = null
 
     @Test
     fun drawCards() {
         // Given
-        val gameStatus = testUtils!!.testGameStatus()
+        val gameStatus = testUtils.testGameStatus()
         val amount = 2
 
         // When
-        drawXCardsService!!.drawXCards(gameStatus.getPlayer1(), amount, gameStatus)
+        drawXCardsService.drawXCards(gameStatus.player1!!, amount, gameStatus)
 
         // Then
-        Assertions.assertThat<CardInstance?>(gameStatus.getPlayer1().hand.cards).hasSize(9)
-        Assertions.assertThat<CardInstance?>(gameStatus.getPlayer1().library.cards).hasSize(31)
+        Assertions.assertThat(gameStatus.player1?.hand?.cards).hasSize(9)
+        Assertions.assertThat(gameStatus.player1?.library?.cards).hasSize(31)
     }
 
     @Test
     fun drawFromEmptyLibrary() {
         // Given
-        val gameStatus = testUtils!!.testGameStatus()
-        val firstTwoCards = gameStatus.getPlayer1().library.cards.subList(0, 2)
-        gameStatus.getPlayer1().library.setCards(firstTwoCards)
+        val gameStatus = testUtils.testGameStatus()
+        val firstTwoCards = gameStatus.player1!!.library.cards.subList(0, 2)
+        gameStatus.player1!!.library.cards = firstTwoCards
         val amount = 3
 
         // When
-        drawXCardsService!!.drawXCards(gameStatus.getPlayer1(), amount, gameStatus)
+        drawXCardsService.drawXCards(gameStatus.player1!!, amount, gameStatus)
 
         // Then
-        Assertions.assertThat<CardInstance?>(gameStatus.getPlayer1().hand.cards).hasSize(9)
-        Assertions.assertThat<CardInstance?>(gameStatus.getPlayer1().library.cards).hasSize(0)
-        Mockito.verify<FinishGameService?>(finishGameService).setWinner(gameStatus, gameStatus.getPlayer2())
+        Assertions.assertThat(gameStatus.player1?.hand?.cards).hasSize(9)
+        Assertions.assertThat(gameStatus.player1?.library?.cards).hasSize(0)
+        Mockito.verify(finishGameService).setWinner(gameStatus, gameStatus.player2!!)
     }
 }

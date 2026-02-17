@@ -49,7 +49,7 @@ class TargetCheckerServiceTest {
         val gameStatus = testUtils!!.testGameStatus()
         val darkRemedy = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Dark Remedy"), "player-name")
         val aCreature = cardInstanceFactory.create(gameStatus, 2, cards.get("Banehound"), "opponent-name")
-        gameStatus.getPlayer2().battlefield.addCard(aCreature)
+        gameStatus.player2!!.battlefield.addCard(aCreature)
 
         // When
         val isValid = targetCheckerService!!.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(
@@ -84,7 +84,7 @@ class TargetCheckerServiceTest {
         val darkRemedy = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Dark Remedy"), "player-name")
         val aCreatureWithHexproof =
             cardInstanceFactory.create(gameStatus, 2, cards.get("Cold-Water Snapper"), "opponent-name")
-        gameStatus.getPlayer2().battlefield.addCard(aCreatureWithHexproof)
+        gameStatus.player2!!.battlefield.addCard(aCreatureWithHexproof)
 
         // When
         val isValid = targetCheckerService!!.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(
@@ -103,7 +103,7 @@ class TargetCheckerServiceTest {
         val darkRemedy = cardInstanceFactory!!.create(gameStatus, 1, cards!!.get("Dark Remedy"), "player-name")
         val aCreatureWithHexproof =
             cardInstanceFactory.create(gameStatus, 2, cards.get("Cold-Water Snapper"), "player-name")
-        gameStatus.getPlayer2().battlefield.addCard(aCreatureWithHexproof)
+        gameStatus.player2!!.battlefield.addCard(aCreatureWithHexproof)
 
         // When
         val isValid = targetCheckerService!!.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(

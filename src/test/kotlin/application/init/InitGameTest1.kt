@@ -2,24 +2,28 @@ package application.init
 
 import application.AbstractApplicationTest
 import application.InitTestService
-import application.InitTestServiceDecorator
 import application.browser.BattlefieldHelper
+import application.cast.CastCreatureAlternativeCostTest.InitTestServiceForTest
 import com.matag.cards.Cards
+import com.matag.game.adminclient.AdminClient
+import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.status.GameStatus
+import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-class InitGameTest : AbstractApplicationTest() {
-    @Autowired
-    private val initTestServiceDecorator: InitTestServiceDecorator? = null
+class InitGameTest(
+    adminClient: AdminClient,
+    gameStatusRepository: GameStatusRepository,
+    cardInstanceFactory: CardInstanceFactory,
+    cards: Cards,
+    private var initService: InitTestService,
+) : AbstractApplicationTest(adminClient, gameStatusRepository, cardInstanceFactory, cards) {
 
-    @Autowired
-    private val cards: Cards? = null
-
-    public override fun setupGame() {
-        initTestServiceDecorator!!.setInitTestService(InitTestServiceForTest())
+    override fun setupGame() {
+        initService = InitTestServiceForTest(cardInstanceFactory, cards)
     }
 
     @Test
@@ -33,17 +37,17 @@ class InitGameTest : AbstractApplicationTest() {
         browser!!.player2().getHandHelper(PlayerType.OPPONENT).containsExactly("card", "card")
 
         // Battlefields are
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .containsExactly(cards.get("Plains"), cards.get("Plains"))
-        browser!!.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
             .containsExactly(cards.get("Grazing Whiptail"))
-        browser!!.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Grazing Whiptail")).hasPowerAndToughness("3/4")
-        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.FIRST_LINE)
+        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.FIRST_LINE)
             .containsExactly(cards.get("Plains"), cards.get("Plains"))
-        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .containsExactly(cards.get("Grazing Whiptail"))
-        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Grazing Whiptail")).hasPowerAndToughness("3/4")
 
         // Graveyards are
@@ -67,15 +71,15 @@ class InitGameTest : AbstractApplicationTest() {
         browser!!.player2().getPlayerInfoHelper(PlayerType.OPPONENT).toBeActive()
 
         // Phase and statuses are
-        browser!!.player1().phaseHelper.`is`(Main1Phase.Companion.M1, PlayerType.PLAYER)
-        browser!!.player1().statusHelper.hasMessage("Play any spell or ability or continue (SPACE).")
-        browser!!.player1().actionHelper.canContinue()
-        browser!!.player2().phaseHelper.`is`(Main1Phase.Companion.M1, PlayerType.OPPONENT)
-        browser!!.player2().statusHelper.hasMessage("Wait for opponent to perform its action...")
-        browser!!.player2().actionHelper.cannotContinue()
+        browser!!.player1().getPhaseHelper().matches(Main1Phase.M1, PlayerType.PLAYER)
+        browser!!.player1().getStatusHelper().hasMessage("Play any spell or ability or continue (SPACE).")
+        browser!!.player1().getActionHelper().canContinue()
+        browser!!.player2().getPhaseHelper().matches(Main1Phase.M1, PlayerType.OPPONENT)
+        browser!!.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...")
+        browser!!.player2().getActionHelper().cannotContinue()
     }
 
-    internal class InitTestServiceForTest : InitTestService() {
+    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         public override fun initGameStatus(gameStatus: GameStatus) {
             // Current Player
             addCardToCurrentPlayerLibrary(gameStatus, cards!!.get("Plains"))

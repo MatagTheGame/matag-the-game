@@ -20,13 +20,13 @@ class MatagBrowser(private val port: Int) {
 
     init {
         webDriver = getWebDriver()
-        webDriver.get(this.url)
+        webDriver.get(this.getUrl())
     }
 
     fun openSecondTab() {
-        (webDriver as JavascriptExecutor).executeScript("window.open('" + this.url + "')")
+        (webDriver as JavascriptExecutor).executeScript("window.open('" + this.getUrl() + "')")
         // Wait for it to fully load
-        this.messageHelper.hasNoMessage()
+        this.getMessageHelper().hasNoMessage()
     }
 
     fun swapTabs() {
@@ -45,69 +45,69 @@ class MatagBrowser(private val port: Int) {
     }
 
     fun close() {
-        val numOfTabs = ArrayList<String?>(webDriver.getWindowHandles()).size
-        for (i in 0..<numOfTabs) {
+        val numOfTabs = webDriver.windowHandles.size
+        (0..<numOfTabs).forEach { _ ->
             tabAt(0)
             webDriver.close()
         }
     }
 
-    val messageHelper: MessageHelper
-        get() = MessageHelper(this)
+    fun getMessageHelper(): MessageHelper =
+        MessageHelper(this)
 
-    val statusHelper: StatusHelper
-        get() = StatusHelper(this)
+    fun getStatusHelper(): StatusHelper = 
+        StatusHelper(this)
 
-    val actionHelper: ActionHelper
-        get() = ActionHelper(this)
+    fun getActionHelper(): ActionHelper =
+        ActionHelper(this)
 
-    val phaseHelper: PhaseHelper
-        get() = PhaseHelper(this)
+    fun getPhaseHelper(): PhaseHelper =
+        PhaseHelper(this)
 
-    fun getHandHelper(playerType: PlayerType?): HandHelper {
+    fun getHandHelper(playerType: PlayerType): HandHelper {
         return HandHelper(this, playerType)
     }
 
-    fun getBattlefieldHelper(playerType: PlayerType?, lineType: String?): BattlefieldHelper {
+    fun getBattlefieldHelper(playerType: PlayerType, lineType: String): BattlefieldHelper {
         return BattlefieldHelper(this, playerType, lineType)
     }
 
-    fun getGraveyardHelper(playerType: PlayerType?): GraveyardHelper {
+    fun getGraveyardHelper(playerType: PlayerType): GraveyardHelper {
         return GraveyardHelper(this, playerType)
     }
 
-    fun getPlayerInfoHelper(playerType: PlayerType?): PlayerInfoHelper {
+    fun getPlayerInfoHelper(playerType: PlayerType): PlayerInfoHelper {
         return PlayerInfoHelper(this, playerType)
     }
 
-    val playerActiveManaHelper: PlayerActiveManaHelper
-        get() = PlayerActiveManaHelper(this)
+    fun getPlayerActiveManaHelper(): PlayerActiveManaHelper =
+        PlayerActiveManaHelper(this)
 
-    val playableAbilitiesHelper: UserInputsHelper
-        get() = UserInputsHelper(this)
+    fun getPlayableAbilitiesHelper(): UserInputsHelper = 
+        UserInputsHelper(this)
 
-    val stackHelper: StackHelper
-        get() = StackHelper(this)
+    fun getStackHelper(): StackHelper = 
+        StackHelper(this)
 
-    fun getLibraryHelper(playerType: PlayerType?): LibraryHelper {
+    fun getLibraryHelper(playerType: PlayerType): LibraryHelper {
         return LibraryHelper(this, playerType)
     }
 
-    val javascriptExecutor: JavascriptExecutor?
-        get() = webDriver as JavascriptExecutor?
+    fun getJavascriptExecutor(): JavascriptExecutor =
+        webDriver as JavascriptExecutor
 
-    private val url: String
-        get() = "http://localhost:" + port + "/matag/game/ui/test-game"
+    private fun getUrl(): String =
+        "http://localhost:$port/matag/game/ui/test-game"
 
     private fun tabAt(index: Int) {
-        webDriver.switchTo().window(ArrayList<String?>(webDriver.getWindowHandles()).get(index)!!)
+        webDriver.switchTo().window(ArrayList<String?>(webDriver.windowHandles)[index]!!)
     }
 
     private fun getWebDriver(): WebDriver {
         val chromeOptions = ChromeOptions()
 
         val webdriverUserDataDir = System.getProperty("webdriver.chrome.userDataDir")
-        chromeOptions.addArguments("user-data-dir=" + webdriverUserDataDir)
+        chromeOptions.addArguments("user-data-dir=$webdriverUserDataDir")
 
         val isHeadless = "true".equals(System.getProperty("webdriver.chrome.headless"), ignoreCase = true)
         if (isHeadless) {
@@ -131,6 +131,6 @@ class MatagBrowser(private val port: Int) {
     }
 
     fun dumpContent() {
-        println(webDriver.getPageSource())
+        println(webDriver.pageSource)
     }
 }

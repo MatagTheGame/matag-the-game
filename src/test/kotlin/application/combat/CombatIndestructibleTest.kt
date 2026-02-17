@@ -2,10 +2,13 @@ package application.combat
 
 import application.AbstractApplicationTest
 import application.InitTestService
-import application.InitTestServiceDecorator
 import application.browser.BattlefieldHelper
+import application.cast.CastCreatureAlternativeCostTest.InitTestServiceForTest
 import com.matag.cards.Cards
+import com.matag.game.adminclient.AdminClient
+import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.status.GameStatus
+import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.combat.*
 import com.matag.game.turn.phases.ending.EndTurnPhase
 import com.matag.game.turn.phases.main1.Main1Phase
@@ -16,108 +19,109 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 @Tag("RegressionTests")
-class CombatIndestructibleTest : AbstractApplicationTest() {
-    @Autowired
-    private val initTestServiceDecorator: InitTestServiceDecorator? = null
+class CombatIndestructibleTest(
+    adminClient: AdminClient,
+    gameStatusRepository: GameStatusRepository,
+    cardInstanceFactory: CardInstanceFactory,
+    cards: Cards,
+    private var initService: InitTestService,
+) : AbstractApplicationTest(adminClient, gameStatusRepository, cardInstanceFactory, cards) {
 
-    @Autowired
-    private val cards: Cards? = null
-
-    public override fun setupGame() {
-        initTestServiceDecorator!!.setInitTestService(InitTestServiceForTest())
+    override fun setupGame() {
+        initService = InitTestServiceForTest(cardInstanceFactory, cards)
     }
 
     @Test
     fun indestructible() {
         // When going to combat
-        browser!!.player1().actionHelper.clickContinueAndExpectPhase(Main1Phase.Companion.M1, PlayerType.OPPONENT)
-        browser!!.player2().actionHelper.clickContinueAndExpectPhase(BeginCombatPhase.Companion.BC, PlayerType.PLAYER)
-        browser!!.player1().actionHelper.clickContinueAndExpectPhase(BeginCombatPhase.Companion.BC, PlayerType.OPPONENT)
-        browser!!.player2().actionHelper.clickContinueAndExpectPhase(
-            DeclareAttackersPhase.Companion.DA,
+        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.OPPONENT)
+        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(BeginCombatPhase.BC, PlayerType.PLAYER)
+        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(BeginCombatPhase.BC, PlayerType.OPPONENT)
+        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(
+            DeclareAttackersPhase.DA,
             PlayerType.PLAYER
         )
 
         // When declare attacker
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards!!.get("Nyxborn Courser")).declareAsAttacker()
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Nyxborn Marauder")).declareAsAttacker()
-        browser!!.player1().actionHelper.clickContinueAndExpectPhase(
-            DeclareAttackersPhase.Companion.DA,
+        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(
+            DeclareAttackersPhase.DA,
             PlayerType.PLAYER
         )
-        browser!!.player1().actionHelper.clickContinueAndExpectPhase(
-            DeclareAttackersPhase.Companion.DA,
+        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(
+            DeclareAttackersPhase.DA,
             PlayerType.OPPONENT
         )
 
         // Declare blocker
-        browser!!.player2().actionHelper.clickContinueAndExpectPhase(
-            DeclareBlockersPhase.Companion.DB,
+        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(
+            DeclareBlockersPhase.DB,
             PlayerType.OPPONENT
         )
-        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.COMBAT_LINE)
+        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.COMBAT_LINE)
             .getFirstCard(cards.get("Nyxborn Courser")).select()
-        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Nyxborn Brute")).declareAsBlocker()
-        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.COMBAT_LINE)
+        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.COMBAT_LINE)
             .getFirstCard(cards.get("Nyxborn Marauder")).select()
-        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Nyxborn Colossus")).declareAsBlocker()
-        browser!!.player2().actionHelper.clickContinueAndExpectPhase(
-            DeclareBlockersPhase.Companion.DB,
+        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(
+            DeclareBlockersPhase.DB,
             PlayerType.PLAYER
         )
 
         // Make a Stand
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Plains"), 0).tap()
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Plains"), 1).tap()
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Plains"), 2).tap()
         browser!!.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Make a Stand")).click()
-        browser!!.player1().phaseHelper.`is`(DeclareBlockersPhase.Companion.DB, PlayerType.OPPONENT)
-        browser!!.player2().actionHelper.clickContinueAndExpectPhase(
-            DeclareBlockersPhase.Companion.DB,
+        browser!!.player1().getPhaseHelper().matches(DeclareBlockersPhase.DB, PlayerType.OPPONENT)
+        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(
+            DeclareBlockersPhase.DB,
             PlayerType.PLAYER
         )
-        browser!!.player1().actionHelper.clickContinueAndExpectPhase(
-            DeclareBlockersPhase.Companion.DB,
+        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(
+            DeclareBlockersPhase.DB,
             PlayerType.OPPONENT
         )
-        browser!!.player2().actionHelper.clickContinueAndExpectPhase(
-            CombatDamagePhase.Companion.CD,
+        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(
+            CombatDamagePhase.CD,
             PlayerType.OPPONENT
         )
-        browser!!.player2().actionHelper.clickContinueAndExpectPhase(EndOfCombatPhase.Companion.EC, PlayerType.OPPONENT)
-        browser!!.player2().actionHelper.clickContinueAndExpectPhase(Main2Phase.Companion.M2, PlayerType.PLAYER)
+        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(EndOfCombatPhase.EC, PlayerType.OPPONENT)
+        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.PLAYER)
 
         // Then
         browser!!.player1().getGraveyardHelper(PlayerType.PLAYER).containsExactly(cards.get("Make a Stand"))
         browser!!.player1().getGraveyardHelper(PlayerType.OPPONENT).containsExactly(cards.get("Nyxborn Brute"))
 
         // Finally indestructible still gets destroyed if toughness reaches 0
-        browser!!.player1().actionHelper.clickContinueAndExpectPhase(Main2Phase.Companion.M2, PlayerType.OPPONENT)
-        browser!!.player2().actionHelper.clickContinueAndExpectPhase(EndTurnPhase.Companion.ET, PlayerType.OPPONENT)
-        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.OPPONENT)
+        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(EndTurnPhase.ET, PlayerType.OPPONENT)
+        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Swamp"), 0).tap()
         browser!!.player2().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Disfigure")).select()
-        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Nyxborn Marauder")).target()
-        browser!!.player1().actionHelper.clickContinueAndExpectPhase(EndTurnPhase.Companion.ET, PlayerType.OPPONENT)
-        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(EndTurnPhase.ET, PlayerType.OPPONENT)
+        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Swamp"), 1).tap()
         browser!!.player2().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Disfigure")).select()
-        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Nyxborn Marauder")).target()
-        browser!!.player1().actionHelper.clickContinueAndExpectPhase(EndTurnPhase.Companion.ET, PlayerType.OPPONENT)
+        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(EndTurnPhase.ET, PlayerType.OPPONENT)
         browser!!.player1().getGraveyardHelper(PlayerType.PLAYER).contains(cards.get("Nyxborn Marauder"))
-        browser!!.player2().actionHelper.clickContinueAndExpectPhase(Main1Phase.Companion.M1, PlayerType.OPPONENT)
+        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.OPPONENT)
     }
 
-    internal class InitTestServiceForTest : InitTestService() {
+    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         public override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards!!.get("Plains"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards!!.get("Plains"))

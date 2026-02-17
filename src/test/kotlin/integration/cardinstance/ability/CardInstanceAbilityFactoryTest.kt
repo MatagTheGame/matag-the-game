@@ -13,7 +13,7 @@ class CardInstanceAbilityFactoryTest {
     @Test
     fun testAbilitiesFromParameters() {
         // Given
-        val parameters = mutableListOf<String?>("+2/+2", "TRAMPLE", "DAMAGE:2", "HASTE")
+        val parameters = listOf("+2/+2", "TRAMPLE", "DAMAGE:2", "HASTE")
 
         // When
         val abilities = cardInstanceAbilityFactory.abilitiesFromParameters(parameters)
@@ -36,7 +36,7 @@ class CardInstanceAbilityFactoryTest {
         val ability = cardInstanceAbilityFactory.abilityFromParameter(parameter)
 
         // Then
-        assertThat(ability).isEmpty()
+        assertThat(ability).isNull()
     }
 
     @Test
@@ -48,6 +48,6 @@ class CardInstanceAbilityFactoryTest {
         val ability = cardInstanceAbilityFactory.abilityFromParameter(parameter)
 
         // Then
-        assertThat(ability).isEqualTo(Optional.of(Ability(AbilityType.TRAMPLE)))
+        assertThat(ability).isEqualTo(Ability(AbilityType.TRAMPLE))
     }
 }

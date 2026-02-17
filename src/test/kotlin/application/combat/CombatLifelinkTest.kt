@@ -2,10 +2,13 @@ package application.combat
 
 import application.AbstractApplicationTest
 import application.InitTestService
-import application.InitTestServiceDecorator
 import application.browser.BattlefieldHelper
+import application.cast.CastCreatureAlternativeCostTest.InitTestServiceForTest
 import com.matag.cards.Cards
+import com.matag.game.adminclient.AdminClient
+import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.status.GameStatus
+import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.combat.DeclareAttackersPhase
 import com.matag.game.turn.phases.main2.Main2Phase
 import com.matag.player.PlayerType
@@ -14,36 +17,37 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 @Tag("RegressionTests")
-class CombatLifelinkTest : AbstractApplicationTest() {
-    @Autowired
-    private val initTestServiceDecorator: InitTestServiceDecorator? = null
+class CombatLifelinkTest(
+    adminClient: AdminClient,
+    gameStatusRepository: GameStatusRepository,
+    cardInstanceFactory: CardInstanceFactory,
+    cards: Cards,
+    private var initService: InitTestService,
+) : AbstractApplicationTest(adminClient, gameStatusRepository, cardInstanceFactory, cards) {
 
-    @Autowired
-    private val cards: Cards? = null
-
-    public override fun setupGame() {
-        initTestServiceDecorator!!.setInitTestService(InitTestServiceForTest())
+    override fun setupGame() {
+        initService = InitTestServiceForTest(cardInstanceFactory, cards)
     }
 
     @Test
     fun combatLifelink() {
         // When going to combat
-        browser!!.player1().actionHelper.clickContinueAndExpectPhase(
-            DeclareAttackersPhase.Companion.DA,
+        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(
+            DeclareAttackersPhase.DA,
             PlayerType.PLAYER
         )
 
         // When attacking
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
+        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards!!.get("Charity Extractor")).declareAsAttacker()
-        browser!!.player1().actionHelper.clickContinueAndExpectPhase(Main2Phase.Companion.M2, PlayerType.PLAYER)
+        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.PLAYER)
 
         // Then
         browser!!.player1().getPlayerInfoHelper(PlayerType.OPPONENT).toHaveLife(19)
         browser!!.player1().getPlayerInfoHelper(PlayerType.PLAYER).toHaveLife(21)
     }
 
-    internal class InitTestServiceForTest : InitTestService() {
+    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         public override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards!!.get("Charity Extractor"))
         }

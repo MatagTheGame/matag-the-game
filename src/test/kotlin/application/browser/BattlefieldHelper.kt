@@ -5,19 +5,20 @@ import org.openqa.selenium.By
 import org.openqa.selenium.WebElement
 
 class BattlefieldHelper internal constructor(
-    matagBrowser: MatagBrowser?,
-    private val playerType: PlayerType?,
+    matagBrowser: MatagBrowser,
+    private val playerType: PlayerType,
     private val lineType: String
 ) : AbstractCardContainerHelper(matagBrowser) {
+
     override fun containerElement(): WebElement {
         return playerTypeContainer()!!.findElement(By.className(lineType))
     }
 
     private fun playerTypeContainer(): WebElement? {
-        if (playerType == PlayerType.PLAYER) {
-            return matagBrowser.findElement(By.id("player-battlefield"))
+        return if (playerType == PlayerType.PLAYER) {
+            matagBrowser.findElement(By.id("player-battlefield"))
         } else {
-            return matagBrowser.findElement(By.id("opponent-battlefield"))
+            matagBrowser.findElement(By.id("opponent-battlefield"))
         }
     }
 

@@ -2,9 +2,12 @@ package application.cleanup
 
 import application.AbstractApplicationTest
 import application.InitTestService
-import application.InitTestServiceDecorator
+import application.cast.CastCreatureAlternativeCostTest.InitTestServiceForTest
 import com.matag.cards.Cards
+import com.matag.game.adminclient.AdminClient
+import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.status.GameStatus
+import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.ending.CleanupPhase
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.game.turn.phases.main2.Main2Phase
@@ -14,29 +17,30 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 @Tag("RegressionTests")
-class DiscardACardAtEndOfTurnIfMoreThanSevenTest : AbstractApplicationTest() {
-    @Autowired
-    private val initTestServiceDecorator: InitTestServiceDecorator? = null
-
-    @Autowired
-    private val cards: Cards? = null
+class DiscardACardAtEndOfTurnIfMoreThanSevenTest(
+    adminClient: AdminClient,
+    gameStatusRepository: GameStatusRepository,
+    cardInstanceFactory: CardInstanceFactory,
+    cards: Cards,
+    private var initService: InitTestService,
+) : AbstractApplicationTest(adminClient, gameStatusRepository, cardInstanceFactory, cards) {
 
     override fun setupGame() {
-        initTestServiceDecorator!!.setInitTestService(InitTestServiceForTest())
+        initService = InitTestServiceForTest(cardInstanceFactory, cards)
     }
 
     @Test
     fun discardACardAtEndOfTurnIfMoreThanSeven() {
         // When arriving to End of Turn with 9 cards
-        browser.player1().actionHelper.clickContinueAndExpectPhase(Main2Phase.Companion.M2, PlayerType.PLAYER)
-        browser.player1().actionHelper.clickContinueAndExpectPhase(CleanupPhase.Companion.CL, PlayerType.PLAYER)
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.PLAYER)
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(CleanupPhase.CL, PlayerType.PLAYER)
         browser.player1().getHandHelper(PlayerType.PLAYER).toHaveSize(9)
 
         // It stops asking to discard a card
-        browser.player1().statusHelper.hasMessage("Choose a card to discard.")
-        browser.player1().actionHelper.clickContinue()
-        browser.player1().messageHelper.hasMessage("Cannot continue: DISCARD_A_CARD")
-        browser.player1().messageHelper.close()
+        browser.player1().getStatusHelper().hasMessage("Choose a card to discard.")
+        browser.player1().getActionHelper().clickContinue()
+        browser.player1().getMessageHelper().hasMessage("Cannot continue: DISCARD_A_CARD")
+        browser.player1().getMessageHelper().close()
 
         // When player clicks on a card to discard
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards!!.get("Plains")).select()
@@ -48,10 +52,10 @@ class DiscardACardAtEndOfTurnIfMoreThanSevenTest : AbstractApplicationTest() {
         browser.getGraveyardHelper(PlayerType.PLAYER).contains(cards.get("Plains"), cards.get("Mountain"))
 
         // Priority is finally passed
-        browser.player1().phaseHelper.`is`(Main1Phase.Companion.M1, PlayerType.OPPONENT)
+        browser.player1().getPhaseHelper().matches(Main1Phase.M1, PlayerType.OPPONENT)
     }
 
-    internal class InitTestServiceForTest : InitTestService() {
+    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             // Current Player
             addCardToCurrentPlayerHand(gameStatus, cards.get("Island"))

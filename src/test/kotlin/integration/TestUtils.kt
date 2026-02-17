@@ -28,14 +28,14 @@ class TestUtils @Autowired constructor(
         val player1 = PlayerInfo("player-name")
         val player1SecurityToken = SecurityToken("player-session", UUID.randomUUID().toString(), "1")
         gameStatus.player1 = playerFactory.create(player1SecurityToken, player1)
-        gameStatus.player1.library.addCards(testLibrary(gameStatus, player1.getPlayerName()))
-        gameStatus.player1.drawHand()
+        gameStatus.player1?.library?.addCards(testLibrary(gameStatus, player1.playerName))
+        gameStatus.player1?.drawHand()
 
         val player2 = PlayerInfo("opponent-name")
         val player2SecurityToken = SecurityToken("opponent-session", UUID.randomUUID().toString(), "1")
         gameStatus.player2 = playerFactory.create(player2SecurityToken, player2)
-        gameStatus.player2.library.addCards(testLibrary(gameStatus, player2.getPlayerName()))
-        gameStatus.player2.drawHand()
+        gameStatus.player2?.library?.addCards(testLibrary(gameStatus, player2.playerName))
+        gameStatus.player2?.drawHand()
 
         gameStatus.turn.currentTurnPlayer = "player-name"
         gameStatus.turn.currentPhaseActivePlayer = "player-name"

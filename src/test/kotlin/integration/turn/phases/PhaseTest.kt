@@ -28,9 +28,9 @@ class PhaseTest(
         val untapPhase = phaseFactory.get(phase)
 
         // When
-        val nextPhase: Phase? = untapPhase.getNextPhase(testUtils.testGameStatus())
+        val nextPhase: Phase = untapPhase.getNextPhase(testUtils.testGameStatus())
 
         // Then
-        assertThat(nextPhase?.getName ?: "null").isEqualTo(expectedNextPhase)
+        assertThat(nextPhase.name ?: "null").isEqualTo(expectedNextPhase)
     }
 }

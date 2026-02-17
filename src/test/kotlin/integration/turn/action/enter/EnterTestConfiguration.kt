@@ -5,7 +5,7 @@ import com.matag.game.turn.action.player.DrawXCardsService
 import com.matag.game.turn.action.selection.MagicInstancePermanentSelectorService
 import com.matag.game.turn.action.trigger.WhenTriggerService
 import integration.TestUtilsConfiguration
-import org.mockito.Mockito
+import org.mockito.Mockito.mock
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
@@ -22,7 +22,7 @@ open class EnterTestConfiguration {
 
     @Bean
     open fun drawXCardsService(): DrawXCardsService? {
-        return Mockito.mock<DrawXCardsService?>(DrawXCardsService::class.java)
+        return mock(DrawXCardsService::class.java)
     }
 
     @Bean
@@ -31,7 +31,7 @@ open class EnterTestConfiguration {
     }
 
     @Bean
-    open fun whenTriggerService(magicInstancePermanentSelectorService: MagicInstancePermanentSelectorService?): WhenTriggerService {
+    open fun whenTriggerService(magicInstancePermanentSelectorService: MagicInstancePermanentSelectorService): WhenTriggerService {
         return WhenTriggerService(magicInstancePermanentSelectorService)
     }
 }

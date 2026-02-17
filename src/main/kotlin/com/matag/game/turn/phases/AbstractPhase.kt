@@ -45,7 +45,7 @@ abstract class AbstractPhase(
     }
 
     private fun moveToNextPhase(gameStatus: GameStatus) {
-        if (name == CleanupPhase.Companion.CL) {
+        if (name == CleanupPhase.CL) {
             gameStatus.turn.currentTurnPlayer = gameStatus.nonCurrentPlayer.name
             gameStatus.turn.increaseTurnNumber()
         }

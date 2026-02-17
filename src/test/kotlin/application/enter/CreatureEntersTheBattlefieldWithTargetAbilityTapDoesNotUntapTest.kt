@@ -2,93 +2,95 @@ package application.enter
 
 import application.AbstractApplicationTest
 import application.InitTestService
-import application.InitTestServiceDecorator
 import application.browser.BattlefieldHelper
 import com.matag.cards.Cards
+import com.matag.game.adminclient.AdminClient
+import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.status.GameStatus
+import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.combat.DeclareAttackersPhase
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.game.turn.phases.main2.Main2Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
 
 @Tag("RegressionTests")
-class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest : AbstractApplicationTest() {
-    @Autowired
-    private val initTestServiceDecorator: InitTestServiceDecorator? = null
-
-    @Autowired
-    private val cards: Cards? = null
+class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest(
+    adminClient: AdminClient,
+    gameStatusRepository: GameStatusRepository,
+    cardInstanceFactory: CardInstanceFactory,
+    cards: Cards,
+    private var initService: InitTestService,
+) : AbstractApplicationTest(adminClient, gameStatusRepository, cardInstanceFactory, cards) {
 
     override fun setupGame() {
-        initTestServiceDecorator!!.setInitTestService(InitTestServiceForTest())
+        initService = InitTestServiceForTest(cardInstanceFactory, cards)
     }
 
     @Test
     fun creatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest() {
         // When Playing Frost Lynx
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
-            .getCard(cards!!.get("Island"), 0).tap()
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
+            .getCard(cards.get("Island"), 0).tap()
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Island"), 1).tap()
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Island"), 2).tap()
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Frost Lynx")).click()
-        browser.player2().actionHelper.clickContinueAndExpectPhase(Main1Phase.Companion.M1, PlayerType.PLAYER)
+        browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
 
         // Player 1 cannot resolve without choosing a target if there are targets available
-        browser.player1().actionHelper.clickContinueAndExpectPhase(Main1Phase.Companion.M1, PlayerType.PLAYER)
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
         val frostLynxId =
-            browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
-                .getFirstCard(cards.get("Frost Lynx")).cardIdNumeric
-        browser.player1().messageHelper.hasMessage("\"" + frostLynxId + " - Frost Lynx\" requires a valid target.")
-        browser.player1().messageHelper.close()
+            browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+                .getFirstCard(cards.get("Frost Lynx")).getCardIdNumeric()
+        browser.player1().getMessageHelper().hasMessage("\"" + frostLynxId + " - Frost Lynx\" requires a valid target.")
+        browser.player1().getMessageHelper().close()
 
         // Player 1 chooses a target
-        browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE)
+        browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Canopy Spider")).click()
-        browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE)
-            .getFirstCard(cards.get("Canopy Spider")).isTargeted
+        browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
+            .getFirstCard(cards.get("Canopy Spider")).isTargeted()
 
         // Player 2 just continues
-        browser.player2().phaseHelper.`is`(Main1Phase.Companion.M1, PlayerType.PLAYER)
-        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
-            .getFirstCard(cards.get("Canopy Spider")).isTargeted
-        browser.player2().actionHelper.clickContinueAndExpectPhase(Main1Phase.Companion.M1, PlayerType.PLAYER)
+        browser.player2().getPhaseHelper().matches(Main1Phase.M1, PlayerType.PLAYER)
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+            .getFirstCard(cards.get("Canopy Spider")).isTargeted()
+        browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
 
         // Player 1 has priority again and target is tapped
-        browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.SECOND_LINE)
-            .getFirstCard(cards.get("Canopy Spider")).isTappedDoesNotUntapNextTurn
+        browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
+            .getFirstCard(cards.get("Canopy Spider")).isTappedDoesNotUntapNextTurn()
 
         // Next turn target is still tapped
-        browser.player1().actionHelper.clickContinueAndExpectPhase(Main2Phase.Companion.M2, PlayerType.PLAYER)
-        browser.player1().actionHelper.clickContinueAndExpectPhase(Main1Phase.Companion.M1, PlayerType.OPPONENT)
-        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
-            .getFirstCard(cards.get("Canopy Spider")).isTapped
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.PLAYER)
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.OPPONENT)
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+            .getFirstCard(cards.get("Canopy Spider")).isTapped()
         browser.player2().getHandHelper(PlayerType.PLAYER).contains(cards.get("Forest"))
-        browser.player2().actionHelper.clickContinueAndExpectPhase(Main2Phase.Companion.M2, PlayerType.OPPONENT)
-        browser.player2().actionHelper.clickContinueAndExpectPhase(Main1Phase.Companion.M1, PlayerType.PLAYER)
+        browser.player2().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.OPPONENT)
+        browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
 
         // Next next turn target is still tapped
-        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
-            .getFirstCard(cards.get("Canopy Spider")).isTapped
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+            .getFirstCard(cards.get("Canopy Spider")).isTapped()
         browser.player1().getHandHelper(PlayerType.PLAYER).contains(cards.get("Island"))
-        browser.player1().actionHelper.clickContinueAndExpectPhase(
-            DeclareAttackersPhase.Companion.DA,
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(
+            DeclareAttackersPhase.DA,
             PlayerType.PLAYER
         )
-        browser.player1().actionHelper.clickContinueAndExpectPhase(Main2Phase.Companion.M2, PlayerType.PLAYER)
-        browser.player1().actionHelper.clickContinueAndExpectPhase(Main1Phase.Companion.M1, PlayerType.OPPONENT)
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.PLAYER)
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.OPPONENT)
 
         // Next next next turn target is untapped
         browser.player2().getHandHelper(PlayerType.PLAYER).contains(cards.get("Forest"), cards.get("Forest"))
-        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.SECOND_LINE)
-            .getFirstCard(cards.get("Canopy Spider")).isNotTapped
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+            .getFirstCard(cards.get("Canopy Spider")).isNotTapped()
     }
 
-    internal class InitTestServiceForTest : InitTestService() {
+    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Frost Lynx"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"))

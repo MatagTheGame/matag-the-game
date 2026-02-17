@@ -34,16 +34,16 @@ class ConsolidateStatusServiceTest {
         val gameStatus = testUtils!!.testGameStatus()
         val cardInstance =
             cardInstanceFactory!!.create(gameStatus, 61, cards!!.get("Canopy Spider"), "player-name", "player-name")
-        cardInstance.modifiers.modifiersUntilEndOfTurn.setToBeReturnedToHand(true)
+        cardInstance.modifiers.modifiersUntilEndOfTurn.isToBeReturnedToHand = true
         cardInstance.modifiers.dealDamage(1)
-        gameStatus.getCurrentPlayer().battlefield.addCard(cardInstance)
+        gameStatus.currentPlayer.battlefield.addCard(cardInstance)
 
         // When
         consolidateStatusService!!.consolidate(gameStatus)
 
         // Then
-        Assertions.assertThat<CardInstance?>(gameStatus.getCurrentPlayer().battlefield.cards).hasSize(0)
-        Assertions.assertThat<CardInstance?>(gameStatus.getCurrentPlayer().hand.cards).contains(cardInstance)
+        Assertions.assertThat<CardInstance?>(gameStatus.currentPlayer.battlefield.cards).hasSize(0)
+        Assertions.assertThat<CardInstance?>(gameStatus.currentPlayer.hand.cards).contains(cardInstance)
         Assertions.assertThat(cardInstance.modifiers.damage).isEqualTo(0)
     }
 
@@ -53,16 +53,16 @@ class ConsolidateStatusServiceTest {
         val gameStatus = testUtils!!.testGameStatus()
         val cardInstance =
             cardInstanceFactory!!.create(gameStatus, 61, cards!!.get("Canopy Spider"), "player-name", "player-name")
-        cardInstance.modifiers.modifiersUntilEndOfTurn.setToBeDestroyed(true)
+        cardInstance.modifiers.modifiersUntilEndOfTurn.isToBeDestroyed = true
         cardInstance.modifiers.dealDamage(1)
-        gameStatus.getCurrentPlayer().battlefield.addCard(cardInstance)
+        gameStatus.currentPlayer.battlefield.addCard(cardInstance)
 
         // When
         consolidateStatusService!!.consolidate(gameStatus)
 
         // Then
-        Assertions.assertThat<CardInstance?>(gameStatus.getCurrentPlayer().battlefield.cards).hasSize(0)
-        Assertions.assertThat<CardInstance?>(gameStatus.getCurrentPlayer().graveyard.cards)
+        Assertions.assertThat<CardInstance?>(gameStatus.currentPlayer.battlefield.cards).hasSize(0)
+        Assertions.assertThat<CardInstance?>(gameStatus.currentPlayer.graveyard.cards)
             .contains(cardInstance)
         Assertions.assertThat(cardInstance.modifiers.damage).isEqualTo(0)
     }

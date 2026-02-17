@@ -6,46 +6,40 @@ import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.turn.action.cast.ManaCountService
 import integration.TestUtils
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import java.util.Map
 
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [CastTestConfiguration::class])
-class ManaCountServiceTest {
-    @Autowired
-    private val manaCountService: ManaCountService? = null
-
-    @Autowired
-    private val cardInstanceFactory: CardInstanceFactory? = null
-
-    @Autowired
-    private val testUtils: TestUtils? = null
-
-    @Autowired
-    private val cards: Cards? = null
-
+class ManaCountServiceTest(
+    @param:Autowired private val manaCountService: ManaCountService,
+    @param:Autowired private val cardInstanceFactory: CardInstanceFactory,
+    @param:Autowired private val testUtils: TestUtils,
+    @param:Autowired private val cards: Cards
+) {
     //  @Rule
     //  public ExpectedException thrown = ExpectedException.none();
+    
     @Test
     fun countManaPaidForSimpleLands() {
         // Given
-        val mana: MutableMap<Int, List<String>> = Map.of<Int, List<String>>(
-            1, listOf("WHITE"),
-            2, listOf("WHITE"),
-            3, listOf("BLUE")
+        val mana = mapOf(
+            1 to listOf("WHITE"),
+            2 to listOf("WHITE"),
+            3 to listOf("BLUE")
         )
-        val gameStatus = testUtils!!.testGameStatus()
-        val player = gameStatus.getPlayer1()
+        val gameStatus = testUtils.testGameStatus()
+        val player = gameStatus.player1!!
 
-        player.battlefield.addCard(
-            cardInstanceFactory!!.create(
+        player.battlefield?.addCard(
+            cardInstanceFactory.create(
                 gameStatus,
                 1,
-                cards!!.get("Plains"),
+                cards.get("Plains"),
                 player.name,
                 player.name
             )
@@ -70,10 +64,10 @@ class ManaCountServiceTest {
         )
 
         // When
-        val colors = manaCountService!!.verifyManaPaid(mana, player)
+        val colors = manaCountService.verifyManaPaid(mana, player)
 
         // Then
-        Assertions.assertThat<Cost?>(colors).containsExactlyInAnyOrder(Cost.WHITE, Cost.WHITE, Cost.BLUE)
+        assertThat<Cost?>(colors).containsExactlyInAnyOrder(Cost.WHITE, Cost.WHITE, Cost.BLUE)
     }
 
     //  @Test
@@ -83,7 +77,7 @@ class ManaCountServiceTest {
     //      1, List.of("WHITE")
     //    );
     //    var gameStatus = testUtils.testGameStatus();
-    //    var player = gameStatus.getPlayer1();
+    //    var player = gameStatus.player1;
     //
     //    player.battlefield.addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Dark Remedy"), player.name, player.name));
     //
@@ -99,10 +93,10 @@ class ManaCountServiceTest {
     //      1, List.of("WHITE")
     //    );
     //    var gameStatus = testUtils.testGameStatus();
-    //    var player = gameStatus.getPlayer1();
+    //    var player = gameStatus.player1;
     //
     //    var plains = cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.name, player.name);
-    //    plains.modifiers.setTapped(true);
+    //    plains.modifiers.isTapped = true;
     //    player.battlefield.addCard(plains);
     //
     //    thrown.expectMessage("\"1 - Plains\" is already tapped.");
@@ -115,7 +109,7 @@ class ManaCountServiceTest {
     //    // Given
     //    var mana = Map.of(1, List.of("BLUE"));
     //    var gameStatus = testUtils.testGameStatus();
-    //    var player = gameStatus.getPlayer1();
+    //    var player = gameStatus.player1;
     //
     //    player.battlefield.addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Plains"), player.name, player.name));
     //
@@ -124,30 +118,31 @@ class ManaCountServiceTest {
     //    // When
     //    manaCountService.verifyManaPaid(mana, player);
     //  }
+    
     @Test
     fun countManaPaidTappingLandForDualLand() {
         // Given
-        val mana: MutableMap<Int?, List<String>> = Map.of<Int?, List<String>>(
-            1, listOf("BLUE")
+        val mana = mapOf(
+            1 to listOf("BLUE")
         )
-        val gameStatus = testUtils!!.testGameStatus()
-        val player = gameStatus.getPlayer1()
+        val gameStatus = testUtils.testGameStatus()
+        val player = gameStatus.player1!!
 
         player.battlefield.addCard(
-            cardInstanceFactory!!.create(
+            cardInstanceFactory.create(
                 gameStatus,
                 1,
-                cards!!.get("Azorius Guildgate"),
+                cards.get("Azorius Guildgate"),
                 player.name,
                 player.name
             )
         )
 
         // When
-        val colors = manaCountService!!.verifyManaPaid(mana, player)
+        val colors = manaCountService.verifyManaPaid(mana, player)
 
         // Then
-        Assertions.assertThat<Cost?>(colors).isEqualTo(listOf(Cost.BLUE))
+        assertThat(colors).isEqualTo(listOf(Cost.BLUE))
     }
 
     //  @Test
@@ -157,7 +152,7 @@ class ManaCountServiceTest {
     //      1, List.of("BLACK")
     //    );
     //    var gameStatus = testUtils.testGameStatus();
-    //    var player = gameStatus.getPlayer1();
+    //    var player = gameStatus.player1;
     //
     //    player.battlefield.addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Azorius Guildgate"), player.name, player.name));
     //
@@ -166,21 +161,22 @@ class ManaCountServiceTest {
     //    // When
     //    manaCountService.verifyManaPaid(mana, player);
     //  }
+    
     @Test
     fun countManaPaidColorlessMana() {
         // Given
-        val mana: MutableMap<Int?, List<String>> = Map.of<Int?, List<String>>(
-            1, listOf("WHITE"),
-            2, listOf("COLORLESS")
+        val mana = mapOf(
+            1 to listOf("WHITE"),
+            2 to listOf("COLORLESS")
         )
-        val gameStatus = testUtils!!.testGameStatus()
-        val player = gameStatus.getPlayer1()
+        val gameStatus = testUtils.testGameStatus()
+        val player = gameStatus.player1!!
 
         player.battlefield.addCard(
-            cardInstanceFactory!!.create(
+            cardInstanceFactory.create(
                 gameStatus,
                 1,
-                cards!!.get("Plains"),
+                cards.get("Plains"),
                 player.name,
                 player.name
             )
@@ -196,38 +192,40 @@ class ManaCountServiceTest {
         )
 
         // When
-        manaCountService!!.verifyManaPaid(mana, player)
+        manaCountService.verifyManaPaid(mana, player)
     }
 
     @Test
     fun countManaPaidTappingCreatureWhichGeneratesTwoMana() {
         // Given
-        val mana: MutableMap<Int?, List<String>> = Map.of<Int?, List<String>>(
-            1, listOf("GREEN", "BLUE")
+        val mana = mapOf(
+            1 to listOf("GREEN", "BLUE")
         )
-        val gameStatus = testUtils!!.testGameStatus()
-        val player = gameStatus.getPlayer1()
+        val gameStatus = testUtils.testGameStatus()
+        val player = gameStatus.player1!!
 
         player.battlefield.addCard(
-            cardInstanceFactory!!.create(
+            cardInstanceFactory.create(
                 gameStatus,
                 1,
-                cards!!.get("Gyre Engineer"),
+                cards.get("Gyre Engineer"),
                 player.name,
                 player.name
             )
         )
 
         // When
-        manaCountService!!.verifyManaPaid(mana, player)
-    } //  @Test
+        manaCountService.verifyManaPaid(mana, player)
+    }
+
+//  @Test
     //  public void countManaPaidTappingCreatureWhichGeneratesTwoManaException() {
     //    // Given
     //    var mana = Map.of(
     //      1, List.of("GREEN", "BLACK")
     //    );
     //    var gameStatus = testUtils.testGameStatus();
-    //    var player = gameStatus.getPlayer1();
+    //    var player = gameStatus.player1;
     //
     //    player.battlefield.addCard(cardInstanceFactory.create(gameStatus, 1, cards.get("Gyre Engineer"), player.name, player.name));
     //

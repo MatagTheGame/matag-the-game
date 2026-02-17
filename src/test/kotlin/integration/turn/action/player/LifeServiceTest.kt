@@ -5,6 +5,7 @@ import com.matag.game.turn.action.player.LifeService
 import integration.TestUtils
 import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito
@@ -14,40 +15,37 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [PlayerTestConfiguration::class, TestUtilsConfiguration::class])
-class LifeServiceTest {
-    @Autowired
-    private val lifeService: LifeService? = null
-
-    @Autowired
-    private val testUtils: TestUtils? = null
-
-    @Autowired
-    private val finishGameService: FinishGameService? = null
+class LifeServiceTest(
+    @param:Autowired private val lifeService: LifeService,
+    @param:Autowired private val testUtils: TestUtils,
+    @param:Autowired private val finishGameService: FinishGameService
+) {
+    
 
     @Test
     fun addLife() {
         // Given
-        val gameStatus = testUtils!!.testGameStatus()
+        val gameStatus = testUtils.testGameStatus()
         val amount = 1
 
         // When
-        lifeService!!.add(gameStatus.getPlayer1(), amount, gameStatus)
+        lifeService.add(gameStatus.player1!!, amount, gameStatus)
 
         // Then
-        Assertions.assertThat(gameStatus.getPlayer1().life).isEqualTo(21)
+        assertThat(gameStatus.player1?.life).isEqualTo(21)
     }
 
     @Test
     fun loseLifeAndLoseGame() {
         // Given
-        val gameStatus = testUtils!!.testGameStatus()
+        val gameStatus = testUtils.testGameStatus()
         val amount = -25
 
         // When
-        lifeService!!.add(gameStatus.getPlayer1(), amount, gameStatus)
+        lifeService.add(gameStatus.player1!!, amount, gameStatus)
 
         // Then
-        Assertions.assertThat(gameStatus.getPlayer1().life).isEqualTo(-5)
-        Mockito.verify<FinishGameService?>(finishGameService).setWinner(gameStatus, gameStatus.getPlayer2())
+        assertThat(gameStatus.player1?.life).isEqualTo(-5)
+        Mockito.verify(finishGameService).setWinner(gameStatus, gameStatus.player2!!)
     }
 }

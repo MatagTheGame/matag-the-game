@@ -7,12 +7,12 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 class PhaseHelper internal constructor(private val matagBrowser: MatagBrowser) {
-    fun `is`(phase: String, priority: PlayerType?) {
+    fun matches(phase: String, priority: PlayerType) {
         matagBrowser.wait(ExpectedConditions.textToBe(PHASE_CSS_SELECTOR, phase))
         isPriority(priority)
     }
 
-    fun isPriority(priority: PlayerType?) {
+    fun isPriority(priority: PlayerType) {
         try {
             matagBrowser.wait(
                 ExpectedConditions.attributeContains(

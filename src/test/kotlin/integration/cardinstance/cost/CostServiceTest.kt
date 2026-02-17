@@ -188,7 +188,7 @@ class CostServiceTest(
         addCardToPlayerBattlefield(gameStatus, "Forest")
 
         val blindingDrone = addCardToPlayerBattlefield(gameStatus, "Blinding Drone")
-        gameStatus.player1.battlefield.addCard(blindingDrone)
+        gameStatus.player1?.battlefield?.addCard(blindingDrone)
 
         // When
         val result = costService.canAfford(blindingDrone, "THAT_TARGETS_GET", gameStatus)
@@ -205,7 +205,7 @@ class CostServiceTest(
         addCardToPlayerBattlefield(gameStatus, "Wastes")
 
         val blindingDrone = addCardToPlayerBattlefield(gameStatus, "Blinding Drone")
-        gameStatus.player1.battlefield.addCard(blindingDrone)
+        gameStatus.player1?.battlefield?.addCard(blindingDrone)
 
         // When
         val result = costService.canAfford(blindingDrone, "THAT_TARGETS_GET", gameStatus)

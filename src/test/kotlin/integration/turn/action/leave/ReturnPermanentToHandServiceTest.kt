@@ -33,13 +33,13 @@ class ReturnPermanentToHandServiceTest {
         val gameStatus = testUtils!!.testGameStatus()
         val cardInstance =
             cardInstanceFactory!!.create(gameStatus, 61, cards!!.get("Canopy Spider"), "player-name", "player-name")
-        gameStatus.getPlayer1().battlefield.addCard(cardInstance)
+        gameStatus.player1!!.battlefield.addCard(cardInstance)
 
         // When
         returnPermanentToHandService!!.markAsToBeReturnedToHand(gameStatus, 61)
 
         // Then
-        Assertions.assertThat(cardInstance.modifiers.modifiersUntilEndOfTurn.isToBeReturnedToHand()).isTrue()
+        Assertions.assertThat(cardInstance.modifiers.modifiersUntilEndOfTurn.isToBeReturnedToHand).isTrue()
     }
 
     @Test
@@ -48,13 +48,13 @@ class ReturnPermanentToHandServiceTest {
         val gameStatus = testUtils!!.testGameStatus()
         val cardInstance =
             cardInstanceFactory!!.create(gameStatus, 61, cards!!.get("Canopy Spider"), "player-name", "player-name")
-        gameStatus.getPlayer1().battlefield.addCard(cardInstance)
+        gameStatus.player1!!.battlefield.addCard(cardInstance)
 
         // When
         returnPermanentToHandService!!.returnPermanentToHand(gameStatus, 61)
 
         // Then
-        Assertions.assertThat(gameStatus.getPlayer1().battlefield.size()).isEqualTo(0)
-        Assertions.assertThat<CardInstance?>(gameStatus.getPlayer1().hand.cards).contains(cardInstance)
+        Assertions.assertThat(gameStatus.player1?.battlefield?.size()).isEqualTo(0)
+        Assertions.assertThat(gameStatus.player1?.hand?.cards).contains(cardInstance)
     }
 }

@@ -19,16 +19,16 @@ class ActionHelper internal constructor(private val matagBrowser: MatagBrowser) 
         matagBrowser.findElement(this.continueSelector).click()
     }
 
-    fun clickContinueAndExpectPhase(expectStatus: String?, player: PlayerType?) {
+    fun clickContinueAndExpectPhase(expectStatus: String, player: PlayerType) {
         clickContinue()
-        matagBrowser.player1().getPhaseHelper().`is`(expectStatus, player)
-        matagBrowser.player2().getPhaseHelper().`is`(expectStatus, other(player))
+        matagBrowser.player1().getPhaseHelper().matches(expectStatus, player)
+        matagBrowser.player2().getPhaseHelper().matches(expectStatus, other(player))
     }
 
     private val continueSelector: By
         get() = By.id("continue-button")
 
-    private fun other(player: PlayerType?): PlayerType {
+    private fun other(player: PlayerType): PlayerType {
         if (PlayerType.PLAYER == player) {
             return PlayerType.OPPONENT
         } else {

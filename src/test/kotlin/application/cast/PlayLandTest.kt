@@ -2,23 +2,27 @@ package application.cast
 
 import application.AbstractApplicationTest
 import application.InitTestService
-import application.InitTestServiceDecorator
 import application.browser.BattlefieldHelper
+import application.cast.CastCreatureAlternativeCostTest.InitTestServiceForTest
 import com.matag.cards.Cards
+import com.matag.game.adminclient.AdminClient
+import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.status.GameStatus
+import com.matag.game.status.GameStatusRepository
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-class PlayLandTest : AbstractApplicationTest() {
-    @Autowired
-    private val initTestServiceDecorator: InitTestServiceDecorator? = null
-
-    @Autowired
-    private val cards: Cards? = null
+class PlayLandTest(
+    adminClient: AdminClient,
+    gameStatusRepository: GameStatusRepository,
+    cardInstanceFactory: CardInstanceFactory,
+    cards: Cards,
+    private var initService: InitTestService,
+) : AbstractApplicationTest(adminClient, gameStatusRepository, cardInstanceFactory, cards) {
 
     override fun setupGame() {
-        initTestServiceDecorator!!.setInitTestService(InitTestServiceForTest())
+        initService = InitTestServiceForTest(cardInstanceFactory, cards)
     }
 
     @Test
@@ -27,9 +31,9 @@ class PlayLandTest : AbstractApplicationTest() {
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards!!.get("Island")).click()
 
         // Then battlefields contain land
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.Companion.FIRST_LINE)
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .containsExactly(cards.get("Island"))
-        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.Companion.FIRST_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.FIRST_LINE)
             .containsExactly(cards.get("Island"))
 
         // Hand is empty
@@ -40,10 +44,10 @@ class PlayLandTest : AbstractApplicationTest() {
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Island")).click()
 
         // Then error is displayed
-        browser.player1().messageHelper.hasMessage("You already played a land this turn.")
+        browser.player1().getMessageHelper().hasMessage("You already played a land this turn.")
     }
 
-    internal class InitTestServiceForTest : InitTestService() {
+    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Island"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Island"))
