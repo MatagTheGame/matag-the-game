@@ -5,6 +5,7 @@ import com.matag.game.turn.action.player.DrawXCardsService
 import integration.TestUtils
 import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito
@@ -13,13 +14,12 @@ import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
-@ContextConfiguration(classes = [PlayerTestConfiguration::class, TestUtilsConfiguration::class])
+@ContextConfiguration(classes = [PlayerTestConfiguration::class])
 class DrawXCardsServiceTest(
-    @param:Autowired private val drawXCardsService: DrawXCardsService,
-    @param:Autowired private val testUtils: TestUtils,
-    @param:Autowired private val finishGameService: FinishGameService
+    private val drawXCardsService: DrawXCardsService,
+    private val testUtils: TestUtils,
+    private val finishGameService: FinishGameService
 ) {
-
 
     @Test
     fun drawCards() {
@@ -31,8 +31,8 @@ class DrawXCardsServiceTest(
         drawXCardsService.drawXCards(gameStatus.player1!!, amount, gameStatus)
 
         // Then
-        Assertions.assertThat(gameStatus.player1?.hand?.cards).hasSize(9)
-        Assertions.assertThat(gameStatus.player1?.library?.cards).hasSize(31)
+        assertThat(gameStatus.player1?.hand?.cards).hasSize(9)
+        assertThat(gameStatus.player1?.library?.cards).hasSize(31)
     }
 
     @Test
@@ -47,8 +47,8 @@ class DrawXCardsServiceTest(
         drawXCardsService.drawXCards(gameStatus.player1!!, amount, gameStatus)
 
         // Then
-        Assertions.assertThat(gameStatus.player1?.hand?.cards).hasSize(9)
-        Assertions.assertThat(gameStatus.player1?.library?.cards).hasSize(0)
+        assertThat(gameStatus.player1?.hand?.cards).hasSize(9)
+        assertThat(gameStatus.player1?.library?.cards).hasSize(0)
         Mockito.verify(finishGameService).setWinner(gameStatus, gameStatus.player2!!)
     }
 }

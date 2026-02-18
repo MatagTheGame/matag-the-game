@@ -16,10 +16,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [LeaveTestConfiguration::class])
 class DestroyPermanentGetServiceTest(
-    @param:Autowired private val destroyPermanentService: DestroyPermanentService,
-    @param:Autowired private val cardInstanceFactory: CardInstanceFactory,
-    @param:Autowired private val testUtils: TestUtils,
-    @param:Autowired private val cards: Cards
+    private val destroyPermanentService: DestroyPermanentService,
+    private val cardInstanceFactory: CardInstanceFactory,
+    private val testUtils: TestUtils,
+    private val cards: Cards
 ) {
     
     @Test

@@ -9,7 +9,7 @@ class Library : CardListComponent() {
 
     fun draw(): CardInstance =
         cards.first().also {
-            cards.drop(1)
+            cards = cards.drop(1)
         }
 
     fun shuffle() {

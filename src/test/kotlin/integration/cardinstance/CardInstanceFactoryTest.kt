@@ -14,9 +14,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [TestUtilsConfiguration::class])
 class CardInstanceFactoryTest(
-    @param:Autowired val cardInstanceFactory: CardInstanceFactory,
-    @param:Autowired val cards: Cards,
-    @param:Autowired val testUtils: TestUtils
+    val cardInstanceFactory: CardInstanceFactory,
+    val cards: Cards,
+    val testUtils: TestUtils
 ) {
     @Test
     fun shouldCreateACardInstance() {

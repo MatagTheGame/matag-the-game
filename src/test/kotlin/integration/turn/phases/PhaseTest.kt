@@ -14,8 +14,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [PhasesTestConfiguration::class])
 class PhaseTest(
-    @param:Autowired val phaseFactory: PhaseFactory,
-    @param:Autowired val testUtils: TestUtils
+    val phaseFactory: PhaseFactory,
+    val testUtils: TestUtils
 ) {
     @ParameterizedTest
     @CsvSource(

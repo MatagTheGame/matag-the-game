@@ -15,9 +15,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [PlayerTestConfiguration::class, TestUtilsConfiguration::class])
 class LifeServiceTest(
-    @param:Autowired private val lifeService: LifeService,
-    @param:Autowired private val testUtils: TestUtils,
-    @param:Autowired private val finishGameService: FinishGameService
+    private val lifeService: LifeService,
+    private val testUtils: TestUtils,
+    private val finishGameService: FinishGameService
 ) {
     
 

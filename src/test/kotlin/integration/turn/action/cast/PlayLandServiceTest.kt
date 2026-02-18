@@ -15,11 +15,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [CastTestConfiguration::class])
 class PlayLandServiceTest(
-    @param:Autowired private val playLandService: PlayLandService,
-    @param:Autowired private val cardInstanceFactory: CardInstanceFactory,
-    @param:Autowired private val enterCardIntoBattlefieldService: EnterCardIntoBattlefieldService,
-    @param:Autowired private val testUtils: TestUtils,
-    @param:Autowired private val cards: Cards
+    private val playLandService: PlayLandService,
+    private val cardInstanceFactory: CardInstanceFactory,
+    private val enterCardIntoBattlefieldService: EnterCardIntoBattlefieldService,
+    private val testUtils: TestUtils,
+    private val cards: Cards
 ) {
 
     @Test

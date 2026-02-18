@@ -16,8 +16,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @Import(CardsConfiguration::class, TestUtilsConfiguration::class)
 class CostServiceTest(
-    @param:Autowired val testUtils: TestUtils,
-    @param:Autowired val costService: CostService
+    val testUtils: TestUtils,
+    val costService: CostService
 ) {
     @Test
     fun isCastingCostFulfilledFeralMaakaCorrectCosts() {

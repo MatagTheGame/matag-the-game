@@ -22,10 +22,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [SelectionTestConfiguration::class])
 class MagicInstancePermanentSelectorServiceTest(
-    @param:Autowired private val selectorService: MagicInstancePermanentSelectorService,
-    @param:Autowired private val cardInstanceFactory: CardInstanceFactory,
-    @param:Autowired private val testUtils: TestUtils,
-    @param:Autowired private val cards: Cards
+    private val selectorService: MagicInstancePermanentSelectorService,
+    private val cardInstanceFactory: CardInstanceFactory,
+    private val testUtils: TestUtils,
+    private val cards: Cards
 ) {
 
     @Test

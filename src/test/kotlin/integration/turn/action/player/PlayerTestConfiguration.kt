@@ -17,21 +17,21 @@ import org.springframework.context.annotation.Import
 open class PlayerTestConfiguration {
     @Bean
     open fun finishGameService(): FinishGameService? {
-        return Mockito.mock<FinishGameService?>(FinishGameService::class.java)
+        return Mockito.mock(FinishGameService::class.java)
     }
 
     @Bean
     open fun abilityService(): AbilityService? {
-        return Mockito.mock<AbilityService?>(AbilityService::class.java)
+        return Mockito.mock(AbilityService::class.java)
     }
 
     @Bean
     open fun dealDamageToPlayerService(): DealDamageToPlayerService? {
-        return Mockito.mock<DealDamageToPlayerService?>(DealDamageToPlayerService::class.java)
+        return Mockito.mock(DealDamageToPlayerService::class.java)
     }
 
     @Bean
     open fun putIntoGraveyardService(): PutIntoGraveyardService? {
-        return Mockito.mock<PutIntoGraveyardService?>(PutIntoGraveyardService::class.java)
+        return Mockito.mock(PutIntoGraveyardService::class.java)
     }
 }

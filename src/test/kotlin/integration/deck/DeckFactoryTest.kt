@@ -15,9 +15,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [TestUtilsConfiguration::class])
 class DeckFactoryTest(
-    @param:Autowired val testUtils: TestUtils,
-    @param:Autowired val deckFactory: DeckFactory,
-    @param:Autowired val cards: Cards
+    val testUtils: TestUtils,
+    val deckFactory: DeckFactory,
+    val cards: Cards
 ) {
     @Test
     fun testFactory() {

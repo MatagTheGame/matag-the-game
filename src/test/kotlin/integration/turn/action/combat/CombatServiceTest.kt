@@ -27,16 +27,16 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [CombatTestConfiguration::class])
 class CombatServiceTest(
-    @param:Autowired private val cardInstanceFactory: CardInstanceFactory,
-    @param:Autowired private val testUtils: TestUtils,
-    @param:Autowired private val cards: Cards,
-    @param:Autowired private val combatService: CombatService,
-    @param:Autowired private val declareAttackerService: DeclareAttackerService,
-    @param:Autowired private val declareBlockerService: DeclareBlockerService,
-    @param:Autowired private val dealDamageToPlayerService: DealDamageToPlayerService,
-    @param:Autowired private val dealDamageToCreatureService: DealDamageToCreatureService,
-    @param:Autowired private val lifeService: LifeService,
-    @param:Autowired private val whenTriggerService: WhenTriggerService
+    private val cardInstanceFactory: CardInstanceFactory,
+    private val testUtils: TestUtils,
+    private val cards: Cards,
+    private val combatService: CombatService,
+    private val declareAttackerService: DeclareAttackerService,
+    private val declareBlockerService: DeclareBlockerService,
+    private val dealDamageToPlayerService: DealDamageToPlayerService,
+    private val dealDamageToCreatureService: DealDamageToCreatureService,
+    private val lifeService: LifeService,
+    private val whenTriggerService: WhenTriggerService
 ) {
 
     @AfterEach

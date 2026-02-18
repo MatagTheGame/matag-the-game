@@ -17,9 +17,9 @@ import java.util.Map
 @ExtendWith(SpringExtension::class)
 @Import(CardsConfiguration::class, TestUtilsConfiguration::class)
 class PayCostServiceTest(
-    @param:Autowired val testUtils: TestUtils,
-    @param:Autowired val payCostService: PayCostService,
-    @param:Autowired val tapPermanentService: TapPermanentService
+    val testUtils: TestUtils,
+    val payCostService: PayCostService,
+    val tapPermanentService: TapPermanentService
 ) {
     @Test
     fun isCastingCostFulfilledFeralMaakaCorrectCosts() {

@@ -17,10 +17,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [SelectionTestConfiguration::class])
 class MagicInstancePlayerSelectorServiceTest(
-    @param:Autowired val selectorService: MagicInstancePlayerSelectorService,
-    @param:Autowired val cardInstanceFactory: CardInstanceFactory,
-    @param:Autowired val testUtils: TestUtils,
-    @param:Autowired val cards: Cards
+    val selectorService: MagicInstancePlayerSelectorService,
+    val cardInstanceFactory: CardInstanceFactory,
+    val testUtils: TestUtils,
+    val cards: Cards
 ) {
     @Test
     fun selectPlayer() {

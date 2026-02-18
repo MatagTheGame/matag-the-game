@@ -18,10 +18,10 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [ContinueTestConfiguration::class, LeaveTestConfiguration::class])
 class AutocontinueCheckerTest(
-    @param:Autowired private val testUtils: TestUtils,
-    @param:Autowired private val autocontinueChecker: AutocontinueChecker,
-    @param:Autowired private val cards: Cards,
-    @param:Autowired private val cardInstanceFactory: CardInstanceFactory
+    private val testUtils: TestUtils,
+    private val autocontinueChecker: AutocontinueChecker,
+    private val cards: Cards,
+    private val cardInstanceFactory: CardInstanceFactory
 ) {
 
     @Test
