@@ -7,10 +7,11 @@ import com.matag.game.turn.action.tap.TapPermanentService
 import org.springframework.stereotype.Component
 
 @Component
-class PayCostService {
-    private val costService: CostService? = null
-    private val tapPermanentService: TapPermanentService? = null
-
+class PayCostService(
+    private val costService: CostService,
+    private val tapPermanentService: TapPermanentService
+) {
+    
     fun pay(
         gameStatus: GameStatus,
         player: Player,
@@ -19,13 +20,13 @@ class PayCostService {
         paidMana: Map<Int, List<String>>
     ) {
         // FIXME Antonio: Do not tap all lands but only the one necessary to pay the cost above. If not player may lose some mana if miscalculated.
-        paidMana.keys.stream()
-            .map<CardInstance?> { cardInstanceId: Int? -> player.battlefield.findCardById(cardInstanceId!!) }
-            .forEach { card: CardInstance? -> tapPermanentService!!.tap(gameStatus, card!!.id) }
+        paidMana.keys
+            .map { player.battlefield.findCardById(it) }
+            .forEach { tapPermanentService.tap(gameStatus, it.id) }
         gameStatus.turn.lastManaPaid = paidMana
 
-        if (costService!!.needsTapping(cardToCast.card!!, playedAbility)) {
-            tapPermanentService!!.tap(gameStatus, cardToCast.id)
+        if (costService.needsTapping(cardToCast.card!!, playedAbility)) {
+            tapPermanentService.tap(gameStatus, cardToCast.id)
         }
     }
 }

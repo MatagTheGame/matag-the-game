@@ -81,7 +81,7 @@ class CostService {
             for (j in 0..<choices) {
                 val index = (j / inverseCumulativeSizes) % addManaAbilities.size
                 val mana = addManaAbilities.get(index).parameters.stream()
-                    .map<Cost> { value: String? -> Cost.valueOf(value!!) }
+                    .map { value: String? -> Cost.valueOf(value!!) }
                     .collect(Collectors.toList())
                 manaOptions.get(j).addAll(mana)
             }
@@ -91,11 +91,11 @@ class CostService {
     }
 
     fun needsTapping(card: Card, ability: String?): Boolean {
-        return getCost(card, ability)!!.stream().anyMatch { c: Cost? -> c == Cost.TAP }
+        return getCost(card, ability)!!.stream().anyMatch { it == Cost.TAP }
     }
 
     private fun getSimpleCost(card: Card, ability: String?): MutableList<Cost?> {
-        return getCost(card, ability)!!.stream().filter { c: Cost? -> c != Cost.TAP }.collect(Collectors.toList())
+        return getCost(card, ability)!!.stream().filter { it != Cost.TAP }.collect(Collectors.toList())
     }
 
     private fun getCost(card: Card, ability: String?): List<Cost>? {

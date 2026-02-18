@@ -1,6 +1,5 @@
 package integration.cardinstance.cost
 
-import com.matag.cards.CardsConfiguration
 import com.matag.cards.properties.Cost
 import com.matag.game.cardinstance.cost.CostService
 import com.matag.game.status.GameStatus
@@ -9,12 +8,11 @@ import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
-@Import(CardsConfiguration::class, TestUtilsConfiguration::class)
+@Import(TestUtilsConfiguration::class)
 class CostServiceTest(
     val testUtils: TestUtils,
     val costService: CostService

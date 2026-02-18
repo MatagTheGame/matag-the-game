@@ -29,7 +29,7 @@ class TargetCheckerService(
 
         var targetIndex = 0
         for (ability in playedAbilities) {
-            if (!ability!!.targets.isEmpty()) {
+            if (!ability.targets.isEmpty()) {
                 checkThatTargetsAreDifferent(ability.targets, targetsIds)
                 var i = 0
                 while (i < ability.targets.size) {
@@ -46,7 +46,7 @@ class TargetCheckerService(
 
     fun checkIfRequiresTarget(cardToCast: CardInstance): Boolean {
         for (ability in cardToCast.getAbilitiesByType(AbilityType.THAT_TARGETS_GET)) {
-            return !ability!!.targets.isEmpty()
+            return !ability.targets.isEmpty()
         }
 
         return false
@@ -84,11 +84,11 @@ class TargetCheckerService(
             }
         } else if (targetId is String) {
             if (!(magicInstanceSelector!!.selectorType == SelectorType.PLAYER || magicInstanceSelector.selectorType == SelectorType.ANY)) {
-                throw MessageException(targetId.toString() + " is not valid for type " + magicInstanceSelector.selectorType)
+                throw MessageException(targetId + " is not valid for type " + magicInstanceSelector.selectorType)
             }
 
             if (PlayerType.OPPONENT == magicInstanceSelector.controllerType && cardInstance.controller == targetId) {
-                throw MessageException(targetId.toString() + " is not valid for type " + magicInstanceSelector.selectorType + " (needs to be an opponent)")
+                throw MessageException(targetId + " is not valid for type " + magicInstanceSelector.selectorType + " (needs to be an opponent)")
             }
         } else {
             if (magicInstanceSelector!!.selectorType == SelectorType.PLAYER) {
@@ -96,7 +96,7 @@ class TargetCheckerService(
             }
 
             val targetCardId = targetId as Int
-            val possibleTargets = magicInstancePermanentSelectorService!!.selectAsTarget(
+            val possibleTargets = magicInstancePermanentSelectorService.selectAsTarget(
                 gameStatus,
                 cardInstance,
                 magicInstanceSelector

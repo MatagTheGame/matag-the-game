@@ -3,64 +3,60 @@ package integration.cardinstance.cost
 import com.matag.cards.CardsConfiguration
 import com.matag.game.cardinstance.cost.PayCostService
 import com.matag.game.status.GameStatus
-import com.matag.game.turn.action.tap.TapPermanentService
 import integration.TestUtils
 import integration.TestUtilsConfiguration
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.mockito.Mockito
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.junit.jupiter.SpringExtension
-import java.util.Map
 
 @ExtendWith(SpringExtension::class)
 @Import(CardsConfiguration::class, TestUtilsConfiguration::class)
 class PayCostServiceTest(
     val testUtils: TestUtils,
-    val payCostService: PayCostService,
-    val tapPermanentService: TapPermanentService
+    val payCostService: PayCostService
 ) {
     @Test
-    fun isCastingCostFulfilledFeralMaakaCorrectCosts() {
+    fun `pay for casting Feral Maaka`() {
         // Given
         val gameStatus = testUtils.testGameStatus()
         val cardInstance = addCardToPlayerBattlefield(gameStatus, "Feral Maaka")
         val mountain1 = addCardToPlayerBattlefield(gameStatus, "Mountain")
         val mountain2 = addCardToPlayerBattlefield(gameStatus, "Mountain")
 
-        val manaPaid: MutableMap<Int, List<String>> = Map.of<Int, List<String>>(
-            mountain1.id, listOf("RED"),
-            mountain2.id, listOf("RED")
+        val manaPaid = mapOf(
+            mountain1.id to listOf("RED"),
+            mountain2.id to listOf("RED")
         )
 
         // When
         payCostService.pay(gameStatus, gameStatus.activePlayer, cardInstance, null, manaPaid)
 
         // Then
-        Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, mountain1.id)
-        Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, mountain2.id)
+        assertThat(mountain1.modifiers.isTapped).isTrue
+        assertThat(mountain2.modifiers.isTapped).isTrue
     }
 
     @Test
-    fun isCastingCostFulfilledCheckpointOfficerTapAbility() {
+    fun `pay for casting tap target creation ability of Checkpoint Officer`() {
         // Given
         val gameStatus = testUtils.testGameStatus()
         val cardInstance = addCardToPlayerBattlefield(gameStatus, "Checkpoint Officer")
         val plains1 = addCardToPlayerBattlefield(gameStatus, "Plains")
         val plains2 = addCardToPlayerBattlefield(gameStatus, "Plains")
-        val manaPaid: MutableMap<Int, List<String>> = Map.of<Int, List<String>>(
-            plains1.id, listOf("WHITE"),
-            plains2.id, listOf("WHITE")
+        val manaPaid = mapOf(
+            plains1.id to listOf("WHITE"),
+            plains2.id to listOf("WHITE")
         )
 
         // When
         payCostService.pay(gameStatus, gameStatus.activePlayer, cardInstance, "THAT_TARGETS_GET", manaPaid)
 
         // Then
-        Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, plains1.id)
-        Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, plains2.id)
-        Mockito.verify<TapPermanentService?>(tapPermanentService).tap(gameStatus, cardInstance.id)
+        assertThat(plains1.modifiers.isTapped).isTrue
+        assertThat(plains2.modifiers.isTapped).isTrue
+        assertThat(cardInstance.modifiers.isTapped).isTrue
     }
 
     private fun addCardToPlayerBattlefield(gameStatus: GameStatus, cardName: String) =
