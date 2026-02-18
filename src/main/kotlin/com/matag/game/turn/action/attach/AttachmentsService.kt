@@ -9,7 +9,7 @@ import com.matag.game.status.GameStatus
 import org.springframework.stereotype.Component
 
 @Component
-class AttachmentsService(
+open class AttachmentsService(
     private val abilityService: AbilityService,
     private val cardInstanceAbilityFactory: CardInstanceAbilityFactory
 ) {

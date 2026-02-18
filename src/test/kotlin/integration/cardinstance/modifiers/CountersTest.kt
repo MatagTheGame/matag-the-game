@@ -1,7 +1,6 @@
 package integration.cardinstance.modifiers
 
 import com.matag.game.cardinstance.modifiers.Counters
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

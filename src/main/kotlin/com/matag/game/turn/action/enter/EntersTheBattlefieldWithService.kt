@@ -51,7 +51,7 @@ class EntersTheBattlefieldWithService(
 
     private fun isAdamantFulfilled(manaPaidByColor: Map<String, Int>, adamantColor: String): Boolean {
         if (adamantColor == "SAME" && manaPaidByColor.values.stream()
-                .anyMatch { key: Int? -> key!! >= ADAMANT_THRESHOLD }
+                .anyMatch { it >= ADAMANT_THRESHOLD }
         ) {
             return true
         } else if (manaPaidByColor.containsKey(adamantColor) && manaPaidByColor.get(adamantColor)!! >= ADAMANT_THRESHOLD) {
@@ -63,8 +63,8 @@ class EntersTheBattlefieldWithService(
 
     private fun executeParameters(gameStatus: GameStatus, cardInstance: CardInstance, parameters: List<String>) {
         for (parameter in parameters) {
-            if (abilityService!!.tappedFromParameter(parameter)) {
-                tapPermanentService!!.tap(gameStatus, cardInstance.id)
+            if (abilityService.tappedFromParameter(parameter)) {
+                tapPermanentService.tap(gameStatus, cardInstance.id)
             }
 
             val plus1Counters = abilityService.plus1CountersFromParameter(parameter)
@@ -74,7 +74,7 @@ class EntersTheBattlefieldWithService(
             cardInstance.modifiers.counters.addMinus1Counters(minus1Counters)
 
             val cardsToDraw = abilityService.drawFromParameter(parameter)
-            drawXCardsService!!.drawXCards(gameStatus.getPlayerByName(cardInstance.controller), cardsToDraw, gameStatus)
+            drawXCardsService.drawXCards(gameStatus.getPlayerByName(cardInstance.controller), cardsToDraw, gameStatus)
         }
     }
 

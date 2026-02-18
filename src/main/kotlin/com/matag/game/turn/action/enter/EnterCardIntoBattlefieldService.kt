@@ -17,8 +17,7 @@ class EnterCardIntoBattlefieldService(
 
 
     fun enter(gameStatus: GameStatus, cardInstance: CardInstance) {
-        val controller = cardInstance.controller
-        gameStatus.getPlayerByName(controller).battlefield.addCard(cardInstance)
+        gameStatus.getPlayerByName(cardInstance.controller).battlefield.addCard(cardInstance)
 
         cardInstance.modifiers.permanentId = gameStatus.nextCardId()
 

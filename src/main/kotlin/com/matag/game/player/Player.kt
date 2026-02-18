@@ -1,14 +1,8 @@
 package com.matag.game.player
 
 import com.matag.game.security.SecurityToken
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Scope
-import org.springframework.stereotype.Component
-import java.util.stream.IntStream
 
-@Component
-@Scope("prototype")
-data class Player @Autowired constructor(
+data class Player(
     val library: Library,
     val hand: Hand,
     val battlefield: Battlefield,

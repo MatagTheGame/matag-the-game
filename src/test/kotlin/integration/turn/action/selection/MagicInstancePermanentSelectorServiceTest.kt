@@ -8,12 +8,10 @@ import com.matag.cards.ability.type.AbilityType
 import com.matag.cards.properties.Color
 import com.matag.cards.properties.Subtype
 import com.matag.cards.properties.Type
-import com.matag.game.cardinstance.CardInstance
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.turn.action.selection.MagicInstancePermanentSelectorService
 import com.matag.player.PlayerType
 import integration.TestUtils
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

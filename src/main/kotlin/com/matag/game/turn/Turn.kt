@@ -2,11 +2,12 @@ package com.matag.game.turn
 
 import com.matag.game.cardinstance.CardInstance
 import com.matag.game.status.GameStatus
+import org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 
 @Component
-@Scope("prototype")
+@Scope(SCOPE_PROTOTYPE)
 class Turn {
     var turnNumber = 0
     var currentTurnPlayer: String? = null

@@ -3,13 +3,8 @@ package com.matag.game.player
 import com.matag.game.cardinstance.CardInstance
 import com.matag.game.cardinstance.CardInstanceSearch
 import com.matag.game.cardinstance.CardListComponent
-import org.springframework.context.annotation.Scope
-import org.springframework.stereotype.Component
 import java.util.function.Consumer
-import java.util.stream.Collectors
 
-@Component
-@Scope("prototype")
 class Battlefield : CardListComponent() {
     fun removeAttacking() {
         CardInstanceSearch(cards).attacking().cards

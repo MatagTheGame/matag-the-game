@@ -1,12 +1,10 @@
 package application.browser
 
 import org.openqa.selenium.By
-import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.ui.ExpectedCondition
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.util.stream.Collectors
 
 class StackHelper internal constructor(matagBrowser: MatagBrowser) : AbstractCardContainerHelper(matagBrowser) {
     override fun containerElement(): WebElement {

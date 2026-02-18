@@ -17,6 +17,7 @@ import com.matag.game.status.GameStatus
 import com.matag.game.turn.action.attach.AttachmentsService
 import com.matag.game.turn.action.selection.AbilitiesFromOtherPermanentsService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 import java.util.stream.Collectors
@@ -29,7 +30,7 @@ import java.util.stream.Collectors
     creatorVisibility = JsonAutoDetect.Visibility.NONE
 )
 @Component
-@Scope("prototype")
+@Scope(SCOPE_PROTOTYPE)
 class CardInstance(
     @param:Autowired(required = false) private val attachmentsService: AttachmentsService?,
     @param:Autowired(required = false) private val abilitiesFromOtherPermanentsService: AbilitiesFromOtherPermanentsService?
@@ -246,16 +247,16 @@ class CardInstance(
     }
 
     fun hasFixedAbility(abilityType: AbilityType?): Boolean {
-        return getFixedAbilitiesByType(abilityType).size > 0
+        return getFixedAbilitiesByType(abilityType).isNotEmpty()
     }
 
     fun hasAnyFixedAbility(abilityTypes: List<AbilityType?>): Boolean {
         return abilityTypes.stream()
-            .anyMatch { abilityType: AbilityType? -> getFixedAbilitiesByType(abilityType).size > 0 }
+            .anyMatch { abilityType: AbilityType? -> getFixedAbilitiesByType(abilityType).isNotEmpty() }
     }
 
     fun hasFixedAbilityWithTriggerSubType(triggerSubtype: TriggerSubtype): Boolean {
-        return getAbilitiesByTriggerSubType(triggerSubtype).size > 0
+        return getAbilitiesByTriggerSubType(triggerSubtype).isNotEmpty()
     }
 
     val isPermanent: Boolean

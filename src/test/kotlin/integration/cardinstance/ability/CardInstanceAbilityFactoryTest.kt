@@ -1,11 +1,10 @@
 package integration.cardinstance.ability
 
 import com.matag.cards.ability.Ability
-import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory
 import com.matag.cards.ability.type.AbilityType
+import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import java.util.*
 
 class CardInstanceAbilityFactoryTest {
     private val cardInstanceAbilityFactory = CardInstanceAbilityFactory()

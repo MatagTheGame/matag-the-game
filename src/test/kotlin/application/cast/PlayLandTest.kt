@@ -3,7 +3,6 @@ package application.cast
 import application.AbstractApplicationTest
 import application.InitTestService
 import application.browser.BattlefieldHelper
-import application.cast.CastCreatureAlternativeCostTest.InitTestServiceForTest
 import com.matag.cards.Cards
 import com.matag.game.adminclient.AdminClient
 import com.matag.game.cardinstance.CardInstanceFactory
@@ -11,7 +10,6 @@ import com.matag.game.status.GameStatus
 import com.matag.game.status.GameStatusRepository
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
 
 class PlayLandTest(
     adminClient: AdminClient,

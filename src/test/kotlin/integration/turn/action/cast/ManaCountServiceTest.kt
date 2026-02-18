@@ -5,21 +5,19 @@ import com.matag.cards.properties.Cost
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.turn.action.cast.ManaCountService
 import integration.TestUtils
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @ExtendWith(SpringExtension::class)
 @ContextConfiguration(classes = [CastTestConfiguration::class])
 class ManaCountServiceTest(
-    @param:Autowired private val manaCountService: ManaCountService,
-    @param:Autowired private val cardInstanceFactory: CardInstanceFactory,
-    @param:Autowired private val testUtils: TestUtils,
-    @param:Autowired private val cards: Cards
+    private val manaCountService: ManaCountService,
+    private val cardInstanceFactory: CardInstanceFactory,
+    private val testUtils: TestUtils,
+    private val cards: Cards
 ) {
     //  @Rule
     //  public ExpectedException thrown = ExpectedException.none();
@@ -35,7 +33,7 @@ class ManaCountServiceTest(
         val gameStatus = testUtils.testGameStatus()
         val player = gameStatus.player1!!
 
-        player.battlefield?.addCard(
+        player.battlefield.addCard(
             cardInstanceFactory.create(
                 gameStatus,
                 1,
@@ -67,7 +65,7 @@ class ManaCountServiceTest(
         val colors = manaCountService.verifyManaPaid(mana, player)
 
         // Then
-        assertThat<Cost?>(colors).containsExactlyInAnyOrder(Cost.WHITE, Cost.WHITE, Cost.BLUE)
+        assertThat(colors).containsExactlyInAnyOrder(Cost.WHITE, Cost.WHITE, Cost.BLUE)
     }
 
     //  @Test

@@ -2,14 +2,14 @@ package com.matag.game.stack
 
 import com.matag.game.cardinstance.CardInstance
 import com.matag.game.cardinstance.CardInstanceSearch
+import org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 import java.util.*
 
 @Component
-@Scope("prototype")
+@Scope(SCOPE_PROTOTYPE)
 class SpellStack {
-    @JvmField
     var items: LinkedList<CardInstance> = LinkedList()
 
     fun isEmpty(): Boolean =

@@ -2,7 +2,6 @@ package application.ability
 
 import application.AbstractApplicationTest
 import application.InitTestService
-import application.ability.ActivatedAbilityOnCreatureTest.InitTestServiceForTest
 import application.browser.BattlefieldHelper
 import com.matag.cards.Cards
 import com.matag.game.adminclient.AdminClient
@@ -12,10 +11,7 @@ import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.test.context.TestConstructor
 
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 class ActivatedTapAbilityOnCreatureTest(
     adminClient: AdminClient,
     gameStatusRepository: GameStatusRepository,

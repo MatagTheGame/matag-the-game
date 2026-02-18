@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.ui.ExpectedCondition
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.util.*
 
 abstract class AbstractCardContainerHelper internal constructor(val matagBrowser: MatagBrowser) {
     fun containsExactly(vararg expectedCards: Card) {

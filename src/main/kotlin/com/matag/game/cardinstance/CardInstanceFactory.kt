@@ -1,15 +1,13 @@
 package com.matag.game.cardinstance
 
 import com.matag.cards.Card
-import com.matag.cards.ability.Ability
-import com.matag.cards.properties.*
+import com.matag.cards.properties.Rarity
 import com.matag.game.status.GameStatus
 import org.springframework.beans.BeansException
 import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
 import org.springframework.stereotype.Component
 import java.util.*
-import java.util.stream.Collectors
 
 @Component
 class CardInstanceFactory : ApplicationContextAware {

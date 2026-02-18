@@ -12,10 +12,8 @@ import com.matag.game.status.GameStatusRepository
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import org.springframework.test.context.TestConstructor
 
 @Tag("RegressionTests")
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 class CastCreatureAlternativeCostTest(
     adminClient: AdminClient,
     gameStatusRepository: GameStatusRepository,

@@ -12,9 +12,7 @@ import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
-import org.springframework.test.context.TestConstructor
 
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @Tag("RegressionTests")
 class CastCreatureAdamantTest(
     adminClient: AdminClient,

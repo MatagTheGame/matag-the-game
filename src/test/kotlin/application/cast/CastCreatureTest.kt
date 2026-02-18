@@ -3,7 +3,6 @@ package application.cast
 import application.AbstractApplicationTest
 import application.InitTestService
 import application.browser.BattlefieldHelper
-import application.cast.CastCreatureAlternativeCostTest.InitTestServiceForTest
 import com.matag.cards.Cards
 import com.matag.cards.properties.Color
 import com.matag.game.adminclient.AdminClient
@@ -13,8 +12,6 @@ import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import java.util.*
 
 class CastCreatureTest(
     adminClient: AdminClient,

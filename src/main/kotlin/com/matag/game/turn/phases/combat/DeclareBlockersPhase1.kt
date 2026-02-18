@@ -7,7 +7,6 @@ import com.matag.game.turn.action._continue.InputRequiredActions.DECLARE_BLOCKER
 import com.matag.game.turn.phases.AbstractPhase
 import com.matag.game.turn.phases.Phase
 import org.springframework.stereotype.Component
-import java.util.List
 
 @Component
 class DeclareBlockersPhase(

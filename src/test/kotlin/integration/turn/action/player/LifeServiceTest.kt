@@ -4,7 +4,6 @@ import com.matag.game.turn.action.finish.FinishGameService
 import com.matag.game.turn.action.player.LifeService
 import integration.TestUtils
 import integration.TestUtilsConfiguration
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 @Component
-class AttachService {
+open class AttachService {
     fun attach(gameStatus: GameStatus, cardInstance: CardInstance, attachedToId: Int) {
         val attachTo = gameStatus.findCardByIdFromAnyBattlefield(attachedToId)
         cardInstance.modifiers.attachedToId = attachedToId

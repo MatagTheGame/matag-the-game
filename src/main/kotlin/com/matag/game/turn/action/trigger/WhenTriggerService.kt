@@ -18,7 +18,7 @@ class WhenTriggerService(
 
         for (cardWithTriggerAbility in cardsWithTriggerAbility) {
             for (ability in cardWithTriggerAbility.getAbilitiesByTriggerSubType(triggerSubtype)) {
-                val selectionForCardWithTriggeredAbility = magicInstancePermanentSelectorService!!.select(
+                val selectionForCardWithTriggeredAbility = magicInstancePermanentSelectorService.select(
                     gameStatus,
                     cardWithTriggerAbility,
                     ability!!.trigger!!.magicInstanceSelector!!

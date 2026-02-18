@@ -11,9 +11,7 @@ import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
-import org.springframework.test.context.TestConstructor
 
-@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 class WheneverCastTest(
     adminClient: AdminClient,
     gameStatusRepository: GameStatusRepository,

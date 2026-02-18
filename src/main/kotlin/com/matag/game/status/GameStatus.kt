@@ -5,12 +5,13 @@ import com.matag.game.cardinstance.CardInstanceSearch
 import com.matag.game.player.Player
 import com.matag.game.stack.SpellStack
 import com.matag.game.turn.Turn
+import org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Component
 import java.util.concurrent.atomic.AtomicInteger
 
 @Component
-@Scope("prototype")
+@Scope(SCOPE_PROTOTYPE)
 class GameStatus(val turn: Turn, val stack: SpellStack) {
     private val nextCardId = AtomicInteger()
     var gameId: String? = null
@@ -86,10 +87,10 @@ class GameStatus(val turn: Turn, val stack: SpellStack) {
     }
 
     val allBattlefieldCardsSearch: CardInstanceSearch
-        get() = CardInstanceSearch(player1!!.battlefield.cards).concat(player2!!.battlefield.cards)
+        get() = CardInstanceSearch(allBattlefieldCards)
 
     val allBattlefieldCards: List<CardInstance>
-        get() = this.allBattlefieldCardsSearch.cards
+        get() = player1!!.battlefield.cards + player2!!.battlefield.cards
 
     val isCurrentPlayerActive: Boolean
         get() = turn.currentPhaseActivePlayer == this.currentPlayer.name

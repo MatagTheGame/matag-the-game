@@ -12,11 +12,11 @@ abstract class CardListComponent {
     }
 
     fun addCard(cardInstance: CardInstance) {
-        cards = cards + cardInstance
+        cards += cardInstance
     }
 
     fun addCards(cardInstance: List<CardInstance>) {
-        cards + cardInstance
+        cards += cardInstance
     }
 
     fun hasCardById(cardId: Int): Boolean =

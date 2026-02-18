@@ -9,10 +9,6 @@ import com.matag.cards.properties.Color
 import com.matag.cards.properties.Subtype
 import com.matag.cards.properties.Type
 import com.matag.game.status.GameStatus
-import java.util.*
-import java.util.function.Predicate
-import java.util.stream.Collectors
-import java.util.stream.Stream
 
 class CardInstanceSearch(
     val cards: List<CardInstance>

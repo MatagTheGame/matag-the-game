@@ -1,12 +1,10 @@
 package integration.turn.action.leave
 
 import com.matag.cards.Cards
-import com.matag.game.cardinstance.CardInstance
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.turn.action.attach.AttachService
 import com.matag.game.turn.action.leave.LeaveBattlefieldService
 import integration.TestUtils
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith

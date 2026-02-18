@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 @Component
-class DestroyPermanentService(
+open class DestroyPermanentService(
     private val leaveBattlefieldService: LeaveBattlefieldService,
     private val putIntoGraveyardService: PutIntoGraveyardService,
     private val whenTriggerService: WhenTriggerService,

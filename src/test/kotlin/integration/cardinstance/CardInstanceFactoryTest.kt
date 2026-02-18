@@ -1,11 +1,9 @@
 package integration.cardinstance
 
 import com.matag.cards.Cards
-import com.matag.game.cardinstance.CardInstance
 import com.matag.game.cardinstance.CardInstanceFactory
 import integration.TestUtils
 import integration.TestUtilsConfiguration
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
