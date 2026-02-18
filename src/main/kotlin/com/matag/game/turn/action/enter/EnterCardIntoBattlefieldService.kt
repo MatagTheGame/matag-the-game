@@ -15,7 +15,6 @@ class EnterCardIntoBattlefieldService(
     private val whenTriggerService: WhenTriggerService
 ) {
 
-
     fun enter(gameStatus: GameStatus, cardInstance: CardInstance) {
         gameStatus.getPlayerByName(cardInstance.controller).battlefield.addCard(cardInstance)
 

@@ -12,6 +12,7 @@ import integration.deck.DeckTestConfiguration
 import integration.player.PlayerTestConfiguration
 import integration.status.GameStatusTestConfiguration
 import org.mockito.Mockito
+import org.mockito.Mockito.mock
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
@@ -38,6 +39,6 @@ open class TestUtilsConfiguration {
 
     @Bean
     open fun adminClient(): AdminClient? {
-        return Mockito.mock<AdminClient?>(AdminClient::class.java)
+        return mock(AdminClient::class.java)
     }
 }

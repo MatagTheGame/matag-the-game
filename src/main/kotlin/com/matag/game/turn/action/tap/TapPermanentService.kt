@@ -31,7 +31,7 @@ class TapPermanentService {
         val cardToTap = gameStatus.findCardByIdFromAnyBattlefield(targetId)
         if (cardToTap != null) {
             cardToTap.modifiers.isTapped = false
-            LOGGER.info("{} tapped.", cardToTap.idAndName)
+            LOGGER.info("{} untapped.", cardToTap.idAndName)
         } else {
             LOGGER.info("target {} is not anymore valid.", targetId)
         }
