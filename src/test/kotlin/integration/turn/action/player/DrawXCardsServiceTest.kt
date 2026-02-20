@@ -17,8 +17,7 @@ import org.springframework.test.context.ActiveProfiles
 @Import(TestUtilsConfiguration::class)
 class DrawXCardsServiceTest(
     private val drawXCardsService: DrawXCardsService,
-    private val testUtils: TestUtils,
-    private val finishGameService: FinishGameService
+    private val testUtils: TestUtils
 ) {
 
     @Test
@@ -49,6 +48,6 @@ class DrawXCardsServiceTest(
         // Then
         assertThat(gameStatus.player1?.hand?.cards).hasSize(9)
         assertThat(gameStatus.player1?.library?.cards).hasSize(0)
-        Mockito.verify(finishGameService).setWinner(gameStatus, gameStatus.player2!!)
+        assertThat(gameStatus.turn.winner).isEqualTo(gameStatus.player2?.name)
     }
 }

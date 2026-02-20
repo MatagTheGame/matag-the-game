@@ -1,13 +1,11 @@
 package integration.turn.action.player
 
 import com.matag.game.MatagGameApplication
-import com.matag.game.turn.action.finish.FinishGameService
 import com.matag.game.turn.action.player.LifeService
 import integration.TestUtils
 import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
@@ -17,8 +15,7 @@ import org.springframework.test.context.ActiveProfiles
 @Import(TestUtilsConfiguration::class)
 class LifeServiceTest(
     private val lifeService: LifeService,
-    private val testUtils: TestUtils,
-    private val finishGameService: FinishGameService
+    private val testUtils: TestUtils
 ) {
     
 
@@ -46,6 +43,6 @@ class LifeServiceTest(
 
         // Then
         assertThat(gameStatus.player1?.life).isEqualTo(-5)
-        Mockito.verify(finishGameService).setWinner(gameStatus, gameStatus.player2!!)
+        assertThat(gameStatus.turn.winner).isEqualTo(gameStatus.player2?.name)
     }
 }

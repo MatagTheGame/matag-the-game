@@ -4,11 +4,12 @@ import com.matag.cards.Cards
 import com.matag.game.MatagGameApplication
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.turn.action.cast.PlayLandService
-import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService
+import com.matag.game.turn.phases.combat.FirstStrikePhase.Companion.FS
 import integration.TestUtils
 import integration.TestUtilsConfiguration
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito.verify
+import org.junit.jupiter.api.assertThrows
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
@@ -19,7 +20,6 @@ import org.springframework.test.context.ActiveProfiles
 class PlayLandServiceTest(
     private val playLandService: PlayLandService,
     private val cardInstanceFactory: CardInstanceFactory,
-    private val enterCardIntoBattlefieldService: EnterCardIntoBattlefieldService,
     private val testUtils: TestUtils,
     private val cards: Cards
 ) {
@@ -35,57 +35,52 @@ class PlayLandServiceTest(
         playLandService.playLand(gameStatus, card.id)
 
         // Then
-        verify(enterCardIntoBattlefieldService).enter(gameStatus, card)
+        assertThat(gameStatus.player1!!.battlefield.cards).contains(card)
     }
 
-    //  @Test
-    //  public void playLandErrorNotALand() {
-    //    // Given
-    //    var gameStatus = testUtils.testGameStatus();
-    //    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Befuddle"), "player-name");
-    //    gameStatus.player1.hand.addCard(card);
-    //
-    //    // Expect
-    //    thrown.expectMessage("Playing \"100 - Befuddle\" as land.");
-    //
-    //    // When
-    //    playLandService.playLand(gameStatus, card.id);
-    //  }
-    //
-    //  @Test
-    //  public void playLandMultipleLand() {
-    //    // Given
-    //    var gameStatus = testUtils.testGameStatus();
-    //    var card1 = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
-    //    gameStatus.player1.hand.addCard(card1);
-    //    var card2 = cardInstanceFactory.create(gameStatus, 101, cards.get("Swamp"), "player-name");
-    //    gameStatus.player1.hand.addCard(card2);
-    //
-    //    // When
-    //    playLandService.playLand(gameStatus, card1.id);
-    //
-    //    // Then
-    //    verify(enterCardIntoBattlefieldService).enter(gameStatus, card1);
-    //
-    //    // Expect
-    //    thrown.expectMessage("You already played a land this turn.");
-    //
-    //    // When
-    //    playLandService.playLand(gameStatus, card2.id);
-    //  }
-    //
-    //  @Test
-    //  public void playLandNotInMainPhase() {
-    //    // Given
-    //    var gameStatus = testUtils.testGameStatus();
-    //    gameStatus.turn.setCurrentPhase(FS);
-    //    var card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
-    //    gameStatus.player1.hand.addCard(card);
-    //
-    //    // Expect
-    //    thrown.expectMessage("You can only play lands during main phases.");
-    //
-    //    // When
-    //    playLandService.playLand(gameStatus, card.id);
-    //  }
+    @Test
+    fun playLandErrorNotALand() {
+        // Given
+        val gameStatus = testUtils.testGameStatus();
+        val card = cardInstanceFactory.create(gameStatus, 100, cards.get("Befuddle"), "player-name");
+        gameStatus.player1!!.hand.addCard(card);
+
+        // When
+        val exception = assertThrows<Exception> { playLandService.playLand(gameStatus, card.id) }
+
+        // Then
+        assertThat(exception).hasMessage("Playing \"100 - Befuddle\" as land.")
+    }
+
+    @Test
+    fun playLandMultipleLand() {
+        // Given
+        val gameStatus = testUtils.testGameStatus();
+        val card1 = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
+        gameStatus.player1!!.hand.addCard(card1);
+        val card2 = cardInstanceFactory.create(gameStatus, 101, cards.get("Swamp"), "player-name");
+        gameStatus.player1!!.hand.addCard(card2);
+
+        // When
+        playLandService.playLand(gameStatus, card1.id);
+        val exception = assertThrows<Exception> { playLandService.playLand(gameStatus, card2.id) }
+
+        // Then
+        assertThat(exception).hasMessage("You already played a land this turn.")
+    }
+
+    @Test
+    fun playLandNotInMainPhase() {
+        // Given
+        val gameStatus = testUtils.testGameStatus();
+        gameStatus.turn.currentPhase = FS;
+        val card = cardInstanceFactory.create(gameStatus, 100, cards.get("Swamp"), "player-name");
+        gameStatus.player1!!.hand.addCard(card);
+
+        // When
+        val exception = assertThrows<Exception> { playLandService.playLand(gameStatus, card.id) }
+
+        // Then
+        assertThat(exception).hasMessage("You can only play lands during main phases.")
+    }
 }
