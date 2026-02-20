@@ -515,11 +515,7 @@ class MagicInstancePermanentSelectorServiceTest(
         // Given
         val gameStatus = testUtils.testGameStatus()
 
-        val magicInstanceSelector = MagicInstanceSelector(
-            selectorType = PERMANENT, notOfType =
-                listOf(Type.LAND)
-        )
-
+        val magicInstanceSelector = MagicInstanceSelector(selectorType = PERMANENT, notOfType = listOf(Type.LAND))
 
         val nonLand = cardInstanceFactory.create(gameStatus, 1, cards.get("Grazing Whiptail"), "player-name")
         nonLand.controller = "player-name"

@@ -1,7 +1,7 @@
 package com.matag.game.turn.action.selection
 
 import com.matag.cards.ability.selector.MagicInstanceSelector
-import com.matag.cards.ability.selector.SelectorType
+import com.matag.cards.ability.selector.SelectorType.*
 import com.matag.cards.ability.selector.StatusType
 import com.matag.cards.ability.type.AbilityType
 import com.matag.game.cardinstance.CardInstance
@@ -18,93 +18,57 @@ class MagicInstancePermanentSelectorService {
         magicInstanceSelector: MagicInstanceSelector
     ): CardInstanceSearch {
         var cards: CardInstanceSearch
-        if (magicInstanceSelector.selectorType == SelectorType.PERMANENT) {
-            cards = gameStatus.allBattlefieldCardsSearch
-        } else if (magicInstanceSelector.selectorType == SelectorType.SPELL) {
-            cards = gameStatus.stack.search()
-        } else if (magicInstanceSelector.selectorType == SelectorType.ANY) {
-            cards = gameStatus.allBattlefieldCardsSearch
-        } else {
-            throw RuntimeException("Missing selectorType.")
+
+        cards = when (magicInstanceSelector.selectorType) {
+            PERMANENT -> gameStatus.allBattlefieldCardsSearch
+            SPELL -> gameStatus.stack.search()
+            ANY -> gameStatus.allBattlefieldCardsSearch
+            else -> throw RuntimeException("Missing selectorType.")
         }
 
-        if (magicInstanceSelector.ofType != null) {
-            cards = cards.ofAnyOfTheTypes(magicInstanceSelector.ofType!!)
-        } else if (magicInstanceSelector.notOfType != null) {
-            cards = cards.notOfTypes(magicInstanceSelector.notOfType!!)
-        }
+        magicInstanceSelector.ofType?.let { cards = cards.ofAnyOfTheTypes(it) }
+        magicInstanceSelector.notOfType?.let { cards = cards.notOfTypes(it) }
+        magicInstanceSelector.ofAllTypes?.let { cards = cards.ofAllOfTheTypes(it) }
 
-        if (magicInstanceSelector.ofAllTypes != null) {
-            cards = cards.ofAllOfTheTypes(magicInstanceSelector.ofAllTypes!!)
-        }
+        magicInstanceSelector.ofSubtype?.let{ cards = cards.ofAnyOfTheSubtypes(it) }
+        magicInstanceSelector.notOfSubtype?.let { cards = cards.notOfSubtypes(it) }
 
-        if (magicInstanceSelector.ofSubtype != null) {
-            cards = cards.ofAnyOfTheSubtypes(magicInstanceSelector.ofSubtype!!)
-        } else if (magicInstanceSelector.notOfSubtype != null) {
-            cards = cards.notOfSubtypes(magicInstanceSelector.notOfSubtype!!)
-        }
+        magicInstanceSelector.withAbilityType?.let { cards = cards.withFixedAbility(it) }
+        magicInstanceSelector.withoutAbilityType?.let { cards = cards.withoutFixedAbility(it) }
 
-        if (magicInstanceSelector.withAbilityType != null) {
-            cards = cards.withFixedAbility(magicInstanceSelector.withAbilityType)
-        }
+        magicInstanceSelector.powerToughnessConstraint?.let { cards = cards.ofPowerToughnessConstraint(it) }
 
-        if (magicInstanceSelector.withoutAbilityType != null) {
-            cards = cards.withoutFixedAbility(magicInstanceSelector.withoutAbilityType)
-        }
+        magicInstanceSelector.ofColors?.let { cards = cards.ofAnyOfTheColors(it) }
+        if (magicInstanceSelector.colorless) { cards = cards.colorless() }
+        if (magicInstanceSelector.multicolor) { cards = cards.multicolor() }
 
-        if (magicInstanceSelector.powerToughnessConstraint != null) {
-            cards = cards.ofPowerToughnessConstraint(magicInstanceSelector.powerToughnessConstraint!!)
-        }
+        if (magicInstanceSelector.historic) { cards = cards.historic() }
 
-        if (magicInstanceSelector.statusTypes != null) {
-            if (magicInstanceSelector.statusTypes!!.contains(StatusType.ATTACKING) && magicInstanceSelector.statusTypes!!.contains(
-                    StatusType.BLOCKING
-                )
-            ) {
+        magicInstanceSelector.statusTypes?.let {
+            if (it.contains(StatusType.ATTACKING) && it.contains(StatusType.BLOCKING)) {
                 cards = cards.attackingOrBlocking()
-            } else if (magicInstanceSelector.statusTypes!!.contains(StatusType.ATTACKING)) {
+            } else if (it.contains(StatusType.ATTACKING)) {
                 cards = cards.attacking()
-            } else if (magicInstanceSelector.statusTypes!!.contains(StatusType.BLOCKING)) {
+            } else if (it.contains(StatusType.BLOCKING)) {
                 cards = cards.blocking()
             }
 
-            if (magicInstanceSelector.statusTypes!!.contains(StatusType.ATTACKED) && magicInstanceSelector.statusTypes!!.contains(
-                    StatusType.BLOCKED
-                )
-            ) {
+            if (it.contains(StatusType.ATTACKED) && it.contains(StatusType.BLOCKED)) {
                 cards = cards.attackedOrBlocked()
-            } else if (magicInstanceSelector.statusTypes!!.contains(StatusType.ATTACKED)) {
+            } else if (it.contains(StatusType.ATTACKED)) {
                 cards = cards.attacked()
-            } else if (magicInstanceSelector.statusTypes!!.contains(StatusType.BLOCKED)) {
+            } else if (it.contains(StatusType.BLOCKED)) {
                 cards = cards.blocked()
             }
 
-            if (magicInstanceSelector.statusTypes!!.contains(StatusType.TAPPED)) {
+            if (it.contains(StatusType.TAPPED)) {
                 cards = cards.tapped()
             }
         }
 
-        if (magicInstanceSelector.ofColors != null) {
-            cards = cards.ofAnyOfTheColors(magicInstanceSelector.ofColors!!)
-        }
+        magicInstanceSelector.turnStatusType?.let { cards = cards.onTurnStatusType(it, gameStatus) }
 
-        if (magicInstanceSelector.colorless) {
-            cards = cards.colorless()
-        }
-
-        if (magicInstanceSelector.multicolor) {
-            cards = cards.multicolor()
-        }
-
-        if (magicInstanceSelector.turnStatusType != null) {
-            cards = cards.onTurnStatusType(magicInstanceSelector.turnStatusType!!, gameStatus)
-        }
-
-        if (magicInstanceSelector.historic) {
-            cards = cards.historic()
-        }
-
-        if (cardInstance != null) {
+        cardInstance?.let {
             if (magicInstanceSelector.controllerType == PlayerType.PLAYER) {
                 cards = cards.controlledBy(cardInstance.controller)
             } else if (magicInstanceSelector.controllerType == PlayerType.OPPONENT) {

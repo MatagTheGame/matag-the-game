@@ -9,8 +9,6 @@ import integration.TestUtils
 import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.verifyNoMoreInteractions
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles
@@ -22,8 +20,7 @@ class EnterCardIntoBattlefieldServiceTest(
     private val enterCardIntoBattlefieldService: EnterCardIntoBattlefieldService,
     private val cardInstanceFactory: CardInstanceFactory,
     private val testUtils: TestUtils,
-    private val drawXCardsService: DrawXCardsService,
-    private val cards: Cards,
+    private val cards: Cards
 ) {
 
     @Test
@@ -131,7 +128,7 @@ class EnterCardIntoBattlefieldServiceTest(
     }
 
     @Test
-    fun enterTheBattlefieldAdamantSameTriggered() {
+    fun enterTheBattlefieldAdamantSameNotTriggered() {
         // Given
         val gameStatus = testUtils.testGameStatus()
         val card = cardInstanceFactory.create(gameStatus, 100, cards.get("Clockwork Servant"), "player-name")
@@ -149,11 +146,11 @@ class EnterCardIntoBattlefieldServiceTest(
         enterCardIntoBattlefieldService.enter(gameStatus, card)
 
         // Then
-        verifyNoMoreInteractions(drawXCardsService)
+        assertThat(gameStatus.player1!!.hand.size()).isEqualTo(7)
     }
 
     @Test
-    fun enterTheBattlefieldAdamantSameNotTriggered() {
+    fun enterTheBattlefieldAdamantSameTriggered() {
         // Given
         val gameStatus = testUtils.testGameStatus()
         val card = cardInstanceFactory.create(gameStatus, 100, cards.get("Clockwork Servant"), "player-name")
@@ -171,6 +168,6 @@ class EnterCardIntoBattlefieldServiceTest(
         enterCardIntoBattlefieldService.enter(gameStatus, card)
 
         // Then
-        verify(drawXCardsService).drawXCards(gameStatus.player1!!, 1, gameStatus)
+        assertThat(gameStatus.player1!!.hand.size()).isEqualTo(8)
     }
 }

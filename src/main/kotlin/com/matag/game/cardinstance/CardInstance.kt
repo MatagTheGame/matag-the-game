@@ -275,6 +275,10 @@ class CardInstance(
         modifiers = CardModifiers()
     }
 
+    override fun toString(): String {
+        return "CardInstance(id=$id, name=${card?.name}, owner=$owner, controller=$controller), modifiers=$modifiers"
+    }
+
     private val attachmentsPower: Int
         get() = attachmentsService?.getAttachmentsPower(gameStatus!!, this) ?: 0
 

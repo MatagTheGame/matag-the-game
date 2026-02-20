@@ -33,7 +33,7 @@ class CardInstanceSearch(
         CardInstanceSearch(cards.filter { it.ofAnyOfTheTypes(types) })
 
     fun notOfTypes(types: List<Type>): CardInstanceSearch =
-        CardInstanceSearch(cards.filter { it.ofAnyOfTheTypes(types) })
+        CardInstanceSearch(cards.filter { !it.ofAnyOfTheTypes(types) })
 
     fun ofAllOfTheTypes(types: List<Type>): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.ofAllOfTheTypes(types) })
@@ -42,7 +42,7 @@ class CardInstanceSearch(
         CardInstanceSearch(cards.filter { it.ofAnyOfTheSubtypes(subtypes) })
 
     fun notOfSubtypes(subtypes: List<Subtype>): CardInstanceSearch =
-        CardInstanceSearch(cards.filter { it.ofAnyOfTheSubtypes(subtypes) })
+        CardInstanceSearch(cards.filter { !it.ofAnyOfTheSubtypes(subtypes) })
 
     fun ofAnyOfTheColors(colors: List<Color>): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.ofAnyOfTheColors(colors) })
@@ -92,14 +92,14 @@ class CardInstanceSearch(
     fun notControlledBy(playerName: String?): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.controller != playerName })
 
-    fun withFixedAbility(abilityType: AbilityType?): CardInstanceSearch =
+    fun withFixedAbility(abilityType: AbilityType): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.hasFixedAbility(abilityType) })
 
     fun withAnyFixedAbility(abilityTypes: List<AbilityType>): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.hasAnyFixedAbility(abilityTypes) })
 
-    fun withoutFixedAbility(abilityType: AbilityType?): CardInstanceSearch =
-        CardInstanceSearch(cards.filter { it.hasFixedAbility(abilityType) })
+    fun withoutFixedAbility(abilityType: AbilityType): CardInstanceSearch =
+        CardInstanceSearch(cards.filter { !it.hasFixedAbility(abilityType) })
 
     fun withTriggerSubtype(triggerSubtype: TriggerSubtype): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.hasFixedAbilityWithTriggerSubType(triggerSubtype) })

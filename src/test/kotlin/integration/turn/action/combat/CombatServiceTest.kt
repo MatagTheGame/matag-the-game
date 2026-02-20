@@ -10,14 +10,13 @@ import com.matag.game.turn.action.combat.DeclareAttackerService
 import com.matag.game.turn.action.combat.DeclareBlockerService
 import com.matag.game.turn.action.damage.DealDamageToCreatureService
 import com.matag.game.turn.action.damage.DealDamageToPlayerService
-import com.matag.game.turn.action.player.LifeService
 import com.matag.game.turn.action.trigger.WhenTriggerService
 import com.matag.game.turn.phases.combat.DeclareAttackersPhase
 import com.matag.game.turn.phases.combat.DeclareBlockersPhase
 import com.matag.game.turn.phases.combat.FirstStrikePhase
 import integration.TestUtils
 import integration.TestUtilsConfiguration
-import org.junit.jupiter.api.AfterEach
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.verify
@@ -37,14 +36,8 @@ class CombatServiceTest(
     private val declareBlockerService: DeclareBlockerService,
     private val dealDamageToPlayerService: DealDamageToPlayerService,
     private val dealDamageToCreatureService: DealDamageToCreatureService,
-    private val lifeService: LifeService,
     private val whenTriggerService: WhenTriggerService
 ) {
-
-    @AfterEach
-    fun cleanup() {
-        Mockito.reset(lifeService, dealDamageToCreatureService, dealDamageToPlayerService)
-    }
 
     @Test
     fun combatShouldWorkIfNoAttackingCreatures() {
@@ -66,8 +59,7 @@ class CombatServiceTest(
         combatService.dealCombatDamage(gameStatus)
 
         // Then
-        verify(dealDamageToPlayerService)
-            .dealDamageToPlayer(gameStatus, 2, gameStatus.nonCurrentPlayer)
+        assertThat(gameStatus.player2!!.life).isEqualTo(18)
     }
 
     @Test
@@ -95,7 +87,7 @@ class CombatServiceTest(
         combatService.dealCombatDamage(gameStatus)
 
         // Then
-        verify(lifeService).add(gameStatus.currentPlayer, 2, gameStatus)
+        assertThat(gameStatus.player1!!.life).isEqualTo(22)
     }
 
     @Test
@@ -179,9 +171,7 @@ class CombatServiceTest(
         combatService.dealCombatDamage(gameStatus)
 
         // Then
-        Mockito.verifyNoInteractions(lifeService)
-        Mockito.verifyNoInteractions(dealDamageToPlayerService)
-        Mockito.verifyNoInteractions(dealDamageToCreatureService)
+        assertThat(gameStatus.player1!!.life).isEqualTo(20)
     }
 
     @Test
