@@ -1,21 +1,23 @@
 package integration.turn.action.enter
 
 import com.matag.cards.Cards
+import com.matag.game.MatagGameApplication
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService
 import com.matag.game.turn.action.player.DrawXCardsService
 import integration.TestUtils
+import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.verifyNoMoreInteractions
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
 
-@ExtendWith(SpringExtension::class)
-@ContextConfiguration(classes = [EnterTestConfiguration::class])
+@SpringBootTest(classes = [MatagGameApplication::class], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
+@Import(TestUtilsConfiguration::class)
 class EnterCardIntoBattlefieldServiceTest(
     private val enterCardIntoBattlefieldService: EnterCardIntoBattlefieldService,
     private val cardInstanceFactory: CardInstanceFactory,

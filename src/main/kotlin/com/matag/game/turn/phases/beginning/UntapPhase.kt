@@ -8,7 +8,7 @@ import com.matag.game.turn.phases.Phase
 import org.springframework.stereotype.Component
 
 @Component
-class UntapPhase(
+open class UntapPhase(
     autocontinueChecker: AutocontinueChecker?,
     private val tapPermanentService: TapPermanentService,
     private val upkeepPhase: UpkeepPhase

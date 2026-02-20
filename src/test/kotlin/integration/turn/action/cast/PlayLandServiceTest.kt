@@ -1,19 +1,21 @@
 package integration.turn.action.cast
 
 import com.matag.cards.Cards
+import com.matag.game.MatagGameApplication
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.turn.action.cast.PlayLandService
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService
 import integration.TestUtils
+import integration.TestUtilsConfiguration
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.verify
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
 
-@ExtendWith(SpringExtension::class)
-@ContextConfiguration(classes = [CastTestConfiguration::class])
+@SpringBootTest(classes = [MatagGameApplication::class], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
+@Import(TestUtilsConfiguration::class)
 class PlayLandServiceTest(
     private val playLandService: PlayLandService,
     private val cardInstanceFactory: CardInstanceFactory,

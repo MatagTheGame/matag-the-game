@@ -2,12 +2,22 @@ package integration.cardinstance.ability
 
 import com.matag.cards.ability.Ability
 import com.matag.cards.ability.type.AbilityType
+import com.matag.game.MatagGameApplication
 import com.matag.game.cardinstance.ability.CardInstanceAbilityFactory
+import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
 
-class CardInstanceAbilityFactoryTest {
-    private val cardInstanceAbilityFactory = CardInstanceAbilityFactory()
+@SpringBootTest(classes = [MatagGameApplication::class], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
+@Import(TestUtilsConfiguration::class)
+class CardInstanceAbilityFactoryTest(
+    private val cardInstanceAbilityFactory: CardInstanceAbilityFactory
+) {
+
 
     @Test
     fun testAbilitiesFromParameters() {

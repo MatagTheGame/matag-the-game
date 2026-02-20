@@ -1,17 +1,19 @@
 package integration.cardinstance.cost
 
 import com.matag.cards.properties.Cost
+import com.matag.game.MatagGameApplication
 import com.matag.game.cardinstance.cost.CostService
 import com.matag.game.status.GameStatus
 import integration.TestUtils
 import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.test.context.ActiveProfiles
 
-@ExtendWith(SpringExtension::class)
+@SpringBootTest(classes = [MatagGameApplication::class], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
 @Import(TestUtilsConfiguration::class)
 class CostServiceTest(
     val testUtils: TestUtils,

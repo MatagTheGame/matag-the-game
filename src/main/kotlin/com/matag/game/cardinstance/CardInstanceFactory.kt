@@ -26,7 +26,7 @@ class CardInstanceFactory : ApplicationContextAware {
         owner: String?,
         controller: String? = null
     ): CardInstance {
-        val cardInstance = applicationContext!!.getBean<CardInstance>(CardInstance::class.java)
+        val cardInstance = applicationContext!!.getBean(CardInstance::class.java)
         cardInstance.gameStatus = gameStatus
         cardInstance.id = id
         cardInstance.card = card

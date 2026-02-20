@@ -1,19 +1,20 @@
 package integration.cardinstance
 
 import com.matag.cards.Cards
+import com.matag.game.MatagGameApplication
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.message.MessageException
 import integration.TestUtils
 import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
 
-@ExtendWith(SpringExtension::class)
-@ContextConfiguration(classes = [TestUtilsConfiguration::class])
+@SpringBootTest(classes = [MatagGameApplication::class], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
+@Import(TestUtilsConfiguration::class)
 class CardInstanceTest(
     val cardInstanceFactory: CardInstanceFactory,
     val cards: Cards,

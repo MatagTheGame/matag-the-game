@@ -8,7 +8,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 @Configuration
 @EnableWebSocketMessageBroker
-class MatagGameWebSocketConfiguration : WebSocketMessageBrokerConfigurer {
+open class MatagGameWebSocketConfiguration : WebSocketMessageBrokerConfigurer {
     override fun configureMessageBroker(config: MessageBrokerRegistry) {
         config.enableSimpleBroker("/topic", "/user")
         config.setApplicationDestinationPrefixes("/api")

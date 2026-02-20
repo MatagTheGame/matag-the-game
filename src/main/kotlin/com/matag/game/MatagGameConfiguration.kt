@@ -7,4 +7,4 @@ import org.springframework.context.annotation.Import
 
 @Configuration
 @Import(CardsConfiguration::class, CardInstanceConfiguration::class, MatagGameWebSocketConfiguration::class)
-class MatagGameConfiguration 
+open class MatagGameConfiguration

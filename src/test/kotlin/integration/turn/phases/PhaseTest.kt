@@ -1,18 +1,20 @@
 package integration.turn.phases
 
+import com.matag.game.MatagGameApplication
 import com.matag.game.turn.phases.Phase
 import com.matag.game.turn.phases.PhaseFactory
 import integration.TestUtils
+import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
 
-@ExtendWith(SpringExtension::class)
-@ContextConfiguration(classes = [PhasesTestConfiguration::class])
+@SpringBootTest(classes = [MatagGameApplication::class], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
+@Import(TestUtilsConfiguration::class)
 class PhaseTest(
     val phaseFactory: PhaseFactory,
     val testUtils: TestUtils

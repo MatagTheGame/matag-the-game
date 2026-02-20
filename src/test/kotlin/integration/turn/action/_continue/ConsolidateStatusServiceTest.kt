@@ -1,18 +1,20 @@
 package integration.turn.action._continue
 
 import com.matag.cards.Cards
+import com.matag.game.MatagGameApplication
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.turn.action._continue.ConsolidateStatusService
 import integration.TestUtils
-import integration.turn.action.leave.LeaveTestConfiguration
+import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.test.context.ContextConfiguration
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.context.annotation.Import
+import org.springframework.test.context.ActiveProfiles
 
-@ExtendWith(SpringExtension::class)
-@ContextConfiguration(classes = [ContinueTestConfiguration::class, LeaveTestConfiguration::class])
+@SpringBootTest(classes = [MatagGameApplication::class], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("test")
+@Import(TestUtilsConfiguration::class)
 class ConsolidateStatusServiceTest(
     private val testUtils: TestUtils,
     private val consolidateStatusService: ConsolidateStatusService,
