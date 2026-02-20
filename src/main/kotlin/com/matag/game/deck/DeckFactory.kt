@@ -9,19 +9,9 @@ import org.springframework.stereotype.Component
 import java.util.stream.Collectors
 
 @Component
-class DeckFactory {
-    private val cardInstanceFactory: CardInstanceFactory? = null
-
-    fun create(playerName: String?, gameStatus: GameStatus, deckInfo: DeckInfo): List<CardInstance> {
-        return deckInfo.cards.stream()
-            .map<CardInstance> { card: Card? ->
-                cardInstanceFactory!!.create(
-                    gameStatus,
-                    gameStatus.nextCardId(),
-                    card,
-                    playerName
-                )
-            }
-            .collect(Collectors.toList())
-    }
+class DeckFactory(
+    private val cardInstanceFactory: CardInstanceFactory
+) {
+    fun create(playerName: String?, gameStatus: GameStatus, deckInfo: DeckInfo): List<CardInstance> =
+        deckInfo.cards.map { cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), it, playerName) }
 }
