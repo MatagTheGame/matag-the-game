@@ -75,7 +75,7 @@ class CombatService(
             }
 
             if (shouldDealDamage(gameStatus, attackingCreature)) {
-                dealDamageToCreatureService!!.dealDamageToCreature(
+                dealDamageToCreatureService.dealDamageToCreature(
                     gameStatus,
                     blockingCreature,
                     damageToCurrentBlocker,

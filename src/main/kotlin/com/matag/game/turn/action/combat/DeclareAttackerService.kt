@@ -40,9 +40,9 @@ class DeclareAttackerService(
     private fun declareAsAttacker(gameStatus: GameStatus, currentPlayer: Player, cardId: Int) {
         val cardInstance = currentPlayer.battlefield.findCardById(cardId)
         if (!cardInstance.hasAbilityType(AbilityType.VIGILANCE)) {
-            tapPermanentService!!.tap(gameStatus, cardId)
+            tapPermanentService.tap(gameStatus, cardId)
         }
         cardInstance.declareAsAttacker()
-        whenTriggerService!!.whenTriggered(gameStatus, cardInstance, TriggerSubtype.WHEN_ATTACK)
+        whenTriggerService.whenTriggered(gameStatus, cardInstance, TriggerSubtype.WHEN_ATTACK)
     }
 }

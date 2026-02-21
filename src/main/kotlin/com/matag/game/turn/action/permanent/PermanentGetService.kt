@@ -53,8 +53,8 @@ class PermanentGetService(
         parameter: String,
         target: CardInstance
     ) {
-        val PowerToughness = abilityService.powerToughnessFromParameter(parameter)
-        target.modifiers.modifiersUntilEndOfTurn.addExtraPowerToughnessUntilEndOfTurn(PowerToughness)
+        val powerToughness = abilityService.powerToughnessFromParameter(parameter)
+        target.modifiers.modifiersUntilEndOfTurn.addExtraPowerToughnessUntilEndOfTurn(powerToughness)
 
         val ability = cardInstanceAbilityFactory.abilityFromParameter(parameter)?.apply {
             target.modifiers.modifiersUntilEndOfTurn.extraAbilities += this
