@@ -14,7 +14,10 @@ import com.matag.game.turn.phases.combat.DeclareBlockersPhase
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
+import org.springframework.context.annotation.Import
+import org.springframework.stereotype.Component
 
+@Import(ActivatedAbilityOnCreatureTest.InitTestServiceForTest::class)
 class ActivatedAbilityOnCreatureTest(
     adminClient: AdminClient,
     gameStatusRepository: GameStatusRepository,
@@ -105,7 +108,8 @@ class ActivatedAbilityOnCreatureTest(
             .getCard(cards.get("Jousting Dummy"), 0).hasPowerAndToughness("3/1")
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    @Component
+    open class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Jousting Dummy"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Jousting Dummy"))

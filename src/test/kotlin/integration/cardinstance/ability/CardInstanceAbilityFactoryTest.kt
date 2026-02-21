@@ -18,7 +18,6 @@ class CardInstanceAbilityFactoryTest(
     private val cardInstanceAbilityFactory: CardInstanceAbilityFactory
 ) {
 
-
     @Test
     fun testAbilitiesFromParameters() {
         // Given

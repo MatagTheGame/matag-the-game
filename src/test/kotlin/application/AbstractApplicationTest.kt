@@ -137,16 +137,16 @@ abstract class AbstractApplicationTest(
     }
 
     @Configuration
-    class InitGameTestConfiguration {
+    open class InitGameTestConfiguration {
 
         @Bean
-        fun launcherTestGameController(launcherGameResponseBuilder: LauncherGameResponseBuilder): LauncherTestGameController {
+        open fun launcherTestGameController(launcherGameResponseBuilder: LauncherGameResponseBuilder): LauncherTestGameController {
             return LauncherTestGameController(launcherGameResponseBuilder)
         }
 
         @Bean
         @Primary
-        fun adminClient(): AdminClient? {
+        open fun adminClient(): AdminClient? {
             return mock(AdminClient::class.java)
         }
     }

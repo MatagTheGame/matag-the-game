@@ -16,7 +16,7 @@ open class DestroyPermanentService(
     private val whenTriggerService: WhenTriggerService,
 ) {
     
-    fun markToBeDestroyed(gameStatus: GameStatus, permanentId: Int) {
+    open fun markToBeDestroyed(gameStatus: GameStatus, permanentId: Int) {
         val cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId)
 
         if (cardInstance != null) {
@@ -24,7 +24,7 @@ open class DestroyPermanentService(
         }
     }
 
-    fun destroy(gameStatus: GameStatus, permanentId: Int): Boolean {
+    open fun destroy(gameStatus: GameStatus, permanentId: Int): Boolean {
         val cardInstance = gameStatus.findCardByIdFromAnyBattlefield(permanentId)
 
         if (cardInstance == null) {

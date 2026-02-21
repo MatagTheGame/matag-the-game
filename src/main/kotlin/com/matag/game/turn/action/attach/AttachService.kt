@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component
 
 @Component
 open class AttachService {
-    fun attach(gameStatus: GameStatus, cardInstance: CardInstance, attachedToId: Int) {
+    open fun attach(gameStatus: GameStatus, cardInstance: CardInstance, attachedToId: Int) {
         val attachTo = gameStatus.findCardByIdFromAnyBattlefield(attachedToId)
         cardInstance.modifiers.attachedToId = attachedToId
         LOGGER.info("attached {} to {}", cardInstance.idAndName, attachTo!!.idAndName)
     }
 
-    fun detach(cardToDestroy: CardInstance, attachedCard: CardInstance) {
+    open fun detach(cardToDestroy: CardInstance, attachedCard: CardInstance) {
         attachedCard.modifiers.unsetAttachedId()
         LOGGER.info("detached {} from {}", attachedCard.idAndName, cardToDestroy.idAndName)
     }

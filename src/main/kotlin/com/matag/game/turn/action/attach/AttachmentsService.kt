@@ -14,23 +14,23 @@ open class AttachmentsService(
     private val cardInstanceAbilityFactory: CardInstanceAbilityFactory
 ) {
 
-    fun getAttachedCards(gameStatus: GameStatus, cardInstance: CardInstance): List<CardInstance> {
+    open fun getAttachedCards(gameStatus: GameStatus, cardInstance: CardInstance): List<CardInstance> {
         return gameStatus.allBattlefieldCardsSearch.attachedToId(cardInstance.id).cards
     }
 
-    fun getAttachmentsPower(gameStatus: GameStatus, cardInstance: CardInstance): Int {
+    open fun getAttachmentsPower(gameStatus: GameStatus, cardInstance: CardInstance): Int {
         return getAttachedCardsAbilities(gameStatus, cardInstance)
             .map { abilityService.powerToughnessFromParameters(it!!.parameters) }
             .sumOf { it.power }
     }
 
-    fun getAttachmentsToughness(gameStatus: GameStatus, cardInstance: CardInstance): Int {
+    open fun getAttachmentsToughness(gameStatus: GameStatus, cardInstance: CardInstance): Int {
         return getAttachedCardsAbilities(gameStatus, cardInstance)
             .map { abilityService.powerToughnessFromParameters(it.parameters) }
             .sumOf { it.toughness }
     }
 
-    fun getAttachmentsAbilities(gameStatus: GameStatus, cardInstance: CardInstance): List<Ability> {
+    open fun getAttachmentsAbilities(gameStatus: GameStatus, cardInstance: CardInstance): List<Ability> {
         return getAttachedCardsAbilities(gameStatus, cardInstance)
             .flatMap { cardInstanceAbilityFactory.abilitiesFromParameters(it.parameters) }
     }

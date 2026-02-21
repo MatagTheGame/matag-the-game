@@ -24,7 +24,7 @@
         <spring.boot.version>4.0.0</spring.boot.version>
         <kotlin.version>2.3.0</kotlin.version>
         <junit.version>6.0.1</junit.version>
-        <selenium.version>4.39.0</selenium.version>
+        <selenium.version>4.40.0</selenium.version>
         <mockito.kotlin.version>6.1.0</mockito.kotlin.version>
     </properties>
 

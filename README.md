@@ -82,5 +82,5 @@ Startup the app as spring boot
 
 It is possible to run `game` app with `test` profile.
 This will allow to initialise the game with a custom status (cards in any area) as defined in `ProdInitTestService`.
-Furthermore this allows to access a test game without having authentication at:
+Furthermore, this allows to access a test game without having authentication at:
  - http://localhost:8080/ui/test-game

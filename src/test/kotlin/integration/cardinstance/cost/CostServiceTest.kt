@@ -30,7 +30,7 @@ class CostServiceTest(
         val fulfilled = costService.isCastingCostFulfilled(cardInstance, null, manaPaid)
 
         // Then
-        assertThat(fulfilled).isTrue()
+        assertThat(fulfilled).isTrue
     }
 
     @Test
@@ -44,7 +44,7 @@ class CostServiceTest(
         val fulfilled = costService.isCastingCostFulfilled(cardInstance, null, manaPaid)
 
         // Then
-        assertThat(fulfilled).isFalse()
+        assertThat(fulfilled).isFalse
     }
 
     @Test
@@ -72,7 +72,7 @@ class CostServiceTest(
         val fulfilled = costService.isCastingCostFulfilled(cardInstance, null, manaPaid)
 
         // Then
-        assertThat(fulfilled).isFalse()
+        assertThat(fulfilled).isFalse
     }
 
     @Test
@@ -100,7 +100,7 @@ class CostServiceTest(
         val fulfilled = costService.isCastingCostFulfilled(cardInstance, "THAT_TARGETS_GET", manaPaid)
 
         // Then
-        assertThat(fulfilled).isTrue()
+        assertThat(fulfilled).isTrue
     }
 
     @Test
@@ -115,7 +115,7 @@ class CostServiceTest(
         val fulfilled = costService.isCastingCostFulfilled(cardInstance, "THAT_TARGETS_GET", manaPaid)
 
         // Then
-        assertThat(fulfilled).isFalse()
+        assertThat(fulfilled).isFalse
     }
 
     @Test
@@ -145,7 +145,7 @@ class CostServiceTest(
         val result = costService.canAfford(cardInstance, null, gameStatus)
 
         // Then
-        assertThat(result).isTrue()
+        assertThat(result).isTrue
     }
 
     @Test
@@ -161,7 +161,7 @@ class CostServiceTest(
         val result = costService.canAfford(cardInstance, null, gameStatus)
 
         // Then
-        assertThat(result).isTrue()
+        assertThat(result).isTrue
     }
 
     @Test
@@ -177,7 +177,7 @@ class CostServiceTest(
         val result = costService.canAfford(cardInstance, null, gameStatus)
 
         // Then
-        assertThat(result).isFalse()
+        assertThat(result).isFalse
     }
 
     @Test
@@ -194,7 +194,7 @@ class CostServiceTest(
         val result = costService.canAfford(blindingDrone, "THAT_TARGETS_GET", gameStatus)
 
         // Then
-        assertThat(result).isFalse()
+        assertThat(result).isFalse
     }
 
     @Test
@@ -211,7 +211,7 @@ class CostServiceTest(
         val result = costService.canAfford(blindingDrone, "THAT_TARGETS_GET", gameStatus)
 
         // Then
-        assertThat(result).isTrue()
+        assertThat(result).isTrue
     }
 
     private fun addCardToPlayerBattlefield(gameStatus: GameStatus, cardName: String) =

@@ -1,11 +1,9 @@
 package integration
 
 import com.matag.cards.Cards
-import com.matag.game.adminclient.AdminClient
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.player.PlayerFactory
 import com.matag.game.status.GameStatusFactory
-import org.mockito.Mockito.mock
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -19,10 +17,5 @@ open class TestUtilsConfiguration {
         cards: Cards
     ): TestUtils {
         return TestUtils(gameStatusFactory, playerFactory, cardInstanceFactory, cards)
-    }
-
-    @Bean
-    open fun adminClient(): AdminClient {
-        return mock(AdminClient::class.java)
     }
 }
