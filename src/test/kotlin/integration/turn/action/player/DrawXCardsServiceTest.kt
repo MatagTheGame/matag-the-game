@@ -1,13 +1,11 @@
 package integration.turn.action.player
 
 import com.matag.game.MatagGameApplication
-import com.matag.game.turn.action.finish.FinishGameService
 import com.matag.game.turn.action.player.DrawXCardsService
 import integration.TestUtils
 import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Import
 import org.springframework.test.context.ActiveProfiles

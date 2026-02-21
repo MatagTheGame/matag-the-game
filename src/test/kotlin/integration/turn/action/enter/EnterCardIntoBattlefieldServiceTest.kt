@@ -4,7 +4,6 @@ import com.matag.cards.Cards
 import com.matag.game.MatagGameApplication
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.turn.action.enter.EnterCardIntoBattlefieldService
-import com.matag.game.turn.action.player.DrawXCardsService
 import integration.TestUtils
 import integration.TestUtilsConfiguration
 import org.assertj.core.api.Assertions.assertThat
