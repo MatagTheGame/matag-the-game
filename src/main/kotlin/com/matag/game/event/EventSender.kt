@@ -9,14 +9,11 @@ import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.stereotype.Component
 import java.util.function.Consumer
 
-/**
- * Sends events to the browser.
- */
 @Component
-class EventSender {
-    private val webSocketTemplate: SimpMessagingTemplate? = null
-    private val objectMapper: ObjectMapper? = null
-
+class EventSender(
+    private val webSocketTemplate: SimpMessagingTemplate,
+    private val objectMapper: ObjectMapper
+) {
     fun sendToUser(sessionId: String, username: String?, event: Event) {
         val eventString = serializeToString(event)
         if (event.type != "HEALTHCHECK") {
@@ -26,7 +23,7 @@ class EventSender {
                 LOGGER.info("Sending event to {}: {}", sessionId, eventString)
             }
         }
-        webSocketTemplate!!.convertAndSendToUser(sessionId, "/events", eventString)
+        webSocketTemplate.convertAndSendToUser(sessionId, "/events", eventString)
     }
 
     fun sendToUser(sessionId: String, event: Event) {
@@ -43,7 +40,7 @@ class EventSender {
 
     private fun serializeToString(event: Any?): String {
         try {
-            return objectMapper!!.writeValueAsString(event)
+            return objectMapper.writeValueAsString(event)
         } catch (e: JsonProcessingException) {
             throw RuntimeException(e)
         }
