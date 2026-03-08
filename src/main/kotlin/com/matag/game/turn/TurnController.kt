@@ -59,7 +59,7 @@ class TurnController(
         } else if ("RESOLVE" == request.action) {
             turnService.resolve(
                 gameStatus,
-                request.inputRequiredAction!!,
+                request.inputRequiredAction,
                 request.inputRequiredChoices,
                 request.cardIds,
                 request.targetsIdsForCardIds

@@ -19,7 +19,6 @@ data class CardModifiers(
     var modifiersUntilEndOfTurn: CardModifiersUntilEndOfTurn = CardModifiersUntilEndOfTurn(),
 ) {
 
-
     fun cleanupUntilEndOfTurnModifiers() {
         damage = 0
         modifiersUntilEndOfTurn = CardModifiersUntilEndOfTurn()

@@ -39,7 +39,7 @@ class TurnService(
 
     fun resolve(
         gameStatus: GameStatus,
-        inputRequiredAction: String,
+        inputRequiredAction: String?,
         inputRequiredChoices: String?,
         targetCardIds: List<Int>,
         targetsIdsForCardIds: Map<Int, List<Any>>

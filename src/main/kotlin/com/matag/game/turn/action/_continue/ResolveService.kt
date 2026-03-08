@@ -31,7 +31,7 @@ class ResolveService(
     
     fun resolve(
         gameStatus: GameStatus,
-        inputRequiredAction: String,
+        inputRequiredAction: String?,
         inputRequiredChoices: String?,
         targetCardIds: List<Int>,
         targetsIdsForCardIds: Map<Int, List<Any>>
@@ -93,10 +93,10 @@ class ResolveService(
         performAbilitiesActions(gameStatus, cardToResolve, cardToResolve.getAbilitiesByTriggerType(TriggerType.CAST))
 
         if (cardToResolve.isPermanent) {
-            enterCardIntoBattlefieldService!!.enter(gameStatus, cardToResolve)
+            enterCardIntoBattlefieldService.enter(gameStatus, cardToResolve)
         } else {
             cardToResolve.resetAllModifiers()
-            putIntoGraveyardService!!.putIntoGraveyard(gameStatus, cardToResolve)
+            putIntoGraveyardService.putIntoGraveyard(gameStatus, cardToResolve)
         }
     }
 
@@ -169,7 +169,7 @@ class ResolveService(
 
     private fun checkTargets(gameStatus: GameStatus?, cardToResolve: CardInstance, ability: Ability) {
         for (i in ability.targets.indices) {
-            val target = ability.targets.get(i)
+            val target = ability.targets[i]
             val targetId = targetCheckerService.getTargetIdAtIndex(cardToResolve, ability, i)
             targetCheckerService.check(gameStatus!!, cardToResolve, target, targetId)
         }

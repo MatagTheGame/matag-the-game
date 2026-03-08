@@ -30,7 +30,7 @@ class PhaseHelper internal constructor(private val matagBrowser: MatagBrowser) {
     val phase: String
         get() {
             matagBrowser.wait(ExpectedConditions.visibilityOfElementLocated(PHASE_CSS_SELECTOR))
-            return matagBrowser.findElement(PHASE_CSS_SELECTOR).getText()
+            return matagBrowser.findElement(PHASE_CSS_SELECTOR).text
         }
 
     val priority: PlayerType
