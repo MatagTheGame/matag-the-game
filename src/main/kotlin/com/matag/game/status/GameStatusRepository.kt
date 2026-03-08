@@ -5,22 +5,22 @@ import org.springframework.stereotype.Component
 
 @Component
 class GameStatusRepository(private val securityHelper: SecurityHelper) {
-    private val games: MutableMap<String?, GameStatus> = HashMap<String?, GameStatus>()
+    private val games: MutableMap<String, GameStatus> = HashMap()
 
-    fun contains(gameId: String?): Boolean {
+    fun contains(gameId: String): Boolean {
         return games.containsKey(gameId)
     }
 
-    fun save(gameId: String?, gameStatus: GameStatus?) {
-        games.put(gameId, gameStatus!!)
+    fun save(gameId: String, gameStatus: GameStatus) {
+        games[gameId] = gameStatus
     }
 
-    fun getUnsecure(gameId: String?): GameStatus? {
-        return games.get(gameId)
+    fun getUnsecure(gameId: String): GameStatus? {
+        return games[gameId]
     }
 
-    fun get(gameId: String?, sessionId: String?): GameStatus {
-        val gameStatus: GameStatus = games.get(gameId)!!
+    fun get(gameId: String, sessionId: String): GameStatus {
+        val gameStatus = games[gameId]!!
         securityHelper.isPlayerAllowedToExecuteAction(gameStatus, sessionId)
         return gameStatus
     }

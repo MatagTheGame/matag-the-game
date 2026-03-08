@@ -3,14 +3,13 @@ package application
 import com.matag.cards.Card
 import com.matag.cards.Cards
 import com.matag.game.cardinstance.CardInstanceFactory
+import com.matag.game.init.InitService
 import com.matag.game.status.GameStatus
 
 abstract class InitTestService(
     protected val cardInstanceFactory: CardInstanceFactory,
     protected val cards: Cards
-) {
-
-    abstract fun initGameStatus(gameStatus: GameStatus)
+) : InitService {
 
     protected fun addCardToCurrentPlayerLibrary(gameStatus: GameStatus, card: Card?) {
         gameStatus.currentPlayer.library.addCard(

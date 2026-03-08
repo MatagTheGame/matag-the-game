@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller
 
 @Controller
 class InitController(
+    private val initService: InitService,
     private val securityHelper: SecurityHelper,
     private val eventSender: EventSender,
     private val configService: ConfigService,
@@ -62,6 +63,8 @@ class InitController(
                 gameStatus.player2!!.drawHand()
 
                 gameStatus.turn.init(gameStatus.player1!!.name!!)
+
+                initService.initGameStatus(gameStatus) // used by tests to setup the game in a particular state
 
                 eventSender.sendToPlayer(gameStatus.player1!!, Event("OPPONENT_JOINED"))
 
