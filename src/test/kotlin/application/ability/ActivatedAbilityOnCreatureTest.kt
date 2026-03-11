@@ -37,12 +37,16 @@ class ActivatedAbilityOnCreatureTest(
             .getCard(cards.get("Plains"), 0).tap()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Plains"), 1).tap()
-        val joustingDummyInHand = cards.get("Jousting Dummy")
-        browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(joustingDummyInHand).click()
+        browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Jousting Dummy")).click()
         browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
 
         // is on the battlefield
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE).getFirstCard(joustingDummyInHand).hasSummoningSickness()
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
+            .getCard(cards.get("Plains"), 0).isTapped()
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
+            .getCard(cards.get("Plains"), 1).isTapped()
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+            .getCard(cards.get("Jousting Dummy"), 1).hasSummoningSickness()
 
         // When increasing jousting dummy (as well on summoning sickness creature)
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
@@ -66,8 +70,6 @@ class ActivatedAbilityOnCreatureTest(
         browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
 
         // power of jousting dummy is increased
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
-            .getCard(cards.get("Jousting Dummy"), 1).hasSummoningSickness()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getCard(cards.get("Jousting Dummy"), 1).hasPowerAndToughness("3/1")
 

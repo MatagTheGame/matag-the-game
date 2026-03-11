@@ -16,7 +16,7 @@ export default class CardUtils {
   }
 
   static hasSummoningSickness(cardInstance) {
-    return cardInstance.summoningSickness
+    return cardInstance.isSummoningSickness
   }
 
   static hasAbility(cardInstance, abilityType) {
@@ -28,15 +28,15 @@ export default class CardUtils {
   }
 
   static frontendTap(cardInstance) {
-    cardInstance.modifiers.tapped = 'FRONTEND_TAPPED'
+    cardInstance.modifiers.isTapped = 'FRONTEND_TAPPED'
   }
 
   static untap(cardInstance) {
-    cardInstance.modifiers.tapped = undefined
+    cardInstance.modifiers.isTapped = undefined
   }
 
   static isFrontendTapped(cardInstance) {
-    return cardInstance.modifiers.tapped === 'FRONTEND_TAPPED'
+    return cardInstance.modifiers.isTapped === 'FRONTEND_TAPPED'
   }
 
   static toggleFrontendTapped(cardInstance) {
@@ -98,7 +98,7 @@ export default class CardUtils {
   }
 
   static isAttacking(cardInstance) {
-    return cardInstance.modifiers.attacking === true
+    return cardInstance.modifiers.isAttacking === true
   }
 
   static isAttackingOrFrontendAttacking(cardInstance) {
@@ -138,7 +138,7 @@ export default class CardUtils {
   }
 
   static isTapped(cardInstance) {
-    return cardInstance.modifiers.tapped === true
+    return cardInstance.modifiers.isTapped === true
   }
 
   static isTappedOrFrontendTapped(cardInstance) {
