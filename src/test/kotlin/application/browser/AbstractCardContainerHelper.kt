@@ -63,10 +63,9 @@ abstract class AbstractCardContainerHelper internal constructor(val matagBrowser
     }
 
     fun getCard(card: Card, index: Int): CardHelper {
-        matagBrowser.wait(ExpectedCondition { driver: WebDriver? ->
-            CardHelper.cardNames(containerElement()).stream()
-                .filter { cardName: String? -> cardName == card.name }
-                .count() > index
+        matagBrowser.wait(ExpectedCondition {
+            CardHelper.cardNames(containerElement())
+                .count { it == card.name } > index
         })
         val webElement = containerElement().findElements(By.cssSelector("[aria-label=\"" + card.name + "\"]"))[index]
         return CardHelper(webElement, matagBrowser)

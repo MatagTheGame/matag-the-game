@@ -11,7 +11,7 @@ class PlayerActiveMana extends Component {
       <div id='player-active-mana'>
         <ul>
           { CostUtils.getDisplayMana(this.props.mana).map((mana, index) =>
-            <li key={index}><img alt={mana} title={mana} src={`/img/symbols/${mana}.png`} /></li>) }
+            <li key={index}><img alt={mana} title={mana} src={`/matag/game/img/symbols/${mana}.png`} /></li>) }
         </ul>
       </div>
     )

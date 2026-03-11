@@ -14,7 +14,7 @@ data class CardModifiers(
     val abilities: List<Ability> = listOf(),
     var targets: List<Any> = listOf(),
     var attachedToId: Int = 0,
-    val controller: String? = null,
+    var controller: String? = null,
     val counters: Counters = Counters(),
     var modifiersUntilEndOfTurn: CardModifiersUntilEndOfTurn = CardModifiersUntilEndOfTurn(),
 ) {
