@@ -25,7 +25,7 @@ class CreatureEntersTheBattlefieldWithAbilityAllCreaturesYouControlTest(var init
     fun creatureEntersTheBattlefieldWithAbilityAllCreaturesYouControl() {
         // When Playing Angel of the Dawn
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
-            .getCard(cards!!.get("Plains"), 0).tap()
+            .getCard(cards.get("Plains"), 0).tap()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Plains"), 1).tap()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
@@ -60,7 +60,7 @@ class CreatureEntersTheBattlefieldWithAbilityAllCreaturesYouControlTest(var init
             .getFirstCard(cards.get("Enforcer Griffin")).isNotTapped()
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Angel of the Dawn"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Enforcer Griffin"))

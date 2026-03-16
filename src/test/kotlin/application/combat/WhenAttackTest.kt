@@ -24,42 +24,42 @@ class WhenAttackTest(var initService: InitTestService) : AbstractApplicationTest
     @Test
     fun combatTrampleHaste() {
         // going to attack
-        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(
             DeclareAttackersPhase.DA,
             PlayerType.PLAYER
         )
 
         // attacking with a creature with when attacks ability
         val brazenWolvesId =
-            browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
-                .getFirstCard(cards!!.get("Brazen Wolves")).getCardIdNumeric()
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+            browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+                .getFirstCard(cards.get("Brazen Wolves")).getCardIdNumeric()
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Brazen Wolves")).declareAsAttacker()
-        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(
             DeclareAttackersPhase.DA,
             PlayerType.PLAYER
         )
 
         // attacking ability is on the stack
-        browser!!.player1().getStackHelper().containsAbility("Player1's Brazen Wolves (" + brazenWolvesId + "): Gets +2/+0 until end of turn.")
-        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(
+        browser.player1().getStackHelper().containsAbility("Player1's Brazen Wolves (" + brazenWolvesId + "): Gets +2/+0 until end of turn.")
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(
             DeclareAttackersPhase.DA,
             PlayerType.OPPONENT
         )
-        browser!!.player2().getStackHelper().containsAbility("Player1's Brazen Wolves (" + brazenWolvesId + "): Gets +2/+0 until end of turn.")
-        browser!!.player2().getActionHelper().clickContinueAndExpectPhase(
+        browser.player2().getStackHelper().containsAbility("Player1's Brazen Wolves (" + brazenWolvesId + "): Gets +2/+0 until end of turn.")
+        browser.player2().getActionHelper().clickContinueAndExpectPhase(
             DeclareAttackersPhase.DA,
             PlayerType.PLAYER
         )
 
         // continuing
-        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.PLAYER)
-        browser!!.player1().getPlayerInfoHelper(PlayerType.OPPONENT).toHaveLife(16)
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.PLAYER)
+        browser.player1().getPlayerInfoHelper(PlayerType.OPPONENT).toHaveLife(16)
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        public override fun initGameStatus(gameStatus: GameStatus) {
-            addCardToCurrentPlayerBattlefield(gameStatus, cards!!.get("Brazen Wolves"))
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+        override fun initGameStatus(gameStatus: GameStatus) {
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Brazen Wolves"))
         }
     }
 }

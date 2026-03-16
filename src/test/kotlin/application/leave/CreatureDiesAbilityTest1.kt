@@ -57,8 +57,8 @@ class CreatureDiesAbilityTest(var initService: InitTestService) : AbstractApplic
             .getFirstCard(cards.get("Goblin Assault Team")).hasPowerAndToughness("5/2")
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        public override fun initGameStatus(gameStatus: GameStatus) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+        override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Goblin Assault Team"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Goblin Assault Team"))
 

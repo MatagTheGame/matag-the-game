@@ -22,7 +22,7 @@ class WheneverCastTest(var initService: InitTestService) : AbstractApplicationTe
     fun wheneverACreatureEntersTheBattlefieldAbility() {
         // When playing Precision Bolt
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
-            .getCard(cards!!.get("Mountain"), 0).tap()
+            .getCard(cards.get("Mountain"), 0).tap()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Mountain"), 1).tap()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
@@ -52,7 +52,7 @@ class WheneverCastTest(var initService: InitTestService) : AbstractApplicationTe
         browser.player1().getPlayerInfoHelper(PlayerType.OPPONENT).toHaveLife(17)
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Adeliz, the Cinder Wind"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"))

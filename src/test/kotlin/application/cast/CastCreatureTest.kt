@@ -151,7 +151,7 @@ class CastCreatureTest(var initService: InitTestService) : AbstractApplicationTe
         browser.player2().getHandHelper(PlayerType.PLAYER).isEmpty
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Headwater Sentries"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"))

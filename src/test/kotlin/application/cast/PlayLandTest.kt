@@ -20,7 +20,7 @@ class PlayLandTest(var initService: InitTestService) : AbstractApplicationTest()
     @Test
     fun playLand() {
         // When play first land
-        browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards!!.get("Island")).click()
+        browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Island")).click()
 
         // Then battlefields contain land
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
@@ -39,7 +39,7 @@ class PlayLandTest(var initService: InitTestService) : AbstractApplicationTest()
         browser.player1().getMessageHelper().hasMessage("You already played a land this turn.")
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Island"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Island"))

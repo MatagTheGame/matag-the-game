@@ -118,7 +118,7 @@ class CastCreatureAlternativeCostTest(var initService: InitTestService) : Abstra
         browser.player1().getStackHelper().contains(cards.get("Headwater Sentries"))
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Headwater Sentries"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Azorius Guildgate"))

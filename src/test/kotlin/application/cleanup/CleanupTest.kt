@@ -25,7 +25,7 @@ class CleanupTest(var initService: InitTestService) : AbstractApplicationTest() 
     fun cleanupWhenPassingTurns() {
         // Battlefields is
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
-            .getFirstCard(cards!!.get("Huatli's Snubhorn")).hasDamage(1)
+            .getFirstCard(cards.get("Huatli's Snubhorn")).hasDamage(1)
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Huatli's Snubhorn")).isTapped()
 
@@ -64,7 +64,7 @@ class CleanupTest(var initService: InitTestService) : AbstractApplicationTest() 
             .getFirstCard(cards.get("Air Elemental")).doesNotHaveDamage()
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             // Current Player
             addCardToCurrentPlayerLibrary(gameStatus, cards.get("Island"))

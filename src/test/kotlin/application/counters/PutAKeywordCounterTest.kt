@@ -89,7 +89,7 @@ class PutAKeywordCounterTest(var initService: InitTestService) : AbstractApplica
         browser.player2().getMessageHelper().hasMessage("Player1 Win! Go back to admin.")
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             gameStatus.player1?.life = 1
             gameStatus.player2?.life = 1

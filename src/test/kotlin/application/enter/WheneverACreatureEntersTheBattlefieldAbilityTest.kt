@@ -24,7 +24,7 @@ class WheneverACreatureEntersTheBattlefieldAbilityTest(var initService: InitTest
     fun wheneverACreatureEntersTheBattlefieldAbility() {
         // When Playing Ajani's Welcome
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
-            .getCard(cards!!.get("Plains"), 0).tap()
+            .getCard(cards.get("Plains"), 0).tap()
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Ajani's Welcome")).click()
         browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
@@ -98,7 +98,7 @@ class WheneverACreatureEntersTheBattlefieldAbilityTest(var initService: InitTest
         browser.player1().getPlayerInfoHelper(PlayerType.PLAYER).toHaveLife(23)
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Ajani's Welcome"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Ajani's Welcome"))

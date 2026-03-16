@@ -84,7 +84,7 @@ class CreatureEntersTheBattlefieldWithTargetAbilityTapDoesNotUntapTest(var initS
             .getFirstCard(cards.get("Canopy Spider")).isNotTapped()
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Frost Lynx"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"))

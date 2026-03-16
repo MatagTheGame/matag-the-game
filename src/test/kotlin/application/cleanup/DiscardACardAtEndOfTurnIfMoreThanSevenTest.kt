@@ -35,7 +35,7 @@ class DiscardACardAtEndOfTurnIfMoreThanSevenTest(var initService: InitTestServic
         browser.player1().getMessageHelper().close()
 
         // When player clicks on a card to discard
-        browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards!!.get("Plains")).select()
+        browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Plains")).select()
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Mountain")).click()
 
         // Then that card is discarded (down to 7)
@@ -47,7 +47,7 @@ class DiscardACardAtEndOfTurnIfMoreThanSevenTest(var initService: InitTestServic
         browser.player1().getPhaseHelper().matches(Main1Phase.M1, PlayerType.OPPONENT)
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             // Current Player
             addCardToCurrentPlayerHand(gameStatus, cards.get("Island"))

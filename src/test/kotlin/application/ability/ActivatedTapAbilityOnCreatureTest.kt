@@ -10,7 +10,6 @@ import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
 import org.springframework.context.annotation.Import
-import org.springframework.stereotype.Component
 
 @Import(ActivatedTapAbilityOnCreatureTest.InitTestServiceForTest::class)
 class ActivatedTapAbilityOnCreatureTest(var initService: InitTestService) : AbstractApplicationTest() {
@@ -68,8 +67,7 @@ class ActivatedTapAbilityOnCreatureTest(var initService: InitTestService) : Abst
             .getCard(cards.get("Checkpoint Officer"), 1).isTapped()
     }
 
-    @Component
-    open class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Checkpoint Officer"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Checkpoint Officer"))

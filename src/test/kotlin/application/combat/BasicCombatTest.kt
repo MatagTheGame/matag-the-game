@@ -183,8 +183,8 @@ class BasicCombatTest(var initService: InitTestService) : AbstractApplicationTes
         browser.player1().getPlayerInfoHelper(PlayerType.OPPONENT).toHaveLife(11)
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        public override fun initGameStatus(gameStatus: GameStatus) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+        override fun initGameStatus(gameStatus: GameStatus) {
             // Single block both survive
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Headwater Sentries")) // 2/5
             addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Headwater Sentries")) // 2/5

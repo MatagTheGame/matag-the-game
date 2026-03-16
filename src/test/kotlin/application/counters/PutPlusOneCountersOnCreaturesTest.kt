@@ -22,7 +22,7 @@ class PutPlusOneCountersOnCreaturesTest(var initService: InitTestService) : Abst
     fun putPlusOneCountersOnCreaturesTest() {
         // When cast Gird for Battle targeting two creatures player control
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
-            .getCard(cards!!.get("Plains"), 0).tap()
+            .getCard(cards.get("Plains"), 0).tap()
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Gird for Battle")).select()
         browser.player1().getStatusHelper().hasMessage("Select targets for Gird for Battle.")
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
@@ -80,7 +80,7 @@ class PutPlusOneCountersOnCreaturesTest(var initService: InitTestService) : Abst
             .getCard(cards.get("Concordia Pegasus"), 0).hasPowerAndToughness("3/5")
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Gird for Battle"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Gird for Battle"))

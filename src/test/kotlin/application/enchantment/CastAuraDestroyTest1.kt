@@ -32,7 +32,7 @@ class CastAuraDestroyTest(var initService: InitTestService) : AbstractApplicatio
 
         // When Player2 destroys an enchantment
         browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
-            .getCard(cards!!.get("Plains"), 0).tap()
+            .getCard(cards.get("Plains"), 0).tap()
         browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Plains"), 1).tap()
         browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
@@ -98,7 +98,7 @@ class CastAuraDestroyTest(var initService: InitTestService) : AbstractApplicatio
             .getFirstCard(cards.get("Concordia Pegasus")).hasPowerAndToughness(powerAndToughness)
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Concordia Pegasus"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Arcane Flight"))

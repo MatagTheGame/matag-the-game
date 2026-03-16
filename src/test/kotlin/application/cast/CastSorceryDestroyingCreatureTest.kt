@@ -105,7 +105,7 @@ class CastSorceryDestroyingCreatureTest(var initService: InitTestService) : Abst
         browser.player2().getStatusHelper().hasMessage("Wait for opponent to perform its action...")
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Legion's Judgment"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"))

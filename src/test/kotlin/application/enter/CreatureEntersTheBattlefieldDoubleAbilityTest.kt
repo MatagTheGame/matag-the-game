@@ -24,7 +24,7 @@ class CreatureEntersTheBattlefieldDoubleAbilityTest(var initService: InitTestSer
     fun creatureEntersTheBattlefieldDoubleAbility() {
         // When Playing Dusk Legion Zealot
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
-            .getCard(cards!!.get("Swamp"), 0).tap()
+            .getCard(cards.get("Swamp"), 0).tap()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Swamp"), 1).tap()
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Dusk Legion Zealot")).click()
@@ -43,7 +43,7 @@ class CreatureEntersTheBattlefieldDoubleAbilityTest(var initService: InitTestSer
         browser.player1().getPlayerInfoHelper(PlayerType.PLAYER).toHaveLife(19)
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Dusk Legion Zealot"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"))

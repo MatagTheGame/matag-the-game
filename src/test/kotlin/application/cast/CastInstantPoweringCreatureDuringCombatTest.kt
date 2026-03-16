@@ -32,7 +32,7 @@ class CastInstantPoweringCreatureDuringCombatTest(var initService: InitTestServi
             PlayerType.PLAYER
         )
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
-            .getFirstCard(cards!!.get("Bastion Enforcer")).declareAsAttacker()
+            .getFirstCard(cards.get("Bastion Enforcer")).declareAsAttacker()
         browser.player1().getActionHelper().clickContinueAndExpectPhase(
             DeclareAttackersPhase.DA,
             PlayerType.OPPONENT
@@ -97,7 +97,7 @@ class CastInstantPoweringCreatureDuringCombatTest(var initService: InitTestServi
             .getFirstCard(cards.get("Bartizan Bats")).hasPowerAndToughness("3/1")
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Bastion Enforcer"))
 

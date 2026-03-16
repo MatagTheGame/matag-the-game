@@ -24,58 +24,58 @@ class CombatFlyingReachTest(var initService: InitTestService) : AbstractApplicat
     @Test
     fun combatFlyingReach() {
         // When going to combat
-        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(
             DeclareAttackersPhase.DA,
             PlayerType.PLAYER
         )
 
         // creature with flying should have the correct class
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
-            .getFirstCard(cards!!.get("Air Elemental")).hasFlying()
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+            .getFirstCard(cards.get("Air Elemental")).hasFlying()
 
         // When declare attacker
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Air Elemental")).declareAsAttacker()
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Air Elemental")).declareAsAttacker()
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Air Elemental")).declareAsAttacker()
-        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(
             DeclareBlockersPhase.DB,
             PlayerType.OPPONENT
         )
 
         // Declare blocker
-        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.COMBAT_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.COMBAT_LINE)
             .getCard(cards.get("Air Elemental"), 0).click()
-        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Air Elemental")).click()
 
-        browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.COMBAT_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.COMBAT_LINE)
             .getCard(cards.get("Air Elemental"), 1).click()
-        browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+        browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Grazing Whiptail")).click()
 
         val airElemental =
-            browser!!.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.COMBAT_LINE)
+            browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.COMBAT_LINE)
                 .getCard(cards.get("Air Elemental"), 2)
         airElemental.click()
         val ancientBrontodon =
-            browser!!.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+            browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
                 .getFirstCard(cards.get("Ancient Brontodon"))
         ancientBrontodon.click()
-        browser!!.player2().getMessageHelper().hasMessage("\"" + ancientBrontodon.getCardIdNumeric() + " - Ancient Brontodon\" cannot block \"" + airElemental.getCardIdNumeric() + " - Air Elemental\" as it has flying.")
+        browser.player2().getMessageHelper().hasMessage("\"" + ancientBrontodon.getCardIdNumeric() + " - Ancient Brontodon\" cannot block \"" + airElemental.getCardIdNumeric() + " - Air Elemental\" as it has flying.")
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        public override fun initGameStatus(gameStatus: GameStatus) {
-            addCardToCurrentPlayerBattlefield(gameStatus, cards!!.get("Air Elemental"))
-            addCardToCurrentPlayerBattlefield(gameStatus, cards!!.get("Air Elemental"))
-            addCardToCurrentPlayerBattlefield(gameStatus, cards!!.get("Air Elemental"))
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+        override fun initGameStatus(gameStatus: GameStatus) {
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Air Elemental"))
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Air Elemental"))
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Air Elemental"))
 
-            addCardToNonCurrentPlayerBattlefield(gameStatus, cards!!.get("Air Elemental"))
-            addCardToNonCurrentPlayerBattlefield(gameStatus, cards!!.get("Grazing Whiptail"))
-            addCardToNonCurrentPlayerBattlefield(gameStatus, cards!!.get("Ancient Brontodon"))
+            addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Air Elemental"))
+            addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Grazing Whiptail"))
+            addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Ancient Brontodon"))
         }
     }
 }

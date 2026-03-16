@@ -24,7 +24,7 @@ class CastNegativeAuraOnOpponentCreatureTest(var initService: InitTestService) :
     fun castNegativeAuraOnOpponentCreature() {
         // When cast an enchantment aura on a creature with toughness higher than 2
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
-            .getCard(cards!!.get("Swamp"), 0).tap()
+            .getCard(cards.get("Swamp"), 0).tap()
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Dead Weight")).select()
         browser.player1().getStatusHelper().hasMessage("Select targets for Dead Weight.")
         browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
@@ -61,7 +61,7 @@ class CastNegativeAuraOnOpponentCreatureTest(var initService: InitTestService) :
         browser.player1().getGraveyardHelper(PlayerType.OPPONENT).contains(cards.get("Nest Robber"))
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Dead Weight"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Dead Weight"))

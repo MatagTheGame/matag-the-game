@@ -23,7 +23,7 @@ class CreatureEntersTheBattlefieldReturnTargetToHandTest(var initService: InitTe
     fun creatureEntersTheBattlefieldReturnTargetToHand() {
         // When Exclusion Mage
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
-            .getCard(cards!!.get("Island"), 0).tap()
+            .getCard(cards.get("Island"), 0).tap()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Island"), 1).tap()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
@@ -76,7 +76,7 @@ class CreatureEntersTheBattlefieldReturnTargetToHandTest(var initService: InitTe
             .contains(cards.get("Banehound"))
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Exclusion Mage"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Exclusion Mage"))

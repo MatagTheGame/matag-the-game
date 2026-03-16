@@ -13,7 +13,6 @@ import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
 import org.springframework.context.annotation.Import
-import org.springframework.stereotype.Component
 
 @Import(ActivatedAbilityOnCreatureTest.InitTestServiceForTest::class)
 class ActivatedAbilityOnCreatureTest(var initService: InitTestService) : AbstractApplicationTest() {
@@ -106,8 +105,7 @@ class ActivatedAbilityOnCreatureTest(var initService: InitTestService) : Abstrac
             .getCard(cards.get("Jousting Dummy"), 0).hasPowerAndToughness("3/1")
     }
 
-    @Component
-    open class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Jousting Dummy"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Jousting Dummy"))

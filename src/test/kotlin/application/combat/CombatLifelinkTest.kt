@@ -24,24 +24,24 @@ class CombatLifelinkTest(var initService: InitTestService) : AbstractApplication
     @Test
     fun combatLifelink() {
         // When going to combat
-        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(
             DeclareAttackersPhase.DA,
             PlayerType.PLAYER
         )
 
         // When attacking
-        browser!!.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
-            .getFirstCard(cards!!.get("Charity Extractor")).declareAsAttacker()
-        browser!!.player1().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.PLAYER)
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
+            .getFirstCard(cards.get("Charity Extractor")).declareAsAttacker()
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.PLAYER)
 
         // Then
-        browser!!.player1().getPlayerInfoHelper(PlayerType.OPPONENT).toHaveLife(19)
-        browser!!.player1().getPlayerInfoHelper(PlayerType.PLAYER).toHaveLife(21)
+        browser.player1().getPlayerInfoHelper(PlayerType.OPPONENT).toHaveLife(19)
+        browser.player1().getPlayerInfoHelper(PlayerType.PLAYER).toHaveLife(21)
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        public override fun initGameStatus(gameStatus: GameStatus) {
-            addCardToCurrentPlayerBattlefield(gameStatus, cards!!.get("Charity Extractor"))
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+        override fun initGameStatus(gameStatus: GameStatus) {
+            addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Charity Extractor"))
         }
     }
 }

@@ -24,7 +24,7 @@ class CastEquipmentDestroyCreatureTest(var initService: InitTestService) : Abstr
     fun castEquipmentDestroyCreature() {
         // When cast an artifact equipment
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
-            .getCard(cards!!.get("Plains"), 0).tap()
+            .getCard(cards.get("Plains"), 0).tap()
         browser.player1().getHandHelper(PlayerType.PLAYER).getFirstCard(cards.get("Short Sword")).click()
 
         // Equipment goes on the stack
@@ -82,7 +82,7 @@ class CastEquipmentDestroyCreatureTest(var initService: InitTestService) : Abstr
             .contains(cards.get("Short Sword"))
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Prowling Caracal"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Legion's Judgment"))

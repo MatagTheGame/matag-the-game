@@ -34,7 +34,7 @@ class CastCreatureWithFlashGivingAbilitiesToOtherCreatures(var initService: Init
 
         // Attack with Ardenvale Paladin
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
-            .getFirstCard(cards!!.get("Ardenvale Paladin")).declareAsAttacker()
+            .getFirstCard(cards.get("Ardenvale Paladin")).declareAsAttacker()
         browser.player1().getActionHelper().clickContinueAndExpectPhase(
             DeclareAttackersPhase.DA,
             PlayerType.PLAYER
@@ -73,7 +73,7 @@ class CastCreatureWithFlashGivingAbilitiesToOtherCreatures(var initService: Init
         browser.player1().getPlayerInfoHelper(PlayerType.PLAYER).toHaveLife(22)
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Blacklance Paragon"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"))

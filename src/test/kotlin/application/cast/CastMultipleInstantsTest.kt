@@ -24,7 +24,7 @@ class CastMultipleInstantsTest(var initService: InitTestService) : AbstractAppli
     fun castInstantPoweringCreatureDuringCombat() {
         // When player 1 try to deal 5 damage to a creature player 2 owns
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
-            .getCard(cards!!.get("Mountain"), 0).tap()
+            .getCard(cards.get("Mountain"), 0).tap()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
             .getCard(cards.get("Mountain"), 1).tap()
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.FIRST_LINE)
@@ -63,7 +63,7 @@ class CastMultipleInstantsTest(var initService: InitTestService) : AbstractAppli
         browser.player2().getGraveyardHelper(PlayerType.OPPONENT).contains(cards.get("Engulfing Eruption"))
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Engulfing Eruption"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"))
