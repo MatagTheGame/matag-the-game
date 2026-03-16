@@ -3,25 +3,19 @@ package application.cleanup
 import application.AbstractApplicationTest
 import application.InitTestService
 import com.matag.cards.Cards
-import com.matag.game.adminclient.AdminClient
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.status.GameStatus
-import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.ending.CleanupPhase
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.game.turn.phases.main2.Main2Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Test
+import org.springframework.context.annotation.Import
 
 @Tag("RegressionTests")
-class DiscardACardAtEndOfTurnIfMoreThanSevenTest(
-    adminClient: AdminClient,
-    gameStatusRepository: GameStatusRepository,
-    cardInstanceFactory: CardInstanceFactory,
-    cards: Cards,
-    private var initService: InitTestService,
-) : AbstractApplicationTest(adminClient, gameStatusRepository, cardInstanceFactory, cards) {
+@Import(DiscardACardAtEndOfTurnIfMoreThanSevenTest.InitTestServiceForTest::class)
+class DiscardACardAtEndOfTurnIfMoreThanSevenTest(var initService: InitTestService) : AbstractApplicationTest() {
 
     override fun setupGame() {
         initService = InitTestServiceForTest(cardInstanceFactory, cards)

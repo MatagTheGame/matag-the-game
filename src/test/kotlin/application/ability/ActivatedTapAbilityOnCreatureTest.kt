@@ -4,21 +4,16 @@ import application.AbstractApplicationTest
 import application.InitTestService
 import application.browser.BattlefieldHelper
 import com.matag.cards.Cards
-import com.matag.game.adminclient.AdminClient
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.status.GameStatus
-import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
+import org.springframework.context.annotation.Import
+import org.springframework.stereotype.Component
 
-class ActivatedTapAbilityOnCreatureTest(
-    adminClient: AdminClient,
-    gameStatusRepository: GameStatusRepository,
-    cardInstanceFactory: CardInstanceFactory,
-    cards: Cards,
-    private var initService: InitTestService,
-) : AbstractApplicationTest(adminClient, gameStatusRepository, cardInstanceFactory, cards) {
+@Import(ActivatedTapAbilityOnCreatureTest.InitTestServiceForTest::class)
+class ActivatedTapAbilityOnCreatureTest(var initService: InitTestService) : AbstractApplicationTest() {
 
     override fun setupGame() {
         initService = InitTestServiceForTest(cardInstanceFactory, cards)
@@ -63,7 +58,7 @@ class ActivatedTapAbilityOnCreatureTest(
 
         // Ability goes on the stack
         browser.player2().getStackHelper()
-            .containsAbility("Player1's Checkpoint Officer (" + checkpointOfficerId + "): That targets get tapped.")
+            .containsAbility("Player1's Checkpoint Officer ($checkpointOfficerId): That targets get tapped.")
         browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
 
         // Both creatures are tapped
@@ -73,7 +68,8 @@ class ActivatedTapAbilityOnCreatureTest(
             .getCard(cards.get("Checkpoint Officer"), 1).isTapped()
     }
 
-    internal class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
+    @Component
+    open class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
         override fun initGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Checkpoint Officer"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Checkpoint Officer"))

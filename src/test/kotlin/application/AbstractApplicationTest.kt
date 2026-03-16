@@ -25,6 +25,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.mock
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.context.annotation.Bean
@@ -38,14 +39,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @SpringBootTest(classes = [MatagGameApplication::class], webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(InitGameTestConfiguration::class)
 @ActiveProfiles("test")
-abstract class AbstractApplicationTest(
-    protected val adminClient: AdminClient,
-    protected val gameStatusRepository: GameStatusRepository,
-    protected val cardInstanceFactory: CardInstanceFactory,
-    protected val cards: Cards
-) {
-    @LocalServerPort
-    private val port = 0
+abstract class AbstractApplicationTest {
+    @LocalServerPort private val port = 0
+
+    @Autowired protected lateinit var adminClient: AdminClient
+    @Autowired protected lateinit var gameStatusRepository: GameStatusRepository
+    @Autowired protected lateinit var cardInstanceFactory: CardInstanceFactory
+    @Autowired protected lateinit var cards: Cards
 
     protected lateinit var browser: MatagBrowser
 

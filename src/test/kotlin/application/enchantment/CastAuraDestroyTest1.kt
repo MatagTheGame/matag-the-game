@@ -4,22 +4,16 @@ import application.AbstractApplicationTest
 import application.InitTestService
 import application.browser.BattlefieldHelper
 import com.matag.cards.Cards
-import com.matag.game.adminclient.AdminClient
 import com.matag.game.cardinstance.CardInstanceFactory
 import com.matag.game.status.GameStatus
-import com.matag.game.status.GameStatusRepository
 import com.matag.game.turn.phases.combat.BeginCombatPhase
 import com.matag.game.turn.phases.main1.Main1Phase
 import com.matag.player.PlayerType
 import org.junit.jupiter.api.Test
+import org.springframework.context.annotation.Import
 
-class CastAuraDestroyTest(
-    adminClient: AdminClient,
-    gameStatusRepository: GameStatusRepository,
-    cardInstanceFactory: CardInstanceFactory,
-    cards: Cards,
-    private var initService: InitTestService,
-) : AbstractApplicationTest(adminClient, gameStatusRepository, cardInstanceFactory, cards) {
+@Import(CastAuraDestroyTest.InitTestServiceForTest::class)
+class CastAuraDestroyTest(var initService: InitTestService) : AbstractApplicationTest() {
 
     override fun setupGame() {
         initService = InitTestServiceForTest(cardInstanceFactory, cards)

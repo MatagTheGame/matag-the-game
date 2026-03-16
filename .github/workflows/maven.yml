@@ -61,6 +61,9 @@ jobs:
   publish:
     needs: [ tests, regression-tests ]
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
     steps:
       - uses: actions/checkout@v5
       - name: Set up JDK 25
@@ -68,9 +71,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 25
-      - name: Create settings.xml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "<settings><servers><server><id>github-matag-cards</id><username>MatagTheGame</username><password>${GITHUB_TOKEN}</password></server><server><id>github-matag-the-game</id><username>MatagTheGame</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > ~/.m2/settings.xml
-      - name: Publish
-        run: mvn -DskipTests deploy
+      - name: Build and Push to GHCR
+        run: |
+          mvn compile com.google.cloud.tools:jib-maven-plugin:build \
+            -Dimage=ghcr.io/${{ github.repository_owner }}/nio-app:latest \
+            -Djib.to.auth.username=${{ github.actor }} \
+            -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }}
