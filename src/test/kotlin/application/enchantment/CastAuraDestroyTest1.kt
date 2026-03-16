@@ -99,7 +99,7 @@ class CastAuraDestroyTest(var initService: InitTestService) : AbstractApplicatio
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Concordia Pegasus"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Arcane Flight"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Arcane Flight"))

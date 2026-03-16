@@ -11,19 +11,27 @@ abstract class InitTestService(
     protected val cards: Cards
 ) : InitService {
 
-    protected fun addCardToCurrentPlayerLibrary(gameStatus: GameStatus, card: Card?) {
+    abstract fun initTestGameStatus(gameStatus: GameStatus)
+
+    override fun initGameStatus(gameStatus: GameStatus) {
+        gameStatus.currentPlayer.hand.extractAllCards()
+        gameStatus.nonCurrentPlayer.hand.extractAllCards()
+        initTestGameStatus(gameStatus)
+    }
+
+    protected fun addCardToCurrentPlayerLibrary(gameStatus: GameStatus, card: Card) {
         gameStatus.currentPlayer.library.addCard(
             cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, gameStatus.currentPlayer.name)
         )
     }
 
-    protected fun addCardToCurrentPlayerHand(gameStatus: GameStatus, card: Card?) {
+    protected fun addCardToCurrentPlayerHand(gameStatus: GameStatus, card: Card) {
         gameStatus.currentPlayer.hand.addCard(
             cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, gameStatus.currentPlayer.name)
         )
     }
 
-    protected fun addCardToCurrentPlayerBattlefield(gameStatus: GameStatus, card: Card?) {
+    protected fun addCardToCurrentPlayerBattlefield(gameStatus: GameStatus, card: Card) {
         val owner = gameStatus.currentPlayer.name
         val controller = gameStatus.currentPlayer.name
         gameStatus.currentPlayer.battlefield.addCard(
@@ -31,25 +39,25 @@ abstract class InitTestService(
         )
     }
 
-    protected fun addCardToCurrentPlayerGraveyard(gameStatus: GameStatus, card: Card?) {
+    protected fun addCardToCurrentPlayerGraveyard(gameStatus: GameStatus, card: Card) {
         gameStatus.currentPlayer.graveyard.addCard(
             cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, gameStatus.currentPlayer.name)
         )
     }
 
-    protected fun addCardToNonCurrentPlayerLibrary(gameStatus: GameStatus, card: Card?) {
+    protected fun addCardToNonCurrentPlayerLibrary(gameStatus: GameStatus, card: Card) {
         gameStatus.nonCurrentPlayer.library.addCard(
             cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, gameStatus.nonCurrentPlayer.name)
         )
     }
 
-    protected fun addCardToNonCurrentPlayerHand(gameStatus: GameStatus, card: Card?) {
+    protected fun addCardToNonCurrentPlayerHand(gameStatus: GameStatus, card: Card) {
         gameStatus.nonCurrentPlayer.hand.addCard(
             cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, gameStatus.nonCurrentPlayer.name)
         )
     }
 
-    protected fun addCardToNonCurrentPlayerBattlefield(gameStatus: GameStatus, card: Card?) {
+    protected fun addCardToNonCurrentPlayerBattlefield(gameStatus: GameStatus, card: Card) {
         val owner = gameStatus.nonCurrentPlayer.name
         val controller = gameStatus.nonCurrentPlayer.name
         gameStatus.nonCurrentPlayer.battlefield.addCard(
@@ -57,7 +65,7 @@ abstract class InitTestService(
         )
     }
 
-    protected fun addCardToNonCurrentPlayerGraveyard(gameStatus: GameStatus, card: Card?) {
+    protected fun addCardToNonCurrentPlayerGraveyard(gameStatus: GameStatus, card: Card) {
         gameStatus.nonCurrentPlayer.graveyard.addCard(
             cardInstanceFactory.create(gameStatus, gameStatus.nextCardId(), card, gameStatus.nonCurrentPlayer.name)
         )

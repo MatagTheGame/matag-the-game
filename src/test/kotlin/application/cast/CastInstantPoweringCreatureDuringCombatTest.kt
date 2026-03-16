@@ -98,7 +98,7 @@ class CastInstantPoweringCreatureDuringCombatTest(var initService: InitTestServi
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Bastion Enforcer"))
 
             addCardToNonCurrentPlayerHand(gameStatus, cards.get("Dark Remedy"))

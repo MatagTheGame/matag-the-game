@@ -152,7 +152,7 @@ class CastCreatureTest(var initService: InitTestService) : AbstractApplicationTe
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Headwater Sentries"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"))

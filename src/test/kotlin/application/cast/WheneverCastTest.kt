@@ -53,7 +53,7 @@ class WheneverCastTest(var initService: InitTestService) : AbstractApplicationTe
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Adeliz, the Cinder Wind"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"))

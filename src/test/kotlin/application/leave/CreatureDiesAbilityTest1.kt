@@ -58,7 +58,7 @@ class CreatureDiesAbilityTest(var initService: InitTestService) : AbstractApplic
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Goblin Assault Team"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Goblin Assault Team"))
 

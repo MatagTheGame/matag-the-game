@@ -77,7 +77,7 @@ class CreatureEntersTheBattlefieldReturnTargetToHandTest(var initService: InitTe
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Exclusion Mage"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Exclusion Mage"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Island"))

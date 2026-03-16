@@ -40,7 +40,7 @@ class CastCreatureAdamantTest(var initService: InitTestService) : AbstractApplic
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Ardenvale Paladin"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"))

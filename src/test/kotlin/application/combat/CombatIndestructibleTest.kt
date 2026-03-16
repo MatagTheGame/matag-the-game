@@ -114,7 +114,7 @@ class CombatIndestructibleTest(var initService: InitTestService) : AbstractAppli
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"))

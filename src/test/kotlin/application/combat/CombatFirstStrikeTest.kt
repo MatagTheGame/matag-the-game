@@ -84,7 +84,7 @@ class CombatFirstStrikeTest(var initService: InitTestService) : AbstractApplicat
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Youthful Knight"))

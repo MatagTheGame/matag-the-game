@@ -184,7 +184,7 @@ class BasicCombatTest(var initService: InitTestService) : AbstractApplicationTes
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             // Single block both survive
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Headwater Sentries")) // 2/5
             addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Headwater Sentries")) // 2/5

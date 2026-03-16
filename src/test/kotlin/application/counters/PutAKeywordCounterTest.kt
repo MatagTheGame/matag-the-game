@@ -90,7 +90,7 @@ class PutAKeywordCounterTest(var initService: InitTestService) : AbstractApplica
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             gameStatus.player1?.life = 1
             gameStatus.player2?.life = 1
 

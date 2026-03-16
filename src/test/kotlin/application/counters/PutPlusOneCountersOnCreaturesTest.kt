@@ -81,7 +81,7 @@ class PutPlusOneCountersOnCreaturesTest(var initService: InitTestService) : Abst
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Gird for Battle"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Gird for Battle"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"))

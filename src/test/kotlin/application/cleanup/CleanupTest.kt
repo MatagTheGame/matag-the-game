@@ -65,7 +65,7 @@ class CleanupTest(var initService: InitTestService) : AbstractApplicationTest() 
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             // Current Player
             addCardToCurrentPlayerLibrary(gameStatus, cards.get("Island"))
 

@@ -119,7 +119,7 @@ class CastCreatureAlternativeCostTest(var initService: InitTestService) : Abstra
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Headwater Sentries"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Azorius Guildgate"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Druid of the Cowl"))

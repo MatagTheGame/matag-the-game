@@ -44,7 +44,7 @@ class CreatureEntersTheBattlefieldDoubleAbilityTest(var initService: InitTestSer
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Dusk Legion Zealot"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"))

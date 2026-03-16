@@ -106,7 +106,7 @@ class ActivatedAbilityOnCreatureTest(var initService: InitTestService) : Abstrac
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Jousting Dummy"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Jousting Dummy"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Plains"))

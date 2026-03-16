@@ -65,7 +65,7 @@ class CombatUntappingBlockerTest(var initService: InitTestService) : AbstractApp
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Headwater Sentries"))
 
             addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Forest"))

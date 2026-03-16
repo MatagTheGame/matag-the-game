@@ -74,7 +74,7 @@ class CastCreatureWithFlashGivingAbilitiesToOtherCreatures(var initService: Init
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Blacklance Paragon"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"))

@@ -64,7 +64,7 @@ class CastMultipleInstantsTest(var initService: InitTestService) : AbstractAppli
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Engulfing Eruption"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Mountain"))

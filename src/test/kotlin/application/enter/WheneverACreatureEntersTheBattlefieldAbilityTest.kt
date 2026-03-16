@@ -99,7 +99,7 @@ class WheneverACreatureEntersTheBattlefieldAbilityTest(var initService: InitTest
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Ajani's Welcome"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Ajani's Welcome"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Daybreak Chaplain"))

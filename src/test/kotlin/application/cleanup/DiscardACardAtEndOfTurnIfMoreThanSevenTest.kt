@@ -48,7 +48,7 @@ class DiscardACardAtEndOfTurnIfMoreThanSevenTest(var initService: InitTestServic
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             // Current Player
             addCardToCurrentPlayerHand(gameStatus, cards.get("Island"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Island"))

@@ -83,7 +83,7 @@ class CastEquipmentDestroyCreatureTest(var initService: InitTestService) : Abstr
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Prowling Caracal"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Legion's Judgment"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Short Sword"))

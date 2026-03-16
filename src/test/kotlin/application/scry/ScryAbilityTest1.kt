@@ -50,7 +50,7 @@ class ScryAbilityTest(var initService: InitTestService) : AbstractApplicationTes
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToNonCurrentPlayerBattlefield(gameStatus, cards.get("Feral Maaka"))
             addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Mountain"))
             addCardToNonCurrentPlayerLibrary(gameStatus, cards.get("Mountain"))

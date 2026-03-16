@@ -62,7 +62,7 @@ class CastNegativeAuraOnOpponentCreatureTest(var initService: InitTestService) :
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {
-        override fun initGameStatus(gameStatus: GameStatus) {
+        override fun initTestGameStatus(gameStatus: GameStatus) {
             addCardToCurrentPlayerHand(gameStatus, cards.get("Dead Weight"))
             addCardToCurrentPlayerHand(gameStatus, cards.get("Dead Weight"))
             addCardToCurrentPlayerBattlefield(gameStatus, cards.get("Swamp"))
