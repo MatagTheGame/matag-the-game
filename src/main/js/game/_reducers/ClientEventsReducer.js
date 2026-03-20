@@ -49,7 +49,7 @@ export default class ClientEventsReducer {
           }
         }
 
-        if (Phase.isMainPhase(newState.turn.currentPhase) || cardInstance.instantSpeed) {
+        if (Phase.isMainPhase(newState.turn.currentPhase) || cardInstance.isInstantSpeed) {
           if (CardUtils.isOfType(cardInstance, 'LAND')) {
             stompClient.sendEvent('turn', {action: 'PLAY_LAND', cardIds: [cardId]})
 

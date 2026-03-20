@@ -70,9 +70,9 @@ class MagicInstancePermanentSelectorService {
 
         cardInstance?.let {
             if (magicInstanceSelector.controllerType == PlayerType.PLAYER) {
-                cards = cards.controlledBy(cardInstance.controller)
+                cards = cards.controlledBy(cardInstance.controller!!)
             } else if (magicInstanceSelector.controllerType == PlayerType.OPPONENT) {
-                cards = cards.controlledBy(gameStatus.getOtherPlayer(cardInstance.controller).name)
+                cards = cards.controlledBy(gameStatus.getOtherPlayer(cardInstance.controller).name!!)
             }
 
             if (magicInstanceSelector.others) {
@@ -97,9 +97,9 @@ class MagicInstancePermanentSelectorService {
         magicInstanceSelector: MagicInstanceSelector
     ): CardInstanceSearch {
         val cards = select(gameStatus, cardInstance, magicInstanceSelector).cards
-        val playerCards = CardInstanceSearch(cards).controlledBy(cardInstance.controller)
+        val playerCards = CardInstanceSearch(cards).controlledBy(cardInstance.controller!!)
         val opponentCardsWithoutHexproof =
-            CardInstanceSearch(cards).notControlledBy(cardInstance.controller).withoutFixedAbility(AbilityType.HEXPROOF)
+            CardInstanceSearch(cards).notControlledBy(cardInstance.controller!!).withoutFixedAbility(AbilityType.HEXPROOF)
         return playerCards.concat(opponentCardsWithoutHexproof)
     }
 }

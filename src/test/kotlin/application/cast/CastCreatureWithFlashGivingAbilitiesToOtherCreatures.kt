@@ -27,10 +27,7 @@ class CastCreatureWithFlashGivingAbilitiesToOtherCreatures(var initService: Init
     fun testCreatureWithFlashGivingAbilitiesToOtherCreature() {
         // Going to combat
         browser.player1().getActionHelper().clickContinueAndExpectPhase(BeginCombatPhase.BC, PlayerType.PLAYER)
-        browser.player1().getActionHelper().clickContinueAndExpectPhase(
-            DeclareAttackersPhase.DA,
-            PlayerType.PLAYER
-        )
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(DeclareAttackersPhase.DA, PlayerType.PLAYER)
 
         // Attack with Ardenvale Paladin
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)

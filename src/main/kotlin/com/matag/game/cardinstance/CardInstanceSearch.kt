@@ -23,8 +23,8 @@ class CardInstanceSearch(
     fun notWithId(cardId: Int): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.id != cardId })
 
-    fun withName(name: String?): CardInstanceSearch =
-        CardInstanceSearch(cards.filter { it.card!!.name == name })
+    fun withName(name: String): CardInstanceSearch =
+        CardInstanceSearch(cards.filter { it.card?.name == name })
 
     fun ofType(type: Type): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.isOfType(type) })
@@ -63,7 +63,7 @@ class CardInstanceSearch(
         CardInstanceSearch(cards.filter { it.isSummoningSickness })
 
     fun withoutSummoningSickness(): CardInstanceSearch =
-        CardInstanceSearch(cards.filter { it.isSummoningSickness })
+        CardInstanceSearch(cards.filter { !it.isSummoningSickness })
 
     fun attacking(): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.modifiers.isAttacking })
@@ -86,10 +86,10 @@ class CardInstanceSearch(
     fun ofPowerToughnessConstraint(powerToughnessConstraint: PowerToughnessConstraint): CardInstanceSearch =
         CardInstanceSearch(cards.filter { PowerToughnessConstraintUtils.check(powerToughnessConstraint, it) })
 
-    fun controlledBy(playerName: String?): CardInstanceSearch =
+    fun controlledBy(playerName: String): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.controller == playerName })
 
-    fun notControlledBy(playerName: String?): CardInstanceSearch =
+    fun notControlledBy(playerName: String): CardInstanceSearch =
         CardInstanceSearch(cards.filter { it.controller != playerName })
 
     fun withFixedAbility(abilityType: AbilityType): CardInstanceSearch =
@@ -106,8 +106,8 @@ class CardInstanceSearch(
 
     fun onTurnStatusType(turnStatusType: TurnStatusType, gameStatus: GameStatus): CardInstanceSearch =
         when (turnStatusType) {
-            TurnStatusType.YOUR_TURN -> controlledBy(gameStatus.currentPlayer.name)
-            TurnStatusType.OPPONENT_TURN -> controlledBy(gameStatus.nonCurrentPlayer?.name)
+            TurnStatusType.YOUR_TURN -> controlledBy(gameStatus.currentPlayer.name!!)
+            TurnStatusType.OPPONENT_TURN -> controlledBy(gameStatus.nonCurrentPlayer.name!!)
         }
 
     fun attachedToId(attachedToId: Int): CardInstanceSearch =
