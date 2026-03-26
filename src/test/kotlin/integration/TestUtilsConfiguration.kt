@@ -21,5 +21,5 @@ open class TestUtilsConfiguration {
     }
 
     @Bean
-    open fun noInitSevice() = NoInitService()
+    open fun noInitService() = NoInitService()
 }
