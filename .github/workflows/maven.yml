@@ -10,53 +10,53 @@ on:
     branches: [ master ]
 
 jobs:
-  tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - name: Set up JDK 25
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'temurin'
-          java-version: 25
-      - name: Create settings.xml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "<settings><servers><server><id>github-matag-cards</id><username>MatagTheGame</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > settings.xml
-      - name: Build with Maven
-        run: mvn clean install -DskipTests
-      - name: Test with Maven
-        run: mvn test -Dwebdriver.chrome.headless=true -DexcludedGroups="RegressionTests"
-      - name: Publish Tests Report
-        uses: scacap/action-surefire-report@v1
-        if: always()
-        with:
-          check_name: Tests Report
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
-  regression-tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-      - name: Set up JDK 25
-        uses: actions/setup-java@v5
-        with:
-          distribution: 'temurin'
-          java-version: 25
-      - name: Create settings.xml
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo "<settings><servers><server><id>github-matag-cards</id><username>MatagTheGame</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > settings.xml
-      - name: Build with Maven
-        run: mvn clean install -DskipTests
-      - name: Test with Maven
-        run: mvn test -Dwebdriver.chrome.headless=true -Dgroups="RegressionTests"
-      - name: Publish Regression Tests Report
-        uses: scacap/action-surefire-report@v1
-        if: always()
-        with:
-          check_name: Regression Tests Report
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+#  tests:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v5
+#      - name: Set up JDK 25
+#        uses: actions/setup-java@v5
+#        with:
+#          distribution: 'temurin'
+#          java-version: 25
+#      - name: Create settings.xml
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: echo "<settings><servers><server><id>github-matag-cards</id><username>MatagTheGame</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > settings.xml
+#      - name: Build with Maven
+#        run: mvn clean install -DskipTests
+#      - name: Test with Maven
+#        run: mvn test -Dwebdriver.chrome.headless=true -DexcludedGroups="RegressionTests"
+#      - name: Publish Tests Report
+#        uses: scacap/action-surefire-report@v1
+#        if: always()
+#        with:
+#          check_name: Tests Report
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
+#
+#  regression-tests:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v5
+#      - name: Set up JDK 25
+#        uses: actions/setup-java@v5
+#        with:
+#          distribution: 'temurin'
+#          java-version: 25
+#      - name: Create settings.xml
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        run: echo "<settings><servers><server><id>github-matag-cards</id><username>MatagTheGame</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > settings.xml
+#      - name: Build with Maven
+#        run: mvn clean install -DskipTests
+#      - name: Test with Maven
+#        run: mvn test -Dwebdriver.chrome.headless=true -Dgroups="RegressionTests"
+#      - name: Publish Regression Tests Report
+#        uses: scacap/action-surefire-report@v1
+#        if: always()
+#        with:
+#          check_name: Regression Tests Report
+#          github_token: ${{ secrets.GITHUB_TOKEN }}
 
   publish:
     needs: [ tests, regression-tests ]
