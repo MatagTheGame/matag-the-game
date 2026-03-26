@@ -179,7 +179,7 @@ export default class CardUtils {
       return `${attackingCardName} has defender and cannot attack.`
     }
 
-    return true
+    return attackingCardName
   }
 
   static canBlock(blockingCard, blockedCard) {

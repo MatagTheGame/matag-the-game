@@ -7,9 +7,9 @@ function card(builder = {}) {
       name: 'CardName',
       types: builder.types ? builder.types : ['CREATURE']
     },
-    summoningSickness : builder.summoningSickness,
+    isSummoningSickness : builder.isSummoningSickness,
     modifiers: {
-      tapped: builder.tapped
+      isTapped: builder.isTapped
     },
     abilities: builder.abilities ? builder.abilities : []
   }
@@ -21,7 +21,7 @@ describe('canAttack', () => {
     const result = CardUtils.canAttack(card())
 
     // Then
-    expect(result).toBe(true)
+    expect(result).toBe('"1 - CardName"')
   })
 
   test('other types cannot attack', () => {
@@ -37,7 +37,7 @@ describe('canAttack', () => {
 
   test('creatures with summoning sickness cannot attack', () => {
     // Given
-    const cardInstance = card({summoningSickness: true})
+    const cardInstance = card({isSummoningSickness: true})
 
     // When
     const result = CardUtils.canAttack(cardInstance)
@@ -48,7 +48,7 @@ describe('canAttack', () => {
 
   test('tapped creature cannot attack', () => {
     // Given
-    const cardInstance = card({tapped: true})
+    const cardInstance = card({isTapped: true})
 
     // When
     const result = CardUtils.canAttack(cardInstance)
