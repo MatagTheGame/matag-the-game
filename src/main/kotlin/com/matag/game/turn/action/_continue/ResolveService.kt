@@ -46,12 +46,12 @@ class ResolveService(
             } else {
                 val controllerName = stackItemToResolve.controller
                 val otherPlayerName = gameStatus.getOtherPlayer(controllerName).name
-                val isNonTriggeredAbilities = stackItemToResolve.triggeredAbilities.any { it.trigger?.type != TriggerType.TRIGGERED_ABILITY }
 
-                if (isNonTriggeredAbilities) {
+                if (stackItemToResolve.triggeredAbilities.any { it.trigger?.type != TriggerType.TRIGGERED_ABILITY }) {
                     stackItemToResolve.acknowledgedBy(controllerName!!)
+                }
 
-                } else if (gameStatus.activePlayer.name == controllerName && !stackItemToResolve.acknowledgedBy.contains(controllerName)) {
+                if (gameStatus.activePlayer.name == controllerName && !stackItemToResolve.acknowledgedBy.contains(controllerName)) {
                     if (targetCheckerService.checkIfRequiresTarget(stackItemToResolve)) {
                         if (targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus)) {
                             targetCheckerService.checkSpellOrAbilityTargetRequisites(
