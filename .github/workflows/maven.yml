@@ -78,6 +78,6 @@ jobs:
       - name: Build and Push to GHCR
         run: |
           mvn compile com.google.cloud.tools:jib-maven-plugin:build \
-            -Dimage=ghcr.io/${{ github.repository_owner }}/nio-app:latest \
+            -Dimage=ghcr.io/matagthegame/matag-the-game:latest \
             -Djib.to.auth.username=${{ github.actor }} \
             -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }}
