@@ -71,6 +71,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 25
+      - name: Create settings.xml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: echo "<settings><servers><server><id>github-matag-cards</id><username>MatagTheGame</username><password>${GITHUB_TOKEN}</password></server></servers></settings>" > settings.xml
       - name: Build and Push to GHCR
         run: |
           mvn compile com.google.cloud.tools:jib-maven-plugin:build \
