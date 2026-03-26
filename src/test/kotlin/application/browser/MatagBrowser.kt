@@ -127,7 +127,7 @@ class MatagBrowser(private val port: Int) {
     }
 
     fun wait(condition: ExpectedCondition<*>?) {
-        WebDriverWait(webDriver, Duration.ofSeconds(10L), Duration.ofMillis(250L)).until(condition)
+        WebDriverWait(webDriver, Duration.ofMillis(1500L), Duration.ofMillis(250L)).until(condition)
     }
 
     fun dumpContent() {

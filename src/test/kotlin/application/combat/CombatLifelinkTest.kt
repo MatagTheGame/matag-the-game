@@ -24,10 +24,7 @@ class CombatLifelinkTest(var initService: InitTestService) : AbstractApplication
     @Test
     fun combatLifelink() {
         // When going to combat
-        browser.player1().getActionHelper().clickContinueAndExpectPhase(
-            DeclareAttackersPhase.DA,
-            PlayerType.PLAYER
-        )
+        browser.player1().getActionHelper().clickContinueAndExpectPhase(DeclareAttackersPhase.DA, PlayerType.PLAYER)
 
         // When attacking
         browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
