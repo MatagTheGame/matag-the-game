@@ -73,7 +73,7 @@ class CastAuraDestroyTest(var initService: InitTestService) : AbstractApplicatio
             cards.get("Arcane Flight"),
             cards.get("Arcane Flight")
         )
-        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE).isEmpty
+        browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE).isEmpty()
     }
 
     private fun castArcaneFlight(indexOfLandToTap: Int, powerAndToughness: String) {

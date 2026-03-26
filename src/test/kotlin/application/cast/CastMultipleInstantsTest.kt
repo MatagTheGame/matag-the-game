@@ -59,7 +59,7 @@ class CastMultipleInstantsTest(var initService: InitTestService) : AbstractAppli
         browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .getFirstCard(cards.get("Douser of Lights")).hasPowerAndToughness("5/8")
         browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
-        browser.player2().getStackHelper().isEmpty
+        browser.player2().getStackHelper().isEmpty()
         browser.player2().getGraveyardHelper(PlayerType.OPPONENT).contains(cards.get("Engulfing Eruption"))
     }
 

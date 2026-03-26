@@ -40,10 +40,7 @@ abstract class AbstractCardContainerHelper internal constructor(val matagBrowser
         })
     }
 
-    val isEmpty: Unit
-        get() {
-            toHaveSize(0)
-        }
+    open fun isEmpty() = toHaveSize(0)
 
     fun toHaveSize(size: Int) {
         matagBrowser.wait(ExpectedCondition {

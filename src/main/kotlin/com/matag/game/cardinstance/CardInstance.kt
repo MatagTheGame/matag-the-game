@@ -216,21 +216,21 @@ class CardInstance(
 
     fun canProduceMana(color: Color): Boolean {
         return getAbilitiesByTriggerType(TriggerType.MANA_ABILITY).stream()
-            .flatMap<String?> { ability: Ability? -> ability!!.parameters.stream() }
-            .anyMatch { parameter: String? -> parameter == color.toString() }
+            .flatMap { it.parameters.stream() }
+            .anyMatch { it == color.toString() }
     }
 
     fun getAbilitiesByTriggerType(triggerType: TriggerType?): List<Ability> {
         return this.abilities.stream()
-            .filter { ability: Ability? -> ability!!.trigger != null }
-            .filter { ability: Ability? -> ability!!.trigger!!.type == triggerType }
+            .filter { it.trigger != null }
+            .filter { it.trigger!!.type == triggerType }
             .collect(Collectors.toList())
     }
 
     fun getAbilitiesByTriggerSubType(triggerSubType: TriggerSubtype): List<Ability?> {
         return this.abilities.stream()
-            .filter { ability: Ability? -> ability!!.trigger != null }
-            .filter { ability: Ability? -> triggerSubType == ability!!.trigger!!.subtype }
+            .filter { it.trigger != null }
+            .filter { triggerSubType == it.trigger!!.subtype }
             .collect(Collectors.toList())
     }
 
@@ -242,7 +242,7 @@ class CardInstance(
 
     fun getFixedAbilitiesByType(abilityType: AbilityType?): List<Ability?> {
         return this.fixedAbilities.stream()
-            .filter { currentAbility: Ability? -> currentAbility!!.abilityType == abilityType }
+            .filter { it.abilityType == abilityType }
             .collect(Collectors.toList())
     }
 
@@ -252,7 +252,7 @@ class CardInstance(
 
     fun hasAnyFixedAbility(abilityTypes: List<AbilityType?>): Boolean {
         return abilityTypes.stream()
-            .anyMatch { abilityType: AbilityType? -> getFixedAbilitiesByType(abilityType).isNotEmpty() }
+            .anyMatch { getFixedAbilitiesByType(it).isNotEmpty() }
     }
 
     fun hasFixedAbilityWithTriggerSubType(triggerSubtype: TriggerSubtype): Boolean {

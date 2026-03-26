@@ -47,8 +47,8 @@ class CounterTargetSpellTest(var initService: InitTestService) : AbstractApplica
         // Both spells are off the stack
         browser.player1().getGraveyardHelper(PlayerType.OPPONENT).contains(cards.get("Cancel"))
         browser.player1().getGraveyardHelper(PlayerType.PLAYER).contains(cards.get("Concordia Pegasus"))
-        browser.player1().getStackHelper().isEmpty
-        browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE).isEmpty
+        browser.player1().getStackHelper().isEmpty()
+        browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE).isEmpty()
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {

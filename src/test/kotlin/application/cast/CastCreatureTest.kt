@@ -115,9 +115,9 @@ class CastCreatureTest(var initService: InitTestService) : AbstractApplicationTe
 
         // And creature is on the stack for both players (hands is empty)
         browser.player1().getStackHelper().containsExactly(cards.get("Headwater Sentries"))
-        browser.player1().getHandHelper(PlayerType.PLAYER).isEmpty
+        browser.player1().getHandHelper(PlayerType.PLAYER).isEmpty()
         browser.player2().getStackHelper().containsExactly(cards.get("Headwater Sentries"))
-        browser.player1().getHandHelper(PlayerType.OPPONENT).isEmpty
+        browser.player1().getHandHelper(PlayerType.OPPONENT).isEmpty()
 
         // And priority is to opponent with corresponding status
         browser.player1().getPhaseHelper().matches(Main1Phase.M1, PlayerType.OPPONENT)
@@ -135,8 +135,8 @@ class CastCreatureTest(var initService: InitTestService) : AbstractApplicationTe
             .contains(cards.get("Headwater Sentries"))
         browser.player2().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
             .contains(cards.get("Headwater Sentries"))
-        browser.player1().getStackHelper().isEmpty
-        browser.player2().getStackHelper().isEmpty
+        browser.player1().getStackHelper().isEmpty()
+        browser.player2().getStackHelper().isEmpty()
 
         // And priority is to player again
         browser.player1().getPhaseHelper().matches(Main1Phase.M1, PlayerType.PLAYER)
@@ -147,8 +147,8 @@ class CastCreatureTest(var initService: InitTestService) : AbstractApplicationTe
         browser.player2().getActionHelper().cannotContinue()
 
         // Hand is now empty
-        browser.player1().getHandHelper(PlayerType.PLAYER).isEmpty
-        browser.player2().getHandHelper(PlayerType.PLAYER).isEmpty
+        browser.player1().getHandHelper(PlayerType.PLAYER).isEmpty()
+        browser.player2().getHandHelper(PlayerType.PLAYER).isEmpty()
     }
 
     class InitTestServiceForTest(cardInstanceFactory: CardInstanceFactory, cards: Cards) : InitTestService(cardInstanceFactory, cards) {

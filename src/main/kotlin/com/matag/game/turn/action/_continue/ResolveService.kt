@@ -42,21 +42,18 @@ class ResolveService(
             if (stackItemToResolve.triggeredAbilities.isEmpty()) {
                 gameStatus.stack.pop()
                 resolveCardInstanceFromStack(gameStatus, stackItemToResolve)
+
             } else {
                 val controllerName = stackItemToResolve.controller
                 val otherPlayerName = gameStatus.getOtherPlayer(controllerName).name
+                val isNonTriggeredAbilities = stackItemToResolve.triggeredAbilities.any { it.trigger?.type != TriggerType.TRIGGERED_ABILITY }
 
-                stackItemToResolve.triggeredAbilities.stream()
-                    .filter({ triggeredAbility -> triggeredAbility.trigger?.type != TriggerType.TRIGGERED_ABILITY })
-                    .forEach({ t -> stackItemToResolve.acknowledgedBy(controllerName!!) })
+                if (isNonTriggeredAbilities) {
+                    stackItemToResolve.acknowledgedBy(controllerName!!)
 
-                if (gameStatus.activePlayer.name == controllerName && !stackItemToResolve.acknowledgedBy.contains(controllerName)) {
+                } else if (gameStatus.activePlayer.name == controllerName && !stackItemToResolve.acknowledgedBy.contains(controllerName)) {
                     if (targetCheckerService.checkIfRequiresTarget(stackItemToResolve)) {
-                        if (targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(
-                                stackItemToResolve,
-                                gameStatus
-                            )
-                        ) {
+                        if (targetCheckerService.checkIfValidTargetsArePresentForSpellOrAbilityTargetRequisites(stackItemToResolve, gameStatus)) {
                             targetCheckerService.checkSpellOrAbilityTargetRequisites(
                                 stackItemToResolve,
                                 gameStatus,
@@ -66,8 +63,9 @@ class ResolveService(
                         }
                     }
                     stackItemToResolve.acknowledgedBy(controllerName!!)
+
                 } else if (!stackItemToResolve.acknowledgedBy.contains(otherPlayerName)) {
-                    val needsTargets =  stackItemToResolve.triggeredAbilities.flatMap{it.targets}.isNotEmpty()
+                    val needsTargets =  stackItemToResolve.triggeredAbilities.flatMap{it.targets}.filterNot{it.optional}.isNotEmpty()
                     val hasSelectedTargets: Boolean = !stackItemToResolve.modifiers.targets.isEmpty()
                     if (!needsTargets || hasSelectedTargets) {
                         stackItemToResolve.acknowledgedBy(otherPlayerName!!)

@@ -11,6 +11,11 @@ class StackHelper internal constructor(matagBrowser: MatagBrowser) : AbstractCar
         return matagBrowser.findElement(By.id("stack"))
     }
 
+    override fun isEmpty() {
+        super.isEmpty() // no cards on the stack
+        toHaveAbilitiesSize(0) // no abilities on the stack
+    }
+
     fun containsAbility(ability: String) {
         containsAbilitiesExactly(listOf(ability))
     }
@@ -18,12 +23,20 @@ class StackHelper internal constructor(matagBrowser: MatagBrowser) : AbstractCar
     fun containsAbilitiesExactly(expectedTriggeredAbilities: List<String>) {
         matagBrowser.wait(ExpectedCondition {
             val actualTriggeredAbilities = triggeredAbilities(containerElement())
-            LOGGER.info(
-                "actualTriggeredAbilities={}   expectedTriggeredAbilities={}",
-                actualTriggeredAbilities,
-                expectedTriggeredAbilities
-            )
+            LOGGER.info("actualTriggeredAbilities={}   expectedTriggeredAbilities={}", actualTriggeredAbilities, expectedTriggeredAbilities)
             expectedTriggeredAbilities == actualTriggeredAbilities
+        })
+    }
+
+    fun toHaveAbilitiesSize(size: Int) {
+        matagBrowser.wait(ExpectedCondition {
+            val actualTriggeredAbilities = triggeredAbilities(containerElement())
+            if (actualTriggeredAbilities.size == size) {
+                return@ExpectedCondition true
+            } else {
+                LOGGER.info("Expected {} no abilities on the stack but got {} ({})", size, actualTriggeredAbilities.size, actualTriggeredAbilities)
+                return@ExpectedCondition false
+            }
         })
     }
 

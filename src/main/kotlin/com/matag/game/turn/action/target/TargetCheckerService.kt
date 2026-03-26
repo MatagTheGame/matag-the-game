@@ -33,8 +33,8 @@ class TargetCheckerService(
                 checkThatTargetsAreDifferent(ability.targets, targetsIds)
                 var i = 0
                 while (i < ability.targets.size) {
-                    val targetId = if (targetIndex < targetsIds.size) targetsIds.get(targetIndex) else null
-                    check(gameStatus, cardToCast, ability.targets.get(i), targetId)
+                    val targetId = if (targetIndex < targetsIds.size) targetsIds[targetIndex] else null
+                    check(gameStatus, cardToCast, ability.targets[i], targetId)
                     i++
                     targetIndex++
                 }

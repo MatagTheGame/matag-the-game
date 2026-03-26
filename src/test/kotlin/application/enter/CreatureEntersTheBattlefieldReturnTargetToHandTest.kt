@@ -43,7 +43,8 @@ class CreatureEntersTheBattlefieldReturnTargetToHandTest(var initService: InitTe
         browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
 
         // Then it's returned to its owner hand
-        browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE).isEmpty
+        browser.player1().getStackHelper().isEmpty()
+        browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE).isEmpty()
         browser.player1().getHandHelper(PlayerType.OPPONENT).toHaveSize(1)
 
         // When playing another Exclusion Mage
@@ -58,12 +59,11 @@ class CreatureEntersTheBattlefieldReturnTargetToHandTest(var initService: InitTe
 
         // Player 1 continue without targets as nothing can be targeted
         browser.player1().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.OPPONENT)
-        browser.player1().getStackHelper().isEmpty
-        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
-            .contains(cards.get("Exclusion Mage"), cards.get("Exclusion Mage"))
+        browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
+        browser.player1().getStackHelper().isEmpty()
+        browser.player1().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE).contains(cards.get("Exclusion Mage"), cards.get("Exclusion Mage"))
 
         // Moving to player 1 main phase
-        browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
         browser.player1().getActionHelper().clickContinueAndExpectPhase(Main2Phase.M2, PlayerType.PLAYER)
         browser.player1().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.OPPONENT)
 

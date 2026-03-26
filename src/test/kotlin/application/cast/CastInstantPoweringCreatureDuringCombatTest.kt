@@ -70,12 +70,12 @@ class CastInstantPoweringCreatureDuringCombatTest(var initService: InitTestServi
         )
 
         // Then spell is resolved from the stack and creature gets the +1/+3
-        browser.player1().getStackHelper().isEmpty
+        browser.player1().getStackHelper().isEmpty()
         browser.player1().getGraveyardHelper(PlayerType.OPPONENT).contains(cards.get("Dark Remedy"))
         browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.COMBAT_LINE)
             .getFirstCard(cards.get("Bartizan Bats")).hasPowerAndToughness("4/4")
         browser.player1().getPhaseHelper().matches(DeclareBlockersPhase.DB, PlayerType.OPPONENT)
-        browser.player2().getStackHelper().isEmpty
+        browser.player2().getStackHelper().isEmpty()
         browser.player2().getGraveyardHelper(PlayerType.PLAYER).contains(cards.get("Dark Remedy"))
         browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.COMBAT_LINE)
             .getFirstCard(cards.get("Bartizan Bats")).hasPowerAndToughness("4/4")

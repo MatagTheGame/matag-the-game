@@ -85,12 +85,12 @@ class CastSorceryDestroyingCreatureTest(var initService: InitTestService) : Abst
         browser.player2().getActionHelper().clickContinueAndExpectPhase(Main1Phase.M1, PlayerType.PLAYER)
 
         // Then the creature is destroyed
-        browser.player1().getStackHelper().isEmpty
+        browser.player1().getStackHelper().isEmpty()
         browser.player1().getBattlefieldHelper(PlayerType.OPPONENT, BattlefieldHelper.SECOND_LINE)
             .doesNotContain(cards.get("Colossal Dreadmaw"))
         browser.player1().getGraveyardHelper(PlayerType.OPPONENT).contains(cards.get("Colossal Dreadmaw"))
         browser.player1().getGraveyardHelper(PlayerType.PLAYER).contains(cards.get("Legion's Judgment"))
-        browser.player2().getStackHelper().isEmpty
+        browser.player2().getStackHelper().isEmpty()
         browser.player2().getBattlefieldHelper(PlayerType.PLAYER, BattlefieldHelper.SECOND_LINE)
             .doesNotContain(cards.get("Colossal Dreadmaw"))
         browser.player2().getGraveyardHelper(PlayerType.PLAYER).contains(cards.get("Colossal Dreadmaw"))
