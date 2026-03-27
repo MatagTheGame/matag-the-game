@@ -15,6 +15,8 @@ open class MatagGameWebSocketConfiguration : WebSocketMessageBrokerConfigurer {
     }
 
     override fun registerStompEndpoints(registry: StompEndpointRegistry) {
-        registry.addEndpoint("/game-ws").withSockJS()
+        registry.addEndpoint("/game-ws")
+            .setAllowedOrigins("https://nio-matrix.uk")
+            .withSockJS()
     }
 }
