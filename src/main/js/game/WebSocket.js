@@ -3,7 +3,11 @@ import {Stomp} from '@stomp/stompjs'
 
 export const APP_BASE_PATH = '/matag/game'
 
-const socketFactory = () => new SockJs(APP_BASE_PATH + '/game-ws');
+let socket;
+const socketFactory = () => {
+  socket = new SockJs(APP_BASE_PATH + '/game-ws');
+  return socket;
+};
 const stompClient = Stomp.over(socketFactory);
 const gameId = window.location.pathname.split('/').pop()
 
