@@ -21,8 +21,9 @@ stompClient.sendHeartbeat = () => {
 
 stompClient.init = (receiveCallback) => {
   stompClient.connect({}, () => {
-    const urlParts = stompClient.webSocket?.url || socket?._transport?.url
-    console.log("urlParts: ", urlParts)
+    console.log("webSocket: ", stompClient.webSocket?.url)
+    console.log("_transport: ", socket?._transport?.url)
+    const urlParts = socket?._transport?.url
     const sessionId = urlParts[urlParts.length - 2]
 
     stompClient.subscribe('/topic/events', (event) => {
