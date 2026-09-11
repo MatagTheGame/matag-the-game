@@ -29,7 +29,7 @@ stompClient.init = (receiveCallback) => {
     console.log("webSocket: ", stompClient.webSocket?.url)
     console.log("init.socket: ", socket)
     console.log("_transport: ", socket?._transport?.url)
-    const urlParts = socket?._transport?.url
+    const urlParts = socket?._transport?.url.split('/')
     const sessionId = urlParts[urlParts.length - 2]
 
     stompClient.subscribe('/topic/events', (event) => {
