@@ -34,7 +34,7 @@ class PlayableAbilities extends Component {
   }
 
   static renderSymbols(symbols) {
-    return symbols.map((symbol, index) => <img key={index} src={`/img/symbols/${symbol}.png`} alt={symbol} />)
+    return symbols.map((symbol, index) => <img key={index} src={`/matag/game/img/symbols/${symbol}.png`} alt={symbol} />)
   }
 
   component(possibleAbility) {
