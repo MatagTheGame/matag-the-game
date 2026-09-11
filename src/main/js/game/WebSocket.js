@@ -6,7 +6,6 @@ export const APP_BASE_PATH = '/matag/game'
 let socket
 const socketFactory = () => {
   socket = new SockJs(APP_BASE_PATH + '/game-ws')
-  console.log('socketFactory.socket: ', socket)
   return socket
 }
 const stompClient = Stomp.over(socketFactory);
@@ -26,9 +25,6 @@ stompClient.sendHeartbeat = () => {
 
 stompClient.init = (receiveCallback) => {
   stompClient.connect({}, () => {
-    console.log("webSocket: ", stompClient.webSocket?.url)
-    console.log("init.socket: ", socket)
-    console.log("_transport: ", socket?._transport?.url)
     const urlParts = socket?._transport?.url.split('/')
     const sessionId = urlParts[urlParts.length - 2]
 
