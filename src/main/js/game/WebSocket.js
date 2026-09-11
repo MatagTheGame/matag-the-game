@@ -3,11 +3,7 @@ import {Stomp} from '@stomp/stompjs'
 
 export const APP_BASE_PATH = '/matag/game'
 
-let socket;
-const socketFactory = () => {
-  socket = new SockJs(APP_BASE_PATH + '/game-ws');
-  return socket;
-};
+const socketFactory = () => new SockJs(APP_BASE_PATH + '/game-ws');
 const stompClient = Stomp.over(socketFactory);
 const gameId = window.location.pathname.split('/').pop()
 
@@ -25,7 +21,8 @@ stompClient.sendHeartbeat = () => {
 
 stompClient.init = (receiveCallback) => {
   stompClient.connect({}, () => {
-    const urlParts = socket._transport.url.split('/')
+    const urlParts = stompClient.webSocket?.url || socket?._transport?.url
+    console.log("urlParts: ", urlParts)
     const sessionId = urlParts[urlParts.length - 2]
 
     stompClient.subscribe('/topic/events', (event) => {
